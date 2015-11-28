@@ -29,6 +29,7 @@
 
 # Archivos de VS
 .vs
+.cdo
 
 # Unity Bulk
 Library
