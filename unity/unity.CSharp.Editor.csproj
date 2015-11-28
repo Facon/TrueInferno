@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F8C79D30-3E60-97E4-D40D-3D66ADDCE59A}</ProjectGuid>
+    <ProjectGuid>{27D29A4B-FDE7-B1BD-E226-B13A243BCA00}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -54,6 +54,9 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -68,6 +71,9 @@
     </Reference>
     <Reference Include="UnityEditor.Networking">
       <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>Library\UnityAssemblies\UnityEditor.Graphs.dll</HintPath>
@@ -105,21 +111,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library\UnityAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
     </Reference>
@@ -128,13 +119,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="unity.CSharp.Plugins.csproj">
-      <Project>{DD03665D-775E-E157-B925-901060156EA3}</Project>
-      <Name>unity.CSharp.Plugins</Name>
+    <ProjectReference Include="Unity.CSharp.Plugins.csproj">
+      <Project>{1AA60596-6964-87F6-2427-6CA85BBAF27D}</Project>
+      <Name>Unity.CSharp.Plugins</Name>
     </ProjectReference>
-    <ProjectReference Include="unity.CSharp.csproj">
-      <Project>{7E182C22-A798-BDAD-9C7D-1FF20524B48E}</Project>
-      <Name>unity.CSharp</Name>
+    <ProjectReference Include="Unity.CSharp.csproj">
+      <Project>{4123F183-8F61-27AE-EA27-294DDE0CC7EB}</Project>
+      <Name>Unity.CSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
