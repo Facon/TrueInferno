@@ -25,6 +25,8 @@ public class Controller : MonoBehaviour {
         {
             var obj = vHit.collider;
 
+            Debug.Log("Tile actual seleccionado: " + obj.name);
+
             if (obj.gameObject.tag == "Building" || obj.transform.childCount > 0)
             {
                 return;
