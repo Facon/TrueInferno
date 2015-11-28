@@ -35,6 +35,6 @@ Library
 Temp
 
 # Visual Studio Project and Solution
-*.csproj
-*.sln
-*.vsproj
+# *.csproj
+# *.sln
+# *.vsproj
