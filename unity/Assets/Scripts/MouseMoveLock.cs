@@ -34,13 +34,14 @@ public class MouseMoveLock : MonoBehaviour {
                     float posZ = obj.gameObject.transform.position.z;
 
 
-                    if (buildcomp.Length1 > 1)
-                        posX += 1;
+                    if ((buildcomp.Length1 % 2) == 0)
+						posX += 0.5f;
+                        //posX += 0.5+buildcomp.Length1;
 
 
-                    if (buildcomp.Length2 > 1)
-                        posZ += 1;
-
+                    if ((buildcomp.Length2 % 2) == 0)
+                        //posZ += 0.5+buildcomp.Length2;
+						posZ += 0.5f;
 
                     gameObject.transform.position = new Vector3(posX, posY, posZ);
                 }

@@ -9,6 +9,7 @@ public class BuildingGenerator : MonoBehaviour {
         Building buildcomp = building.GetComponent<Building>();
         if (buildcomp)
             edifGO.transform.localScale = new Vector3(buildcomp.Length1, 0.25f, buildcomp.Length2);
+		UnityEngine.Cursor.visible = false;
     }
 
 }
