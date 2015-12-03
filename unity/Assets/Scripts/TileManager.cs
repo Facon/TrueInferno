@@ -7,8 +7,8 @@ public class TileManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        var maxX = 8;
-        var maxZ = 8;
+        var maxX = 20;
+        var maxZ = 20;
 
         tiles = new GameObject[maxZ, maxX];
 
@@ -18,7 +18,7 @@ public class TileManager : MonoBehaviour {
             {
                 GameObject newTile = Instantiate(tile, new Vector3(x, 0, z), Quaternion.identity) as GameObject;
                 newTile.transform.parent = this.transform;
-                newTile.name = "Tile_x" + x + "_z" + (z + 1);
+                newTile.name = "Tile_x" + x + "_z" + z;
             }
         }
 	}
