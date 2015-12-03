@@ -18,6 +18,7 @@ public class TileManager : MonoBehaviour {
             {
                 GameObject newTile = Instantiate(tile, new Vector3(x, 0, z), Quaternion.identity) as GameObject;
                 newTile.transform.parent = this.transform;
+                newTile.tag = "Tile";
                 newTile.name = "Tile_x" + x + "_z" + (z + 1);
             }
         }

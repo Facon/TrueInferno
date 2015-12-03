@@ -37,7 +37,7 @@ public class Controller : MonoBehaviour {
 
             if (Input.GetMouseButtonDown(0))
             {
-                GameObject edifGO = Instantiate(building, new Vector3(positionClick.x, 0.5f, positionClick.z), Quaternion.identity) as GameObject;
+                GameObject edifGO = Instantiate(building, new Vector3(1f, 1f, 1f), Quaternion.identity) as GameObject;
                 edifGO.transform.parent = obj.transform;
             }
             else if (Input.GetMouseButtonDown(1))
