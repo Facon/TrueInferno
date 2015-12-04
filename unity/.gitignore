@@ -1,41 +1,69 @@
-# Compiled Object files
+# ===================== #
+# Compiled Object files #
+# ===================== #
 *.slo
 *.lo
 *.o
 *.obj
 
-# Precompiled Headers
+# =================== #
+# Precompiled Headers #
+# =================== #
 *.gch
 *.pch
 
-# Compiled Dynamic libraries
+# ========================== #
+# Compiled Dynamic libraries #
+# ========================== #
 *.so
 *.dylib
 *.dll
 
-# Fortran module files
-*.mod
-
-# Compiled Static libraries
+# ========================= #
+# Compiled Static libraries #
+# ========================= #
 *.lai
 *.la
 *.a
 *.lib
 
-# Executables
+# =========== #
+# Executables #
+# =========== #
 *.exe
 *.out
 *.app
 
-# Archivos de VS
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Library/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+obj/
+*.svd
+*.userprefs
+/*.csproj
+*.pidb
+*.suo
+/*.sln
+*.user
+*.unityproj
+*.booproj
 .vs
 .cdo
 
-# Unity Bulk
-Library
-Temp
-
-# Visual Studio Project and Solution
-*.csproj
-*.sln
-*.vsproj
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
