@@ -23,7 +23,7 @@ public class MouseMoveLock : MonoBehaviour {
 
             for (int i = 0; i < hits.Length; i++)
             {
-                if (hits[i].collider.gameObject.tag == "Tile")
+                if (hits[i].collider.gameObject.tag == "Tile" && hits[i].point.y>=0.12)
                 {
 
                     var obj = hits[i].collider;
