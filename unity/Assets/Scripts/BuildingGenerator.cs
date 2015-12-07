@@ -2,13 +2,23 @@
 using System.Collections;
 
 public class BuildingGenerator : MonoBehaviour {
+    public GameObject newBuilding;
+
+    public void start() {
+        newBuilding = null;
+    }
 
     public void CreateBuilding(GameObject building)
     {
-        GameObject edifGO = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+        newBuilding = Instantiate(building, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
         Building buildcomp = building.GetComponent<Building>();
         if (buildcomp)
-            edifGO.transform.localScale = new Vector3(buildcomp.Length1, 0.25f, buildcomp.Length2);
+        {
+            newBuilding.transform.position = new Vector3(0f,(float) buildcomp.sizeY / 2 + 0.1f,0f);
+            newBuilding.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeY);
+            
+        }
+
 		UnityEngine.Cursor.visible = false;
     }
 
