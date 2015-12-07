@@ -3,8 +3,8 @@ using System.Collections;
 
 public class MouseMoveLock : MonoBehaviour {
 
-    RaycastHit hit;
-    private float raycastLength = 1000;
+
+    public bool bValidPosition; 
 
     // Use this for initialization
     void Start () {
@@ -12,10 +12,10 @@ public class MouseMoveLock : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update() //Allows Object to Follow Mouse like in Original Script
+    public void BuildingMouseMove(GameObject building) 
     {
-        
-
+        bValidPosition = false;
+        float raycastLength = 1000;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, raycastLength);
         
@@ -27,26 +27,24 @@ public class MouseMoveLock : MonoBehaviour {
                 {
 
                     var obj = hits[i].collider;
-                    Building buildcomp = gameObject.GetComponent<Building>();
+                    Building buildcomp = building.GetComponent<Building>();
 
                     float posX = obj.gameObject.transform.position.x;
-                    float posY = obj.gameObject.transform.position.y;
+                    float posY = building.transform.position.y;
                     float posZ = obj.gameObject.transform.position.z;
 
 
-                    if ((buildcomp.Length1 % 2) == 0)
+                    if (((float)buildcomp.sizeX % 2) == 0)
 						posX += 0.5f;
-                        //posX += 0.5+buildcomp.Length1;
 
-
-                    if ((buildcomp.Length2 % 2) == 0)
-                        //posZ += 0.5+buildcomp.Length2;
+                    if (((float)buildcomp.sizeZ % 2) == 0)
 						posZ += 0.5f;
 
-                    gameObject.transform.position = new Vector3(posX, posY, posZ);
+                    building.transform.position = new Vector3(posX, posY, posZ);
+
                 }
             }
-        }    
-    }
-
+        }
+        bValidPosition = true;//aprobar por rayos de asier
+    }    
 }

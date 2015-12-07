@@ -234,7 +234,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1246687691}
+      - m_Target: {fileID: 1374703418}
         m_MethodName: CreateBuilding
         m_Mode: 2
         m_Arguments:
@@ -450,7 +450,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: .300000012
-  far clip plane: 10
+  far clip plane: 100
   field of view: 30
   orthographic: 0
   orthographic size: 5
@@ -501,7 +501,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 900077409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.05000019, z: -4.44000006}
+  m_LocalPosition: {x: 0, y: 7, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 724581093}
@@ -639,45 +639,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!1 &1246687690
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1246687692}
-  - 114: {fileID: 1246687691}
-  m_Layer: 0
-  m_Name: BuildingInstantiator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1246687691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1246687690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 198b207cf19b19b4499aa96799ae044b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1246687692
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1246687690}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
 --- !u!1 &1374703415
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +648,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1374703417}
   - 114: {fileID: 1374703416}
+  - 114: {fileID: 1374703418}
+  - 114: {fileID: 1374703419}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -719,6 +682,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &1374703418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1374703415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198b207cf19b19b4499aa96799ae044b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newBuilding: {fileID: 0}
+--- !u!114 &1374703419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1374703415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e579b8966803f5543adab13d736fd99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bValidPosition: 0
 --- !u!1 &1813417645
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,7 +854,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1246687691}
+      - m_Target: {fileID: 1374703418}
         m_MethodName: CreateBuilding
         m_Mode: 2
         m_Arguments:

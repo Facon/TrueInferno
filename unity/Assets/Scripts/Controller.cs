@@ -4,15 +4,29 @@ using System.Collections;
 public class Controller : MonoBehaviour {
     public GameObject building;
     public GameObject road;
+    private BuildingGenerator bGenerator;
+    private MouseMoveLock mMove;
 
 	// Use this for initialization
 	void Start () {
-	
+        mMove = GetComponent<MouseMoveLock>();
+        bGenerator = GetComponent<BuildingGenerator>();	
 	}
 	
 	// Update is called once per frame
+    void FixedUpdate() {
+        if (bGenerator.newBuilding)
+            mMove.BuildingMouseMove(bGenerator.newBuilding);
+
+    }
+
 	void Update () {
-        var vRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0) && (mMove.bValidPosition) && (bGenerator.newBuilding))
+        {
+            bGenerator.newBuilding = null;
+            UnityEngine.Cursor.visible = true;
+        }
+      /*  var vRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 positionClick;
         RaycastHit vHit;
 
@@ -33,23 +47,10 @@ public class Controller : MonoBehaviour {
                 return;
             }
 
-            positionClick.x = obj.gameObject.transform.position.x;
-            positionClick.z = obj.gameObject.transform.position.z;
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                GameObject edifGO = Instantiate(building, new Vector3(positionClick.x, 0.5f, positionClick.z), Quaternion.identity) as GameObject;
-                edifGO.transform.parent = obj.transform;
-            }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                GameObject roadGO = Instantiate(road, new Vector3(positionClick.x, 0.15f, positionClick.z), Quaternion.identity) as GameObject;
-                roadGO.transform.parent = obj.transform;
-            }
-        }
         catch (System.NullReferenceException)
         {
                         
-        }
+        }*/
     }
 }

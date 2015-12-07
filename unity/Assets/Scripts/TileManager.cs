@@ -51,8 +51,8 @@ public class TileManager : MonoBehaviour
                 //newTile.name = "Tile_x" + x + "_z" + z;
                 newTile.name = getTileNameFromCoords(z, x);
                 newTile.tag = "Tile";
-                var features = newTile.GetComponent<TileFeatures>();
-                Debug.Log("X: " + x + ", Z: " + z);
+                var features = newTile.GetComponent<Tile>();
+                //Debug.Log("X: " + x + ", Z: " + z);
                 features.type = map[z, x];
                 features.init();
 

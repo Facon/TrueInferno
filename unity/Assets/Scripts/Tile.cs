@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-public class TileFeatures : MonoBehaviour {
+public class Tile : MonoBehaviour {
     public int type;
     public List<Material> materials = new List<Material>(5); 
 
