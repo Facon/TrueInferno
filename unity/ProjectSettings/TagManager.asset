@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Building
   - Fire
+  - Tile
   layers:
   - Default
   - TransparentFX

@@ -23,29 +23,13 @@ public class TileManager : MonoBehaviour {
                 GameObject newTile = Instantiate(tile, new Vector3(x, 0, sizeZ - z), Quaternion.identity) as GameObject;
                 newTile.transform.parent = this.transform;
                 newTile.name = "Tile_x" + x + "_z" + z;
+                newTile.tag = "Tile";
                 var features = newTile.GetComponent<TileFeatures>();
                 Debug.Log("X: " + x + ", Z: " + z);
                 features.type = map[z, x];
                 features.init();
             }
         }
-
-        /*
-        var maxX = 20;
-        var maxZ = 20;
-
-        tiles = new GameObject[maxZ, maxX];
-
-        for(var z = 0; z < maxZ; ++z)
-        {
-            for (var x = 0; x < maxX; ++x)
-            {
-                GameObject newTile = Instantiate(tile, new Vector3(x, 0, z), Quaternion.identity) as GameObject;
-                newTile.transform.parent = this.transform;
-                newTile.name = "Tile_x" + x + "_z" + z;
-            }
-        }
-        */
     }
 
     private int[,] parseMap()
