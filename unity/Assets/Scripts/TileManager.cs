@@ -9,8 +9,8 @@ public enum TileType
 
 public class TileManager : MonoBehaviour
 {
-    private uint sizeX = 10;
-    private uint sizeZ = 10;
+    public uint sizeX = 10;
+    public uint sizeZ = 10;
 
     public GameObject tile;
 
@@ -28,7 +28,7 @@ public class TileManager : MonoBehaviour
     /// <summary>
     /// Char delim for tile names
     /// </summary>
-    private char[] TILE_NAME_DELIM = { '_' };
+    private char TILE_NAME_DELIM = '_';
 
     // Use this for initialization
     void Start()
@@ -53,6 +53,8 @@ public class TileManager : MonoBehaviour
                 newTile.tag = "Tile";
                 var features = newTile.GetComponent<Tile>();
                 //Debug.Log("X: " + x + ", Z: " + z);
+                features.posX = x;
+                features.posZ = z;
                 features.type = map[z, x];
                 features.init();
 

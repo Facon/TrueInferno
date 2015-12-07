@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System;
 
 public class Tile : MonoBehaviour {
+    public uint posX, posZ;
     public int type;
-    public List<Material> materials = new List<Material>(5); 
+    public List<Material> materials = new List<Material>(5);
 
 	// Use this for initialization
 	void Start () {

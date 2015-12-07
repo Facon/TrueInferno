@@ -19,7 +19,7 @@ public class BuildingGenerator : MonoBehaviour {
             
         }
 
-		UnityEngine.Cursor.visible = false;
+		UnityEngine.Cursor.visible = true; // TODO Cambiar a false
     }
 
 }

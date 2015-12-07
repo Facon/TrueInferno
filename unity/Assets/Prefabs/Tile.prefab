@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3312432}
   - 65: {fileID: 6545528}
   - 23: {fileID: 2368164}
-  - 114: {fileID: 11402022}
+  - 114: {fileID: 11465086}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -49,9 +49,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -76,7 +74,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11402022
+--- !u!114 &11465086
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -87,8 +85,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b99673315c8f0fb438b5ae31c1085441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posX: 0
+  posZ: 0
   type: 0
   materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 654a2c1b911b36647b211a44a46e6d09, type: 2}
+  - {fileID: 2100000, guid: 52b7d70b1de7c4ce09662b77c14d9fda, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
@@ -99,7 +103,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: materials.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
@@ -110,9 +114,17 @@ Prefab:
       value: .980000019
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 0}
+      propertyPath: materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 654a2c1b911b36647b211a44a46e6d09, type: 2}
+    - target: {fileID: 0}
+      propertyPath: materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52b7d70b1de7c4ce09662b77c14d9fda, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 184256}

@@ -34,10 +34,10 @@ public class MouseMoveLock : MonoBehaviour {
                     float posZ = obj.gameObject.transform.position.z;
 
 
-                    if (((float)buildcomp.sizeX % 2) == 0)
+                    if (isEven(buildcomp.sizeX))
 						posX += 0.5f;
 
-                    if (((float)buildcomp.sizeZ % 2) == 0)
+                    if (isEven(buildcomp.sizeZ))
 						posZ += 0.5f;
 
                     building.transform.position = new Vector3(posX, posY, posZ);
@@ -46,5 +46,51 @@ public class MouseMoveLock : MonoBehaviour {
             }
         }
         bValidPosition = true;//aprobar por rayos de asier
-    }    
+    }
+
+    bool checkValidPosition(Building building, uint x, uint z)
+    {
+        TileManager tm = GameObject.Find("Map").GetComponent<TileManager>();
+        uint mapSizeX = tm.sizeX;
+        uint mapSizeZ = tm.sizeZ;
+
+        if (isEven(building.sizeX)) // Even
+        {
+            if ((x - building.sizeX / 2 + 1) < 0 || (x + building.sizeX / 2) >= mapSizeX)
+            {
+                return false;
+            }
+        }
+        else // Odd
+        {
+            if ((x - building.sizeX / 2) < 0 || (x + building.sizeX / 2) >= mapSizeX)
+            {
+                return false;
+            }
+        }
+
+        if (isEven(building.sizeZ)) // Even
+        {
+            if ((z - building.sizeZ / 2 + 1) < 0 || (z + building.sizeZ / 2) >= mapSizeZ)
+            {
+                return false;
+            }
+        }
+        else // Odd
+        {
+            if ((z - building.sizeZ / 2) < 0 || (x + building.sizeZ / 2) >= mapSizeZ)
+            {
+                return false;
+            }
+        }
+
+        // TODO Meter el resto
+
+        return true;
+    }
+
+    bool isEven(float num)
+    {
+        return num % 2 == 0;
+    }
 }

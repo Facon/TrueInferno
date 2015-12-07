@@ -49,6 +49,7 @@ public class Building : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () {
+        /*
         RaycastHit hitInfo;
 
         foreach (GameObject go in list)
@@ -58,9 +59,11 @@ public class Building : MonoBehaviour {
             {
                 if (hitInfo.collider.gameObject.tag == "Tile")
                 {
+                    Debug.DrawLine(point, hitInfo.point);
                     Debug.Log("Tile HIT:" + hitInfo.collider.gameObject.name);
                 }
             }
         }
-	}
+        */
+    }
 }
