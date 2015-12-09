@@ -28,7 +28,7 @@ public class TileManager : MonoBehaviour
     /// <summary>
     /// Char delim for tile names
     /// </summary>
-    private char[] TILE_NAME_DELIM = { '_' };
+    private char TILE_NAME_DELIM = '_';
 
     // Use this for initialization
     void Start()

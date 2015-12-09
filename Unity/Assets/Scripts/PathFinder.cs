@@ -13,7 +13,31 @@ public class PathFinder : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        // TEST
+        int fromX = UnityEngine.Random.Range(0, (int)tileManager.getSizeX());
+        int fromZ = UnityEngine.Random.Range(0, (int)tileManager.getSizeZ());
+        int toX = UnityEngine.Random.Range(0, (int)tileManager.getSizeX());
+        int toZ = UnityEngine.Random.Range(0, (int)tileManager.getSizeZ());
+
+        GameObject from = tileManager.tiles[fromZ, fromX];
+        GameObject to = tileManager.tiles[toZ, toX];
+
+        Debug.Log("Finding path from " + from.name + " to " + to.name + "...\n");
+        List<GameObject> path = GetRoadPath(from, to);
+
+        if (path != null)
+        {
+            Debug.Log("Path found!\n");
+
+            foreach (GameObject tile in path)
+            {
+                Debug.Log(tile.name + "\n");
+            }
+        }
+        else
+        {
+            Debug.Log("Path not found!\n");
+        }
 	}
 
     private class Node<T>
@@ -65,6 +89,12 @@ public class PathFinder : MonoBehaviour {
         public int GetHashCode()
         {
             return id.GetHashCode();
+        }
+
+        override
+        public string ToString()
+        {
+            return "id="+id;
         }
     }
 
@@ -207,7 +237,7 @@ public class PathFinder : MonoBehaviour {
 			}
 			
 			// But the origin
-            gScores.Add(start, 0);
+            gScores[start] = 0;
             fScores.Add(start, heuristicCost(start, goal));
 			
 			while(opened.Count>0){
@@ -242,7 +272,7 @@ public class PathFinder : MonoBehaviour {
 					
 					// Best path found
 					neighbour.setPrevious(current);
-					gScores.Add(neighbour, possibleGScore);
+					gScores[neighbour] = possibleGScore;
                     fScores.Add(neighbour, possibleGScore + heuristicCost(neighbour, goal));
 				}
 			}
