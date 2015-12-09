@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 public class Building : MonoBehaviour {
     public uint sizeX;
-    public uint sizeY;
+    public float sizeY;
     public uint sizeZ;
     private bool visible = true;
     private List<GameObject> list = new List<GameObject>();
 
     // Use this for initialization
     void Start() {
-        if (sizeX < 1 || sizeY < 1 || sizeZ < 1)
+        if (sizeX < 1 || sizeY < 0.1 || sizeZ < 1)
             throw new System.Exception("El tamaño de edificio tiene que ser mayor que 1x1x1");
 
-        Vector3 center = gameObject.transform.position;
+        /*Vector3 center = gameObject.transform.position;
 
         // Pitagoras
         var hip = Mathf.Sqrt(Mathf.Pow((float)sizeX, 2) + Mathf.Pow((float)sizeZ, 2));
@@ -44,7 +44,7 @@ public class Building : MonoBehaviour {
                 list.Add(cube);
             }
 
-        }
+        }*/
     }
 
     // Update is called once per frame

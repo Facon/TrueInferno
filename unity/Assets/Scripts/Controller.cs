@@ -15,17 +15,29 @@ public class Controller : MonoBehaviour {
 	
 	// Update is called once per frame
     void FixedUpdate() {
-        if (bGenerator.newBuilding)
-            mMove.BuildingMouseMove(bGenerator.newBuilding);
 
     }
 
 	void Update () {
-        if (Input.GetMouseButtonDown(0) && (mMove.bValidPosition) && (bGenerator.newBuilding))
+
+        if (bGenerator.newBuilding){
+            if (mMove.BuildingMouseMove(bGenerator.newBuilding, Input.GetMouseButtonDown(0))){
+                bGenerator.newBuilding = null;
+                UnityEngine.Cursor.visible = true;
+            }
+
+        }
+
+        /*
+         * if (Input.GetMouseButtonDown(0) && (mMove.bValidPosition) && (bGenerator.newBuilding))
         {
             bGenerator.newBuilding = null;
             UnityEngine.Cursor.visible = true;
         }
+
+        */
+
+
       /*  var vRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 positionClick;
         RaycastHit vHit;

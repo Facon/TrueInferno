@@ -8,11 +8,11 @@ public class MouseMoveLock : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
+        bValidPosition = false;
 	}
 
     // Update is called once per frame
-    public void BuildingMouseMove(GameObject building) 
+    public bool BuildingMouseMove(GameObject building, bool placeBuilding) 
     {
         bValidPosition = false;
         float raycastLength = 1000;
@@ -41,11 +41,27 @@ public class MouseMoveLock : MonoBehaviour {
 						posZ += 0.5f;
 
                     building.transform.position = new Vector3(posX, posY, posZ);
+                    bValidPosition = checkValidPosition(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
+
+                    Renderer rend = building.GetComponent<Renderer>();
+                    if (placeBuilding && bValidPosition)
+                    {
+                        rend.material.SetColor("_SpecColor", Color.yellow);
+                        setOcuppiedTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
+                        building.transform.position = new Vector3(posX, posY-0.5f, posZ);
+                        return true;
+                    }
+                    else { 
+                        if (bValidPosition)
+                            rend.material.SetColor("_SpecColor", Color.green);
+                        else
+                            rend.material.SetColor("_SpecColor", Color.red);
+                    }
 
                 }
             }
         }
-        bValidPosition = true;//aprobar por rayos de asier
+        return false;
     }
 
     bool checkValidPosition(Building building, uint x, uint z)
@@ -53,44 +69,64 @@ public class MouseMoveLock : MonoBehaviour {
         TileManager tm = GameObject.Find("Map").GetComponent<TileManager>();
         uint mapSizeX = tm.sizeX;
         uint mapSizeZ = tm.sizeZ;
+        int liminfX = 0, liminfZ = 0, limsupX = 0, limsupZ = 0;
+
+        liminfX = (int)x - (int)building.sizeX / 2;
+        limsupX = (int)x + (int)building.sizeX / 2;
+        liminfZ = (int)z - (int)building.sizeZ / 2;
+        limsupZ = (int)z + (int)building.sizeZ / 2;
 
         if (isEven(building.sizeX)) // Even
-        {
-            if ((x - building.sizeX / 2 + 1) < 0 || (x + building.sizeX / 2) >= mapSizeX)
-            {
-                return false;
-            }
-        }
-        else // Odd
-        {
-            if ((x - building.sizeX / 2) < 0 || (x + building.sizeX / 2) >= mapSizeX)
-            {
-                return false;
-            }
-        }
-
+            ++liminfX;
         if (isEven(building.sizeZ)) // Even
-        {
-            if ((z - building.sizeZ / 2 + 1) < 0 || (z + building.sizeZ / 2) >= mapSizeZ)
+            --limsupZ;
+
+        if (liminfX < 0 || liminfZ < 0 || limsupX >= mapSizeX || limsupZ >= mapSizeZ)
+            return false;
+
+        GameObject tile = null;
+        string tilename = "";
+        for (int i = liminfX; i <= limsupX; ++i) {
+            for (int j = liminfZ; j <= limsupZ; ++j)
             {
-                return false;
+                tilename="Tile_"+i+"_"+j;
+                tile = GameObject.Find(tilename);
+                if (tile.GetComponent<Tile>().type != 0)
+                    return false;
             }
         }
-        else // Odd
-        {
-            if ((z - building.sizeZ / 2) < 0 || (x + building.sizeZ / 2) >= mapSizeZ)
-            {
-                return false;
-            }
-        }
-
-        // TODO Meter el resto
-
         return true;
+    }
+
+    void setOcuppiedTile(Building building, uint x, uint z)
+    {
+        int liminfX = 0, liminfZ = 0, limsupX = 0, limsupZ = 0;
+
+        liminfX = (int)x - (int)building.sizeX / 2;
+        limsupX = (int)x + (int)building.sizeX / 2;
+        liminfZ = (int)z - (int)building.sizeZ / 2;
+        limsupZ = (int)z + (int)building.sizeZ / 2;
+
+        if (isEven(building.sizeX)) // Even
+            ++liminfX;
+        if (isEven(building.sizeZ)) // Even
+            --limsupZ;
+
+        GameObject tile = null;
+        string tilename = "";
+        for (int i = liminfX; i <= limsupX; ++i)
+        {
+            for (int j = liminfZ; j <= limsupZ; ++j)
+            {
+                tilename = "Tile_" + i + "_" + j;
+                tile = GameObject.Find(tilename);
+                tile.GetComponent<Tile>().type = 2;
+            }
+        }
     }
 
     bool isEven(float num)
     {
-        return num % 2 == 0;
+        return (num % 2) == 0;
     }
 }
