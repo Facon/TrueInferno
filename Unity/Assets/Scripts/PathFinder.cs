@@ -4,7 +4,15 @@ using System;
 using Assets.Scripts;
 
 public class PathFinder : MonoBehaviour {
+    /// <summary>
+    /// GameObject with TileManager component attached
+    /// </summary>
     public TileManager tileManager;
+
+    /// <summary>
+    /// Flag to activate test finding a random path on each update
+    /// </summary>
+    public Boolean test = false;
 
     // Use this for initialization
     void Start () {
@@ -13,7 +21,34 @@ public class PathFinder : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (test) 
+        {
+            // TEST
+            int fromX = UnityEngine.Random.Range(0, (int)tileManager.getSizeX());
+            int fromZ = UnityEngine.Random.Range(0, (int)tileManager.getSizeZ());
+            int toX = UnityEngine.Random.Range(0, (int)tileManager.getSizeX());
+            int toZ = UnityEngine.Random.Range(0, (int)tileManager.getSizeZ());
+
+            GameObject from = tileManager.tiles[fromZ, fromX];
+            GameObject to = tileManager.tiles[toZ, toX];
+
+            Debug.Log("Finding path from " + from.name + " to " + to.name + "...\n");
+            List<GameObject> path = GetRoadPath(from, to);
+
+            if (path != null)
+            {
+                Debug.Log("Path found!\n");
+
+                foreach (GameObject tile in path)
+                {
+                    Debug.Log(tile.name + "\n");
+                }
+            }
+            else
+            {
+                Debug.Log("Path not found!\n");
+            }
+        }
 	}
 
     private class Node<T>
@@ -66,6 +101,12 @@ public class PathFinder : MonoBehaviour {
         {
             return id.GetHashCode();
         }
+
+        override
+        public string ToString()
+        {
+            return "id="+id;
+        }
     }
 
     private class RoadPathProblem<T>
@@ -75,8 +116,25 @@ public class PathFinder : MonoBehaviour {
         public Dictionary<string,Node<T>> nodes = null;
     }
 
-    RoadPathProblem<GameObject> getRoadPathProblem(GameObject startTile, GameObject goalTile)
+    /// <summary>
+    ///  Transform a tile-based problem into an abstract node-based. It only considers empty and road tiles
+    /// </summary>
+    /// <param name="startTile"></param>
+    /// <param name="goalTile"></param>
+    /// <returns></returns>
+    private RoadPathProblem<GameObject> getRoadPathProblem(GameObject startTile, GameObject goalTile)
     {
+        if(startTile==null)
+        {
+            Debug.Log("startTile must be not-null");
+            return null;
+        }
+        if(goalTile==null)
+        {
+            Debug.Log("goalTile must be not-null");
+            return null;
+        }
+
         RoadPathProblem<GameObject> problem = new RoadPathProblem<GameObject>();
         problem.nodes = new Dictionary<string,Node<GameObject>>();
 
@@ -100,14 +158,23 @@ public class PathFinder : MonoBehaviour {
                     // Locate start and goal tiles to assign start and goal nodes
                     if (tile == startTile)
                         problem.startNode = newNode;
-                    else if (tile == goalTile)
+                    if (tile == goalTile)
                         problem.goalNode = newNode;
                 }
 
         // Check we've found start and goal
-        if (problem.startNode == null || problem.goalNode == null)
+        string error = "";
+        if (problem.startNode == null)
         {
-            Debug.Log("Can't find path: Start or goal tiles couldn't be found\n");
+            error += "Start tile can't be mapped into a valid node. ";
+        }
+        if (problem.goalNode == null)
+        {
+            error += "Goal tile can't be mapped into a valid node. ";
+        }
+        if (error != "")
+        {
+            Debug.Log("Can't find path: " + error + "\n");
             return null;
         }
 
@@ -139,29 +206,45 @@ public class PathFinder : MonoBehaviour {
     }
 
     /// <summary>
-    /// Gets path from a start tile to a goal
+    /// Gets road path from a start tile to a goal passing through empty or road tile types
     /// </summary>
     /// <param name="start"></param>
     /// <param name="goal"></param>
     /// <returns></returns>
     public List<GameObject> GetRoadPath(GameObject startTile, GameObject goalTile)
     {
+        float start = Time.realtimeSinceStartup;
+
         List<GameObject> path = new List<GameObject>();
 
         // Transform our tile-based world into a node-based one
         RoadPathProblem<GameObject> roadPathProblem = getRoadPathProblem(startTile, goalTile);
+
+        if (roadPathProblem == null)
+        {
+            Debug.Log("Can't instantiate road path problem\n");
+            return null;
+        }
 
         // Instantiate A* search problem
         AStar<GameObject> problem = new AStar<GameObject>(roadPathProblem.nodes, roadPathProblem.startNode, roadPathProblem.goalNode, manhattanDist);
 
 		// And solve it
 		List<Node<GameObject>> problemPath = problem.solve();
+        if (problemPath == null)
+        {
+            Debug.Log("Can't solve A* search problem\n");
+            return null;
+        }
 
 		// Transform node list into a tile list
 		foreach(Node<GameObject> node in problemPath){
 			path.Add(node.getData());
 		}
-				
+
+        float timeElapsed = Time.realtimeSinceStartup - start;
+        Debug.Log("(GetRoadPath) Time elapsed = "+timeElapsed+" seconds");
+
         return path;
     }
 
@@ -191,6 +274,8 @@ public class PathFinder : MonoBehaviour {
 
         public List<Node<T>> solve()
         {
+            float startTime = Time.realtimeSinceStartup;
+
 			// Init the closed set as empty
             HashSet<Node<T>> closed = new HashSet<Node<T>>();
             
@@ -207,15 +292,20 @@ public class PathFinder : MonoBehaviour {
 			}
 			
 			// But the origin
-            gScores.Add(start, 0);
+            gScores[start] = 0;
             fScores.Add(start, heuristicCost(start, goal));
 			
 			while(opened.Count>0){
 				Node<T> current = fScores.popMin();
 				
 				// Target reached!
-				if(current == goal)
-					return getPath(goal);
+                if (current == goal)
+                {
+                    float timeElapsed = Time.realtimeSinceStartup - startTime;
+                    Debug.Log("(AStar.solve) Time elapsed = " + (Time.realtimeSinceStartup - startTime) + " seconds");
+
+                    return getPath(goal);
+                }
 				
 				// Close current node
 				opened.Remove(current);
@@ -242,12 +332,15 @@ public class PathFinder : MonoBehaviour {
 					
 					// Best path found
 					neighbour.setPrevious(current);
-					gScores.Add(neighbour, possibleGScore);
+					gScores[neighbour] = possibleGScore;
                     fScores.Add(neighbour, possibleGScore + heuristicCost(neighbour, goal));
 				}
 			}
 
-			// No path found
+			// No path possible
+            Debug.Log("There is no possible path\n");
+            Debug.Log("(AStar.solve) Time elapsed = " + (Time.realtimeSinceStartup - startTime) + " seconds");
+
 			return null;
         }
 		
@@ -261,14 +354,25 @@ public class PathFinder : MonoBehaviour {
 			return 1; // TODO For generalizing include this in the node structure
 		}
 
-		private List<Node<T>> getPath(Node<T> node){
+        /// <summary>
+        /// Reconstruct a path where the last node is the given
+        /// </summary>
+        /// <param name="last"></param>
+        /// <returns></returns>
+		private List<Node<T>> getPath(Node<T> last){
 			List<Node<T>> path = new List<Node<T>>();
-			path.Add (node);
+			
+            // Start from the last node
+            path.Add (last);
 
-			while(node.getPrevious()!=null){
-				path.Add(node.getPrevious());
-				node = node.getPrevious();
+            // Go backwards
+			while(last.getPrevious()!=null){
+				path.Add(last.getPrevious());
+				last = last.getPrevious();
 			}
+
+            // Fix order
+            path.Reverse();
 
 			return path;
 		}

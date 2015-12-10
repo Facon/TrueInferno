@@ -10,6 +10,6 @@ public class BuildingPlacement : MonoBehaviour {
 	
 	// FixedUpdate is called once per 0.33333 s
 	void FixedUpdate () {
-        Vector3 scale = this.transform.lossyScale;
+        //Vector3 scale = this.transform.lossyScale;
 	}
 }
