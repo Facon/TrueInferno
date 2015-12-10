@@ -59,8 +59,13 @@ public class TileManager : MonoBehaviour
                 // Update tile map
                 tiles[z, x] = newTile;
 
+                // TODO quick-fix...
                 // Update tile type map
-                tileTypes[z, x] = TileType.EMPTY;
+                switch(map[z, x])
+                {
+                    case 0: tileTypes[z, x] = TileType.EMPTY; break;
+                    default: tileTypes[z, x] = TileType.OBSTACLE; break;
+                }
             }
         }
     }
@@ -88,7 +93,7 @@ public class TileManager : MonoBehaviour
     public Vector2zx getCoordsFromTileName(String name)
     {
         String[] parts = name.Split(TILE_NAME_DELIM);
-        return new Vector2zx(float.Parse(parts[1]), float.Parse(parts[2]));
+        return new Vector2zx(float.Parse(parts[2]), float.Parse(parts[1]));
     }
 
     public string getTileNameFromCoords(uint z, uint x)
