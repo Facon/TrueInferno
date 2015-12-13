@@ -41,7 +41,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ebe604d5d917f5a46b16bee580373c4d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -49,9 +49,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -92,10 +90,8 @@ MonoBehaviour:
   type: 0
   materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 2100000, guid: 654a2c1b911b36647b211a44a46e6d09, type: 2}
-  - {fileID: 2100000, guid: 52b7d70b1de7c4ce09662b77c14d9fda, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 7a3453ecc1d34cc4b99739e08dfb0fde, type: 2}
+  - {fileID: 2100000, guid: 70c0883fd59fc0948b9f50769f44f8ec, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -105,7 +101,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: materials.Array.size
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
@@ -122,11 +118,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 654a2c1b911b36647b211a44a46e6d09, type: 2}
+      objectReference: {fileID: 2100000, guid: 7a3453ecc1d34cc4b99739e08dfb0fde, type: 2}
     - target: {fileID: 0}
       propertyPath: materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 52b7d70b1de7c4ce09662b77c14d9fda, type: 2}
+      objectReference: {fileID: 2100000, guid: 70c0883fd59fc0948b9f50769f44f8ec, type: 2}
     - target: {fileID: 0}
       propertyPath: posX
       value: 1
@@ -135,6 +131,18 @@ Prefab:
       propertyPath: posZ
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: .25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: numTypes
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ebe604d5d917f5a46b16bee580373c4d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 184256}

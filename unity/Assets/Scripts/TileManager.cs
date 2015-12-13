@@ -4,13 +4,13 @@ using UnityEngine;
 
 public enum TileType
 {
-    ROAD, BUILDING, EMPTY, OBSTACLE
+    EMPTY, OBSTACLE, ROAD, BUILDING
 }
 
 public class TileManager : MonoBehaviour
 {
-    public uint sizeX = 10;
-    public uint sizeZ = 10;
+    private const uint SIZE_X = 10;
+    private const uint SIZE_Z = 10;
 
     public GameObject tile;
 
@@ -21,7 +21,8 @@ public class TileManager : MonoBehaviour
 
     /// <summary>
     ///  Matrix[z,x] with the tile type info. 
-    /// TODO A tile type should be attached somehow to its tile GameObject. It may be included in a Component so its value could be changed by reading a specific message
+    /// TODO A tile type should be attached somehow to its tile GameObject. It may be included
+    /// in a Component so its value could be changed by reading a specific message
     /// </summary>
     public TileType[,] tileTypes;
 
@@ -122,21 +123,21 @@ public class TileManager : MonoBehaviour
     /// <returns></returns>
     public HashSet<Vector2zx> getCrossAdyacents(uint z, uint x)
     {
-        if (z < 0 || z >= sizeZ || x < 0 || x >= sizeX)
-            throw new Exception("z=" + z + " must be in [0," + (sizeZ - 1) + "] and x=" + x + " must be in [0," + (sizeX - 1) + "]");
+        if (z < 0 || z >= SIZE_Z || x < 0 || x >= SIZE_X)
+            throw new Exception("z=" + z + " must be in [0," + (SIZE_Z - 1) + "] and x=" + x + " must be in [0," + (SIZE_X - 1) + "]");
 
         HashSet<Vector2zx> ret = new HashSet<Vector2zx>();
 
         if (z >= 1)
             ret.Add(new Vector2zx(z - 1, x));
 
-        if (z <= sizeZ - 2)
+        if (z <= SIZE_Z - 2)
             ret.Add(new Vector2zx(z + 1, x));
 
         if (x >= 1)
             ret.Add(new Vector2zx(z, x - 1));
 
-        if (x <= sizeX - 2)
+        if (x <= SIZE_X - 2)
             ret.Add(new Vector2zx(z, x + 1));
 
         return ret;
@@ -144,12 +145,12 @@ public class TileManager : MonoBehaviour
 
     public uint getSizeX()
     {
-        return sizeX;
+        return SIZE_X;
     }
 
     public uint getSizeZ()
     {
-        return sizeZ;
+        return SIZE_Z;
     }
 
     // Update is called once per frame
@@ -160,9 +161,6 @@ public class TileManager : MonoBehaviour
 
     private int[,] parseMap()
     {
-        sizeX = 10;
-        sizeZ = sizeX;
-
         int[,] data = new int[10, 10]
         {
             { 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, },

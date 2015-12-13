@@ -7,6 +7,10 @@ TagManager:
   - Building
   - Fire
   - Tile
+  - GameManager
+  - InputManager
+  - ResourceManager
+  - ScoreManager
   layers:
   - Default
   - TransparentFX

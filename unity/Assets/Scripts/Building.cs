@@ -66,4 +66,13 @@ public class Building : MonoBehaviour {
         }
         */
     }
+
+    void Update()
+    {
+        /* Code for resources gathering buildings:
+        GameObject goResManager = GameObject.FindGameObjectWithTag("ResourceManager");
+        ResourceManager resourceManager = goResManager.GetComponent<ResourceManager>();
+        resourceManager.incRes1(1, Time.deltaTime);
+        */
+    }
 }

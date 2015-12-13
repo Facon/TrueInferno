@@ -67,8 +67,8 @@ public class MouseMoveLock : MonoBehaviour {
     bool checkValidPosition(Building building, uint x, uint z)
     {
         TileManager tm = GameObject.Find("Map").GetComponent<TileManager>();
-        uint mapSizeX = tm.sizeX;
-        uint mapSizeZ = tm.sizeZ;
+        uint mapSizeX = tm.getSizeX();
+        uint mapSizeZ = tm.getSizeZ();
         int liminfX = 0, liminfZ = 0, limsupX = 0, limsupZ = 0;
 
         liminfX = (int)x - (int)building.sizeX / 2;
