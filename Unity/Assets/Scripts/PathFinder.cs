@@ -29,8 +29,8 @@ public class PathFinder : MonoBehaviour {
             int toX = UnityEngine.Random.Range(0, (int)tileManager.getSizeX());
             int toZ = UnityEngine.Random.Range(0, (int)tileManager.getSizeZ());
 
-            Tile from = tileManager.tiles[fromZ, fromX];
-            Tile to = tileManager.tiles[toZ, toX];
+            Tile from = tileManager.tiles[fromX, fromZ];
+            Tile to = tileManager.tiles[toX, toZ];
 
             Debug.Log("Finding path from " + from.name + " to " + to.name + "...\n");
             List<Tile> path = GetRoadPath(from, to);
@@ -142,14 +142,14 @@ public class PathFinder : MonoBehaviour {
         Tile[,] tiles = tileManager.tiles;
         
         // Loop over tile set: Create nodes and locate goal and start
-        for (int z = 0; z < tileManager.getSizeZ(); ++z)
-            for (int x = 0; x < tileManager.getSizeX(); ++x)
+        for (int x = 0; x < tileManager.getSizeX(); ++x)
+            for (int z = 0; z < tileManager.getSizeZ(); ++z)
                 // Only empty tiles and roads are considered for the graph
-                //if (tileTypes[z, x] == TileType.EMPTY || tileTypes[z, x] == TileType.ROAD)
-
-                if (tiles[z, x].buildingType == TileType.EMPTY || tiles[z, x].buildingType == TileType.ROAD)
+                if (tiles[x, z].buildingType == TileType.EMPTY || tiles[x, z].buildingType == TileType.ROAD)
                 {
-                    Tile tile = tiles[z, x];
+                    Tile tile = tiles[x, z];
+
+                    Debug.Assert(tile.posX == x && tile.posZ == z, "Error de coordenadas: La x,z de la Tile no se corresponde con su posición en la matriz");
 
                     // Create node
                     Node<Tile> newNode = new Node<Tile>(tile.name, tile);
@@ -183,18 +183,17 @@ public class PathFinder : MonoBehaviour {
         // Loop over node set: Assign neighbours
         foreach (Node<Tile> node in problem.nodes.Values)
         {
-            TileManager.Vector2zx coords = tileManager.getTileCoords(node.getData());
+            TileManager.Vector2xz coords = tileManager.getTileCoords(node.getData());
 
             // Add adyacent tiles as neighbours if they are also EMPTY or ROAD
-            foreach (TileManager.Vector2zx adyacent in tileManager.getCrossAdyacents(coords))
+            foreach (TileManager.Vector2xz adyacent in tileManager.getCrossAdyacents(coords))
             {
-                uint adyacentZ = (uint)adyacent.z;
                 uint adyacentX = (uint)adyacent.x;
-                
+                uint adyacentZ = (uint)adyacent.z;
 
-                if (tiles[adyacentZ, adyacentX].buildingType == TileType.EMPTY || tiles[adyacentZ, adyacentX].buildingType == TileType.ROAD)
+                if (tiles[adyacentX, adyacentZ].buildingType == TileType.EMPTY || tiles[adyacentX, adyacentZ].buildingType == TileType.ROAD)
                 {
-                    Node<Tile> adyacentNode = problem.nodes[getNodeId(adyacentZ, adyacentX)];
+                    Node<Tile> adyacentNode = problem.nodes[getNodeId(adyacentX, adyacentZ)];
                     node.addNeighbour(adyacentNode);
                 }
             }
@@ -203,9 +202,9 @@ public class PathFinder : MonoBehaviour {
         return problem;
     }
 
-    private string getNodeId(uint z, uint x)
+    private string getNodeId(uint x, uint z)
     {
-        return tileManager.getTileNameFromCoords(z, x);
+        return tileManager.getTileNameFromCoords(x, z);
     }
 
     /// <summary>
@@ -255,8 +254,8 @@ public class PathFinder : MonoBehaviour {
 
     private float manhattanDist(Node<Tile> from, Node<Tile> to)
     {
-        TileManager.Vector2zx fromCoords = tileManager.getTileCoords(from.getData());
-        TileManager.Vector2zx toCoords = tileManager.getTileCoords(to.getData());
+        TileManager.Vector2xz fromCoords = tileManager.getTileCoords(from.getData());
+        TileManager.Vector2xz toCoords = tileManager.getTileCoords(to.getData());
 
         return Math.Abs(fromCoords.x - toCoords.x) + Math.Abs(fromCoords.z - toCoords.z);
     }
