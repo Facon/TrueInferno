@@ -90,8 +90,8 @@ MonoBehaviour:
   sizeX: 1
   sizeY: .200000003
   sizeZ: 1
-  BuildingType: 0
-  validTileType: 1
+  BuildingType: 2
+  validTileType: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -133,7 +133,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: validTileType
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BuildingType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

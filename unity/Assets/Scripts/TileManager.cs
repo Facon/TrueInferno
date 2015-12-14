@@ -40,14 +40,14 @@ public class TileManager : MonoBehaviour
 
         Debug.Log("Tamaño Array: " + map.Length);
 
-        tiles = new Tile[sizeX, sizeZ];
+        tiles = new Tile[SIZE_X, SIZE_Z];
         //tileTypes = new TileType[sizeZ, sizeX];
 
-        for (uint z = 0; z < sizeZ; ++z)
+        for (uint z = 0; z < SIZE_Z; ++z)
         {
-            for (uint x = 0; x < sizeX; ++x)
+            for (uint x = 0; x < SIZE_X; ++x)
             {
-                Tile newTile = Instantiate(tile, new Vector3(x, 0, sizeZ - z), Quaternion.identity) as Tile;
+                Tile newTile = Instantiate(tile, new Vector3(x, 0, SIZE_Z - z), Quaternion.identity) as Tile;
                 newTile.transform.parent = this.transform;
                 //newTile.name = "Tile_x" + x + "_z" + z;
                 newTile.name = getTileNameFromCoords(z, x);
