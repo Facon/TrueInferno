@@ -5,6 +5,7 @@ using System;
 public class Tile : MonoBehaviour {
     public uint posX, posZ;
     public int type;
+    public TileType buildingType;
     public List<Material> materials = new List<Material>(5);
 
 	// Use this for initialization

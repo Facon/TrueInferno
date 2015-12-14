@@ -383,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizeX: 10
   sizeZ: 10
-  tile: {fileID: 184256, guid: 23ee477060469084ca02cbac98775fbb, type: 2}
+  tile: {fileID: 11465086, guid: 23ee477060469084ca02cbac98775fbb, type: 2}
 --- !u!4 &683767135
 Transform:
   m_ObjectHideFlags: 0
@@ -408,6 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileManager: {fileID: 683767134}
+  test: 0
 --- !u!1 &724581088
 GameObject:
   m_ObjectHideFlags: 0

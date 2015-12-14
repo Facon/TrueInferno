@@ -5,8 +5,12 @@ public class Building : MonoBehaviour {
     public uint sizeX;
     public float sizeY;
     public uint sizeZ;
+    public TileType BuildingType;
+    public int validTileType;
     private bool visible = true;
     private List<GameObject> list = new List<GameObject>();
+    
+    
 
     // Use this for initialization
     void Start() {
