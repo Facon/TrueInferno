@@ -7,11 +7,14 @@ public class Tile : MonoBehaviour {
     public uint posZ;
 
     public int type;
-    public List<Material> materials;
+    public TileType buildingType;
+    public List<Material> materials = new List<Material>(5);
 
 	// Use this for initialization
 	void Start () {
-    }
+        //MeshRenderer m = GetComponent<MeshRenderer>();
+        //m.material = new Material(Material.)
+	}
 
     internal void init()
     {

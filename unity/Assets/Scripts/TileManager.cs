@@ -12,19 +12,19 @@ public class TileManager : MonoBehaviour
     private const uint SIZE_X = 10;
     private const uint SIZE_Z = 10;
 
-    public GameObject tile;
+    public Tile tile;
 
     /// <summary>
     ///  Matrix[z,x] with the tile GameObject. 
     /// </summary>
-    public GameObject[,] tiles;
+    public Tile[,] tiles;
 
     /// <summary>
     ///  Matrix[z,x] with the tile type info. 
     /// TODO A tile type should be attached somehow to its tile GameObject. It may be included
     /// in a Component so its value could be changed by reading a specific message
     /// </summary>
-    public TileType[,] tileTypes;
+    //public TileType[,] tileTypes;
 
     /// <summary>
     /// Char delim for tile names
@@ -35,19 +35,19 @@ public class TileManager : MonoBehaviour
     void Start()
     {
         int[,] map = parseMap();
-        int sizeX = (int)Mathf.Sqrt(map.Length);
-        int sizeZ = sizeX;
+        //int sizeX = (int)Mathf.Sqrt(map.Length);
+        //int sizeZ = sizeX;
 
         Debug.Log("Tamaño Array: " + map.Length);
 
-        tiles = new GameObject[sizeZ, sizeX];
-        tileTypes = new TileType[sizeZ, sizeX];
+        tiles = new Tile[sizeX, sizeZ];
+        //tileTypes = new TileType[sizeZ, sizeX];
 
         for (uint z = 0; z < sizeZ; ++z)
         {
             for (uint x = 0; x < sizeX; ++x)
             {
-                GameObject newTile = Instantiate(tile, new Vector3(x, 0, sizeZ - z), Quaternion.identity) as GameObject;
+                Tile newTile = Instantiate(tile, new Vector3(x, 0, sizeZ - z), Quaternion.identity) as Tile;
                 newTile.transform.parent = this.transform;
                 //newTile.name = "Tile_x" + x + "_z" + z;
                 newTile.name = getTileNameFromCoords(z, x);
@@ -56,19 +56,21 @@ public class TileManager : MonoBehaviour
                 //Debug.Log("X: " + x + ", Z: " + z);
                 features.posX = x;
                 features.posZ = z;
+                features.buildingType = TileType.EMPTY;
                 features.type = map[z, x];
+                //Debug.Log("tile "+z+" "+x+" es de tipo "+features.type);
                 features.init();
 
                 // Update tile map
-                tiles[z, x] = newTile;
+                tiles[x, z] = newTile;
 
                 // TODO quick-fix...
                 // Update tile type map
-                switch(map[z, x])
-                {
-                    case 0: tileTypes[z, x] = TileType.EMPTY; break;
-                    default: tileTypes[z, x] = TileType.OBSTACLE; break;
-                }
+                //switch(map[z, x])
+                //{
+                  //  case 0: tileTypes[z, x] = TileType.EMPTY; break;
+                    //default: tileTypes[z, x] = TileType.OBSTACLE; break;
+                //}
             }
         }
     }
@@ -88,7 +90,7 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    public Vector2zx getTileCoords(GameObject tile)
+    public Vector2zx getTileCoords(Tile tile)
     {
         return getCoordsFromTileName(tile.name);
     }
@@ -161,6 +163,7 @@ public class TileManager : MonoBehaviour
 
     private int[,] parseMap()
     {
+
         int[,] data = new int[10, 10]
         {
             { 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, },

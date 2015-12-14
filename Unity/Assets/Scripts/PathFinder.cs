@@ -29,17 +29,17 @@ public class PathFinder : MonoBehaviour {
             int toX = UnityEngine.Random.Range(0, (int)tileManager.getSizeX());
             int toZ = UnityEngine.Random.Range(0, (int)tileManager.getSizeZ());
 
-            GameObject from = tileManager.tiles[fromZ, fromX];
-            GameObject to = tileManager.tiles[toZ, toX];
+            Tile from = tileManager.tiles[fromZ, fromX];
+            Tile to = tileManager.tiles[toZ, toX];
 
             Debug.Log("Finding path from " + from.name + " to " + to.name + "...\n");
-            List<GameObject> path = GetRoadPath(from, to);
+            List<Tile> path = GetRoadPath(from, to);
 
             if (path != null)
             {
                 Debug.Log("Path found!\n");
 
-                foreach (GameObject tile in path)
+                foreach (Tile tile in path)
                 {
                     Debug.Log(tile.name + "\n");
                 }
@@ -122,7 +122,7 @@ public class PathFinder : MonoBehaviour {
     /// <param name="startTile"></param>
     /// <param name="goalTile"></param>
     /// <returns></returns>
-    private RoadPathProblem<GameObject> getRoadPathProblem(GameObject startTile, GameObject goalTile)
+    private RoadPathProblem<Tile> getRoadPathProblem(Tile startTile, Tile goalTile)
     {
         if(startTile==null)
         {
@@ -135,22 +135,24 @@ public class PathFinder : MonoBehaviour {
             return null;
         }
 
-        RoadPathProblem<GameObject> problem = new RoadPathProblem<GameObject>();
-        problem.nodes = new Dictionary<string,Node<GameObject>>();
+        RoadPathProblem<Tile> problem = new RoadPathProblem<Tile>();
+        problem.nodes = new Dictionary<string,Node<Tile>>();
 
-        TileType[,] tileTypes = tileManager.tileTypes;
-        GameObject[,] tiles = tileManager.tiles;
+        //TileType[,] tileTypes = tileManager.tileTypes;
+        Tile[,] tiles = tileManager.tiles;
         
         // Loop over tile set: Create nodes and locate goal and start
         for (int z = 0; z < tileManager.getSizeZ(); ++z)
             for (int x = 0; x < tileManager.getSizeX(); ++x)
                 // Only empty tiles and roads are considered for the graph
-                if (tileTypes[z, x] == TileType.EMPTY || tileTypes[z, x] == TileType.ROAD)
+                //if (tileTypes[z, x] == TileType.EMPTY || tileTypes[z, x] == TileType.ROAD)
+
+                if (tiles[z, x].buildingType == TileType.EMPTY || tiles[z, x].buildingType == TileType.ROAD)
                 {
-                    GameObject tile = tiles[z, x];
+                    Tile tile = tiles[z, x];
 
                     // Create node
-                    Node<GameObject> newNode = new Node<GameObject>(tile.name, tile);
+                    Node<Tile> newNode = new Node<Tile>(tile.name, tile);
 
                     // Store it in node set
                     problem.nodes.Add(tile.name, newNode);
@@ -179,7 +181,7 @@ public class PathFinder : MonoBehaviour {
         }
 
         // Loop over node set: Assign neighbours
-        foreach (Node<GameObject> node in problem.nodes.Values)
+        foreach (Node<Tile> node in problem.nodes.Values)
         {
             TileManager.Vector2zx coords = tileManager.getTileCoords(node.getData());
 
@@ -188,10 +190,11 @@ public class PathFinder : MonoBehaviour {
             {
                 uint adyacentZ = (uint)adyacent.z;
                 uint adyacentX = (uint)adyacent.x;
+                
 
-                if (tileTypes[adyacentZ, adyacentX] == TileType.EMPTY || tileTypes[adyacentZ, adyacentX] == TileType.ROAD)
+                if (tiles[adyacentZ, adyacentX].buildingType == TileType.EMPTY || tiles[adyacentZ, adyacentX].buildingType == TileType.ROAD)
                 {
-                    Node<GameObject> adyacentNode = problem.nodes[getNodeId(adyacentZ, adyacentX)];
+                    Node<Tile> adyacentNode = problem.nodes[getNodeId(adyacentZ, adyacentX)];
                     node.addNeighbour(adyacentNode);
                 }
             }
@@ -211,14 +214,14 @@ public class PathFinder : MonoBehaviour {
     /// <param name="start"></param>
     /// <param name="goal"></param>
     /// <returns></returns>
-    public List<GameObject> GetRoadPath(GameObject startTile, GameObject goalTile)
+    public List<Tile> GetRoadPath(Tile startTile, Tile goalTile)
     {
         float start = Time.realtimeSinceStartup;
 
-        List<GameObject> path = new List<GameObject>();
+        List<Tile> path = new List<Tile>();
 
         // Transform our tile-based world into a node-based one
-        RoadPathProblem<GameObject> roadPathProblem = getRoadPathProblem(startTile, goalTile);
+        RoadPathProblem<Tile> roadPathProblem = getRoadPathProblem(startTile, goalTile);
 
         if (roadPathProblem == null)
         {
@@ -227,10 +230,10 @@ public class PathFinder : MonoBehaviour {
         }
 
         // Instantiate A* search problem
-        AStar<GameObject> problem = new AStar<GameObject>(roadPathProblem.nodes, roadPathProblem.startNode, roadPathProblem.goalNode, manhattanDist);
+        AStar<Tile> problem = new AStar<Tile>(roadPathProblem.nodes, roadPathProblem.startNode, roadPathProblem.goalNode, manhattanDist);
 
 		// And solve it
-		List<Node<GameObject>> problemPath = problem.solve();
+		List<Node<Tile>> problemPath = problem.solve();
         if (problemPath == null)
         {
             Debug.Log("Can't solve A* search problem\n");
@@ -238,7 +241,7 @@ public class PathFinder : MonoBehaviour {
         }
 
 		// Transform node list into a tile list
-		foreach(Node<GameObject> node in problemPath){
+		foreach(Node<Tile> node in problemPath){
 			path.Add(node.getData());
 		}
 
@@ -250,7 +253,7 @@ public class PathFinder : MonoBehaviour {
 
     private delegate float HeuristicCost<T>(Node<T> from, Node<T> to);
 
-    private float manhattanDist(Node<GameObject> from, Node<GameObject> to)
+    private float manhattanDist(Node<Tile> from, Node<Tile> to)
     {
         TileManager.Vector2zx fromCoords = tileManager.getTileCoords(from.getData());
         TileManager.Vector2zx toCoords = tileManager.getTileCoords(to.getData());

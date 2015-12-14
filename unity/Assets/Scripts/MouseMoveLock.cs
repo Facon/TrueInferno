@@ -66,7 +66,10 @@ public class MouseMoveLock : MonoBehaviour {
 
     bool checkValidPosition(Building building, uint x, uint z)
     {
+        Debug.Log(x + " " + z);
+
         TileManager tm = GameObject.Find("Map").GetComponent<TileManager>();
+        Tile[,] tiles = tm.tiles;
         uint mapSizeX = tm.getSizeX();
         uint mapSizeZ = tm.getSizeZ();
         int liminfX = 0, liminfZ = 0, limsupX = 0, limsupZ = 0;
@@ -84,14 +87,11 @@ public class MouseMoveLock : MonoBehaviour {
         if (liminfX < 0 || liminfZ < 0 || limsupX >= mapSizeX || limsupZ >= mapSizeZ)
             return false;
 
-        GameObject tile = null;
-        string tilename = "";
         for (int i = liminfX; i <= limsupX; ++i) {
             for (int j = liminfZ; j <= limsupZ; ++j)
             {
-                tilename="Tile_"+i+"_"+j;
-                tile = GameObject.Find(tilename);
-                if (tile.GetComponent<Tile>().type != 0)
+                //Debug.Log("Tile "+i+" "+j+" tipo "+tiles[i,j].type+" tipo buscado "+building.validTileType);
+                if ((tiles[i,j].buildingType != TileType.EMPTY)||(tiles[i,j].type != building.validTileType))
                     return false;
             }
         }
@@ -100,6 +100,8 @@ public class MouseMoveLock : MonoBehaviour {
 
     void setOcuppiedTile(Building building, uint x, uint z)
     {
+        TileManager tm = GameObject.Find("Map").GetComponent<TileManager>();
+        Tile[,] tiles = tm.tiles;
         int liminfX = 0, liminfZ = 0, limsupX = 0, limsupZ = 0;
 
         liminfX = (int)x - (int)building.sizeX / 2;
@@ -112,15 +114,11 @@ public class MouseMoveLock : MonoBehaviour {
         if (isEven(building.sizeZ)) // Even
             --limsupZ;
 
-        GameObject tile = null;
-        string tilename = "";
         for (int i = liminfX; i <= limsupX; ++i)
         {
             for (int j = liminfZ; j <= limsupZ; ++j)
             {
-                tilename = "Tile_" + i + "_" + j;
-                tile = GameObject.Find(tilename);
-                tile.GetComponent<Tile>().type = 2;
+                tiles[i,j].buildingType = building.BuildingType;
             }
         }
     }
