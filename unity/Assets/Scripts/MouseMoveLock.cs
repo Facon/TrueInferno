@@ -46,7 +46,7 @@ public class MouseMoveLock : MonoBehaviour {
                     Renderer rend = building.GetComponent<Renderer>();
                     if (placeBuilding && bValidPosition)
                     {
-                        rend.material.SetColor("_SpecColor", Color.yellow);
+                        rend.material.SetColor("_SpecColor", Color.black);
                         setOcuppiedTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
                         building.transform.position = new Vector3(posX, posY-0.5f, posZ);
                         return true;
