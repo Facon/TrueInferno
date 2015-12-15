@@ -202,6 +202,99 @@ public class PathFinder : MonoBehaviour {
         return problem;
     }
 
+    private class WorkerPathProblem<T>
+    {
+        public Node<T> startNode = null;
+        public Node<T> goalNode = null;
+        public Dictionary<string, Node<T>> nodes = null;
+    }
+
+    /// <summary>
+    ///  Transform a tile-based problem into an abstract node-based. It only considers road tiles
+    /// </summary>
+    /// <param name="startTile"></param>
+    /// <param name="goalTile"></param>
+    /// <returns></returns>
+    private WorkerPathProblem<Tile> getWorkerPathProblem(Tile startTile, Tile goalTile)
+    {
+        if (startTile == null)
+        {
+            Debug.Log("startTile must be not-null");
+            return null;
+        }
+        if (goalTile == null)
+        {
+            Debug.Log("goalTile must be not-null");
+            return null;
+        }
+
+        WorkerPathProblem<Tile> problem = new WorkerPathProblem<Tile>();
+        problem.nodes = new Dictionary<string, Node<Tile>>();
+
+        //TileType[,] tileTypes = tileManager.tileTypes;
+        Tile[,] tiles = tileManager.tiles;
+
+        // Loop over tile set: Create nodes and locate goal and start
+        for (int x = 0; x < tileManager.getSizeX(); ++x)
+            for (int z = 0; z < tileManager.getSizeZ(); ++z)
+                // Only roads tiles are considered for the graph
+                if (tiles[x, z].buildingType == TileType.ROAD)
+                {
+                    Tile tile = tiles[x, z];
+
+                    Debug.Assert(tile.posX == x && tile.posZ == z, "Error de coordenadas: La x,z de la Tile no se corresponde con su posición en la matriz");
+
+                    // Create node
+                    Node<Tile> newNode = new Node<Tile>(tile.name, tile);
+
+                    // Store it in node set
+                    problem.nodes.Add(tile.name, newNode);
+
+                    // Locate start and goal tiles to assign start and goal nodes
+                    if (tile == startTile)
+                        problem.startNode = newNode;
+                    if (tile == goalTile)
+                        problem.goalNode = newNode;
+                }
+
+        // Check we've found start and goal
+        string error = "";
+        if (problem.startNode == null)
+        {
+            error += "Start tile can't be mapped into a valid node. ";
+        }
+        if (problem.goalNode == null)
+        {
+            error += "Goal tile can't be mapped into a valid node. ";
+        }
+        if (error != "")
+        {
+            Debug.Log("Can't find path: " + error + "\n");
+            return null;
+        }
+
+        // Loop over node set: Assign neighbours
+        foreach (Node<Tile> node in problem.nodes.Values)
+        {
+            TileManager.Vector2xz coords = tileManager.getTileCoords(node.getData());
+
+            // Add adyacent tiles as neighbours if they are also EMPTY or ROAD
+            foreach (TileManager.Vector2xz adyacent in tileManager.getCrossAdyacents(coords))
+            {
+                uint adyacentX = (uint)adyacent.x;
+                uint adyacentZ = (uint)adyacent.z;
+
+                if (tiles[adyacentX, adyacentZ].buildingType == TileType.ROAD)
+                {
+                    Node<Tile> adyacentNode = problem.nodes[getNodeId(adyacentX, adyacentZ)];
+                    node.addNeighbour(adyacentNode);
+                }
+            }
+        }
+
+        return problem;
+    }
+
     private string getNodeId(uint x, uint z)
     {
         return tileManager.getTileNameFromCoords(x, z);
@@ -246,6 +339,49 @@ public class PathFinder : MonoBehaviour {
 
         float timeElapsed = Time.realtimeSinceStartup - start;
         Debug.Log("(GetRoadPath) Time elapsed = "+timeElapsed+" seconds");
+
+        return path;
+    }
+
+    /// <summary>
+    /// Gets road path from a start tile to a goal passing through road tile types
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="goal"></param>
+    /// <returns></returns>
+    public List<Tile> GetWorkerPath(Tile startTile, Tile goalTile)
+    {
+        float start = Time.realtimeSinceStartup;
+
+        List<Tile> path = new List<Tile>();
+
+        // Transform our tile-based world into a node-based one
+        WorkerPathProblem<Tile> workerPathProblem = getWorkerPathProblem(startTile, goalTile);
+
+        if (workerPathProblem == null)
+        {
+            Debug.Log("Can't instantiate road path problem\n");
+            return null;
+        }
+
+        // Instantiate A* search problem
+        AStar<Tile> problem = new AStar<Tile>(workerPathProblem.nodes, workerPathProblem.startNode, workerPathProblem.goalNode, manhattanDist);
+
+		// And solve it
+		List<Node<Tile>> problemPath = problem.solve();
+        if (problemPath == null)
+        {
+            Debug.Log("Can't solve A* search problem\n");
+            return null;
+        }
+
+		// Transform node list into a tile list
+		foreach(Node<Tile> node in problemPath){
+			path.Add(node.getData());
+		}
+
+        float timeElapsed = Time.realtimeSinceStartup - start;
+        Debug.Log("(GetWorkerPath) Time elapsed = " + timeElapsed + " seconds");
 
         return path;
     }
@@ -304,7 +440,7 @@ public class PathFinder : MonoBehaviour {
                 if (current == goal)
                 {
                     float timeElapsed = Time.realtimeSinceStartup - startTime;
-                    Debug.Log("(AStar.solve) Time elapsed = " + (Time.realtimeSinceStartup - startTime) + " seconds");
+                    Debug.Log("(AStar.solve) Time elapsed = " + timeElapsed + " seconds");
 
                     return getPath(goal);
                 }
