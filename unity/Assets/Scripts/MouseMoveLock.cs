@@ -82,7 +82,7 @@ public class MouseMoveLock : MonoBehaviour {
         if (isEven(building.sizeX)) // Even
             ++liminfX;
         if (isEven(building.sizeZ)) // Even
-            --limsupZ;
+            ++liminfZ;
 
         if (liminfX < 0 || liminfZ < 0 || limsupX >= mapSizeX || limsupZ >= mapSizeZ)
             return false;
@@ -112,7 +112,7 @@ public class MouseMoveLock : MonoBehaviour {
         if (isEven(building.sizeX)) // Even
             ++liminfX;
         if (isEven(building.sizeZ)) // Even
-            --limsupZ;
+            ++liminfZ;
 
         for (int i = liminfX; i <= limsupX; ++i)
         {
