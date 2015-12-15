@@ -13,7 +13,11 @@ public class TileManager : MonoBehaviour
     private const uint SIZE_Z = 15;
 
     public Tile tile;
+    public GameObject prefabTownHall;
+    public GameObject prefabElevator;
     public GameObject prefabWorker;
+
+    public List<GameObject> buildingList;
 
     /// <summary>
     ///  Matrix[x,z] with the tile GameObject. 
@@ -55,6 +59,30 @@ public class TileManager : MonoBehaviour
                 tiles[x, z] = newTile;
             }
         }
+
+        // Create townhall and elevator
+        //MouseMoveLock mMove = GameObject.Find("Controller").GetComponent<MouseMoveLock>();
+
+        Building buildcomp = prefabTownHall.GetComponent<Building>();
+        GameObject TownHall = Instantiate(prefabTownHall, new Vector3(tiles[13, 1].posX, buildcomp.sizeY / 2 + 0.1f, tiles[13, 1].posZ), Quaternion.identity) as GameObject;
+        TownHall.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeZ);
+        //mMove.setOcuppiedTile(buildcomp, tiles[2, 8].posX, tiles[2, 8].posZ);
+        tiles[14, 0].buildingType = TileType.BUILDING;
+        tiles[13, 0].buildingType = TileType.BUILDING;
+        tiles[12, 0].buildingType = TileType.BUILDING;
+        tiles[14, 1].buildingType = TileType.BUILDING;
+        tiles[13, 1].buildingType = TileType.BUILDING;
+        tiles[12, 1].buildingType = TileType.BUILDING;
+        tiles[14, 2].buildingType = TileType.BUILDING;
+        tiles[13, 2].buildingType = TileType.BUILDING;
+        tiles[12, 2].buildingType = TileType.BUILDING;
+
+        buildcomp = prefabElevator.GetComponent<Building>();
+        GameObject Elevator = Instantiate(prefabElevator, new Vector3(tiles[13, 8].posX+0.5f, buildcomp.sizeY / 2 +0.1f, tiles[13, 8].posZ), Quaternion.identity) as GameObject;
+        Elevator.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeZ);
+        tiles[14, 8].buildingType = TileType.BUILDING;
+        tiles[13, 8].buildingType = TileType.BUILDING;
+
 
         // Create test workers
         GameObject worker1 = GameObject.Instantiate(prefabWorker, tiles[0, 0].transform.position + Vector3.up, Quaternion.identity) as GameObject;
@@ -155,7 +183,13 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       /* int i=1;
+        Building buildcomp;
+        foreach (GameObject go in buildingList) {
+            buildcomp = go.GetComponent<Building>();
+            Debug.Log("edificio " + i + " tamaño " + buildcomp.sizeX + "_" + buildcomp.sizeY + "_" + buildcomp.sizeZ);
+            ++i;
+        }*/
     }
 
     private int[,] parseMap()

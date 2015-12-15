@@ -43,11 +43,17 @@ public class BuildingGenerator : MonoBehaviour {
             Destroy(go);
         }
 
-        foreach (Tile tile in path) {
-            roadSegment = Instantiate(road, new Vector3(tile.posX, buildcomp.sizeY / 2 + 0.1f, tile.posZ), Quaternion.identity) as GameObject;
-            roadSegment.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeZ);
-            newRoad.Add(roadSegment);
+        if (path!=null)
+        {
+
+            foreach (Tile tile in path)
+            {
+                roadSegment = Instantiate(road, new Vector3(tile.posX, buildcomp.sizeY / 2 + 0.1f, tile.posZ), Quaternion.identity) as GameObject;
+                roadSegment.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeZ);
+                newRoad.Add(roadSegment);
+            }
         }
+            
     }
 
 }
