@@ -145,7 +145,7 @@ public class PathFinder : MonoBehaviour {
         for (int x = 0; x < tileManager.getSizeX(); ++x)
             for (int z = 0; z < tileManager.getSizeZ(); ++z)
                 // Only empty tiles and roads are considered for the graph
-                if (tiles[x, z].buildingType == TileType.EMPTY || tiles[x, z].buildingType == TileType.ROAD)
+                if ((tiles[x, z].buildingType == TileType.EMPTY || tiles[x, z].buildingType == TileType.ROAD) && tiles[x,z].type==0)
                 {
                     Tile tile = tiles[x, z];
 
@@ -191,7 +191,7 @@ public class PathFinder : MonoBehaviour {
                 uint adyacentX = (uint)adyacent.x;
                 uint adyacentZ = (uint)adyacent.z;
 
-                if (tiles[adyacentX, adyacentZ].buildingType == TileType.EMPTY || tiles[adyacentX, adyacentZ].buildingType == TileType.ROAD)
+                if ((tiles[adyacentX, adyacentZ].buildingType == TileType.EMPTY || tiles[adyacentX, adyacentZ].buildingType == TileType.ROAD) && tiles[adyacentX, adyacentZ].type == 0)
                 {
                     Node<Tile> adyacentNode = problem.nodes[getNodeId(adyacentX, adyacentZ)];
                     node.addNeighbour(adyacentNode);

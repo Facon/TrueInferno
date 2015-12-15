@@ -9,10 +9,11 @@ public enum TileType
 
 public class TileManager : MonoBehaviour
 {
-    private const uint SIZE_X = 10;
-    private const uint SIZE_Z = 10;
+    private const uint SIZE_X = 15;
+    private const uint SIZE_Z = 15;
 
     public Tile tile;
+    public GameObject prefabWorker;
 
     /// <summary>
     ///  Matrix[x,z] with the tile GameObject. 
@@ -54,6 +55,21 @@ public class TileManager : MonoBehaviour
                 tiles[x, z] = newTile;
             }
         }
+
+        // Create test workers
+        GameObject worker1 = GameObject.Instantiate(prefabWorker, tiles[0, 0].transform.position + Vector3.up, Quaternion.identity) as GameObject;
+        Tile from = tiles[3, 0];
+        Tile to = tiles[7, 8];
+        //List<Tile> path = GetComponent<PathFinder>().GetWorkerPath(from, to);
+        List<Tile> path = GetComponent<PathFinder>().GetRoadPath(from, to);
+        worker1.GetComponent<PathFollower>().AddToQueue(path);
+
+        GameObject worker2 = GameObject.Instantiate(prefabWorker, tiles[2,2].transform.position + Vector3.up, Quaternion.identity) as GameObject;
+        from = tiles[0, 8];
+        to = tiles[14, 13];
+        //List<Tile> path = GetComponent<PathFinder>().GetWorkerPath(from, to);
+        path = GetComponent<PathFinder>().GetRoadPath(from, to);
+        worker2.GetComponent<PathFollower>().AddToQueue(path);
     }
 
     /// <summary>
@@ -145,18 +161,23 @@ public class TileManager : MonoBehaviour
     private int[,] parseMap()
     {
 
-        int[,] data = new int[10, 10]
+        int[,] data = new int[15, 15]
         {
-            { 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, },
-            { 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, },
-            { 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, },
-            { 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, },
-            { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, },
-            { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, },
-            { 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, },
-            { 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, },
-            { 0, 1, 2, 0, 0, 0, 0, 0, 1, 0, },
-            { 1, 2, 2, 0, 0, 0, 0, 0, 0, 1, },
+            { 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0 },
+            { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2 },
+            { 1, 1, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2, 2, 0 },
+            { 0, 0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 1, 2, 2, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0 },
+            { 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0 },
         };
 
         return data;
