@@ -1,24 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MouseMoveLock : MonoBehaviour {
 
 
-    public bool bValidPosition; 
+    private bool bValidPosition;
+    private Tile startPoint;
+    private BuildingGenerator bGenerator;
+    private PathFinder pFinder;
+    private TileManager tm;
+    private bool bFirstClick;
 
     // Use this for initialization
     void Start () {
         bValidPosition = false;
+        startPoint = null;
+        bGenerator = GameObject.Find("Controller").GetComponent<BuildingGenerator>();
+        pFinder = GameObject.Find("Map").GetComponent<PathFinder>();
+        tm = GameObject.Find("Map").GetComponent<TileManager>();
+        bFirstClick = true;
 	}
 
+
     // Update is called once per frame
-    public bool BuildingMouseMove(GameObject building, bool placeBuilding) 
+    public bool BuildingMouseMove(GameObject building, bool placeBuilding, bool bRoad, GameObject road) 
     {
         bValidPosition = false;
         float raycastLength = 1000;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, raycastLength);
-        
+
+        if (!bRoad)
+            startPoint = null;
+
         if (hits.Length > 0) {
 
             for (int i = 0; i < hits.Length; i++)
@@ -46,14 +61,45 @@ public class MouseMoveLock : MonoBehaviour {
                     Renderer rend = building.GetComponent<Renderer>();
                     if (placeBuilding && bValidPosition)
                     {
-                        rend.material.SetColor("_SpecColor", Color.black);
-                        setOcuppiedTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
-                        building.transform.position = new Vector3(posX, posY-0.5f, posZ);
-                        return true;
+                        if (!bRoad)
+                        {
+                            rend.material.SetColor("_SpecColor", Color.black);
+                            setOcuppiedTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
+                            building.transform.position = new Vector3(posX, posY - 0.5f, posZ);
+                            return true;
+                        }
+                        else {
+                            if (startPoint == null)
+                            {
+                                bFirstClick = false;
+                                startPoint = hits[i].collider.gameObject.GetComponent<Tile>();
+                                bGenerator.CreateRoad(pFinder.GetRoadPath(startPoint, hits[i].collider.gameObject.GetComponent<Tile>()), road);
+                                return false;
+                            }
+                            else {
+                                List<Tile> path = pFinder.GetRoadPath(startPoint, hits[i].collider.gameObject.GetComponent<Tile>());
+                                bGenerator.CreateRoad(path, road);
+                                foreach (Tile tile in path) {
+                                    setOcuppiedTile(buildcomp, tile.posX, tile.posZ);
+                                }
+                                DestroyObject(building);
+                                bFirstClick = true;
+                                startPoint = null;
+                                bGenerator.newRoad.Clear();
+                                return true;
+                            }
+                        }
                     }
-                    else { 
+                    else {
                         if (bValidPosition)
+                        {
                             rend.material.SetColor("_SpecColor", Color.green);
+                            Debug.Log("broad es "+bRoad+" bFirstclick es "+bFirstClick);
+                            if (bRoad && !bFirstClick) {
+                                Debug.Log("HOLAAAA");
+                                bGenerator.CreateRoad(pFinder.GetRoadPath(startPoint, hits[i].collider.gameObject.GetComponent<Tile>()), road);
+                            }
+                        }
                         else
                             rend.material.SetColor("_SpecColor", Color.red);
                     }
@@ -66,9 +112,7 @@ public class MouseMoveLock : MonoBehaviour {
 
     bool checkValidPosition(Building building, uint x, uint z)
     {
-        Debug.Log(x + " " + z);
 
-        TileManager tm = GameObject.Find("Map").GetComponent<TileManager>();
         Tile[,] tiles = tm.tiles;
         uint mapSizeX = tm.getSizeX();
         uint mapSizeZ = tm.getSizeZ();
@@ -100,7 +144,6 @@ public class MouseMoveLock : MonoBehaviour {
 
     void setOcuppiedTile(Building building, uint x, uint z)
     {
-        TileManager tm = GameObject.Find("Map").GetComponent<TileManager>();
         Tile[,] tiles = tm.tiles;
         int liminfX = 0, liminfZ = 0, limsupX = 0, limsupZ = 0;
 

@@ -2,15 +2,15 @@
 using System.Collections;
 
 public class Controller : MonoBehaviour {
-    public GameObject building;
     public GameObject road;
+    //public GameObject[] road;
     private BuildingGenerator bGenerator;
     private MouseMoveLock mMove;
-
+    
 	// Use this for initialization
 	void Start () {
         mMove = GetComponent<MouseMoveLock>();
-        bGenerator = GetComponent<BuildingGenerator>();	
+        bGenerator = GetComponent<BuildingGenerator>();
 	}
 	
 	// Update is called once per frame
@@ -21,12 +21,14 @@ public class Controller : MonoBehaviour {
 	void Update () {
 
         if (bGenerator.newBuilding){
-            if (mMove.BuildingMouseMove(bGenerator.newBuilding, Input.GetMouseButtonDown(0))){
+            if (mMove.BuildingMouseMove(bGenerator.newBuilding, Input.GetMouseButtonDown(0), bGenerator.bRoad, road)){
                 bGenerator.newBuilding = null;
                 UnityEngine.Cursor.visible = true;
             }
-
         }
+
+
+       
 
         /*
          * if (Input.GetMouseButtonDown(0) && (mMove.bValidPosition) && (bGenerator.newBuilding))
