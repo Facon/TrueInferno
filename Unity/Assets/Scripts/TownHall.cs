@@ -4,16 +4,10 @@ using System;
 
 public class TownHall : MonoBehaviour
 {
-    private int numFreeWorkers;
+    private static int numFreeWorkers = 0;
 
     // Use this for initialization
     void Start()
-    {
-        // TODO TEST
-        numFreeWorkers = 2;
-    }
-
-    internal void init()
     {
     }
 

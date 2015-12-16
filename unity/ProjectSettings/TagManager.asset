@@ -11,6 +11,8 @@ TagManager:
   - InputManager
   - ResourceManager
   - ScoreManager
+  - TownHall
+  - Map
   layers:
   - Default
   - TransparentFX

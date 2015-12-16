@@ -7,16 +7,21 @@ public class Building : MonoBehaviour {
     public uint sizeZ;
     public TileType BuildingType;
     public int validTileType;
+
+    private TileManager tileManager;
+
     private bool visible = true;
     private List<GameObject> list = new List<GameObject>();
-
-    // TODO Initialize its tiles. It should be easy to know when it's instantiated
-    private HashSet<Tile> tiles;
+    
+    private List<Tile> tiles = new List<Tile>();
 
     // Use this for initialization
     void Start() {
         if (sizeX < 1 || sizeY < 0.1 || sizeZ < 1)
             throw new System.Exception("El tamaño de edificio tiene que ser mayor que 1x1x1");
+
+        GameObject goMap = GameObject.FindGameObjectWithTag("Map");
+        tileManager = goMap.GetComponent<TileManager>();
 
         /*Vector3 center = gameObject.transform.position;
 
@@ -81,11 +86,50 @@ public class Building : MonoBehaviour {
         */
     }
 
-    public HashSet<Tile> getTiles()
+    public List<Tile> getTiles()
     {
         if (tiles == null)
-            Debug.LogError("No tiles have been defined for building "+this);
+            Debug.LogError("No tiles have been defined for building " + this);
+
         return tiles;
+    }
+
+    public List<Tile> getSurrRoadTiles()
+    {
+        List<Tile> surrRoadTiles = new List<Tile>();
+
+        // Get building's tiles
+        List<Tile> buildingTiles = getTiles();
+
+        // For each tile of the building
+        foreach (Tile buildingTile in buildingTiles)
+        {
+            // For each surrounding tile of the building tile
+            foreach (Tile surrTile in getSurrTiles(buildingTile))
+            {
+                if (surrTile.buildingType == TileType.ROAD)
+                    surrRoadTiles.Add(surrTile);
+            }
+        }
+
+        return surrRoadTiles;
+    }
+
+    public HashSet<Tile> getSurrTiles(Tile tile)
+    {
+        HashSet<Tile> surrTiles = new HashSet<Tile>();
+
+        foreach (TileManager.Vector2xz pos in TileManager.getCrossAdyacents(tile.posX, tile.posZ))
+        {
+            surrTiles.Add(tileManager.tiles[(uint)pos.x, (uint)pos.z]);
+        }
+
+        return surrTiles;
+    }
+
+    public void addTile(Tile tile)
+    {
+        tiles.Add(tile);
     }
 
 }

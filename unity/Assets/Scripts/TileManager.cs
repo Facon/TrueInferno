@@ -17,6 +17,9 @@ public class TileManager : MonoBehaviour
     public GameObject prefabElevator;
     public GameObject prefabWorker;
 
+    private GameObject townHall;
+    private TownHall townHallComp;
+
     public List<GameObject> buildingList;
 
     /// <summary>
@@ -28,7 +31,6 @@ public class TileManager : MonoBehaviour
     /// Char delim for tile names
     /// </summary>
     private char TILE_NAME_DELIM = '_';
-    private GameObject townHall;
 
     // Use this for initialization
     void Start()
@@ -67,22 +69,28 @@ public class TileManager : MonoBehaviour
         Building buildcomp = prefabTownHall.GetComponent<Building>();
         townHall = Instantiate(prefabTownHall, new Vector3(tiles[13, 1].posX, buildcomp.sizeY / 2 + 0.1f, tiles[13, 1].posZ), Quaternion.identity) as GameObject;
         townHall.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeZ);
+
+        Building townHallBuildingComp = townHall.GetComponent<Building>();
         //mMove.setOcuppiedTile(buildcomp, tiles[2, 8].posX, tiles[2, 8].posZ);
-        tiles[14, 0].buildingType = TileType.BUILDING;
-        tiles[13, 0].buildingType = TileType.BUILDING;
-        tiles[12, 0].buildingType = TileType.BUILDING;
-        tiles[14, 1].buildingType = TileType.BUILDING;
-        tiles[13, 1].buildingType = TileType.BUILDING;
-        tiles[12, 1].buildingType = TileType.BUILDING;
-        tiles[14, 2].buildingType = TileType.BUILDING;
-        tiles[13, 2].buildingType = TileType.BUILDING;
-        tiles[12, 2].buildingType = TileType.BUILDING;
+        tiles[14, 0].buildingType = TileType.BUILDING; townHallBuildingComp.addTile(tiles[14, 0]);
+        tiles[13, 0].buildingType = TileType.BUILDING; townHallBuildingComp.addTile(tiles[13, 0]);
+        tiles[12, 0].buildingType = TileType.BUILDING; townHallBuildingComp.addTile(tiles[12, 0]);
+        tiles[14, 1].buildingType = TileType.BUILDING; townHallBuildingComp.addTile(tiles[14, 1]);
+        tiles[13, 1].buildingType = TileType.BUILDING; townHallBuildingComp.addTile(tiles[13, 1]);
+        tiles[12, 1].buildingType = TileType.BUILDING; townHallBuildingComp.addTile(tiles[12, 1]);
+        tiles[14, 2].buildingType = TileType.BUILDING; townHallBuildingComp.addTile(tiles[14, 2]);
+        tiles[13, 2].buildingType = TileType.BUILDING; townHallBuildingComp.addTile(tiles[13, 2]);
+        tiles[12, 2].buildingType = TileType.BUILDING; townHallBuildingComp.addTile(tiles[12, 2]);
+
+        townHallComp = townHall.GetComponent<TownHall>();
 
         buildcomp = prefabElevator.GetComponent<Building>();
         GameObject Elevator = Instantiate(prefabElevator, new Vector3(tiles[13, 8].posX+0.5f, buildcomp.sizeY / 2 +0.1f, tiles[13, 8].posZ), Quaternion.identity) as GameObject;
         Elevator.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeZ);
-        tiles[14, 8].buildingType = TileType.BUILDING;
-        tiles[13, 8].buildingType = TileType.BUILDING;
+
+        Building elevatorBuildingComp = townHall.GetComponent<Building>();
+        tiles[14, 8].buildingType = TileType.BUILDING; elevatorBuildingComp.addTile(tiles[14, 8]);
+        tiles[13, 8].buildingType = TileType.BUILDING; elevatorBuildingComp.addTile(tiles[14, 8]);
     }
 
     /// <summary>
@@ -174,91 +182,49 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TownHall townHallComp = townHall.GetComponent<TownHall>();
         if (townHallComp.getNumFreeWorkers() > 0 && buildingList.Count > 0)
         {
             // Select random road tile of the townhall
-            List<Tile> surrRoadTiles = getSurrRoadTiles(townHall.GetComponent<Building>());
+            List<Tile> surrRoadTiles = townHall.GetComponent<Building>().getSurrRoadTiles();
 
             if (surrRoadTiles.Count == 0)
-            {
-                Debug.Log("Can't do anything: There are no surrounding roads to the TownHall");
                 return;
-            }
 
             Tile fromRoadTile = surrRoadTiles[UnityEngine.Random.Range(0, surrRoadTiles.Count)];
             
             // Select random building
-            Building targetBuilding = buildingList[UnityEngine.Random.Range(0, buildingList.Count)].GetComponent<Building>();
+            Building targetBuilding =
+                buildingList[UnityEngine.Random.Range(0, buildingList.Count)].GetComponent<Building>();
 
-            if (targetBuilding==townHall)
-            {
-                Debug.Log("Can't do anything: Target building can't be the TownHall");
+            if (targetBuilding == townHall)
                 return;
-            }
 
             // Get its surrounding road tiles
-            surrRoadTiles = getSurrRoadTiles(targetBuilding);
+            surrRoadTiles = targetBuilding.getSurrRoadTiles();
 
             if (surrRoadTiles.Count == 0)
-            {
-                Debug.Log("Can't do anything: There are no surrounding roads to the target building: "+targetBuilding);
                 return;
-            }
 
             // Select random road tile of the target building
             Tile targetRoadTile = surrRoadTiles[UnityEngine.Random.Range(0, surrRoadTiles.Count)];
 
             // Try to find path
             List<Tile> path = GetComponent<PathFinder>().GetWorkerPath(fromRoadTile, targetRoadTile);
-            if(path==null)
-            {
-                Debug.Log("Can't do anything: There is no valid worker path from "+fromRoadTile+" to "+targetRoadTile);
+
+            if (path == null)
                 return;
-            }
 
             // Create worker
             GameObject worker = GameObject.Instantiate(prefabWorker, fromRoadTile.transform.position + Vector3.up, Quaternion.identity) as GameObject;
             worker.GetComponent<PathFollower>().AddToQueue(path);
+
             townHallComp.decreaseNumFreeWorkers();
         }
-
-        else
-        {
-            Debug.Log("Can't do anything: There are " + townHallComp.getNumFreeWorkers() + " free workers and " + buildingList.Count + " buildings");
-            return;
-        }
     }
 
-    public HashSet<Tile> getSurrTiles(Tile tile)
+    public void disableWorker(GameObject spirit)
     {
-        HashSet<Tile> surrTiles = new HashSet<Tile>();
-
-        foreach(Vector2xz pos in getCrossAdyacents(tile.posX, tile.posZ))
-        {
-            surrTiles.Add(tiles[(uint)pos.x, (uint)pos.z]);
-        }
-
-        return surrTiles;
-    }
-
-    public List<Tile> getSurrRoadTiles(Building building)
-    {
-        List<Tile> surrRoadTiles = new List<Tile>();
-
-        // Get building's tiles
-        HashSet<Tile> buildingTiles = building.getTiles();
-
-        // For each tile of the building
-        foreach (Tile buildingTile in buildingTiles)
-            // For each surrounding tile of the building tile
-            foreach (Tile surrTile in getSurrTiles(tile))
-                {
-                    if (surrTile.buildingType == TileType.ROAD)
-                        surrRoadTiles.Add(surrTile);
-                }
-
-        return surrRoadTiles;
+        spirit.SetActive(false);
     }
 
     private int[,] parseMap()

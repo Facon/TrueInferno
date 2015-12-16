@@ -14,17 +14,31 @@ public class PathFollower : MonoBehaviour {
     private float startTime;
     private float journeyLength;
 
+    private TileManager tileManager;
+
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        GameObject goMap = GameObject.FindGameObjectWithTag("Map");
+        tileManager = goMap.GetComponent<TileManager>();
+
         //this.transform.position = new Vector3(0.0f, 1.0f, 0.0f);
 
         // Encolar camino de prueba
         //testPath();
-	}
+    }
 
     // FixedUpdate is called once per 0.33s
-    void FixedUpdate () {
-	    if (path.Count > 0 && !moving)
+    void FixedUpdate ()
+    {
+        if (path.Count == 0 && this.transform.position == targetPosition)
+        {
+            Debug.Log("Worker reached his destination!");
+            tileManager.disableWorker(this.gameObject);
+            //TODO Incrementar el número de trabajadores del edificio destino
+        }
+
+        if (path.Count > 0 && !moving)
         {
             moving = true;
             Tile tile = path.Dequeue();
@@ -43,14 +57,12 @@ public class PathFollower : MonoBehaviour {
             float fracJourney = distCovered / journeyLength;
             this.transform.position = Vector3.Lerp(startPosition, targetPosition, fracJourney);
             // Si llega al destino, meter moving a false
-            if (fracJourney >= 1.0f) 
-            { 
+            if (fracJourney >= 1.0f)
+            {
                 moving = false;
-                // TODO Destroy worker?
-                Debug.Log("Worker reached his destination!");
             }
         }
-	}
+    }
 
     public void AddToQueue(List<Tile> path)
     {
