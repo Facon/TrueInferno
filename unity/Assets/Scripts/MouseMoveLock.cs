@@ -163,6 +163,7 @@ public class MouseMoveLock : MonoBehaviour {
         {
             for (int j = liminfZ; j <= limsupZ; ++j)
             {
+                building.addTile(tiles[i, j]);
                 tiles[i,j].buildingType = building.BuildingType;
             }
         }
