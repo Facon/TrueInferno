@@ -15,6 +15,10 @@ public class TileManager : MonoBehaviour
     public Tile tile;
     public GameObject prefabWorker;
 
+    public TownHall townHall;
+
+    private List<Building> buildingList;
+
     /// <summary>
     ///  Matrix[x,z] with the tile GameObject. 
     /// </summary>
@@ -56,20 +60,7 @@ public class TileManager : MonoBehaviour
             }
         }
 
-        // Create test workers
-        GameObject worker1 = GameObject.Instantiate(prefabWorker, tiles[0, 0].transform.position + Vector3.up, Quaternion.identity) as GameObject;
-        Tile from = tiles[3, 0];
-        Tile to = tiles[7, 8];
-        //List<Tile> path = GetComponent<PathFinder>().GetWorkerPath(from, to);
-        List<Tile> path = GetComponent<PathFinder>().GetRoadPath(from, to);
-        worker1.GetComponent<PathFollower>().AddToQueue(path);
-
-        GameObject worker2 = GameObject.Instantiate(prefabWorker, tiles[2,2].transform.position + Vector3.up, Quaternion.identity) as GameObject;
-        from = tiles[0, 8];
-        to = tiles[14, 13];
-        //List<Tile> path = GetComponent<PathFinder>().GetWorkerPath(from, to);
-        path = GetComponent<PathFinder>().GetRoadPath(from, to);
-        worker2.GetComponent<PathFollower>().AddToQueue(path);
+        buildingList = new List<Building>();
     }
 
     /// <summary>
@@ -84,6 +75,12 @@ public class TileManager : MonoBehaviour
         {
             this.x = x;
             this.z = z;
+        }
+
+        override
+        public int GetHashCode()
+        {
+            return (x + "_" + z).GetHashCode();
         }
     }
 
@@ -120,7 +117,7 @@ public class TileManager : MonoBehaviour
     /// <param name="x"></param>
     /// <param name="z"></param>
     /// <returns></returns>
-    public HashSet<Vector2xz> getCrossAdyacents(uint x, uint z)
+    public static HashSet<Vector2xz> getCrossAdyacents(uint x, uint z)
     {
         if (x < 0 || x >= SIZE_X || z < 0 || z >= SIZE_Z)
             throw new Exception("x=" + x + " must be in [0," + (SIZE_X - 1) + "] and z=" + z + " must be in [0," + (SIZE_Z - 1) + "]");
@@ -155,7 +152,90 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(townHall.getNumFreeWorkers()>0 && buildingList.Count>0)
+        {
+            // Select random road tile of the townhall
+            List<Tile> surrRoadTiles = getSurrRoadTiles(townHall);
 
+            if (surrRoadTiles.Count == 0)
+            {
+                Debug.Log("Can't do anything: There are no surrounding roads to the TownHall");
+                return;
+            }
+
+            Tile fromRoadTile = surrRoadTiles[UnityEngine.Random.Range(0, surrRoadTiles.Count)];
+            
+            // Select random building
+            Building targetBuilding = buildingList[UnityEngine.Random.Range(0, buildingList.Count)];
+
+            if (targetBuilding==townHall)
+            {
+                Debug.Log("Can't do anything: Target building can't be the TownHall");
+                return;
+            }
+
+            // Get its surrounding road tiles
+            surrRoadTiles = getSurrRoadTiles(targetBuilding);
+
+            if (surrRoadTiles.Count == 0)
+            {
+                Debug.Log("Can't do anything: There are no surrounding roads to the target building: "+targetBuilding);
+                return;
+            }
+
+            // Select random road tile of the target building
+            Tile targetRoadTile = surrRoadTiles[UnityEngine.Random.Range(0, surrRoadTiles.Count)];
+
+            // Try to find path
+            List<Tile> path = GetComponent<PathFinder>().GetWorkerPath(fromRoadTile, targetRoadTile);
+            if(path==null)
+            {
+                Debug.Log("Can't do anything: There is no valid worker path from "+fromRoadTile+" to "+targetRoadTile);
+                return;
+            }
+
+            // Create worker
+            GameObject worker = GameObject.Instantiate(prefabWorker, fromRoadTile.transform.position + Vector3.up, Quaternion.identity) as GameObject;
+            worker.GetComponent<PathFollower>().AddToQueue(path);
+            townHall.decreaseNumFreeWorkers();
+        }
+
+        else
+        {
+            Debug.Log("Can't do anything: There are " + townHall.getNumFreeWorkers() + " free workers and " + buildingList.Count + " buildings");
+            return;
+        }
+    }
+
+    public HashSet<Tile> getSurrTiles(Tile tile)
+    {
+        HashSet<Tile> surrTiles = new HashSet<Tile>();
+
+        foreach(Vector2xz pos in getCrossAdyacents(tile.posX, tile.posZ))
+        {
+            surrTiles.Add(tiles[(uint)pos.x, (uint)pos.z]);
+        }
+
+        return surrTiles;
+    }
+
+    public List<Tile> getSurrRoadTiles(Building building)
+    {
+        List<Tile> surrRoadTiles = new List<Tile>();
+
+        // Get building's tiles
+        HashSet<Tile> buildingTiles = building.getTiles();
+
+        // For each tile of the building
+        foreach (Tile buildingTile in buildingTiles)
+            // For each surrounding tile of the building tile
+            foreach (Tile surrTile in getSurrTiles(tile))
+                {
+                    if (surrTile.buildingType == TileType.ROAD)
+                        surrRoadTiles.Add(surrTile);
+                }
+
+        return surrRoadTiles;
     }
 
     private int[,] parseMap()

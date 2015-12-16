@@ -45,6 +45,7 @@ public class PathFollower : MonoBehaviour {
             // Si llega al destino, meter moving a false
             if (fracJourney >= 1.0f)
                 moving = false;
+                // TODO Destroy worker?
         }
 	}
 

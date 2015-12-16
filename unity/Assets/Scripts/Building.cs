@@ -9,8 +9,9 @@ public class Building : MonoBehaviour {
     public int validTileType;
     private bool visible = true;
     private List<GameObject> list = new List<GameObject>();
-    
-    
+
+    // TODO Initialize its tiles. It should be easy to know when it's instantiated
+    private HashSet<Tile> tiles;
 
     // Use this for initialization
     void Start() {
@@ -79,4 +80,12 @@ public class Building : MonoBehaviour {
         resourceManager.incRes1(1, Time.deltaTime);
         */
     }
+
+    public HashSet<Tile> getTiles()
+    {
+        if (tiles == null)
+            Debug.Log("No tiles have been defined for building "+this);
+        return tiles;
+    }
+
 }
