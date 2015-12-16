@@ -9,6 +9,9 @@ public class PathFollower : MonoBehaviour {
     public Vector3 targetPosition = new Vector3(0.0f, 0.0f, 0.0f);
     public bool moving = false;
 
+    private Building targetBuilding;
+    private bool targetReached = false;
+
     private Vector3 startPosition;
     //private Transform endMarker;
     private float startTime;
@@ -31,11 +34,13 @@ public class PathFollower : MonoBehaviour {
     // FixedUpdate is called once per 0.33s
     void FixedUpdate ()
     {
-        if (path.Count == 0 && this.transform.position == targetPosition)
+        if (path.Count == 0 && this.transform.position == targetPosition && !targetReached)
         {
             Debug.Log("Worker reached his destination!");
             tileManager.disableWorker(this.gameObject);
-            //TODO Incrementar el número de trabajadores del edificio destino
+
+            targetBuilding.incNumWorkers();
+            targetReached = true;
         }
 
         if (path.Count > 0 && !moving)
@@ -92,5 +97,10 @@ public class PathFollower : MonoBehaviour {
         }
 
         Destroy(newTileGO);
+    }
+
+    public void setBuilding(Building targetBuilding)
+    {
+        this.targetBuilding = targetBuilding;
     }
 }

@@ -15,6 +15,11 @@ public class Building : MonoBehaviour {
     
     private List<Tile> tiles = new List<Tile>();
 
+    private int numWorkers = 0;
+
+    public int resourceType = 0;
+    private ResourceManager resourceManager;
+
     // Use this for initialization
     void Start() {
         if (sizeX < 1 || sizeY < 0.1 || sizeZ < 1)
@@ -22,6 +27,9 @@ public class Building : MonoBehaviour {
 
         GameObject goMap = GameObject.FindGameObjectWithTag("Map");
         tileManager = goMap.GetComponent<TileManager>();
+
+        GameObject goResManager = GameObject.FindGameObjectWithTag("ResourceManager");
+        resourceManager = goResManager.GetComponent<ResourceManager>();
 
         /*Vector3 center = gameObject.transform.position;
 
@@ -79,11 +87,7 @@ public class Building : MonoBehaviour {
 
     void Update()
     {
-        /* Code for resources gathering buildings:
-        GameObject goResManager = GameObject.FindGameObjectWithTag("ResourceManager");
-        ResourceManager resourceManager = goResManager.GetComponent<ResourceManager>();
-        resourceManager.incRes1(1, Time.deltaTime);
-        */
+        incMapResource();
     }
 
     public List<Tile> getTiles()
@@ -130,6 +134,26 @@ public class Building : MonoBehaviour {
     public void addTile(Tile tile)
     {
         tiles.Add(tile);
+    }
+
+    public void incNumWorkers()
+    {
+        ++numWorkers;
+    }
+
+    public void incMapResource()
+    {
+        if (numWorkers > 0)
+        {
+            if (resourceType == 1)
+            {
+                resourceManager.incRes1(numWorkers, Time.deltaTime);
+            }
+            else if (resourceType == 2)
+            {
+                resourceManager.incRes2(numWorkers, Time.deltaTime);
+            }
+        }
     }
 
 }

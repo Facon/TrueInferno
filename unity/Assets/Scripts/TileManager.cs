@@ -64,7 +64,7 @@ public class TileManager : MonoBehaviour
         }
 
         // Create townhall and elevator
-        //MouseMoveLock mMove = GameObject.Find("Controller").GetComponent<MouseMoveLock>();
+        //MouseMoveLock mMove = GameObject.Find("GameController").GetComponent<MouseMoveLock>();
 
         Building buildcomp = prefabTownHall.GetComponent<Building>();
         townHall = Instantiate(prefabTownHall, new Vector3(tiles[13, 1].posX, buildcomp.sizeY / 2 + 0.1f, tiles[13, 1].posZ), Quaternion.identity) as GameObject;
@@ -217,6 +217,8 @@ public class TileManager : MonoBehaviour
             // Create worker
             GameObject worker = GameObject.Instantiate(prefabWorker, fromRoadTile.transform.position + Vector3.up, Quaternion.identity) as GameObject;
             worker.GetComponent<PathFollower>().AddToQueue(path);
+            
+            worker.GetComponent<PathFollower>().setBuilding(targetBuilding);
 
             townHallComp.decreaseNumFreeWorkers();
         }
