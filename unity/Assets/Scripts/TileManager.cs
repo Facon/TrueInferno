@@ -13,11 +13,11 @@ public class TileManager : MonoBehaviour
     private const uint SIZE_Z = 15;
 
     public Tile tile;
+    public GameObject prefabTownHall;
+    public GameObject prefabElevator;
     public GameObject prefabWorker;
 
-    public TownHall townHall;
-
-    private List<Building> buildingList;
+    public List<GameObject> buildingList;
 
     /// <summary>
     ///  Matrix[x,z] with the tile GameObject. 
@@ -28,6 +28,7 @@ public class TileManager : MonoBehaviour
     /// Char delim for tile names
     /// </summary>
     private char TILE_NAME_DELIM = '_';
+    private GameObject townHall;
 
     // Use this for initialization
     void Start()
@@ -60,7 +61,28 @@ public class TileManager : MonoBehaviour
             }
         }
 
-        buildingList = new List<Building>();
+        // Create townhall and elevator
+        //MouseMoveLock mMove = GameObject.Find("Controller").GetComponent<MouseMoveLock>();
+
+        Building buildcomp = prefabTownHall.GetComponent<Building>();
+        townHall = Instantiate(prefabTownHall, new Vector3(tiles[13, 1].posX, buildcomp.sizeY / 2 + 0.1f, tiles[13, 1].posZ), Quaternion.identity) as GameObject;
+        townHall.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeZ);
+        //mMove.setOcuppiedTile(buildcomp, tiles[2, 8].posX, tiles[2, 8].posZ);
+        tiles[14, 0].buildingType = TileType.BUILDING;
+        tiles[13, 0].buildingType = TileType.BUILDING;
+        tiles[12, 0].buildingType = TileType.BUILDING;
+        tiles[14, 1].buildingType = TileType.BUILDING;
+        tiles[13, 1].buildingType = TileType.BUILDING;
+        tiles[12, 1].buildingType = TileType.BUILDING;
+        tiles[14, 2].buildingType = TileType.BUILDING;
+        tiles[13, 2].buildingType = TileType.BUILDING;
+        tiles[12, 2].buildingType = TileType.BUILDING;
+
+        buildcomp = prefabElevator.GetComponent<Building>();
+        GameObject Elevator = Instantiate(prefabElevator, new Vector3(tiles[13, 8].posX+0.5f, buildcomp.sizeY / 2 +0.1f, tiles[13, 8].posZ), Quaternion.identity) as GameObject;
+        Elevator.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeZ);
+        tiles[14, 8].buildingType = TileType.BUILDING;
+        tiles[13, 8].buildingType = TileType.BUILDING;
     }
 
     /// <summary>
@@ -152,10 +174,11 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(townHall.getNumFreeWorkers()>0 && buildingList.Count>0)
+        TownHall townHallComp = townHall.GetComponent<TownHall>();
+        if (townHallComp.getNumFreeWorkers() > 0 && buildingList.Count > 0)
         {
             // Select random road tile of the townhall
-            List<Tile> surrRoadTiles = getSurrRoadTiles(townHall);
+            List<Tile> surrRoadTiles = getSurrRoadTiles(townHall.GetComponent<Building>());
 
             if (surrRoadTiles.Count == 0)
             {
@@ -166,7 +189,7 @@ public class TileManager : MonoBehaviour
             Tile fromRoadTile = surrRoadTiles[UnityEngine.Random.Range(0, surrRoadTiles.Count)];
             
             // Select random building
-            Building targetBuilding = buildingList[UnityEngine.Random.Range(0, buildingList.Count)];
+            Building targetBuilding = buildingList[UnityEngine.Random.Range(0, buildingList.Count)].GetComponent<Building>();
 
             if (targetBuilding==townHall)
             {
@@ -197,12 +220,12 @@ public class TileManager : MonoBehaviour
             // Create worker
             GameObject worker = GameObject.Instantiate(prefabWorker, fromRoadTile.transform.position + Vector3.up, Quaternion.identity) as GameObject;
             worker.GetComponent<PathFollower>().AddToQueue(path);
-            townHall.decreaseNumFreeWorkers();
+            townHallComp.decreaseNumFreeWorkers();
         }
 
         else
         {
-            Debug.Log("Can't do anything: There are " + townHall.getNumFreeWorkers() + " free workers and " + buildingList.Count + " buildings");
+            Debug.Log("Can't do anything: There are " + townHallComp.getNumFreeWorkers() + " free workers and " + buildingList.Count + " buildings");
             return;
         }
     }

@@ -84,7 +84,7 @@ public class Building : MonoBehaviour {
     public HashSet<Tile> getTiles()
     {
         if (tiles == null)
-            Debug.Log("No tiles have been defined for building "+this);
+            Debug.LogError("No tiles have been defined for building "+this);
         return tiles;
     }
 

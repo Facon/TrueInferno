@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-public class TownHall : Building
+public class TownHall : MonoBehaviour
 {
     private int numFreeWorkers;
 

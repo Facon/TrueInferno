@@ -43,9 +43,12 @@ public class PathFollower : MonoBehaviour {
             float fracJourney = distCovered / journeyLength;
             this.transform.position = Vector3.Lerp(startPosition, targetPosition, fracJourney);
             // Si llega al destino, meter moving a false
-            if (fracJourney >= 1.0f)
+            if (fracJourney >= 1.0f) 
+            { 
                 moving = false;
                 // TODO Destroy worker?
+                Debug.Log("Worker reached his destination!");
+            }
         }
 	}
 

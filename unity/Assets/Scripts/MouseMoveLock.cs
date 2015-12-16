@@ -63,6 +63,8 @@ public class MouseMoveLock : MonoBehaviour {
                     {
                         if (!bRoad)
                         {
+                            tm.buildingList.Add(building);
+
                             rend.material.SetColor("_SpecColor", Color.black);
                             setOcuppiedTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
                             building.transform.position = new Vector3(posX, posY - 0.5f, posZ);
@@ -142,7 +144,7 @@ public class MouseMoveLock : MonoBehaviour {
         return true;
     }
 
-    void setOcuppiedTile(Building building, uint x, uint z)
+    public void setOcuppiedTile(Building building, uint x, uint z)
     {
         Tile[,] tiles = tm.tiles;
         int liminfX = 0, liminfZ = 0, limsupX = 0, limsupZ = 0;
