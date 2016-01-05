@@ -2,7 +2,6 @@
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 ExportedObj/
-obj/
 *.svd
 *.sdf
 *.userprefs
