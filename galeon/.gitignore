@@ -2,7 +2,6 @@
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 ExportedObj/
-obj/
 *.svd
 *.sdf
 *.userprefs
@@ -33,32 +32,32 @@ Thumbs.db
 /*.txt
 
 # DEPENDENCIES FOLDER
-dependencies/**/build/
+/dependencies/**/build/
 
-dependencies/bin/*/*
-!dependencies/bin/*/nvTools*.dll
-!dependencies/bin/*/PhysX*.dll
+/dependencies/bin/*/*
+!/dependencies/bin/*/nvTools*.dll
+!/dependencies/bin/*/PhysX*.dll
 
-dependencies/include/*
-!dependencies/include/PhysX/
+/dependencies/include/*
+!/dependencies/include/PhysX/
 
-dependencies/lib/*/*
-!dependencies/lib/*/PhysX*.lib
-!dependencies/lib/*/PxTask*.lib
+/dependencies/lib/*/*
+!/dependencies/lib/*/PhysX*.lib
+!/dependencies/lib/*/PxTask*.lib
 
-dependencies/VisualLeakDetector/src/bin/
-dependencies/VisualLeakDetector/src/obj/
+/dependencies/VisualLeakDetector/src/bin/
+/dependencies/VisualLeakDetector/src/obj/
 
 # DOC FOLDER
-Doc/*
-!Doc/doxygenFooter.html
+/Doc/*
+!/Doc/doxygenFooter.html
 
 # EXES FOLDER
-Exes/*
-!Exes/media/
-!Exes/resources.cfg
+/Exes/*
+!/Exes/media/
+!/Exes/resources.cfg
 
 # PROJECTS FOLDER
-Projects/**/Debug/
-Projects/**/Release/
-Projects/**/*.log
+/Projects/**/Debug/
+/Projects/**/Release/
+/Projects/**/*.log
