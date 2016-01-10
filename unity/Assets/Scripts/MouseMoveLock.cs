@@ -23,7 +23,7 @@ public class MouseMoveLock : MonoBehaviour {
 	}
 
 
-    // Update is called once per frame
+    // Returns true if the building has been placed
     public bool BuildingMouseMove(GameObject building, bool placeBuilding, bool bRoad, GameObject road) 
     {
         bValidPosition = false;
@@ -96,7 +96,7 @@ public class MouseMoveLock : MonoBehaviour {
                         if (bValidPosition)
                         {
                             rend.material.SetColor("_SpecColor", Color.green);
-                            Debug.Log("broad es "+bRoad+" bFirstclick es "+bFirstClick);
+                            //Debug.Log("broad es "+bRoad+" bFirstclick es "+bFirstClick);
                             if (bRoad && !bFirstClick) {
                                 Debug.Log("HOLAAAA");
                                 bGenerator.CreateRoad(pFinder.GetRoadPath(startPoint, hits[i].collider.gameObject.GetComponent<Tile>()), road);

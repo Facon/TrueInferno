@@ -7,16 +7,17 @@ public class PathFinder : MonoBehaviour {
     /// <summary>
     /// GameObject with TileManager component attached
     /// </summary>
-    public TileManager tileManager;
+    private TileManager tileManager;
 
     /// <summary>
     /// Flag to activate test finding a random path on each update
     /// </summary>
-    public Boolean test = false;
+    private Boolean test = false;
 
     // Use this for initialization
     void Start () {
-	
+        GameObject goMap = GameObject.FindGameObjectWithTag("Map");
+        tileManager = goMap.GetComponent<TileManager>();	
 	}
 	
 	// Update is called once per frame

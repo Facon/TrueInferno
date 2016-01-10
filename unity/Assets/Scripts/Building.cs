@@ -15,7 +15,14 @@ public class Building : MonoBehaviour {
     
     private List<Tile> tiles = new List<Tile>();
 
+    // Current number of workers
     private int numWorkers = 0;
+    
+    // Number of workers so the building is considered active and ready to produce
+    private int minWorkers = 1;
+
+    // TODO Number of workers to get the highest production rate from the building
+    private int maxWorkers = 4;
 
     public int resourceType = 0;
     private ResourceManager resourceManager;
@@ -143,7 +150,7 @@ public class Building : MonoBehaviour {
 
     public void incMapResource()
     {
-        if (numWorkers > 0)
+        if (isActive())
         {
             if (resourceType == 1)
             {
@@ -156,4 +163,24 @@ public class Building : MonoBehaviour {
         }
     }
 
+    public void setMinWorkers(int minWorkers)
+    {
+        this.minWorkers = minWorkers;
+    }
+
+    public bool isActive()
+    {
+        return numWorkers >= minWorkers;
+    }
+
+    /** Returns float factor in [0,1] proportional to the current number of workers: 0 = inactive; 1 = max work speed */
+    public float getWorkFactor()
+    {
+        if (numWorkers < minWorkers)
+            return 0f;
+        else if (numWorkers >= maxWorkers)
+            return 1f;
+        else
+            return (numWorkers - minWorkers + 1f) / (maxWorkers - minWorkers + 1f);
+    }
 }

@@ -18,12 +18,14 @@ public class PathFollower : MonoBehaviour {
     private float journeyLength;
 
     private TileManager tileManager;
-
+    private WorkerManager workerManager;
+    
     // Use this for initialization
     void Start ()
     {
         GameObject goMap = GameObject.FindGameObjectWithTag("Map");
         tileManager = goMap.GetComponent<TileManager>();
+        workerManager = GameObject.FindGameObjectWithTag("WorkerManager").GetComponent<WorkerManager>();
 
         //this.transform.position = new Vector3(0.0f, 1.0f, 0.0f);
 
@@ -37,7 +39,7 @@ public class PathFollower : MonoBehaviour {
         if (path.Count == 0 && this.transform.position == targetPosition && !targetReached)
         {
             Debug.Log("Worker reached his destination!");
-            tileManager.disableWorker(this.gameObject);
+            workerManager.disableWorker(this.gameObject);
 
             targetBuilding.incNumWorkers();
             targetReached = true;
@@ -88,7 +90,7 @@ public class PathFollower : MonoBehaviour {
         newTile.type = 0;
         newTile.posX = 0;
 
-        uint maxZ = GameObject.Find("Map").GetComponent<TileManager>().getSizeZ();
+        uint maxZ = tileManager.getSizeZ();
 
         for (uint z = 1; z < maxZ; ++z)
         {

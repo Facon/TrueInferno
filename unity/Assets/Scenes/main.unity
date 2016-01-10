@@ -164,7 +164,7 @@ MonoBehaviour:
         m_MethodName: CreateBuilding
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 133352, guid: 2762a467aaf5709418be70eaaae510b9,
+          m_ObjectArgument: {fileID: 137334, guid: 305e43bad79844f4db2863f032657267,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
@@ -865,8 +865,8 @@ MonoBehaviour:
   tile: {fileID: 11465086, guid: 23ee477060469084ca02cbac98775fbb, type: 2}
   prefabTownHall: {fileID: 133352, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
   prefabElevator: {fileID: 133352, guid: a7cb80514e468be4b8cac508457fcaeb, type: 2}
-  prefabWorker: {fileID: 164792, guid: 1034a75c901404a459169da80973b7dc, type: 2}
   buildingList: []
+  workerManager: {fileID: 0}
 --- !u!4 &683767135
 Transform:
   m_ObjectHideFlags: 0
@@ -890,8 +890,194 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43fd3739bd266d143ba1e14c278b0b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileManager: {fileID: 683767134}
-  test: 0
+--- !u!1 &690555400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 690555401}
+  - 222: {fileID: 690555403}
+  - 114: {fileID: 690555402}
+  m_Layer: 0
+  m_Name: Soul2FurnaceBorder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &690555401
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 690555400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 696923333}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 15.99996, y: -15.999985}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &690555402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 690555400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 309cf9dfc2114634d96b11b8346712b8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &690555403
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 690555400}
+--- !u!1 &696923332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 696923333}
+  - 222: {fileID: 696923336}
+  - 114: {fileID: 696923335}
+  - 114: {fileID: 696923334}
+  m_Layer: 0
+  m_Name: Soul2FurnaceButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &696923333
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 696923332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 690555401}
+  m_Father: {fileID: 1578734214}
+  m_RootOrder: 5
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 31.1, y: -46}
+  m_SizeDelta: {x: 32, y: 32}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &696923334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 696923332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 696923335}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1669783096}
+        m_MethodName: soul2Furnace
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CreateBuilding
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &696923335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 696923332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: e1eb3c78884b1bc4693637a15447efe9, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &696923336
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 696923332}
 --- !u!1 &724581088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,6 +1872,7 @@ RectTransform:
   - {fileID: 912176759}
   - {fileID: 757323932}
   - {fileID: 1656711853}
+  - {fileID: 696923333}
   m_Father: {fileID: 552422515}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0.5}
@@ -2058,7 +2245,7 @@ GameObject:
   - 114: {fileID: 1656711855}
   - 114: {fileID: 1656711854}
   m_Layer: 0
-  m_Name: CreateWorkerButton
+  m_Name: Soul2WorkerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2075,12 +2262,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2029332818}
-  - {fileID: 1744918852}
   m_Father: {fileID: 1578734214}
   m_RootOrder: 4
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -44}
+  m_AnchoredPosition: {x: -30.9, y: -46}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1656711854
@@ -2122,8 +2308,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1744918853}
-        m_MethodName: increaseNumFreeWorkers
+      - m_Target: {fileID: 1669783096}
+        m_MethodName: soul2Worker
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2154,7 +2340,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0b91aabd40f864d44afb681919454328, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f26e2bc08da3b074aa8182a143900f74, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2235,6 +2421,58 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1661276001}
+--- !u!1 &1669783095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1669783097}
+  - 114: {fileID: 1669783096}
+  - 114: {fileID: 1669783098}
+  m_Layer: 0
+  m_Name: WorkerManager
+  m_TagString: WorkerManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1669783096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669783095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b193e97bab6c8084581ffa491d4ed807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabWorker: {fileID: 164792, guid: 1034a75c901404a459169da80973b7dc, type: 2}
+--- !u!4 &1669783097
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669783095}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+--- !u!114 &1669783098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669783095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43fd3739bd266d143ba1e14c278b0b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1675078331
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,81 +2541,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1675078331}
---- !u!1001 &1744918851
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1656711853}
-    m_Modifications:
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 133352, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 133352, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-      propertyPath: m_Name
-      value: CreateWorkerTownHall
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3399354, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-    - {fileID: 6513824, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-    - {fileID: 2318082, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &1744918852 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 419124, guid: 76b4310289a2b044b91a01e5437575e6, type: 2}
-  m_PrefabInternal: {fileID: 1744918851}
---- !u!114 &1744918853 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11430312, guid: 76b4310289a2b044b91a01e5437575e6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1744918851}
-  m_Script: {fileID: 11500000, guid: a1458302e1000b749a9a3a9ae2c2aa12, type: 3}
 --- !u!1 &1800784836
 GameObject:
   m_ObjectHideFlags: 0
@@ -2548,7 +2711,7 @@ GameObject:
   - 222: {fileID: 2029332820}
   - 114: {fileID: 2029332819}
   m_Layer: 0
-  m_Name: CreateWorkerBorder
+  m_Name: Soul2WorkerBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

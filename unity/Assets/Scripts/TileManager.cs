@@ -15,12 +15,15 @@ public class TileManager : MonoBehaviour
     public Tile tile;
     public GameObject prefabTownHall;
     public GameObject prefabElevator;
-    public GameObject prefabWorker;
 
     private GameObject townHall;
     private TownHall townHallComp;
 
+    private Furnace furnace;
+
     public List<GameObject> buildingList;
+
+    public WorkerManager workerManager;
 
     /// <summary>
     ///  Matrix[x,z] with the tile GameObject. 
@@ -35,6 +38,10 @@ public class TileManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        workerManager = GameObject.FindGameObjectWithTag("WorkerManager").GetComponent<WorkerManager>();
+        if (workerManager == null)
+            Debug.LogError("No WorkerManager found");
+
         int[,] map = parseMap();
 
         Debug.Log("Tamaño Array: " + map.Length);
@@ -184,49 +191,14 @@ public class TileManager : MonoBehaviour
     {
         if (townHallComp.getNumFreeWorkers() > 0 && buildingList.Count > 0)
         {
-            // Select random road tile of the townhall
-            List<Tile> surrRoadTiles = townHall.GetComponent<Building>().getSurrRoadTiles();
-
-            if (surrRoadTiles.Count == 0)
-                return;
-
-            Tile fromRoadTile = surrRoadTiles[UnityEngine.Random.Range(0, surrRoadTiles.Count)];
-            
             // Select random building
             Building targetBuilding =
                 buildingList[UnityEngine.Random.Range(0, buildingList.Count)].GetComponent<Building>();
 
-            if (targetBuilding == townHall)
-                return;
-
-            // Get its surrounding road tiles
-            surrRoadTiles = targetBuilding.getSurrRoadTiles();
-
-            if (surrRoadTiles.Count == 0)
-                return;
-
-            // Select random road tile of the target building
-            Tile targetRoadTile = surrRoadTiles[UnityEngine.Random.Range(0, surrRoadTiles.Count)];
-
-            // Try to find path
-            List<Tile> path = GetComponent<PathFinder>().GetWorkerPath(fromRoadTile, targetRoadTile);
-
-            if (path == null)
-                return;
-
-            // Create worker
-            GameObject worker = GameObject.Instantiate(prefabWorker, fromRoadTile.transform.position + Vector3.up, Quaternion.identity) as GameObject;
-            worker.GetComponent<PathFollower>().AddToQueue(path);
-            
-            worker.GetComponent<PathFollower>().setBuilding(targetBuilding);
-
-            townHallComp.decreaseNumFreeWorkers();
+            // Send worker to the target building
+            if (targetBuilding != null && workerManager.sendSoulToBuilding(targetBuilding))
+                townHallComp.decreaseNumFreeWorkers();
         }
-    }
-
-    public void disableWorker(GameObject spirit)
-    {
-        spirit.SetActive(false);
     }
 
     private int[,] parseMap()
@@ -253,4 +225,20 @@ public class TileManager : MonoBehaviour
 
         return data;
     }
+
+    public void furnaceBuilt(Furnace furnace)
+    {
+        this.furnace = furnace;
+    }
+
+    public GameObject getTownHall()
+    {
+        return townHall;
+    }
+
+    public Furnace getFurnace()
+    {
+        return furnace;
+    }
+
 }

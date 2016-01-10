@@ -13,7 +13,7 @@ TagManager:
   - ScoreManager
   - TownHall
   - Map
-  - New Tag
+  - WorkerManager
   layers:
   - Default
   - TransparentFX
