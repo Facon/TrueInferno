@@ -2,6 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum SoulTask
+{
+    Work,
+    Burn
+}
+
 public class WorkerManager : MonoBehaviour {
     public GameObject prefabWorker;
     private TileManager tileManager;
@@ -18,7 +24,9 @@ public class WorkerManager : MonoBehaviour {
     {
 	}
 
-    // Sends a soul to furnace from town hall
+    /// <summary>
+    // Orders a soul from town hall to go to the furnace
+    /// <summary>
     public void soul2Furnace()
     {
         TownHall townHall = tileManager.getTownHall().GetComponent<TownHall>();
@@ -26,12 +34,14 @@ public class WorkerManager : MonoBehaviour {
 
         if (furnace != null && townHall != null && townHall.getNumSouls()>0) 
         {
-            if(sendSoulToBuilding(furnace.GetComponent<Building>()))
+            if(sendSoulToBuilding(furnace.GetComponent<Building>(), SoulTask.Burn))
                 townHall.decreaseNumSouls();
         }
     }
 
-    // Turns a soul into worker in the town hall
+    /// <summary>
+    // Turns a soul into a free worker in the town hall
+    /// <summary>
     public void soul2Worker() 
     {
         TownHall townHall = tileManager.getTownHall().GetComponent<TownHall>();
@@ -46,7 +56,7 @@ public class WorkerManager : MonoBehaviour {
     /// <summary>
     /// Sends a soul from town hall to the target building. Returns true if the soul was successfully set on route
     /// </summary>
-    public bool sendSoulToBuilding(Building targetBuilding)
+    public bool sendSoulToBuilding(Building targetBuilding, SoulTask task)
     {
         GameObject townHall = tileManager.getTownHall();
 
@@ -73,12 +83,15 @@ public class WorkerManager : MonoBehaviour {
         if (path == null)
             return false;
 
-        // Create worker graphics object
-        GameObject worker = GameObject.Instantiate(prefabWorker, fromRoadTile.transform.position + Vector3.up, Quaternion.identity) as GameObject;
-        worker.GetComponent<PathFollower>().AddToQueue(path);
+        // Create soul graphics object
+        GameObject soul = GameObject.Instantiate(prefabWorker, fromRoadTile.transform.position + Vector3.up, Quaternion.identity) as GameObject;
+        soul.GetComponent<PathFollower>().AddToQueue(path);
 
-        // Send him/her to work
-        worker.GetComponent<PathFollower>().setBuilding(targetBuilding);
+        // Send him/her
+        soul.GetComponent<PathFollower>().setBuilding(targetBuilding);
+
+        // Assign task
+        soul.GetComponent<SoulTaskExecutor>().setTask(task);
 
         return true;
     }

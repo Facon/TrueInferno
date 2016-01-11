@@ -150,7 +150,7 @@ public class Building : MonoBehaviour {
 
     public void incMapResource()
     {
-        if (isActive())
+        if (isWorking())
         {
             if (resourceType == 1)
             {
@@ -168,7 +168,7 @@ public class Building : MonoBehaviour {
         this.minWorkers = minWorkers;
     }
 
-    public bool isActive()
+    public bool isWorking()
     {
         return numWorkers >= minWorkers;
     }
@@ -183,4 +183,10 @@ public class Building : MonoBehaviour {
         else
             return (numWorkers - minWorkers + 1f) / (maxWorkers - minWorkers + 1f);
     }
+
+    public void soulReadyToWork()
+    {
+        incNumWorkers();
+    }
+
 }

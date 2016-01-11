@@ -16,6 +16,12 @@ public class ResourceManager : MonoBehaviour {
     private const float RES_2_BASE_GATHERING_SPEED = 12.0f  / 60.0f;
 
     /// <summary>
+    /// Single resource increment per soul used.
+    /// </summary>
+    private const float COKE_PER_SOUL = 8;
+    private const float CRUDE_PER_SOUL = 2;
+
+    /// <summary>
     /// Current gathering speed per minute and worker for both map resources,
     /// already including all factors to be considered.
     /// </summary>
@@ -29,15 +35,24 @@ public class ResourceManager : MonoBehaviour {
     /// </summary>
     private float res1 = 0; //"Mineral"
     private float res2 = 0; //"Gas"
+    private float coke = 0;
+    private float crude = 0;
+    private float pure = 0;
+    private float refined = 0;
 
     /// <summary>
     /// UI text elements where both resources game values are displayed.
     /// </summary>
-    public Text res1Display;
-    public Text res2Display;
+    public Text res1Display; // mineral
+    public Text res2Display; // gas
+    public Text cokeDisplay; // coke
+    public Text crudeDisplay; // crude
+    public Text pureDisplay; // pure
+    public Text refinedDisplay; // refined
 
     void Awake() {
-        if (!res1Display || !res2Display) {
+        if (!res1Display || !res2Display || !cokeDisplay || !crudeDisplay || !pureDisplay || !refinedDisplay)
+        {
             Debug.LogError("Map resources displays not assigned!");
         }
     }
@@ -49,6 +64,10 @@ public class ResourceManager : MonoBehaviour {
         //Updates both resources values being displayed
         res1Display.text = ((int)Math.Floor(res1)).ToString();
         res2Display.text = ((int)Math.Floor(res2)).ToString();
+        cokeDisplay.text = ((int)Math.Floor(coke)).ToString();
+        crudeDisplay.text = ((int)Math.Floor(crude)).ToString();
+        pureDisplay.text = ((int)Math.Floor(pure)).ToString();
+        refinedDisplay.text = ((int)Math.Floor(refined)).ToString();
     }
 
     /// <summary>
@@ -67,6 +86,12 @@ public class ResourceManager : MonoBehaviour {
     /// </summary>
     public void incRes2(int workers, float time) {
         res2 += res2GatheringSpeed * workers * time;
+    }
+
+    public void burnSouls(int numSouls)
+    {
+        coke += numSouls * COKE_PER_SOUL;
+        crude += numSouls * CRUDE_PER_SOUL;
     }
 
 }

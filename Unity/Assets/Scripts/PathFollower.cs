@@ -38,10 +38,13 @@ public class PathFollower : MonoBehaviour {
     {
         if (path.Count == 0 && this.transform.position == targetPosition && !targetReached)
         {
-            Debug.Log("Worker reached his destination!");
+            //Debug.Log("Worker reached his destination!");
+
+            // Execute soul's task
+            SendMessage("executeTask", targetBuilding, SendMessageOptions.RequireReceiver);
+
             workerManager.disableWorker(this.gameObject);
 
-            targetBuilding.incNumWorkers();
             targetReached = true;
         }
 
