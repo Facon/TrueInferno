@@ -13,7 +13,7 @@ public class ResourceManager : MonoBehaviour {
     /// incremented) as the game progresses.
     /// </summary>
     private const float RES_1_BASE_GATHERING_SPEED = 20.0f / 60.0f;
-    private const float RES_2_BASE_GATHERING_SPEED = 12.0f  / 60.0f;
+    private const float RES_2_BASE_GATHERING_SPEED = 12.0f / 60.0f;
 
     /// <summary>
     /// Single resource increment per soul used.
