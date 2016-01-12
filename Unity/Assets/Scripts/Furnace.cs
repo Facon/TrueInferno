@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Furnace : MonoBehaviour {
-    public TileManager tileManager;
-    public ResourceManager resourceManager;
+    private TileManager tileManager;
+    private ResourceManager resourceManager;
 
 	// Use this for initialization
 	void Start () 
