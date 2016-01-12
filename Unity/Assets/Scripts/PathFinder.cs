@@ -440,7 +440,7 @@ public class PathFinder : MonoBehaviour {
 				// Target reached!
                 if (current == goal)
                 {
-                    float timeElapsed = Time.realtimeSinceStartup - startTime;
+                    //float timeElapsed = Time.realtimeSinceStartup - startTime;
                     //Debug.Log("(AStar.solve) Time elapsed = " + timeElapsed + " seconds");
 
                     return getPath(goal);
