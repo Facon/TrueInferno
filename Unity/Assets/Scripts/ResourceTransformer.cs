@@ -9,6 +9,7 @@ public class ResourceTransformer : MonoBehaviour
     public ResourceType outputResourceType;
     public float conversionRate = 0.5f;
     public float transportSpeed = 0.8f;
+    public float maxSqrDistance = 50;
 
     private TileManager tileManager;
     private ResourceManager resourceManager;
@@ -31,32 +32,40 @@ public class ResourceTransformer : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        // If there are input resources they are converted to output
-        if(inputResources>0)
-        {
-            transformResources(inputResources);
-        }
-        
-        // If there are output resources we try to send them
+        // If there are output resources try to send them
         if(outputResources>0)
         {
-            // Decide how much we will send
+            // Decide how much will be sent
             float batchSize = outputResources;
 
             // Find buildings that accepts as input resource our output
-            List<GameObject> builidngs = tileManager.findResourceBuildingByInput(outputResourceType);
+            List<GameObject> initialBuildings = tileManager.findResourceBuildingByInput(outputResourceType);
 
-            // If exists at least one
-            if(builidngs.Count>0)
+            // Filter buildings
+            List<GameObject> filteredBuildings = new List<GameObject>();
+            foreach(GameObject building in initialBuildings)
             {
-                // TODO Get nearest one
-                // TODO Check if it's in range
-                Building targetBuilding = builidngs[0].GetComponent<Building>();
+                // Skip non-working buildings
+                if (!building.GetComponent<Building>().isWorking())
+                    continue;
 
-                // Ask the right component to send a soul with the task of transporting ouput resources
+                // And retain the closest ones
+                float sqrDist = (building.transform.position - this.gameObject.transform.position).sqrMagnitude;
+                if(sqrDist <= maxSqrDistance)
+                    filteredBuildings.Add(building); // Add to filtered list
+            }
+
+            // If there's still at least one candidate
+            if (filteredBuildings.Count > 0)
+            {
+                // Get a random one
+                int selected = Random.Range(0, filteredBuildings.Count);
+                Building targetBuilding = filteredBuildings[selected].GetComponent<Building>();
+
+                // Ask our building component to send a soul with the task of transporting ouput resources
                 bool transportSent = GetComponent<Building>().transportResources(new TransportTask(batchSize, outputResourceType, targetBuilding));
 
-                // If it was done, update our output resources
+                // If it was possible, update our output resources
                 if (transportSent)
                     removeOutputResources(batchSize);
             }
@@ -66,8 +75,16 @@ public class ResourceTransformer : MonoBehaviour
     // Transform input resources into output with a conversion rate. Input is added to our resources
     private void transformResources(float numResources)
     {
-        outputResources += numResources * conversionRate;
-        resourceManager.increaseResources(outputResourceType, outputResources);
+        // Calculate the fraction of output resources obtained
+        float newOutputResources = numResources * conversionRate;
+
+        // Register them in the manager
+        resourceManager.increaseResources(outputResourceType, newOutputResources);
+        
+        // Increase the local storage
+        outputResources += newOutputResources;
+
+        // Consume the appropiate local input resources
         inputResources -= numResources;
     }
 
@@ -79,6 +96,12 @@ public class ResourceTransformer : MonoBehaviour
     {
         inputResources += numResources;
         Debug.Log("input(" + inputResourceType + ")=" + inputResources + ", output(" + outputResourceType + ")=" + outputResources);
+
+        // Transform the new input resources into output
+        if(numResources > 0)
+        {
+            transformResources(numResources);
+        }
     }
 
     /// <summary>

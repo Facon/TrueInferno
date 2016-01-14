@@ -34,7 +34,7 @@ public class Furnace : MonoBehaviour {
     {
         if (GetComponent<Building>().isWorking())
         {
-            resourceManager.incCoke(COKE_PER_SOUL);
+            resourceManager.increaseResources(ResourceType.Coke, COKE_PER_SOUL);
             SendMessage("addInputResources", CRUDE_PER_SOUL, SendMessageOptions.RequireReceiver);
         }
     }
