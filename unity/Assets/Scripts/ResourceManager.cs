@@ -106,4 +106,23 @@ public class ResourceManager : MonoBehaviour {
         this.crude += crude;
     }
 
+    // TODO Refactorize/Generalize all resources
+    public void increaseResources(ResourceType type, float num)
+    {
+        switch(type)
+        {
+            case ResourceType.Coke: 
+                coke += num; 
+                break;
+            case ResourceType.Crude:
+                crude += num;
+                break;
+            case ResourceType.Pure:
+                pure += num;
+                break;
+            case ResourceType.Refined:
+                refined += num;
+                break;
+        }
+    }
 }

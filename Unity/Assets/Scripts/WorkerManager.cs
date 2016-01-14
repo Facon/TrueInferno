@@ -29,7 +29,7 @@ public class WorkerManager : MonoBehaviour {
 
         if (furnace != null && townHall != null && townHall.getNumSouls()>0) 
         {
-            if(sendSoulToBuilding(furnace.GetComponent<Building>(), new BurnTask()))
+            if(sendSoulToBuilding(townHall.GetComponent<Building>(), furnace.GetComponent<Building>(), new BurnTask()))
                 townHall.decreaseNumSouls();
         }
     }
@@ -51,12 +51,10 @@ public class WorkerManager : MonoBehaviour {
     /// <summary>
     /// Sends a soul from town hall to the target building. Returns true if the soul was successfully set on route
     /// </summary>
-    public bool sendSoulToBuilding(Building targetBuilding, SoulTask task)
+    public bool sendSoulToBuilding(Building fromBuilding, Building targetBuilding, SoulTask task)
     {
-        GameObject townHall = tileManager.getTownHall();
-
         // Select random road tile of the townhall
-        List<Tile> surrRoadTiles = townHall.GetComponent<Building>().getSurrRoadTiles();
+        List<Tile> surrRoadTiles = fromBuilding.getSurrRoadTiles();
 
         if (surrRoadTiles.Count == 0)
             return false;
@@ -85,6 +83,8 @@ public class WorkerManager : MonoBehaviour {
         // Send him/her
         soul.GetComponent<PathFollower>().setBuilding(targetBuilding);
 
+        // TODO Change color of soul to reflect where is going
+
         // Assign task
         soul.GetComponent<SoulTaskExecutor>().setTask(task);
 
@@ -93,7 +93,8 @@ public class WorkerManager : MonoBehaviour {
 
     public void disableWorker(GameObject soul)
     {
-        soul.SetActive(false);
+        //soul.SetActive(false);
+        GameObject.Destroy(soul);
     }
 
 }

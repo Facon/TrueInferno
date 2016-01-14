@@ -10,7 +10,7 @@ namespace Assets.Scripts
     {
         void SoulTask.executeTask(Building building)
         {
-            // TODO Notify building the soul has just reached and it's ready to work
+            // Notify building the soul has just reached and it's ready to work
             building.SendMessage("soulReadyToWork", SendMessageOptions.RequireReceiver);
         }
     }

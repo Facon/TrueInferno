@@ -197,7 +197,7 @@ public class TileManager : MonoBehaviour
                 buildingList[UnityEngine.Random.Range(0, buildingList.Count)].GetComponent<Building>();
 
             // Send worker to the target building
-            if (targetBuilding != null && workerManager.sendSoulToBuilding(targetBuilding, new WorkTask()))
+            if (targetBuilding != null && workerManager.sendSoulToBuilding(townHall.GetComponent<Building>(), targetBuilding, new WorkTask()))
                 townHallComp.decreaseNumFreeWorkers();
         }
     }
@@ -256,7 +256,7 @@ public class TileManager : MonoBehaviour
         {
             // If it has a ResourceTransformer component
             ResourceTransformer resourceTransformer = building.GetComponent<ResourceTransformer>();
-            if (resourceTransformer != null && resourceTransformer.inputResource == resource)
+            if (resourceTransformer != null && resourceTransformer.inputResourceType == resource)
                 list.Add(building);
         }
 

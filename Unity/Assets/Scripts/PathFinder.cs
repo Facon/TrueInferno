@@ -338,8 +338,8 @@ public class PathFinder : MonoBehaviour {
 			path.Add(node.getData());
 		}
 
-        float timeElapsed = Time.realtimeSinceStartup - start;
-        Debug.Log("(GetRoadPath) Time elapsed = "+timeElapsed+" seconds");
+        //float timeElapsed = Time.realtimeSinceStartup - start;
+        //Debug.Log("(GetRoadPath) Time elapsed = "+timeElapsed+" seconds");
 
         return path;
     }
@@ -381,8 +381,8 @@ public class PathFinder : MonoBehaviour {
 			path.Add(node.getData());
 		}
 
-        float timeElapsed = Time.realtimeSinceStartup - start;
-        Debug.Log("(GetWorkerPath) Time elapsed = " + timeElapsed + " seconds");
+        //float timeElapsed = Time.realtimeSinceStartup - start;
+        //Debug.Log("(GetWorkerPath) Time elapsed = " + timeElapsed + " seconds");
 
         return path;
     }

@@ -40,7 +40,7 @@ public class PathFollower : MonoBehaviour {
         {
             //Debug.Log("Worker reached his destination!");
 
-            // Demand soul to execute its task
+            // Ask soul to execute its task
             SendMessage("executeTask", targetBuilding, SendMessageOptions.RequireReceiver);
 
             workerManager.disableWorker(this.gameObject);

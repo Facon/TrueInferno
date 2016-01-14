@@ -8,8 +8,8 @@ public class Furnace : MonoBehaviour {
     /// <summary>
     /// Single resource increment per soul used.
     /// </summary>
-    private const float COKE_PER_SOUL = 8;
-    private const float CRUDE_PER_SOUL = 2;
+    private const float COKE_PER_SOUL = 6;
+    private const float CRUDE_PER_SOUL = 4;
 
 	// Use this for initialization
 	void Start () 
@@ -35,8 +35,6 @@ public class Furnace : MonoBehaviour {
         if (GetComponent<Building>().isWorking())
         {
             resourceManager.incCoke(COKE_PER_SOUL);
-            resourceManager.incCrude(CRUDE_PER_SOUL);
-
             SendMessage("addInputResources", CRUDE_PER_SOUL, SendMessageOptions.RequireReceiver);
         }
     }

@@ -198,16 +198,16 @@ public class Building : MonoBehaviour {
     /// <summary>
     /// We are going to transport resources by sending a worker
     /// </summary>
-    public void transportResources(TransportTask task)
+    public bool transportResources(TransportTask task)
     {
         if(numWorkers>=minWorkers)
         {
-            if (workerManager.sendSoulToBuilding(task.getTargetBuilding(), task))
+            if (workerManager.sendSoulToBuilding(this, task.getTargetBuilding(), task))
             {
-                --numWorkers; // Remove the sent worker
-                SendMessage("removeOutputResources", task.getNumResources(), SendMessageOptions.RequireReceiver); // Remove output resources from origin building
+                return true;
             }
         }
 
+        return false;
     }
 }

@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36ef1a8314987f04fa0e9dd0410082bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputResource: 0
-  outputResource: 4
+  inputResourceType: 0
+  outputResourceType: 4
   conversionRate: 1
   transportSpeed: 0.8
 --- !u!114 &11496030
@@ -143,6 +143,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: conversionRate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: outputResourceType
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
