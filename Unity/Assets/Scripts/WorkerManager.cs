@@ -83,7 +83,8 @@ public class WorkerManager : MonoBehaviour {
         // Send him/her
         soul.GetComponent<PathFollower>().setBuilding(targetBuilding);
 
-        // TODO Change color of soul to reflect where is going
+        // Change color of soul to reflect where is going
+        soul.GetComponent<Renderer>().material.CopyPropertiesFromMaterial(targetBuilding.GetComponent<Renderer>().material);
 
         // Assign task
         soul.GetComponent<SoulTaskExecutor>().setTask(task);
