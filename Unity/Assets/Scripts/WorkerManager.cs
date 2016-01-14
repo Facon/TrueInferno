@@ -1,12 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
-public enum SoulTask
-{
-    Work,
-    Burn
-}
+using Assets.Scripts;
 
 public class WorkerManager : MonoBehaviour {
     public GameObject prefabWorker;
@@ -34,7 +29,7 @@ public class WorkerManager : MonoBehaviour {
 
         if (furnace != null && townHall != null && townHall.getNumSouls()>0) 
         {
-            if(sendSoulToBuilding(furnace.GetComponent<Building>(), SoulTask.Burn))
+            if(sendSoulToBuilding(furnace.GetComponent<Building>(), new BurnTask()))
                 townHall.decreaseNumSouls();
         }
     }
@@ -96,8 +91,9 @@ public class WorkerManager : MonoBehaviour {
         return true;
     }
 
-    public void disableWorker(GameObject spirit)
+    public void disableWorker(GameObject soul)
     {
-        spirit.SetActive(false);
+        soul.SetActive(false);
     }
+
 }

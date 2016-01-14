@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2371506}
   - 114: {fileID: 11404576}
   - 114: {fileID: 11403428}
+  - 114: {fileID: 11473478}
   m_Layer: 0
   m_Name: EvilWorks
   m_TagString: Building
@@ -105,6 +106,21 @@ MonoBehaviour:
   BuildingType: 3
   validTileType: 0
   resourceType: 0
+--- !u!114 &11473478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ef1a8314987f04fa0e9dd0410082bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputResource: 4
+  outputResource: 5
+  conversionRate: 0.5
+  transportSpeed: 0.8
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -116,6 +132,22 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9bb4300ad2125114f892438ee5a98a39, type: 2}
+    - target: {fileID: 0}
+      propertyPath: input
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: output
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inputResource
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: outputResource
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 184852}

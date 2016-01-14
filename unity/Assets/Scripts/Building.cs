@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Assets.Scripts;
 
 public class Building : MonoBehaviour {
     public uint sizeX;
@@ -25,8 +26,11 @@ public class Building : MonoBehaviour {
     private int maxWorkers = 4;
 
     public int resourceType = 0;
+
     private ResourceManager resourceManager;
 
+    private WorkerManager workerManager;
+    
     // Use this for initialization
     void Start() {
         if (sizeX < 1 || sizeY < 0.1 || sizeZ < 1)
@@ -37,6 +41,8 @@ public class Building : MonoBehaviour {
 
         GameObject goResManager = GameObject.FindGameObjectWithTag("ResourceManager");
         resourceManager = goResManager.GetComponent<ResourceManager>();
+
+        workerManager = GameObject.FindGameObjectWithTag("WorkerManager").GetComponent<WorkerManager>();
 
         /*Vector3 center = gameObject.transform.position;
 
@@ -189,4 +195,19 @@ public class Building : MonoBehaviour {
         incNumWorkers();
     }
 
+    /// <summary>
+    /// We are going to transport resources by sending a worker
+    /// </summary>
+    public void transportResources(TransportTask task)
+    {
+        if(numWorkers>=minWorkers)
+        {
+            if (workerManager.sendSoulToBuilding(task.getTargetBuilding(), task))
+            {
+                --numWorkers; // Remove the sent worker
+                SendMessage("removeOutputResources", task.getNumResources(), SendMessageOptions.RequireReceiver); // Remove output resources from origin building
+            }
+        }
+
+    }
 }

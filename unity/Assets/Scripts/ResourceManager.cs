@@ -4,6 +4,18 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
+public enum ResourceType
+{
+    None,
+    Mineral,
+    Gas,
+    Coke,
+    Crude,
+    Pure,
+    Refined,
+    Aether
+}
+
 public class ResourceManager : MonoBehaviour {
 
     /// <summary>
@@ -16,18 +28,13 @@ public class ResourceManager : MonoBehaviour {
     private const float RES_2_BASE_GATHERING_SPEED = 12.0f / 60.0f;
 
     /// <summary>
-    /// Single resource increment per soul used.
-    /// </summary>
-    private const float COKE_PER_SOUL = 8;
-    private const float CRUDE_PER_SOUL = 2;
-
-    /// <summary>
     /// Current gathering speed per minute and worker for both map resources,
     /// already including all factors to be considered.
     /// </summary>
     private float res1GatheringSpeed = RES_1_BASE_GATHERING_SPEED;
     private float res2GatheringSpeed = RES_2_BASE_GATHERING_SPEED;
 
+    // TODO Refactorize/Generalize all resources
     /// <summary>
     /// Map resources game values.
     /// Float numbers will allow us to control them better and play with lower
@@ -88,10 +95,15 @@ public class ResourceManager : MonoBehaviour {
         res2 += res2GatheringSpeed * workers * time;
     }
 
-    public void burnSouls(int numSouls)
+    // TODO Refactorize/Generalize all increase methods
+    public void incCoke(float coke)
     {
-        coke += numSouls * COKE_PER_SOUL;
-        crude += numSouls * CRUDE_PER_SOUL;
+        this.coke += coke;
+    }
+
+    public void incCrude(float crude)
+    {
+        this.crude += crude;
     }
 
 }
