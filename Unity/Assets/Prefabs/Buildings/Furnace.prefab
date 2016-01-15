@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2369150}
   - 114: {fileID: 11496030}
   - 114: {fileID: 11409798}
+  - 114: {fileID: 11432168}
   m_Layer: 0
   m_Name: Furnace
   m_TagString: Building
@@ -88,6 +89,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d1bf372da14fb64081aa3c1caab20ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11432168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ef1a8314987f04fa0e9dd0410082bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputResourceType: 0
+  outputResourceType: 4
+  conversionRate: 1
+  transportSpeed: 0.8
+  maxSqrDistance: 50
 --- !u!114 &11496030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,6 +133,26 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c97539ee5438aef40b5a46e69e862f6a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: inputResource
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: outputResource
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: conversionRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: outputResourceType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxSqrDistance
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 137334}

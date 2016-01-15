@@ -98,7 +98,7 @@ public class MouseMoveLock : MonoBehaviour {
                             rend.material.SetColor("_SpecColor", Color.green);
                             //Debug.Log("broad es "+bRoad+" bFirstclick es "+bFirstClick);
                             if (bRoad && !bFirstClick) {
-                                Debug.Log("HOLAAAA");
+                                //Debug.Log("HOLAAAA");
                                 bGenerator.CreateRoad(pFinder.GetRoadPath(startPoint, hits[i].collider.gameObject.GetComponent<Tile>()), road);
                             }
                         }

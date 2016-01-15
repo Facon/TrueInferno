@@ -1,12 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
-public enum SoulTask
-{
-    Work,
-    Burn
-}
+using Assets.Scripts;
 
 public class WorkerManager : MonoBehaviour {
     public GameObject prefabWorker;
@@ -30,12 +25,20 @@ public class WorkerManager : MonoBehaviour {
     public void soul2Furnace()
     {
         TownHall townHall = tileManager.getTownHall().GetComponent<TownHall>();
-        Furnace furnace = tileManager.getFurnace();
+        List<GameObject> furnaces = tileManager.findFurnaces();
 
-        if (furnace != null && townHall != null && townHall.getNumSouls()>0) 
+        // If there are furnaces
+        if(furnaces.Count>0)
         {
-            if(sendSoulToBuilding(furnace.GetComponent<Building>(), SoulTask.Burn))
-                townHall.decreaseNumSouls();
+            // Choose a random furnace
+            int index = Random.Range(0, furnaces.Count);
+            GameObject furnace = furnaces[index];
+
+            if (furnace != null && townHall != null && townHall.getNumSouls() > 0)
+            {
+                if (sendSoulToBuilding(townHall.GetComponent<Building>(), furnace.GetComponent<Building>(), new BurnTask()))
+                    townHall.decreaseNumSouls();
+            }
         }
     }
 
@@ -56,12 +59,10 @@ public class WorkerManager : MonoBehaviour {
     /// <summary>
     /// Sends a soul from town hall to the target building. Returns true if the soul was successfully set on route
     /// </summary>
-    public bool sendSoulToBuilding(Building targetBuilding, SoulTask task)
+    public bool sendSoulToBuilding(Building fromBuilding, Building targetBuilding, SoulTask task)
     {
-        GameObject townHall = tileManager.getTownHall();
-
         // Select random road tile of the townhall
-        List<Tile> surrRoadTiles = townHall.GetComponent<Building>().getSurrRoadTiles();
+        List<Tile> surrRoadTiles = fromBuilding.getSurrRoadTiles();
 
         if (surrRoadTiles.Count == 0)
             return false;
@@ -90,14 +91,19 @@ public class WorkerManager : MonoBehaviour {
         // Send him/her
         soul.GetComponent<PathFollower>().setBuilding(targetBuilding);
 
+        // Change color of soul to reflect where is going
+        soul.GetComponent<Renderer>().material.CopyPropertiesFromMaterial(targetBuilding.GetComponent<Renderer>().material);
+
         // Assign task
         soul.GetComponent<SoulTaskExecutor>().setTask(task);
 
         return true;
     }
 
-    public void disableWorker(GameObject spirit)
+    public void disableWorker(GameObject soul)
     {
-        spirit.SetActive(false);
+        //soul.SetActive(false);
+        GameObject.Destroy(soul);
     }
+
 }

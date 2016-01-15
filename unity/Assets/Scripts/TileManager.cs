@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts;
 
 public enum TileType
 {
@@ -18,8 +19,6 @@ public class TileManager : MonoBehaviour
 
     private GameObject townHall;
     private TownHall townHallComp;
-
-    private Furnace furnace;
 
     public List<GameObject> buildingList;
 
@@ -196,7 +195,7 @@ public class TileManager : MonoBehaviour
                 buildingList[UnityEngine.Random.Range(0, buildingList.Count)].GetComponent<Building>();
 
             // Send worker to the target building
-            if (targetBuilding != null && workerManager.sendSoulToBuilding(targetBuilding, SoulTask.Work))
+            if (targetBuilding != null && workerManager.sendSoulToBuilding(townHall.GetComponent<Building>(), targetBuilding, new WorkTask()))
                 townHallComp.decreaseNumFreeWorkers();
         }
     }
@@ -226,19 +225,48 @@ public class TileManager : MonoBehaviour
         return data;
     }
 
-    public void furnaceBuilt(Furnace furnace)
-    {
-        this.furnace = furnace;
-    }
-
     public GameObject getTownHall()
     {
         return townHall;
     }
 
-    public Furnace getFurnace()
+    /// <summary>
+    /// Find every building that accepts the resource param as input
+    /// </summary>
+    /// <param name="resource"></param>
+    /// <returns></returns>
+    public List<GameObject> findResourceBuildingByInput(ResourceType resource)
     {
-        return furnace;
+        List<GameObject> list = new List<GameObject>();
+
+        // Check every game object
+        foreach(GameObject building in buildingList)
+        {
+            // If it has a ResourceTransformer component
+            ResourceTransformer resourceTransformer = building.GetComponent<ResourceTransformer>();
+            if (resourceTransformer != null && resourceTransformer.inputResourceType == resource)
+                list.Add(building);
+        }
+
+        return list;
     }
 
+    /// <summary>
+    /// Find all furnaces
+    /// </summary>
+    /// <param name="resource"></param>
+    /// <returns></returns>
+    public List<GameObject> findFurnaces()
+    {
+        List<GameObject> list = new List<GameObject>();
+
+        // Check every game object
+        foreach (GameObject building in buildingList)
+        {
+            if (building.GetComponent<Furnace>() != null)
+                list.Add(building);
+        }
+
+        return list;
+    }
 }

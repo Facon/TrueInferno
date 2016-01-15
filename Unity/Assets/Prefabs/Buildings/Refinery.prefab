@@ -12,7 +12,7 @@ GameObject:
   - 65: {fileID: 6564174}
   - 23: {fileID: 2342438}
   - 114: {fileID: 11401154}
-  - 114: {fileID: 11450384}
+  - 114: {fileID: 11410668}
   m_Layer: 0
   m_Name: Refinery
   m_TagString: Building
@@ -94,7 +94,7 @@ MonoBehaviour:
   BuildingType: 3
   validTileType: 0
   resourceType: 0
---- !u!114 &11450384
+--- !u!114 &11410668
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -102,9 +102,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 182906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b9af65ff197cd54494fa59628e9fa68, type: 3}
+  m_Script: {fileID: 11500000, guid: 36ef1a8314987f04fa0e9dd0410082bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputResourceType: 5
+  outputResourceType: 6
+  conversionRate: 0.5
+  transportSpeed: 0.8
+  maxSqrDistance: 50
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -116,6 +121,34 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 81da64b7a90af0841b3e629ca64fce94, type: 2}
+    - target: {fileID: 0}
+      propertyPath: input
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: output
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inputResource
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: outputResource
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inputResourceType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: outputResourceType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxSqrDistance
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182906}
