@@ -25,12 +25,20 @@ public class WorkerManager : MonoBehaviour {
     public void soul2Furnace()
     {
         TownHall townHall = tileManager.getTownHall().GetComponent<TownHall>();
-        Furnace furnace = tileManager.getFurnace();
+        List<GameObject> furnaces = tileManager.findFurnaces();
 
-        if (furnace != null && townHall != null && townHall.getNumSouls()>0) 
+        // If there are furnaces
+        if(furnaces.Count>0)
         {
-            if(sendSoulToBuilding(townHall.GetComponent<Building>(), furnace.GetComponent<Building>(), new BurnTask()))
-                townHall.decreaseNumSouls();
+            // Choose a random furnace
+            int index = Random.Range(0, furnaces.Count);
+            GameObject furnace = furnaces[index];
+
+            if (furnace != null && townHall != null && townHall.getNumSouls() > 0)
+            {
+                if (sendSoulToBuilding(townHall.GetComponent<Building>(), furnace.GetComponent<Building>(), new BurnTask()))
+                    townHall.decreaseNumSouls();
+            }
         }
     }
 

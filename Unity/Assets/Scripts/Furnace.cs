@@ -24,11 +24,6 @@ public class Furnace : MonoBehaviour {
 	void Update () 
     {
 	}
-
-    public void buildingBuilt()
-    {
-        tileManager.SendMessage("furnaceBuilt", this, SendMessageOptions.RequireReceiver);
-    }
     
     public void soulReadyToBurn()
     {

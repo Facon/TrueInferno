@@ -309,7 +309,7 @@ public class PathFinder : MonoBehaviour {
     /// <returns></returns>
     public List<Tile> GetRoadPath(Tile startTile, Tile goalTile)
     {
-        float start = Time.realtimeSinceStartup;
+        //float start = Time.realtimeSinceStartup;
 
         List<Tile> path = new List<Tile>();
 
@@ -352,7 +352,7 @@ public class PathFinder : MonoBehaviour {
     /// <returns></returns>
     public List<Tile> GetWorkerPath(Tile startTile, Tile goalTile)
     {
-        float start = Time.realtimeSinceStartup;
+        //float start = Time.realtimeSinceStartup;
 
         List<Tile> path = new List<Tile>();
 
