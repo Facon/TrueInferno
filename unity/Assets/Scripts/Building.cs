@@ -200,7 +200,7 @@ public class Building : MonoBehaviour {
     /// </summary>
     public bool transportResources(TransportTask task)
     {
-        if(numWorkers>=minWorkers)
+        if (isWorking())
         {
             if (workerManager.sendSoulToBuilding(this, task.getTargetBuilding(), task))
             {

@@ -83,7 +83,7 @@ public class ResourceManager : MonoBehaviour {
     /// gathering building.
     /// </summary>
     public void incRes1(int workers, float time) {
-        res1 += res1GatheringSpeed * workers * time;
+        increaseResources(ResourceType.Mineral, res1GatheringSpeed * workers * time);
     }
 
     /// <summary>
@@ -92,18 +92,7 @@ public class ResourceManager : MonoBehaviour {
     /// gathering building.
     /// </summary>
     public void incRes2(int workers, float time) {
-        res2 += res2GatheringSpeed * workers * time;
-    }
-
-    // TODO Refactorize/Generalize all increase methods
-    public void incCoke(float coke)
-    {
-        this.coke += coke;
-    }
-
-    public void incCrude(float crude)
-    {
-        this.crude += crude;
+        increaseResources(ResourceType.Gas, res2GatheringSpeed * workers * time);
     }
 
     // TODO Refactorize/Generalize all resources
