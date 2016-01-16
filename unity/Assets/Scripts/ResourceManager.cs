@@ -100,6 +100,12 @@ public class ResourceManager : MonoBehaviour {
     {
         switch(type)
         {
+            case ResourceType.Mineral:
+                res1 += num;
+                break;
+            case ResourceType.Gas:
+                res2 += num;
+                break;
             case ResourceType.Coke: 
                 coke += num; 
                 break;
