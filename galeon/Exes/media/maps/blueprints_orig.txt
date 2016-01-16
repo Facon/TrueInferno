@@ -4,4 +4,6 @@ Entity CGraphics
 AnimatedEntity CAnimatedGraphics
 Camera CCamera
 Barril CGraphics CPhysicEntity
-Tile CGraphics CPhysicEntity
+PuertaTrigger CPhysicEntity CSwitchTrigger 
+Puerta CGraphics CSwitchPosition
+Sierra CAnimatedGraphics CSwitchPosition CPhysicEntity CDamageTrigger 

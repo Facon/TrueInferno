@@ -4,6 +4,7 @@
 ExportedObj/
 *.svd
 *.sdf
+*.opensdf
 *.userprefs
 *.pidb
 *.suo

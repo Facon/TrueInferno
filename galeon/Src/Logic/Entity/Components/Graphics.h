@@ -31,8 +31,10 @@ namespace Logic
 	no animadas. Para otros tipos de representaciones hay otros componentes
 	que especializan éste (CAnimatedGraphics y CStaticGraphics).
 	<p>
-	Acepta mensajes de cambio de posición y orientación (matriz de 
-	transformación) mediante el mensaje SET_TRANSFORM.
+	Acepta mensajes de:
+	1) cambio de posición y orientación (matriz de transformación) mediante
+	el mensaje SET_TRANSFORM.
+	2) cambio de escala mediante el mensaje SET_SCALE.
 	
     @ingroup logicGroup
 
@@ -71,7 +73,7 @@ namespace Logic
 
 		/**
 		Método virtual que elige que mensajes son aceptados. Son válidos
-		SET_TRANSFORM.
+		SET_TRANSFORM y SET_SCALE.
 
 		@param message Mensaje a chequear.
 		@return true si el mensaje es aceptado.

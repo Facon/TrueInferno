@@ -12,8 +12,9 @@ la gestión de la lógica del juego.
 
 #include "Server.h"
 #include "Logic/Maps/Map.h"
-
 #include "Logic/Maps/EntityFactory.h"
+
+#include "Logic/Entity/Entity.h"
 
 #include "Map/MapParser.h"
 
@@ -107,12 +108,24 @@ namespace Logic {
 		// se borra el mapa anterior.
 		unLoadLevel();
 
-		if(_map = CMap::createMapFromFile(filename))
-		{
-			return true;
+		_map = CMap::createMapFromFile(filename);
+
+		if (!_map) {
+			return false;
 		}
 
-		return false;
+		// #TODO Aquí el mapa ya ha sido cargado de fichero y las entidades
+		// del map.txt están leídas y creadas.
+
+		// Se podría acceder a ellas a través de algún atributo (iterando sobre la lista)
+		// y definir los Tiles extremos, instanciando los intermedios
+		// a partir de ellos, cambiando solo la posición y el ID.
+
+		// La segunda opción es añadirlas todas al vuelo, aquí o en un manager.
+
+		CEntity* baseTileEntity = _map->getEntityByType("Tile");
+
+		return true;
 
 	} // loadLevel
 

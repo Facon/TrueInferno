@@ -255,6 +255,25 @@ namespace Logic
 		Vector3 getPosition() const { return _transform.getTrans(); }
 
 		/**
+		Establece la escala de la entidad. Avisa a los componentes
+		del cambio.
+
+		@param scale Nueva escala.
+		*/
+		void setScale(const Vector3 &scale, IComponent* invoker = 0);
+
+		/**
+		Devuelve la escala de la entidad.
+		<p>
+		La escala es inicialmente leída del mapa (si no aparece,
+		será la original de la malla), aunque, obviamente, puede
+		cambiar con el tiempo.
+
+		@return Escala de la entidad.
+		*/
+		Vector3 getScale() const { return _scale; };
+
+		/**
 		Establece la orientación de la entidad. Avisa a los componentes
 		del cambio.
 
@@ -360,9 +379,14 @@ namespace Logic
 		Vector3 _position;
 
 		/*
-		Posición de la entidad.
+		Orientación de la entidad.
 		*
 		float _orientation;
+
+		/**
+		Escala de la entidad.
+		*/
+		Vector3 _scale;
 
 		/**
 		Atributo que indica si la entidad es el jugador; por defecto

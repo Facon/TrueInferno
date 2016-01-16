@@ -80,6 +80,7 @@ namespace Logic
 		}
 
 		_graphicsEntity->setTransform(_entity->getTransform());
+		_graphicsEntity->setScale(_entity->getScale());
 		
 		return _graphicsEntity;
 
@@ -89,7 +90,8 @@ namespace Logic
 
 	bool CGraphics::accept(const TMessage &message)
 	{
-		return message._type == Message::SET_TRANSFORM;
+		return message._type == Message::SET_TRANSFORM ||
+			message._type == Message::SET_SCALE;
 
 	} // accept
 	
@@ -101,6 +103,8 @@ namespace Logic
 		{
 		case Message::SET_TRANSFORM:
 			_graphicsEntity->setTransform(message._transform);
+		case Message::SET_SCALE:
+			_graphicsEntity->setScale(message._vector3);
 		}
 
 	} // process

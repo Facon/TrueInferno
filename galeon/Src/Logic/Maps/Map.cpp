@@ -25,7 +25,7 @@ Contiene la implementación de la clase CMap, Un mapa lógico.
 #define MAP_FILE_PATH "./media/maps/"
 
 namespace Logic {
-		
+	
 	CMap* CMap::createMapFromFile(const std::string &filename)
 	{
 		// Completamos la ruta con el nombre proporcionado
