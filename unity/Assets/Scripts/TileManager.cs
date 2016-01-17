@@ -97,7 +97,7 @@ public class TileManager : MonoBehaviour
         Building elevatorBuildingComp = elevator.GetComponent<Building>();
         tiles[14, 8].buildingType = TileType.BUILDING; elevatorBuildingComp.addTile(tiles[14, 8]);
         tiles[13, 8].buildingType = TileType.BUILDING; elevatorBuildingComp.addTile(tiles[13, 8]);
-        buildingList.Add(elevator);
+        //buildingList.Add(elevator);
     }
 
     /// <summary>
@@ -189,6 +189,7 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (townHallComp.getNumFreeWorkers() > 0 && buildingList.Count > 0)
         {
             // Select random building
@@ -198,6 +199,7 @@ public class TileManager : MonoBehaviour
             // Send worker to the target building
             if (targetBuilding != null && workerManager.sendSoulToBuilding(townHall.GetComponent<Building>(), targetBuilding, new WorkTask()))
                 townHallComp.decreaseNumFreeWorkers();
+
         }
     }
 
