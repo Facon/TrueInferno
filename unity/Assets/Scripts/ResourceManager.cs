@@ -13,7 +13,8 @@ public enum ResourceType
     Crude,
     Pure,
     Refined,
-    Aether
+    Aether,
+    HadesFavor
 }
 
 public class ResourceManager : MonoBehaviour {
