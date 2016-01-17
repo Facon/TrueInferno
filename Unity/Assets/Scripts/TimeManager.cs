@@ -12,7 +12,7 @@ public class TimeManager : MonoBehaviour
     /// <summary>
     /// Remaining time
     /// </summary>
-    private float remainingTime;
+    public float remainingTime;
 
     public Text timeDisplay;
 
