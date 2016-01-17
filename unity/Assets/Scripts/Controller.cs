@@ -22,7 +22,7 @@ public class Controller : MonoBehaviour {
 
         if (bGenerator.newBuilding){
             if (mMove.BuildingMouseMove(bGenerator.newBuilding, Input.GetMouseButtonDown(0), bGenerator.bRoad, road)){
-                bGenerator.newBuilding.SendMessage("buildingBuilt", SendMessageOptions.DontRequireReceiver);
+                //bGenerator.newBuilding.SendMessage("buildingBuilt", SendMessageOptions.DontRequireReceiver);
                 bGenerator.newBuilding = null;
                 UnityEngine.Cursor.visible = true;
             }

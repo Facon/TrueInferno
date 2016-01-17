@@ -68,6 +68,10 @@ public class MouseMoveLock : MonoBehaviour {
                             rend.material.SetColor("_SpecColor", Color.black);
                             setOcuppiedTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
                             building.transform.position = new Vector3(posX, posY - 0.5f, posZ);
+                            
+                            // Notify building it has been placed if some component wants to do something
+                            building.SendMessage("buildingBuilt", SendMessageOptions.DontRequireReceiver);
+
                             return true;
                         }
                         else {

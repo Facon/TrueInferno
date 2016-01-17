@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Assets.Scripts;
 
 public class Building : MonoBehaviour {
+    private const int HADES_FAVOR_POINTS_PER_BUILDING = 10;
+
     public uint sizeX;
     public float sizeY;
     public uint sizeZ;
@@ -30,7 +32,9 @@ public class Building : MonoBehaviour {
     private ResourceManager resourceManager;
 
     private WorkerManager workerManager;
-    
+
+    private ScoreManager scoreManager;
+
     // Use this for initialization
     void Start() {
         if (sizeX < 1 || sizeY < 0.1 || sizeZ < 1)
@@ -43,6 +47,8 @@ public class Building : MonoBehaviour {
         resourceManager = goResManager.GetComponent<ResourceManager>();
 
         workerManager = GameObject.FindGameObjectWithTag("WorkerManager").GetComponent<WorkerManager>();
+
+        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
 
         /*Vector3 center = gameObject.transform.position;
 
@@ -209,5 +215,10 @@ public class Building : MonoBehaviour {
         }
 
         return false;
+    }
+
+    public void buildingBuilt()
+    {
+        scoreManager.increaseHadesFavor(HADES_FAVOR_POINTS_PER_BUILDING);
     }
 }
