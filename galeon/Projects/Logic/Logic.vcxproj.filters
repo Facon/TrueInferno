@@ -29,6 +29,12 @@
     <Filter Include="Entity\Components\Header Files">
       <UniqueIdentifier>{40d43982-4d6f-4a4a-b427-ce5753f432e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maps\Header Files\Managers">
+      <UniqueIdentifier>{cc1c7794-2c3f-4a9c-b214-b66b78bb53df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maps\Source Files\Managers">
+      <UniqueIdentifier>{5f29a869-ef9d-45ec-96f6-c32ccc0754fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp">
@@ -87,6 +93,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PhysicController.cpp">
       <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.cpp">
+      <Filter>Maps\Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\TileManager.cpp">
+      <Filter>Maps\Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +173,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Physics.h">
       <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\TileManager.h">
+      <Filter>Maps\Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.h">
+      <Filter>Maps\Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

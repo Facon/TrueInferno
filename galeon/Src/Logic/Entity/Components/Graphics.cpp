@@ -40,19 +40,24 @@ namespace Logic
 	
 	//---------------------------------------------------------
 
-	bool CGraphics::spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo) 
+	bool CGraphics::spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo)
 	{
-		if(!IComponent::spawn(entity,map,entityInfo))
+		if (!IComponent::spawn(entity, map, entityInfo))
 			return false;
-		
+
 		_scene = _entity->getMap()->getScene();
 
-		if(entityInfo->hasAttribute("model"))
+		if (entityInfo->hasAttribute("model"))
 			_model = entityInfo->getStringAttribute("model");
 
 		_graphicsEntity = createGraphicsEntity(entityInfo);
-		if(!_graphicsEntity)
+		if (!_graphicsEntity)
 			return false;
+
+		if (entityInfo->hasAttribute("visible")) {
+			bool visible = entityInfo->getBoolAttribute("visible");
+			_graphicsEntity->setVisible(visible);
+		}
 
 		return true;
 

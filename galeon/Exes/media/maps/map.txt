@@ -2,19 +2,18 @@ Map = {
 	
 	Camera = {
 		type = "Camera",
-		distance = 150,
-		height = 75,
-		targetDistance = 10,
-		targetHeight = 7,
+		distance = 50,
+		height = 25,
 	},
 	
 	Tile = {
 		type = "Tile",
 		position = {0, 0, 0},
-		scale = {0.1, 0.025, 0.1},
-		orientation = 45,
+		scale = {0.02, 0.01, 0.02},
+		orientation = 0,
 		model = "cube.mesh",
 		static = true,
+		visible = true,
 		physic_entity = "rigid",
 		physic_type = "static",
 		physic_shape = "box",

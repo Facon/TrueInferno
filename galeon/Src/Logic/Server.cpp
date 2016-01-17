@@ -13,12 +13,15 @@ la gestión de la lógica del juego.
 #include "Server.h"
 #include "Logic/Maps/Map.h"
 #include "Logic/Maps/EntityFactory.h"
+#include "Logic/Maps/Managers/TileManager.h"
 
 #include "Logic/Entity/Entity.h"
 
 #include "Map/MapParser.h"
+#include "Map/MapEntity.h"
 
 #include <cassert>
+#include <cstdio>
 
 namespace Logic {
 
@@ -84,6 +87,10 @@ namespace Logic {
 		if (!Logic::CEntityFactory::Init())
 			return false;
 
+		// Inicializamos el gestor de la matriz de tiles.
+		if (!Logic::CTileManager::Init())
+			return false;
+
 		return true;
 
 	} // open
@@ -93,6 +100,8 @@ namespace Logic {
 	void CServer::close() 
 	{
 		unLoadLevel();
+
+		Logic::CTileManager::Release();
 
 		Logic::CEntityFactory::Release();
 		
@@ -104,27 +113,28 @@ namespace Logic {
 
 	bool CServer::loadLevel(const std::string &filename)
 	{
-		// solo admitimos un mapa cargado, si iniciamos un nuevo nivel 
-		// se borra el mapa anterior.
+		// Solo admitimos un mapa cargado, si iniciamos un nuevo nivel se
+		// borra el mapa anterior.
 		unLoadLevel();
 
+		// Cargamos el fichero de mapa.
 		_map = CMap::createMapFromFile(filename);
 
 		if (!_map) {
 			return false;
 		}
 
-		// #TODO Aquí el mapa ya ha sido cargado de fichero y las entidades
-		// del map.txt están leídas y creadas.
+		// Aquí el mapa ya ha sido cargado de fichero y las entidades del
+		// map.txt están leídas y creadas.
 
-		// Se podría acceder a ellas a través de algún atributo (iterando sobre la lista)
-		// y definir los Tiles extremos, instanciando los intermedios
-		// a partir de ellos, cambiando solo la posición y el ID.
+		// Entre ellas, habrá una Map::CEntity Tile que puede ser empleada
+		// de forma similar a un prefab para generar toda la matriz de
+		// tiles inicial.
 
-		// La segunda opción es añadirlas todas al vuelo, aquí o en un manager.
+		// @TODO La generación de la matriz de tiles debería ser realizada
+		// por el TileManager en función de la matriz de enteros a cargar.
 
-		CEntity* baseTileEntity = _map->getEntityByType("Tile");
-
+		createTilesMatrix();
 		return true;
 
 	} // loadLevel
@@ -169,5 +179,61 @@ namespace Logic {
 		_map->tick(msecs);
 
 	} // tick
+
+	//--------------------------------------------------------
+
+	void CServer::createTilesMatrix()
+	{
+		// Cogemos la Map::CEntity Tile leída del fichero de mapa a modo de prefab.
+		Map::CEntity *mapEntityTile;
+
+		Map::CMapParser::TEntityList mapEntityList =
+			Map::CMapParser::getSingletonPtr()->getEntityList();
+
+		Map::CMapParser::TEntityList::const_iterator it, end;
+		it = mapEntityList.begin();
+		end = mapEntityList.end();
+
+		for (; it != end; it++) {
+			if ((*it)->getType() == "Tile") {
+				mapEntityTile = *it;
+			}
+		}
+
+		assert(mapEntityTile && "Map::CEntity Tile not found");
+
+		// Generamos todas las Logic:CEntity (tiles) de la matriz a partir de la
+		// Map::CEntity leída.
+		CEntityFactory* entityFactory = CEntityFactory::getSingletonPtr();
+		Vector3 tileBasePosition = mapEntityTile->getVector3Attribute("position");
+
+		for (int x = 0; x < SIZE_X; ++x) {
+			for (int z = 0; z < SIZE_Z; ++z) {
+				// Change attribute position.
+				Vector3 tilePosition(tileBasePosition);
+				tilePosition.x += x;
+				tilePosition.z += z;
+
+				// Build new Vector3::position attribute: "x y z"
+				// @TODO This should be done inside Map::MapEntity
+				std::stringstream newPosition;
+				newPosition << tilePosition.x << " " << tilePosition.y << " " << tilePosition.z;
+
+				mapEntityTile->setAttribute("position", newPosition.str());
+
+				// Change attribute name (must be unique).
+				std::stringstream newTileName;
+				newTileName << mapEntityTile->getStringAttribute("name");
+				newTileName << "_" << tilePosition.x << "_" << tilePosition.z;
+
+				mapEntityTile->setName(newTileName.str());
+
+				// Create a new entity Tile.
+				CEntity *entityTile = entityFactory->createEntity(mapEntityTile, _map);
+				assert(entityTile && "Failed to create entity Tile[X,Z]");
+			}
+		}
+
+	} // createTilesMatrix
 
 } // namespace Logic
