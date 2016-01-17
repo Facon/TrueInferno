@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Furnace : MonoBehaviour {
-    private TileManager tileManager;
+    //private TileManager tileManager;
     private ResourceManager resourceManager;
 
     /// <summary>
@@ -14,8 +14,8 @@ public class Furnace : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        GameObject goMap = GameObject.FindGameObjectWithTag("Map");
-        tileManager = goMap.GetComponent<TileManager>();
+        /*GameObject goMap = GameObject.FindGameObjectWithTag("Map");
+        tileManager = goMap.GetComponent<TileManager>();*/
 
         resourceManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
 	}

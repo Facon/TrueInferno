@@ -91,12 +91,13 @@ public class TileManager : MonoBehaviour
         townHallComp = townHall.GetComponent<TownHall>();
 
         buildcomp = prefabElevator.GetComponent<Building>();
-        GameObject Elevator = Instantiate(prefabElevator, new Vector3(tiles[13, 8].posX+0.5f, buildcomp.sizeY / 2 +0.1f, tiles[13, 8].posZ), Quaternion.identity) as GameObject;
-        Elevator.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeZ);
+        GameObject elevator = Instantiate(prefabElevator, new Vector3(tiles[13, 8].posX+0.5f, buildcomp.sizeY / 2 +0.1f, tiles[13, 8].posZ), Quaternion.identity) as GameObject;
+        elevator.transform.localScale = new Vector3(buildcomp.sizeX, buildcomp.sizeY, buildcomp.sizeZ);
 
-        Building elevatorBuildingComp = townHall.GetComponent<Building>();
+        Building elevatorBuildingComp = elevator.GetComponent<Building>();
         tiles[14, 8].buildingType = TileType.BUILDING; elevatorBuildingComp.addTile(tiles[14, 8]);
-        tiles[13, 8].buildingType = TileType.BUILDING; elevatorBuildingComp.addTile(tiles[14, 8]);
+        tiles[13, 8].buildingType = TileType.BUILDING; elevatorBuildingComp.addTile(tiles[13, 8]);
+        buildingList.Add(elevator);
     }
 
     /// <summary>

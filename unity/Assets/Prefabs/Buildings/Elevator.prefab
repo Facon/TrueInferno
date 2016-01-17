@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputResourceType: 6
-  outputResourceType: 0
-  conversionRate: 0.5
+  outputResourceType: 8
+  conversionRate: 666
   transportSpeed: 0.8
   maxSqrDistance: 50
 --- !u!114 &11441694
@@ -180,6 +180,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: maxSqrDistance
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: outputResourceType
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: conversionRate
+      value: 666
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
