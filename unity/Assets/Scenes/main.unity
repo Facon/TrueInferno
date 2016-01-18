@@ -4257,7 +4257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyInterval: 10
   destroyDelay: 5
-  destroyChance: 50
+  destroyChance: 150
 --- !u!4 &1946938461
 Transform:
   m_ObjectHideFlags: 0

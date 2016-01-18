@@ -51,10 +51,33 @@ public class EventManager : MonoBehaviour {
     {
         remainingDestroyEventTime = destroyInterval;
         bool eventSuccess = UnityEngine.Random.Range(1,100) <= destroyChance;
+        if (eventSuccess)
+        {
+            eventSuccess = false;
+            foreach (GameObject building in tileManager.buildingList)
+            { 
+                if (building.GetComponent<BuildingDestructor>()!=null)
+                {
+                    eventSuccess = true;
+                    break;
+                }
+            }
+        }
+        
         if ( eventSuccess && tileManager.buildingList.Count > 0)
         {
-            GameObject targetBuilding = tileManager.buildingList[UnityEngine.Random.Range(0, tileManager.buildingList.Count)];
-            targetBuilding.GetComponent<BuildingDestructor>().DestroyBuilding(destroyDelay);
+            eventSuccess = false;
+            BuildingDestructor targetBuildingDestructor;
+
+            while (!eventSuccess)
+            {
+                targetBuildingDestructor = tileManager.buildingList[UnityEngine.Random.Range(0, tileManager.buildingList.Count)].GetComponent<BuildingDestructor>();
+                if (targetBuildingDestructor != null)
+                {
+                    targetBuildingDestructor.DestroyBuilding(destroyDelay);
+                    eventSuccess = true;
+                }
+            }
         }
     }
 }

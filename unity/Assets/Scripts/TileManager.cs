@@ -97,7 +97,7 @@ public class TileManager : MonoBehaviour
         Building elevatorBuildingComp = elevator.GetComponent<Building>();
         tiles[14, 8].buildingType = TileType.BUILDING; elevatorBuildingComp.addTile(tiles[14, 8]);
         tiles[13, 8].buildingType = TileType.BUILDING; elevatorBuildingComp.addTile(tiles[13, 8]);
-        //buildingList.Add(elevator);
+        buildingList.Add(elevator);
     }
 
     /// <summary>
