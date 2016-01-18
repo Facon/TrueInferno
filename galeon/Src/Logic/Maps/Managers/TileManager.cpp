@@ -15,6 +15,11 @@ Contiene la implementación del gestor de la matriz de tiles.
 
 #include "TileManager.h"
 
+#include "Logic/Maps/EntityFactory.h"
+
+#include "Map/MapParser.h"
+#include "Map/MapEntity.h"
+
 #include <cassert>
 
 namespace Logic {
@@ -69,6 +74,62 @@ namespace Logic {
 		}
 
 	} // Release
+
+	//--------------------------------------------------------
+
+	void CTileManager::loadInitialMatrix(CMap *map)
+	{
+		// Coge la Map::CEntity "Tile" leída del fichero de mapa a modo de prefab.
+		Map::CEntity *mapEntityTile;
+
+		Map::CMapParser::TEntityList mapEntityList =
+			Map::CMapParser::getSingletonPtr()->getEntityList();
+
+		Map::CMapParser::TEntityList::const_iterator it, end;
+		it = mapEntityList.begin();
+		end = mapEntityList.end();
+
+		for (; it != end; it++) {
+			if ((*it)->getType() == "Tile") {
+				mapEntityTile = *it;
+			}
+		}
+
+		assert(mapEntityTile && "Map::CEntity Tile not found");
+
+		// Genera todas las Logic::CEntity tiles de la matriz a partir de la
+		// Map::CEntity "Tile" leída.
+		CEntityFactory* entityFactory = CEntityFactory::getSingletonPtr();
+		Vector3 tileBasePosition = mapEntityTile->getVector3Attribute("position");
+
+		for (int x = 0; x < SIZE_X; ++x) {
+			for (int z = 0; z < SIZE_Z; ++z) {
+				// Change attribute position.
+				Vector3 tilePosition(tileBasePosition);
+				tilePosition.x += x;
+				tilePosition.z += z;
+
+				// Build new Vector3::position attribute: "x y z"
+				// @TODO This should be done inside Map::MapEntity
+				std::stringstream newPosition;
+				newPosition << tilePosition.x << " " << tilePosition.y << " " << tilePosition.z;
+
+				mapEntityTile->setAttribute("position", newPosition.str());
+
+				// Change attribute name (must be unique).
+				std::stringstream newTileName;
+				newTileName << mapEntityTile->getStringAttribute("name");
+				newTileName << "_" << tilePosition.x << "_" << tilePosition.z;
+
+				mapEntityTile->setName(newTileName.str());
+
+				// Create a new entity Tile.
+				CEntity *entityTile = entityFactory->createEntity(mapEntityTile, map);
+				assert(entityTile && "Failed to create entity Tile[X,Z]");
+			}
+		}
+
+	} // loadInitialMatrix
 
 	//--------------------------------------------------------
 

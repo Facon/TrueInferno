@@ -20,6 +20,7 @@ al mapa.
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
 {
+	class CMap;
 }
 
 /**
@@ -65,6 +66,18 @@ namespace Logic
 		*/
 		static void Release();
 
+		/**
+		Lee y genera la matriz inicial de tiles del mapa.
+		<p>
+		Aquí el resto de entidades iniciales del mapa ya han sido cargadas
+		de fichero (map.txt) y creadas. Entre ellas, habrá una Map::CEntity
+		"Tile" que puede ser empleada de forma similar a un prefab para
+		generar toda la matriz de tiles inicial.
+
+		@param map Mapa en el que generar la matriz.
+		*/
+		void loadInitialMatrix(CMap *map);
+
 	protected:
 
 		/**
@@ -98,6 +111,12 @@ namespace Logic
 		Única instancia de la clase.
 		*/
 		static CTileManager *_instance;
+
+		/**
+		Dimensiones de la matriz del mapa.
+		*/
+		const int SIZE_X = 15;
+		const int SIZE_Z = 15;
 
 	}; // class TileManager
 

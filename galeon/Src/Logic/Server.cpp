@@ -124,17 +124,8 @@ namespace Logic {
 			return false;
 		}
 
-		// Aquí el mapa ya ha sido cargado de fichero y las entidades del
-		// map.txt están leídas y creadas.
-
-		// Entre ellas, habrá una Map::CEntity Tile que puede ser empleada
-		// de forma similar a un prefab para generar toda la matriz de
-		// tiles inicial.
-
-		// @TODO La generación de la matriz de tiles debería ser realizada
-		// por el TileManager en función de la matriz de enteros a cargar.
-
-		createTilesMatrix();
+		// Cargamos la matriz de tiles inicial en el mapa.
+		CTileManager::getSingletonPtr()->loadInitialMatrix(_map);
 		return true;
 
 	} // loadLevel
@@ -179,61 +170,5 @@ namespace Logic {
 		_map->tick(msecs);
 
 	} // tick
-
-	//--------------------------------------------------------
-
-	void CServer::createTilesMatrix()
-	{
-		// Cogemos la Map::CEntity Tile leída del fichero de mapa a modo de prefab.
-		Map::CEntity *mapEntityTile;
-
-		Map::CMapParser::TEntityList mapEntityList =
-			Map::CMapParser::getSingletonPtr()->getEntityList();
-
-		Map::CMapParser::TEntityList::const_iterator it, end;
-		it = mapEntityList.begin();
-		end = mapEntityList.end();
-
-		for (; it != end; it++) {
-			if ((*it)->getType() == "Tile") {
-				mapEntityTile = *it;
-			}
-		}
-
-		assert(mapEntityTile && "Map::CEntity Tile not found");
-
-		// Generamos todas las Logic:CEntity (tiles) de la matriz a partir de la
-		// Map::CEntity leída.
-		CEntityFactory* entityFactory = CEntityFactory::getSingletonPtr();
-		Vector3 tileBasePosition = mapEntityTile->getVector3Attribute("position");
-
-		for (int x = 0; x < SIZE_X; ++x) {
-			for (int z = 0; z < SIZE_Z; ++z) {
-				// Change attribute position.
-				Vector3 tilePosition(tileBasePosition);
-				tilePosition.x += x;
-				tilePosition.z += z;
-
-				// Build new Vector3::position attribute: "x y z"
-				// @TODO This should be done inside Map::MapEntity
-				std::stringstream newPosition;
-				newPosition << tilePosition.x << " " << tilePosition.y << " " << tilePosition.z;
-
-				mapEntityTile->setAttribute("position", newPosition.str());
-
-				// Change attribute name (must be unique).
-				std::stringstream newTileName;
-				newTileName << mapEntityTile->getStringAttribute("name");
-				newTileName << "_" << tilePosition.x << "_" << tilePosition.z;
-
-				mapEntityTile->setName(newTileName.str());
-
-				// Create a new entity Tile.
-				CEntity *entityTile = entityFactory->createEntity(mapEntityTile, _map);
-				assert(entityTile && "Failed to create entity Tile[X,Z]");
-			}
-		}
-
-	} // createTilesMatrix
 
 } // namespace Logic

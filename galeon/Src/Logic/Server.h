@@ -154,12 +154,6 @@ namespace Logic
 		void close();
 
 		/**
-		Genera la matriz de tiles inicial.
-		@TODO Esto debe hacerse en el TileManager leyendo una matriz de enteros.
-		*/
-		void createTilesMatrix();
-
-		/**
 		Mapa donde se encuentran todas las entidades lógicas.
 		*/
 		CMap *_map;
@@ -174,12 +168,6 @@ namespace Logic
 		Única instancia de la clase.
 		*/
 		static CServer* _instance;
-
-		/**
-		Tamaño de la matriz de tiles.
-		*/
-		const int SIZE_X = 15;
-		const int SIZE_Z = 15;
 
 	}; // class CServer
 
