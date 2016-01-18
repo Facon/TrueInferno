@@ -12,12 +12,16 @@ la gestión de la lógica del juego.
 
 #include "Server.h"
 #include "Logic/Maps/Map.h"
-
 #include "Logic/Maps/EntityFactory.h"
+#include "Logic/Maps/Managers/TileManager.h"
+
+#include "Logic/Entity/Entity.h"
 
 #include "Map/MapParser.h"
+#include "Map/MapEntity.h"
 
 #include <cassert>
+#include <cstdio>
 
 namespace Logic {
 
@@ -83,6 +87,10 @@ namespace Logic {
 		if (!Logic::CEntityFactory::Init())
 			return false;
 
+		// Inicializamos el gestor de la matriz de tiles.
+		if (!Logic::CTileManager::Init())
+			return false;
+
 		return true;
 
 	} // open
@@ -92,6 +100,8 @@ namespace Logic {
 	void CServer::close() 
 	{
 		unLoadLevel();
+
+		Logic::CTileManager::Release();
 
 		Logic::CEntityFactory::Release();
 		
@@ -103,16 +113,20 @@ namespace Logic {
 
 	bool CServer::loadLevel(const std::string &filename)
 	{
-		// solo admitimos un mapa cargado, si iniciamos un nuevo nivel 
-		// se borra el mapa anterior.
+		// Solo admitimos un mapa cargado, si iniciamos un nuevo nivel se
+		// borra el mapa anterior.
 		unLoadLevel();
 
-		if(_map = CMap::createMapFromFile(filename))
-		{
-			return true;
+		// Cargamos el fichero de mapa.
+		_map = CMap::createMapFromFile(filename);
+
+		if (!_map) {
+			return false;
 		}
 
-		return false;
+		// Cargamos la matriz de tiles inicial en el mapa.
+		CTileManager::getSingletonPtr()->loadInitialMatrix(_map);
+		return true;
 
 	} // loadLevel
 

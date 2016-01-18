@@ -19,6 +19,7 @@ namespace Logic
 {
 	class CMap;
 	class CEntity;
+	class CTileManager;
 }
 
 /**

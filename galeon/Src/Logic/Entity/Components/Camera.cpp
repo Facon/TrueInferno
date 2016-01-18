@@ -76,19 +76,11 @@ namespace Logic
 	{
 		IComponent::tick(msecs);
 
-		if(_target)
-		{
-			// Actualizamos la posición de la cámara.
-			Vector3 position = _target->getPosition();
-			Vector3 direction = -_distance * Math::getDirection(_target->getOrientation());
-			direction.y = _height;
-			_graphicsCamera->setCameraPosition(position + direction);
-
-			// Y la posición hacia donde mira la cámara.
-			direction = _targetDistance * Math::getDirection(_target->getOrientation());
-			direction.y = _targetHeight;
-			_graphicsCamera->setTargetCameraPosition(position + direction);
-		}
+		// Updating camera position and direction...
+		Vector3 position = Vector3(0, _height, 0);
+		Vector3 direction = Vector3(0, 0, 1);
+		_graphicsCamera->setCameraPosition(position - _distance * direction);
+		_graphicsCamera->setTargetCameraPosition(direction);
 
 	} // tick
 

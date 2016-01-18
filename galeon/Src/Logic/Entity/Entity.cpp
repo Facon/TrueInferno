@@ -26,7 +26,8 @@ de juego. Es una colección de componentes.
 namespace Logic 
 {
 	CEntity::CEntity(TEntityID entityID) : _entityID(entityID), 
-				_map(0), _type(""), _name(""), _transform(Matrix4::IDENTITY),
+				_map(0), _type(""), _name(""),
+				_transform(Matrix4::IDENTITY), _scale(Vector3(1, 1, 1)),
 				_isPlayer(false), _activated(false)
 	{
 
@@ -58,6 +59,9 @@ namespace Logic
 			Vector3 position = entityInfo->getVector3Attribute("position");
 			_transform.setTrans(position);
 		}
+
+		if (entityInfo->hasAttribute("scale"))
+			_scale = entityInfo->getVector3Attribute("scale");
 
 		// Por comodidad en el mapa escribimos los ángulos en grados.
 		if(entityInfo->hasAttribute("orientation"))
@@ -243,9 +247,23 @@ namespace Logic
 		TMessage message;
 		message._type = Message::SET_TRANSFORM;
 		message._transform = _transform;
-		emitMessage(message,invoker);
+		emitMessage(message, invoker);
 
 	} // setPosition
+
+	//---------------------------------------------------------
+
+	void CEntity::setScale(const Vector3 &scale, IComponent* invoker)
+	{
+		_scale = scale;
+
+		// Avisamos a los componentes del cambio.
+		TMessage message;
+		message._type = Message::SET_SCALE;
+		message._vector3 = _scale;
+		emitMessage(message, invoker);
+
+	} // setScale
 
 	//---------------------------------------------------------
 

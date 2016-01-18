@@ -172,7 +172,7 @@ namespace Graphics
 
 		throw new std::exception("La entidad no ha sido cargada");
 
-	} // getPosition
+	} // getVisible
 	
 	//--------------------------------------------------------
 		
