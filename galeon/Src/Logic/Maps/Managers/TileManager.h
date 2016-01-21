@@ -17,10 +17,13 @@ al mapa.
 #ifndef __Logic_TileManager_H
 #define __Logic_TileManager_H
 
+#include <vector>
+
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
 {
 	class CMap;
+	class CEntity;
 }
 
 /**
@@ -118,6 +121,8 @@ namespace Logic
 		const int SIZE_X = 15;
 		const int SIZE_Z = 15;
 
+		/** 2D tile matrix[x][z]. Elements are entity pointers */
+		Logic::CEntity ***_tiles;
 	}; // class TileManager
 
 } // namespace Logic

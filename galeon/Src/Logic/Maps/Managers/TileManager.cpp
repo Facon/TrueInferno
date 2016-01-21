@@ -31,6 +31,7 @@ namespace Logic {
 	CTileManager::CTileManager()
 	{
 		_instance = this;
+		_tiles = nullptr;
 
 	} // CTileManager
 
@@ -40,6 +41,18 @@ namespace Logic {
 	{
 		assert(_instance);
 		_instance = 0;
+
+		// Free tile matrix
+		if (_tiles){
+			for (int x = 0; x < SIZE_X; ++x){
+				if (_tiles[x]){
+					delete(_tiles[x]);
+					_tiles[x] = nullptr;
+				}
+			}
+			delete(_tiles);
+			_tiles = nullptr;
+		}
 
 	} // ~CTileManager
 
@@ -89,6 +102,7 @@ namespace Logic {
 		it = mapEntityList.begin();
 		end = mapEntityList.end();
 
+		// Find Tile "prefab"
 		for (; it != end; it++) {
 			if ((*it)->getType() == "Tile") {
 				mapEntityTile = *it;
@@ -101,6 +115,15 @@ namespace Logic {
 		// Map::CEntity "Tile" leída.
 		CEntityFactory* entityFactory = CEntityFactory::getSingletonPtr();
 		Vector3 tileBasePosition = mapEntityTile->getVector3Attribute("position");
+
+		// Allocate memory for tile matrix
+		_tiles = new CEntity**[SIZE_X];
+		for (int x = 0; x < SIZE_X; ++x) {
+			_tiles[x] = new CEntity*[SIZE_Z];
+			for (int z = 0; z < SIZE_Z; ++z) {
+				_tiles[x][z] = nullptr;
+			}
+		}
 
 		for (int x = 0; x < SIZE_X; ++x) {
 			for (int z = 0; z < SIZE_Z; ++z) {
@@ -126,6 +149,8 @@ namespace Logic {
 				// Create a new entity Tile.
 				CEntity *entityTile = entityFactory->createEntity(mapEntityTile, map);
 				assert(entityTile && "Failed to create entity Tile[X,Z]");
+
+				_tiles[x][z] = entityTile;
 			}
 		}
 
