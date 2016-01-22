@@ -101,6 +101,7 @@
       <Filter>Maps\Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -182,6 +183,9 @@
       <Filter>Maps\Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Tile.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
