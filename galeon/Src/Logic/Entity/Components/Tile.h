@@ -2,6 +2,7 @@
 #define TILE_H_
 
 #include "Logic/Entity/Component.h"
+#include "Logic/Maps/Managers/TileManager.h"
 
 namespace Logic {
 	class Tile : public IComponent{
@@ -34,8 +35,20 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
-	private:
+		/** 
+		Returns logic position
+		*/
+		const Vector3 getLogicPosition();
 
+		void setTerrainType(const TerrainType &terrainType);
+
+		const TerrainType getTerrainType();
+
+	private:
+		/** Logic position in the matrix */
+		Vector3 _logicPosition;
+
+		TerrainType _terrainType;
 	}; // class Tile
 
 	REG_FACTORY(Tile);
