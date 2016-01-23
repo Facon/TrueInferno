@@ -26,7 +26,7 @@ namespace Logic
 	*/
 	namespace Message
 	{
-		enum TMessageType
+		enum MessageType
 		{
 			UNASSIGNED = 0xFFFFFFFF,
 			SET_TRANSFORM,
@@ -42,18 +42,18 @@ namespace Logic
 			DAMAGED
 		};
 	}
-
+	
 	/**
 	Tipo copia para los mensajes. Por simplicidad.
 	*/
-	typedef Message::TMessageType TMessageType;
+	typedef Message::MessageType MessageType;
 
 	/**
 	Contiene el tipo de datos de un mensaje. Tiene una serie de
 	atributos genéricos que se interpretarán en función del tipo 
 	de mensaje.
 	<p>
-	@remarks <b>¡¡ESTO NO ES ESCALABLE!!</b> En tu proyecto esto 
+	@remarks <b>??ESTO NO ES ESCALABLE!!</b> En tu proyecto esto 
 	debería ser cambiado.
 	Lo suyo sería tener una clase CMesage base y luego clases que
 	especializasen a ésta con los atributos necesarios para el 
@@ -68,6 +68,7 @@ namespace Logic
 	@date Julio, 2010
     @ingroup grupoEntidad
 	*/
+	/*
 	typedef struct
 	{
 		/**
@@ -80,11 +81,6 @@ namespace Logic
 		*/
 		Matrix4 _transform;
 		
-		/**
-		Atributo para almacenar un valor int.
-		*/
-		int _int;
-
 		/**
 		Atributo para almacenar un valor float.
 		*/
@@ -100,18 +96,84 @@ namespace Logic
 		*/
 		std::string _string;
 
-		/**
-		Atributo para almacenar un vector.
-		*/
-		Vector3 _vector3;
+	} TMessage;
+	*/
+	
+	class Message
+	{
+	public:
+		MessageType _type;
+		virtual void Dispatch(MessageHandler& handler) const = 0;
+	};
 
-		/**
-		Atributo para almacenar una entidad.
-		*/
-		CEntity *_entity;
-
-	} TMessage; 
-
+	// SET_TRANSFORM, SET_SCALE
+	class TransformMessage
+	{
+	public:
+		Matrix4 _transform;
+		
+		virtual void Dispatch(MessageHandler& handler) const
+		{
+			handler.HandleMessage(*this);
+		}
+	};
+	
+	// SET_ANIMATION, STOP_ANIMATION
+	class AnimationMessage
+	{
+	public:		
+		virtual void Dispatch(MessageHandler& handler) const
+		{
+			handler.HandleMessage(*this);
+		}
+	};
+	
+	// CONTROL
+	class ControlMessage
+	{
+	public:
+		virtual void Dispatch(MessageHandler& handler) const
+		{
+			handler.HandleMessage(*this);
+		}
+	};
+	
+	// AVATAR_WALK,
+	// KINEMATIC_MOVE,
+	// TOUCHED, UNTOUCHED
+	class TouchMessage
+	{
+	public:
+		bool touched = false;
+		
+		virtual void Dispatch(MessageHandler& handler) const
+		{
+			handler.HandleMessage(*this);
+		}
+	};
+	
+	// SWITCH,
+	// DAMAGED
+	class DamageMessage
+	{
+	public:
+		unsigned int damage = 0;
+		
+		virtual void Dispatch(MessageHandler& handler) const
+		{
+			handler.HandleMessage(*this);
+		}
+	};
+	
+	/*
+	GameObject* receiver_object = blah;
+	
+	// Send the "Up arrow pressed" message
+	KeyMessage msg;
+	msg._type = MSG_KEY_DOWN;
+	msg._keyCode = KEY_CODE_UP_ARROW;
+	msg.Dispatch(*receiver_object);
+	*/
 } // namespace Logic
 
 #endif // __Logic_Message_H
