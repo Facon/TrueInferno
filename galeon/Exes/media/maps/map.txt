@@ -12,6 +12,7 @@ Map = {
 		scale = {0.02, 0.01, 0.02},
 		orientation = 0,
 		model = "cube.mesh",
+		material = "tile",
 		static = true,
 		visible = true,
 		physic_entity = "rigid",

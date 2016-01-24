@@ -86,6 +86,12 @@ namespace Logic
 
 		_graphicsEntity->setTransform(_entity->getTransform());
 		_graphicsEntity->setScale(_entity->getScale());
+
+		if (entityInfo->hasAttribute("material"))
+		{
+			std::string materialName = entityInfo->getStringAttribute("material");
+			_graphicsEntity->setMaterialName(materialName);
+		}
 		
 		return _graphicsEntity;
 
@@ -96,7 +102,9 @@ namespace Logic
 	bool CGraphics::accept(const TMessage &message)
 	{
 		return message._type == Message::SET_TRANSFORM ||
-			message._type == Message::SET_SCALE;
+			message._type == Message::SET_SCALE ||
+			message._type == Message::SET_COLOR ||
+			message._type == Message::SET_MATERIAL_NAME;
 
 	} // accept
 	
@@ -108,8 +116,16 @@ namespace Logic
 		{
 		case Message::SET_TRANSFORM:
 			_graphicsEntity->setTransform(message._transform);
+			break;
 		case Message::SET_SCALE:
 			_graphicsEntity->setScale(message._vector3);
+			break;
+		case Message::SET_COLOR:
+			_graphicsEntity->setColor(message._vector3);
+			break;
+		case Message::SET_MATERIAL_NAME:
+			_graphicsEntity->setMaterialName(message._string);
+			break;
 		}
 
 	} // process

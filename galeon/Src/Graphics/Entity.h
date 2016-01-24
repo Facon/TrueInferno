@@ -152,6 +152,34 @@ namespace Graphics
 		const Vector3 &getScale();
 
 		/**
+		 Cambia el color de la entidad.
+
+		 @param color Valores (r,g,b) del color interpolados entre -1 y 1.
+		*/
+		void setColor(const Vector3 &color);
+
+		/**
+		 Devuelve el color de la entidad.
+
+		 @return Valores (r,g,b) del color interpolados entre -1 y 1.
+		*/
+		const Vector3 &getColor();
+
+		/**
+		 Cambia el material de la entidad.
+
+		 @param material Nombre del material.
+		*/
+		void setMaterialName(const std::string &materialName);
+
+		/**
+		 Devuelve el material de la entidad.
+
+		 @return Nombre del material.
+		*/
+		const std::string &getMaterialName();
+
+		/**
 		Devuelve la entidad de Ogre.
 
 		@return puntero a la entidad de Ogre.

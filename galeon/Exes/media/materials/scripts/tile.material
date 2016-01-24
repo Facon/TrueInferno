@@ -1,0 +1,25 @@
+
+material tile
+{
+	technique
+	{
+		pass
+		{
+			ambient 1 1 1 1
+			diffuse 1 1 1 1
+		}
+	}
+}
+
+material tile_alt
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.5 0.5 1
+			diffuse 0.5 0.5 0.5 1
+		}
+	}
+}
+

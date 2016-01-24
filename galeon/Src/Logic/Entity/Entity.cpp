@@ -208,6 +208,10 @@ namespace Logic
 		{
 		case Message::SET_TRANSFORM:
 			_transform = message._transform;
+			break;
+		case Message::SET_SCALE:
+			_scale = message._vector3;
+			break;
 		}
 
 		TComponentList::const_iterator it;
