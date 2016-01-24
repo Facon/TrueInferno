@@ -11,16 +11,22 @@ al mapa.
 @see Logic::CTileManager
 
 @author Raúl Segura
+@author Álvaro Valera
 @date Enero, 2016
 */
 
 #ifndef __Logic_TileManager_H
 #define __Logic_TileManager_H
 
+#include <string>
+#include "BaseSubsystems/Math.h"
+
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
 {
 	class CMap;
+	class CEntity;
+	class Tile;
 }
 
 /**
@@ -34,6 +40,19 @@ sus componentes, mensajes, factorias de entidades y componentes, etc.
 */
 namespace Logic
 {
+	enum TerrainType{
+		Empty = 0,
+		Mineral = 1,
+		Gas = 2 
+	};
+
+	enum BuildingType{
+		None,
+		Obstacle,
+		Building,
+		Road
+	};
+
 	/**
 	Manager singleton que gestiona la lectura y actualización de la matriz
 	de tiles del mapa.
@@ -78,6 +97,12 @@ namespace Logic
 		*/
 		void loadInitialMatrix(CMap *map);
 
+		/** Register internally a tile in the matrix tile */
+		void registerTile(Tile *tile);
+
+		/** Returns a tile given its logic position */
+		Tile* getTile(const Vector3 &position);
+			
 	protected:
 
 		/**
@@ -117,6 +142,19 @@ namespace Logic
 		*/
 		const int SIZE_X = 15;
 		const int SIZE_Z = 15;
+
+		/** File with the terrain map definition */
+		const std::string TERRAIN_MAP_FILE = "media/maps/terrain_map.txt";
+
+		/** 2D tile matrix[x][z].
+		We store pointers to the Tile components */
+		Tile ***_tiles;
+
+		/** Assign terrain type to all the tiles in the map reading from a file
+		- 0 stands for empty
+		- 1 stands for Gas
+		- 2 stands for Mineral  */
+		void loadTerrain(const std::string &filename);
 
 	}; // class TileManager
 

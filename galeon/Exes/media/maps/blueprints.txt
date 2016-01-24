@@ -1,4 +1,4 @@
 Entity CGraphics
 AnimatedEntity CAnimatedGraphics
 Camera CCamera
-Tile CGraphics CPhysicEntity
+Tile CGraphics CPhysicEntity Tile
