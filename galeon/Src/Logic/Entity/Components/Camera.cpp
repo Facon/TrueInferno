@@ -1,13 +1,13 @@
 /**
 @file Camera.cpp
 
-Contiene la implementación del componente que controla la cámara gráfica
+Contiene la implementaciï¿½n del componente que controla la cï¿½mara grï¿½fica
 de una escena.
  
 @see Logic::CCamera
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 
@@ -23,6 +23,7 @@ de una escena.
 
 namespace Logic 
 {
+	RTTI_ROOT_IMPL(CCamera);
 	IMP_FACTORY(CCamera);
 	
 	//---------------------------------------------------------

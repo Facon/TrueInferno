@@ -5,11 +5,11 @@
 /**
 @file Entity.cpp
 
-Contiene la implementación de la clase que representa una entidad gráfica.
+Contiene la implementaciï¿½n de la clase que representa una entidad grï¿½fica.
 
 @see Graphics::CEntity
 
-@author David Llansó
+@author David Llansï¿½
 @date Julio, 2010
 */
 
@@ -39,7 +39,7 @@ namespace Graphics
 
 	CEntity::~CEntity() 
 	{
-		assert(!_scene && "¡¡Para destruir una entidad esta no puede pertenecer a una escena!!");
+		assert(!_scene && "Â¡Â¡Para destruir una entidad esta no puede pertenecer a una escena!!");
 		
 	} // ~CEntity
 	
@@ -47,12 +47,12 @@ namespace Graphics
 		
 	bool CEntity::attachToScene(CScene *scene)
 	{
-		assert(scene && "¡¡La entidad debe asociarse a una escena!!");
-		// Si la entidad está cargada por otro gestor de escena.
+		assert(scene && "Â¡Â¡La entidad debe asociarse a una escena!!");
+		// Si la entidad estï¿½ cargada por otro gestor de escena.
 		if(_loaded && (_scene != scene))
 			return false;
 
-		// Si no está cargada forzamos su carga.
+		// Si no estï¿½ cargada forzamos su carga.
 		if (!_loaded)
 		{
 			_scene = scene;
@@ -68,14 +68,14 @@ namespace Graphics
 		
 	bool CEntity::deattachFromScene()
 	{
-		// Si la entidad no está cargada no se puede quitar de
-		// una escena. Ya que no pertenecerá a ninguna.
+		// Si la entidad no estï¿½ cargada no se puede quitar de
+		// una escena. Ya que no pertenecerï¿½ a ninguna.
 		if(!_loaded)
 			return false;
-		// Si la entidad está cargada forzamos su descarga.
+		// Si la entidad estï¿½ cargada forzamos su descarga.
 		else
 		{
-			assert(_scene && "¡¡La entidad debe estar asociada a una escena!!");
+			assert(_scene && "Â¡Â¡La entidad debe estar asociada a una escena!!");
 			unload();
 			_scene = 0;
 		}
@@ -170,7 +170,7 @@ namespace Graphics
 		if(_entityNode)
 			return _entity->isVisible();
 
-		throw new std::exception("La entidad no ha sido cargada");
+		throw new std::runtime_error("La entidad no ha sido cargada");
 
 	} // getVisible
 	

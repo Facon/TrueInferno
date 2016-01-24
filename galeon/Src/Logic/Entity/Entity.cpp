@@ -1,16 +1,17 @@
 /**
 @file Entity.cpp
 
-Contiene la implementación de la clase Entity, que representa una entidad
-de juego. Es una colección de componentes.
+Contiene la implementaciï¿½n de la clase Entity, que representa una entidad
+de juego. Es una colecciï¿½n de componentes.
 
 @see Logic::CEntity
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Julio, 2010
 */
 
+#include <Logic/Entity/Components/AnimatedGraphics.h>
 #include "Entity.h"
 
 // Componentes
@@ -37,7 +38,7 @@ namespace Logic
 
 	CEntity::~CEntity()
 	{
-		assert(!_map && "¡¡Antes de destruir la entidad debe desacoplarse del mapa!!");
+		assert(!_map && "Â¡Â¡Antes de destruir la entidad debe desacoplarse del mapa!!");
 
 		destroyAllComponents();
 
@@ -63,7 +64,7 @@ namespace Logic
 		if (entityInfo->hasAttribute("scale"))
 			_scale = entityInfo->getVector3Attribute("scale");
 
-		// Por comodidad en el mapa escribimos los ángulos en grados.
+		// Por comodidad en el mapa escribimos los ï¿½ngulos en grados.
 		if(entityInfo->hasAttribute("orientation"))
 		{
 			float yaw = Math::fromDegreesToRadians(entityInfo->getFloatAttribute("orientation"));
@@ -118,7 +119,7 @@ namespace Logic
 
 	void CEntity::deactivate() 
 	{
-		// Si éramos el jugador, le decimos al servidor que ya no hay.
+		// Si ï¿½ramos el jugador, le decimos al servidor que ya no hay.
 		// y evitamos que se nos siga informando de los movimientos que 
 		// debemos realizar
 		if (isPlayer())
@@ -165,8 +166,8 @@ namespace Logic
 		TComponentList::const_iterator it = _components.begin();
 
 		bool removed = false;
-		// Buscamos el componente hasta el final, por si aparecía
-		// más de una vez... (no tendría mucho sentido, pero por si
+		// Buscamos el componente hasta el final, por si aparecï¿½a
+		// mï¿½s de una vez... (no tendrï¿½a mucho sentido, pero por si
 		// acaso).
 		while (it != _components.end()) 
 		{
@@ -199,10 +200,10 @@ namespace Logic
 	} // destroyAllComponents
 
 	//---------------------------------------------------------
-
+    /*
 	bool CEntity::emitMessage(const TMessage &message, IComponent* emitter)
 	{
-		// Interceptamos los mensajes que además de al resto de los
+		// Interceptamos los mensajes que ademï¿½s de al resto de los
 		// componentes, interesan a la propia entidad.
 		switch(message._type)
 		{
@@ -222,19 +223,59 @@ namespace Logic
 		return anyReceiver;
 
 	} // emitMessage
+    */
+
+	bool CEntity::HandleMessage(const TransformMessage& msg)
+    {
+        this->_transform = msg._transform;
+
+        return true;
+    }
+
+    bool CEntity::HandleMessage(const ScaleMessage& msg)
+    {
+        this->_scale = msg._scale;
+
+        return true;
+    }
+
+	bool CEntity::HandleMessage(const AnimationMessage& msg)
+    {
+        for (auto it =  _components.cbegin(); it != _components.cend(); ++it)
+        {
+            if ((*it)->GetRTTI().IsExactly(CAnimatedGraphics::rtti))
+            {
+                // Manipular componente haciendo casting
+                CAnimatedGraphics& obj = (*(*it));
+
+                // Hacer movidas con obj y msg
+
+                return true;
+            }
+        }
+
+		return false;
+    }
+
+	bool CEntity::HandleMessage(const ControlMessage& msg)
+    {}
+
+	bool CEntity::HandleMessage(const TouchMessage& msg)
+    {}
+
+	bool CEntity::HandleMessage(const DamageMessage& msg)
+    {}
 
 	//---------------------------------------------------------
 
 	void CEntity::setTransform(const Matrix4& transform) 
 	{
-		_transform = transform;
+        TransformMessage m;
 
-		// Avisamos a los componentes del cambio.
-		TMessage message;
-		message._type = Message::SET_TRANSFORM;
-		message._transform = _transform;
-		emitMessage(message);
+        m._type = MessageType::SET_TRANSFORM;
+        m._transform = _transform;
 
+        m.Dispatch(*this);
 	} // setTransform
 
 	//---------------------------------------------------------
@@ -244,39 +285,35 @@ namespace Logic
 		_transform.setTrans(position);
 
 		// Avisamos a los componentes del cambio.
-		TMessage message;
-		message._type = Message::SET_TRANSFORM;
+		TransformMessage message;
+		message._type = MessageType::SET_TRANSFORM;
 		message._transform = _transform;
-		emitMessage(message, invoker);
 
+        message.Dispatch(*this);
 	} // setPosition
 
 	//---------------------------------------------------------
 
 	void CEntity::setScale(const Vector3 &scale, IComponent* invoker)
 	{
-		_scale = scale;
-
 		// Avisamos a los componentes del cambio.
-		TMessage message;
-		message._type = Message::SET_SCALE;
-		message._vector3 = _scale;
-		emitMessage(message, invoker);
+		ScaleMessage message;
+		message._type = MessageType::SET_SCALE;
+		message._scale = _scale;
 
+        message.Dispatch(*this);
 	} // setScale
 
 	//---------------------------------------------------------
 
 	void CEntity::setOrientation(const Matrix3& orientation) 
 	{
-		_transform = orientation;
-
 		// Avisamos a los componentes del cambio.
-		TMessage message;
-		message._type = Message::SET_TRANSFORM;
-		message._transform = _transform;
-		emitMessage(message);
+		TransformMessage message;
+		message._type = MessageType::SET_TRANSFORM;
+		message._transform = orientation;
 
+        message.Dispatch(*this);
 	} // setOrientation
 
 	//---------------------------------------------------------
@@ -296,11 +333,11 @@ namespace Logic
 		Math::setYaw(yaw,_transform);
 
 		// Avisamos a los componentes del cambio.
-		TMessage message;
-		message._type = Message::SET_TRANSFORM;
+		TransformMessage message;
+		message._type = MessageType::SET_TRANSFORM;
 		message._transform = _transform;
-		emitMessage(message);
 
+        message.Dispatch(*this);
 	} // setYaw
 
 	//---------------------------------------------------------
@@ -310,11 +347,11 @@ namespace Logic
 		Math::yaw(yaw,_transform);
 
 		// Avisamos a los componentes del cambio.
-		TMessage message;
-		message._type = Message::SET_TRANSFORM;
+		TransformMessage message;
+		message._type = MessageType::SET_TRANSFORM;
 		message._transform = _transform;
-		emitMessage(message);
 
+        message.Dispatch(*this);
 	} // yaw
 
 } // namespace Logic

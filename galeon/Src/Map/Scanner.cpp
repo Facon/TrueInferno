@@ -378,7 +378,7 @@ typedef unsigned char YY_CHAR;
 
 #define yytext_ptr yytext
 
-#include <FlexLexer.h>
+#include "FlexLexer.h"
 
 /* %if-c-only Standard (non-C++) definition */
 /* %endif */
@@ -507,16 +507,16 @@ static yyconst flex_int16_t yy_rule_linenum[12] =
 /** 
 @file Scanner.ll 
 
-Contiene el codigo autogenerado del scanner léxico de Flex.
+Contiene el codigo autogenerado del scanner lï¿½xico de Flex.
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 #line 11 "Scanner.ll"
 
 #include <string>
 
-#include "Scanner.h"
+#include "scanner.h"
 
 #include <stdio.h>
 #include "Parser.h"
@@ -528,15 +528,15 @@ typedef Map::CParser::token_type token_type;
 /* Redefinimos yyterminate para que devuelva el token END. */
 #define yyterminate() return token::END
 
-/* Desabilitamos la inclusión de unistd.h, no disponible bajo Visual C++
+/* Desabilitamos la inclusiï¿½n de unistd.h, no disponible bajo Visual C++
    en Win32. A cambio se usan STL streams. */
 #define YY_NO_UNISTD_H
 
 /*** Declaraciones y opciones de Flex ***/
-/* Habilitamos la generación de la clase C++ para el scanner*/
-/* Cambiamos el prefijo de la clase generada. El resultado será "CMapFlexLexer" */
-/* Una optimización */
-/* Añade salida de depuración. Para la versión definitiva debería eliminarse esta opción. */
+/* Habilitamos la generaciï¿½n de la clase C++ para el scanner*/
+/* Cambiamos el prefijo de la clase generada. El resultado serï¿½ "CMapFlexLexer" */
+/* Una optimizaciï¿½n */
+/* Aï¿½ade salida de depuraciï¿½n. Para la versiï¿½n definitiva deberï¿½a eliminarse esta opciï¿½n. */
 /* No permitimos inclusiones de ficheros */
 #line 52 "Scanner.ll"
 #define YY_USER_ACTION  yylloc->columns(yyleng);
@@ -700,13 +700,13 @@ YY_DECL
 #line 59 "Scanner.ll"
 
 
- /* Código añadido al principio de yylex() */
+ /* Cï¿½digo aï¿½adido al principio de yylex() */
 
     // reset location
     yylloc->step();
 
 
- /*** EMPIECE de las reglas léxicas ***/
+ /*** EMPIECE de las reglas lï¿½xicas ***/
 
 #line 712 "Scanner.cpp"
 
@@ -873,7 +873,7 @@ YY_RULE_SETUP
 #line 79 "Scanner.ll"
 {yylval->string = new std::string(yytext+1, yyleng-2); return(token::STRING);} /* Quitamos las comillas */
 	YY_BREAK
-/*** FIN de las reglas léxicas ***/
+/*** FIN de las reglas lï¿½xicas ***/
 case 12:
 YY_RULE_SETUP
 #line 83 "Scanner.ll"
@@ -1953,9 +1953,9 @@ namespace Map {
 
 /**
 Debemos reimplementar CMapFlexLexer::yylex() para completar la vtable de
-CMapFlexLexer. Esta nueva definición sin embargo reporta un error ya que
-lo que haremos es definir la funcionalidad de esta función en la clase
-CScanner que heredará de CMapFlexLexer y es la que se usará. 
+CMapFlexLexer. Esta nueva definiciï¿½n sin embargo reporta un error ya que
+lo que haremos es definir la funcionalidad de esta funciï¿½n en la clase
+CScanner que heredarï¿½ de CMapFlexLexer y es la que se usarï¿½. 
 */
 
 #ifdef yylex

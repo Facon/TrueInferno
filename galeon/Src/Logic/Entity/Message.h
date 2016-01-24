@@ -5,7 +5,7 @@ Contiene el tipo de datos de un mensaje.
 
 @see Logic::TMessage
 
-@author David Llansó García
+@author David Llansï¿½ Garcï¿½a
 */
 #ifndef __Logic_Message_H
 #define __Logic_Message_H
@@ -13,6 +13,7 @@ Contiene el tipo de datos de un mensaje.
 #include <string>
 
 #include "BaseSubsystems/Math.h"
+#include "MessageHandler.h"
 
 // Predeclaraciones
 namespace Logic {
@@ -24,7 +25,7 @@ namespace Logic
 	/**
 	Namespace para los tipos de mensajes posibles.
 	*/
-	namespace Message
+	namespace TMessage
 	{
 		enum MessageType
 		{
@@ -42,61 +43,28 @@ namespace Logic
 			DAMAGED
 		};
 	}
-	
-	/**
-	Tipo copia para los mensajes. Por simplicidad.
-	*/
-	typedef Message::MessageType MessageType;
+
+    typedef TMessage::MessageType MessageType;
 
 	/**
 	Contiene el tipo de datos de un mensaje. Tiene una serie de
-	atributos genéricos que se interpretarán en función del tipo 
+	atributos genï¿½ricos que se interpretarï¿½n en funciï¿½n del tipo 
 	de mensaje.
 	<p>
 	@remarks <b>??ESTO NO ES ESCALABLE!!</b> En tu proyecto esto 
-	debería ser cambiado.
-	Lo suyo sería tener una clase CMesage base y luego clases que
-	especializasen a ésta con los atributos necesarios para el 
+	deberï¿½a ser cambiado.
+	Lo suyo serï¿½a tener una clase CMesage base y luego clases que
+	especializasen a ï¿½sta con los atributos necesarios para el 
 	mensaje concreto en vez de tener una serie de atributos
-	genéricos como es esta estructura que deben de ser interpretados
-	externamente en función del tipo de mensaje.
+	genï¿½ricos como es esta estructura que deben de ser interpretados
+	externamente en funciï¿½n del tipo de mensaje.
 	
     @ingroup logicGroup
     @ingroup entityGroup
 
-	@author David Llansó García
+	@author David Llansï¿½ Garcï¿½a
 	@date Julio, 2010
     @ingroup grupoEntidad
-	*/
-	/*
-	typedef struct
-	{
-		/**
-		Tipo del mensaje.
-		*/
-		TMessageType _type;
-
-		/**
-		Atributo para almacenar una matriz de transformación.
-		*/
-		Matrix4 _transform;
-		
-		/**
-		Atributo para almacenar un valor float.
-		*/
-		float _float;
-		
-		/**
-		Atributo para almacenar un valor booleano.
-		*/
-		bool _bool;
-		
-		/**
-		Atributo para almacenar un string.
-		*/
-		std::string _string;
-
-	} TMessage;
 	*/
 	
 	class Message
@@ -106,8 +74,8 @@ namespace Logic
 		virtual void Dispatch(MessageHandler& handler) const = 0;
 	};
 
-	// SET_TRANSFORM, SET_SCALE
-	class TransformMessage
+	// SET_TRANSFORM
+	class TransformMessage : public Message
 	{
 	public:
 		Matrix4 _transform;
@@ -117,9 +85,21 @@ namespace Logic
 			handler.HandleMessage(*this);
 		}
 	};
+
+	// SET_SCALE
+	class ScaleMessage : public Message
+	{
+	public:
+		Vector3 _scale;
+
+		virtual void Dispatch(MessageHandler& handler) const
+		{
+			handler.HandleMessage(*this);
+		}
+	};
 	
 	// SET_ANIMATION, STOP_ANIMATION
-	class AnimationMessage
+	class AnimationMessage : public Message
 	{
 	public:		
 		virtual void Dispatch(MessageHandler& handler) const
@@ -129,9 +109,12 @@ namespace Logic
 	};
 	
 	// CONTROL
-	class ControlMessage
+	class ControlMessage : public Message
 	{
 	public:
+        std::string _action;
+        float _degreesMoved;
+
 		virtual void Dispatch(MessageHandler& handler) const
 		{
 			handler.HandleMessage(*this);
@@ -139,9 +122,21 @@ namespace Logic
 	};
 	
 	// AVATAR_WALK,
-	// KINEMATIC_MOVE,
+	// KINEMATIC_MOVE
+    class MoveMessage : public Message
+    {
+    public:
+        Vector3 _point;
+
+        virtual void Dispatch(MessageHandler& handler) const
+        {
+            handler.HandleMessage(*this);
+        }
+    };
+
+
 	// TOUCHED, UNTOUCHED
-	class TouchMessage
+	class TouchMessage : public Message
 	{
 	public:
 		bool touched = false;
@@ -154,7 +149,7 @@ namespace Logic
 	
 	// SWITCH,
 	// DAMAGED
-	class DamageMessage
+	class DamageMessage : public Message
 	{
 	public:
 		unsigned int damage = 0;

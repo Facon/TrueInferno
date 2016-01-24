@@ -1,13 +1,13 @@
 /**
 @file PlayerController.cpp
 
-Contiene la implementación de la clase CPlayerController. Se encarga de
-recibir eventos del teclado y del ratón y de interpretarlos para
+Contiene la implementaciï¿½n de la clase CPlayerController. Se encarga de
+recibir eventos del teclado y del ratï¿½n y de interpretarlos para
 mover al jugador.
 
 @see GUI::CPlayerController
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 
@@ -60,26 +60,29 @@ namespace GUI {
 	{
 		if(_controlledAvatar)
 		{
-			Logic::TMessage m;
-			m._type = Logic::Message::CONTROL;
+			Logic::ControlMessage m;
+			m._type = Logic::MessageType::CONTROL;
+
 			switch(key.keyId)
 			{
 			case GUI::Key::W:
-				m._string = "walk";
+				m._action = "walk";
 				break;
 			case GUI::Key::S:
-				m._string = "walkBack";
+				m._action = "walkBack";
 				break;
 			case GUI::Key::A:
-				m._string = "strafeLeft";
+				m._action = "strafeLeft";
 				break;
 			case GUI::Key::D:
-				m._string = "strafeRight";
+				m._action = "strafeRight";
 				break;
 			default:
 				return false;
 			}
-			_controlledAvatar->emitMessage(m);
+
+            m.Dispatch(*_controlledAvatar);
+
 			return true;
 		}
 		return false;
@@ -92,24 +95,26 @@ namespace GUI {
 	{
 		if(_controlledAvatar)
 		{
-			Logic::TMessage m;
-			m._type = Logic::Message::CONTROL;
+			Logic::ControlMessage m;
+			m._type = Logic::MessageType::CONTROL;
 			switch(key.keyId)
 			{
 			case GUI::Key::W:
 			case GUI::Key::S:
-				m._string = "stopWalk";
+				m._action = "stopWalk";
 				break;
 
 			case GUI::Key::A:
 			case GUI::Key::D:
-				m._string = "stopStrafe";
+				m._action = "stopStrafe";
 				break;
 
 			default:
 				return false;
 			}
-			_controlledAvatar->emitMessage(m);
+
+            m.Dispatch(*_controlledAvatar);
+
 			return true;
 		}
 		return false;
@@ -122,12 +127,14 @@ namespace GUI {
 	{
 		if(_controlledAvatar)
 		{
-			Logic::TMessage m;
-			m._type = Logic::Message::CONTROL;
-			m._string = "turn";
-			m._float = -(float)mouseState.movX * TURN_FACTOR;
-			_controlledAvatar->emitMessage(m);
-			return true;
+			Logic::ControlMessage m;
+			m._type = Logic::MessageType::CONTROL;
+			m._action = "turn";
+			m._degreesMoved = -(float)mouseState.movX * TURN_FACTOR;
+
+            m.Dispatch(*_controlledAvatar);
+
+            return true;
 		}
 		return false;
 

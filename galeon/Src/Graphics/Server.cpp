@@ -5,12 +5,12 @@
 /**
 @file Server.cpp
 
-Contiene la implementación de la clase principal de gráficos, la que permite crear
+Contiene la implementaciï¿½n de la clase principal de grï¿½ficos, la que permite crear
 la ventana, etc.
 
 @see Graphics::CServer
 
-@author David Llansó
+@author David Llansï¿½
 @date Julio, 2010
 */
 
@@ -32,7 +32,7 @@ namespace Graphics
 
 	CServer::CServer() : _root(0), _renderWindow(0), _activeScene(0), _dummyScene(0)
 	{
-		assert(!_instance && "Segunda inicialización de Graphics::CServer no permitida!");
+		assert(!_instance && "Segunda inicializaciï¿½n de Graphics::CServer no permitida!");
 
 		_instance = this;
 
@@ -52,7 +52,7 @@ namespace Graphics
 
 	bool CServer::Init() 
 	{
-		assert(!_instance && "Segunda inicialización de Graphics::CServer no permitida!");
+		assert(!_instance && "Segunda inicializaciÃ³n de Graphics::CServer no permitida!");
 
 		new CServer();
 
@@ -177,13 +177,13 @@ namespace Graphics
 		if(scene)
 		{
 			// Sanity check. Nos aseguramos de que la escena pertenezca 
-			// al servidor. Aunque nadie más puede crear escenas...
+			// al servidor. Aunque nadie mï¿½s puede crear escenas...
 			assert((*_scenes.find(scene->getName())).second == scene && 
 				"Esta escena no pertenece al servidor");
 
 			_activeScene = scene;
 		}
-		// Si se añade NULL ponemos la escena dummy.
+		// Si se aï¿½ade NULL ponemos la escena dummy.
 		else
 			_activeScene = _dummyScene;
 

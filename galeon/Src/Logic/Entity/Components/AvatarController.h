@@ -1,39 +1,41 @@
 /**
 @file AvatarController.h
 
-Contiene la declaración del componente que controla el movimiento 
+Contiene la declaraciï¿½n del componente que controla el movimiento 
 de la entidad.
 
 @see Logic::CAvatarController
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 #ifndef __Logic_AvatarController_H
 #define __Logic_AvatarController_H
 
+#include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 
-//declaración de la clase
+//declaraciï¿½n de la clase
 namespace Logic 
 {
 /**
 	Este componente es el encargado de mover a una entidad animada. Tiene
-	diferentes métodos que permiten avances o giros. El uso de este componente
-	es un poco atípico ya que se puede registrar en otro controlador externo
-	(i.e. GUI::CPlayerController) que sea el que de las órdenes que se deben
-	llevar a cabo mediante llamadas a métodos públicos del componente. Puede
+	diferentes mï¿½todos que permiten avances o giros. El uso de este componente
+	es un poco atï¿½pico ya que se puede registrar en otro controlador externo
+	(i.e. GUI::CPlayerController) que sea el que de las ï¿½rdenes que se deben
+	llevar a cabo mediante llamadas a mï¿½todos pï¿½blicos del componente. Puede
 	no obstante ampliarse este componente para aceptar mensajes tradicionales
-	con las órdenes, sin embargo de momento así es suficiente.
+	con las ï¿½rdenes, sin embargo de momento asï¿½ es suficiente.
 	
     @ingroup logicGroup
 
-	@author David Llansó García
+	@author David Llansï¿½ Garcï¿½a
 	@date Agosto, 2010
 */
 	class CAvatarController : public IComponent
 	{
+		RTTI_DECL;
 		DEC_FACTORY(CAvatarController);
 	public:
 
@@ -45,67 +47,55 @@ namespace Logic
 			_strafingLeft(false), _strafingRight(false), _speed(0.05f) {}
 		
 		/**
-		Inicialización del componente, utilizando la información extraída de
-		la entidad leída del mapa (Maps::CEntity). Toma del mapa el atributo
-		speed que indica a la velocidad a la que se moverá el jugador.
+		Inicializaciï¿½n del componente, utilizando la informaciï¿½n extraï¿½da de
+		la entidad leï¿½da del mapa (Maps::CEntity). Toma del mapa el atributo
+		speed que indica a la velocidad a la que se moverï¿½ el jugador.
 
 		@param entity Entidad a la que pertenece el componente.
-		@param map Mapa Lógico en el que se registrará el objeto.
-		@param entityInfo Información de construcción del objeto leído del
+		@param map Mapa Lï¿½gico en el que se registrarï¿½ el objeto.
+		@param entityInfo Informaciï¿½n de construcciï¿½n del objeto leï¿½do del
 			fichero de disco.
-		@return Cierto si la inicialización ha sido satisfactoria.
+		@return Cierto si la inicializaciï¿½n ha sido satisfactoria.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
 		/**
-		Método que activa el componente; invocado cuando se activa
-		el mapa donde está la entidad a la que pertenece el componente.
+		Mï¿½todo que activa el componente; invocado cuando se activa
+		el mapa donde estï¿½ la entidad a la que pertenece el componente.
 		<p>
 		Si el componente pertenece a la entidad del jugador, el componente
-		se registra así mismo en el controlador del GUI para que las ordenes 
-		se reciban a partir de los eventos de teclado y ratón.
+		se registra asï¿½ mismo en el controlador del GUI para que las ordenes 
+		se reciban a partir de los eventos de teclado y ratï¿½n.
 
 		@return true si todo ha ido correctamente.
 		*/
 		virtual bool activate();
 		
 		/**
-		Método que desactiva el componente; invocado cuando se
-		desactiva el mapa donde está la entidad a la que pertenece el
-		componente. Se invocará siempre, independientemente de si estamos
+		Mï¿½todo que desactiva el componente; invocado cuando se
+		desactiva el mapa donde estï¿½ la entidad a la que pertenece el
+		componente. Se invocarï¿½ siempre, independientemente de si estamos
 		activados o no.
 		<p>
 		Si el componente pertenece a la entidad del jugador, el componente
-		se deregistra así mismo en el controlador del GUI para dejar de
-		recibir las ordenes dadas a partir de los eventos de teclado y ratón.
+		se deregistra asï¿½ mismo en el controlador del GUI para dejar de
+		recibir las ordenes dadas a partir de los eventos de teclado y ratï¿½n.
 		*/
 		virtual void deactivate();
 
 		/**
-		Método llamado en cada frame que actualiza el estado del componente.
+		Mï¿½todo llamado en cada frame que actualiza el estado del componente.
 		<p>
 		Se encarga de mover la entidad en cada vuelta de ciclo cuando es
-		necesario (cuando está andando o desplazándose lateralmente).
+		necesario (cuando estï¿½ andando o desplazï¿½ndose lateralmente).
 
-		@param msecs Milisegundos transcurridos desde el último tick.
+		@param msecs Milisegundos transcurridos desde el ï¿½ltimo tick.
 		*/
 		virtual void tick(unsigned int msecs);
 
 		/**
-		Método virtual que elige que mensajes son aceptados. Son válidos
+		Mï¿½todo virtual que elige que mensajes son aceptados. Son vï¿½lidos
 		CONTROL.
-
-		@param message Mensaje a chequear.
-		@return true si el mensaje es aceptado.
-		*/
-		virtual bool accept(const TMessage &message);
-
-		/**
-		Método virtual que procesa un mensaje.
-
-		@param message Mensaje a procesar.
-		*/
-		virtual void process(const TMessage &message);
 
 		/**
 		Provoca que la entidad avance.
@@ -138,7 +128,7 @@ namespace Logic
 		void stopStrafe();
 		
 		/**
-		Provoca que la entidad gire. Números Positivos para	giro a 
+		Provoca que la entidad gire. Nï¿½meros Positivos para	giro a 
 		derechas, negativos para giro izquierdas.
 
 		@param amount Cantidad de giro. Positivos giro a derechas,
@@ -149,23 +139,23 @@ namespace Logic
 	protected:
 
 		/**
-		Atributo para saber si la entidad está avanzando.
+		Atributo para saber si la entidad estï¿½ avanzando.
 		*/
 		bool _walking;
 
 		/**
-		Atributo para saber si la entidad está retrocediendo.
+		Atributo para saber si la entidad estï¿½ retrocediendo.
 		*/
 		bool _walkingBack;
 
 		/**
-		Atributo para saber si la entidad está moviendose lateralmente
+		Atributo para saber si la entidad estï¿½ moviendose lateralmente
 		a la izquierda.
 		*/
 		bool _strafingLeft;
 
 		/**
-		Atributo para saber si la entidad está moviendose lateralmente
+		Atributo para saber si la entidad estï¿½ moviendose lateralmente
 		a la derecha.
 		*/
 		bool _strafingRight;

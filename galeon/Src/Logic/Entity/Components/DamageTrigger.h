@@ -1,18 +1,19 @@
 /**
 @file DamageTrigger.h
 
-Contiene la declaración de un componente que envia un mensaje DAMAGED cuando su 
-entidad es tocada. El mensaje se envía a la entidad que se ha tocado.
+Contiene la declaraciï¿½n de un componente que envia un mensaje DAMAGED cuando su 
+entidad es tocada. El mensaje se envï¿½a a la entidad que se ha tocado.
 
 @see Logic::CDamageTrigger
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Octubre, 2010
 */
 #ifndef __Logic_DamageTrigger_H
 #define __Logic_DamageTrigger_H
 
+#include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 
 // Los componentes pertenecen al namespace Logic
@@ -20,17 +21,18 @@ namespace Logic
 {
 	/**
 	Este componente procesa mensajes de tipo TOUCHED (indican que la entidad ha 
-	sido tocada) para enviar un mensaje DAMAGED a la entidad que tocó.
+	sido tocada) para enviar un mensaje DAMAGED a la entidad que tocï¿½.
 	<p>
-	El daño que recibe la entidad se especifica en el mapa con el atributo "damage".
+	El daï¿½o que recibe la entidad se especifica en el mapa con el atributo "damage".
 	
     @ingroup logicGroup
 
-	@author David Llansó García
+	@author David Llansï¿½ Garcï¿½a
 	@date Octubre, 2010
 */
 	class CDamageTrigger: public IComponent
 	{
+		RTTI_DECL;
 		DEC_FACTORY(CDamageTrigger);
 	public:
 
@@ -40,26 +42,15 @@ namespace Logic
 		CDamageTrigger() : IComponent(), _damage(20.f) {}
 		
 		/**
-		Inicialización del componente usando la descripción de la entidad que hay en 
+		Inicializaciï¿½n del componente usando la descripciï¿½n de la entidad que hay en 
 		el fichero de mapa.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
-		/**
-		Este componente sólo acepta mensajes de tipo TOUCHED.
-		*/
-		virtual bool accept(const TMessage &message);
-
-		/**
-		Al recibir un mensaje TOUCHED se envía otro mensaje de tipo DAMAGED a la
-		entidad tocada.
-		*/
-		virtual void process(const TMessage &message);
-
 	protected:
 
 		/**
-		Daño que se produce cada vez que se toca.
+		Daï¿½o que se produce cada vez que se toca.
 		*/
 		float _damage;
 

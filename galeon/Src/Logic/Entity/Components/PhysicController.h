@@ -1,23 +1,24 @@
 /**
 @file PhysicController.h
 
-Contiene la declaración del componente que se utiliza para representar jugadores y enemigos en
-el mundo físico usando character controllers.
+Contiene la declaraciï¿½n del componente que se utiliza para representar jugadores y enemigos en
+el mundo fï¿½sico usando character controllers.
 
 @see Logic::PhysicController
 @see Logic::CPhysicEntity
 @see Logic::IPhysics
 
-@author Antonio Sánchez Ruiz-Granados
+@author Antonio Sï¿½nchez Ruiz-Granados
 @date Noviembre, 2012
 */
 
 #ifndef __Logic_PhysicController_H
 #define __Logic_PhysicController_H
 
+#include "BaseSubsystems/RTTI.h"
 #include "Physics.h"
 
-// Predeclaración de tipos
+// Predeclaraciï¿½n de tipos
 namespace physx {
 	class PxCapsuleController;
 	struct PxControllersHit;
@@ -32,25 +33,26 @@ namespace Physics {
 namespace Logic 
 {
 	/**
-	Componente que se utiliza para representar jugadores y enemigos en el mundo físico usando 
+	Componente que se utiliza para representar jugadores y enemigos en el mundo fï¿½sico usando 
 	character controllers.
 	<p>
 	Este componente recibe mensajes de tipo AVATAR_WALK indicando el movimiento que se quiere 
-	realizar. A continuación se le indica al motor de física el movimiento deseado, y en el
-	siguiente tick se actualiza la posición de la entidad lógica. Debemos tener en cuenta que 
-	la posición final la determina el motor de física, ya que durante el movimiento podemos 
+	realizar. A continuaciï¿½n se le indica al motor de fï¿½sica el movimiento deseado, y en el
+	siguiente tick se actualiza la posiciï¿½n de la entidad lï¿½gica. Debemos tener en cuenta que 
+	la posiciï¿½n final la determina el motor de fï¿½sica, ya que durante el movimiento podemos 
 	colisionar con otra entidades, resbalar sobre paredes, etc.
 	<p>
-	Este componente también simula el efecto de la gravedad sobre el jugador (los controllers
+	Este componente tambiï¿½n simula el efecto de la gravedad sobre el jugador (los controllers
 	de PhysX no se ven afectados por la gravedad).
 	
     @ingroup logicGroup
 
-	@author Antonio Sánchez Ruiz-Granados
+	@author Antonio Sï¿½nchez Ruiz-Granados
 	@date Noviembre, 2012
 	*/
 	class CPhysicController : public IPhysics
 	{
+		RTTI_DECL;
 		DEC_FACTORY(CPhysicController);
 	public:
 
@@ -70,58 +72,45 @@ namespace Logic
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
 		/**
-		Este componente sólo acepta mensajes de tipo AVATAR_WALK.
-		*/
-		virtual bool accept(const TMessage &message);
-		
-		/**
-		Cuando se recibe un mensaje de tipo AVATAR_WALK, se almacena su vector de 
-		desplazamiento para mover el character controller en el próximo tick.
-		De esta forma, si en un ciclo se reciben varios mensaje de tipo AVATAR_WALK 
-		sólo tendrá efecto el último.
-		*/
-		virtual void process(const TMessage &message);
-
-		/**
-		Este método se invoca en cada ciclo de la simulación y hace lo siguiente:
+		Este mï¿½todo se invoca en cada ciclo de la simulaciï¿½n y hace lo siguiente:
 		<ul>
-		<li> Actualiza la posición de la entidad lógica usando la información porporcionada por
-		     el motor de física. </li>
-		<li> Mueve el character controller de acuerdo al último mensaje AVATAR_WALK recibido. </li>
+		<li> Actualiza la posiciï¿½n de la entidad lï¿½gica usando la informaciï¿½n porporcionada por
+		     el motor de fï¿½sica. </li>
+		<li> Mueve el character controller de acuerdo al ï¿½ltimo mensaje AVATAR_WALK recibido. </li>
 		</ul>
 		*/
 		virtual void tick(unsigned int msecs);
 
 		/**
-		Se invoca cuando se produce una colisión entre una entidad física y un trigger.
+		Se invoca cuando se produce una colisiï¿½n entre una entidad fï¿½sica y un trigger.
 		*/
 		void  onTrigger (IPhysics *otherComponent, bool enter);
 
 		/**
-		Se invoca cuando se produce una colisión entre un character controller y una entidad física.
+		Se invoca cuando se produce una colisiï¿½n entre un character controller y una entidad fï¿½sica.
 		*/
 		void onShapeHit (const physx::PxControllerShapeHit &hit);
 
 		/**
-		Se invoca cuando se produce una colisión entre dos character controllers.
+		Se invoca cuando se produce una colisiï¿½n entre dos character controllers.
 		*/
 		void onControllerHit (const physx::PxControllersHit &hit);
 
 	private:
 
 		/**
-		Crea el character controller de PhysX que representa la entidad física a partir de la
-		información del mapa.
+		Crea el character controller de PhysX que representa la entidad fï¿½sica a partir de la
+		informaciï¿½n del mapa.
 		*/
 		physx::PxCapsuleController* createController(const Map::CEntity *entityInfo);
 
-		// Servidor de física
+		// Servidor de fï¿½sica
 		Physics::CServer *_server;
 
-		// Character controller que representa la entidad física en PhysX
+		// Character controller que representa la entidad fï¿½sica en PhysX
 		physx::PxCapsuleController *_controller;
 
-		// Vector de desplazamiento recibido en el último mensaje de tipo AVATAR_WALK. 
+		// Vector de desplazamiento recibido en el ï¿½ltimo mensaje de tipo AVATAR_WALK. 
 		Vector3 _movement;
 
 		// Indica si el character controller esta apoyado sobre una superficie o cayendo.

@@ -1,13 +1,13 @@
 /**
 @file AnimatedGraphics.cpp
 
-Contiene la implementación del componente que controla la representación
-gráfica de una entidad estática.
+Contiene la implementaciï¿½n del componente que controla la representaciï¿½n
+grï¿½fica de una entidad estï¿½tica.
  
 @see Logic::CAnimatedGraphics
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 
@@ -45,7 +45,7 @@ namespace Logic
 	} // createGraphicsEntity
 	
 	//---------------------------------------------------------
-
+	/*
 	bool CAnimatedGraphics::accept(const TMessage &message)
 	{
 		return CGraphics::accept(message) ||
@@ -64,7 +64,7 @@ namespace Logic
 		{
 		case Message::SET_ANIMATION:
 			// Paramos todas las animaciones antes de poner una nueva.
-			// Un control más sofisticado debería permitir interpolación
+			// Un control mï¿½s sofisticado deberï¿½a permitir interpolaciï¿½n
 			// de animaciones. Galeon no lo plantea.
 			_animatedGraphicsEntity->stopAllAnimations();
 			_animatedGraphicsEntity->setAnimation(message._string,message._bool);
@@ -75,12 +75,12 @@ namespace Logic
 		}
 
 	} // process
-	
+	*/
 	//---------------------------------------------------------
 	
 	void CAnimatedGraphics::animationFinished(const std::string &animation)
 	{
-		// Si acaba una animación y tenemos una por defecto la ponemos
+		// Si acaba una animaciï¿½n y tenemos una por defecto la ponemos
 		_animatedGraphicsEntity->stopAllAnimations();
 		_animatedGraphicsEntity->setAnimation(_defaultAnimation,true);
 	}

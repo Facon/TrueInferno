@@ -1,12 +1,12 @@
 /**
 @file Components/Component.cpp
 
-Contiene la implementación de la clase base de los componentes.
+Contiene la implementaciï¿½n de la clase base de los componentes.
  
 @see Logic::IComponent
 @see Logic::CCommunicationPort
 
-@author David Llansó
+@author David Llansï¿½
 @date Julio, 2010
 */
 
@@ -14,8 +14,10 @@ Contiene la implementación de la clase base de los componentes.
 
 //#include "Entity.h"
 
-namespace Logic 
+namespace Logic
 {
+	RTTI_ROOT_IMPL(IComponent);
+
 	bool IComponent::spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo) 
 	{
 		_entity = entity;

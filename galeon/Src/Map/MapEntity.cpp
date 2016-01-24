@@ -1,10 +1,10 @@
 /**
 @file Entity.cpp
 
-Contiene la implementación de la clase que representa una entidad leida 
+Contiene la implementaciï¿½n de la clase que representa una entidad leida 
 del fichero del mapa.
 
-@author David Llansó García
+@author David Llansï¿½ Garcï¿½a
 @date Agosto, 2010
 */
 #include "MapEntity.h"
@@ -84,7 +84,7 @@ namespace Map {
 			return true;
 		else if(!(*_attributes.find(attr)).second.compare("false"))
 			return false;
-		throw new std::exception("Leido archivo booleano que no es ni true ni false.");
+		throw std::runtime_error("Leido archivo booleano que no es ni true ni false.");
 
 	} // getBoolAttribute
 

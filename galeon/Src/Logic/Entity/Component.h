@@ -1,21 +1,22 @@
 /**
 @file Component.h
 
-Contiene la declaración de la clase base de los componentes.
+Contiene la declaraciï¿½n de la clase base de los componentes.
 
 @see Logic::IComponent
 @see Logic::CCommunicationPort
 
-@author David Llansó
+@author David Llansï¿½
 @date Julio, 2010
 */
 #ifndef __Logic_Component_H
 #define __Logic_Component_H
 
+#include "BaseSubsystems/RTTI.h"
 #include "CommunicationPort.h"
 #include "Logic/Maps/ComponentFactory.h"
 
-// Predeclaración de clases para ahorrar tiempo de compilación
+// Predeclaraciï¿½n de clases para ahorrar tiempo de compilaciï¿½n
 namespace Map
 {
 	class CEntity;
@@ -27,7 +28,7 @@ namespace Logic
 	class CEntity;
 }
 
-//declaración de la clase
+//declaraciï¿½n de la clase
 namespace Logic 
 {
 /**
@@ -35,51 +36,52 @@ namespace Logic
 	<p>
 	Un componente puede recibir mensajes y reaccionar ante ellos
 	enviando otros mensajes al resto de componentes hermanos o
-	realizando alguna acción sobre el entorno.
+	realizando alguna acciï¿½n sobre el entorno.
 	<p>
 	Para procesar los mensajes y para realizar cualquier otro
 	comportamiento, la entidad a la que el componente pertenece
-	invoca periódicamente a la función tick() del componente. 
-	La implementación por defecto de ese método simplemente procesa todos
+	invoca periï¿½dicamente a la funciï¿½n tick() del componente. 
+	La implementaciï¿½n por defecto de ese mï¿½todo simplemente procesa todos
 	los mensajes pendientes recibidos por el componente.
 	<p>
-	Si las clases hija sobreescriben este método, <em>son responsables</em>
-	de invocar al método de procesado de mensajes (o en su defecto al
-	método tick() de la clase padre). En caso de no hacerlo, el
-	componente <em>no procesará ningún mensaje</em>.
+	Si las clases hija sobreescriben este mï¿½todo, <em>son responsables</em>
+	de invocar al mï¿½todo de procesado de mensajes (o en su defecto al
+	mï¿½todo tick() de la clase padre). En caso de no hacerlo, el
+	componente <em>no procesarï¿½ ningï¿½n mensaje</em>.
 	<p>
-	El ciclo de vida de un componente típico viene determinado por
+	El ciclo de vida de un componente tï¿½pico viene determinado por
 	el ciclo de vida de la entidad a la que pertenece. El componente 
 	puede estar activado o desactivado:
 	<ul>
 	   <li> El componente es creado cuando se crea la entidad a la que pertenece
-	   al leer el mapa. Después de llamar al constructor de la clase
-	   se invoca al método spawn() que podrá leer los parámetros leidos del mapa
+	   al leer el mapa. Despuï¿½s de llamar al constructor de la clase
+	   se invoca al mï¿½todo spawn() que podrï¿½ leer los parï¿½metros leidos del mapa
 	   para inicializar sus atributos. En ese momento se pueden crear recursos
-	   que necesite el componente, como las entidades gráficas, físicas, etc.</li>
+	   que necesite el componente, como las entidades grï¿½ficas, fï¿½sicas, etc.</li>
 
-	   <li> El componente es <em>activado</em> llamando al método activate().
-	   Un componente se activa cuando <em>se activa el mapa donde está la
+	   <li> El componente es <em>activado</em> llamando al mï¿½todo activate().
+	   Un componente se activa cuando <em>se activa el mapa donde estï¿½ la
 	   entidad a la que pertenece</em>,
-	   es decir, cuando el motor de juego decide que se empezará a simular
+	   es decir, cuando el motor de juego decide que se empezarï¿½ a simular
 	   el entorno de ese mapa.</li>
 
 	   <li> El componente finalmente es <em>desactivado</em>, cuando el motor del
 	   juego establece que no se desea simular el entorno virtual del mapa
-	   donde está el componente. En ese caso, se invoca al método deactivate().</li>
+	   donde estï¿½ el componente. En ese caso, se invoca al mï¿½todo deactivate().</li>
 
-	   <li> Cuando se destruye el mapa cargado (típicamente al final del juego/estado
+	   <li> Cuando se destruye el mapa cargado (tï¿½picamente al final del juego/estado
 	   del juego), se invoca al destructor de la entidad.</li>
 	</ul>
 	
     @ingroup logicGroup
     @ingroup entityGroup
 
-	@author David Llansó García
+	@author David Llansï¿½ Garcï¿½a
 	@date Julio, 2010
 */
-	class IComponent : public CCommunicationPort 
+	class IComponent
 	{
+        RTTI_DECL;
 	public:
 
 		/**
@@ -93,26 +95,26 @@ namespace Logic
 		virtual ~IComponent() {}
 		
 		/**
-		Inicialización del componente, utilizando la información extraída de
-		la entidad leída del mapa (Maps::CEntity). El método es extendido
-		en las clases hijas, que hacen cosas más inteligentes, dependiendo
-		del tipo de componente concreto, pero siempre deberán invocar a esta
+		Inicializaciï¿½n del componente, utilizando la informaciï¿½n extraï¿½da de
+		la entidad leï¿½da del mapa (Maps::CEntity). El mï¿½todo es extendido
+		en las clases hijas, que hacen cosas mï¿½s inteligentes, dependiendo
+		del tipo de componente concreto, pero siempre deberï¿½n invocar a esta
 		antes de hacer nada.
 
 		@param entity Entidad a la que pertenece el componente.
-		@param map Mapa Lógico en el que se registrará el objeto.
-		@param entityInfo Información de construcción del objeto leído del
+		@param map Mapa Lï¿½gico en el que se registrarï¿½ el objeto.
+		@param entityInfo Informaciï¿½n de construcciï¿½n del objeto leï¿½do del
 			fichero de disco.
-		@return Cierto si la inicialización ha sido satisfactoria.
+		@return Cierto si la inicializaciï¿½n ha sido satisfactoria.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
 		/**
-		Método que activa el componente; invocado cuando se activa
-		el mapa donde está la entidad a la que pertenece el componente.
+		Mï¿½todo que activa el componente; invocado cuando se activa
+		el mapa donde estï¿½ la entidad a la que pertenece el componente.
 		<p>
-		La implementación registrará al componente en algunos observers en 
-		los que pueda necesitar estar registrado (como el cronómetro del 
+		La implementaciï¿½n registrarï¿½ al componente en algunos observers en 
+		los que pueda necesitar estar registrado (como el cronï¿½metro del 
 		sistema, etc.).
 
 		@return true si todo ha ido correctamente.
@@ -120,28 +122,28 @@ namespace Logic
 		virtual bool activate() {return true;}
 		
 		/**
-		Método que desactiva el componente; invocado cuando se
-		desactiva el mapa donde está la entidad a la que pertenece el
-		componente. Se invocará siempre, independientemente de si estamos
+		Mï¿½todo que desactiva el componente; invocado cuando se
+		desactiva el mapa donde estï¿½ la entidad a la que pertenece el
+		componente. Se invocarï¿½ siempre, independientemente de si estamos
 		activados o no.
 		<p>
-		La implementación eliminará al componente de algunos observers en los 
-		que pueda estar registrado (como el cronómetro del sistema, etc.).
+		La implementaciï¿½n eliminarï¿½ al componente de algunos observers en los 
+		que pueda estar registrado (como el cronï¿½metro del sistema, etc.).
 		*/
 		virtual void deactivate() {}
 
 		/**
-		Método llamado en cada frame que actualiza el estado del componente.
+		Mï¿½todo llamado en cada frame que actualiza el estado del componente.
 		<p>
-		Las clases hijas deberán sobreescribir este método con las 
+		Las clases hijas deberï¿½n sobreescribir este mï¿½todo con las 
 		instrucciones que quieran realizar cada ciclo.
 
-		@param msecs Milisegundos transcurridos desde el último tick.
+		@param msecs Milisegundos transcurridos desde el ï¿½ltimo tick.
 		*/
 		virtual void tick(unsigned int msecs);
 
 		/**
-		Método que devuelve la entidad a la que pertenece el componente.
+		Mï¿½todo que devuelve la entidad a la que pertenece el componente.
 
 		@return La entidad a la que pertenece el componente.
 		*/
@@ -155,7 +157,7 @@ namespace Logic
 		friend class CEntity;
 
 		/**
-		Método que establece la entidad a la que pertenece el componente.
+		Mï¿½todo que establece la entidad a la que pertenece el componente.
 
 		@param entity Entidad a la que pertenece el componente.
 		*/
@@ -171,14 +173,14 @@ namespace Logic
 
 
 /////////////////////////////////////////////////////////////
-// Macros para la adición de los componentes a la factoría // 
+// Macros para la adiciï¿½n de los componentes a la factorï¿½a // 
 // de componentes.                                         //
 /////////////////////////////////////////////////////////////
 	
 /** 
-Macro para la declaración de los métodos necesarios para que 
+Macro para la declaraciï¿½n de los mï¿½todos necesarios para que 
 la factoria cree nuevas instancias del tipo de componentes y 
-para que el componente se registre en la factoría.
+para que el componente se registre en la factorï¿½a.
 */
 #define DEC_FACTORY(Class) \
 public: \
@@ -187,14 +189,14 @@ public: \
 	*/ \
     static IComponent* create(); \
 	/** \
-	Registra el componente de la clase en la factoría. \
+	Registra el componente de la clase en la factorï¿½a. \
 	*/ \
 	static bool regist(); \
 
 /** 
-Macro para la implementación de los métodos necesarios para que
+Macro para la implementaciï¿½n de los mï¿½todos necesarios para que
 la factoria cree nuevas instancias del tipo de componentes y 
-para que el componente se registre en la factoría.
+para que el componente se registre en la factorï¿½a.
 */
 #define IMP_FACTORY(Class) \
 IComponent* Class::create() \
@@ -212,7 +214,7 @@ bool Class::regist() \
 }
 
 /** 
-Macro que invoca al método que registra la clase en la factoría.
+Macro que invoca al mï¿½todo que registra la clase en la factorï¿½a.
 */
 #define REG_FACTORY(Class) \
 static bool RegisteredFactory_##Class = Class::regist();

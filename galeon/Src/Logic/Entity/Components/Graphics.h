@@ -1,48 +1,50 @@
 /**
 @file Graphics.h
 
-Contiene la declaración del componente que controla la representación
-gráfica de la entidad.
+Contiene la declaraciï¿½n del componente que controla la representaciï¿½n
+grï¿½fica de la entidad.
 
 @see Logic::CGraphics
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 #ifndef __Logic_Graphics_H
 #define __Logic_Graphics_H
 
+#include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 
-// Predeclaración de clases para ahorrar tiempo de compilación
+// Predeclaraciï¿½n de clases para ahorrar tiempo de compilaciï¿½n
 namespace Graphics 
 {
 	class CEntity;
 	class CScene;
 }
 
-//declaración de la clase
+//declaraciï¿½n de la clase
 namespace Logic 
 {
 /**
-	Componente que se encarga de la representación gráfica de una entidad.
-	En concreto se encarga de las entidades con representaciones gráficas
+	Componente que se encarga de la representaciï¿½n grï¿½fica de una entidad.
+	En concreto se encarga de las entidades con representaciones grï¿½ficas
 	no animadas. Para otros tipos de representaciones hay otros componentes
-	que especializan éste (CAnimatedGraphics y CStaticGraphics).
+	que especializan ï¿½ste (CAnimatedGraphics y CStaticGraphics).
 	<p>
 	Acepta mensajes de:
-	1) cambio de posición y orientación (matriz de transformación) mediante
+	1) cambio de posiciï¿½n y orientaciï¿½n (matriz de transformaciï¿½n) mediante
 	el mensaje SET_TRANSFORM.
 	2) cambio de escala mediante el mensaje SET_SCALE.
 	
     @ingroup logicGroup
 
-	@author David Llansó García
+	@author David Llansï¿½ Garcï¿½a
 	@date Agosto, 2010
 */
 	class CGraphics : public IComponent
 	{
+		RTTI_DECL;
 		DEC_FACTORY(CGraphics);
 	public:
 
@@ -53,66 +55,50 @@ namespace Logic
 		CGraphics() : IComponent(), _graphicsEntity(0) {}
 
 		/**
-		Destructor (virtual); Quita de la escena y destruye la entidad gráfica.
+		Destructor (virtual); Quita de la escena y destruye la entidad grï¿½fica.
 		*/
 		virtual ~CGraphics();
 		
 		/**
-		Inicialización del componente, utilizando la información extraída de
-		la entidad leída del mapa (Maps::CEntity). Toma del mapa el atributo
-		model con el modelo que se deberá cargar e invoca al método virtual
-		createGraphicsEntity() para generar la entidad gráfica.
+		Inicializaciï¿½n del componente, utilizando la informaciï¿½n extraï¿½da de
+		la entidad leï¿½da del mapa (Maps::CEntity). Toma del mapa el atributo
+		model con el modelo que se deberï¿½ cargar e invoca al mï¿½todo virtual
+		createGraphicsEntity() para generar la entidad grï¿½fica.
 
 		@param entity Entidad a la que pertenece el componente.
-		@param map Mapa Lógico en el que se registrará el objeto.
-		@param entityInfo Información de construcción del objeto leído del
+		@param map Mapa Lï¿½gico en el que se registrarï¿½ el objeto.
+		@param entityInfo Informaciï¿½n de construcciï¿½n del objeto leï¿½do del
 			fichero de disco.
-		@return Cierto si la inicialización ha sido satisfactoria.
+		@return Cierto si la inicializaciï¿½n ha sido satisfactoria.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
-
-		/**
-		Método virtual que elige que mensajes son aceptados. Son válidos
-		SET_TRANSFORM y SET_SCALE.
-
-		@param message Mensaje a chequear.
-		@return true si el mensaje es aceptado.
-		*/
-		virtual bool accept(const TMessage &message);
-
-		/**
-		Método virtual que procesa un mensaje.
-
-		@param message Mensaje a procesar.
-		*/
-		virtual void process(const TMessage &message);
 
 	protected:
 
 		/**
-		Método virtual que construye la entidad gráfica de la entidad. Otros
+		Mï¿½todo virtual que construye la entidad grï¿½fica de la entidad. Otros
 		componentes pueden sobreescribirlo para inicializar otro tipo de
-		entidades gráficas (animadas, etc.).
+		entidades grï¿½ficas (animadas, etc.).
 		
-		@param entityInfo Información de construcción del objeto leído del
+		@param entityInfo Informaciï¿½n de construcciï¿½n del objeto leï¿½do del
 			fichero de disco.
-		@return Entidad gráfica creada, NULL si hubo algún problema.
+		@return Entidad grï¿½fica creada, NULL si hubo algï¿½n problema.
 		*/
 		virtual Graphics::CEntity* createGraphicsEntity(const Map::CEntity *entityInfo);
 
 		/**
-		Atributo con el nombre del modelo gráfico de la entidad.
+		Atributo con el nombre del modelo grï¿½fico de la entidad.
 		*/
 		std::string _model;
 		
 		/**
-		Entidad gráfica.
+		Entidad grï¿½fica.
 		*/
 		Graphics::CEntity *_graphicsEntity;
 
 		/**
-		Escena gráfica donde se encontrarán las representaciones gráficas de
-		las entidades. La guardamos para la destrucción de la entidad gráfica.
+		Escena grï¿½fica donde se encontrarï¿½n las representaciones grï¿½ficas de
+		las entidades. La guardamos para la destrucciï¿½n de la entidad grï¿½fica.
 		*/
 		Graphics::CScene* _scene;
 

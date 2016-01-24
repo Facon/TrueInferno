@@ -1,13 +1,13 @@
 /**
 @file Entity.h
 
-Contiene la declaración de la clase Entity, que representa una entidad
-de juego. Es una colección de componentes.
+Contiene la declaraciï¿½n de la clase Entity, que representa una entidad
+de juego. Es una colecciï¿½n de componentes.
 
 @see Logic::CEntity
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 
@@ -24,7 +24,7 @@ de juego. Es una colección de componentes.
 #include <list>
 #include <string>
 
-// Predeclaración de clases para ahorrar tiempo de compilación
+// Predeclaraciï¿½n de clases para ahorrar tiempo de compilaciï¿½n
 namespace Map
 {
 	class CEntity;
@@ -37,31 +37,31 @@ namespace Logic
 	class CEntityFactory;
 }
 
-// Declaración de la clase
+// Declaraciï¿½n de la clase
 namespace Logic 
 {
 	/**
 	Clase que representa una entidad en el entorno virtual. Las entidades
 	son meros contenedores de componentes, y su funcionamiento depende
-	de cuáles tenga. Además, la clase contiene una serie de atributos que
+	de cuï¿½les tenga. Ademï¿½s, la clase contiene una serie de atributos que
 	pueden ser accedidos desde los componentes (Id, nombre, etc.).
 	<p>
-	Tras la creación de la entidad, donde se inicializan los valores de la
-	entidad a su valor por defecto, se invocará a su método spawn() en el
-	que se inicializarán los atributos de la entidad con los valores leidos 
-	del fichero del mapa. Tras esto, en algún momento, cuando se active
-	el mapa se llamará al método activate() de la entidad. En este momento
-	los componentes harán visibles los componentes gráficos y demás ya que 
-	apartir de ahí es cuando la entidad empieza su función siendo actualizada 
+	Tras la creaciï¿½n de la entidad, donde se inicializan los valores de la
+	entidad a su valor por defecto, se invocarï¿½ a su mï¿½todo spawn() en el
+	que se inicializarï¿½n los atributos de la entidad con los valores leidos 
+	del fichero del mapa. Tras esto, en algï¿½n momento, cuando se active
+	el mapa se llamarï¿½ al mï¿½todo activate() de la entidad. En este momento
+	los componentes harï¿½n visibles los componentes grï¿½ficos y demï¿½s ya que 
+	apartir de ahï¿½ es cuando la entidad empieza su funciï¿½n siendo actualizada 
 	por el tick() en cada vuelta de bucle.
 
     @ingroup logicGroup
     @ingroup entityGroup
 
-	@author David Llansó
+	@author David Llansï¿½
 	@date Agosto, 2010
 	*/
-	class CEntity 
+	class CEntity : public MessageHandler
 	{
 	protected:
 
@@ -72,34 +72,34 @@ namespace Logic
 
 		/**
 		Constructor protegido de la clase (para crear CEntity debe
-		utilizarse la factoría CEntityFactory). El constructor
-		no hace más que poner el identificador único de la entidad
-		, pues la inicialización efectiva se hace en el método spawn().
+		utilizarse la factorï¿½a CEntityFactory). El constructor
+		no hace mï¿½s que poner el identificador ï¿½nico de la entidad
+		, pues la inicializaciï¿½n efectiva se hace en el mï¿½todo spawn().
 		
-		@param entityID Identificador único de la entidad.
+		@param entityID Identificador ï¿½nico de la entidad.
 		*/
 		CEntity(TEntityID entityID);
 
 		/**
-		Destructor de la clase. Es un método protegido pues para
-		eliminar CEntity debe utilizarse la factoría
+		Destructor de la clase. Es un mï¿½todo protegido pues para
+		eliminar CEntity debe utilizarse la factorï¿½a
 		CEntityFactory. El destructor invoca al destructor de
 		cada componente.
-		Cuando el destructor es invocado, éste _ya ha sido desenganchado
-		del mapa al que perteneció_, por lo que los destructores de los
+		Cuando el destructor es invocado, ï¿½ste _ya ha sido desenganchado
+		del mapa al que perteneciï¿½_, por lo que los destructores de los
 		componentes no pueden utilizar el mapa.
 		*/
 		~CEntity();
 
 		/**
-		Inicialización del objeto Logic, utilizando la información extraída de
-		la entidad leída del mapa (Map::CEntity). Avisará a los componentes
+		Inicializaciï¿½n del objeto Logic, utilizando la informaciï¿½n extraï¿½da de
+		la entidad leï¿½da del mapa (Map::CEntity). Avisarï¿½ a los componentes
 		de la entidad para que se inicialicen.
 
-		@param map Mapa Logic en el que se registrará la entidad.
-		@param entity Información de construcción de la entidad leída del
+		@param map Mapa Logic en el que se registrarï¿½ la entidad.
+		@param entity Informaciï¿½n de construcciï¿½n de la entidad leï¿½da del
 		fichero de disco.
-		@return Cierto si la inicialización ha sido satisfactoria.
+		@return Cierto si la inicializaciï¿½n ha sido satisfactoria.
 		*/
 		bool spawn(CMap *map, const Map::CEntity *entity);
 
@@ -108,7 +108,7 @@ namespace Logic
 		/**
 		Activa la entidad. Esto significa que el mapa ha sido activado.
 		<p>
-		El método llama al activate() de todos los componentes para que
+		El mï¿½todo llama al activate() de todos los componentes para que
 		se den por enterados y hagan lo que necesiten.
 		 
 		@return Devuelve true si todo fue bien.
@@ -118,68 +118,76 @@ namespace Logic
 		/**
 		Desactiva la entidad. Esto significa que el mapa ha sido desactivado.
 		<p>
-		El método llama al deactivate() de todos los componentes para que
+		El mï¿½todo llama al deactivate() de todos los componentes para que
 		se den por enterados y hagan lo que necesiten.
 		*/
 		void deactivate();
 
 		/**
-		Función llamada en cada frame para que se realicen las funciones
-		de actualización adecuadas.
+		Funciï¿½n llamada en cada frame para que se realicen las funciones
+		de actualizaciï¿½n adecuadas.
 		<p>
-		Llamará a los métodos tick() de todos sus componentes.
+		Llamarï¿½ a los mï¿½todos tick() de todos sus componentes.
 
-		@param msecs Milisegundos transcurridos desde el último tick.
+		@param msecs Milisegundos transcurridos desde el ï¿½ltimo tick.
 		*/
 		void tick(unsigned int msecs);
 
 		/**
-		Método que añade un nuevo componente a la lista de la entidad.
+		Mï¿½todo que aï¿½ade un nuevo componente a la lista de la entidad.
 
-		@param component Componente a añadir.
+		@param component Componente a aï¿½adir.
 		*/
 		void addComponent(IComponent* component);
 
 		/**
-		Método que quita un componente de la lista.
+		Mï¿½todo que quita un componente de la lista.
 
 		El componente es eliminado de la lista de componentes de la
 		entidad, pero <b>no</b> es desactivado ni eliminado (con delete);
 		la responsabilidad de esa tarea se deja al invocante.
 
 		@param component Componente a borrar.
-		@return true si se borró el componente (false si el componente
+		@return true si se borrï¿½ el componente (false si el componente
 		no estaba en el objeto).
 		*/
 		bool removeComponent(IComponent* component);
 		
 		/**
-		Método que destruye todos los componentes de una entidad.
+		Mï¿½todo que destruye todos los componentes de una entidad.
 		*/
 		void destroyAllComponents();
 
 		/**
 		Recibe un mensaje que envia a todos los componentes de la lista menos 
-		al componente que lo envia, si éste se especifica en el segundo campo.
+		al componente que lo envia, si ï¿½ste se especifica en el segundo campo.
 
 		@param message Mensaje a enviar.
-		@param emitter Componente emisor, si lo hay. No se le enviará el mensaje.
-		@return true si al menos un componente aceptó el mensaje
+		@param emitter Componente emisor, si lo hay. No se le enviarï¿½ el mensaje.
+		@return true si al menos un componente aceptï¿½ el mensaje
 		*/
-		bool emitMessage(const TMessage &message, IComponent* emitter = 0);
+		//bool emitMessage(const Message &message, IComponent* emitter = 0);
+
+		// Para tipo de mensaje se hace la gestiÃ³n apropiada.
+		bool HandleMessage(const TransformMessage& msg);
+		bool HandleMessage(const ScaleMessage& msg);
+		bool HandleMessage(const AnimationMessage& msg);
+		bool HandleMessage(const ControlMessage& msg);
+		bool HandleMessage(const TouchMessage& msg);
+		bool HandleMessage(const DamageMessage& msg);
 
 		/**
-		Devuelve el identificador único de la entidad.
+		Devuelve el identificador ï¿½nico de la entidad.
 
 		@return Identificador.
 		*/
 		Logic::TEntityID getEntityID() const { return _entityID; }
 
 		/**
-		Método que indica si la entidad es o no el jugador.
+		Mï¿½todo que indica si la entidad es o no el jugador.
 		Seguro que hay formas mejores desde el punto de vista de
-		diseño de hacerlo, pero esta es la más rápida: la entidad 
-		con la descripción de la entidad tiene esta descripción que
+		diseï¿½o de hacerlo, pero esta es la mï¿½s rï¿½pida: la entidad 
+		con la descripciï¿½n de la entidad tiene esta descripciï¿½n que
 		establece en el spawn().
 		
 		@return true si la entidad es el jugador.
@@ -187,14 +195,14 @@ namespace Logic
 		bool isPlayer() { return _isPlayer; }
 
 		/**
-		Devuelve el mapa donde está la entidad.
+		Devuelve el mapa donde estï¿½ la entidad.
 
 		@return Puntero al mapa que contiene la entidad.
 		*/
 		CMap *getMap() { return _map; }
 
 		/**
-		Devuelve el mapa donde está la entidad.
+		Devuelve el mapa donde estï¿½ la entidad.
 
 		@return Puntero al mapa que contiene la entidad.
 		*/
@@ -216,41 +224,41 @@ namespace Logic
 		const std::string &getType() const { return _type; }
 
 		/**
-		Establece la matriz de transformación de la entidad. Avisa a los 
+		Establece la matriz de transformaciï¿½n de la entidad. Avisa a los 
 		componentes del cambio.
 
-		@param transform Nueva matriz de transformación de la entidad.
+		@param transform Nueva matriz de transformaciï¿½n de la entidad.
 		*/
 		void setTransform(const Matrix4& transform);
 
 		/**
-		Devuelve la metriz de transformación de la entidad.
+		Devuelve la metriz de transformaciï¿½n de la entidad.
 		<p>
-		La posición es inicialmente leída del mapa (si no aparece,
-		se colocará a (0, 0, 0)) y la orientación es también inicialmente 
-		leída del mapa, como un simple viraje (si no aparece, se colocará 
+		La posiciï¿½n es inicialmente leï¿½da del mapa (si no aparece,
+		se colocarï¿½ a (0, 0, 0)) y la orientaciï¿½n es tambiï¿½n inicialmente 
+		leï¿½da del mapa, como un simple viraje (si no aparece, se colocarï¿½ 
 		a 0). Obviamente, pueden cambiar con el tiempo.
 
-		@return Matriz de transformación de la entidad en el entorno.
+		@return Matriz de transformaciï¿½n de la entidad en el entorno.
 		*/
 		Matrix4 getTransform() const { return _transform; }
 
 		/**
-		Establece la posición de la entidad. Avisa a los componentes
+		Establece la posiciï¿½n de la entidad. Avisa a los componentes
 		del cambio.
 
-		@param position Nueva posición.
+		@param position Nueva posiciï¿½n.
 		*/
 		void setPosition(const Vector3 &position, IComponent* invoker = 0);
 
 		/**
-		Devuelve la posición de la entidad.
+		Devuelve la posiciï¿½n de la entidad.
 		<p>
-		La posición es inicialmente leída del mapa (si no aparece,
-		se colocará a (0, 0, 0)), aunque, obviamente, puede
+		La posiciï¿½n es inicialmente leï¿½da del mapa (si no aparece,
+		se colocarï¿½ a (0, 0, 0)), aunque, obviamente, puede
 		cambiar con el tiempo.
 
-		@return Posición de la entidad en el entorno.
+		@return Posiciï¿½n de la entidad en el entorno.
 		*/
 		Vector3 getPosition() const { return _transform.getTrans(); }
 
@@ -265,8 +273,8 @@ namespace Logic
 		/**
 		Devuelve la escala de la entidad.
 		<p>
-		La escala es inicialmente leída del mapa (si no aparece,
-		será la original de la malla), aunque, obviamente, puede
+		La escala es inicialmente leï¿½da del mapa (si no aparece,
+		serï¿½ la original de la malla), aunque, obviamente, puede
 		cambiar con el tiempo.
 
 		@return Escala de la entidad.
@@ -274,21 +282,21 @@ namespace Logic
 		Vector3 getScale() const { return _scale; };
 
 		/**
-		Establece la orientación de la entidad. Avisa a los componentes
+		Establece la orientaciï¿½n de la entidad. Avisa a los componentes
 		del cambio.
 
-		@param pos Nueva orientación.
+		@param pos Nueva orientaciï¿½n.
 		*/
 		void setOrientation(const Matrix3& orientation);
 
 		/**
-		Devuelve la matriz de rotación de la entidad.
+		Devuelve la matriz de rotaciï¿½n de la entidad.
 		<p>
-		La orientación es inicialmente leída del mapa como un simple 
-		viraje (si no aparece, se colocará a 0), aunque, obviamente, puede
+		La orientaciï¿½n es inicialmente leï¿½da del mapa como un simple 
+		viraje (si no aparece, se colocarï¿½ a 0), aunque, obviamente, puede
 		cambiar con el tiempo.
 
-		@return Orientación en el entorno.
+		@return Orientaciï¿½n en el entorno.
 		*/
 		Matrix3 getOrientation() const;
 
@@ -310,8 +318,8 @@ namespace Logic
 		/**
 		Devuelve el viraje de la entidad.
 		<p>
-		La orientación es inicialmente leída del mapa como un simple 
-		viraje (si no aparece, se colocará a 0), aunque, obviamente, puede
+		La orientaciï¿½n es inicialmente leï¿½da del mapa como un simple 
+		viraje (si no aparece, se colocarï¿½ a 0), aunque, obviamente, puede
 		cambiar con el tiempo.
 
 		@return Viraje en el entorno.
@@ -321,7 +329,7 @@ namespace Logic
 		/**
 		Indica si la entidad se encuentra activa.
 
-		@return true si la entidad está activa.
+		@return true si la entidad estï¿½ activa.
 		*/
 		bool isActivated() {return _activated;}
 
@@ -334,7 +342,7 @@ namespace Logic
 		friend class CMap;
 
 		/**
-		Identificador único de la entidad.
+		Identificador ï¿½nico de la entidad.
 		*/
 		Logic::TEntityID _entityID;
 
@@ -349,7 +357,7 @@ namespace Logic
 		TComponentList _components;
 
 		/**
-		Indica si la entidad está activa.
+		Indica si la entidad estï¿½ activa.
 		*/
 		bool _activated;
 
@@ -364,22 +372,22 @@ namespace Logic
 		std::string _name;
 
 		/**
-		Mapa lógico donde está la entidad.
+		Mapa lï¿½gico donde estï¿½ la entidad.
 		*/
 		Logic::CMap *_map;
 
 		/**
-		Matriz de transformación de la entidad. Contiene posición y orientación.
+		Matriz de transformaciï¿½n de la entidad. Contiene posiciï¿½n y orientaciï¿½n.
 		*/
 		Matrix4 _transform;
 
 		/*
-		Posición de la entidad.
+		Posiciï¿½n de la entidad.
 		*
 		Vector3 _position;
 
 		/*
-		Orientación de la entidad.
+		Orientaciï¿½n de la entidad.
 		*
 		float _orientation;
 

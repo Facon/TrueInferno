@@ -5,12 +5,12 @@
 /**
 @file GameOverState.cpp
 
-Contiene la implementación del estado de game over.
+Contiene la implementaciï¿½n del estado de game over.
 
 @see Application::CApplicationState
 @see Application::CGameOverState
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 
@@ -18,10 +18,17 @@ Contiene la implementación del estado de game over.
 
 #include "GUI/Server.h"
 
+#ifdef _WIN32
 #include <CEGUISystem.h>
 #include <CEGUIWindowManager.h>
 #include <CEGUIWindow.h>
 #include <elements/CEGUIPushButton.h>
+#else
+#include <CEGUI/System.h>
+#include <CEGUI/WindowManager.h>
+#include <CEGUI/Window.h>
+#include <CEGUI/widgets/PushButton.h>
+#endif
 
 namespace Application {
 
@@ -35,14 +42,25 @@ namespace Application {
 	{
 		CApplicationState::init();
 
-		// Cargamos la ventana que muestra el menú
+        #ifdef _WIN32
+		// Cargamos la ventana que muestra el menï¿½
 		CEGUI::WindowManager::getSingletonPtr()->loadWindowLayout("GameOver.layout");
 		_gameOverWindow = CEGUI::WindowManager::getSingleton().getWindow("GameOver");
-		
+
 		CEGUI::WindowManager::getSingleton().getWindow("GameOver/Exit")->
 			subscribeEvent(CEGUI::PushButton::EventClicked, 
 				CEGUI::SubscriberSlot(&CGameOverState::exitReleased, this));
-	
+
+        #else
+        // TODO Posible error AquÃ­ para cuando el personaje muera.
+        _gameOverWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("GameOver.layout");
+
+        _gameOverWindow->getChildElement("Exit")->
+                subscribeEvent(CEGUI::PushButton::EventClicked,
+                               CEGUI::SubscriberSlot(&CGameOverState::exitReleased, this));
+
+        #endif
+
 		return true;
 
 	} // init
@@ -61,25 +79,40 @@ namespace Application {
 	{
 		CApplicationState::activate();
 
-		// Activamos la ventana que nos muestra el menú y activamos el ratón.
-		CEGUI::System::getSingletonPtr()->setGUISheet(_gameOverWindow);
+		// Activamos la ventana que nos muestra el menï¿½ y activamos el ratï¿½n.
+        #ifdef _WIN32
+        CEGUI::System::getSingletonPtr()->setGUISheet(_gameOverWindow);
 		_gameOverWindow->setVisible(true);
 		_gameOverWindow->activate();
 		CEGUI::MouseCursor::getSingleton().show();
 
+        #else
+        CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_gameOverWindow);
+        _gameOverWindow->setVisible(true);
+        _gameOverWindow->activate();
+        CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().show();
+        #endif
 	} // activate
 
 	//--------------------------------------------------------
 
 	void CGameOverState::deactivate() 
-	{		
-		// Desactivamos la ventana GUI con el menú y el ratón.
+	{
+        #ifdef _WIN32
+		// Desactivamos la ventana GUI con el menï¿½ y el ratï¿½n.
 		CEGUI::MouseCursor::getSingleton().hide();
 		_gameOverWindow->deactivate();
 		_gameOverWindow->setVisible(false);
 		
 		CApplicationState::deactivate();
 
+        #else
+        CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().hide();
+        _gameOverWindow->deactivate();
+        _gameOverWindow->setVisible(false);
+
+        CApplicationState::deactivate();
+        #endif
 	} // deactivate
 
 	//--------------------------------------------------------

@@ -1,21 +1,22 @@
 /**
 @file SwitchTrigger.h
 
-Contiene la declaración del componente que envia un mensaje SWITCH a otra
+Contiene la declaraciï¿½n del componente que envia un mensaje SWITCH a otra
 entidad cuando recibe un mensaje TOUCHED / UNTOUCHED.
 
 @see Logic::CSwitchTrigger
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Octubre, 2010
 */
 #ifndef __Logic_SwitchTrigger_H
 #define __Logic_SwitchTrigger_H
 
+#include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 
-//declaración de la clase
+//declaraciï¿½n de la clase
 namespace Logic 
 {
 /**
@@ -28,11 +29,12 @@ namespace Logic
 	
     @ingroup logicGroup
 
-	@author David Llansó García
+	@author David Llansï¿½ Garcï¿½a
 	@date Octubre, 2010
 */
 	class CSwitchTrigger : public IComponent
 	{
+        RTTI_DECL;
 		DEC_FACTORY(CSwitchTrigger);
 	public:
 
@@ -42,31 +44,20 @@ namespace Logic
 		CSwitchTrigger() : IComponent(), _targetName(""), _target(0) {}
 		
 		/**
-		Inicialización del componente usando la descripción de la entidad que hay en 
+		Inicializaciï¿½n del componente usando la descripciï¿½n de la entidad que hay en 
 		el fichero de mapa.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
 		/**
-		Método que se invoca para activar el componente.
+		Mï¿½todo que se invoca para activar el componente.
 		*/
 		virtual bool activate();
 		
 		/**
-		Método que se invoca al desactivar el componente.
+		Mï¿½todo que se invoca al desactivar el componente.
 		*/
 		virtual void deactivate();
-
-		/**
-		Este componente sólo acepta mensaje de tipos TOUCHED y UNTOUCHED.
-		*/
-		virtual bool accept(const TMessage &message);
-
-		/**
-		Al recibir mensaje TOUCHED y UNTOUCHED emite mensajes SWITCH
-		a la entidad objetivo para que cambie de posición.
-		*/
-		virtual void process(const TMessage &message);
 
 	protected:
 

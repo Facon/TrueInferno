@@ -11,7 +11,7 @@ Contiene el codigo autogenerado del scanner léxico de Flex.
 
 #include <string>
 
-#include "Scanner.h"
+#include "scanner.h"
 
 #include <stdio.h>
 #include "Parser.h"

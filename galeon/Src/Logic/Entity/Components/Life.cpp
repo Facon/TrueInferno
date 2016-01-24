@@ -1,12 +1,12 @@
 /**
 @file Life.cpp
 
-Contiene la implementación del componente que controla la vida de una entidad.
+Contiene la implementaciï¿½n del componente que controla la vida de una entidad.
  
 @see Logic::CLife
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Octubre, 2010
 */
 
@@ -19,6 +19,7 @@ Contiene la implementación del componente que controla la vida de una entidad.
 
 namespace Logic 
 {
+	RTTI_ROOT_IMPL(CLife);
 	IMP_FACTORY(CLife);
 	
 	//---------------------------------------------------------
@@ -36,8 +37,8 @@ namespace Logic
 	} // spawn
 	
 	//---------------------------------------------------------
-
-	bool CLife::accept(const TMessage &message)
+	/*
+	bool CLife::accept(const Message &message)
 	{
 		return message._type == Message::DAMAGED;
 
@@ -45,7 +46,7 @@ namespace Logic
 	
 	//---------------------------------------------------------
 
-	void CLife::process(const TMessage &message)
+	void CLife::process(const Message &message)
 	{
 		switch(message._type)
 		{
@@ -59,15 +60,14 @@ namespace Logic
 				if ((_life <= 0) && (_entity->isPlayer())) {
 					Application::CBaseApplication::getSingletonPtr()->setState("menu");
 				}
-				// @todo Poner la animación de herido.
-				// @todo Si la vida es menor que 0 poner animación de morir.
+				// @todo Poner la animaciï¿½n de herido.
+				// @todo Si la vida es menor que 0 poner animaciï¿½n de morir.
 
 			}
 			break;
 		}
 
 	} // process
-
-
+	*/
 } // namespace Logic
 

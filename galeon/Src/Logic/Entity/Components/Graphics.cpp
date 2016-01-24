@@ -1,13 +1,13 @@
 /**
 @file Graphics.cpp
 
-Contiene la implementación del componente que controla la representación
-gráfica de la entidad.
+Contiene la implementaciï¿½n del componente que controla la representaciï¿½n
+grï¿½fica de la entidad.
  
 @see Logic::CGraphics
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 
@@ -23,6 +23,7 @@ gráfica de la entidad.
 
 namespace Logic 
 {
+	RTTI_ROOT_IMPL(CGraphics);
 	IMP_FACTORY(CGraphics);
 	
 	//---------------------------------------------------------

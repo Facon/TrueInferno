@@ -1,46 +1,48 @@
 /**
 @file AnimatedGraphics.h
 
-Contiene la declaración del componente que controla la representación
-gráfica de una entidad estática.
+Contiene la declaraciï¿½n del componente que controla la representaciï¿½n
+grï¿½fica de una entidad estï¿½tica.
 
 @see Logic::CAnimatedGraphics
 @see Logic::CGraphics
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 #ifndef __Logic_AnimatedGraphics_H
 #define __Logic_AnimatedGraphics_H
 
+#include "BaseSubsystems/RTTI.h"
 #include "Graphics.h"
 #include "Graphics/AnimatedEntity.h"
 
-// Predeclaración de clases para ahorrar tiempo de compilación
+// Predeclaraciï¿½n de clases para ahorrar tiempo de compilaciï¿½n
 namespace Graphics 
 {
 	class CAnimatedEntity;
 }
 
-//declaración de la clase
+//declaraciï¿½n de la clase
 namespace Logic 
 {
 /**
-	Componente que se encarga de la representación gráfica animada de una 
-	entidad. Especializa a la clase CGraphics para que la entidad gráfica
+	Componente que se encarga de la representaciï¿½n grï¿½fica animada de una 
+	entidad. Especializa a la clase CGraphics para que la entidad grï¿½fica
 	creada sea animada.
 	<p>
-	Además de los mensajes de cambio de posición y de cambio de orientación
-	que acepta CGraphics, acepta mensajes para poner o para una animación
+	Ademï¿½s de los mensajes de cambio de posiciï¿½n y de cambio de orientaciï¿½n
+	que acepta CGraphics, acepta mensajes para poner o para una animaciï¿½n
 	(SET_ANIMATION y STOP_ANIMATION).
 	
     @ingroup logicGroup
 
-	@author David Llansó García
+	@author David Llansï¿½ Garcï¿½a
 	@date Agosto, 2010
 */
 	class CAnimatedGraphics : public CGraphics, public Graphics::CAnimatedEntityListener
 	{
+		RTTI_DECL;
 		DEC_FACTORY(CAnimatedGraphics);
 	public:
 
@@ -50,53 +52,37 @@ namespace Logic
 		*/
 		CAnimatedGraphics() : CGraphics(), _animatedGraphicsEntity(0),
 				_defaultAnimation("") {}
-
-		/**
-		Método virtual que elige que mensajes son aceptados. Son válidos
-		SET_ANIMATION y STOP_ANIMATION.
-
-		@param message Mensaje a chequear.
-		@return true si el mensaje es aceptado.
-		*/
-		virtual bool accept(const TMessage &message);
-
-		/**
-		Método virtual que procesa un mensaje.
-
-		@param message Mensaje a procesar.
-		*/
-		virtual void process(const TMessage &message);
 		
 		////////////////////////////////////////
-		// Métodos de CAnimatedEntityListener //
+		// Mï¿½todos de CAnimatedEntityListener //
 		////////////////////////////////////////
 		/**
-		Método que será invocado siempre que se termine una animación.
-		Las animaciones en cíclicas no invocarán nunca este método.
+		Mï¿½todo que serï¿½ invocado siempre que se termine una animaciï¿½n.
+		Las animaciones en cï¿½clicas no invocarï¿½n nunca este mï¿½todo.
 
-		@param animation Nombre de la animación terminada.
+		@param animation Nombre de la animaciï¿½n terminada.
 		*/
 		void animationFinished(const std::string &animation);
 
 	protected:
 
 		/**
-		Método virtual que construye la entidad gráfica animada de la entidad. 
-		Sobreescribe el método de la clase CGraphics.
+		Mï¿½todo virtual que construye la entidad grï¿½fica animada de la entidad. 
+		Sobreescribe el mï¿½todo de la clase CGraphics.
 		
-		@param entityInfo Información de construcción del objeto leído del
+		@param entityInfo Informaciï¿½n de construcciï¿½n del objeto leï¿½do del
 			fichero de disco.
-		@return Entidad gráfica creada, NULL si hubo algún problema.
+		@return Entidad grï¿½fica creada, NULL si hubo algï¿½n problema.
 		*/
 		virtual Graphics::CEntity* createGraphicsEntity(const Map::CEntity *entityInfo);
 		
 		/**
-		Entidad gráfica animada.
+		Entidad grï¿½fica animada.
 		*/
 		Graphics::CAnimatedEntity *_animatedGraphicsEntity;
 
 		/**
-		Animación por defecto de una entidad gráfica animada.
+		Animaciï¿½n por defecto de una entidad grï¿½fica animada.
 		*/
 		std::string _defaultAnimation;
 

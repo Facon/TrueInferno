@@ -5,21 +5,22 @@
 /**
 @file Scene.h
 
-Contiene la declaración de la clase contenedora de los elementos
+Contiene la declaraciï¿½n de la clase contenedora de los elementos
 de una escena.
 
 @see Graphics::CScene
 
-@author David Llansó
+@author David Llansï¿½
 @date Julio, 2010
 */
 
 #ifndef __Graphics_Scene_H
 #define __Graphics_Scene_H
 
+#include <string>
 #include <list>
 
-// Predeclaración de clases para ahorrar tiempo de compilación
+// Predeclaraciï¿½n de clases para ahorrar tiempo de compilaciï¿½n
 namespace Ogre 
 {
 	class Root;
@@ -40,35 +41,35 @@ namespace Graphics
 {
 	/**
 	Clase que controla todos los elementos de una escena. Puede ser de 
-	un estado como el menú o un nivel del juego. Su equivalente en la 
-	lógica del juego en el caso de ser un nivel sería el mapa. la escena 
-	es un contenedor de todas las entidades gráficas que pueden ser 
+	un estado como el menï¿½ o un nivel del juego. Su equivalente en la 
+	lï¿½gica del juego en el caso de ser un nivel serï¿½a el mapa. la escena 
+	es un contenedor de todas las entidades grï¿½ficas que pueden ser 
 	reenderizadas por un viewport asociado a esa escena. Se asume que una
 	escena solo va a ser reenderizada desde un punto de vista por lo que
-	por defecto se crea una única cámara y cuando se activa la escena se
-	crea un único viewport mostrado en la totalidad de la ventana de 
-	reenderizado. En función del tipo de juego puede quererse hacer más de
+	por defecto se crea una ï¿½nica cï¿½mara y cuando se activa la escena se
+	crea un ï¿½nico viewport mostrado en la totalidad de la ventana de 
+	reenderizado. En funciï¿½n del tipo de juego puede quererse hacer mï¿½s de
 	un reenderizado de la misma escena a la vez y mostrarlo en diferentes 
 	viewports en la ventana. Por ejemplo en un juego de coches para mostrar
 	la imagen de los retrovisores del coche.
 	<p>
-	Trás crear la escena se deben añadir las diferentes entidades y 
-	entidades estáticas. Al añadir las entidades a la escena se fuerza su
-	carga. Las entidades estáticas se almacenan en una estructura. Una vez 
-	añadidas todas las entidades se debe crear la geometría estática ya 
+	Trï¿½s crear la escena se deben aï¿½adir las diferentes entidades y 
+	entidades estï¿½ticas. Al aï¿½adir las entidades a la escena se fuerza su
+	carga. Las entidades estï¿½ticas se almacenan en una estructura. Una vez 
+	aï¿½adidas todas las entidades se debe crear la geometrï¿½a estï¿½tica ya 
 	que hasta que no se invoque a buildStaticGeometry() las entidades no
-	pasarán a formar parte de la geometría estática. Al activar la escena
-	se fuerza la creación de la geometría estática si no se había creado.
+	pasarï¿½n a formar parte de la geometrï¿½a estï¿½tica. Al activar la escena
+	se fuerza la creaciï¿½n de la geometrï¿½a estï¿½tica si no se habï¿½a creado.
 	<p>
 	@remarks Una vez activada la escena las modificaciones realizadas en
-	los valores de las entidades estáticas no tendrán efecto.
+	los valores de las entidades estï¿½ticas no tendrï¿½n efecto.
 	<p>
-	@remarks Solo el servidor gráfico (Graphics::CServer) puede crear o 
+	@remarks Solo el servidor grï¿½fico (Graphics::CServer) puede crear o 
 	liberar escenas.
 	
 	@ingroup graphicsGroup
 
-	@author David Llansó
+	@author David Llansï¿½
 	@date Julio, 2010
 	*/
 	class CScene 
@@ -76,9 +77,9 @@ namespace Graphics
 	public:
 
 		/**
-		Devuelve la cámara de la escena.
+		Devuelve la cï¿½mara de la escena.
 
-		@return Puntero a la cámara de la escena.
+		@return Puntero a la cï¿½mara de la escena.
 		*/
 		CCamera *getCamera() {return _camera;}
 
@@ -90,47 +91,47 @@ namespace Graphics
 		const std::string& getName() {return _name;}
 
 		/**
-		Añade una entidad gráfica a la escena.
+		Aï¿½ade una entidad grï¿½fica a la escena.
 		<p>
 		@remarks La escena NO se hace responsable de destruir la
 		entidad.
 
-		@param entity Entidad gráfica que se quiere añadir a la escena.
-		@return Cierto si la entidad se añadió y cargó correctamente.
+		@param entity Entidad grï¿½fica que se quiere aï¿½adir a la escena.
+		@return Cierto si la entidad se aï¿½adiï¿½ y cargï¿½ correctamente.
 		*/
 		bool addEntity(CEntity* entity);
 
 		/**
-		Añade una entidad gráfica estática a la escena. No sirve
+		Aï¿½ade una entidad grï¿½fica estï¿½tica a la escena. No sirve
 		addEntity porque estas entidades deben ser almacenadas en otra
-		lista para cuando se cree la geometría estática de la escena poder 
+		lista para cuando se cree la geometrï¿½a estï¿½tica de la escena poder 
 		recuperarlas y cargarlas.
 		<p>
 		@remarks La escena NO se hace responsable de destruir la
 		entidad.
 
-		@param entity Entidad gráfica que se quiere añadir a la escena.
-		@return Cierto si la entidad se añadió y cargó correctamente.
+		@param entity Entidad grï¿½fica que se quiere aï¿½adir a la escena.
+		@return Cierto si la entidad se aï¿½adiï¿½ y cargï¿½ correctamente.
 		*/
 		bool addStaticEntity(CStaticEntity* entity);
 
 		/**
-		Elimina una entidad gráfica de la escena. 
+		Elimina una entidad grï¿½fica de la escena. 
 		<p>
-		@remarks Este método NO destrulle la entidad, ésta solo deja de
+		@remarks Este mï¿½todo NO destrulle la entidad, ï¿½sta solo deja de
 		ser parte de la escena.
 
-		@param entity Entidad gráfica que se quiere eliminar de la escena.
+		@param entity Entidad grï¿½fica que se quiere eliminar de la escena.
 		*/
 		void removeEntity(CEntity* entity);
 
 		/**
-		Elimina una entidad gráfica estática de la escena. 
+		Elimina una entidad grï¿½fica estï¿½tica de la escena. 
 		<p>
-		@remarks Este método NO destrulle la entidad, ésta solo deja de
+		@remarks Este mï¿½todo NO destrulle la entidad, ï¿½sta solo deja de
 		ser parte de la escena.
 
-		@param entity Entidad gráfica estática que se quiere eliminar de 
+		@param entity Entidad grï¿½fica estï¿½tica que se quiere eliminar de 
 		la escena.
 		*/
 		void removeStaticEntity(CStaticEntity* entity);
@@ -138,7 +139,7 @@ namespace Graphics
 	protected:
 
 		/**
-		Clase amiga. Solo el servidor gráfico puede crear o liberar escenas, 
+		Clase amiga. Solo el servidor grï¿½fico puede crear o liberar escenas, 
 		activarlas o desactivarlas y actualizar su estado.
 		*/
 		friend class CServer;
@@ -149,7 +150,7 @@ namespace Graphics
 		CScene(const std::string& name);
 
 		/**
-		Destructor de la aplicación.
+		Destructor de la aplicaciï¿½n.
 		*/
 		virtual ~CScene();
 
@@ -169,23 +170,23 @@ namespace Graphics
 		Actualiza el estado de la escena cada ciclo. Llama a su vez a 
 		todas las entidades.
 		
-		@param secs Número de segundos transcurridos desde la última 
+		@param secs Nï¿½mero de segundos transcurridos desde la ï¿½ltima 
 		llamada.
 		*/
 		void tick(float secs);
 
 		/**
-		Añade las entidades estáticas a la geometría estática del nivel
-		y la construlle. Si la geometría estática ya ha sido construida
+		Aï¿½ade las entidades estï¿½ticas a la geometrï¿½a estï¿½tica del nivel
+		y la construlle. Si la geometrï¿½a estï¿½tica ya ha sido construida
 		no se vuelve a construir.
 		<p>
-		@remarks Una vez construida la geometría estática no se pueden 
-		modificar los valores de las entidades estáticas.
+		@remarks Una vez construida la geometrï¿½a estï¿½tica no se pueden 
+		modificar los valores de las entidades estï¿½ticas.
 		*/
 		void buildStaticGeometry();
 
 		/**
-		Clase amiga. Solo las entidades y la cámara pueden acceder al 
+		Clase amiga. Solo las entidades y la cï¿½mara pueden acceder al 
 		gestor de la escena de Ogre.
 		*/
 		friend class CEntity;
@@ -206,9 +207,9 @@ namespace Graphics
 		friend class CStaticEntity;
 
 		/**
-		Devuelve la geometría estática de la escena de Ogre
+		Devuelve la geometrï¿½a estï¿½tica de la escena de Ogre
 
-		@return Puntero a la geometría estática de la escena de Ogre.
+		@return Puntero a la geometrï¿½a estï¿½tica de la escena de Ogre.
 		*/
 		Ogre::StaticGeometry *getStaticGeometry() {return _staticGeometry;}
 		
@@ -224,7 +225,7 @@ namespace Graphics
 
 		/** 
 		Marco en la ventana de reenderizado donde se pinta lo captado por
-		una cámara. Solo puede haber una cámara asociada a un viewport,
+		una cï¿½mara. Solo puede haber una cï¿½mara asociada a un viewport,
 		sin embargo una ventana de reenderizado puede tener diferentes
 		viewports al mismo tiempo.
 		*/
@@ -232,21 +233,21 @@ namespace Graphics
 		
 		/**
 		Controla todos los elementos Ogre de una escena. Su equivalente
-		en la lógica del juego sería el mapa o nivel. 
+		en la lï¿½gica del juego serï¿½a el mapa o nivel. 
 		*/
 		Ogre::SceneManager *_sceneMgr;
 		
 		/**
-		Luz direccional que se crea por defecto en la escena. Gráficamente
+		Luz direccional que se crea por defecto en la escena. Grï¿½ficamente
 		mejora la escena bastante respecto a tener solo luz ambiente ya que
-		se ven mejor los volúmenes de las entidades.
+		se ven mejor los volï¿½menes de las entidades.
 		*/
 		Ogre::Light *_directionalLight;
 
 		/**
-		Camara desde la que se verá la escena. Puede haber cámaras más
-		sofisticadas y más tipos de cámaras desde el punto de vista lógico,
-		ellas se encargarán de mover esta instancia.
+		Camara desde la que se verï¿½ la escena. Puede haber cï¿½maras mï¿½s
+		sofisticadas y mï¿½s tipos de cï¿½maras desde el punto de vista lï¿½gico,
+		ellas se encargarï¿½n de mover esta instancia.
 		*/
 		CCamera *_camera;
 
@@ -261,17 +262,17 @@ namespace Graphics
 		typedef std::list<CEntity*> TEntityList;
 
 		/**
-		Lista de entidades estáticas.
+		Lista de entidades estï¿½ticas.
 		*/
 		TStaticEntityList _staticEntities;
 
 		/**
-		Lista de entidades dinámicas.
+		Lista de entidades dinï¿½micas.
 		*/
 		TEntityList _dynamicEntities;
 		
 		/**
-		Geometría estática de la escena.
+		Geometrï¿½a estï¿½tica de la escena.
 		*/
 		Ogre::StaticGeometry *_staticGeometry;
 

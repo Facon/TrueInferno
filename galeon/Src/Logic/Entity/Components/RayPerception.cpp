@@ -1,12 +1,12 @@
 /**
 @file RayPerception.cpp
 
-Contiene la implementación de un componente de percepción basado en lanzamiento de rayos.
+Contiene la implementaciï¿½n de un componente de percepciï¿½n basado en lanzamiento de rayos.
  
 @see Logic::CRayPerception
 @see Logic::IComponent
 
-@author Antonio A. Sánchez Ruiz-Granados
+@author Antonio A. Sï¿½nchez Ruiz-Granados
 @date Noviembre, 2012
 */
 
@@ -18,6 +18,7 @@ Contiene la implementación de un componente de percepción basado en lanzamiento 
 
 using namespace Logic;
 
+RTTI_ROOT_IMPL(CRayPerception);
 IMP_FACTORY(CRayPerception);
 	
 //---------------------------------------------------------
@@ -38,11 +39,11 @@ CRayPerception::~CRayPerception()
 
 bool CRayPerception::spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo) 
 {
-	// Invocar al método de la clase padre
+	// Invocar al mï¿½todo de la clase padre
 	if(!IComponent::spawn(entity,map,entityInfo))
 		return false;
 
-	// Leer distancia máxima a la que se perciben las entidades (por defecto 10)
+	// Leer distancia mï¿½xima a la que se perciben las entidades (por defecto 10)
 	_distance = 10.0f;
 	if(entityInfo->hasAttribute("perception_distance"))
 		_distance = entityInfo->getFloatAttribute("perception_distance");
@@ -54,13 +55,13 @@ bool CRayPerception::spawn(CEntity *entity, CMap *map, const Map::CEntity *entit
 
 void CRayPerception::tick(unsigned int msecs)
 {
-	// Invocar al método de la clase padre (IMPORTANTE)
+	// Invocar al mï¿½todo de la clase padre (IMPORTANTE)
 	IComponent::tick(msecs);
 
-	// Vamos a lanzar el rayo a mitad de altura de la cápsula del jugador.
-	// Para que no golpee contra la propia cápsula debe empezar justo delante
+	// Vamos a lanzar el rayo a mitad de altura de la cï¿½psula del jugador.
+	// Para que no golpee contra la propia cï¿½psula debe empezar justo delante
 	// de ella.
-	// HACK: altura y anchura de la cápsula deberían estar parametrizadas
+	// HACK: altura y anchura de la cï¿½psula deberï¿½an estar parametrizadas
 	Vector3 dir = Math::getDirection(_entity->getTransform());
 	Vector3 origin = _entity->getPosition() + Vector3(0, 3, 0) + 3.1f * dir;
 
@@ -71,12 +72,12 @@ void CRayPerception::tick(unsigned int msecs)
 		//std::cout << entity->getName() << " percibida" << std::endl;
 	}
 
-	// Nota: este componente es bastante inútil tal y como está programado. Habría que
+	// Nota: este componente es bastante inï¿½til tal y como estï¿½ programado. Habrï¿½a que
 	// generalizarlo para que funcionase con otras entidades.
 	
-	// Nota: también podríamos lanzar el rayo a altura del suelo. En ese caso no necesitamos
-	// conocer el tamaño de la cápsula puesto que nunca la golpearía (empieza fuera de ella).
-	// El problema es que el suelo de Galeón no es completamente liso (por ejemplo en las puertas).
+	// Nota: tambiï¿½n podrï¿½amos lanzar el rayo a altura del suelo. En ese caso no necesitamos
+	// conocer el tamaï¿½o de la cï¿½psula puesto que nunca la golpearï¿½a (empieza fuera de ella).
+	// El problema es que el suelo de Galeï¿½n no es completamente liso (por ejemplo en las puertas).
 }
 
 //---------------------------------------------------------

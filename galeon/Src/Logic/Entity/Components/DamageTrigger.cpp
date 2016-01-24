@@ -1,13 +1,13 @@
 /**
 @file DamageTrigger.cpp
 
-Contiene la implementación del componente que envia un mensaje DAMAGED cuando su 
-entidad es tocada. El mensaje se envía a la entidad que se ha tocado.
+Contiene la implementaciï¿½n del componente que envia un mensaje DAMAGED cuando su 
+entidad es tocada. El mensaje se envï¿½a a la entidad que se ha tocado.
  
 @see Logic::CDamageTrigger
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Octubre, 2010
 */
 
@@ -19,6 +19,7 @@ entidad es tocada. El mensaje se envía a la entidad que se ha tocado.
 
 namespace Logic 
 {
+	RTTI_ROOT_IMPL(CDamageTrigger);
 	IMP_FACTORY(CDamageTrigger);
 	
 	//---------------------------------------------------------

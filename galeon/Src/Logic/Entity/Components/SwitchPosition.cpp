@@ -1,13 +1,13 @@
 /**
 @file SwitchPosition.cpp
 
-Contiene la implementación del componente que controla el movimiento de
+Contiene la implementaciï¿½n del componente que controla el movimiento de
 una entidad que tiene dos estado (posiciones) para ir de una a otra.
  
 @see Logic::CSwitchPosition
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Octubre, 2010
 */
 
@@ -19,6 +19,7 @@ una entidad que tiene dos estado (posiciones) para ir de una a otra.
 
 namespace Logic 
 {
+	RTTI_ROOT_IMPL(CSwitchPosition);
 	IMP_FACTORY(CSwitchPosition);
 	
 	//---------------------------------------------------------
@@ -57,7 +58,7 @@ namespace Logic
 
 	
 	//---------------------------------------------------------
-
+	/*
 	bool CSwitchPosition::accept(const TMessage &message)
 	{
 		return message._type == Message::SWITCH;
@@ -77,15 +78,15 @@ namespace Logic
 		}
 
 	} // process
-	
+	*/
 	//---------------------------------------------------------
 
 	void CSwitchPosition::tick(unsigned int msecs)
 	{
-		// Invocamos al método de la clase padre
+		// Invocamos al mï¿½todo de la clase padre
 		IComponent::tick(msecs);
 
-		// Calcular la dirección en la que debemos mover la entidad
+		// Calcular la direcciï¿½n en la que debemos mover la entidad
 		Vector3 displ = _targetPosition - _entity->getPosition();
 	
 		// Si estamos en loop y nos hemos pasado del objetivo, cambiamos de objetivo
@@ -98,32 +99,32 @@ namespace Logic
 			displ = _targetPosition - _entity->getPosition();
 		}
 
-		// Calcular la distancia a la que está el objetivo
+		// Calcular la distancia a la que estï¿½ el objetivo
 		float distance = displ.length();
 		
-		// Calcular desplazamiento en función del tiempo transcurrido
+		// Calcular desplazamiento en funciï¿½n del tiempo transcurrido
 		displ.normalise();
 		displ *= msecs * _speed;
 		
-		// Si nos pasamos del objetivo ajustamos para llegar justo hasta él 
+		// Si nos pasamos del objetivo ajustamos para llegar justo hasta ï¿½l 
 		if (displ.length() > distance) {
 			displ.normalise();
 			displ *= distance;
 		}
 
 		// Notificamos el movimiento que deseamos realizar
-		TMessage m;
+		Message m;
 		m._type = Message::KINEMATIC_MOVE;
 		m._vector3 = displ;
 		bool accepted = _entity->emitMessage(m);
 
-		// Si nadie captura el mensaje significa que no hay componente físico,
-		// así que movemos la entidad nosotros
+		// Si nadie captura el mensaje significa que no hay componente fï¿½sico,
+		// asï¿½ que movemos la entidad nosotros
 		if (!accepted) {
 			_entity->setPosition(_entity->getPosition() + displ);
 		}
 
-		// Actualizamos el último movimiento realizado
+		// Actualizamos el ï¿½ltimo movimiento realizado
 		_lastMovement = displ;
 
 	} // tick

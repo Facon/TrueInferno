@@ -1,14 +1,14 @@
 /**
 @file PhysicController.cpp
 
-Contiene la implementación del componente que se utiliza para representar jugadores y enemigos en
-el mundo físico usando character controllers.
+Contiene la implementaciï¿½n del componente que se utiliza para representar jugadores y enemigos en
+el mundo fï¿½sico usando character controllers.
 
 @see Logic::CPhysicController
 @see Logic::CPhysicEntity
 @see Logic::IPhysics
 
-@author Antonio Sánchez Ruiz-Granados
+@author Antonio Sï¿½nchez Ruiz-Granados
 @date Noviembre, 2012
 */
 
@@ -22,8 +22,9 @@ el mundo físico usando character controllers.
 
 using namespace Logic;
 using namespace Physics;
-using namespace physx; 
+using namespace physx;
 
+RTTI_ROOT_IMPL(CPhysicController);
 IMP_FACTORY(CPhysicController);
 
 //---------------------------------------------------------
@@ -50,7 +51,7 @@ CPhysicController::~CPhysicController()
 
 bool CPhysicController::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo)
 {
-	// Invocar al método de la clase padre
+	// Invocar al mï¿½todo de la clase padre
 	if(!IComponent::spawn(entity,map,entityInfo))
 		return false;
 
@@ -76,8 +77,8 @@ void CPhysicController::process(const TMessage &message)
 	{
 	case Message::AVATAR_WALK:
 		// Anotamos el vector de desplazamiento para usarlo posteriormente en 
-		// el método tick. De esa forma, si recibimos varios mensajes AVATAR_WALK
-		// en el mismo ciclo sólo tendremos en cuenta el último.
+		// el mï¿½todo tick. De esa forma, si recibimos varios mensajes AVATAR_WALK
+		// en el mismo ciclo sï¿½lo tendremos en cuenta el ï¿½ltimo.
 		_movement = message._vector3;
 		break;
 		/*
@@ -93,11 +94,11 @@ void CPhysicController::process(const TMessage &message)
 
 void CPhysicController::tick(unsigned int msecs) 
 {
-	// Llamar al método de la clase padre (IMPORTANTE).
+	// Llamar al mï¿½todo de la clase padre (IMPORTANTE).
 	IComponent::tick(msecs);
 
-	// Actualizar la posición y orientación de la entidad lógica usando la 
-	// información proporcionada por el motor de física	
+	// Actualizar la posiciï¿½n y orientaciï¿½n de la entidad lï¿½gica usando la 
+	// informaciï¿½n proporcionada por el motor de fï¿½sica	
 	_entity->setPosition(_server->getControllerPosition(_controller), this);
 
 	// Si estamos cayendo modificar el vector de desplazamiento para simular el 
@@ -106,7 +107,7 @@ void CPhysicController::tick(unsigned int msecs)
 		_movement += Vector3(0,-1,0);
 	}
 
-	// Intentamos mover el controller a la posición recibida en el último mensaje 
+	// Intentamos mover el controller a la posiciï¿½n recibida en el ï¿½ltimo mensaje 
 	// de tipo AVATAR_WALK. 
 	unsigned flags = _server->moveController(_controller, _movement, msecs);
 
@@ -121,27 +122,27 @@ void CPhysicController::tick(unsigned int msecs)
 
 PxCapsuleController* CPhysicController::createController(const Map::CEntity *entityInfo)
 {
-	// Obtenemos la posición de la entidad. Inicialmente colocaremos el controller
+	// Obtenemos la posiciï¿½n de la entidad. Inicialmente colocaremos el controller
 	// un poco por encima del suelo, porque si lo ponemos justo en el suelo a veces
-	// lo atraviesa en el primer ciclo de simulación.
+	// lo atraviesa en el primer ciclo de simulaciï¿½n.
 	Vector3 position = _entity->getPosition() + Vector3(0, 0.5f, 0);
 	
-	// Leer el volumen de colisión del controller. Por ahora sólo admitimos cápsulas.
+	// Leer el volumen de colisiï¿½n del controller. Por ahora sï¿½lo admitimos cï¿½psulas.
 	std::string shape = "capsule";
 	if (entityInfo->hasAttribute("physic_shape")) {
 		shape = entityInfo->getStringAttribute("physic_shape");
 		assert(shape == "capsule");
 	}
 
-	// Leer el radio de la cápsula
+	// Leer el radio de la cï¿½psula
 	assert(entityInfo->hasAttribute("physic_radius"));
 	float radius = entityInfo->getFloatAttribute("physic_radius");
 
-	// Leer la altura de la cápsula
+	// Leer la altura de la cï¿½psula
 	assert(entityInfo->hasAttribute("physic_height"));
 	float height = entityInfo->getFloatAttribute("physic_height");
 
-	// Crear el controller de tipo cápsula
+	// Crear el controller de tipo cï¿½psula
 	return _server->createCapsuleController(position, radius, height, this);
 } 
 
@@ -156,16 +157,16 @@ void CPhysicController::onTrigger(IPhysics *otherComponent, bool enter)
 
 void CPhysicController::onShapeHit (const PxControllerShapeHit &hit)
 {
-	// Si chocamos contra una entidad estática no hacemos nada
+	// Si chocamos contra una entidad estï¿½tica no hacemos nada
 	PxRigidDynamic* actor = hit.shape->getActor()->isRigidDynamic();
 	if(!actor)
 		return;
 
-	// Si chocamos contra una entidad cinemática no hacemos nada
+	// Si chocamos contra una entidad cinemï¿½tica no hacemos nada
 	if (_server->isKinematic(actor))
 		return;
 	
-	// Aplicar una fuerza a la entidad en la dirección del movimiento
+	// Aplicar una fuerza a la entidad en la direcciï¿½n del movimiento
 	actor->addForce(hit.dir * hit.length * 1000.0f);
 }
 

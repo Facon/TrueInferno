@@ -1,23 +1,25 @@
 /**
 @file Physics.h
 
-Contiene la declaración de una clase abstracta de la que deben heredar todos los
-componentes físicos.
+Contiene la declaraciï¿½n de una clase abstracta de la que deben heredar todos los
+componentes fï¿½sicos.
 
 @see Logic::IComponent
 @see Logic::CPhysicEntity
 @see Logic::CPhysicController
 
-@author Antonio Sánchez Ruiz-Granados
+@author Antonio Sï¿½nchez Ruiz-Granados
 @date Noviembre, 2012
 */
 
 #ifndef __Logic_Physics_H
 #define __Logic_Physics_H
 //
+
+#include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 
-// Predeclaración de tipos
+// Predeclaraciï¿½n de tipos
 namespace physx {
 	struct PxTriggerPair;
 };
@@ -26,25 +28,26 @@ namespace physx {
 namespace Logic 
 {	
 	/**
-	Clase abstracta de la que deben heredar todos los componentes físicos. Proporciona un interfaz
-	común para recibir eventos desde el motor de física.
+	Clase abstracta de la que deben heredar todos los componentes fï¿½sicos. Proporciona un interfaz
+	comï¿½n para recibir eventos desde el motor de fï¿½sica.
 	
     @ingroup logicGroup
 
-	@author Antonio Sánchez Ruiz-Granados
+	@author Antonio Sï¿½nchez Ruiz-Granados
 	@date Noviembre, 2012
 	*/
 	class IPhysics : public IComponent
 	{
+		RTTI_DECL;
 	public:
  
 		/**
-		Este método es invocado desde el motor de física cuando una entidad entra o sale de un
-		trigger físico. Se notifica tanto al componente asociado al trigger como al componente
+		Este mï¿½todo es invocado desde el motor de fï¿½sica cuando una entidad entra o sale de un
+		trigger fï¿½sico. Se notifica tanto al componente asociado al trigger como al componente
 		asociado a la otra entidad.
 
 		@param otherComponent Componente asociado al trigger o a la otra entidad, dependiendo
-		       de a quién se esté notificando.
+		       de a quiï¿½n se estï¿½ notificando.
 		@param enter True si la entidad entra en el trigger y false si sale. 
 		*/
 		virtual void onTrigger(IPhysics *otherComponent, bool enter) = 0;

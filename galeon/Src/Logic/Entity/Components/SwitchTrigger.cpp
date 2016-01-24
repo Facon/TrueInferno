@@ -1,13 +1,13 @@
 /**
 @file SwitchTrigger.cpp
 
-Contiene la declaración del componente que envia un mensaje SWITCH a otra
+Contiene la declaraciï¿½n del componente que envia un mensaje SWITCH a otra
 entidad cuando recibe un mensaje TOUCHED / UNTOUCHED.
  
 @see Logic::CSwitchTrigger
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Octubre, 2010
 */
 
@@ -19,6 +19,7 @@ entidad cuando recibe un mensaje TOUCHED / UNTOUCHED.
 
 namespace Logic 
 {
+	RTTI_ROOT_IMPL(CSwitchTrigger);
 	IMP_FACTORY(CSwitchTrigger);
 	
 	//---------------------------------------------------------
@@ -58,6 +59,7 @@ namespace Logic
 	
 	//---------------------------------------------------------
 
+	/*
 	bool CSwitchTrigger::accept(const TMessage &message)
 	{
 		return message._type == Message::TOUCHED ||
@@ -88,7 +90,6 @@ namespace Logic
 		}
 
 	} // process
-
-
+	*/
 } // namespace Logic
 

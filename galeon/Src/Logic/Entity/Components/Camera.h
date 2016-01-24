@@ -1,50 +1,52 @@
 /**
 @file Camera.h
 
-Contiene la declaración del componente que controla la cámara gráfica
+Contiene la declaraciï¿½n del componente que controla la cï¿½mara grï¿½fica
 de una escena.
 
 @see Logic::CCamera
 @see Logic::IComponent
 
-@author David Llansó
+@author David Llansï¿½
 @date Septiembre, 2010
 */
 #ifndef __Logic_Camera_H
 #define __Logic_Camera_H
 
+#include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 
-// Predeclaración de clases para ahorrar tiempo de compilación
+// Predeclaraciï¿½n de clases para ahorrar tiempo de compilaciï¿½n
 namespace Graphics 
 {
 	class CCamera;
 	class CScene;
 }
 
-//declaración de la clase
+//declaraciï¿½n de la clase
 namespace Logic 
 {
 /**
-	Componente que se encarga de mover la cámara gráfica de una escena, para que 
-	ésta se pueda reenderizar, siguiendo al jugador.
+	Componente que se encarga de mover la cï¿½mara grï¿½fica de una escena, para que 
+	ï¿½sta se pueda reenderizar, siguiendo al jugador.
 	<p>
-	La cámara se situará a una distancia detrás del jugador y a una altura del 
-	suelo y enfocará a un punto imaginario por delante del jugador que estará 
-	también a cierta altura del suelo. Todas estas características son configurables 
-	desde la declaración del mapa definiendo los nombres de atributo "distance",
+	La cï¿½mara se situarï¿½ a una distancia detrï¿½s del jugador y a una altura del 
+	suelo y enfocarï¿½ a un punto imaginario por delante del jugador que estarï¿½ 
+	tambiï¿½n a cierta altura del suelo. Todas estas caracterï¿½sticas son configurables 
+	desde la declaraciï¿½n del mapa definiendo los nombres de atributo "distance",
 	"height", "targetDistance" y "targetHeight".
 	<p>
-	El componente irá recalculando en cada ciclo las posiciones de la cámara y del
-	punto de mira en función de la posición y orientación del jugador.
+	El componente irï¿½ recalculando en cada ciclo las posiciones de la cï¿½mara y del
+	punto de mira en funciï¿½n de la posiciï¿½n y orientaciï¿½n del jugador.
 	
     @ingroup logicGroup
 
-	@author David Llansó García
+	@author David Llansï¿½ Garcï¿½a
 	@date Septiembre, 2010
 */
 	class CCamera : public IComponent
 	{
+		RTTI_DECL;
 		DEC_FACTORY(CCamera);
 	public:
 
@@ -55,21 +57,21 @@ namespace Logic
 			_targetDistance(7), _targetHeight(3) {}
 		
 		/**
-		Inicialización del componente, utilizando la información extraída de
-		la entidad leída del mapa (Maps::CEntity). Se accede a los atributos 
-		necesarios como la cámara gráfica y se leen atributos del mapa.
+		Inicializaciï¿½n del componente, utilizando la informaciï¿½n extraï¿½da de
+		la entidad leï¿½da del mapa (Maps::CEntity). Se accede a los atributos 
+		necesarios como la cï¿½mara grï¿½fica y se leen atributos del mapa.
 
 		@param entity Entidad a la que pertenece el componente.
-		@param map Mapa Lógico en el que se registrará el objeto.
-		@param entityInfo Información de construcción del objeto leído del
+		@param map Mapa Lï¿½gico en el que se registrarï¿½ el objeto.
+		@param entityInfo Informaciï¿½n de construcciï¿½n del objeto leï¿½do del
 			fichero de disco.
-		@return Cierto si la inicialización ha sido satisfactoria.
+		@return Cierto si la inicializaciï¿½n ha sido satisfactoria.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
 		/**
-		Método que activa el componente; invocado cuando se activa
-		el mapa donde está la entidad a la que pertenece el componente.
+		Mï¿½todo que activa el componente; invocado cuando se activa
+		el mapa donde estï¿½ la entidad a la que pertenece el componente.
 		<p>
 		Se coge el jugador del mapa, la entidad que se quiere "seguir".
 
@@ -78,9 +80,9 @@ namespace Logic
 		virtual bool activate();
 		
 		/**
-		Método que desactiva el componente; invocado cuando se
-		desactiva el mapa donde está la entidad a la que pertenece el
-		componente. Se invocará siempre, independientemente de si estamos
+		Mï¿½todo que desactiva el componente; invocado cuando se
+		desactiva el mapa donde estï¿½ la entidad a la que pertenece el
+		componente. Se invocarï¿½ siempre, independientemente de si estamos
 		activados o no.
 		<p>
 		Se pone el objetivo a seguir a NULL.
@@ -88,18 +90,18 @@ namespace Logic
 		virtual void deactivate();
 
 		/**
-		Método llamado en cada frame que actualiza el estado del componente.
+		Mï¿½todo llamado en cada frame que actualiza el estado del componente.
 		<p>
-		Se encarga de mover la cámara siguiendo al jugador.
+		Se encarga de mover la cï¿½mara siguiendo al jugador.
 
-		@param msecs Milisegundos transcurridos desde el último tick.
+		@param msecs Milisegundos transcurridos desde el ï¿½ltimo tick.
 		*/
 		virtual void tick(unsigned int msecs);
 
 	protected:
 		
 		/**
-		Cámara gráfica.
+		Cï¿½mara grï¿½fica.
 		*/
 		Graphics::CCamera *_graphicsCamera;
 
@@ -109,25 +111,25 @@ namespace Logic
 		CEntity *_target;
 
 		/**
-		Distancia de la cámara respecto a la entidad objetivo. Es distancia
+		Distancia de la cï¿½mara respecto a la entidad objetivo. Es distancia
 		sobre el plano XZ, la altura tiene su propio atributo.
 		*/
 		float _distance;
 		
 		/**
-		altura de la cámara respecto del suelo o plano XZ.
+		altura de la cï¿½mara respecto del suelo o plano XZ.
 		*/
 		float _height;
 
 		/**
-		Distancia del punto al que mirará la cámara respecto a la entidad 
+		Distancia del punto al que mirarï¿½ la cï¿½mara respecto a la entidad 
 		objetivo. Es distancia sobre el plano XZ, la altura tiene su propio 
 		atributo.
 		*/
 		float _targetDistance;
 		
 		/**
-		altura del punto al que mirará la cámara respecto del suelo o plano XZ.
+		altura del punto al que mirarï¿½ la cï¿½mara respecto del suelo o plano XZ.
 		*/
 		float _targetHeight;
 

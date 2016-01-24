@@ -1,15 +1,15 @@
 /**
 @file PhysicEntity.cpp
 
-Contiene la implementación del componente encargado de representar entidades físicas simples,
-que son aquellas representadas mediante un único actor de PhysX. Este componente no sirve
+Contiene la implementaciï¿½n del componente encargado de representar entidades fï¿½sicas simples,
+que son aquellas representadas mediante un ï¿½nico actor de PhysX. Este componente no sirve
 para representar character controllers.
 
 @see Logic::CPhysicEntity
 @see Logic::IComponent
 @see Logic::CPhysicController
 
-@author Antonio Sánchez Ruiz-Granados
+@author Antonio Sï¿½nchez Ruiz-Granados
 @date Noviembre, 2012
 */
 
@@ -25,8 +25,9 @@ para representar character controllers.
 
 using namespace Logic;
 using namespace Physics;
-using namespace physx; 
+using namespace physx;
 
+RTTI_ROOT_IMPL(CPhysicEntity);
 IMP_FACTORY(CPhysicEntity);
 
 //---------------------------------------------------------
@@ -52,11 +53,11 @@ CPhysicEntity::~CPhysicEntity()
 
 bool CPhysicEntity::spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo) 
 {
-	// Invocar al método de la clase padre
+	// Invocar al mï¿½todo de la clase padre
 	if(!IComponent::spawn(entity,map,entityInfo))
 		return false;
 
-	// Crear el objeto físico asociado al componente
+	// Crear el objeto fï¿½sico asociado al componente
 	_actor = createActor(entityInfo);
 
 	return true;
@@ -76,7 +77,7 @@ void CPhysicEntity::process(const TMessage &message)
 	switch(message._type) {
 	case Message::KINEMATIC_MOVE:
 		// Acumulamos el vector de desplazamiento para usarlo posteriormente en 
-		// el método tick.
+		// el mï¿½todo tick.
 		_movement += message._vector3;
 		break;
 	}
@@ -86,19 +87,19 @@ void CPhysicEntity::process(const TMessage &message)
 
 void CPhysicEntity::tick(unsigned int msecs) 
 {
-	// Invocar al método de la clase padre (IMPORTANTE)
+	// Invocar al mï¿½todo de la clase padre (IMPORTANTE)
 	IComponent::tick(msecs);
 
-	// Si es una entidad estática no hacemos nada
+	// Si es una entidad estï¿½tica no hacemos nada
 	PxRigidDynamic *dinActor = _actor->isRigidDynamic();
 	if (!dinActor) 
 		return;
 
-	// Actualizar la posición y la orientación de la entidad lógica usando la 
-	// información proporcionada por el motor de física	
+	// Actualizar la posiciï¿½n y la orientaciï¿½n de la entidad lï¿½gica usando la 
+	// informaciï¿½n proporcionada por el motor de fï¿½sica	
 	_entity->setTransform(_server->getActorTransform(dinActor));
 
-	// Si el objeto físico es cinemático intentamos moverlo de acuerdo 
+	// Si el objeto fï¿½sico es cinemï¿½tico intentamos moverlo de acuerdo 
 	// a los mensajes KINEMATIC_MOVE recibidos 
 	if (_server->isKinematic(dinActor)) {
 		_server->moveKinematicActor(dinActor, _movement);
@@ -130,14 +131,14 @@ PxRigidActor* CPhysicEntity::createActor(const Map::CEntity *entityInfo)
 
 PxRigidStatic* CPhysicEntity::createPlane(const Map::CEntity *entityInfo)
 {
-	// La posición de la entidad es un punto del plano
+	// La posiciï¿½n de la entidad es un punto del plano
 	const Vector3 point = _entity->getPosition();
 	
 	// Leer el vector normal al plano
 	assert(entityInfo->hasAttribute("physic_normal"));
 	const Vector3 normal = entityInfo->getVector3Attribute("physic_normal");
 
-	// Leer el grupo de colisión (por defecto grupo 0)
+	// Leer el grupo de colisiï¿½n (por defecto grupo 0)
 	int group = 0;
 	if (entityInfo->hasAttribute("physic_group"))
 		group = entityInfo->getIntAttribute("physic_group");
@@ -148,10 +149,10 @@ PxRigidStatic* CPhysicEntity::createPlane(const Map::CEntity *entityInfo)
 
 PxRigidActor* CPhysicEntity::createRigid(const Map::CEntity *entityInfo)
 {
-	// Leer la posición de la entidad
+	// Leer la posiciï¿½n de la entidad
 	const Vector3 position = _entity->getPosition();
 	
-	// Leer el tipo de entidad: estáticos, dinámico o cinemático
+	// Leer el tipo de entidad: estï¿½ticos, dinï¿½mico o cinemï¿½tico
 	assert(entityInfo->hasAttribute("physic_type"));
 	const std::string physicType = entityInfo->getStringAttribute("physic_type");
 	assert((physicType == "static") || (physicType == "dynamic") || (physicType == "kinematic"));
@@ -166,7 +167,7 @@ PxRigidActor* CPhysicEntity::createRigid(const Map::CEntity *entityInfo)
 	if (entityInfo->hasAttribute("physic_trigger"))
 		trigger = entityInfo->getBoolAttribute("physic_trigger");
 
-	// Leer el grupo de colisión (por defecto 0)
+	// Leer el grupo de colisiï¿½n (por defecto 0)
 	int group = 0;
 	if (entityInfo->hasAttribute("physic_group"))
 		group = entityInfo->getIntAttribute("physic_group");
@@ -178,7 +179,7 @@ PxRigidActor* CPhysicEntity::createRigid(const Map::CEntity *entityInfo)
 			assert(entityInfo->hasAttribute("physic_dimensions"));
 			const Vector3 physicDimensions = entityInfo->getVector3Attribute("physic_dimensions");
 			
-			// Crear una caja estática
+			// Crear una caja estï¿½tica
 			return _server->createStaticBox(position, physicDimensions, trigger, group, this);
 		}
 
@@ -188,7 +189,7 @@ PxRigidActor* CPhysicEntity::createRigid(const Map::CEntity *entityInfo)
 		if (entityInfo->hasAttribute("physic_mass"))
 			mass = entityInfo->getFloatAttribute("physic_mass");
 		
-		// Leer si se trata de un actor cinemático
+		// Leer si se trata de un actor cinemï¿½tico
 		bool kinematic = (physicType == "kinematic");
 
 		if (physicShape == "box") {
@@ -196,7 +197,7 @@ PxRigidActor* CPhysicEntity::createRigid(const Map::CEntity *entityInfo)
 			assert(entityInfo->hasAttribute("physic_dimensions"));
 			const Vector3 physicDimensions = entityInfo->getVector3Attribute("physic_dimensions");
 			
-			// Crear una caja dinámica
+			// Crear una caja dinï¿½mica
 			return _server->createDynamicBox(position, physicDimensions, mass, kinematic, trigger, group, this);
 		}
 	}
@@ -210,7 +211,7 @@ PxRigidActor* CPhysicEntity::createFromFile(const Map::CEntity *entityInfo)
 	assert(entityInfo->hasAttribute("physic_file"));
 	const std::string file = entityInfo->getStringAttribute("physic_file");
 	
-	// Leer el grupo de colisión (por defecto 0)
+	// Leer el grupo de colisiï¿½n (por defecto 0)
 	int group = 0;
 	if (entityInfo->hasAttribute("physic_group"))
 		group = entityInfo->getIntAttribute("physic_group");

@@ -5,13 +5,13 @@
 /**
 @file BaseApplication.cpp
 
-Contiene la implementación de la clase aplicacion, que maneja la ejecución
+Contiene la implementaciï¿½n de la clase aplicacion, que maneja la ejecuciï¿½n
 de todo el juego.
 
 @see Application::CBaseApplication
 @see Application::CApplicationState
 
-@author Marco Antonio Gómez Martín & David Llansó
+@author Marco Antonio Gï¿½mez Martï¿½n & David Llansï¿½
 @date Julio, 2010
 */
 
@@ -32,7 +32,7 @@ namespace Application {
 		_exit(false),
 		_clock(0)
 	{
-		assert(!_instance && "No puede crearse más de una aplicación");
+		assert(!_instance && "No puede crearse mÃ¡s de una aplicaciÃ³n");
 
 		_instance = this;
 
@@ -50,7 +50,7 @@ namespace Application {
 
 	bool CBaseApplication::init() 
 	{
-		assert(!_initialized && "La aplicación ya está inicializada");
+		assert(!_initialized && "La aplicaciÃ³n ya estÃ¡ inicializada");
 
 		_initialized = true;
 
@@ -62,7 +62,7 @@ namespace Application {
 
 	void CBaseApplication::release()
 	{
-		assert(_initialized && "La aplicación no está inicializada");
+		assert(_initialized && "La aplicaciÃ³n no estÃ¡ inicializada");
 
 		// Desactivamos y eliminamos todos los estados.
 		releaseAllStates();
@@ -106,9 +106,9 @@ namespace Application {
 #ifdef _DEBUG
 		// Comprobamos que no existe un estado con ese nombre.
 		// Otra posibilidad es no hacerlo en Debug, sino siempre,
-		// y, en caso de que ya exista, eliminarlo (pues la aplicación
+		// y, en caso de que ya exista, eliminarlo (pues la aplicaciï¿½n
 		// acepta la responsabilidad de borrar los estados que contiene).
-		// Sin embargo, en ese caso, habría que comprobar que no es
+		// Sin embargo, en ese caso, habrï¿½a que comprobar que no es
 		// el estado actual, ni el estado siguiente al que se espera ir...
 		it = _states.find(name);
 		assert(it == _states.end());
@@ -127,7 +127,7 @@ namespace Application {
 
 		it = _states.find(name);
 
-		// Si no hay ningún estado con ese nombre, no hacemos nada
+		// Si no hay ningï¿½n estado con ese nombre, no hacemos nada
 		if (it == _states.end())
 			return false;
 
@@ -148,8 +148,8 @@ namespace Application {
 		// de frame razonable.
 		_clock->updateTime();
 
-		// Ejecución del bucle principal. Simplemente miramos si
-		// tenemos que hacer una transición de estado, y si no hay que
+		// Ejecuciï¿½n del bucle principal. Simplemente miramos si
+		// tenemos que hacer una transiciï¿½n de estado, y si no hay que
 		// hacerla, ejecutamos la vuelta
 		while (!exitRequested()) 
 		{
@@ -190,12 +190,12 @@ namespace Application {
 
 	void CBaseApplication::tick(unsigned int msecs) 
 	{
-		// Aparentemente esta función es sencilla. Aquí se pueden
-		// añadir otras llamadas que sean comunes a todos los estados
+		// Aparentemente esta funciï¿½n es sencilla. Aquï¿½ se pueden
+		// aï¿½adir otras llamadas que sean comunes a todos los estados
 		// de todas las aplicaciones.
-		// El método es virtual. Si para una aplicación concreta, se
+		// El mï¿½todo es virtual. Si para una aplicaciï¿½n concreta, se
 		// identifican cosas comunes a todos los estados, se pueden
-		// añadir en la implementación del método de esa aplicación.
+		// aï¿½adir en la implementaciï¿½n del mï¿½todo de esa aplicaciï¿½n.
 
 		if (_currentState)
 			_currentState->tick(msecs);
@@ -206,7 +206,7 @@ namespace Application {
 
 	bool CBaseApplication::keyPressed(GUI::TKey key)
 	{
-		// Avisamos al estado actual de la pulsación.
+		// Avisamos al estado actual de la pulsaciï¿½n.
 		if (_currentState)
 			return _currentState->keyPressed(key);
 		
@@ -218,7 +218,7 @@ namespace Application {
 
 	bool CBaseApplication::keyReleased(GUI::TKey key)
 	{
-		// Avisamos al estado actual del fin de la pulsación.
+		// Avisamos al estado actual del fin de la pulsaciï¿½n.
 		if (_currentState)
 			return _currentState->keyReleased(key);
 		
@@ -242,7 +242,7 @@ namespace Application {
 		
 	bool CBaseApplication::mousePressed(const GUI::CMouseState &mouseState)
 	{
-		// Avisamos al estado actual de la pulsación.
+		// Avisamos al estado actual de la pulsaciï¿½n.
 		if (_currentState)
 			return _currentState->mousePressed(mouseState);
 		
@@ -255,7 +255,7 @@ namespace Application {
 
 	bool CBaseApplication::mouseReleased(const GUI::CMouseState &mouseState)
 	{
-		// Avisamos al estado actual del fin de la pulsación.
+		// Avisamos al estado actual del fin de la pulsaciï¿½n.
 		if (_currentState)
 			return _currentState->mouseReleased(mouseState);
 		

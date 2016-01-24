@@ -1,13 +1,13 @@
 /**
 @file Factory.h
 
-Contiene la declaración de la plantilla CFactory, factoría que 
-almacena los punteros a función de funciones de creación de clases 
+Contiene la declaraciï¿½n de la plantilla CFactory, factorï¿½a que 
+almacena los punteros a funciï¿½n de funciones de creaciï¿½n de clases 
 tel tipo parametrizado.
 
 @see BaseSubsystems::CFactory
 
-@author David Llansó
+@author David Llansï¿½
 @date Julio, 2010
 */
 #ifndef __BaseSubsystems_Factory_H
@@ -17,20 +17,20 @@ tel tipo parametrizado.
 #include <map>
 #include <exception>
 
-// Declaración de la clase
+// Declaraciï¿½n de la clase
 namespace BaseSubsystems
 {
 
 	/**
-	Factoría parametrizada de objetos. Permite registrar punteros a función de 
-	creación de cualquier tipo de clase. Dichas funciones no pueden tener 
-	parámetros de entrada y como salida deven devolver un objeto de tipo T.
+	Factorï¿½a parametrizada de objetos. Permite registrar punteros a funciï¿½n de 
+	creaciï¿½n de cualquier tipo de clase. Dichas funciones no pueden tener 
+	parï¿½metros de entrada y como salida deven devolver un objeto de tipo T.
 	<p>
-	Como ejemplo esta factoría es usada para almacenar componentes en el singleton
+	Como ejemplo esta factorï¿½a es usada para almacenar componentes en el singleton
 	Logic::CComponentFactory donde todo el registro de componentes se realiza 
 	utilizando macros del preprocesador.
 
-	@author David Llansó
+	@author David Llansï¿½
 	@date Julio, 2010
 	@ingroup baseSubsystemsGroup
 	 */
@@ -40,7 +40,7 @@ namespace BaseSubsystems
 	protected:
 		
 		/** 
-		Puntero a función.  
+		Puntero a funciï¿½n.  
 		*/
 		typedef T (*FunctionPointer)();
 
@@ -57,16 +57,16 @@ namespace BaseSubsystems
 		virtual ~CFactory();
 
 		/**
-		Añade una nueva función a la tabla de la factoría.
+		Aï¿½ade una nueva funciï¿½n a la tabla de la factorï¿½a.
 
-		@param funcion Función de creación del objeto.
-		@param name Nombre con el que nos referiremos a la función para
-		la futura creación del objeto.
+		@param funcion Funciï¿½n de creaciï¿½n del objeto.
+		@param name Nombre con el que nos referiremos a la funciï¿½n para
+		la futura creaciï¿½n del objeto.
 		*/
 		void add(FunctionPointer function, const std::string& name);
 
 		/**
-		Si una función ya está contenida en la tabla.
+		Si una funciï¿½n ya estï¿½ contenida en la tabla.
 
 		@param name Nombre de la clase del objeto que se quiere saber si 
 		se puede crear.
@@ -78,7 +78,7 @@ namespace BaseSubsystems
 		Crea una nueva instancia de la clase requerida.
 
 		@param name Nombre de la clase del objeto que se quiere crear.
-		@return Nueva instancia de la clase. 0 si no está en la tabla.
+		@return Nueva instancia de la clase. 0 si no estï¿½ en la tabla.
 		*/
 		T create(const std::string& name) const;
 
@@ -88,7 +88,7 @@ namespace BaseSubsystems
 		typedef std::map<std::string,FunctionPointer> TFunctionPointerMap;
 
 		/** 
-		Tabla con los punteros a función.
+		Tabla con los punteros a funciï¿½n.
 		*/
 		TFunctionPointerMap _table;
 
@@ -99,8 +99,8 @@ namespace BaseSubsystems
 	template <class T> 
 	inline CFactory<T>::~CFactory()
 	{
-		TFunctionPointerMap::const_iterator it = _table.begin();
-		TFunctionPointerMap::const_iterator it2;
+		auto it = _table.cbegin(); // TODO Cambiar si hay errores
+		decltype(it) it2;
 		
 		while( it != _table.end() )
 		{
@@ -137,12 +137,12 @@ namespace BaseSubsystems
 	{
 		if(has(name))
 		{
-			TFunctionPointerMap::const_iterator it;
-			it = _table.find(name);
-			if( it != _table.end() )
+			//TFunctionPointerMap::const_iterator it;
+			auto it = _table.find(name);
+			if( it != _table.cend() )
 				return _table.find(name)->second();
 		}
-		throw new std::exception("No existe la función de creación que se solicitó.");
+		throw std::runtime_error("No existe la funciÃ³n de creaciÃ³n que se solicitÃ³.");
 
 	} // create
 
