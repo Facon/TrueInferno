@@ -17,8 +17,8 @@ material tile_alt
 	{
 		pass
 		{
-			ambient 0.5 0.5 0.5 1
-			diffuse 0.5 0.5 0.5 1
+			ambient 0.55 0.55 0.55 1
+			diffuse 0.55 0.55 0.55 1
 		}
 	}
 }

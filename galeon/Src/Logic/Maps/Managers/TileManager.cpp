@@ -102,6 +102,7 @@ namespace Logic {
 		// Map::CEntity "Tile" leída del fichero de mapa.
 		CEntityFactory* entityFactory = CEntityFactory::getSingletonPtr();
 		Vector3 tileBasePosition = mapEntityTile->getVector3Attribute("position");
+		Vector3 tileBaseDimensions = mapEntityTile->getVector3Attribute("dimensions");
 
 		// Material base para los tiles.
 		std::string baseMaterialName = mapEntityTile->getStringAttribute("material");
@@ -113,8 +114,8 @@ namespace Logic {
 			for (int z = 0; z < SIZE_Z; ++z) {
 				// Cambia la posición.
 				Vector3 tilePosition(tileBasePosition);
-				tilePosition.x += x * 2;
-				tilePosition.z += z * 2;
+				tilePosition.x += x * tileBaseDimensions.x;
+				tilePosition.z += z * tileBaseDimensions.z;
 
 				// Construye la nueva posición como un Vector3 representado por un
 				// string con formato: "x y z".

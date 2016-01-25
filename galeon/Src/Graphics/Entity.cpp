@@ -210,6 +210,16 @@ namespace Graphics
 	
 	//--------------------------------------------------------
 	
+	void CEntity::setDimensions(const Vector3 &dimensions)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		Vector3 scale(dimensions/CUBE_MESH_DIMENSIONS);
+		this->setScale(scale);
+
+	} // setDimensions
+	
+	//--------------------------------------------------------
+	
 	void CEntity::setColor(const Vector3 &color)
 	{
 		assert(_entityNode && "La entidad no ha sido cargada");

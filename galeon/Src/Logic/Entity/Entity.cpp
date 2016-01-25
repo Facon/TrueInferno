@@ -27,7 +27,7 @@ namespace Logic
 {
 	CEntity::CEntity(TEntityID entityID) : _entityID(entityID), 
 				_map(0), _type(""), _name(""),
-				_transform(Matrix4::IDENTITY), _scale(Vector3(1, 1, 1)),
+				_transform(Matrix4::IDENTITY), _dimensions(Vector3(1, 1, 1)),
 				_isPlayer(false), _activated(false)
 	{
 
@@ -60,8 +60,8 @@ namespace Logic
 			_transform.setTrans(position);
 		}
 
-		if (entityInfo->hasAttribute("scale"))
-			_scale = entityInfo->getVector3Attribute("scale");
+		if (entityInfo->hasAttribute("dimensions"))
+			_dimensions = entityInfo->getVector3Attribute("dimensions");
 
 		// Por comodidad en el mapa escribimos los ángulos en grados.
 		if(entityInfo->hasAttribute("orientation"))
@@ -209,8 +209,8 @@ namespace Logic
 		case Message::SET_TRANSFORM:
 			_transform = message._transform;
 			break;
-		case Message::SET_SCALE:
-			_scale = message._vector3;
+		case Message::SET_DIMENSIONS:
+			_dimensions = message._vector3;
 			break;
 		}
 
@@ -257,14 +257,14 @@ namespace Logic
 
 	//---------------------------------------------------------
 
-	void CEntity::setScale(const Vector3 &scale, IComponent* invoker)
+	void CEntity::setDimensions(const Vector3 &dimensions, IComponent* invoker)
 	{
-		_scale = scale;
+		_dimensions = dimensions;
 
 		// Avisamos a los componentes del cambio.
 		TMessage message;
-		message._type = Message::SET_SCALE;
-		message._vector3 = _scale;
+		message._type = Message::SET_DIMENSIONS;
+		message._vector3 = _dimensions;
 		emitMessage(message, invoker);
 
 	} // setScale
