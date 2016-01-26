@@ -757,6 +757,46 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 258068261}
+--- !u!1 &299488280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 299488282}
+  - 114: {fileID: 299488281}
+  m_Layer: 0
+  m_Name: PopUpManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &299488281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 299488280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 882d8eb5ca5593647b8174a141118df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 184614, guid: 9067dcca2330fb84da6176be70363e83, type: 2}
+--- !u!4 &299488282
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 299488280}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 569.938049, y: 403.678345, z: -26.142664}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!1 &328477904
 GameObject:
   m_ObjectHideFlags: 0
@@ -3983,7 +4023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ee19bd5f2afb447b544c4ef1c52d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minutesTimeLimit: 2
+  minutesTimeLimit: 1
   remainingTime: 0
   timeDisplay: {fileID: 251031466}
 --- !u!4 &1698341941
@@ -4255,9 +4295,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449b7da229df2544a801a3a728f40a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyInterval: 10
+  destroyInterval: 20
   destroyDelay: 5
-  destroyChance: 150
+  destroyChance: 50
 --- !u!4 &1946938461
 Transform:
   m_ObjectHideFlags: 0

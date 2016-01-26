@@ -5,6 +5,8 @@ public class EventManager : MonoBehaviour {
 
     private TimeManager timeManager;
     private TileManager tileManager;
+    private PopUpManager popManager;
+    private ScoreManager scoreManager;
 
     //Event parameters
     public float destroyInterval;
@@ -19,6 +21,8 @@ public class EventManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
+        popManager = GameObject.Find("PopUpManager").GetComponent<PopUpManager>();
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
         tileManager = GameObject.Find("Map").GetComponent<TileManager>();
         previousTime = 60 * timeManager.minutesTimeLimit;
@@ -44,9 +48,17 @@ public class EventManager : MonoBehaviour {
     {
         if (remainingDestroyEventTime <= 0)
             BuildingDestructionEvent();
+
+        if (timeManager.remainingTime <= 0)
+            EndGamePopUpEvent();
     }
 
     //Event Methods
+    void EndGamePopUpEvent() {
+
+        popManager.GeneratePopUp(0.25f, 0.75f, "Score: "+scoreManager.hadesFavorDisplay.text);
+    }
+
     void BuildingDestructionEvent()
     {
         remainingDestroyEventTime = destroyInterval;
