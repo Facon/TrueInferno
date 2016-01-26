@@ -37,7 +37,7 @@ namespace Logic
 	} // spawn
 
 	//---------------------------------------------------------
-
+	/*
 	bool CDamageTrigger::accept(const TMessage &message)
 	{
 		return message._type == Message::TOUCHED;
@@ -63,7 +63,6 @@ namespace Logic
 		}
 
 	} // process
-
-
+	*/
 } // namespace Logic
 

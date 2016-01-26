@@ -17,6 +17,7 @@ el mundo f�sico usando character controllers.
 
 #include "BaseSubsystems/RTTI.h"
 #include "Physics.h"
+#include "BaseSubsystems/Math.h"
 
 // Predeclaraci�n de tipos
 namespace physx {

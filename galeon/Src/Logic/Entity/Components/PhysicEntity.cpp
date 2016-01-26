@@ -13,15 +13,12 @@ para representar character controllers.
 @date Noviembre, 2012
 */
 
+#include <PxPhysicsAPI.h>
+
 #include "PhysicEntity.h"
 #include "Logic/Entity/Entity.h"
 #include "Map/MapEntity.h"
 #include "Physics/Server.h"
-
-#define _USE_MATH_DEFINES
-#include <math.h>
-
-#include <PxPhysicsAPI.h>
 
 using namespace Logic;
 using namespace Physics;
@@ -64,7 +61,7 @@ bool CPhysicEntity::spawn(CEntity *entity, CMap *map, const Map::CEntity *entity
 } 
 
 //---------------------------------------------------------
-
+/*
 bool CPhysicEntity::accept(const TMessage &message)
 {
 	return message._type == Message::KINEMATIC_MOVE;
@@ -82,7 +79,7 @@ void CPhysicEntity::process(const TMessage &message)
 		break;
 	}
 }
-
+*/
 //---------------------------------------------------------
 
 void CPhysicEntity::tick(unsigned int msecs) 
@@ -225,14 +222,15 @@ void CPhysicEntity::onTrigger(IPhysics *otherComponent, bool enter)
 {
 	// Construimos un mensaje de tipo TOUCHED o UNTOUCHED y lo enviamos a 
 	// todos los componentes de la entidad. 
-	TMessage msg;
+	TouchMessage msg;
 	if (enter) {
-		msg._type = Message::TOUCHED;
+		msg._type = MessageType::TOUCHED;
 	} else {
-		msg._type = Message::UNTOUCHED;
+		msg._type = MessageType::UNTOUCHED;
 	}
-	msg._entity = otherComponent->getEntity();
 
-	_entity->emitMessage(msg);
+    msg._entity = *otherComponent->getEntity();
+
+	msg.Dispatch(*_entity);
 }
 

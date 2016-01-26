@@ -29,7 +29,8 @@ namespace Logic
 
 	void IComponent::tick(unsigned int msecs)
 	{
-		processMessages();
+		//processMessages();
+		// Entity should do the work now
 
 	} // tick
 

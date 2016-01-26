@@ -16,8 +16,8 @@ para representar character controllers.
 #ifndef __Logic_PhysicEntity_H
 #define __Logic_PhysicEntity_H
 
-#include "BaseSubsystems/RTTI.h"
 #include "Physics.h"
+#include "BaseSubsystems/RTTI.h"
 
 // Predeclaraci�n de tipos
 namespace physx {

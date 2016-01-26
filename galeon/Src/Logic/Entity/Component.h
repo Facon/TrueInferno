@@ -13,7 +13,6 @@ Contiene la declaraci�n de la clase base de los componentes.
 #define __Logic_Component_H
 
 #include "BaseSubsystems/RTTI.h"
-#include "CommunicationPort.h"
 #include "Logic/Maps/ComponentFactory.h"
 
 // Predeclaraci�n de clases para ahorrar tiempo de compilaci�n

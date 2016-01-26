@@ -17,25 +17,25 @@ namespace Logic
 	{
 	public:
 		virtual bool HandleMessage(const TransformMessage& msg)
-		{}
+		{ return false; }
 
 		virtual bool HandleMessage(const ScaleMessage& msg)
-		{}
+		{ return false; }
 		
 		virtual bool HandleMessage(const AnimationMessage& msg)
-		{}
+		{ return false; }
 		
 		virtual bool HandleMessage(const ControlMessage& msg)
-		{}
+		{ return false; }
 
         virtual bool HandleMessage(const MoveMessage& msg)
-        {}
+        { return false; }
 
         virtual bool HandleMessage(const TouchMessage& msg)
-        {}
+        { return false; }
 
         virtual bool HandleMessage(const DamageMessage& msg)
-        {}
+        { return false; }
 	};
 } // namespace Logic
 

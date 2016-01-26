@@ -246,7 +246,7 @@ namespace Logic
             if ((*it)->GetRTTI().IsExactly(CAnimatedGraphics::rtti))
             {
                 // Manipular componente haciendo casting
-                CAnimatedGraphics& obj = (*(*it));
+                CAnimatedGraphics& obj = static_cast<CAnimatedGraphics&>(*(*it));
 
                 // Hacer movidas con obj y msg
 
@@ -258,13 +258,19 @@ namespace Logic
     }
 
 	bool CEntity::HandleMessage(const ControlMessage& msg)
-    {}
+    {
+		return false;
+	}
 
 	bool CEntity::HandleMessage(const TouchMessage& msg)
-    {}
+    {
+		return false;
+	}
 
 	bool CEntity::HandleMessage(const DamageMessage& msg)
-    {}
+    {
+		return false;
+	}
 
 	//---------------------------------------------------------
 

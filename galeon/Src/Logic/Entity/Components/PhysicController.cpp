@@ -12,13 +12,12 @@ el mundo f�sico usando character controllers.
 @date Noviembre, 2012
 */
 
+#include <PxPhysicsAPI.h>
 #include "PhysicController.h"
 
 #include "Logic/Entity/Entity.h"
 #include "Map/MapEntity.h"
 #include "Physics/Server.h"
-
-#include <PxPhysicsAPI.h>
 
 using namespace Logic;
 using namespace Physics;
@@ -62,11 +61,10 @@ bool CPhysicController::spawn(CEntity* entity, CMap *map, const Map::CEntity *en
 }
 
 //---------------------------------------------------------
-
+/*
 bool CPhysicController::accept(const TMessage &message)
 {
-	return message._type == Message::AVATAR_WALK /*|| 
-		   message._type == Message::SET_TRANSFORM*/;
+	return message._type == Message::AVATAR_WALK //|| message._type == Message::SET_TRANSFORM;
 } 
 
 //---------------------------------------------------------
@@ -81,15 +79,13 @@ void CPhysicController::process(const TMessage &message)
 		// en el mismo ciclo s�lo tendremos en cuenta el �ltimo.
 		_movement = message._vector3;
 		break;
-		/*
-	case Message::SET_TRANSFORM:
-		_server->setControllerPosition(_controller, message._transform.getTrans());
-		break;
-		*/
+	    //case Message::SET_TRANSFORM:
+		//_server->setControllerPosition(_controller, message._transform.getTrans());
+		//break;
 	}
 
-} 
-
+}
+*/
 //---------------------------------------------------------
 
 void CPhysicController::tick(unsigned int msecs) 

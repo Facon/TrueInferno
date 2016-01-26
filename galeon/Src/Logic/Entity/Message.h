@@ -14,6 +14,7 @@ Contiene el tipo de datos de un mensaje.
 
 #include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
+#include "Entity.h"
 
 // Predeclaraciones
 namespace Logic {
@@ -139,7 +140,7 @@ namespace Logic
 	class TouchMessage : public Message
 	{
 	public:
-		bool touched = false;
+		CEntity& _entity;
 		
 		virtual void Dispatch(MessageHandler& handler) const
 		{
