@@ -15,6 +15,8 @@ para representar character controllers.
 
 #include <PxPhysicsAPI.h>
 
+#include "BaseSubsystems/Math.h"
+
 #include "PhysicEntity.h"
 #include "Logic/Entity/Entity.h"
 #include "Map/MapEntity.h"
@@ -223,13 +225,14 @@ void CPhysicEntity::onTrigger(IPhysics *otherComponent, bool enter)
 	// Construimos un mensaje de tipo TOUCHED o UNTOUCHED y lo enviamos a 
 	// todos los componentes de la entidad. 
 	TouchMessage msg;
+
 	if (enter) {
 		msg._type = MessageType::TOUCHED;
 	} else {
 		msg._type = MessageType::UNTOUCHED;
 	}
 
-    msg._entity = *otherComponent->getEntity();
+    msg._entity = otherComponent->getEntity();
 
 	msg.Dispatch(*_entity);
 }

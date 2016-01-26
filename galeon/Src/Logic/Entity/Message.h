@@ -72,7 +72,7 @@ namespace Logic
 	{
 	public:
 		MessageType _type;
-		virtual void Dispatch(MessageHandler& handler) const = 0;
+		virtual bool Dispatch(MessageHandler& handler) const = 0;
 	};
 
 	// SET_TRANSFORM
@@ -81,9 +81,9 @@ namespace Logic
 	public:
 		Matrix4 _transform;
 		
-		virtual void Dispatch(MessageHandler& handler) const
+		virtual bool Dispatch(MessageHandler& handler) const
 		{
-			handler.HandleMessage(*this);
+			return handler.HandleMessage(*this);
 		}
 	};
 
@@ -93,19 +93,22 @@ namespace Logic
 	public:
 		Vector3 _scale;
 
-		virtual void Dispatch(MessageHandler& handler) const
+		virtual bool Dispatch(MessageHandler& handler) const
 		{
-			handler.HandleMessage(*this);
+            return handler.HandleMessage(*this);
 		}
 	};
 	
 	// SET_ANIMATION, STOP_ANIMATION
 	class AnimationMessage : public Message
 	{
-	public:		
-		virtual void Dispatch(MessageHandler& handler) const
+	public:
+        std::string _action;
+        bool _activated = false;
+
+		virtual bool Dispatch(MessageHandler& handler) const
 		{
-			handler.HandleMessage(*this);
+            return handler.HandleMessage(*this);
 		}
 	};
 	
@@ -116,22 +119,33 @@ namespace Logic
         std::string _action;
         float _degreesMoved;
 
-		virtual void Dispatch(MessageHandler& handler) const
+		virtual bool Dispatch(MessageHandler& handler) const
 		{
-			handler.HandleMessage(*this);
+            return handler.HandleMessage(*this);
 		}
 	};
 	
-	// AVATAR_WALK,
+	// AVATAR_WALK
+    class PhysicMessage : public Message
+    {
+    public:
+        Vector3 _point;
+
+        virtual bool Dispatch(MessageHandler& handler) const
+        {
+            return handler.HandleMessage(*this);
+        }
+    };
+
 	// KINEMATIC_MOVE
     class MoveMessage : public Message
     {
     public:
         Vector3 _point;
 
-        virtual void Dispatch(MessageHandler& handler) const
+        virtual bool Dispatch(MessageHandler& handler) const
         {
-            handler.HandleMessage(*this);
+            return handler.HandleMessage(*this);
         }
     };
 
@@ -140,11 +154,11 @@ namespace Logic
 	class TouchMessage : public Message
 	{
 	public:
-		CEntity& _entity;
+		CEntity* _entity;
 		
-		virtual void Dispatch(MessageHandler& handler) const
+		virtual bool Dispatch(MessageHandler& handler) const
 		{
-			handler.HandleMessage(*this);
+            return handler.HandleMessage(*this);
 		}
 	};
 	
@@ -155,9 +169,9 @@ namespace Logic
 	public:
 		unsigned int damage = 0;
 		
-		virtual void Dispatch(MessageHandler& handler) const
+		virtual bool Dispatch(MessageHandler& handler) const
 		{
-			handler.HandleMessage(*this);
+            return handler.HandleMessage(*this);
 		}
 	};
 	

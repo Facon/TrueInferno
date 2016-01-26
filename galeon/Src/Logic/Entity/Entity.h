@@ -173,6 +173,7 @@ namespace Logic
 		bool HandleMessage(const ScaleMessage& msg);
 		bool HandleMessage(const AnimationMessage& msg);
 		bool HandleMessage(const ControlMessage& msg);
+		bool HandleMessage(const PhysicMessage& msg);
 		bool HandleMessage(const TouchMessage& msg);
 		bool HandleMessage(const DamageMessage& msg);
 

@@ -1,6 +1,8 @@
 #ifndef __LOGIC_MessageHandler_H
 #define __LOGIC_MessageHandler_H
 
+#include "Message.h"
+
 namespace Logic
 {
     // Predefiniciones
@@ -9,6 +11,7 @@ namespace Logic
     class ScaleMessage;
     class AnimationMessage;
     class ControlMessage;
+	class PhysicMessage;
     class MoveMessage;
     class TouchMessage;
     class DamageMessage;
@@ -26,6 +29,9 @@ namespace Logic
 		{ return false; }
 		
 		virtual bool HandleMessage(const ControlMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const PhysicMessage& msg)
 		{ return false; }
 
         virtual bool HandleMessage(const MoveMessage& msg)

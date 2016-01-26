@@ -93,7 +93,7 @@ namespace Logic
 	} // createGraphicsEntity
 	
 	//---------------------------------------------------------
-
+	/*
 	bool CGraphics::accept(const TMessage &message)
 	{
 		return message._type == Message::SET_TRANSFORM ||
@@ -114,6 +114,6 @@ namespace Logic
 		}
 
 	} // process
-
+	*/
 } // namespace Logic
 

@@ -1,13 +1,17 @@
 /**
 @file Server.cpp
 
-Contiene la implementación del servidor de física. 
+Contiene la implementaciï¿½n del servidor de fï¿½sica. 
 
 @see Physics::CServer
 
-@author Antonio Sánchez Ruiz-Granados
+@author Antonio Sï¿½nchez Ruiz-Granados
 @date Noviembre, 2012
 */
+
+#include <PxPhysicsAPI.h>
+#include <extensions/PxExtensionsAPI.h>
+#include <extensions/PxVisualDebuggerExt.h>
 
 #include "Server.h"
 #include "Conversions.h"
@@ -18,16 +22,12 @@ Contiene la implementación del servidor de física.
 #include <assert.h>
 #include <algorithm>
 
-#include <PxPhysicsAPI.h>
-#include <extensions\PxExtensionsAPI.h>
-#include <extensions\PxVisualDebuggerExt.h> 
-
 using namespace Physics;
 using namespace Logic;
 using namespace physx;
 
 
-// Única instancia del servidor
+// ï¿½nica instancia del servidor
 CServer *CServer::_instance = NULL;
 
 //--------------------------------------------------------
@@ -52,9 +52,9 @@ CServer::CServer() : _cudaContextManager(NULL), _scene(NULL)
 	_profileZoneManager = &PxProfileZoneManager::createProfileZoneManager(_foundation);
 	assert(_profileZoneManager && "Error en PxProfileZoneManager::createProfileZoneManage");
 
-	// Crear CudaContextManager. Permite aprovechar la GPU para hacer parte de la simulación física.
-	// Se utiliza posteriormente al crear la escena física.
-	// Sólo Windows
+	// Crear CudaContextManager. Permite aprovechar la GPU para hacer parte de la simulaciï¿½n fï¿½sica.
+	// Se utiliza posteriormente al crear la escena fï¿½sica.
+	// Sï¿½lo Windows
 #ifdef PX_WINDOWS
 
 	PxCudaContextManagerDesc cudaContextManagerDesc;
@@ -78,7 +78,7 @@ CServer::CServer() : _cudaContextManager(NULL), _scene(NULL)
 		                       recordMemoryAllocations, _profileZoneManager);
 	assert(_physics && "Error en PxCreatePhysics");
 
-	// Inicializar el módulo PxCooking. Es necesario para cocinar mallas y para 
+	// Inicializar el mï¿½dulo PxCooking. Es necesario para cocinar mallas y para 
 	// deserializar actores a partir de ficheros RepX
 	PxCookingParams params(toleranceScale);
 	_cooking = PxCreateCooking(PX_PHYSICS_VERSION, *_foundation, params);
@@ -87,7 +87,7 @@ CServer::CServer() : _cudaContextManager(NULL), _scene(NULL)
 	if (!PxInitExtensions(*_physics))
 		assert(false && "PxInitExtensions failed!");
 
-	// Crear el material que se usará por defecto
+	// Crear el material que se usarï¿½ por defecto
 	float staticFriction = 0.5f;
 	float dynamicFriction = 0.5f;
 	float restitution = 0.1f;
@@ -96,20 +96,20 @@ CServer::CServer() : _cudaContextManager(NULL), _scene(NULL)
 	// Intentar conectar con PhysX Visual Debugger (PVD)
 	_pvdConnection = NULL;
 
-	// Sólo en modo DEBUG
+	// Sï¿½lo en modo DEBUG
 #ifdef _DEBUG
 	debugger::comm::PvdConnectionManager *pvdConnectionManager = _physics->getPvdConnectionManager();
 	assert(pvdConnectionManager && "Error en PxPhysics::getPvdConnectionManager");
 
-	// Configurar máquina, puerto y tiempo de espera (en millisegundos)
+	// Configurar mï¿½quina, puerto y tiempo de espera (en millisegundos)
 	const char *ip = "127.0.0.1";
 	int port = 5425;						
 	unsigned int timeout = 100;				
 
-	// Configurar qué información queremos mandar al PVD (debug, profile, memory)
+	// Configurar quï¿½ informaciï¿½n queremos mandar al PVD (debug, profile, memory)
 	PxVisualDebuggerConnectionFlags connectionFlags = PxVisualDebuggerExt::getAllConnectionFlags();
 
-	// Intentar establecer la conexión
+	// Intentar establecer la conexiï¿½n
 	_pvdConnection = PxVisualDebuggerExt::createConnection(pvdConnectionManager, ip, port, timeout, connectionFlags);
 
 #endif
@@ -211,7 +211,7 @@ void CServer::createScene ()
 
 	// Establecer un gestor de tareas por CPU
 	if (!sceneDesc.cpuDispatcher) {
-		int mNbThreads = 1; // hilos de ejecución
+		int mNbThreads = 1; // hilos de ejecuciï¿½n
 		_cpuDispatcher  = PxDefaultCpuDispatcherCreate(mNbThreads);
 		assert (_cpuDispatcher && "Error en PxDefaultCpuDispatcherCreate");
 
@@ -219,12 +219,12 @@ void CServer::createScene ()
 	}
 
 	// Establecer el shader que controla las colisiones entre entidades.
-	// Usamos un shader que emula la gestión de grupos de PhysX 2.8
+	// Usamos un shader que emula la gestiï¿½n de grupos de PhysX 2.8
 	if (!sceneDesc.filterShader)
 		sceneDesc.filterShader = PxDefaultSimulationFilterShader;
 
 	// Intentar establecer un gestor de tareas por GPU 
-	// Sólo Windows
+	// Sï¿½lo Windows
 #ifdef PX_WINDOWS
 	if (!sceneDesc.gpuDispatcher && _cudaContextManager)
 	{
@@ -232,7 +232,7 @@ void CServer::createScene ()
 	}
 #endif
 
-	// Crear la escena física
+	// Crear la escena fï¿½sica
 	_scene = _physics->createScene(sceneDesc);
 	assert(_scene && "Error en PxPhysics::createScene");
 
@@ -268,14 +268,14 @@ bool CServer::tick(unsigned int msecs)
 {
 	assert(_scene);
 
-	// Empezar la simulación física. Actualmente usamos intervalos de tiempo variables,
+	// Empezar la simulaciï¿½n fï¿½sica. Actualmente usamos intervalos de tiempo variables,
 	// debemos tener cuidado porque PhysX puede no comportarse bien si el tiempo 
 	// transcurrido es demasiado grande.
 	_scene->simulate(msecs / 1000.0f);
 
-	// Esperamos a que la simulación física termine. En principio podríamos utilizar
-	// este intervalo de tiempo para hacer algo más útil. Existe una versión de este
-	// método no bloqueante.
+	// Esperamos a que la simulaciï¿½n fï¿½sica termine. En principio podrï¿½amos utilizar
+	// este intervalo de tiempo para hacer algo mï¿½s ï¿½til. Existe una versiï¿½n de este
+	// mï¿½todo no bloqueante.
 	return _scene->fetchResults(true);
 } 
 
@@ -286,18 +286,18 @@ PxRigidStatic* CServer::createPlane(const Vector3 &point, const Vector3 &normal,
 {
 	assert(_scene);
 
-	// Crear un plano estático
+	// Crear un plano estï¿½tico
 	PxPlane plane(Vector3ToPxVec3(point), Vector3ToPxVec3(normal));
 	PxMaterial *material = _defaultMaterial;
 	PxRigidStatic *actor = PxCreatePlane(*_physics, plane, *material);
 	
-	// Anotar el componente lógico asociado a la entidad física
+	// Anotar el componente lï¿½gico asociado a la entidad fï¿½sica
 	actor->userData = (void *) component;
 
-	// Establecer el grupo de colisión
+	// Establecer el grupo de colisiï¿½n
 	PxSetGroup(*actor, group);
 	
-	// Añadir el actor a la escena
+	// Aï¿½adir el actor a la escena
 	_scene->addActor(*actor);
 
 	return actor;
@@ -311,16 +311,16 @@ PxRigidStatic* CServer::createStaticBox(const Vector3 &position, const Vector3 &
 	assert(_scene);
 
 	// Nota: PhysX coloca el sistema de coordenadas local en el centro de la caja, mientras
-	// que la lógica asume que el origen del sistema de coordenadas está en el centro de la 
-	// cara inferior. Para unificar necesitamos realizar una traslación en el eje Y.
+	// que la lï¿½gica asume que el origen del sistema de coordenadas estï¿½ en el centro de la 
+	// cara inferior. Para unificar necesitamos realizar una traslaciï¿½n en el eje Y.
 	// Afortunadamente, el descriptor que se usa para crear el actor permite definir esta 
-	// transformación local, por lo que la conversión entre sistemas de coordenadas es transparente. 
+	// transformaciï¿½n local, por lo que la conversiï¿½n entre sistemas de coordenadas es transparente. 
 	
-	// Crear un cubo estático
+	// Crear un cubo estï¿½tico
 	PxTransform pose(Vector3ToPxVec3(position));
 	PxBoxGeometry geom(Vector3ToPxVec3(dimensions));
 	PxMaterial *material = _defaultMaterial;
-	PxTransform localPose(PxVec3(0, dimensions.y, 0)); // Transformación de coordenadas lógicas a coodenadas de PhysX
+	PxTransform localPose(PxVec3(0, dimensions.y, 0)); // Transformaciï¿½n de coordenadas lï¿½gicas a coodenadas de PhysX
 	PxRigidStatic *actor = PxCreateStatic(*_physics, pose, geom, *material, localPose);
 	
 	// Transformarlo en trigger si es necesario
@@ -331,13 +331,13 @@ PxRigidStatic* CServer::createStaticBox(const Vector3 &position, const Vector3 &
 		shape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
 	}
 
-	// Anotar el componente lógico asociado a la entidad física
+	// Anotar el componente lï¿½gico asociado a la entidad fï¿½sica
 	actor->userData = (void *) component;
 
-	// Establecer el grupo de colisión
+	// Establecer el grupo de colisiï¿½n
 	PxSetGroup(*actor, group);
 
-	// Añadir el actor a la escena
+	// Aï¿½adir el actor a la escena
 	_scene->addActor(*actor);
 	
 	return actor;
@@ -352,19 +352,19 @@ PxRigidDynamic* CServer::createDynamicBox(const Vector3 &position, const Vector3
 	assert(_scene);
 
 	// Nota: PhysX coloca el sistema de coordenadas local en el centro de la caja, mientras
-	// que la lógica asume que el origen del sistema de coordenadas está en el centro de la 
-	// cara inferior. Para unificar necesitamos realizar una traslación en el eje Y.
+	// que la lï¿½gica asume que el origen del sistema de coordenadas estï¿½ en el centro de la 
+	// cara inferior. Para unificar necesitamos realizar una traslaciï¿½n en el eje Y.
 	// Afortunadamente, el descriptor que se usa para crear el actor permite definir esta 
-	// transformación local, por lo que la conversión entre sistemas de coordenadas es transparente. 
+	// transformaciï¿½n local, por lo que la conversiï¿½n entre sistemas de coordenadas es transparente. 
 
-	// Crear un cubo dinámico
+	// Crear un cubo dinï¿½mico
 	PxTransform pose(Vector3ToPxVec3(position));
 	PxBoxGeometry geom(Vector3ToPxVec3(dimensions));
 	PxMaterial *material = _defaultMaterial;
 	float density = mass / (dimensions.x * dimensions.y * dimensions.z);
-	PxTransform localPose(PxVec3(0, dimensions.y, 0)); // Transformación de coordenadas lógicas a coodenadas de PhysX
+	PxTransform localPose(PxVec3(0, dimensions.y, 0)); // Transformaciï¿½n de coordenadas lï¿½gicas a coodenadas de PhysX
 
-	// Crear cubo dinámico o cinemático
+	// Crear cubo dinï¿½mico o cinemï¿½tico
 	PxRigidDynamic *actor;
 	if (kinematic)
 		actor = PxCreateKinematic(*_physics, pose, geom, *material, density, localPose);
@@ -379,13 +379,13 @@ PxRigidDynamic* CServer::createDynamicBox(const Vector3 &position, const Vector3
 		shape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
 	}
 
-	// Anotar el componente lógico asociado a la entidad física
+	// Anotar el componente lï¿½gico asociado a la entidad fï¿½sica
 	actor->userData = (void *) component;
 
-	// Establecer el grupo de colisión
+	// Establecer el grupo de colisiï¿½n
 	PxSetGroup(*actor, group);
 
-	// Añadir el actor a la escena
+	// Aï¿½adir el actor a la escena
 	_scene->addActor(*actor);
 
 	return actor;
@@ -397,7 +397,7 @@ PxRigidActor* CServer::createFromFile(const std::string &file, int group, const 
 {
 	assert(_scene);
 
-	// Preparar parámetros para deserializar
+	// Preparar parï¿½metros para deserializar
 	PxSerializationRegistry* registry = PxSerialization::createSerializationRegistry(*_physics); 
 	PxDefaultFileInputData data(file.c_str());
 	PxCollection* collection;
@@ -405,7 +405,7 @@ PxRigidActor* CServer::createFromFile(const std::string &file, int group, const 
 	// Deserializar a partir del fichero RepX
 	collection = PxSerialization::createCollectionFromXml(data, *_cooking, *registry);
 	
-	// Añadir entidades físicas a la escena
+	// Aï¿½adir entidades fï¿½sicas a la escena
 	_scene->addCollection(*collection); 
 	
 	// Buscar una entidad de tipo PxRigidActor. Asumimos que hay exactamente 1 en el fichero.
@@ -415,10 +415,10 @@ PxRigidActor* CServer::createFromFile(const std::string &file, int group, const 
 	}
 	assert(actor);
 	
-	// Anotar el componente lógico asociado a la entidad física
+	// Anotar el componente lï¿½gico asociado a la entidad fï¿½sica
 	actor->userData = (void *) component;
 
-	// Establecer el grupo de colisión
+	// Establecer el grupo de colisiï¿½n
 	PxSetGroup(*actor, group);
 
 	// Liberar recursos
@@ -447,7 +447,7 @@ Matrix4 CServer::getActorTransform(const PxRigidActor *actor)
 {
 	assert(actor);
 
-	// Devolver la posición y orientación en coordenadas lógicas
+	// Devolver la posiciï¿½n y orientaciï¿½n en coordenadas lï¿½gicas
 	return PxTransformToMatrix4(actor->getGlobalPose());
 }
 
@@ -458,7 +458,7 @@ void CServer::moveKinematicActor(physx::PxRigidDynamic *actor, const Matrix4 &tr
 	assert(actor);
 	assert(isKinematic(actor));
 
-	// Mover el actor tras transformar el destino a coordenadas lógicas
+	// Mover el actor tras transformar el destino a coordenadas lï¿½gicas
 	actor->setKinematicTarget(Matrix4ToPxTransform(transform));
 }
 
@@ -491,14 +491,14 @@ PxCapsuleController* CServer::createCapsuleController(const Vector3 &position, f
 {
 	assert(_scene);
 
-	// Nota: PhysX coloca el sistema de coordenadas local en el centro de la cápsula, mientras
-	// que la lógica asume que el origen del sistema de coordenadas está en los piés del 
-	// jugador. Para unificar necesitamos realizar una traslación en el eje Y.
+	// Nota: PhysX coloca el sistema de coordenadas local en el centro de la cï¿½psula, mientras
+	// que la lï¿½gica asume que el origen del sistema de coordenadas estï¿½ en los piï¿½s del 
+	// jugador. Para unificar necesitamos realizar una traslaciï¿½n en el eje Y.
 	// Desafortunadamente, el descriptor que se usa para crear los controllers no permite
-	// definir esta transformación local (que sí permite al crear un actor), por lo que
-	// tendremos que realizar la traslación nosotros cada vez. 
+	// definir esta transformaciï¿½n local (que sï¿½ permite al crear un actor), por lo que
+	// tendremos que realizar la traslaciï¿½n nosotros cada vez. 
 
-	// Transformación entre el sistema de coordenadas lógico y el de PhysX
+	// Transformaciï¿½n entre el sistema de coordenadas lï¿½gico y el de PhysX
 	float offsetY = height / 2.0f + radius;
 	PxVec3 pos = Vector3ToPxVec3(position + Vector3(0, offsetY, 0));
 	
@@ -512,11 +512,11 @@ PxCapsuleController* CServer::createCapsuleController(const Vector3 &position, f
 	//desc.climbingMode = PxCapsuleClimbingMode::eCONSTRAINED;
 	//desc.slopeLimit = 0.707f;
 	desc.reportCallback = _collisionManager;   // Establecer gestor de colisiones
-	desc.userData = (void *) component;  // Anotar el componente lógico asociado al controller
+	desc.userData = (void *) component;  // Anotar el componente lï¿½gico asociado al controller
 	
 	PxCapsuleController *controller = (PxCapsuleController *) _controllerManager->createController(desc);
 	
-	// Anotar el componente lógico asociado al actor dentro del controller (No es automático)
+	// Anotar el componente lï¿½gico asociado al actor dentro del controller (No es automï¿½tico)
 	controller->getActor()->userData = (void *) component;
 
 	return controller;
@@ -528,7 +528,7 @@ unsigned CServer::moveController(PxController *controller, const Vector3 &moveme
 {
 	assert(_scene);
 
-	// Mover el character controller y devolver los flags de colisión
+	// Mover el character controller y devolver los flags de colisiï¿½n
 	PxVec3 disp = Vector3ToPxVec3(movement);
 	float minDist = 0.01f;
 	float elapsedTime = msecs / 1000.0f;
@@ -543,8 +543,8 @@ Vector3 CServer::getControllerPosition(const PxCapsuleController *controller)
 {
 	assert(_scene);
 
-	// Antes de devolver la posición del controller debemos transformar entre el 
-	// sistema de coordenadas de PhysX y el de la lógica
+	// Antes de devolver la posiciï¿½n del controller debemos transformar entre el 
+	// sistema de coordenadas de PhysX y el de la lï¿½gica
 	float offsetY = controller->getHeight() / 2.0f + controller->getRadius();
 	Vector3 pos = PxExtendedVec3ToVector3(controller->getPosition());
 	return pos - Vector3(0, offsetY, 0);
@@ -556,7 +556,7 @@ void CServer::setControllerPosition(PxCapsuleController *controller, const Vecto
 {
 	assert(_scene);
 
-	// Mover el character controller y devolver los flags de colisión
+	// Mover el character controller y devolver los flags de colisiï¿½n
 	float offsetY = controller->getHeight() / 2.0f + controller->getRadius();
 	PxExtendedVec3 pos = Vector3ToPxExtendedVec3(position+Vector3(0,offsetY,0));
 	controller->setPosition(pos);
@@ -577,25 +577,25 @@ Logic::CEntity* CServer::raycastClosest (const Ray& ray, float maxDist) const
 {
 	assert(_scene);
 
-	// Establecer parámetros del rayo
+	// Establecer parï¿½metros del rayo
 	PxVec3 origin = Vector3ToPxVec3(ray.getOrigin());      // origen     
-	PxVec3 unitDir = Vector3ToPxVec3(ray.getDirection());  // dirección normalizada   
-	PxReal maxDistance = maxDist;                          // distancia máxima
+	PxVec3 unitDir = Vector3ToPxVec3(ray.getDirection());  // direcciï¿½n normalizada   
+	PxReal maxDistance = maxDist;                          // distancia mï¿½xima
 	PxRaycastHit hit;                 
 
-	// Información que queremos recuperar de la posible colisión
+	// Informaciï¿½n que queremos recuperar de la posible colisiï¿½n
 	//const PxSceneQueryFlags outputFlags = PxSceneQueryFlag::eDISTANCE | PxSceneQueryFlag::eIMPACT | PxSceneQueryFlag::eNORMAL;
 	const PxSceneQueryFlags outputFlags;
 
 	// Lanzar el rayo
 	bool intersection = _scene->raycastSingle(origin, unitDir, maxDistance, outputFlags, hit);
 
-	// IMPORTANTE: aunque se haya llamado al método move de los controllers y al consultar su posición
-	// esta aparezca actualizada, sus actores asociados no se habrán desplazado aún. La consecuencia
+	// IMPORTANTE: aunque se haya llamado al mï¿½todo move de los controllers y al consultar su posiciï¿½n
+	// esta aparezca actualizada, sus actores asociados no se habrï¿½n desplazado aï¿½n. La consecuencia
 	// es que se pueden recuperar colisiones inesperadas.
 
 	if (intersection) {
-		// Devolver entidad lógica asociada a la entidad física impactada
+		// Devolver entidad lï¿½gica asociada a la entidad fï¿½sica impactada
 		IPhysics *component = (IPhysics *) hit.shape->getActor()->userData;
 		return component->getEntity();
 	} else {
@@ -609,10 +609,10 @@ Logic::CEntity* CServer::raycastClosest(const Ray& ray, float maxDist, int group
 {
 	assert(_scene);
 
-	// Establecer parámetros del rayo
+	// Establecer parï¿½metros del rayo
 	PxVec3 origin = Vector3ToPxVec3(ray.getOrigin());      // origen     
-	PxVec3 unitDir = Vector3ToPxVec3(ray.getDirection());  // dirección normalizada   
-	PxReal maxDistance = maxDist;                          // distancia máxima
+	PxVec3 unitDir = Vector3ToPxVec3(ray.getDirection());  // direcciï¿½n normalizada   
+	PxReal maxDistance = maxDist;                          // distancia mï¿½xima
 	PxRaycastHit hit;                 
 	const PxSceneQueryFlags outputFlags;				   // Info que queremos recuperar	
 
@@ -621,7 +621,7 @@ Logic::CEntity* CServer::raycastClosest(const Ray& ray, float maxDist, int group
 	bool blockingHit;
 	PxI32 nHits = _scene->raycastMultiple(origin, unitDir, maxDistance, outputFlags, hits, 64, blockingHit); 
 	
-	// Buscar un actot que pertenezca al grupo de colisión indicado
+	// Buscar un actot que pertenezca al grupo de colisiï¿½n indicado
 	for (int i=0; i<nHits; i++) {
 		PxRigidActor *actor = hits[i].shape->getActor();
 		if (PxGetGroup(*actor) == group) {
@@ -634,7 +634,7 @@ Logic::CEntity* CServer::raycastClosest(const Ray& ray, float maxDist, int group
 
 	return NULL;
 
-	// Nota: seguro que se puede hacer de manera mucho más eficiente usando los filtros
+	// Nota: seguro que se puede hacer de manera mucho mï¿½s eficiente usando los filtros
 	// de PhysX.
 }
 

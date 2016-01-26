@@ -13,6 +13,7 @@ una entidad que tiene dos estado (posiciones) para ir de una a otra.
 #ifndef __Logic_SwitchPosition_H
 #define __Logic_SwitchPosition_H
 
+#include "BaseSubsystems/Math.h"
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 

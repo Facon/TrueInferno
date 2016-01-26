@@ -1,35 +1,35 @@
 /**
 @file Conversions.h
 
-Funciones auxiliares para convertir entre los tipos de PhysX y los tipos de la lógica. 
+Funciones auxiliares para convertir entre los tipos de PhysX y los tipos de la lï¿½gica. 
 
-@author Antonio Sánchez Ruiz-Granados
+@author Antonio Sï¿½nchez Ruiz-Granados
 @date Noviembre, 2012
 */
 
 #ifndef	__PHYSICS_CONVERSIONS_H_
 #define	__PHYSICS_CONVERSIONS_H_
 
-#include "BaseSubsystems/Math.h"
-
 #include <foundation/PxVec3.h> 
 #include <foundation/PxTransform.h>
 #include <foundation/PxMat44.h>
 #include <characterkinematic/PxExtended.h>
 
+#include "BaseSubsystems/Math.h"
 
-// Namespace que contiene las clases relacionadas con la parte física. 
+
+// Namespace que contiene las clases relacionadas con la parte fï¿½sica. 
 namespace Physics {
 
 	/**
-	Transforma un vector lógico al equivalente en PhysX.
+	Transforma un vector lï¿½gico al equivalente en PhysX.
 	*/
 	inline physx::PxVec3 Vector3ToPxVec3(const Vector3 &v) {
 		return physx::PxVec3(v.x, v.y, v.z);
 	}
 
 	/**
-	Transforma un vector de PshysX al equivalente lógico.
+	Transforma un vector de PshysX al equivalente lï¿½gico.
 	*/
 	inline Vector3 PxVec3ToVector3(const physx::PxVec3 &v) {
 		return Vector3(v.x, v.y, v.z);
@@ -37,21 +37,21 @@ namespace Physics {
 
 
 	/**
-	Transforma un vector lógico al equivalente vector extendido de PhysX.
+	Transforma un vector lï¿½gico al equivalente vector extendido de PhysX.
 	*/
 	inline physx::PxExtendedVec3 Vector3ToPxExtendedVec3(const Vector3 &v) {
 		return physx::PxExtendedVec3(v.x, v.y, v.z);
 	}
 
 	/**
-	Transforma un vector extendido de PshysX al equivalente lógico.
+	Transforma un vector extendido de PshysX al equivalente lï¿½gico.
 	*/
 	inline Vector3 PxExtendedVec3ToVector3(const physx::PxExtendedVec3 &v) {
 		return Vector3((float) v.x, (float) v.y, (float) v.z);
 	}
 
 	/**
-	Transforma un Transform de PhysX a una matriz 4x4 lógica equivalente.
+	Transforma un Transform de PhysX a una matriz 4x4 lï¿½gica equivalente.
 	*/
 	inline Matrix4 PxTransformToMatrix4(const physx::PxTransform &t) {
 		physx::PxMat44 m(t);
@@ -63,7 +63,7 @@ namespace Physics {
 	}
 
 	/**
-	Transforma una matriz 4x4 lógica en un Transform de PhysX equivalente.
+	Transforma una matriz 4x4 lï¿½gica en un Transform de PhysX equivalente.
 	*/
 	inline physx::PxTransform Matrix4ToPxTransform(const Matrix4 &m) {
 		physx::PxMat44 pm(physx::PxVec4(m[0][0], m[1][0], m[2][0], m[3][0]),

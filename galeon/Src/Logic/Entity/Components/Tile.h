@@ -1,11 +1,13 @@
 #ifndef TILE_H_
 #define TILE_H_
 
+#include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 #include "Logic/Maps/Managers/TileManager.h"
 
 namespace Logic {
 	class Tile : public IComponent{
+		RTTI_DECL;
 		DEC_FACTORY(Tile);
 
 	public:
@@ -15,23 +17,20 @@ namespace Logic {
 		Tile();
 
 		/**
-		Inicialización del componente usando la descripción de la entidad que hay en
+		Inicializaciï¿½n del componente usando la descripciï¿½n de la entidad que hay en
 		el fichero de mapa.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
-		/**
-		Aceptación de mensajes
-		*/
+        /*
+		// AceptaciÃ³n de mensajes
 		virtual bool accept(const TMessage &message);
 
-		/**
-		Procesamiento de mensajes
-		*/
+		// Procesamiento de mensajes
 		virtual void process(const TMessage &message);
-
+        */
 		/**
-		Actualización por frame
+		Actualizaciï¿½n por frame
 		*/
 		virtual void tick(unsigned int msecs);
 

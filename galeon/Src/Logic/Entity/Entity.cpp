@@ -248,6 +248,10 @@ namespace Logic
                 // Manipular componente haciendo casting
                 CAnimatedGraphics& obj = static_cast<CAnimatedGraphics&>(*(*it));
 
+                //obj.handlemsg(msg);
+
+                obj.handleAnimationMessage(msg);
+
                 // Hacer movidas con obj y msg
 
                 return true;
@@ -261,6 +265,11 @@ namespace Logic
     {
 		return false;
 	}
+
+    bool CEntity::HandleMessage(const PhysicMessage& msg)
+    {
+        return false;
+    }
 
 	bool CEntity::HandleMessage(const TouchMessage& msg)
     {

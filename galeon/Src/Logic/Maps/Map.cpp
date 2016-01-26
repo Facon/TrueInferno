@@ -1,11 +1,11 @@
 /**
 @file Map.cpp
 
-Contiene la implementación de la clase CMap, Un mapa lógico.
+Contiene la implementaciï¿½n de la clase CMap, Un mapa lï¿½gico.
 
 @see Logic::Map
 
-@author David Llansó
+@author David Llansï¿½
 @date Agosto, 2010
 */
 
@@ -21,7 +21,7 @@ Contiene la implementación de la clase CMap, Un mapa lógico.
 
 #include <cassert>
 
-// HACK. Debería leerse de algún fichero de configuración
+// HACK. Deberï¿½a leerse de algï¿½n fichero de configuraciï¿½n
 #define MAP_FILE_PATH "./media/maps/"
 
 namespace Logic {
@@ -35,10 +35,10 @@ namespace Logic {
 		if(!Map::CMapParser::getSingletonPtr()->parseFile(completePath))
 		{
 			assert(!"No se ha podido parsear el mapa.");
-			return false;
+			return nullptr;
 		}
 
-		// Si se ha realizado con éxito el parseo creamos el mapa.
+		// Si se ha realizado con ï¿½xito el parseo creamos el mapa.
 		CMap *map = new CMap(filename);
 
 		// Extraemos las entidades del parseo.
@@ -51,10 +51,10 @@ namespace Logic {
 		it = entityList.begin();
 		end = entityList.end();
 
-		// Creamos todas las entidades lógicas.
+		// Creamos todas las entidades lï¿½gicas.
 		for(; it != end; it++)
 		{
-			// La propia factoría se encarga de añadir la entidad al mapa.
+			// La propia factorï¿½a se encarga de aï¿½adir la entidad al mapa.
 			CEntity *entity = entityFactory->createEntity((*it),map);
 			assert(entity && "No se pudo crear una entidad del mapa");
 		}
@@ -168,7 +168,7 @@ namespace Logic {
 		it = _entityMap.begin();
 		end = _entityMap.end();
 
-		// Eliminamos todas las entidades. La factoría se encarga de
+		// Eliminamos todas las entidades. La factorï¿½a se encarga de
 		// desactivarlas y sacarlas previamente del mapa.
 		while(it != end)
 		{
@@ -198,8 +198,8 @@ namespace Logic {
 		TEntityMap::const_iterator it, end;
 		end = _entityMap.end();
 
-		// Si se definió entidad desde la que comenzar la búsqueda 
-		// cogemos su posición y empezamos desde la siguiente.
+		// Si se definiï¿½ entidad desde la que comenzar la bï¿½squeda 
+		// cogemos su posiciï¿½n y empezamos desde la siguiente.
 		if (start)
 		{
 			it = _entityMap.find(start->getEntityID());
@@ -217,7 +217,7 @@ namespace Logic {
 			if (!(*it).second->getName().compare(name))
 				return (*it).second;
 		}
-		// si no se encontró la entidad devolvemos NULL.
+		// si no se encontrï¿½ la entidad devolvemos NULL.
 		return 0;
 
 	} // getEntityByName
@@ -229,8 +229,8 @@ namespace Logic {
 		TEntityMap::const_iterator it, end;
 		end = _entityMap.end();
 
-		// Si se definió entidad desde la que comenzar la búsqueda 
-		// cogemos su posición y empezamos desde la siguiente.
+		// Si se definiï¿½ entidad desde la que comenzar la bï¿½squeda 
+		// cogemos su posiciï¿½n y empezamos desde la siguiente.
 		if (start)
 		{
 			it = _entityMap.find(start->getEntityID());
@@ -248,7 +248,7 @@ namespace Logic {
 			if (!(*it).second->getType().compare(type))
 				return (*it).second;
 		}
-		// si no se encontró la entidad devolvemos NULL.
+		// si no se encontrï¿½ la entidad devolvemos NULL.
 		return 0;
 
 	} // getEntityByType

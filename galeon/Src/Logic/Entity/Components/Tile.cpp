@@ -9,6 +9,7 @@
 #include <cassert>
 
 namespace Logic {
+	RTTI_ROOT_IMPL(Tile);
 	IMP_FACTORY(Tile);
 
 	Tile::Tile() : IComponent() {
@@ -29,6 +30,7 @@ namespace Logic {
 		return true;
 	} // spawn
 
+	/*
 	bool Tile::accept(const TMessage &message){
 		return true;
 	} // accept
@@ -36,6 +38,7 @@ namespace Logic {
 	void Tile::process(const TMessage &message){
 
 	} // process
+	*/
 
 	void Tile::tick(unsigned int msecs){
 	} // tick

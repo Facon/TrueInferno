@@ -51,7 +51,7 @@ namespace Logic
 	} // deactivate
 	
 	//---------------------------------------------------------
-
+	/*
 	bool CAvatarController::accept(const TMessage &message)
 	{
 		return message._type == Message::CONTROL;
@@ -82,7 +82,7 @@ namespace Logic
 		}
 
 	} // process
-	
+	*/
 	//---------------------------------------------------------
 
 	void CAvatarController::turn(float amount) 
@@ -98,12 +98,12 @@ namespace Logic
 		_walking = true;
 
 		// Cambiamos la animaci�n
-		TMessage message;
-		message._type = Message::SET_ANIMATION;
-		message._string = "Walk";
-		message._bool = true;
-		_entity->emitMessage(message,this);
+		AnimationMessage msg;
+		msg._type = MessageType::SET_ANIMATION;
+		msg._action = "Walk";
+		msg._activated = true;
 
+		msg.Dispatch(*_entity);
 	} // walk
 	
 	//---------------------------------------------------------
@@ -113,12 +113,12 @@ namespace Logic
 		_walkingBack = true;
 
 		// Cambiamos la animaci�n
-		TMessage message;
-		message._type = Message::SET_ANIMATION;
-		message._string = "WalkBack";
-		message._bool = true;
-		_entity->emitMessage(message,this);
+		AnimationMessage msg;
+		msg._type = MessageType::SET_ANIMATION;
+		msg._action = "WalkBack";
+		msg._activated = true;
 
+		msg.Dispatch(*_entity);
 	} // walkBack
 	
 	//---------------------------------------------------------
@@ -131,11 +131,12 @@ namespace Logic
 		// lateralmente
 		if(!(_strafingLeft || _strafingRight))
 		{
-			TMessage message;
-			message._type = Message::SET_ANIMATION;
-			message._string = "Idle";
-			message._bool = true;
-			_entity->emitMessage(message,this);
+			AnimationMessage msg;
+			msg._type = MessageType::SET_ANIMATION;
+			msg._action = "Idle";
+			msg._activated = true;
+
+            msg.Dispatch(*_entity);
 		}
 
 	} // stopWalk
@@ -147,12 +148,12 @@ namespace Logic
 		_strafingLeft = true;
 
 		// Cambiamos la animaci�n
-		TMessage message;
-		message._type = Message::SET_ANIMATION;
-		message._string = "StrafeLeft";
-		message._bool = true;
-		_entity->emitMessage(message,this);
+		AnimationMessage msg;
+		msg._type = MessageType::SET_ANIMATION;
+		msg._action = "StrafeLeft";
+		msg._activated = true;
 
+        msg.Dispatch(*_entity);
 	} // walk
 	
 	//---------------------------------------------------------
@@ -162,12 +163,12 @@ namespace Logic
 		_strafingRight = true;
 
 		// Cambiamos la animaci�n
-		TMessage message;
-		message._type = Message::SET_ANIMATION;
-		message._string = "StrafeRight";
-		message._bool = true;
-		_entity->emitMessage(message,this);
+		AnimationMessage msg;
+		msg._type = MessageType::SET_ANIMATION;
+		msg._action = "StrafeRight";
+		msg._activated = true;
 
+        msg.Dispatch(*_entity);
 	} // walkBack
 	
 	//---------------------------------------------------------
@@ -179,11 +180,12 @@ namespace Logic
 		// Cambiamos la animaci�n si no seguimos andando
 		if(!(_walking || _walkingBack))
 		{
-			TMessage message;
-			message._type = Message::SET_ANIMATION;
-			message._string = "Idle";
-			message._bool = true;
-			_entity->emitMessage(message,this);
+			AnimationMessage message;
+			message._type = MessageType::SET_ANIMATION;
+			message._action = "Idle";
+			message._activated = true;
+
+            message.Dispatch(*_entity);
 		}
 
 	} // stopWalk
@@ -226,10 +228,11 @@ namespace Logic
 			direction *= msecs * _speed;
 
 			// Enviar un mensaje para que el componente f�sico mueva el personaje
-			TMessage message;
-			message._type = Message::AVATAR_WALK;
-			message._vector3 = direction;
-			_entity->emitMessage(message);
+			PhysicMessage message;
+			message._type = MessageType::AVATAR_WALK;
+			message._point = direction;
+
+            message.Dispatch(*_entity);
 
 			//Vector3 newPosition = _entity->getPosition() + direction;
 			//_entity->setPosition(newPosition);
