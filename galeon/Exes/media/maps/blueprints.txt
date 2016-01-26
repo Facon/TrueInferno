@@ -2,3 +2,6 @@ Entity CGraphics
 AnimatedEntity CAnimatedGraphics
 Camera CCamera
 Tile CGraphics CPhysicEntity Tile
+HellQuarters CGraphics CPhysicEntity Placeable
+Evilator CGraphics CPhysicEntity Placeable
+Road CGraphics CPhysicEntity Placeable

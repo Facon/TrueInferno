@@ -7,6 +7,7 @@ Map = {
 	},
 	
 	Tile = {
+		prefab = true,
 		type = "Tile",
 		position = {0, 0, 0},
 		scale = {0.02, 0.01, 0.02},
@@ -19,7 +20,44 @@ Map = {
 		physic_shape = "box",
 		physic_dimensions = { 1, 0.5, 1 },
 		physic_group = 0,
+	},
+	
+	HellQuarters = {
 		prefab = true,
+		type="HellQuarters",
+		position = {2, 0.5, 2},
+		scale = {0.02, 0.01, 0.02},
+		orientation = 0,
+		model = "cube.mesh",
+		static = true,
+		visible = true,
+		physic_entity = "rigid",
+		physic_type = "static",
+		physic_shape = "box",
+		physic_dimensions = { 1, 2, 1 },
+		physic_group = 0,
+		floor_absolute_position0 = {5, 0, 5},
+		floor_relative_position1 = {1, 0, 0},
+		floor_relative_position2 = {0, 0, 1},
+		floor_relative_position3 = {1, 0, 1},
+	},
+	
+	Evilator = {
+		prefab = true,
+		type="Evilator",
+		position = {10, 0.5, 10},
+		scale = {0.02, 0.01, 0.02},
+		orientation = 0,
+		model = "cube.mesh",
+		static = true,
+		visible = true,
+		physic_entity = "rigid",
+		physic_type = "static",
+		physic_shape = "box",
+		physic_dimensions = { 1, 2, 1 },
+		physic_group = 0,
+		floor_absolute_position0 = {10, 0, 10},
+		floor_relative_position1 = {1, 0, 0},
 	},
 	
 }

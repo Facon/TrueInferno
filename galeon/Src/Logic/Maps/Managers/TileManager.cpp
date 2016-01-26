@@ -161,6 +161,29 @@ namespace Logic {
 		// Read the terrain configuration
 		loadTerrain(TERRAIN_MAP_FILE);
 
+		// TODO TEST
+		Map::CEntity *prefab = nullptr;
+		for (it = mapEntityList.begin(); it != mapEntityList.end(); ++it) {
+			if ((*it)->getType() == "HellQuarters") {
+				prefab = *it;
+				break;
+			}
+		}
+		prefab->setAttribute("prefab", "false");
+		prefab->setAttribute("floor_absolute_position0", "5 0 5");
+		entityFactory->createEntity(prefab, map);
+
+		prefab = nullptr;
+		for (it = mapEntityList.begin(); it != mapEntityList.end(); ++it) {
+			if ((*it)->getType() == "Evilator") {
+				prefab = *it;
+				break;
+			}
+		}
+		prefab->setAttribute("prefab", "false");
+		prefab->setAttribute("floor_absolute_position0", "10 0 10");
+		entityFactory->createEntity(prefab, map);
+
 	} // loadInitialMatrix
 
 	//--------------------------------------------------------
