@@ -21,7 +21,7 @@ public class Controller : MonoBehaviour {
 	void Update () {
 
         if (bGenerator.newBuilding){
-            if (mMove.BuildingMouseMove(bGenerator.newBuilding, Input.GetMouseButtonDown(0), bGenerator.bRoad, road)){
+            if (mMove.BuildingMouseMove(bGenerator.newBuilding, Input.GetMouseButtonDown(0), bGenerator.bRoad, road, bGenerator.bShovel, bGenerator.bRepairTool)){
                 //bGenerator.newBuilding.SendMessage("buildingBuilt", SendMessageOptions.DontRequireReceiver);
                 bGenerator.newBuilding = null;
                 UnityEngine.Cursor.visible = true;

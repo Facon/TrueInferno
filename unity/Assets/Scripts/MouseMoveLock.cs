@@ -24,9 +24,10 @@ public class MouseMoveLock : MonoBehaviour {
 
 
     // Returns true if the building has been placed
-    public bool BuildingMouseMove(GameObject building, bool placeBuilding, bool bRoad, GameObject road) 
+    public bool BuildingMouseMove(GameObject building, bool placeBuilding, bool bRoad, GameObject road, bool bShovel, bool bRepairTool) 
     {
         bValidPosition = false;
+        GameObject tileBuilding = null;
         float raycastLength = 1000;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, raycastLength);
@@ -56,23 +57,49 @@ public class MouseMoveLock : MonoBehaviour {
 						posZ += 0.5f;
 
                     building.transform.position = new Vector3(posX, posY, posZ);
-                    bValidPosition = checkValidPosition(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
+
+                    if (!bRepairTool)
+                        bValidPosition = checkValidPosition(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
+                    else
+                    {
+                        tileBuilding = GetTileBuilding(hits[i].collider.gameObject.GetComponent<Tile>());
+                        if (tileBuilding != null)
+                            bValidPosition = checkValidRepairPosition(tileBuilding);
+                    }
 
                     Renderer rend = building.GetComponent<Renderer>();
                     if (placeBuilding && bValidPosition)
                     {
                         if (!bRoad)
                         {
-                            tm.buildingList.Add(building);
+                            if (!bShovel)
+                            {
+                                if (!bRepairTool)
+                                {
+                                    tm.buildingList.Add(building);
 
-                            rend.material.SetColor("_SpecColor", Color.black);
-                            setOcuppiedTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
-                            building.transform.position = new Vector3(posX, posY - 0.5f, posZ);
-                            
-                            // Notify building it has been placed if some component wants to do something
-                            building.SendMessage("buildingBuilt", SendMessageOptions.DontRequireReceiver);
+                                    rend.material.SetColor("_SpecColor", Color.black);
+                                    setOcuppiedTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
+                                    building.transform.position = new Vector3(posX, posY - 0.5f, posZ);
 
-                            return true;
+                                    // Notify building it has been placed if some component wants to do something
+                                    building.SendMessage("buildingBuilt", SendMessageOptions.DontRequireReceiver);
+
+                                    return true;
+                                }
+                                else
+                                {
+                                    tileBuilding.GetComponent<BuildingDestructor>().AvoidDestruction();
+                                    Destroy(building);
+                                    return true;
+                                }
+                            }
+                            else
+                            {
+                                setFreeTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
+                                Destroy(building);
+                                return true;
+                            }
                         }
                         else {
                             if (startPoint == null)
@@ -116,6 +143,29 @@ public class MouseMoveLock : MonoBehaviour {
         return false;
     }
 
+    GameObject GetTileBuilding(Tile tile)
+    {
+        Building buildcomp;
+        
+        foreach (GameObject building in tm.buildingList) {
+
+            buildcomp = building.GetComponent<Building>();
+
+            foreach (Tile buildingTile in buildcomp.getTiles()) {
+
+                if (buildingTile == tile) {
+                    return building;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    bool checkValidRepairPosition(GameObject building) {
+        return building.GetComponent<BuildingDestructor>().CheckIncomingDestruction();
+    }
+
     bool checkValidPosition(Building building, uint x, uint z)
     {
 
@@ -141,7 +191,7 @@ public class MouseMoveLock : MonoBehaviour {
             for (int j = liminfZ; j <= limsupZ; ++j)
             {
                 //Debug.Log("Tile "+i+" "+j+" tipo "+tiles[i,j].type+" tipo buscado "+building.validTileType);
-                if ((tiles[i,j].buildingType != TileType.EMPTY)||(tiles[i,j].type != building.validTileType))
+                if ((tiles[i, j].buildingType != TileType.EMPTY && tiles[i, j].buildingType != TileType.RUINS) || (tiles[i, j].type != building.validTileType))
                     return false;
             }
         }
@@ -169,6 +219,32 @@ public class MouseMoveLock : MonoBehaviour {
             {
                 building.addTile(tiles[i, j]);
                 tiles[i,j].buildingType = building.BuildingType;
+            }
+        }
+    }
+
+    public void setFreeTile(Building building, uint x, uint z)
+    {
+        Tile[,] tiles = tm.tiles;
+        int liminfX = 0, liminfZ = 0, limsupX = 0, limsupZ = 0;
+
+        liminfX = (int)x - (int)building.sizeX / 2;
+        limsupX = (int)x + (int)building.sizeX / 2;
+        liminfZ = (int)z - (int)building.sizeZ / 2;
+        limsupZ = (int)z + (int)building.sizeZ / 2;
+
+        if (isEven(building.sizeX)) // Even
+            ++liminfX;
+        if (isEven(building.sizeZ)) // Even
+            ++liminfZ;
+
+        for (int i = liminfX; i <= limsupX; ++i)
+        {
+            for (int j = liminfZ; j <= limsupZ; ++j)
+            {
+                tiles[i, j].buildingType = TileType.EMPTY;
+                tiles[i, j].type = tm.getMapTileType(i,j);
+                tiles[i, j].init();
             }
         }
     }

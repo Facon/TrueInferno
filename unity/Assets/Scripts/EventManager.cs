@@ -15,8 +15,9 @@ public class EventManager : MonoBehaviour {
 
     // Event time controller
     private float remainingDestroyEventTime;
-
     private float previousTime;
+    private bool endGame;
+    private bool gameStart;
 
 	// Use this for initialization
 	void Start () 
@@ -27,6 +28,8 @@ public class EventManager : MonoBehaviour {
         tileManager = GameObject.Find("Map").GetComponent<TileManager>();
         previousTime = 60 * timeManager.minutesTimeLimit;
         remainingDestroyEventTime = destroyInterval;
+        endGame = false;
+        gameStart = true;
 	}
 	
 	// Update is called once per frame
@@ -46,17 +49,27 @@ public class EventManager : MonoBehaviour {
     // Method for event controlling
     void EventChecker() 
     {
+        if (gameStart) {
+            TutorialPopUpEvent();
+        }
+
         if (remainingDestroyEventTime <= 0)
             BuildingDestructionEvent();
 
-        if (timeManager.remainingTime <= 0)
+        if (timeManager.remainingTime <= 0 && !endGame)
             EndGamePopUpEvent();
     }
 
     //Event Methods
-    void EndGamePopUpEvent() {
+    void TutorialPopUpEvent()
+    {
+        gameStart = false;
+        popManager.GenerateTutorialPopUp(0.25f, 0.75f);
+    }
 
-        popManager.GeneratePopUp(0.25f, 0.75f, "Score: "+scoreManager.hadesFavorDisplay.text);
+    void EndGamePopUpEvent() {
+        endGame = true;
+        popManager.GenerateEndGamePopUp(0.25f, 0.75f, "Game Over", "Score: " + scoreManager.hadesFavorDisplay.text);
     }
 
     void BuildingDestructionEvent()
@@ -86,6 +99,7 @@ public class EventManager : MonoBehaviour {
                 targetBuildingDestructor = tileManager.buildingList[UnityEngine.Random.Range(0, tileManager.buildingList.Count)].GetComponent<BuildingDestructor>();
                 if (targetBuildingDestructor != null)
                 {
+                    popManager.GenerateEventPopUp(0.25f, 0.75f, "Building Destruction", "Incoming building destruction", 0, 5f);
                     targetBuildingDestructor.DestroyBuilding(destroyDelay);
                     eventSuccess = true;
                 }
