@@ -24,9 +24,10 @@ public class MouseMoveLock : MonoBehaviour {
 
 
     // Returns true if the building has been placed
-    public bool BuildingMouseMove(GameObject building, bool placeBuilding, bool bRoad, GameObject road, bool bShovel) 
+    public bool BuildingMouseMove(GameObject building, bool placeBuilding, bool bRoad, GameObject road, bool bShovel, bool bRepairTool) 
     {
         bValidPosition = false;
+        GameObject tileBuilding = null;
         float raycastLength = 1000;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, raycastLength);
@@ -56,7 +57,15 @@ public class MouseMoveLock : MonoBehaviour {
 						posZ += 0.5f;
 
                     building.transform.position = new Vector3(posX, posY, posZ);
-                    bValidPosition = checkValidPosition(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
+
+                    if (!bRepairTool)
+                        bValidPosition = checkValidPosition(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
+                    else
+                    {
+                        tileBuilding = GetTileBuilding(hits[i].collider.gameObject.GetComponent<Tile>());
+                        if (tileBuilding != null)
+                            bValidPosition = checkValidRepairPosition(tileBuilding);
+                    }
 
                     Renderer rend = building.GetComponent<Renderer>();
                     if (placeBuilding && bValidPosition)
@@ -65,21 +74,31 @@ public class MouseMoveLock : MonoBehaviour {
                         {
                             if (!bShovel)
                             {
-                                tm.buildingList.Add(building);
+                                if (!bRepairTool)
+                                {
+                                    tm.buildingList.Add(building);
 
-                                rend.material.SetColor("_SpecColor", Color.black);
-                                setOcuppiedTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
-                                building.transform.position = new Vector3(posX, posY - 0.5f, posZ);
+                                    rend.material.SetColor("_SpecColor", Color.black);
+                                    setOcuppiedTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
+                                    building.transform.position = new Vector3(posX, posY - 0.5f, posZ);
 
-                                // Notify building it has been placed if some component wants to do something
-                                building.SendMessage("buildingBuilt", SendMessageOptions.DontRequireReceiver);
+                                    // Notify building it has been placed if some component wants to do something
+                                    building.SendMessage("buildingBuilt", SendMessageOptions.DontRequireReceiver);
 
-                                return true;
+                                    return true;
+                                }
+                                else
+                                {
+                                    tileBuilding.GetComponent<BuildingDestructor>().AvoidDestruction();
+                                    Destroy(building);
+                                    return true;
+                                }
                             }
                             else
                             {
                                 setFreeTile(buildcomp, hits[i].collider.gameObject.GetComponent<Tile>().posX, hits[i].collider.gameObject.GetComponent<Tile>().posZ);
                                 Destroy(building);
+                                return true;
                             }
                         }
                         else {
@@ -122,6 +141,29 @@ public class MouseMoveLock : MonoBehaviour {
             }
         }
         return false;
+    }
+
+    GameObject GetTileBuilding(Tile tile)
+    {
+        Building buildcomp;
+        
+        foreach (GameObject building in tm.buildingList) {
+
+            buildcomp = building.GetComponent<Building>();
+
+            foreach (Tile buildingTile in buildcomp.getTiles()) {
+
+                if (buildingTile == tile) {
+                    return building;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    bool checkValidRepairPosition(GameObject building) {
+        return building.GetComponent<BuildingDestructor>().CheckIncomingDestruction();
     }
 
     bool checkValidPosition(Building building, uint x, uint z)

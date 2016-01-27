@@ -3279,6 +3279,7 @@ MonoBehaviour:
   newRoad: []
   bRoad: 0
   bShovel: 0
+  bRepairTool: 0
 --- !u!114 &1374703419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4620,7 +4621,7 @@ MonoBehaviour:
         m_MethodName: CreateBuilding
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 184852, guid: af8bd9e143839c4439885a8bad928fd4,
+          m_ObjectArgument: {fileID: 187836, guid: abac4f2d5de9ddb4dbe9d386c4489d16,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
@@ -4690,8 +4691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449b7da229df2544a801a3a728f40a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyInterval: 3
-  destroyDelay: 1
+  destroyInterval: 15
+  destroyDelay: 10
   destroyChance: 100
 --- !u!4 &1946938461
 Transform:
