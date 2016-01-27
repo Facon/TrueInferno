@@ -5,7 +5,7 @@ using Assets.Scripts;
 
 public enum TileType
 {
-    EMPTY, OBSTACLE, ROAD, BUILDING
+    EMPTY, OBSTACLE, ROAD, BUILDING, RUINS
 }
 
 public class TileManager : MonoBehaviour
@@ -201,6 +201,12 @@ public class TileManager : MonoBehaviour
                 townHallComp.decreaseNumFreeWorkers();
 
         }
+    }
+
+    public int getMapTileType(int posX, int posZ)
+    {
+        int[,] map = parseMap();
+        return map[posX,posZ];
     }
 
     private int[,] parseMap()

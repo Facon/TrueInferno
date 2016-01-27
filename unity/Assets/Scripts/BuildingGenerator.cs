@@ -6,6 +6,7 @@ public class BuildingGenerator : MonoBehaviour {
     public GameObject newBuilding;
     public List<GameObject> newRoad;
     public bool bRoad;
+    public bool bShovel;
 
     public void start() {
         newBuilding = null;
@@ -31,6 +32,7 @@ public class BuildingGenerator : MonoBehaviour {
             rend.material.SetColor("_SpecColor", Color.red);
         }
         bRoad = (buildcomp.BuildingType==TileType.ROAD);
+        bShovel = (buildcomp.BuildingType == TileType.RUINS);
 		UnityEngine.Cursor.visible = true; // TODO Cambiar a false
     }
 

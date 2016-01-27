@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class BuildingDestructor : MonoBehaviour {
 
+    //private bool avoidDestruction
 
     public void DelayedDestruction(float seconds)
     {
@@ -24,7 +25,9 @@ public class BuildingDestructor : MonoBehaviour {
 
         foreach (Tile tile in tiles)
         {
-            tile.buildingType = TileType.EMPTY;
+            tile.buildingType = TileType.RUINS;
+            tile.type = 3;
+            tile.init();
         }
 
         Destroy(gameObject);
