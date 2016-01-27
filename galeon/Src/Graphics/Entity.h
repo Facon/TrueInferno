@@ -152,6 +152,41 @@ namespace Graphics
 		const Vector3 &getScale();
 
 		/**
+		Cambia las dimensiones de la entidad.
+
+		@param dimensions Dimensiones de la entidad en cada eje.
+		*/
+		void setDimensions(const Vector3 &dimensions);
+
+		/**
+		 Cambia el color de la entidad.
+
+		 @param color Valores (r,g,b) del color interpolados entre 0 y 1.
+		*/
+		void setColor(const Vector3 &color);
+
+		/**
+		 Devuelve el color de la entidad.
+
+		 @return Valores (r,g,b) del color interpolados entre 0 y 1.
+		*/
+		const Vector3 &getColor();
+
+		/**
+		 Cambia el material de la entidad.
+
+		 @param material Nombre del material.
+		*/
+		void setMaterialName(const std::string &materialName);
+
+		/**
+		 Devuelve el material de la entidad.
+
+		 @return Nombre del material.
+		*/
+		const std::string &getMaterialName();
+
+		/**
 		Devuelve la entidad de Ogre.
 
 		@return puntero a la entidad de Ogre.
@@ -242,6 +277,15 @@ namespace Graphics
 		Indica si la entidad ha sido cargada en el motor gráfico.
 		*/
 		bool _loaded;
+
+	private:
+
+		/**
+		Dimensiones de la malla "cube.mesh" original de Ogre.
+		Empleadas, al cambiar las dimensiones de la entidad, para calcular
+		la nueva escala con la que invocar al método setScale() de Ogre.
+		*/
+		const Vector3 CUBE_MESH_DIMENSIONS = Vector3(100.f, 100.f, 100.f);
 
 	}; // class CEntity
 

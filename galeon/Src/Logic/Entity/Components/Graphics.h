@@ -73,7 +73,7 @@ namespace Logic
 
 		/**
 		Método virtual que elige que mensajes son aceptados. Son válidos
-		SET_TRANSFORM y SET_SCALE.
+		SET_TRANSFORM, SET_SCALE, ...
 
 		@param message Mensaje a chequear.
 		@return true si el mensaje es aceptado.

@@ -29,6 +29,11 @@ namespace Logic
 	class Tile;
 }
 
+namespace Map
+{
+	class CEntity;
+}
+
 /**
 Namespace que engloba la lógica del juego. Engloba desde el mapa lógico
 contenedor de todas las entidades del juego hasta las propias entidades,
@@ -40,13 +45,13 @@ sus componentes, mensajes, factorias de entidades y componentes, etc.
 */
 namespace Logic
 {
-	enum TerrainType{
+	enum TerrainType {
 		Empty = 0,
 		Mineral = 1,
 		Gas = 2 
 	};
 
-	enum BuildingType{
+	enum BuildingType {
 		None,
 		Obstacle,
 		Building,
@@ -97,10 +102,14 @@ namespace Logic
 		*/
 		void loadInitialMatrix(CMap *map);
 
-		/** Register internally a tile in the matrix tile */
+		/**
+		Register internally a tile in the matrix tile.
+		*/
 		void registerTile(Tile *tile);
 
-		/** Returns a tile given its logic position */
+		/**
+		Returns a tile given its logic position.
+		*/
 		Tile* getTile(const Vector3 &position);
 			
 	protected:
@@ -132,6 +141,7 @@ namespace Logic
 		void close();
 
 	private:
+
 		/**
 		Única instancia de la clase.
 		*/
@@ -143,17 +153,28 @@ namespace Logic
 		const int SIZE_X = 15;
 		const int SIZE_Z = 15;
 
-		/** File with the terrain map definition */
+		/**
+		File with the terrain map definition.
+		*/
 		const std::string TERRAIN_MAP_FILE = "media/maps/terrain_map.txt";
 
-		/** 2D tile matrix[x][z].
-		We store pointers to the Tile components */
-		Tile ***_tiles;
+		/**
+		2D tile matrix[x][z].
+		We store pointers to their Tile components.
+		*/
+		Tile* **_tiles;
 
-		/** Assign terrain type to all the tiles in the map reading from a file
-		- 0 stands for empty
+		/**
+		Entidad de mapa "Tile" leída del fichero de mapa a modo de prefab.
+		*/
+		Map::CEntity *tileMapEntity;
+
+		/**
+		Assign terrain type to all tiles in the map reading them from the given file
+		- 0 stands for Empty
 		- 1 stands for Gas
-		- 2 stands for Mineral  */
+		- 2 stands for Mineral
+		*/
 		void loadTerrain(const std::string &filename);
 
 	}; // class TileManager
