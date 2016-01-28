@@ -1,0 +1,72 @@
+
+material tile0
+{
+	technique
+	{
+		pass
+		{
+			ambient 1 1 1 1
+			diffuse 1 1 1 1
+		}
+	}
+}
+
+material tile0_alt
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.55 0.55 0.55 1
+			diffuse 0.55 0.55 0.55 1
+		}
+	}
+}
+
+material tile1
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.2 0.6 0.2 1
+			diffuse 0.2 0.6 0.2	 1
+		}
+	}
+}
+
+material tile1_alt
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.2 0.9 0 1
+			diffuse 0.2 0.9 0 1
+		}
+	}
+}
+
+material tile2
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.2 0 0.8 1
+			diffuse 0.2 0 0.8 1
+		}
+	}
+}
+
+material tile2_alt
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.2 0.1 1 1
+			diffuse 0.2 0.1 1 1
+		}
+	}
+}

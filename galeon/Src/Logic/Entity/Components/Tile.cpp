@@ -24,32 +24,31 @@ namespace Logic {
 		_logicPosition = entityInfo->getVector3Attribute("position");
 
 		// Register real (non-prefab) tiles in the TileManager
-		if (!entityInfo->hasAttribute("prefab") || !entityInfo->getBoolAttribute("prefab"))
-			CTileManager::getSingletonPtr()->registerTile(this);
+		CTileManager::getSingletonPtr()->registerTile(this);
 
 		return true;
 	} // spawn
 
-	bool Tile::accept(const TMessage &message){
+	bool Tile::accept(const TMessage &message) {
 		return true;
 	} // accept
 
-	void Tile::process(const TMessage &message){
+	void Tile::process(const TMessage &message) {
 
 	} // process
 
-	void Tile::tick(unsigned int msecs){
+	void Tile::tick(unsigned int msecs) {
 	} // tick
 
 	void Tile::setTerrainType(const TerrainType &terrainType){
 		_terrainType = terrainType;
 	}
 
-	const TerrainType Tile::getTerrainType(){
+	const TerrainType Tile::getTerrainType() {
 		return _terrainType;
 	}
 
-	const Vector3 Tile::getLogicPosition(){
+	const Vector3 Tile::getLogicPosition() {
 		return _logicPosition;
 	}
 
