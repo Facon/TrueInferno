@@ -7,17 +7,18 @@
 namespace Logic
 {
 	class Tile;
+	class CTileManager;
 }
 
 namespace Logic {
-	class Placeable : public IComponent{
-		DEC_FACTORY(Placeable);
+	class CPlaceable : public IComponent{
+		DEC_FACTORY(CPlaceable);
 
 	public:
 		/**
 		Constructor por defecto.
 		*/
-		Placeable();
+		CPlaceable();
 
 		/**
 		Inicialización del componente usando la descripción de la entidad que hay en
@@ -40,15 +41,22 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
-		/** Place this placeable on the given logic position*/
+		/** Place this placeable on a given logic position*/
 		bool place(const Vector3 logicPosition);
 
 		/** Gets occupied tiles depending on the placeable's floor */
 		const std::vector<Tile*> getTiles();
 
+		/** Checks if it's possible to place all the placeable's floor tiles starting at given origin position. All tiles must be entity free. 
+		Returns true if placement is possible, false otherways */
+		bool checkPlacementIsPossible(const Vector3 &originPosition);
+
 	private:
 		/** Floor's absolute logic origin position in the matrix */
 		Vector3 _floorOriginPosition;
+
+		/** Flag set to true when logic position has changed */
+		//bool _logicPositionChanged;
 
 		/** Floor's relative positions to the origin */
 		std::vector<Vector3> _floorRelativePositions;
@@ -56,11 +64,17 @@ namespace Logic {
 		/** Floor's occupied tiles */
 		std::vector<Tile*> _tiles;
 
+		/** Tile manager reference */
+		CTileManager* _tileManager;
+
 		/** Obtains position attribute name */
 		std::string getPositionAttributeName(int num);
+
+		// TODO TEST
+		bool _test;
 	}; // class Placeable
 
-	REG_FACTORY(Placeable);
+	REG_FACTORY(CPlaceable);
 
 } // namespace Logic
 

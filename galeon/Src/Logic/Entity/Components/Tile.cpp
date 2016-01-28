@@ -14,6 +14,7 @@ namespace Logic {
 	Tile::Tile() : IComponent() {
 		_terrainType = TerrainType::Empty;
 		_logicPosition = Vector3::ZERO;
+		_entityAbove = nullptr;
 	}
 
 	bool Tile::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
@@ -50,6 +51,14 @@ namespace Logic {
 
 	const Vector3 Tile::getLogicPosition(){
 		return _logicPosition;
+	}
+
+	void Tile::setEntityAbove(CEntity *entityAbove){
+		_entityAbove = entityAbove;
+	}
+
+	const CEntity* Tile::getEntityAbove(){
+		return _entityAbove;
 	}
 
 } // namespace Logic

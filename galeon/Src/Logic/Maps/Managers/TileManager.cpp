@@ -170,10 +170,16 @@ namespace Logic {
 			}
 		}
 		prefab->setAttribute("prefab", "false");
-		prefab->setAttribute("floor_absolute_position0", "5 0 5");
-		entityFactory->createEntity(prefab, map);
+		prefab->setAttribute("floor_absolute_position0", "5 0 0");
+		prefab->setName(prefab->getName()+"0");
+		if (entityFactory->createEntity(prefab, map)){
+			std::cout << "Building created!" << std::endl;
+		}
+		else{
+			std::cout << "Can't create building :(" << std::endl;
+		}
 
-		prefab = nullptr;
+		/*prefab = nullptr;
 		for (it = mapEntityList.begin(); it != mapEntityList.end(); ++it) {
 			if ((*it)->getType() == "Evilator") {
 				prefab = *it;
@@ -181,14 +187,57 @@ namespace Logic {
 			}
 		}
 		prefab->setAttribute("prefab", "false");
-		prefab->setAttribute("floor_absolute_position0", "10 0 10");
-		entityFactory->createEntity(prefab, map);
+		prefab->setAttribute("floor_absolute_position0", "0 0 0");
+		prefab->setName(prefab->getName() + "1");
+		if (entityFactory->createEntity(prefab, map)){
+			std::cout << "Building created!" << std::endl;
+		}
+		else{
+			std::cout << "Can't create building :(" << std::endl;
+		}*/
 
+		// TODO TEST
+		/*prefab->setAttribute("prefab", "false");
+		prefab->setAttribute("floor_absolute_position0", "12 0 12");
+		prefab->setName(prefab->getName() + "2");
+		if (entityFactory->createEntity(prefab, map)){
+			std::cout << "Building created!" << std::endl;
+		}
+		else{
+			std::cout << "Can't create building :(" << std::endl;
+		}*/
+
+		// TODO TEST
+		/*prefab->setAttribute("prefab", "false");
+		prefab->setAttribute("floor_absolute_position0", "0 0 14");
+		prefab->setName(prefab->getName() + "4");
+		if (entityFactory->createEntity(prefab, map)){
+			std::cout << "Building created!" << std::endl;
+		}
+		else{
+			std::cout << "Can't create building :(" << std::endl;
+		}
+
+		// TODO TEST
+		prefab->setAttribute("prefab", "false");
+		prefab->setAttribute("floor_absolute_position0", "5 0 0");
+		prefab->setName(prefab->getName() + "3");
+		if (entityFactory->createEntity(prefab, map)){
+			std::cout << "Building created!" << std::endl;
+		}
+		else{
+			std::cout << "Can't create building :(" << std::endl;
+		}*/
+		
 	} // loadInitialMatrix
 
 	//--------------------------------------------------------
 
 	Tile* CTileManager::getTile(const Vector3 &position){
+		// Check bounds
+		if (position.x < 0 || position.x >= SIZE_X || position.z < 0 || position.z >= SIZE_Z)
+			return nullptr;
+
 		return _tiles[(int)position.x][(int)position.z];
 	}
 
