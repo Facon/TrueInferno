@@ -103,6 +103,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Placeable.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\BuildingManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -190,6 +191,9 @@
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Placeable.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\BuildingManager.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

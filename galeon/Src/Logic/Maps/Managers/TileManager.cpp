@@ -141,9 +141,9 @@ namespace Logic {
 				// Cambia la posición.
 				Vector3 tilePosition(tileBasePosition);
 
-				tilePosition.x = x; // *tileBaseDimensions.x;
-				tilePosition.y = 0.f; // Matriz de tiles 2D
-				tilePosition.z = z; // *tileBaseDimensions.z;
+				tilePosition.x = (float)x; // *tileBaseDimensions.x;
+				tilePosition.y = (float)0; // Matriz de tiles 2D
+				tilePosition.z = (float)z; // *tileBaseDimensions.z;
 
 				// Construye la nueva posición como un Vector3 representado por un
 				// string con formato: "x y z".
@@ -166,74 +166,6 @@ namespace Logic {
 
 		// Procesa la configuración inicial del terreno.
 		loadTerrain(TERRAIN_MAP_FILE);
-
-		// TODO TEST
-		Map::CEntity *prefab = nullptr;
-		for (it = mapEntityList.begin(); it != mapEntityList.end(); ++it) {
-			if ((*it)->getType() == "HellQuarters") {
-				prefab = *it;
-				break;
-			}
-		}
-		prefab->setAttribute("prefab", "false");
-		prefab->setAttribute("floor_absolute_position0", "5 0 0");
-		prefab->setName(prefab->getName()+"0");
-		if (entityFactory->createEntity(prefab, map)){
-			std::cout << "Building created!" << std::endl;
-		}
-		else{
-			std::cout << "Can't create building :(" << std::endl;
-		}
-
-		/*prefab = nullptr;
-		for (it = mapEntityList.begin(); it != mapEntityList.end(); ++it) {
-			if ((*it)->getType() == "Evilator") {
-				prefab = *it;
-				break;
-			}
-		}
-		prefab->setAttribute("prefab", "false");
-		prefab->setAttribute("floor_absolute_position0", "0 0 0");
-		prefab->setName(prefab->getName() + "1");
-		if (entityFactory->createEntity(prefab, map)){
-			std::cout << "Building created!" << std::endl;
-		}
-		else{
-			std::cout << "Can't create building :(" << std::endl;
-		}*/
-
-		// TODO TEST
-		/*prefab->setAttribute("prefab", "false");
-		prefab->setAttribute("floor_absolute_position0", "12 0 12");
-		prefab->setName(prefab->getName() + "2");
-		if (entityFactory->createEntity(prefab, map)){
-			std::cout << "Building created!" << std::endl;
-		}
-		else{
-			std::cout << "Can't create building :(" << std::endl;
-		}*/
-
-		// TODO TEST
-		/*prefab->setAttribute("prefab", "false");
-		prefab->setAttribute("floor_absolute_position0", "0 0 14");
-		prefab->setName(prefab->getName() + "4");
-		if (entityFactory->createEntity(prefab, map)){
-			std::cout << "Building created!" << std::endl;
-		}
-		else{
-			std::cout << "Can't create building :(" << std::endl;
-		}
-
-		// TODO TEST
-		prefab->setAttribute("prefab", "false");
-		prefab->setAttribute("floor_absolute_position0", "5 0 0");
-		prefab->setName(prefab->getName() + "3");
-		if (entityFactory->createEntity(prefab, map)){
-			std::cout << "Building created!" << std::endl;
-		}
-		else{
-			std::cout << "Can't create building :(" << std::endl;
-		}*/
 		
 	} // loadInitialMatrix
 

@@ -14,6 +14,7 @@ la gestión de la lógica del juego.
 #include "Logic/Maps/Map.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Logic/Maps/Managers/BuildingManager.h"
 
 #include "Logic/Entity/Entity.h"
 
@@ -91,6 +92,10 @@ namespace Logic {
 		if (!Logic::CTileManager::Init())
 			return false;
 
+		// Inicializamos el gestor de edificios.
+		if (!Logic::CBuildingManager::Init())
+			return false;
+
 		return true;
 
 	} // open
@@ -100,6 +105,8 @@ namespace Logic {
 	void CServer::close() 
 	{
 		unLoadLevel();
+
+		Logic::CBuildingManager::Release();
 
 		Logic::CTileManager::Release();
 
@@ -126,6 +133,10 @@ namespace Logic {
 
 		// Cargamos la matriz de tiles inicial en el mapa.
 		CTileManager::getSingletonPtr()->loadInitialMatrix(_map);
+
+		// Cargamos la lista de edificios inicial en el mapa.
+		CBuildingManager::getSingletonPtr()->loadInitialBuildings(_map);
+
 		return true;
 
 	} // loadLevel

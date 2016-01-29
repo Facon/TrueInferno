@@ -4,6 +4,7 @@
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Logic/Maps/Managers/BuildingManager.h"
 #include <iostream>
 #include <string>
 
@@ -45,7 +46,13 @@ namespace Logic {
 		_tiles = std::vector<Tile*>(_floorRelativePositions.size()+1);
 
 		// Place placeable on its configured initial position
-		return place(entityInfo->getVector3Attribute("floor_absolute_position0"));
+		if (!place(entityInfo->getVector3Attribute("floor_absolute_position0")))
+			return false;
+
+		// Register building in manager
+		Logic::CBuildingManager::getSingletonPtr()->registerBuilding(this);
+
+		return true;
 	} // spawn
 
 	bool CPlaceable::accept(const TMessage &message){
@@ -65,7 +72,7 @@ namespace Logic {
 			_test = false;
 		}*/
 
-		std::cout << this << ": Current position is: x=" << _entity->getPosition().x << ", y=" << _entity->getPosition().y << ", z=" << _entity->getPosition().z << std::endl;
+		//std::cout << this << ": Current position is: x=" << _entity->getPosition().x << ", y=" << _entity->getPosition().y << ", z=" << _entity->getPosition().z << std::endl;
 	} // tick
 
 	bool CPlaceable::place(const Vector3 newOriginPosition){
@@ -103,7 +110,7 @@ namespace Logic {
 
 		// Update entity position aligning it to the origin tile position and putting it on the tile
 		// TODO Move this logic to... Entity? TileManager?
-		Vector3 targetPosition = _tileManager->getTile(_floorOriginPosition)->getEntity()->getPosition() + Vector3(0, 2, 0);
+		Vector3 targetPosition = _tileManager->getTile(_floorOriginPosition)->getEntity()->getPosition() + Vector3(0, 1, 0);
 		//std::cout << "Setting position for " << this->getEntity() << ": x=" << targetPosition.x << ", y=" << targetPosition.y << ", z=" << targetPosition.z << std::endl;
 		_entity->setPosition(targetPosition, this);
 
