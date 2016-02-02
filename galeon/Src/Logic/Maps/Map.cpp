@@ -15,6 +15,7 @@ Contiene la implementaciï¿½n de la clase CMap, Un mapa lï¿½gico.
 #include "EntityFactory.h"
 
 #include "Map/MapParser.h"
+#include "Map/MapEntity.h"
 
 #include "Graphics/Server.h"
 #include "Graphics/Scene.h"
@@ -51,12 +52,19 @@ namespace Logic {
 		it = entityList.begin();
 		end = entityList.end();
 
-		// Creamos todas las entidades lï¿½gicas.
-		for(; it != end; it++)
-		{
-			// La propia factorï¿½a se encarga de aï¿½adir la entidad al mapa.
-			CEntity *entity = entityFactory->createEntity((*it),map);
-			assert(entity && "No se pudo crear una entidad del mapa");
+		// Creamos todas las entidades lógicas.
+		for (; it != end; it++) {
+			// La propia factoría se encarga de añadir la entidad al mapa.
+			Map::CEntity *mapEntity = *it;
+
+			if (!mapEntity->hasAttribute("prefab") || !mapEntity->getBoolAttribute("prefab")) {
+				CEntity *entity = entityFactory->createEntity(mapEntity, map);
+				assert(entity && "No se pudo crear una entidad del mapa");
+			}
+			else {
+				// Deshabilita el atributo "prefab".
+				mapEntity->setAttribute("prefab", "false");
+			}
 		}
 
 		return map;

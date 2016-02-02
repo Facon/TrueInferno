@@ -32,7 +32,9 @@ namespace Logic
 		{
 			UNASSIGNED = 0xFFFFFFFF,
 			SET_TRANSFORM,
-			SET_SCALE,
+			SET_DIMENSIONS,
+			SET_COLOR,
+			SET_MATERIAL_NAME,
 			SET_ANIMATION,
 			STOP_ANIMATION,
 			CONTROL,
@@ -87,11 +89,11 @@ namespace Logic
 		}
 	};
 
-	// SET_SCALE
-	class ScaleMessage : public Message
+	// SET_DIMENSIONS
+	class DimensionsMessage : public Message
 	{
 	public:
-		Vector3 _scale;
+		Vector3 _dimensions;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

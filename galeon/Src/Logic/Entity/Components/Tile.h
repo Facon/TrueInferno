@@ -39,15 +39,26 @@ namespace Logic {
 		*/
 		const Vector3 getLogicPosition();
 
+		/** Setter for terrainType */
 		void setTerrainType(const TerrainType &terrainType);
 
+		/** Getter for terrainType */
 		const TerrainType getTerrainType();
+
+		/** Setter for entityAbove */
+		void setEntityAbove(CEntity *entityAbove);
+
+		/** Getter for entityAbove */
+		const CEntity* getEntityAbove();
 
 	private:
 		/** Logic position in the matrix */
 		Vector3 _logicPosition;
 
 		TerrainType _terrainType;
+
+		/** Entity placed above */
+		CEntity *_entityAbove;
 	}; // class Tile
 
 	REG_FACTORY(Tile);

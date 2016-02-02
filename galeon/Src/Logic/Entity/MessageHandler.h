@@ -8,7 +8,7 @@ namespace Logic
     // Predefiniciones
     class Message;
     class TransformMessage;
-    class ScaleMessage;
+    class DimensionsMessage;
     class AnimationMessage;
     class ControlMessage;
 	class PhysicMessage;
@@ -22,7 +22,7 @@ namespace Logic
 		virtual bool HandleMessage(const TransformMessage& msg)
 		{ return false; }
 
-		virtual bool HandleMessage(const ScaleMessage& msg)
+		virtual bool HandleMessage(const DimensionsMessage& msg)
 		{ return false; }
 		
 		virtual bool HandleMessage(const AnimationMessage& msg)

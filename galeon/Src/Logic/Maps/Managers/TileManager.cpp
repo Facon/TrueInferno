@@ -95,8 +95,7 @@ namespace Logic {
 	void CTileManager::loadInitialMatrix(CMap *map)
 	{
 		// Coge la Map::CEntity "Tile" leída del fichero de mapa a modo de prefab.
-		Map::CEntity *mapEntityTile;
-
+		// @TODO Hacerlo en Map::CParser mediante una función genérica que reciba el nombre de la Map::CEntity.
 		Map::CMapParser::TEntityList mapEntityList =
 			Map::CMapParser::getSingletonPtr()->getEntityList();
 
@@ -104,22 +103,30 @@ namespace Logic {
 		it = mapEntityList.begin();
 		end = mapEntityList.end();
 
-		// Find Tile "prefab"
+		// Itera sobre la lista de entidades del mapa hasta encontrar el prefab "Tile".
 		for (; it != end; it++) {
 			if ((*it)->getType() == "Tile") {
-				mapEntityTile = *it;
+				tileMapEntity = *it;
 			}
 		}
 
-		assert(mapEntityTile && "Map::CEntity Tile not found");
+		assert(tileMapEntity && "Map::CEntity Tile not found");
 
 		// Genera todas las Logic::CEntity tiles de la matriz a partir de la
-		// Map::CEntity "Tile" leída.
+		// Map::CEntity "Tile" leída del fichero de mapa.
 		CEntityFactory* entityFactory = CEntityFactory::getSingletonPtr();
-		Vector3 tileBasePosition = mapEntityTile->getVector3Attribute("position");
-		std::string baseName = mapEntityTile->getStringAttribute("name");
 
-		// Allocate memory for tile matrix
+		std::string tileBaseName = tileMapEntity->getStringAttribute("name");
+		Vector3 tileBasePosition = tileMapEntity->getVector3Attribute("position");
+		Vector3 tileBaseDimensions = tileMapEntity->getVector3Attribute("dimensions");
+
+		// Material base para los tiles.
+		std::string baseMaterialName = tileMapEntity->getStringAttribute("material");
+		// Material alternativo para los tiles.
+		// Se usa para diferenciar visualmente tiles adyacentes entre sí.
+		std::string altMaterialName = baseMaterialName + "_alt";
+
+		// Reserva de memoria para la matriz de tiles.
 		_tiles = new Tile**[SIZE_X];
 		for (int x = 0; x < SIZE_X; ++x) {
 			_tiles[x] = new Tile*[SIZE_Z];
@@ -128,63 +135,72 @@ namespace Logic {
 			}
 		}
 
-		// Read the tile map
+		// Lectura de los tiles del mapa.
 		for (int x = 0; x < SIZE_X; ++x) {
 			for (int z = 0; z < SIZE_Z; ++z) {
-				// Change attribute position.
+				// Cambia la posición.
 				Vector3 tilePosition(tileBasePosition);
-				tilePosition.x = (float) x;
-				tilePosition.y = (float) 0; // Currently we only manage a 2D tile matrix
-				tilePosition.z = (float) z;
 
-				// Build new Vector3::position attribute with the logic position in the matrix: "x y z"
-				// @TODO This should be done inside Map::MapEntity
+				tilePosition.x = (float)x; // *tileBaseDimensions.x;
+				tilePosition.y = (float)0; // Matriz de tiles 2D
+				tilePosition.z = (float)z; // *tileBaseDimensions.z;
+
+				// Construye la nueva posición como un Vector3 representado por un
+				// string con formato: "x y z".
+				// @TODO Esto debería hacerse en Map::MapEntity.
 				std::stringstream newPosition;
 				newPosition << tilePosition.x << " " << tilePosition.y << " " << tilePosition.z;
-				mapEntityTile->setAttribute("position", newPosition.str());
+				tileMapEntity->setAttribute("position", newPosition.str());
 
-				// Change attribute name (must be unique).
+				// Cambia el nombre (debe ser único!).
 				std::stringstream newTileName;
-				newTileName << baseName;
+				newTileName << tileBaseName;
 				newTileName << "_" << tilePosition.x << "_" << tilePosition.z;
-				mapEntityTile->setName(newTileName.str());
+				tileMapEntity->setName(newTileName.str());
 
-				// Change prefab attribute
-				mapEntityTile->setAttribute("prefab", "false");
-
-				// Create a new entity Tile.
-				CEntity *entityTile = entityFactory->createEntity(mapEntityTile, map);
+				// Crea una nueva Logic::CEntity tile.
+				CEntity *entityTile = entityFactory->createEntity(tileMapEntity, map);
 				assert(entityTile && "Failed to create entity Tile[X,Z]");
 			}
 		}
 
-		// Read the terrain configuration
+		// Procesa la configuración inicial del terreno.
 		loadTerrain(TERRAIN_MAP_FILE);
-
+		
 	} // loadInitialMatrix
 
 	//--------------------------------------------------------
 
 	Tile* CTileManager::getTile(const Vector3 &position){
+		// Check bounds
+		if (position.x < 0 || position.x >= SIZE_X || position.z < 0 || position.z >= SIZE_Z)
+			return nullptr;
+
 		return _tiles[(int)position.x][(int)position.z];
-	}
+
+	} // getTile
 
 	//--------------------------------------------------------
 
-	void CTileManager::registerTile(Tile *tile){
+	void CTileManager::registerTile(Tile *tile) {
 		Vector3 position = tile->getLogicPosition();
-		_tiles[(int)position.x][(int)position.z] = tile;
-	}
+		_tiles[(int)(position.x)][(int)(position.z)] = tile;
+
+	} // registerTile
 
 	//--------------------------------------------------------
 
-	void CTileManager::loadTerrain(const std::string &filename){
+	void CTileManager::loadTerrain(const std::string &filename) {
 		// Open file
 		std::ifstream file(filename);
+
+		// Base material name for all tiles
+		std::string baseMaterialName = tileMapEntity->getStringAttribute("material");
 
 		// For each line
 		std::string line;
 		int x = 0;
+
 		while (std::getline(file, line)) {
 			// Read line
 			std::stringstream ss(line);
@@ -192,11 +208,14 @@ namespace Logic {
 			// For each token in line delimited by whitespace
 			int z = 0;
 			std::string item;
+
 			while (std::getline(ss, item, ' ')) {
 				assert((item.size() == 1) && "Only tokens of 1 char are allowed in the terrain map");
 				
 				TerrainType terrainType;
-				switch (item[0]){
+				char terrainTypeChar(item[0]);
+
+				switch (terrainTypeChar) {
 				case '0':
 					terrainType = TerrainType::Empty;
 					break;
@@ -207,9 +226,18 @@ namespace Logic {
 					terrainType = TerrainType::Gas;
 					break;
 				default:
-					assert("Unknown terrain type char: "+terrainType);
+					assert("Unknown terrain type char: " + terrainType);
 				}
 
+				// Alternative material for odd tiles
+				std::string materialName(baseMaterialName);
+				materialName += terrainTypeChar;
+
+				TMessage message;
+				message._type = Message::SET_MATERIAL_NAME;
+				message._string = (((x + z) % 2 == 0) ? materialName : materialName + "_alt");
+
+				_tiles[x][z]->getEntity()->emitMessage(message);
 				_tiles[x][z]->setTerrainType(terrainType);
 				++z;
 			}
@@ -217,15 +245,18 @@ namespace Logic {
 		}
 
 		file.close();
-	}
 
-	bool CTileManager::open(){
+	} // loadTerrain
+
+	//--------------------------------------------------------
+
+	bool CTileManager::open() {
 		return true;
 	} // open
 
 	//--------------------------------------------------------
 
-	void CTileManager::close(){
+	void CTileManager::close() {
 	} // close
 
 } // namespace Logic

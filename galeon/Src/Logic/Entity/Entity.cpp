@@ -28,7 +28,7 @@ namespace Logic
 {
 	CEntity::CEntity(TEntityID entityID) : _entityID(entityID), 
 				_map(0), _type(""), _name(""),
-				_transform(Matrix4::IDENTITY), _scale(Vector3(1, 1, 1)),
+				_transform(Matrix4::IDENTITY), _dimensions(Vector3(1, 1, 1)),
 				_isPlayer(false), _activated(false)
 	{
 
@@ -61,8 +61,8 @@ namespace Logic
 			_transform.setTrans(position);
 		}
 
-		if (entityInfo->hasAttribute("scale"))
-			_scale = entityInfo->getVector3Attribute("scale");
+		if (entityInfo->hasAttribute("dimensions"))
+			_dimensions = entityInfo->getVector3Attribute("dimensions");
 
 		// Por comodidad en el mapa escribimos los �ngulos en grados.
 		if(entityInfo->hasAttribute("orientation"))
@@ -209,6 +209,10 @@ namespace Logic
 		{
 		case Message::SET_TRANSFORM:
 			_transform = message._transform;
+			break;
+		case Message::SET_DIMENSIONS:
+			_dimensions = message._vector3;
+			break;
 		}
 
 		TComponentList::const_iterator it;
@@ -295,26 +299,29 @@ namespace Logic
 
 	//---------------------------------------------------------
 
-	void CEntity::setPosition(const Vector3 &position, IComponent* invoker)  
+	void CEntity::setPosition(const Vector3 &position)  
 	{
 		_transform.setTrans(position);
 
 		// Avisamos a los componentes del cambio.
-		TransformMessage message;
-		message._type = MessageType::SET_TRANSFORM;
-		message._transform = _transform;
+		TransformMessage m;
 
-        message.Dispatch(*this);
+		m._type = MessageType::SET_TRANSFORM;
+		m._transform = _transform;
+
+        m.Dispatch(*this);
 	} // setPosition
 
 	//---------------------------------------------------------
 
-	void CEntity::setScale(const Vector3 &scale, IComponent* invoker)
+	void CEntity::setDimensions(const Vector3 &dimensions)
 	{
+		_dimensions = dimensions;
+
 		// Avisamos a los componentes del cambio.
-		ScaleMessage message;
-		message._type = MessageType::SET_SCALE;
-		message._scale = _scale;
+		DimensionsMessage message;
+		message._type = MessageType::SET_DIMENSIONS;
+		message._dimensions = _dimensions;
 
         message.Dispatch(*this);
 	} // setScale
@@ -338,7 +345,6 @@ namespace Logic
 		Matrix3 orientation;
 		_transform.extract3x3Matrix(orientation);
 		return orientation;
-
 	} // getOrientation
 
 	//---------------------------------------------------------

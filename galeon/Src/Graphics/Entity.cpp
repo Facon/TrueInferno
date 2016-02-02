@@ -5,11 +5,11 @@
 /**
 @file Entity.cpp
 
-Contiene la implementaci�n de la clase que representa una entidad gr�fica.
+Contiene la implementación de la clase que representa una entidad gráfica.
 
 @see Graphics::CEntity
 
-@author David Llans�
+@author David Llansó
 @date Julio, 2010
 */
 
@@ -22,6 +22,7 @@ Contiene la implementaci�n de la clase que representa una entidad gr�fica.
 #include <assert.h>
 
 #include <OgreEntity.h>
+#include <OgreSubEntity.h>
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 
@@ -48,7 +49,7 @@ namespace Graphics
 	bool CEntity::attachToScene(CScene *scene)
 	{
 		assert(scene && "¡¡La entidad debe asociarse a una escena!!");
-		// Si la entidad est� cargada por otro gestor de escena.
+		// Si la entidad está cargada por otro gestor de escena.
 		if(_loaded && (_scene != scene))
 			return false;
 
@@ -68,7 +69,7 @@ namespace Graphics
 		
 	bool CEntity::deattachFromScene()
 	{
-		// Si la entidad no est� cargada no se puede quitar de
+		// Si la entidad no está cargada no se puede quitar de
 		// una escena. Ya que no pertenecer� a ninguna.
 		if(!_loaded)
 			return false;
@@ -206,6 +207,62 @@ namespace Graphics
 		}
 
 	} // setScale
+	
+	//--------------------------------------------------------
+	
+	void CEntity::setDimensions(const Vector3 &dimensions)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		Vector3 scale(dimensions/CUBE_MESH_DIMENSIONS);
+		this->setScale(scale);
 
+	} // setDimensions
+	
+	//--------------------------------------------------------
+	
+	void CEntity::setColor(const Vector3 &color)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entity) {
+			Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(0)->getMaterial();
+			entityMaterial->getTechnique(0)->getPass(0)->setAmbient(color.x, color.y, color.z);
+		}
+
+	} // setColor
+	
+	//--------------------------------------------------------
+	
+	const Vector3& CEntity::getColor()
+	{
+		if (_entityNode) {
+			Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(0)->getMaterial();
+			Ogre::ColourValue entityMatColor = entityMaterial->getTechnique(0)->getPass(0)->getAmbient();
+			return Vector3(entityMatColor.r, entityMatColor.g, entityMatColor.b);
+		}
+
+		throw new std::exception("La entidad no ha sido cargada");
+
+	} // getColor
+	
+	//--------------------------------------------------------
+	
+	void CEntity::setMaterialName(const std::string &materialName)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entity)
+			_entity->getSubEntity(0)->setMaterialName(materialName);
+
+	} // setMaterial
+	
+	//--------------------------------------------------------
+	
+	const std::string& CEntity::getMaterialName()
+	{
+		if (_entityNode)
+			return _entity->getSubEntity(0)->getMaterialName();
+
+		throw new std::exception("La entidad no ha sido cargada");
+
+	} // getMaterialName
 
 } // namespace Graphics

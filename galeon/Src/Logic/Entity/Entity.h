@@ -1,13 +1,13 @@
 /**
 @file Entity.h
 
-Contiene la declaraciï¿½n de la clase Entity, que representa una entidad
-de juego. Es una colecciï¿½n de componentes.
+Contiene la declaración de la clase Entity, que representa una entidad
+de juego. Es una colección de componentes.
 
 @see Logic::CEntity
 @see Logic::IComponent
 
-@author David Llansï¿½
+@author David Llansó
 @date Agosto, 2010
 */
 
@@ -24,7 +24,7 @@ de juego. Es una colecciï¿½n de componentes.
 #include <list>
 #include <string>
 
-// Predeclaraciï¿½n de clases para ahorrar tiempo de compilaciï¿½n
+// Predeclaración de clases para ahorrar tiempo de compilación
 namespace Map
 {
 	class CEntity;
@@ -170,7 +170,7 @@ namespace Logic
 
 		// Para tipo de mensaje se hace la gestiÃ³n apropiada.
 		bool HandleMessage(const TransformMessage& msg);
-		bool HandleMessage(const ScaleMessage& msg);
+		bool HandleMessage(const DimensionsMessage& msg);
 		bool HandleMessage(const AnimationMessage& msg);
 		bool HandleMessage(const ControlMessage& msg);
 		bool HandleMessage(const PhysicMessage& msg);
@@ -250,7 +250,7 @@ namespace Logic
 
 		@param position Nueva posiciï¿½n.
 		*/
-		void setPosition(const Vector3 &position, IComponent* invoker = 0);
+		void setPosition(const Vector3 &position);
 
 		/**
 		Devuelve la posiciï¿½n de la entidad.
@@ -264,29 +264,29 @@ namespace Logic
 		Vector3 getPosition() const { return _transform.getTrans(); }
 
 		/**
-		Establece la escala de la entidad. Avisa a los componentes
+		Establece las dimensiones de la entidad. Avisa a los componentes
 		del cambio.
 
-		@param scale Nueva escala.
+		@param dimensions Nuevas dimensiones.
 		*/
-		void setScale(const Vector3 &scale, IComponent* invoker = 0);
+		void setDimensions(const Vector3 &dimensions);
 
 		/**
-		Devuelve la escala de la entidad.
+		Devuelve las dimensiones de la entidad.
 		<p>
-		La escala es inicialmente leï¿½da del mapa (si no aparece,
-		serï¿½ la original de la malla), aunque, obviamente, puede
+		Las dimensiones son inicialmente leídas del mapa (si no aparecen,
+		serán las originales de la malla), aunque, obviamente, pueden
 		cambiar con el tiempo.
 
-		@return Escala de la entidad.
+		@return Dimensiones de la entidad.
 		*/
-		Vector3 getScale() const { return _scale; };
+		Vector3 getDimensions() const { return _dimensions; };
 
 		/**
 		Establece la orientaciï¿½n de la entidad. Avisa a los componentes
 		del cambio.
 
-		@param pos Nueva orientaciï¿½n.
+		@param pos Nueva orientación.
 		*/
 		void setOrientation(const Matrix3& orientation);
 
@@ -393,9 +393,9 @@ namespace Logic
 		float _orientation;
 
 		/**
-		Escala de la entidad.
+		Dimensiones de la entidad.
 		*/
-		Vector3 _scale;
+		Vector3 _dimensions;
 
 		/**
 		Atributo que indica si la entidad es el jugador; por defecto
