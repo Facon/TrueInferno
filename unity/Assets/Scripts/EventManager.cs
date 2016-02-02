@@ -89,7 +89,6 @@ public class EventManager : MonoBehaviour {
         {
             TutorialPopUpEvent(2);
             buildingRoadState = -1;
-            tutorial = false;
         }
 
         if (remainingDestroyEventTime <= 0)
@@ -114,12 +113,6 @@ public class EventManager : MonoBehaviour {
     void BuildingDestructionEvent()
     {
         remainingDestroyEventTime = destroyInterval;
-
-        if (buildingRoadState == -1 && tutorial)
-        {
-            tutorial = false;
-            return;
-        }
         
         bool eventSuccess = UnityEngine.Random.Range(1,100) <= destroyChance;
         if (eventSuccess)
@@ -135,7 +128,7 @@ public class EventManager : MonoBehaviour {
             }
         }
         
-        if ( eventSuccess && tileManager.buildingList.Count > 0)
+        if ( !tutorial && eventSuccess && tileManager.buildingList.Count > 0)
         {
             eventSuccess = false;
             BuildingDestructor targetBuildingDestructor;
@@ -151,5 +144,9 @@ public class EventManager : MonoBehaviour {
                 }
             }
         }
+
+        if (buildingRoadState == -1 && tutorial)
+            tutorial = false;
+
     }
 }
