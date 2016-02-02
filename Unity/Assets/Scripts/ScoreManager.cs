@@ -12,7 +12,12 @@ public class ScoreManager : MonoBehaviour {
 	void Start () {
         hadesFavor = 0;
 	}
-	
+
+    public int GetHadesFavor()
+    {
+        return hadesFavor;
+    }
+
 	// Update is called once per frame
 	void Update () {
         hadesFavorDisplay.text = hadesFavor.ToString();

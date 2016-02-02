@@ -56,6 +56,33 @@ public class WorkerManager : MonoBehaviour {
         }
     }
 
+    public bool checkSoulPathAvaible(Building fromBuilding, Building targetBuilding)
+    {
+        // Select random road tile of the townhall
+        List<Tile> surrRoadTiles = fromBuilding.getSurrRoadTiles();
+
+        if (surrRoadTiles.Count == 0)
+            return false;
+
+        Tile fromRoadTile = surrRoadTiles[UnityEngine.Random.Range(0, surrRoadTiles.Count)];
+
+        // Get its surrounding road tiles
+        surrRoadTiles = targetBuilding.getSurrRoadTiles();
+
+        if (surrRoadTiles.Count == 0)
+            return false;
+
+        // Select random road tile of the target building
+        Tile targetRoadTile = surrRoadTiles[UnityEngine.Random.Range(0, surrRoadTiles.Count)];
+
+        // Try to find path
+        List<Tile> path = GetComponent<PathFinder>().GetWorkerPath(fromRoadTile, targetRoadTile);
+
+        if (path == null)
+            return false;
+
+        return true;
+    }
     /// <summary>
     /// Sends a soul from town hall to the target building. Returns true if the soul was successfully set on route
     /// </summary>

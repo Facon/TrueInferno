@@ -785,20 +785,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventPanel: {fileID: 167302, guid: 0cc6be656b248af4db36702ed8503bce, type: 2}
-  tutorialPanel: {fileID: 100566, guid: 69ca0d6f850ef234cb457fa58894e036, type: 2}
+  tutorialPanel: {fileID: 165398, guid: 69ca0d6f850ef234cb457fa58894e036, type: 2}
   endgamePanel: {fileID: 165032, guid: 0938080306e9df648b05db1c51105ecc, type: 2}
   eventSprites:
   - {fileID: 21300000, guid: 73fe971aef140c34689913332b019e5f, type: 3}
   tutorialSprites:
-  - {fileID: 21300000, guid: 4db017495c69e8140a56a0e2b669e3f8, type: 3}
-  - {fileID: 21300000, guid: 5b1a64ea234fb2343b8d0686c51280de, type: 3}
+  - {fileID: 21300000, guid: eb2fe80f7e6173543a083e4a465d3bcb, type: 3}
+  - {fileID: 21300000, guid: 2155b4a9bab625f4cb7f4bcf16ec4fc4, type: 3}
+  - {fileID: 21300000, guid: db7618a5a7934ef459b5a32630d45dd9, type: 3}
+  - {fileID: 21300000, guid: abbded26d48dcdb4cae0f9cd32975619, type: 3}
+  - {fileID: 21300000, guid: b578b8bfb6677a546a60c9246f4e3826, type: 3}
   tutorialTitles:
-  - tuto1
-  - tuto2
+  - Welcome to Hell
+  - Building facilities
+  - Building soulpaths
+  - Putting souls to work
+  - Putting souls to work
   tutorialDesc:
-  - tutorial1
-  - tutorial2
-  endgameSprite: {fileID: 21300000, guid: 8293b4b5a52466b4380b24d5067cb01c, type: 3}
+  - 
+  - "Press on a building\u2019s button to select it, then click anywhere on the terrain
+    to build it there."
+  - Press the Soulpath button and draw a line on the terrain.
+  - "Er\u2026 Just do what he said, nothing to add."
+  - Press the button with the worker icon to send your souls to work.
+  tutorialDialogs:
+  - "Well, well\u2026 Welcome to Hell! The Pandemonium is about to start, so... What,
+    you still don\u2019t know how this works? Oh boy\u2026 I love new guys. So clueless,
+    so innocent\u2026 Alright gang, explain the basics for our newcomer. Be kind for
+    a minute. I know it hurts, but you\u2019ll live. Good luck now, kiddo. Remember,
+    I\u2019ll be watching you."
+  - "Oh, great\u2026 The rookie. I really don\u2019t get why we must put up with these
+    sissies. Look at this one\u2026 Hey you. Where do you think you are? Heaven? Come
+    on, move! Start building something!"
+  - "Please do not mind Lucy\u2019s manners. She forgets she was also a rookie once,
+    just as everyone here. Except me, of course. My pleasure, I\u2019m Osiris. You
+    will learn a lot from me if you pay attention. Here, you should connect your facilities
+    with Soulpaths so your personnel can move around."
+  - Naphlegeth grah'n y-ehye hafh'drnoth gotha chtenff fm'latgh nog, ilyaa bug llll
+    nan'gha y-vulgtlagln fm'latghog nnnlw'nafh ya nilgh'ri vulgtm nw nnnsgn'wahl chtenff
+    ph'wgah'n.
+  - "Don\u2019t make faces. The Old One is easy to understand\u2026 if you listen
+    with an open mind. He just said you\u2019ve laid a path for your souls, and now
+    you must point them to their eternal destiny.  Trust Hel, I knows people."
+  endgameSprites:
+  - {fileID: 21300000, guid: a7a0b667b22714742956bc565f1d4018, type: 3}
+  - {fileID: 21300000, guid: c19288d388d3e5645890a1e07e8aed4b, type: 3}
+  endgameDialogs:
+  - "YES!! That\u2019s how it\u2019s done, kiddo. I KNEW you had potential. HAH!!
+    Look at your rivals\u2019 faces, you really pissed them off. This deserves some
+    extra points. Here you go. Hades\u2019 Favor increased! +66.666 Now on to the
+    next round! Give\u2019em Hell!"
+  - "Sad news: you failed. You\u2019re done. Out. FIRED. And I thought you had potential\u2026
+    I hate being wrong. I really do. Now get the Hell out of my Hell before I throw
+    you in a furnace."
+  endgameTitles:
+  - You are in the NEXT ROUND!
+  - You have been ELIMINATED!
 --- !u!4 &299488282
 Transform:
   m_ObjectHideFlags: 0
@@ -4694,6 +4736,7 @@ MonoBehaviour:
   destroyInterval: 15
   destroyDelay: 10
   destroyChance: 100
+  goalScore: 10
 --- !u!4 &1946938461
 Transform:
   m_ObjectHideFlags: 0
