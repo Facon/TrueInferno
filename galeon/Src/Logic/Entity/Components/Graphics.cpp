@@ -104,38 +104,31 @@ namespace Logic
 
 	} // createGraphicsEntity
 	
-	//---------------------------------------------------------
-	/*
-	bool CGraphics::accept(const TMessage &message)
+	bool CGraphics::HandleMessage(const TransformMessage& m)
 	{
-		return message._type == Message::SET_TRANSFORM ||
-			message._type == Message::SET_DIMENSIONS ||
-			message._type == Message::SET_COLOR ||
-			message._type == Message::SET_MATERIAL_NAME;
+		_graphicsEntity->setTransform(m._transform);
 
-	} // accept
+		return true;
+	}
+
+	bool CGraphics::HandleMessage(const DimensionsMessage& m)
+	{
+		_graphicsEntity->setDimensions(m._dimensions);
+
+		return true;
+	}
 	
-	//---------------------------------------------------------
-
-	void CGraphics::process(const TMessage &message)
+	bool CGraphics::HandleMessage(const ColorMessage& m)
 	{
-		switch(message._type)
-		{
-		case Message::SET_TRANSFORM:
-			_graphicsEntity->setTransform(message._transform);
-			break;
-		case Message::SET_DIMENSIONS:
-			_graphicsEntity->setDimensions(message._vector3);
-			break;
-		case Message::SET_COLOR:
-			_graphicsEntity->setColor(message._vector3);
-			break;
-		case Message::SET_MATERIAL_NAME:
-			_graphicsEntity->setMaterialName(message._string);
-			break;
-		}
+		_graphicsEntity->setColor(m._rgb);
 
-	} // process
-	*/
+		return true;
+	}
+	bool CGraphics::HandleMessage(const MaterialMessage& m)
+	{
+		_graphicsEntity->setMaterialName(m._name);
+
+		return true;
+	}
 } // namespace Logic
 

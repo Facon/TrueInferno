@@ -100,6 +100,18 @@ namespace Logic
 		}
 	};
 	
+	// SET_COLOR
+	class ColorMessage : public Message
+	{
+	public:
+		Vector3 _rgb;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
 	// SET_MATERIAL_NAME
 	class MaterialMessage : public Message
 	{

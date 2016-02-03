@@ -229,51 +229,63 @@ namespace Logic
 	} // emitMessage
     */
 
+#define SEND_MESSAGE_TO_ALL_COMPONENTS \
+	bool received = false; \
+	\
+	for (auto it = _components.cbegin(); it != _components.cend(); ++it) \
+	{ \
+		received |= (*it)->HandleMessage(msg); \
+	} \
+	\
+	return received;
+
 	bool CEntity::HandleMessage(const TransformMessage& msg)
     {
         this->_transform = msg._transform;
 
-        return true;
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
     }
 
     bool CEntity::HandleMessage(const DimensionsMessage& msg)
     {
         this->_dimensions = msg._dimensions;
 
-        return true;
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
     }
+
+	bool CEntity::HandleMessage(const ColorMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
+	bool CEntity::HandleMessage(const MaterialMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
 
 	bool CEntity::HandleMessage(const AnimationMessage& msg)
     {
-        for (auto it =  _components.cbegin(); it != _components.cend(); ++it)
-        {
-            if ((*it)->GetRTTI().IsExactly(CAnimatedGraphics::rtti))
-            {
-				return (*it)->HandleMessage(msg);
-            }
-        }
-
-		return false;
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
     }
 
 	bool CEntity::HandleMessage(const ControlMessage& msg)
     {
-		return false;
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
     bool CEntity::HandleMessage(const PhysicMessage& msg)
     {
-        return false;
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
     }
 
 	bool CEntity::HandleMessage(const TouchMessage& msg)
     {
-		return false;
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
 	bool CEntity::HandleMessage(const DamageMessage& msg)
     {
-		return false;
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
 	//---------------------------------------------------------

@@ -73,6 +73,11 @@ namespace Logic
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
+		bool HandleMessage(const TransformMessage& m);
+		bool HandleMessage(const DimensionsMessage& m);
+		bool HandleMessage(const ColorMessage& m);
+		bool HandleMessage(const MaterialMessage& m);
+
 	protected:
 
 		/**

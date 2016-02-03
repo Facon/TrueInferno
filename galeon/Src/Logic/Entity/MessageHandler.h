@@ -7,6 +7,7 @@ namespace Logic
     class Message;
     class TransformMessage;
     class DimensionsMessage;
+	class ColorMessage;
 	class MaterialMessage;
     class AnimationMessage;
     class ControlMessage;
@@ -23,6 +24,9 @@ namespace Logic
 
 		virtual bool HandleMessage(const DimensionsMessage& msg)
 		{ return false; }
+
+		virtual bool HandleMessage(const ColorMessage& msg)
+		{ return false;	}
 
 		virtual bool HandleMessage(const MaterialMessage& msg)
 		{ return false; }

@@ -172,6 +172,8 @@ namespace Logic
 		// Para tipo de mensaje se hace la gestión apropiada.
 		bool HandleMessage(const TransformMessage& msg);
 		bool HandleMessage(const DimensionsMessage& msg);
+		bool HandleMessage(const ColorMessage& msg);
+		bool HandleMessage(const MaterialMessage& msg);
 		bool HandleMessage(const AnimationMessage& msg);
 		bool HandleMessage(const ControlMessage& msg);
 		bool HandleMessage(const PhysicMessage& msg);
