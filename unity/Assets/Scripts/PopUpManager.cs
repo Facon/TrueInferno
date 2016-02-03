@@ -18,6 +18,13 @@ public class PopUpManager : MonoBehaviour {
     private int tutorialIndex;
     private int tutorialIndexEnd;
 
+    private TimeManager timeManager;
+
+    void Start()
+    {
+        timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
+    }
+
     public void GenerateEventPopUp (float tamX, float tamY, string title, string desc, int sprite, float duration) {
         Transform canvastrans = GameObject.Find("Canvas").gameObject.transform;
         GameObject popup = Instantiate(eventPanel, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
@@ -71,6 +78,8 @@ public class PopUpManager : MonoBehaviour {
                 tutorialStartPoint = 3;
                 tutorialIndexEnd = 5;
                 tutorialIndex = 3;
+                // Esto se debe hacer en el último para arrancar el tiempo de juego
+                timeManager.setCounting(true);
                 break;
             default:
                 tutorialStartPoint = 0;
