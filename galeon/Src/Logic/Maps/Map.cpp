@@ -57,13 +57,23 @@ namespace Logic {
 			// La propia factoría se encarga de añadir la entidad al mapa.
 			Map::CEntity *mapEntity = *it;
 
+			// Si no es un prefab crea la entidad con normalidad.
 			if (!mapEntity->hasAttribute("prefab") || !mapEntity->getBoolAttribute("prefab")) {
 				CEntity *entity = entityFactory->createEntity(mapEntity, map);
 				assert(entity && "No se pudo crear una entidad del mapa");
 			}
+
+			// Si es un prefab.
 			else {
-				// Deshabilita el atributo "prefab".
+				// Deshabilitamos el atributo "prefab".
 				mapEntity->setAttribute("prefab", "false");
+
+				// Si no tiene posición le damos una por defecto porque puede no tenerla en el mapa y ciertos componentes cascarían.
+				if (!mapEntity->hasAttribute("position"))
+					mapEntity->setAttribute("position", "0 0 0");
+
+				// No creamos entidad lógica pero sí un prefab con nombre igual al tipo de la entidad.
+				entityFactory->createPrefab(mapEntity, mapEntity->getType());
 			}
 		}
 

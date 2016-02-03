@@ -183,6 +183,14 @@ namespace Logic
 
 		}TBluePrint;
 
+		/** Crea un prefab con un nombre dado. 
+		El prefab podrá usarse más adelante para crear instancias con una sobrecarga del método createEntity */
+		void createPrefab(Map::CEntity *info, const std::string& prefabName);
+
+		/** Crea una entidad utilizando el nombre de prefab indicado.
+		Por defecto los prefabs se crean utilizando el nombre del tipo */
+		Logic::CEntity *CEntityFactory::createEntity(const std::string& prefabName, Logic::CMap *map);
+
 	protected:
 
 		/**
@@ -248,6 +256,11 @@ namespace Logic
 		Tabla donde se almacenan las entidades blueprint por nombre.
 		*/
 		TBluePrintMap _bluePrints;
+
+		/**
+		Mapa cacheado de prefabs indexado por tipo
+		*/
+		std::map<std::string, Map::CEntity*> _prefabs;
 
 	}; // CEntityFactory
 

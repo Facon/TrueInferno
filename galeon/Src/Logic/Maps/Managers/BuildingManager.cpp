@@ -18,6 +18,7 @@ Contiene la implementación del gestor de la matriz de tiles.
 #include "Map/MapEntity.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
+#include "Logic/Entity/Components/Placeable.h"
 
 #include <cassert>
 
@@ -90,7 +91,7 @@ namespace Logic {
 	{
 	} // close
 
-	void CBuildingManager::loadInitialBuildings(CMap *map){
+	bool CBuildingManager::loadInitialBuildings(CMap *map){
 		// Coge la Map::CEntity "Tile" leída del fichero de mapa a modo de prefab.
 		// @TODO Hacerlo en Map::CParser mediante una función genérica que reciba el nombre de la Map::CEntity.
 		Map::CMapParser::TEntityList mapEntityList =
@@ -98,48 +99,41 @@ namespace Logic {
 
 		CEntityFactory* entityFactory = CEntityFactory::getSingletonPtr();
 
+		// TODO Colocamos temporalmente hardcodeando posiciones en código
+		CEntity* evilator = createBuilding(map, "Evilator", Vector3(4, 0, 4));
+		if (!evilator)
+			return false;
 
-		// Localización de los prefabs necesarios
-		// TODO Generalizar lectura y almacenaje de prefabs de edificio (prefab=true && tiene componente Placeable)
-		Map::CEntity *prefabHellQuarters = nullptr;
-		Map::CEntity *prefabEvilator = nullptr;
+		CEntity* hellQuarters = createBuilding(map, "HellQuarters", Vector3(12, 0, 12));
+		if (!hellQuarters)
+			return false;
 
-		for (auto it = mapEntityList.begin(); it != mapEntityList.end(); ++it) {
-			if ((*it)->getType() == "HellQuarters") {
-				prefabHellQuarters = *it;
-			}
-			else if ((*it)->getType() == "Evilator") {
-				prefabEvilator = *it;
-			}
-		}
-
-		// Construimos HellQuarters
-		// TODO Generalizar construcción de edificios en una función que reciba el nombre del prefab y la posición lógica
-		prefabHellQuarters->setAttribute("prefab", "false");
-		prefabHellQuarters->setAttribute("floor_absolute_position0", "0 0 0");
-		prefabHellQuarters->setName(prefabHellQuarters->getName() + "0");
-		if (entityFactory->createEntity(prefabHellQuarters, map)){
-			std::cout << "HellQuarters created!" << std::endl;
-		}
-		else{
-			std::cout << "Can't create HellQuarters :(" << std::endl;
-		}
-
-		// Construimos Evilator
-		// TODO Generalizar construcción de edificios en una función que reciba el nombre del prefab y la posición lógica
-		prefabEvilator->setAttribute("prefab", "false");
-		prefabEvilator->setAttribute("floor_absolute_position0", "6 0 6");
-		prefabEvilator->setName(prefabEvilator->getName() + "0");
-		if (entityFactory->createEntity(prefabEvilator, map)){
-			std::cout << "Evilator created!" << std::endl;
-		}
-		else{
-			std::cout << "Can't create Evilator :(" << std::endl;
-		}
+		return true;
 	}
 
 	void CBuildingManager::registerBuilding(CPlaceable *placeable){
 		_buildings.push_back(placeable);
+	}
+
+	CEntity* CBuildingManager::createBuilding(CMap *map, const std::string& prefabName, const Vector3& logicPosition){
+		CEntity* buildingEntity = CEntityFactory::getSingletonPtr()->createEntity(prefabName, map);
+
+		// TODO Apaño temporal: Buscamos a capón la entidad recién creada (con posición por defecto) en el array de buildings
+		// Habría que enviar un mensaje a la entidad para que se ubique en la posición lógica dada (CPlaceable::place())
+		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
+			CPlaceable* building = (*it);
+			if (building->getEntity() == buildingEntity){
+				(*it)->place(logicPosition);
+				break;
+			}
+		}
+
+		if (!buildingEntity){
+			std::cout << "Can't create new building '"<< prefabName <<"' on '"<< logicPosition <<"'" << std::endl;
+			return nullptr;
+		}
+
+		return buildingEntity;
 	}
 
 } // namespace Logic
