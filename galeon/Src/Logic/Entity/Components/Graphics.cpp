@@ -92,7 +92,13 @@ namespace Logic
 			std::string materialName = entityInfo->getStringAttribute("material");
 			_graphicsEntity->setMaterialName(materialName);
 		}
-		
+
+		if (entityInfo->hasAttribute("color"))
+		{
+			Vector3 color = entityInfo->getVector3Attribute("color");
+			_graphicsEntity->setColor(color);
+		}
+
 		return _graphicsEntity;
 
 	} // createGraphicsEntity
