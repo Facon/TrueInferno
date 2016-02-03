@@ -805,7 +805,7 @@ MonoBehaviour:
   - Putting souls to work
   - Putting souls to work
   tutorialDesc:
-  - 
+  - Reach 10000 points, if you can...
   - "Press on a building\u2019s button to select it, then click anywhere on the terrain
     to build it there."
   - Press the Soulpath button and draw a line on the terrain.
@@ -4751,7 +4751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449b7da229df2544a801a3a728f40a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyInterval: 15
+  destroyInterval: 20
   destroyDelay: 10
   destroyChance: 100
   goalScore: 10000
