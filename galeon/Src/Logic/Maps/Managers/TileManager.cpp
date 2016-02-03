@@ -233,11 +233,11 @@ namespace Logic {
 				std::string materialName(baseMaterialName);
 				materialName += terrainTypeChar;
 
-				TMessage message;
-				message._type = Message::SET_MATERIAL_NAME;
-				message._string = (((x + z) % 2 == 0) ? materialName : materialName + "_alt");
+				MaterialMessage message;
+				message._type = MessageType::SET_MATERIAL_NAME;
+				message._name = (((x + z) % 2 == 0) ? materialName : materialName + "_alt");
 
-				_tiles[x][z]->getEntity()->emitMessage(message);
+				message.Dispatch(*_tiles[x][z]->getEntity());
 				_tiles[x][z]->setTerrainType(terrainType);
 				++z;
 			}

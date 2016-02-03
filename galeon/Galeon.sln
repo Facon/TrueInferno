@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Application", "Projects\Application\Application.vcxproj", "{0B9BBA1D-20A3-4737-BD4E-C354FEF50B8A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{848EBA43-0D28-4267-A717-030578DB8EE6} = {848EBA43-0D28-4267-A717-030578DB8EE6}
@@ -13,12 +15,18 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GUI", "Projects\GUI\GUI.vcxproj", "{215AA6AD-AAE6-4E45-9ADC-F075F9EE9966}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Logic", "Projects\Logic\Logic.vcxproj", "{288B50D7-60BC-4542-A263-74DE0ACFE822}"
+	ProjectSection(ProjectDependencies) = postProject
+		{848EBA43-0D28-4267-A717-030578DB8EE6} = {848EBA43-0D28-4267-A717-030578DB8EE6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Map", "Projects\Map\Map.vcxproj", "{599F27DC-A593-4E7C-A461-D7B3198118B0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Configure", "Projects\Configure\Configure.vcxproj", "{C1B74FA8-146A-4CC7-9797-55A2F1126AF4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Physics", "Projects\Physics\Physics.vcxproj", "{848EBA43-0D28-4267-A717-030578DB8EE6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9C5C21D7-F23C-409D-A332-7BE5A325FD7A} = {9C5C21D7-F23C-409D-A332-7BE5A325FD7A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

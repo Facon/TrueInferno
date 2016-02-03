@@ -1,12 +1,29 @@
-/*
- * Copyright (c) 2008-2015, NVIDIA CORPORATION.  All rights reserved.
- *
- * NVIDIA CORPORATION and its licensors retain all intellectual property
- * and proprietary rights in and to this software, related documentation
- * and any modifications thereto.  Any use, reproduction, disclosure or
- * distribution of this software and related documentation without an express
- * license agreement from NVIDIA CORPORATION is strictly prohibited.
- */
+// This code contains NVIDIA Confidential Information and is disclosed to you
+// under a form of NVIDIA software license agreement provided separately to you.
+//
+// Notice
+// NVIDIA Corporation and its licensors retain all intellectual property and
+// proprietary rights in and to this software and related documentation and
+// any modifications thereto. Any use, reproduction, disclosure, or
+// distribution of this software and related documentation without an express
+// license agreement from NVIDIA Corporation is strictly prohibited.
+//
+// ALL NVIDIA DESIGN SPECIFICATIONS, CODE ARE PROVIDED "AS IS.". NVIDIA MAKES
+// NO WARRANTIES, EXPRESSED, IMPLIED, STATUTORY, OR OTHERWISE WITH RESPECT TO
+// THE MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF NONINFRINGEMENT,
+// MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE.
+//
+// Information and code furnished is believed to be accurate and reliable.
+// However, NVIDIA Corporation assumes no responsibility for the consequences of use of such
+// information or for any infringement of patents or other rights of third parties that may
+// result from its use. No license is granted by implication or otherwise under any patent
+// or patent rights of NVIDIA Corporation. Details are subject to change without notice.
+// This code supersedes and replaces all information previously supplied.
+// NVIDIA Corporation products are not authorized for use as critical
+// components in life support devices or systems without express written approval of
+// NVIDIA Corporation.
+//
+// Copyright (c) 2008-2013 NVIDIA Corporation. All rights reserved.
 // Copyright (c) 2004-2008 AGEIA Technologies, Inc. All rights reserved.
 // Copyright (c) 2001-2004 NovodeX AG. All rights reserved.  
 
@@ -64,8 +81,6 @@ struct PxPairFlag
 
 		\note Only takes effect if the colliding actors are rigid bodies.
 
-		\note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
-
 		@see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
 		*/
 		eNOTIFY_TOUCH_FOUND					= (1<<2),
@@ -82,10 +97,6 @@ struct PxPairFlag
 
 		\note No report will get sent if the objects in contact are sleeping.
 
-		\note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
-
-		\note If this flag gets enabled while a pair is in touch already, there will be no eNOTIFY_TOUCH_PERSISTS events until the pair loses and regains touch.
-
 		@see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
 		*/
 		eNOTIFY_TOUCH_PERSISTS				= (1<<3),
@@ -101,8 +112,6 @@ struct PxPairFlag
 		\note Only takes effect if the colliding actors are rigid bodies.
 
 		\note This event will also get triggered if one of the colliding objects gets deleted.
-
-		\note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
 
 		@see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
 		*/
@@ -122,8 +131,6 @@ struct PxPairFlag
 
 		\note Trigger shapes are not supported.
 
-		\note Only takes effect if eDETECT_CCD_CONTACT is raised
-
 		@see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
 		*/
 		eNOTIFY_TOUCH_CCD					= (1<<5),
@@ -132,8 +139,6 @@ struct PxPairFlag
 		\brief Call contact report callback when the contact force between the actors of this collision pair exceeds one of the actor-defined force thresholds.
 
 		\note Only takes effect if the colliding actors are rigid bodies.
-
-		\note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
 
 		@see PxSimulationEventCallback.onContact()
 		*/
@@ -147,8 +152,6 @@ struct PxPairFlag
 		\note If a pair gets re-filtered and this flag has previously been disabled, then the report will not get fired in the same frame even if the force threshold has been reached in the
 		previous one (unless #eNOTIFY_THRESHOLD_FORCE_FOUND has been set in the previous frame).
 
-		\note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
-
 		@see PxSimulationEventCallback.onContact()
 		*/
 		eNOTIFY_THRESHOLD_FORCE_PERSISTS	= (1<<7),
@@ -161,8 +164,6 @@ struct PxPairFlag
 		\note If a pair gets re-filtered and this flag has previously been disabled, then the report will not get fired in the same frame even if the force threshold has been reached in the
 		previous one (unless #eNOTIFY_THRESHOLD_FORCE_FOUND or #eNOTIFY_THRESHOLD_FORCE_PERSISTS has been set in the previous frame).
 
-		\note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
-
 		@see PxSimulationEventCallback.onContact()
 		*/
 		eNOTIFY_THRESHOLD_FORCE_LOST		= (1<<8),
@@ -171,8 +172,6 @@ struct PxPairFlag
 		\brief Provide contact points in contact reports for this collision pair.
 
 		\note Only takes effect if the colliding actors are rigid bodies and if used in combination with the flags eNOTIFY_TOUCH_... or eNOTIFY_THRESHOLD_FORCE_...
-
-		\note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
 
 		@see PxSimulationEventCallback.onContact() PxContactPair PxContactPair.extractContacts()
 		*/
@@ -193,8 +192,6 @@ struct PxPairFlag
 		\note The contacts will only be responded to if eSOLVE_CONTACT is enabled on this pair.
 		\note The scene must have PxSceneFlag::eENABLE_CCD enabled to use this feature.
 		\note Non-static bodies of the pair should have PxRigidBodyFlag::eENABLE_CCD specified for this feature to work correctly.
-		\note This flag is not supported with trigger shapes. However, CCD trigger events can be emulated using non-trigger shapes 
-		and requesting eNOTIFY_TOUCH_FOUND and eNOTIFY_TOUCH_LOST and not raising eSOLVE_CONTACT on the pair.
 
 		@see PxRigidBodyFlag::eENABLE_CCD
 		@see PxSceneFlag::eENABLE_CCD
@@ -265,7 +262,7 @@ struct PxPairFlag
 		/**
 		\brief Provided default flag to get commonly used trigger behavior for this collision pair.
 		*/
-		eTRIGGER_DEFAULT					= eNOTIFY_TOUCH_FOUND | eNOTIFY_TOUCH_LOST | eDETECT_DISCRETE_CONTACT
+		eTRIGGER_DEFAULT					= eNOTIFY_TOUCH_FOUND | eNOTIFY_TOUCH_LOST
 	};
 };
 
@@ -365,13 +362,6 @@ PX_FLAGS_OPERATORS(PxFilterFlag::Enum, PxU16)
 */
 struct PxFilterData
 {
-//= ATTENTION! =====================================================================================
-// Changing the data layout of this class breaks the binary serialization format.  See comments for 
-// PX_BINARY_SERIAL_VERSION.  If a modification is required, please adjust the getBinaryMetaData 
-// function.  If the modification is made on a custom branch, please change PX_BINARY_SERIAL_VERSION
-// accordingly.
-//==================================================================================================
-
 	PX_INLINE PxFilterData(const PxEMPTY&)
 	{
 	}
@@ -645,7 +635,7 @@ public:
 	\param[in] filterData0 The custom filter data of the first object
 	\param[in] attributes1 The filter attribute of the second object
 	\param[in] filterData1 The custom filter data of the second object
-	\param[in] objectRemoved True if the pair was lost because one of the objects got removed from the scene
+	\param[in] objectDeleted True if the pair was lost because one of the objects got deleted
 
 	@see pairFound() PxSimulationFilterShader PxFilterData PxFilterObjectAttributes
 	*/
@@ -654,7 +644,7 @@ public:
 		PxFilterData filterData0,
 		PxFilterObjectAttributes attributes1,
 		PxFilterData filterData1,
-		bool objectRemoved) = 0;
+		bool objectDeleted) = 0;
 
 	/**
 	\brief Callback to give the opportunity to change the filter state of a tracked collision pair.

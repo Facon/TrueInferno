@@ -1,12 +1,29 @@
-/*
- * Copyright (c) 2008-2015, NVIDIA CORPORATION.  All rights reserved.
- *
- * NVIDIA CORPORATION and its licensors retain all intellectual property
- * and proprietary rights in and to this software, related documentation
- * and any modifications thereto.  Any use, reproduction, disclosure or
- * distribution of this software and related documentation without an express
- * license agreement from NVIDIA CORPORATION is strictly prohibited.
- */
+// This code contains NVIDIA Confidential Information and is disclosed to you
+// under a form of NVIDIA software license agreement provided separately to you.
+//
+// Notice
+// NVIDIA Corporation and its licensors retain all intellectual property and
+// proprietary rights in and to this software and related documentation and
+// any modifications thereto. Any use, reproduction, disclosure, or
+// distribution of this software and related documentation without an express
+// license agreement from NVIDIA Corporation is strictly prohibited.
+//
+// ALL NVIDIA DESIGN SPECIFICATIONS, CODE ARE PROVIDED "AS IS.". NVIDIA MAKES
+// NO WARRANTIES, EXPRESSED, IMPLIED, STATUTORY, OR OTHERWISE WITH RESPECT TO
+// THE MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF NONINFRINGEMENT,
+// MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE.
+//
+// Information and code furnished is believed to be accurate and reliable.
+// However, NVIDIA Corporation assumes no responsibility for the consequences of use of such
+// information or for any infringement of patents or other rights of third parties that may
+// result from its use. No license is granted by implication or otherwise under any patent
+// or patent rights of NVIDIA Corporation. Details are subject to change without notice.
+// This code supersedes and replaces all information previously supplied.
+// NVIDIA Corporation products are not authorized for use as critical
+// components in life support devices or systems without express written approval of
+// NVIDIA Corporation.
+//
+// Copyright (c) 2008-2013 NVIDIA Corporation. All rights reserved.
 // Copyright (c) 2004-2008 AGEIA Technologies, Inc. All rights reserved.
 // Copyright (c) 2001-2004 NovodeX AG. All rights reserved.  
 
@@ -34,11 +51,7 @@ Compiler define
 */
 #ifdef _MSC_VER 
 #	define PX_VC
-#	if _MSC_VER >= 1900
-#		define PX_VC14
-#	elif _MSC_VER >= 1800
-#		define PX_VC12
-#   elif _MSC_VER >= 1700
+#   if _MSC_VER >= 1700
 #       define PX_VC11
 #   elif _MSC_VER >= 1600
 #       define PX_VC10
@@ -82,7 +95,7 @@ Platform define
 #	else
 #		error "Unknown platform"
 #	endif
-#	if defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_PARTITION_APP)
+#   if defined(WINAPI_FAMILY) && WINAPI_FAMILY == WINAPI_PARTITION_APP
 #		define PX_WINMODERN
 #	endif
 #elif defined PX_GNUC
@@ -94,11 +107,6 @@ Platform define
 #		if defined(__SNC__)
 #			define PX_PSP2
 #		endif
-#		if defined(__ARM_NEON__)
-#			define PX_ARM_NEON
-#		endif
-#   elif defined(__arm64__)
-#		define PX_A64
 #		if defined(__ARM_NEON__)
 #			define PX_ARM_NEON
 #		endif
@@ -129,7 +137,7 @@ Platform define
 #	elif defined(__APPLE__)
 #   	define PX_APPLE
 #   	define PX_UNIX
-#		if defined(__arm__) || defined(__arm64__)
+#		if defined(__arm__)
 #			define PX_APPLE_IOS
 #		else
 #			define PX_OSX
@@ -143,25 +151,15 @@ Platform define
 #	define PX_WIIU
 #endif
 
-#if defined(PX_X64) || defined(PX_A64)
-#define PX_P64 // pointers are 64 bit
-#endif
-
 /**
 DLL export macros
 */
 #if !defined(PX_C_EXPORT) 
-#	if defined(PX_WINDOWS) || defined(PX_WINMODERN) || defined(PX_LINUX)
+#	if defined(PX_WINDOWS) || defined(PX_WINMODERN)
 #		define PX_C_EXPORT extern "C"
 #	else
 #		define PX_C_EXPORT
 #	endif
-#endif
-
-#if (defined(PX_UNIX) && (__GNUC__ >= 4))
-#	define PX_UNIX_EXPORT __attribute__ ((visibility ("default")))
-#else
-#	define PX_UNIX_EXPORT
 #endif
 
 /**
@@ -181,10 +179,8 @@ no definition - this will allow DLLs and libraries to use the exported API from 
 	#else
 		#define PX_FOUNDATION_API __declspec(dllimport)
 	#endif
-#elif defined(PX_UNIX)
-	#define PX_FOUNDATION_API PX_UNIX_EXPORT
 #else
-	#define PX_FOUNDATION_API
+	#define PX_FOUNDATION_API 
 #endif
 
 /**
@@ -246,12 +242,14 @@ Noinline macro
 #	define PX_NOINLINE 
 #endif
 
+
 /*! restrict macro */
 #if defined(__CUDACC__)
 #	define PX_RESTRICT __restrict__
-#else
-//PX_GNUC, PX_VC and PX_GHS all support restrict.  If adding support for a compiler which does not like restrict, please add an exception for it by in that case defining PX_RESTRICT to naught.
+#elif (defined(PX_GNUC) || defined(PX_VC) || defined(PX_GHS)) && !defined(PX_PS4) // ps4 doesn't like restricted functions
 #	define PX_RESTRICT __restrict
+#else
+#	define PX_RESTRICT
 #endif
 
 #if defined(PX_WINDOWS) || defined(PX_X360) || defined(PX_WINMODERN) || defined(PX_XBOXONE)
@@ -291,7 +289,7 @@ This declaration style is parsed correctly by Visual Assist.
 /**
 Deprecated macro
 - To deprecate a function: Place PX_DEPRECATED at the start of the function header (leftmost word).
-- To deprecate a 'typedef', a 'struct' or a 'class': Place PX_DEPRECATED directly after the keywords ('typdef', 'struct', 'class').
+- To deprecate a 'typdef', a 'struct' or a 'class': Place PX_DEPRECATED directly after the keywords ('typdef', 'struct', 'class').
 */
 #if 0 // set to 1 to create warnings for deprecated functions
 #	define PX_DEPRECATED __declspec(deprecated)
@@ -309,11 +307,7 @@ General defines
 */
 
 // static assert
-#if defined(__GNUC__) && ((__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 7)))  
-#define PX_COMPILE_TIME_ASSERT(exp)	typedef char PxCompileTimeAssert_Dummy[(exp) ? 1 : -1] __attribute__((unused))
-#else 
 #define PX_COMPILE_TIME_ASSERT(exp)	typedef char PxCompileTimeAssert_Dummy[(exp) ? 1 : -1]
-#endif
 
 #if defined(PX_GNUC)
 #define PX_OFFSET_OF(X, Y) __builtin_offsetof(X, Y)
@@ -337,13 +331,6 @@ General defines
 #define PX_CUDA_CALLABLE __host__ __device__
 #else
 #define PX_CUDA_CALLABLE
-#endif
-
-// Support GPU PhysX
-#if (defined(PX_WINDOWS) && !defined(PX_WINMODERN) && !defined(PX_VC14)) || defined(PX_LINUX)
-#define PX_SUPPORT_GPU_PHYSX 1
-#else
-#define PX_SUPPORT_GPU_PHYSX 0
 #endif
 
 // avoid unreferenced parameter warning (why not just disable it?)
@@ -415,12 +402,6 @@ PX_COMPILE_TIME_ASSERT(PX_OFFSET_OF(PxPackValidation, a) == 8);
 #define PX_IS_PS3 1
 #else
 #define PX_IS_PS3 0
-#endif
-
-#ifdef PX_NVTX
-#define PX_NVTX 1
-#else
-#define PX_NVTX 0
 #endif
 
 #define PX_IS_PPU (PX_IS_PS3 && !PX_IS_SPU) // PS3 PPU

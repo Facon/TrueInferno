@@ -236,9 +236,9 @@ namespace Logic
         return true;
     }
 
-    bool CEntity::HandleMessage(const ScaleMessage& msg)
+    bool CEntity::HandleMessage(const DimensionsMessage& msg)
     {
-        this->_scale = msg._scale;
+        this->_dimensions = msg._dimensions;
 
         return true;
     }
@@ -249,16 +249,7 @@ namespace Logic
         {
             if ((*it)->GetRTTI().IsExactly(CAnimatedGraphics::rtti))
             {
-                // Manipular componente haciendo casting
-                CAnimatedGraphics& obj = static_cast<CAnimatedGraphics&>(*(*it));
-
-                //obj.handlemsg(msg);
-
-                obj.handleAnimationMessage(msg);
-
-                // Hacer movidas con obj y msg
-
-                return true;
+				return (*it)->HandleMessage(msg);
             }
         }
 

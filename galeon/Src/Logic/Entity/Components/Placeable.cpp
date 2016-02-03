@@ -9,6 +9,7 @@
 #include <string>
 
 namespace Logic {
+	RTTI_ROOT_IMPL(CPlaceable);
 	IMP_FACTORY(CPlaceable);
 
 	CPlaceable::CPlaceable() : IComponent() {
@@ -54,7 +55,8 @@ namespace Logic {
 
 		return true;
 	} // spawn
-
+	
+	/*
 	bool CPlaceable::accept(const TMessage &message){
 		return true;
 	} // accept
@@ -62,6 +64,7 @@ namespace Logic {
 	void CPlaceable::process(const TMessage &message){
 
 	} // process
+	*/
 
 	void CPlaceable::tick(unsigned int msecs){
 		// TODO Eliminar
@@ -112,7 +115,7 @@ namespace Logic {
 		// TODO Move this logic to... Entity? TileManager?
 		Vector3 targetPosition = _tileManager->getTile(_floorOriginPosition)->getEntity()->getPosition() + Vector3(0, 1, 0);
 		//std::cout << "Setting position for " << this->getEntity() << ": x=" << targetPosition.x << ", y=" << targetPosition.y << ", z=" << targetPosition.z << std::endl;
-		_entity->setPosition(targetPosition, this);
+		_entity->setPosition(targetPosition);
 
 		return true;
 	}

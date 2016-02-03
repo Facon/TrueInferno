@@ -38,7 +38,6 @@ namespace Logic
 	*/
 	class IPhysics : public IComponent
 	{
-		RTTI_DECL;
 	public:
  
 		/**

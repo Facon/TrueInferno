@@ -14,7 +14,6 @@ Contiene el tipo de datos de un mensaje.
 
 #include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
-#include "Entity.h"
 
 // Predeclaraciones
 namespace Logic {
@@ -101,6 +100,18 @@ namespace Logic
 		}
 	};
 	
+	// SET_MATERIAL_NAME
+	class MaterialMessage : public Message
+	{
+	public:
+		std::string _name;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
 	// SET_ANIMATION, STOP_ANIMATION
 	class AnimationMessage : public Message
 	{

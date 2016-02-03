@@ -19,7 +19,8 @@ de juego. Es una colección de componentes.
 #include "Logic/Maps/EntityID.h"
 
 // Mensaje
-#include "Message.h"
+#include "Logic/Entity/MessageHandler.h"
+#include "Logic/Entity/Message.h"
 
 #include <list>
 #include <string>

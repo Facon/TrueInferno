@@ -95,7 +95,7 @@ void CPhysicController::tick(unsigned int msecs)
 
 	// Actualizar la posici�n y orientaci�n de la entidad l�gica usando la 
 	// informaci�n proporcionada por el motor de f�sica	
-	_entity->setPosition(_server->getControllerPosition(_controller), this);
+	_entity->setPosition(_server->getControllerPosition(_controller));
 
 	// Si estamos cayendo modificar el vector de desplazamiento para simular el 
 	// efecto de la gravedad. Lo hacemos de manera sencilla y pero poco realista.

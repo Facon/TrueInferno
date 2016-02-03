@@ -21,6 +21,7 @@ gr�fica de una entidad est�tica.
 
 namespace Logic 
 {
+	RTTI_ROOT_IMPL(CAnimatedGraphics);
 	IMP_FACTORY(CAnimatedGraphics);
 	
 	//---------------------------------------------------------

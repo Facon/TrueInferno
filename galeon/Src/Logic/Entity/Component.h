@@ -14,6 +14,7 @@ Contiene la declaraci�n de la clase base de los componentes.
 
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Maps/ComponentFactory.h"
+#include "Logic/Entity/MessageHandler.h"
 
 // Predeclaraci�n de clases para ahorrar tiempo de compilaci�n
 namespace Map
@@ -78,7 +79,7 @@ namespace Logic
 	@author David Llans� Garc�a
 	@date Julio, 2010
 */
-	class IComponent
+	class IComponent : public MessageHandler
 	{
         RTTI_DECL;
 	public:

@@ -1,6 +1,10 @@
 #ifndef PLACEABLE_H_
 #define PLACEABLE_H_
 
+#include <vector>
+
+#include "BaseSubsystems/Math.h"
+#include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
@@ -12,6 +16,7 @@ namespace Logic
 
 namespace Logic {
 	class CPlaceable : public IComponent{
+		RTTI_DECL;
 		DEC_FACTORY(CPlaceable);
 
 	public:
@@ -26,15 +31,13 @@ namespace Logic {
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
-		/**
-		Aceptación de mensajes
-		*/
+		/*
+		//Aceptación de mensajes
 		virtual bool accept(const TMessage &message);
 
-		/**
-		Procesamiento de mensajes
-		*/
+		//Procesamiento de mensajes
 		virtual void process(const TMessage &message);
+		*/
 
 		/**
 		Actualización por frame
@@ -42,7 +45,7 @@ namespace Logic {
 		virtual void tick(unsigned int msecs);
 
 		/** Place this placeable on a given logic position*/
-		bool place(const Vector3 logicPosition);
+		bool place(const Vector3 newOriginPosition);
 
 		/** Gets occupied tiles depending on the placeable's floor */
 		const std::vector<Tile*> getTiles();

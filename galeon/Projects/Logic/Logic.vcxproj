@@ -100,7 +100,6 @@
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\TileManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Map.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\CommunicationPort.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Component.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Entity.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\AnimatedGraphics.cpp" />
@@ -129,7 +128,6 @@
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\TileManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Map.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\CommunicationPort.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Component.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Documentation.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Entity.h" />
