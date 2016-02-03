@@ -32,7 +32,6 @@ public class EventManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        
         popManager = GameObject.Find("PopUpManager").GetComponent<PopUpManager>();
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
