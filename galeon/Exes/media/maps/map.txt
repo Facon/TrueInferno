@@ -2,7 +2,7 @@ Map = {
 	
 	Camera = {
 		type = "Camera",
-		distance = 50,
+		distance = 30,
 		height = 25,
 	},
 	
@@ -26,7 +26,7 @@ Map = {
 	HellQuarters = {
 		prefab = true,
 		type="HellQuarters",
-		dimensions = {1.5, 1.5, 1.5},
+		dimensions = {2, 1.5, 2},
 		orientation = 0,
 		model = "cube.mesh",
 		static = false,
@@ -46,7 +46,7 @@ Map = {
 	Evilator = {
 		prefab = true,
 		type="Evilator",
-		dimensions = {1.5, 1.5, 1.5},
+		dimensions = {1, 1.5, 1},
 		orientation = 0,
 		model = "cube.mesh",
 		static = false,
@@ -56,7 +56,6 @@ Map = {
 		physic_shape = "box",
 		physic_dimensions = { 1, 2, 1 },
 		physic_group = 0,
-		floor_relative_position1 = {0, 0, 1},
 		color = {0.81, 0.32, 0.7},
 		material = "Evilator",
 	},

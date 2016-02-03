@@ -71,15 +71,6 @@ namespace Logic {
 	*/
 
 	void CPlaceable::tick(unsigned int msecs){
-		// TODO Eliminar
-		/*if (_test){
-			std::cout << this << ": 1 Current position is: x=" << _entity->getPosition().x << ", y=" << _entity->getPosition().y << ", z=" << _entity->getPosition().z << std::endl;
-			getEntity()->setPosition(Vector3(rand() % 14, 4, rand() % 14), this);
-			std::cout << this << ": 2 Current position is: x=" << _entity->getPosition().x << ", y=" << _entity->getPosition().y << ", z=" << _entity->getPosition().z << std::endl;
-			_test = false;
-		}*/
-
-		//std::cout << this << ": Current position is: x=" << _entity->getPosition().x << ", y=" << _entity->getPosition().y << ", z=" << _entity->getPosition().z << std::endl;
 	} // tick
 
 	bool CPlaceable::place(const Vector3 newOriginPosition){
@@ -116,16 +107,17 @@ namespace Logic {
 			_tiles.push_back(_tileManager->getTile(_floorOriginPosition + relativePosition));
 		}
 
-		// Notify all tiles about this placeable's owner entity
+		// Notify all tiles about this placeable's owner entity and calculate target position right in the center (average) of all tiles
+		Vector3 targetPosition(0, 0, 0);
 		for (auto it = _tiles.begin(); it != _tiles.end(); ++it) {
 			Tile* tile = (*it);
 			tile->setEntityAbove(this->getEntity());
+			targetPosition += tile->getEntity()->getPosition();
 		}
+		targetPosition /= _tiles.size();
 
-		// Update entity position aligning it to the origin tile position and putting it on the tile
-		// TODO Move this logic to... Entity? TileManager?
-		Vector3 targetPosition = _tileManager->getTile(_floorOriginPosition)->getEntity()->getPosition() + Vector3(0, 1, 0);
-		//std::cout << "Setting position for " << this->getEntity() << ": x=" << targetPosition.x << ", y=" << targetPosition.y << ", z=" << targetPosition.z << std::endl;
+		// Move the object a bit over the tile
+		targetPosition += Vector3(0, 1, 0);
 		_entity->setPosition(targetPosition);
 
 		return true;
