@@ -4339,7 +4339,7 @@ GameObject:
   - 114: {fileID: 1698341940}
   m_Layer: 0
   m_Name: TimeManager
-  m_TagString: Untagged
+  m_TagString: TimeManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4754,7 +4754,7 @@ MonoBehaviour:
   destroyInterval: 15
   destroyDelay: 10
   destroyChance: 100
-  goalScore: 10
+  goalScore: 10000
 --- !u!4 &1946938461
 Transform:
   m_ObjectHideFlags: 0

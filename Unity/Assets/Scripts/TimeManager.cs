@@ -14,10 +14,15 @@ public class TimeManager : MonoBehaviour
     /// </summary>
     public float remainingTime;
 
+    /// <summary>
+    /// Time UI display
+    /// </summary>
     public Text timeDisplay;
 
-	// Use this for initialization
-	void Start () 
+    private bool counting = false;
+
+    // Use this for initialization
+    void Start () 
     {
         remainingTime = 60 * minutesTimeLimit;
 	}
@@ -25,9 +30,11 @@ public class TimeManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        remainingTime -= Time.deltaTime;
-        if (remainingTime <= 0)
-            remainingTime = 0;
+        if (counting) {
+            remainingTime -= Time.deltaTime;
+            if (remainingTime <= 0)
+                remainingTime = 0;
+        }
 
         timeDisplay.text = formatTime();
 	}
@@ -38,5 +45,10 @@ public class TimeManager : MonoBehaviour
         int seconds = (int)remainingTime % 60;
 
         return string.Format("{0}:{1:00}", minutes , seconds);
+    }
+
+    public void setCounting(bool timeOn)
+    {
+        counting = timeOn;
     }
 }
