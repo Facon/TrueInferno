@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour {
     private TileManager tileManager;
     private PopUpManager popManager;
     private ScoreManager scoreManager;
+    private WorkerManager workerManager;
 
     //Event parameters
     public float destroyInterval;
@@ -19,6 +20,15 @@ public class EventManager : MonoBehaviour {
     private bool endGame;
     private bool gameStart;
 
+    //EventVictory parameters
+    public int goalScore;
+
+    private bool tutorial;
+
+    private int buildingTutorialState;
+    private int buildingRoadState;
+    private TownHall townHall;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -26,10 +36,15 @@ public class EventManager : MonoBehaviour {
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
         tileManager = GameObject.Find("Map").GetComponent<TileManager>();
+        workerManager = GameObject.Find("WorkerManager").GetComponent<WorkerManager>();
         previousTime = 60 * timeManager.minutesTimeLimit;
         remainingDestroyEventTime = destroyInterval;
         endGame = false;
         gameStart = true;
+        tutorial = true;
+        buildingTutorialState = 0;
+        buildingRoadState = 0;
+        townHall = tileManager.getTownHall().GetComponent<TownHall>();
 	}
 	
 	// Update is called once per frame
@@ -43,14 +58,36 @@ public class EventManager : MonoBehaviour {
 
         // Update timer
         previousTime = timeManager.remainingTime;
+
+        if (buildingTutorialState == 0)
+            buildingTutorialState = tileManager.buildingList.Count - 1;
+
+        if (buildingRoadState == 0){
+            if(workerManager.checkSoulPathAvaible(townHall.GetComponent<Building>(), tileManager.buildingList[UnityEngine.Random.Range(0, tileManager.buildingList.Count)].GetComponent<Building>()))
+                buildingRoadState = 1;
+        }
+
 	}
 
 
     // Method for event controlling
     void EventChecker() 
     {
-        if (gameStart) {
-            TutorialPopUpEvent();
+        if (gameStart) 
+        {
+            TutorialPopUpEvent(0);
+        }
+
+        if (buildingTutorialState > 0) 
+        {
+            TutorialPopUpEvent(1);
+            buildingTutorialState = -1;
+        }
+
+        if (buildingRoadState == 1)
+        {
+            TutorialPopUpEvent(2);
+            buildingRoadState = -1;
         }
 
         if (remainingDestroyEventTime <= 0)
@@ -61,20 +98,21 @@ public class EventManager : MonoBehaviour {
     }
 
     //Event Methods
-    void TutorialPopUpEvent()
+    void TutorialPopUpEvent(int tutorialState)
     {
         gameStart = false;
-        popManager.GenerateTutorialPopUp(0.25f, 0.75f);
+        popManager.GenerateTutorialPopUp(0.25f, 0.75f, tutorialState);
     }
 
     void EndGamePopUpEvent() {
         endGame = true;
-        popManager.GenerateEndGamePopUp(0.25f, 0.75f, "Game Over", "Score: " + scoreManager.hadesFavorDisplay.text);
+        popManager.GenerateEndGamePopUp(0.25f, 0.75f, scoreManager.GetHadesFavor(), goalScore);
     }
 
     void BuildingDestructionEvent()
     {
         remainingDestroyEventTime = destroyInterval;
+        
         bool eventSuccess = UnityEngine.Random.Range(1,100) <= destroyChance;
         if (eventSuccess)
         {
@@ -89,7 +127,7 @@ public class EventManager : MonoBehaviour {
             }
         }
         
-        if ( eventSuccess && tileManager.buildingList.Count > 0)
+        if ( !tutorial && eventSuccess && tileManager.buildingList.Count > 0)
         {
             eventSuccess = false;
             BuildingDestructor targetBuildingDestructor;
@@ -105,5 +143,9 @@ public class EventManager : MonoBehaviour {
                 }
             }
         }
+
+        if (buildingRoadState == -1 && tutorial)
+            tutorial = false;
+
     }
 }

@@ -17,12 +17,16 @@ Contiene la declaración del gestor de edificios.
 #define BUILDING_MANAGER_H
 
 #include <vector>
+#include <string>
+#include <map>
+#include "BaseSubsystems/Math.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
 {
 	class CMap;
 	class CPlaceable;
+	class CEntity;
 }
 
 namespace Map
@@ -82,12 +86,19 @@ namespace Logic
 
 		@param map Mapa en el que generar los edificios.
 		*/
-		void loadInitialBuildings(CMap *map);
+		bool loadInitialBuildings(CMap *map);
 
 		/**
 		Registra internamente un edificio.
 		*/
 		void registerBuilding(CPlaceable *placeable);
+
+		/** Coloca un edificio del tipo indicado en la posición lógica del tile inicial 
+
+		@param map Mapa donde se instanciará la entidad del edificio
+		@param prefabName Nombre de la entidad de mapa o "prefab"
+		@param logicPosition Posición lógica donde se colocará el primer tile. El resto de tiles se colocarán de acuerdo a la info del prefab */
+		Logic::CEntity* createBuilding(CMap *map, const std::string& prefabName, const Vector3& logicPosition);
 
 	protected:
 
@@ -128,6 +139,14 @@ namespace Logic
 		Guardamos punteros de sus correspondientes componentes CPlaceable.
 		*/
 		std::vector<CPlaceable*> _buildings;
+
+		/**
+		Índice de prefabs de edificios indexados por su nombre de tipo
+		*/
+		std::map<std::string, Map::CEntity*> _prefabs;
+
+		/** Carga los prefabs de edificios del mapa y los almacena indexados internamente */
+		//bool loadPrefabs();
 
 	}; // class BuildingManager
 

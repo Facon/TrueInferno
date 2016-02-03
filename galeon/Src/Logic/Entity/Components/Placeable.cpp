@@ -43,12 +43,16 @@ namespace Logic {
 			attributeName = getPositionAttributeName(++numPosition);
 		}
 
-		// Get memory for the tiles: The origin and all the relatives
-		_tiles = std::vector<Tile*>(_floorRelativePositions.size()+1);
+		// Si el edificio fue creado por prefab, es posible que al hacer spawn no tenga el atributo de posición lógica
+		if (entityInfo->hasAttribute("floor_absolute_position0")){
+			// Place placeable on its configured initial position
+			if (!place(entityInfo->getVector3Attribute("floor_absolute_position0"))){
+				return false;
+			}
 
-		// Place placeable on its configured initial position
-		if (!place(entityInfo->getVector3Attribute("floor_absolute_position0")))
-			return false;
+			// Get memory for the tiles: The origin and all the relatives
+			_tiles = std::vector<Tile*>(_floorRelativePositions.size() + 1);
+		}
 
 		// Register building in manager
 		Logic::CBuildingManager::getSingletonPtr()->registerBuilding(this);
@@ -87,6 +91,13 @@ namespace Logic {
 		bool check = checkPlacementIsPossible(newOriginPosition);
 		if (!check)
 			return false;
+
+		// Clean entity above in old tiles
+		_tileManager->getTile(_floorOriginPosition)->setEntityAbove(nullptr);
+		for (auto it = _floorRelativePositions.cbegin(); it != _floorRelativePositions.cend(); ++it) {
+			Vector3 relativePosition = (*it);
+			_tileManager->getTile(_floorOriginPosition + relativePosition)->setEntityAbove(nullptr);
+		}
 
 		// Store new origin position
 		_floorOriginPosition = newOriginPosition;

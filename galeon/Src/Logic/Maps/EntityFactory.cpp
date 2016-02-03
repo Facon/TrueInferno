@@ -19,6 +19,7 @@ del juego.
 #include <iostream>
 #include <fstream>
 #include <cassert>
+#include <map>
 
 // HACK. Debería leerse de algún fichero de configuración
 #define BLUEPRINTS_FILE_PATH "./media/maps/"
@@ -219,6 +220,30 @@ namespace Logic
 
 	} // createEntity
 	
+	//---------------------------------------------------------
+
+	void CEntityFactory::createPrefab(Map::CEntity *info, const std::string& name){
+		_prefabs[name] = info;
+	}
+
+	//---------------------------------------------------------
+
+	Logic::CEntity *CEntityFactory::createEntity(const std::string& prefabName, Logic::CMap *map)
+	{
+		// Cogemos el prefab indicado por el nombre
+		Map::CEntity *entityInfo = _prefabs[prefabName];
+
+		// Si no se encontró el prefab devolvemos nullptr
+		if (!entityInfo){
+			std::cout << "Prefab no encontrado" << std::endl;
+			return nullptr;
+		}
+
+		// Creamos la entidad con la info que tiene el prefab
+		return createEntity(entityInfo, map);
+
+	} // createEntity
+
 	//---------------------------------------------------------
 
 	void CEntityFactory::deleteEntity(Logic::CEntity *entity)

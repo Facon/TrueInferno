@@ -50,6 +50,10 @@ namespace Application {
 		// Cargamos la ventana que muestra el tiempo de juego transcurrido.
 		_timeWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Time.layout");
 
+		// Cargamos la ventana que muestra la barra superior
+		_uibarsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIbars.layout");
+
+
 		return true;
 
 	} // init
@@ -85,6 +89,11 @@ namespace Application {
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_timeWindow);
 		_timeWindow->setVisible(true);
 		_timeWindow->activate();
+
+		// Activamos la interfaz de usuario
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_uibarsWindow);
+		_uibarsWindow->setVisible(true);
+		_uibarsWindow->activate();
 
 	} // activate
 

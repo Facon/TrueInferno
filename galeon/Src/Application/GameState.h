@@ -186,6 +186,11 @@ namespace Application
 		CEGUI::Window* _timeWindow;
 
 		/**
+		Ventana CEGUI que muestra la barra superior
+		*/
+		CEGUI::Window* _uibarsWindow;
+
+		/**
 		Tiempo de juego en milisegundos.
 		*/
 		unsigned int _time;
