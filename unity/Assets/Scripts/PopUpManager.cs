@@ -22,7 +22,7 @@ public class PopUpManager : MonoBehaviour {
         Transform canvastrans = GameObject.Find("Canvas").gameObject.transform;
         GameObject popup = Instantiate(eventPanel, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
         popup.transform.SetParent(canvastrans, false);
-        popup.transform.localScale = new Vector3(tamX, tamY, 0);
+        //popup.transform.localScale = new Vector3(tamX, tamY, 0);
         popup.GetComponentsInChildren<Text>()[0].text = title;
         popup.GetComponentsInChildren<Text>()[1].text = desc;
         popup.GetComponentsInChildren<Image>()[1].sprite = eventSprites[sprite];
@@ -35,7 +35,8 @@ public class PopUpManager : MonoBehaviour {
         Transform canvastrans = GameObject.Find("Canvas").gameObject.transform;
         GameObject popup = Instantiate(endgamePanel, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
         popup.transform.SetParent(canvastrans, false);
-        popup.transform.localScale = new Vector3(tamX, tamY, 0);
+        //popup.transform.localScale = new Vector3(tamX, tamY, 0);
+
         if (score >= goalScore)
         {
             popup.GetComponentsInChildren<Text>()[0].text = endgameTitles[0];
@@ -56,7 +57,7 @@ public class PopUpManager : MonoBehaviour {
         Transform canvastrans = GameObject.Find("Canvas").gameObject.transform;
         GameObject popup = Instantiate(tutorialPanel, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
         popup.transform.SetParent(canvastrans, false);
-        popup.transform.localScale = new Vector3(tamX, tamY, 0);
+        //popup.transform.localScale = new Vector3(tamX, tamY, 0);
 
         int tutorialStartPoint = 0;
         switch (tutorialState) 
