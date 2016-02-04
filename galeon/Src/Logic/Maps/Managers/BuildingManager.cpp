@@ -118,12 +118,19 @@ namespace Logic {
 	CEntity* CBuildingManager::createBuilding(CMap *map, const std::string& prefabName, const Vector3& logicPosition){
 		CEntity* buildingEntity = CEntityFactory::getSingletonPtr()->createEntity(prefabName, map);
 
-		// TODO Apaño temporal: Buscamos a capón la entidad recién creada (con posición por defecto) en el array de buildings
+		// TODO Apaño temporal para ubicar el edificio: Buscamos a capón la entidad recién creada (con posición por defecto) en el array de buildings
 		// Habría que enviar un mensaje a la entidad para que se ubique en la posición lógica dada (CPlaceable::place())
 		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
 			CPlaceable* building = (*it);
+
+			// Si es la entidad buscada
 			if (building->getEntity() == buildingEntity){
-				(*it)->place(logicPosition);
+				// Intentamos ubicarla
+				if (!(*it)->place(logicPosition)){
+					// Destruímos la entidad si no se pudo ubicar
+					CEntityFactory::getSingletonPtr()->deleteEntity(buildingEntity);
+					buildingEntity = nullptr;
+				}
 				break;
 			}
 		}

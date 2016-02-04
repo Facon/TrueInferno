@@ -239,6 +239,9 @@ namespace Logic
 			return nullptr;
 		}
 
+		// Aseguramos que el nombre es único
+		entityInfo->setName(entityInfo->getStringAttribute("prefabName") + "_clone" + std::to_string(numInstance++));
+
 		// Creamos la entidad con la info que tiene el prefab
 		return createEntity(entityInfo, map);
 

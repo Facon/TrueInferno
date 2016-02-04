@@ -72,6 +72,9 @@ namespace Logic {
 				if (!mapEntity->hasAttribute("position"))
 					mapEntity->setAttribute("position", "0 0 0");
 
+				// Guaradmos el nombre original del prefab
+				mapEntity->setAttribute("prefabName", mapEntity->getName());
+
 				// No creamos entidad lógica pero sí un prefab con nombre igual al tipo de la entidad.
 				entityFactory->createPrefab(mapEntity, mapEntity->getType());
 			}

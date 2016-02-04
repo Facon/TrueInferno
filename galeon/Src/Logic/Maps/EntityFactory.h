@@ -192,6 +192,8 @@ namespace Logic
 		Logic::CEntity *CEntityFactory::createEntity(const std::string& prefabName, Logic::CMap *map);
 
 	protected:
+		/** Número que se añade al nombre de la instancia que viene en el prefab para que sea único */
+		int numInstance = 0;
 
 		/**
 		Única instancia de la clase.

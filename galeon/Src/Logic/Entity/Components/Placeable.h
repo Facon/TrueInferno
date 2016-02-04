@@ -55,14 +55,22 @@ namespace Logic {
 		bool checkPlacementIsPossible(const Vector3 &originPosition);
 
 	private:
+		/** Height added to entities placed over tiles so they don't overlap
+		TODO Should be relative to a tile's height
+		*/
+		const float HEIGHT_OVER_TILE = 1.0;
+
 		/** Floor's absolute logic origin position in the matrix */
 		Vector3 _floorOriginPosition;
 
 		/** Flag set to true when logic position has changed */
 		//bool _logicPositionChanged;
 
-		/** Floor's relative positions to the origin */
-		std::vector<Vector3> _floorRelativePositions;
+		/** Floor's x size */
+		int _floorX;
+
+		/** Floor's z size */
+		int _floorZ;
 
 		/** Floor's occupied tiles */
 		std::vector<Tile*> _tiles;
@@ -70,11 +78,6 @@ namespace Logic {
 		/** Tile manager reference */
 		CTileManager* _tileManager;
 
-		/** Obtains position attribute name */
-		std::string getPositionAttributeName(int num);
-
-		// TODO TEST
-		bool _test;
 	}; // class Placeable
 
 	REG_FACTORY(CPlaceable);
