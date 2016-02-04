@@ -23,11 +23,12 @@ public class EventManager : MonoBehaviour {
     //EventVictory parameters
     public int goalScore;
 
-    private bool tutorial;
+    public bool tutorial;
 
     private int buildingTutorialState;
     private int buildingRoadState;
     private TownHall townHall;
+    private bool bStartTimer;
 
 	// Use this for initialization
 	void Start () 
@@ -41,7 +42,7 @@ public class EventManager : MonoBehaviour {
         remainingDestroyEventTime = destroyInterval;
         endGame = false;
         gameStart = true;
-        tutorial = true;
+        bStartTimer = false;
         buildingTutorialState = 0;
         buildingRoadState = 0;
         townHall = tileManager.getTownHall().GetComponent<TownHall>();
@@ -50,6 +51,12 @@ public class EventManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (!tutorial && !bStartTimer)
+        {
+            bStartTimer = true;
+            timeManager.setCounting(true);
+        }
+
         // Update event timers
         remainingDestroyEventTime -= (previousTime - timeManager.remainingTime);
 
@@ -73,18 +80,18 @@ public class EventManager : MonoBehaviour {
     // Method for event controlling
     void EventChecker() 
     {
-        if (gameStart) 
+        if (gameStart && tutorial) 
         {
             TutorialPopUpEvent(0);
         }
 
-        if (buildingTutorialState > 0) 
+        if (buildingTutorialState > 0 && tutorial) 
         {
             TutorialPopUpEvent(1);
             buildingTutorialState = -1;
         }
 
-        if (buildingRoadState == 1)
+        if (buildingRoadState == 1 && tutorial)
         {
             TutorialPopUpEvent(2);
             buildingRoadState = -1;
