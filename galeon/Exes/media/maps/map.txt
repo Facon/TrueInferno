@@ -2,8 +2,8 @@ Map = {
 	
 	Camera = {
 		type = "Camera",
-		distance = 30,
-		height = 25,
+		distance = 25,
+		height = 20,
 	},
 	
 	Tile = {
