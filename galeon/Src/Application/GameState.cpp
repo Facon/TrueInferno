@@ -105,6 +105,10 @@ namespace Application {
 		_timeWindow->deactivate();
 		_timeWindow->setVisible(false);
 
+		// Desactivamos la ventana de UiBars.
+		_uibarsWindow->deactivate();
+		_uibarsWindow->setVisible(false);
+
 		// Desactivamos la clase que procesa eventos de entrada para 
 		// controlar al jugador.
 		GUI::CServer::getSingletonPtr()->getPlayerController()->deactivate();
