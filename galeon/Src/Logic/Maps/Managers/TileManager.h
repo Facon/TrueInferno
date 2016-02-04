@@ -174,6 +174,13 @@ namespace Logic
 		- 0 stands for Empty
 		- 1 stands for Gas
 		- 2 stands for Mineral
+
+		El fichero se lee de acuerdo a los ejes gráficos de Galeón-Ogre con el origen de coordenadas en la esquina inferior derecha:
+		(X-1, Z-1) (X-2, Z-1) ... (1, Z-1) (0, Z-1)
+		(X-1, Z-2) (X-2, Z-2) ... (1, Z-2) (0, Z-2)
+		...
+		(X-1, 1) (X-2, 1) ... (1, 1) (0, 1)
+		(X-1, 0) (X-2, 0) ... (1, 0) (0, 0)
 		*/
 		void loadTerrain(const std::string &filename);
 

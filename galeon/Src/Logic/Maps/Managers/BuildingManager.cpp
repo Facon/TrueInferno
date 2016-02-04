@@ -128,7 +128,7 @@ namespace Logic {
 				// Intentamos ubicarla
 				if (!(*it)->place(logicPosition)){
 					// Destruímos la entidad si no se pudo ubicar
-					CEntityFactory::getSingletonPtr()->deleteEntity(buildingEntity);
+					CEntityFactory::getSingletonPtr()->deferredDeleteEntity(buildingEntity);
 					buildingEntity = nullptr;
 				}
 				break;
