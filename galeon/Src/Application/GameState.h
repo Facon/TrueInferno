@@ -18,6 +18,7 @@ Contiene la declaración del estado de juego.
 #define __Application_GameState_H
 
 #include "ApplicationState.h"
+#include "Logic/Maps/Managers/ResourceManager.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Application 
@@ -194,6 +195,9 @@ namespace Application
 		Tiempo de juego en milisegundos.
 		*/
 		unsigned int _time;
+
+		// Resources produced
+		Logic::ResourceManager _resourceManager;
 
 	}; // CGameState
 

@@ -1,15 +1,19 @@
 #include "ResourceManager.h"
+#include <stdexcept>
 
 namespace Logic
 {
-	void ResourceManager::incRes1(int workers, float time)
+	const float ResourceManager::MINERAL_GATHERING_SPEED = 20.f / 60.f;
+	const float ResourceManager::GAS_GATHERING_SPEED = 12.f / 60.f;
+
+	void ResourceManager::incMineral(int workers, float time)
 	{
-		increaseResources(ResourceType::Mineral, res1GatheringSpeed * workers * time);
+		increaseResources(ResourceType::MINERAL, MINERAL_GATHERING_SPEED * workers * time);
 	}
 	
-	void ResourceManager::incRes2(int workers, float time)
+	void ResourceManager::incGas(int workers, float time)
 	{
-		increaseResources(ResourceType::GAS, res2GatheringSpeed * workers * time)
+		increaseResources(ResourceType::GAS, GAS_GATHERING_SPEED * workers * time);
 	}
 	
 	void ResourceManager::increaseResources(ResourceType type, float num)
@@ -17,23 +21,31 @@ namespace Logic
 		switch(type)
 		{
 			case ResourceType::MINERAL:
-				res1 += num;
+				_mineral += num;
 				break;
-			case ResourceType.GAS:
-				res2 += num;
+			case ResourceType::GAS:
+				_gas += num;
 				break;
-			case ResourceType.COKE: 
-				coke += num; 
+			case ResourceType::COKE:
+				_coke += num; 
 				break;
-			case ResourceType.CRUDE:
-				crude += num;
+			case ResourceType::CRUDE:
+				_crude += num;
 				break;
-			case ResourceType.PURE:
-				pure += num;
+			case ResourceType::PURE:
+				_pure += num;
 				break;
-			case ResourceType.REFINED:
-				refined += num;
+			case ResourceType::REFINED:
+				_refined += num;
 				break;
+			case ResourceType::AETHER:
+				_aether += num;
+				break;
+			case ResourceType::HADES_FAVOR:
+				_hadesFavor += num;
+				break;
+			default:
+				throw std::runtime_error("Invalid Resource.");
 		}
 	}
 }
