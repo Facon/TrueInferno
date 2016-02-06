@@ -18,7 +18,7 @@ Contiene la declaración del estado de juego.
 #define __Application_GameState_H
 
 #include "ApplicationState.h"
-#include "Logic/Maps/Managers/ResourceManager.h"
+#include "GUI/ResourcesUI.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Application 
@@ -187,18 +187,12 @@ namespace Application
 		CEGUI::Window* _timeWindow;
 
 		/**
-		Ventana CEGUI que muestra la barra superior
-		*/
-		CEGUI::Window* _uibarsWindow;
-
-		/**
 		Tiempo de juego en milisegundos.
 		*/
 		unsigned int _time;
 
-		// Resources produced
-		Logic::ResourceManager _resourceManager;
-
+		// Resources Displays
+		GUI::ResourcesUI _resourcesUI;
 	}; // CGameState
 
 } // namespace Application

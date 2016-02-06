@@ -250,8 +250,8 @@ namespace Logic {
 		TEntityMap::const_iterator it, end;
 		end = _entityMap.end();
 
-		// Si se definiï¿½ entidad desde la que comenzar la bï¿½squeda 
-		// cogemos su posiciï¿½n y empezamos desde la siguiente.
+		// Si se define entidad desde la que comenzar la búsqueda 
+		// cogemos su posición y empezamos desde la siguiente.
 		if (start)
 		{
 			it = _entityMap.find(start->getEntityID());
@@ -269,8 +269,8 @@ namespace Logic {
 			if (!(*it).second->getType().compare(type))
 				return (*it).second;
 		}
-		// si no se encontrï¿½ la entidad devolvemos NULL.
-		return 0;
+		// si no se encontró la entidad devolvemos NULL.
+		return nullptr;
 
 	} // getEntityByType
 

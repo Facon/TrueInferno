@@ -38,6 +38,12 @@
     <Filter Include="Maps\Managers\Header Files">
       <UniqueIdentifier>{7de8ab9b-481b-4694-a463-53c4f2a7c5ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{a58979d1-8f3d-4661-9b13-fc66d5a2e82c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{9a68b189-ac40-4452-ba8c-91831b00fb7b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp">
@@ -57,9 +63,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Entity.cpp">
       <Filter>Entity\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\Logic\Server.cpp">
-      <Filter>Maps\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\AnimatedGraphics.cpp">
       <Filter>Entity\Components\Source Files</Filter>
@@ -94,18 +97,32 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PhysicController.cpp">
       <Filter>Entity\Components\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Placeable.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\Managers\BuildingManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\TileManager.cpp">
-      <Filter>Maps\Managers\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\Logic\Maps\Managers\ResourceManager.cpp">
       <Filter>Maps\Managers\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.cpp">
       <Filter>Maps\Managers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\BuildingManager.cpp">
+      <Filter>Maps\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp">
+      <Filter>Maps\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Placeable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\TimeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\ResourceManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +168,6 @@
     <ClInclude Include="..\..\Src\Logic\Documentation.h">
       <Filter>Maps\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Logic\Server.h">
-      <Filter>Maps\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\DamageTrigger.h">
       <Filter>Entity\Components\Header Files</Filter>
     </ClInclude>
@@ -196,8 +210,14 @@
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.h">
       <Filter>Maps\Managers\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Logic\Maps\Managers\ResourceManager.h">
-      <Filter>Maps\Managers\Header Files</Filter>
+    <ClInclude Include="..\..\Src\Logic\Server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\TimeManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\ResourceManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

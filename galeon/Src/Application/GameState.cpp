@@ -52,9 +52,7 @@ namespace Application {
 		// Cargamos la ventana que muestra el tiempo de juego transcurrido.
 		_timeWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Time.layout");
 
-		// Cargamos la ventana que muestra la barra superior
-		_uibarsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIbars.layout");
-
+		_resourcesUI.init();
 
 		return true;
 
@@ -92,11 +90,7 @@ namespace Application {
 		_timeWindow->setVisible(true);
 		_timeWindow->activate();
 
-		// Activamos la interfaz de usuario
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_uibarsWindow);
-		_uibarsWindow->setVisible(true);
-		_uibarsWindow->activate();
-
+		_resourcesUI.activate();
 	} // activate
 
 	//--------------------------------------------------------
@@ -107,9 +101,7 @@ namespace Application {
 		_timeWindow->deactivate();
 		_timeWindow->setVisible(false);
 
-		// Desactivamos la ventana de UiBars.
-		_uibarsWindow->deactivate();
-		_uibarsWindow->setVisible(false);
+		_resourcesUI.deactivate();
 
 		// Desactivamos la clase que procesa eventos de entrada para 
 		// controlar al jugador.
@@ -134,23 +126,8 @@ namespace Application {
 		// Actualizamos la lógica de juego.
 		Logic::CServer::getSingletonPtr()->tick(msecs);
 
-		// Changing Time UI
-		_time += msecs;
-		
-		std::stringstream text;
-		text << "Time: " << _time/1000;
-		_timeWindow->setText(text.str());
-
-		// Changing Resources UI
-		_uibarsWindow->getChild("TopBar/Mineral")->setText("Mineral  " + std::to_string(static_cast<int>(trunc(_resourceManager.getMineral()))));
-		_uibarsWindow->getChild("TopBar/Gas")->setText("Gas  " + std::to_string(static_cast<int>(trunc(_resourceManager.getGas()))));
-		_uibarsWindow->getChild("TopBar/Coke")->setText("Coke  " + std::to_string(static_cast<int>(trunc(_resourceManager.getCoke()))));
-		_uibarsWindow->getChild("TopBar/Crude")->setText("Crude  " + std::to_string(static_cast<int>(trunc(_resourceManager.getCrude()))));
-		_uibarsWindow->getChild("TopBar/Pure")->setText("Pure  " + std::to_string(static_cast<int>(trunc(_resourceManager.getPure()))));
-		_uibarsWindow->getChild("TopBar/Refined")->setText("Refined  " + std::to_string(static_cast<int>(trunc(_resourceManager.getRefined()))));
-		// TODO Change to our format
-		_uibarsWindow->getChild("TopBar/TimeLeft")->setText("Time:  " + std::to_string(_time/1000));
-		_uibarsWindow->getChild("TopBar/HadesFavor")->setText("HF: " + std::to_string(static_cast<int>(trunc(_resourceManager.getHadesFavor()))));
+		// Changing resources displays info
+		_resourcesUI.tick(msecs);
 	} // tick
 
 	//--------------------------------------------------------

@@ -98,7 +98,6 @@
     <ClCompile Include="..\..\Src\Logic\Maps\EntityID.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\BuildingManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\Managers\ResourceManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\TileManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Map.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Component.cpp" />
@@ -107,7 +106,9 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\AvatarController.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Camera.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Graphics.cpp" />
+    <ClCompile Include="..\..\Src\Logic\ResourceManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Server.cpp" />
+    <ClCompile Include="..\..\Src\Logic\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.h" />
@@ -127,7 +128,6 @@
     <ClInclude Include="..\..\Src\Logic\Maps\EntityID.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\BuildingManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\Managers\ResourceManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\TileManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Map.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Component.h" />
@@ -139,7 +139,9 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Camera.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Graphics.h" />
     <ClInclude Include="..\..\Src\Logic\Documentation.h" />
+    <ClInclude Include="..\..\Src\Logic\ResourceManager.h" />
     <ClInclude Include="..\..\Src\Logic\Server.h" />
+    <ClInclude Include="..\..\Src\Logic\TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseSubsystems\BaseSubsystems.vcxproj">
