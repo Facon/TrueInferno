@@ -1,0 +1,44 @@
+digraph "Logic::CSwitchPosition"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="Logic::CSwitchPosition",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Logic::IComponent",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_i_component.html",tooltip="Clase base de los componentes que forman las entidades. "];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Logic::MessageHandler",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_message_handler.html"];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _entity" ,fontname="FreeSans"];
+  Node4 [label="Logic::CEntity",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_c_entity.html",tooltip="Clase que representa una entidad en el entorno virtual. "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _components" ,fontname="FreeSans"];
+  Node5 [label="std::list\< IComponent * \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node2 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" elements" ,fontname="FreeSans"];
+  Node6 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _type\n_name" ,fontname="FreeSans"];
+  Node6 [label="std::string",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip="STL class. "];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="std::basic_string\<\l char \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip="STL class. "];
+  Node8 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _map" ,fontname="FreeSans"];
+  Node8 [label="Logic::CMap",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_c_map.html",tooltip="Clase que representa un mapa lógico. "];
+  Node9 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _scene" ,fontname="FreeSans"];
+  Node9 [label="Graphics::CScene",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_graphics_1_1_c_scene.html",tooltip="Clase que controla todos los elementos de una escena. "];
+  Node10 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _staticEntities" ,fontname="FreeSans"];
+  Node10 [label="std::list\< CStaticEntity * \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node11 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" elements" ,fontname="FreeSans"];
+  Node11 [label="Graphics::CStaticEntity",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_graphics_1_1_c_static_entity.html",tooltip="Clase que representa una entidad gráfica estática. "];
+  Node12 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node12 [label="Graphics::CEntity",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_graphics_1_1_c_entity.html",tooltip="Clase que representa una entidad gráfica. "];
+  Node9 -> Node12 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _scene" ,fontname="FreeSans"];
+  Node6 -> Node12 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _name\n_mesh" ,fontname="FreeSans"];
+  Node13 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _camera" ,fontname="FreeSans"];
+  Node13 [label="Graphics::CCamera",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_graphics_1_1_c_camera.html",tooltip="Clase de la cámara extendida basada en Ogre. "];
+  Node9 -> Node13 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _scene" ,fontname="FreeSans"];
+  Node6 -> Node13 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _name" ,fontname="FreeSans"];
+  Node6 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _name" ,fontname="FreeSans"];
+  Node14 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _dynamicEntities" ,fontname="FreeSans"];
+  Node14 [label="std::list\< CEntity * \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node12 -> Node14 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" elements" ,fontname="FreeSans"];
+  Node15 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _entityMap" ,fontname="FreeSans"];
+  Node15 [label="std::map\< TEntityID,\l CEntity * \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node15 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" elements" ,fontname="FreeSans"];
+  Node6 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _name" ,fontname="FreeSans"];
+}

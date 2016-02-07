@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Logic/Maps/ComponentFactory.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_d2dfb49d6ca7b999bdafe5a748473e42.html">Logic</a></li><li class="navelem"><a class="el" href="dir_38a48bd85dd922a682381912690847d2.html">Maps</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">ComponentFactory.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_component_factory_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#ifndef __Logic_ComponentFactory_H</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define __Logic_ComponentFactory_H</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_factory_8h.html">BaseSubsystems/Factory.h</a>&quot;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// Predeclaración de clases para ahorrar tiempo de compilación</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_logic.html">Logic</a> </div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">class </span>IComponent;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// Declaración de la clase</span></div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_logic.html">Logic</a></div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div><div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_logic_1_1_c_component_factory.html">   43</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_logic_1_1_c_component_factory.html">CComponentFactory</a> : <span class="keyword">public</span> <a class="code" href="class_base_subsystems_1_1_c_factory.html">BaseSubsystems::CFactory</a>&lt;IComponent*&gt;</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">static</span> <a class="code" href="class_logic_1_1_c_component_factory.html">CComponentFactory</a>* <a class="code" href="class_logic_1_1_c_component_factory.html#a0a4388c870d42f6a6618fab587e04c13">getSingletonPtr</a>();</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <a class="code" href="class_logic_1_1_c_component_factory.html#a921b711997b43632a4240d47feb6331f">~CComponentFactory</a>();</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">protected</span>:</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <a class="code" href="class_logic_1_1_c_component_factory.html#adb9219fd7d4090fc15aac28dd5a14290">CComponentFactory</a> ();</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_logic_1_1_c_component_factory.html#abd015f5938d8e61538a12dc7f26905cd">   69</a></span>&#160;        <span class="keyword">static</span> <a class="code" href="class_logic_1_1_c_component_factory.html">CComponentFactory</a>* <a class="code" href="class_logic_1_1_c_component_factory.html#abd015f5938d8e61538a12dc7f26905cd">_instance</a>;</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }; <span class="comment">// class CComponentFactory</span></div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <span class="comment">// namespace Logic</span></div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif // __Logic_ComponentFactory_H</span></div><div class="ttc" id="namespace_logic_html"><div class="ttname"><a href="namespace_logic.html">Logic</a></div><div class="ttdoc">Namespace que engloba la lógica del juego. </div><div class="ttdef"><b>Definition:</b> <a href="_player_controller_8h_source.html#l00019">PlayerController.h:19</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_component_factory_html"><div class="ttname"><a href="class_logic_1_1_c_component_factory.html">Logic::CComponentFactory</a></div><div class="ttdoc">Factoría de componentes. </div><div class="ttdef"><b>Definition:</b> <a href="_component_factory_8h_source.html#l00043">ComponentFactory.h:43</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_component_factory_html_abd015f5938d8e61538a12dc7f26905cd"><div class="ttname"><a href="class_logic_1_1_c_component_factory.html#abd015f5938d8e61538a12dc7f26905cd">Logic::CComponentFactory::_instance</a></div><div class="ttdeci">static CComponentFactory * _instance</div><div class="ttdoc">Única instancia de la clase. </div><div class="ttdef"><b>Definition:</b> <a href="_component_factory_8h_source.html#l00069">ComponentFactory.h:69</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_component_factory_html_a921b711997b43632a4240d47feb6331f"><div class="ttname"><a href="class_logic_1_1_c_component_factory.html#a921b711997b43632a4240d47feb6331f">Logic::CComponentFactory::~CComponentFactory</a></div><div class="ttdeci">~CComponentFactory()</div><div class="ttdoc">Destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_component_factory_8cpp_source.html#l00033">ComponentFactory.cpp:33</a></div></div>
+<div class="ttc" id="class_base_subsystems_1_1_c_factory_html"><div class="ttname"><a href="class_base_subsystems_1_1_c_factory.html">BaseSubsystems::CFactory</a></div><div class="ttdoc">Factorï¿œa parametrizada de objetos. </div><div class="ttdef"><b>Definition:</b> <a href="_factory_8h_source.html#l00038">Factory.h:38</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_component_factory_html_a0a4388c870d42f6a6618fab587e04c13"><div class="ttname"><a href="class_logic_1_1_c_component_factory.html#a0a4388c870d42f6a6618fab587e04c13">Logic::CComponentFactory::getSingletonPtr</a></div><div class="ttdeci">static CComponentFactory * getSingletonPtr()</div><div class="ttdoc">Devuelve la única instancia de la clase CComponentFactory. </div><div class="ttdef"><b>Definition:</b> <a href="_component_factory_8cpp_source.html#l00041">ComponentFactory.cpp:41</a></div></div>
+<div class="ttc" id="_factory_8h_html"><div class="ttname"><a href="_factory_8h.html">Factory.h</a></div><div class="ttdoc">Contiene la declaraciï¿œn de la plantilla CFactory, factorï¿œa que almacena los punteros a funciï¿œn ...</div></div>
+<div class="ttc" id="class_logic_1_1_c_component_factory_html_adb9219fd7d4090fc15aac28dd5a14290"><div class="ttname"><a href="class_logic_1_1_c_component_factory.html#adb9219fd7d4090fc15aac28dd5a14290">Logic::CComponentFactory::CComponentFactory</a></div><div class="ttdeci">CComponentFactory()</div><div class="ttdoc">Constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_component_factory_8cpp_source.html#l00025">ComponentFactory.cpp:25</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

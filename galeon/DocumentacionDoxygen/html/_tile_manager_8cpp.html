@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Referencia del Archivo Src/Logic/Maps/Managers/TileManager.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_d2dfb49d6ca7b999bdafe5a748473e42.html">Logic</a></li><li class="navelem"><a class="el" href="dir_38a48bd85dd922a682381912690847d2.html">Maps</a></li><li class="navelem"><a class="el" href="dir_2ec3f38aeeff04f32d9fa260e569ddf3.html">Managers</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo TileManager.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>THIS IS A TEMPLATE OF AN EMPTY SINGLETON MANAGER, CONTAINING ONLY THE MANAGER INSTANCE AND ALL REQUIRED FUNCTIONS FOR INITIALIZATION AND DESTRUCTION OF STATIC RESOURCES.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="_tile_manager_8h_source.html">TileManager.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_map_parser_8h_source.html">Map/MapParser.h</a>&quot;</code><br />
+<code>#include &quot;Map/MapEntity.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_entity_factory_8h_source.html">Logic/Maps/EntityFactory.h</a>&quot;</code><br />
+<code>#include &quot;Logic/Entity/Entity.h&quot;</code><br />
+<code>#include &quot;Logic/Entity/Components/Tile.h&quot;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Dependencia gráfica adjunta para TileManager.cpp:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="_tile_manager_8cpp__incl.png" border="0" usemap="#_src_2_logic_2_maps_2_managers_2_tile_manager_8cpp" alt=""/></div>
+<map name="_src_2_logic_2_maps_2_managers_2_tile_manager_8cpp" id="_src_2_logic_2_maps_2_managers_2_tile_manager_8cpp">
+</map>
+</div>
+</div>
+<p><a href="_tile_manager_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_logic"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_logic.html">Logic</a></td></tr>
+<tr class="memdesc:namespace_logic"><td class="mdescLeft">&#160;</td><td class="mdescRight">Namespace que engloba la lógica del juego. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>THIS IS A TEMPLATE OF AN EMPTY SINGLETON MANAGER, CONTAINING ONLY THE MANAGER INSTANCE AND ALL REQUIRED FUNCTIONS FOR INITIALIZATION AND DESTRUCTION OF STATIC RESOURCES. </p>
+<p>Contiene la implementación del gestor de la matriz de tiles.</p>
+<p>TO CREATE A NEW MANAGER FROM THIS, SIMPLY: 1) COPY-PASTE THIS CODE. 2) CLOSE COMMENTS. 3) CHANGE CLASS NAME AND EVERY OTHER THING YOU NEED. 4) REMEMBER ALSO TO REVIEW AND CHANGE COMMENTS IF NEEDED.</p>
+<p>Contiene la implementación del gestor de la matriz de tiles.</p>
+<dl class="section see"><dt>Ver también</dt><dd><a class="el" href="class_logic_1_1_c_tile_manager.html" title="Manager singleton que gestiona la lectura y actualización de la matriz de tiles del mapa...">Logic::CTileManager</a></dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>Raúl Segura </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>Enero, 2016 /</dd></dl>
+<p>#include "TileManager.h"</p>
+<p>#include &lt;cassert&gt;</p>
+<p>namespace <a class="el" href="namespace_logic.html" title="Namespace que engloba la lógica del juego. ">Logic</a> { </p><pre class="fragment">CTileManager* CTileManager::_instance = 0;
+</pre><hr/>
+ <pre class="fragment">CTileManager::CTileManager()
+{
+    _instance = this;
+
+} // CTileManager
+</pre><hr/>
+ <pre class="fragment">CTileManager::~CTileManager()
+{
+    assert(_instance);
+    _instance = 0;
+
+} // ~CTileManager
+</pre><hr/>
+ <pre class="fragment">bool CTileManager::Init()
+{
+    assert(!_instance &amp;&amp; "Segunda inicialización de Logic::CTileManager no permitida!");
+
+    new CTileManager();
+
+    if (!_instance-&gt;open())
+    {
+        Release();
+        return false;
+    }
+
+    return true;
+
+} // Init
+</pre><hr/>
+ <pre class="fragment">void CTileManager::Release()
+{
+    assert(_instance &amp;&amp; "Logic::CTileManager no está inicializado!");
+
+    if (_instance)
+    {
+        _instance-&gt;close();
+        delete _instance;
+    }
+
+} // Release
+</pre><hr/>
+ <pre class="fragment">bool CTileManager::open()
+{
+    return true;
+
+} // open
+</pre><hr/>
+ <pre class="fragment">void CTileManager::close()
+{
+} // close
+</pre><p>} // namespace <a class="el" href="namespace_logic.html" title="Namespace que engloba la lógica del juego. ">Logic</a></p>
+<dl class="section see"><dt>Ver también</dt><dd><a class="el" href="class_logic_1_1_c_tile_manager.html" title="Manager singleton que gestiona la lectura y actualización de la matriz de tiles del mapa...">Logic::CTileManager</a></dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>Raúl Segura </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>Enero, 2016 </dd></dl>
+
+<p>Definición en el archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+</div></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

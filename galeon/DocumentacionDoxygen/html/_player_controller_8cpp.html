@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Referencia del Archivo Src/GUI/PlayerController.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_afb1736bb4b56595909549d6227c5cc3.html">GUI</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">'defines'</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo PlayerController.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Contiene la implementaciï¿œn de la clase CPlayerController.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="_player_controller_8h_source.html">PlayerController.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_input_manager_8h_source.html">InputManager.h</a>&quot;</code><br />
+<code>#include &quot;Logic/Entity/Entity.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_message_8h_source.html">Logic/Entity/Message.h</a>&quot;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Dependencia gráfica adjunta para PlayerController.cpp:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="_player_controller_8cpp__incl.png" border="0" usemap="#_src_2_g_u_i_2_player_controller_8cpp" alt=""/></div>
+<map name="_src_2_g_u_i_2_player_controller_8cpp" id="_src_2_g_u_i_2_player_controller_8cpp">
+</map>
+</div>
+</div>
+<p><a href="_player_controller_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_g_u_i"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_g_u_i.html">GUI</a></td></tr>
+<tr class="memdesc:namespace_g_u_i"><td class="mdescLeft">&#160;</td><td class="mdescRight">Namespace con todo lo que se refiere a la interfaz con el usuario. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+'defines'</h2></td></tr>
+<tr class="memitem:ac4bf4010a7a014ce67036be1348d41ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4bf4010a7a014ce67036be1348d41ae"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TURN_FACTOR</b>&#160;&#160;&#160;0.001f</td></tr>
+<tr class="separator:ac4bf4010a7a014ce67036be1348d41ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Contiene la implementaciï¿œn de la clase CPlayerController. </p>
+<p>Se encarga de recibir eventos del teclado y del ratï¿œn y de interpretarlos para mover al jugador.</p>
+<dl class="section see"><dt>Ver también</dt><dd><a class="el" href="class_g_u_i_1_1_c_player_controller.html" title="Esta clase sirve para gestionar el teclado y el ratón, y mover un avatar acorde con las pulsaciones y...">GUI::CPlayerController</a></dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>David Llansï¿œ </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>Agosto, 2010 </dd></dl>
+
+<p>Definición en el archivo <a class="el" href="_player_controller_8cpp_source.html">PlayerController.cpp</a>.</p>
+</div></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

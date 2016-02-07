@@ -1,0 +1,20 @@
+digraph "Src/Map/location.hh"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="Src/Map/location.hh",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Src/Map/Parser.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_parser_8h_source.html"];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Src/Map/scanner.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$scanner_8h.html",tooltip="Contiene la declaración de un scanner flex con funcionalidades extra. "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="Src/Map/MapParser.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_map_parser_8cpp.html",tooltip="Contiene la implementación de la clase que encapsula el parseo de mapas. "];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="Src/Map/Parser.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_parser_8cpp_source.html"];
+  Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="Src/Map/Scanner.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_scanner_8cpp_source.html"];
+  Node3 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="Src/Map/y.tab.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$y_8tab_8h.html",tooltip="Por si se hacen generaciones extandar hacemos una inclusión de Scanner.h. "];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+}

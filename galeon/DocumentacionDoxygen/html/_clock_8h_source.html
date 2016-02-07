@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Application/Clock.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_39a5dde6d3e8ec86137a0a0de8f7c6b8.html">Application</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Clock.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_clock_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Clock.h</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifndef __Application_Clock_H</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define __Application_Clock_H</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_application.html">Application</a> </div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div><div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="class_application_1_1_i_clock.html">   58</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_application_1_1_i_clock.html">IClock</a></div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    {</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_application_1_1_i_clock.html#a5235b9ff81239f7a1bce45e226104da4">   64</a></span>&#160;        <a class="code" href="class_application_1_1_i_clock.html#a5235b9ff81239f7a1bce45e226104da4">IClock</a>() : <a class="code" href="class_application_1_1_i_clock.html#a09d035573912b78ad093bfcbcd4ec959">_lastTime</a>(0), <a class="code" href="class_application_1_1_i_clock.html#aa250b4b8e84c44b24517850c18d0f4f5">_lastFrameDuration</a>(0) {}</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div><div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_application_1_1_i_clock.html#afca7a1dfa2214e3775b5ac6c6344bfdd">   69</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_application_1_1_i_clock.html#afca7a1dfa2214e3775b5ac6c6344bfdd">~IClock</a>() {}</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_application_1_1_i_clock.html#a6f97277761b17b7de93be644cb7050c4">updateTime</a>();</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div><div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="class_application_1_1_i_clock.html#a07d57f29fda20fabe443e1ccd56a1fc3">   88</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_application_1_1_i_clock.html#a07d57f29fda20fabe443e1ccd56a1fc3">getTime</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_application_1_1_i_clock.html#a09d035573912b78ad093bfcbcd4ec959">_lastTime</a>; }</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div><div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="class_application_1_1_i_clock.html#a5ad914c8d08d8d3a3f41a8e2ca233f15">   98</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_application_1_1_i_clock.html#a5ad914c8d08d8d3a3f41a8e2ca233f15">getLastFrameDuration</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_application_1_1_i_clock.html#aa250b4b8e84c44b24517850c18d0f4f5">_lastFrameDuration</a>; }</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">protected</span>:</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_application_1_1_i_clock.html#aae6937a9a1ae79346c536dca07d41ed9">getPhysicalTime</a>() = 0;</div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div><div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="class_application_1_1_i_clock.html#a09d035573912b78ad093bfcbcd4ec959">  121</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_application_1_1_i_clock.html#a09d035573912b78ad093bfcbcd4ec959">_lastTime</a>;</div><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div><div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="class_application_1_1_i_clock.html#aa250b4b8e84c44b24517850c18d0f4f5">  126</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_application_1_1_i_clock.html#aa250b4b8e84c44b24517850c18d0f4f5">_lastFrameDuration</a>;</div><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div><div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    }; <span class="comment">// IClock</span></div><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;} <span class="comment">// namespace Application</span></div><div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div><div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#endif //  __Application_Clock_H</span></div><div class="ttc" id="class_application_1_1_i_clock_html_a07d57f29fda20fabe443e1ccd56a1fc3"><div class="ttname"><a href="class_application_1_1_i_clock.html#a07d57f29fda20fabe443e1ccd56a1fc3">Application::IClock::getTime</a></div><div class="ttdeci">unsigned long getTime() const </div><div class="ttdoc">Devuelve la hora en el momento de la última invocación a updateTime(). </div><div class="ttdef"><b>Definition:</b> <a href="_clock_8h_source.html#l00088">Clock.h:88</a></div></div>
+<div class="ttc" id="namespace_application_html"><div class="ttname"><a href="namespace_application.html">Application</a></div><div class="ttdoc">Namespace con todo lo relacionado con la aplicación: clase abstracta, estados, etc. </div><div class="ttdef"><b>Definition:</b> <a href="3_d_application_8cpp_source.html#l00033">3DApplication.cpp:33</a></div></div>
+<div class="ttc" id="class_application_1_1_i_clock_html_a5ad914c8d08d8d3a3f41a8e2ca233f15"><div class="ttname"><a href="class_application_1_1_i_clock.html#a5ad914c8d08d8d3a3f41a8e2ca233f15">Application::IClock::getLastFrameDuration</a></div><div class="ttdeci">unsigned int getLastFrameDuration() const </div><div class="ttdoc">Devuelve la duración del último frame, o lo que es lo mismo, el tiempo transcurrido entre las dos últ...</div><div class="ttdef"><b>Definition:</b> <a href="_clock_8h_source.html#l00098">Clock.h:98</a></div></div>
+<div class="ttc" id="class_application_1_1_i_clock_html_afca7a1dfa2214e3775b5ac6c6344bfdd"><div class="ttname"><a href="class_application_1_1_i_clock.html#afca7a1dfa2214e3775b5ac6c6344bfdd">Application::IClock::~IClock</a></div><div class="ttdeci">virtual ~IClock()</div><div class="ttdoc">Destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_clock_8h_source.html#l00069">Clock.h:69</a></div></div>
+<div class="ttc" id="class_application_1_1_i_clock_html_aa250b4b8e84c44b24517850c18d0f4f5"><div class="ttname"><a href="class_application_1_1_i_clock.html#aa250b4b8e84c44b24517850c18d0f4f5">Application::IClock::_lastFrameDuration</a></div><div class="ttdeci">unsigned int _lastFrameDuration</div><div class="ttdoc">Duración del último frame. </div><div class="ttdef"><b>Definition:</b> <a href="_clock_8h_source.html#l00126">Clock.h:126</a></div></div>
+<div class="ttc" id="class_application_1_1_i_clock_html_a5235b9ff81239f7a1bce45e226104da4"><div class="ttname"><a href="class_application_1_1_i_clock.html#a5235b9ff81239f7a1bce45e226104da4">Application::IClock::IClock</a></div><div class="ttdeci">IClock()</div><div class="ttdoc">Constructor de la clase. </div><div class="ttdef"><b>Definition:</b> <a href="_clock_8h_source.html#l00064">Clock.h:64</a></div></div>
+<div class="ttc" id="class_application_1_1_i_clock_html"><div class="ttname"><a href="class_application_1_1_i_clock.html">Application::IClock</a></div><div class="ttdoc">Reloj de la aplicación, que sirve para controlar el tiempo de la aplicación. </div><div class="ttdef"><b>Definition:</b> <a href="_clock_8h_source.html#l00058">Clock.h:58</a></div></div>
+<div class="ttc" id="class_application_1_1_i_clock_html_aae6937a9a1ae79346c536dca07d41ed9"><div class="ttname"><a href="class_application_1_1_i_clock.html#aae6937a9a1ae79346c536dca07d41ed9">Application::IClock::getPhysicalTime</a></div><div class="ttdeci">virtual unsigned long getPhysicalTime()=0</div><div class="ttdoc">Método que devuelve la &quot;hora física&quot; del sistema en milisegundos. </div></div>
+<div class="ttc" id="class_application_1_1_i_clock_html_a6f97277761b17b7de93be644cb7050c4"><div class="ttname"><a href="class_application_1_1_i_clock.html#a6f97277761b17b7de93be644cb7050c4">Application::IClock::updateTime</a></div><div class="ttdeci">void updateTime()</div><div class="ttdoc">Hace avanzar la hora del reloj, para que getTime() y getLastFrameDuration() devuelvan los nuevos valo...</div><div class="ttdef"><b>Definition:</b> <a href="_clock_8cpp_source.html#l00020">Clock.cpp:20</a></div></div>
+<div class="ttc" id="class_application_1_1_i_clock_html_a09d035573912b78ad093bfcbcd4ec959"><div class="ttname"><a href="class_application_1_1_i_clock.html#a09d035573912b78ad093bfcbcd4ec959">Application::IClock::_lastTime</a></div><div class="ttdeci">unsigned long _lastTime</div><div class="ttdoc">Última hora registrada. </div><div class="ttdef"><b>Definition:</b> <a href="_clock_8h_source.html#l00121">Clock.h:121</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

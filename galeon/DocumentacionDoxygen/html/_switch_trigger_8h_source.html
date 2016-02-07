@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Logic/Entity/Components/SwitchTrigger.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_d2dfb49d6ca7b999bdafe5a748473e42.html">Logic</a></li><li class="navelem"><a class="el" href="dir_1abaf7f005b91edc996e1a6520484f9f.html">Entity</a></li><li class="navelem"><a class="el" href="dir_045fdd94c61a0e418838cb05acc5676f.html">Components</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">SwitchTrigger.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_switch_trigger_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef __Logic_SwitchTrigger_H</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define __Logic_SwitchTrigger_H</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;BaseSubsystems/RTTI.h&quot;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_component_8h.html">Logic/Entity/Component.h</a>&quot;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//declaraciï¿œn de la clase</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_logic.html">Logic</a> </div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div><div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_logic_1_1_c_switch_trigger.html">   35</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_logic_1_1_c_switch_trigger.html">CSwitchTrigger</a> : <span class="keyword">public</span> <a class="code" href="class_logic_1_1_i_component.html">IComponent</a></div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        RTTI_DECL;</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        DEC_FACTORY(<a class="code" href="class_logic_1_1_c_switch_trigger.html">CSwitchTrigger</a>);</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div><div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_logic_1_1_c_switch_trigger.html#a2370fadde741707f80861ba5c651db2d">   44</a></span>&#160;        <a class="code" href="class_logic_1_1_c_switch_trigger.html#a2370fadde741707f80861ba5c651db2d">CSwitchTrigger</a>() : <a class="code" href="class_logic_1_1_i_component.html">IComponent</a>(), <a class="code" href="class_logic_1_1_c_switch_trigger.html#a57252720a4a64000d41cb3d912c8f5e5">_targetName</a>(<span class="stringliteral">&quot;&quot;</span>), <a class="code" href="class_logic_1_1_c_switch_trigger.html#a5477329d320be12dbf18e8ea403baa07">_target</a>(0) {}</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        </div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_logic_1_1_c_switch_trigger.html#a0b33b0cb2e1da209888fdbee288e7d2e">spawn</a>(<a class="code" href="class_logic_1_1_c_entity.html">CEntity</a>* entity, <a class="code" href="class_logic_1_1_c_map.html">CMap</a> *map, <span class="keyword">const</span> <a class="code" href="class_map_1_1_c_entity.html">Map::CEntity</a> *entityInfo);</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_logic_1_1_c_switch_trigger.html#a8cca2f8a6e55c66721402294b9082287">activate</a>();</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        </div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_logic_1_1_c_switch_trigger.html#ae6768755c2d76566932803766a4106c7">deactivate</a>();</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">protected</span>:</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div><div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="class_logic_1_1_c_switch_trigger.html#a57252720a4a64000d41cb3d912c8f5e5">   68</a></span>&#160;        std::string <a class="code" href="class_logic_1_1_c_switch_trigger.html#a57252720a4a64000d41cb3d912c8f5e5">_targetName</a>;</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div><div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_logic_1_1_c_switch_trigger.html#a5477329d320be12dbf18e8ea403baa07">   74</a></span>&#160;        <a class="code" href="class_logic_1_1_c_entity.html">CEntity</a> *<a class="code" href="class_logic_1_1_c_switch_trigger.html#a5477329d320be12dbf18e8ea403baa07">_target</a>;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }; <span class="comment">// class CSwitchTrigger</span></div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="_component_8h.html#a064dbb72c88a8c8bdadc4328c30b561e">REG_FACTORY</a>(<a class="code" href="class_logic_1_1_c_switch_trigger.html">CSwitchTrigger</a>);</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;} <span class="comment">// namespace Logic</span></div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif // __Logic_SwitchTrigger_H</span></div><div class="ttc" id="namespace_logic_html"><div class="ttname"><a href="namespace_logic.html">Logic</a></div><div class="ttdoc">Namespace que engloba la lógica del juego. </div><div class="ttdef"><b>Definition:</b> <a href="_player_controller_8h_source.html#l00019">PlayerController.h:19</a></div></div>
+<div class="ttc" id="_component_8h_html_a064dbb72c88a8c8bdadc4328c30b561e"><div class="ttname"><a href="_component_8h.html#a064dbb72c88a8c8bdadc4328c30b561e">REG_FACTORY</a></div><div class="ttdeci">#define REG_FACTORY(Class)</div><div class="ttdoc">Macro que invoca al mï¿œtodo que registra la clase en la factorï¿œa. </div><div class="ttdef"><b>Definition:</b> <a href="_component_8h_source.html#l00219">Component.h:219</a></div></div>
+<div class="ttc" id="class_map_1_1_c_entity_html"><div class="ttname"><a href="class_map_1_1_c_entity.html">Map::CEntity</a></div><div class="ttdoc">Clase que representa una entidad leida del fichero del mapa. </div><div class="ttdef"><b>Definition:</b> <a href="_map_entity_8h_source.html#l00041">MapEntity.h:41</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_map_html"><div class="ttname"><a href="class_logic_1_1_c_map.html">Logic::CMap</a></div><div class="ttdoc">Clase que representa un mapa lógico. </div><div class="ttdef"><b>Definition:</b> <a href="_map_8h_source.html#l00046">Map.h:46</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_switch_trigger_html_ae6768755c2d76566932803766a4106c7"><div class="ttname"><a href="class_logic_1_1_c_switch_trigger.html#ae6768755c2d76566932803766a4106c7">Logic::CSwitchTrigger::deactivate</a></div><div class="ttdeci">virtual void deactivate()</div><div class="ttdoc">Mï¿œtodo que se invoca al desactivar el componente. </div><div class="ttdef"><b>Definition:</b> <a href="_switch_trigger_8cpp_source.html#l00054">SwitchTrigger.cpp:54</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_entity_html"><div class="ttname"><a href="class_logic_1_1_c_entity.html">Logic::CEntity</a></div><div class="ttdoc">Clase que representa una entidad en el entorno virtual. </div><div class="ttdef"><b>Definition:</b> <a href="_logic_2_entity_2_entity_8h_source.html#l00065">Entity.h:65</a></div></div>
+<div class="ttc" id="_component_8h_html"><div class="ttname"><a href="_component_8h.html">Component.h</a></div><div class="ttdoc">Contiene la declaraciï¿œn de la clase base de los componentes. </div></div>
+<div class="ttc" id="class_logic_1_1_c_switch_trigger_html_a5477329d320be12dbf18e8ea403baa07"><div class="ttname"><a href="class_logic_1_1_c_switch_trigger.html#a5477329d320be12dbf18e8ea403baa07">Logic::CSwitchTrigger::_target</a></div><div class="ttdeci">CEntity * _target</div><div class="ttdoc">Entidad a la que se desea enviar un SWITCH cuando se recibe un mensaje TOUCHED o UNTOUCHED. </div><div class="ttdef"><b>Definition:</b> <a href="_switch_trigger_8h_source.html#l00074">SwitchTrigger.h:74</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_switch_trigger_html_a0b33b0cb2e1da209888fdbee288e7d2e"><div class="ttname"><a href="class_logic_1_1_c_switch_trigger.html#a0b33b0cb2e1da209888fdbee288e7d2e">Logic::CSwitchTrigger::spawn</a></div><div class="ttdeci">virtual bool spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo)</div><div class="ttdoc">Inicializaciï¿œn del componente usando la descripciï¿œn de la entidad que hay en el fichero de mapa...</div><div class="ttdef"><b>Definition:</b> <a href="_switch_trigger_8cpp_source.html#l00027">SwitchTrigger.cpp:27</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_switch_trigger_html_a57252720a4a64000d41cb3d912c8f5e5"><div class="ttname"><a href="class_logic_1_1_c_switch_trigger.html#a57252720a4a64000d41cb3d912c8f5e5">Logic::CSwitchTrigger::_targetName</a></div><div class="ttdeci">std::string _targetName</div><div class="ttdoc">Nombre de la entidad a la que se desea enviar un SWITCH cuando se recibe un mensaje TOUCHED o UNTOUCH...</div><div class="ttdef"><b>Definition:</b> <a href="_switch_trigger_8h_source.html#l00068">SwitchTrigger.h:68</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_switch_trigger_html_a8cca2f8a6e55c66721402294b9082287"><div class="ttname"><a href="class_logic_1_1_c_switch_trigger.html#a8cca2f8a6e55c66721402294b9082287">Logic::CSwitchTrigger::activate</a></div><div class="ttdeci">virtual bool activate()</div><div class="ttdoc">Mï¿œtodo que se invoca para activar el componente. </div><div class="ttdef"><b>Definition:</b> <a href="_switch_trigger_8cpp_source.html#l00042">SwitchTrigger.cpp:42</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_switch_trigger_html_a2370fadde741707f80861ba5c651db2d"><div class="ttname"><a href="class_logic_1_1_c_switch_trigger.html#a2370fadde741707f80861ba5c651db2d">Logic::CSwitchTrigger::CSwitchTrigger</a></div><div class="ttdeci">CSwitchTrigger()</div><div class="ttdoc">Constructor por defecto. </div><div class="ttdef"><b>Definition:</b> <a href="_switch_trigger_8h_source.html#l00044">SwitchTrigger.h:44</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_switch_trigger_html"><div class="ttname"><a href="class_logic_1_1_c_switch_trigger.html">Logic::CSwitchTrigger</a></div><div class="ttdoc">Este componente procesa mensajes de tipo TOUCHED o UNTOUCHED (indican que la entidad ha sido tocada o...</div><div class="ttdef"><b>Definition:</b> <a href="_switch_trigger_8h_source.html#l00035">SwitchTrigger.h:35</a></div></div>
+<div class="ttc" id="class_logic_1_1_i_component_html"><div class="ttname"><a href="class_logic_1_1_i_component.html">Logic::IComponent</a></div><div class="ttdoc">Clase base de los componentes que forman las entidades. </div><div class="ttdef"><b>Definition:</b> <a href="_component_8h_source.html#l00082">Component.h:82</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

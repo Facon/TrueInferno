@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Configure/Configure.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_827e7973937a527aea1e8a69b9214a0a.html">Configure</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Configure.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_configure_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Galeon.cpp</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#ifdef _DEBUG</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// VLD: Completa biblioteca para detectar leaks y donde se produjeron en modo de</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// depuración. Ralentiza moderadamente el lanzamiento de la aplicación aunque no </span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// en exceso su ejecución. Si se desea anular la comprobación basta con comentar </span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// la siguiente línea.</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//#define _VISUALLEAKDETECTOR</span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifdef _VISUALLEAKDETECTOR</span></div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define WIN32_LEAN_AND_MEAN </span></div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;windows.h&gt;</span></div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;vld.h&gt;</span> </div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif // _VISUALLEAKDETECTOR</span></div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif // _DEBUG</span></div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;OgreRoot.h&gt;</span></div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#if (defined _DEBUG) || !(defined _WIN32)</span></div><div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="_configure_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">   40</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="_configure_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) </div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#else</span></div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#define WIN32_LEAN_AND_MEAN</span></div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &lt;windows.h&gt;</span></div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">int</span> WINAPI</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;WinMain(HINSTANCE zhInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, <span class="keywordtype">int</span> nCmdShow) </div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif // (defined _DEBUG) || !(defined _WIN32)</span></div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// Aqui llegamos a lo que verdaderamente importa.</span></div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    {</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="comment">// Inicializamos el punto de acceso a Ogre con una definición</span></div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">// diferente de los plugins si estamos en release o en debug.</span></div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#ifdef _DEBUG</span></div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        Ogre::Root *root = <span class="keyword">new</span> Ogre::Root(<span class="stringliteral">&quot;plugins_d.cfg&quot;</span>);</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#else</span></div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        Ogre::Root *root = <span class="keyword">new</span> Ogre::Root(<span class="stringliteral">&quot;plugins.cfg&quot;</span>);</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">// Lanzamos la ventana de depuración</span></div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        root-&gt;showConfigDialog();</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            </div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keyword">delete</span> root;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> 0;</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;} <span class="comment">// main</span></div><div class="ttc" id="_configure_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="_configure_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Main que lanza una ventana de configuración de Ogre para poder modificar las opciones gráficas sin te...</div><div class="ttdef"><b>Definition:</b> <a href="_configure_8cpp_source.html#l00040">Configure.cpp:40</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

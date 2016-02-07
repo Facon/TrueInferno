@@ -1,0 +1,9 @@
+digraph "Representación gráfica de la clase"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="BaseSubsystems::CFactory\l\< IComponent * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_base_subsystems_1_1_c_factory.html"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Logic::CComponentFactory",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_c_component_factory.html",tooltip="Factoría de componentes. "];
+}

@@ -1,0 +1,8 @@
+digraph "Src/Application/GameOverState.h"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="Src/Application/GameOver\lState.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Src/Application/GameOver\lState.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_game_over_state_8cpp.html",tooltip="Contiene la implementaciï¿œn del estado de game over. "];
+}

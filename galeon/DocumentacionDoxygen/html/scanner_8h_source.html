@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Map/scanner.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_47e751894d7851d23df86075c7ee8e53.html">Map</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">scanner.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="scanner_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef __Scanner_H</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define __Scanner_H</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifndef YY_DECL</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// Macro para la declaración de la función principal usada en el análisis léxico</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define YY_DECL                     \</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">    Map::CParser::token_type Map::CScanner::lex(        \</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">                Map::CParser::semantic_type* yylval,    \</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">                Map::CParser::location_type* yylloc     \</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">                )</span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifndef __FLEX_LEXER_H</span></div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define yyFlexLexer CMapFlexLexer</span></div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;FlexLexer.h&quot;</span></div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#undef yyFlexLexer</span></div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;Parser.h&quot;</span></div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_map.html">Map</a> {</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div><div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_map_1_1_c_scanner.html">   44</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_map_1_1_c_scanner.html">CScanner</a> : <span class="keyword">public</span> CMapFlexLexer</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="class_map_1_1_c_scanner.html#a9d0ec1e6390da3c7ffee8c03c1ea19cd">CScanner</a>(std::istream* arg_yyin = 0,</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            std::ostream* arg_yyout = 0);</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_map_1_1_c_scanner.html#aaf47c217379deb0295e84db9af2aa611">~CScanner</a>();</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">virtual</span> CParser::token_type <a class="code" href="class_map_1_1_c_scanner.html#a27dedbf374b808df285000f1dd5606c8">lex</a>(</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        <a class="code" href="union_map_1_1_c_parser_1_1semantic__type.html">CParser::semantic_type</a>* yylval,</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        <a class="code" href="class_map_1_1location.html">CParser::location_type</a>* yylloc</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                        );</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_map_1_1_c_scanner.html#af06459cface8b04e3e20c2dac45b7eba">set_debug</a>(<span class="keywordtype">bool</span> b);</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    };</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;} <span class="comment">// namespace Map</span></div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif // __Scanner_H</span></div><div class="ttc" id="union_map_1_1_c_parser_1_1semantic__type_html"><div class="ttname"><a href="union_map_1_1_c_parser_1_1semantic__type.html">Map::CParser::semantic_type</a></div><div class="ttdoc">Symbol semantic values. </div><div class="ttdef"><b>Definition:</b> <a href="_parser_8h_source.html#l00108">Parser.h:108</a></div></div>
+<div class="ttc" id="class_map_1_1_c_scanner_html_af06459cface8b04e3e20c2dac45b7eba"><div class="ttname"><a href="class_map_1_1_c_scanner.html#af06459cface8b04e3e20c2dac45b7eba">Map::CScanner::set_debug</a></div><div class="ttdeci">void set_debug(bool b)</div><div class="ttdoc">Habilita la salida de depuración (via arg_yyout). </div><div class="ttdef"><b>Definition:</b> <a href="_scanner_8cpp_source.html#l01947">Scanner.cpp:1947</a></div></div>
+<div class="ttc" id="class_map_1_1_c_scanner_html_aaf47c217379deb0295e84db9af2aa611"><div class="ttname"><a href="class_map_1_1_c_scanner.html#aaf47c217379deb0295e84db9af2aa611">Map::CScanner::~CScanner</a></div><div class="ttdeci">virtual ~CScanner()</div><div class="ttdoc">Destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_scanner_8cpp_source.html#l01943">Scanner.cpp:1943</a></div></div>
+<div class="ttc" id="class_map_1_1_c_scanner_html_a9d0ec1e6390da3c7ffee8c03c1ea19cd"><div class="ttname"><a href="class_map_1_1_c_scanner.html#a9d0ec1e6390da3c7ffee8c03c1ea19cd">Map::CScanner::CScanner</a></div><div class="ttdeci">CScanner(std::istream *arg_yyin=0, std::ostream *arg_yyout=0)</div><div class="ttdoc">Crea un nuevo objeto scanner. </div><div class="ttdef"><b>Definition:</b> <a href="_scanner_8cpp_source.html#l01937">Scanner.cpp:1937</a></div></div>
+<div class="ttc" id="class_map_1_1_c_scanner_html"><div class="ttname"><a href="class_map_1_1_c_scanner.html">Map::CScanner</a></div><div class="ttdoc">CScanner es una clase que dota de funcionalidades extra a la clase automáticamente generada por Flex ...</div><div class="ttdef"><b>Definition:</b> <a href="scanner_8h_source.html#l00044">scanner.h:44</a></div></div>
+<div class="ttc" id="namespace_map_html"><div class="ttname"><a href="namespace_map.html">Map</a></div><div class="ttdoc">Namespace con todo lo relacionado con el parseado de mapas. </div><div class="ttdef"><b>Definition:</b> <a href="_component_8h_source.html#l00020">Component.h:20</a></div></div>
+<div class="ttc" id="class_map_1_1_c_scanner_html_a27dedbf374b808df285000f1dd5606c8"><div class="ttname"><a href="class_map_1_1_c_scanner.html#a27dedbf374b808df285000f1dd5606c8">Map::CScanner::lex</a></div><div class="ttdeci">virtual CParser::token_type lex(CParser::semantic_type *yylval, CParser::location_type *yylloc)</div><div class="ttdoc">Esta es la función principal usada en el análisis léxico. </div></div>
+<div class="ttc" id="class_map_1_1location_html"><div class="ttname"><a href="class_map_1_1location.html">Map::location</a></div><div class="ttdoc">Abstract a location. </div><div class="ttdef"><b>Definition:</b> <a href="location_8hh_source.html#l00052">location.hh:52</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>
