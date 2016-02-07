@@ -42,7 +42,11 @@ namespace Logic
 			TOUCHED,
 			UNTOUCHED,
 			SWITCH,
-			DAMAGED
+			DAMAGED,
+			MOVE_TO,
+			ROUTE_TO,
+			FINISHED_ROUTE,
+			FINISHED_MOVE
 		};
 	}
 

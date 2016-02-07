@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Perception">
+      <UniqueIdentifier>{f3679d6f-3bd2-4527-ae80-3b6ce55c184d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Perception\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Perception\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Movement">
+      <UniqueIdentifier>{5bcaee1b-5191-41b0-a973-ac901781a779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Movement\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Movement\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Decision">
+      <UniqueIdentifier>{472e1875-5b74-42f0-9cc0-d6523616fbef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Decision\Header Files">
+      <UniqueIdentifier>{e7858467-45f4-43f1-94b1-04bdc0dc1902}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Decision\Source Files">
+      <UniqueIdentifier>{06b8f2d6-a483-4bbd-89d3-7ba92a7dd9af}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Src\AI\Server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\UndirectedGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\AStarFunctionsGaleon.cpp">
+      <Filter>Movement\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\DisjointSets.cpp">
+      <Filter>Movement\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp">
+      <Filter>Movement\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp">
+      <Filter>Movement\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\micropather.cpp">
+      <Filter>Movement\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\Movement.cpp">
+      <Filter>Movement\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\WaypointGraph.cpp">
+      <Filter>Movement\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Src\AI\DynTriMat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\Server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\UndirectedGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\AStarFunctionsGaleon.h">
+      <Filter>Movement\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\DisjointSets.h">
+      <Filter>Movement\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\DynamicMovement.h">
+      <Filter>Movement\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\KinematicMovement.h">
+      <Filter>Movement\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\micropather.h">
+      <Filter>Movement\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\Movement.h">
+      <Filter>Movement\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\WaypointGraph.h">
+      <Filter>Movement\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
