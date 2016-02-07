@@ -100,7 +100,7 @@ namespace Logic {
 		CEntityFactory* entityFactory = CEntityFactory::getSingletonPtr();
 
 		// TODO Colocamos temporalmente hardcodeando posiciones en código
-		CEntity* evilator = createBuilding(map, "Evilator", Vector3(5, 0, 14));
+		CEntity* evilator = createBuilding(map, "Evilator", Vector3(5, 0, 12));
 		if (!evilator)
 			return false;
 

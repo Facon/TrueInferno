@@ -2,7 +2,7 @@ Map = {
 	
 	Camera = {
 		type = "Camera",
-		distance = 25,
+		distance = 35,
 		height = 20,
 	},
 	

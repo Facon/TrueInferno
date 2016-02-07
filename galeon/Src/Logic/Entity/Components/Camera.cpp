@@ -78,14 +78,14 @@ namespace Logic
 		IComponent::tick(msecs);
 
 		// Updating camera position and direction...
-		Vector3 position = Vector3(0, _height, 0);
-		Vector3 direction = Vector3(0, 0, 1);
+		Vector3 position = Vector3(10, _height, 0);
+		Vector3 direction = Vector3(10, 0, -1);
 
 		// Isometric camera view for (0,0,0)...
 		//_graphicsCamera->setCameraPosition(Vector3(-10, 15, -10));
 		//_graphicsCamera->setTargetCameraPosition(Vector3(20, -10, 20));
 
-		_graphicsCamera->setCameraPosition(position - _distance * direction);
+		_graphicsCamera->setCameraPosition(position + _distance * Vector3(0, 0, 1));
 		_graphicsCamera->setTargetCameraPosition(direction);
 
 	} // tick
