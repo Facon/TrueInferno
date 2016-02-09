@@ -15,6 +15,11 @@ namespace Logic {
 	Tile::Tile() : IComponent() {
 		_terrainType = TerrainType::Empty;
 		_logicPosition = Vector3::ZERO;
+
+		// Inicializamos el tamaño del vector de adyacentes
+		_adjacentTiles = std::vector<Tile*>(NUM_ADJACENT);
+
+		_tileManager = CTileManager::getSingletonPtr();
 		_placeableAbove = nullptr;
 	}
 
@@ -25,7 +30,7 @@ namespace Logic {
 		_logicPosition = entityInfo->getVector3Attribute("position");
 
 		// Register real (non-prefab) tiles in the TileManager
-		CTileManager::getSingletonPtr()->registerTile(this);
+		_tileManager->registerTile(this);
 
 		return true;
 	} // spawn
@@ -47,10 +52,6 @@ namespace Logic {
 		_terrainType = terrainType;
 	}
 
-	const TerrainType Tile::getTerrainType() {
-		return _terrainType;
-	}
-
 	const Vector3 Tile::getLogicPosition() {
 		return _logicPosition;
 	}
@@ -67,5 +68,48 @@ namespace Logic {
 		// True si no hay placeable encima
 		return _placeableAbove == nullptr;
 	}
+
+	const std::vector<Tile*> Tile::getAdjacentTiles(){
+		// Si no ha sido inicializado todavía
+		if (_adjacentTiles.size() == 0){
+			Tile* adjacent = _tileManager->getTile(_logicPosition + Vector3(-1, 0, 0));
+			if (adjacent != nullptr)
+				_adjacentTiles.push_back(adjacent);
+			adjacent = _tileManager->getTile(_logicPosition + Vector3(1, 0, 0));
+			if (adjacent != nullptr)
+				_adjacentTiles.push_back(adjacent);
+			adjacent = _tileManager->getTile(_logicPosition + Vector3(0, 0, -1));
+			if (adjacent != nullptr)
+				_adjacentTiles.push_back(adjacent);
+			adjacent = _tileManager->getTile(_logicPosition + Vector3(0, 0, 1));
+			if (adjacent != nullptr)
+				_adjacentTiles.push_back(adjacent);
+		}
+
+		return _adjacentTiles;
+	}
+
+	bool Tile::canPassSoulPath(){
+		// Si no hay ningún placeable encima, la SoulPath puede atravesar
+		if (_placeableAbove == nullptr)
+			return true;
+
+		// En otro caso delegamos en el Placeable
+		return _placeableAbove->canPassSoulPath();
+	}
+
+	bool Tile::canPassWalkingSoul(){
+		// Si no hay ningún placeable encima, las almas no pueden caminar
+		if (_placeableAbove == nullptr)
+			return false;
+
+		// En otro caso delegamos en el Placeable
+		return _placeableAbove->canPassWalkingSoul();
+	}
+
+	void Tile::printDebugInfo(){
+		std::cout << "pos=" << _logicPosition << ", terrain=" << _terrainType << ", placeable=" << _placeableAbove << ", passSoulPath=" << canPassSoulPath() << ", passWalkingSoul=" << canPassWalkingSoul() << ", placeSomething=" << canPlaceSomething();
+	}
+
 
 } // namespace Logic

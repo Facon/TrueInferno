@@ -4,7 +4,10 @@
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Logic/Entity/TerrainType.h"
 #include "Placeable.h"
+
+#include <vector>
 
 namespace Logic {
 	class Tile : public IComponent{
@@ -43,9 +46,6 @@ namespace Logic {
 		/** Setter for terrainType */
 		void setTerrainType(const TerrainType &terrainType);
 
-		/** Getter for terrainType */
-		const TerrainType getTerrainType();
-
 		/** Setter for entityAbove */
 		void setPlaceableAbove(CPlaceable* placeableAbove);
 
@@ -56,11 +56,32 @@ namespace Logic {
 		It could be extended to check if some specific building can be placed (e.g. can a regular building be placed on a resource tile?) */
 		bool canPlaceSomething();
 
+		/** Devuelve el vector de tiles adyacentes */
+		const std::vector<Tile*> getAdjacentTiles();
+
+		/** Devuelve un boolean indicando si es posible hacer pasar una SoulPath por el Tile */
+		bool canPassSoulPath();
+
+		/** Devuelve un boolean indicando si es posible hacer caminar un alma por el Tile */
+		bool canPassWalkingSoul();
+
+		/** Imprime información de debug */
+		void printDebugInfo();
+
 	private:
+		/** Número de tiles adyacentes que tiene normalmente un tile (salvo las de los extremos): 4 (si no se consideran las diagonales) */
+		static const int NUM_ADJACENT = 4;
+
 		/** Logic position in the matrix */
 		Vector3 _logicPosition;
 
 		TerrainType _terrainType;
+
+		/** Vector de tiles adyacentes */
+		std::vector<Tile*> _adjacentTiles;
+
+		/** Referencia al TileManager */
+		CTileManager *_tileManager;
 
 		/** Entity (i.e. building, road) placed above */
 		CPlaceable *_placeableAbove;

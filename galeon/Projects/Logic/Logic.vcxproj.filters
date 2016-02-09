@@ -219,5 +219,11 @@
     <ClInclude Include="..\..\Src\Logic\ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

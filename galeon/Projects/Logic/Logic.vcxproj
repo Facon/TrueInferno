@@ -122,6 +122,8 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchPosition.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Tile.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Documentation.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\EntityFactory.h" />

@@ -5,6 +5,8 @@
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Logic/Maps/Managers/BuildingManager.h"
+#include "Logic/Entity/PlaceableType.h"
+
 #include <iostream>
 #include <string>
 
@@ -29,8 +31,24 @@ namespace Logic {
 		_floorOriginPosition = 0;
 
 		// Read floor's size
+		if (!entityInfo->hasAttribute("floor_x") || !entityInfo->hasAttribute("floor_z")){
+			std::cout << "floor_x and floor_z must be defined" << std::endl;
+			return false;
+		}
 		_floorX = entityInfo->getIntAttribute("floor_x");
 		_floorZ = entityInfo->getIntAttribute("floor_z");
+
+		std::string placeableType = entityInfo->getStringAttribute("placeableType");
+		if (placeableType == "Building")
+			_placeableType = Logic::PlaceableType::Building;
+		else if (placeableType == "Obstacle")
+			_placeableType = Logic::PlaceableType::Obstacle;
+		else if (placeableType == "SoulPath")
+			_placeableType = Logic::PlaceableType::SoulPath;
+		else{
+			std::cout << "Unknown placeableType: '" << placeableType << "'" << std::endl;
+			return false;
+		}
 
 		// Si el edificio fue creado por prefab, es posible que al hacer spawn no tenga el atributo de posición lógica
 		if (entityInfo->hasAttribute("floor_absolute_position0")){
@@ -140,6 +158,16 @@ namespace Logic {
 
 	const std::vector<Tile*> CPlaceable::getTiles(){
 		return _tiles;
+	}
+
+	bool CPlaceable::canPassSoulPath(){
+		// Sólo permitimos pasar SoulPath si hay SoulPath
+		return _placeableType == SoulPath;
+	}
+
+	bool CPlaceable::canPassWalkingSoul(){
+		// Sólo permitimos a las almas caminar si hay SoulPath. Podría interesar dejarlas atravesar también los edificios
+		return _placeableType == SoulPath;
 	}
 
 } // namespace Logic
