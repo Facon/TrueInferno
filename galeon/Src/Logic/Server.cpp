@@ -134,10 +134,18 @@ namespace Logic {
 		}
 
 		// Cargamos la matriz de tiles inicial en el mapa.
-		CTileManager::getSingletonPtr()->loadInitialMatrix(_map);
+		if (!CTileManager::getSingletonPtr()->loadInitialMatrix(_map)){
+			std::cout << "Error loading initial buildings" << std::endl;
+			return false;
+		}
 
 		// Cargamos la lista de edificios inicial en el mapa.
-		CBuildingManager::getSingletonPtr()->loadInitialBuildings(_map);
+		if (!CBuildingManager::getSingletonPtr()->loadInitialBuildings(_map)){
+			std::cout << "Error loading initial buildings" << std::endl;
+			return false;
+		}
+
+		//CTileManager::getSingletonPtr()->printDebugInfo();
 
 		// Cargamos el mapa de navegación
 		AI::CServer::getSingletonPtr()->computeNavigationGraph();

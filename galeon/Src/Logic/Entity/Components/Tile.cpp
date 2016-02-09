@@ -52,10 +52,6 @@ namespace Logic {
 		_terrainType = terrainType;
 	}
 
-	const TerrainType Tile::getTerrainType() {
-		return _terrainType;
-	}
-
 	const Vector3 Tile::getLogicPosition() {
 		return _logicPosition;
 	}
@@ -93,12 +89,27 @@ namespace Logic {
 		return _adjacentTiles;
 	}
 
-	bool Tile::canBuildSoulPath(){
-		if (_entityAbove)
+	bool Tile::canPassSoulPath(){
+		// Si no hay ningún placeable encima, la SoulPath puede atravesar
+		if (_placeableAbove == nullptr)
+			return true;
+
+		// En otro caso delegamos en el Placeable
+		return _placeableAbove->canPassSoulPath();
 	}
 
-	bool Tile::canBuildBuilding(){
-		return (_entityAbove == nullptr);
+	bool Tile::canPassWalkingSoul(){
+		// Si no hay ningún placeable encima, las almas no pueden caminar
+		if (_placeableAbove == nullptr)
+			return false;
+
+		// En otro caso delegamos en el Placeable
+		return _placeableAbove->canPassWalkingSoul();
 	}
+
+	void Tile::printDebugInfo(){
+		std::cout << "pos=" << _logicPosition << ", terrain=" << _terrainType << ", placeable=" << _placeableAbove << ", passSoulPath=" << canPassSoulPath() << ", passWalkingSoul=" << canPassWalkingSoul() << ", placeSomething=" << canPlaceSomething();
+	}
+
 
 } // namespace Logic

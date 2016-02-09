@@ -45,19 +45,6 @@ sus componentes, mensajes, factorias de entidades y componentes, etc.
 */
 namespace Logic
 {
-	enum TerrainType {
-		Empty = 0,
-		Mineral = 1,
-		Gas = 2 
-	};
-
-	enum BuildingType {
-		None,
-		Obstacle,
-		Building,
-		Road
-	};
-
 	/**
 	Manager singleton que gestiona la lectura y actualización de la matriz
 	de tiles del mapa.
@@ -100,7 +87,7 @@ namespace Logic
 
 		@param map Mapa en el que generar la matriz.
 		*/
-		void loadInitialMatrix(CMap *map);
+		bool loadInitialMatrix(CMap *map);
 
 		/**
 		Register internally a tile in the matrix tile.
@@ -112,6 +99,9 @@ namespace Logic
 		*/
 		Tile* getTile(const Vector3 &position);
 			
+		/** Imprime información de debug */
+		void printDebugInfo();
+
 	protected:
 
 		/**

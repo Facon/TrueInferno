@@ -108,6 +108,20 @@ namespace Logic {
 		if (!hellQuarters)
 			return false;
 
+		if(!createBuilding(map, "SoulPath", Vector3(13, 0, 4)))
+			return false;
+
+		if (!createBuilding(map, "SoulPath", Vector3(13, 0, 5)))
+			return false;
+
+		for (int x = 13; x >= 5; --x)
+			if (!createBuilding(map, "SoulPath", Vector3(x, 0, 6)))
+				return false;
+
+		for (int z = 7; z <= 11; ++z)
+			if (!createBuilding(map, "SoulPath", Vector3(5, 0, z)))
+				return false;
+
 		return true;
 	}
 

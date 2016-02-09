@@ -92,7 +92,7 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	void CTileManager::loadInitialMatrix(CMap *map)
+	bool CTileManager::loadInitialMatrix(CMap *map)
 	{
 		// Coge la Map::CEntity "Tile" leída del fichero de mapa a modo de prefab.
 		// @TODO Hacerlo en Map::CParser mediante una función genérica que reciba el nombre de la Map::CEntity.
@@ -168,6 +168,7 @@ namespace Logic {
 		// Procesa la configuración inicial del terreno.
 		loadTerrain(TERRAIN_MAP_FILE);
 		
+		return true;
 	} // loadInitialMatrix
 
 	//--------------------------------------------------------
@@ -180,6 +181,17 @@ namespace Logic {
 		return _tiles[(int)position.x][(int)position.z];
 
 	} // getTile
+
+	//--------------------------------------------------------
+
+	void CTileManager::printDebugInfo(){
+		for (int x = 0; x < SIZE_X; ++x) {
+			for (int z = 0; z < SIZE_Z; ++z) {
+				_tiles[x][z]->printDebugInfo();
+				std::cout << std::endl;
+			}
+		}
+	}
 
 	//--------------------------------------------------------
 

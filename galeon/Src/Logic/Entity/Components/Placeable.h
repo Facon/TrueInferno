@@ -6,6 +6,7 @@
 #include "BaseSubsystems/Math.h"
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
+#include "Logic/Entity/PlaceableType.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
@@ -54,6 +55,12 @@ namespace Logic {
 		Returns true if placement is possible, false otherways */
 		bool checkPlacementIsPossible(const Vector3 &originPosition);
 
+		/** Devuelve un boolean indicando si es posible hacer pasar una SoulPath por el Placeable */
+		bool canPassSoulPath();
+
+		/** Devuelve un boolean indicando si es posible hacer caminar un alma por el Placeable */
+		bool canPassWalkingSoul();
+
 	private:
 		/** Height added to entities placed over tiles so they don't overlap
 		TODO Should be relative to a tile's height
@@ -77,6 +84,9 @@ namespace Logic {
 
 		/** Tile manager reference */
 		CTileManager* _tileManager;
+
+		/** Tipo del placeable */
+		Logic::PlaceableType _placeableType;
 
 	}; // class Placeable
 
