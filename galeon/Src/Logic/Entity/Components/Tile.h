@@ -4,6 +4,7 @@
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Placeable.h"
 
 namespace Logic {
 	class Tile : public IComponent{
@@ -46,10 +47,14 @@ namespace Logic {
 		const TerrainType getTerrainType();
 
 		/** Setter for entityAbove */
-		void setEntityAbove(CEntity *entityAbove);
+		void setPlaceableAbove(CPlaceable* placeableAbove);
 
 		/** Getter for entityAbove */
-		const CEntity* getEntityAbove();
+		const CPlaceable* getPlaceableAbove();
+
+		/** Checks if tile allows placing something on it (i.e. if the tile has no other Placeable on it)
+		It could be extended to check if some specific building can be placed (e.g. can a regular building be placed on a resource tile?) */
+		bool canPlaceSomething();
 
 	private:
 		/** Logic position in the matrix */
@@ -57,8 +62,8 @@ namespace Logic {
 
 		TerrainType _terrainType;
 
-		/** Entity placed above */
-		CEntity *_entityAbove;
+		/** Entity (i.e. building, road) placed above */
+		CPlaceable *_placeableAbove;
 	}; // class Tile
 
 	REG_FACTORY(Tile);
