@@ -137,8 +137,8 @@ namespace Logic {
 
 		// Lectura de los tiles del mapa.
 		// Se leen en el mismo orden en el que luego se les asigna el terreno, pero no es necesario.
-		for (int z = SIZE_Z - 1; z >= 0; --z) {
-			for (int x = SIZE_X - 1; x >= 0; --x) {
+		for (int x = 0; x < SIZE_X; ++x) {
+			for (int z = 0; z < SIZE_Z; ++z) {
 				// Cambia la posición.
 				Vector3 tilePosition(tileBasePosition);
 
@@ -200,17 +200,17 @@ namespace Logic {
 
 		// For each line
 		std::string line;
-		int z = SIZE_Z-1;
+		int z = 0;
 
-		while (z>=0 && std::getline(file, line)) {
+		while (z < SIZE_Z && std::getline(file, line)) {
 			// Read line
 			std::stringstream ss(line);
 			
 			// For each token in line delimited by whitespace
-			int x = SIZE_X-1;
+			int x = 0;
 			std::string item;
 
-			while (x>=0 && std::getline(ss, item, ' ')) {
+			while (x < SIZE_X && std::getline(ss, item, ' ')) {
 				assert((item.size() == 1) && "Only tokens of 1 char are allowed in the terrain map");
 				
 				TerrainType terrainType;
@@ -240,9 +240,10 @@ namespace Logic {
 
 				message.Dispatch(*_tiles[x][z]->getEntity());
 				_tiles[x][z]->setTerrainType(terrainType);
-				--x;
+				++x;
 			} // while x
-			--z;
+
+			++z;
 		} // while z
 
 		file.close();

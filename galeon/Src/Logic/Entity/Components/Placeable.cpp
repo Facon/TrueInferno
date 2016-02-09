@@ -72,12 +72,12 @@ namespace Logic {
 		if (!check)
 			return false;
 
-		// Clean entity above in old tiles
-		_tileManager->getTile(_floorOriginPosition)->setEntityAbove(nullptr);
+		// Clear placeable above in old tiles
+		_tileManager->getTile(_floorOriginPosition)->setPlaceableAbove(nullptr);
 		for (int x = 0; x < _floorX; ++x) {
 			for (int z = 0; z < _floorZ; ++z) {
 				Tile* tile = _tileManager->getTile(_floorOriginPosition + Vector3(x, 0, z));
-				tile->setEntityAbove(nullptr);
+				tile->setPlaceableAbove(nullptr);
 			}
 		}
 
@@ -99,7 +99,7 @@ namespace Logic {
 				_tiles.push_back(tile);
 
 				// Notify its new entity above
-				tile->setEntityAbove(this->getEntity());
+				tile->setPlaceableAbove(this);
 
 				// Add it to the average position
 				centerPosition += tile->getEntity()->getPosition();
@@ -119,8 +119,8 @@ namespace Logic {
 	}
 	
 	bool CPlaceable::checkPlacementIsPossible(const Vector3 &checkPosition){
-		// Check origin tile. If it's null or has an entity above: placement is not possible
-		if (_tileManager->getTile(checkPosition) == nullptr || _tileManager->getTile(checkPosition)->getEntityAbove() != nullptr)
+		// Check origin tile. If it's null or can't place anything on it: placement is not possible
+		if (_tileManager->getTile(checkPosition) == nullptr || !_tileManager->getTile(checkPosition)->canPlaceSomething())
 			return false;
 
 		// For each tile
@@ -129,7 +129,7 @@ namespace Logic {
 				Tile* tile = _tileManager->getTile(checkPosition + Vector3(x, 0, z));
 
 				// Check tile
-				if (tile == nullptr || tile->getEntityAbove() != nullptr)
+				if (tile == nullptr || !tile->canPlaceSomething())
 					return false;
 			}
 		}

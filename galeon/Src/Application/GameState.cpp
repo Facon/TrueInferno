@@ -29,6 +29,8 @@ Contiene la implementación del estado de juego.
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/Window.h>
 
+#include <cmath>
+
 namespace Application {
 
 	bool CGameState::init() 
@@ -50,9 +52,7 @@ namespace Application {
 		// Cargamos la ventana que muestra el tiempo de juego transcurrido.
 		_timeWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Time.layout");
 
-		// Cargamos la ventana que muestra la barra superior
-		_uibarsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIbars.layout");
-
+		_resourcesUI.init();
 
 		return true;
 
@@ -90,11 +90,7 @@ namespace Application {
 		_timeWindow->setVisible(true);
 		_timeWindow->activate();
 
-		// Activamos la interfaz de usuario
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_uibarsWindow);
-		_uibarsWindow->setVisible(true);
-		_uibarsWindow->activate();
-
+		_resourcesUI.activate();
 	} // activate
 
 	//--------------------------------------------------------
@@ -105,9 +101,7 @@ namespace Application {
 		_timeWindow->deactivate();
 		_timeWindow->setVisible(false);
 
-		// Desactivamos la ventana de UiBars.
-		_uibarsWindow->deactivate();
-		_uibarsWindow->setVisible(false);
+		_resourcesUI.deactivate();
 
 		// Desactivamos la clase que procesa eventos de entrada para 
 		// controlar al jugador.
@@ -132,12 +126,8 @@ namespace Application {
 		// Actualizamos la lógica de juego.
 		Logic::CServer::getSingletonPtr()->tick(msecs);
 
-		_time += msecs;
-		
-		std::stringstream text;
-		text << "Time: " << _time/1000;
-		_timeWindow->setText(text.str());
-
+		// Changing resources displays info
+		_resourcesUI.tick(msecs);
 	} // tick
 
 	//--------------------------------------------------------
