@@ -1,18 +1,18 @@
 /**
-@file AStarFunctionsGaleon.h
+@file AStarFunctionsSoulPath.h
 
 En este fichero se implementan las funciones
-necesarias para calcular rutas usando A*.
+necesarias para calcular rutas de almas usando A*.
 
 
-@author Gonzalo Flórez
-@date Diciembre, 2010
+@author Álvaro Valera
+@date February, 2016
 */
 
 #pragma once
 
-#ifndef __AI_AStarFunctionsGaleon_H
-#define __AI_AStarFunctionsGaleon_H
+#ifndef AI_STAR_FUNCTIONS_SOUL_PATH_H_
+#define AI_STAR_FUNCTIONS_SOUL_PATH_H_
 
 #include "micropather.h"
 
@@ -22,30 +22,28 @@ namespace AI
 	Clase que hereda de micropather::Graph y que contiene las funciones
 	de A* específicas de Galeon.
 	*/
-	class CAStarFunctionsGaleon : public micropather::Graph
+	class CAStarFunctionsSoulPath : public micropather::Graph
 	{
 	public:
 		/** 
 		Constructor
 		*/
-		CAStarFunctionsGaleon(void);
+		CAStarFunctionsSoulPath(void);
 		/** 
 		Destructor
 		*/
-		~CAStarFunctionsGaleon(void);
+		~CAStarFunctionsSoulPath(void);
 		/**
 		Devuelve el coste según la heurística para llegar desde el estado stateStart hasta stateEnd.
 		Para que el camino devuelto por A* sea óptimo la heurística sea aceptable y no sobreestimar 
 		la distancia.
-		Para la búsqueda de caminos de Galeon utilizaremos como heurística la distancia euclídea
-		entre los puntos.
+		Para la búsqueda de caminos de almas en el mapa de Tiles utilizaremos como heurística la distancia de Manhattan.
 		*/
 		virtual float LeastCostEstimate( void* stateStart, void* stateEnd );
 
 		/** 
 		Devuelve la lista de vecinos de un nodo junto con el coste de llegar desde el nodo actual
 		hasta cada uno de ellos.
-		En Galeon usaremos el grafo de waypoints para obtenerla.
 		*/	
 		virtual void AdjacentCost( void* state, std::vector< micropather::StateCost > *adjacent );
 
@@ -60,4 +58,4 @@ namespace AI
 
 } // namespace AI 
 
-#endif //__AI_AStarFunctionsGaleon_H
+#endif //AI_STAR_FUNCTIONS_SOUL_PATH_H_

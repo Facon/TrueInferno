@@ -16,6 +16,11 @@ namespace Logic {
 		_terrainType = TerrainType::Empty;
 		_logicPosition = Vector3::ZERO;
 		_entityAbove = nullptr;
+
+		// Inicializamos el tamaño del vector de adyacentes
+		_adjacentTiles = std::vector<Tile*>(NUM_ADJACENT);
+
+		_tileManager = CTileManager::getSingletonPtr();
 	}
 
 	bool Tile::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
@@ -25,7 +30,7 @@ namespace Logic {
 		_logicPosition = entityInfo->getVector3Attribute("position");
 
 		// Register real (non-prefab) tiles in the TileManager
-		CTileManager::getSingletonPtr()->registerTile(this);
+		_tileManager->registerTile(this);
 
 		return true;
 	} // spawn
@@ -61,6 +66,34 @@ namespace Logic {
 
 	const CEntity* Tile::getEntityAbove(){
 		return _entityAbove;
+	}
+
+	const std::vector<Tile*> Tile::getAdjacentTiles(){
+		// Si no ha sido inicializado todavía
+		if (_adjacentTiles.size() == 0){
+			Tile* adjacent = _tileManager->getTile(_logicPosition + Vector3(-1, 0, 0));
+			if (adjacent != nullptr)
+				_adjacentTiles.push_back(adjacent);
+			adjacent = _tileManager->getTile(_logicPosition + Vector3(1, 0, 0));
+			if (adjacent != nullptr)
+				_adjacentTiles.push_back(adjacent);
+			adjacent = _tileManager->getTile(_logicPosition + Vector3(0, 0, -1));
+			if (adjacent != nullptr)
+				_adjacentTiles.push_back(adjacent);
+			adjacent = _tileManager->getTile(_logicPosition + Vector3(0, 0, 1));
+			if (adjacent != nullptr)
+				_adjacentTiles.push_back(adjacent);
+		}
+
+		return _adjacentTiles;
+	}
+
+	bool Tile::canBuildSoulPath(){
+		if (_entityAbove)
+	}
+
+	bool Tile::canBuildBuilding(){
+		return (_entityAbove == nullptr);
 	}
 
 } // namespace Logic

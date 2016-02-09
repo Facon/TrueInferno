@@ -18,6 +18,8 @@ la gestión de la lógica del juego.
 
 #include "Logic/Entity/Entity.h"
 
+#include "AI/Server.h"
+
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
 
@@ -136,6 +138,9 @@ namespace Logic {
 
 		// Cargamos la lista de edificios inicial en el mapa.
 		CBuildingManager::getSingletonPtr()->loadInitialBuildings(_map);
+
+		// Cargamos el mapa de navegación
+		AI::CServer::getSingletonPtr()->computeNavigationGraph();
 
 		return true;
 

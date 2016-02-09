@@ -54,9 +54,6 @@
     <ClCompile Include="..\..\Src\AI\UndirectedGraph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\AStarFunctionsGaleon.cpp">
-      <Filter>Movement\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\AI\DisjointSets.cpp">
       <Filter>Movement\Source Files</Filter>
     </ClCompile>
@@ -75,6 +72,12 @@
     <ClCompile Include="..\..\Src\AI\WaypointGraph.cpp">
       <Filter>Movement\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\AStarFunctionsRoadPath.cpp">
+      <Filter>Movement\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\AStarFunctionsSoulPath.cpp">
+      <Filter>Movement\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -85,9 +88,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\UndirectedGraph.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AI\AStarFunctionsGaleon.h">
-      <Filter>Movement\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\DisjointSets.h">
       <Filter>Movement\Header Files</Filter>
@@ -105,6 +105,12 @@
       <Filter>Movement\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\WaypointGraph.h">
+      <Filter>Movement\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\AStarFunctionsRoadPath.h">
+      <Filter>Movement\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\AStarFunctionsSoulPath.h">
       <Filter>Movement\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

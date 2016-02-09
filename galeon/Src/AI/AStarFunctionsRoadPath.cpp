@@ -1,17 +1,18 @@
 /**
-@file AStarFunctionsGaleon.cpp
+@file AStarFunctionsRoadPath.cpp
 
 En este fichero se implementan las funciones
-necesarias para calcular rutas usando A*.
+necesarias para calcular rutas de carreteras usando A*.
 
 
-@author Gonzalo Flórez
-@date Diciembre, 2010
+@author Álvaro Valera
+@date February, 2016
 */
 
-#include "AStarFunctionsGaleon.h"
+#include "AStarFunctionsRoadPath.h"
 
 #include "Server.h"
+#include "Logic\Entity\Components\Tile.h"
 
 namespace AI 
 {
@@ -20,7 +21,7 @@ namespace AI
 	/** 
 	Constructor
 	*/
-	CAStarFunctionsGaleon::CAStarFunctionsGaleon(void)
+	CAStarFunctionsRoadPath::CAStarFunctionsRoadPath(void)
 	{
 	}
 
@@ -28,7 +29,7 @@ namespace AI
 	/** 
 	Destructor
 	*/
-	CAStarFunctionsGaleon::~CAStarFunctionsGaleon(void)
+	CAStarFunctionsRoadPath::~CAStarFunctionsRoadPath(void)
 	{
 	}
 
@@ -37,44 +38,37 @@ namespace AI
 	Devuelve el coste según la heurística para llegar desde el estado stateStart hasta stateEnd.
 	Para que el camino devuelto por A* sea óptimo la heurística sea aceptable y no sobreestimar 
 	la distancia.
-	Para la búsqueda de caminos de Galeon utilizaremos como heurística la distancia euclídea
-	entre los puntos.
+	Para la búsqueda de caminos de carretera en el mapa de Tiles utilizaremos como heurística la distancia de Manhattan.
 	*/
-	float CAStarFunctionsGaleon::LeastCostEstimate( void* stateStart, void* stateEnd )
+	float CAStarFunctionsRoadPath::LeastCostEstimate( void* stateStart, void* stateEnd )
 	{
 		// Función heurística para A*.
 		// En el caso de Galeón, una heurística admisible es la distancia entre los nodos 
 		// indicados por stateStart y stateEnd.
-		// Para calcularla tenemos que obtener los nodos del grafo de navegación, al que 
-		// podemos acceder mediante el servidor de IA
-		int idOrigen = (int) stateStart;
-		int idDestino = (int) stateEnd;
-		// Utilizamos el grafo de navegación:
-		CWaypointGraph* wpg = CServer::getSingletonPtr()->getNavigationGraph();
-		Vector3 orig = wpg->getWaypoint(idOrigen);
-		Vector3 dest = wpg->getWaypoint(idDestino);
-		return orig.distance(dest);
+		Logic::Tile* tileFrom = (Logic::Tile*)stateStart;
+		Logic::Tile* tileTo = (Logic::Tile*)stateEnd;
+
+		return tileFrom->getLogicPosition().manhattanDistance(tileTo->getLogicPosition());
 	}
 
 	//---------------------------------------------------------
 	/** 
 	Devuelve la lista de vecinos de un nodo junto con el coste de llegar desde el nodo actual
 	hasta cada uno de ellos.
-	En Galeon usaremos el grafo de waypoints para obtenerla.
 	*/	
-	void CAStarFunctionsGaleon::AdjacentCost( void* state, std::vector< micropather::StateCost > *adjacent )
+	void CAStarFunctionsRoadPath::AdjacentCost( void* state, std::vector< micropather::StateCost > *adjacent )
 	{
 		// Esta función nos da la lista de vecinos de un nodo y el coste real (no heurístico) para llegar a
 		// cada uno de ellos.
-		// Para acceder a la lista de vecinos usamos el grafo de navegación.
-		// Para el coste de cada vecino consultamos la arista lo une con el nodo.
-		// Estos datos se devuelven en un vector de pares [idNodo, coste] (tipo StateCost).
-		int idNodo = (int) state;
-		// Utilizamos el grafo de navegación:
-		CWaypointGraph* wpg = CServer::getSingletonPtr()->getNavigationGraph();
-		list<unsigned int> neighbours = wpg->getNeighbours(idNodo);
+		Logic::Tile* current = (Logic::Tile*) state;
+		
+		if (current->canBuildRoad())
+
 		// Llenamos la lista de adyacentes con pares de (nodo vecino, coste en llegar)
-		for (list<unsigned int>::iterator it = neighbours.begin(); it != neighbours.end(); it++) {
+		for (auto it = current->getAdjacentTiles().cbegin(); it != current->getAdjacentTiles().cbegin(); ++it) {
+			Logic::Tile* adjacent = (Logic::Tile*)(*it);
+			
+
 			micropather::StateCost nodeCost = {(void*)(*it), wpg->getCost(idNodo, (*it))};
 			adjacent->push_back(nodeCost);
 		}
@@ -86,7 +80,7 @@ namespace AI
 		aren't really human readable, normally you print out some concise info (like "(1,2)") 
 		without an ending newline.
 	*/
-	void  CAStarFunctionsGaleon::PrintStateInfo( void* state )
+	void  CAStarFunctionsRoadPath::PrintStateInfo( void* state )
 	{
 		CWaypointGraph* wpg = CServer::getSingletonPtr()->getNavigationGraph();
 		Vector3 position = wpg->getNode((int) state)->position;

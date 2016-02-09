@@ -5,6 +5,8 @@
 #include "Logic/Entity/Component.h"
 #include "Logic/Maps/Managers/TileManager.h"
 
+#include <vector>
+
 namespace Logic {
 	class Tile : public IComponent{
 		RTTI_DECL;
@@ -51,7 +53,19 @@ namespace Logic {
 		/** Getter for entityAbove */
 		const CEntity* getEntityAbove();
 
+		/** Devuelve el vector de tiles adyacentes */
+		const std::vector<Tile*> getAdjacentTiles();
+
+		/** Devuelve un boolean indicando si es posible construir SoulPath en el Tile */
+		bool canBuildSoulPath();
+
+		/** Devuelve un boolean indicando si es posible construir un edificio en el Tile */
+		bool canBuildBuilding();
+
 	private:
+		/** Número de tiles adyacentes que tiene normalmente un tile (salvo las de los extremos): 4 (si no se consideran las diagonales) */
+		static const int NUM_ADJACENT = 4;
+
 		/** Logic position in the matrix */
 		Vector3 _logicPosition;
 
@@ -59,6 +73,12 @@ namespace Logic {
 
 		/** Entity placed above */
 		CEntity *_entityAbove;
+
+		/** Vector de tiles adyacentes */
+		std::vector<Tile*> _adjacentTiles;
+
+		/** Referencia al TileManager */
+		CTileManager *_tileManager;
 	}; // class Tile
 
 	REG_FACTORY(Tile);

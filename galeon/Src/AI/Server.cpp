@@ -67,15 +67,7 @@ namespace AI {
 	{
 		_wpg.addWaypoint(waypoint);
 	}
-	/////////////////////////////////////////
-	/**
-	Recalcula el grafo de navegación a partir de los nodos que han sido
-	añadidos con addGraphNode.
-	*/
-	void CServer::computeNavigationGraph() 
-	{
-		_wpg.computeNavigationGraph();
-	}
+
 	/////////////////////////////////////////
 	/**
 	Calcula una ruta usando A*.

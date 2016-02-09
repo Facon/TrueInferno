@@ -58,22 +58,10 @@ class CServer
 		bool tick(float secs);
 
 		/**
-		Añade un nuevo nodo al grafo de navegación.
-		*/
-		void addWaypoint(Vector3 waypoint);
-		/**
-		Recalcula el grafo de navegación a partir de los nodos que han sido
-		añadidos con addGraphNode.
-		*/
-		void computeNavigationGraph();
-		/**
-		Devuelve el grafo de navegación.
-		*/
-		CWaypointGraph* getNavigationGraph() {return &_wpg; };
-		/**
 		Calcula una ruta usando A*.
 		*/
 		vector<Vector3> *getAStarRoute(Vector3 from, Vector3 to);
+
 		/**
 		Dado un ángulo en radianes lo lleva al intervalo [-PI, PI]
 		*/
@@ -94,16 +82,20 @@ class CServer
 		*/
 		static CServer *_instance;
 
-		CWaypointGraph _wpg;
 		/**
 		Clase que se encarga de calcular la mejor ruta con A*
 		*/
 		micropather::MicroPather* _aStar;
-		/** 
-		Funciones de distancia para calcular A*
-		*/
-		CAStarFunctionsGaleon* _f;
 
+		/** 
+		Funciones de distancia para calcular A* en los problemas de obtención de rutas de carretera
+		*/
+		CAStarFunctionsRoadPath* _f;
+
+		/**
+		Funciones de distancia para calcular A* en los problemas de obtención de rutas para las almas
+		*/
+		CAStarFunctionsSoulPath* _f;
 }; // class CServer
 
 } // namespace AI
