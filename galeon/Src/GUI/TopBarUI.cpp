@@ -1,27 +1,30 @@
-#include "ResourcesUI.h"
+#include "TopBarUI.h"
 
 #include <CEGUI/System.h>
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/Window.h>
 
+#include "Logic/TimeManager.h"
+#include "Logic/ResourcesManager.h"
+
 namespace GUI
 {
-	ResourcesUI::ResourcesUI()
+	TopBarUI::TopBarUI(Logic::ResourcesManager& rm, Logic::TimeManager& tm) : _resourceManager(rm), _timeManager(tm)
 	{
 	}
 
 
-	ResourcesUI::~ResourcesUI()
+	TopBarUI::~TopBarUI()
 	{
 	}
 
-	void ResourcesUI::init()
+	void TopBarUI::init()
 	{
 		// Cargamos la ventana que muestra la barra superior
 		_uibarsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIbars.layout");
 	}
 
-	void ResourcesUI::activate()
+	void TopBarUI::activate()
 	{
 		// Activamos la interfaz de usuario
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_uibarsWindow);
@@ -29,14 +32,14 @@ namespace GUI
 		_uibarsWindow->activate();
 	}
 
-	void ResourcesUI::deactivate()
+	void TopBarUI::deactivate()
 	{
 		// Desactivamos la ventana de UiBars.
 		_uibarsWindow->deactivate();
 		_uibarsWindow->setVisible(false);
 	}
 
-	void ResourcesUI::tick(unsigned int msecs)
+	void TopBarUI::tick(unsigned int msecs)
 	{
 		_timeManager.tick(msecs);
 

@@ -106,7 +106,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\AvatarController.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Camera.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Graphics.cpp" />
-    <ClCompile Include="..\..\Src\Logic\ResourceManager.cpp" />
+    <ClCompile Include="..\..\Src\Logic\ResourcesManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Server.cpp" />
     <ClCompile Include="..\..\Src\Logic\TimeManager.cpp" />
   </ItemGroup>
@@ -139,7 +139,7 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Camera.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Graphics.h" />
     <ClInclude Include="..\..\Src\Logic\Documentation.h" />
-    <ClInclude Include="..\..\Src\Logic\ResourceManager.h" />
+    <ClInclude Include="..\..\Src\Logic\ResourcesManager.h" />
     <ClInclude Include="..\..\Src\Logic\Server.h" />
     <ClInclude Include="..\..\Src\Logic\TimeManager.h" />
   </ItemGroup>

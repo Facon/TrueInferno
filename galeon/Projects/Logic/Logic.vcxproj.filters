@@ -121,7 +121,7 @@
     <ClCompile Include="..\..\Src\Logic\TimeManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Logic\ResourceManager.cpp">
+    <ClCompile Include="..\..\Src\Logic\ResourcesManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -216,7 +216,7 @@
     <ClInclude Include="..\..\Src\Logic\TimeManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Logic\ResourceManager.h">
+    <ClInclude Include="..\..\Src\Logic\ResourcesManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

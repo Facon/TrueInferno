@@ -52,7 +52,7 @@ namespace Application {
 		// Cargamos la ventana que muestra el tiempo de juego transcurrido.
 		_timeWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Time.layout");
 
-		_resourcesUI.init();
+		_topBarUI.init();
 
 		return true;
 
@@ -90,7 +90,7 @@ namespace Application {
 		_timeWindow->setVisible(true);
 		_timeWindow->activate();
 
-		_resourcesUI.activate();
+		_topBarUI.activate();
 	} // activate
 
 	//--------------------------------------------------------
@@ -101,7 +101,7 @@ namespace Application {
 		_timeWindow->deactivate();
 		_timeWindow->setVisible(false);
 
-		_resourcesUI.deactivate();
+		_topBarUI.deactivate();
 
 		// Desactivamos la clase que procesa eventos de entrada para 
 		// controlar al jugador.
@@ -127,7 +127,7 @@ namespace Application {
 		Logic::CServer::getSingletonPtr()->tick(msecs);
 
 		// Changing resources displays info
-		_resourcesUI.tick(msecs);
+		_topBarUI.tick(msecs);
 	} // tick
 
 	//--------------------------------------------------------

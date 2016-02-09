@@ -1066,7 +1066,7 @@
         <Property name="BackgroundEnabled" value="True"/>
         <Property name="FrameEnabled" value="True"/>
         <Property name="TextColours" value="tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000"/>
-        <Property name="HorzFormatting" value="WordWrapLeftAligned"/>
+		<Property name="HorzFormatting" value="WordWrapLeftAligned"/>
         <Property name="Size" value="{{0, 256}, {0, 128}}" />
         <NamedArea name="WithFrameTextRenderArea">
             <Area>
@@ -1257,6 +1257,38 @@
             </Area>
         </NamedArea>
         <Child nameSuffix="__auto_caption__" type="OgreTray/Title">
+            <Area>
+                <Dim type="LeftEdge">
+                    <OperatorDim op="Multiply">
+                        <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                        <AbsoluteDim value="0.25"/>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="TopEdge">
+                    <OperatorDim op="Multiply">
+                        <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                        <AbsoluteDim value="0.25"/>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="RightEdge">
+                    <OperatorDim op="Subtract">
+                        <UnifiedDim scale="1" type="Width"/>
+                        <OperatorDim op="Multiply">
+                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                            <AbsoluteDim value="0.25"/>
+                        </OperatorDim>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="Height">
+                    <OperatorDim op="Add">
+                        <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                        <FontDim padding="0" widget="__auto_caption__" type="LineSpacing"/>
+                    </OperatorDim>
+                </Dim>
+            </Area>
+            <Property name="NonClient" value="True"/>
+        </Child>
+		<Child nameSuffix="__auto_caption__" type="OgreTray/TitleHF">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Multiply">

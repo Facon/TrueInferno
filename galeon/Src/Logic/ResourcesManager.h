@@ -13,7 +13,7 @@ namespace Logic
 		HADES_FAVOR
 	};
 
-	class ResourceManager
+	class ResourcesManager
 	{
 	protected:
 		static const float MINERAL_GATHERING_SPEED;
