@@ -22,6 +22,12 @@
     <ClCompile Include="..\..\Src\GUI\ResourcesUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\GUI\UIManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\GUI\SideBarUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\GUI\Documentation.h">
@@ -37,6 +43,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\GUI\ResourcesUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\GUI\UIManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\GUI\SideBarUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

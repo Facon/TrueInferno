@@ -43,6 +43,8 @@ namespace Application {
 		_menuWindow->getChildElement("Exit")->
 			subscribeEvent(CEGUI::PushButton::EventClicked, 
 				CEGUI::SubscriberSlot(&CMenuState::exitReleased, this));
+
+		
 	
 		return true;
 

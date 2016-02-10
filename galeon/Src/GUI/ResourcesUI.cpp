@@ -4,6 +4,12 @@
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/Window.h>
 
+#include "Map/MapParser.h"
+#include "Map/MapEntity.h"
+#include "Logic/Maps/EntityFactory.h"
+#include "Logic/Entity/Entity.h"
+#include "Logic/Entity/Components/Placeable.h"
+
 namespace GUI
 {
 	ResourcesUI::ResourcesUI()
@@ -15,16 +21,19 @@ namespace GUI
 	{
 	}
 
+	CEGUI::Window* ResourcesUI::getResourceWindow(){
+		return _uibarsWindow;
+	}
+
 	void ResourcesUI::init()
 	{
 		// Cargamos la ventana que muestra la barra superior
-		_uibarsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIbars.layout");
+		_uibarsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIResourceBar.layout");
 	}
 
 	void ResourcesUI::activate()
 	{
 		// Activamos la interfaz de usuario
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_uibarsWindow);
 		_uibarsWindow->setVisible(true);
 		_uibarsWindow->activate();
 	}
@@ -45,13 +54,15 @@ namespace GUI
 		unsigned int seconds = static_cast<unsigned int>(((total_seconds / 60.0f) - minutes) * 60.0f);
 
 		// Changing Resources UI
-		_uibarsWindow->getChild("TopBar/Mineral")->setText("Mineral  " + std::to_string(static_cast<int>(trunc(_resourceManager.getMineral()))));
-		_uibarsWindow->getChild("TopBar/Gas")->setText("Gas  " + std::to_string(static_cast<int>(trunc(_resourceManager.getGas()))));
-		_uibarsWindow->getChild("TopBar/Coke")->setText("Coke  " + std::to_string(static_cast<int>(trunc(_resourceManager.getCoke()))));
-		_uibarsWindow->getChild("TopBar/Crude")->setText("Crude  " + std::to_string(static_cast<int>(trunc(_resourceManager.getCrude()))));
-		_uibarsWindow->getChild("TopBar/Pure")->setText("Pure  " + std::to_string(static_cast<int>(trunc(_resourceManager.getPure()))));
-		_uibarsWindow->getChild("TopBar/Refined")->setText("Refined  " + std::to_string(static_cast<int>(trunc(_resourceManager.getRefined()))));
-		_uibarsWindow->getChild("TopBar/TimeLeft")->setText("Time:  " + std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
-		_uibarsWindow->getChild("TopBar/HadesFavor")->setText("HF: " + std::to_string(static_cast<int>(trunc(_resourceManager.getHadesFavor()))));
+		
+		_uibarsWindow->getChild("Mineral")->setText("Mineral  " + std::to_string(static_cast<int>(trunc(_resourceManager.getMineral()))));
+		_uibarsWindow->getChild("Gas")->setText("Gas  " + std::to_string(static_cast<int>(trunc(_resourceManager.getGas()))));
+		_uibarsWindow->getChild("Coke")->setText("Coke  " + std::to_string(static_cast<int>(trunc(_resourceManager.getCoke()))));
+		_uibarsWindow->getChild("Crude")->setText("Crude  " + std::to_string(static_cast<int>(trunc(_resourceManager.getCrude()))));
+		_uibarsWindow->getChild("Pure")->setText("Pure  " + std::to_string(static_cast<int>(trunc(_resourceManager.getPure()))));
+		_uibarsWindow->getChild("Refined")->setText("Refined  " + std::to_string(static_cast<int>(trunc(_resourceManager.getRefined()))));
+		_uibarsWindow->getChild("TimeLeft")->setText("Time:  " + std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
+		_uibarsWindow->getChild("HadesFavor")->setText("HF: " + std::to_string(static_cast<int>(trunc(_resourceManager.getHadesFavor()))));
 	}
+
 }

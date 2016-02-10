@@ -79,6 +79,8 @@
     <ClCompile Include="..\..\Src\GUI\PlayerController.cpp" />
     <ClCompile Include="..\..\Src\GUI\ResourcesUI.cpp" />
     <ClCompile Include="..\..\Src\GUI\Server.cpp" />
+    <ClCompile Include="..\..\Src\GUI\SideBarUI.cpp" />
+    <ClCompile Include="..\..\Src\GUI\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\GUI\Documentation.h" />
@@ -86,6 +88,8 @@
     <ClInclude Include="..\..\Src\GUI\PlayerController.h" />
     <ClInclude Include="..\..\Src\GUI\ResourcesUI.h" />
     <ClInclude Include="..\..\Src\GUI\Server.h" />
+    <ClInclude Include="..\..\Src\GUI\SideBarUI.h" />
+    <ClInclude Include="..\..\Src\GUI\UIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseSubsystems\BaseSubsystems.vcxproj">

@@ -18,7 +18,7 @@ Contiene la declaración del estado de juego.
 #define __Application_GameState_H
 
 #include "ApplicationState.h"
-#include "GUI/ResourcesUI.h"
+#include "GUI/UIManager.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Application 
@@ -192,7 +192,8 @@ namespace Application
 		unsigned int _time;
 
 		// Resources Displays
-		GUI::ResourcesUI _resourcesUI;
+		GUI::UIManager _UIManager;
+
 	}; // CGameState
 
 } // namespace Application

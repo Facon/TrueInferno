@@ -7,6 +7,7 @@
 namespace CEGUI
 {
 	class Window;
+	class EventArgs;
 }
 
 namespace GUI
@@ -22,6 +23,7 @@ namespace GUI
 
 		// Window for displaying resources
 		CEGUI::Window* _uibarsWindow;
+
 	public:
 		ResourcesUI();
 		~ResourcesUI();
@@ -29,6 +31,7 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
+		CEGUI::Window* ResourcesUI::getResourceWindow();
 	};
 }
 

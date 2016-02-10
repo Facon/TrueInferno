@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+	<Window type="OgreTray/StaticImage" name="SideBar" >
+		<Property name="Area" value="{{0.8,0},{0.1,0},{1,0},{1,0}}" />
+		<Window type="OgreTray/Button" name="CreateBuilding" >
+			<Property name="Area" value="{{0.05,0},{0.015,0},{0.475,0},{0.139,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="CBuild" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/Button" name="CreateRoad" >
+			<Property name="Area" value="{{0.525,0},{0.015,0},{0.95,0},{0.139,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="CRoad" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+	</Window>
+</GUILayout>
+
