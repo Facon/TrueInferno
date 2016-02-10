@@ -61,6 +61,8 @@ namespace Logic {
 		/** Devuelve un boolean indicando si es posible hacer caminar un alma por el Placeable */
 		bool canPassWalkingSoul();
 
+		bool CPlaceable::HandleMessage(const PlaceMessage& msg);
+
 	private:
 		/** Height added to entities placed over tiles so they don't overlap
 		TODO Should be relative to a tile's height

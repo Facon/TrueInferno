@@ -100,6 +100,12 @@ namespace Logic
 		@param logicPosition Posición lógica donde se colocará el primer tile. El resto de tiles se colocarán de acuerdo a la info del prefab */
 		Logic::CEntity* createBuilding(CMap *map, const std::string& prefabName, const Vector3& logicPosition);
 
+		/** Coloca una SoulPath en la posición lógica dada
+
+		@param map Mapa donde se instanciará la entidad de SoulPath
+		@param logicPosition Posición lógica donde se colocará el tile de la SoulPath */
+		CEntity* CBuildingManager::createSoulPath(CMap *map, const Vector3& logicPosition);
+
 	protected:
 
 		/**

@@ -129,6 +129,16 @@ namespace Logic {
 		_buildings.push_back(placeable);
 	}
 
+	CEntity* CBuildingManager::createSoulPath(CMap *map, const Vector3& logicPosition){
+		CEntity* soulPath = CEntityFactory::getSingletonPtr()->createEntity("SoulPath", map);
+		if (soulPath){
+			PlaceMessage m;
+			m.position = logicPosition;
+			m.Dispatch(*soulPath);
+		}
+		return soulPath;
+	}
+
 	CEntity* CBuildingManager::createBuilding(CMap *map, const std::string& prefabName, const Vector3& logicPosition){
 		CEntity* buildingEntity = CEntityFactory::getSingletonPtr()->createEntity(prefabName, map);
 

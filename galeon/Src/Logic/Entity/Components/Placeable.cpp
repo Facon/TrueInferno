@@ -170,4 +170,8 @@ namespace Logic {
 		return _placeableType == SoulPath;
 	}
 
+	bool CPlaceable::HandleMessage(const PlaceMessage& msg){
+		return place(msg.position);
+	}
+
 } // namespace Logic

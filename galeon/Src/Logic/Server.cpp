@@ -17,6 +17,7 @@ la gestión de la lógica del juego.
 #include "Logic/Maps/Managers/BuildingManager.h"
 
 #include "Logic/Entity/Entity.h"
+#include "Logic/Entity/Components/Tile.h"
 
 #include "AI/Server.h"
 
@@ -35,6 +36,7 @@ namespace Logic {
 	CServer::CServer() : _map(0)
 	{
 		_instance = this;
+		_timeSince = 0;
 
 	} // CServer
 
@@ -187,6 +189,34 @@ namespace Logic {
 	{
 		// Eliminamos las entidades que se han marcado para ser eliminadas.
 		Logic::CEntityFactory::getSingletonPtr()->deleteDefferedEntities();
+
+		// Test de construcción de carreteras
+		CTileManager* tileManager = CTileManager::getSingletonPtr();
+		_timeSince += msecs;
+		if (_timeSince >= 3000){
+			Tile* from = tileManager->getRandomTile();
+			Tile* to = tileManager->getRandomTile();
+
+			std::vector<Tile*>* path = AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(from, to);
+			if (path != nullptr){
+				std::cout << "Soulpath found from " << from << " to " << to << std::endl;
+
+				// Imprimimos la ruta
+				for (auto it = path->cbegin(); it != path->cend(); ++it){
+					Tile* tile = (*it);
+					bool built = CBuildingManager::getSingletonPtr()->createSoulPath(_map, tile->getLogicPosition());
+					if (!built){
+						std::cout << "Can't create soulpath in " << tile->getLogicPosition() << std::endl;
+					}
+				}
+
+				delete path;
+			}
+			else{
+				std::cout << "Can't get soulpath from " << from << " to " << to << std::endl;
+			}
+			_timeSince -= 3000;
+		}
 
 		_map->tick(msecs);
 

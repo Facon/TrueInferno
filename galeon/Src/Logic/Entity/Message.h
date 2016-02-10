@@ -204,6 +204,17 @@ namespace Logic
 		}
 	};
 	
+	class PlaceMessage : public Message
+	{
+	public:
+		Vector3 position;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
 	/*
 	GameObject* receiver_object = blah;
 	

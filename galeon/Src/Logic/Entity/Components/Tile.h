@@ -68,6 +68,15 @@ namespace Logic {
 		/** Imprime información de debug */
 		void printDebugInfo();
 
+
+		/** Calcula la distancia de Manhattan con respecto a otro Tile.
+		Debería estar en OgreVector3 para generalizar su uso pero no linka.
+		*/
+		inline float manhattanDistance(const Tile& rhs) const
+		{
+			return Ogre::Math::Abs(this->_logicPosition.x - rhs._logicPosition.x) + Ogre::Math::Abs(this->_logicPosition.y - rhs._logicPosition.y) + Ogre::Math::Abs(this->_logicPosition.z - rhs._logicPosition.z);
+		}
+
 	private:
 		/** Número de tiles adyacentes que tiene normalmente un tile (salvo las de los extremos): 4 (si no se consideran las diagonales) */
 		static const int NUM_ADJACENT = 4;

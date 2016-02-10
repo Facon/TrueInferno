@@ -14,12 +14,13 @@ necesarias para calcular rutas de almas caminantes usando A*.
 
 #include "Logic\Entity\Components\Tile.h"
 
+#include "OgreVector3.h"
 
-namespace AI 
+namespace AI
 {
 
 	//---------------------------------------------------------
-	/** 
+	/**
 	Constructor
 	*/
 	CAStarFunctionsSoulPath::CAStarFunctionsSoulPath(void)
@@ -27,7 +28,7 @@ namespace AI
 	}
 
 	//---------------------------------------------------------
-	/** 
+	/**
 	Destructor
 	*/
 	CAStarFunctionsSoulPath::~CAStarFunctionsSoulPath(void)
@@ -41,7 +42,7 @@ namespace AI
 	la distancia.
 	Para la búsqueda de rutas de SoulPaths en el mapa de Tiles utilizaremos como heurística la distancia de Manhattan.
 	*/
-	float CAStarFunctionsSoulPath::LeastCostEstimate( void* stateStart, void* stateEnd )
+	float CAStarFunctionsSoulPath::LeastCostEstimate(void* stateStart, void* stateEnd)
 	{
 		// Función heurística para A*.
 		// En el caso de Galeón, una heurística admisible es la distancia entre los nodos 
@@ -49,26 +50,30 @@ namespace AI
 		Logic::Tile* tileFrom = (Logic::Tile*)stateStart;
 		Logic::Tile* tileTo = (Logic::Tile*)stateEnd;
 
-		return tileFrom->getLogicPosition().manhattanDistance(tileTo->getLogicPosition());
+		return tileTo->manhattanDistance(*tileFrom);
 	}
 
 	//---------------------------------------------------------
-	/** 
+	/**
 	Devuelve la lista de vecinos de un nodo junto con el coste de llegar desde el nodo actual
 	hasta cada uno de ellos.
-	*/	
-	void CAStarFunctionsSoulPath::AdjacentCost( void* state, std::vector< micropather::StateCost > *adjacent )
+	*/
+	void CAStarFunctionsSoulPath::AdjacentCost(void* state, std::vector< micropather::StateCost > *adjacent)
 	{
 		Logic::Tile* current = (Logic::Tile*) state;
 
-		// Si la tile permite SoulPaths
-		if (current->canPassSoulPath())
-			// Llenamos la lista de adyacentes con pares de (tile vecino, 1)
-			for (auto it = current->getAdjacentTiles().cbegin(); it != current->getAdjacentTiles().cbegin(); ++it) {
+		// Si la tile no permite SoulPaths quizás no deberíamos ni haber llegado aquí
+		if (!current->canPassSoulPath())
+			return;
+
+		// Si las permite, chequeamos sus tiles adyacentes
+		for (auto it = current->getAdjacentTiles().cbegin(); it != current->getAdjacentTiles().cend(); ++it) {
+			// Si la tile adyacente permite SoulPaths la añadimos a la lista de adyacencia con mismo coste
+			if ((*it)->canPassSoulPath()){
 				micropather::StateCost nodeCost = { (void*)(*it), 1.0f };
 				adjacent->push_back(nodeCost);
 			}
-		// Si no, no la añadimos
+		}
 	}
 
 	//---------------------------------------------------------

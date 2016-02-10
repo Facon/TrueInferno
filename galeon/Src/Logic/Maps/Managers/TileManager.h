@@ -99,6 +99,9 @@ namespace Logic
 		*/
 		Tile* getTile(const Vector3 &position);
 			
+		/** Devuelve un puntero a una tile aleatoria */
+		Tile* getRandomTile();
+
 		/** Imprime información de debug */
 		void printDebugInfo();
 

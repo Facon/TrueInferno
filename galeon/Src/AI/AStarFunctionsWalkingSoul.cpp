@@ -14,6 +14,8 @@ necesarias para calcular rutas de soulpaths usando A*.
 
 #include "Logic\Entity\Components\Tile.h"
 
+#include "OgreVector3.h"
+
 namespace AI 
 {
 
@@ -48,7 +50,7 @@ namespace AI
 		Logic::Tile* tileFrom = (Logic::Tile*)stateStart;
 		Logic::Tile* tileTo = (Logic::Tile*)stateEnd;
 
-		return tileFrom->getLogicPosition().manhattanDistance(tileTo->getLogicPosition());
+		return tileTo->manhattanDistance(*tileFrom);
 	}
 
 	//---------------------------------------------------------
@@ -60,14 +62,18 @@ namespace AI
 	{
 		Logic::Tile* current = (Logic::Tile*) state;
 
-		// Si la tile permite almas caminantes
-		if (current->canPassWalkingSoul())
-			// Llenamos la lista de adyacentes con pares de (tile vecino, 1)
-			for (auto it = current->getAdjacentTiles().cbegin(); it != current->getAdjacentTiles().cbegin(); ++it) {
+		// Si la tile no permite almas caminantes quizás no deberíamos ni haber llegado aquí
+		if (!current->canPassWalkingSoul())
+			return;
+
+		// Si las permite, chequeamos sus tiles adyacentes
+		for (auto it = current->getAdjacentTiles().cbegin(); it != current->getAdjacentTiles().cbegin(); ++it) {
+			// Si la tile adyacente permite almas caminantes la añadimos a la lista de adyacencia con mismo coste
+			if ((*it)->canPassWalkingSoul()){
 				micropather::StateCost nodeCost = { (void*)(*it), 1.0f };
 				adjacent->push_back(nodeCost);
 			}
-		// Si no, no la añadimos
+		}
 	}
 
 	//---------------------------------------------------------

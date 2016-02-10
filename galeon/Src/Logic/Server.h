@@ -169,6 +169,7 @@ namespace Logic
 		*/
 		static CServer* _instance;
 
+		float _timeSince;
 	}; // class CServer
 
 } // namespace Logic

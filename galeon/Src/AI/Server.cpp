@@ -81,7 +81,7 @@ namespace AI {
 			return NULL;
 		}
 
-		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>(out->size());
+		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>(path->size());
 		out->push_back(from);
 		for (std::vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
 			out->push_back((Logic::Tile*)(*it));
@@ -97,8 +97,22 @@ namespace AI {
 	Calcula una ruta para almas caminantes usando A* desde un cierto tile a otro.
 	*/
 	std::vector<Logic::Tile*>* CServer::getWalkingSoulAStarRoute(Logic::Tile* from, Logic::Tile* to){
-		// TODO
-		return nullptr;
+		std::vector<void*>* path = new std::vector<void*>();
+		float cost = 0.0f;
+		int solved = _aStarWalkingSoul->Solve((void*)from, (void*)to, path, &cost);
+		if (solved == micropather::MicroPather::NO_SOLUTION || path->size() == 0) {
+			delete path;
+			return NULL;
+		}
+
+		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>(path->size());
+		out->push_back(from);
+		for (std::vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
+			out->push_back((Logic::Tile*)(*it));
+		}
+
+		delete path;
+		return out;
 	}
 
 	/////////////////////////////////////////
