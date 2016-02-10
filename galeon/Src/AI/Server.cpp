@@ -8,8 +8,10 @@ Servidor de IA.
 */
 #include "Server.h"
 
-#include <assert.h>
+#include "Logic\Entity\Components\Tile.h"
+#include "Logic\Maps\Managers\TileManager.h"
 
+#include <assert.h>
 
 namespace AI {
 	/////////////////////////////////////////
@@ -24,8 +26,11 @@ namespace AI {
 	CServer::CServer(void)
 	{
 		assert(!_instance && "Segunda inicialización de AI::CServer no permitida!");
-		_f = new CAStarFunctionsGaleon();
-		_aStar = new micropather::MicroPather(_f);
+		_fWalkingSoul = new CAStarFunctionsWalkingSoul();
+		_fSoulPath = new CAStarFunctionsSoulPath();
+		_aStarWalkingSoul = new micropather::MicroPather(_fWalkingSoul);
+		_aStarSoulPath = new micropather::MicroPather(_fSoulPath);
+		_tileManager = Logic::CTileManager::getSingletonPtr();
 	}
 	/////////////////////////////////////////
 	/**
@@ -34,8 +39,10 @@ namespace AI {
 	CServer::~CServer(void)
 	{
 		assert(_instance);
-		delete _aStar;
-		delete _f;
+		delete _aStarSoulPath;
+		delete _aStarWalkingSoul;
+		delete _fSoulPath;
+		delete _fWalkingSoul;
 	}
 	/////////////////////////////////////////
 	/**
@@ -59,54 +66,43 @@ namespace AI {
 			delete _instance;
 		_instance = 0;
 	}
-	/////////////////////////////////////////
-	/**
-	Añade un nuevo nodo al grafo de navegación.
-	*/
-	void CServer::addWaypoint(Vector3 waypoint)
-	{
-		_wpg.addWaypoint(waypoint);
-	}
 
 	/////////////////////////////////////////
+
 	/**
-	Calcula una ruta usando A*.
+	Calcula una ruta de soulpaths usando A* desde un cierto tile a otro.
 	*/
-	std::vector<Vector3> *CServer::getAStarRoute(Vector3 from, Vector3 to)
-	{
-		// Dadas dos posiciones devuelve una ruta para llegar de una a otra.
-		// En primer lugar utilizamos los métodos del grafo de waypoints para obtener los nodos
-		// más cercanos al origen y al destino (_wpg.getClosestWaypoint). 
-		// A continuación usamos A* para calcular la ruta (_aStar->Solve).
-		// Por último tenemos que devolver la ruta en un vector de posiciones. Para 
-		// ello tendremos que convertir los ids de los nodos en sus posiciones (_wpg.getNode) 
-		// y añadir las posiciones de origen y destino.
-		int idFrom = _wpg.getClosestWaypoint(from);
-		int idTo = _wpg.getClosestWaypoint(to);
-		vector<void*>* path = new vector<void*>();
+	std::vector<Logic::Tile*>* CServer::getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to){
+		std::vector<void*>* path = new std::vector<void*>();
 		float cost = 0.0f;
-		int solved = _aStar->Solve((void*) idFrom, (void*) idTo, path, &cost);
+		int solved = _aStarSoulPath->Solve((void*)from, (void*)to, path, &cost);
 		if (solved == micropather::MicroPather::NO_SOLUTION || path->size() == 0) {
 			delete path;
 			return NULL;
 		}
 
-		vector<Vector3>* out = new vector<Vector3>();
-		// Añadimos el punto inicial si no coincide con el primer nodo
-		if (!from.positionEquals(_wpg.getWaypoint(
-				(int) path->at(0)), 5.0f))
-			out->push_back(from);
-		for (vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
-			out->push_back(_wpg.getWaypoint((int) (*it)));
+		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>(out->size());
+		out->push_back(from);
+		for (std::vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
+			out->push_back((Logic::Tile*)(*it));
 		}
-		// Añadimos el punto final si no coincide con el último nodo
-		if (!to.positionEquals(_wpg.getWaypoint(
-				(int) path->at(path->size() - 1)), 5.0f))
-			out->push_back(to);
+
 		delete path;
 		return out;
 	}
+
 	/////////////////////////////////////////
+
+	/**
+	Calcula una ruta para almas caminantes usando A* desde un cierto tile a otro.
+	*/
+	std::vector<Logic::Tile*>* CServer::getWalkingSoulAStarRoute(Logic::Tile* from, Logic::Tile* to){
+		// TODO
+		return nullptr;
+	}
+
+	/////////////////////////////////////////
+
 	/**
 	Dado un ángulo en radianes lo lleva al intervalo [-PI, PI]
 	*/

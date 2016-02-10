@@ -2,7 +2,7 @@
 @file AStarFunctionsSoulPath.cpp
 
 En este fichero se implementan las funciones
-necesarias para calcular rutas de almas usando A*.
+necesarias para calcular rutas de almas caminantes usando A*.
 
 
 @author Álvaro Valera
@@ -10,8 +10,10 @@ necesarias para calcular rutas de almas usando A*.
 */
 
 #include "AStarFunctionsSoulPath.h"
-
 #include "Server.h"
+
+#include "Logic\Entity\Components\Tile.h"
+
 
 namespace AI 
 {
@@ -37,22 +39,17 @@ namespace AI
 	Devuelve el coste según la heurística para llegar desde el estado stateStart hasta stateEnd.
 	Para que el camino devuelto por A* sea óptimo la heurística sea aceptable y no sobreestimar
 	la distancia.
-	Para la búsqueda de caminos de almas en el mapa de Tiles utilizaremos como heurística la distancia de Manhattan.
+	Para la búsqueda de rutas de SoulPaths en el mapa de Tiles utilizaremos como heurística la distancia de Manhattan.
 	*/
 	float CAStarFunctionsSoulPath::LeastCostEstimate( void* stateStart, void* stateEnd )
 	{
 		// Función heurística para A*.
 		// En el caso de Galeón, una heurística admisible es la distancia entre los nodos 
 		// indicados por stateStart y stateEnd.
-		// Para calcularla tenemos que obtener los nodos del grafo de navegación, al que 
-		// podemos acceder mediante el servidor de IA
-		int idOrigen = (int) stateStart;
-		int idDestino = (int) stateEnd;
-		// Utilizamos el grafo de navegación:
-		CWaypointGraph* wpg = CServer::getSingletonPtr()->getNavigationGraph();
-		Vector3 orig = wpg->getWaypoint(idOrigen);
-		Vector3 dest = wpg->getWaypoint(idDestino);
-		return orig.distance(dest);
+		Logic::Tile* tileFrom = (Logic::Tile*)stateStart;
+		Logic::Tile* tileTo = (Logic::Tile*)stateEnd;
+
+		return tileFrom->getLogicPosition().manhattanDistance(tileTo->getLogicPosition());
 	}
 
 	//---------------------------------------------------------
@@ -62,20 +59,16 @@ namespace AI
 	*/	
 	void CAStarFunctionsSoulPath::AdjacentCost( void* state, std::vector< micropather::StateCost > *adjacent )
 	{
-		// Esta función nos da la lista de vecinos de un nodo y el coste real (no heurístico) para llegar a
-		// cada uno de ellos.
-		// Para acceder a la lista de vecinos usamos el grafo de navegación.
-		// Para el coste de cada vecino consultamos la arista lo une con el nodo.
-		// Estos datos se devuelven en un vector de pares [idNodo, coste] (tipo StateCost).
-		int idNodo = (int) state;
-		// Utilizamos el grafo de navegación:
-		CWaypointGraph* wpg = CServer::getSingletonPtr()->getNavigationGraph();
-		list<unsigned int> neighbours = wpg->getNeighbours(idNodo);
-		// Llenamos la lista de adyacentes con pares de (nodo vecino, coste en llegar)
-		for (list<unsigned int>::iterator it = neighbours.begin(); it != neighbours.end(); it++) {
-			micropather::StateCost nodeCost = {(void*)(*it), wpg->getCost(idNodo, (*it))};
-			adjacent->push_back(nodeCost);
-		}
+		Logic::Tile* current = (Logic::Tile*) state;
+
+		// Si la tile permite SoulPaths
+		if (current->canPassSoulPath())
+			// Llenamos la lista de adyacentes con pares de (tile vecino, 1)
+			for (auto it = current->getAdjacentTiles().cbegin(); it != current->getAdjacentTiles().cbegin(); ++it) {
+				micropather::StateCost nodeCost = { (void*)(*it), 1.0f };
+				adjacent->push_back(nodeCost);
+			}
+		// Si no, no la añadimos
 	}
 
 	//---------------------------------------------------------
@@ -84,11 +77,10 @@ namespace AI
 		aren't really human readable, normally you print out some concise info (like "(1,2)") 
 		without an ending newline.
 	*/
-	void  CAStarFunctionsSoulPath::PrintStateInfo( void* state )
+	void CAStarFunctionsSoulPath::PrintStateInfo( void* state )
 	{
-		CWaypointGraph* wpg = CServer::getSingletonPtr()->getNavigationGraph();
-		Vector3 position = wpg->getNode((int) state)->position;
-		printf("(%f, %f, %f)", position.x, position.y, position.z);
+		Logic::Tile *tile = (Logic::Tile*)state;
+		printf("(%f, %f, %f)", tile->getLogicPosition().x, tile->getLogicPosition().y, tile->getLogicPosition().z);
 	}
 
 	//---------------------------------------------------------

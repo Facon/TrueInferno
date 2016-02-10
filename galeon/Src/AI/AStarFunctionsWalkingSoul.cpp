@@ -2,16 +2,16 @@
 @file AStarFunctionsRoadPath.cpp
 
 En este fichero se implementan las funciones
-necesarias para calcular rutas de carreteras usando A*.
+necesarias para calcular rutas de soulpaths usando A*.
 
 
 @author Álvaro Valera
 @date February, 2016
 */
 
-#include "AStarFunctionsRoadPath.h"
-
+#include "AStarFunctionsWalkingSoul.h"
 #include "Server.h"
+
 #include "Logic\Entity\Components\Tile.h"
 
 namespace AI 
@@ -21,7 +21,7 @@ namespace AI
 	/** 
 	Constructor
 	*/
-	CAStarFunctionsRoadPath::CAStarFunctionsRoadPath(void)
+	CAStarFunctionsWalkingSoul::CAStarFunctionsWalkingSoul(void)
 	{
 	}
 
@@ -29,18 +29,18 @@ namespace AI
 	/** 
 	Destructor
 	*/
-	CAStarFunctionsRoadPath::~CAStarFunctionsRoadPath(void)
+	CAStarFunctionsWalkingSoul::~CAStarFunctionsWalkingSoul(void)
 	{
 	}
 
 	//---------------------------------------------------------
 	/**
 	Devuelve el coste según la heurística para llegar desde el estado stateStart hasta stateEnd.
-	Para que el camino devuelto por A* sea óptimo la heurística sea aceptable y no sobreestimar 
+	Para que el camino devuelto por A* sea óptimo la heurística sea aceptable y no sobreestimar
 	la distancia.
-	Para la búsqueda de caminos de carretera en el mapa de Tiles utilizaremos como heurística la distancia de Manhattan.
+	Para la búsqueda de caminos de almas caminantes en el mapa de Tiles utilizaremos como heurística la distancia de Manhattan.
 	*/
-	float CAStarFunctionsRoadPath::LeastCostEstimate( void* stateStart, void* stateEnd )
+	float CAStarFunctionsWalkingSoul::LeastCostEstimate(void* stateStart, void* stateEnd)
 	{
 		// Función heurística para A*.
 		// En el caso de Galeón, una heurística admisible es la distancia entre los nodos 
@@ -56,22 +56,18 @@ namespace AI
 	Devuelve la lista de vecinos de un nodo junto con el coste de llegar desde el nodo actual
 	hasta cada uno de ellos.
 	*/	
-	void CAStarFunctionsRoadPath::AdjacentCost( void* state, std::vector< micropather::StateCost > *adjacent )
+	void CAStarFunctionsWalkingSoul::AdjacentCost(void* state, std::vector< micropather::StateCost > *adjacent)
 	{
-		// Esta función nos da la lista de vecinos de un nodo y el coste real (no heurístico) para llegar a
-		// cada uno de ellos.
 		Logic::Tile* current = (Logic::Tile*) state;
-		
-		if (current->canBuildRoad())
 
-		// Llenamos la lista de adyacentes con pares de (nodo vecino, coste en llegar)
-		for (auto it = current->getAdjacentTiles().cbegin(); it != current->getAdjacentTiles().cbegin(); ++it) {
-			Logic::Tile* adjacent = (Logic::Tile*)(*it);
-			
-
-			micropather::StateCost nodeCost = {(void*)(*it), wpg->getCost(idNodo, (*it))};
-			adjacent->push_back(nodeCost);
-		}
+		// Si la tile permite almas caminantes
+		if (current->canPassWalkingSoul())
+			// Llenamos la lista de adyacentes con pares de (tile vecino, 1)
+			for (auto it = current->getAdjacentTiles().cbegin(); it != current->getAdjacentTiles().cbegin(); ++it) {
+				micropather::StateCost nodeCost = { (void*)(*it), 1.0f };
+				adjacent->push_back(nodeCost);
+			}
+		// Si no, no la añadimos
 	}
 
 	//---------------------------------------------------------
@@ -80,11 +76,10 @@ namespace AI
 		aren't really human readable, normally you print out some concise info (like "(1,2)") 
 		without an ending newline.
 	*/
-	void  CAStarFunctionsRoadPath::PrintStateInfo( void* state )
+	void CAStarFunctionsWalkingSoul::PrintStateInfo(void* state)
 	{
-		CWaypointGraph* wpg = CServer::getSingletonPtr()->getNavigationGraph();
-		Vector3 position = wpg->getNode((int) state)->position;
-		printf("(%f, %f, %f)", position.x, position.y, position.z);
+		Logic::Tile *tile = (Logic::Tile*)state;
+		printf("(%f, %f, %f)", tile->getLogicPosition().x, tile->getLogicPosition().y, tile->getLogicPosition().z);
 	}
 
 	//---------------------------------------------------------

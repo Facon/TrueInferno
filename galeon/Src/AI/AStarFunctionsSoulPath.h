@@ -37,7 +37,7 @@ namespace AI
 		Devuelve el coste según la heurística para llegar desde el estado stateStart hasta stateEnd.
 		Para que el camino devuelto por A* sea óptimo la heurística sea aceptable y no sobreestimar 
 		la distancia.
-		Para la búsqueda de caminos de almas en el mapa de Tiles utilizaremos como heurística la distancia de Manhattan.
+		Para la búsqueda de rutas de SoulPaths en el mapa de Tiles utilizaremos como heurística la distancia de Manhattan.
 		*/
 		virtual float LeastCostEstimate( void* stateStart, void* stateEnd );
 
@@ -52,7 +52,7 @@ namespace AI
 			aren't really human readable, normally you print out some concise info (like "(1,2)") 
 			without an ending newline.
 		*/
-		virtual void  PrintStateInfo( void* state );
+		virtual void PrintStateInfo( void* state );
 
 	};
 

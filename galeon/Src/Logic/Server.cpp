@@ -147,9 +147,6 @@ namespace Logic {
 
 		//CTileManager::getSingletonPtr()->printDebugInfo();
 
-		// Cargamos el mapa de navegación
-		AI::CServer::getSingletonPtr()->computeNavigationGraph();
-
 		return true;
 
 	} // loadLevel

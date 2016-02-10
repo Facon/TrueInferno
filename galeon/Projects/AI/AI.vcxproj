@@ -80,7 +80,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\AI\AStarFunctionsRoadPath.cpp" />
+    <ClCompile Include="..\..\Src\AI\AStarFunctionsWalkingSoul.cpp" />
     <ClCompile Include="..\..\Src\AI\AStarFunctionsSoulPath.cpp" />
     <ClCompile Include="..\..\Src\AI\DisjointSets.cpp" />
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
@@ -92,7 +92,7 @@
     <ClCompile Include="..\..\Src\AI\WaypointGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\AI\AStarFunctionsRoadPath.h" />
+    <ClInclude Include="..\..\Src\AI\AStarFunctionsWalkingSoul.h" />
     <ClInclude Include="..\..\Src\AI\AStarFunctionsSoulPath.h" />
     <ClInclude Include="..\..\Src\AI\DisjointSets.h" />
     <ClInclude Include="..\..\Src\AI\DynamicMovement.h" />
