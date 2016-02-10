@@ -67,7 +67,7 @@ namespace AI
 			return;
 
 		// Si las permite, chequeamos sus tiles adyacentes
-		for (auto it = current->getAdjacentTiles().cbegin(); it != current->getAdjacentTiles().cbegin(); ++it) {
+		for (auto it = current->getAdjacentTiles()->cbegin(); it != current->getAdjacentTiles()->cbegin(); ++it) {
 			// Si la tile adyacente permite almas caminantes la añadimos a la lista de adyacencia con mismo coste
 			if ((*it)->canPassWalkingSoul()){
 				micropather::StateCost nodeCost = { (void*)(*it), 1.0f };

@@ -179,6 +179,7 @@ namespace Logic
 		bool HandleMessage(const PhysicMessage& msg);
 		bool HandleMessage(const TouchMessage& msg);
 		bool HandleMessage(const DamageMessage& msg);
+		bool HandleMessage(const PlaceMessage& msg);
 
 		/**
 		Devuelve el identificador �nico de la entidad.

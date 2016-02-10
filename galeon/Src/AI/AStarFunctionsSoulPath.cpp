@@ -67,7 +67,7 @@ namespace AI
 			return;
 
 		// Si las permite, chequeamos sus tiles adyacentes
-		for (auto it = current->getAdjacentTiles().cbegin(); it != current->getAdjacentTiles().cend(); ++it) {
+		for (auto it = current->getAdjacentTiles()->cbegin(); it != current->getAdjacentTiles()->cend(); ++it) {
 			// Si la tile adyacente permite SoulPaths la añadimos a la lista de adyacencia con mismo coste
 			if ((*it)->canPassSoulPath()){
 				micropather::StateCost nodeCost = { (void*)(*it), 1.0f };

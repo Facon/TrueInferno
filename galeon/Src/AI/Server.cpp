@@ -81,7 +81,7 @@ namespace AI {
 			return NULL;
 		}
 
-		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>(path->size());
+		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>();
 		out->push_back(from);
 		for (std::vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
 			out->push_back((Logic::Tile*)(*it));
@@ -105,7 +105,7 @@ namespace AI {
 			return NULL;
 		}
 
-		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>(path->size());
+		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>();
 		out->push_back(from);
 		for (std::vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
 			out->push_back((Logic::Tile*)(*it));

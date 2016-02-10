@@ -288,6 +288,11 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
+	bool CEntity::HandleMessage(const PlaceMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
 	//---------------------------------------------------------
 
 	void CEntity::setTransform(const Matrix4& transform) 
