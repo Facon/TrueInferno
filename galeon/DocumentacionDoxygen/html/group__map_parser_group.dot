@@ -1,0 +1,9 @@
+digraph "Parseador de ficheros de mapas"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir=LR;
+  Node0 [label="Parseador de ficheros\l de mapas",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 [label="Mapas de entidades\l lógicas",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__map_group.html",tooltip="Las entidades de la capa lógica (ver Entidades en la lógica de juego) se organizan en mapas lógicos..."];
+  Node0->Node1 [shape=plaintext, label="Map::CEntity", color="orange", dir="none", style="dashed"];
+}

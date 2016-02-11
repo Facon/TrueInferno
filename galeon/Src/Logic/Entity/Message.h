@@ -42,7 +42,11 @@ namespace Logic
 			TOUCHED,
 			UNTOUCHED,
 			SWITCH,
-			DAMAGED
+			DAMAGED,
+			MOVE_TO,
+			ROUTE_TO,
+			FINISHED_ROUTE,
+			FINISHED_MOVE
 		};
 	}
 
@@ -200,6 +204,17 @@ namespace Logic
 		}
 	};
 	
+	class PlaceMessage : public Message
+	{
+	public:
+		Vector3 position;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
 	/*
 	GameObject* receiver_object = blah;
 	

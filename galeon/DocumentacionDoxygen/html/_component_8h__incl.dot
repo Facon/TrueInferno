@@ -1,0 +1,21 @@
+digraph "Src/Logic/Entity/Component.h"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="Src/Logic/Entity/Component.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="BaseSubsystems/RTTI.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_r_t_t_i_8h_source.html"];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="string",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="Logic/Maps/ComponentFactory.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_component_factory_8h.html",tooltip="Contiene la declaración de la clase CComponentFactory, Singleton que almacena los punteros a función ..."];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="BaseSubsystems/Factory.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_factory_8h.html",tooltip="Contiene la declaraciï¿œn de la plantilla CFactory, factorï¿œa que almacena los punteros a funciï¿œn ..."];
+  Node5 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="map",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node5 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="exception",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node8 [label="Logic/Entity/MessageHandler.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_message_handler_8h_source.html"];
+}

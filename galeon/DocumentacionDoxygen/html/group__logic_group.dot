@@ -1,0 +1,11 @@
+digraph "Lógica de juego"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir=LR;
+  Node0 [label="Lógica de juego",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 [label="Mapas de entidades\l lógicas",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__map_group.html",tooltip="Las entidades de la capa lógica (ver Entidades en la lógica de juego) se organizan en mapas lógicos..."];
+  Node1 [label="Entidades en la lógica\l de juego",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__entity_group.html",tooltip="La gestión de entidades realizada en la capa lógica (ver Lógica de juego) utiliza una arquitectura de..."];
+  Node0->Node1 [shape=plaintext, label="Logic::IComponent\nLogic::CEntity\nLogic::Message", color="orange", dir="none", style="dashed"];
+  Node0->Node2 [shape=plaintext, label="Logic::CComponentFactory\nLogic::CEntityFactory\nLogic::EntityID\nLogic::CMap", color="orange", dir="none", style="dashed"];
+}

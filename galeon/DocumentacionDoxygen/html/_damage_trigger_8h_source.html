@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Logic/Entity/Components/DamageTrigger.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_d2dfb49d6ca7b999bdafe5a748473e42.html">Logic</a></li><li class="navelem"><a class="el" href="dir_1abaf7f005b91edc996e1a6520484f9f.html">Entity</a></li><li class="navelem"><a class="el" href="dir_045fdd94c61a0e418838cb05acc5676f.html">Components</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">DamageTrigger.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_damage_trigger_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef __Logic_DamageTrigger_H</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define __Logic_DamageTrigger_H</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;BaseSubsystems/RTTI.h&quot;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_component_8h.html">Logic/Entity/Component.h</a>&quot;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// Los componentes pertenecen al namespace Logic</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_logic.html">Logic</a> </div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div><div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_logic_1_1_c_damage_trigger.html">   33</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_logic_1_1_c_damage_trigger.html">CDamageTrigger</a>: <span class="keyword">public</span> <a class="code" href="class_logic_1_1_i_component.html">IComponent</a></div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        RTTI_DECL;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        DEC_FACTORY(<a class="code" href="class_logic_1_1_c_damage_trigger.html">CDamageTrigger</a>);</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div><div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_logic_1_1_c_damage_trigger.html#ad795cea545e2623964317866f07ae3f5">   42</a></span>&#160;        <a class="code" href="class_logic_1_1_c_damage_trigger.html#ad795cea545e2623964317866f07ae3f5">CDamageTrigger</a>() : <a class="code" href="class_logic_1_1_i_component.html">IComponent</a>(), <a class="code" href="class_logic_1_1_c_damage_trigger.html#a6b9b8111c27f8238fa6fdab72bf67b1e">_damage</a>(20.f) {}</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        </div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_logic_1_1_c_damage_trigger.html#a8f65b4e49b5dc83773c3f43bd8f5dbba">spawn</a>(<a class="code" href="class_logic_1_1_c_entity.html">CEntity</a>* entity, <a class="code" href="class_logic_1_1_c_map.html">CMap</a> *map, <span class="keyword">const</span> <a class="code" href="class_map_1_1_c_entity.html">Map::CEntity</a> *entityInfo);</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">protected</span>:</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div><div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_logic_1_1_c_damage_trigger.html#a6b9b8111c27f8238fa6fdab72bf67b1e">   55</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_logic_1_1_c_damage_trigger.html#a6b9b8111c27f8238fa6fdab72bf67b1e">_damage</a>;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }; <span class="comment">// class CDamageTrigger</span></div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="_component_8h.html#a064dbb72c88a8c8bdadc4328c30b561e">REG_FACTORY</a>(<a class="code" href="class_logic_1_1_c_damage_trigger.html">CDamageTrigger</a>);</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <span class="comment">// namespace Logic</span></div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif // __Logic_DamageTrigger_H</span></div><div class="ttc" id="namespace_logic_html"><div class="ttname"><a href="namespace_logic.html">Logic</a></div><div class="ttdoc">Namespace que engloba la lógica del juego. </div><div class="ttdef"><b>Definition:</b> <a href="_player_controller_8h_source.html#l00019">PlayerController.h:19</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_damage_trigger_html_ad795cea545e2623964317866f07ae3f5"><div class="ttname"><a href="class_logic_1_1_c_damage_trigger.html#ad795cea545e2623964317866f07ae3f5">Logic::CDamageTrigger::CDamageTrigger</a></div><div class="ttdeci">CDamageTrigger()</div><div class="ttdoc">Constructor por defecto. </div><div class="ttdef"><b>Definition:</b> <a href="_damage_trigger_8h_source.html#l00042">DamageTrigger.h:42</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_damage_trigger_html_a8f65b4e49b5dc83773c3f43bd8f5dbba"><div class="ttname"><a href="class_logic_1_1_c_damage_trigger.html#a8f65b4e49b5dc83773c3f43bd8f5dbba">Logic::CDamageTrigger::spawn</a></div><div class="ttdeci">virtual bool spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo)</div><div class="ttdoc">Inicializaciï¿œn del componente usando la descripciï¿œn de la entidad que hay en el fichero de mapa...</div><div class="ttdef"><b>Definition:</b> <a href="_damage_trigger_8cpp_source.html#l00027">DamageTrigger.cpp:27</a></div></div>
+<div class="ttc" id="_component_8h_html_a064dbb72c88a8c8bdadc4328c30b561e"><div class="ttname"><a href="_component_8h.html#a064dbb72c88a8c8bdadc4328c30b561e">REG_FACTORY</a></div><div class="ttdeci">#define REG_FACTORY(Class)</div><div class="ttdoc">Macro que invoca al mï¿œtodo que registra la clase en la factorï¿œa. </div><div class="ttdef"><b>Definition:</b> <a href="_component_8h_source.html#l00219">Component.h:219</a></div></div>
+<div class="ttc" id="class_map_1_1_c_entity_html"><div class="ttname"><a href="class_map_1_1_c_entity.html">Map::CEntity</a></div><div class="ttdoc">Clase que representa una entidad leida del fichero del mapa. </div><div class="ttdef"><b>Definition:</b> <a href="_map_entity_8h_source.html#l00041">MapEntity.h:41</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_damage_trigger_html_a6b9b8111c27f8238fa6fdab72bf67b1e"><div class="ttname"><a href="class_logic_1_1_c_damage_trigger.html#a6b9b8111c27f8238fa6fdab72bf67b1e">Logic::CDamageTrigger::_damage</a></div><div class="ttdeci">float _damage</div><div class="ttdoc">Daï¿œo que se produce cada vez que se toca. </div><div class="ttdef"><b>Definition:</b> <a href="_damage_trigger_8h_source.html#l00055">DamageTrigger.h:55</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_map_html"><div class="ttname"><a href="class_logic_1_1_c_map.html">Logic::CMap</a></div><div class="ttdoc">Clase que representa un mapa lógico. </div><div class="ttdef"><b>Definition:</b> <a href="_map_8h_source.html#l00046">Map.h:46</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_entity_html"><div class="ttname"><a href="class_logic_1_1_c_entity.html">Logic::CEntity</a></div><div class="ttdoc">Clase que representa una entidad en el entorno virtual. </div><div class="ttdef"><b>Definition:</b> <a href="_logic_2_entity_2_entity_8h_source.html#l00065">Entity.h:65</a></div></div>
+<div class="ttc" id="_component_8h_html"><div class="ttname"><a href="_component_8h.html">Component.h</a></div><div class="ttdoc">Contiene la declaraciï¿œn de la clase base de los componentes. </div></div>
+<div class="ttc" id="class_logic_1_1_i_component_html"><div class="ttname"><a href="class_logic_1_1_i_component.html">Logic::IComponent</a></div><div class="ttdoc">Clase base de los componentes que forman las entidades. </div><div class="ttdef"><b>Definition:</b> <a href="_component_8h_source.html#l00082">Component.h:82</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_damage_trigger_html"><div class="ttname"><a href="class_logic_1_1_c_damage_trigger.html">Logic::CDamageTrigger</a></div><div class="ttdoc">Este componente procesa mensajes de tipo TOUCHED (indican que la entidad ha sido tocada) para enviar ...</div><div class="ttdef"><b>Definition:</b> <a href="_damage_trigger_8h_source.html#l00033">DamageTrigger.h:33</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

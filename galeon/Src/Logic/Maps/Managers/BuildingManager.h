@@ -61,7 +61,7 @@ namespace Logic
 
 		@return Puntero a la instancia de la clase.
 		*/
-		static Logic::CBuildingManager *getSingletonPtr() { return _instance; }
+		static CBuildingManager *getSingletonPtr() { return _instance; }
 
 		/**
 		Inicializa la instancia y los recursos estáticos.
@@ -98,7 +98,7 @@ namespace Logic
 		@param map Mapa donde se instanciará la entidad del edificio
 		@param prefabName Nombre de la entidad de mapa o "prefab"
 		@param logicPosition Posición lógica donde se colocará el primer tile. El resto de tiles se colocarán de acuerdo a la info del prefab */
-		Logic::CEntity* createBuilding(CMap *map, const std::string& prefabName, const Vector3& logicPosition);
+		Logic::CEntity* createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition);
 
 	protected:
 
@@ -135,7 +135,7 @@ namespace Logic
 		static CBuildingManager *_instance;
 
 		/**
-		Lista de edificios.
+		Lista de edificios. Sólo se almacenan edificios.
 		Guardamos punteros de sus correspondientes componentes CPlaceable.
 		*/
 		std::vector<CPlaceable*> _buildings;

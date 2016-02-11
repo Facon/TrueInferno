@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Map/Main.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_47e751894d7851d23df86075c7ee8e53.html">Map</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Main.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifdef WIN32</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_map_parser_8h.html">MapParser.h</a>&quot;</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">int</span> <a class="code" href="_configure_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_map_1_1_c_map_parser.html#af371cc3d10a7a73223dcd44264dd18f0">Map::CMapParser::Init</a>();</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    </div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_map_1_1_c_map_parser.html">Map::CMapParser</a> *mapParser = <a class="code" href="class_map_1_1_c_map_parser.html#a30ec4e3e456b6b24fc978b1ef8f813c2">Map::CMapParser::getSingletonPtr</a>();</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">if</span>(mapParser-&gt;<a class="code" href="class_map_1_1_c_map_parser.html#aad5c152f4f2270ea2ad57badbe46504f">parseFile</a>(<span class="stringliteral">&quot;../map.txt&quot;</span>))</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="class_map_1_1_c_map_parser.html#a3094ad420d37c01b211fb5b41ad9a2ab">Map::CMapParser::TEntityList</a> entitylist = mapParser-&gt;<a class="code" href="class_map_1_1_c_map_parser.html#a21d61996033c4a8ceae18bdaab4b4872">getEntityList</a>();</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_map_1_1_c_map_parser.html#aaceb35d29f1659e1172a7db563a69f52">Map::CMapParser::Release</a>();</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">return</span> 0;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;} <span class="comment">// main</span></div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="class_map_1_1_c_map_parser_html_a21d61996033c4a8ceae18bdaab4b4872"><div class="ttname"><a href="class_map_1_1_c_map_parser.html#a21d61996033c4a8ceae18bdaab4b4872">Map::CMapParser::getEntityList</a></div><div class="ttdeci">const TEntityList getEntityList()</div><div class="ttdoc">Devuelve el listado de las entidades leidas del mapa. </div><div class="ttdef"><b>Definition:</b> <a href="_map_parser_8h_source.html#l00200">MapParser.h:200</a></div></div>
+<div class="ttc" id="class_map_1_1_c_map_parser_html_aaceb35d29f1659e1172a7db563a69f52"><div class="ttname"><a href="class_map_1_1_c_map_parser.html#aaceb35d29f1659e1172a7db563a69f52">Map::CMapParser::Release</a></div><div class="ttdeci">static void Release()</div><div class="ttdoc">Libera la factoría. </div><div class="ttdef"><b>Definition:</b> <a href="_map_parser_8cpp_source.html#l00056">MapParser.cpp:56</a></div></div>
+<div class="ttc" id="class_map_1_1_c_map_parser_html_af371cc3d10a7a73223dcd44264dd18f0"><div class="ttname"><a href="class_map_1_1_c_map_parser.html#af371cc3d10a7a73223dcd44264dd18f0">Map::CMapParser::Init</a></div><div class="ttdeci">static bool Init()</div><div class="ttdoc">Inicializa la instancia. </div><div class="ttdef"><b>Definition:</b> <a href="_map_parser_8cpp_source.html#l00045">MapParser.cpp:45</a></div></div>
+<div class="ttc" id="class_map_1_1_c_map_parser_html_a3094ad420d37c01b211fb5b41ad9a2ab"><div class="ttname"><a href="class_map_1_1_c_map_parser.html#a3094ad420d37c01b211fb5b41ad9a2ab">Map::CMapParser::TEntityList</a></div><div class="ttdeci">std::list&lt; Map::CEntity * &gt; TEntityList</div><div class="ttdoc">Tipo lista de entidades de mapa. </div><div class="ttdef"><b>Definition:</b> <a href="_map_parser_8h_source.html#l00193">MapParser.h:193</a></div></div>
+<div class="ttc" id="class_map_1_1_c_map_parser_html"><div class="ttname"><a href="class_map_1_1_c_map_parser.html">Map::CMapParser</a></div><div class="ttdoc">La clase CMapParser reune todos los componentes necesarios para el parseo de un mapa. </div><div class="ttdef"><b>Definition:</b> <a href="_map_parser_8h_source.html#l00123">MapParser.h:123</a></div></div>
+<div class="ttc" id="class_map_1_1_c_map_parser_html_a30ec4e3e456b6b24fc978b1ef8f813c2"><div class="ttname"><a href="class_map_1_1_c_map_parser.html#a30ec4e3e456b6b24fc978b1ef8f813c2">Map::CMapParser::getSingletonPtr</a></div><div class="ttdeci">static CMapParser * getSingletonPtr()</div><div class="ttdoc">Devuelve la única instancia de la clase CMapParser. </div><div class="ttdef"><b>Definition:</b> <a href="_map_parser_8h_source.html#l00132">MapParser.h:132</a></div></div>
+<div class="ttc" id="_map_parser_8h_html"><div class="ttname"><a href="_map_parser_8h.html">MapParser.h</a></div><div class="ttdoc">Contiene la declaración de la clase que encapsula el parseo de mapas. </div></div>
+<div class="ttc" id="class_map_1_1_c_map_parser_html_aad5c152f4f2270ea2ad57badbe46504f"><div class="ttname"><a href="class_map_1_1_c_map_parser.html#aad5c152f4f2270ea2ad57badbe46504f">Map::CMapParser::parseFile</a></div><div class="ttdeci">bool parseFile(const std::string &amp;filename)</div><div class="ttdoc">Crea un CParser y un CScanner para parsear un mapa dado en un nombre de fichero. </div><div class="ttdef"><b>Definition:</b> <a href="_map_parser_8cpp_source.html#l00084">MapParser.cpp:84</a></div></div>
+<div class="ttc" id="_configure_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="_configure_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Main que lanza una ventana de configuración de Ogre para poder modificar las opciones gráficas sin te...</div><div class="ttdef"><b>Definition:</b> <a href="_configure_8cpp_source.html#l00040">Configure.cpp:40</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

@@ -1,0 +1,27 @@
+digraph "GUI::CMouseListener"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="GUI::CMouseListener",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Application::CApplication\lState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_1_1_c_application_state.html",tooltip="Clase CApplicationState; representa un estado de la aplicación, como el estado del menú..."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Application::CExitState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_1_1_c_exit_state.html",tooltip="Clase CExitState; representa el estado de la aplicación que provoca su terminación inmediata..."];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="Application::CGameOverState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_1_1_c_game_over_state.html",tooltip="Como su nombre indica, esta clase es la clase de game over principal del juego. "];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="Application::CGameState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_1_1_c_game_state.html",tooltip="Clase CGameState; representa el estado de juego de la aplicación. "];
+  Node2 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="Application::CMenuState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_1_1_c_menu_state.html",tooltip="Como su nombre indica, esta clase es la clase del menú principal del juego. "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="Application::CBaseApplication",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_1_1_c_base_application.html",tooltip="Clase CBaseApplication, que contiene el control de la aplicación del juego, implementando una máquina..."];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node8 [label="Application::C3DApplication",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_1_1_c3_d_application.html",tooltip="Clase C3DApplication, que contiene el control de la aplicación del juego. "];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node9 [label="Application::CGaleonApplication",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_1_1_c_galeon_application.html",tooltip="Clase CGaleonApplication, que extiende C3DApplication para añadir los estados concretos que se desean..."];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node10 [label="GUI::CPlayerController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_g_u_i_1_1_c_player_controller.html",tooltip="Esta clase sirve para gestionar el teclado y el ratón, y mover un avatar acorde con las pulsaciones y..."];
+  Node1 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node11 [label="GUI::CServer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_g_u_i_1_1_c_server.html",tooltip="Servidor del módulo GUI que hace de interfaz con el usuario. "];
+}

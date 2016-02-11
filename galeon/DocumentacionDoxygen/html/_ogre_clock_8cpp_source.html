@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Application/OgreClock.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_39a5dde6d3e8ec86137a0a0de8f7c6b8.html">Application</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">OgreClock.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_ogre_clock_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// OgreClock.cpp</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_ogre_clock_8h.html">OgreClock.h</a>&quot;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;BaseSubsystems/Server.h&quot;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;OgreTimer.h&gt;</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_application.html">Application</a> {</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_application_1_1_c_ogre_clock.html#ae57e25aa24a41e6abc99ceffd84b226d">   24</a></span>&#160;    <a class="code" href="class_application_1_1_c_ogre_clock.html#ae57e25aa24a41e6abc99ceffd84b226d">COgreClock::COgreClock</a>() : <a class="code" href="class_application_1_1_i_clock.html">IClock</a>() </div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="class_application_1_1_c_ogre_clock.html#aa2668905f81d2582bdb567c1380c8914">_timer</a> = <a class="code" href="class_base_subsystems_1_1_c_server.html#abe441f75e0f582b7e3fba479f00fb570">BaseSubsystems::CServer::getSingletonPtr</a>()-&gt;<a class="code" href="class_base_subsystems_1_1_c_server.html#ad53de86845b1374a3a0aa58c260e3e4e">getAppTimer</a>();</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    } <span class="comment">// COgreClock</span></div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">//--------------------------------------------------------</span></div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_application_1_1_c_ogre_clock.html#a0a9e663cc39c821bf6d2ba50bf8d50ba">   32</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_application_1_1_c_ogre_clock.html#a0a9e663cc39c821bf6d2ba50bf8d50ba">COgreClock::getPhysicalTime</a>()</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        assert(<a class="code" href="class_application_1_1_c_ogre_clock.html#aa2668905f81d2582bdb567c1380c8914">_timer</a>);</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_application_1_1_c_ogre_clock.html#aa2668905f81d2582bdb567c1380c8914">_timer</a>-&gt;getMilliseconds();</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    } <span class="comment">// getPhysicalTime</span></div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;} <span class="comment">// namespace Application</span></div><div class="ttc" id="namespace_application_html"><div class="ttname"><a href="namespace_application.html">Application</a></div><div class="ttdoc">Namespace con todo lo relacionado con la aplicación: clase abstracta, estados, etc. </div><div class="ttdef"><b>Definition:</b> <a href="3_d_application_8cpp_source.html#l00033">3DApplication.cpp:33</a></div></div>
+<div class="ttc" id="class_application_1_1_c_ogre_clock_html_ae57e25aa24a41e6abc99ceffd84b226d"><div class="ttname"><a href="class_application_1_1_c_ogre_clock.html#ae57e25aa24a41e6abc99ceffd84b226d">Application::COgreClock::COgreClock</a></div><div class="ttdeci">COgreClock()</div><div class="ttdoc">Constructor de la clase. </div><div class="ttdef"><b>Definition:</b> <a href="_ogre_clock_8cpp_source.html#l00024">OgreClock.cpp:24</a></div></div>
+<div class="ttc" id="_ogre_clock_8h_html"><div class="ttname"><a href="_ogre_clock_8h.html">OgreClock.h</a></div><div class="ttdoc">Contiene la declaración de un temporizador basado en Ogre. </div></div>
+<div class="ttc" id="class_base_subsystems_1_1_c_server_html_ad53de86845b1374a3a0aa58c260e3e4e"><div class="ttname"><a href="class_base_subsystems_1_1_c_server.html#ad53de86845b1374a3a0aa58c260e3e4e">BaseSubsystems::CServer::getAppTimer</a></div><div class="ttdeci">Ogre::Timer * getAppTimer()</div><div class="ttdoc">Devuelve el temporizador de la aplicación. </div><div class="ttdef"><b>Definition:</b> <a href="_base_subsystems_2_server_8cpp_source.html#l00389">Server.cpp:389</a></div></div>
+<div class="ttc" id="class_application_1_1_c_ogre_clock_html_aa2668905f81d2582bdb567c1380c8914"><div class="ttname"><a href="class_application_1_1_c_ogre_clock.html#aa2668905f81d2582bdb567c1380c8914">Application::COgreClock::_timer</a></div><div class="ttdeci">Ogre::Timer * _timer</div><div class="ttdoc">Temporizador de Ogre. </div><div class="ttdef"><b>Definition:</b> <a href="_ogre_clock_8h_source.html#l00072">OgreClock.h:72</a></div></div>
+<div class="ttc" id="class_base_subsystems_1_1_c_server_html_abe441f75e0f582b7e3fba479f00fb570"><div class="ttname"><a href="class_base_subsystems_1_1_c_server.html#abe441f75e0f582b7e3fba479f00fb570">BaseSubsystems::CServer::getSingletonPtr</a></div><div class="ttdeci">static BaseSubsystems::CServer * getSingletonPtr()</div><div class="ttdoc">Devuelve la única instancia de la clase. </div><div class="ttdef"><b>Definition:</b> <a href="_base_subsystems_2_server_8h_source.html#l00105">Server.h:105</a></div></div>
+<div class="ttc" id="class_application_1_1_c_ogre_clock_html_a0a9e663cc39c821bf6d2ba50bf8d50ba"><div class="ttname"><a href="class_application_1_1_c_ogre_clock.html#a0a9e663cc39c821bf6d2ba50bf8d50ba">Application::COgreClock::getPhysicalTime</a></div><div class="ttdeci">virtual unsigned long getPhysicalTime()</div><div class="ttdoc">Método que devuelve la &quot;hora física&quot; del sistema en milisegundos. </div><div class="ttdef"><b>Definition:</b> <a href="_ogre_clock_8cpp_source.html#l00032">OgreClock.cpp:32</a></div></div>
+<div class="ttc" id="class_application_1_1_i_clock_html"><div class="ttname"><a href="class_application_1_1_i_clock.html">Application::IClock</a></div><div class="ttdoc">Reloj de la aplicación, que sirve para controlar el tiempo de la aplicación. </div><div class="ttdef"><b>Definition:</b> <a href="_clock_8h_source.html#l00058">Clock.h:58</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

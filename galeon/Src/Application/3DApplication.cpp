@@ -25,6 +25,7 @@ basadas en Ogre. Esta clase maneja la ejecución de todo el juego.
 #include "Logic/Server.h"
 #include "Logic/Maps/ComponentFactory.h"
 #include "Physics/Server.h"
+#include "AI/Server.h"
 
 #include <cassert>
 
@@ -81,6 +82,10 @@ namespace Application {
 		if (!Logic::CServer::Init())
 			return false;
 
+		// Inicializamos el servidor de IA
+		if (!AI::CServer::Init())
+			return false;
+
 		// Creamos el reloj basado en Ogre.
 		_clock = new COgreClock();
 
@@ -104,6 +109,10 @@ namespace Application {
 
 		if(Logic::CServer::getSingletonPtr())
 			Logic::CServer::Release();
+
+		// Liberar servidor de IA 
+		if (AI::CServer::getSingletonPtr())
+			AI::CServer::Release();
 
 		// Liberar los recursos del servidor de física
 		if (Physics::CServer::getSingletonPtr())

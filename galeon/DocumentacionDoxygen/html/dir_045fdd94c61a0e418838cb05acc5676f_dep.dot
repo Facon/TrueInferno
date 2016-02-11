@@ -1,0 +1,22 @@
+digraph "Src/Logic/Entity/Components" {
+  compound=true
+  node [ fontsize="10", fontname="FreeSans"];
+  edge [ labelfontsize="10", labelfontname="FreeSans"];
+  subgraph clusterdir_1abaf7f005b91edc996e1a6520484f9f {
+    graph [ bgcolor="#ddddee", pencolor="black", label="Entity" fontname="FreeSans", fontsize="10", URL="dir_1abaf7f005b91edc996e1a6520484f9f.html"]
+  dir_045fdd94c61a0e418838cb05acc5676f [shape=box, label="Components", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_045fdd94c61a0e418838cb05acc5676f.html"];
+  }
+  dir_61b4a868c815ee5d33281b22009a5bdc [shape=box label="BaseSubsystems" URL="dir_61b4a868c815ee5d33281b22009a5bdc.html"];
+  dir_39a5dde6d3e8ec86137a0a0de8f7c6b8 [shape=box label="Application" URL="dir_39a5dde6d3e8ec86137a0a0de8f7c6b8.html"];
+  dir_38a48bd85dd922a682381912690847d2 [shape=box label="Maps" fillcolor="white" style="filled" color="red" URL="dir_38a48bd85dd922a682381912690847d2.html"];
+  dir_a4fcdcbc38332b918a4cb8a64d0c7686 [shape=box label="Graphics" URL="dir_a4fcdcbc38332b918a4cb8a64d0c7686.html"];
+  dir_61b4a868c815ee5d33281b22009a5bdc->dir_39a5dde6d3e8ec86137a0a0de8f7c6b8 [headlabel="1", labeldistance=1.5 headhref="dir_000002_000001.html"];
+  dir_39a5dde6d3e8ec86137a0a0de8f7c6b8->dir_38a48bd85dd922a682381912690847d2 [headlabel="3", labeldistance=1.5 headhref="dir_000001_000007.html"];
+  dir_38a48bd85dd922a682381912690847d2->dir_61b4a868c815ee5d33281b22009a5bdc [headlabel="3", labeldistance=1.5 headhref="dir_000007_000002.html"];
+  dir_38a48bd85dd922a682381912690847d2->dir_a4fcdcbc38332b918a4cb8a64d0c7686 [headlabel="1", labeldistance=1.5 headhref="dir_000007_000003.html"];
+  dir_a4fcdcbc38332b918a4cb8a64d0c7686->dir_61b4a868c815ee5d33281b22009a5bdc [headlabel="5", labeldistance=1.5 headhref="dir_000003_000002.html"];
+  dir_045fdd94c61a0e418838cb05acc5676f->dir_61b4a868c815ee5d33281b22009a5bdc [headlabel="4", labeldistance=1.5 headhref="dir_000012_000002.html"];
+  dir_045fdd94c61a0e418838cb05acc5676f->dir_39a5dde6d3e8ec86137a0a0de8f7c6b8 [headlabel="1", labeldistance=1.5 headhref="dir_000012_000001.html"];
+  dir_045fdd94c61a0e418838cb05acc5676f->dir_38a48bd85dd922a682381912690847d2 [headlabel="11", labeldistance=1.5 headhref="dir_000012_000007.html"];
+  dir_045fdd94c61a0e418838cb05acc5676f->dir_a4fcdcbc38332b918a4cb8a64d0c7686 [headlabel="5", labeldistance=1.5 headhref="dir_000012_000003.html"];
+}

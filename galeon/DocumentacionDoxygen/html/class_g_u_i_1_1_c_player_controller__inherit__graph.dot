@@ -1,0 +1,10 @@
+digraph "GUI::CPlayerController"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="GUI::CPlayerController",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="GUI::CKeyboardListener",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_g_u_i_1_1_c_keyboard_listener.html",tooltip="Esta clase debe ser implementada por las clases que quieren registrarse en el gestor de periféricos d..."];
+  Node3 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="GUI::CMouseListener",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_g_u_i_1_1_c_mouse_listener.html",tooltip="Esta clase debe ser implementada por las clases que quieren registrarse en el gestor de periféricos d..."];
+}

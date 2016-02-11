@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Graphics/StaticEntity.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_a4fcdcbc38332b918a4cb8a64d0c7686.html">Graphics</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">StaticEntity.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_static_entity_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// StaticEntity.h</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef __Graphics_StaticEntity_H</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define __Graphics_StaticEntity_H</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;Entity.h&quot;</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// Predeclaración de clases para ahorrar tiempo de compilación</span></div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_ogre.html">Ogre</a> </div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">class </span>CScene;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_graphics.html">Graphics</a> </div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div><div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_graphics_1_1_c_static_entity.html">   53</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_graphics_1_1_c_static_entity.html">CStaticEntity</a> : <span class="keyword">public</span> <a class="code" href="class_graphics_1_1_c_entity.html">CEntity</a></div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div><div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_graphics_1_1_c_static_entity.html#ad4b55a65606e4080108c8e58e7ee4d82">   63</a></span>&#160;        <a class="code" href="class_graphics_1_1_c_static_entity.html#ad4b55a65606e4080108c8e58e7ee4d82">CStaticEntity</a>(<span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> std::string &amp;mesh):</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    <a class="code" href="class_graphics_1_1_c_entity.html">CEntity</a>(name,mesh) {}</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div><div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_graphics_1_1_c_static_entity.html#a95ec3319ab5fd26715af97f065d15a2d">   69</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_graphics_1_1_c_static_entity.html#a95ec3319ab5fd26715af97f065d15a2d">~CStaticEntity</a>() {}</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    </div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">protected</span>:</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div><div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_graphics_1_1_c_static_entity.html#ab976f1f1a79f0279208915e91ebf04b6">   77</a></span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_graphics_1_1_c_scene.html">CScene</a>;</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordtype">bool</span> addToStaticGeometry();</div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }; <span class="comment">// class CStaticEntity</span></div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;} <span class="comment">// namespace Graphics</span></div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#endif // __Graphics_StaticEntity_H</span></div><div class="ttc" id="class_graphics_1_1_c_entity_html"><div class="ttname"><a href="class_graphics_1_1_c_entity.html">Graphics::CEntity</a></div><div class="ttdoc">Clase que representa una entidad gráfica. </div><div class="ttdef"><b>Definition:</b> <a href="_graphics_2_entity_8h_source.html#l00067">Entity.h:67</a></div></div>
+<div class="ttc" id="class_graphics_1_1_c_static_entity_html_a95ec3319ab5fd26715af97f065d15a2d"><div class="ttname"><a href="class_graphics_1_1_c_static_entity.html#a95ec3319ab5fd26715af97f065d15a2d">Graphics::CStaticEntity::~CStaticEntity</a></div><div class="ttdeci">virtual ~CStaticEntity()</div><div class="ttdoc">Destructor de la aplicación. </div><div class="ttdef"><b>Definition:</b> <a href="_static_entity_8h_source.html#l00069">StaticEntity.h:69</a></div></div>
+<div class="ttc" id="namespace_graphics_html"><div class="ttname"><a href="namespace_graphics.html">Graphics</a></div><div class="ttdoc">Namespace con todo lo que se refiere a la parte gráfica. </div><div class="ttdef"><b>Definition:</b> <a href="3_d_application_8h_source.html#l00028">3DApplication.h:28</a></div></div>
+<div class="ttc" id="class_graphics_1_1_c_static_entity_html_ad4b55a65606e4080108c8e58e7ee4d82"><div class="ttname"><a href="class_graphics_1_1_c_static_entity.html#ad4b55a65606e4080108c8e58e7ee4d82">Graphics::CStaticEntity::CStaticEntity</a></div><div class="ttdeci">CStaticEntity(const std::string &amp;name, const std::string &amp;mesh)</div><div class="ttdoc">Constructor de la clase. </div><div class="ttdef"><b>Definition:</b> <a href="_static_entity_8h_source.html#l00063">StaticEntity.h:63</a></div></div>
+<div class="ttc" id="class_graphics_1_1_c_scene_html"><div class="ttname"><a href="class_graphics_1_1_c_scene.html">Graphics::CScene</a></div><div class="ttdoc">Clase que controla todos los elementos de una escena. </div><div class="ttdef"><b>Definition:</b> <a href="_scene_8h_source.html#l00075">Scene.h:75</a></div></div>
+<div class="ttc" id="class_graphics_1_1_c_static_entity_html"><div class="ttname"><a href="class_graphics_1_1_c_static_entity.html">Graphics::CStaticEntity</a></div><div class="ttdoc">Clase que representa una entidad gráfica estática. </div><div class="ttdef"><b>Definition:</b> <a href="_static_entity_8h_source.html#l00053">StaticEntity.h:53</a></div></div>
+<div class="ttc" id="namespace_ogre_html"><div class="ttname"><a href="namespace_ogre.html">Ogre</a></div><div class="ttdoc">Si se define la siguiente directiva, en modo ventana el juego no toma ratón y teclado como como de us...</div><div class="ttdef"><b>Definition:</b> <a href="3_d_application_8h_source.html#l00032">3DApplication.h:32</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

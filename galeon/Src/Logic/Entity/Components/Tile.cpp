@@ -15,12 +15,13 @@ namespace Logic {
 	Tile::Tile() : IComponent() {
 		_terrainType = TerrainType::Empty;
 		_logicPosition = Vector3::ZERO;
-
-		// Inicializamos el tamaño del vector de adyacentes
-		_adjacentTiles = std::vector<Tile*>(NUM_ADJACENT);
-
+		_adjacentTiles = nullptr;
 		_tileManager = CTileManager::getSingletonPtr();
 		_placeableAbove = nullptr;
+	}
+
+	Tile::~Tile(){
+		delete _adjacentTiles;
 	}
 
 	bool Tile::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
@@ -69,27 +70,33 @@ namespace Logic {
 		return _placeableAbove == nullptr;
 	}
 
-	const std::vector<Tile*> Tile::getAdjacentTiles(){
+	const std::vector<Tile*>* Tile::getAdjacentTiles(){
 		// Si no ha sido inicializado todavía
-		if (_adjacentTiles.size() == 0){
+		if (_adjacentTiles == nullptr){
+			_adjacentTiles = new std::vector<Tile*>();
+
 			Tile* adjacent = _tileManager->getTile(_logicPosition + Vector3(-1, 0, 0));
 			if (adjacent != nullptr)
-				_adjacentTiles.push_back(adjacent);
+				_adjacentTiles->push_back(adjacent);
 			adjacent = _tileManager->getTile(_logicPosition + Vector3(1, 0, 0));
 			if (adjacent != nullptr)
-				_adjacentTiles.push_back(adjacent);
+				_adjacentTiles->push_back(adjacent);
 			adjacent = _tileManager->getTile(_logicPosition + Vector3(0, 0, -1));
 			if (adjacent != nullptr)
-				_adjacentTiles.push_back(adjacent);
+				_adjacentTiles->push_back(adjacent);
 			adjacent = _tileManager->getTile(_logicPosition + Vector3(0, 0, 1));
 			if (adjacent != nullptr)
-				_adjacentTiles.push_back(adjacent);
+				_adjacentTiles->push_back(adjacent);
 		}
 
 		return _adjacentTiles;
 	}
 
 	bool Tile::canPassSoulPath(){
+		// Si el terreno no está vacío la SoulPath no puede pasar
+		if (_terrainType != Empty)
+			return false;
+
 		// Si no hay ningún placeable encima, la SoulPath puede atravesar
 		if (_placeableAbove == nullptr)
 			return true;

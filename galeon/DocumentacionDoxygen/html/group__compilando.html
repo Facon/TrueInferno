@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Compilacion de Galeon</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li class="current"><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Compilacion de Galeon</div>  </div>
+</div><!--header-->
+<div class="contents">
+<h1><a class="anchor" id="introCompilando"></a>
+Introducción</h1>
+<p>La compilación de Galeon desde cero requiere la ejecución de un gran número de pasos. Para evitar la tarea tediosa de realizarlos manualmente, Galeon dispone de un script para Ant que se encarga de hacerlo automáticamente.</p>
+<p>Antes de poder utilizarlo, no obstante, es imprescindible comprobar que en la máquina donde se pretende compilar Galeon están instalados ciertos prerequisitos.</p>
+<p>La sección siguiente detalla cuáles son esos requisitos y cómo conseguirlos. Posteriormente se explica cómo compilar Galeon una vez instalados. La última sección describe cómo sería el proceso de compilación manual sin la utilización de Ant. Aunque está altamente desaconsejado utilizar ese método, la sección es interesante por sí misma porque en la práctica lo que hace es describir todo lo que el script de Ant hace por nosotros, algo que puede ayudar a entender mejor la estructura de directorios de Galeon.</p>
+<h1><a class="anchor" id="requisitos"></a>
+Requisitos de Galeon</h1>
+<p>Para poder trabajar con Galeon es preciso que la máquina tenga instalado lo siguiente:</p>
+<ul>
+<li>
+<p class="startli">Visual Studio 2010.</p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">DirectX: es necesario tener instaladas las SDK de DirectX, que incluyen los ficheros de cabecera y bibliotecas necesarios para poder compilar el motor gráfico. Las SDK se pueden obtener en la página de Microsoft. Es importante instalarlas <em>después</em> de la instalación de Visual Studio, pues el instalador altera (mínimamente) la configuración del IDE para que encuentre los ficheros al compilar.</p>
+<p>Por último, hay que asegurarse de que tras la instalación se queda establecida la variable de entorno <code>DXSDK_DIR</code> al directorio raiz de la instalación.</p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Ant: esta herramienta de Apache permite la compilación de Galeon en un solo paso. Sólo es necesario si se opta por este tipo de generación (¡altamente recomendable!). Ant se puede descargar de <a href="http://ant.apache.org/">http://ant.apache.org/</a>.</p>
+<p class="endli">Como añadido, para poder llamar a Visual Studio desde los script de Ant es necesario extender la instalación de Ant. Para eso, hay que descargar <a href="http://gaia.fdi.ucm.es/people/marcoa/development/vcTasks">vcTask</a> y copiar el .jar al directorio lib de la instalación. </p>
+</li>
+</ul>
+<pre class="fragment">Opcionalmente también puedes instalar:
+</pre><ul>
+<li>
+<p class="startli">Doxygen: si planeas generar la documentación de Galeon. Está disponible <a href="http://www.stack.nl/~dimitri/doxygen/">aquí</a>.</p>
+<p>En ese caso, también puede que te interese añadir a Ant la posibilidad de generar la documentación directamente, instalando la tarea disponible <a href="http://ant-doxygen.blogspot.com/">aqui</a>.</p>
+<p class="endli">Puedes encontrar más información en la sección <a class="el" href="group__compilando.html#generarDocumentacion">Generación de la documentación</a> </p>
+</li>
+</ul>
+<h1><a class="anchor" id="usoDeAnt"></a>
+Compilación automática con Ant</h1>
+<p>Para compilar Galeon automáticamente, basta con ejecutar Ant desde el directorio raíz de Galeon.</p>
+<pre>
+c:&gt; ant
+Buildfile: build.xml</pre><pre>debug:</pre><pre>llamaBuilds:</pre><pre>debug:</pre><pre>llamaBuilds:</pre><pre>debug:</pre><pre>compilaSln:</pre><pre>windowsbuilder:
+      [vc10] Command= C:...\IDE\devenv.com /out c:\Galeon/vslog.txt ...
+      [vc10] 
+      [vc10] Microsoft (R) Visual Studio 10.0.30319.1.
+      [vc10] (C) Microsoft Corp. Reservados todos los derechos.
+      [vc10] 1&gt;------ Operaci¢n Generar iniciada: proyecto: zlib, configuraci¢n: Debug Win32 ------
+      [vc10] 2&gt;------ Operaci¢n Generar iniciada: proyecto: ZLib-freeImage, configuraci¢n: Debug Win32 ------
+      [vc10] 2&gt;Compilando...
+      [vc10] 1&gt;Compilando...
+      [vc10] 2&gt;adler32.c
+      [vc10] 1&gt;compress.c
+</pre><p>Después de mucho rato y más de 3GB menos en el disco duro, tanto la versión de Debug como la de Release de Galeon están generadas en el directorio Exes.</p>
+<h1><a class="anchor" id="compilacionManual"></a>
+Compilación manual</h1>
+<p>Lo primero que se debe hacer es compilar las dependencias adicionales que tiene Galeon, que se encuentran en el directorio dependencies:</p>
+<ol>
+<li>
+<p class="startli">Compilar las dependencias de <a class="el" href="namespace_ogre.html" title="Si se define la siguiente directiva, en modo ventana el juego no toma ratón y teclado como como de us...">Ogre</a>: para eso, abrir el proyecto en Visual Studio 2010 (<code>dependencies/OgreDependencies/OgreDependencies.VS2008.sln</code>), y generar las versiones Debug y Release (lo más fácil tanto en este como en el resto de proyectos es usar el menú Generar - Compilación por lotes - Seleccionar todo - Generar </p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Generar los proyectos de <a class="el" href="namespace_ogre.html" title="Si se define la siguiente directiva, en modo ventana el juego no toma ratón y teclado como como de us...">Ogre</a>: la distribución de <a class="el" href="namespace_ogre.html" title="Si se define la siguiente directiva, en modo ventana el juego no toma ratón y teclado como como de us...">Ogre</a> NO incluye los proyectos de Visual Studio, sino que hay que generarlos con una aplicación aparte (CMake). Para evitar complicaciones, la aplicación está en el directorio dependencies, por lo que no hay que instalarla.</p>
+<p>Para generarlos, se debe crear el directorio <code>build</code> dentro de la distribución de ogre, y luego invocar a CMake (el comando de ejecución de CMake es algo largo, pues se desactiva la compilación de bastantes componentes que Galeon no utiliza):</p>
+<pre>
+c:&gt; mkdir build
+c:&gt; cd build
+c:&gt; ..\CMake\bin\cmake.exe -DOGRE_DEPENDENCIES_DIR=.... -DOGRE_BUILD_SAMPLES=FALSE -DOGRE_BUILD_TOOLS=FALSE -DOGRE_BUILD_COMPONENT_PAGING=FALSE -DOGRE_BUILD_COMPONENT_TERRAIN=FALSE -DOGRE_BUILD_PLUGIN_PCZ=FALSE -DOGRE_BUILD_PLUGIN_OCTREE=FALSE -DOGRE_BUILD_PLUGIN_BSP=FALSE -DOGRE_INSTALL_TOOLS=FALSE ..
+-- Building for: Visual Studio 10 2010
+-- Check for working C compiler: cl
+-- Check for working C compiler: cl -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working CXX compiler: cl
+...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: c:/Galeon/dependencies/Ogre/build
+    </pre> <p class="endli"></p>
+</li>
+<li>
+<p class="startli">Compilar <a class="el" href="namespace_ogre.html" title="Si se define la siguiente directiva, en modo ventana el juego no toma ratón y teclado como como de us...">Ogre</a>. Para eso se abre la solución <code>OGRE.sln</code> del directorio <code>build</code> y se compilan todos los proyectos que tienen. </p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Copiar los ficheros resultantes de la compilación de <a class="el" href="namespace_ogre.html" title="Si se define la siguiente directiva, en modo ventana el juego no toma ratón y teclado como como de us...">Ogre</a> donde los espera Galeon. Los ficheros de inclusión de <a class="el" href="namespace_ogre.html" title="Si se define la siguiente directiva, en modo ventana el juego no toma ratón y teclado como como de us...">Ogre</a> deben copiarse a <code>dependencies/include</code>, las bibliotecas estáticas a <code>dependencies/lib</code> y las DLLs y otros ficheros utilizados durante la ejecución irán a <code>dependencies/bin</code>. Más concretamente: </p><ol>
+<li>
+<p class="startli">Crear el directorio <code>dependencies/include/OGRE</code> y copiar en él el contenido del directorio <code>dependencies/OGRE/OgreMain/include</code> y el de <code>dependencies/OGRE/build/include</code>.</p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Copiar al directorio <code>dependencies/lib/Debug</code> todos los .lib que se hayan generado en <code>build/lib/Debug</code>. Hacer lo mismo con los Release.</p>
+<p class="endli"></p>
+</li>
+<li>
+Copiar al directorio <code>dependencies/bin/Debug</code> las DLLs que se habrán generado en <code>build/bin/Debug</code>, así como los ficheros con extensión <code>.cfg</code> (en la práctica ni resources.cfg ni samples.cfg ni quakemap.cfg son necesarios). Hacer lo mismo con las correspondientes versiones de Release. </li>
+</ol>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Generar la solución de Visual Studio de CEGUI. Para eso, basta con ejecutar el fichero <code>dependencies/CEGUI/projects/premake/build_vs2008.bat</code>. </p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Convertir a Visual Studio 2010 abriendo la solución generado con Visual Studio 2010. </p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Compilar todos los proyectos de la solución CEGUI.sln que se habrá creado en ese mismo directorio. </p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Igual que con <a class="el" href="namespace_ogre.html" title="Si se define la siguiente directiva, en modo ventana el juego no toma ratón y teclado como como de us...">Ogre</a>, copiar los resultados de la compilación a los directorios include, lib y bin: </p><ol>
+<li>
+<p class="startli">Crear el directorio <code>cegui</code> dentro de <code>dependencies/include</code> y copiar en él el directorio <code>dependencies/cegui/include</code> (en la copia se pueden omitir los ficheros con extensión *.in y *.am). </p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Las bibliotecas compiladas habrán quedado en <code>dependencies/cegui/lib</code>; las que terminan en <code>_d</code> son las versiones Debug que habrá que copiar a <code>dependencies/lib/Debug</code>, mientras que las demás son las versiones en Release. Copiar a cada uno de ellos los ficheros CEGUIBase, CEGUIExpatParser, CEGUIFalagardWRBase, CEGUIOgreRenderer y CEGUISILLYImageCodec, que son los componentes de CEGUI que utiliza Galeon. </p>
+<p class="endli"></p>
+</li>
+<li>
+Por su parte, las DLLs se habrán quedado en <code>dependencies/cegui/bin</code> y siguen la misma nomenclatura. Hay que copiar a <code>dependencies/bin/Debug</code> las DLLs de depuración de las bibliotecas listadas anteriormente y a <code>dependencies/bin/Release</code> las versiones Release. También habrá que copiar una última DLL que CEGUI tiene de dependencia que se encuentra en <code>dependencies/CEGUI/dependencies/bin</code> llamada SILLY (y la correspondiente SILLY_d).  </li>
+</ol>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Compilar el proyecto Visual Leak Detector de la solución vld.sln que se encuentra en <code>dependencies/VisualLeakDetector/src</code>. </p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Igual que con <a class="el" href="namespace_ogre.html" title="Si se define la siguiente directiva, en modo ventana el juego no toma ratón y teclado como como de us...">Ogre</a> y CEGUI, hay que copiar los resultados de la compilación a los directorios include, lib y bin: </p><ol>
+<li>
+<p class="startli">Copiar los ficheros <code>vld.h</code> y <code>vld_def.h</code>, que se encuentran en <code>dependencies/VisualLeakDetector/src</code>, dentro de <code>dependencies/include</code> </p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Copiar la biblioteca <code>vld.lib</code>, que se encuentran en <code>dependencies/VisualLeakDetector/bin</code>, solo a <code>dependencies/lib/Debug</code> ya que en Release no se necesita VLD. </p>
+<p class="endli"></p>
+</li>
+<li>
+Por su parte, la DLL habrá quedado en <code>dependencies/VisualLeakDetector/bin</code> y se llamará <code>vld_x86.dll</code> o <code>vld_x64.dll</code> en función de la arquitectura del ordenador (32 o 64 bits). Hay que copiarla a <code>dependencies/bin/Debug</code>. También habrá que copiar una última DLL (<code>dbghelp.dll</code>), de la que Visual Leak Detector tiene dependencia, en el mismo directorio. En función de la arquitectura del ordenador (32 o 64 bits) se deberá coger de <code>dependencies/VisualLeakDetector/bin/Win32</code> o de <code>dependencies/VisualLeakDetector/bin/Win64</code>.  </li>
+</ol>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">El último paso, compilar Galeon. Para eso se abre la solución Galeon.sln del raíz, y se compilan todos sus proyectos. Al final, los ejecutables de la versión de depuración y release habrán quedado en el directorio <code>Exes</code>. No obstante, para que se puedan ejecutar las versiones Release y Debug de Galeón, se deberá mover el contenido de <code>dependencies/bin/Release</code> y <code>dependencies/bin/Debug</code> al directorio <code>Exes</code>. </p>
+<p class="endli"></p>
+</li>
+</ol>
+<h1><a class="anchor" id="generarDocumentacion"></a>
+Generación de la documentación</h1>
+<p>Como ya se ha comentado previamente, la generación de la documentación hace uso de la herramienta <a href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a>.</p>
+<p>Es posible lanzarla directamente desde el directorio de Galeón:</p>
+<pre>
+$GALEON&gt; doxygen
+</pre><p>La documentación se creará en el directorio <code>DocumentacionDoxygen</code>.</p>
+<p>Si se instala en Ant la tarea <a href="http://ant-doxygen.blogspot.com/">ant-doxygen</a> (copiando el fichero <code>.jar</code> en la <code>$ANT_PATH</code>), también será posible generarla mediante:</p>
+<pre>
+$GALEON&gt; ant doxygen
+</pre><p>En este caso, la salida de doxygen no se mostrará, lo que en ocasiones puede acelerar el proceso a costa de no ver posibles errores y avisos.</p>
+<dl class="section author"><dt>Autor</dt><dd>Marco Antonio Gómez Martín, David Llansó </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>Septiembre, 2010 </dd></dl>
+</div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

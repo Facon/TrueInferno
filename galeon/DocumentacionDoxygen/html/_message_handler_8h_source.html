@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Logic/Entity/MessageHandler.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_d2dfb49d6ca7b999bdafe5a748473e42.html">Logic</a></li><li class="navelem"><a class="el" href="dir_1abaf7f005b91edc996e1a6520484f9f.html">Entity</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">MessageHandler.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __LOGIC_MessageHandler_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __LOGIC_MessageHandler_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_logic.html">Logic</a></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="comment">// Predefiniciones</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keyword">class </span>Message;</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">class </span>TransformMessage;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">class </span>DimensionsMessage;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">class </span>ColorMessage;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">class </span>MaterialMessage;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">class </span>AnimationMessage;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">class </span>ControlMessage;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">class </span>PhysicMessage;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">class </span>MoveMessage;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">class </span>TouchMessage;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">class </span>DamageMessage;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_logic_1_1_message_handler.html">   19</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_logic_1_1_message_handler.html">MessageHandler</a></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    {</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HandleMessage(<span class="keyword">const</span> <a class="code" href="class_logic_1_1_transform_message.html">TransformMessage</a>&amp; msg)</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HandleMessage(<span class="keyword">const</span> <a class="code" href="class_logic_1_1_dimensions_message.html">DimensionsMessage</a>&amp; msg)</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HandleMessage(<span class="keyword">const</span> <a class="code" href="class_logic_1_1_color_message.html">ColorMessage</a>&amp; msg)</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HandleMessage(<span class="keyword">const</span> <a class="code" href="class_logic_1_1_material_message.html">MaterialMessage</a>&amp; msg)</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        </div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HandleMessage(<span class="keyword">const</span> <a class="code" href="class_logic_1_1_animation_message.html">AnimationMessage</a>&amp; msg)</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        </div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HandleMessage(<span class="keyword">const</span> <a class="code" href="class_logic_1_1_control_message.html">ControlMessage</a>&amp; msg)</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HandleMessage(<span class="keyword">const</span> <a class="code" href="class_logic_1_1_physic_message.html">PhysicMessage</a>&amp; msg)</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HandleMessage(<span class="keyword">const</span> <a class="code" href="class_logic_1_1_move_message.html">MoveMessage</a>&amp; msg)</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HandleMessage(<span class="keyword">const</span> <a class="code" href="class_logic_1_1_touch_message.html">TouchMessage</a>&amp; msg)</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HandleMessage(<span class="keyword">const</span> <a class="code" href="class_logic_1_1_damage_message.html">DamageMessage</a>&amp; msg)</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    };</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;} <span class="comment">// namespace Logic</span></div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif // __LOGIC_MessageHandler_H</span></div><div class="ttc" id="namespace_logic_html"><div class="ttname"><a href="namespace_logic.html">Logic</a></div><div class="ttdoc">Namespace que engloba la lógica del juego. </div><div class="ttdef"><b>Definition:</b> <a href="_player_controller_8h_source.html#l00019">PlayerController.h:19</a></div></div>
+<div class="ttc" id="class_logic_1_1_dimensions_message_html"><div class="ttname"><a href="class_logic_1_1_dimensions_message.html">Logic::DimensionsMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_8h_source.html#l00092">Message.h:92</a></div></div>
+<div class="ttc" id="class_logic_1_1_move_message_html"><div class="ttname"><a href="class_logic_1_1_move_message.html">Logic::MoveMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_8h_source.html#l00166">Message.h:166</a></div></div>
+<div class="ttc" id="class_logic_1_1_damage_message_html"><div class="ttname"><a href="class_logic_1_1_damage_message.html">Logic::DamageMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_8h_source.html#l00192">Message.h:192</a></div></div>
+<div class="ttc" id="class_logic_1_1_material_message_html"><div class="ttname"><a href="class_logic_1_1_material_message.html">Logic::MaterialMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_8h_source.html#l00116">Message.h:116</a></div></div>
+<div class="ttc" id="class_logic_1_1_animation_message_html"><div class="ttname"><a href="class_logic_1_1_animation_message.html">Logic::AnimationMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_8h_source.html#l00128">Message.h:128</a></div></div>
+<div class="ttc" id="class_logic_1_1_transform_message_html"><div class="ttname"><a href="class_logic_1_1_transform_message.html">Logic::TransformMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_8h_source.html#l00080">Message.h:80</a></div></div>
+<div class="ttc" id="class_logic_1_1_color_message_html"><div class="ttname"><a href="class_logic_1_1_color_message.html">Logic::ColorMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_8h_source.html#l00104">Message.h:104</a></div></div>
+<div class="ttc" id="class_logic_1_1_touch_message_html"><div class="ttname"><a href="class_logic_1_1_touch_message.html">Logic::TouchMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_8h_source.html#l00179">Message.h:179</a></div></div>
+<div class="ttc" id="class_logic_1_1_message_handler_html"><div class="ttname"><a href="class_logic_1_1_message_handler.html">Logic::MessageHandler</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_handler_8h_source.html#l00019">MessageHandler.h:19</a></div></div>
+<div class="ttc" id="class_logic_1_1_physic_message_html"><div class="ttname"><a href="class_logic_1_1_physic_message.html">Logic::PhysicMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_8h_source.html#l00154">Message.h:154</a></div></div>
+<div class="ttc" id="class_logic_1_1_control_message_html"><div class="ttname"><a href="class_logic_1_1_control_message.html">Logic::ControlMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="_message_8h_source.html#l00141">Message.h:141</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

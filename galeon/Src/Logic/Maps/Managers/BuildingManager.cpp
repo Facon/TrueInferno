@@ -100,61 +100,52 @@ namespace Logic {
 		CEntityFactory* entityFactory = CEntityFactory::getSingletonPtr();
 
 		// TODO Colocamos temporalmente hardcodeando posiciones en código
-		CEntity* evilator = createBuilding(map, "Evilator", Vector3(5, 0, 12));
+		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(5, 0, 12));
 		if (!evilator)
 			return false;
 
-		CEntity* hellQuarters = createBuilding(map, "HellQuarters", Vector3(13, 0, 2));
+		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(13, 0, 2));
 		if (!hellQuarters)
 			return false;
 
-		if(!createBuilding(map, "SoulPath", Vector3(13, 0, 4)))
+		if(!createPlaceable(map, "SoulPath", Vector3(13, 0, 4)))
 			return false;
 
-		if (!createBuilding(map, "SoulPath", Vector3(13, 0, 5)))
+		if (!createPlaceable(map, "SoulPath", Vector3(13, 0, 5)))
 			return false;
 
 		for (int x = 13; x >= 5; --x)
-			if (!createBuilding(map, "SoulPath", Vector3(x, 0, 6)))
+			if (!createPlaceable(map, "SoulPath", Vector3(x, 0, 6)))
 				return false;
 
 		for (int z = 7; z <= 11; ++z)
-			if (!createBuilding(map, "SoulPath", Vector3(5, 0, z)))
+			if (!createPlaceable(map, "SoulPath", Vector3(5, 0, z)))
 				return false;
 
 		return true;
 	}
 
 	void CBuildingManager::registerBuilding(CPlaceable *placeable){
+		// Ignoramos todo lo que no sean edificios
+		if (!placeable->isBuilding())
+			return;
+
 		_buildings.push_back(placeable);
 	}
 
-	CEntity* CBuildingManager::createBuilding(CMap *map, const std::string& prefabName, const Vector3& logicPosition){
-		CEntity* buildingEntity = CEntityFactory::getSingletonPtr()->createEntity(prefabName, map);
+	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition){
+		CEntity* newEntity = CEntityFactory::getSingletonPtr()->createEntity(prefabName, map);
 
-		// TODO Apaño temporal para ubicar el edificio: Buscamos a capón la entidad recién creada (con posición por defecto) en el array de buildings
-		// Habría que enviar un mensaje a la entidad para que se ubique en la posición lógica dada (CPlaceable::place())
-		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
-			CPlaceable* building = (*it);
-
-			// Si es la entidad buscada
-			if (building->getEntity() == buildingEntity){
-				// Intentamos ubicarla
-				if (!(*it)->place(logicPosition)){
-					// Destruímos la entidad si no se pudo ubicar
-					CEntityFactory::getSingletonPtr()->deferredDeleteEntity(buildingEntity);
-					buildingEntity = nullptr;
-				}
-				break;
-			}
-		}
-
-		if (!buildingEntity){
-			std::cout << "Can't create new building '"<< prefabName <<"' on '"<< logicPosition <<"'" << std::endl;
+		if (!newEntity){
+			std::cout << "Can't create new placeable '"<< prefabName <<"' on '"<< logicPosition <<"'" << std::endl;
 			return nullptr;
 		}
 
-		return buildingEntity;
+		PlaceMessage m;
+		m.position = logicPosition;
+		m.Dispatch(*newEntity);
+
+		return newEntity;
 	}
 
 } // namespace Logic

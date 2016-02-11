@@ -61,8 +61,9 @@ namespace Logic {
 			_tiles = std::vector<Tile*>(_floorX * _floorZ);
 		}
 
-		// Register building in manager
-		Logic::CBuildingManager::getSingletonPtr()->registerBuilding(this);
+		// Register buildings in manager
+		if (_placeableType == Building)
+			Logic::CBuildingManager::getSingletonPtr()->registerBuilding(this);
 
 		return true;
 	} // spawn
@@ -168,6 +169,14 @@ namespace Logic {
 	bool CPlaceable::canPassWalkingSoul(){
 		// Sólo permitimos a las almas caminar si hay SoulPath. Podría interesar dejarlas atravesar también los edificios
 		return _placeableType == SoulPath;
+	}
+
+	bool CPlaceable::isBuilding(){
+		return _placeableType == Building;
+	}
+
+	bool CPlaceable::HandleMessage(const PlaceMessage& msg){
+		return place(msg.position);
 	}
 
 } // namespace Logic

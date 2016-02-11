@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Logic/Entity/Component.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_d2dfb49d6ca7b999bdafe5a748473e42.html">Logic</a></li><li class="navelem"><a class="el" href="dir_1abaf7f005b91edc996e1a6520484f9f.html">Entity</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Component.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_component_8h.html">Component.h</a>&quot;</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//#include &quot;Entity.h&quot;</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_logic.html">Logic</a></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    RTTI_ROOT_IMPL(IComponent);</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_logic_1_1_i_component.html#aebc5b73ad53f65df15727aae50dded67">   21</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_logic_1_1_i_component.html#aebc5b73ad53f65df15727aae50dded67">IComponent::spawn</a>(<a class="code" href="class_logic_1_1_c_entity.html">CEntity</a> *entity, <a class="code" href="class_logic_1_1_c_map.html">CMap</a> *map, <span class="keyword">const</span> <a class="code" href="class_map_1_1_c_entity.html">Map::CEntity</a> *entityInfo) </div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    {</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="class_logic_1_1_i_component.html#a5563d7af50c126ded8ebc4be2c2a46f6">_entity</a> = entity;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    } <span class="comment">// spawn</span></div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    </div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">//---------------------------------------------------------</span></div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div><div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_logic_1_1_i_component.html#a45798c9df980f48d0215a30b4a949b90">   30</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_logic_1_1_i_component.html#a45798c9df980f48d0215a30b4a949b90">IComponent::tick</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> msecs)</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="comment">//processMessages();</span></div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="comment">// Entity should do the work now</span></div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    } <span class="comment">// tick</span></div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;} <span class="comment">// namespace Logic</span></div><div class="ttc" id="namespace_logic_html"><div class="ttname"><a href="namespace_logic.html">Logic</a></div><div class="ttdoc">Namespace que engloba la lógica del juego. </div><div class="ttdef"><b>Definition:</b> <a href="_player_controller_8h_source.html#l00019">PlayerController.h:19</a></div></div>
+<div class="ttc" id="class_map_1_1_c_entity_html"><div class="ttname"><a href="class_map_1_1_c_entity.html">Map::CEntity</a></div><div class="ttdoc">Clase que representa una entidad leida del fichero del mapa. </div><div class="ttdef"><b>Definition:</b> <a href="_map_entity_8h_source.html#l00041">MapEntity.h:41</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_map_html"><div class="ttname"><a href="class_logic_1_1_c_map.html">Logic::CMap</a></div><div class="ttdoc">Clase que representa un mapa lógico. </div><div class="ttdef"><b>Definition:</b> <a href="_map_8h_source.html#l00046">Map.h:46</a></div></div>
+<div class="ttc" id="class_logic_1_1_i_component_html_a5563d7af50c126ded8ebc4be2c2a46f6"><div class="ttname"><a href="class_logic_1_1_i_component.html#a5563d7af50c126ded8ebc4be2c2a46f6">Logic::IComponent::_entity</a></div><div class="ttdeci">CEntity * _entity</div><div class="ttdoc">Entidad que contiene al componente. </div><div class="ttdef"><b>Definition:</b> <a href="_component_8h_source.html#l00170">Component.h:170</a></div></div>
+<div class="ttc" id="class_logic_1_1_i_component_html_a45798c9df980f48d0215a30b4a949b90"><div class="ttname"><a href="class_logic_1_1_i_component.html#a45798c9df980f48d0215a30b4a949b90">Logic::IComponent::tick</a></div><div class="ttdeci">virtual void tick(unsigned int msecs)</div><div class="ttdoc">Mï¿œtodo llamado en cada frame que actualiza el estado del componente. </div><div class="ttdef"><b>Definition:</b> <a href="_component_8cpp_source.html#l00030">Component.cpp:30</a></div></div>
+<div class="ttc" id="class_logic_1_1_c_entity_html"><div class="ttname"><a href="class_logic_1_1_c_entity.html">Logic::CEntity</a></div><div class="ttdoc">Clase que representa una entidad en el entorno virtual. </div><div class="ttdef"><b>Definition:</b> <a href="_logic_2_entity_2_entity_8h_source.html#l00065">Entity.h:65</a></div></div>
+<div class="ttc" id="class_logic_1_1_i_component_html_aebc5b73ad53f65df15727aae50dded67"><div class="ttname"><a href="class_logic_1_1_i_component.html#aebc5b73ad53f65df15727aae50dded67">Logic::IComponent::spawn</a></div><div class="ttdeci">virtual bool spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo)</div><div class="ttdoc">Inicializaciï¿œn del componente, utilizando la informaciï¿œn extraï¿œda de la entidad leï¿œda del map...</div><div class="ttdef"><b>Definition:</b> <a href="_component_8cpp_source.html#l00021">Component.cpp:21</a></div></div>
+<div class="ttc" id="_component_8h_html"><div class="ttname"><a href="_component_8h.html">Component.h</a></div><div class="ttdoc">Contiene la declaraciï¿œn de la clase base de los componentes. </div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

@@ -1,0 +1,16 @@
+digraph "Src/Application/Clock.h"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="Src/Application/Clock.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Src/Application/OgreClock.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_ogre_clock_8h.html",tooltip="Contiene la declaración de un temporizador basado en Ogre. "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Src/Application/3DApplication.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$3_d_application_8cpp.html",tooltip="Contiene la implementación de la clase aplicacion para aplicaciones basadas en Ogre. "];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="Src/Application/OgreClock.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_ogre_clock_8cpp.html",tooltip="Contiene la implementación de un interfaz para un temporizador. "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="Src/Application/BaseApplication.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_base_application_8cpp.html",tooltip="Contiene la implementaciï¿œn de la clase aplicacion, que maneja la ejecuciï¿œn de todo el juego..."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="Src/Application/Clock.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_clock_8cpp.html",tooltip="Contiene la implementación de un interfaz para un temporizador. "];
+}

@@ -1,0 +1,19 @@
+digraph "Src/Logic/Entity/Components/Physics.h"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="Src/Logic/Entity/Components\l/Physics.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Src/Logic/Entity/Components\l/PhysicController.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_physic_controller_8h.html",tooltip="Contiene la declaraciï¿œn del componente que se utiliza para representar jugadores y enemigos en el m..."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Src/Logic/Entity/Components\l/PhysicController.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_physic_controller_8cpp.html",tooltip="Contiene la implementaciï¿œn del componente que se utiliza para representar jugadores y enemigos en e..."];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="Src/Physics/CollisionManager.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_collision_manager_8cpp.html",tooltip="Contiene la implementación del gestor de colisiones. "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="Src/Logic/Entity/Components\l/PhysicEntity.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_physic_entity_8h.html",tooltip="Contiene la declaraciï¿œn del componente encargado de representar entidades fï¿œsicas simples..."];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="Src/Logic/Entity/Components\l/PhysicEntity.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_physic_entity_8cpp.html",tooltip="Contiene la implementaciï¿œn del componente encargado de representar entidades fï¿œsicas simples..."];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="Src/Physics/Server.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_physics_2_server_8cpp_source.html"];
+}

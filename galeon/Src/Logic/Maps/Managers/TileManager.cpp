@@ -173,6 +173,14 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	Tile* CTileManager::getRandomTile(){
+		int x = rand() % SIZE_X;
+		int z = rand() % SIZE_Z;
+		return _tiles[x][z];
+	}
+
+	//--------------------------------------------------------
+
 	Tile* CTileManager::getTile(const Vector3 &position){
 		// Check bounds
 		if (position.x < 0 || position.x >= SIZE_X || position.z < 0 || position.z >= SIZE_Z)

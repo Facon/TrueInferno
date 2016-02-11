@@ -1,0 +1,9 @@
+digraph "Entidades en la lógica de juego"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="Lógica de juego",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__logic_group.html",tooltip="La lógica de juego son las reglas del juego que se quiere implementar; aquí es donde se definen conce..."];
+  Node0 [label="Entidades en la lógica\l de juego",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node0->Node1 [shape=plaintext, label="Logic::IComponent\nLogic::CEntity\nLogic::Message", color="orange", dir="none", style="dashed"];
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Subsistemas base</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li class="current"><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Estructuras de datos</a>  </div>
+  <div class="headertitle">
+<div class="title">Subsistemas base</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Dentro del grupo de subsistemas base se encuentran la inicialización y gestión de los diferentes motores necesarios para correr la aplicación así como una seríe de herramientas auxiliares usadas por el proyecto.  
+<a href="#details">Más...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Estructuras de datos</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_subsystems_1_1_c_factory.html">BaseSubsystems::CFactory&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorï¿œa parametrizada de objetos.  <a href="class_base_subsystems_1_1_c_factory.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_subsystems_1_1_c_server.html">BaseSubsystems::CServer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clase central que se encarga de inicializar y gestionar los diferentes subsistemas necesarios para correr la aplicación.  <a href="class_base_subsystems_1_1_c_server.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<p>Dentro del grupo de subsistemas base se encuentran la inicialización y gestión de los diferentes motores necesarios para correr la aplicación así como una seríe de herramientas auxiliares usadas por el proyecto. </p>
+<p>Su misión principal es la de inicializar los subsistemas de <a class="el" href="namespace_ogre.html" title="Si se define la siguiente directiva, en modo ventana el juego no toma ratón y teclado como como de us...">Ogre</a>, OIS, etc. y hacerlos accesibles al resto de proyectos de la solución. De esta manera se ocultan los detalles engorrosos de la creación y destrucción de los recursos necesarios para que luego el resto de proyectos de la solución puedan acceder a ellos de forma limpia. Su otra función es la de ofrecer una seríe de funciones y estructuras con las que trabajar por el resto de proyectos. </p>
+<p>Para activar su funcionalidad basta con inicializar el servidor central del grupo. Se trata de un servidor de inicialización y destrucción explícita por lo que habrá que llamar a <code><a class="el" href="class_base_subsystems_1_1_c_server.html#ad0c8077efe4d124b782c1f8c77c8d0ab" title="Inicializa los diferentes subsistemas. ">BaseSubsystems::CServer::Init()</a></code> y <code><a class="el" href="class_base_subsystems_1_1_c_server.html#a4a5b72af15267f5a2319ff9334836bbd" title="Libera el gestor de subsistemas. ">BaseSubsystems::CServer::Release()</a></code>. </p>
+<p>Es importante recalcar que este servidor debe de ser inicializado <b>antes</b> que el resto ya que varios de ellos necesitan pedir recursos a éste en sus inicializaciones. </p>
+<p>En la cabecera Server.h se puede definir o no definir la directiva NON_EXCLUSIVE_MODE_IN_WINDOW_MODE que indica si se quiere que la aplicación se haga con el control del ratón y dibuje su propio cursor o por el contrario se quiere usar el del sistema operativo, de manera que se pueda acceder a otras aplicaciones mientras corre el juego. Por defecto está activa sólo en DEBUG.</p>
+<dl class="section author"><dt>Autor</dt><dd>David Llansó </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>Septiembre, 2010 </dd></dl>
+</div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

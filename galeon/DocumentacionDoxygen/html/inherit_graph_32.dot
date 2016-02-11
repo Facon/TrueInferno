@@ -1,0 +1,7 @@
+digraph "Representación gráfica de la clase"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Map::slice\< T, S \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_map_1_1slice.html",tooltip="Present a slice of the top of a stack. "];
+}

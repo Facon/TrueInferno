@@ -1,0 +1,701 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Referencia de la Clase Logic::CServer</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Estructura&#160;de&#160;datos</span></a></li>
+      <li><a href="inherits.html"><span>Jerarquía&#160;de&#160;la&#160;clase</span></a></li>
+      <li><a href="functions.html"><span>Campos&#160;de&#160;datos</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_logic.html">Logic</a></li><li class="navelem"><a class="el" href="class_logic_1_1_c_server.html">CServer</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Métodos públicos</a> &#124;
+<a href="#pub-static-methods">Métodos públicos estáticos</a> &#124;
+<a href="#pro-methods">Métodos protegidos</a> &#124;
+<a href="#pro-attribs">Atributos protegidos</a> &#124;
+<a href="#pri-static-attribs">Atributos privados estáticos</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia de la Clase Logic::CServer<div class="ingroups"><a class="el" href="group__logic_group.html">Lógica de juego</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Servidor de la lógica que se se encarga de la creación del mundo, su destrucción y actualización a lo largo de la partida.  
+ <a href="class_logic_1_1_c_server.html#details">Más...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_logic_2_server_8h_source.html">Server.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Diagrama de colaboración para Logic::CServer:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="class_logic_1_1_c_server__coll__graph.png" border="0" usemap="#_logic_1_1_c_server_coll__map" alt="Collaboration graph"/></div>
+<map name="_logic_1_1_c_server_coll__map" id="_logic_1_1_c_server_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">significado de colores y flechas</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Métodos públicos</h2></td></tr>
+<tr class="memitem:ab37956274022d10d61cbe170b0d8bbb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#ab37956274022d10d61cbe170b0d8bbb9">tick</a> (unsigned int msecs)</td></tr>
+<tr class="memdesc:ab37956274022d10d61cbe170b0d8bbb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función llamada en cada frame para que se realicen las funciones de actualización adecuadas.  <a href="#ab37956274022d10d61cbe170b0d8bbb9">Más...</a><br /></td></tr>
+<tr class="separator:ab37956274022d10d61cbe170b0d8bbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57c90be973f7f839ca56eb039e68c825"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a57c90be973f7f839ca56eb039e68c825">activateMap</a> ()</td></tr>
+<tr class="memdesc:a57c90be973f7f839ca56eb039e68c825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función que activa el mapa en curso.  <a href="#a57c90be973f7f839ca56eb039e68c825">Más...</a><br /></td></tr>
+<tr class="separator:a57c90be973f7f839ca56eb039e68c825"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c8e7e8bb7655ed7fcdb0414cf1c8030"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a6c8e7e8bb7655ed7fcdb0414cf1c8030">deactivateMap</a> ()</td></tr>
+<tr class="memdesc:a6c8e7e8bb7655ed7fcdb0414cf1c8030"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función que desactiva el mapa en curso.  <a href="#a6c8e7e8bb7655ed7fcdb0414cf1c8030">Más...</a><br /></td></tr>
+<tr class="separator:a6c8e7e8bb7655ed7fcdb0414cf1c8030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60dbc4a690c8afb80ad42730df2aca09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_logic_1_1_c_map.html">CMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a60dbc4a690c8afb80ad42730df2aca09">getMap</a> ()</td></tr>
+<tr class="memdesc:a60dbc4a690c8afb80ad42730df2aca09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve el mapa lógico del juego.  <a href="#a60dbc4a690c8afb80ad42730df2aca09">Más...</a><br /></td></tr>
+<tr class="separator:a60dbc4a690c8afb80ad42730df2aca09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7db46d4add2e4897e0fd6f6e91c7373c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_logic_1_1_c_entity.html">CEntity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a7db46d4add2e4897e0fd6f6e91c7373c">getPlayer</a> ()</td></tr>
+<tr class="memdesc:a7db46d4add2e4897e0fd6f6e91c7373c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve la entidad del jugador.  <a href="#a7db46d4add2e4897e0fd6f6e91c7373c">Más...</a><br /></td></tr>
+<tr class="separator:a7db46d4add2e4897e0fd6f6e91c7373c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36626bd13da505c2431276bd90265d56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a36626bd13da505c2431276bd90265d56">setPlayer</a> (<a class="el" href="class_logic_1_1_c_entity.html">CEntity</a> *player)</td></tr>
+<tr class="memdesc:a36626bd13da505c2431276bd90265d56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Establece la entidad del jugador.  <a href="#a36626bd13da505c2431276bd90265d56">Más...</a><br /></td></tr>
+<tr class="separator:a36626bd13da505c2431276bd90265d56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07338753f946c3d59a76f794594a0158"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a07338753f946c3d59a76f794594a0158">loadLevel</a> (const std::string &amp;filename)</td></tr>
+<tr class="memdesc:a07338753f946c3d59a76f794594a0158"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carga un nuevo nivel a partir del nombre del mapa que se desea cargar.  <a href="#a07338753f946c3d59a76f794594a0158">Más...</a><br /></td></tr>
+<tr class="separator:a07338753f946c3d59a76f794594a0158"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ecad59c481f2d2ea891836115a21d0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a1ecad59c481f2d2ea891836115a21d0d">unLoadLevel</a> ()</td></tr>
+<tr class="memdesc:a1ecad59c481f2d2ea891836115a21d0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Si hay un nivel cargado lo descarga destruye.  <a href="#a1ecad59c481f2d2ea891836115a21d0d">Más...</a><br /></td></tr>
+<tr class="separator:a1ecad59c481f2d2ea891836115a21d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Métodos públicos estáticos</h2></td></tr>
+<tr class="memitem:a6f7538360ea983bd1e81d0c988c14b27"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_logic_1_1_c_server.html">CServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a6f7538360ea983bd1e81d0c988c14b27">getSingletonPtr</a> ()</td></tr>
+<tr class="memdesc:a6f7538360ea983bd1e81d0c988c14b27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve la única instancia de la clase <a class="el" href="class_logic_1_1_c_server.html" title="Servidor de la lógica que se se encarga de la creación del mundo, su destrucción y actualización a lo...">CServer</a>.  <a href="#a6f7538360ea983bd1e81d0c988c14b27">Más...</a><br /></td></tr>
+<tr class="separator:a6f7538360ea983bd1e81d0c988c14b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80fa02eb6a6dd105aca546cbf8e7e93a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a80fa02eb6a6dd105aca546cbf8e7e93a">Init</a> ()</td></tr>
+<tr class="memdesc:a80fa02eb6a6dd105aca546cbf8e7e93a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa la instancia.  <a href="#a80fa02eb6a6dd105aca546cbf8e7e93a">Más...</a><br /></td></tr>
+<tr class="separator:a80fa02eb6a6dd105aca546cbf8e7e93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a092004ad9f1e4f973bd6dbcc2b12b944"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a092004ad9f1e4f973bd6dbcc2b12b944">Release</a> ()</td></tr>
+<tr class="memdesc:a092004ad9f1e4f973bd6dbcc2b12b944"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libera la instancia de <a class="el" href="class_logic_1_1_c_server.html" title="Servidor de la lógica que se se encarga de la creación del mundo, su destrucción y actualización a lo...">CServer</a>.  <a href="#a092004ad9f1e4f973bd6dbcc2b12b944">Más...</a><br /></td></tr>
+<tr class="separator:a092004ad9f1e4f973bd6dbcc2b12b944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Métodos protegidos</h2></td></tr>
+<tr class="memitem:aa3277fb7ded9c4d7a60747805d527c29"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#aa3277fb7ded9c4d7a60747805d527c29">CServer</a> ()</td></tr>
+<tr class="memdesc:aa3277fb7ded9c4d7a60747805d527c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#aa3277fb7ded9c4d7a60747805d527c29">Más...</a><br /></td></tr>
+<tr class="separator:aa3277fb7ded9c4d7a60747805d527c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6da9f8b52bdc049e21cd7c687ef4d4b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#af6da9f8b52bdc049e21cd7c687ef4d4b">~CServer</a> ()</td></tr>
+<tr class="memdesc:af6da9f8b52bdc049e21cd7c687ef4d4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#af6da9f8b52bdc049e21cd7c687ef4d4b">Más...</a><br /></td></tr>
+<tr class="separator:af6da9f8b52bdc049e21cd7c687ef4d4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56bffc91e7da9e110cec2db96470a2d9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a56bffc91e7da9e110cec2db96470a2d9">open</a> ()</td></tr>
+<tr class="memdesc:a56bffc91e7da9e110cec2db96470a2d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Segunda fase de la construcción del objeto.  <a href="#a56bffc91e7da9e110cec2db96470a2d9">Más...</a><br /></td></tr>
+<tr class="separator:a56bffc91e7da9e110cec2db96470a2d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe2afbbf456f3caaafd094289226f249"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#afe2afbbf456f3caaafd094289226f249">close</a> ()</td></tr>
+<tr class="memdesc:afe2afbbf456f3caaafd094289226f249"><td class="mdescLeft">&#160;</td><td class="mdescRight">Segunda fase de la destrucción del objeto.  <a href="#afe2afbbf456f3caaafd094289226f249">Más...</a><br /></td></tr>
+<tr class="separator:afe2afbbf456f3caaafd094289226f249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Atributos protegidos</h2></td></tr>
+<tr class="memitem:a45fb3b63f6d3a1eedcaf2ec74097b740"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_logic_1_1_c_map.html">CMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a45fb3b63f6d3a1eedcaf2ec74097b740">_map</a></td></tr>
+<tr class="memdesc:a45fb3b63f6d3a1eedcaf2ec74097b740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapa donde se encuentran todas las entidades lógicas.  <a href="#a45fb3b63f6d3a1eedcaf2ec74097b740">Más...</a><br /></td></tr>
+<tr class="separator:a45fb3b63f6d3a1eedcaf2ec74097b740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453a9f3eb7d3dc40bfd5f682b4db790f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_logic_1_1_c_entity.html">CEntity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a453a9f3eb7d3dc40bfd5f682b4db790f">_player</a></td></tr>
+<tr class="memdesc:a453a9f3eb7d3dc40bfd5f682b4db790f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Entidad del jugador.  <a href="#a453a9f3eb7d3dc40bfd5f682b4db790f">Más...</a><br /></td></tr>
+<tr class="separator:a453a9f3eb7d3dc40bfd5f682b4db790f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Atributos privados estáticos</h2></td></tr>
+<tr class="memitem:a475a5b5dba33b06d78f865490211830c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_logic_1_1_c_server.html">CServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_server.html#a475a5b5dba33b06d78f865490211830c">_instance</a> = 0</td></tr>
+<tr class="memdesc:a475a5b5dba33b06d78f865490211830c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Única instancia de la clase.  <a href="#a475a5b5dba33b06d78f865490211830c">Más...</a><br /></td></tr>
+<tr class="separator:a475a5b5dba33b06d78f865490211830c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Servidor de la lógica que se se encarga de la creación del mundo, su destrucción y actualización a lo largo de la partida. </p>
+<p>Se encarga de inicializar el parseador de mapas y la factoría de entidades para cargar y gestionar el mapa de la partida.</p>
+<dl class="section author"><dt>Autor</dt><dd>David Llansó </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>Agosto, 2010 </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8h_source.html#l00047">47</a> del archivo <a class="el" href="_logic_2_server_8h_source.html">Server.h</a>.</p>
+</div><h2 class="groupheader">Documentación del constructor y destructor</h2>
+<a class="anchor" id="aa3277fb7ded9c4d7a60747805d527c29"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CServer::CServer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00033">33</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00170">_instance</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8cpp_source.html#l00049">Init()</a> y <a class="el" href="_logic_2_server_8h_source.html#l00112">setPlayer()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af6da9f8b52bdc049e21cd7c687ef4d4b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CServer::~CServer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00041">41</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00170">_instance</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8h_source.html#l00112">setPlayer()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones miembro</h2>
+<a class="anchor" id="a57c90be973f7f839ca56eb039e68c825"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Logic::CServer::activateMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función que activa el mapa en curso. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>true si la inicialización fue correcta. </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00160">160</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00159">_map</a> y <a class="el" href="_map_8cpp_source.html#l00108">Logic::CMap::activate()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_game_state_8cpp_source.html#l00078">Application::CGameState::activate()</a> y <a class="el" href="_logic_2_server_8h_source.html#l00056">getSingletonPtr()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afe2afbbf456f3caaafd094289226f249"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logic::CServer::close </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Segunda fase de la destrucción del objeto. </p>
+<p>Sirve para hacer liberar los recursos de la propia instancia, la liberación de los recursos estáticos se hace en <a class="el" href="class_logic_1_1_c_server.html#a092004ad9f1e4f973bd6dbcc2b12b944" title="Libera la instancia de CServer. ">Release()</a>. </p>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00105">105</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_entity_factory_8cpp_source.html#l00089">Logic::CEntityFactory::Release()</a>, <a class="el" href="_building_manager_8cpp_source.html#l00068">Logic::CBuildingManager::Release()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00081">Logic::CTileManager::Release()</a>, <a class="el" href="_map_parser_8cpp_source.html#l00056">Map::CMapParser::Release()</a> y <a class="el" href="_logic_2_server_8cpp_source.html#l00146">unLoadLevel()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8cpp_source.html#l00067">Release()</a> y <a class="el" href="_logic_2_server_8h_source.html#l00112">setPlayer()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6c8e7e8bb7655ed7fcdb0414cf1c8030"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logic::CServer::deactivateMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función que desactiva el mapa en curso. </p>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00168">168</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00159">_map</a> y <a class="el" href="_map_8cpp_source.html#l00128">Logic::CMap::deactivate()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_game_state_8cpp_source.html#l00102">Application::CGameState::deactivate()</a> y <a class="el" href="_logic_2_server_8h_source.html#l00056">getSingletonPtr()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a60dbc4a690c8afb80ad42730df2aca09"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_logic_1_1_c_map.html">CMap</a>* Logic::CServer::getMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Devuelve el mapa lógico del juego. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>Mapa con las entidades de juego. </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8h_source.html#l00098">98</a> del archivo <a class="el" href="_logic_2_server_8h_source.html">Server.h</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00159">_map</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7db46d4add2e4897e0fd6f6e91c7373c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_logic_1_1_c_entity.html">CEntity</a>* Logic::CServer::getPlayer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Devuelve la entidad del jugador. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>Entidad del jugador. </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8h_source.html#l00105">105</a> del archivo <a class="el" href="_logic_2_server_8h_source.html">Server.h</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00164">_player</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_entity_2_components_2_camera_8cpp_source.html#l00058">Logic::CCamera::activate()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6f7538360ea983bd1e81d0c988c14b27"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_logic_1_1_c_server.html">CServer</a>* Logic::CServer::getSingletonPtr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Devuelve la única instancia de la clase <a class="el" href="class_logic_1_1_c_server.html" title="Servidor de la lógica que se se encarga de la creación del mundo, su destrucción y actualización a lo...">CServer</a>. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>Única instancia de la clase <a class="el" href="class_logic_1_1_c_server.html" title="Servidor de la lógica que se se encarga de la creación del mundo, su destrucción y actualización a lo...">CServer</a>. </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8h_source.html#l00056">56</a> del archivo <a class="el" href="_logic_2_server_8h_source.html">Server.h</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00170">_instance</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00160">activateMap()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00168">deactivateMap()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00049">Init()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00067">Release()</a> y <a class="el" href="_logic_2_server_8cpp_source.html#l00176">tick()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_entity_2_components_2_camera_8cpp_source.html#l00058">Logic::CCamera::activate()</a>, <a class="el" href="_game_state_8cpp_source.html#l00078">Application::CGameState::activate()</a>, <a class="el" href="_logic_2_entity_2_entity_8cpp_source.html#l00092">Logic::CEntity::activate()</a>, <a class="el" href="_physic_controller_8cpp_source.html#l00031">Logic::CPhysicController::CPhysicController()</a>, <a class="el" href="_physic_entity_8cpp_source.html#l00034">Logic::CPhysicEntity::CPhysicEntity()</a>, <a class="el" href="_game_state_8cpp_source.html#l00102">Application::CGameState::deactivate()</a>, <a class="el" href="_logic_2_entity_2_entity_8cpp_source.html#l00120">Logic::CEntity::deactivate()</a>, <a class="el" href="_game_state_8cpp_source.html#l00034">Application::CGameState::init()</a>, <a class="el" href="3_d_application_8cpp_source.html#l00093">Application::C3DApplication::release()</a>, <a class="el" href="_game_state_8cpp_source.html#l00063">Application::CGameState::release()</a> y <a class="el" href="_game_state_8cpp_source.html#l00125">Application::CGameState::tick()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a80fa02eb6a6dd105aca546cbf8e7e93a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CServer::Init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inicializa la instancia. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>Devuelve false si no se ha podido inicializar. </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00049">49</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00170">_instance</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00033">CServer()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00081">open()</a> y <a class="el" href="_logic_2_server_8cpp_source.html#l00067">Release()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8h_source.html#l00056">getSingletonPtr()</a> y <a class="el" href="3_d_application_8cpp_source.html#l00049">Application::C3DApplication::init()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a07338753f946c3d59a76f794594a0158"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Logic::CServer::loadLevel </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Carga un nuevo nivel a partir del nombre del mapa que se desea cargar. </p>
+<p>Si ya existía un mapa este se borra, solo permitimos un nivel activo.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Fichero que se desea cargar. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>true si la carga fue correcta. </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00121">121</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00159">_map</a>, <a class="el" href="_map_8cpp_source.html#l00030">Logic::CMap::createMapFromFile()</a>, <a class="el" href="_building_manager_8h_source.html#l00064">Logic::CBuildingManager::getSingletonPtr()</a>, <a class="el" href="_tile_manager_8h_source.html#l00078">Logic::CTileManager::getSingletonPtr()</a>, <a class="el" href="_building_manager_8cpp_source.html#l00094">Logic::CBuildingManager::loadInitialBuildings()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00095">Logic::CTileManager::loadInitialMatrix()</a> y <a class="el" href="_logic_2_server_8cpp_source.html#l00146">unLoadLevel()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8h_source.html#l00112">setPlayer()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a56bffc91e7da9e110cec2db96470a2d9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Logic::CServer::open </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Segunda fase de la construcción del objeto. </p>
+<p>Sirve para hacer inicializaciones de la propia instancia en vez de inicializaciones estáticas.</p>
+<dl class="section return"><dt>Devuelve</dt><dd>true si todo fue correctamente. </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00081">81</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_entity_factory_8cpp_source.html#l00071">Logic::CEntityFactory::Init()</a>, <a class="el" href="_building_manager_8cpp_source.html#l00050">Logic::CBuildingManager::Init()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00063">Logic::CTileManager::Init()</a> y <a class="el" href="_map_parser_8cpp_source.html#l00045">Map::CMapParser::Init()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8cpp_source.html#l00049">Init()</a> y <a class="el" href="_logic_2_server_8h_source.html#l00112">setPlayer()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a092004ad9f1e4f973bd6dbcc2b12b944"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CServer::Release </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Libera la instancia de <a class="el" href="class_logic_1_1_c_server.html" title="Servidor de la lógica que se se encarga de la creación del mundo, su destrucción y actualización a lo...">CServer</a>. </p>
+<p>Debe llamarse al finalizar la aplicación. </p>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00067">67</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00170">_instance</a> y <a class="el" href="_logic_2_server_8cpp_source.html#l00105">close()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8h_source.html#l00056">getSingletonPtr()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00049">Init()</a> y <a class="el" href="3_d_application_8cpp_source.html#l00093">Application::C3DApplication::release()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a36626bd13da505c2431276bd90265d56"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logic::CServer::setPlayer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_logic_1_1_c_entity.html">CEntity</a> *&#160;</td>
+          <td class="paramname"><em>player</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Establece la entidad del jugador. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td>Entidad del jugador. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8h_source.html#l00112">112</a> del archivo <a class="el" href="_logic_2_server_8h_source.html">Server.h</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00164">_player</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00105">close()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00033">CServer()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00121">loadLevel()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00081">open()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00146">unLoadLevel()</a> y <a class="el" href="_logic_2_server_8cpp_source.html#l00041">~CServer()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_entity_2_entity_8cpp_source.html#l00092">Logic::CEntity::activate()</a> y <a class="el" href="_logic_2_entity_2_entity_8cpp_source.html#l00120">Logic::CEntity::deactivate()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab37956274022d10d61cbe170b0d8bbb9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CServer::tick </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>msecs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función llamada en cada frame para que se realicen las funciones de actualización adecuadas. </p>
+<p>Llamará al método <a class="el" href="class_logic_1_1_c_server.html#ab37956274022d10d61cbe170b0d8bbb9" title="Función llamada en cada frame para que se realicen las funciones de actualización adecuadas...">tick()</a> del mapa.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msecs</td><td>Milisegundos transcurridos desde el último tick. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00176">176</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00159">_map</a>, <a class="el" href="_entity_factory_8cpp_source.html#l00273">Logic::CEntityFactory::deleteDefferedEntities()</a>, <a class="el" href="_entity_factory_8h_source.html#l00075">Logic::CEntityFactory::getSingletonPtr()</a> y <a class="el" href="_map_8cpp_source.html#l00145">Logic::CMap::tick()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_physics_2_server_8cpp_source.html#l00245">Physics::CServer::destroyScene()</a>, <a class="el" href="_logic_2_server_8h_source.html#l00056">getSingletonPtr()</a> y <a class="el" href="_game_state_8cpp_source.html#l00125">Application::CGameState::tick()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1ecad59c481f2d2ea891836115a21d0d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logic::CServer::unLoadLevel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Si hay un nivel cargado lo descarga destruye. </p>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8cpp_source.html#l00146">146</a> del archivo <a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_logic_2_server_8h_source.html#l00159">_map</a>, <a class="el" href="_logic_2_server_8h_source.html#l00164">_player</a> y <a class="el" href="_map_8cpp_source.html#l00128">Logic::CMap::deactivate()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8cpp_source.html#l00105">close()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00121">loadLevel()</a>, <a class="el" href="_game_state_8cpp_source.html#l00063">Application::CGameState::release()</a> y <a class="el" href="_logic_2_server_8h_source.html#l00112">setPlayer()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de los campos</h2>
+<a class="anchor" id="a475a5b5dba33b06d78f865490211830c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_logic_1_1_c_server.html">CServer</a> * CServer::_instance = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Única instancia de la clase. </p>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8h_source.html#l00170">170</a> del archivo <a class="el" href="_logic_2_server_8h_source.html">Server.h</a>.</p>
+
+<p>Referenciado por <a class="el" href="_physics_2_server_8cpp_source.html#l00199">Physics::CServer::createScene()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00033">CServer()</a>, <a class="el" href="_physics_2_server_8cpp_source.html#l00245">Physics::CServer::destroyScene()</a>, <a class="el" href="_logic_2_server_8h_source.html#l00056">getSingletonPtr()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00049">Init()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00067">Release()</a> y <a class="el" href="_logic_2_server_8cpp_source.html#l00041">~CServer()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a45fb3b63f6d3a1eedcaf2ec74097b740"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_logic_1_1_c_map.html">CMap</a>* Logic::CServer::_map</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mapa donde se encuentran todas las entidades lógicas. </p>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8h_source.html#l00159">159</a> del archivo <a class="el" href="_logic_2_server_8h_source.html">Server.h</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8cpp_source.html#l00160">activateMap()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00168">deactivateMap()</a>, <a class="el" href="_logic_2_server_8h_source.html#l00098">getMap()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00121">loadLevel()</a>, <a class="el" href="_logic_2_server_8cpp_source.html#l00176">tick()</a> y <a class="el" href="_logic_2_server_8cpp_source.html#l00146">unLoadLevel()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a453a9f3eb7d3dc40bfd5f682b4db790f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_logic_1_1_c_entity.html">CEntity</a>* Logic::CServer::_player</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Entidad del jugador. </p>
+
+<p>Definición en la línea <a class="el" href="_logic_2_server_8h_source.html#l00164">164</a> del archivo <a class="el" href="_logic_2_server_8h_source.html">Server.h</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8h_source.html#l00105">getPlayer()</a>, <a class="el" href="_logic_2_server_8h_source.html#l00112">setPlayer()</a> y <a class="el" href="_logic_2_server_8cpp_source.html#l00146">unLoadLevel()</a>.</p>
+
+</div>
+</div>
+<hr/>La documentación para esta clase fue generada a partir de los siguientes ficheros:<ul>
+<li>Src/Logic/<a class="el" href="_logic_2_server_8h_source.html">Server.h</a></li>
+<li>Src/Logic/<a class="el" href="_logic_2_server_8cpp_source.html">Server.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

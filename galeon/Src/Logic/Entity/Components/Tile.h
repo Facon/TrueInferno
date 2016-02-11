@@ -20,6 +20,9 @@ namespace Logic {
 		*/
 		Tile();
 
+		/** Destructor */
+		Tile::~Tile();
+
 		/**
 		Inicializaci�n del componente usando la descripci�n de la entidad que hay en
 		el fichero de mapa.
@@ -57,7 +60,7 @@ namespace Logic {
 		bool canPlaceSomething();
 
 		/** Devuelve el vector de tiles adyacentes */
-		const std::vector<Tile*> getAdjacentTiles();
+		const std::vector<Tile*>* getAdjacentTiles();
 
 		/** Devuelve un boolean indicando si es posible hacer pasar una SoulPath por el Tile */
 		bool canPassSoulPath();
@@ -67,6 +70,15 @@ namespace Logic {
 
 		/** Imprime información de debug */
 		void printDebugInfo();
+
+
+		/** Calcula la distancia de Manhattan con respecto a otro Tile.
+		Debería estar en OgreVector3 para generalizar su uso pero no linka.
+		*/
+		inline float manhattanDistance(const Tile& rhs) const
+		{
+			return Ogre::Math::Abs(this->_logicPosition.x - rhs._logicPosition.x) + Ogre::Math::Abs(this->_logicPosition.y - rhs._logicPosition.y) + Ogre::Math::Abs(this->_logicPosition.z - rhs._logicPosition.z);
+		}
 
 	private:
 		/** Número de tiles adyacentes que tiene normalmente un tile (salvo las de los extremos): 4 (si no se consideran las diagonales) */
@@ -78,7 +90,7 @@ namespace Logic {
 		TerrainType _terrainType;
 
 		/** Vector de tiles adyacentes */
-		std::vector<Tile*> _adjacentTiles;
+		std::vector<Tile*>* _adjacentTiles;
 
 		/** Referencia al TileManager */
 		CTileManager *_tileManager;

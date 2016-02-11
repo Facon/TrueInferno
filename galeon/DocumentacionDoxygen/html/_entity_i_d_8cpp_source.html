@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Fichero Fuente Src/Logic/Maps/EntityID.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_413f4e031a85da0d68269c6fd2f76e1c.html">Src</a></li><li class="navelem"><a class="el" href="dir_d2dfb49d6ca7b999bdafe5a748473e42.html">Logic</a></li><li class="navelem"><a class="el" href="dir_38a48bd85dd922a682381912690847d2.html">Maps</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">EntityID.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_entity_i_d_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_entity_i_d_8h.html">EntityID.h</a>&quot;</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_logic.html">Logic</a> </div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="namespace_logic.html#affc5109dce56527c1b6f2a878428d893">TEntityID</a> <a class="code" href="class_logic_1_1_entity_i_d.html#af0fae24135a51579925b2ce44b0198c4">EntityID::_nextId</a> = EntityID::FIRST_ID;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">//---------------------------------------------------------</span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_logic_1_1_entity_i_d.html#a64c52534d03863566a89081e17c4cebf">   24</a></span>&#160;    <a class="code" href="namespace_logic.html#affc5109dce56527c1b6f2a878428d893">TEntityID</a> <a class="code" href="class_logic_1_1_entity_i_d.html#a64c52534d03863566a89081e17c4cebf">EntityID::NextID</a>() </div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="namespace_logic.html#affc5109dce56527c1b6f2a878428d893">TEntityID</a> ret = <a class="code" href="class_logic_1_1_entity_i_d.html#af0fae24135a51579925b2ce44b0198c4">_nextId</a>;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        assert(ret != EntityID::UNASSIGNED &amp;&amp; <span class="stringliteral">&quot;Se han asignado todos los identificadores posibles.&quot;</span>);</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="class_logic_1_1_entity_i_d.html#af0fae24135a51579925b2ce44b0198c4">_nextId</a>++;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">return</span> ret;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    } <span class="comment">// NextEntityId</span></div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}; <span class="comment">// namespace Logic</span></div><div class="ttc" id="namespace_logic_html"><div class="ttname"><a href="namespace_logic.html">Logic</a></div><div class="ttdoc">Namespace que engloba la lógica del juego. </div><div class="ttdef"><b>Definition:</b> <a href="_player_controller_8h_source.html#l00019">PlayerController.h:19</a></div></div>
+<div class="ttc" id="class_logic_1_1_entity_i_d_html_af0fae24135a51579925b2ce44b0198c4"><div class="ttname"><a href="class_logic_1_1_entity_i_d.html#af0fae24135a51579925b2ce44b0198c4">Logic::EntityID::_nextId</a></div><div class="ttdeci">static TEntityID _nextId</div><div class="ttdoc">Próximo identificador a asignar (aun no asignado). </div><div class="ttdef"><b>Definition:</b> <a href="_entity_i_d_8h_source.html#l00056">EntityID.h:56</a></div></div>
+<div class="ttc" id="namespace_logic_html_affc5109dce56527c1b6f2a878428d893"><div class="ttname"><a href="namespace_logic.html#affc5109dce56527c1b6f2a878428d893">Logic::TEntityID</a></div><div class="ttdeci">unsigned int TEntityID</div><div class="ttdoc">Tipo que representa el identificador de una entidad. </div><div class="ttdef"><b>Definition:</b> <a href="_entity_i_d_8h_source.html#l00024">EntityID.h:24</a></div></div>
+<div class="ttc" id="_entity_i_d_8h_html"><div class="ttname"><a href="_entity_i_d_8h.html">EntityID.h</a></div><div class="ttdoc">Contiene la definición del tipo de identificación de entidades y una función para generación de nuevo...</div></div>
+<div class="ttc" id="class_logic_1_1_entity_i_d_html_a64c52534d03863566a89081e17c4cebf"><div class="ttname"><a href="class_logic_1_1_entity_i_d.html#a64c52534d03863566a89081e17c4cebf">Logic::EntityID::NextID</a></div><div class="ttdeci">static TEntityID NextID()</div><div class="ttdoc">Devuelve el siguiente identificador de entidad sin asignar. </div><div class="ttdef"><b>Definition:</b> <a href="_entity_i_d_8cpp_source.html#l00024">EntityID.cpp:24</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

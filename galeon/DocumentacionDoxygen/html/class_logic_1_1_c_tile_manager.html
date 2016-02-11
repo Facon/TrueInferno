@@ -1,0 +1,630 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Referencia de la Clase Logic::CTileManager</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Estructura&#160;de&#160;datos</span></a></li>
+      <li><a href="inherits.html"><span>Jerarquía&#160;de&#160;la&#160;clase</span></a></li>
+      <li><a href="functions.html"><span>Campos&#160;de&#160;datos</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_logic.html">Logic</a></li><li class="navelem"><a class="el" href="class_logic_1_1_c_tile_manager.html">CTileManager</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Métodos públicos</a> &#124;
+<a href="#pub-static-methods">Métodos públicos estáticos</a> &#124;
+<a href="#pro-methods">Métodos protegidos</a> &#124;
+<a href="#pri-methods">Métodos privados</a> &#124;
+<a href="#pri-attribs">Atributos privados</a> &#124;
+<a href="#pri-static-attribs">Atributos privados estáticos</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia de la Clase Logic::CTileManager<div class="ingroups"><a class="el" href="group__logic_group.html">Lógica de juego</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Manager singleton que gestiona la lectura y actualización de la matriz de tiles del mapa.  
+ <a href="class_logic_1_1_c_tile_manager.html#details">Más...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_tile_manager_8h_source.html">TileManager.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Diagrama de colaboración para Logic::CTileManager:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="class_logic_1_1_c_tile_manager__coll__graph.png" border="0" usemap="#_logic_1_1_c_tile_manager_coll__map" alt="Collaboration graph"/></div>
+<map name="_logic_1_1_c_tile_manager_coll__map" id="_logic_1_1_c_tile_manager_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">significado de colores y flechas</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Métodos públicos</h2></td></tr>
+<tr class="memitem:ab21a1e163f2c0c331d4b75711c1528ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#ab21a1e163f2c0c331d4b75711c1528ca">loadInitialMatrix</a> (<a class="el" href="class_logic_1_1_c_map.html">CMap</a> *map)</td></tr>
+<tr class="memdesc:ab21a1e163f2c0c331d4b75711c1528ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lee y genera la matriz inicial de tiles del mapa.  <a href="#ab21a1e163f2c0c331d4b75711c1528ca">Más...</a><br /></td></tr>
+<tr class="separator:ab21a1e163f2c0c331d4b75711c1528ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22147a053f73d5d0bb4f2cde458763b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#a22147a053f73d5d0bb4f2cde458763b0">registerTile</a> (<a class="el" href="class_logic_1_1_tile.html">Tile</a> *tile)</td></tr>
+<tr class="memdesc:a22147a053f73d5d0bb4f2cde458763b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register internally a tile in the matrix tile.  <a href="#a22147a053f73d5d0bb4f2cde458763b0">Más...</a><br /></td></tr>
+<tr class="separator:a22147a053f73d5d0bb4f2cde458763b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6a55600648babf7187ccf6ee27e9027"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_logic_1_1_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#ae6a55600648babf7187ccf6ee27e9027">getTile</a> (const <a class="el" href="_math_8h.html#a3771b51d2ba333bb3c797170bb8ec6f9">Vector3</a> &amp;position)</td></tr>
+<tr class="memdesc:ae6a55600648babf7187ccf6ee27e9027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a tile given its logic position.  <a href="#ae6a55600648babf7187ccf6ee27e9027">Más...</a><br /></td></tr>
+<tr class="separator:ae6a55600648babf7187ccf6ee27e9027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Métodos públicos estáticos</h2></td></tr>
+<tr class="memitem:a481d11fbcf158c286822f37d57eff241"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_logic_1_1_c_tile_manager.html">Logic::CTileManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#a481d11fbcf158c286822f37d57eff241">getSingletonPtr</a> ()</td></tr>
+<tr class="memdesc:a481d11fbcf158c286822f37d57eff241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve la única instancia de la clase.  <a href="#a481d11fbcf158c286822f37d57eff241">Más...</a><br /></td></tr>
+<tr class="separator:a481d11fbcf158c286822f37d57eff241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2be937e6a1beef9b7da1f6d1a3cb4084"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#a2be937e6a1beef9b7da1f6d1a3cb4084">Init</a> ()</td></tr>
+<tr class="memdesc:a2be937e6a1beef9b7da1f6d1a3cb4084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa la instancia y los recursos estáticos.  <a href="#a2be937e6a1beef9b7da1f6d1a3cb4084">Más...</a><br /></td></tr>
+<tr class="separator:a2be937e6a1beef9b7da1f6d1a3cb4084"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d360c1337f4cee6ee4642a50643f5b4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#a7d360c1337f4cee6ee4642a50643f5b4">Release</a> ()</td></tr>
+<tr class="memdesc:a7d360c1337f4cee6ee4642a50643f5b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libera la propia instancia y los recursos estáticos.  <a href="#a7d360c1337f4cee6ee4642a50643f5b4">Más...</a><br /></td></tr>
+<tr class="separator:a7d360c1337f4cee6ee4642a50643f5b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Métodos protegidos</h2></td></tr>
+<tr class="memitem:a1dcaa6fbad255fd7f8f9aaec2124e825"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#a1dcaa6fbad255fd7f8f9aaec2124e825">CTileManager</a> ()</td></tr>
+<tr class="memdesc:a1dcaa6fbad255fd7f8f9aaec2124e825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a1dcaa6fbad255fd7f8f9aaec2124e825">Más...</a><br /></td></tr>
+<tr class="separator:a1dcaa6fbad255fd7f8f9aaec2124e825"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a549f24a505dacf1658dff85a03306113"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#a549f24a505dacf1658dff85a03306113">~CTileManager</a> ()</td></tr>
+<tr class="memdesc:a549f24a505dacf1658dff85a03306113"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#a549f24a505dacf1658dff85a03306113">Más...</a><br /></td></tr>
+<tr class="separator:a549f24a505dacf1658dff85a03306113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a391c52fb726cef24be9c7a4d6e4b7e0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#a391c52fb726cef24be9c7a4d6e4b7e0a">open</a> ()</td></tr>
+<tr class="memdesc:a391c52fb726cef24be9c7a4d6e4b7e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Segunda fase de la construcción del objeto.  <a href="#a391c52fb726cef24be9c7a4d6e4b7e0a">Más...</a><br /></td></tr>
+<tr class="separator:a391c52fb726cef24be9c7a4d6e4b7e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacaf7241a8874157088a7d5d09ec453b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#aacaf7241a8874157088a7d5d09ec453b">close</a> ()</td></tr>
+<tr class="memdesc:aacaf7241a8874157088a7d5d09ec453b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Segunda fase de la destrucción del objeto.  <a href="#aacaf7241a8874157088a7d5d09ec453b">Más...</a><br /></td></tr>
+<tr class="separator:aacaf7241a8874157088a7d5d09ec453b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Métodos privados</h2></td></tr>
+<tr class="memitem:a38f9c5ee258467b7005b834ccc20d3ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#a38f9c5ee258467b7005b834ccc20d3ff">loadTerrain</a> (const std::string &amp;filename)</td></tr>
+<tr class="memdesc:a38f9c5ee258467b7005b834ccc20d3ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign terrain type to all tiles in the map reading them from the given file.  <a href="#a38f9c5ee258467b7005b834ccc20d3ff">Más...</a><br /></td></tr>
+<tr class="separator:a38f9c5ee258467b7005b834ccc20d3ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Atributos privados</h2></td></tr>
+<tr class="memitem:adc063bf2ef169d61c11cf776e51b3309"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#adc063bf2ef169d61c11cf776e51b3309">SIZE_X</a> = 15</td></tr>
+<tr class="memdesc:adc063bf2ef169d61c11cf776e51b3309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dimensiones de la matriz del mapa.  <a href="#adc063bf2ef169d61c11cf776e51b3309">Más...</a><br /></td></tr>
+<tr class="separator:adc063bf2ef169d61c11cf776e51b3309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14d398285c62b15d57949aba107e1110"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a14d398285c62b15d57949aba107e1110"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>SIZE_Z</b> = 15</td></tr>
+<tr class="separator:a14d398285c62b15d57949aba107e1110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6fec9d040597b8ed8b243b8d4d6ea16"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#ab6fec9d040597b8ed8b243b8d4d6ea16">TERRAIN_MAP_FILE</a> = &quot;media/maps/terrain_map.txt&quot;</td></tr>
+<tr class="memdesc:ab6fec9d040597b8ed8b243b8d4d6ea16"><td class="mdescLeft">&#160;</td><td class="mdescRight">File with the terrain map definition.  <a href="#ab6fec9d040597b8ed8b243b8d4d6ea16">Más...</a><br /></td></tr>
+<tr class="separator:ab6fec9d040597b8ed8b243b8d4d6ea16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80f6c8c40ad1afaff32b9c2f910d706"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_logic_1_1_tile.html">Tile</a> ***&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#af80f6c8c40ad1afaff32b9c2f910d706">_tiles</a></td></tr>
+<tr class="memdesc:af80f6c8c40ad1afaff32b9c2f910d706"><td class="mdescLeft">&#160;</td><td class="mdescRight">2D tile matrix[x][z].  <a href="#af80f6c8c40ad1afaff32b9c2f910d706">Más...</a><br /></td></tr>
+<tr class="separator:af80f6c8c40ad1afaff32b9c2f910d706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf82afc2ec3a80813422f3b924008103"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_map_1_1_c_entity.html">Map::CEntity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#aaf82afc2ec3a80813422f3b924008103">tileMapEntity</a></td></tr>
+<tr class="memdesc:aaf82afc2ec3a80813422f3b924008103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Entidad de mapa "Tile" leída del fichero de mapa a modo de prefab.  <a href="#aaf82afc2ec3a80813422f3b924008103">Más...</a><br /></td></tr>
+<tr class="separator:aaf82afc2ec3a80813422f3b924008103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Atributos privados estáticos</h2></td></tr>
+<tr class="memitem:af13758f52235ea012459c9c1cd4b8c99"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_logic_1_1_c_tile_manager.html">CTileManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_tile_manager.html#af13758f52235ea012459c9c1cd4b8c99">_instance</a> = 0</td></tr>
+<tr class="memdesc:af13758f52235ea012459c9c1cd4b8c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Única instancia de la clase.  <a href="#af13758f52235ea012459c9c1cd4b8c99">Más...</a><br /></td></tr>
+<tr class="separator:af13758f52235ea012459c9c1cd4b8c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Manager singleton que gestiona la lectura y actualización de la matriz de tiles del mapa. </p>
+<dl class="section author"><dt>Autor</dt><dd>Raúl Segura </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>Enero, 2016 </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8h_source.html#l00070">70</a> del archivo <a class="el" href="_tile_manager_8h_source.html">TileManager.h</a>.</p>
+</div><h2 class="groupheader">Documentación del constructor y destructor</h2>
+<a class="anchor" id="a1dcaa6fbad255fd7f8f9aaec2124e825"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Logic::CTileManager::CTileManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8cpp_source.html#l00033">33</a> del archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_tile_manager_8h_source.html#l00148">_instance</a> y <a class="el" href="_tile_manager_8h_source.html#l00165">_tiles</a>.</p>
+
+<p>Referenciado por <a class="el" href="_tile_manager_8cpp_source.html#l00063">Init()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a549f24a505dacf1658dff85a03306113"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Logic::CTileManager::~CTileManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8cpp_source.html#l00042">42</a> del archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_tile_manager_8h_source.html#l00148">_instance</a>, <a class="el" href="_tile_manager_8h_source.html#l00165">_tiles</a> y <a class="el" href="_tile_manager_8h_source.html#l00153">SIZE_X</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones miembro</h2>
+<a class="anchor" id="aacaf7241a8874157088a7d5d09ec453b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logic::CTileManager::close </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Segunda fase de la destrucción del objeto. </p>
+<p>Sirve para hacer liberar los recursos de la propia instancia, la liberación de los recursos estáticos se hace en <a class="el" href="class_logic_1_1_c_tile_manager.html#a7d360c1337f4cee6ee4642a50643f5b4" title="Libera la propia instancia y los recursos estáticos. ">Release()</a>. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8cpp_source.html#l00260">260</a> del archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+
+<p>Referenciado por <a class="el" href="_tile_manager_8cpp_source.html#l00081">Release()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a481d11fbcf158c286822f37d57eff241"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_logic_1_1_c_tile_manager.html">Logic::CTileManager</a>* Logic::CTileManager::getSingletonPtr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Devuelve la única instancia de la clase. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>Puntero a la instancia de la clase. </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8h_source.html#l00078">78</a> del archivo <a class="el" href="_tile_manager_8h_source.html">TileManager.h</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8cpp_source.html#l00121">Logic::CServer::loadLevel()</a>, <a class="el" href="_tile_8cpp_source.html#l00021">Logic::Tile::spawn()</a> y <a class="el" href="_placeable_8cpp_source.html#l00020">Logic::CPlaceable::spawn()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae6a55600648babf7187ccf6ee27e9027"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_logic_1_1_tile.html">Tile</a> * Logic::CTileManager::getTile </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="_math_8h.html#a3771b51d2ba333bb3c797170bb8ec6f9">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a tile given its logic position. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8cpp_source.html#l00175">175</a> del archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_tile_manager_8h_source.html#l00165">_tiles</a> y <a class="el" href="_tile_manager_8h_source.html#l00153">SIZE_X</a>.</p>
+
+<p>Referenciado por <a class="el" href="_placeable_8cpp_source.html#l00121">Logic::CPlaceable::checkPlacementIsPossible()</a> y <a class="el" href="_placeable_8cpp_source.html#l00065">Logic::CPlaceable::place()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2be937e6a1beef9b7da1f6d1a3cb4084"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Logic::CTileManager::Init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inicializa la instancia y los recursos estáticos. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>true si la inicialización se hizo correctamente. </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8cpp_source.html#l00063">63</a> del archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_tile_manager_8h_source.html#l00148">_instance</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00033">CTileManager()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00254">open()</a> y <a class="el" href="_tile_manager_8cpp_source.html#l00081">Release()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8cpp_source.html#l00081">Logic::CServer::open()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab21a1e163f2c0c331d4b75711c1528ca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logic::CTileManager::loadInitialMatrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_logic_1_1_c_map.html">CMap</a> *&#160;</td>
+          <td class="paramname"><em>map</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lee y genera la matriz inicial de tiles del mapa. </p>
+<p>Aquí el resto de entidades iniciales del mapa ya han sido cargadas de fichero (map.txt) y creadas. Entre ellas, habrá una <a class="el" href="class_map_1_1_c_entity.html" title="Clase que representa una entidad leida del fichero del mapa. ">Map::CEntity</a> "Tile" que puede ser empleada de forma similar a un prefab para generar toda la matriz de tiles inicial.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">map</td><td>Mapa en el que generar la matriz. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8cpp_source.html#l00095">95</a> del archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_tile_manager_8h_source.html#l00165">_tiles</a>, <a class="el" href="_entity_factory_8cpp_source.html#l00200">Logic::CEntityFactory::createEntity()</a>, <a class="el" href="_map_parser_8h_source.html#l00200">Map::CMapParser::getEntityList()</a>, <a class="el" href="_entity_factory_8h_source.html#l00075">Logic::CEntityFactory::getSingletonPtr()</a>, <a class="el" href="_map_parser_8h_source.html#l00132">Map::CMapParser::getSingletonPtr()</a>, <a class="el" href="_map_entity_8cpp_source.html#l00044">Map::CEntity::getStringAttribute()</a>, <a class="el" href="_map_entity_8cpp_source.html#l00093">Map::CEntity::getVector3Attribute()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00194">loadTerrain()</a>, <a class="el" href="_map_entity_8cpp_source.html#l00018">Map::CEntity::setAttribute()</a>, <a class="el" href="_map_entity_8h_source.html#l00152">Map::CEntity::setName()</a>, <a class="el" href="_tile_manager_8h_source.html#l00153">SIZE_X</a>, <a class="el" href="_tile_manager_8h_source.html#l00159">TERRAIN_MAP_FILE</a> y <a class="el" href="_tile_manager_8h_source.html#l00170">tileMapEntity</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8cpp_source.html#l00121">Logic::CServer::loadLevel()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a38f9c5ee258467b7005b834ccc20d3ff"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logic::CTileManager::loadTerrain </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assign terrain type to all tiles in the map reading them from the given file. </p>
+<ul>
+<li>0 stands for Empty</li>
+<li>1 stands for Gas</li>
+<li>2 stands for Mineral</li>
+</ul>
+<p>El fichero se lee de acuerdo a los ejes gráficos de Galeón-Ogre con el origen de coordenadas en la esquina inferior derecha: (X-1, Z-1) (X-2, Z-1) ... (1, Z-1) (0, Z-1) (X-1, Z-2) (X-2, Z-2) ... (1, Z-2) (0, Z-2) ... (X-1, 1) (X-2, 1) ... (1, 1) (0, 1) (X-1, 0) (X-2, 0) ... (1, 0) (0, 0) </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8cpp_source.html#l00194">194</a> del archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_tile_manager_8h_source.html#l00165">_tiles</a>, <a class="el" href="_map_entity_8cpp_source.html#l00044">Map::CEntity::getStringAttribute()</a>, <a class="el" href="_tile_8cpp_source.html#l00046">Logic::Tile::setTerrainType()</a>, <a class="el" href="_tile_manager_8h_source.html#l00153">SIZE_X</a> y <a class="el" href="_tile_manager_8h_source.html#l00170">tileMapEntity</a>.</p>
+
+<p>Referenciado por <a class="el" href="_tile_manager_8cpp_source.html#l00095">loadInitialMatrix()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a391c52fb726cef24be9c7a4d6e4b7e0a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Logic::CTileManager::open </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Segunda fase de la construcción del objeto. </p>
+<p>Sirve para hacer inicializaciones de la propia instancia en vez de inicializaciones estáticas.</p>
+<dl class="section return"><dt>Devuelve</dt><dd>true si la inicialización se hizo correctamente. </dd></dl>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8cpp_source.html#l00254">254</a> del archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+
+<p>Referenciado por <a class="el" href="_tile_manager_8cpp_source.html#l00063">Init()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a22147a053f73d5d0bb4f2cde458763b0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logic::CTileManager::registerTile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_logic_1_1_tile.html">Tile</a> *&#160;</td>
+          <td class="paramname"><em>tile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register internally a tile in the matrix tile. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8cpp_source.html#l00186">186</a> del archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_tile_manager_8h_source.html#l00165">_tiles</a> y <a class="el" href="_tile_8cpp_source.html#l00054">Logic::Tile::getLogicPosition()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_tile_8cpp_source.html#l00021">Logic::Tile::spawn()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7d360c1337f4cee6ee4642a50643f5b4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logic::CTileManager::Release </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Libera la propia instancia y los recursos estáticos. </p>
+<p>Debe llamarse al finalizar la aplicación. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8cpp_source.html#l00081">81</a> del archivo <a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a>.</p>
+
+<p>Hace referencia a <a class="el" href="_tile_manager_8h_source.html#l00148">_instance</a> y <a class="el" href="_tile_manager_8cpp_source.html#l00260">close()</a>.</p>
+
+<p>Referenciado por <a class="el" href="_logic_2_server_8cpp_source.html#l00105">Logic::CServer::close()</a> y <a class="el" href="_tile_manager_8cpp_source.html#l00063">Init()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de los campos</h2>
+<a class="anchor" id="af13758f52235ea012459c9c1cd4b8c99"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_logic_1_1_c_tile_manager.html">CTileManager</a> * Logic::CTileManager::_instance = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Única instancia de la clase. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8h_source.html#l00148">148</a> del archivo <a class="el" href="_tile_manager_8h_source.html">TileManager.h</a>.</p>
+
+<p>Referenciado por <a class="el" href="_tile_manager_8cpp_source.html#l00033">CTileManager()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00063">Init()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00081">Release()</a> y <a class="el" href="_tile_manager_8cpp_source.html#l00042">~CTileManager()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af80f6c8c40ad1afaff32b9c2f910d706"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_logic_1_1_tile.html">Tile</a>* ** Logic::CTileManager::_tiles</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>2D tile matrix[x][z]. </p>
+<p>We store pointers to their <a class="el" href="class_logic_1_1_tile.html">Tile</a> components. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8h_source.html#l00165">165</a> del archivo <a class="el" href="_tile_manager_8h_source.html">TileManager.h</a>.</p>
+
+<p>Referenciado por <a class="el" href="_tile_manager_8cpp_source.html#l00033">CTileManager()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00175">getTile()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00095">loadInitialMatrix()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00194">loadTerrain()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00186">registerTile()</a> y <a class="el" href="_tile_manager_8cpp_source.html#l00042">~CTileManager()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adc063bf2ef169d61c11cf776e51b3309"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int Logic::CTileManager::SIZE_X = 15</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dimensiones de la matriz del mapa. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8h_source.html#l00153">153</a> del archivo <a class="el" href="_tile_manager_8h_source.html">TileManager.h</a>.</p>
+
+<p>Referenciado por <a class="el" href="_tile_manager_8cpp_source.html#l00175">getTile()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00095">loadInitialMatrix()</a>, <a class="el" href="_tile_manager_8cpp_source.html#l00194">loadTerrain()</a> y <a class="el" href="_tile_manager_8cpp_source.html#l00042">~CTileManager()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab6fec9d040597b8ed8b243b8d4d6ea16"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string Logic::CTileManager::TERRAIN_MAP_FILE = &quot;media/maps/terrain_map.txt&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>File with the terrain map definition. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8h_source.html#l00159">159</a> del archivo <a class="el" href="_tile_manager_8h_source.html">TileManager.h</a>.</p>
+
+<p>Referenciado por <a class="el" href="_tile_manager_8cpp_source.html#l00095">loadInitialMatrix()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaf82afc2ec3a80813422f3b924008103"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_map_1_1_c_entity.html">Map::CEntity</a>* Logic::CTileManager::tileMapEntity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Entidad de mapa "Tile" leída del fichero de mapa a modo de prefab. </p>
+
+<p>Definición en la línea <a class="el" href="_tile_manager_8h_source.html#l00170">170</a> del archivo <a class="el" href="_tile_manager_8h_source.html">TileManager.h</a>.</p>
+
+<p>Referenciado por <a class="el" href="_tile_manager_8cpp_source.html#l00095">loadInitialMatrix()</a> y <a class="el" href="_tile_manager_8cpp_source.html#l00194">loadTerrain()</a>.</p>
+
+</div>
+</div>
+<hr/>La documentación para esta clase fue generada a partir de los siguientes ficheros:<ul>
+<li>Src/Logic/Maps/Managers/<a class="el" href="_tile_manager_8h_source.html">TileManager.h</a></li>
+<li>Src/Logic/Maps/Managers/<a class="el" href="_tile_manager_8cpp_source.html">TileManager.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

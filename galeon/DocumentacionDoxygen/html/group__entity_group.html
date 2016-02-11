@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Galeon: Entidades en la lógica de juego</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Galeon
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li class="current"><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="files.html"><span>Archivos</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Estructuras de datos</a>  </div>
+  <div class="headertitle">
+<div class="title">Entidades en la lógica de juego</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>La gestión de entidades realizada en la capa lógica (ver <a class="el" href="group__logic_group.html">Lógica de juego</a>) utiliza una arquitectura de componentes.  
+<a href="#details">Más...</a></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Diagrama de colaboración para Entidades en la lógica de juego:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<center><table><tr><td><img src="group__entity_group.png" border="0" alt="" usemap="#group____entity__group"/>
+<map name="group____entity__group" id="group____entity__group">
+</map>
+</td></tr></table></center>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Estructuras de datos</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_i_component.html">Logic::IComponent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clase base de los componentes que forman las entidades.  <a href="class_logic_1_1_i_component.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_c_entity.html">Logic::CEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clase que representa una entidad en el entorno virtual.  <a href="class_logic_1_1_c_entity.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic_1_1_message.html">Logic::Message</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contiene el tipo de datos de un mensaje.  <a href="class_logic_1_1_message.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<p>La gestión de entidades realizada en la capa lógica (ver <a class="el" href="group__logic_group.html">Lógica de juego</a>) utiliza una arquitectura de componentes. </p>
+<p>Gracias a esto, hay únicamente una clase que implementa el concepto de "entidad", la clase <a class="el" href="class_logic_1_1_c_entity.html" title="Clase que representa una entidad en el entorno virtual. ">Logic::CEntity</a> que no es más que un contenedor de componentes (<a class="el" href="class_logic_1_1_i_component.html" title="Clase base de los componentes que forman las entidades. ">Logic::IComponent</a>) que son los que definen el comportamiento total de la entidad.</p>
+<p>La construcción de entidades se basa en la existencia de lo que se llaman ficheros de "blueprint" que contienen, para cada entidad, qué componentes definen su comportamiento. Por ejemplo la entidad "Player", que representa al jugador, está definida como:</p>
+<div class="fragment"><div class="line">Player CAvatarController CAnimatedGraphics</div></div><!-- fragment --><p>Lo que viene a indicar que la entidad es simplemente un componente de control (para que pueda ser controlado) y uno gráfico (para que se dibuje).</p>
+<p>El mapa después lo único que tiene que hacer es declarar la lista de entidades que contiene y sus propiedades. En la carga del mapa se van creando los componentes e inicializándolos con esas propiedades leídas del mapa (como la posición inicial, o el modelo gráfico a dibujar).</p>
+<p>Los componentes se intentan hacer lo más general posible, para que sirvan para definir el comportamiento de distintos tipos de entidades. En muchas ocasiones el comportamiento final se termina de configurar gracias a esos atributos. Por ejemplo, el componente gráfico sirve para dotar a las entidades de cuerpo en el mundo gráfico, ya sea este estático o dinámico. Las distintas propiedades o atributos leídos del mapa configurarán el componente para que refleje el tipo de entidad gráfica que se desea.</p>
+<p>El funcionamiento de los componentes se basa en la existencia del método <a class="el" href="class_logic_1_1_i_component.html#a45798c9df980f48d0215a30b4a949b90" title="Mï¿œtodo llamado en cada frame que actualiza el estado del componente. ">Logic::IComponent::tick()</a>, donde los componentes particulares pueden ejecutar sus operaciones. Normalmente las operaciones consistirán en el procesado de mensajes recibidos y/o alguna otra operación necesaria.</p>
+<h1><a class="anchor" id="grupoComponentesRegistro"></a>
+Registrando un componente nuevo</h1>
+<p>Para que el juego sea capaz de crear cada componente particular a partir de su nombre se necesita una factoría de componentes y que cada clase que implementa uno de ellos se registre en la misma.</p>
+<p>La clase Logic::ComponentFactory es la responsable de esa creación. Es un singleton donde se registran todos los componentes utilizando el método Logic::ComponentFactory::add. Ese método recibe el nombre del componente y una función global (o estática) para crear un objeto de ese tipo. En el momento de crear una entidad, se utiliza el fichero de blueprints para saber qué componentes se necesitan y se utiliza la factoría para crearlos.</p>
+<p>Sin embargo, para facilitar el desarrollo de nuevos componentes, el fichero Logic/Entity/IComponent.h define una serie de macros del preprocesador que pueden/deben utilizarse. En conreto, para tener un componente funcionando basta con:</p>
+<ul>
+<li>
+Utilizar la macro DEC_FACTORY en la parte de declaración de la nueva clase para que se añadan ciertas funciones estáticas útiles para el registro en la factoría. </li>
+<li>
+Utilizar la macro IMP_FACTORY en la parte de implementación para definir el código de esas funciones. </li>
+<li>
+Utilizar la macro REG_FACTORY tras la declaración de la nueva clase para que se registre el componente en la factoría utilizando los métodos declarados y definidos con las macros anteriores. </li>
+<li>
+Hacer una inclusión del archivo cabecera del nuevo componente en algún fichero .cpp del proyecto que sepamos que va a ser procesado para que la macro REG_FACTORY registre el nuevo componente en la factoría. </li>
+</ul>
+<p>Como ejemplo, si queremos construir un nuevo componente <code>CMyComponent</code>, el inicio del fichero de cabecera sería algo así:</p>
+<div class="fragment"><div class="line"><span class="comment">// File MyComponent.h</span></div><div class="line"><span class="preprocessor">#include &quot;Logic/Entity/IComponent.h&quot;</span></div><div class="line"></div><div class="line"><span class="keyword">class </span>CMyComponent : <span class="keyword">public</span> <a class="code" href="class_logic_1_1_i_component.html">Logic::IComponent</a> </div><div class="line">{</div><div class="line">   <a class="code" href="_component_8h.html#a554853ac4d99463d9869c2962c249d52">DEC_FACTORY</a>();</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">   ...</div><div class="line">};</div><div class="line"><a class="code" href="_component_8h.html#a064dbb72c88a8c8bdadc4328c30b561e">REG_FACTORY</a>(CMyComponent);</div></div><!-- fragment --><p>y en el fichero de implementación:</p>
+<div class="fragment"><div class="line"><span class="comment">// File MyComponent.cpp</span></div><div class="line"><span class="preprocessor">#include &quot;MyComponent.h&quot;</span></div><div class="line"></div><div class="line"><a class="code" href="_component_8h.html#a7b9601be0efd2b3adfa03a92f07c0d9d">IMP_FACTORY</a>(IComponent);</div><div class="line">...</div></div><!-- fragment --><p>Por último, para poder utilizar el componente (mejor dicho para que durante la carga de un mapa el motor sea capaz de crearlo), se debe registrar en la factoría. Hacemos la inclusión de la cabecera en cualquier fichero .cpp del proyecto que sepamos que va a ser procesado. Las inclusiones de los componentes iniciales se han realizado en Logic/ComponentFactory.cpp:</p>
+<div class="fragment"><div class="line"><span class="comment">// Fichero XXX.cpp</span></div><div class="line"><span class="preprocessor">#include &quot;MyComponent.h&quot;</span></div><div class="line">...</div></div><!-- fragment --><h1><a class="anchor" id="grupoComponentesImplementacion"></a>
+Implementando un componente nuevo</h1>
+<p>Una vez que se tiene claro cómo crear un nuevo componente para que pueda ser utilizado dentro de una entidad, podemos pasar a implementar la funcionalidad que deseemos que realice.</p>
+<p>El componente más sencillo (e inútil) es el implementado en la sección anterior: aquel que simplemente hereda de <a class="el" href="class_logic_1_1_i_component.html" title="Clase base de los componentes que forman las entidades. ">Logic::IComponent</a>. No sirve para mucho, pero es un comienzo: el motor del juego lo reconoce como componente y se puede utilizar dentro de las entidades.</p>
+<p>A continuación iremos extendiendo ese componente para ejemplificar las características básicas que deben conocerse para implementar un componente serio. Por comodidad el código presentado asume que se está en el fichero de cabecera, aunque en un desarrollo serio tendríamos la mayor parte de la implementación en un fichero .cpp.</p>
+<h2><a class="anchor" id="noLabel1"></a>
+Leyendo propiedades</h2>
+<p>Nuestro componente será creado cuando en el mapa se tenga una entidad que lo necesite. Esa entidad tendrá a buen seguro una lista de atributos que podrán ser leídos por los componentes para terminar de definir sus comportamientos.</p>
+<p>En el momento de la creación del componente, el motor invoca al método <a class="el" href="class_logic_1_1_i_component.html#aebc5b73ad53f65df15727aae50dded67" title="Inicializaciï¿œn del componente, utilizando la informaciï¿œn extraï¿œda de la entidad leï¿œda del map...">Logic::IComponent::spawn()</a> al que le pasa, entre otras cosas, un objeto de donde leer todos los atributos de la entidad.</p>
+<p>El método devuelve un booleano para poder notificar condiciones de error; en caso de ser imposible la inicialización del componente, se devuelve <code>false</code> y el motor anula la carga del mapa.</p>
+<p>Es <em>importante</em> invocar al método spawn de la clase padre al principio del método, para que la inicialización sea completa. El siguiente ejemplo comprueba si existe el atributo "activateMsg" en el mapa y si existe lo guarda en una variable. Para poder acceder a los atributos leídos del mapa se debe incluir el fichero <a class="el" href="_map_entity_8h_source.html">Map/MapEntity.h</a>.</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>CMyComponent : <span class="keyword">public</span> <a class="code" href="class_logic_1_1_i_component.html">Logic::IComponent</a> </div><div class="line">{</div><div class="line">   DEC_FACTORIA();</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line"></div><div class="line">   CTestComponent() : _activateMsg(<span class="stringliteral">&quot;Map activated or deactivated&quot;</span>) {}</div><div class="line"></div><div class="line">   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_logic_1_1_i_component.html#aebc5b73ad53f65df15727aae50dded67">spawn</a>(CEntity *entity, CMap *map, <span class="keyword">const</span> <a class="code" href="class_map_1_1_c_entity.html">Map::CEntity</a> *entityInfo)</div><div class="line">   {</div><div class="line">      <span class="keywordflow">if</span>( !IComponent::spawn(entity,map,entityInfo) )</div><div class="line">         <span class="keywordflow">return</span> <span class="keyword">false</span>;</div><div class="line"></div><div class="line">      <span class="keywordflow">if</span> (entity-&gt;existsKey(<span class="stringliteral">&quot;activateMsg&quot;</span>))</div><div class="line">         _activateMsg = entity-&gt;getStringAtributo(<span class="stringliteral">&quot;activateMsg&quot;</span>);</div><div class="line"></div><div class="line">      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div><div class="line">   }</div><div class="line"></div><div class="line"><span class="keyword">protected</span>:</div><div class="line"></div><div class="line">   std::string _activateMsg;</div><div class="line">};</div><div class="line"><a class="code" href="_component_8h.html#a064dbb72c88a8c8bdadc4328c30b561e">REG_FACTORY</a>(CMyComponent);</div></div><!-- fragment --><h2><a class="anchor" id="noLabel2"></a>
+Activación y desactivación</h2>
+<p>Una entidad pertenece siempre a un mapa (o nivel) del juego. Un mapa al cargarse se encuentra inactivo, no recibe atención por parte del motor de juego y por tanto no se renderizan sus objetos ni se actualiza su lógica.</p>
+<p>Cuando un mapa es activado y desactivado, todas sus entidades son informadas para que puedan realizar las tareas oportunas (como por ejemplo la entidad del jugador debe registrarse en el servidor lógico para que quien lo requiera pueda tener acceso al jugador).</p>
+<p>Los componentes pueden también ser conscientes de esta activación/desactivación sobreescribiendo los métodos <a class="el" href="class_logic_1_1_i_component.html#aebd3612e31ef5baecf2adcec608ed467" title="Mï¿œtodo que activa el componente; invocado cuando se activa el mapa donde estï¿œ la entidad a la que...">Logic::IComponent::activate()</a> y <a class="el" href="class_logic_1_1_i_component.html#abd6d9f4d2e650a97d01f38769909cc02" title="Mï¿œtodo que desactiva el componente; invocado cuando se desactiva el mapa donde estï¿œ la entidad a ...">Logic::IComponent::deactivate()</a> ya que la entidad invocará esos métodos de todos sus componentes. Por ejemplo <a class="el" href="class_logic_1_1_c_avatar_controller.html" title="Este componente es el encargado de mover a una entidad animada. ">Logic::CAvatarController</a> se registra en los eventos de teclado para manejar al jugador si el componente pertenece a la entidad del jugador.</p>
+<p>El siguiente código muestra como el componente que vamos definiendo escribe la cadena leida en el método <a class="el" href="class_logic_1_1_i_component.html#aebc5b73ad53f65df15727aae50dded67" title="Inicializaciï¿œn del componente, utilizando la informaciï¿œn extraï¿œda de la entidad leï¿œda del map...">Logic::IComponent::spawn()</a> cuando el mapa en el que se encuentra su entidad es activado y desactivado.</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>CMyComponent : <span class="keyword">public</span> <a class="code" href="class_logic_1_1_i_component.html">Logic::IComponent</a> </div><div class="line">{</div><div class="line">   DEC_FACTORIA();</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">   ...</div><div class="line">   </div><div class="line">   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_logic_1_1_i_component.html#aebd3612e31ef5baecf2adcec608ed467">activate</a>() </div><div class="line">   {</div><div class="line">      std::cout &lt;&lt; _activateMsg &lt;&lt; std::endl;</div><div class="line">      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div><div class="line">   }</div><div class="line"></div><div class="line">   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_logic_1_1_i_component.html#abd6d9f4d2e650a97d01f38769909cc02">deactivate</a>() </div><div class="line">   {</div><div class="line">      std::cout &lt;&lt; _activateMsg &lt;&lt; std::endl;</div><div class="line">   }</div><div class="line">   ...</div><div class="line">};</div><div class="line"><a class="code" href="_component_8h.html#a064dbb72c88a8c8bdadc4328c30b561e">REG_FACTORY</a>(CMyComponent);</div></div><!-- fragment --><h2><a class="anchor" id="noLabel3"></a>
+Recibiendo mensajes</h2>
+<p>El funcionamiento básico de un componente es recibir mensajes de otros componentes y reaccionar ante ellos. Para eso el motor proporciona al <a class="el" href="class_logic_1_1_i_component.html" title="Clase base de los componentes que forman las entidades. ">Logic::IComponent</a> un mecanismo de recepción de mensajes para poder hacer cosas con ellos.</p>
+<p>La recepción está separada en dos fases. Primero el motor <em>pregunta</em> al componente si acepta el mensaje enviado, es decir, si para él ese mensaje tiene algún tipo de información útil. En caso afirmativo, el motor invocará en un momento posterior al método para procesar el mensaje y que el componente ejecute las acciones que considere oportunas en base a la información recibida.</p>
+<p>Por lo tanto, para ser capaces de recibir mensajes, los IComponent deben sobreescribir dos métodos: el Logic::IComponent::acept y Logic::IComponent::process. En ambos casos se recibe como parámetro el mensaje. Para saber de qué tipo es habrá que consultar el atributo Logic::TMessage::_type.</p>
+<p>Para la implementación de los mensajes se ha optado conscientemente por una implementación sencilla que con un tipo de mensaje genérico <a class="el" href="namespace_logic_1_1_t_message.html" title="Namespace para los tipos de mensajes posibles. ">Logic::TMessage</a> que tiene una serie de atributos también genéricos y en función del tipo (Logic::TMessage::_type) de mensaje se usarán unos u otros. Esta aproximación es sencilla, pero no es óptima desde el punto de vista de rendimiento. Para llevar a cabo un proyecto serio esta implementación <b>debe</b> ser reconsiderada.</p>
+<p>El siguiente código muestra la implementación de los dos métodos en el componente CTestComponent que nos está sirviendo de prueba, para que interprete los mensajes enviados a la entidad cuando ésta cambia de posición, y escribe por pantalla la nueva posición (para que funcione habrá que incluir el fichero <a class="el" href="_message_8h.html" title="Contiene el tipo de datos de un mensaje. ">Logic/Entity/Message.h</a>).</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>CMyComponent : <span class="keyword">public</span> <a class="code" href="class_logic_1_1_i_component.html">Logic::IComponent</a> </div><div class="line">{</div><div class="line">   DEC_FACTORIA();</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">   ...</div><div class="line"></div><div class="line">   <span class="keywordtype">bool</span> accept(<span class="keyword">const</span> TMessage &amp;message)</div><div class="line">   {</div><div class="line">      <span class="keywordflow">return</span> message._type == Message::SET_POSITION;</div><div class="line">   }</div><div class="line"></div><div class="line">   <span class="keywordtype">void</span> process(<span class="keyword">const</span> TMessage &amp;message)</div><div class="line">   {</div><div class="line">      <span class="keywordflow">switch</span>(message._type)</div><div class="line">      {</div><div class="line">      <span class="keywordflow">case</span> Message::SET_POSITION:</div><div class="line">         std::cout &lt;&lt; <span class="stringliteral">&quot;Moved to(&quot;</span> &lt;&lt; message._position.x &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> </div><div class="line">                   &lt;&lt; message._position.y &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> </div><div class="line">                   &lt;&lt; message._position.z &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div><div class="line">         <span class="keywordflow">break</span>;</div><div class="line">      }</div><div class="line">   }</div><div class="line">   ...</div><div class="line">};</div><div class="line"><a class="code" href="_component_8h.html#a064dbb72c88a8c8bdadc4328c30b561e">REG_FACTORY</a>(CMyComponent);</div></div><!-- fragment --><p>El funcionamiento interno del motor ayudará a entender los siguientes apartados. En algún momento una entidad externa puede enviar un mensaje a la entidad a la que pertenecemos. La entidad al recibirlos lo que hace es preguntar uno a uno a todos sus componentes para averiguar cuáles de ellos están interesados en el mensaje, o lo que es lo mismo, para qué componentes el mensaje resulta útil. Si un componente <em>acepta</em> un mensaje, éste se <em>encola</em> en la lista de mensajes a procesar del componente.</p>
+<p>Posteriormente, en la fase de simulación de la lógica, se concederá tiempo de CPU al componente para que procese todos los mensajes encolados. Eso es realizado por el método Logic::IComponent::processMessages() que recorre la cola y va llamando sucesivamente al método Logic::IComponent::process() sobreescrito en las implementaciones concretas de cada componente.</p>
+<h2><a class="anchor" id="noLabel4"></a>
+Ejecutando lógica</h2>
+<p>En general las entidades de un juego implementan la lógica usando pequeñas ejecuciones de un método que suele llamarse algo así como "tick()" o "update()". El motor del juego llama regularmente a ese método (por ejemplo en cada frame), y espera que ejecute una mínima parte de su comportamiento. En una arquitectura de componentes, la entidad lo que hace es llamar al método "tick()" o "update()" de todos sus componentes, y estos ejecutarán ahí la parte de su comportamiento.</p>
+<p>Aunque en el componente que hemos implementado hasta ahora no ha aparecido ningún método de este tipo, en realidad sí existe, declarado en <a class="el" href="class_logic_1_1_i_component.html#a45798c9df980f48d0215a30b4a949b90" title="Mï¿œtodo llamado en cada frame que actualiza el estado del componente. ">Logic::IComponent::tick()</a>. La implementación por defecto de ese método lo que hace es invocar al método Logic::IComponent::processMessages() que terminará llamando al sobreescrito Logic::IComponent::process() con todos los mensajes aceptados por Logic::IComponent::accept().</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>IComponent </div><div class="line">{</div><div class="line"><span class="keyword">public</span>:</div><div class="line">   ...</div><div class="line"></div><div class="line">   <span class="keywordtype">bool</span> IComponent::tick()</div><div class="line">   {</div><div class="line">      processMessages();</div><div class="line">      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div><div class="line">   }</div><div class="line">   ...</div><div class="line">};</div></div><!-- fragment --><p>Si nuestro componente ejecuta otro tipo de lógica de manera autónoma, sobreescribremos el método <a class="el" href="class_logic_1_1_i_component.html#a45798c9df980f48d0215a30b4a949b90" title="Mï¿œtodo llamado en cada frame que actualiza el estado del componente. ">Logic::IComponent::tick()</a> con la implementación de nuestro nuevo comportamiento. De la explicación anterior se deduce que si un componente sobreescribe el método es <em>indispensable</em> que llame a la implementación del método de la clase padre (o al menos al método Logic::IComponent::processMessages()). Si se olvida hacer esto, el componente <em>nunca</em> procesará los mensajes recibidos.</p>
+<p>El siguiente podría ser un tick() que presenta un simple texto en pantalla. Si se devuelve true implica que todo ha ido bien:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>CMyComponent : <span class="keyword">public</span> <a class="code" href="class_logic_1_1_i_component.html">Logic::IComponent</a> </div><div class="line">{</div><div class="line">   DEC_FACTORIA();</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">   ...</div><div class="line"></div><div class="line">   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_logic_1_1_i_component.html#a45798c9df980f48d0215a30b4a949b90">tick</a>() </div><div class="line">   {</div><div class="line">      <span class="comment">// Importante no olvidar esto...</span></div><div class="line">      <a class="code" href="class_logic_1_1_i_component.html#a45798c9df980f48d0215a30b4a949b90">IComponent::tick</a>();</div><div class="line"></div><div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;I&#39;m alive!&quot;</span> &lt;&lt; std::endl;</div><div class="line">      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div><div class="line">   }</div><div class="line">   ...</div><div class="line">};</div><div class="line"><a class="code" href="_component_8h.html#a064dbb72c88a8c8bdadc4328c30b561e">REG_FACTORY</a>(CMyComponent);</div></div><!-- fragment --><div class="fragment"></div><!-- fragment --><p>Habitualmente, las entidades de los motores de juegos (y sus componentes) tienen la posibilidad de "dormirse" de forma que el motor no pierde el tiempo en la invocación a su método de actualización para no consumir ciclos innecesarios cuando la entidad y los componentes no tienen taréas que realizar en los siguiente ciclos. En esta aproximación no ha sido incluida esta habilidad de manera intencionada, pero quien pretenda reutilizar esta arquitectura debería plantearse incluir esta cualidad.</p>
+<dl class="section author"><dt>Autor</dt><dd>David Llansó, Marco Antonio Gómez Martín </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>Septiembre, 2010 </dd></dl>
+</div><!-- contents -->
+<hr size="1"/>
+<address style="text-align: left;"><small>
+David Llansó, Marco Antonio Gómez Martín.<p/>
+(c) <a href="http://www.videojuegos-ucm.es/">Master en Desarrollo de Videojuegos</a>, <a href="http://www.ucm.es">UCM</a>.<p/>
+Documentación generada con <a href="http://www.doxygen.org/index.html">Doxygen</a>
+</small></address>

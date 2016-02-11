@@ -1,0 +1,14 @@
+digraph "Src/Graphics/AnimatedEntity.h"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="Src/Graphics/AnimatedEntity.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Src/Graphics/AnimatedEntity.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_animated_entity_8cpp.html",tooltip="Contiene la implementación de la clase que representa una entidad gráfica con animaciones. "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Src/Logic/Entity/Components\l/AnimatedGraphics.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_animated_graphics_8h.html",tooltip="Contiene la declaraciï¿œn del componente que controla la representaciï¿œn grï¿œfica de una entidad es..."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="Src/Logic/Entity/Components\l/AnimatedGraphics.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_animated_graphics_8cpp.html",tooltip="Contiene la implementaciï¿œn del componente que controla la representaciï¿œn grï¿œfica de una entidad..."];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="Src/Logic/Entity/Entity.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_logic_2_entity_2_entity_8cpp_source.html"];
+}

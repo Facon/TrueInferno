@@ -1,0 +1,27 @@
+digraph "Representación gráfica de la clase"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Logic::Message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_message.html",tooltip="Contiene el tipo de datos de un mensaje. "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Logic::AnimationMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_animation_message.html"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Logic::ColorMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_color_message.html"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="Logic::ControlMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_control_message.html"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="Logic::DamageMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_damage_message.html"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="Logic::DimensionsMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_dimensions_message.html"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="Logic::MaterialMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_material_message.html"];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node8 [label="Logic::MoveMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_move_message.html"];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node9 [label="Logic::PhysicMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_physic_message.html"];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node10 [label="Logic::TouchMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_touch_message.html"];
+  Node1 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node11 [label="Logic::TransformMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_logic_1_1_transform_message.html"];
+}

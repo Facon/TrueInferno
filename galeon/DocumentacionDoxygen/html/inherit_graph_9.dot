@@ -1,0 +1,7 @@
+digraph "Representación gráfica de la clase"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Graphics::CServer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_graphics_1_1_c_server.html",tooltip="Clase central del subistema gráfico. "];
+}
