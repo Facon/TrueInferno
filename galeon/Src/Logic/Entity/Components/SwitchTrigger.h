@@ -7,7 +7,7 @@ entidad cuando recibe un mensaje TOUCHED / UNTOUCHED.
 @see Logic::CSwitchTrigger
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Octubre, 2010
 */
 #ifndef __Logic_SwitchTrigger_H
@@ -29,7 +29,7 @@ namespace Logic
 	
     @ingroup logicGroup
 
-	@author David Llans� Garc�a
+	@author David Llansó Garc�a
 	@date Octubre, 2010
 */
 	class CSwitchTrigger : public IComponent

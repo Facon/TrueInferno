@@ -4,7 +4,7 @@
 Contiene la implementaci�n de la clase que representa una entidad leida 
 del fichero del mapa.
 
-@author David Llans� Garc�a
+@author David Llansó Garc�a
 @date Agosto, 2010
 */
 #include "MapEntity.h"

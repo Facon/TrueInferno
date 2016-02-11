@@ -7,18 +7,18 @@ de juego. Es una colecci�n de componentes.
 @see Logic::CEntity
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Julio, 2010
 */
 
 #include <Logic/Entity/Components/AnimatedGraphics.h>
 #include "Entity.h"
 
-// Componentes
 #include "Component.h"
 
 #include "Logic/Server.h"
 #include "Logic/Maps/Map.h"
+
 #include "Map/MapEntity.h"
 
 #include "GUI/Server.h"
@@ -26,12 +26,12 @@ de juego. Es una colecci�n de componentes.
 
 namespace Logic 
 {
-	CEntity::CEntity(TEntityID entityID) : _entityID(entityID), 
+	CEntity::CEntity(TEntityID entityID) : _entityID(entityID),
 				_map(0), _type(""), _name(""),
-				_transform(Matrix4::IDENTITY), _dimensions(Vector3(1, 1, 1)),
+				_position(Vector3(0, 0, 0)), _rotation(Vector3(0, 0, 0)),
+				_dimensions(Vector3(1, 1, 1)),
 				_isPlayer(false), _activated(false)
 	{
-
 	} // CEntity
 	
 	//---------------------------------------------------------
@@ -55,27 +55,19 @@ namespace Logic
 		if(entityInfo->hasAttribute("name"))
 			_name = entityInfo->getStringAttribute("name");
 
-		if(entityInfo->hasAttribute("position"))
-		{
-			Vector3 position = entityInfo->getVector3Attribute("position");
-			_transform.setTrans(position);
-		}
+		if (entityInfo->hasAttribute("position"))
+			_position = entityInfo->getVector3Attribute("position");
+
+		if (entityInfo->hasAttribute("orientation"))
+			_rotation.y = Math::fromDegreesToRadians(entityInfo->getFloatAttribute("orientation"));
 
 		if (entityInfo->hasAttribute("dimensions"))
 			_dimensions = entityInfo->getVector3Attribute("dimensions");
 
-		// Por comodidad en el mapa escribimos los �ngulos en grados.
-		if(entityInfo->hasAttribute("orientation"))
-		{
-			float yaw = Math::fromDegreesToRadians(entityInfo->getFloatAttribute("orientation"));
-			Math::yaw(yaw,_transform);
-		}
-
 		if(entityInfo->hasAttribute("isPlayer"))
 			_isPlayer = entityInfo->getBoolAttribute("isPlayer");
 		
-
-		// Inicializamos los componentes
+		// Inicializamos los componentes.
 		TComponentList::const_iterator it;
 
 		bool correct = true;
@@ -110,7 +102,6 @@ namespace Logic
 		for( it = _components.begin(); it != _components.end(); ++it )
 			_activated = (*it)->activate() && _activated;
 
-
 		return _activated;
 
 	} // activate
@@ -127,7 +118,6 @@ namespace Logic
 			GUI::CServer::getSingletonPtr()->getPlayerController()->setControlledAvatar(0);
 			CServer::getSingletonPtr()->setPlayer(0);
 		}
-
 
 		TComponentList::const_iterator it;
 
@@ -200,58 +190,42 @@ namespace Logic
 	} // destroyAllComponents
 
 	//---------------------------------------------------------
-    /*
-	bool CEntity::emitMessage(const TMessage &message, IComponent* emitter)
-	{
-		// Interceptamos los mensajes que adem�s de al resto de los
-		// componentes, interesan a la propia entidad.
-		switch(message._type)
-		{
-		case Message::SET_TRANSFORM:
-			_transform = message._transform;
-			break;
-		case Message::SET_DIMENSIONS:
-			_dimensions = message._vector3;
-			break;
-		}
 
-		TComponentList::const_iterator it;
-		// Para saber si alguien quiso el mensaje.
-		bool anyReceiver = false;
-		for( it = _components.begin(); it != _components.end(); ++it )
-		{
-			// Al emisor no se le envia el mensaje.
-			if( emitter != (*it) )
-				anyReceiver = (*it)->set(message) || anyReceiver;
-		}
-		return anyReceiver;
+	#define SEND_MESSAGE_TO_ALL_COMPONENTS \
+		bool received = false; \
+		\
+		for (auto it = _components.cbegin(); it != _components.cend(); ++it) \
+		{ \
+			received |= (*it)->HandleMessage(msg); \
+		} \
+		\
+		return received;
 
-	} // emitMessage
-    */
-
-#define SEND_MESSAGE_TO_ALL_COMPONENTS \
-	bool received = false; \
-	\
-	for (auto it = _components.cbegin(); it != _components.cend(); ++it) \
-	{ \
-		received |= (*it)->HandleMessage(msg); \
-	} \
-	\
-	return received;
+	//---------------------------------------------------------
 
 	bool CEntity::HandleMessage(const TransformMessage& msg)
-    {
-        this->_transform = msg._transform;
-
+	{
+		updateTransformValuesFromMatrix(msg._transform);
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
-    }
+	}
 
-    bool CEntity::HandleMessage(const DimensionsMessage& msg)
-    {
-        this->_dimensions = msg._dimensions;
-
+	bool CEntity::HandleMessage(const PositionMessage& msg)
+	{
+		_position = msg._position;
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
-    }
+	}
+
+	bool CEntity::HandleMessage(const RotationMessage& msg)
+	{
+		_rotation = msg._rotation;
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
+	bool CEntity::HandleMessage(const DimensionsMessage& msg)
+	{
+		_dimensions = msg._dimensions;
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
 
 	bool CEntity::HandleMessage(const ColorMessage& msg)
 	{
@@ -290,30 +264,63 @@ namespace Logic
 
 	//---------------------------------------------------------
 
-	void CEntity::setTransform(const Matrix4& transform) 
+	void CEntity::updateTransformValuesFromMatrix(const Matrix4 &transform)
 	{
-        TransformMessage m;
+		Vector3 scale;
+		Quaternion orientation;
 
-        m._type = MessageType::SET_TRANSFORM;
-        m._transform = _transform;
+		transform.decomposition(_position, scale, orientation);
 
-        m.Dispatch(*this);
+		_rotation = Vector3(orientation.getPitch().valueDegrees(),
+			orientation.getYaw().valueDegrees(),
+			orientation.getRoll().valueDegrees());
+
+		// @TODO _dimensions = Obtener dimensiones en función de la escala
+		// Valorar si deberíamos guardar también la escala junto con las dimensiones
+		_dimensions = scale * 100;
+	}
+
+	//---------------------------------------------------------
+
+	void CEntity::setTransform(const Matrix4 &transform)
+	{
+		updateTransformValuesFromMatrix(transform);
+
+		TransformMessage m;
+		m._type = MessageType::SET_TRANSFORM;
+		m._transform = transform;
+
+		m.Dispatch(*this);
+
 	} // setTransform
 
 	//---------------------------------------------------------
 
-	void CEntity::setPosition(const Vector3 &position)  
+	void CEntity::setPosition(const Vector3 &position)
 	{
-		_transform.setTrans(position);
+		_position = position;
 
-		// Avisamos a los componentes del cambio.
-		TransformMessage m;
-
-		m._type = MessageType::SET_TRANSFORM;
-		m._transform = _transform;
+		PositionMessage m;
+		m._type = MessageType::SET_POSITION;
+		m._position = _position;
 
         m.Dispatch(*this);
+
 	} // setPosition
+
+	//---------------------------------------------------------
+
+	void CEntity::setRotation(const Vector3 &rotation)
+	{
+		_rotation = rotation;
+
+		RotationMessage m;
+		m._type = MessageType::SET_ROTATION;
+		m._rotation = _rotation;
+
+		m.Dispatch(*this);
+
+	} // setRotation
 
 	//---------------------------------------------------------
 
@@ -321,61 +328,33 @@ namespace Logic
 	{
 		_dimensions = dimensions;
 
-		// Avisamos a los componentes del cambio.
-		DimensionsMessage message;
-		message._type = MessageType::SET_DIMENSIONS;
-		message._dimensions = _dimensions;
+		DimensionsMessage m;
+		m._type = MessageType::SET_DIMENSIONS;
+		m._dimensions = _dimensions;
 
-        message.Dispatch(*this);
-	} // setScale
+        m.Dispatch(*this);
 
-	//---------------------------------------------------------
-
-	void CEntity::setOrientation(const Matrix3& orientation) 
-	{
-		// Avisamos a los componentes del cambio.
-		TransformMessage message;
-		message._type = MessageType::SET_TRANSFORM;
-		message._transform = orientation;
-
-        message.Dispatch(*this);
-	} // setOrientation
+	} // setDimensions
 
 	//---------------------------------------------------------
 
-	Matrix3 CEntity::getOrientation() const
+	Matrix4 CEntity::getTransform() const
 	{
-		Matrix3 orientation;
-		_transform.extract3x3Matrix(orientation);
-		return orientation;
-	} // getOrientation
+		Vector3 scale;
+		Quaternion orientation;
 
-	//---------------------------------------------------------
+		// @TODO scale = Obtener escala en función de las dimensiones
+		// Valorar si deberíamos guardar también la escala junto con las dimensiones
+		scale = _dimensions / 100;
 
-	void CEntity::setYaw(float yaw) 
-	{
-		Math::setYaw(yaw,_transform);
+		orientation = Math::getOrientationFromRadians(
+			Radian(_rotation.x), Radian(_rotation.y), Radian(_rotation.z));
 
-		// Avisamos a los componentes del cambio.
-		TransformMessage message;
-		message._type = MessageType::SET_TRANSFORM;
-		message._transform = _transform;
+		Matrix4 transform;
+		transform.makeTransform(_position, scale, orientation);
 
-        message.Dispatch(*this);
-	} // setYaw
+		return transform;
 
-	//---------------------------------------------------------
-
-	void CEntity::yaw(float yaw) 
-	{
-		Math::yaw(yaw,_transform);
-
-		// Avisamos a los componentes del cambio.
-		TransformMessage message;
-		message._type = MessageType::SET_TRANSFORM;
-		message._transform = _transform;
-
-        message.Dispatch(*this);
-	} // yaw
+	} // getTransform
 
 } // namespace Logic

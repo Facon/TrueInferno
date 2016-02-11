@@ -7,7 +7,7 @@ de la entidad.
 @see Logic::CAvatarController
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Agosto, 2010
 */
 
@@ -87,7 +87,8 @@ namespace Logic
 
 	void CAvatarController::turn(float amount) 
 	{
-		_entity->yaw(amount);
+		Vector3 entityRotation = _entity->getRotation();
+		entityRotation.y += amount;
 
 	} // turn
 	
@@ -210,7 +211,7 @@ namespace Logic
 
 			if(_walking || _walkingBack)
 			{
-				direction = Math::getDirection(_entity->getYaw());
+				direction = Math::getDirection(_entity->getRotation().y);
 				if(_walkingBack)
 					direction *= -1;
 			}
@@ -218,7 +219,7 @@ namespace Logic
 			if(_strafingLeft || _strafingRight)
 			{
 				directionStrafe = 
-						Math::getDirection(_entity->getYaw() + Math::PI/2);
+					Math::getDirection(_entity->getRotation().y + Math::PI / 2);
 				if(_strafingRight)
 					directionStrafe *= -1;
 			}

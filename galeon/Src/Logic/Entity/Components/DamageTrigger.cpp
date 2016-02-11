@@ -7,7 +7,7 @@ entidad es tocada. El mensaje se env�a a la entidad que se ha tocado.
 @see Logic::CDamageTrigger
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Octubre, 2010
 */
 

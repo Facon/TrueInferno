@@ -6,7 +6,7 @@ Contiene la implementaci�n de la clase base de los componentes.
 @see Logic::IComponent
 @see Logic::CCommunicationPort
 
-@author David Llans�
+@author David Llansó
 @date Julio, 2010
 */
 

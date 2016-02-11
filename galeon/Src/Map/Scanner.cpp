@@ -509,7 +509,7 @@ static yyconst flex_int16_t yy_rule_linenum[12] =
 
 Contiene el codigo autogenerado del scanner l�xico de Flex.
 
-@author David Llans�
+@author David Llansó
 @date Agosto, 2010
 */
 #line 11 "Scanner.ll"

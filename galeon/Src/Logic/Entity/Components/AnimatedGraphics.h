@@ -7,7 +7,7 @@ gr�fica de una entidad est�tica.
 @see Logic::CAnimatedGraphics
 @see Logic::CGraphics
 
-@author David Llans�
+@author David Llansó
 @date Agosto, 2010
 */
 #ifndef __Logic_AnimatedGraphics_H
@@ -37,7 +37,7 @@ namespace Logic
 	
     @ingroup logicGroup
 
-	@author David Llans� Garc�a
+	@author David Llansó Garc�a
 	@date Agosto, 2010
 */
 	class CAnimatedGraphics : public CGraphics, public Graphics::CAnimatedEntityListener

@@ -1,13 +1,13 @@
 /**
 @file Graphics.cpp
 
-Contiene la implementaci�n del componente que controla la representaci�n
-gr�fica de la entidad.
+Contiene la implementación del componente que controla la representación
+gráfica de la entidad.
  
 @see Logic::CGraphics
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Agosto, 2010
 */
 
@@ -52,6 +52,7 @@ namespace Logic
 			_model = entityInfo->getStringAttribute("model");
 
 		_graphicsEntity = createGraphicsEntity(entityInfo);
+
 		if (!_graphicsEntity)
 			return false;
 
@@ -85,7 +86,8 @@ namespace Logic
 				return 0;
 		}
 
-		_graphicsEntity->setTransform(_entity->getTransform());
+		_graphicsEntity->setPosition(_entity->getPosition());
+		_graphicsEntity->setRotation(_entity->getRotation());
 		_graphicsEntity->setDimensions(_entity->getDimensions());
 
 		if (entityInfo->hasAttribute("material"))
@@ -104,31 +106,43 @@ namespace Logic
 
 	} // createGraphicsEntity
 	
+	//---------------------------------------------------------
+	
 	bool CGraphics::HandleMessage(const TransformMessage& m)
 	{
 		_graphicsEntity->setTransform(m._transform);
-
 		return true;
-	}
-
+	} // SET_TRANSFORM
+	
+	bool CGraphics::HandleMessage(const PositionMessage& m)
+	{
+		_graphicsEntity->setPosition(m._position);
+		return true;
+	} // SET_POSITION
+	
+	bool CGraphics::HandleMessage(const RotationMessage& m)
+	{
+		_graphicsEntity->setRotation(m._rotation);
+		return true;
+	} // SET_ROTATION
+	
 	bool CGraphics::HandleMessage(const DimensionsMessage& m)
 	{
 		_graphicsEntity->setDimensions(m._dimensions);
-
 		return true;
-	}
+	} // SET_DIMENSIONS
 	
 	bool CGraphics::HandleMessage(const ColorMessage& m)
 	{
 		_graphicsEntity->setColor(m._rgb);
-
 		return true;
-	}
+	} // SET_COLOR
+
 	bool CGraphics::HandleMessage(const MaterialMessage& m)
 	{
 		_graphicsEntity->setMaterialName(m._name);
-
 		return true;
-	}
+	} // SET_MATERIAL_NAME
+
 } // namespace Logic
 

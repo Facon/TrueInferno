@@ -1,51 +1,57 @@
 /**
 @file Graphics.h
 
-Contiene la declaraci�n del componente que controla la representaci�n
-gr�fica de la entidad.
+Contiene la declaración del componente que controla la representación
+gráfica de la entidad.
 
 @see Logic::CGraphics
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Agosto, 2010
 */
 #ifndef __Logic_Graphics_H
 #define __Logic_Graphics_H
 
 #include "BaseSubsystems/RTTI.h"
+#include "BaseSubsystems/Math.h"
+
 #include "Logic/Entity/Component.h"
 
-// Predeclaraci�n de clases para ahorrar tiempo de compilaci�n
+// Predeclaración de clases para ahorrar tiempo de compilaci�n
 namespace Graphics 
 {
 	class CEntity;
 	class CScene;
 }
 
-//declaraci�n de la clase
+//declaración de la clase
 namespace Logic 
 {
 /**
-	Componente que se encarga de la representaci�n gr�fica de una entidad.
-	En concreto se encarga de las entidades con representaciones gr�ficas
+	Componente que se encarga de la representación gráfica de una entidad.
+	En concreto se encarga de las entidades con representaciones gráficas
 	no animadas. Para otros tipos de representaciones hay otros componentes
-	que especializan �ste (CAnimatedGraphics y CStaticGraphics).
+	que especializan éste (CAnimatedGraphics y CStaticGraphics).
 	<p>
 	Acepta mensajes de:
-	1) cambio de posici�n y orientaci�n (matriz de transformaci�n) mediante
-	el mensaje SET_TRANSFORM.
-	2) cambio de escala mediante el mensaje SET_SCALE.
+	1) cambio de posición, orientación y dimensiones (escala)
+	   mediante SET_POSITION, SET_ROTATION y SET_DIMENSIONS.
+	2) cambio de la matriz de transformación (posición +
+	   orientación + escala) mediante el mensaje SET_TRANSFORM.
+	3) cambio de color mediante el mensaje SET_COLOR.
+	4) cambio de material mediante el mensaje SET_MATERIAL_NAME.
 	
     @ingroup logicGroup
 
-	@author David Llans� Garc�a
+	@author David Llansó
 	@date Agosto, 2010
 */
 	class CGraphics : public IComponent
 	{
 		RTTI_DECL;
 		DEC_FACTORY(CGraphics);
+
 	public:
 
 		/**
@@ -60,21 +66,26 @@ namespace Logic
 		virtual ~CGraphics();
 		
 		/**
-		Inicializaci�n del componente, utilizando la informaci�n extra�da de
-		la entidad le�da del mapa (Maps::CEntity). Toma del mapa el atributo
-		model con el modelo que se deber� cargar e invoca al m�todo virtual
+		Inicialización del componente, utilizando la información extraída de
+		la entidad leída del mapa (Maps::CEntity). Toma del mapa el atributo
+		model con el modelo que se deberá cargar e invoca al m�todo virtual
 		createGraphicsEntity() para generar la entidad gr�fica.
 
 		@param entity Entidad a la que pertenece el componente.
-		@param map Mapa L�gico en el que se registrar� el objeto.
+		@param map Mapa lógico en el que se registrará el objeto.
 		@param entityInfo Informaci�n de construcci�n del objeto le�do del
 			fichero de disco.
 		@return Cierto si la inicializaci�n ha sido satisfactoria.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
+		/**
+		Mensajes.
+		*/
 		bool HandleMessage(const TransformMessage& m);
-		bool HandleMessage(const DimensionsMessage& m);
+		bool HandleMessage(const PositionMessage& msg);
+		bool HandleMessage(const RotationMessage& msg);
+		bool HandleMessage(const DimensionsMessage& msg);
 		bool HandleMessage(const ColorMessage& m);
 		bool HandleMessage(const MaterialMessage& m);
 
