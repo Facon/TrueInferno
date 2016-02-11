@@ -73,6 +73,7 @@ namespace Graphics
 
 		@param name Nombre de la entidad.
 		@param mesh Nombre del modelo que debe cargarse.
+		@param meshDimensions Dimensiones del modelo que debe cargarse.
 		*/
 		CEntity(const std::string &name, const std::string &mesh);
 
@@ -277,9 +278,8 @@ namespace Graphics
 
 		/**
 		Dimensiones del modelo de la entidad.
-		@TODO Pasar _meshDimensions en el constructor de la entidad.
 		*/
-		Vector3 _meshDimensions = Vector3(100.f, 100.f, 100.f);
+		Vector3 _meshDimensions;
 
 		/**
 		Indica si la entidad ha sido cargada en el motor gráfico.

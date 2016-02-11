@@ -29,7 +29,8 @@ Contiene la implementación de la clase que representa una entidad gráfica.
 namespace Graphics 
 {
 	CEntity::CEntity(const std::string &name, const std::string &mesh)
-		: _entity(0), _entityNode(0), _scene(0), _loaded(false)
+		: _entity(0), _entityNode(0), _scene(0), _loaded(false),
+		  _meshDimensions(Vector3(100.f, 100.f, 100.f))
 	{
 		_name = name;
 		_mesh = mesh;
