@@ -61,6 +61,9 @@ namespace Logic {
 		/** Devuelve un boolean indicando si es posible hacer caminar un alma por el Placeable */
 		bool canPassWalkingSoul();
 
+		/** Devuelve un boolean a true si el Placeable corresponde a un edificio */
+		bool isBuilding();
+
 		virtual bool CPlaceable::HandleMessage(const PlaceMessage& msg);
 
 	private:

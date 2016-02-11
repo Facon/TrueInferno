@@ -93,6 +93,10 @@ namespace Logic {
 	}
 
 	bool Tile::canPassSoulPath(){
+		// Si el terreno no está vacío la SoulPath no puede pasar
+		if (_terrainType != Empty)
+			return false;
+
 		// Si no hay ningún placeable encima, la SoulPath puede atravesar
 		if (_placeableAbove == nullptr)
 			return true;

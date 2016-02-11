@@ -36,7 +36,7 @@ namespace Logic {
 	CServer::CServer() : _map(0)
 	{
 		_instance = this;
-		_timeSince = 0;
+		_timeSinceRoadBuild = 0;
 
 	} // CServer
 
@@ -190,22 +190,32 @@ namespace Logic {
 		// Eliminamos las entidades que se han marcado para ser eliminadas.
 		Logic::CEntityFactory::getSingletonPtr()->deleteDefferedEntities();
 
+		_map->tick(msecs);
+
+		// TODO Quitar cuando se esté disponible el control para crear edificios
+		if (TEST_ROAD_BUILDING)
+			testRoadBuild(msecs);
+
+	} // tick
+
+	// TODO TEST
+	void CServer::testRoadBuild(unsigned int msecs){
 		// Test de construcción de carreteras
 		CTileManager* tileManager = CTileManager::getSingletonPtr();
-		_timeSince += msecs;
-		if (_timeSince >= 3000){
+		_timeSinceRoadBuild += msecs;
+		if (_timeSinceRoadBuild >= TIME_BETWEEN_ROAD_BUILDING){
 			Tile* from = tileManager->getRandomTile();
 			Tile* to = tileManager->getRandomTile();
 
 			std::vector<Tile*>* path = AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(from, to);
 			if (path != nullptr){
-				std::cout << "Soulpath found from " << from << " to " << to << std::endl;
+				std::cout << "Soulpath found from " << from->getLogicPosition() << " to " << to->getLogicPosition() << std::endl;
 
-				// Imprimimos la ruta
+				// Construímos
 				for (auto it = path->cbegin(); it != path->cend(); ++it){
 					Tile* tile = (*it);
-					bool built = CBuildingManager::getSingletonPtr()->createSoulPath(_map, tile->getLogicPosition());
-					if (!built){
+					Logic::CEntity* entity = CBuildingManager::getSingletonPtr()->createPlaceable(_map, "SoulPath", tile->getLogicPosition());
+					if (!entity){
 						std::cout << "Can't create soulpath in " << tile->getLogicPosition() << std::endl;
 					}
 				}
@@ -213,13 +223,10 @@ namespace Logic {
 				delete path;
 			}
 			else{
-				std::cout << "Can't get soulpath from " << from << " to " << to << std::endl;
+				std::cout << "Can't get soulpath from " << from->getLogicPosition() << " to " << to->getLogicPosition() << std::endl;
 			}
-			_timeSince -= 3000;
+			_timeSinceRoadBuild -= TIME_BETWEEN_ROAD_BUILDING;
 		}
-
-		_map->tick(msecs);
-
-	} // tick
+	}
 
 } // namespace Logic
