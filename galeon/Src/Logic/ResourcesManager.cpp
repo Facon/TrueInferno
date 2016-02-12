@@ -41,9 +41,11 @@ namespace Logic
 			case ResourceType::AETHER:
 				_aether += num;
 				break;
+			/*
 			case ResourceType::HADES_FAVOR:
 				_hadesFavor += num;
 				break;
+			*/
 			default:
 				throw std::runtime_error("Invalid Resource.");
 		}

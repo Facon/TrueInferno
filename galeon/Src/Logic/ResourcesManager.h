@@ -1,3 +1,6 @@
+#ifndef RESOURCEMANAGER_H_
+#define RESOURCEMANAGER_H_
+
 namespace Logic
 {
 	enum ResourceType
@@ -10,7 +13,7 @@ namespace Logic
 		PURE,
 		REFINED,
 		AETHER,
-		HADES_FAVOR
+		//HADES_FAVOR
 	};
 
 	class ResourcesManager
@@ -26,19 +29,7 @@ namespace Logic
 		float _pure = 0.0f;
 		float _refined = 0.0f;
 		float _aether = 0.0f;
-		float _hadesFavor = 0.0f;
-		
-		/*
-		// TextDisplays shouldn't be here, there should be a class
-		// that deals with resources and another class dealing with it
-		
-		public Text res1Display; // mineral
-		public Text res2Display; // gas
-		public Text cokeDisplay; // coke
-		public Text crudeDisplay; // crude
-		public Text pureDisplay; // pure
-		public Text refinedDisplay; // refined
-		*/
+		//float _hadesFavor = 0.0f;
 		
 	public:
 		float getMineral() const { return _mineral; }
@@ -48,7 +39,7 @@ namespace Logic
 		float getPure() const { return _pure; }
 		float getRefined() const { return _refined; }
 		float getAether() const { return _aether; }
-		float getHadesFavor() const { return _hadesFavor; }
+		//float getHadesFavor() const { return _hadesFavor; }
 
 		void setMineral(const float mineral) { _mineral = mineral; }
 		void setGas(const float gas) { _gas = gas; }
@@ -57,7 +48,7 @@ namespace Logic
 		void setPure(const float pure) { _pure = pure; }
 		void setRefined(const float refined) { _refined = refined; }
 		void setAether(const float aether) { _aether = aether; }
-		void setHadesFavor(const float hadesFavor) { _hadesFavor = hadesFavor; }
+		//void setHadesFavor(const float hadesFavor) { _hadesFavor = hadesFavor; }
 
 		void incMineral(int workers, float time);
 		
@@ -67,3 +58,5 @@ namespace Logic
 		void increaseResources(ResourceType type, float num);
 	};
 }
+
+#endif //RESOURCEMANAGER_H_
