@@ -4,16 +4,9 @@
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/Window.h>
 
-
-#include "Map/MapParser.h"
-#include "Map/MapEntity.h"
-#include "Logic/Maps/EntityFactory.h"
-#include "Logic/Entity/Entity.h"
-#include "Logic/Entity/Components/Placeable.h"
-
 namespace GUI
 {
-	UIManager::UIManager()
+	UIManager::UIManager(Logic::ResourcesManager& rm, Logic::TimeManager& tm) : _topBarUI(rm, tm)
 	{
 	}
 
@@ -31,12 +24,12 @@ namespace GUI
 
 		_uiWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UI.layout");
 
-		_resourcesUI.init();
+		_topBarUI.init();
 
-		_sidebarUI.init();
+		_sideBarUI.init();
 
-		_uiWindow->addChild(_resourcesUI.getResourceWindow());
-		_uiWindow->addChild(_sidebarUI.getSideBarWindow());
+		_uiWindow->addChild(_topBarUI.getResourcesWindow());
+		_uiWindow->addChild(_sideBarUI.getSideBarWindow());
 
 		
 	}
@@ -48,8 +41,8 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_uiWindow);
 
 
-		_resourcesUI.activate();
-		_sidebarUI.activate();
+		_topBarUI.activate();
+		_sideBarUI.activate();
 		_uiWindow->setVisible(true);
 		_uiWindow->activate();
 
@@ -61,15 +54,15 @@ namespace GUI
 		
 		_uiWindow->deactivate();
 		_uiWindow->setVisible(false);
-		_resourcesUI.deactivate();
-		_sidebarUI.deactivate();
+		_topBarUI.deactivate();
+		_sideBarUI.deactivate();
 
 	}
 
 	void UIManager::tick(unsigned int msecs)
 	{
-		_resourcesUI.tick(msecs);
-		_sidebarUI.tick(msecs);
+		_topBarUI.tick(msecs);
+		_sideBarUI.tick(msecs);
 	}
 
 

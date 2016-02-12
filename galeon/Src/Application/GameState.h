@@ -19,6 +19,8 @@ Contiene la declaración del estado de juego.
 
 #include "ApplicationState.h"
 #include "GUI/UIManager.h"
+#include "Logic/ResourcesManager.h"
+#include "Logic/TimeManager.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Application 
@@ -70,7 +72,7 @@ namespace Application
 		Constructor de la clase 
 		*/
 		CGameState(CBaseApplication *app) : CApplicationState(app), 
-				_scene(0), _time(0) {}
+				_scene(0), _time(0), _uiManager(this->_resourcesManager, this->_timeManager) {}
 
 		/** 
 		Destructor 
@@ -174,6 +176,9 @@ namespace Application
 		*/
 		virtual bool mouseReleased(const GUI::CMouseState &mouseState);
 
+		Logic::ResourcesManager& getResourcesManager() { return _resourcesManager; }
+		Logic::TimeManager& getTimeManager() { return _timeManager; }
+
 	protected:
 
 		/**
@@ -191,9 +196,11 @@ namespace Application
 		*/
 		unsigned int _time;
 
-		// Resources Displays
-		GUI::UIManager _UIManager;
+		Logic::ResourcesManager _resourcesManager;
+		Logic::TimeManager _timeManager;
 
+		// Resources Displays
+		GUI::UIManager _uiManager;
 	}; // CGameState
 
 } // namespace Application

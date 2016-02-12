@@ -1,7 +1,7 @@
 #ifndef UIMANAGER_H_
 #define UIMANAGER_H_
 
-#include "GUI/ResourcesUI.h"
+#include "GUI/TopBarUI.h"
 #include "GUI/SideBarUI.h"
 
 namespace CEGUI
@@ -16,14 +16,14 @@ namespace GUI
 	{
 	protected:
 
-		ResourcesUI _resourcesUI;
-		SideBarUI _sidebarUI;
+		TopBarUI _topBarUI;
+		SideBarUI _sideBarUI;
 		// Window for displaying resources
 		CEGUI::Window* _uiWindow;
 
 
 	public:
-		UIManager();
+		UIManager(Logic::ResourcesManager& rm, Logic::TimeManager& tm);
 		~UIManager();
 		void init();
 		void activate();

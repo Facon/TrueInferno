@@ -1,22 +1,22 @@
-#include "ResourceManager.h"
+#include "ResourcesManager.h"
 #include <stdexcept>
 
 namespace Logic
 {
-	const float ResourceManager::MINERAL_GATHERING_SPEED = 20.f / 60.f;
-	const float ResourceManager::GAS_GATHERING_SPEED = 12.f / 60.f;
+	const float ResourcesManager::MINERAL_GATHERING_SPEED = 20.f / 60.f;
+	const float ResourcesManager::GAS_GATHERING_SPEED = 12.f / 60.f;
 
-	void ResourceManager::incMineral(int workers, float time)
+	void ResourcesManager::incMineral(int workers, float time)
 	{
 		increaseResources(ResourceType::MINERAL, MINERAL_GATHERING_SPEED * workers * time);
 	}
 	
-	void ResourceManager::incGas(int workers, float time)
+	void ResourcesManager::incGas(int workers, float time)
 	{
 		increaseResources(ResourceType::GAS, GAS_GATHERING_SPEED * workers * time);
 	}
 	
-	void ResourceManager::increaseResources(ResourceType type, float num)
+	void ResourcesManager::increaseResources(ResourceType type, float num)
 	{
 		switch(type)
 		{
