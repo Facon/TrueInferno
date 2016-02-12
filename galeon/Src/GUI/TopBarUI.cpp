@@ -6,10 +6,11 @@
 
 #include "Logic/TimeManager.h"
 #include "Logic/ResourcesManager.h"
+#include "Logic/HFManager.h"
 
 namespace GUI
 {
-	TopBarUI::TopBarUI(Logic::ResourcesManager& rm, Logic::TimeManager& tm) : _resourceManager(rm), _timeManager(tm)
+	TopBarUI::TopBarUI(Logic::ResourcesManager& rm, Logic::HFManager& hfm, Logic::TimeManager& tm) : _resourceManager(rm), _hfManager(hfm), _timeManager(tm)
 	{
 	}
 
@@ -55,7 +56,7 @@ namespace GUI
 		_uiBarsWindow->getChild("Pure")->setText("Pure  " + std::to_string(static_cast<int>(trunc(_resourceManager.getPure()))));
 		_uiBarsWindow->getChild("Refined")->setText("Refined  " + std::to_string(static_cast<int>(trunc(_resourceManager.getRefined()))));
 		_uiBarsWindow->getChild("TimeLeft")->setText("Time:  " + std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
-		_uiBarsWindow->getChild("HadesFavor")->setText("HF: " + std::to_string(static_cast<int>(trunc(_resourceManager.getHadesFavor()))));
+		_uiBarsWindow->getChild("HadesFavor")->setText("HF: " + std::to_string(static_cast<int>(trunc(_hfManager.getHadesFavor()))));
 	}
 
 	CEGUI::Window* TopBarUI::getResourcesWindow()
