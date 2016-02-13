@@ -51,39 +51,30 @@ namespace Logic
 	} // deactivate
 	
 	//---------------------------------------------------------
-	/*
-	bool CAvatarController::accept(const TMessage &message)
+
+	bool CAvatarController::HandleMessage(const ControlMessage& msg)
 	{
-		return message._type == Message::CONTROL;
+		bool received = true;
 
-	} // accept
-	
-	//---------------------------------------------------------
+		if (!msg._action.compare("walk"))
+			walk();
+		else if (!msg._action.compare("walkBack"))
+			walkBack();
+		else if (!msg._action.compare("stopWalk"))
+			stopWalk();
+		else if (!msg._action.compare("strafeLeft"))
+			strafeLeft();
+		else if (!msg._action.compare("strafeRight"))
+			strafeRight();
+		else if (!msg._action.compare("stopStrafe"))
+			stopStrafe();
+		else if (!msg._action.compare("turn"))
+			turn(msg._degreesMoved);
+		else
+			received = false;
 
-	void CAvatarController::process(const TMessage &message)
-	{
-		switch(message._type)
-		{
-		case Message::CONTROL:
-			if(!message._string.compare("walk"))
-				walk();
-			else if(!message._string.compare("walkBack"))
-				walkBack();
-			else if(!message._string.compare("stopWalk"))
-				stopWalk();
-			else if(!message._string.compare("strafeLeft"))
-				strafeLeft();
-			else if(!message._string.compare("strafeRight"))
-				strafeRight();
-			else if(!message._string.compare("stopStrafe"))
-				stopStrafe();
-			else if(!message._string.compare("turn"))
-				turn(message._float);
-		}
-
-	} // process
-	*/
-	//---------------------------------------------------------
+		return received;
+	}
 
 	void CAvatarController::turn(float amount) 
 	{
@@ -228,17 +219,22 @@ namespace Logic
 			direction *= msecs * _speed;
 
 			// Enviar un mensaje para que el componente f�sico mueva el personaje
-			PhysicMessage message;
-			message._type = MessageType::AVATAR_WALK;
-			message._point = direction;
+			//PhysicMessage message;
+			//message._type = MessageType::AVATAR_WALK;
+			//message._point = direction;
 
-            message.Dispatch(*_entity);
+            //message.Dispatch(*_entity);
 
-			//Vector3 newPosition = _entity->getPosition() + direction;
-			//_entity->setPosition(newPosition);
+			Vector3 newPosition = _entity->getPosition() + direction;
+			_entity->setPosition(newPosition);
+
+			TransformMessage msg;
+			msg._type = MessageType::SET_TRANSFORM;
+			msg._transform = _entity->getTransform();
+
+			msg.Dispatch(*_entity);
 		}
 
 	} // tick
 
 } // namespace Logic
-
