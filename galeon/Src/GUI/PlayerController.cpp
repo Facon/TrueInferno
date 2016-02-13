@@ -66,10 +66,10 @@ namespace GUI {
 			switch(key.keyId)
 			{
 			case GUI::Key::W:
-				m._action = "walk";
+				m._action = "moveForward";
 				break;
 			case GUI::Key::S:
-				m._action = "walkBack";
+				m._action = "moveBackward";
 				break;
 			case GUI::Key::A:
 				m._action = "strafeLeft";
@@ -97,11 +97,12 @@ namespace GUI {
 		{
 			Logic::ControlMessage m;
 			m._type = Logic::MessageType::CONTROL;
+
 			switch(key.keyId)
 			{
 			case GUI::Key::W:
 			case GUI::Key::S:
-				m._action = "stopWalk";
+				m._action = "stopMove";
 				break;
 
 			case GUI::Key::A:
@@ -117,6 +118,7 @@ namespace GUI {
 
 			return true;
 		}
+
 		return false;
 
 	} // keyReleased
@@ -136,6 +138,7 @@ namespace GUI {
 
             return true;
 		}
+		
 		return false;
 
 	} // mouseMoved

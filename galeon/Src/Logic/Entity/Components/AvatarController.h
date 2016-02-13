@@ -136,6 +136,8 @@ namespace Logic
 		*/
 		void turn(float amount);
 
+		bool HandleMessage(const ControlMessage& msg);
+
 	protected:
 
 		/**

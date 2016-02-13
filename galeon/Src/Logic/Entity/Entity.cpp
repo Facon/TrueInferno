@@ -71,9 +71,12 @@ namespace Logic
 			Math::yaw(yaw,_transform);
 		}
 
+		/*
 		if(entityInfo->hasAttribute("isPlayer"))
 			_isPlayer = entityInfo->getBoolAttribute("isPlayer");
-		
+		*/
+		if (entityInfo->getName() == "Camera")
+			_isPlayer = true;
 
 		// Inicializamos los componentes
 		TComponentList::const_iterator it;
