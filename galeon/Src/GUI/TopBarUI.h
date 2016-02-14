@@ -36,7 +36,6 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
-		CEGUI::Window* getResourcesWindow();
 	};
 }
 

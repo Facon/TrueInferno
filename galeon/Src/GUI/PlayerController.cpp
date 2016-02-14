@@ -127,17 +127,22 @@ namespace GUI {
 	
 	bool CPlayerController::mouseMoved(const CMouseState &mouseState)
 	{
-		if(_controlledAvatar)
-		{
-			Logic::ControlMessage m;
-			m._type = Logic::MessageType::CONTROL;
-			m._action = "turn";
-			m._degreesMoved = -(float)mouseState.movX * TURN_FACTOR;
+		/*IMPORTANTE
+		  se ha comentado este código que hacía girar el personaje con el ratón ya que cancelaba
+		  el uso de CEGUI impidiendo que se utilizaran sus botones
+		*/
 
-            m.Dispatch(*_controlledAvatar);
+		//if(_controlledAvatar)
+		//{
+			//Logic::ControlMessage m;
+			//m._type = Logic::MessageType::CONTROL;
+			//m._action = "turn";
+			//m._degreesMoved = -(float)mouseState.movX * TURN_FACTOR;
 
-            return true;
-		}
+            //m.Dispatch(*_controlledAvatar);
+
+            //return true;
+		//}
 		
 		return false;
 

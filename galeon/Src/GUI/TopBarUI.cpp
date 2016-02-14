@@ -27,6 +27,7 @@ namespace GUI
 
 	void TopBarUI::activate()
 	{
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiBarsWindow);
 		// Activamos la interfaz de usuario
 		_uiBarsWindow->setVisible(true);
 		_uiBarsWindow->activate();
@@ -59,8 +60,4 @@ namespace GUI
 		_uiBarsWindow->getChild("HadesFavor")->setText("HF: " + std::to_string(static_cast<int>(trunc(_hfManager.getHadesFavor()))));
 	}
 
-	CEGUI::Window* TopBarUI::getResourcesWindow()
-	{
-		return _uiBarsWindow;
-	}
 }

@@ -19,19 +19,11 @@ namespace GUI
 	void UIManager::init()
 	{
 		// Cargamos la ventana que muestra la barra superior
-		
-
 
 		_uiWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UI.layout");
-
 		_topBarUI.init();
-
 		_sideBarUI.init();
 
-		_uiWindow->addChild(_topBarUI.getResourcesWindow());
-		_uiWindow->addChild(_sideBarUI.getSideBarWindow());
-
-		
 	}
 
 	void UIManager::activate()
@@ -39,8 +31,6 @@ namespace GUI
 		// Activamos la interfaz de usuario
 		
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_uiWindow);
-
-
 		_topBarUI.activate();
 		_sideBarUI.activate();
 		_uiWindow->setVisible(true);

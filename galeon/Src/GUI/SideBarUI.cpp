@@ -23,10 +23,6 @@ namespace GUI
 	{
 	}
 
-	CEGUI::Window* SideBarUI::getSideBarWindow(){
-		return _uibuttonsWindow;
-	}
-
 	void SideBarUI::init()
 	{
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIButtonBar.layout");
@@ -40,6 +36,7 @@ namespace GUI
 	void SideBarUI::activate()
 	{
 		// Activamos la interfaz de usuario
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uibuttonsWindow);
 		_uibuttonsWindow->setVisible(true);
 		_uibuttonsWindow->activate();
 	}
