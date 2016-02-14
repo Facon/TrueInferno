@@ -20,6 +20,7 @@ Contiene la declaración del gestor de edificios.
 #include <string>
 #include <map>
 #include "BaseSubsystems/Math.h"
+#include "Logic/Entity/BuildingType.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
@@ -91,7 +92,7 @@ namespace Logic
 		/**
 		Registra internamente un edificio.
 		*/
-		void registerBuilding(CPlaceable *placeable);
+		void CBuildingManager::registerBuilding(CPlaceable *placeable, const BuildingType& buildingType);
 
 		/** Coloca un edificio del tipo indicado en la posición lógica del tile inicial 
 

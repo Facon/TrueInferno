@@ -7,6 +7,7 @@
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 #include "Logic/Entity/PlaceableType.h"
+#include "Logic/Entity/BuildingType.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
@@ -31,14 +32,6 @@ namespace Logic {
 		el fichero de mapa.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
-
-		/*
-		//Aceptación de mensajes
-		virtual bool accept(const TMessage &message);
-
-		//Procesamiento de mensajes
-		virtual void process(const TMessage &message);
-		*/
 
 		/**
 		Actualización por frame
@@ -92,6 +85,13 @@ namespace Logic {
 
 		/** Tipo del placeable */
 		Logic::PlaceableType _placeableType;
+
+		/** Tipo del edificio */
+		Logic::BuildingType _buildingType;
+
+		PlaceableType CPlaceable::getPlaceableType(std::string name);
+
+		BuildingType CPlaceable::getBuildingType(std::string name);
 
 	}; // class Placeable
 

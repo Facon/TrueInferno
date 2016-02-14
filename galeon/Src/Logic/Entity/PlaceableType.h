@@ -1,12 +1,17 @@
-#ifndef PLACEABLE_TYPE_
-#define PLACEABLE_TYPE_
+#ifndef PLACEABLE_TYPE_H_
+#define PLACEABLE_TYPE_H_
+
+#include <string>
+#include <cassert>
 
 namespace Logic {
 	enum PlaceableType {
 		Obstacle,
 		Building,
-		SoulPath
+		SoulPath,
+		NoPlaceable
 	};
+
 } // namespace Logic
 
-#endif // PLACEABLE_TYPE_
+#endif // PLACEABLE_TYPE_H_

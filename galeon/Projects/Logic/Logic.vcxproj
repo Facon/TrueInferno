@@ -84,6 +84,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\CameraController.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\HellQuarters.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\DamageTrigger.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Life.cpp" />
@@ -94,6 +95,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchPosition.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\WorkBuilding.cpp" />
     <ClCompile Include="..\..\Src\Logic\HFManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\EntityFactory.cpp" />
@@ -113,7 +115,9 @@
     <ClCompile Include="..\..\Src\Logic\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\Logic\Entity\BuildingType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\CameraController.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\HellQuarters.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Physics.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\DamageTrigger.h" />
@@ -125,6 +129,7 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchPosition.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Tile.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\WorkBuilding.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h" />
     <ClInclude Include="..\..\Src\Logic\HFManager.h" />

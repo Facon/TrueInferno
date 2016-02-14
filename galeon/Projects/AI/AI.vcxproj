@@ -88,6 +88,7 @@
     <ClCompile Include="..\..\Src\AI\micropather.cpp" />
     <ClCompile Include="..\..\Src\AI\Movement.cpp" />
     <ClCompile Include="..\..\Src\AI\Server.cpp" />
+    <ClCompile Include="..\..\Src\AI\SoulTask.cpp" />
     <ClCompile Include="..\..\Src\AI\UndirectedGraph.cpp" />
     <ClCompile Include="..\..\Src\AI\WaypointGraph.cpp" />
   </ItemGroup>
@@ -101,6 +102,7 @@
     <ClInclude Include="..\..\Src\AI\micropather.h" />
     <ClInclude Include="..\..\Src\AI\Movement.h" />
     <ClInclude Include="..\..\Src\AI\Server.h" />
+    <ClInclude Include="..\..\Src\AI\SoulTask.h" />
     <ClInclude Include="..\..\Src\AI\UndirectedGraph.h" />
     <ClInclude Include="..\..\Src\AI\WaypointGraph.h" />
   </ItemGroup>

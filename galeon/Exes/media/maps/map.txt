@@ -24,6 +24,25 @@ Map = {
 		physic_group = 0,
 	},
 	
+	SoulPath = {
+		prefab = true,
+		type="SoulPath",
+		dimensions = {1, 0.2, 1},
+		orientation = 0,
+		model = "cube.mesh",
+		static = false,
+		visible = true,
+		physic_entity = "rigid",
+		physic_type = "static",
+		physic_shape = "box",
+		physic_dimensions = { 1, 0.25, 1 },
+		physic_group = 0,
+		floor_x = 1,
+		floor_z = 1,
+		placeableType = "SoulPath",
+		color = {0.572, 0.415, 0.109},
+	},
+	
 	HellQuarters = {
 		prefab = true,
 		type="HellQuarters",
@@ -42,6 +61,9 @@ Map = {
 		placeableType = "Building",
 		color = {1, 0.68, 0.4},
 		material = "HellQuarters",
+		numInitialSouls = 5,
+		secondsBetweenSpawns = 10,
+		numSpawnedSouls = 5,
 	},
 	
 	Evilator = {
@@ -62,12 +84,14 @@ Map = {
 		placeableType = "Building",
 		color = {0.81, 0.32, 0.7},
 		material = "Evilator",
+		minWorkers = 1,
+		maxWorkers = 5,
 	},
-
-	SoulPath = {
+	
+	Furnace = {
 		prefab = true,
-		type="SoulPath",
-		dimensions = {1, 0.2, 1},
+		type="Furnace",
+		dimensions = {2, 1.5, 2},
 		orientation = 0,
 		model = "cube.mesh",
 		static = false,
@@ -75,11 +99,14 @@ Map = {
 		physic_entity = "rigid",
 		physic_type = "static",
 		physic_shape = "box",
-		physic_dimensions = { 1, 0.25, 1 },
+		physic_dimensions = { 1, 2, 1 },
 		physic_group = 0,
-		floor_x = 1,
-		floor_z = 1,
-		placeableType = "SoulPath",
-		color = {0.572, 0.415, 0.109},
+		floor_x = 2,
+		floor_z = 2,
+		placeableType = "Building",
+		color = {0.721, 0, 0},
+		material = "Furnace",
+		minWorkers = 1,
+		maxWorkers = 5,
 	},
 }

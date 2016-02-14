@@ -38,17 +38,8 @@ namespace Logic {
 		_floorX = entityInfo->getIntAttribute("floor_x");
 		_floorZ = entityInfo->getIntAttribute("floor_z");
 
-		std::string placeableType = entityInfo->getStringAttribute("placeableType");
-		if (placeableType == "Building")
-			_placeableType = Logic::PlaceableType::Building;
-		else if (placeableType == "Obstacle")
-			_placeableType = Logic::PlaceableType::Obstacle;
-		else if (placeableType == "SoulPath")
-			_placeableType = Logic::PlaceableType::SoulPath;
-		else{
-			std::cout << "Unknown placeableType: '" << placeableType << "'" << std::endl;
-			return false;
-		}
+		// Determinamos el tipo de placeable que es
+		_placeableType = getPlaceableType(entityInfo->getStringAttribute("placeableType"));
 
 		// Si el edificio fue creado por prefab, es posible que al hacer spawn no tenga el atributo de posición lógica
 		if (entityInfo->hasAttribute("floor_absolute_position0")){
@@ -61,22 +52,19 @@ namespace Logic {
 			_tiles = std::vector<Tile*>(_floorX * _floorZ);
 		}
 
-		// Register buildings in manager
-		if (_placeableType == Building)
-			Logic::CBuildingManager::getSingletonPtr()->registerBuilding(this);
+		// Si es un edificio
+		if (_placeableType == Building){
+			// Determinamos el tipo
+			_buildingType = getBuildingType(entityInfo->getStringAttribute("type"));
+
+			// Lo registramos en el manager
+			Logic::CBuildingManager::getSingletonPtr()->registerBuilding(this, _buildingType);
+		}
+		else
+			_buildingType = NoBuilding;
 
 		return true;
 	} // spawn
-	
-	/*
-	bool CPlaceable::accept(const TMessage &message){
-		return true;
-	} // accept
-
-	void CPlaceable::process(const TMessage &message){
-
-	} // process
-	*/
 
 	void CPlaceable::tick(unsigned int msecs){
 	} // tick
@@ -177,6 +165,61 @@ namespace Logic {
 
 	bool CPlaceable::HandleMessage(const PlaceMessage& msg){
 		return place(msg.position);
+	}
+
+	PlaceableType CPlaceable::getPlaceableType(std::string name){
+		if (name == "Obstacle"){
+			return Obstacle;
+		}
+		else if (name == "Building"){
+			return Building;
+		}
+		else if (name == "SoulPath"){
+			return SoulPath;
+		}
+		else{
+			assert("PlaceableType name unknown");
+			// TODO lanzar excepción en vez de assert y eliminar valor NoPlaceable
+			return NoPlaceable;
+		}
+	}
+
+	BuildingType CPlaceable::getBuildingType(std::string name){
+		if (name == "HellQuarters"){
+			return HellQuarters;
+		}
+		else if (name == "Furnace"){
+			return Furnace;
+		}
+		else if (name == "Evilworks"){
+			return Evilworks;
+		}
+		else if (name == "Refinery"){
+			return Refinery;
+		}
+		else if (name == "Evilator"){
+			return Evilator;
+		}
+		else if (name == "Mine"){
+			return Mine;
+		}
+		else if (name == "GasPlant"){
+			return GasPlant;
+		}
+		else if (name == "ResearchLabs"){
+			return ResearchLabs;
+		}
+		else if (name == "PowerGenerator"){
+			return PowerGenerator;
+		}
+		else if (name == "Warehouse"){
+			return Warehouse;
+		}
+		else{
+			assert("BuildingType name unknown");
+			// TODO lanzar excepción en vez de assert
+			return NoBuilding;
+		}
 	}
 
 } // namespace Logic

@@ -3,5 +3,6 @@ AnimatedEntity CAnimatedGraphics
 Camera CCamera CameraController
 Tile CGraphics CPhysicEntity Tile
 SoulPath CGraphics CPhysicEntity CPlaceable
-HellQuarters CGraphics CPhysicEntity CPlaceable
-Evilator CGraphics CPhysicEntity CPlaceable
+HellQuarters CHellQuarters CGraphics CPhysicEntity CPlaceable
+Evilator CGraphics CPhysicEntity CPlaceable CWorkBuilding
+Furnace CGraphics CPhysicEntity CPlaceable CWorkBuilding
