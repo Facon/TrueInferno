@@ -3,10 +3,12 @@
 
 namespace Logic
 {
-    // Predefiniciones
+    // Predefinición de cada tipo de mensaje
     class Message;
-    class TransformMessage;
-    class DimensionsMessage;
+	class TransformMessage;
+	class PositionMessage;
+	class RotationMessage;
+	class DimensionsMessage;
 	class ColorMessage;
 	class MaterialMessage;
     class AnimationMessage;
@@ -17,10 +19,18 @@ namespace Logic
     class DamageMessage;
 	class PlaceMessage;
 
+	// MessageHandler
 	class MessageHandler
 	{
 	public:
+
 		virtual bool HandleMessage(const TransformMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const PositionMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const RotationMessage& msg)
 		{ return false; }
 
 		virtual bool HandleMessage(const DimensionsMessage& msg)
@@ -51,9 +61,8 @@ namespace Logic
         { return false; }
 
 		virtual bool HandleMessage(const PlaceMessage& msg)
-		{
-			return false;
-		}
+		{ return false; }
+		
 	};
 } // namespace Logic
 

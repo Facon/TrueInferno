@@ -7,7 +7,7 @@ una entidad que tiene dos estado (posiciones) para ir de una a otra.
 @see Logic::CSwitchPosition
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Octubre, 2010
 */
 #ifndef __Logic_SwitchPosition_H
@@ -34,7 +34,7 @@ namespace Logic
 	
     @ingroup logicGroup
 
-	@author David Llans� Garc�a
+	@author David Llansó Garc�a
 	@date Octubre, 2010
 	*/
 	class CSwitchPosition : public IComponent

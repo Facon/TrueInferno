@@ -7,7 +7,7 @@ entidad cuando recibe un mensaje TOUCHED / UNTOUCHED.
 @see Logic::CSwitchTrigger
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Octubre, 2010
 */
 

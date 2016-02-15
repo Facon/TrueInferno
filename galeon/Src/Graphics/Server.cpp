@@ -10,7 +10,7 @@ la ventana, etc.
 
 @see Graphics::CServer
 
-@author David Llans�
+@author David Llansó
 @date Julio, 2010
 */
 

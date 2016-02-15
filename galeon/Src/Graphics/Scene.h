@@ -10,7 +10,7 @@ de una escena.
 
 @see Graphics::CScene
 
-@author David Llans�
+@author David Llansó
 @date Julio, 2010
 */
 
@@ -69,7 +69,7 @@ namespace Graphics
 	
 	@ingroup graphicsGroup
 
-	@author David Llans�
+	@author David Llansó
 	@date Julio, 2010
 	*/
 	class CScene 

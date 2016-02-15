@@ -78,6 +78,20 @@ por el motor gráfico, por lo tanto es dependiente del motor usado.
 typedef Ogre::Ray Ray;
 
 /**
+Wrapper class de un valor Ogre::Real para un ángulo en radianes. 
+La definición del tipo de datos es la misma que la utilizada por el
+motor gráfico, por lo tanto es dependiente del motor usado.
+*/
+typedef Ogre::Radian Radian;
+
+/**
+Wrapper class de un valor Ogre::Real para un ángulo en grados.
+La definición del tipo de datos es la misma que la utilizada por el
+motor gráfico, por lo tanto es dependiente del motor usado.
+*/
+typedef Ogre::Degree Degree;
+
+/**
 Namespace en el que ofrecemos alguna definición de constante
 matamática y métodos para convertir grados en radianes, etc.
 */
@@ -188,6 +202,28 @@ namespace Math
 		return getDirection(getYaw(transform));
 
 	} // getDirection
+	
+	/**
+	Obtiene la orientación de una entidad a partir de su rotación
+	alrededor de cada eje.
+
+	@param pitch Rotación alrededor del eje X.
+	@param yaw Rotación alrededor del eje Y.
+	@param roll Rotación alrededor del eje Z.
+	@return Quaternion de orientación de la entidad.
+	*/
+	static Quaternion getOrientationFromRadians(const Radian &pitch,
+		const Radian &yaw, const Radian &roll)
+	{
+		Matrix3 rotationMatrix;
+		Quaternion orientation;
+
+		rotationMatrix.FromEulerAnglesYXZ(yaw, pitch, roll);
+		orientation.FromRotationMatrix(rotationMatrix);
+
+		return orientation;
+
+	} // getOrientationFromRadians
 
 } // namespace Math
 

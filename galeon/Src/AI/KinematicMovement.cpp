@@ -75,7 +75,7 @@ namespace AI
 		// actuales y se modifica con los nuevos valores de velocidad/aceleración.
 		// Puede ser útil usar el método IA::CServer::correctAngle, que nos sirve para asegurarnos de que, después
 		// de restar dos ángulos, el resultado se mantiene entre -PI y PI.
-		currentProperties.angularSpeed = (atan2(-currentProperties.linearSpeed.x, -currentProperties.linearSpeed.z) - _entity->getYaw());
+		currentProperties.angularSpeed = (atan2(-currentProperties.linearSpeed.x, -currentProperties.linearSpeed.z) - _entity->getRotation().y);
 		currentProperties.angularSpeed = CServer::correctAngle(currentProperties.angularSpeed);
 		currentProperties.angularSpeed /= IMovement::ATTENUATION;
 		if (abs(currentProperties.angularSpeed) > _maxAngularSpeed) {

@@ -7,7 +7,7 @@ de una escena.
 @see Logic::CCamera
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Agosto, 2010
 */
 

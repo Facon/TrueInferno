@@ -7,7 +7,7 @@ gr�fica de una entidad est�tica.
 @see Logic::CAnimatedGraphics
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Agosto, 2010
 */
 

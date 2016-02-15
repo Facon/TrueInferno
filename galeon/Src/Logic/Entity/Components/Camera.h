@@ -7,7 +7,7 @@ de una escena.
 @see Logic::CCamera
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Septiembre, 2010
 */
 #ifndef __Logic_Camera_H
@@ -41,7 +41,7 @@ namespace Logic
 	
     @ingroup logicGroup
 
-	@author David Llans� Garc�a
+	@author David Llansó Garc�a
 	@date Septiembre, 2010
 */
 	class CCamera : public IComponent

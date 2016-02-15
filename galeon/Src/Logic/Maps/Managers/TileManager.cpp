@@ -142,9 +142,9 @@ namespace Logic {
 				// Cambia la posición.
 				Vector3 tilePosition(tileBasePosition);
 
-				tilePosition.x = (float)x; // *tileBaseDimensions.x;
-				tilePosition.y = (float)0; // Matriz de tiles 2D
-				tilePosition.z = (float)z; // *tileBaseDimensions.z;
+				tilePosition.x = (float) x; // *tileBaseDimensions.x;
+				tilePosition.y = (float) 0; // Matriz de tiles 2D
+				tilePosition.z = (float) z; // *tileBaseDimensions.z;
 
 				// Construye la nueva posición como un Vector3 representado por un
 				// string con formato: "x y z".

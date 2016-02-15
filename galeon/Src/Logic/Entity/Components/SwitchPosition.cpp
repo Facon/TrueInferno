@@ -7,7 +7,7 @@ una entidad que tiene dos estado (posiciones) para ir de una a otra.
 @see Logic::CSwitchPosition
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Octubre, 2010
 */
 

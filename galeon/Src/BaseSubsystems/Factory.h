@@ -7,7 +7,7 @@ tel tipo parametrizado.
 
 @see BaseSubsystems::CFactory
 
-@author David Llans�
+@author David Llansó
 @date Julio, 2010
 */
 #ifndef __BaseSubsystems_Factory_H
@@ -30,7 +30,7 @@ namespace BaseSubsystems
 	Logic::CComponentFactory donde todo el registro de componentes se realiza 
 	utilizando macros del preprocesador.
 
-	@author David Llans�
+	@author David Llansó
 	@date Julio, 2010
 	@ingroup baseSubsystemsGroup
 	 */

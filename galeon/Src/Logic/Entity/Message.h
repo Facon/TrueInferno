@@ -5,7 +5,7 @@ Contiene el tipo de datos de un mensaje.
 
 @see Logic::TMessage
 
-@author David Llans� Garc�a
+@author David Llansó Garc�a
 */
 #ifndef __Logic_Message_H
 #define __Logic_Message_H
@@ -31,6 +31,8 @@ namespace Logic
 		{
 			UNASSIGNED = 0xFFFFFFFF,
 			SET_TRANSFORM,
+			SET_POSITION,
+			SET_ROTATION,
 			SET_DIMENSIONS,
 			SET_COLOR,
 			SET_MATERIAL_NAME,
@@ -68,7 +70,7 @@ namespace Logic
     @ingroup logicGroup
     @ingroup entityGroup
 
-	@author David Llans� Garc�a
+	@author David Llansó Garc�a
 	@date Julio, 2010
     @ingroup grupoEntidad
 	*/
@@ -92,6 +94,31 @@ namespace Logic
 		}
 	};
 
+	// SET_POSITION
+	class PositionMessage : public Message
+	{
+	public:
+		Vector3 _position;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// SET_ROTATION
+	class RotationMessage : public Message
+	{
+	public:
+		// Rotación con respecto a los ejes X(pitch), Y(yaw) y Z(roll).
+		Vector3 _rotation;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
 	// SET_DIMENSIONS
 	class DimensionsMessage : public Message
 	{
@@ -100,7 +127,7 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
-            return handler.HandleMessage(*this);
+			return handler.HandleMessage(*this);
 		}
 	};
 	
@@ -224,6 +251,7 @@ namespace Logic
 	msg._keyCode = KEY_CODE_UP_ARROW;
 	msg.Dispatch(*receiver_object);
 	*/
+
 } // namespace Logic
 
 #endif // __Logic_Message_H

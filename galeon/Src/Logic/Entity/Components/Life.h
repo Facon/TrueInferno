@@ -6,7 +6,7 @@ Contiene la declaraci�n del componente que controla la vida de una entidad.
 @see Logic::CLife
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Octubre, 2010
 */
 #ifndef __Logic_Life_H
@@ -31,7 +31,7 @@ namespace Logic
 	
     @ingroup logicGroup
 
-	@author David Llans� Garc�a
+	@author David Llansó Garc�a
 	@date Octubre, 2010
 */
 	class CLife : public IComponent

@@ -3,7 +3,6 @@
 #include "Logic/Entity/Entity.h"
 #include "Map/MapEntity.h"
 
-
 namespace Logic
 {
 	RTTI_ROOT_IMPL(CameraController);
@@ -97,7 +96,7 @@ namespace Logic
 
 			if (_movingForward || _movingBackward)
 			{
-				direction = Math::getDirection(_entity->getYaw());
+				direction = Math::getDirection(_entity->getRotation().y);
 				if (_movingBackward)
 					direction *= -1;
 			}
@@ -105,7 +104,7 @@ namespace Logic
 			if (_strafingLeft || _strafingRight)
 			{
 				directionStrafe =
-					Math::getDirection(_entity->getYaw() + Math::PI / 2);
+					Math::getDirection(_entity->getRotation().y + Math::PI / 2);
 				if (_strafingRight)
 					directionStrafe *= -1;
 			}

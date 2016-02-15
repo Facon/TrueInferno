@@ -29,7 +29,8 @@ Contiene la implementación de la clase que representa una entidad gráfica.
 namespace Graphics 
 {
 	CEntity::CEntity(const std::string &name, const std::string &mesh)
-		: _entity(0), _entityNode(0), _scene(0), _loaded(false)
+		: _entity(0), _entityNode(0), _scene(0), _loaded(false),
+		  _meshDimensions(Vector3(100.f, 100.f, 100.f))
 	{
 		_name = name;
 		_mesh = mesh;
@@ -132,27 +133,76 @@ namespace Graphics
 	} // tick
 	
 	//--------------------------------------------------------
-		
+	
 	void CEntity::setTransform(const Matrix4 &transform)
 	{
 		assert(_entityNode && "La entidad no ha sido cargada");
 		if(_entityNode)
 		{
-			_entityNode->setPosition(transform.getTrans());
-			_entityNode->setOrientation(transform.extractQuaternion());
+			Vector3 position, scale;
+			Quaternion orientation;
+			
+			transform.decomposition(position, scale, orientation);
+
+			_entityNode->setPosition(position);
+			_entityNode->setOrientation(orientation);
+			_entityNode->setScale(scale);
 		}
 
 	} // setTransform
 	
 	//--------------------------------------------------------
 		
-	void CEntity::setOrientation(const Matrix3 &orientation)
+	void CEntity::setPosition(const Vector3 &position)
 	{
 		assert(_entityNode && "La entidad no ha sido cargada");
-		if(_entityNode)
-			_entityNode->setOrientation(orientation);
+		if (_entityNode)
+			_entityNode->setPosition(position);
 
-	} // setOrientation
+	} // setPosition
+	
+	//--------------------------------------------------------
+		
+	void CEntity::setRotation(const Vector3 &rotation)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entityNode) {
+			Quaternion orientation = Math::getOrientationFromRadians(
+				Radian(rotation.x), Radian(rotation.y), Radian(rotation.z));
+			_entityNode->setOrientation(orientation);
+		}
+
+	} // setRotation
+	
+	//--------------------------------------------------------
+		
+	void CEntity::setDimensions(const Vector3 &dimensions)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entityNode)
+			setScale(dimensions / _meshDimensions);
+
+	} // setDimensions
+	
+	//--------------------------------------------------------
+		
+	void CEntity::setScale(const Vector3 &scale)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entityNode)
+			_entityNode->setScale(scale);
+
+	} // setScale
+
+	//--------------------------------------------------------
+
+	void CEntity::setScale(const float scale)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entityNode)
+			setScale(Vector3(scale, scale, scale));
+
+	} // setScale
 	
 	//--------------------------------------------------------
 		
@@ -165,7 +215,7 @@ namespace Graphics
 	} // setVisible
 	
 	//--------------------------------------------------------
-		
+	
 	const bool CEntity::getVisible()
 	{
 		if(_entityNode)
@@ -176,48 +226,16 @@ namespace Graphics
 	} // getVisible
 	
 	//--------------------------------------------------------
-		
-	void CEntity::setPosition(const Vector3 &position)
+	
+	const Vector3& CEntity::getScale()
 	{
-		assert(_entityNode && "La entidad no ha sido cargada");
-		if(_entityNode)
-			_entityNode->setPosition(position);
+		if (_entityNode)
+			return _entityNode->getScale();
 
-	} // setPosition
-	
-	//--------------------------------------------------------
-		
-	void CEntity::setScale(const Vector3 &scale)
-	{
-		assert(_entityNode && "La entidad no ha sido cargada");
-		if(_entityNode)
-			_entityNode->setScale(scale);
+		throw new std::runtime_error("La entidad no ha sido cargada");
 
-	} // setScale
-	
-	//--------------------------------------------------------
-		
-	void CEntity::setScale(const float scale)
-	{
-		assert(_entityNode && "La entidad no ha sido cargada");
-		if(_entityNode)
-		{
-			Vector3 scaleVector(scale,scale,scale);
-			_entityNode->setScale(scaleVector);
-		}
+	} // getScale
 
-	} // setScale
-	
-	//--------------------------------------------------------
-	
-	void CEntity::setDimensions(const Vector3 &dimensions)
-	{
-		assert(_entityNode && "La entidad no ha sido cargada");
-		Vector3 scale(dimensions/CUBE_MESH_DIMENSIONS);
-		this->setScale(scale);
-
-	} // setDimensions
-	
 	//--------------------------------------------------------
 	
 	void CEntity::setColor(const Vector3 &color)

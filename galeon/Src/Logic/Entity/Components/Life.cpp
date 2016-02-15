@@ -6,7 +6,7 @@ Contiene la implementaci�n del componente que controla la vida de una entidad.
 @see Logic::CLife
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Octubre, 2010
 */
 

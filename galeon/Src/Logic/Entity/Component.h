@@ -6,7 +6,7 @@ Contiene la declaraci�n de la clase base de los componentes.
 @see Logic::IComponent
 @see Logic::CCommunicationPort
 
-@author David Llans�
+@author David Llansó
 @date Julio, 2010
 */
 #ifndef __Logic_Component_H
@@ -76,7 +76,7 @@ namespace Logic
     @ingroup logicGroup
     @ingroup entityGroup
 
-	@author David Llans� Garc�a
+	@author David Llansó Garc�a
 	@date Julio, 2010
 */
 	class IComponent : public MessageHandler

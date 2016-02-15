@@ -7,7 +7,7 @@ mover al jugador.
 
 @see GUI::CPlayerController
 
-@author David Llans�
+@author David Llansó
 @date Agosto, 2010
 */
 

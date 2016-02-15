@@ -7,7 +7,7 @@ de la entidad.
 @see Logic::CAvatarController
 @see Logic::IComponent
 
-@author David Llans�
+@author David Llansó
 @date Agosto, 2010
 */
 #ifndef __Logic_AvatarController_H
@@ -30,7 +30,7 @@ namespace Logic
 	
     @ingroup logicGroup
 
-	@author David Llans� Garc�a
+	@author David Llansó Garc�a
 	@date Agosto, 2010
 */
 	class CAvatarController : public IComponent

@@ -73,6 +73,7 @@ namespace Graphics
 
 		@param name Nombre de la entidad.
 		@param mesh Nombre del modelo que debe cargarse.
+		@param meshDimensions Dimensiones del modelo que debe cargarse.
 		*/
 		CEntity(const std::string &name, const std::string &mesh);
 
@@ -82,10 +83,11 @@ namespace Graphics
 		virtual ~CEntity();
 
 		/**
-		Cambia la posición y orientación de la entidad.
+		Cambia la matriz de transformación de la entidad (posición,
+		orientación y escala).
 
 		@param transform Referencia a la matriz de transformación con la 
-		que debe posicionarse y orientarse la entidad.
+		que debe posicionarse, orientarse y escalarse la entidad.
 		*/
 		void setTransform(const Matrix4 &transform);
 
@@ -98,12 +100,34 @@ namespace Graphics
 		void setPosition(const Vector3& position);
 
 		/**
-		Cambia la orientación de la entidad.
+		Cambia la rotación de la entidad.
 
-		@param orientation Referencia a la matriz de rotación con la que debe 
-		orientarse la entidad.
+		@param rotation Nueva rotación para el nodo que contiene la entidad
+		de Ogre.
 		*/
-		void setOrientation(const Matrix3 &orientation);
+		void setRotation(const Vector3& rotation);
+
+		/**
+		Cambia las dimensiones de la entidad.
+
+		@param dimensions Nuevas dimensiones para el nodo que contiene la
+		entidad de Ogre.
+		*/
+		void setDimensions(const Vector3& dimensions);
+
+		/**
+		Escala la entidad.
+
+		@param scale Valores de la escala en los diferentes ejes.
+		*/
+		void setScale(const Vector3 &scale);
+
+		/**
+		Escala la entidad.
+
+		@param scale Valor de la escala para los 3 ejes.
+		*/
+		void setScale(float scale);
 
 		/**
 		 Establece la propiedad visible de la entidad. Si
@@ -131,32 +155,11 @@ namespace Graphics
 		const bool getVisible();
 
 		/**
-		 Escala la entidad.
-
-		 @param scale Valores de la escala en los diferentes ejes.
-		 */
-		void setScale(const Vector3 &scale);
-
-		/**
-		 Escala la entidad.
-
-		 @param scale Valor de la escala para los 3 ejes.
-		 */
-		void setScale(float scale);
-
-		/**
 		 Devuelve el valor de la escala de la entidad.
 
 		 @return Valores de la escala en los diferentes ejes.
 		*/
 		const Vector3 &getScale();
-
-		/**
-		Cambia las dimensiones de la entidad.
-
-		@param dimensions Dimensiones de la entidad en cada eje.
-		*/
-		void setDimensions(const Vector3 &dimensions);
 
 		/**
 		 Cambia el color de la entidad.
@@ -274,18 +277,14 @@ namespace Graphics
 		std::string _mesh;
 
 		/**
+		Dimensiones del modelo de la entidad.
+		*/
+		Vector3 _meshDimensions;
+
+		/**
 		Indica si la entidad ha sido cargada en el motor gráfico.
 		*/
 		bool _loaded;
-
-	private:
-
-		/**
-		Dimensiones de la malla "cube.mesh" original de Ogre.
-		Empleadas, al cambiar las dimensiones de la entidad, para calcular
-		la nueva escala con la que invocar al método setScale() de Ogre.
-		*/
-		const Vector3 CUBE_MESH_DIMENSIONS = Vector3(100.f, 100.f, 100.f);
 
 	}; // class CEntity
 

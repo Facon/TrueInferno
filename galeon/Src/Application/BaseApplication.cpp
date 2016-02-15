@@ -11,7 +11,7 @@ de todo el juego.
 @see Application::CBaseApplication
 @see Application::CApplicationState
 
-@author Marco Antonio G�mez Mart�n & David Llans�
+@author Marco Antonio G�mez Mart�n & David Llansó
 @date Julio, 2010
 */
 

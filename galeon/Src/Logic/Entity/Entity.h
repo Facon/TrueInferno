@@ -16,11 +16,10 @@ de juego. Es una colección de componentes.
 
 #include "BaseSubsystems/Math.h"
 
-#include "Logic/Maps/EntityID.h"
-
-// Mensaje
 #include "Logic/Entity/MessageHandler.h"
 #include "Logic/Entity/Message.h"
+
+#include "Logic/Maps/EntityID.h"
 
 #include <list>
 #include <string>
@@ -155,7 +154,7 @@ namespace Logic
 		bool removeComponent(IComponent* component);
 		
 		/**
-		Mï¿½todo que destruye todos los componentes de una entidad.
+		Método que destruye todos los componentes de una entidad.
 		*/
 		void destroyAllComponents();
 
@@ -169,8 +168,10 @@ namespace Logic
 		*/
 		//bool emitMessage(const Message &message, IComponent* emitter = 0);
 
-		// Para tipo de mensaje se hace la gestiÃ³n apropiada.
+		// Para cada tipo de mensaje se hace la gestión apropiada.
 		bool HandleMessage(const TransformMessage& msg);
+		bool HandleMessage(const PositionMessage& msg);
+		bool HandleMessage(const RotationMessage& msg);
 		bool HandleMessage(const DimensionsMessage& msg);
 		bool HandleMessage(const ColorMessage& msg);
 		bool HandleMessage(const MaterialMessage& msg);
@@ -189,10 +190,10 @@ namespace Logic
 		Logic::TEntityID getEntityID() const { return _entityID; }
 
 		/**
-		Mï¿½todo que indica si la entidad es o no el jugador.
+		Método que indica si la entidad es o no el jugador.
 		Seguro que hay formas mejores desde el punto de vista de
-		diseï¿½o de hacerlo, pero esta es la mï¿½s rï¿½pida: la entidad 
-		con la descripciï¿½n de la entidad tiene esta descripciï¿½n que
+		diseño de hacerlo, pero esta es la más rápida: la entidad 
+		con la descripción de la entidad tiene esta descripciï¿½n que
 		establece en el spawn().
 		
 		@return true si la entidad es el jugador.
@@ -229,116 +230,86 @@ namespace Logic
 		const std::string &getType() const { return _type; }
 
 		/**
-		Establece la matriz de transformaciï¿½n de la entidad. Avisa a los 
-		componentes del cambio.
+		Establece la matriz de transformación de la entidad (posición,
+		rotación y escala). Avisa a los componentes del cambio.
 
-		@param transform Nueva matriz de transformaciï¿½n de la entidad.
+		@param transform Nueva matriz de transformación de la entidad.
 		*/
 		void setTransform(const Matrix4& transform);
 
 		/**
-		Devuelve la metriz de transformaciï¿½n de la entidad.
-		<p>
-		La posiciï¿½n es inicialmente leï¿½da del mapa (si no aparece,
-		se colocarï¿½ a (0, 0, 0)) y la orientaciï¿½n es tambiï¿½n inicialmente 
-		leï¿½da del mapa, como un simple viraje (si no aparece, se colocarï¿½ 
-		a 0). Obviamente, pueden cambiar con el tiempo.
-
-		@return Matriz de transformaciï¿½n de la entidad en el entorno.
-		*/
-		Matrix4 getTransform() const { return _transform; }
-
-		/**
-		Establece la posiciï¿½n de la entidad. Avisa a los componentes
+		Establece la posición de la entidad. Avisa a los componentes
 		del cambio.
 
-		@param position Nueva posiciï¿½n.
+		@param position Nueva posición de la entidad.
 		*/
 		void setPosition(const Vector3 &position);
 
 		/**
-		Devuelve la posiciï¿½n de la entidad.
-		<p>
-		La posiciï¿½n es inicialmente leï¿½da del mapa (si no aparece,
-		se colocarï¿½ a (0, 0, 0)), aunque, obviamente, puede
-		cambiar con el tiempo.
+		Establece la rotación de la entidad. Avisa a los componentes
+		del cambio.
 
-		@return Posiciï¿½n de la entidad en el entorno.
+		@param rotation Nueva rotación de la entidad.
 		*/
-		Vector3 getPosition() const { return _transform.getTrans(); }
+		void setRotation(const Vector3 &rotation);
 
 		/**
 		Establece las dimensiones de la entidad. Avisa a los componentes
 		del cambio.
 
-		@param dimensions Nuevas dimensiones.
+		@param dimensions Nuevas dimensiones de la entidad.
 		*/
 		void setDimensions(const Vector3 &dimensions);
 
 		/**
-		Devuelve las dimensiones de la entidad.
+		Devuelve la matriz de transformación de la entidad.
+
+		@return Matriz de transformación de la entidad en el entorno.
+		*/
+		Matrix4 getTransform() const;
+
+		/**
+		Devuelve la posición de la entidad.
 		<p>
-		Las dimensiones son inicialmente leídas del mapa (si no aparecen,
-		serán las originales de la malla), aunque, obviamente, pueden
+		La posición es inicialmente leída del mapa (si no aparece,
+		se colocará a (0, 0, 0)), aunque, obviamente, puede
 		cambiar con el tiempo.
+
+		@return Posición de la entidad en el entorno.
+		*/
+		Vector3 getPosition() const { return _position; }
+
+		/**
+		Devuelve la rotación de la entidad.
+
+		@return Rotación de la entidad en el entorno.
+		*/
+		Vector3 getRotation() const { return _rotation; }
+
+		/**
+		Devuelve las dimensiones de la entidad.
 
 		@return Dimensiones de la entidad.
 		*/
-		Vector3 getDimensions() const { return _dimensions; };
-
-		/**
-		Establece la orientaciï¿½n de la entidad. Avisa a los componentes
-		del cambio.
-
-		@param pos Nueva orientación.
-		*/
-		void setOrientation(const Matrix3& orientation);
-
-		/**
-		Devuelve la matriz de rotaciï¿½n de la entidad.
-		<p>
-		La orientaciï¿½n es inicialmente leï¿½da del mapa como un simple 
-		viraje (si no aparece, se colocarï¿½ a 0), aunque, obviamente, puede
-		cambiar con el tiempo.
-
-		@return Orientaciï¿½n en el entorno.
-		*/
-		Matrix3 getOrientation() const;
-
-		/**
-		Establece el viraje de la entidad. Avisa a los componentes
-		del cambio.
-
-		@param yaw Nuevo viraje.
-		*/
-		void setYaw(float yaw);
-
-		/**
-		Vira la entidad. Avisa a los componentes del cambio.
-
-		@param yaw Viraje a aplicar.
-		*/
-		void yaw(float yaw);
-
-		/**
-		Devuelve el viraje de la entidad.
-		<p>
-		La orientaciï¿½n es inicialmente leï¿½da del mapa como un simple 
-		viraje (si no aparece, se colocarï¿½ a 0), aunque, obviamente, puede
-		cambiar con el tiempo.
-
-		@return Viraje en el entorno.
-		*/
-		float getYaw() const { return Math::getYaw(_transform); }
+		Vector3 getDimensions() const { return _dimensions; }
 
 		/**
 		Indica si la entidad se encuentra activa.
 
-		@return true si la entidad estï¿½ activa.
+		@return true si la entidad está activa.
 		*/
 		bool isActivated() {return _activated;}
 
 	protected:
+
+		/**
+		Actualiza el valor de todos los parámetros que forman parte del
+		transform de la entidad (_position, _rotation y _dimensions).
+		Avisa a los componentes del cambio.
+
+		@param transform Nueva matriz de transformación.
+		*/
+		void updateTransformValuesFromMatrix(const Matrix4 &transform);
 
 		/**
 		Clase amiga que puede modificar los atributos (en concreto se 
@@ -347,7 +318,7 @@ namespace Logic
 		friend class CMap;
 
 		/**
-		Identificador ï¿½nico de la entidad.
+		Identificador lóico de la entidad.
 		*/
 		Logic::TEntityID _entityID;
 
@@ -362,7 +333,7 @@ namespace Logic
 		TComponentList _components;
 
 		/**
-		Indica si la entidad estï¿½ activa.
+		Indica si la entidad está activa.
 		*/
 		bool _activated;
 
@@ -377,24 +348,20 @@ namespace Logic
 		std::string _name;
 
 		/**
-		Mapa lï¿½gico donde estï¿½ la entidad.
+		Mapa lógico donde está la entidad.
 		*/
 		Logic::CMap *_map;
 
 		/**
-		Matriz de transformaciï¿½n de la entidad. Contiene posiciï¿½n y orientaciï¿½n.
+		Posición de la entidad.
 		*/
-		Matrix4 _transform;
-
-		/*
-		Posiciï¿½n de la entidad.
-		*
 		Vector3 _position;
 
-		/*
-		Orientaciï¿½n de la entidad.
-		*
-		float _orientation;
+		/**
+		Rotación de la entidad con respecto a los ejes X (pitch), Y (yaw)
+		y Z (roll). Radianes!
+		*/
+		Vector3 _rotation;
 
 		/**
 		Dimensiones de la entidad.
