@@ -17,6 +17,7 @@ namespace Logic {
 	CPlaceable::CPlaceable() : IComponent() {
 		_tileManager = nullptr;
 		_tiles.clear();
+		_adyacentTiles.clear();
 		_placeableType = NonPlaceable;
 		_buildingType = NonBuilding;
 	}
@@ -102,6 +103,7 @@ namespace Logic {
 
 		// Clear tile vector
 		_tiles.clear();
+		_adyacentTiles.clear();
 
 		// Initialize vector to calculate the average position of all tiles
 		Vector3 centerPosition(0, 0, 0);
@@ -131,6 +133,9 @@ namespace Logic {
 		// Move entity
 		_entity->setPosition(centerPosition);
 
+		// Update adyacent tiles
+		updateAdyacentTiles();
+
 		return true;
 	}
 	
@@ -156,6 +161,10 @@ namespace Logic {
 
 	const std::vector<Tile*> CPlaceable::getTiles(){
 		return _tiles;
+	}
+
+	const std::unordered_set<Tile*> CPlaceable::getAdyacentTiles(){
+		return _adyacentTiles;
 	}
 
 	bool CPlaceable::canPassSoulPath(){
@@ -228,6 +237,28 @@ namespace Logic {
 			assert("BuildingType name unknown");
 			// TODO lanzar excepción en vez de assert
 			return NonBuilding;
+		}
+	}
+
+	void CPlaceable::updateAdyacentTiles(){
+		// For each tile
+		for (auto itTiles = _tiles.cbegin(); itTiles != _tiles.cend(); ++itTiles){
+			Tile *tile = (*itTiles);
+
+			// For each of its adyacent tiles
+			for (auto itAdyacent = tile->getAdjacentTiles()->cbegin(); itAdyacent != tile->getAdjacentTiles()->cend(); ++itAdyacent){
+				Tile *adyacentTile = (*itAdyacent);
+
+				// Save adyacent tile (* which may belong to the Placeable's tile. Read below)
+				_adyacentTiles.insert(*itAdyacent);
+			}
+		}
+
+		// As a tile is adyacent to the placeable's tiles we have to remove them
+		// (* Here we check the set once for each of the placeable's tiles. This way we avoid checking the tile vector for each tile-adyacent)
+		for (auto itTiles = _tiles.cbegin(); itTiles != _tiles.cend(); ++itTiles){
+			Tile *tile = (*itTiles);
+			_adyacentTiles.erase(tile);
 		}
 	}
 

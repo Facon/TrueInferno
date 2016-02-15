@@ -41,6 +41,12 @@ namespace Logic {
 	{
 		assert(_instance);
 		_instance = 0;
+
+		// Liberamos la  estructura de datos para los edificios
+		for (auto it = _buildings.begin(); it != _buildings.end(); ++it){
+			delete it->second;
+			it->second = nullptr;
+		}
 		_buildings.clear();
 
 	} // ~CBuildingManager
@@ -122,6 +128,8 @@ namespace Logic {
 			if (!createPlaceable(map, "SoulPath", Vector3(5, 0, z)))
 				return false;
 
+		createPlaceable(map, "HellQuarters", Vector3(0, 0, 0));
+
 		return true;
 	}
 
@@ -133,20 +141,19 @@ namespace Logic {
 		// Obtenemos el tipo del edificio
 		BuildingType buildingType = building->getBuildingType();
 
-		std::cout << "Registering " << buildingType << std::endl;
+		// Almacenaremos en el mapa indexando por el tipo de edificio
 
-		// Almacenamos en el mapa indexando por el tipo de edificio
+		// Creamos, si no existe, el índice para el tipo de edificio
 		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
 		if (buildingsFromType == nullptr){
 			buildingsFromType = new std::set<CPlaceable*>();
 			_buildings[buildingType] = buildingsFromType;
 		}
 
-		// TODO Revisar emplace
-		buildingsFromType->emplace(building);
+		// Añadimos el edificio
+		buildingsFromType->insert(building);
 	}
 
-	// TODO Completar
 	void CBuildingManager::unregisterBuilding(CPlaceable *building){
 		// Ignoramos todo lo que no sean edificios
 		if (!building->isBuilding())
@@ -155,13 +162,11 @@ namespace Logic {
 		// Obtenemos el tipo del edificio
 		BuildingType buildingType = building->getBuildingType();
 
-		std::cout << "Unregistering " << buildingType << std::endl;
-
-		// Eliminamos la referencia del conjunto de edificios para ese tipo
+		// Eliminamos el puntero al edificio en el conjunto de edificios para ese tipo
 		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
-		/*if (buildingsFromType != nullptr){
-			buildingsFromType->erase()
-		}*/
+		if (buildingsFromType != nullptr){
+			buildingsFromType->erase(building);
+		}
 	}
 
 	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition){
@@ -188,6 +193,16 @@ namespace Logic {
 		}
 
 		return newEntity;
+	}
+
+	void CBuildingManager::printBuildingList() const{
+		for (auto it = _buildings.begin(); it != _buildings.end(); ++it){
+			std::cout << "BuildingType=" << it->first << std::endl;
+
+			for (auto it2 = it->second->cbegin(); it2 != it->second->cend(); ++it2){
+				std::cout << (*it2)->getEntity()->getEntityID() << std::endl;
+			}
+		}
 	}
 
 } // namespace Logic

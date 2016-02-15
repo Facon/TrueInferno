@@ -155,6 +155,8 @@ namespace Logic
 		/** Carga los prefabs de edificios del mapa y los almacena indexados internamente */
 		//bool loadPrefabs();
 
+		void printBuildingList() const;
+
 	}; // class BuildingManager
 
 } // namespace Logic

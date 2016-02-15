@@ -8,6 +8,7 @@
 #include "Logic/Entity/Component.h"
 #include "Logic/Entity/PlaceableType.h"
 #include "Logic/Entity/BuildingType.h"
+#include <unordered_set>
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
@@ -52,6 +53,9 @@ namespace Logic {
 		/** Gets occupied tiles depending on the placeable's floor */
 		const std::vector<Tile*> getTiles();
 
+		/** Gets all adyacent tiles to the placeable's own tiles */
+		const std::unordered_set<Tile*> getAdyacentTiles();
+
 		/** Checks if it's possible to place all the placeable's floor tiles starting at given origin position. All tiles must be entity free. 
 		Returns true if placement is possible, false otherways */
 		bool checkPlacementIsPossible(const Vector3 &originPosition);
@@ -88,6 +92,9 @@ namespace Logic {
 		/** Floor's occupied tiles */
 		std::vector<Tile*> _tiles;
 
+		/** Tiles adyacent to floor's occupied tiles */
+		std::unordered_set<Tile*> _adyacentTiles;
+
 		/** Tile manager reference */
 		CTileManager* _tileManager;
 
@@ -96,6 +103,8 @@ namespace Logic {
 
 		/** Tipo del edificio */
 		Logic::BuildingType _buildingType;
+
+		void updateAdyacentTiles();
 
 	protected:
 		/** Parsea un enum PlaceableType a partir del nombre en texto
