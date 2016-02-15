@@ -16,7 +16,7 @@ namespace Logic {
 		ResearchLabs,
 		PowerGenerator,
 		Warehouse,
-		NoBuilding
+		NonBuilding
 	};
 
 } // namespace Logic

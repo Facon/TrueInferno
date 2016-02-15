@@ -21,11 +21,19 @@ namespace Logic {
 		RTTI_DECL;
 		DEC_FACTORY(CPlaceable);
 
+	// Anotamos la clase como friend de BuildingManager para permitirle acceso al tipo de edificio y de placeable
+	friend class CBuildingManager;
+
 	public:
 		/**
 		Constructor por defecto.
 		*/
 		CPlaceable();
+
+		/**
+		Destructor
+		*/
+		virtual ~CPlaceable();
 
 		/**
 		Inicialización del componente usando la descripción de la entidad que hay en
@@ -89,9 +97,24 @@ namespace Logic {
 		/** Tipo del edificio */
 		Logic::BuildingType _buildingType;
 
-		PlaceableType CPlaceable::getPlaceableType(std::string name);
+	protected:
+		/** Parsea un enum PlaceableType a partir del nombre en texto
+		TODO Mover junto al código del enum */
+		static PlaceableType CPlaceable::parsePlaceableType(const std::string& name);
 
-		BuildingType CPlaceable::getBuildingType(std::string name);
+		/** Parsea un enum BuildingType a partir del nombre en texto
+		TODO Mover junto al código del enum */
+		static BuildingType CPlaceable::parseBuildingType(const std::string& name);
+
+		// Devuelve el PlaceableType de este placeable
+		PlaceableType CPlaceable::getPlaceableType(){
+			return _placeableType;
+		}
+
+		// Devuelve el BuildingType de este placeable
+		BuildingType CPlaceable::getBuildingType(){
+			return _buildingType;
+		}
 
 	}; // class Placeable
 

@@ -9,7 +9,7 @@ namespace Logic {
 		Obstacle,
 		Building,
 		SoulPath,
-		NoPlaceable
+		NonPlaceable
 	};
 
 } // namespace Logic

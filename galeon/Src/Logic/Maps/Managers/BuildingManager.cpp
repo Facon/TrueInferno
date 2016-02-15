@@ -31,7 +31,7 @@ namespace Logic {
 	CBuildingManager::CBuildingManager()
 	{
 		_instance = this;
-		_buildings = std::vector<CPlaceable*>();
+		_buildings = std::map<BuildingType, std::set<CPlaceable*>*>();
 
 	} // CBuildingManager
 
@@ -125,15 +125,43 @@ namespace Logic {
 		return true;
 	}
 
-	void CBuildingManager::registerBuilding(CPlaceable *placeable, const BuildingType& buildingType){
+	void CBuildingManager::registerBuilding(CPlaceable *building){
 		// Ignoramos todo lo que no sean edificios
-		if (!placeable->isBuilding())
+		if (!building->isBuilding())
 			return;
+
+		// Obtenemos el tipo del edificio
+		BuildingType buildingType = building->getBuildingType();
 
 		std::cout << "Registering " << buildingType << std::endl;
 
-		// TODO Store in a map by type
-		_buildings.push_back(placeable);
+		// Almacenamos en el mapa indexando por el tipo de edificio
+		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
+		if (buildingsFromType == nullptr){
+			buildingsFromType = new std::set<CPlaceable*>();
+			_buildings[buildingType] = buildingsFromType;
+		}
+
+		// TODO Revisar emplace
+		buildingsFromType->emplace(building);
+	}
+
+	// TODO Completar
+	void CBuildingManager::unregisterBuilding(CPlaceable *building){
+		// Ignoramos todo lo que no sean edificios
+		if (!building->isBuilding())
+			return;
+
+		// Obtenemos el tipo del edificio
+		BuildingType buildingType = building->getBuildingType();
+
+		std::cout << "Unregistering " << buildingType << std::endl;
+
+		// Eliminamos la referencia del conjunto de edificios para ese tipo
+		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
+		/*if (buildingsFromType != nullptr){
+			buildingsFromType->erase()
+		}*/
 	}
 
 	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition){
