@@ -6,26 +6,19 @@
 #include <iostream>
 
 namespace Logic {
-	IMP_FACTORY(Tile);
+	RTTI_ROOT_IMPL(CTile);
+	IMP_FACTORY(CTile);
 
-	Tile::Tile() : IComponent() {
+	CTile::CTile() : IComponent() {
 
 	}
 
-	bool Tile::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
-		std::cout << "Tile spawned!" << std::endl;
+	bool CTile::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+		std::cout << "CTile spawned!" << std::endl;
 		return true;
 	} // spawn
 
-	bool Tile::accept(const TMessage &message){
-		return true;
-	} // accept
-
-	void Tile::process(const TMessage &message){
-
-	} // process
-
-	void Tile::tick(unsigned int msecs){
+	void CTile::tick(unsigned int msecs){
 
 	} // tick
 

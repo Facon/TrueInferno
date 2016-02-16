@@ -18,8 +18,8 @@ namespace Logic
     class TouchMessage;
     class DamageMessage;
 	class PlaceMessage;
-
-	// MessageHandler
+	class WorkerMessage;
+	
 	class MessageHandler
 	{
 	public:
@@ -62,7 +62,9 @@ namespace Logic
 
 		virtual bool HandleMessage(const PlaceMessage& msg)
 		{ return false; }
-		
+
+		virtual bool HandleMessage(const WorkerMessage& msg)
+		{ return false; }
 	};
 } // namespace Logic
 

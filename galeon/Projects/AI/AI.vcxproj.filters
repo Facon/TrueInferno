@@ -46,6 +46,17 @@
       <UniqueIdentifier>{06b8f2d6-a483-4bbd-89d3-7ba92a7dd9af}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Souls">
+      <UniqueIdentifier>{5acfc0f3-88d6-4664-8076-92d3b1dc110a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Souls\Header Files">
+      <UniqueIdentifier>{28856eea-60f1-4c47-bbfc-e53218d10a1b}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Souls\Source Files">
+      <UniqueIdentifier>{c43f258b-9c62-43c3-87d7-7740abe0ff98}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AI\Server.cpp">
@@ -77,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AI\AStarFunctionsWalkingSoul.cpp">
       <Filter>Movement\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\SoulTask.cpp">
+      <Filter>Souls\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +126,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\AStarFunctionsWalkingSoul.h">
       <Filter>Movement\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SoulTask.h">
+      <Filter>Souls\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

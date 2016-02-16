@@ -17,6 +17,16 @@ namespace Logic {
 	CPlaceable::CPlaceable() : IComponent() {
 		_tileManager = nullptr;
 		_tiles.clear();
+		_adyacentTiles.clear();
+		_placeableType = NonPlaceable;
+		_buildingType = NonBuilding;
+	}
+
+	CPlaceable::~CPlaceable() {
+		// Si es un edificio
+		if (_placeableType == Building)
+			// Lo desregistramos en el manager
+			Logic::CBuildingManager::getSingletonPtr()->unregisterBuilding(this);
 	}
 
 	bool CPlaceable::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
@@ -38,17 +48,8 @@ namespace Logic {
 		_floorX = entityInfo->getIntAttribute("floor_x");
 		_floorZ = entityInfo->getIntAttribute("floor_z");
 
-		std::string placeableType = entityInfo->getStringAttribute("placeableType");
-		if (placeableType == "Building")
-			_placeableType = Logic::PlaceableType::Building;
-		else if (placeableType == "Obstacle")
-			_placeableType = Logic::PlaceableType::Obstacle;
-		else if (placeableType == "SoulPath")
-			_placeableType = Logic::PlaceableType::SoulPath;
-		else{
-			std::cout << "Unknown placeableType: '" << placeableType << "'" << std::endl;
-			return false;
-		}
+		// Determinamos el tipo de placeable que es
+		_placeableType = parsePlaceableType(entityInfo->getStringAttribute("placeableType"));
 
 		// Si el edificio fue creado por prefab, es posible que al hacer spawn no tenga el atributo de posición lógica
 		if (entityInfo->hasAttribute("floor_absolute_position0")){
@@ -61,22 +62,19 @@ namespace Logic {
 			_tiles = std::vector<Tile*>(_floorX * _floorZ);
 		}
 
-		// Register buildings in manager
-		if (_placeableType == Building)
+		// Si es un edificio
+		if (_placeableType == Building){
+			// Determinamos el tipo
+			_buildingType = parseBuildingType(entityInfo->getStringAttribute("type"));
+
+			// Lo registramos en el manager
 			Logic::CBuildingManager::getSingletonPtr()->registerBuilding(this);
+		}
+		else
+			_buildingType = NonBuilding;
 
 		return true;
 	} // spawn
-	
-	/*
-	bool CPlaceable::accept(const TMessage &message){
-		return true;
-	} // accept
-
-	void CPlaceable::process(const TMessage &message){
-
-	} // process
-	*/
 
 	void CPlaceable::tick(unsigned int msecs){
 	} // tick
@@ -105,6 +103,7 @@ namespace Logic {
 
 		// Clear tile vector
 		_tiles.clear();
+		_adyacentTiles.clear();
 
 		// Initialize vector to calculate the average position of all tiles
 		Vector3 centerPosition(0, 0, 0);
@@ -134,6 +133,9 @@ namespace Logic {
 		// Move entity
 		_entity->setPosition(centerPosition);
 
+		// Update adyacent tiles
+		updateAdyacentTiles();
+
 		return true;
 	}
 	
@@ -161,6 +163,10 @@ namespace Logic {
 		return _tiles;
 	}
 
+	const std::unordered_set<Tile*> CPlaceable::getAdyacentTiles(){
+		return _adyacentTiles;
+	}
+
 	bool CPlaceable::canPassSoulPath(){
 		// Sólo permitimos pasar SoulPath si hay SoulPath
 		return _placeableType == SoulPath;
@@ -177,6 +183,83 @@ namespace Logic {
 
 	bool CPlaceable::HandleMessage(const PlaceMessage& msg){
 		return place(msg.position);
+	}
+
+	PlaceableType CPlaceable::parsePlaceableType(const std::string& name){
+		if (name == "Obstacle"){
+			return Obstacle;
+		}
+		else if (name == "Building"){
+			return Building;
+		}
+		else if (name == "SoulPath"){
+			return SoulPath;
+		}
+		else{
+			assert("PlaceableType name unknown");
+			// TODO lanzar excepción en vez de assert y eliminar valor NoPlaceable
+			return NonPlaceable;
+		}
+	}
+
+	BuildingType CPlaceable::parseBuildingType(const std::string& name){
+		if (name == "HellQuarters"){
+			return HellQuarters;
+		}
+		else if (name == "Furnace"){
+			return Furnace;
+		}
+		else if (name == "Evilworks"){
+			return Evilworks;
+		}
+		else if (name == "Refinery"){
+			return Refinery;
+		}
+		else if (name == "Evilator"){
+			return Evilator;
+		}
+		else if (name == "Mine"){
+			return Mine;
+		}
+		else if (name == "GasPlant"){
+			return GasPlant;
+		}
+		else if (name == "ResearchLabs"){
+			return ResearchLabs;
+		}
+		else if (name == "PowerGenerator"){
+			return PowerGenerator;
+		}
+		else if (name == "Warehouse"){
+			return Warehouse;
+		}
+		else{
+			assert("BuildingType name unknown");
+			// TODO lanzar excepción en vez de assert
+			return NonBuilding;
+		}
+	}
+
+	void CPlaceable::updateAdyacentTiles(){
+		// For each tile
+		for (auto itTiles = _tiles.cbegin(); itTiles != _tiles.cend(); ++itTiles){
+			Tile *tile = (*itTiles);
+
+			// For each of its adyacent tiles
+			for (auto itAdyacent = tile->getAdjacentTiles()->cbegin(); itAdyacent != tile->getAdjacentTiles()->cend(); ++itAdyacent){
+				Tile *adyacentTile = (*itAdyacent);
+
+				// Save adyacent tile (* which may belong to the Placeable's tile. Read below)
+				_adyacentTiles.insert(*itAdyacent);
+			}
+		}
+
+		// As a tile is adyacent to the placeable's tiles we have to remove them
+		// (* Here we check the set once for each of the placeable's tiles. This way we avoid checking the tile vector for each tile-adyacent)
+		for (auto itTiles = _tiles.cbegin(); itTiles != _tiles.cend(); ++itTiles){
+			Tile *tile = (*itTiles);
+			_adyacentTiles.erase(tile);
+		}
 	}
 
 } // namespace Logic

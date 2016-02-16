@@ -7,6 +7,8 @@
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 #include "Logic/Entity/PlaceableType.h"
+#include "Logic/Entity/BuildingType.h"
+#include <unordered_set>
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
@@ -20,6 +22,9 @@ namespace Logic {
 		RTTI_DECL;
 		DEC_FACTORY(CPlaceable);
 
+	// Anotamos la clase como friend de BuildingManager para permitirle acceso al tipo de edificio y de placeable
+	friend class CBuildingManager;
+
 	public:
 		/**
 		Constructor por defecto.
@@ -27,18 +32,15 @@ namespace Logic {
 		CPlaceable();
 
 		/**
+		Destructor
+		*/
+		virtual ~CPlaceable();
+
+		/**
 		Inicialización del componente usando la descripción de la entidad que hay en
 		el fichero de mapa.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
-
-		/*
-		//Aceptación de mensajes
-		virtual bool accept(const TMessage &message);
-
-		//Procesamiento de mensajes
-		virtual void process(const TMessage &message);
-		*/
 
 		/**
 		Actualización por frame
@@ -50,6 +52,9 @@ namespace Logic {
 
 		/** Gets occupied tiles depending on the placeable's floor */
 		const std::vector<Tile*> getTiles();
+
+		/** Gets all adyacent tiles to the placeable's own tiles */
+		const std::unordered_set<Tile*> getAdyacentTiles();
 
 		/** Checks if it's possible to place all the placeable's floor tiles starting at given origin position. All tiles must be entity free. 
 		Returns true if placement is possible, false otherways */
@@ -87,11 +92,38 @@ namespace Logic {
 		/** Floor's occupied tiles */
 		std::vector<Tile*> _tiles;
 
+		/** Tiles adyacent to floor's occupied tiles */
+		std::unordered_set<Tile*> _adyacentTiles;
+
 		/** Tile manager reference */
 		CTileManager* _tileManager;
 
 		/** Tipo del placeable */
 		Logic::PlaceableType _placeableType;
+
+		/** Tipo del edificio */
+		Logic::BuildingType _buildingType;
+
+		void updateAdyacentTiles();
+
+	protected:
+		/** Parsea un enum PlaceableType a partir del nombre en texto
+		TODO Mover junto al código del enum */
+		static PlaceableType CPlaceable::parsePlaceableType(const std::string& name);
+
+		/** Parsea un enum BuildingType a partir del nombre en texto
+		TODO Mover junto al código del enum */
+		static BuildingType CPlaceable::parseBuildingType(const std::string& name);
+
+		// Devuelve el PlaceableType de este placeable
+		PlaceableType CPlaceable::getPlaceableType(){
+			return _placeableType;
+		}
+
+		// Devuelve el BuildingType de este placeable
+		BuildingType CPlaceable::getBuildingType(){
+			return _buildingType;
+		}
 
 	}; // class Placeable
 

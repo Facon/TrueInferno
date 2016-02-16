@@ -31,7 +31,7 @@ namespace Logic {
 	CBuildingManager::CBuildingManager()
 	{
 		_instance = this;
-		_buildings = std::vector<CPlaceable*>();
+		_buildings = std::map<BuildingType, std::set<CPlaceable*>*>();
 
 	} // CBuildingManager
 
@@ -41,6 +41,12 @@ namespace Logic {
 	{
 		assert(_instance);
 		_instance = 0;
+
+		// Liberamos la  estructura de datos para los edificios
+		for (auto it = _buildings.begin(); it != _buildings.end(); ++it){
+			delete it->second;
+			it->second = nullptr;
+		}
 		_buildings.clear();
 
 	} // ~CBuildingManager
@@ -125,27 +131,76 @@ namespace Logic {
 		return true;
 	}
 
-	void CBuildingManager::registerBuilding(CPlaceable *placeable){
+	void CBuildingManager::registerBuilding(CPlaceable *building){
 		// Ignoramos todo lo que no sean edificios
-		if (!placeable->isBuilding())
+		if (!building->isBuilding())
 			return;
 
-		_buildings.push_back(placeable);
+		// Obtenemos el tipo del edificio
+		BuildingType buildingType = building->getBuildingType();
+
+		// Almacenaremos en el mapa indexando por el tipo de edificio
+
+		// Creamos, si no existe, el índice para el tipo de edificio
+		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
+		if (buildingsFromType == nullptr){
+			buildingsFromType = new std::set<CPlaceable*>();
+			_buildings[buildingType] = buildingsFromType;
+		}
+
+		// Añadimos el edificio
+		buildingsFromType->insert(building);
+	}
+
+	void CBuildingManager::unregisterBuilding(CPlaceable *building){
+		// Ignoramos todo lo que no sean edificios
+		if (!building->isBuilding())
+			return;
+
+		// Obtenemos el tipo del edificio
+		BuildingType buildingType = building->getBuildingType();
+
+		// Eliminamos el puntero al edificio en el conjunto de edificios para ese tipo
+		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
+		if (buildingsFromType != nullptr){
+			buildingsFromType->erase(building);
+		}
 	}
 
 	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition){
+		bool ret = false;
+		
+		// Primero se intenta crear la entidad
 		CEntity* newEntity = CEntityFactory::getSingletonPtr()->createEntity(prefabName, map);
+		if (newEntity){
+			// En segundo lugar se posiciona mediante paso de mensaje
+			PlaceMessage m;
+			m.position = logicPosition;
+			ret = m.Dispatch(*newEntity);
+		}
 
-		if (!newEntity){
+		// Si algo falló
+		if (!ret){
 			std::cout << "Can't create new placeable '"<< prefabName <<"' on '"<< logicPosition <<"'" << std::endl;
+
+			// Eliminamos la instancia si se llegó a crear
+			if (newEntity)
+				CEntityFactory::getSingletonPtr()->deferredDeleteEntity(newEntity);
+
 			return nullptr;
 		}
 
-		PlaceMessage m;
-		m.position = logicPosition;
-		m.Dispatch(*newEntity);
-
 		return newEntity;
+	}
+
+	void CBuildingManager::printBuildingList() const{
+		for (auto it = _buildings.begin(); it != _buildings.end(); ++it){
+			std::cout << "BuildingType=" << it->first << std::endl;
+
+			for (auto it2 = it->second->cbegin(); it2 != it->second->cend(); ++it2){
+				std::cout << (*it2)->getEntity()->getEntityID() << std::endl;
+			}
+		}
 	}
 
 } // namespace Logic

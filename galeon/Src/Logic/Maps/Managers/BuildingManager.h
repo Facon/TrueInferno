@@ -20,6 +20,7 @@ Contiene la declaración del gestor de edificios.
 #include <string>
 #include <map>
 #include "BaseSubsystems/Math.h"
+#include "Logic/Entity/BuildingType.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
@@ -89,9 +90,15 @@ namespace Logic
 		bool loadInitialBuildings(CMap *map);
 
 		/**
-		Registra internamente un edificio.
+		Registra internamente un edificio ya existente.
+		Hay que llamar a unregisterBuilding cuando el edificio se quiera destruír. Actualmente esto se hace en el destructor de CPlaceable
 		*/
-		void registerBuilding(CPlaceable *placeable);
+		void CBuildingManager::registerBuilding(CPlaceable *placeable);
+
+		/**
+		Saca del registro un edificio previamente registrado.
+		*/
+		void CBuildingManager::unregisterBuilding(CPlaceable *placeable);
 
 		/** Coloca un edificio del tipo indicado en la posición lógica del tile inicial 
 
@@ -135,10 +142,10 @@ namespace Logic
 		static CBuildingManager *_instance;
 
 		/**
-		Lista de edificios. Sólo se almacenan edificios.
+		Estructura map para almacenar los edificios. La clave es el tipo de edificio, el valor es un puntero al set de todos los edificios de dicho tipo.
 		Guardamos punteros de sus correspondientes componentes CPlaceable.
 		*/
-		std::vector<CPlaceable*> _buildings;
+		std::map<BuildingType, std::set<CPlaceable*>*> _buildings;
 
 		/**
 		Índice de prefabs de edificios indexados por su nombre de tipo
@@ -147,6 +154,8 @@ namespace Logic
 
 		/** Carga los prefabs de edificios del mapa y los almacena indexados internamente */
 		//bool loadPrefabs();
+
+		void printBuildingList() const;
 
 	}; // class BuildingManager
 

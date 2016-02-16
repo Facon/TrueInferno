@@ -15,6 +15,8 @@ Contiene el tipo de datos de un mensaje.
 #include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
 
+#include "AI/SoulTask.h"
+
 // Predeclaraciones
 namespace Logic {
 	class CEntity;
@@ -235,6 +237,29 @@ namespace Logic
 	{
 	public:
 		Vector3 position;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	/*class SoulTaskMessage : public Message
+	{
+	public:
+		AI::SoulTask task;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};*/
+
+	/** Mensaje con la cantidad de trabajadores a añadir (numWorkers > 0) o quitar (numWorkers < 0) */
+	class WorkerMessage : public Message
+	{
+	public:
+		int numWorkers;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
