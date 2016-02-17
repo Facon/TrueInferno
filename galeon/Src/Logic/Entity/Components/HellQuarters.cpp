@@ -1,6 +1,9 @@
 #include "HellQuarters.h"
 
+#include "Logic/Server.h"
 #include "Map/MapEntity.h"
+#include "Logic/Maps/EntityFactory.h"
+#include "Logic/Maps/Map.h"
 #include "Logic/Entity/Entity.h"
 #include <iostream>
 #include <cassert>
@@ -42,6 +45,18 @@ namespace Logic {
 			_numAvailableSouls += _numSpawnedSouls;
 
 			std::cout << "available souls = " << _numAvailableSouls << std::endl;
+
+			CMap* map = CServer::getSingletonPtr()->getMap();
+			CEntity* newSoul = CEntityFactory::getSingletonPtr()->createEntity("Soul", map);
+
+			PositionMessage m;
+			m._type = MessageType::SET_POSITION;
+			m._position = Vector3(0.0f, 2.0f, 0.0f);
+
+			m.Dispatch(*newSoul);
+
+			//CEntity* entity = CServer::getSingletonPtr()->getMap();
+			//entity->clone();
 
 			// TODO ¿Reproducimos algún sonido o animación de almas nuevas?
 		}
