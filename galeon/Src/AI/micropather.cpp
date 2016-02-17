@@ -637,8 +637,7 @@ void PathNodePool::AllStates( unsigned frame, std::vector< void* >* stateVec )
 	}           
 }   
 
-
-int MicroPather::Solve( void* startNode, void* endNode, vector< void* >* path, float* cost )
+int MicroPather::Solve(void* startNode, void* endNode, vector< void* >* path, float* cost)
 {
 
 	#ifdef DEBUG_PATH
@@ -733,6 +732,104 @@ int MicroPather::Solve( void* startNode, void* endNode, vector< void* >* path, f
 	#endif
 	return NO_SOLUTION;		
 }	
+
+int MicroPather::Solve(void* startNode, std::unordered_set<void*> endNodes, std::vector< void* >* path, float* cost)
+{
+
+#ifdef DEBUG_PATH
+	printf("Path: ");
+	graph->PrintStateInfo(startNode);
+	printf(" --> ");
+	graph->PrintStateInfo(endNode);
+	printf(" min cost=%f\n", graph->LeastCostEstimate(startNode, endNode));
+#endif
+
+	*cost = 0.0f;
+
+	if (endNodes.count(startNode)>0)
+		return START_END_SAME;
+
+	++frame;
+
+	OpenQueue open(graph);
+	ClosedSet closed(graph);
+
+	// Heurística siempre fija a 0
+	PathNode* newPathNode = pathNodePool.GetPathNode(frame,
+		startNode,
+		0,
+		0,
+		0);
+
+	open.Push(newPathNode);
+	stateCostVec.resize(0);
+	nodeCostVec.resize(0);
+
+	while (!open.Empty())
+	{
+		PathNode* node = open.Pop();
+
+		// Fin si el nodo actual es cualquiera de los nodos destino
+		if (endNodes.count(node->state)>0)
+		{
+			GoalReached(node, startNode, node->state, path);
+			*cost = node->costFromStart;
+#ifdef DEBUG_PATH
+			DumpStats();
+#endif
+			return SOLVED;
+		}
+		else
+		{
+			closed.Add(node);
+
+			// We have not reached the goal - add the neighbors.
+			GetNodeNeighbors(node, &nodeCostVec);
+
+			for (int i = 0; i<node->numAdjacent; ++i)
+			{
+				// Not actually a neighbor, but useful. Filter out infinite cost.
+				if (nodeCostVec[i].cost == FLT_MAX) {
+					continue;
+				}
+				PathNode* child = nodeCostVec[i].node;
+				float newCost = node->costFromStart + nodeCostVec[i].cost;
+
+				PathNode* inOpen = child->inOpen ? child : 0;
+				PathNode* inClosed = child->inClosed ? child : 0;
+				PathNode* inEither = (PathNode*)(((MP_UPTR)inOpen) | ((MP_UPTR)inClosed));
+
+				MPASSERT(inEither != node);
+				MPASSERT(!(inOpen && inClosed));
+
+				if (inEither) {
+					if (newCost < child->costFromStart) {
+						child->parent = node;
+						child->costFromStart = newCost;
+						child->estToGoal = 0; 	// Heurística siempre fija a 0
+						child->CalcTotalCost();
+						if (inOpen) {
+							open.Update(child);
+						}
+					}
+				}
+				else {
+					child->parent = node;
+					child->costFromStart = newCost;
+					child->estToGoal = 0, 	// Heurística siempre fija a 0
+						child->CalcTotalCost();
+
+					MPASSERT(!child->inOpen && !child->inClosed);
+					open.Push(child);
+				}
+			}
+		}
+	}
+#ifdef DEBUG_PATH
+	DumpStats();
+#endif
+	return NO_SOLUTION;
+}
 
 
 int MicroPather::SolveForNearStates( void* startState, std::vector< StateCost >* near, float maxCost )
@@ -838,7 +935,3 @@ int MicroPather::SolveForNearStates( void* startState, std::vector< StateCost >*
 
 	return SOLVED;
 }
-
-
-
-

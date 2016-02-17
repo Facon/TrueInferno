@@ -40,6 +40,7 @@ distribution.
 
 #include <vector>
 #include <float.h>
+#include <unordered_set>
 
 #ifdef _DEBUG
 	#ifndef DEBUG
@@ -343,6 +344,8 @@ namespace micropather
 			@return				Success or failure, expressed as SOLVED, NO_SOLUTION, or START_END_SAME.
 		*/
 		int Solve( void* startState, void* endState, std::vector< void* >* path, float* totalCost );
+
+		int Solve(void* startState, std::unordered_set<void*> endStates, std::vector< void* >* path, float* totalCost);
 
 		/**
 			Find all the states within a given cost from startState.

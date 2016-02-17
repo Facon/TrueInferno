@@ -19,6 +19,7 @@ Contiene la implementación del gestor de la matriz de tiles.
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
+#include "AI/Server.h"
 
 #include <cassert>
 
@@ -127,6 +128,8 @@ namespace Logic {
 		for (int z = 7; z <= 11; ++z)
 			if (!createPlaceable(map, "SoulPath", Vector3(5, 0, z)))
 				return false;
+
+		AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(hellQuarters, evilator);
 
 		return true;
 	}

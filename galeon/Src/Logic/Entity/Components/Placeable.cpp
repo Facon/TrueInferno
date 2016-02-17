@@ -139,7 +139,7 @@ namespace Logic {
 		return true;
 	}
 	
-	bool CPlaceable::checkPlacementIsPossible(const Vector3 &checkPosition){
+	bool CPlaceable::checkPlacementIsPossible(const Vector3 &checkPosition) const{
 		// Check origin tile. If it's null or can't place anything on it: placement is not possible
 		if (_tileManager->getTile(checkPosition) == nullptr || !_tileManager->getTile(checkPosition)->canPlaceSomething())
 			return false;
@@ -159,25 +159,25 @@ namespace Logic {
 		return true;
 	}
 
-	const std::vector<Tile*> CPlaceable::getTiles(){
+	const std::vector<Tile*> CPlaceable::getTiles() const{
 		return _tiles;
 	}
 
-	const std::unordered_set<Tile*> CPlaceable::getAdyacentTiles(){
+	const std::unordered_set<Tile*> CPlaceable::getAdyacentTiles() const{
 		return _adyacentTiles;
 	}
 
-	bool CPlaceable::canPassSoulPath(){
+	bool CPlaceable::canPassSoulPath() const{
 		// Sólo permitimos pasar SoulPath si hay SoulPath
 		return _placeableType == SoulPath;
 	}
 
-	bool CPlaceable::canPassWalkingSoul(){
+	bool CPlaceable::canPassWalkingSoul() const{
 		// Sólo permitimos a las almas caminar si hay SoulPath. Podría interesar dejarlas atravesar también los edificios
 		return _placeableType == SoulPath;
 	}
 
-	bool CPlaceable::isBuilding(){
+	bool CPlaceable::isBuilding() const{
 		return _placeableType == Building;
 	}
 

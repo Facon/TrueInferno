@@ -51,23 +51,23 @@ namespace Logic {
 		bool place(const Vector3 newOriginPosition);
 
 		/** Gets occupied tiles depending on the placeable's floor */
-		const std::vector<Tile*> getTiles();
+		const std::vector<Tile*> getTiles() const;
 
 		/** Gets all adyacent tiles to the placeable's own tiles */
-		const std::unordered_set<Tile*> getAdyacentTiles();
+		const std::unordered_set<Tile*> getAdyacentTiles() const;
 
 		/** Checks if it's possible to place all the placeable's floor tiles starting at given origin position. All tiles must be entity free. 
 		Returns true if placement is possible, false otherways */
-		bool checkPlacementIsPossible(const Vector3 &originPosition);
+		bool checkPlacementIsPossible(const Vector3 &originPosition) const;
 
 		/** Devuelve un boolean indicando si es posible hacer pasar una SoulPath por el Placeable */
-		bool canPassSoulPath();
+		bool canPassSoulPath() const;
 
 		/** Devuelve un boolean indicando si es posible hacer caminar un alma por el Placeable */
-		bool canPassWalkingSoul();
+		bool canPassWalkingSoul() const;
 
 		/** Devuelve un boolean a true si el Placeable corresponde a un edificio */
-		bool isBuilding();
+		bool isBuilding() const;
 
 		virtual bool CPlaceable::HandleMessage(const PlaceMessage& msg);
 
@@ -104,6 +104,7 @@ namespace Logic {
 		/** Tipo del edificio */
 		Logic::BuildingType _buildingType;
 
+		/** Actualiza el conjunto de tiles adyacentes */
 		void updateAdyacentTiles();
 
 	protected:

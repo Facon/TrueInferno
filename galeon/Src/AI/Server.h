@@ -15,12 +15,13 @@ Servidor de IA.
 #include "AStarFunctionsSoulPath.h"
 #include "micropather.h"
 
+#include <vector>
+
 namespace Logic {
 	class Tile;
+	class CPlaceable;
 	class CTileManager;
 }
-
-#include <vector>
 
 namespace AI {
 
@@ -65,14 +66,19 @@ class CServer
 		bool tick(float secs);
 
 		/**
-		Calcula una ruta de soulpaths usando A* desde un cierto tile a otro.
+		Calcula con A* una ruta de soulpaths desde un cierto Tile a otro.
 		*/
 		std::vector<Logic::Tile*> *getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to);
 
 		/**
-		Calcula una ruta para almas caminantes usando A* desde un cierto tile a otro.
+		Calcula con A* una ruta para que las almas vayan caminando desde un cierto Tile a otro.
 		*/
 		std::vector<Logic::Tile*> *getWalkingSoulAStarRoute(Logic::Tile* from, Logic::Tile* to);
+
+		/**
+		Calcula con A* una ruta para que las almas vayan caminando desde un cierto Placeable a otro.
+		*/
+		std::vector<Logic::Tile*>* CServer::getWalkingSoulAStarRoute(Logic::CPlaceable* from, Logic::CPlaceable* to);
 
 		/**
 		Dado un ángulo en radianes lo lleva al intervalo [-PI, PI]
