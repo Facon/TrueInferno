@@ -21,7 +21,7 @@ Map = {
 		physic_type = "static",
 		physic_shape = "box",
 		physic_dimensions = { 1, 1, 1 },
-		physic_group = 0,
+		physic_group = 1,
 	},
 	
 	SoulPath = {
