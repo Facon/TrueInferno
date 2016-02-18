@@ -19,7 +19,11 @@ de una escena.
 
 #include <string>
 #include <list>
+//#include "GUI/SideBarUI.h"
 
+namespace GUI{
+	class SideBarUI;
+}
 // Predeclaraci�n de clases para ahorrar tiempo de compilaci�n
 namespace Ogre 
 {
@@ -136,6 +140,8 @@ namespace Graphics
 		*/
 		void removeStaticEntity(CStaticEntity* entity);
 
+		
+
 	protected:
 
 		/**
@@ -143,6 +149,7 @@ namespace Graphics
 		activarlas o desactivarlas y actualizar su estado.
 		*/
 		friend class CServer;
+		
 
 		/**
 		Constructor de la clase.
@@ -191,13 +198,12 @@ namespace Graphics
 		*/
 		friend class CEntity;
 		friend class CCamera;
-
 		/**
 		Devuelve el gestor de la escena de Ogre
 
 		@return Puntero al gestor de la escena de Ogre.
 		*/
-		Ogre::SceneManager *getSceneMgr() {return _sceneMgr;}
+		Ogre::SceneManager *getSceneMgr() { return _sceneMgr; }
 
 
 		/**

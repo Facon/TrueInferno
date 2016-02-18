@@ -97,6 +97,13 @@ namespace Graphics
 		*/
 		void setTargetCameraPosition(const Vector3 &newPosition);
 
+		Ray getCameraToViewportRay(float x, float y);
+
+		int getViewportWidth();
+
+		int getViewportHeight();
+
+		
 	protected:
 		
 		/**
@@ -104,13 +111,12 @@ namespace Graphics
 		poder crear el viewport.
 		*/
 		friend class CScene;
-
 		/**
 		Devuelve la cámara de Ogre.
 
 		@return puntero a la cámara de Ogre.
 		*/
-		Ogre::Camera *getCamera() {return _camera;}
+		Ogre::Camera *getCamera() { return _camera; }
 
 		/**
 		Nodo que contiene la cámara.
