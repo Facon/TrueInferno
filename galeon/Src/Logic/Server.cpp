@@ -195,7 +195,6 @@ namespace Logic {
 		// TODO Quitar cuando se esté disponible el control para crear edificios
 		if (TEST_ROAD_BUILDING)
 			testRoadBuild(msecs);
-
 	} // tick
 
 	// TODO TEST

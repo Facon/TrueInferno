@@ -6,6 +6,7 @@
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Logic/Maps/Managers/BuildingManager.h"
 #include "Logic/Entity/PlaceableType.h"
+#include "AI/Server.h"
 
 #include <iostream>
 #include <string>
@@ -15,11 +16,6 @@ namespace Logic {
 	IMP_FACTORY(CPlaceable);
 
 	CPlaceable::CPlaceable() : IComponent() {
-		_tileManager = nullptr;
-		_tiles.clear();
-		_adyacentTiles.clear();
-		_placeableType = NonPlaceable;
-		_buildingType = NonBuilding;
 	}
 
 	CPlaceable::~CPlaceable() {
@@ -30,6 +26,13 @@ namespace Logic {
 	}
 
 	bool CPlaceable::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+		_tileManager = nullptr;
+		_tiles.clear();
+		_adyacentTiles.clear();
+		_placeableType = NonPlaceable;
+		_buildingType = NonBuilding;
+		_walkingSoulTarget = nullptr;
+
 		// TODO Remove when this check is done above
 		if (entityInfo->hasAttribute("prefab") && entityInfo->getBoolAttribute("prefab"))
 			return true;
@@ -77,7 +80,22 @@ namespace Logic {
 	} // spawn
 
 	void CPlaceable::tick(unsigned int msecs){
+		processWalkingSoulPathRequest();
 	} // tick
+
+	void CPlaceable::processWalkingSoulPathRequest(){
+		if (_walkingSoulTarget != nullptr){
+
+			// Calculate path from this placeable to the given target placeable
+			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(this, _walkingSoulTarget);
+			WalkSoulPathMessage message;
+			message.path = path;
+			message.Dispatch(*this);
+
+			// Clean request
+			_walkingSoulTarget = nullptr;
+		}
+	}
 
 	bool CPlaceable::place(const Vector3 newOriginPosition){
 		// Don't do anything if the origin position is not changing (and tiles have been already initialitated)
@@ -238,6 +256,14 @@ namespace Logic {
 			// TODO lanzar excepción en vez de assert
 			return NonBuilding;
 		}
+	}
+
+	bool CPlaceable::HandleMessage(const WalkSoulPathMessage& msg){
+		assert(msg.target && "Message received with null target");
+
+		_walkingSoulTarget = msg.target;
+
+		return true;
 	}
 
 	void CPlaceable::updateAdyacentTiles(){

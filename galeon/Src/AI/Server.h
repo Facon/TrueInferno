@@ -11,6 +11,8 @@ Servidor de IA.
 #ifndef __AI_Server_H
 #define __AI_Server_H
 
+#include "BaseSubsystems\Math.h"
+
 #include "AStarFunctionsWalkingSoul.h"
 #include "AStarFunctionsSoulPath.h"
 #include "micropather.h"
@@ -73,12 +75,12 @@ class CServer
 		/**
 		Calcula con A* una ruta para que las almas vayan caminando desde un cierto Tile a otro.
 		*/
-		std::vector<Logic::Tile*> *getWalkingSoulAStarRoute(Logic::Tile* from, Logic::Tile* to);
+		std::vector<Vector3> *getWalkingSoulAStarRoute(Logic::Tile* from, Logic::Tile* to);
 
 		/**
 		Calcula con A* una ruta para que las almas vayan caminando desde un cierto Placeable a otro.
 		*/
-		std::vector<Logic::Tile*>* CServer::getWalkingSoulAStarRoute(Logic::CPlaceable* from, Logic::CPlaceable* to);
+		std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(Logic::CPlaceable* from, Logic::CPlaceable* to);
 
 		/**
 		Dado un ángulo en radianes lo lleva al intervalo [-PI, PI]

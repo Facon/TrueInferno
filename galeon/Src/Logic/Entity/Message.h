@@ -20,6 +20,7 @@ Contiene el tipo de datos de un mensaje.
 // Predeclaraciones
 namespace Logic {
 	class CEntity;
+	class CPlaceable;
 };
 
 namespace Logic
@@ -50,7 +51,8 @@ namespace Logic
 			MOVE_TO,
 			ROUTE_TO,
 			FINISHED_ROUTE,
-			FINISHED_MOVE
+			FINISHED_MOVE,
+			WALK_SOUL_PATH
 		};
 	}
 
@@ -260,6 +262,19 @@ namespace Logic
 	{
 	public:
 		int numWorkers;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// WALK_SOUL_PATH
+	class WalkSoulPathMessage : public Message
+	{
+	public:
+		CPlaceable* target;
+		std::vector<Vector3>* path;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

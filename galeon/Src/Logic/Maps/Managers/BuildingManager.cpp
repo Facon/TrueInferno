@@ -129,8 +129,6 @@ namespace Logic {
 			if (!createPlaceable(map, "SoulPath", Vector3(5, 0, z)))
 				return false;
 
-		AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(hellQuarters, evilator);
-
 		return true;
 	}
 
@@ -196,8 +194,22 @@ namespace Logic {
 		return newEntity;
 	}
 
+	CPlaceable* CBuildingManager::findBuilding(BuildingType buildingType){
+		// Obtenemos el conjunto de edificios para el tipo
+		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
+		if (buildingsFromType == nullptr)
+			return nullptr;
+
+		// Seleccionamos uno al azar
+		int numBuildings = buildingsFromType->size();
+		int randomIndex = rand() % numBuildings;
+		auto it = buildingsFromType->cbegin();
+		std::advance(it, randomIndex);
+		return *it;
+	}
+
 	void CBuildingManager::printBuildingList() const{
-		for (auto it = _buildings.begin(); it != _buildings.end(); ++it){
+		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
 			std::cout << "BuildingType=" << it->first << std::endl;
 
 			for (auto it2 = it->second->cbegin(); it2 != it->second->cend(); ++it2){

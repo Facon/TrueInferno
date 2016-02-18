@@ -9,6 +9,7 @@ Servidor de IA.
 #include "Server.h"
 
 #include "Logic\Entity\Components\Tile.h"
+#include "Logic\Entity\Entity.h"
 #include "Logic\Entity\Components\Placeable.h"
 #include "Logic\Maps\Managers\TileManager.h"
 
@@ -86,10 +87,12 @@ namespace AI {
 			return NULL;
 		}
 
+		// Transformamos el retorno
 		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>();
 		out->push_back(from);
 		for (std::vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
-			out->push_back((Logic::Tile*)(*it));
+			Logic::Tile* tile = (Logic::Tile*)(*it);
+			out->push_back(tile);
 		}
 
 		delete path;
@@ -101,7 +104,7 @@ namespace AI {
 	/**
 	Calcula con A* una ruta para que las almas vayan caminando desde un cierto Tile a otro.
 	*/
-	std::vector<Logic::Tile*>* CServer::getWalkingSoulAStarRoute(Logic::Tile* from, Logic::Tile* to){
+	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(Logic::Tile* from, Logic::Tile* to){
 		// Reseteamos para asegurarnos que los vecinos se recalculan por si el mapa ha cambiado
 		// TODO Llamar únicamente cuando se modifique el mapa para las almas: Soulpath eliminada o construída, etc.
 		_aStarWalkingSoul->Reset();
@@ -114,10 +117,12 @@ namespace AI {
 			return NULL;
 		}
 
-		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>();
-		out->push_back(from);
+		// Transformamos el retorno
+		std::vector<Vector3>* out = new std::vector<Vector3>();
+		out->push_back(from->getEntity()->getPosition());
 		for (std::vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
-			out->push_back((Logic::Tile*)(*it));
+			Logic::Tile* tile = (Logic::Tile*)(*it);
+			out->push_back(tile->getEntity()->getPosition());
 		}
 
 		delete path;
@@ -129,7 +134,7 @@ namespace AI {
 	/**
 	Calcula con A* una ruta para que las almas vayan caminando desde un cierto Placeable a otro.
 	*/
-	std::vector<Logic::Tile*>* CServer::getWalkingSoulAStarRoute(Logic::CPlaceable* from, Logic::CPlaceable* to){
+	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(Logic::CPlaceable* from, Logic::CPlaceable* to){
 		// Obtenemos el conjunto de tiles objetivo
 		std::unordered_set<Logic::Tile*> tiles = to->getAdyacentTiles();
 		std::unordered_set<void*> tos = std::unordered_set<void*>();
@@ -153,10 +158,12 @@ namespace AI {
 			return NULL;
 		}
 
-		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>();
-		out->push_back(tileFrom);
+		// Transformamos el retorno
+		std::vector<Vector3>* out = new std::vector<Vector3>();
+		out->push_back(from->getEntity()->getPosition());
 		for (std::vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
-			out->push_back((Logic::Tile*)(*it));
+			Logic::Tile* tile = (Logic::Tile*)(*it);
+			out->push_back(tile->getEntity()->getPosition());
 		}
 
 		delete path;

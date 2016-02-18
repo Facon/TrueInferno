@@ -2,6 +2,8 @@
 
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Entity.h"
+#include "Logic/Maps/Managers/BuildingManager.h"
+
 #include <iostream>
 #include <cassert>
 
@@ -14,10 +16,10 @@ namespace Logic {
 
 	bool CHellQuarters::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 		_timeSinceLastSpawn = 0;
-		
+
 		assert(entityInfo->hasAttribute("numInitialSouls") && "numInitialSouls is not defined");
 		_numAvailableSouls = entityInfo->getIntAttribute("numInitialSouls");
-		
+
 		assert(entityInfo->hasAttribute("secondsBetweenSpawns") && "secondsBetweenSpawns is not defined");
 		_timeBetweenSpawns = 1000 * entityInfo->getIntAttribute("secondsBetweenSpawns");
 
@@ -27,12 +29,30 @@ namespace Logic {
 		_soulsToWorkRequest = false;
 		_soulsToBurnRequest = false;
 
+		_sendingSoulToWorkState = SendingSoulToWorkState::Idle;
+		_pathReceived = nullptr;
+
 		return true;
 	} // spawn
 
 	void CHellQuarters::tick(unsigned int msecs){
 		spawnSouls(msecs);
+
+		sendSoulToWork();
 	} // tick
+
+	bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg){
+		if (_sendingSoulToWorkState != WaitingForPath)
+			return false;
+
+		assert(msg.path && "Message received with null path");
+		_pathReceived = msg.path;
+
+		// Cambiamos al estado de path recibido
+		_sendingSoulToWorkState = SendingSoulToWorkState::PathReceived;
+
+		return true;
+	}
 
 	void CHellQuarters::spawnSouls(unsigned int msecs){
 		// Chequeamos si ha pasado tiempo suficiente
@@ -45,6 +65,55 @@ namespace Logic {
 
 			// TODO ¿Reproducimos algún sonido o animación de almas nuevas?
 		}
+	}
+
+	bool CHellQuarters::sendSoulToWork(){
+		if (_numAvailableSouls <= 0)
+			return false;
+
+		switch (_sendingSoulToWorkState){
+		// En caso de estar parados, solicitamos ruta
+		case Idle:{
+			// TODO De momento, enviamos siempre al Evilator
+			// Localizamos el Evilator
+			CPlaceable *evilator = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Evilator);
+
+			// Enviamos un mensaje para obtener la ruta hasta el Evilator
+			WalkSoulPathMessage message;
+			message.target = evilator;
+			if (!message.Dispatch(*(this->getEntity()))){
+				return false;
+			}
+
+			_sendingSoulToWorkState = SendingSoulToWorkState::WaitingForPath;
+			break;
+		}
+
+		// En el caso de estar esperando no hacemos nada a la espera de que llegue el mensaje
+		case WaitingForPath:{
+			break;
+		}
+
+		// En ruta recibida, creamos el alma y le pasamos la ruta
+		case PathReceived:{
+			// TODO Crear alma y pasarle _pathReceived
+			std::cout << "Path received!" << std::endl;
+			for (auto it = _pathReceived->cbegin(); it != _pathReceived->cend(); ++it){
+				std::cout << "Node=" << (*it) << std::endl;
+			}
+
+			--_numAvailableSouls;
+			_pathReceived = nullptr;
+			break;
+		}
+
+		default:{
+			assert(true && "Unimplemented logic for all states");
+			break;
+		}
+		}
+
+		return true;
 	}
 
 } // namespace Logic

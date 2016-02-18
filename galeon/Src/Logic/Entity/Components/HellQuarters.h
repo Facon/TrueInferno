@@ -3,11 +3,19 @@
 
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
+#include "BaseSubsystems/Math.h"
+#include <vector>
 
 namespace Logic {
 	class CHellQuarters : public IComponent{
 		RTTI_DECL;
 		DEC_FACTORY(CHellQuarters);
+
+		enum SendingSoulToWorkState{
+			Idle,
+			WaitingForPath,
+			PathReceived
+		};
 
 	public:
 		/**
@@ -25,6 +33,9 @@ namespace Logic {
 		Actualización por frame
 		*/
 		virtual void tick(unsigned int msecs);
+
+		/** Gestión de mensajes para enviar y recibir información de rutas de almas caminantes */
+		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
 
 	private:
 		// Tiempo (ms) entre generación de almas
@@ -47,6 +58,14 @@ namespace Logic {
 
 		/** Genera almas periódicamente */
 		void spawnSouls(unsigned int msecs);
+
+		/** Send a soul to work */
+		bool sendSoulToWork();
+
+		SendingSoulToWorkState _sendingSoulToWorkState;
+
+		std::vector<Vector3>* _pathReceived;
+
 	}; // class CHellQuarters
 
 	REG_FACTORY(CHellQuarters);

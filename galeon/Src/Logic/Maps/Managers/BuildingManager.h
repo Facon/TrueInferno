@@ -93,12 +93,12 @@ namespace Logic
 		Registra internamente un edificio ya existente.
 		Hay que llamar a unregisterBuilding cuando el edificio se quiera destruír. Actualmente esto se hace en el destructor de CPlaceable
 		*/
-		void CBuildingManager::registerBuilding(CPlaceable *placeable);
+		void registerBuilding(CPlaceable *placeable);
 
 		/**
 		Saca del registro un edificio previamente registrado.
 		*/
-		void CBuildingManager::unregisterBuilding(CPlaceable *placeable);
+		void unregisterBuilding(CPlaceable *placeable);
 
 		/** Coloca un edificio del tipo indicado en la posición lógica del tile inicial 
 
@@ -106,6 +106,9 @@ namespace Logic
 		@param prefabName Nombre de la entidad de mapa o "prefab"
 		@param logicPosition Posición lógica donde se colocará el primer tile. El resto de tiles se colocarán de acuerdo a la info del prefab */
 		Logic::CEntity* createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition);
+
+		// Localiza un edificio por el tipo dado
+		CPlaceable* findBuilding(BuildingType buildingType);
 
 	protected:
 

@@ -69,7 +69,9 @@ namespace Logic {
 		/** Devuelve un boolean a true si el Placeable corresponde a un edificio */
 		bool isBuilding() const;
 
-		virtual bool CPlaceable::HandleMessage(const PlaceMessage& msg);
+		virtual bool HandleMessage(const PlaceMessage& msg);
+
+		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
 
 	private:
 		/** Height added to entities placed over tiles so they don't overlap
@@ -104,8 +106,14 @@ namespace Logic {
 		/** Tipo del edificio */
 		Logic::BuildingType _buildingType;
 
+		/** Objetivo para calcular ruta */
+		CPlaceable* _walkingSoulTarget;
+
 		/** Actualiza el conjunto de tiles adyacentes */
 		void updateAdyacentTiles();
+
+		/** Procesa peticiones pendientes de cálculo de rutas */
+		void processWalkingSoulPathRequest();
 
 	protected:
 		/** Parsea un enum PlaceableType a partir del nombre en texto
