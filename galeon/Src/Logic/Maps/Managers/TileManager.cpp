@@ -203,6 +203,17 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	Tile* CTileManager::getTileByName(std::string tileName){
+		for (int x = 0; x < SIZE_X; ++x) {
+			for (int z = 0; z < SIZE_Z; ++z) {
+				if (_tiles[x][z]->getEntity()->getName() == tileName)
+					return _tiles[x][z];
+			}
+		}
+	}
+
+	//--------------------------------------------------------
+
 	void CTileManager::registerTile(Tile *tile) {
 		Vector3 position = tile->getLogicPosition();
 		_tiles[(int)(position.x)][(int)(position.z)] = tile;

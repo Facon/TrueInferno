@@ -148,4 +148,16 @@ namespace Logic {
 		return newEntity;
 	}
 
+	void CBuildingManager::movePlaceable(CMap *map, CEntity* movableEntity, const Vector3& logicPosition){
+
+		if (!movableEntity){
+			std::cout << "Can't move null placeable on '" << logicPosition << "'" << std::endl;
+			return;
+		}
+
+		PlaceMessage m;
+		m.position = logicPosition;
+		m.Dispatch(*movableEntity);
+	}
+
 } // namespace Logic

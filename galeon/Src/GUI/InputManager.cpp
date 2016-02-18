@@ -330,6 +330,7 @@ namespace GUI{
 				if ((*it)->mousePressed(_mouseState))
 				  break;
 			}
+				
 		}
 
 		return false;
