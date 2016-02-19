@@ -98,6 +98,8 @@ namespace Logic
 		Returns a tile given its logic position or null if coordinates are out of bounds
 		*/
 		Tile* getTile(const Vector3 &position);
+
+		Tile* getTileByName(std::string tileName);
 			
 		/** Devuelve un puntero a una tile aleatoria */
 		Tile* getRandomTile();

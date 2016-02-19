@@ -166,6 +166,12 @@ namespace Application {
 		
 	bool CGameState::mousePressed(const GUI::CMouseState &mouseState)
 	{
+
+		
+		if (mouseState.button == GUI::Button::TButton::LEFT){
+			_uiManager.getSideBarUI()->placeBuildingInConstruction();
+		}
+
 		return false;
 
 	} // mousePressed

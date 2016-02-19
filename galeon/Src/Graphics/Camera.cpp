@@ -114,5 +114,17 @@ namespace Graphics
 		_targetNode->setPosition(newPosition);
 	}
 
+	Ray CCamera::getCameraToViewportRay(float x, float y){
+		return _camera->getCameraToViewportRay(x, y);
+	}
+
+	int CCamera::getViewportWidth(){
+		return _camera->getViewport()->getActualWidth();
+	}
+
+	int CCamera::getViewportHeight(){
+		return _camera->getViewport()->getActualHeight();
+	}
+
 
 } // namespace Graphics

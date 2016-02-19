@@ -2,6 +2,11 @@
 #define SIDEBARUI_H_
 
 
+namespace Logic
+{
+	class CEntity;
+}
+//lo de antes ver si kitar
 namespace CEGUI
 {
 	class Window;
@@ -14,6 +19,8 @@ namespace GUI
 	{
 	protected:
 		CEGUI::Window* _uibuttonsWindow;
+		Logic::CEntity* _placeableEntity=nullptr;
+		int _Constructing = 0;
 
 		bool createBuildingReleased(const CEGUI::EventArgs& e);
 
@@ -26,6 +33,7 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
+		void placeBuildingInConstruction();
 	};
 }
 
