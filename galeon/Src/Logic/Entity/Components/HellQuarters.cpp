@@ -38,11 +38,15 @@ namespace Logic {
 	void CHellQuarters::tick(unsigned int msecs){
 		spawnSouls(msecs);
 
-		sendSoulToWork();
+		// TODO TEST Quitar
+		if (_timeSinceLastSpawn >= 1000)
+			sendSoulToWork();
 	} // tick
 
+	// TODO TEST Chequear por qué NO está entrando aquí!
 	bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg){
-		if (_sendingSoulToWorkState != WaitingForPath)
+		// Nos aseguramos que estamos recibiendo una respuesta y que estábamos en estado de esperarla
+		if (msg._type != MessageType::WALK_SOUL_PATH_RESPONSE || _sendingSoulToWorkState != WaitingForPath)
 			return false;
 
 		assert(msg.path && "Message received with null path");
@@ -81,6 +85,7 @@ namespace Logic {
 			// Enviamos un mensaje para obtener la ruta hasta el Evilator
 			WalkSoulPathMessage message;
 			message.target = evilator;
+			message._type = MessageType::WALK_SOUL_PATH_REQUEST;
 			if (!message.Dispatch(*(this->getEntity()))){
 				return false;
 			}
@@ -103,7 +108,11 @@ namespace Logic {
 			}
 
 			--_numAvailableSouls;
+
+			// Liberamos recursos
+			delete(_pathReceived);
 			_pathReceived = nullptr;
+
 			break;
 		}
 

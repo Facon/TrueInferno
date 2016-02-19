@@ -90,6 +90,7 @@ namespace Logic {
 			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(this, _walkingSoulTarget);
 			WalkSoulPathMessage message;
 			message.path = path;
+			message._type = MessageType::WALK_SOUL_PATH_RESPONSE;
 			message.Dispatch(*this);
 
 			// Clean request
@@ -259,6 +260,9 @@ namespace Logic {
 	}
 
 	bool CPlaceable::HandleMessage(const WalkSoulPathMessage& msg){
+		if(msg._type != MessageType::WALK_SOUL_PATH_REQUEST)
+			return false;
+
 		assert(msg.target && "Message received with null target");
 
 		_walkingSoulTarget = msg.target;

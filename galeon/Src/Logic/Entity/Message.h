@@ -15,8 +15,6 @@ Contiene el tipo de datos de un mensaje.
 #include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
 
-#include "AI/SoulTask.h"
-
 // Predeclaraciones
 namespace Logic {
 	class CEntity;
@@ -52,7 +50,8 @@ namespace Logic
 			ROUTE_TO,
 			FINISHED_ROUTE,
 			FINISHED_MOVE,
-			WALK_SOUL_PATH
+			WALK_SOUL_PATH_REQUEST,
+			WALK_SOUL_PATH_RESPONSE
 		};
 	}
 
@@ -269,7 +268,7 @@ namespace Logic
 		}
 	};
 
-	// WALK_SOUL_PATH
+	// WALK_SOUL_PATH_REQUEST, WALK_SOUL_PATH_RESPONSE
 	class WalkSoulPathMessage : public Message
 	{
 	public:
