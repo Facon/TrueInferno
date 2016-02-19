@@ -38,9 +38,9 @@ namespace Logic {
 	void CHellQuarters::tick(unsigned int msecs){
 		spawnSouls(msecs);
 
-		// TODO TEST Quitar
-		if (_timeSinceLastSpawn >= 1000)
-			sendSoulToWork();
+		// TODO TEST
+		/*if (_timeSinceLastSpawn >= 1000)
+			sendSoulToWork();*/
 	} // tick
 
 	// TODO TEST Chequear por qué NO está entrando aquí!
@@ -107,6 +107,7 @@ namespace Logic {
 				std::cout << "Node=" << (*it) << std::endl;
 			}
 
+			// TODO Instanciar alma y toda la pesca de Assiertion
 			--_numAvailableSouls;
 
 			// Liberamos recursos
