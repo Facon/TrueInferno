@@ -3,6 +3,7 @@
 
 #include "Logic/Server.h"
 #include "Map/MapEntity.h"
+#include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Message.h"
 #include "Logic/BuildingManager.h"
@@ -66,7 +67,6 @@ namespace Logic {
 
 			std::cout << "available souls = " << _numAvailableSouls << std::endl;
 			
-			/*
 			CMap* map = CServer::getSingletonPtr()->getMap();
 			CEntity* newSoul = CEntityFactory::getSingletonPtr()->createEntity("Soul", map);
 
@@ -76,10 +76,9 @@ namespace Logic {
 
 			m.Dispatch(*newSoul);
 
-			CBuildingManager* bm = CBuildingManager::getSingletonPtr();
+			//CBuildingManager* bm = CBuildingManager::getSingletonPtr();
 
-			AI::CServer::getSoulPathAStarRoute(bm->)
-			*/
+			//AI::CServer::getSoulPathAStarRoute(bm->)
 
 			// TODO ¿Reproducimos algún sonido o animación de almas nuevas?
 		}
