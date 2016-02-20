@@ -26,12 +26,14 @@ namespace Logic {
 	}
 
 	bool CPlaceable::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+		// Inicialización
 		_tileManager = nullptr;
 		_tiles.clear();
 		_adyacentTiles.clear();
 		_placeableType = NonPlaceable;
 		_buildingType = NonBuilding;
 		_walkingSoulTarget = nullptr;
+		_validTerrainTypes.clear();
 
 		// TODO Remove when this check is done above
 		if (entityInfo->hasAttribute("prefab") && entityInfo->getBoolAttribute("prefab"))
@@ -54,7 +56,7 @@ namespace Logic {
 		// Determinamos el tipo de placeable que es
 		_placeableType = parsePlaceableType(entityInfo->getStringAttribute("placeableType"));
 
-		// Si el edificio fue creado por prefab, es posible que al hacer spawn no tenga el atributo de posición lógica
+		// Si el edificio fue creado por prefab, es posible que al hacer spawn no tenga el atributo de posición lógica inicial
 		if (entityInfo->hasAttribute("floor_absolute_position0")){
 			// Place placeable on its configured initial position
 			if (!place(entityInfo->getVector3Attribute("floor_absolute_position0"))){
@@ -75,6 +77,14 @@ namespace Logic {
 		}
 		else
 			_buildingType = NonBuilding;
+
+		// Leemos los tipos de terreno válidos
+		if (!entityInfo->hasAttribute("validTerrainType")){
+			std::cout << "validTerrainType must be defined" << std::endl;
+			return false;
+		}
+		_validTerrainTypes.clear();
+		_validTerrainTypes.insert(parseTerrainType(entityInfo->getStringAttribute("validTerrainType")));
 
 		return true;
 	} // spawn
@@ -159,17 +169,13 @@ namespace Logic {
 	}
 	
 	bool CPlaceable::checkPlacementIsPossible(const Vector3 &checkPosition) const{
-		// Check origin tile. If it's null or can't place anything on it: placement is not possible
-		if (_tileManager->getTile(checkPosition) == nullptr || !_tileManager->getTile(checkPosition)->canPlaceSomething())
-			return false;
-
 		// For each tile
 		for (int x = 0; x < _floorX; ++x) {
 			for (int z = 0; z < _floorZ; ++z) {
 				Tile* tile = _tileManager->getTile(checkPosition + Vector3(x, 0, z));
 
 				// Check tile
-				if (tile == nullptr || !tile->canPlaceSomething())
+				if (tile == nullptr || !tile->allowsPlaceable(this))
 					return false;
 			}
 		}
@@ -196,6 +202,10 @@ namespace Logic {
 		return _placeableType == SoulPath;
 	}
 
+	bool CPlaceable::canBePlacedOnTerrain(TerrainType terrainType) const{
+		return _validTerrainTypes.count(terrainType)>0;
+	}
+
 	bool CPlaceable::isBuilding() const{
 		return _placeableType == Building;
 	}
@@ -215,7 +225,7 @@ namespace Logic {
 			return SoulPath;
 		}
 		else{
-			assert("PlaceableType name unknown");
+			assert(false && "PlaceableType name unknown");
 			// TODO lanzar excepción en vez de assert y eliminar valor NoPlaceable
 			return NonPlaceable;
 		}
@@ -253,11 +263,29 @@ namespace Logic {
 			return Warehouse;
 		}
 		else{
-			assert("BuildingType name unknown");
+			assert(false && "BuildingType name unknown");
 			// TODO lanzar excepción en vez de assert
 			return NonBuilding;
 		}
 	}
+
+	TerrainType CPlaceable::parseTerrainType(const std::string& name){
+		if (name == "Empty"){
+			return Empty;
+		}
+		else if (name == "Mineral"){
+			return Mineral;
+		}
+		else if (name == "Gas"){
+			return Gas;
+		}
+		else{
+			assert(false && "TerrainType name unknown");
+			// TODO lanzar excepción en vez de assert
+			return Empty;
+		}
+	}
+
 
 	bool CPlaceable::HandleMessage(const WalkSoulPathMessage& msg){
 		if(msg._type != MessageType::WALK_SOUL_PATH_REQUEST)

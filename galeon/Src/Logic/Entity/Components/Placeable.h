@@ -8,7 +8,10 @@
 #include "Logic/Entity/Component.h"
 #include "Logic/Entity/PlaceableType.h"
 #include "Logic/Entity/BuildingType.h"
+#include "Logic/Entity/TerrainType.h"
+
 #include <unordered_set>
+
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
@@ -66,6 +69,9 @@ namespace Logic {
 		/** Devuelve un boolean indicando si es posible hacer caminar un alma por el Placeable */
 		bool canPassWalkingSoul() const;
 
+		/** Devuelve un boolean indicando si es posible que el Placeable se coloque sobre terreno de recurso */
+		bool canBePlacedOnTerrain(TerrainType terrainType) const;
+
 		/** Devuelve un boolean a true si el Placeable corresponde a un edificio */
 		bool isBuilding() const;
 
@@ -106,6 +112,9 @@ namespace Logic {
 		/** Tipo del edificio */
 		Logic::BuildingType _buildingType;
 
+		/** Tipos de terrenos aceptados */
+		std::unordered_set<Logic::TerrainType> _validTerrainTypes;
+
 		/** Objetivo para calcular ruta */
 		CPlaceable* _walkingSoulTarget;
 
@@ -118,11 +127,15 @@ namespace Logic {
 	protected:
 		/** Parsea un enum PlaceableType a partir del nombre en texto
 		TODO Mover junto al código del enum */
-		static PlaceableType CPlaceable::parsePlaceableType(const std::string& name);
+		static PlaceableType parsePlaceableType(const std::string& name);
 
 		/** Parsea un enum BuildingType a partir del nombre en texto
 		TODO Mover junto al código del enum */
-		static BuildingType CPlaceable::parseBuildingType(const std::string& name);
+		static BuildingType parseBuildingType(const std::string& name);
+
+		/** Parsea un enum TerrainType a partir del nombre en texto
+		TODO Mover junto al código del enum */
+		static TerrainType parseTerrainType(const std::string& name);
 
 		// Devuelve el PlaceableType de este placeable
 		PlaceableType CPlaceable::getPlaceableType(){

@@ -100,13 +100,15 @@ namespace Logic
 		*/
 		void unregisterBuilding(CPlaceable *placeable);
 
-		/** Coloca un edificio del tipo indicado en la posición lógica del tile inicial 
+		/** Coloca un placeable del tipo indicado con el tile inicial ubicado en la posición lógica dada
 
 		@param map Mapa donde se instanciará la entidad del edificio
 		@param prefabName Nombre de la entidad de mapa o "prefab"
 		@param logicPosition Posición lógica donde se colocará el primer tile. El resto de tiles se colocarán de acuerdo a la info del prefab */
 		Logic::CEntity* createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition);
-		void movePlaceable(CMap *map, CEntity* movableEntity, const Vector3& logicPosition);
+		
+		/** Mueve un placeable */
+		bool movePlaceable(CMap *map, CEntity* movableEntity, const Vector3& logicPosition);
 
 		// Localiza un edificio por el tipo dado
 		CPlaceable* findBuilding(BuildingType buildingType);

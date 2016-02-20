@@ -111,12 +111,12 @@ namespace Logic {
 		if (!evilator)
 			return false;
 
-		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(13, 0, 2));
+		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(12, 0, 4));
 		if (!hellQuarters)
 			return false;
 
 		// Carretera inicial
-		if(!createPlaceable(map, "SoulPath", Vector3(13, 0, 4)))
+		/*if(!createPlaceable(map, "SoulPath", Vector3(13, 0, 4)))
 			return false;
 
 		if (!createPlaceable(map, "SoulPath", Vector3(13, 0, 5)))
@@ -128,7 +128,7 @@ namespace Logic {
 
 		for (int z = 7; z <= 11; ++z)
 			if (!createPlaceable(map, "SoulPath", Vector3(5, 0, z)))
-				return false;
+				return false;*/
 
 		return true;
 	}
@@ -175,10 +175,8 @@ namespace Logic {
 		// Primero se intenta crear la entidad
 		CEntity* newEntity = CEntityFactory::getSingletonPtr()->createEntity(prefabName, map);
 		if (newEntity){
-			// En segundo lugar se posiciona mediante paso de mensaje
-			PlaceMessage m;
-			m.position = logicPosition;
-			ret = m.Dispatch(*newEntity);
+			// En segundo lugar se posiciona
+			ret = movePlaceable(map, newEntity, logicPosition);
 		}
 
 		// Si algo falló
@@ -195,6 +193,19 @@ namespace Logic {
 		return newEntity;
 	}
 
+	bool CBuildingManager::movePlaceable(CMap *map, CEntity* movableEntity, const Vector3& logicPosition){
+		if (!movableEntity){
+			std::cout << "Can't move null placeable on '" << logicPosition << "'" << std::endl;
+			return false;
+		}
+
+		PlaceMessage m;
+		m.position = logicPosition;
+
+		// TODO Como atajo sabemos si se ha podido mover porque el Dispatch devuelve false
+		return m.Dispatch(*movableEntity);
+	}
+
 	CPlaceable* CBuildingManager::findBuilding(BuildingType buildingType){
 		// Obtenemos el conjunto de edificios para el tipo
 		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
@@ -207,18 +218,6 @@ namespace Logic {
 		auto it = buildingsFromType->cbegin();
 		std::advance(it, randomIndex);
 		return *it;
-	}
-
-	void CBuildingManager::movePlaceable(CMap *map, CEntity* movableEntity, const Vector3& logicPosition){
-
-		if (!movableEntity){
-			std::cout << "Can't move null placeable on '" << logicPosition << "'" << std::endl;
-			return;
-		}
-
-		PlaceMessage m;
-		m.position = logicPosition;
-		m.Dispatch(*movableEntity);
 	}
 
 	void CBuildingManager::printBuildingList() const{

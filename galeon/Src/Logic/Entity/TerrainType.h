@@ -5,7 +5,8 @@ namespace Logic {
 	enum TerrainType {
 		Empty = 0,
 		Mineral = 1,
-		Gas = 2
+		Gas = 2,
+		//FixedObstacle = 3
 	};
 } // namespace Logic
 

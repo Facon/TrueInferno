@@ -65,9 +65,12 @@ namespace Logic {
 		return _placeableAbove;
 	}
 
-	bool Tile::canPlaceSomething(){
-		// True si no hay placeable encima
-		return _placeableAbove == nullptr;
+	bool Tile::allowsPlaceable(const CPlaceable *placeable) const{
+		// Si hay algún otro Placeable o si el terreno es de obstáculo fijo
+		if (_placeableAbove != nullptr)
+			return false;
+
+		return (placeable->canBePlacedOnTerrain(_terrainType));
 	}
 
 	const std::vector<Tile*>* Tile::getAdjacentTiles(){
@@ -115,7 +118,7 @@ namespace Logic {
 	}
 
 	void Tile::printDebugInfo(){
-		std::cout << "pos=" << _logicPosition << ", terrain=" << _terrainType << ", placeable=" << _placeableAbove << ", passSoulPath=" << canPassSoulPath() << ", passWalkingSoul=" << canPassWalkingSoul() << ", placeSomething=" << canPlaceSomething();
+		std::cout << "pos=" << _logicPosition << ", terrain=" << _terrainType << ", placeable=" << _placeableAbove << ", passSoulPath=" << canPassSoulPath() << ", passWalkingSoul=" << canPassWalkingSoul();
 	}
 
 

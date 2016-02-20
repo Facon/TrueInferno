@@ -55,9 +55,8 @@ namespace Logic {
 		/** Getter for entityAbove */
 		const CPlaceable* getPlaceableAbove() const;
 
-		/** Checks if tile allows placing something on it (i.e. if the tile has no other Placeable on it)
-		It could be extended to check if some specific building can be placed (e.g. can a regular building be placed on a resource tile?) */
-		bool canPlaceSomething();
+		/** Comprueba si la Tile permite colocar encima un placeable dado */
+		bool allowsPlaceable(const CPlaceable *placeable) const;
 
 		/** Devuelve el vector de tiles adyacentes */
 		const std::vector<Tile*>* getAdjacentTiles();
@@ -77,7 +76,10 @@ namespace Logic {
 		*/
 		inline float manhattanDistance(const Tile& rhs) const
 		{
-			return Ogre::Math::Abs(this->_logicPosition.x - rhs._logicPosition.x) + Ogre::Math::Abs(this->_logicPosition.y - rhs._logicPosition.y) + Ogre::Math::Abs(this->_logicPosition.z - rhs._logicPosition.z);
+			return 
+				Ogre::Math::Abs(this->_logicPosition.x - rhs._logicPosition.x) + 
+				Ogre::Math::Abs(this->_logicPosition.y - rhs._logicPosition.y) + 
+				Ogre::Math::Abs(this->_logicPosition.z - rhs._logicPosition.z);
 		}
 
 	private:
