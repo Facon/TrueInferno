@@ -91,7 +91,7 @@ namespace Logic {
 			WalkSoulPathMessage message;
 			message.path = path;
 			message._type = MessageType::WALK_SOUL_PATH_RESPONSE;
-			message.Dispatch(*this);
+			message.Dispatch(*this->getEntity());
 
 			// Clean request
 			_walkingSoulTarget = nullptr;

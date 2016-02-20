@@ -53,7 +53,7 @@ namespace Logic {
 		void setPlaceableAbove(CPlaceable* placeableAbove);
 
 		/** Getter for entityAbove */
-		const CPlaceable* getPlaceableAbove();
+		const CPlaceable* getPlaceableAbove() const;
 
 		/** Checks if tile allows placing something on it (i.e. if the tile has no other Placeable on it)
 		It could be extended to check if some specific building can be placed (e.g. can a regular building be placed on a resource tile?) */

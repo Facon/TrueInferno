@@ -104,6 +104,9 @@ namespace Logic
 		/** Devuelve un puntero a una tile aleatoria */
 		Tile* getRandomTile();
 
+		/** Devuelve un puntero a la Tile más cercana a la posición real dada */
+		Tile* getNearestTile(const Vector3 &pos) const;
+
 		/** Imprime información de debug */
 		void printDebugInfo();
 

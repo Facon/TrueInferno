@@ -61,7 +61,7 @@ namespace Logic {
 		_placeableAbove = placeableAbove;
 	}
 
-	const CPlaceable* Tile::getPlaceableAbove(){
+	const CPlaceable* Tile::getPlaceableAbove() const{
 		return _placeableAbove;
 	}
 

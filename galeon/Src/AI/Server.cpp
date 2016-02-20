@@ -170,8 +170,8 @@ namespace AI {
 
 			// Si se encontró ruta desde el tile actual
 			if (solved != micropather::MicroPather::NO_SOLUTION && path->size() > 0) {
-				// Si es la primera ruta o mejora la que teníamos hasta el momento
-				if (bestPath == nullptr || cost < bestCost){
+				// Si mejora la mejor ruta actual
+				if (cost < bestCost){
 					// Actualizamos el mejor path copiando el vector
 					*bestPath = *path;
 

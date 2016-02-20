@@ -181,6 +181,25 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	Tile* CTileManager::getNearestTile(const Vector3 &pos) const{
+		float minSqrDist = FLT_MAX;
+		Tile* nearestTile = nullptr;
+
+		for (int x = 0; x < SIZE_X; ++x)
+			for (int z = 0; z < SIZE_Z; ++z){
+				Tile *tile = _tiles[x][z];
+				float sqrDist = pos.squaredDistance(tile->getEntity()->getPosition());
+				if (sqrDist < minSqrDist){
+					minSqrDist = sqrDist;
+					nearestTile = tile;
+				}
+			}
+
+		return nearestTile;
+	}
+
+	//--------------------------------------------------------
+
 	Tile* CTileManager::getTile(const Vector3 &position){
 		// Check bounds
 		if (position.x < 0 || position.x >= SIZE_X || position.z < 0 || position.z >= SIZE_Z)

@@ -1,8 +1,10 @@
 #include "HellQuarters.h"
 
+#include "Tile.h"
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Maps/Managers/BuildingManager.h"
+#include "Logic/Maps/Managers/TileManager.h"
 
 #include <iostream>
 #include <cassert>
@@ -39,17 +41,16 @@ namespace Logic {
 		spawnSouls(msecs);
 
 		// TODO TEST
-		/*if (_timeSinceLastSpawn >= 1000)
-			sendSoulToWork();*/
+		if (_timeSinceLastSpawn >= 1000)
+			sendSoulToWork();
 	} // tick
 
-	// TODO TEST Chequear por qué NO está entrando aquí!
 	bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg){
 		// Nos aseguramos que estamos recibiendo una respuesta y que estábamos en estado de esperarla
 		if (msg._type != MessageType::WALK_SOUL_PATH_RESPONSE || _sendingSoulToWorkState != WaitingForPath)
 			return false;
 
-		assert(msg.path && "Message received with null path");
+		// Guardamos la ruta devuelta. Puede ser NULL si no se encontró ruta al destino solicitado
 		_pathReceived = msg.path;
 
 		// Cambiamos al estado de path recibido
@@ -86,7 +87,7 @@ namespace Logic {
 			WalkSoulPathMessage message;
 			message.target = evilator;
 			message._type = MessageType::WALK_SOUL_PATH_REQUEST;
-			if (!message.Dispatch(*(this->getEntity()))){
+			if (!message.Dispatch(*this->getEntity())){
 				return false;
 			}
 
@@ -102,17 +103,22 @@ namespace Logic {
 		// En ruta recibida, creamos el alma y le pasamos la ruta
 		case PathReceived:{
 			// TODO Crear alma y pasarle _pathReceived
-			std::cout << "Path received!" << std::endl;
-			for (auto it = _pathReceived->cbegin(); it != _pathReceived->cend(); ++it){
-				std::cout << "Node=" << (*it) << std::endl;
+			if (_pathReceived != nullptr && _pathReceived->size()>0){
+				std::cout << "Path received! :)" << std::endl;
+
+				// TODO Instanciar alma y toda la pesca de Assiertion
+				--_numAvailableSouls;
+
+				// Liberamos recursos
+				delete(_pathReceived);
+				_pathReceived = nullptr;
+			}
+			else{
+				std::cout << "There is no path :(" << std::endl;
 			}
 
-			// TODO Instanciar alma y toda la pesca de Assiertion
-			--_numAvailableSouls;
-
-			// Liberamos recursos
-			delete(_pathReceived);
-			_pathReceived = nullptr;
+			// Volvemos a estado parado
+			_sendingSoulToWorkState = SendingSoulToWorkState::Idle;
 
 			break;
 		}

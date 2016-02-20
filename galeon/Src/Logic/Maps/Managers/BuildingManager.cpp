@@ -115,6 +115,7 @@ namespace Logic {
 		if (!hellQuarters)
 			return false;
 
+		// Carretera inicial
 		if(!createPlaceable(map, "SoulPath", Vector3(13, 0, 4)))
 			return false;
 
