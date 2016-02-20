@@ -83,6 +83,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\Logic\BuildingManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\CameraController.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\DamageTrigger.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp" />
@@ -102,7 +103,6 @@
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\EntityFactory.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\EntityID.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\Managers\BuildingManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\TileManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Map.cpp" />
@@ -117,6 +117,7 @@
     <ClCompile Include="..\..\Src\Logic\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\Logic\BuildingManager.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\CameraController.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\HellQuarters.h" />
@@ -140,7 +141,6 @@
     <ClInclude Include="..\..\Src\Logic\Maps\Documentation.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\EntityFactory.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\EntityID.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\Managers\BuildingManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\TileManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Map.h" />

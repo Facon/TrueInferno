@@ -4,9 +4,10 @@
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Maps/Managers/TileManager.h"
-#include "Logic/Maps/Managers/BuildingManager.h"
+#include "Logic/BuildingManager.h"
 #include "Logic/Entity/PlaceableType.h"
 #include "AI/Server.h"
+#include "Logic/Entity/Message.h"
 
 #include <iostream>
 #include <string>
@@ -89,7 +90,7 @@ namespace Logic {
 			// Calculate path from this placeable to the given target placeable
 			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(this, _walkingSoulTarget);
 			WalkSoulPathMessage message;
-			message.path = path;
+			message._path = path;
 			message._type = MessageType::WALK_SOUL_PATH_RESPONSE;
 			message.Dispatch(*this);
 
@@ -201,7 +202,7 @@ namespace Logic {
 	}
 
 	bool CPlaceable::HandleMessage(const PlaceMessage& msg){
-		return place(msg.position);
+		return place(msg._position);
 	}
 
 	PlaceableType CPlaceable::parsePlaceableType(const std::string& name){
@@ -263,9 +264,9 @@ namespace Logic {
 		if(msg._type != MessageType::WALK_SOUL_PATH_REQUEST)
 			return false;
 
-		assert(msg.target && "Message received with null target");
+		assert(msg._target && "Message received with null target");
 
-		_walkingSoulTarget = msg.target;
+		_walkingSoulTarget = msg._target;
 
 		return true;
 	}

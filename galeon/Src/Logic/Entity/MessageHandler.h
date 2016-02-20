@@ -67,7 +67,7 @@ namespace Logic
 		virtual bool HandleMessage(const WorkerMessage& msg)
 		{ return false; }
 
-		virtual bool HandleMessage(const WalkSoulPathMessage &msg)
+		virtual bool HandleMessage(const WalkSoulPathMessage& msg)
 		{  return false; }
 	};
 } // namespace Logic

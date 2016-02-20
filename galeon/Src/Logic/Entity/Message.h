@@ -61,16 +61,8 @@ namespace Logic
 	Contiene el tipo de datos de un mensaje. Tiene una serie de
 	atributos gen�ricos que se interpretar�n en funci�n del tipo 
 	de mensaje.
-	<p>
-	@remarks <b>??ESTO NO ES ESCALABLE!!</b> En tu proyecto esto 
-	deber�a ser cambiado.
-	Lo suyo ser�a tener una clase CMesage base y luego clases que
-	especializasen a �sta con los atributos necesarios para el 
-	mensaje concreto en vez de tener una serie de atributos
-	gen�ricos como es esta estructura que deben de ser interpretados
-	externamente en funci�n del tipo de mensaje.
-	
-    @ingroup logicGroup
+
+	@ingroup logicGroup
     @ingroup entityGroup
 
 	@author David Llansó Garc�a
@@ -226,7 +218,7 @@ namespace Logic
 	class DamageMessage : public Message
 	{
 	public:
-		unsigned int damage = 0;
+		unsigned int _damage = 0;
 		
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -237,7 +229,7 @@ namespace Logic
 	class PlaceMessage : public Message
 	{
 	public:
-		Vector3 position;
+		Vector3 _position;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -260,7 +252,7 @@ namespace Logic
 	class WorkerMessage : public Message
 	{
 	public:
-		int numWorkers;
+		int _numWorkers;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -272,8 +264,8 @@ namespace Logic
 	class WalkSoulPathMessage : public Message
 	{
 	public:
-		CPlaceable* target;
-		std::vector<Vector3>* path;
+		CPlaceable* _target;
+		std::vector<Vector3>* _path;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
