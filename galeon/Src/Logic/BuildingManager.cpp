@@ -108,7 +108,8 @@ namespace Logic {
 		CEntityFactory* entityFactory = CEntityFactory::getSingletonPtr();
 
 		// TODO Colocamos temporalmente hardcodeando posiciones en código
-		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(5, 0, 12));
+		//CEntity* evilator = createPlaceable(map, "Evilator", Vector3(5, 0, 12));
+		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(8, 0, 4));
 		if (!evilator)
 			return false;
 
@@ -200,8 +201,7 @@ namespace Logic {
 			return false;
 		}
 
-		PlaceMessage m;
-		m._position = logicPosition;
+		PlaceMessage m(logicPosition);
 
 		// TODO Como atajo sabemos si se ha podido mover porque el Dispatch devuelve false
 		return m.Dispatch(*movableEntity);

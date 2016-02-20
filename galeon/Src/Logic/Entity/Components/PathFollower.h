@@ -40,6 +40,7 @@ namespace Logic
 		Vector3 _targetPosition;
 		//private Transform endMarker;
 		std::queue<Vector3> _path;
+		const float ZERO_DISTANCE = 0.00001f;
 	};
 
 	REG_FACTORY(PathFollower);

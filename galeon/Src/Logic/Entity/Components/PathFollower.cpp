@@ -23,7 +23,7 @@ namespace Logic
 	{
 		switch (msg._type)
 		{
-		case MessageType::WALK_SOUL_PATH_REQUEST:
+		case MessageType::PERFORM_WALK_SOUL_PATH:
 			addToQueue(*msg._path);
 			return true;
 		default:
@@ -35,9 +35,9 @@ namespace Logic
 
 	void PathFollower::tick(unsigned int msecs)
 	{
-		if (_path.empty() && _entity->getPosition() == _targetPosition && !_targetReached)
+		if (_path.empty() && (_entity->getPosition().squaredDistance(_targetPosition) <= ZERO_DISTANCE) && !_targetReached)
 		{
-			//Debug.Log("Worker reached his destination!");
+			std::cout << "Worker reached his destination!" << std::endl;
 
 			// Ask soul to execute its task
 			//SendMessage("executeTask", targetBuilding, SendMessageOptions.RequireReceiver);
@@ -50,12 +50,15 @@ namespace Logic
 		if (!_path.empty() && !_moving)
 		{
 			_moving = true;
-			Vector3 newPos(_path.front());
-			_path.pop();
+
 			Vector3 entityPosition(_entity->getPosition());
 			_startPosition = entityPosition;
-			_targetPosition = Vector3(newPos.x, entityPosition.y, newPos.z);
-			
+			do{
+				Vector3 newPos(_path.front());
+				_path.pop();
+				_targetPosition = Vector3(newPos.x, entityPosition.y, newPos.z);
+			} while (_path.size()>0 && _startPosition.squaredDistance(_targetPosition) <= ZERO_DISTANCE);
+								
 			// TODO Mirar como hacer la rotación sin usar LookAt
 			//this.transform.LookAt(targetPosition);
 			

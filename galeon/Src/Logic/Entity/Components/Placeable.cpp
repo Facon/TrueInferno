@@ -99,9 +99,8 @@ namespace Logic {
 
 			// Calculate path from this placeable to the given target placeable
 			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(this, _walkingSoulTarget);
-			WalkSoulPathMessage message;
-			message._path = path;
-			message._type = MessageType::WALK_SOUL_PATH_RESPONSE;
+			WalkSoulPathMessage message(path);
+			message._type = MessageType::RETURN_WALK_SOUL_PATH;
 			message.Dispatch(*this->getEntity());
 
 			// Clean request
@@ -289,7 +288,7 @@ namespace Logic {
 
 
 	bool CPlaceable::HandleMessage(const WalkSoulPathMessage& msg){
-		if(msg._type != MessageType::WALK_SOUL_PATH_REQUEST)
+		if(msg._type != MessageType::REQUEST_WALK_SOUL_PATH)
 			return false;
 
 		assert(msg._target && "Message received with null target");

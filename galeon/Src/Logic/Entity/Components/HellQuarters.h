@@ -13,8 +13,12 @@ namespace Logic {
 
 		enum SendingSoulToWorkState{
 			Idle,
+			Requested,
 			WaitingForPath,
-			PathReceived
+			PathReceived,
+			Success,
+			Fail,
+			Clean
 		};
 
 	public:
@@ -37,6 +41,15 @@ namespace Logic {
 		/** Gestión de mensajes para enviar y recibir información de rutas de almas caminantes */
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
 
+		/** Gestión de mensajes para solicitar acciones en el HellQuarters */
+		virtual bool HandleMessage(const HellQuartersActionMessage& msg);
+
+		/** Interfaz pública para que se solicite el envío de un alma a trabajar */
+		void requestSendSoulToWork();
+
+		/** Interfaz pública para que se solicite el envío de un alma a arder */
+		void requestSendSoulToBurn();
+
 	private:
 		// Tiempo (ms) entre generación de almas
 		unsigned int _timeBetweenSpawns;
@@ -50,21 +63,25 @@ namespace Logic {
 		// Número de almas disponibles
 		int _numAvailableSouls;
 
-		// Flag a true cuando se ha solicitado enviar almas a trabajar
-		bool _soulsToWorkRequest;
+		// Número de almas que se han solicitado enviar a trabajar
+		int _numSoulsToWork;
 
-		// Flag a true cuando se ha solicitado enviar almas a quemarse
-		bool _soulsToBurnRequest;
+		// Número de almas que se han solicitado enviar a arder
+		int _numSoulsToBurn;
 
-		/** Genera almas periódicamente */
-		void spawnSouls(unsigned int msecs);
-
-		/** Send a soul to work */
-		bool sendSoulToWork();
-
+		// Estado del flujo de envío de almas a trabajar
 		SendingSoulToWorkState _sendingSoulToWorkState;
 
 		std::vector<Vector3>* _pathReceived;
+
+		/** Gestiona la lógica del spawn de almas */
+		void tickSpawnSouls(unsigned int msecs);
+
+		/** Gestiona la lógica del envío de almas a trabajar */
+		void tickSendSoulToWork(unsigned int msecs);
+
+		/** Crea y envía un alma a trabajar */
+		bool CHellQuarters::createAndSendSoulToWork();
 
 	}; // class CHellQuarters
 

@@ -20,6 +20,7 @@ namespace Logic
 	class PlaceMessage;
 	class WorkerMessage;
 	class WalkSoulPathMessage;
+	class HellQuartersActionMessage;
 	
 	class MessageHandler
 	{
@@ -69,6 +70,10 @@ namespace Logic
 
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg)
 		{  return false; }
+
+		virtual bool HandleMessage(const HellQuartersActionMessage& msg)
+		{  return false; }
+
 	};
 } // namespace Logic
 

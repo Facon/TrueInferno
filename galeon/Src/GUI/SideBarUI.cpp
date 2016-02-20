@@ -26,6 +26,7 @@
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Physics/Server.h"
+#include "Logic\Entity\Message.h"
 
 namespace GUI
 {
@@ -172,7 +173,12 @@ namespace GUI
 
 	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Create Soul\n");
+		Logic::HellQuartersActionMessage m(1);
+		m._type = Logic::MessageType::SEND_SOUL_WORK;
+		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
+		
+		m.Dispatch(*hellQuarters->getEntity());
+		
 		return true;
 	}
 

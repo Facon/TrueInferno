@@ -50,8 +50,11 @@ namespace Logic
 			ROUTE_TO,
 			FINISHED_ROUTE,
 			FINISHED_MOVE,
-			WALK_SOUL_PATH_REQUEST,
-			WALK_SOUL_PATH_RESPONSE
+			REQUEST_WALK_SOUL_PATH,
+			RETURN_WALK_SOUL_PATH,
+			PERFORM_WALK_SOUL_PATH,
+			SEND_SOUL_WORK, 
+			SEND_SOUL_BURN
 		};
 	}
 
@@ -229,6 +232,8 @@ namespace Logic
 	class PlaceMessage : public Message
 	{
 	public:
+		PlaceMessage(Vector3 position) : _position(position) {}
+		
 		Vector3 _position;
 
 		virtual bool Dispatch(MessageHandler& handler) const
@@ -252,6 +257,8 @@ namespace Logic
 	class WorkerMessage : public Message
 	{
 	public:
+		WorkerMessage(int numWorkers) : _numWorkers(numWorkers) {}
+
 		int _numWorkers;
 
 		virtual bool Dispatch(MessageHandler& handler) const
@@ -260,12 +267,29 @@ namespace Logic
 		}
 	};
 
-	// WALK_SOUL_PATH_REQUEST, WALK_SOUL_PATH_RESPONSE
+	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH
 	class WalkSoulPathMessage : public Message
 	{
 	public:
+		WalkSoulPathMessage(CPlaceable* target) : _target(target), _path(nullptr) {}
+		WalkSoulPathMessage(std::vector<Vector3>* path) : _target(nullptr), _path(path) {}
+
 		CPlaceable* _target;
 		std::vector<Vector3>* _path;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// SEND_SOUL_WORK, SEND_SOUL_BURN
+	class HellQuartersActionMessage : public Message
+	{
+	public:
+		HellQuartersActionMessage(int numSouls) : _numSouls(numSouls) {}
+
+		int _numSouls;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
