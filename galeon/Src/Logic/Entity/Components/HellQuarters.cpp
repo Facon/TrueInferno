@@ -40,10 +40,6 @@ namespace Logic {
 
 	void CHellQuarters::tick(unsigned int msecs){
 		spawnSouls(msecs);
-
-		// TODO TEST
-		if (_timeSinceLastSpawn >= 1000)
-			sendSoulToWork();
 	} // tick
 
 	bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg){

@@ -22,9 +22,16 @@ namespace GUI
 		Logic::CEntity* _placeableEntity=nullptr;
 		int _Constructing = 0;
 
-		bool createBuildingReleased(const CEGUI::EventArgs& e);
-
+		bool createFurnaceReleased(const CEGUI::EventArgs& e);
 		bool createRoadReleased(const CEGUI::EventArgs& e);
+		bool createResource1BuildingReleased(const CEGUI::EventArgs& e);
+		bool createResource2BuildingReleased(const CEGUI::EventArgs& e);
+		bool createSoulReleased(const CEGUI::EventArgs& e);
+		bool moveSoulReleased(const CEGUI::EventArgs& e);
+		bool createEvilworksReleased(const CEGUI::EventArgs& e);
+		bool createRefineryReleased(const CEGUI::EventArgs& e);
+		bool repairBuildingReleased(const CEGUI::EventArgs& e);
+		bool clearTerrainReleased(const CEGUI::EventArgs& e);
 
 	public:
 		SideBarUI();

@@ -3,16 +3,64 @@
 <GUILayout version="4" >
 	<Window type="OgreTray/StaticImage" name="SideBar" >
 		<Property name="Area" value="{{0.8,0},{0.1,0},{1,0},{1,0}}" />
-		<Window type="OgreTray/Button" name="CreateBuilding" >
-			<Property name="Area" value="{{0.05,0},{0.015,0},{0.475,0},{0.139,0}}" />
+		<Window type="OgreTray/Button" name="CreateFurnace" >
+			<Property name="Area" value="{{0.05,0},{0.150,0},{0.475,0},{0.274,0}}" />
 			<Property name="Font" value="Jura-18" />
 			<Property name="Text" value="CBuild" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		<Window type="OgreTray/Button" name="CreateRoad" >
-			<Property name="Area" value="{{0.525,0},{0.015,0},{0.95,0},{0.139,0}}" />
+			<Property name="Area" value="{{0.525,0},{0.150,0},{0.95,0},{0.274,0}}" />
 			<Property name="Font" value="Jura-18" />
 			<Property name="Text" value="CRoad" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/Button" name="CreateResource1Building" >
+			<Property name="Area" value="{{0.05,0},{0.280,0},{0.475,0},{0.404,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="CRes1" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/Button" name="CreateResource2Building" >
+			<Property name="Area" value="{{0.525,0},{0.280,0},{0.95,0},{0.404,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="CRes2" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/Button" name="CreateSoul" >
+			<Property name="Area" value="{{0.05,0},{0.410,0},{0.475,0},{0.534,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="CSoul" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/Button" name="MoveSoul" >
+			<Property name="Area" value="{{0.525,0},{0.410,0},{0.95,0},{0.534,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="MSoul" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/Button" name="CreateEvilworks" >
+			<Property name="Area" value="{{0.05,0},{0.540,0},{0.475,0},{0.664,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="CEvil" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/Button" name="CreateRefinery" >
+			<Property name="Area" value="{{0.525,0},{0.540,0},{0.95,0},{0.664,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="CRefin" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/Button" name="RepairBuilding" >
+			<Property name="Area" value="{{0.05,0},{0.670,0},{0.475,0},{0.794,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="Repair" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/Button" name="ClearTerrain" >
+			<Property name="Area" value="{{0.525,0},{0.670,0},{0.95,0},{0.794,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="Shovel" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 	</Window>
