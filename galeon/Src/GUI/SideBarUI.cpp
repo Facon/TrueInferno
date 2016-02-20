@@ -41,11 +41,36 @@ namespace GUI
 	void SideBarUI::init()
 	{
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIButtonBar.layout");
-		_uibuttonsWindow->getChildElement("CreateBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::createBuildingReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreateFurnace")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createFurnaceReleased, this));
 
 		_uibuttonsWindow->getChildElement("CreateRoad")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createRoadReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreateResource1Building")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createResource1BuildingReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreateResource2Building")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createResource2BuildingReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreateSoul")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createSoulReleased, this));
+
+		_uibuttonsWindow->getChildElement("MoveSoul")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::moveSoulReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreateEvilworks")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createEvilworksReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreateRefinery")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createRefineryReleased, this));
+
+		_uibuttonsWindow->getChildElement("RepairBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::repairBuildingReleased, this));
+
+		_uibuttonsWindow->getChildElement("ClearTerrain")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::clearTerrainReleased, this));
 	}
 
 	void SideBarUI::activate()
@@ -114,7 +139,7 @@ namespace GUI
 		}
 	}
 
-	bool SideBarUI::createBuildingReleased(const CEGUI::EventArgs& e)
+	bool SideBarUI::createFurnaceReleased(const CEGUI::EventArgs& e)
 	{
 
 		//Map::CMapParser::TEntityList mapEntityList =
@@ -131,6 +156,61 @@ namespace GUI
 		return true;
 
 	} //createBuildingReleased
+
+	bool SideBarUI::createResource1BuildingReleased(const CEGUI::EventArgs& e)
+	{
+		printf("Create Resource1\n");
+		return true;
+	}
+
+	bool SideBarUI::createResource2BuildingReleased(const CEGUI::EventArgs& e)
+	{
+		printf("Create Resource2\n");
+		return true;
+	}
+
+
+	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
+	{
+		printf("Create Soul\n");
+		return true;
+	}
+
+
+	bool SideBarUI::moveSoulReleased(const CEGUI::EventArgs& e)
+	{
+		printf("Move Soul\n");
+		return true;
+	}
+
+
+	bool SideBarUI::createEvilworksReleased(const CEGUI::EventArgs& e)
+	{
+		printf("Create Evilworks\n");
+		return true;
+	}
+
+
+	bool SideBarUI::createRefineryReleased(const CEGUI::EventArgs& e)
+	{
+		printf("Create Refinery\n");
+		return true;
+	}
+
+
+	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
+	{
+		printf("Repair Building\n");
+		return true;
+	}
+
+
+	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
+	{
+		printf("Clear Terrain\n");
+		return true;
+	}
+
 
 	void SideBarUI::placeBuildingInConstruction(){
 		if (_placeableEntity){
