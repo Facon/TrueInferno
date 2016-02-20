@@ -72,7 +72,7 @@ namespace Application
 		*/
 		virtual void release();
 
-		CGaleonApplication* getSingletonPtr() { return static_cast<CGaleonApplication*>(_instance); }
+		static CGaleonApplication* getSingletonPtr() { return static_cast<CGaleonApplication*>(_instance); }
 
 	}; // class GaleonApplication
 

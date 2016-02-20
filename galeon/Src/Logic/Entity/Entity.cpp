@@ -14,7 +14,9 @@ de juego. Es una colecci�n de componentes.
 #include <Logic/Entity/Components/AnimatedGraphics.h>
 #include "Entity.h"
 
-#include "Component.h"
+//#include "Component.h"
+
+#include "Logic/Entity/Message.h"
 
 #include "Logic/Server.h"
 #include "Logic/Maps/Map.h"

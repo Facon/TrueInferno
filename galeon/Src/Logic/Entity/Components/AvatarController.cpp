@@ -15,7 +15,7 @@ de la entidad.
 
 #include "Logic/Entity/Entity.h"
 #include "Map/MapEntity.h"
-
+#include "Logic/Entity/Message.h"
 
 namespace Logic
 {

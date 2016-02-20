@@ -1,5 +1,6 @@
 ﻿#include "CameraController.h"
 
+#include "Logic/Entity/Message.h"
 #include "Logic/Entity/Entity.h"
 #include "Map/MapEntity.h"
 

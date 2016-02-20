@@ -132,20 +132,21 @@ namespace GUI {
 		  el uso de CEGUI impidiendo que se utilizaran sus botones
 		*/
 
-		//if(_controlledAvatar)
-		//{
-			//Logic::ControlMessage m;
-			//m._type = Logic::MessageType::CONTROL;
-			//m._action = "turn";
-			//m._degreesMoved = -(float)mouseState.movX * TURN_FACTOR;
+		/*
+		if(_controlledAvatar)
+		{
+			Logic::ControlMessage m;
+			m._type = Logic::MessageType::CONTROL;
+			m._action = "turn";
+			m._degreesMoved = -(float)mouseState.movX * TURN_FACTOR;
 
-            //m.Dispatch(*_controlledAvatar);
+            m.Dispatch(*_controlledAvatar);
 
-            //return true;
-		//}
-		
+            return true;
+		}
+		*/
+
 		return false;
-
 	} // mouseMoved
 
 	//--------------------------------------------------------

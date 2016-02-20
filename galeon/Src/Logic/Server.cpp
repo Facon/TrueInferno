@@ -14,7 +14,7 @@ la gestión de la lógica del juego.
 #include "Logic/Maps/Map.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Maps/Managers/TileManager.h"
-#include "Logic/Maps/Managers/BuildingManager.h"
+#include "Logic/BuildingManager.h"
 
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"

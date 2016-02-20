@@ -14,6 +14,7 @@ una entidad que tiene dos estado (posiciones) para ir de una a otra.
 #include "SwitchPosition.h"
 
 #include "Logic/Entity/Entity.h"
+#include "Logic/Entity/Message.h"
 #include "Logic/Maps/Map.h"
 #include "Map/MapEntity.h"
 

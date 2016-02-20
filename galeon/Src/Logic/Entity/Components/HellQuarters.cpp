@@ -1,11 +1,12 @@
 #include "HellQuarters.h"
 
-#include "Tile.h"
+
+#include "Logic/Server.h"
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Entity.h"
-#include "Logic/Maps/Managers/BuildingManager.h"
-#include "Logic/Maps/Managers/TileManager.h"
-
+#include "Logic/Entity/Message.h"
+#include "Logic/BuildingManager.h"
+#include "AI/Server.h"
 #include <iostream>
 #include <cassert>
 
@@ -51,7 +52,8 @@ namespace Logic {
 			return false;
 
 		// Guardamos la ruta devuelta. Puede ser NULL si no se encontró ruta al destino solicitado
-		_pathReceived = msg.path;
+		assert(msg._path && "Message received with null path");
+		_pathReceived = msg._path;
 
 		// Cambiamos al estado de path recibido
 		_sendingSoulToWorkState = SendingSoulToWorkState::PathReceived;
@@ -67,6 +69,21 @@ namespace Logic {
 			_numAvailableSouls += _numSpawnedSouls;
 
 			std::cout << "available souls = " << _numAvailableSouls << std::endl;
+			
+			/*
+			CMap* map = CServer::getSingletonPtr()->getMap();
+			CEntity* newSoul = CEntityFactory::getSingletonPtr()->createEntity("Soul", map);
+
+			PositionMessage m;
+			m._type = MessageType::SET_POSITION;
+			m._position = Vector3(0.0f, 2.0f, 0.0f);
+
+			m.Dispatch(*newSoul);
+
+			CBuildingManager* bm = CBuildingManager::getSingletonPtr();
+
+			AI::CServer::getSoulPathAStarRoute(bm->)
+			*/
 
 			// TODO ¿Reproducimos algún sonido o animación de almas nuevas?
 		}
@@ -85,7 +102,7 @@ namespace Logic {
 
 			// Enviamos un mensaje para obtener la ruta hasta el Evilator
 			WalkSoulPathMessage message;
-			message.target = evilator;
+			message._target = evilator;
 			message._type = MessageType::WALK_SOUL_PATH_REQUEST;
 			if (!message.Dispatch(*this->getEntity())){
 				return false;

@@ -17,7 +17,6 @@ de juego. Es una colección de componentes.
 #include "BaseSubsystems/Math.h"
 
 #include "Logic/Entity/MessageHandler.h"
-#include "Logic/Entity/Message.h"
 
 #include "Logic/Maps/EntityID.h"
 
