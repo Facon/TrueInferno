@@ -11,7 +11,7 @@
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
-#include "Logic/Maps/Managers/BuildingManager.h"
+#include "Logic/BuildingManager.h"
 #include "Logic/Server.h"
 
 //includes pal raycast

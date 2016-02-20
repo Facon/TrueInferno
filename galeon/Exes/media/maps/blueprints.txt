@@ -6,3 +6,4 @@ SoulPath CGraphics CPhysicEntity CPlaceable
 HellQuarters CHellQuarters CGraphics CPhysicEntity CPlaceable
 Evilator CGraphics CPhysicEntity CPlaceable CWorkBuilding
 Furnace CGraphics CPhysicEntity CPlaceable CWorkBuilding
+Soul Soul CGraphics PathFollower

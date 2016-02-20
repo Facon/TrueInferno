@@ -100,7 +100,6 @@ namespace Logic
 
 		//_graphicsCamera->setCameraPosition(position + _distance * Vector3(0, 0, 1));
 		//_graphicsCamera->setTargetCameraPosition(direction);
-
 		_graphicsCamera->setCameraPosition(position + _distance * Vector3(0, 0, 1));
 		//_graphicsCamera->setTargetCameraPosition(direction);
 

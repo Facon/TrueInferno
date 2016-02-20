@@ -20,6 +20,7 @@ Contiene la implementación del gestor de la matriz de tiles.
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
 #include "AI/Server.h"
+#include "Logic/Entity/Message.h"
 
 #include <cassert>
 
@@ -200,7 +201,7 @@ namespace Logic {
 		}
 
 		PlaceMessage m;
-		m.position = logicPosition;
+		m._position = logicPosition;
 
 		// TODO Como atajo sabemos si se ha podido mover porque el Dispatch devuelve false
 		return m.Dispatch(*movableEntity);

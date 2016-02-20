@@ -28,6 +28,7 @@ Se ofrecen también una serie de funciones auxiliares.
 #include <OgreMatrix3.h>
 #include <OgreMatrix4.h>
 #include <OgreRay.h>
+#include <OgreMath.h>
 
 /**
 Definicion de matriz de 4x4. La definición del tipo de datos
@@ -224,6 +225,12 @@ namespace Math
 		return orientation;
 
 	} // getOrientationFromRadians
+
+	template<typename V, typename T>
+	static V lerp(const V& v0, const V& v1, const T& t)
+	{
+		return Ogre::Math::lerp<V, T>(v0, v1, t);
+	}
 
 } // namespace Math
 

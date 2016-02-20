@@ -1,7 +1,7 @@
 #include "WorkBuilding.h"
 
 #include "Map/MapEntity.h"
-#include "Logic/Entity/Entity.h"
+#include "Logic/Entity/Message.h"
 #include <iostream>
 #include <cassert>
 
@@ -40,7 +40,7 @@ namespace Logic {
 	}
 
 	bool CWorkBuilding::HandleMessage(const WorkerMessage& msg){
-		_changeNumWorkers += msg.numWorkers;
+		_changeNumWorkers += msg._numWorkers;
 		return true;
 	}
 
