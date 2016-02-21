@@ -50,8 +50,11 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
-		/** Place this placeable on a given logic position*/
-		bool place(const Vector3 newOriginPosition);
+		/** Float this placeable to a given logic position*/
+		void floatTo(const Vector3 newOriginPosition);
+
+		/** Coloca el Placeable en la posición original */
+		bool place();
 
 		/** Gets occupied tiles depending on the placeable's floor */
 		const std::vector<Tile*> getTiles() const;
@@ -75,15 +78,16 @@ namespace Logic {
 		/** Devuelve un boolean a true si el Placeable corresponde a un edificio */
 		bool isBuilding() const;
 
-		virtual bool HandleMessage(const PlaceMessage& msg);
+		virtual bool HandleMessage(const MovePlaceableMessage& msg);
 
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
 
 	private:
-		/** Height added to entities placed over tiles so they don't overlap
-		TODO Should be relative to a tile's height
-		*/
-		const float HEIGHT_OVER_TILE = 1.0;
+		/** Altura añadida a la posición del Placeable para que parezca que está justo encima */
+		const float HEIGHT_ON_TILE = 1.0;
+
+		/** Altura añadida a la posición del Placeable para que parezca que flota por encima */
+		const float HEIGHT_FLOATING_OVER_TILE = 1.5;
 
 		/** Floor's absolute logic origin position in the matrix */
 		Vector3 _floorOriginPosition;
@@ -102,6 +106,9 @@ namespace Logic {
 
 		/** Tiles adyacent to floor's occupied tiles */
 		std::unordered_set<Tile*> _adyacentTiles;
+
+		/** Flag a true si el Placeable está flotando y, por tanto, todavía no debe estar registrado ni colisionar con otros objetos */
+		bool _floating;
 
 		/** Tile manager reference */
 		CTileManager* _tileManager;

@@ -109,11 +109,11 @@ namespace Logic {
 
 		// TODO Colocamos temporalmente hardcodeando posiciones en código
 		//CEntity* evilator = createPlaceable(map, "Evilator", Vector3(5, 0, 12));
-		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(8, 0, 4));
+		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(8, 0, 4), false);
 		if (!evilator)
 			return false;
 
-		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(12, 0, 4));
+		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(12, 0, 4), false);
 		if (!hellQuarters)
 			return false;
 
@@ -154,6 +154,8 @@ namespace Logic {
 
 		// Añadimos el edificio
 		buildingsFromType->insert(building);
+
+		std::cout << "Building registered: " << building->getBuildingType() << std::endl;
 	}
 
 	void CBuildingManager::unregisterBuilding(CPlaceable *building){
@@ -169,16 +171,25 @@ namespace Logic {
 		if (buildingsFromType != nullptr){
 			buildingsFromType->erase(building);
 		}
+
+		std::cout << "Building unregistered: " << building->getBuildingType() << std::endl;
 	}
 
-	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition){
-		bool ret = false;
+	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition, bool floating){
+		bool ret = true;
 		
 		// Primero se intenta crear la entidad
 		CEntity* newEntity = CEntityFactory::getSingletonPtr()->createEntity(prefabName, map);
 		if (newEntity){
-			// En segundo lugar se posiciona
-			ret = movePlaceable(map, newEntity, logicPosition);
+			// En segundo lugar se desplaza
+			ret &= floatPlaceableTo(newEntity, logicPosition);
+
+			// Por último, salvo que sea flotante, lo intentamos colocar en su posición
+			if (!floating)
+				ret &= placePlaceable(newEntity);
+		}
+		else{
+			ret = false;
 		}
 
 		// Si algo falló
@@ -195,15 +206,25 @@ namespace Logic {
 		return newEntity;
 	}
 
-	bool CBuildingManager::movePlaceable(CMap *map, CEntity* movableEntity, const Vector3& logicPosition){
+	bool CBuildingManager::floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition){
 		if (!movableEntity){
-			std::cout << "Can't move null placeable on '" << logicPosition << "'" << std::endl;
+			std::cout << "Can't float null placeable to '" << logicPosition << "'" << std::endl;
 			return false;
 		}
 
-		PlaceMessage m(logicPosition);
+		MovePlaceableMessage m(MessageType::PLACEABLE_FLOAT_TO, logicPosition);
 
-		// TODO Como atajo sabemos si se ha podido mover porque el Dispatch devuelve false
+		return m.Dispatch(*movableEntity);
+	}
+
+	bool CBuildingManager::placePlaceable(CEntity* movableEntity){
+		if (!movableEntity){
+			std::cout << "Can't place null placeable" << std::endl;
+			return false;
+		}
+
+		MovePlaceableMessage m(MessageType::PLACEABLE_PLACE);
+
 		return m.Dispatch(*movableEntity);
 	}
 

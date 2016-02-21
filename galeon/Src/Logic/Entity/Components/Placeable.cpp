@@ -40,6 +40,9 @@ namespace Logic {
 		if (entityInfo->hasAttribute("prefab") && entityInfo->getBoolAttribute("prefab"))
 			return true;
 
+		// Inicialmente los edificios flotan
+		_floating = true;
+
 		// Get TileManager's reference
 		_tileManager = Logic::CTileManager::getSingletonPtr();
 
@@ -59,10 +62,9 @@ namespace Logic {
 
 		// Si el edificio fue creado por prefab, es posible que al hacer spawn no tenga el atributo de posición lógica inicial
 		if (entityInfo->hasAttribute("floor_absolute_position0")){
-			// Place placeable on its configured initial position
-			if (!place(entityInfo->getVector3Attribute("floor_absolute_position0"))){
-				return false;
-			}
+			// Hacemos flotar al edificio hasta su posición inicial
+			Vector3 initialPosition = entityInfo->getVector3Attribute("floor_absolute_position0");
+			floatTo(initialPosition);
 
 			// Get memory for all the tiles
 			_tiles = std::vector<Tile*>(_floorX * _floorZ);
@@ -72,9 +74,6 @@ namespace Logic {
 		if (_placeableType == Building){
 			// Determinamos el tipo
 			_buildingType = parseBuildingType(entityInfo->getStringAttribute("type"));
-
-			// Lo registramos en el manager
-			Logic::CBuildingManager::getSingletonPtr()->registerBuilding(this);
 		}
 		else
 			_buildingType = NonBuilding;
@@ -108,45 +107,79 @@ namespace Logic {
 		}
 	}
 
-	bool CPlaceable::place(const Vector3 newOriginPosition){
-		// Don't do anything if the origin position is not changing (and tiles have been already initialitated)
-		if ((newOriginPosition == _floorOriginPosition) && _tiles.capacity()>0)
+	bool CPlaceable::place(){
+		// Si no estábamos flotando no hacemos nada porque ya estamos (teóricamente bien) colocados
+		if (!_floating)
 			return true;
 
-		// Check if tiles allow the placement
-		bool check = checkPlacementIsPossible(newOriginPosition);
+		// Check if current tiles allow the placement
+		bool check = checkPlacementIsPossible(_floorOriginPosition);
 		if (!check)
 			return false;
 
-		// Clear placeable above in old tiles
-		_tileManager->getTile(_floorOriginPosition)->setPlaceableAbove(nullptr);
-		for (int x = 0; x < _floorX; ++x) {
-			for (int z = 0; z < _floorZ; ++z) {
-				Tile* tile = _tileManager->getTile(_floorOriginPosition + Vector3(x, 0, z));
-				tile->setPlaceableAbove(nullptr);
+		// For each of our tiles
+		for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
+			// Notify of the new entity above
+			(*it)->setPlaceableAbove(this);
+		}
+
+		// Registramos el edificio en el buildingManager
+		if (_placeableType == Building){
+			Logic::CBuildingManager::getSingletonPtr()->registerBuilding(this);
+		}
+
+		// Cambiamos la altura a justo encima de la tile
+		MoveMessage m;
+		m._point = _entity->getPosition();
+		m._point.y = HEIGHT_ON_TILE;
+
+		// Cambiamos el estado
+		_floating = false;
+
+		return true;
+	}
+
+	void CPlaceable::floatTo(const Vector3 newOriginPosition){
+		//std::cout << "Flotando a: " << newOriginPosition << std::endl;
+
+		// Si no estábamos flotando
+		if (!_floating){
+			// Cambiamos el estado
+			_floating = true;
+
+			// Desregistramos el edificio del buildingManager
+			if (_placeableType == Building){
+				Logic::CBuildingManager::getSingletonPtr()->unregisterBuilding(this);
 			}
+		}
+
+		// Don't do anything if the origin position is not changing (and tiles have been already initialitated)
+		if ((newOriginPosition == _floorOriginPosition) && _tiles.capacity()>0)
+			return;
+
+		// Clear this placeable above in current tiles because it's no longer attached to those tiles
+		for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
+			// Notify of the new entity above
+			(*it)->setPlaceableAbove(nullptr);
 		}
 
 		// Store new origin position
 		_floorOriginPosition = newOriginPosition;
 
-		// Clear tile vector
+		// Clear tile vectors
 		_tiles.clear();
 		_adyacentTiles.clear();
 
 		// Initialize vector to calculate the average position of all tiles
 		Vector3 centerPosition(0, 0, 0);
 
-		// For each tile
+		// Update tiles based on the Placeable's floor size
 		for (int x = 0; x < _floorX; ++x) {
 			for (int z = 0; z < _floorZ; ++z) {
 				Tile* tile = _tileManager->getTile(_floorOriginPosition + Vector3(x, 0, z));
 
 				// Store it internally
 				_tiles.push_back(tile);
-
-				// Notify its new entity above
-				tile->setPlaceableAbove(this);
 
 				// Add it to the average position
 				centerPosition += tile->getEntity()->getPosition();
@@ -156,16 +189,14 @@ namespace Logic {
 		// Get the average position
 		centerPosition /= _tiles.size();
 
-		// Add some height to the average found so the object is over the tile
-		centerPosition += Vector3(0, HEIGHT_OVER_TILE, 0);
+		// Añadimos cierta altura a la posición del Placeable para que parezca que está colocada encima o sobrevolando la Tile
+		centerPosition += Vector3(0, (_floating ? HEIGHT_FLOATING_OVER_TILE : HEIGHT_ON_TILE), 0);
 
-		// Move entity
+		// Move entity physically
 		_entity->setPosition(centerPosition);
 
 		// Update adyacent tiles
 		updateAdyacentTiles();
-
-		return true;
 	}
 	
 	bool CPlaceable::checkPlacementIsPossible(const Vector3 &checkPosition) const{
@@ -210,8 +241,20 @@ namespace Logic {
 		return _placeableType == Building;
 	}
 
-	bool CPlaceable::HandleMessage(const PlaceMessage& msg){
-		return place(msg._position);
+	bool CPlaceable::HandleMessage(const MovePlaceableMessage& msg){
+		if (msg._type == MessageType::PLACEABLE_FLOAT_TO){
+			floatTo(msg._position);
+			return true;
+		}
+
+		else if (msg._type == MessageType::PLACEABLE_PLACE){
+			return place();
+		}
+
+		else{
+			assert(false && "Unimplemented routine for this MessageType");
+			return false;
+		}
 	}
 
 	PlaceableType CPlaceable::parsePlaceableType(const std::string& name){
@@ -285,7 +328,6 @@ namespace Logic {
 			return Empty;
 		}
 	}
-
 
 	bool CPlaceable::HandleMessage(const WalkSoulPathMessage& msg){
 		if(msg._type != MessageType::REQUEST_WALK_SOUL_PATH)

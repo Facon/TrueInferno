@@ -264,11 +264,6 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
-	bool CEntity::HandleMessage(const PlaceMessage& msg)
-	{
-		SEND_MESSAGE_TO_ALL_COMPONENTS;
-	}
-
 	bool CEntity::HandleMessage(const WorkerMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
@@ -280,6 +275,11 @@ namespace Logic
 	}
 
 	bool CEntity::HandleMessage(const HellQuartersActionMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
+	bool CEntity::HandleMessage(const MovePlaceableMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}

@@ -179,10 +179,10 @@ namespace Logic
 		bool HandleMessage(const PhysicMessage& msg);
 		bool HandleMessage(const TouchMessage& msg);
 		bool HandleMessage(const DamageMessage& msg);
-		bool HandleMessage(const PlaceMessage& msg);
 		bool HandleMessage(const WorkerMessage& msg);
 		bool HandleMessage(const WalkSoulPathMessage& msg);
 		bool HandleMessage(const HellQuartersActionMessage& msg);
+		bool HandleMessage(const MovePlaceableMessage& msg);
 
 		/**
 		Devuelve el identificador �nico de la entidad.

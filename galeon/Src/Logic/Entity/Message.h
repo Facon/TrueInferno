@@ -54,7 +54,9 @@ namespace Logic
 			RETURN_WALK_SOUL_PATH,
 			PERFORM_WALK_SOUL_PATH,
 			SEND_SOUL_WORK, 
-			SEND_SOUL_BURN
+			SEND_SOUL_BURN,
+			PLACEABLE_FLOAT_TO,
+			PLACEABLE_PLACE,
 		};
 	}
 
@@ -76,6 +78,9 @@ namespace Logic
 	class Message
 	{
 	public:
+		Message() : _type(MessageType::UNASSIGNED) {}
+		Message(MessageType type) : _type(type) {}
+
 		MessageType _type;
 		virtual bool Dispatch(MessageHandler& handler) const = 0;
 	};
@@ -229,11 +234,13 @@ namespace Logic
 		}
 	};
 	
-	class PlaceMessage : public Message
+	// PLACEABLE_FLOAT_TO, PLACEABLE_PLACE
+	class MovePlaceableMessage : public Message
 	{
 	public:
-		PlaceMessage(Vector3 position) : _position(position) {}
-		
+		MovePlaceableMessage(MessageType type, Vector3 position) : Message(type), _position(position) {}
+		MovePlaceableMessage(MessageType type) : Message(type) {}
+
 		Vector3 _position;
 
 		virtual bool Dispatch(MessageHandler& handler) const

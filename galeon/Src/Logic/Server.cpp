@@ -213,7 +213,7 @@ namespace Logic {
 				// Construímos
 				for (auto it = path->cbegin(); it != path->cend(); ++it){
 					Tile* tile = (*it);
-					Logic::CEntity* entity = CBuildingManager::getSingletonPtr()->createPlaceable(_map, "SoulPath", tile->getLogicPosition());
+					Logic::CEntity* entity = CBuildingManager::getSingletonPtr()->createPlaceable(_map, "SoulPath", tile->getLogicPosition(), false);
 					if (!entity){
 						std::cout << "Can't create soulpath in " << tile->getLogicPosition() << std::endl;
 					}

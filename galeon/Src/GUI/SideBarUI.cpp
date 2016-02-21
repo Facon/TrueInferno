@@ -131,7 +131,7 @@ namespace GUI
 			Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000, 1);
 			if (entity){
 				//printf(entity->getName().c_str());
-				Logic::CBuildingManager::getSingletonPtr()->movePlaceable(Logic::CServer::getSingletonPtr()->getMap(), _placeableEntity, entity->getPosition());
+				Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, entity->getPosition());
 			}
 
 
@@ -146,14 +146,14 @@ namespace GUI
 		//Map::CMapParser::TEntityList mapEntityList =
 			//Map::CMapParser::getSingletonPtr()->getEntityList();
 		//Logic::CEntityFactory* entityFactory = Logic::CEntityFactory::getSingletonPtr();
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Evilator", Vector3(0, 2, 0));
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Evilator", Vector3(0, 2, 0), true);
 
 		return true;
 	} //createBuildingReleased
 
 	bool SideBarUI::createRoadReleased(const CEGUI::EventArgs& e)
 	{
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 2, 0));
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 2, 0), true);
 		return true;
 
 	} //createBuildingReleased
