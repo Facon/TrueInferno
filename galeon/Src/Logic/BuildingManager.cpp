@@ -242,6 +242,15 @@ namespace Logic {
 		return *it;
 	}
 
+	CPlaceable* CBuildingManager::getRandomBuilding(){
+		// Obtenemos un tipo aleatorio
+		int randomIndex = rand() % _buildings.size();
+		auto it = _buildings.cbegin();
+		std::advance(it, randomIndex);
+
+		return findBuilding(it->first);
+	}
+
 	void CBuildingManager::printBuildingList() const{
 		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
 			std::cout << "BuildingType=" << it->first << std::endl;

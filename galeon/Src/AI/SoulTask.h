@@ -2,8 +2,8 @@
 #define SOUL_TASK_H_
 
 namespace AI{
-	class SoulTask {
-
+	class CSoulTask {
+		virtual void executeTask();
 	};
 }
 

@@ -4,22 +4,27 @@
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 #include "BaseSubsystems/Math.h"
+#include "Logic/Entity/Message.h"
 #include <vector>
 
 namespace Logic {
+	enum HellQuartersAction {
+		BurnSoul,
+		SendSoulToWork
+	};
+
+	enum HellQuartersActionState{
+		Idle,
+		Requested,
+		WaitingTask,
+		Fail,
+		Success,
+		Clean
+	};
+
 	class CHellQuarters : public IComponent{
 		RTTI_DECL;
 		DEC_FACTORY(CHellQuarters);
-
-		enum SendingSoulToWorkState{
-			Idle,
-			Requested,
-			WaitingForPath,
-			PathReceived,
-			Success,
-			Fail,
-			Clean
-		};
 
 	public:
 		/**
@@ -38,18 +43,12 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
-		/** Gestión de mensajes para enviar y recibir información de rutas de almas caminantes */
-		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
-
 		/** Gestión de mensajes para solicitar acciones en el HellQuarters */
 		virtual bool HandleMessage(const HellQuartersActionMessage& msg);
 
-		/** Interfaz pública para que se solicite el envío de un alma a trabajar */
-		void requestSendSoulToWork();
-
-		/** Interfaz pública para que se solicite el envío de un alma a arder */
-		void requestSendSoulToBurn();
-
+		/** Gestión de mensajes para recoger respuestas del SoulSender */
+		virtual bool HandleMessage(const SoulSenderResponseMessage& msg);
+			
 	private:
 		static const float SOUL_ON_TILE_HEIGHT;
 
@@ -65,25 +64,15 @@ namespace Logic {
 		// Número de almas disponibles
 		int _numAvailableSouls;
 
-		// Número de almas que se han solicitado enviar a trabajar
-		int _numSoulsToWork;
-
-		// Número de almas que se han solicitado enviar a arder
-		int _numSoulsToBurn;
-
-		// Estado del flujo de envío de almas a trabajar
-		SendingSoulToWorkState _sendingSoulToWorkState;
-
-		std::vector<Vector3>* _pathReceived;
-
 		/** Gestiona la lógica del spawn de almas */
 		void tickSpawnSouls(unsigned int msecs);
 
-		/** Gestiona la lógica del envío de almas a trabajar */
-		void tickSendSoulToWork(unsigned int msecs);
+		/** Gestiona la lógica de acciones solicitadas */
+		void tickActions(unsigned int msecs);
 
-		/** Crea y envía un alma a trabajar */
-		bool CHellQuarters::createAndSendSoulToWork();
+		HellQuartersActionState _hellQuartersActionState;
+
+		HellQuartersActionMessage* _actionRequested;
 
 	}; // class CHellQuarters
 

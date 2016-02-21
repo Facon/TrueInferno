@@ -117,6 +117,9 @@ namespace Logic
 		// Localiza un edificio por el tipo dado
 		CPlaceable* findBuilding(BuildingType buildingType);
 
+		// Devuelve un edificio aleatorio
+		CPlaceable* getRandomBuilding();
+
 	protected:
 
 		/**

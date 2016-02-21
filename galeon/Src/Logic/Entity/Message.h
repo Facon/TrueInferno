@@ -14,6 +14,7 @@ Contiene el tipo de datos de un mensaje.
 
 #include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
+#include "AI\SoulTask.h"
 
 // Predeclaraciones
 namespace Logic {
@@ -50,13 +51,16 @@ namespace Logic
 			ROUTE_TO,
 			FINISHED_ROUTE,
 			FINISHED_MOVE,
+
 			REQUEST_WALK_SOUL_PATH,
 			RETURN_WALK_SOUL_PATH,
 			PERFORM_WALK_SOUL_PATH,
-			SEND_SOUL_WORK, 
-			SEND_SOUL_BURN,
+
 			PLACEABLE_FLOAT_TO,
 			PLACEABLE_PLACE,
+
+			SOUL_SENDER_REQUEST,
+			SOUL_SENDER_RESPONSE
 		};
 	}
 
@@ -238,8 +242,8 @@ namespace Logic
 	class MovePlaceableMessage : public Message
 	{
 	public:
-		MovePlaceableMessage(MessageType type, Vector3 position) : Message(type), _position(position) {}
-		MovePlaceableMessage(MessageType type) : Message(type) {}
+		MovePlaceableMessage(Vector3 position) : Message(MessageType::PLACEABLE_FLOAT_TO), _position(position) {}
+		MovePlaceableMessage() : Message(MessageType::PLACEABLE_PLACE) {}
 
 		Vector3 _position;
 
@@ -248,17 +252,6 @@ namespace Logic
 			return handler.HandleMessage(*this);
 		}
 	};
-
-	/*class SoulTaskMessage : public Message
-	{
-	public:
-		AI::SoulTask task;
-
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			return handler.HandleMessage(*this);
-		}
-	};*/
 
 	/** Mensaje con la cantidad de trabajadores a añadir (numWorkers > 0) o quitar (numWorkers < 0) */
 	class WorkerMessage : public Message
@@ -290,13 +283,41 @@ namespace Logic
 		}
 	};
 
-	// SEND_SOUL_WORK, SEND_SOUL_BURN
 	class HellQuartersActionMessage : public Message
 	{
 	public:
-		HellQuartersActionMessage(int numSouls) : _numSouls(numSouls) {}
-
+		HellQuartersActionMessage(int numSouls, HellQuartersAction action) : _numSouls(numSouls), _action(action) {}
+		HellQuartersAction _action;
 		int _numSouls;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// SOUL_SENDER_REQUEST
+	class SoulSenderRequestMessage : public Message
+	{
+	public:
+		SoulSenderRequestMessage(const AI::CSoulTask& task, int numSouls) : Message(MessageType::SOUL_SENDER_REQUEST), _task(task), _numSouls(numSouls) {}
+
+		AI::CSoulTask _task;
+		int _numSouls;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// SOUL_SENDER_RESPONSE
+	class SoulSenderResponseMessage : public Message
+	{
+	public:
+		SoulSenderResponseMessage(bool status) : Message(MessageType::SOUL_SENDER_RESPONSE), _status(status) {}
+
+		bool _status;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

@@ -183,6 +183,8 @@ namespace Logic
 		bool HandleMessage(const WalkSoulPathMessage& msg);
 		bool HandleMessage(const HellQuartersActionMessage& msg);
 		bool HandleMessage(const MovePlaceableMessage& msg);
+		bool HandleMessage(const SoulSenderRequestMessage& msg);
+		bool HandleMessage(const SoulSenderResponseMessage& msg);
 
 		/**
 		Devuelve el identificador �nico de la entidad.

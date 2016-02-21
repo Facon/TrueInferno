@@ -142,6 +142,7 @@
     <ClCompile Include="..\..\Src\Logic\BuildingManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulSender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -260,6 +261,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\BuildingManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulSender.h">
+      <Filter>Entity\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
