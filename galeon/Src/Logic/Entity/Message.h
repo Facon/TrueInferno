@@ -171,11 +171,23 @@ namespace Logic
 		}
 	};
 	
+	enum ActionType
+	{
+		UNASSIGNED = 0xFFFFFFFF,
+		MOVE_FORWARD = 0,
+		MOVE_BACKWARD,
+		STRAFE_LEFT,
+		STRAFE_RIGHT,
+		TURN,
+		STOP_MOVE,
+		STOP_STRAFE
+	};
+
 	// CONTROL
 	class ControlMessage : public Message
 	{
 	public:
-        std::string _action;
+        ActionType _action;
         float _degreesMoved;
 
 		virtual bool Dispatch(MessageHandler& handler) const

@@ -31,8 +31,7 @@ namespace Logic
 	CEntity::CEntity(TEntityID entityID) : _entityID(entityID),
 				_map(0), _type(""), _name(""),
 				_position(Vector3(0, 0, 0)), _rotation(Vector3(0, 0, 0)),
-				_dimensions(Vector3(1, 1, 1)),
-				_isPlayer(false), _activated(false)
+				_dimensions(Vector3(1, 1, 1)), _activated(false)
 	{
 	} // CEntity
 	
@@ -66,8 +65,8 @@ namespace Logic
 		if (entityInfo->hasAttribute("dimensions"))
 			_dimensions = entityInfo->getVector3Attribute("dimensions");
 
-		if (entityInfo->getName() == "Camera")
-			_isPlayer = true;
+		//if (entityInfo->getName() == "Camera")
+		//	_isPlayer = true;
 
 		// Inicializamos los componentes
 		TComponentList::const_iterator it;
@@ -85,15 +84,6 @@ namespace Logic
 
 	bool CEntity::activate() 
 	{
-		// Si somos jugador, se lo decimos al servidor
-		// y nos registramos para que nos informen
-		// de los movimientos que debemos realizar
-		if (isPlayer())
-		{
-			CServer::getSingletonPtr()->setPlayer(this);
-			GUI::CServer::getSingletonPtr()->getPlayerController()->setControlledAvatar(this);
-		}
-
 		// Activamos los componentes
 		TComponentList::const_iterator it;
 
@@ -112,15 +102,6 @@ namespace Logic
 
 	void CEntity::deactivate() 
 	{
-		// Si �ramos el jugador, le decimos al servidor que ya no hay.
-		// y evitamos que se nos siga informando de los movimientos que 
-		// debemos realizar
-		if (isPlayer())
-		{
-			GUI::CServer::getSingletonPtr()->getPlayerController()->setControlledAvatar(0);
-			CServer::getSingletonPtr()->setPlayer(0);
-		}
-
 		TComponentList::const_iterator it;
 
 		// Desactivamos los componentes
