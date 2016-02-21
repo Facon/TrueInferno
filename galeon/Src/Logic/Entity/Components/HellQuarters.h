@@ -51,6 +51,8 @@ namespace Logic {
 		void requestSendSoulToBurn();
 
 	private:
+		static const float SOUL_ON_TILE_HEIGHT;
+
 		// Tiempo (ms) entre generación de almas
 		unsigned int _timeBetweenSpawns;
 

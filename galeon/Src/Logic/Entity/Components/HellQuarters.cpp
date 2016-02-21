@@ -15,6 +15,8 @@ namespace Logic {
 	RTTI_ROOT_IMPL(CHellQuarters);
 	IMP_FACTORY(CHellQuarters);
 
+	const float CHellQuarters::SOUL_ON_TILE_HEIGHT = 2.0;
+
 	CHellQuarters::CHellQuarters() : IComponent() {
 	}
 
@@ -203,6 +205,7 @@ namespace Logic {
 		PositionMessage m;
 		m._type = MessageType::SET_POSITION;
 		m._position = (*_pathReceived)[0];
+		m._position.y += SOUL_ON_TILE_HEIGHT;
 		if (!m.Dispatch(*newSoul)){
 			std::cout << "Can´t set soul on initial position" << std::endl;
 			return false;
