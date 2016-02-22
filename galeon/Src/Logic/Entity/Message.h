@@ -62,6 +62,17 @@ namespace Logic
 			SOUL_SENDER_REQUEST,
 			SOUL_SENDER_RESPONSE
 		};
+
+		enum HellQuartersAction {
+			SendSoulToBurn,
+			SendSoulToWork
+		};
+
+		enum SoulAction {
+			BurnSoul,
+			StartWorking
+		};
+
 	}
 
     typedef TMessage::MessageType MessageType;
@@ -286,8 +297,21 @@ namespace Logic
 	class HellQuartersActionMessage : public Message
 	{
 	public:
-		HellQuartersActionMessage(int numSouls, HellQuartersAction action) : _numSouls(numSouls), _action(action) {}
-		HellQuartersAction _action;
+		HellQuartersActionMessage(int numSouls, TMessage::HellQuartersAction action) : _numSouls(numSouls), _action(action) {}
+		TMessage::HellQuartersAction _action;
+		int _numSouls;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	class SoulActionMessage : public Message
+	{
+	public:
+		SoulActionMessage(int numSouls, TMessage::SoulAction action) : _numSouls(numSouls), _action(action) {}
+		TMessage::SoulAction _action;
 		int _numSouls;
 
 		virtual bool Dispatch(MessageHandler& handler) const

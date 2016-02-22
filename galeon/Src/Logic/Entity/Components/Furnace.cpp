@@ -65,9 +65,9 @@ namespace Logic {
 
 		switch (msg._action){
 
-		case TMessage::HellQuartersAction::SendSoulToBurn:
+		case HellQuartersAction::BurnSoul:
 
-		case TMessage::HellQuartersAction::SendSoulToWork:{
+		case HellQuartersAction::SendSoulToWork:{
 			_actionRequested = new HellQuartersActionMessage(msg);
 			_hellQuartersActionState = HellQuartersActionState::Requested;
 
@@ -103,7 +103,7 @@ namespace Logic {
 			break;
 		}
 
-		case HellQuartersActionState::ActionRequested:{
+		case HellQuartersActionState::Requested:{
 			// Reservamos las almas
 			_numAvailableSouls -= _actionRequested->_numSouls;
 
@@ -116,18 +116,15 @@ namespace Logic {
 
 			// Creamos la SoulTask correspondiente
 			AI::CSoulTask task;
-			CPlaceable* target = nullptr;
-			
 			switch (_actionRequested->_action){
-			case TMessage::HellQuartersAction::SendSoulToBurn:{
-				target = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Furnace);
-				task = AI::CGoToNearestTask(BuildingType::Furnace, SoulActionMessage(1, TMessage::SoulAction::BurnSoul));
+
+			case HellQuartersAction::BurnSoul:{
+				task = AI::CGoToNearestTask(BuildingType::Furnace, FurnaceActionMessage(FurnaceAction::BurnSoul));
 				break;
 			}
 
-			case TMessage::HellQuartersAction::SendSoulToWork:{
-				target = CBuildingManager::getSingletonPtr()->getRandomBuilding();
-				task = AI::CGoToTask(, SoulActionMessage(1, TMessage::SoulAction::StartWorking));
+			case HellQuartersAction::SendSoulToWork:{
+				task = AI::CGoToTask(CBuildingManager::getSingletonPtr()->getRandomBuilding());
 				break;
 			}
 

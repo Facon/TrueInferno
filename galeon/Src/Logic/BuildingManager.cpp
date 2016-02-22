@@ -212,7 +212,7 @@ namespace Logic {
 			return false;
 		}
 
-		MovePlaceableMessage m(MessageType::PLACEABLE_FLOAT_TO, logicPosition);
+		MovePlaceableMessage m(logicPosition);
 
 		return m.Dispatch(*movableEntity);
 	}
@@ -223,7 +223,7 @@ namespace Logic {
 			return false;
 		}
 
-		MovePlaceableMessage m(MessageType::PLACEABLE_PLACE);
+		MovePlaceableMessage m;
 
 		return m.Dispatch(*movableEntity);
 	}

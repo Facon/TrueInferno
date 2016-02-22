@@ -1,5 +1,5 @@
-#ifndef HELL_QUARTERS_H_
-#define HELL_QUARTERS_H_
+#ifndef FURNACE_H_
+#define FURNACE_H_
 
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
@@ -9,26 +9,24 @@
 
 namespace Logic {
 
-	enum HellQuartersActionState{
+	enum FurnaceActionState {
 		Idle,
-		ActionRequested,
-		WaitingPath,
-		PathObtained,
-		WaitingTaskStart,
+		Requested,
+		WaitingTask,
 		Fail,
 		Success,
 		Clean
 	};
 
-	class CHellQuarters : public IComponent{
+	class CFurnace : public IComponent{
 		RTTI_DECL;
-		DEC_FACTORY(CHellQuarters);
+		DEC_FACTORY(CFurnace);
 
 	public:
 		/**
 		Constructor por defecto.
 		*/
-		CHellQuarters();
+		CFurnace();
 
 		/**
 		Inicialización del componente usando la descripción de la entidad que hay en
@@ -41,8 +39,8 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
-		/** Gestión de mensajes para solicitar acciones en el HellQuarters */
-		virtual bool HandleMessage(const HellQuartersActionMessage& msg);
+		/** Gestión de mensajes para solicitar acciones en el Furnace */
+		virtual bool HandleMessage(const FurnaceActionMessage& msg);
 
 		/** Gestión de mensajes para recoger respuestas del SoulSender */
 		virtual bool HandleMessage(const SoulSenderResponseMessage& msg);
@@ -68,14 +66,14 @@ namespace Logic {
 		/** Gestiona la lógica de acciones solicitadas */
 		void tickActions(unsigned int msecs);
 
-		HellQuartersActionState _hellQuartersActionState;
+		FurnaceActionState _furnaceActionState;
 
-		HellQuartersActionMessage* _actionRequested;
+		FurnaceActionMessage* _actionRequested;
 
-	}; // class CHellQuarters
+	}; // class CFurnace
 
-	REG_FACTORY(CHellQuarters);
+	REG_FACTORY(CFurnace);
 
 } // namespace Logic
 
-#endif // HELL_QUARTERS_H_
+#endif // FURNACE_H_

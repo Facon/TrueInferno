@@ -279,6 +279,11 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
+	bool CEntity::HandleMessage(const SoulActionMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
 	bool CEntity::HandleMessage(const MovePlaceableMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;

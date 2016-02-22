@@ -10,12 +10,13 @@ namespace Logic{
 namespace AI{
 	class CGoToTask : public CSoulTask {
 	public:
-		CGoToTask(Logic::CPlaceable *target) : _target(target) {}
+		CGoToTask(Logic::CPlaceable* target, Logic::SoulActionMessage msg) : _target(target), _msg(msg) {}
 
 		virtual void executeTask();
 
 	private:
 		Logic::CPlaceable* _target;
+		Logic::SoulActionMessage _msg;
 	};
 }
 

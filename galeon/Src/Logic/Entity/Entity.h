@@ -182,6 +182,7 @@ namespace Logic
 		bool HandleMessage(const WorkerMessage& msg);
 		bool HandleMessage(const WalkSoulPathMessage& msg);
 		bool HandleMessage(const HellQuartersActionMessage& msg);
+		bool HandleMessage(const SoulActionMessage& msg);
 		bool HandleMessage(const MovePlaceableMessage& msg);
 		bool HandleMessage(const SoulSenderRequestMessage& msg);
 		bool HandleMessage(const SoulSenderResponseMessage& msg);

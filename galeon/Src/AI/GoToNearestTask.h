@@ -10,12 +10,13 @@ namespace Logic{
 namespace AI{
 	class CGoToNearestTask : public CSoulTask {
 	public:
-		CGoToNearestTask(Logic::BuildingType target) : _target(target) {}
+		CGoToNearestTask(Logic::BuildingType target, Logic::SoulActionMessage msg) : _target(target), _msg(msg) {}
 
 		virtual void executeTask();
 
 	private:
 		Logic::BuildingType _target;
+		Logic::SoulActionMessage _msg;
 	};
 }
 

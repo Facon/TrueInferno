@@ -27,6 +27,7 @@
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Physics/Server.h"
 #include "Logic\Entity\Message.h"
+#include "Logic\Entity\Components\HellQuarters.h"
 
 namespace GUI
 {
@@ -173,8 +174,8 @@ namespace GUI
 
 	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
-		Logic::HellQuartersActionMessage m(1);
-		m._type = Logic::MessageType::SEND_SOUL_WORK;
+		// Envíamos un alma a arder
+		Logic::HellQuartersActionMessage m(1, Logic::TMessage::HellQuartersAction::SendSoulToBurn);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 		
 		m.Dispatch(*hellQuarters->getEntity());
@@ -185,7 +186,12 @@ namespace GUI
 
 	bool SideBarUI::moveSoulReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Move Soul\n");
+		// Envíamos un alma a trabajar
+		Logic::HellQuartersActionMessage m(1, Logic::TMessage::HellQuartersAction::SendSoulToWork);
+		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
+
+		m.Dispatch(*hellQuarters->getEntity());
+
 		return true;
 	}
 

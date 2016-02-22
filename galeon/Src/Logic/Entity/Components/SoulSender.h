@@ -58,8 +58,8 @@ namespace Logic {
 		// Número de almas disponibles
 		int _numAvailableSouls;
 
-		// Número de almas que se han solicitado enviar
-		int _numSoulsToSend;
+		// Petición a ejecutar
+		SoulSenderRequestMessage* _request;
 
 		// Estado del flujo de envío de almas a trabajar
 		SendingSoulState _sendingSoulState;

@@ -20,6 +20,7 @@ namespace Logic
 	class WorkerMessage;
 	class WalkSoulPathMessage;
 	class HellQuartersActionMessage;
+	class SoulActionMessage;
 	class MovePlaceableMessage;
 	class SoulSenderRequestMessage;
 	class SoulSenderResponseMessage;
@@ -72,6 +73,11 @@ namespace Logic
 
 		virtual bool HandleMessage(const HellQuartersActionMessage& msg)
 		{  return false; }
+
+		virtual bool HandleMessage(const SoulActionMessage& msg)
+		{
+			return false;
+		}
 
 		virtual bool HandleMessage(const MovePlaceableMessage& msg)
 		{  return false; }

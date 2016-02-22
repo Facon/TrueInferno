@@ -21,7 +21,7 @@ namespace Logic {
 	}
 
 	bool CSoulSender::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
-		_numSoulsToSend = 0;
+		_request = nullptr;
 
 		_sendingSoulState = SendingSoulState::Idle;
 		_pathReceived = nullptr;
@@ -33,10 +33,11 @@ namespace Logic {
 		// Ignoramos peticiones si no estamos en estado inactivo
 		if (_sendingSoulState != SendingSoulState::Idle){
 			assert(false && "SoulSender is busy");
+			return false;
 		}
 
 		_sendingSoulState = SendingSoulState::Requested;
-		_numSoulsToSend += msg._numSouls;
+		_request = new SoulSenderRequestMessage(msg);
 
 		return true;
 	}
@@ -64,7 +65,7 @@ namespace Logic {
 
 		case Requested:{
 			// Reservamos las almas
-			_numAvailableSouls -= _numSoulsToSend;
+			_numAvailableSouls -= _request->_numSouls;
 
 			if (_numAvailableSouls < 0){
 				std::cout << "There are no available souls" << std::endl;
@@ -72,12 +73,10 @@ namespace Logic {
 				return;
 			}
 
-			// TODO De momento, enviamos siempre al Evilator
-			// Localizamos el Evilator
-			CPlaceable *evilator = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Evilator);
+			// Enviamos un mensaje para obtener ruta hasta el objetivo
+			//_request;
 
-			// Enviamos un mensaje para obtener la ruta hasta el Evilator
-			WalkSoulPathMessage message(evilator);
+			WalkSoulPathMessage message;
 			message._type = MessageType::REQUEST_WALK_SOUL_PATH;
 			
 			// Si nadie atendió al mensaje
@@ -139,12 +138,15 @@ namespace Logic {
 		}
 
 		case Clean:{
-			_numSoulsToSend = 0;
-
 			// Liberamos memoria
 			if (_pathReceived){
 				delete(_pathReceived);
 				_pathReceived = nullptr;
+			}
+
+			if (_request){
+				delete(_request);
+				_request = nullptr;
 			}
 
 			_sendingSoulState = SendingSoulState::Idle;
