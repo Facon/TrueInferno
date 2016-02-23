@@ -8,10 +8,9 @@
 #include "Logic/BuildingManager.h"
 #include "AI/Server.h"
 #include "AI/SoulTask.h"
-#include "AI/GoToNearestTask.h"
-#include "AI/GoToTask.h"
 #include <iostream>
 #include <cassert>
+#include "Logic/Entity/Components/Placeable.h"
 
 namespace Logic {
 	RTTI_ROOT_IMPL(CHellQuarters);
@@ -59,7 +58,7 @@ namespace Logic {
 
 	bool CHellQuarters::HandleMessage(const HellQuartersActionMessage& msg){
 		if (_hellQuartersActionState != HellQuartersActionState::Idle){
-			std::cout << "HellQuarters is busy" << std::endl;
+			assert(false && "HellQuarters is not expecting this message");
 			return false;
 		}
 
@@ -69,7 +68,7 @@ namespace Logic {
 
 		case TMessage::HellQuartersAction::SendSoulToWork:{
 			_actionRequested = new HellQuartersActionMessage(msg);
-			_hellQuartersActionState = HellQuartersActionState::Requested;
+			_hellQuartersActionState = HellQuartersActionState::ActionRequested;
 
 			return true;
 			break;
@@ -83,8 +82,8 @@ namespace Logic {
 	}
 
 	bool CHellQuarters::HandleMessage(const SoulSenderResponseMessage& msg){
-		if (_hellQuartersActionState != HellQuartersActionState::WaitingTask){
-			assert(false && "HellQuarters is not expecting message");
+		if (_hellQuartersActionState != HellQuartersActionState::WaitingTaskStart){
+			assert(false && "HellQuarters is not expecting this message");
 			return false;
 		}
 
@@ -96,8 +95,28 @@ namespace Logic {
 		}
 	}
 
+	bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg){
+		// Nos aseguramos que estamos recibiendo una respuesta y que estábamos en estado de esperarla
+		if (msg._type != MessageType::RETURN_WALK_SOUL_PATH || _hellQuartersActionState != HellQuartersActionState::WaitingPath){
+			assert(false && "HellQuarters is not expecting this message");
+			return false;
+		}
+
+		// Guardamos la ruta devuelta. Puede ser NULL si no se encontró ruta al destino solicitado
+		_pathReceived = msg._path;
+
+		if (msg._path)
+			// Cambiamos al estado de path recibido
+			_hellQuartersActionState = HellQuartersActionState::PathReceived;
+		else
+			_hellQuartersActionState = HellQuartersActionState::Fail;
+
+		return true;
+	}
+
 	void CHellQuarters::tickActions(unsigned int msecs){
 		switch (_hellQuartersActionState){
+
 		// En caso de estar parados, no se hace nada
 		case HellQuartersActionState::Idle:{
 			break;
@@ -114,41 +133,61 @@ namespace Logic {
 				return;
 			}
 
-			// Creamos la SoulTask correspondiente
-			AI::CSoulTask task;
 			CPlaceable* target = nullptr;
-			
+
 			switch (_actionRequested->_action){
 			case TMessage::HellQuartersAction::SendSoulToBurn:{
 				target = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Furnace);
-				task = AI::CGoToNearestTask(BuildingType::Furnace, SoulActionMessage(1, TMessage::SoulAction::BurnSoul));
+				_task = AI::CSendMessageTask(target->getEntity(), SoulActionMessage(_actionRequested->_numSouls, TMessage::SoulAction::BurnSoul));
 				break;
 			}
 
 			case TMessage::HellQuartersAction::SendSoulToWork:{
 				target = CBuildingManager::getSingletonPtr()->getRandomBuilding();
-				task = AI::CGoToTask(, SoulActionMessage(1, TMessage::SoulAction::StartWorking));
+				_task = AI::CSendMessageTask(target->getEntity(), SoulActionMessage(_actionRequested->_numSouls, TMessage::SoulAction::WorkSoul));
 				break;
 			}
 
 			default:
-				break;
+				assert(false && "Unimplemented HellQuarters action");
+				_hellQuartersActionState = HellQuartersActionState::Fail;
+				return;
 			}
 
+			// Enviamos un mensaje para obtener ruta hasta el objetivo
+			WalkSoulPathMessage message(target);
+
+			// Si nadie atendió al mensaje
+			if (!message.Dispatch(*this->getEntity())){
+				std::cout << "No one answered the REQUEST_WALK_SOUL_PATH message" << std::endl;
+				_hellQuartersActionState = HellQuartersActionState::Fail;
+				return;
+			}
+
+			// Nos ponemos a esperar a la ruta
+			_hellQuartersActionState = HellQuartersActionState::WaitingPath;
+			break;
+		}
+
+		case HellQuartersActionState::WaitingPath:{
+			break;
+		}
+
+		case HellQuartersActionState::PathReceived:{
 			// Enviamos la solicitud de ejecución de tarea
-			SoulSenderRequestMessage m(task, _actionRequested->_numSouls);
+			SoulSenderRequestMessage m(_pathReceived, _task);
 
 			if (m.Dispatch(*_entity)){
-				_hellQuartersActionState = HellQuartersActionState::WaitingTask;
+				_hellQuartersActionState = HellQuartersActionState::WaitingTaskStart;
 			}
 			else{
 				_hellQuartersActionState = HellQuartersActionState::Fail;
 			}
-
+			
 			break;
 		}
 
-		case HellQuartersActionState::WaitingTask:{
+		case HellQuartersActionState::WaitingTaskStart:{
 			break;
 		}
 

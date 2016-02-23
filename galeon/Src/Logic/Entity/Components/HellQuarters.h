@@ -13,7 +13,7 @@ namespace Logic {
 		Idle,
 		ActionRequested,
 		WaitingPath,
-		PathObtained,
+		PathReceived,
 		WaitingTaskStart,
 		Fail,
 		Success,
@@ -46,6 +46,8 @@ namespace Logic {
 
 		/** Gestión de mensajes para recoger respuestas del SoulSender */
 		virtual bool HandleMessage(const SoulSenderResponseMessage& msg);
+
+		bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg);
 			
 	private:
 		static const float SOUL_ON_TILE_HEIGHT;
@@ -71,6 +73,10 @@ namespace Logic {
 		HellQuartersActionState _hellQuartersActionState;
 
 		HellQuartersActionMessage* _actionRequested;
+
+		std::vector<Vector3>* _pathReceived;
+
+		AI::CSoulTask _task;
 
 	}; // class CHellQuarters
 

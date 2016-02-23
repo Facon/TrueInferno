@@ -89,12 +89,6 @@
     <ClCompile Include="..\..\Src\AI\AStarFunctionsWalkingSoul.cpp">
       <Filter>Movement\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\GoToNearestTask.cpp">
-      <Filter>Souls\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AI\GoToTask.cpp">
-      <Filter>Souls\Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -131,12 +125,6 @@
       <Filter>Movement\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\SoulTask.h">
-      <Filter>Souls\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AI\GoToNearestTask.h">
-      <Filter>Souls\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AI\GoToTask.h">
       <Filter>Souls\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

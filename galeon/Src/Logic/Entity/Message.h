@@ -70,7 +70,7 @@ namespace Logic
 
 		enum SoulAction {
 			BurnSoul,
-			StartWorking
+			WorkSoul
 		};
 
 	}
