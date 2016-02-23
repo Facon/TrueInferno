@@ -5,12 +5,12 @@
 /**
 @file Server.cpp
 
-Contiene la implementación de la clase principal que engloba los subsistemas
-usados. La mayoría de ellos son parte de Ogre.
+Contiene la implementaciÃ³n de la clase principal que engloba los subsistemas
+usados. La mayorÃ­a de ellos son parte de Ogre.
 
 @see BaseSubsystems::CServer
 
-@author David Llansó
+@author David LlansÃ³
 @date Julio, 2010
 */
 
@@ -45,12 +45,12 @@ usados. La mayoría de ellos son parte de Ogre.
 #include <falagard/CEGUIFalWidgetLookManager.h>
 #include <CEGUIScheme.h>*/
 
-// Para cerrar la aplicación si se cierra la ventana
+// Para cerrar la aplicaciÃ³n si se cierra la ventana
 #include "Application/BaseApplication.h"
 
 /**
 Si se define la siguiente directiva, en modo ventana se reenderiza aunque
-la ventana esté en background (siempre que esté visible)
+la ventana estÃ© en background (siempre que estÃ© visible)
 */
 #define RENDER_IN_BACKGROUND
 
@@ -60,7 +60,7 @@ namespace BaseSubsystems
 	/**
 	Clase auxiliar que hereda de Ogre y que sirve para modificar el 
 	comportamiento habitual de cierre de ventana. No queremos cerrarla
-	desde aquí, queremos que sea la aplicación.
+	desde aquÃ­, queremos que sea la aplicaciÃ³n.
 	*/
 	class WindowEventListener : public Ogre::WindowEventListener
 	{
@@ -72,16 +72,16 @@ namespace BaseSubsystems
 		}
 		
 		/**
-		En vez de dejar que el método de salida habitual funcione 
-		lo reescribimos para que se le comunique a la aplicación.
+		En vez de dejar que el mÃ©todo de salida habitual funcione 
+		lo reescribimos para que se le comunique a la aplicaciÃ³n.
 		Al devolver false la ventana no se cierra, lo haremos desde
-		la aplicación.
+		la aplicaciÃ³n.
 		<p>
-		Este método es llamado al solicitar el cierre de la ventana
+		Este mÃ©todo es llamado al solicitar el cierre de la ventana
 		tanto con Alt-F4 como al pulsar la 'x' de la ventana.
 
 		@param renderWindow Ventana sobre la que se produce el evento.
-		@return Siempre falso, así no se realiza ninguna acción.
+		@return Siempre falso, asÃ­ no se realiza ninguna acciÃ³n.
 		*/
 		bool windowClosing(Ogre::RenderWindow* renderWindow)
 		{
@@ -100,7 +100,7 @@ namespace BaseSubsystems
 		_inputSystem(0),
 		_windowEventListener(0)
 	{
-		assert(!_instance && "Segunda inicialización de BaseSubsystems::CServer no permitida!");
+		assert(!_instance && "Segunda inicializaciÃ³n de BaseSubsystems::CServer no permitida!");
 
 		_instance = this;
 
@@ -120,7 +120,7 @@ namespace BaseSubsystems
 
 	bool CServer::Init() 
 	{
-		assert(!_instance && "Segunda inicialización de BaseSubsystems::CServer no permitida!");
+		assert(!_instance && "Segunda inicializaciÃ³n de BaseSubsystems::CServer no permitida!");
 
 		new CServer();
 
@@ -138,7 +138,7 @@ namespace BaseSubsystems
 
 	void CServer::Release()
 	{
-		assert(_instance && "BaseSubsystems::CServer no está inicializado!");
+		assert(_instance && "BaseSubsystems::CServer no estÃ¡ inicializado!");
 		if(_instance)
 		{
 			_instance->close();
@@ -178,31 +178,31 @@ namespace BaseSubsystems
 
 	bool CServer::initOgre()
 	{
-		// Inicializamos el punto de acceso a Ogre con una definición
+		// Inicializamos el punto de acceso a Ogre con una definiciÃ³n
 		// diferente de los plugins si estamos en release o en debug.
 #ifdef _DEBUG
 		_root = new Ogre::Root("plugins_d.cfg");
 #else
 		_root = new Ogre::Root("plugins.cfg");
 #endif
-		// Cargamos las rutas de los recursos desde el archivo de configuración
+		// Cargamos las rutas de los recursos desde el archivo de configuraciÃ³n
 		setupOgreResources();
 
-		// Cargamos los ajustes de configuración.
+		// Cargamos los ajustes de configuraciÃ³n.
 		if(!configureOgre())
 			return false;
 		
 		// Inicializamos los recursos y el sistema de renderizado.
 		if(!initOgreResources())
 		{
-			// La unicialización puede haber fallado por cargar una
-			// configuración incorrecta, por haber actualizado hardware o
-			// cambiado de máquina. Mostramos la ventana de configuración.
+			// La unicializaciÃ³n puede haber fallado por cargar una
+			// configuraciÃ³n incorrecta, por haber actualizado hardware o
+			// cambiado de mÃ¡quina. Mostramos la ventana de configuraciÃ³n.
 			if(!configureOgre(true)) {
 				// Si el juego no se puede configurar se finaliza
 				return false;
 			}
-			// Si tras actualizar la configuración sigue sin poderse desistimos.
+			// Si tras actualizar la configuraciÃ³n sigue sin poderse desistimos.
 			if(!initOgreResources())
 				return false;
 		}
@@ -215,8 +215,8 @@ namespace BaseSubsystems
 	bool CServer::initOIS()
 	{
 		// Cogemos el identificador y las dimensiones de la ventana
-		// de renderizado para el gestor de periféricos de entrada.
-		// Para saber el espacio de actuación del ratón.
+		// de renderizado para el gestor de perifÃ©ricos de entrada.
+		// Para saber el espacio de actuaciÃ³n del ratÃ³n.
 		unsigned int width, height, windowHnd;
 		getWindowExtents(width,height);
 		if((width == -1) || (height == -1))
@@ -225,7 +225,7 @@ namespace BaseSubsystems
 		if((windowHnd = getWindowHnd()) == -1)
 			return false;
 
-		// Preparamos variables para la inicialización del sistema
+		// Preparamos variables para la inicializaciÃ³n del sistema
 		// de entrada.
 		OIS::ParamList paramList;
 		std::ostringstream windowHndStr;
@@ -234,8 +234,8 @@ namespace BaseSubsystems
 		paramList.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
 		
 #if defined NON_EXCLUSIVE_MODE_IN_WINDOW_MODE
-		// Si estamos en modo ventana no queremos ratón y teclado en modo exclusivo,
-		// queremos que las demás aplicaciones puedan usarlo.
+		// Si estamos en modo ventana no queremos ratÃ³n y teclado en modo exclusivo,
+		// queremos que las demÃ¡s aplicaciones puedan usarlo.
 		if(!_renderWindow->isFullScreen())
 		{
 #if defined OIS_WIN32_PLATFORM 
@@ -268,14 +268,14 @@ namespace BaseSubsystems
 			_keyboard = static_cast<OIS::Keyboard*>(_inputSystem->createInputObject(OIS::OISKeyboard, true));
 		}
 
-		// Si es posible creamos el buffer del ratón.
+		// Si es posible creamos el buffer del ratÃ³n.
 		if (_inputSystem->getNumberOfDevices(OIS::OISMouse) > 0) 
 		{
 			_mouse = static_cast<OIS::Mouse*>(_inputSystem->createInputObject(OIS::OISMouse, true));
 
 			// Establecemos las dimensiones de la ventana de
-			// renderizado para saber el espacio de actuación 
-			// del ratón.
+			// renderizado para saber el espacio de actuaciÃ³n 
+			// del ratÃ³n.
 			setWindowExtents(width, height);
 		}
 
@@ -295,7 +295,7 @@ namespace BaseSubsystems
 		_GUISystem = CEGUI::System::getSingletonPtr();
 
 		// Inicializamos los directorios necesarios para el Resource Provider,
-		// así cuando creemos un recurso no tenemos que dar una ruta completa.
+		// asÃ­ cuando creemos un recurso no tenemos que dar una ruta completa.
 		CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>(
 			_GUISystem->getResourceProvider());
 
@@ -378,7 +378,15 @@ namespace BaseSubsystems
 	{
 		if(_GUISystem)
 		{
-			CEGUI::System::destroy();    
+			/*
+			The problem is that memory is allocated on the .dll side, then that same memory is freed on the application side.
+			This means that memory manager A is allocating memory, and memory manager B is releasing that same memory,
+			which generates errors.
+			
+			For detailed explanation:
+			http://stackoverflow.com/questions/18882760/debug-assertion-failed-expression-pfirstblock-phead
+			*/
+			//CEGUI::System::destroy();    
 			_GUISystem = 0;
 		}
 
@@ -403,7 +411,7 @@ namespace BaseSubsystems
 		// OGRE         //
 		//////////////////
 
-		// Carga las rutas de los recursos desde el archivo de configuración
+		// Carga las rutas de los recursos desde el archivo de configuraciÃ³n
 		Ogre::ConfigFile cf;
 		cf.load("resources.cfg");
 
@@ -439,9 +447,9 @@ namespace BaseSubsystems
 		// OGRE         //
 		//////////////////
 
-		// Carga los ajustes de configudación desde ogre.cfg
+		// Carga los ajustes de configudaciÃ³n desde ogre.cfg
 		if(force || !_root->restoreConfig()) {
-			// Si no hay archivo de configuración se lanza la ventana de configuración
+			// Si no hay archivo de configuraciÃ³n se lanza la ventana de configuraciÃ³n
 			if(!_root->showConfigDialog()) {
 				// Si el juego no se puede configurar se finaliza
 				return false;
@@ -463,10 +471,10 @@ namespace BaseSubsystems
 		{
 			// Inicializa el sistema de renderizado y crea la ventanapor defecto. 
 			// El true nos evita llamar a Root::createRenderWindow y se invoca 
-			// con los parámetros actuales del sistema de reenderizado.
+			// con los parÃ¡metros actuales del sistema de reenderizado.
 			_renderWindow = _root->initialise(true,"Galeon");
 
-			// Añadimos un listener que gestiona el evento de cierre de la ventana.
+			// AÃ±adimos un listener que gestiona el evento de cierre de la ventana.
 			_windowEventListener = new WindowEventListener();
 			Ogre::WindowEventUtilities::addWindowEventListener(_renderWindow,_windowEventListener);
 
@@ -493,7 +501,7 @@ namespace BaseSubsystems
 
 	void CServer::getWindowExtents(unsigned int &width, unsigned int &height) 
 	{
-		assert(_renderWindow && "¡No hay ventana de renderizado!");
+		assert(_renderWindow && "Â¡No hay ventana de renderizado!");
 		if(_renderWindow)
 		{
 			width = _renderWindow->getWidth();
@@ -508,7 +516,7 @@ namespace BaseSubsystems
 
 	const unsigned int CServer::getWindowHnd() 
 	{
-		assert(_renderWindow && "¡No hay ventana de renderizado!");
+		assert(_renderWindow && "Â¡No hay ventana de renderizado!");
 		if(_renderWindow)
 		{
 			unsigned int windowHnd;
@@ -527,7 +535,7 @@ namespace BaseSubsystems
 		// Ogre    //
 		/////////////
 
-		// Redimensionamos y cambiamos la resolución de la 
+		// Redimensionamos y cambiamos la resoluciÃ³n de la 
 		// pantalla.
 		bool fullScreen = _renderWindow->isFullScreen();
 		_renderWindow->setFullscreen(fullScreen,width,height);
@@ -536,7 +544,7 @@ namespace BaseSubsystems
 		// OIS     //
 		/////////////
 
-		// Actualizamos el estado del ratón de OIS
+		// Actualizamos el estado del ratÃ³n de OIS
 		const OIS::MouseState &mouseStateOIS = _mouse->getMouseState();
 		mouseStateOIS.width  = width;
 		mouseStateOIS.height = height;
