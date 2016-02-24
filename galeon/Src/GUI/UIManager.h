@@ -26,6 +26,7 @@ namespace GUI
 		UIManager(Logic::ResourcesManager& rm, Logic::HFManager& hfm, Logic::TimeManager& tm);
 		~UIManager();
 		void init();
+		void release();
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);

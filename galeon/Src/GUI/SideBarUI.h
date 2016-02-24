@@ -37,6 +37,7 @@ namespace GUI
 		SideBarUI();
 		~SideBarUI();
 		void init();
+		void release();
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);

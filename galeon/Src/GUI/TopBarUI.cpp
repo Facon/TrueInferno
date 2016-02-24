@@ -25,6 +25,11 @@ namespace GUI
 		_uiBarsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIResourceBar.layout");
 	}
 
+	void TopBarUI::release()
+	{
+		_uiBarsWindow->destroy();
+	}
+
 	void TopBarUI::activate()
 	{
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiBarsWindow);

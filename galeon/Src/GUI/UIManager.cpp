@@ -26,6 +26,15 @@ namespace GUI
 
 	}
 
+	void UIManager::release()
+	{
+		// Releasing memory
+
+		_uiWindow->destroy();
+		_topBarUI.release();
+		_sideBarUI.release();
+	}
+
 	void UIManager::activate()
 	{
 		// Activamos la interfaz de usuario

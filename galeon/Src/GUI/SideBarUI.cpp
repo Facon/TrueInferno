@@ -74,6 +74,25 @@ namespace GUI
 			CEGUI::SubscriberSlot(&SideBarUI::clearTerrainReleased, this));
 	}
 
+	void SideBarUI::release()
+	{
+		// Remove all events to avoid memory leaks
+		_uibuttonsWindow->getChildElement("CreateFurnace")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateRoad")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateResource1Building")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateResource2Building")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateSoul")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("MoveSoul")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateEvilworks")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateRefinery")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("ClearTerrain")->removeAllEvents();
+		
+		_uibuttonsWindow->destroy();
+
+		_placeableEntity = nullptr;
+	}
+
 	void SideBarUI::activate()
 	{
 		// Activamos la interfaz de usuario

@@ -33,6 +33,7 @@ namespace GUI
 		TopBarUI(Logic::ResourcesManager& rm, Logic::HFManager& hfm, Logic::TimeManager& tm);
 		~TopBarUI();
 		void init();
+		void release();
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
