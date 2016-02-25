@@ -42,6 +42,28 @@ namespace AI
 		*/
 		~CLARouteToRandom() {};
 
+		/**
+		Devuelve true si a la acción le interesa el tipo de mensaje
+		enviado como parámetro.
+		<p>
+		Esta acción acepta mensajes del tipo FAILED_ROUTE y FINISHED_ROUTE
+
+		@param msg Mensaje que ha recibido la entidad.
+		@return true Si la acción está en principio interesada
+		por ese mensaje.
+		*/
+		virtual bool accept(const TMessage &message);
+		/**
+		Procesa el mensaje recibido. El método es invocado durante la
+		ejecución de la acción cuando se recibe el mensaje.
+		<p>
+		Si recibe FINISHED_ROUTE la acción finaliza con éxito. Si recibe
+		FAILED_ROUTE finaliza con fallo.
+
+		@param msg Mensaje recibido.
+		*/
+		virtual void process(const TMessage &message);
+
 	protected:
 		/**
 		Método invocado al principio de la ejecución de la acción,

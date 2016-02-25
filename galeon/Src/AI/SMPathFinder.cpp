@@ -1,0 +1,2 @@
+#include "SMPathFinder.h"
+

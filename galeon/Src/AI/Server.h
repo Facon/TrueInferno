@@ -80,7 +80,12 @@ class CServer
 		/**
 		Calcula con A* una ruta para que las almas vayan caminando desde un cierto Placeable a otro.
 		*/
-		std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(Logic::CPlaceable* from, Logic::CPlaceable* to);
+		std::vector<Vector3>* getWalkingSoulAStarRoute(Logic::CPlaceable* from, Logic::CPlaceable* to);
+
+		/** 
+		Calcula con A* una ruta para que las almas vayan caminando desde un Vector3 a otro.
+		*/
+		std::vector<Vector3>* getWalkingSoulAStarRoute(const Vector3& from, const Vector3& to);
 
 		/**
 		Dado un ángulo en radianes lo lleva al intervalo [-PI, PI]

@@ -101,7 +101,7 @@ namespace AI
 	@return true Si la acción está en principio interesada
 	por ese mensaje.
 	*/
-	bool CLAWait::accept(const MessageType &message)
+	bool CLAWait::accept(const TMessage &message)
 	{
 		// TODO PRÁCTICA IA
 		// La acción no acepta mensajes
@@ -113,7 +113,7 @@ namespace AI
 
 	@param msg Mensaje recibido.
 	*/
-	void CLAWait::process(const MessageType &message)
+	void CLAWait::process(const TMessage &message)
 	{
 		// TODO PRÁCTICA IA
 		// La acción no procesa mensajes

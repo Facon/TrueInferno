@@ -330,7 +330,7 @@ namespace Logic {
 	}
 
 	bool CPlaceable::HandleMessage(const WalkSoulPathMessage& msg){
-		if(msg._type != MessageType::REQUEST_WALK_SOUL_PATH)
+		if (msg._type != MessageType::REQUEST_WALK_SOUL_PATH)
 			return false;
 
 		assert(msg._target && "Message received with null target");

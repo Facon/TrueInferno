@@ -50,6 +50,7 @@ namespace Logic
 			ROUTE_TO,
 			FINISHED_ROUTE,
 			FINISHED_MOVE,
+			PATH_FINDER_WAKE_UP,
 			REQUEST_WALK_SOUL_PATH,
 			RETURN_WALK_SOUL_PATH,
 			PERFORM_WALK_SOUL_PATH,
@@ -286,14 +287,14 @@ namespace Logic
 		}
 	};
 
-	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH
+	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH, PATH_FINDER_WAKE_UP
 	class WalkSoulPathMessage : public Message
 	{
 	public:
-		WalkSoulPathMessage(CPlaceable* target) : _target(target), _path(nullptr) {}
-		WalkSoulPathMessage(std::vector<Vector3>* path) : _target(nullptr), _path(path) {}
+		WalkSoulPathMessage(const Vector3& target) : _target(target), _path(nullptr) {}
+		WalkSoulPathMessage(std::vector<Vector3>* path) : _path(path) {}
 
-		CPlaceable* _target;
+		Vector3 _target;
 		std::vector<Vector3>* _path;
 
 		virtual bool Dispatch(MessageHandler& handler) const

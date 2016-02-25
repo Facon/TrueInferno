@@ -62,7 +62,7 @@ namespace Logic {
 
 	bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg){
 		// Nos aseguramos que estamos recibiendo una respuesta y que estábamos en estado de esperarla
-		if (msg._type != MessageType::RETURN_WALK_SOUL_PATH || _sendingSoulToWorkState != WaitingForPath)
+		if (msg._type != MessageType::WALK_SOUL_PATH_RESPONSE || _sendingSoulToWorkState != WaitingForPath)
 			return false;
 
 		// Guardamos la ruta devuelta. Puede ser NULL si no se encontró ruta al destino solicitado
@@ -112,11 +112,11 @@ namespace Logic {
 
 			// Enviamos un mensaje para obtener la ruta hasta el Evilator
 			WalkSoulPathMessage message(evilator);
-			message._type = MessageType::REQUEST_WALK_SOUL_PATH;
+			message._type = MessageType::WALK_SOUL_PATH_REQUEST;
 			
 			// Si nadie atendió al mensaje
 			if (!message.Dispatch(*this->getEntity())){
-				std::cout << "No one answered the REQUEST_WALK_SOUL_PATH message" << std::endl;
+				std::cout << "No one answered the WALK_SOUL_PATH_REQUEST message" << std::endl;
 				_sendingSoulToWorkState = SendingSoulToWorkState::Fail;
 				return;
 			}

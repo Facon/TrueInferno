@@ -39,7 +39,7 @@ namespace AI
 	una acción ejecutable (CLatentAction).
 	*/
 	template <class TNode>
-	class CStateMachine
+	class CStateMachine : MessageHandler
 	{
 	public: 
 		/**
@@ -53,7 +53,7 @@ namespace AI
 		/**
 		Destructor
 		*/
-		~CStateMachine();
+		virtual ~CStateMachine();
 		/**
 		Este método añade un nodo a la máquina de estado y devuelve un identificador
 		del nodo. Este identificador se usa para referirse a los nodos al añadir
@@ -108,9 +108,11 @@ namespace AI
 		*/
 		void resetExecution(){ _currentNodeId = -1; };
 
-		virtual bool accept(const MessageType &message);
+		//virtual bool accept(const TMessage &message);
 		
-		virtual void process(const MessageType &message);
+		//virtual void process(const TMessage &message);
+
+		virtual bool HandleMessage(const WalkSoulPathMessage& msg) = 0;
 
 	protected:
 		/**
@@ -157,7 +159,7 @@ namespace AI
 	recibe un mensaje de un tipo determinado. El tipo que usaremos en este caso 
 	es FINISHED_ROUTE
 	*/
-	class CSMPatrol : public CStateMachine<int>
+	/*class CSMPatrol : public CStateMachine<int>
 	{
 	public:
 		CSMPatrol(CEntity* entity) : CStateMachine(entity) 
@@ -176,15 +178,15 @@ namespace AI
 			// Las aristas se crean usando el método addEdge. En cada arista
 			// añadimos una condición del tipo CConditionMessage, con el tipo 
 			// de mensaje FINISHED_ROUTE.
-			this->addEdge(routeTo1, routeTo2, new CConditionMessage<int>(MessageType::FINISHED_ROUTE));
-			this->addEdge(routeTo2, routeTo3, new CConditionMessage<int>(MessageType::FINISHED_ROUTE));
-			this->addEdge(routeTo3, routeTo4, new CConditionMessage<int>(MessageType::FINISHED_ROUTE));
-			this->addEdge(routeTo4, routeTo1, new CConditionMessage<int>(MessageType::FINISHED_ROUTE));
+			this->addEdge(routeTo1, routeTo2, new CConditionMessage<int>(Message::FINISHED_ROUTE));
+			this->addEdge(routeTo2, routeTo3, new CConditionMessage<int>(Message::FINISHED_ROUTE));
+			this->addEdge(routeTo3, routeTo4, new CConditionMessage<int>(Message::FINISHED_ROUTE));
+			this->addEdge(routeTo4, routeTo1, new CConditionMessage<int>(Message::FINISHED_ROUTE));
 			// Por último hay que decir cuál es el nodo inicial.
 			this->setInitialNode(routeTo1);
 			this->resetExecution();
 		}
-	};
+	};*/
 
 	/**
 	Esta clase implementa una máquina de estado para un comportamiento
@@ -194,14 +196,14 @@ namespace AI
 	que espera durante un periodo fijo de tiempo (3 segundos).
 	Después de esperar vuelve al comienzo.
 	*/
-	class CSMWander : public CStateMachine<CLatentAction>
+	/*class CSMWander : public CStateMachine<CLatentAction>
 	{
 	public:
 		/**
 		Constructor. Añade los nodos y las aristas, establece el nodo de inicio
 		y deja la máquina de estado lista para ser ejecutada.
 		*/
-		CSMWander(CEntity* entity) : CStateMachine(entity) {
+		/*CSMWander(CEntity* entity) : CStateMachine(entity) {
 
 			// TODO PRÁCTICA IA
 			// Aquí tiene que venir el código para crear la máquina de estado:
@@ -228,7 +230,7 @@ namespace AI
 	irá hasta la posición (0, 0, 0) (CLARouteTo). Cuando llegue a esta posición,
 	el comportamiento vuelve al nodo anterior.
 	*/
-	class CSMHierarchical : public CStateMachine<CLatentAction>
+	/*class CSMHierarchical : public CStateMachine<CLatentAction>
 	{
 	public:
 		CSMHierarchical(CEntity* entity) : CStateMachine(entity)
@@ -250,7 +252,7 @@ namespace AI
 			this->resetExecution();
 		}
 		
-	};
+	};*/
 
 	/**
 	Factoría que devuelve máquinas de estado predefinidas.
@@ -262,11 +264,11 @@ namespace AI
 	public:
 		static CStateMachine<CLatentAction>* getStateMachine(std::string smName, CEntity * entity)
 		{
-			if (smName == "wander") {
+			/*if (smName == "wander") {
 				return new CSMWander(entity);
 			} else if (smName == "hfsm") {
 				return new CSMHierarchical(entity);
-			}
+			}*/
 			return 0;
 		}
 	};
@@ -379,8 +381,8 @@ namespace AI
 		return _nodes[_currentNodeId];
 	} // getCurrentNode
 //////////////////////////////
-	template <class TNode>
-	bool CStateMachine<TNode>::accept(const MessageType &message)
+	/*template <class TNode>
+	bool CStateMachine<TNode>::accept(const TMessage &message)
 	{
 		// Si no hay un nodo actual no hay aristas interesadas
 		if (_currentNodeId == -1) 
@@ -397,10 +399,11 @@ namespace AI
 			}
 		}
 		return false;
-	}
+	}*/
+
 //////////////////////////////
-	template <class TNode>
-	void CStateMachine<TNode>::process(const MessageType &message){
+	/*template <class TNode>
+	void CStateMachine<TNode>::process(const TMessage &message){
 		// Si no hay un nodo actual no hay aristas interesadas así que lo primero es comprobar si hay un nodo válido en _currentNodeId
 		if (_currentNodeId != -1) { 
 			// Buscamos la lista de aristas que salen del nodo actual
@@ -415,7 +418,8 @@ namespace AI
 				}
 			}
 		}
-	}
+	}*/
+
 //////////////////////////////
 
 } // namespace AI 

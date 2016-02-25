@@ -33,7 +33,7 @@ namespace AI
 	las máquinas de estado.
 	*/
 	template <class TNode>
-	class ICondition
+	class ICondition : MessageHandler
 	{
 	public:
 		/**
@@ -48,21 +48,9 @@ namespace AI
 		@return true o false según si se cumple la condición o no.
 		*/
 		virtual bool check(TNode* currentNode, CEntity* entity) = 0;
-		/**
-		Devuelve true si a la acción le interesa el tipo de mensaje
-		enviado como parámetro.
-		@param msg Mensaje que ha recibido la entidad.
-		@return true Si la acción está en principio interesada
-		por ese mensaje.
-		*/
-		virtual bool accept(const MessageType &message) { return false; };
-		/**
-		Procesa el mensaje recibido. El método es invocado durante la
-		ejecución de la acción cuando se recibe el mensaje.
 
-		@param msg Mensaje recibido.
-		*/
-		virtual void process(const MessageType &message) {};
+		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
+
 	}; // class CCondition
 
 	/**
@@ -163,11 +151,12 @@ namespace AI
 		@return true Si la acción está en principio interesada
 		por ese mensaje.
 		*/
-		virtual bool accept(const MessageType &message) {
+		/*virtual bool accept(const MessageType &message) {
 			// TODO PRÁCTICA IA
 			// La condición debe aceptar mensajes del tipo indicado en _messageType
 			return message._type == _messageType;
-		};
+		};*/
+
 		/**
 		Procesa el mensaje recibido. Como sólo aceptamos mensajes del
 		tipo en el que estamos interesados aquí directamente ponemos 
@@ -175,11 +164,16 @@ namespace AI
 
 		@param msg Mensaje recibido.
 		*/
-		virtual void process(const MessageType &message) {
+		/*virtual void process(const MessageType &message) {
 			// TODO PRÁCTICA IA
 			// Actualizamos el flag _received si el mensaje es del tipo _messageType
 			_received = _received || (message._type == _messageType); 
-		};
+		};*/
+
+		bool CStateMachine<TNode>::HandleMessage(const WalkSoulPathMessage& msg){
+			// Actualizamos el flag _received si el mensaje es del tipo _messageType
+			_received = _received || (msg._type == _messageType);
+		}
 
 	private:
 		/** Flag que se activa cuando recibimos un mensaje del tipo en el que estamos interesados */

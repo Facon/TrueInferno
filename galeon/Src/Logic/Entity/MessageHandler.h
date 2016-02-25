@@ -66,13 +66,13 @@ namespace Logic
 		{ return false; }
 
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg)
-		{  return false; }
+		{ return false; }
 
 		virtual bool HandleMessage(const HellQuartersActionMessage& msg)
-		{  return false; }
+		{ return false; }
 
 		virtual bool HandleMessage(const MovePlaceableMessage& msg)
-		{  return false; }
+		{ return false; }
 
 	};
 } // namespace Logic

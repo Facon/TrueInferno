@@ -94,7 +94,7 @@ namespace AI
 	@return true Si la acción está en principio interesada
 	por ese mensaje.
 	*/
-	bool CLAExecuteSM::accept(const MessageType &message)
+	bool CLAExecuteSM::accept(const TMessage &message)
 	{
 		// TODO PRÁCTICA IA
 		// Para saber si un mensaje acepta, debemos delegar por 
@@ -112,7 +112,7 @@ namespace AI
 
 	@param msg Mensaje recibido.
 	*/
-	void CLAExecuteSM::process(const MessageType &message)
+	void CLAExecuteSM::process(const TMessage &message)
 	{
 		// TODO PRÁCTICA IA
 		// Igual que en accept, la responsabilidad de procesar

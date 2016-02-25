@@ -22,9 +22,8 @@ using namespace Logic;
 
 namespace AI 
 {
-
 	/**
-	Esta acción espera durante un periodo de tiempo indicado en el constructor.
+	Esta acción espera durante un periodo de tiempo (s) indicado en el constructor.
 	*/
 	class CLAWait : public CLatentAction
 	{
@@ -32,9 +31,16 @@ namespace AI
 		/**
 		Constructor.
 		
-		@param time Tiempo de espera
+		@param time Tiempo (ms) de espera
 		*/
 		CLAWait(unsigned long time) : CLatentAction(), _time(time) {};
+
+		/**
+		Constructor. Espera tiempo infinito
+
+		*/
+		CLAWait() : CLatentAction(), _time(INFINITE_TIME) {};
+
 		/**
 		Destructor
 		*/
@@ -96,24 +102,27 @@ namespace AI
 		@return true Si la acción está en principio interesada
 		por ese mensaje.
 		*/
-		virtual bool accept(const MessageType &message);
+		//virtual bool accept(const TMessage &message);
 		/**
 		Procesa el mensaje recibido. El método es invocado durante la
 		ejecución de la acción cuando se recibe el mensaje.
 
 		@param msg Mensaje recibido.
 		*/
-		virtual void process(const MessageType &message);
+		//virtual void process(const TMessage &message);
 
 	protected:
 		/**
-		Tiempo de espera
+		Tiempo (ms) de espera
 		*/
 		unsigned long _time;
 		/**
-		Tiempo en el que se termina la acción
+		Tiempo (ms) en el que se termina la acción
 		*/
 		unsigned long _endingTime;
+
+	private:
+		const int INFINITE_TIME = 24 * 60 * 60 * 1000; // 24h deberían ser suficientes ^_^'
 	};
 
 } //namespace AI 

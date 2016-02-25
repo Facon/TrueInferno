@@ -208,6 +208,11 @@ namespace AI {
 		return out;
 	}
 
+	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(const Vector3& from, const Vector3& to){
+		// TODO
+		return nullptr;
+	}
+
 	/////////////////////////////////////////
 
 	/**
