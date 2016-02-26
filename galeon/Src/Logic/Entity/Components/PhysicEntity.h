@@ -45,8 +45,8 @@ namespace Logic
 	para representar objetos cuyo movimiento viene dictado desde la l�gica del juego. Las entidades 
 	cinem�ticas se pueden mover mediante desplazamientos en lugar de fuerzas.
 	<p>
-	En cada tick, este componente actualiza la posici�n y rotaci�n de las entidades l�gicas usando
-	la informaci�n que proporciona el motor de f�sica (s�lo entidades din�micas). 
+	Solo para entidades dinámicas: En cada tick, este componente actualiza la posici�n, rotaci�n y
+	escalado de las entidades l�gicas usando la informaci�n que proporciona el motor de f�sica. 
 	<p>
 	Cuando este componente se utiliza para representar una entidad cinem�tica, acepta mensajes de 
 	tipo KINEMATIC_MOVE indicando el movimiento que se quiere realizar. Y en cada tick el componente
@@ -82,18 +82,24 @@ namespace Logic
 		Este m�todo se invoca en cada ciclo de la simulaci�n y hace lo siguiente:
 		<ul>
 		<li> Si la entidad f�sica es de tipo est�tico no hace nada. </li>
-		<li> Si la entidad f�sica es de tipo din�mico actualiza la posici�n y rotaci�n de 
+		<li> Si la entidad f�sica es de tipo din�mico actualiza posición, rotación y escalado de 
 		     la entidad l�gica usando la informaci�n proporcionada por el motor de f�sica. </li>
 		<li> Si la entidad f�sica es de tipo cinem�tico, adem�s solicita al motor de f�sica
 		     que mueva la entidad de acuerdo al �ltimo mensaje KINEMATIC_MOVE recibido. </li>
 		</ul>
 		*/
 		virtual void tick(unsigned int msecs);
- 
+
 		/**
 		Se invoca cuando se produce una colisi�n entre una entidad f�sica y un trigger.
 		*/
-		virtual void onTrigger (IPhysics *otherComponent, bool enter);
+		virtual void onTrigger(IPhysics *otherComponent, bool enter);
+
+		/**
+		Mensajes.
+		*/
+		bool HandleMessage(const TransformMessage& m);
+		bool HandleMessage(const KinematicMoveMessage& m);
 
 	private:
 

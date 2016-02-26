@@ -87,9 +87,7 @@ namespace Logic
 				return 0;
 		}
 
-		_graphicsEntity->setPosition(_entity->getPosition());
-		_graphicsEntity->setRotation(_entity->getRotation());
-		_graphicsEntity->setDimensions(_entity->getDimensions());
+		_graphicsEntity->setTransform(_entity->getTransform());
 
 		if (entityInfo->hasAttribute("material"))
 		{
@@ -114,24 +112,6 @@ namespace Logic
 		_graphicsEntity->setTransform(m._transform);
 		return true;
 	} // SET_TRANSFORM
-	
-	bool CGraphics::HandleMessage(const PositionMessage& m)
-	{
-		_graphicsEntity->setPosition(m._position);
-		return true;
-	} // SET_POSITION
-	
-	bool CGraphics::HandleMessage(const RotationMessage& m)
-	{
-		_graphicsEntity->setRotation(m._rotation);
-		return true;
-	} // SET_ROTATION
-	
-	bool CGraphics::HandleMessage(const DimensionsMessage& m)
-	{
-		_graphicsEntity->setDimensions(m._dimensions);
-		return true;
-	} // SET_DIMENSIONS
 	
 	bool CGraphics::HandleMessage(const ColorMessage& m)
 	{

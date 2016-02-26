@@ -50,8 +50,8 @@ void CErrorManager::reportError(PxErrorCode::Enum code, const char* message, con
 	case PxErrorCode::ePERF_WARNING: codeStr = "PERF_WARNING"; break;
 	}
 
-	cout << "File: " << string(file) << " Line: " << line << " Code: " << codeStr 
-		 << " " << string(message) << endl; 
+	if (!_off) {
+		cout << "File: " << string(file) << " Line: " << line << " Code: " << codeStr
+			<< " " << string(message) << endl;
+	}
 }
-
-//---------------------------------------------------------

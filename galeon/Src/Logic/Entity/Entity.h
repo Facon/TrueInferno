@@ -43,7 +43,7 @@ namespace Logic
 	Clase que representa una entidad en el entorno virtual. Las entidades
 	son meros contenedores de componentes, y su funcionamiento depende
 	de cuï¿½les tenga. Ademï¿½s, la clase contiene una serie de atributos que
-	pueden ser accedidos desde los componentes (Id, nombre, etc.).
+	pueden ser accedidos desde los componentes (id, nombre, etc.).
 	<p>
 	Tras la creaciï¿½n de la entidad, donde se inicializan los valores de la
 	entidad a su valor por defecto, se invocarï¿½ a su mï¿½todo spawn() en el
@@ -157,16 +157,6 @@ namespace Logic
 		*/
 		void destroyAllComponents();
 
-		/**
-		Recibe un mensaje que envia a todos los componentes de la lista menos 
-		al componente que lo envia, si ï¿½ste se especifica en el segundo campo.
-
-		@param message Mensaje a enviar.
-		@param emitter Componente emisor, si lo hay. No se le enviarï¿½ el mensaje.
-		@return true si al menos un componente aceptï¿½ el mensaje
-		*/
-		//bool emitMessage(const Message &message, IComponent* emitter = 0);
-
 		// Para cada tipo de mensaje se hace la gestión apropiada.
 		bool HandleMessage(const TransformMessage& msg);
 		bool HandleMessage(const PositionMessage& msg);
@@ -226,7 +216,7 @@ namespace Logic
 
 		@param transform Nueva matriz de transformación de la entidad.
 		*/
-		void setTransform(const Matrix4& transform);
+		bool setTransform(const Matrix4& transform);
 
 		/**
 		Establece la posición de la entidad. Avisa a los componentes
@@ -234,7 +224,7 @@ namespace Logic
 
 		@param position Nueva posición de la entidad.
 		*/
-		void setPosition(const Vector3 &position);
+		bool setPosition(const Vector3 &position);
 
 		/**
 		Establece la rotación de la entidad. Avisa a los componentes
@@ -242,7 +232,7 @@ namespace Logic
 
 		@param rotation Nueva rotación de la entidad.
 		*/
-		void setRotation(const Vector3 &rotation);
+		bool setRotation(const Vector3 &rotation);
 
 		/**
 		Establece las dimensiones de la entidad. Avisa a los componentes
@@ -250,7 +240,7 @@ namespace Logic
 
 		@param dimensions Nuevas dimensiones de la entidad.
 		*/
-		void setDimensions(const Vector3 &dimensions);
+		bool setDimensions(const Vector3 &dimensions);
 
 		/**
 		Devuelve la matriz de transformación de la entidad.
@@ -301,6 +291,12 @@ namespace Logic
 		@param transform Nueva matriz de transformación.
 		*/
 		void updateTransformValuesFromMatrix(const Matrix4 &transform);
+
+		/**
+		Construye la matriz de transformación de la entidad y envía un
+		mensaje para avisar a los componentes del cambio.
+		*/
+		bool sendTransformMessage();
 
 		/**
 		Clase amiga que puede modificar los atributos (en concreto se 

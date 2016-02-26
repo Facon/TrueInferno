@@ -74,7 +74,7 @@ namespace Logic
 		bool correct = true;
 
 		for( it = _components.begin(); it != _components.end() && correct; ++it )
-			correct = (*it)->spawn(this,map,entityInfo) && correct;
+			correct = (*it)->spawn(this, map, entityInfo) && correct;
 
 		return correct;
 
@@ -194,21 +194,20 @@ namespace Logic
 
 	bool CEntity::HandleMessage(const PositionMessage& msg)
 	{
-		_position = msg._position;
-		SEND_MESSAGE_TO_ALL_COMPONENTS;
+		return setPosition(msg._position);
 	}
 
 	bool CEntity::HandleMessage(const RotationMessage& msg)
 	{
-		_rotation = msg._rotation;
-		SEND_MESSAGE_TO_ALL_COMPONENTS;
+		return setRotation(msg._rotation);
 	}
 
 	bool CEntity::HandleMessage(const DimensionsMessage& msg)
 	{
-		_dimensions = msg._dimensions;
-		SEND_MESSAGE_TO_ALL_COMPONENTS;
+		return setDimensions(msg._dimensions);
 	}
+
+	//---------------------------------------------------------
 
 	bool CEntity::HandleMessage(const ColorMessage& msg)
 	{
@@ -285,7 +284,20 @@ namespace Logic
 
 	//---------------------------------------------------------
 
-	void CEntity::setTransform(const Matrix4 &transform)
+	bool CEntity::sendTransformMessage()
+	{
+		Matrix4 transform = getTransform();
+
+		TransformMessage m;
+		m._type = MessageType::SET_TRANSFORM;
+		m._transform = transform;
+
+		return m.Dispatch(*this);
+	}
+
+	//---------------------------------------------------------
+
+	bool CEntity::setTransform(const Matrix4 &transform)
 	{
 		updateTransformValuesFromMatrix(transform);
 
@@ -293,49 +305,34 @@ namespace Logic
 		m._type = MessageType::SET_TRANSFORM;
 		m._transform = transform;
 
-		m.Dispatch(*this);
+		return m.Dispatch(*this);
 
 	} // setTransform
 
 	//---------------------------------------------------------
 
-	void CEntity::setPosition(const Vector3 &position)
+	bool CEntity::setPosition(const Vector3 &position)
 	{
 		_position = position;
-
-		PositionMessage m;
-		m._type = MessageType::SET_POSITION;
-		m._position = _position;
-
-        m.Dispatch(*this);
+		return sendTransformMessage();
 
 	} // setPosition
 
 	//---------------------------------------------------------
 
-	void CEntity::setRotation(const Vector3 &rotation)
+	bool CEntity::setRotation(const Vector3 &rotation)
 	{
 		_rotation = rotation;
-
-		RotationMessage m;
-		m._type = MessageType::SET_ROTATION;
-		m._rotation = _rotation;
-
-		m.Dispatch(*this);
+		return sendTransformMessage();
 
 	} // setRotation
 
 	//---------------------------------------------------------
 
-	void CEntity::setDimensions(const Vector3 &dimensions)
+	bool CEntity::setDimensions(const Vector3 &dimensions)
 	{
 		_dimensions = dimensions;
-
-		DimensionsMessage m;
-		m._type = MessageType::SET_DIMENSIONS;
-		m._dimensions = _dimensions;
-
-        m.Dispatch(*this);
+		return sendTransformMessage();
 
 	} // setDimensions
 
