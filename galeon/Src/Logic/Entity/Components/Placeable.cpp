@@ -90,10 +90,10 @@ namespace Logic {
 	} // spawn
 
 	void CPlaceable::tick(unsigned int msecs){
-		processWalkingSoulPathRequest();
+		//processWalkingSoulPathRequest();
 	} // tick
 
-	void CPlaceable::processWalkingSoulPathRequest(){
+	/*void CPlaceable::processWalkingSoulPathRequest(){
 		if (_walkingSoulTarget != nullptr){
 
 			// Calculate path from this placeable to the given target placeable
@@ -105,7 +105,7 @@ namespace Logic {
 			// Clean request
 			_walkingSoulTarget = nullptr;
 		}
-	}
+	}*/
 
 	bool CPlaceable::place(){
 		// Si no estábamos flotando no hacemos nada porque ya estamos (teóricamente bien) colocados
@@ -329,7 +329,7 @@ namespace Logic {
 		}
 	}
 
-	bool CPlaceable::HandleMessage(const WalkSoulPathMessage& msg){
+	/*bool CPlaceable::HandleMessage(const WalkSoulPathMessage& msg){
 		if (msg._type != MessageType::REQUEST_WALK_SOUL_PATH)
 			return false;
 
@@ -338,7 +338,7 @@ namespace Logic {
 		_walkingSoulTarget = msg._target;
 
 		return true;
-	}
+	}*/
 
 	void CPlaceable::updateAdyacentTiles(){
 		// For each tile

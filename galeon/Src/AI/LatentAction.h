@@ -14,7 +14,7 @@ Clase que implementa las acciones latentes
 #define __AI_LatentAction_H
 
 #include "Logic/Entity/Entity.h"
-#include "Logic\Entity\MessageHandler.h"
+#include "Logic/Entity/Message.h"
 
 using namespace Logic;
 
@@ -146,11 +146,6 @@ namespace AI
 		*/
 		LAStatus getStatus() {return _status; };
 
-		virtual bool HandleMessage(const WalkSoulPathMessage& msg)
-		{
-			return false;
-		}
-
 	private:
 		/**
 		Estado de la acción
@@ -172,7 +167,7 @@ namespace AI
 		para que se realicen las tareas que son únicamente necesarias
 		al principio (y no durante toda la vida de la acción).
 		@return Estado de la al que pasa la acción; si se indica que la
-		acción a terminado (LatentAction::Completed), se invocará
+		acción ha terminado (LatentAction::Completed), se invocará
 		al OnStop().
 		*/
 		virtual LAStatus OnStart() { return READY;}

@@ -1,8 +1,15 @@
 #ifndef PATH_FINDER_
 #define PATH_FINDER_
 
+#include "StateMachineExecutor.h"
+
+#include "Map/MapEntity.h"
+
+#include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Component.h"
-#include "Logic/Entity/Components/StateMachineExecutor.h"
+
+#include "AI/SMPathFinder.h"
+#include "AI/LatentAction.h"
 
 namespace Logic {
 	class CPathFinder : public CStateMachineExecutor {
@@ -13,7 +20,9 @@ namespace Logic {
 		/**
 		Constructor por defecto.
 		*/
-		CPathFinder();
+		CPathFinder() {};
+
+		virtual ~CPathFinder() {}
 
 		/**
 		Inicialización del componente usando la descripción de la entidad que hay en
@@ -27,7 +36,9 @@ namespace Logic {
 		virtual void tick(unsigned int msecs);
 
 	protected:
-		AI::CStateMachine<AI::CLatentAction> *getStateMachine();
+		AI::CStateMachine<AI::CLatentAction>* getStateMachine(){
+			return new AI::CSMPathFinder(_entity);
+		}
 
 	}; // class CPathFinder
 

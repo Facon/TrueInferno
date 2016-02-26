@@ -2,12 +2,13 @@
 #define HELL_QUARTERS_H_
 
 #include "BaseSubsystems/RTTI.h"
-#include "Logic/Entity/Component.h"
 #include "BaseSubsystems/Math.h"
+#include "Logic/Entity/Component.h"
+#include "Logic/Entity/Components/StateMachineExecutor.h"
 #include <vector>
 
 namespace Logic {
-	class CHellQuarters : public IComponent{
+	class CHellQuarters : public CStateMachineExecutor{
 		RTTI_DECL;
 		DEC_FACTORY(CHellQuarters);
 
@@ -25,7 +26,9 @@ namespace Logic {
 		/**
 		Constructor por defecto.
 		*/
-		CHellQuarters();
+		CHellQuarters() {};
+
+		virtual ~CHellQuarters() {};
 
 		/**
 		Inicialización del componente usando la descripción de la entidad que hay en
@@ -38,9 +41,6 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
-		/** Gestión de mensajes para enviar y recibir información de rutas de almas caminantes */
-		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
-
 		/** Gestión de mensajes para solicitar acciones en el HellQuarters */
 		virtual bool HandleMessage(const HellQuartersActionMessage& msg);
 
@@ -49,6 +49,11 @@ namespace Logic {
 
 		/** Interfaz pública para que se solicite el envío de un alma a arder */
 		void requestSendSoulToBurn();
+
+	protected:
+		AI::CStateMachine<AI::CLatentAction>* getStateMachine(){
+			return new AI::CSMHellQuarters(_entity);
+		}
 
 	private:
 		static const float SOUL_ON_TILE_HEIGHT;

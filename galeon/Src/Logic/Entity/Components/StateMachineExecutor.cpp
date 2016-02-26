@@ -1,15 +1,13 @@
 #include "StateMachineExecutor.h"
-
 #include "Map/MapEntity.h"
-#include "AI/WaypointGraph.h"
-#include "AI/Server.h"
 
 namespace Logic 
 {
 
 	//---------------------------------------------------------
 
-	IMP_FACTORY(CStateMachineExecutor);
+	//IMP_FACTORY(CStateMachineExecutor);
+	RTTI_ROOT_IMPL(CStateMachineExecutor);
 
 	//---------------------------------------------------------
 
@@ -94,10 +92,10 @@ namespace Logic
 	*/
 	bool CStateMachineExecutor::HandleMessage(const WalkSoulPathMessage& msg)
 	{
-		if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
+		/*if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
 			return true;
 		if (_currentAction != NULL)
-			return _currentAction->HandleMessage(msg);
+			return _currentAction->HandleMessage(msg);*/
 		return false;
 	}
 

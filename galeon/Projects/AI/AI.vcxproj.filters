@@ -95,19 +95,10 @@
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LARoutes.cpp">
-      <Filter>Decision\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\AI\LatentAction.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AI\SimpleLatentActions.cpp">
-      <Filter>Decision\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AI\StateMachine.cpp">
-      <Filter>Decision\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AI\SMPathFinder.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -157,9 +148,6 @@
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LARoutes.h">
-      <Filter>Decision\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\AI\LatentAction.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
@@ -167,6 +155,12 @@
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\SMPathFinder.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAFindingPath.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMHellQuarters.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

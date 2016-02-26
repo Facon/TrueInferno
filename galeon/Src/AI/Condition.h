@@ -21,7 +21,6 @@ si la acción asociada al nodo ha terminado con fallo).
 #define __AI_Condition_H
 
 #include "Logic/Entity/Entity.h"
-
 #include "LatentAction.h"
 
 using namespace Logic;
@@ -33,7 +32,7 @@ namespace AI
 	las máquinas de estado.
 	*/
 	template <class TNode>
-	class ICondition : MessageHandler
+	class ICondition : public MessageHandler
 	{
 	public:
 		/**
@@ -48,9 +47,6 @@ namespace AI
 		@return true o false según si se cumple la condición o no.
 		*/
 		virtual bool check(TNode* currentNode, CEntity* entity) = 0;
-
-		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
-
 	}; // class CCondition
 
 	/**
@@ -123,9 +119,8 @@ namespace AI
 		hará saltar la condición
 		@param messageType Tipo de mensaje que estamos escuchando
 		*/
-		CConditionMessage(MessageType messageType) : _received(false) {
-			_messageType = messageType;
-		}
+		CConditionMessage(MessageType messageType) : _received(false), _messageType(messageType) {};
+
 		/**
 		En el check sólo tenemos que comprobar el flag _received. Este flag
 		se habrá activado en process si durante este tick hemos recibido
@@ -144,6 +139,7 @@ namespace AI
 			_received = false;
 			return receivedThisTick;
 		}
+
 		/**
 		Devuelve true si el tipo del mensaje recibido coincide con el 
 		que estamos esperando
@@ -170,14 +166,20 @@ namespace AI
 			_received = _received || (message._type == _messageType); 
 		};*/
 
-		bool CStateMachine<TNode>::HandleMessage(const WalkSoulPathMessage& msg){
-			// Actualizamos el flag _received si el mensaje es del tipo _messageType
-			_received = _received || (msg._type == _messageType);
+		bool HandleMessage(const WalkSoulPathMessage& msg){
+			if (msg._type == _messageType){
+				// Actualizamos el flag _received si el mensaje es del tipo _messageType
+				_received = true;
+				return true;
+			}
+			else
+				return false;
 		}
 
 	private:
 		/** Flag que se activa cuando recibimos un mensaje del tipo en el que estamos interesados */
 		bool _received;
+
 		/** Tipo del mensaje que esperamos */
 		MessageType _messageType;
 	};

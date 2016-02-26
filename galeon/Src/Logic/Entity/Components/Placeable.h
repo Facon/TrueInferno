@@ -80,7 +80,7 @@ namespace Logic {
 
 		virtual bool HandleMessage(const MovePlaceableMessage& msg);
 
-		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
+		//virtual bool HandleMessage(const WalkSoulPathMessage& msg);
 
 	private:
 		/** Altura añadida a la posición del Placeable para que parezca que está justo encima */

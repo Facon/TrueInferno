@@ -8,6 +8,7 @@
 #include "Logic/Entity/Message.h"
 #include "Logic/BuildingManager.h"
 #include "AI/Server.h"
+#include "Logic/Entity/Components/Placeable.h"
 #include <iostream>
 #include <cassert>
 
@@ -16,9 +17,6 @@ namespace Logic {
 	IMP_FACTORY(CHellQuarters);
 
 	const float CHellQuarters::SOUL_ON_TILE_HEIGHT = 2.0;
-
-	CHellQuarters::CHellQuarters() : IComponent() {
-	}
 
 	bool CHellQuarters::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 		_timeSinceLastSpawn = 0;
@@ -62,7 +60,7 @@ namespace Logic {
 
 	bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg){
 		// Nos aseguramos que estamos recibiendo una respuesta y que estábamos en estado de esperarla
-		if (msg._type != MessageType::WALK_SOUL_PATH_RESPONSE || _sendingSoulToWorkState != WaitingForPath)
+		if (msg._type != MessageType::RETURN_WALK_SOUL_PATH || _sendingSoulToWorkState != WaitingForPath)
 			return false;
 
 		// Guardamos la ruta devuelta. Puede ser NULL si no se encontró ruta al destino solicitado
@@ -111,8 +109,8 @@ namespace Logic {
 			CPlaceable *evilator = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Evilator);
 
 			// Enviamos un mensaje para obtener la ruta hasta el Evilator
-			WalkSoulPathMessage message(evilator);
-			message._type = MessageType::WALK_SOUL_PATH_REQUEST;
+			WalkSoulPathMessage message(evilator->getEntity()->getPosition());
+			message._type = MessageType::REQUEST_WALK_SOUL_PATH;
 			
 			// Si nadie atendió al mensaje
 			if (!message.Dispatch(*this->getEntity())){

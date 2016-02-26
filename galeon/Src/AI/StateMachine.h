@@ -23,7 +23,6 @@ de ejemplo.
 
 #include "LatentAction.h"
 #include "SimpleLatentActions.h"
-#include "LARoutes.h"
 #include "LAExecuteSM.h"
 
 using namespace Logic;
@@ -39,7 +38,7 @@ namespace AI
 	una acción ejecutable (CLatentAction).
 	*/
 	template <class TNode>
-	class CStateMachine : MessageHandler
+	class CStateMachine : public MessageHandler
 	{
 	public: 
 		/**

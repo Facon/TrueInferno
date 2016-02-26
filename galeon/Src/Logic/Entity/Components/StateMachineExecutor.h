@@ -22,18 +22,19 @@ namespace Logic
 	*/
 	class CStateMachineExecutor : public IComponent
 	{
-		DEC_FACTORY(CStateMachineExecutor);
+		RTTI_DECL;
+		//DEC_FACTORY(CStateMachineExecutor);
 	
 	public:
 		/**
 		Constructor
 		*/
-		CStateMachineExecutor(void) : _currentStateMachine(0), _currentAction(0) {};
+		CStateMachineExecutor() : _currentStateMachine(0), _currentAction(0) {};
 
 		/**
 		Destructor
 		*/
-		~CStateMachineExecutor(void) { 
+		virtual ~CStateMachineExecutor() { 
 			if (_currentStateMachine != 0) delete _currentStateMachine;
 		};
 
@@ -69,7 +70,7 @@ namespace Logic
 		Almacena la máquina de estado que se está ejecutando
 		*/
 		// AI::CStateMachine<int>* _currentStateMachine;
-		AI::CStateMachine<AI::CLatentAction> * _currentStateMachine;
+		AI::CStateMachine<AI::CLatentAction>* _currentStateMachine;
 
 		/**
 		Acción que se está ejecutando.
@@ -77,11 +78,11 @@ namespace Logic
 		AI::CLatentAction* _currentAction;
 
 		/** Instancia la máquina de estados. Debe ser implementado por la clase hija */
-		virtual AI::CStateMachine<AI::CLatentAction> *getStateMachine();
+		virtual AI::CStateMachine<AI::CLatentAction>* getStateMachine() = 0;
 
 	}; // class CStateMachineExecutor 
 
-	REG_FACTORY(CStateMachineExecutor);
+	//REG_FACTORY(CStateMachineExecutor);
 
 }// namespace Logic
 
