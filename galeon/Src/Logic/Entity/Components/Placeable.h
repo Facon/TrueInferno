@@ -84,10 +84,10 @@ namespace Logic {
 
 	private:
 		/** Altura añadida a la posición del Placeable para que parezca que está justo encima */
-		const float HEIGHT_ON_TILE = 1.0;
+		const float HEIGHT_ON_TILE = 0.5f;
 
 		/** Altura añadida a la posición del Placeable para que parezca que flota por encima */
-		const float HEIGHT_FLOATING_OVER_TILE = 1.5;
+		const float HEIGHT_FLOATING_OVER_TILE = 1.0f;
 
 		/** Floor's absolute logic origin position in the matrix */
 		Vector3 _floorOriginPosition;

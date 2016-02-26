@@ -47,6 +47,26 @@ namespace Physics {
 		 */
 		void reportError(physx::PxErrorCode::Enum code, const char* message, const char* file, int line);
 
+		/**
+		* Cambia el valor del flag para los mensajes.
+		*
+		* @param off Nuevo valor del flag. 
+		*/
+		void setOff(const bool off) { _off = off; }
+
+	private:
+
+		/**
+		 * Flag para desactivar temporalmente los mensajes de log de PhysX (normalmente por
+		 * la repetición masiva de alguno concreto que inunda la ventana de log y no deja ver
+		 * nada más).
+		 *
+		 * Esto es una solución rápida para la parte de desarrollo, tarde o temprano habrá
+		 * que quitar esto y buscar la forma correcta de hacer todo aquello que provoque
+		 * mensajes de error o warning!
+		 */
+		bool _off = false;
+
 	}; // classCErrorManager
 
 }; // namespace Physics

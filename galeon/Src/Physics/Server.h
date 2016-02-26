@@ -54,8 +54,6 @@ namespace physx {
 	};
 };
 
-
-
 // Namespace que contiene las clases relacionadas con la parte f�sica. 
 namespace Physics {
 
@@ -126,7 +124,6 @@ namespace Physics {
 		*/
 		bool tick(unsigned int msecs);
 
-
 		//----------------------
 		// Gestion de la escena
 		//----------------------
@@ -135,12 +132,12 @@ namespace Physics {
 		Crea la escena f�sica. Se asume que s�lo existir� una escena f�sica, por lo que 
 		s�lo debe invocarse una vez.
 		*/
-		void createScene ();
+		void createScene();
 
 		/**
 		Destruye la escena f�sica.
 		*/
-		void destroyScene ();
+		void destroyScene();
 
 		/**
 		Establece si debe haber colisiones entre dos grupos de colisi�n. Al crear los objetos
@@ -152,7 +149,6 @@ namespace Physics {
 		@param enable Activar o desactivar las colisiones entre los dos grupos anteriores.
 		*/
 		void setGroupCollisions(int group1, int group2, bool enable);
-
 
 		//------------------------------
 		// Gesti�n de entidades simples
@@ -175,23 +171,21 @@ namespace Physics {
 
 		@param position Posici�n de la caja en coordenadas l�gicas (el origen de coordenadas 
 		       est� en el centro de la cara inferior del cubo).
-		@param dimensions Dimensiones de la caja divididas entre 2. Es decir, los lados de 
-		       la caja medir�n dimensions*2.
+		@param dimensions Dimensiones de la caja.
 		@param trigger Indica si la entidad f�sica representa un trigger.
 		@param group Grupo de colisi�n.
 		@param component Componente l�gico asociado a la entidad f�sica.
 		@return actor f�sico creado
 		*/
 		physx::PxRigidStatic* createStaticBox(const Vector3 &position, const Vector3 &dimensions, 
-			                                  bool trigger, int group, const Logic::IPhysics *component); 
+			                                  bool trigger, int group, const Logic::IPhysics *component);
 
 		/**
 		Crea una caja din�mica en la escena.
 
 		@param position Posici�n de la caja en coordenadas l�gicas (el origen de coordenadas 
 		       est� en el centro de la cara inferior del cubo).
-		@param dimensions Dimensiones de la caja divididas entre 2. Es decir, los lados de 
-		       la caja medir�n dimensions*2.
+		@param dimensions Dimensiones de la caja.
 		@param mass Masa distribuida uniformemente en el volumen de la entidad.
 		@param kinematic Indica si la entidad es cinem�tica.
 		@param trigger Indica si la entidad f�sica representa un trigger.
@@ -201,7 +195,7 @@ namespace Physics {
 		*/
 		physx::PxRigidDynamic* createDynamicBox(const Vector3 &position, const Vector3 &dimensions, 
 			                                    float mass, bool kinematic, bool trigger, int group, 
-												const Logic::IPhysics *component); 
+												const Logic::IPhysics *component);
 
 		/**
 		Crea una entidad f�sica en la escena a partir de un fichero RepX exportado con el 
@@ -225,10 +219,10 @@ namespace Physics {
 		void destroyActor(physx::PxActor *actor);
 
 		/**
-		Devuelve la posici�n y rotaci�n de una entidad f�sica.
+		Devuelve el transform de una entidad f�sica.
 
-		@param actor Actor f�sico del que se desea conocer la posici�n y orientaci�n.
-		@return Matriz 4x4 con la posici�n y orientaci�n de la entidad.
+		@param actor Actor f�sico del que se desea conocer el transform.
+		@return Matriz 4x4 con la posici�n, rotación y escalado de la entidad.
 		 */
 		Matrix4 getActorTransform(const physx::PxRigidActor *actor);
 
@@ -236,7 +230,7 @@ namespace Physics {
 		Mueve un actor cinem�tico.
 
 		@param actor Actor cinem�tico que se desea mover.
-		@param transform Nueva posici�n y orientaci�n. 
+		@param transform Nuevo transform. 
 		 */
 		void moveKinematicActor(physx::PxRigidDynamic *actor, const Matrix4 &transform);
 
@@ -244,7 +238,7 @@ namespace Physics {
 		Aplica una traslaci�n a un actor cinem�tico.
 
 		@param actor Actor cinem�tico que se desea mover.
-		@param displ Desplazamiento a realizar
+		@param displ Desplazamiento a realizar.
 		 */
 		void moveKinematicActor(physx::PxRigidDynamic *actor, const Vector3 &displ);
 
@@ -252,8 +246,15 @@ namespace Physics {
 		Indica si un actor din�mico es cinem�tico.
 		 */
 		bool isKinematic(const physx::PxRigidDynamic *actor);
-		
 
+		/**
+		Cambia el transform de una entidad f�sica.
+
+		@param actor Actor f�sico del que se desea cambiar el transform.
+		@param transform Nuevo transform.
+		*/
+		void setActorTransform(physx::PxRigidActor *actor, const Matrix4 &transform);
+		
 		//----------------------------------
 		// Gesti�n de character controllers
 		//----------------------------------
@@ -271,7 +272,6 @@ namespace Physics {
 		physx::PxCapsuleController* createCapsuleController(const Vector3 &position, float radius, 
 															float height, 
 															const Logic::CPhysicController *component);
-
 
 		/**
 		Mueve el controller por la escena.
@@ -299,7 +299,6 @@ namespace Physics {
 		@param posici�n del controller en coordenadas l�gicas.
 		*/
 		void setControllerPosition(physx::PxCapsuleController *controller, const Vector3 &position);
-
 		
 		//----------------------------------
 		// Consultas 
@@ -313,7 +312,7 @@ namespace Physics {
 		 @param maxDist distancia m�xima de la primera intersecci�n.
 		 @return Primera entidad l�gica alcanzada o NULL.
 		 */
-		Logic::CEntity* raycastClosest (const Ray& ray, float maxDist) const; 
+		Logic::CEntity* raycastClosest(const Ray& ray, float maxDist) const;
 
 		/**
 		 Lanza un rayo y devuelve la primera entidad l�gica contra la que interseca que pertenezca 
@@ -325,7 +324,7 @@ namespace Physics {
 		 @param group Grupo de colisi�n de la entidad buscada.
 		 @return Primera entidad l�gica alcanzada de ese grupo o NULL.
 		 */
-		Logic::CEntity* raycastClosest (const Ray& ray, float maxDist, int group) const; 
+		Logic::CEntity* raycastClosest(const Ray& ray, float maxDist, int group) const;
 
 	private:
 
@@ -343,7 +342,7 @@ namespace Physics {
 		static CServer *_instance;
 
 		// Gestor de errores
-		physx::PxErrorCallback *_errorManager;
+		Physics::CErrorManager *_errorManager;
 
 		// Gestor de memoria
 		physx::PxAllocatorCallback *_allocator;

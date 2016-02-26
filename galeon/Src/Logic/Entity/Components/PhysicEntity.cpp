@@ -49,7 +49,7 @@ CPhysicEntity::~CPhysicEntity()
 	_server = NULL;
 } 
 
-////---------------------------------------------------------
+//---------------------------------------------------------
 
 bool CPhysicEntity::spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo) 
 {
@@ -61,31 +61,11 @@ bool CPhysicEntity::spawn(CEntity *entity, CMap *map, const Map::CEntity *entity
 	_actor = createActor(entityInfo);
 
 	return true;
-} 
-
-//---------------------------------------------------------
-/*
-bool CPhysicEntity::accept(const TMessage &message)
-{
-	return message._type == Message::KINEMATIC_MOVE;
 }
 
 //---------------------------------------------------------
 
-void CPhysicEntity::process(const TMessage &message)
-{
-	switch(message._type) {
-	case Message::KINEMATIC_MOVE:
-		// Acumulamos el vector de desplazamiento para usarlo posteriormente en 
-		// el m�todo tick.
-		_movement += message._vector3;
-		break;
-	}
-}
-*/
-//---------------------------------------------------------
-
-void CPhysicEntity::tick(unsigned int msecs) 
+void CPhysicEntity::tick(unsigned int msecs)
 {
 	// Invocar al m�todo de la clase padre (IMPORTANTE)
 	IComponent::tick(msecs);
@@ -95,17 +75,35 @@ void CPhysicEntity::tick(unsigned int msecs)
 	if (!dinActor) 
 		return;
 
-	// Actualizar la posici�n y la orientaci�n de la entidad l�gica usando la 
-	// informaci�n proporcionada por el motor de f�sica	
+	// Si es una entidad dinámica: Actualizar el transform de la entidad
+	// l�gica usando la informaci�n proporcionada por el motor de f�sica	
 	_entity->setTransform(_server->getActorTransform(dinActor));
 
-	// Si el objeto f�sico es cinem�tico intentamos moverlo de acuerdo 
+	// Si el objeto f�sico es cinem�tico, intentamos moverlo de acuerdo 
 	// a los mensajes KINEMATIC_MOVE recibidos 
 	if (_server->isKinematic(dinActor)) {
 		_server->moveKinematicActor(dinActor, _movement);
 		_movement = Vector3::ZERO;
-	} 
+	}
 }
+
+//---------------------------------------------------------
+
+bool CPhysicEntity::HandleMessage(const TransformMessage& m)
+{
+	_server->setActorTransform(_actor, m._transform);
+	return true;
+
+} // SET_TRANSFORM
+
+//---------------------------------------------------------
+
+bool CPhysicEntity::HandleMessage(const KinematicMoveMessage& m)
+{
+	_movement += m._shift;
+	return true;
+
+} // KINEMATIC_MOVE
 
 //---------------------------------------------------------
 
@@ -129,6 +127,8 @@ PxRigidActor* CPhysicEntity::createActor(const Map::CEntity *entityInfo)
 	return NULL;
 }
 
+//---------------------------------------------------------
+
 PxRigidStatic* CPhysicEntity::createPlane(const Map::CEntity *entityInfo)
 {
 	// La posici�n de la entidad es un punto del plano
@@ -142,10 +142,12 @@ PxRigidStatic* CPhysicEntity::createPlane(const Map::CEntity *entityInfo)
 	int group = 0;
 	if (entityInfo->hasAttribute("physic_group"))
 		group = entityInfo->getIntAttribute("physic_group");
- 
+
 	// Crear el plano
 	return _server->createPlane(point, normal, group, this);
 }
+
+//---------------------------------------------------------
 
 PxRigidActor* CPhysicEntity::createRigid(const Map::CEntity *entityInfo)
 {
@@ -171,7 +173,6 @@ PxRigidActor* CPhysicEntity::createRigid(const Map::CEntity *entityInfo)
 	int group = 0;
 	if (entityInfo->hasAttribute("physic_group"))
 		group = entityInfo->getIntAttribute("physic_group");
-
 
 	if (physicType == "static") {
 		if (physicShape == "box") {
@@ -205,6 +206,8 @@ PxRigidActor* CPhysicEntity::createRigid(const Map::CEntity *entityInfo)
 	return NULL;
 }
 
+//---------------------------------------------------------
+
 PxRigidActor* CPhysicEntity::createFromFile(const Map::CEntity *entityInfo)
 {
 	// Leer la ruta del fichero RepX
@@ -220,6 +223,7 @@ PxRigidActor* CPhysicEntity::createFromFile(const Map::CEntity *entityInfo)
 	return _server->createFromFile(file, group, this);
 }
 
+//---------------------------------------------------------
 
 void CPhysicEntity::onTrigger(IPhysics *otherComponent, bool enter)
 {
@@ -227,14 +231,8 @@ void CPhysicEntity::onTrigger(IPhysics *otherComponent, bool enter)
 	// todos los componentes de la entidad. 
 	TouchMessage msg;
 
-	if (enter) {
-		msg._type = MessageType::TOUCHED;
-	} else {
-		msg._type = MessageType::UNTOUCHED;
-	}
-
+	msg._type = (enter) ? MessageType::TOUCHED : MessageType::UNTOUCHED;
     msg._entity = otherComponent->getEntity();
 
 	msg.Dispatch(*_entity);
 }
-

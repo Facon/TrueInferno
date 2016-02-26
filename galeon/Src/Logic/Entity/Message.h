@@ -209,17 +209,16 @@ namespace Logic
     };
 
 	// KINEMATIC_MOVE
-    class MoveMessage : public Message
-    {
-    public:
-        Vector3 _point;
+	class KinematicMoveMessage : public Message
+	{
+	public:
+		Vector3 _shift;
 
-        virtual bool Dispatch(MessageHandler& handler) const
-        {
-            return handler.HandleMessage(*this);
-        }
-    };
-
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
 
 	// TOUCHED, UNTOUCHED
 	class TouchMessage : public Message
@@ -254,6 +253,18 @@ namespace Logic
 		MovePlaceableMessage(MessageType type) : Message(type) {}
 
 		Vector3 _position;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// MOVE ??
+	class MoveMessage : public Message
+	{
+	public:
+		Vector3 _point;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

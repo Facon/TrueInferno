@@ -14,12 +14,13 @@ namespace Logic
     class AnimationMessage;
     class ControlMessage;
 	class PhysicMessage;
-    class MoveMessage;
+	class KinematicMoveMessage;
     class TouchMessage;
     class DamageMessage;
 	class WorkerMessage;
 	class WalkSoulPathMessage;
 	class HellQuartersActionMessage;
+	class MoveMessage;
 	class MovePlaceableMessage;
 	
 	class MessageHandler
@@ -53,7 +54,7 @@ namespace Logic
 		virtual bool HandleMessage(const PhysicMessage& msg)
 		{ return false; }
 
-        virtual bool HandleMessage(const MoveMessage& msg)
+		virtual bool HandleMessage(const KinematicMoveMessage& msg)
         { return false; }
 
         virtual bool HandleMessage(const TouchMessage& msg)
@@ -73,6 +74,9 @@ namespace Logic
 
 		virtual bool HandleMessage(const MovePlaceableMessage& msg)
 		{  return false; }
+
+        virtual bool HandleMessage(const MoveMessage& msg)
+        { return false; }
 
 	};
 } // namespace Logic
