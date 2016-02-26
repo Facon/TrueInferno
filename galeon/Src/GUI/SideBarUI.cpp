@@ -28,6 +28,8 @@
 #include "Physics/Server.h"
 #include "Logic\Entity\Message.h"
 
+#include "AI/Server.h"
+
 namespace GUI
 {
 	SideBarUI::SideBarUI()
@@ -108,74 +110,111 @@ namespace GUI
 		_uibuttonsWindow->setVisible(false);
 	}
 
+	Logic::CEntity* getTileEntityFromRaycast(){
+
+		Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
+
+		float width = (float)mCamera->getViewportWidth();
+		float height = (float)mCamera->getViewportHeight();
+
+		CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+		CEGUI::Vector2f mousePos =
+			context.getMouseCursor().getPosition();
+
+		Ogre::Ray mouseRay =
+			mCamera->getCameraToViewportRay(
+			mousePos.d_x / width,
+			mousePos.d_y / height);
+
+		Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000, 1);
+
+		return entity;
+	}
+
 	void SideBarUI::tick(unsigned int msecs)
 	{
 		if (_placeableEntity){
-			Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
-			//auto mSceneMgr = Graphics::CServer::getSingletonPtr()->getActiveScene()->getSceneMgr();
 
-			float width = (float) mCamera->getViewportWidth(); // viewport width
-			float height = (float) mCamera->getViewportHeight(); // viewport height
+			Logic::CEntity* entity = getTileEntityFromRaycast();
 
-			//Ogre::RaySceneQuery* mRayScnQuery = mSceneMgr->createRayQuery(Ogre::Ray());
-			CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-			CEGUI::Vector2f mousePos =
-				context.getMouseCursor().getPosition();
-			
-			Ogre::Ray mouseRay =
-				mCamera->getCameraToViewportRay(
-				mousePos.d_x / width,
-				mousePos.d_y / height);
-			/*mRayScnQuery->setRay(mouseRay);
-			mRayScnQuery->setSortByDistance(true);
-
-			Ogre::RaySceneQueryResult& result = mRayScnQuery->execute();
-			Ogre::RaySceneQueryResult::iterator it = result.begin();
-
-			for (; it != result.end(); it++)
+			if (entity)
 			{
-				std::string aux = it->movable->getName().c_str();
-				std::size_t found = aux.find("Tile");
-				if (found != std::string::npos){
-					//printf(it->movable->getName().c_str());
-					
-					//Logic::Tile* tile = Ogre::any_cast<Logic::Tile*>(it->movable->getUserObjectBindings().getUserAny());
-
-					Logic::CBuildingManager::getSingletonPtr()->movePlaceable(Logic::CServer::getSingletonPtr()->getMap(), _placeableEntity, Logic::CTileManager::getSingletonPtr()->getTileByName(it->movable->getName().c_str())->getLogicPosition());
-		
-					break;
-				}
-			}*/
-
-			Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000, 1);
-			if (entity){
-				//printf(entity->getName().c_str());
 				Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, entity->getPosition());
-			}
-
-
-
+				if (_roadInConstruction == 1)
+				{
+					_originRoadTile = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
+				}
 			
+
+
+				if (_roadInConstruction == 2)
+				{
+					if (_placeableRoadSize > 0){
+						for (int i = 1; i < _placeableRoadSize; ++i){
+							if (_placeableRoad[i])
+								Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableRoad[i]);
+						}
+						_placeableRoadSize = 0;
+						free(_placeableRoad);
+					}
+
+
+					Logic::Tile* to = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
+					std::vector<Logic::Tile*>* path= AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(_originRoadTile, to);
+					printf("tile origin x=%f z=%f tile destiny x=%f z=%f\n", _originRoadTile->getLogicPosition().x,
+						_originRoadTile->getLogicPosition().z, to->getLogicPosition().x, to->getLogicPosition().z);
+
+					if (path){
+						printf("path route provided of size %d\n", path->size());
+						int z = 0;
+						for (auto it = path->cbegin(); it != path->cend(); ++it)
+						{
+							Logic::Tile* tile = (*it);
+							printf("tile %d x=%f z=%f\n", ++z, tile->getLogicPosition().x, tile->getLogicPosition().z);
+						}
+
+						int j = 0;
+
+						//borrarñapa
+
+						if (path->size() > 1){
+							path->erase(path->cbegin());
+						}
+						//borrarñapa
+
+						printf("path size %d\n", path->size());
+						_placeableRoad = new Logic::CEntity*[path->size()];
+						_placeableRoadSize = path->size();
+						_placeableRoad[0] = _placeableEntity;
+						for (auto it = path->cbegin(); it != path->cend(); ++it)
+						{
+							if (j == 0){
+								++j;
+								continue;
+							}
+							Logic::Tile* tile = (*it);
+							_placeableRoad[j++] = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", tile->getLogicPosition(), false);
+						}
+						printf("road created\n");
+					}
+				}
+			}
 		}
 	}
 
 	bool SideBarUI::createFurnaceReleased(const CEGUI::EventArgs& e)
 	{
 
-		//Map::CMapParser::TEntityList mapEntityList =
-			//Map::CMapParser::getSingletonPtr()->getEntityList();
-		//Logic::CEntityFactory* entityFactory = Logic::CEntityFactory::getSingletonPtr();
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Evilator", Vector3(0, 2, 0), true);
-
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Furnace", Vector3(0, 0, 0), true);
 		return true;
-	} //createBuildingReleased
+	} 
 
 	bool SideBarUI::createRoadReleased(const CEGUI::EventArgs& e)
 	{
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 2, 0), true);
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 0, 0), true);
+		_roadInConstruction = 1;
 		return true;
-
-	} //createBuildingReleased
+	}
 
 	bool SideBarUI::createResource1BuildingReleased(const CEGUI::EventArgs& e)
 	{
@@ -237,10 +276,38 @@ namespace GUI
 	}
 
 
-	void SideBarUI::placeBuildingInConstruction(){
-		if (_placeableEntity){
-			//Logic::CBuildingManager::getSingletonPtr()->registerBuilding(_placeableEntity->);
-			_placeableEntity = nullptr;
+	void SideBarUI::placeBuildingInConstruction()
+	{
+		if (_placeableEntity)
+		{
+			Logic::CEntity* entity = getTileEntityFromRaycast();
+			if (entity){
+				switch (_roadInConstruction)
+				{
+
+				case 0:
+				{
+					if (Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableEntity))
+						_placeableEntity = nullptr;		
+					break;
+
+				}
+				case 1:
+				{
+					_roadInConstruction = 2;
+					break;
+				}
+				case 2:
+				{
+					for (int i = 0; i < _placeableRoadSize; ++i)
+						Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableRoad[i]);
+					_placeableRoad = nullptr;
+					_placeableEntity = nullptr;
+					_roadInConstruction = 0;
+					break;
+				}
+				}
+			}
 		}
 	}
 }

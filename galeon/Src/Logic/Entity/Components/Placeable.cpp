@@ -129,9 +129,9 @@ namespace Logic {
 		}
 
 		// Cambiamos la altura a justo encima de la tile
-		MoveMessage m;
-		m._point = _entity->getPosition();
-		m._point.y = HEIGHT_ON_TILE;
+		Vector3 newPosition = _entity->getPosition();
+		newPosition.y = HEIGHT_ON_TILE;
+		_entity->setPosition(newPosition);
 
 		// Cambiamos el estado
 		_floating = false;

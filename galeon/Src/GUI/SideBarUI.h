@@ -5,6 +5,7 @@
 namespace Logic
 {
 	class CEntity;
+	class Tile;
 }
 //lo de antes ver si kitar
 namespace CEGUI
@@ -20,7 +21,10 @@ namespace GUI
 	protected:
 		CEGUI::Window* _uibuttonsWindow;
 		Logic::CEntity* _placeableEntity=nullptr;
-		int _Constructing = 0;
+		Logic::CEntity* *_placeableRoad = nullptr;
+		int _placeableRoadSize;
+		Logic::Tile* _originRoadTile=nullptr;
+		int _roadInConstruction = false;
 
 		bool createFurnaceReleased(const CEGUI::EventArgs& e);
 		bool createRoadReleased(const CEGUI::EventArgs& e);

@@ -76,11 +76,19 @@ namespace AI {
 	Calcula con A* una ruta de soulpaths desde un cierto Tile a otro.
 	*/
 	std::vector<Logic::Tile*>* CServer::getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to){
+
 		// Reseteamos para asegurarnos que los vecinos se recalculan por si el mapa ha cambiado
 		// TODO Llamar únicamente cuando se modifique el mapa para las soulpaths: Soulpath eliminada (las construídas no cambian nada), edificio construído sobre una casilla vacía, etc.
 		_aStarSoulPath->Reset();
 
+		if (from == to){
+			std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>();
+			out->push_back(from);
+			return out;
+		}
+
 		std::vector<void*>* path = new std::vector<void*>();
+
 		float cost = 0.0f;
 		int solved = _aStarSoulPath->Solve((void*)from, (void*)to, path, &cost);
 		if (solved == micropather::MicroPather::NO_SOLUTION || path->size() == 0) {
