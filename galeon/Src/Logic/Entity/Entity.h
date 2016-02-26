@@ -181,7 +181,7 @@ namespace Logic
 		bool HandleMessage(const DamageMessage& msg);
 		bool HandleMessage(const WorkerMessage& msg);
 		bool HandleMessage(const WalkSoulPathMessage& msg);
-		bool HandleMessage(const HellQuartersActionMessage& msg);
+		bool HandleMessage(const HellQuartersMessage& msg);
 		bool HandleMessage(const MovePlaceableMessage& msg);
 
 		/**

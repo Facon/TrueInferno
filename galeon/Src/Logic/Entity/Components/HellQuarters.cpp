@@ -16,8 +16,6 @@ namespace Logic {
 	RTTI_ROOT_IMPL(CHellQuarters);
 	IMP_FACTORY(CHellQuarters);
 
-	const float CHellQuarters::SOUL_ON_TILE_HEIGHT = 2.0;
-
 	bool CHellQuarters::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 		_timeSinceLastSpawn = 0;
 
@@ -30,19 +28,15 @@ namespace Logic {
 		assert(entityInfo->hasAttribute("numSpawnedSouls") && "numSpawnedSouls is not defined");
 		_numSpawnedSouls = entityInfo->getIntAttribute("numSpawnedSouls");
 
-		_numSoulsToWork = 0;
-		_numSoulsToBurn = 0;
-
-		_sendingSoulToWorkState = SendingSoulToWorkState::Idle;
-		_pathReceived = nullptr;
-
 		return true;
 	} // spawn
 
 	void CHellQuarters::tick(unsigned int msecs){
-		tickSpawnSouls(msecs);
+		// Tickeamos la FSM
+		IComponent::tick(msecs);
 
-		tickSendSoulToWork(msecs);
+		// Y la lógica interna sencilla
+		tickSpawnSouls(msecs);
 	} // tick
 
 	void CHellQuarters::tickSpawnSouls(unsigned int msecs){
@@ -56,31 +50,6 @@ namespace Logic {
 			
 			// TODO ¿Reproducimos algún sonido o animación de almas nuevas?
 		}
-	}
-
-	bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg){
-		// Nos aseguramos que estamos recibiendo una respuesta y que estábamos en estado de esperarla
-		if (msg._type != MessageType::RETURN_WALK_SOUL_PATH || _sendingSoulToWorkState != WaitingForPath)
-			return false;
-
-		// Guardamos la ruta devuelta. Puede ser NULL si no se encontró ruta al destino solicitado
-		_pathReceived = msg._path;
-
-		// Cambiamos al estado de path recibido
-		_sendingSoulToWorkState = SendingSoulToWorkState::PathReceived;
-
-		return true;
-	}
-
-	bool CHellQuarters::HandleMessage(const HellQuartersActionMessage& msg){
-		// Ignoramos peticiones si no estamos en estado inactivo para mensajes de enviar a trabajar
-		if ((_sendingSoulToWorkState != SendingSoulToWorkState::Idle) || (msg._type != MessageType::SEND_SOUL_WORK))
-			return false;
-
-		_numSoulsToWork += msg._numSouls;
-		_sendingSoulToWorkState = SendingSoulToWorkState::Requested;
-
-		return true;
 	}
 
 	void CHellQuarters::requestSendSoulToBurn(){

@@ -111,8 +111,6 @@ namespace AI
 		
 		//virtual void process(const TMessage &message);
 
-		virtual bool HandleMessage(const WalkSoulPathMessage& msg) = 0;
-
 	protected:
 		/**
 		Tipo que guarda la información de las aristas salientes de un nodo.

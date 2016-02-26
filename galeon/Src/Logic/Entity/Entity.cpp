@@ -255,7 +255,7 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
-	bool CEntity::HandleMessage(const HellQuartersActionMessage& msg)
+	bool CEntity::HandleMessage(const HellQuartersMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}

@@ -19,7 +19,7 @@ namespace Logic
     class DamageMessage;
 	class WorkerMessage;
 	class WalkSoulPathMessage;
-	class HellQuartersActionMessage;
+	class HellQuartersMessage;
 	class MovePlaceableMessage;
 	
 	class MessageHandler
@@ -68,7 +68,7 @@ namespace Logic
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg)
 		{ return false; }
 
-		virtual bool HandleMessage(const HellQuartersActionMessage& msg)
+		virtual bool HandleMessage(const HellQuartersMessage& msg)
 		{ return false; }
 
 		virtual bool HandleMessage(const MovePlaceableMessage& msg)

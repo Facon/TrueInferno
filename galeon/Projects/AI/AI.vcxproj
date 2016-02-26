@@ -86,18 +86,19 @@
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAGetTaskAndTarget.cpp" />
     <ClCompile Include="..\..\Src\AI\LatentAction.cpp" />
     <ClCompile Include="..\..\Src\AI\micropather.cpp" />
     <ClCompile Include="..\..\Src\AI\Movement.cpp" />
     <ClCompile Include="..\..\Src\AI\Server.cpp" />
     <ClCompile Include="..\..\Src\AI\SimpleLatentActions.cpp" />
-    <ClCompile Include="..\..\Src\AI\SoulTask.cpp" />
     <ClCompile Include="..\..\Src\AI\UndirectedGraph.cpp" />
     <ClCompile Include="..\..\Src\AI\WaypointGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\AStarFunctionsWalkingSoul.h" />
     <ClInclude Include="..\..\Src\AI\AStarFunctionsSoulPath.h" />
+    <ClInclude Include="..\..\Src\AI\BurnSoulTask.h" />
     <ClInclude Include="..\..\Src\AI\Condition.h" />
     <ClInclude Include="..\..\Src\AI\DisjointSets.h" />
     <ClInclude Include="..\..\Src\AI\DynamicMovement.h" />
@@ -105,6 +106,7 @@
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />
     <ClInclude Include="..\..\Src\AI\LAFindingPath.h" />
+    <ClInclude Include="..\..\Src\AI\LAGetTaskAndTarget.h" />
     <ClInclude Include="..\..\Src\AI\LatentAction.h" />
     <ClInclude Include="..\..\Src\AI\micropather.h" />
     <ClInclude Include="..\..\Src\AI\Movement.h" />
@@ -116,6 +118,7 @@
     <ClInclude Include="..\..\Src\AI\StateMachine.h" />
     <ClInclude Include="..\..\Src\AI\UndirectedGraph.h" />
     <ClInclude Include="..\..\Src\AI\WaypointGraph.h" />
+    <ClInclude Include="..\..\Src\AI\WorkSoulTask.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

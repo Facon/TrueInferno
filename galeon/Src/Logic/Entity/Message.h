@@ -58,6 +58,8 @@ namespace Logic
 			SEND_SOUL_BURN,
 			PLACEABLE_FLOAT_TO,
 			PLACEABLE_PLACE,
+			HELLQUARTERS_REQUEST,
+			HELLQUARTERS_RESPONSE,
 		};
 	}
 
@@ -303,12 +305,18 @@ namespace Logic
 		}
 	};
 
-	// SEND_SOUL_WORK, SEND_SOUL_BURN
-	class HellQuartersActionMessage : public Message
+	enum HellQuartersAction{
+		SEND_SOUL_BURN,
+		SEND_SOUL_WORK,
+	};
+
+	// REQUEST_SEND_SOUL_WORK, REQUEST_SEND_SOUL_BURN
+	class HellQuartersMessage : public Message
 	{
 	public:
-		HellQuartersActionMessage(int numSouls) : _numSouls(numSouls) {}
+		HellQuartersMessage(HellQuartersAction action, int numSouls) : Message(MessageType::HELLQUARTERS_REQUEST), _action(action), _numSouls(numSouls) {}
 
+		HellQuartersAction _action;
 		int _numSouls;
 
 		virtual bool Dispatch(MessageHandler& handler) const

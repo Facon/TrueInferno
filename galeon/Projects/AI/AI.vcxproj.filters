@@ -89,9 +89,6 @@
     <ClCompile Include="..\..\Src\AI\AStarFunctionsWalkingSoul.cpp">
       <Filter>Movement\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\SoulTask.cpp">
-      <Filter>Souls\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
@@ -99,6 +96,9 @@
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AI\SimpleLatentActions.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAGetTaskAndTarget.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -162,6 +162,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\SMHellQuarters.h">
       <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAGetTaskAndTarget.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\BurnSoulTask.h">
+      <Filter>Souls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\WorkSoulTask.h">
+      <Filter>Souls\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

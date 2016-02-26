@@ -17,17 +17,17 @@ namespace AI {
 			int waitingRequest = this->addNode(new CLAWait(TIMEOUT));
 
 			/** Estado de cálculo de ruta */
-			int findingPath = this->addNode(new CLAFindingPath());
+			int process = this->addNode(new CLAFindingPath());
 
 			/** Pasamos de inactivo a esperando petición cuando nos despiertan */
 			this->addEdge(idle, waitingRequest, new CConditionMessage<CLatentAction>(MessageType::WAKE_UP));
 
 			/** Si hay éxito y se recibe petición pasamos de espera a buscando ruta. Si no recibimos nada volvemos a inactivo */
-			this->addEdge(waitingRequest, findingPath, new CConditionSuccess());
+			this->addEdge(waitingRequest, process, new CConditionSuccess());
 			this->addEdge(waitingRequest, idle, new CConditionFail());
 
 			/** Una vez calculada y devuelta la ruta volvemos al estado inactivo */
-			this->addEdge(findingPath, idle, new CConditionFinished());
+			this->addEdge(process, idle, new CConditionFinished());
 			
 			this->setInitialNode(idle);
 			this->resetExecution();

@@ -144,6 +144,7 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFinder.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulSender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -267,6 +268,9 @@
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFinder.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulSender.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

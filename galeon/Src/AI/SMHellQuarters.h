@@ -4,29 +4,9 @@
 #include "StateMachine.h"
 #include "Logic\Entity\Message.h"
 #include "AI\Server.h"
+#include "LAGetTaskAndTarget.h"
 
 namespace AI {
-	class CLAGetTaskAndTarget : public CLatentAction {
-	public:
-		CLAGetTaskAndTarget() {}
-		~CLAGetTaskAndTarget() {}
-
-		virtual bool HandleMessage(const HellQuartersActionMessage& msg)
-		{
-			if (msg._type != Logic::TMessage::REQUEST_HELLQUARTERS_ACTION)
-				return false;
-
-			_walkingSoulTarget = msg.;
-
-			return true;
-		}
-
-	protected:
-		virtual LAStatus OnRun() {
-			// TODO
-		}
-	};
-
 	class CSMHellQuarters : public CStateMachine<CLatentAction> {
 	public:
 		CSMHellQuarters(CEntity* entity) : CStateMachine(entity) {
@@ -46,7 +26,7 @@ namespace AI {
 			this->addEdge(waitingRequest, process, new CConditionSuccess());
 			this->addEdge(waitingRequest, idle, new CConditionFail());
 
-			/** Una vez procesada la petición al estado inactivo */
+			/** Una vez procesada la petición volvemos al estado inactivo */
 			this->addEdge(process, idle, new CConditionFinished());
 			
 			this->setInitialNode(idle);
@@ -55,7 +35,7 @@ namespace AI {
 
 		virtual ~CSMHellQuarters() {}
 
-		bool HandleMessage(const HellQuartersActionMessage& msg){
+		bool HandleMessage(const HellQuartersMessage& msg){
 			bool ret = false;
 
 			// Si no hay un nodo actual no hay aristas interesadas así que lo primero es comprobar si hay un nodo válido en _currentNodeId

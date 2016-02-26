@@ -173,8 +173,7 @@ namespace GUI
 
 	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
-		Logic::HellQuartersActionMessage m(1);
-		m._type = Logic::MessageType::SEND_SOUL_WORK;
+		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_WORK, 1);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 		
 		m.Dispatch(*hellQuarters->getEntity());
