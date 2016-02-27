@@ -2,9 +2,11 @@
 #define SOUL_SENDER_H_
 
 #include "Logic/Entity/Component.h"
+#include "StateMachineExecutor.h"
+#include "AI/SMSoulSender.h"
 
 namespace Logic {
-	class CSoulSender : public IComponent{
+	class CSoulSender : public CStateMachineExecutor {
 		RTTI_DECL;
 		DEC_FACTORY(CSoulSender);
 
@@ -12,9 +14,9 @@ namespace Logic {
 		/**
 		Constructor por defecto.
 		*/
-		CSoulSender();
+		CSoulSender() {};
 
-		virtual ~CSoulSender();
+		virtual ~CSoulSender() {};
 
 		/**
 		Inicialización del componente usando la descripción de la entidad que hay en
@@ -26,6 +28,11 @@ namespace Logic {
 		Actualización por frame
 		*/
 		virtual void tick(unsigned int msecs);
+
+	protected:
+		AI::CStateMachine<AI::CLatentAction>* getStateMachine(){
+			return new AI::CSMSoulSender(_entity);
+		}
 
 	private:
 		const float SOUL_ON_TILE_HEIGHT = 2.0;

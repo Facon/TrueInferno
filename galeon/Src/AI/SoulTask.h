@@ -4,7 +4,7 @@
 namespace AI{
 	class CSoulTask {
 	public:
-		virtual bool execute();
+		virtual bool execute() = 0;
 	};
 }
 

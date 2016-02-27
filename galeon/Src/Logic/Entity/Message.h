@@ -60,6 +60,8 @@ namespace Logic
 			PLACEABLE_PLACE,
 			HELLQUARTERS_REQUEST,
 			HELLQUARTERS_RESPONSE,
+			SOUL_SENDER_REQUEST,
+			SOUL_SENDER_RESPONSE,
 		};
 	}
 
@@ -264,17 +266,6 @@ namespace Logic
 		}
 	};
 
-	/*class SoulTaskMessage : public Message
-	{
-	public:
-		AI::SoulTask task;
-
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			return handler.HandleMessage(*this);
-		}
-	};*/
-
 	/** Mensaje con la cantidad de trabajadores a añadir (numWorkers > 0) o quitar (numWorkers < 0) */
 	class WorkerMessage : public Message
 	{
@@ -318,6 +309,18 @@ namespace Logic
 
 		HellQuartersAction _action;
 		int _numSouls;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// SOUL_SENDER_REQUEST, SOUL_SENDER_RESPONSE
+	class SoulSenderMessage : public Message
+	{
+	public:
+		SoulSenderMessage() : Message(MessageType::SOUL_SENDER_REQUEST) {}
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

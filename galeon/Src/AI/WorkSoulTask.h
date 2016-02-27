@@ -4,6 +4,7 @@
 #include "SoulTask.h"
 
 namespace AI{
+
 	class CWorkTask : public CSoulTask {
 	public:
 		CWorkTask() {};
@@ -11,8 +12,10 @@ namespace AI{
 
 		virtual bool execute() {
 			// TODO
+			return false;
 		};
 	};
+
 }
 
 #endif

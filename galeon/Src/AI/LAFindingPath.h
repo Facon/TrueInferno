@@ -28,7 +28,6 @@ namespace AI {
 		}
 
 	protected:
-
 		virtual LAStatus OnStart() {
 			_pathRequestReceived = false;
 			return LAStatus::READY;

@@ -32,9 +32,6 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
-		/** Gestión de mensajes para solicitar acciones a este HellQuarters */
-		virtual bool HandleMessage(const HellQuartersMessage& msg);
-
 	protected:
 		AI::CStateMachine<AI::CLatentAction>* getStateMachine(){
 			return new AI::CSMHellQuarters(_entity);

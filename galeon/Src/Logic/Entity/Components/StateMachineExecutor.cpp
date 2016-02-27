@@ -92,10 +92,19 @@ namespace Logic
 	*/
 	bool CStateMachineExecutor::HandleMessage(const WalkSoulPathMessage& msg)
 	{
-		/*if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
+		if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
 			return true;
 		if (_currentAction != NULL)
-			return _currentAction->HandleMessage(msg);*/
+			return _currentAction->HandleMessage(msg);
+		return false;
+	}
+
+	bool CStateMachineExecutor::HandleMessage(const HellQuartersMessage& msg)
+	{
+		if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
+			return true;
+		if (_currentAction != NULL)
+			return _currentAction->HandleMessage(msg);
 		return false;
 	}
 

@@ -172,5 +172,8 @@
     <ClInclude Include="..\..\Src\AI\WorkSoulTask.h">
       <Filter>Souls\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMSoulSender.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

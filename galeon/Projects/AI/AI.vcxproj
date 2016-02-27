@@ -114,6 +114,7 @@
     <ClInclude Include="..\..\Src\AI\SimpleLatentActions.h" />
     <ClInclude Include="..\..\Src\AI\SMHellQuarters.h" />
     <ClInclude Include="..\..\Src\AI\SMPathFinder.h" />
+    <ClInclude Include="..\..\Src\AI\SMSoulSender.h" />
     <ClInclude Include="..\..\Src\AI\SoulTask.h" />
     <ClInclude Include="..\..\Src\AI\StateMachine.h" />
     <ClInclude Include="..\..\Src\AI\UndirectedGraph.h" />

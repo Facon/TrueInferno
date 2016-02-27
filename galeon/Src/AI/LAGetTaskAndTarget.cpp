@@ -2,20 +2,20 @@
 
 namespace AI {
 	bool CLAGetTaskAndTarget::HandleMessage(const HellQuartersMessage& msg) {
-		// Rechazamos lo que no sean peticiones. No aceptamos más de una petición
+		// Rechazamos lo que no sean peticiones. No aceptamos más de una petición simultánea
 		if (msg._type != MessageType::HELLQUARTERS_REQUEST || _task != nullptr)
 			return false;
 
 		switch (msg._action){
 		case SEND_SOUL_BURN:{
-			_task = new CBurnSoulTask();
 			_target = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Furnace);
+			_task = new CBurnTask();
 
 			break;
 		}
 		case SEND_SOUL_WORK:{
-			_task = new CWorkSoulTask();
 			_target = CBuildingManager::getSingletonPtr()->getRandomBuilding();
+			_task = new CWorkTask();
 			break;
 		}
 		default:{
@@ -24,12 +24,13 @@ namespace AI {
 		}
 		}
 
+		// Reactivamos la LA
 		resume();
 
 		return true;
 	}
 
-	LAStatus CLAGetTaskAndTarget::OnStart() {
+	CLatentAction::LAStatus CLAGetTaskAndTarget::OnStart() {
 		// Inicializamos
 		if (_task){
 			delete _task;
@@ -37,11 +38,11 @@ namespace AI {
 		}
 		_target = nullptr;
 
-		// Dormimos la LA hasta que llegue el mensaje con la petición
+		// Suspendemos la LA hasta que llegue el mensaje con la petición
 		return LAStatus::SUSPENDED;
 	}
 
-	LAStatus CLAGetTaskAndTarget::OnRun() {
+	CLatentAction::LAStatus CLAGetTaskAndTarget::OnRun() {
 		// Verificación por seguridad
 		if (_target == nullptr || _task == nullptr)
 			return LAStatus::FAIL;
@@ -50,6 +51,10 @@ namespace AI {
 	}
 
 	bool CLAGetTaskAndTarget::sendSoul(){
+		// TODO Enviar mensaje al SoulSender
+
+		/*SoulSenderMessage() m;
+
 		CMap* map = CServer::getSingletonPtr()->getMap();
 		CEntity* newSoul = CEntityFactory::getSingletonPtr()->createEntity("Soul", map);
 
@@ -74,7 +79,7 @@ namespace AI {
 		if (!m2.Dispatch(*newSoul)){
 			std::cout << "Can´t assign path to soul" << std::endl;
 			return false;
-		}
+		}*/
 
 		return true;
 	}

@@ -1,6 +1,7 @@
 #include "PathFinder.h"
 
-
+#include "Map/MapEntity.h"
+#include "Logic/Entity/Entity.h"
 #include <iostream>
 
 namespace Logic {

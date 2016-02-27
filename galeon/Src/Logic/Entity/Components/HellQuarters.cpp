@@ -35,7 +35,7 @@ namespace Logic {
 		// Tickeamos la FSM
 		IComponent::tick(msecs);
 
-		// Y la lógica interna sencilla
+		// Y también la lógica interna de la generación de almas, de forma independiente
 		tickSpawnSouls(msecs);
 	} // tick
 
@@ -52,10 +52,7 @@ namespace Logic {
 		}
 	}
 
-	void CHellQuarters::requestSendSoulToBurn(){
-		// TODO Interfaz pública para iniciar la lógica de envío de almas a arder
-	}
-
+	/*
 	void CHellQuarters::tickSendSoulToWork(unsigned int msecs){
 		switch (_sendingSoulToWorkState){
 		// En caso de estar parados, no se hace nada
@@ -188,5 +185,5 @@ namespace Logic {
 
 		return true;
 	}
-
+	*/
 } // namespace Logic

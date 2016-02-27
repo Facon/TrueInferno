@@ -2,12 +2,12 @@
 #define LA_GET_TASK_TARGET_
 
 #include "StateMachine.h"
-#include "Logic\Entity\Message.h"
-#include "AI\Server.h"
-#include "AI\SoulTask.h"
-#include "AI\WorkSoulTask.h"
-#include "AI\BurnSoulTask.h"
+#include "Server.h"
+#include "SoulTask.h"
+#include "WorkSoulTask.h"
+#include "BurnSoulTask.h"
 #include "Logic\BuildingManager.h"
+#include "Logic\Entity\Message.h"
 
 namespace AI {
 	class CLAGetTaskAndTarget : public CLatentAction {
@@ -28,9 +28,9 @@ namespace AI {
 		virtual bool HandleMessage(const HellQuartersMessage& msg);
 
 	protected:
-		virtual LAStatus OnStart();
+		LAStatus OnStart();
 
-		virtual LAStatus OnRun();
+		LAStatus OnRun();
 
 	private:
 		CSoulTask* _task;
