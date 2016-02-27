@@ -1,0 +1,5 @@
+"src\wrapper_base.cpp" -Fo"bin\msvc-12.0\debug\threading-multi\wrapper_base.obj"   -TP /Z7 /Od /Ob0 /W3 /GR /MDd /Zc:forScope /Zc:wchar_t /wd4675 /EHs /wd4251 -c 
+-DLUABIND_DYNAMIC_LINK 
+"-I." 
+"-I..\include" 
+"-I..\lua\src"
