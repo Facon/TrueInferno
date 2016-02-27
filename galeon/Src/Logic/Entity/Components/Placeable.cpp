@@ -24,6 +24,14 @@ namespace Logic {
 		if (_placeableType == Building)
 			// Lo desregistramos en el manager
 			Logic::CBuildingManager::getSingletonPtr()->unregisterBuilding(this);
+
+		// Eliminamos la referencia al placeable en las tiles que ocupaba
+		for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
+			(*it)->setPlaceableAbove(nullptr);
+		}
+
+		_tiles.clear();
+		_adyacentTiles.clear();
 	}
 
 	bool CPlaceable::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
