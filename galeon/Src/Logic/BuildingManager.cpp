@@ -206,6 +206,10 @@ namespace Logic {
 		return newEntity;
 	}
 
+	void CBuildingManager::destroyPlaceable(CEntity *entity){
+		CEntityFactory::getSingletonPtr()->deleteEntity(entity);
+	}
+
 	bool CBuildingManager::floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition){
 		if (!movableEntity){
 			std::cout << "Can't float null placeable to '" << logicPosition << "'" << std::endl;

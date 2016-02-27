@@ -106,6 +106,7 @@ namespace Logic
 		@param prefabName Nombre de la entidad de mapa o "prefab"
 		@param logicPosition Posición lógica donde se colocará el primer tile. El resto de tiles se colocarán de acuerdo a la info del prefab
 		@param floating Flag a true si se quiere dejar al Placeable inicialmente flotando sin ocupar realmente posiciones en la matriz ni registrarse */
+		void CBuildingManager::destroyPlaceable(CEntity *entity);
 		CEntity* createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition, bool floating);
 
 		/** Hace flotar un placeable hasta la posición lógica deseada */
