@@ -3,31 +3,29 @@
 #include <CEGUI/System.h>
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/Window.h>
-
 #include <CEGUI/CEGUI.h>
 
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
+
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/Server.h"
+#include "Logic/Entity/Components/Tile.h"
+#include "Logic/Maps/Managers/TileManager.h"
 
-//includes pal raycast
 #include "Graphics/Scene.h"
+#include "Graphics/Server.h"
+#include "Graphics/Camera.h"
+
 #include <OgreCamera.h>
 #include <OgreViewport.h>
 #include <OgreSceneQuery.h>
-#include "Graphics/Server.h"
-//#include <OgreSceneManager.h>
-#include "Graphics/Camera.h"
-#include <string>
-#include "Logic/Entity/Components/Tile.h"
-#include "Logic/Maps/Managers/TileManager.h"
+
 #include "Physics/Server.h"
 #include "Logic\Entity\Message.h"
-
 #include "AI/Server.h"
 
 namespace GUI
@@ -139,64 +137,47 @@ namespace GUI
 
 			if (entity)
 			{
-				Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, entity->getPosition());
-				if (_roadInConstruction == 1)
-				{
-					_originRoadTile = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
-				}
-			
-
-
 				if (_roadInConstruction == 2)
 				{
-					if (_placeableRoadSize > 0){
-						for (int i = 1; i < _placeableRoadSize; ++i){
-							if (_placeableRoad[i])
-								Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableRoad[i]);
-						}
-						_placeableRoadSize = 0;
-						free(_placeableRoad);
-					}
-
-
 					Logic::Tile* to = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
 					std::vector<Logic::Tile*>* path= AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(_originRoadTile, to);
-					printf("tile origin x=%f z=%f tile destiny x=%f z=%f\n", _originRoadTile->getLogicPosition().x,
-						_originRoadTile->getLogicPosition().z, to->getLogicPosition().x, to->getLogicPosition().z);
 
-					if (path){
-						printf("path route provided of size %d\n", path->size());
-						int z = 0;
-						for (auto it = path->cbegin(); it != path->cend(); ++it)
-						{
-							Logic::Tile* tile = (*it);
-							printf("tile %d x=%f z=%f\n", ++z, tile->getLogicPosition().x, tile->getLogicPosition().z);
+					if (path)
+					{
+						Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, entity->getPosition());
+						if (_placeableRoadSize > 0){
+							for (int i = 0; i < _placeableRoadSize; ++i){
+								if (_placeableRoad[i])
+									Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableRoad[i]);
+							}
+							_placeableRoadSize = 0;
+							free(_placeableRoad);
+							_placeableEntity = nullptr;
 						}
 
 						int j = 0;
 
 						//borrarñapa
-
 						if (path->size() > 1){
 							path->erase(path->cbegin());
 						}
-						//borrarñapa
 
-						printf("path size %d\n", path->size());
+						//finborrarñapa
 						_placeableRoad = new Logic::CEntity*[path->size()];
 						_placeableRoadSize = path->size();
-						_placeableRoad[0] = _placeableEntity;
 						for (auto it = path->cbegin(); it != path->cend(); ++it)
 						{
-							if (j == 0){
-								++j;
-								continue;
-							}
 							Logic::Tile* tile = (*it);
 							_placeableRoad[j++] = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", tile->getLogicPosition(), false);
 						}
-						printf("road created\n");
+						_placeableEntity = _placeableRoad[0];
 					}
+				}
+				else
+				{
+					Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, entity->getPosition());
+					if (_roadInConstruction == 1)
+						_originRoadTile = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
 				}
 			}
 		}
@@ -204,16 +185,20 @@ namespace GUI
 
 	bool SideBarUI::createFurnaceReleased(const CEGUI::EventArgs& e)
 	{
-
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Furnace", Vector3(0, 0, 0), true);
-		return true;
+		return (_placeableEntity != nullptr);
 	} 
 
 	bool SideBarUI::createRoadReleased(const CEGUI::EventArgs& e)
 	{
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 0, 0), true);
-		_roadInConstruction = 1;
-		return true;
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 0, 0), false);
+		if (_placeableEntity){
+			_placeableRoad = new Logic::CEntity*[1];
+			_placeableRoadSize = 1;
+			_placeableRoad[0] = _placeableEntity;
+			_roadInConstruction = 1;
+		}
+		return (_placeableEntity != nullptr);
 	}
 
 	bool SideBarUI::createResource1BuildingReleased(const CEGUI::EventArgs& e)
@@ -301,9 +286,11 @@ namespace GUI
 				{
 					for (int i = 0; i < _placeableRoadSize; ++i)
 						Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableRoad[i]);
+					free(_placeableRoad);
 					_placeableRoad = nullptr;
 					_placeableEntity = nullptr;
 					_roadInConstruction = 0;
+					_placeableRoadSize = 0;
 					break;
 				}
 				}
