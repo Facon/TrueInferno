@@ -10,26 +10,11 @@ namespace AI {
 	class CSMHellQuarters : public CStateMachine<CLatentAction> {
 	public:
 		CSMHellQuarters(CEntity* entity) : CStateMachine(entity) {
-			/** Estado inactivo. Espera tiempo infinito */
-			int idle = this->addNode(new CLAWait());
-
-			/** Estado de espera de petición. Se espera una cantidad razonable finita de tiempo */
-			int waitingRequest = this->addNode(new CLAWait(TIMEOUT));
-
-			/** Estado de obtención de tarea y objetivo */
+			// Bucle infinito procesando peticiones
 			int process = this->addNode(new CLAGetTaskAndTarget());
-
-			/** Pasamos de inactivo a esperando petición cuando nos despiertan */
-			this->addEdge(idle, waitingRequest, new CConditionMessage<CLatentAction>(MessageType::WAKE_UP));
-
-			/** Si hay éxito y se recibe petición pasamos de espera a procesando. Si no recibimos nada volvemos a inactivo */
-			this->addEdge(waitingRequest, process, new CConditionSuccess());
-			this->addEdge(waitingRequest, idle, new CConditionFail());
-
-			/** Una vez procesada la petición volvemos al estado inactivo */
-			this->addEdge(process, idle, new CConditionFinished());
+			this->addEdge(process, process, new CConditionFinished());
 			
-			this->setInitialNode(idle);
+			this->setInitialNode(process);
 			this->resetExecution();
 		}
 
@@ -54,10 +39,6 @@ namespace AI {
 
 			return ret;
 		}
-
-	private:
-		/** Máximo tiempo (ms) que se espera antes de volver al estado inactivo si no se recibe la petición de ruta */
-		const int TIMEOUT = 2000;
 	};
 }
 

@@ -14,7 +14,6 @@ namespace AI {
 	public:
 		CLAGetTaskAndTarget() {
 			_task = nullptr;
-			_target = nullptr;
 		}
 
 		virtual ~CLAGetTaskAndTarget() {
@@ -22,7 +21,6 @@ namespace AI {
 				delete _task;
 				_task = nullptr;
 			}
-			_target = nullptr;
 		}
 
 		virtual bool HandleMessage(const HellQuartersMessage& msg);
@@ -34,7 +32,7 @@ namespace AI {
 
 	private:
 		CSoulTask* _task;
-		CPlaceable* _target;
+		int _numSouls;
 
 		bool sendSoul();
 	};

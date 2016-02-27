@@ -14,6 +14,7 @@ Contiene el tipo de datos de un mensaje.
 
 #include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
+#include "AI/SoulTask.h"
 
 // Predeclaraciones
 namespace Logic {
@@ -320,7 +321,10 @@ namespace Logic
 	class SoulSenderMessage : public Message
 	{
 	public:
-		SoulSenderMessage() : Message(MessageType::SOUL_SENDER_REQUEST) {}
+		SoulSenderMessage(AI::CSoulTask* task, int numSouls) : Message(MessageType::SOUL_SENDER_REQUEST), _task(task), _numSouls(numSouls) {}
+
+		AI::CSoulTask* _task;
+		int _numSouls;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

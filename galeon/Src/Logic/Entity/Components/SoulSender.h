@@ -34,9 +34,6 @@ namespace Logic {
 			return new AI::CSMSoulSender(_entity);
 		}
 
-	private:
-		const float SOUL_ON_TILE_HEIGHT = 2.0;
-
 	}; // class CSoulSender
 
 	REG_FACTORY(CSoulSender);

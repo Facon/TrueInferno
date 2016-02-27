@@ -8,14 +8,17 @@ namespace AI {
 
 		switch (msg._action){
 		case SEND_SOUL_BURN:{
-			_target = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Furnace);
-			_task = new CBurnTask();
+			CPlaceable *target = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Furnace);
+			_task = new CBurnTask(target);
+			_numSouls = msg._numSouls;
 
 			break;
 		}
 		case SEND_SOUL_WORK:{
-			_target = CBuildingManager::getSingletonPtr()->getRandomBuilding();
-			_task = new CWorkTask();
+			CPlaceable *target = CBuildingManager::getSingletonPtr()->getRandomBuilding();
+			_task = new CWorkTask(target);
+			_numSouls = msg._numSouls;
+
 			break;
 		}
 		default:{
@@ -36,7 +39,6 @@ namespace AI {
 			delete _task;
 			_task = nullptr;
 		}
-		_target = nullptr;
 
 		// Suspendemos la LA hasta que llegue el mensaje con la petición
 		return LAStatus::SUSPENDED;
@@ -44,43 +46,14 @@ namespace AI {
 
 	CLatentAction::LAStatus CLAGetTaskAndTarget::OnRun() {
 		// Verificación por seguridad
-		if (_target == nullptr || _task == nullptr)
+		if (_task == nullptr)
 			return LAStatus::FAIL;
 
 		return sendSoul() ? LAStatus::SUCCESS : LAStatus::FAIL;
 	}
 
 	bool CLAGetTaskAndTarget::sendSoul(){
-		// TODO Enviar mensaje al SoulSender
-
-		/*SoulSenderMessage() m;
-
-		CMap* map = CServer::getSingletonPtr()->getMap();
-		CEntity* newSoul = CEntityFactory::getSingletonPtr()->createEntity("Soul", map);
-
-		if (!newSoul){
-			std::cout << "Can´t create new soul" << std::endl;
-			return false;
-		}
-
-		// La ubicamos en la posición inicial de la ruta
-		PositionMessage m;
-		m._type = MessageType::SET_POSITION;
-		m._position = (*_pathReceived)[0];
-		m._position.y += SOUL_ON_TILE_HEIGHT;
-		if (!m.Dispatch(*newSoul)){
-			std::cout << "Can´t set soul on initial position" << std::endl;
-			return false;
-		}
-
-		// Le indicamos la ruta que tiene que recorrer
-		WalkSoulPathMessage m2(_pathReceived);
-		m2._type = MessageType::PERFORM_WALK_SOUL_PATH;
-		if (!m2.Dispatch(*newSoul)){
-			std::cout << "Can´t assign path to soul" << std::endl;
-			return false;
-		}*/
-
-		return true;
+		SoulSenderMessage m(_task, _numSouls);
+		return m.Dispatch(*_entity);
 	}
 }
