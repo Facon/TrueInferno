@@ -109,10 +109,10 @@ namespace Logic
 		void CBuildingManager::destroyPlaceable(CEntity *entity);
 		CEntity* createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition, bool floating);
 
-		/** Hace flotar un placeable hasta la posición lógica deseada */
+		/** Hace flotar un placeable hasta la posición lógica deseada. Es necesario hacer llamar a place para que deje de flotar, se registre y conste para los chequeos de posicionamiento */
 		bool floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition);
 
-		/** Coloca un placeable en la posición actual donde está */
+		/** Coloca un placeable en la posición actual donde está. Deja de flotar, se registra y comienza a constar para los chequeos de posicionamiento */
 		bool placePlaceable(CEntity* movableEntity);
 
 		/** Comprueba si un placeable está en una posición válida */
