@@ -186,11 +186,14 @@ namespace Logic {
 			for (int z = 0; z < _floorZ; ++z) {
 				Tile* tile = _tileManager->getTile(_floorOriginPosition + Vector3(x, 0, z));
 
-				// Store it internally
-				_tiles.push_back(tile);
+				// Añadimos la Tile si no es null (i.e. se salió de los bordes)
+				if (tile != nullptr){
+					// Store it internally
+					_tiles.push_back(tile);
 
-				// Add it to the average position
-				centerPosition += tile->getEntity()->getPosition();
+					// Add it to the average position
+					centerPosition += tile->getEntity()->getPosition();
+				}
 			}
 		}
 
