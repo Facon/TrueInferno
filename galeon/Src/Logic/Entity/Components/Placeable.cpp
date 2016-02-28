@@ -348,6 +348,14 @@ namespace Logic {
 		return true;
 	}
 
+	bool CPlaceable::HandleMessage(const CheckValidPositionPlaceableMessage& msg){
+		if (msg._type == MessageType::PLACEABLE_CHECKPOSITION){
+			return checkPlacementIsPossible(_floorOriginPosition);
+		}
+		return false;
+	}
+
+
 	void CPlaceable::updateAdyacentTiles(){
 		// For each tile
 		for (auto itTiles = _tiles.cbegin(); itTiles != _tiles.cend(); ++itTiles){

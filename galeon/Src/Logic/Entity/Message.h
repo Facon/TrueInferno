@@ -57,6 +57,7 @@ namespace Logic
 			SEND_SOUL_BURN,
 			PLACEABLE_FLOAT_TO,
 			PLACEABLE_PLACE,
+			PLACEABLE_CHECKPOSITION,
 		};
 	}
 
@@ -252,6 +253,21 @@ namespace Logic
 		MovePlaceableMessage(MessageType type, Vector3 position) : Message(type), _position(position) {}
 		MovePlaceableMessage(MessageType type) : Message(type) {}
 
+		Vector3 _position;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// PLACEABLE_CHECKPOSITION
+	class CheckValidPositionPlaceableMessage : public Message
+	{
+	public:
+		CheckValidPositionPlaceableMessage(MessageType type, CEntity* entity, Vector3 position) : Message(type), _entity(entity), _position(position) {}
+
+		CEntity* _entity;
 		Vector3 _position;
 
 		virtual bool Dispatch(MessageHandler& handler) const

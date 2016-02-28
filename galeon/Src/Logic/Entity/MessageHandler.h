@@ -22,6 +22,7 @@ namespace Logic
 	class HellQuartersActionMessage;
 	class MoveMessage;
 	class MovePlaceableMessage;
+	class CheckValidPositionPlaceableMessage;
 	
 	class MessageHandler
 	{
@@ -74,6 +75,9 @@ namespace Logic
 
 		virtual bool HandleMessage(const MovePlaceableMessage& msg)
 		{  return false; }
+
+		virtual bool HandleMessage(const CheckValidPositionPlaceableMessage& msg)
+		{	return false; }
 
         virtual bool HandleMessage(const MoveMessage& msg)
         { return false; }

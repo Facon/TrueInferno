@@ -115,6 +115,9 @@ namespace Logic
 		/** Coloca un placeable en la posición actual donde está */
 		bool placePlaceable(CEntity* movableEntity);
 
+		/** Comprueba si un placeable está en una posición válida */
+		bool checkValidPlaceablePosition(CEntity* placeableEntity, const Vector3& logicPosition);
+
 		// Localiza un edificio por el tipo dado
 		CPlaceable* findBuilding(BuildingType buildingType);
 

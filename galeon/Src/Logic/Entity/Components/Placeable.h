@@ -82,6 +82,8 @@ namespace Logic {
 
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
 
+		virtual bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
+
 	private:
 		/** Altura añadida a la posición del Placeable para que parezca que está justo encima */
 		const float HEIGHT_ON_TILE = 1.0f;

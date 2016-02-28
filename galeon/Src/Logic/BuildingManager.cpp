@@ -232,6 +232,17 @@ namespace Logic {
 		return m.Dispatch(*movableEntity);
 	}
 
+	bool CBuildingManager::checkValidPlaceablePosition(CEntity* placeableEntity, const Vector3& logicPosition){
+		if (!placeableEntity){
+			std::cout << "Can't check null placeable to'" << logicPosition << "'" << std::endl;
+			return false;
+		}
+
+		CheckValidPositionPlaceableMessage m(MessageType::PLACEABLE_CHECKPOSITION, placeableEntity, logicPosition);
+		 
+		return m.Dispatch(*placeableEntity);
+	}
+
 	CPlaceable* CBuildingManager::findBuilding(BuildingType buildingType){
 		// Obtenemos el conjunto de edificios para el tipo
 		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];

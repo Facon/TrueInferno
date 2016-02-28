@@ -174,11 +174,8 @@ namespace GUI
 					}
 				}
 				else
-				{
 					Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, entity->getPosition());
-					if (_roadInConstruction == 1)
-						_originRoadTile = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
-				}
+
 			}
 		}
 	}
@@ -279,7 +276,11 @@ namespace GUI
 				}
 				case 1:
 				{
-					_roadInConstruction = 2;
+					_originRoadTile = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
+					if (Logic::CBuildingManager::getSingletonPtr()->checkValidPlaceablePosition(_placeableEntity, _originRoadTile->getLogicPosition()))
+						_roadInConstruction = 2;
+					else
+						_originRoadTile = nullptr;
 					break;
 				}
 				case 2:
@@ -291,6 +292,7 @@ namespace GUI
 					_placeableEntity = nullptr;
 					_roadInConstruction = 0;
 					_placeableRoadSize = 0;
+					_originRoadTile = nullptr;
 					break;
 				}
 				}
