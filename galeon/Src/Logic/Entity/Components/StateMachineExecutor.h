@@ -69,6 +69,8 @@ namespace Logic
 
 		virtual bool HandleMessage(const SoulSenderMessage& msg);
 
+		virtual bool HandleMessage(const SoulMessage& msg);
+
 	protected:
 		/**
 		Almacena la máquina de estado que se está ejecutando

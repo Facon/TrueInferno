@@ -107,10 +107,6 @@ namespace AI
 		*/
 		void resetExecution(){ _currentNodeId = -1; };
 
-		//virtual bool accept(const TMessage &message);
-		
-		//virtual void process(const TMessage &message);
-
 	protected:
 		/**
 		Tipo que guarda la información de las aristas salientes de un nodo.
@@ -147,110 +143,6 @@ namespace AI
 
 	}; // class CStateMachine
 	
-	/**
-	En esta clase implementaremos una máquina de estado simple que hará que 
-	la entidad haga un recorrido a través de varios waypoints.
-	Cada nodo de la máquina de estado almacenará un int con el número de waypoint
-	de destino (3, 4, 5 y 6). Cada nodo está unido al siguiente con una arista 
-	con la condición CConditionMessage, que se hace cierta cuando la entidad 
-	recibe un mensaje de un tipo determinado. El tipo que usaremos en este caso 
-	es FINISHED_ROUTE
-	*/
-	/*class CSMPatrol : public CStateMachine<int>
-	{
-	public:
-		CSMPatrol(CEntity* entity) : CStateMachine(entity) 
-		{
-			// TODO PRÁCTICA IA
-			// Aquí tiene que venir el código para crear la máquina de estado:
-			// En primer lugar se añaden los nodos, usando la función addNode.
-			// En este caso el contenido de los nodos serán waypoints por los 
-			// que queremos pasar (3, 4, 5, 6).
-			// Esta función devuelve un identificador por cada nodo que 
-			// tenemos que guardar para poder crear las aristas.
-			int routeTo1 = this->addNode(new int(3));
-			int routeTo2 = this->addNode(new int(4));
-			int routeTo3 = this->addNode(new int(5));
-			int routeTo4 = this->addNode(new int(6));
-			// Las aristas se crean usando el método addEdge. En cada arista
-			// añadimos una condición del tipo CConditionMessage, con el tipo 
-			// de mensaje FINISHED_ROUTE.
-			this->addEdge(routeTo1, routeTo2, new CConditionMessage<int>(Message::FINISHED_ROUTE));
-			this->addEdge(routeTo2, routeTo3, new CConditionMessage<int>(Message::FINISHED_ROUTE));
-			this->addEdge(routeTo3, routeTo4, new CConditionMessage<int>(Message::FINISHED_ROUTE));
-			this->addEdge(routeTo4, routeTo1, new CConditionMessage<int>(Message::FINISHED_ROUTE));
-			// Por último hay que decir cuál es el nodo inicial.
-			this->setInitialNode(routeTo1);
-			this->resetExecution();
-		}
-	};*/
-
-	/**
-	Esta clase implementa una máquina de estado para un comportamiento
-	Wander. Es un comportamiento simple que consta de dos estados. En primer
-	lugar, la entidad ejecuta la acción latente CLARouteTo, que busca una ruta 
-	hasta un punto aleatorio del mapa. Cuando ha finalizado, ejecuta CLAWait, 
-	que espera durante un periodo fijo de tiempo (3 segundos).
-	Después de esperar vuelve al comienzo.
-	*/
-	/*class CSMWander : public CStateMachine<CLatentAction>
-	{
-	public:
-		/**
-		Constructor. Añade los nodos y las aristas, establece el nodo de inicio
-		y deja la máquina de estado lista para ser ejecutada.
-		*/
-		/*CSMWander(CEntity* entity) : CStateMachine(entity) {
-
-			// TODO PRÁCTICA IA
-			// Aquí tiene que venir el código para crear la máquina de estado:
-			// En primer lugar se añaden los nodos. A continuación, utilizando 
-			// los ids que obtenemos al añadir los nodos se añaden las aristas.
-			// Por último hay que decir cuál es el nodo inicial.
-			// En este caso los nodos son acciones latentes (CLARouteToRandom 
-			// y CLAWait)
-			int routeTo = this->addNode(new CLARouteToRandom(entity));
-			int wait = this->addNode(new CLAWait(3000));
-			this->addEdge(routeTo, wait, new CConditionSuccess());
-			this->addEdge(routeTo, routeTo, new CConditionFail());
-			this->addEdge(wait, routeTo, new CConditionFinished());
-			this->setInitialNode(wait);
-			this->resetExecution();
-		}
-	};
-
-	/**
-	Esta clase implementa una máquina de estado jerárquica con un comportamiento 
-	simple. La máquina de estado comienza con un nodo compuesto, que contiene 
-	una CSMWander. Este nodo se ejecutará hasta que alcance la posición 
-	(20, 0, 700) (CConditionNear). Cuando se verifique la condición, la entidad
-	irá hasta la posición (0, 0, 0) (CLARouteTo). Cuando llegue a esta posición,
-	el comportamiento vuelve al nodo anterior.
-	*/
-	/*class CSMHierarchical : public CStateMachine<CLatentAction>
-	{
-	public:
-		CSMHierarchical(CEntity* entity) : CStateMachine(entity)
-		{
-			// TODO PRÁCTICA IA
-			// Aquí tiene que venir el código para crear la máquina de estado:
-			// En primer lugar se añaden los nodos. A continuación, utilizando 
-			// los ids que obtenemos al añadir los nodos se añaden las aristas.
-			// Por último hay que decir cuál es el nodo inicial.
-
-			CStateMachine* smWander = new CSMWander(entity);
-			int wander = this->addNode(new CLAExecuteSM(smWander));
-			int go_to = this->addNode(new CLARouteTo(entity, Vector3(0, 0, 0)));
-
-			this->addEdge(wander, go_to, new CConditionNear<CLatentAction>(Vector3(-20, 0, 700), 20));
-			this->addEdge(go_to, wander, new CConditionFinished());
-
-			this->setInitialNode(wander);
-			this->resetExecution();
-		}
-		
-	};*/
-
 	/**
 	Factoría que devuelve máquinas de estado predefinidas.
 	Sólo reconoce el valor "wander" como entrada, 

@@ -1,28 +1,38 @@
-#ifndef SPIRIT_H_
-#define SPIRIT_H_
+#ifndef SOUL_H_
+#define SOUL_H_
 
-#include "BaseSubsystems/RTTI.h"
+#include "StateMachineExecutor.h"
+
+#include "Map/MapEntity.h"
+
+#include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Component.h"
 
-namespace Logic
-{
-	class Soul : public IComponent
-	{
+#include "AI/SMSoul.h"
+#include "AI/LatentAction.h"
+
+namespace Logic {
+	class CSoul : public CStateMachineExecutor {
 		RTTI_DECL;
-		DEC_FACTORY(Soul);
+		DEC_FACTORY(CSoul);
 
 	public:
-		Soul() : IComponent()
-		{}
+		CSoul() {}
+		virtual ~CSoul() {}
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
-	
+
+		virtual void tick(unsigned int msecs);
+
 	protected:
-		float speed = 0.5f;
+		AI::CStateMachine<AI::CLatentAction>* getStateMachine(){
+			return new AI::CSMSoul(_entity);
+		}
 
 	};
+	
+	REG_FACTORY(CSoul);
 
-	REG_FACTORY(Soul);
-}
+} // namespace Logic
 
-#endif // SPIRIT_H_
+#endif // SOUL_H_

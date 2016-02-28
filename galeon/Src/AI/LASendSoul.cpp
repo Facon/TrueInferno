@@ -63,7 +63,12 @@ namespace AI {
 			}
 
 			// Le asignamos la tarea
-			std::cout << "Assigning task to soul..." << std::endl;
+			SoulMessage m2(_task->clone());
+			if (!m2.Dispatch(*newSoul)){
+				assert(false && "Can´assign task to soul");
+				ret = false;
+				continue;
+			}
 		}
 
 		return ret;

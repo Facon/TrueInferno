@@ -60,7 +60,7 @@ namespace AI {
 		}
 
 	private:
-		Vector3 _walkingSoulTarget;
+		CPlaceable* _walkingSoulTarget;
 		bool _pathRequestReceived;
 	};
 

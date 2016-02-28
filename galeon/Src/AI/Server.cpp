@@ -102,56 +102,51 @@ namespace AI {
 
 	/////////////////////////////////////////
 
-	/**
-	Calcula con A* una ruta para que las almas vayan caminando desde un cierto Tile a otro.
-	*/
-	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(Logic::Tile* from, Logic::Tile* to){
-		// Reseteamos para asegurarnos que los vecinos se recalculan por si el mapa ha cambiado
-		// TODO Llamar únicamente cuando se modifique el mapa para las almas: Soulpath eliminada o construída, etc.
-		_aStarWalkingSoul->Reset();
+	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(const Vector3& from, Logic::CPlaceable* to){
+		// Sacamos la tile más cercana a la posición dada
+		Logic::Tile* tileFrom = _tileManager->getNearestTile(from);
 
-		std::vector<void*>* path = new std::vector<void*>();
-		float cost = 0.0f;
-		int solved = _aStarWalkingSoul->Solve((void*)from, (void*)to, path, &cost);
-		if (solved == micropather::MicroPather::NO_SOLUTION || path->size() == 0) {
-			delete path;
-			return NULL;
-		}
-
-		// Transformamos el retorno
-		std::vector<Vector3>* out = new std::vector<Vector3>();
-
-		// ¿Es necesario añadir la posición actual del Tile?
-		// out->push_back(from->getEntity()->getPosition());
-		for (std::vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
-			Logic::Tile* tile = (Logic::Tile*)(*it);
-			out->push_back(tile->getEntity()->getPosition());
-		}
-
-		delete path;
-		return out;
+		// Si hay un placeable en la tile, consideramos sus adyacentes como posibles puntos de inicio
+		const Logic::CPlaceable* placeableFrom = tileFrom->getPlaceableAbove();
+		if (placeableFrom != nullptr)
+			return getWalkingSoulAStarRoute(placeableFrom->getAdyacentTiles(), to->getAdyacentTiles());
 	}
 
 	/////////////////////////////////////////
 
-	/**
-	Calcula con A* una ruta para que las almas vayan caminando desde un cierto Placeable a otro.
-	*/
 	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(Logic::CPlaceable* from, Logic::CPlaceable* to){
-		// Obtenemos el conjunto de tiles objetivo
-		std::unordered_set<Logic::Tile*> toTiles = to->getAdyacentTiles();
+		return getWalkingSoulAStarRoute(from->getAdyacentTiles(), to->getAdyacentTiles());
+	}
+
+	/////////////////////////////////////////
+	
+	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(const std::vector<Vector3>& from, const std::vector<Vector3>& to){
+		// Cogemos las tiles más cercanas a los puntos de origen dados
+		std::unordered_set<Logic::Tile*> fromTiles;
+		for (auto it = from.cbegin(); it != from.cend(); ++it)
+			fromTiles.insert(_tileManager->getNearestTile(*it));
+
+		// Cogemos las tiles más cercanas a los puntos de destino dados
+		std::unordered_set<Logic::Tile*> toTiles;
+		for (auto it = to.cbegin(); it != to.cend(); ++it)
+			toTiles.insert(_tileManager->getNearestTile(*it));
+
+		return getWalkingSoulAStarRoute(fromTiles, toTiles);
+	}
+
+	/////////////////////////////////////////
+
+	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(std::unordered_set<Logic::Tile*> fromTiles, std::unordered_set<Logic::Tile*> toTiles){
+		// Reseteamos para asegurarnos que los vecinos se recalculan por si el mapa ha cambiado
+		// TODO Llamar únicamente cuando se modifique el mapa para las almas: Soulpath eliminada o construída, etc.
+		_aStarWalkingSoul->Reset();
+
+		// Transformamos el conjunto de destinos Tile* a void*
 		std::unordered_set<void*> tos = std::unordered_set<void*>();
 		for (auto it = toTiles.cbegin(); it != toTiles.cend(); ++it){
 			// Introducimos cada Tile como estado
 			tos.insert((void*)(*it));
 		}
-
-		// Obtenemos las tiles de origen
-		std::unordered_set<Logic::Tile*> fromTiles = from->getAdyacentTiles();
-
-		// Reseteamos para asegurarnos que los vecinos se recalculan por si el mapa ha cambiado
-		// TODO Llamar únicamente cuando se modifique el mapa para las almas: Soulpath eliminada o construída, etc.
-		_aStarWalkingSoul->Reset();
 
 		// Probamos a obtener ruta desde cada Tile de origen para conseguir la mejor ruta
 		// TODO Lo correcto sería meter el Placeable como estado inicial para expandirlo dentro. Para eso se necesitaría RTTI o encapsular el Tile/Placeable en una interfaz y expandir en el Solve según la clase
@@ -206,11 +201,6 @@ namespace AI {
 		bestPath = nullptr;
 
 		return out;
-	}
-
-	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(const Vector3& from, const Vector3& to){
-		// TODO
-		return nullptr;
 	}
 
 	/////////////////////////////////////////

@@ -52,7 +52,6 @@ namespace Logic
 			ROUTE_TO,
 			FINISHED_ROUTE,
 			FINISHED_MOVE,
-			WAKE_UP,
 			REQUEST_WALK_SOUL_PATH,
 			RETURN_WALK_SOUL_PATH,
 			PERFORM_WALK_SOUL_PATH,
@@ -64,6 +63,9 @@ namespace Logic
 			HELLQUARTERS_RESPONSE,
 			SOUL_SENDER_REQUEST,
 			SOUL_SENDER_RESPONSE,
+			SOUL_REQUEST,
+			SOUL_RESPONSE,
+			SOUL_PATH_FINISHED,
 		};
 	}
 
@@ -282,14 +284,17 @@ namespace Logic
 		}
 	};
 
-	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH, PATH_FINDER_WAKE_UP
+	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH
 	class WalkSoulPathMessage : public Message
 	{
 	public:
-		WalkSoulPathMessage(const Vector3& target) : _target(target), _path(nullptr) {}
+		// Petición
+		WalkSoulPathMessage(CPlaceable* target) : Message(MessageType::REQUEST_WALK_SOUL_PATH), _target(target), _path(nullptr) {}
+		
+		// Respuesta
 		WalkSoulPathMessage(std::vector<Vector3>* path) : _path(path) {}
 
-		Vector3 _target;
+		CPlaceable* _target;
 		std::vector<Vector3>* _path;
 
 		virtual bool Dispatch(MessageHandler& handler) const
@@ -327,6 +332,22 @@ namespace Logic
 		//std::unique_ptr<AI::CSoulTask> _task;
 		AI::CSoulTask* _task;
 		int _numSouls;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// SOUL_REQUEST, SOUL_RESPONSE, SOUL_PATH_FINISHED
+	class SoulMessage : public Message
+	{
+	public:
+		SoulMessage(AI::CSoulTask* task) : Message(MessageType::SOUL_REQUEST), _task(task) {}
+		SoulMessage(MessageType type) : Message(type), _task(0) {}
+
+		//std::unique_ptr<AI::CSoulTask> _task;
+		AI::CSoulTask* _task;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

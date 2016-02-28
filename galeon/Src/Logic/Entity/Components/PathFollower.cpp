@@ -42,6 +42,10 @@ namespace Logic
 			// Ask soul to execute its task
 			//SendMessage("executeTask", targetBuilding, SendMessageOptions.RequireReceiver);
 
+			// Informamos que hemos llegado
+			SoulMessage m(MessageType::SOUL_PATH_FINISHED);
+			m.Dispatch(*_entity);
+
 			//workerManager.disableWorker(this.gameObject);
 
 			_targetReached = true;

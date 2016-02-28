@@ -120,6 +120,15 @@ namespace Logic
 		return false;
 	}
 
+	bool CStateMachineExecutor::HandleMessage(const SoulMessage& msg)
+	{
+		if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
+			return true;
+		if (_currentAction != NULL)
+			return _currentAction->HandleMessage(msg);
+		return false;
+	}
+
 	//---------------------------------------------------------
 
 	/**

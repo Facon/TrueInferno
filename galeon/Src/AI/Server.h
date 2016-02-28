@@ -17,6 +17,7 @@ Servidor de IA.
 #include "AStarFunctionsSoulPath.h"
 #include "micropather.h"
 
+#include <unordered_set>
 #include <vector>
 
 namespace Logic {
@@ -70,22 +71,19 @@ class CServer
 		/**
 		Calcula con A* una ruta de soulpaths desde un cierto Tile a otro.
 		*/
-		std::vector<Logic::Tile*> *getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to);
+		std::vector<Logic::Tile*>* getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to);
 
-		/**
-		Calcula con A* una ruta para que las almas vayan caminando desde un cierto Tile a otro.
-		*/
-		std::vector<Vector3> *getWalkingSoulAStarRoute(Logic::Tile* from, Logic::Tile* to);
+		/** Calcula con A* una ruta para almas caminantes desde un punto hasta un placeable */
+		std::vector<Vector3>* getWalkingSoulAStarRoute(const Vector3& from, Logic::CPlaceable* to);
 
-		/**
-		Calcula con A* una ruta para que las almas vayan caminando desde un cierto Placeable a otro.
-		*/
+		/** Calcula con A* una ruta para almas caminantes desde un placeable a otro */
 		std::vector<Vector3>* getWalkingSoulAStarRoute(Logic::CPlaceable* from, Logic::CPlaceable* to);
 
-		/** 
-		Calcula con A* una ruta para que las almas vayan caminando desde un Vector3 a otro.
-		*/
-		std::vector<Vector3>* getWalkingSoulAStarRoute(const Vector3& from, const Vector3& to);
+		/** Calcula con A* una ruta para almas caminantes desde un conjunto de puntos a otro */
+		std::vector<Vector3>* getWalkingSoulAStarRoute(const std::vector<Vector3>& from, const std::vector<Vector3>& to);
+
+		/** Calcula con A* una ruta para almas caminantes desde un conjunto de tiles a otro */
+		std::vector<Vector3>* getWalkingSoulAStarRoute(std::unordered_set<Logic::Tile*> fromTiles, std::unordered_set<Logic::Tile*> toTiles);
 
 		/**
 		Dado un ángulo en radianes lo lleva al intervalo [-PI, PI]

@@ -184,6 +184,7 @@ namespace Logic
 		bool HandleMessage(const HellQuartersMessage& msg);
 		bool HandleMessage(const MovePlaceableMessage& msg);
 		bool HandleMessage(const SoulSenderMessage& msg);
+		bool HandleMessage(const SoulMessage& msg);
 
 		/**
 		Devuelve el identificador �nico de la entidad.
