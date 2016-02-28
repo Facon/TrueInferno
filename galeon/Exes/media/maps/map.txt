@@ -44,6 +44,7 @@ Map = {
 		placeableType = "SoulPath",
 		validTerrainType = "Empty",
 		color = {0.572, 0.415, 0.109},
+		material = "SoulPath",
 	},
 	
 	HellQuarters = {
