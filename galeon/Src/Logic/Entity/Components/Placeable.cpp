@@ -150,6 +150,11 @@ namespace Logic {
 	void CPlaceable::floatTo(const Vector3 newOriginPosition){
 		//std::cout << "Flotando a: " << newOriginPosition << std::endl;
 
+		if (newOriginPosition.x != round(newOriginPosition.x) && newOriginPosition.z != round(newOriginPosition.z)){
+			std::cout << "Ignoring floatTo to a non-integer [X,Z] position: " << newOriginPosition << std::endl;
+			return;
+		}
+		
 		// Si no estábamos flotando
 		if (!_floating){
 			// Cambiamos el estado
