@@ -17,6 +17,10 @@ namespace Logic {
 	IMP_FACTORY(CHellQuarters);
 
 	bool CHellQuarters::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+		// Garantizamos que se llama al padre
+		if (!CStateMachineExecutor::spawn(entity, map, entityInfo))
+			return false;
+
 		_timeSinceLastSpawn = 0;
 
 		assert(entityInfo->hasAttribute("numInitialSouls") && "numInitialSouls is not defined");
@@ -33,7 +37,7 @@ namespace Logic {
 
 	void CHellQuarters::tick(unsigned int msecs){
 		// Tickeamos la FSM
-		IComponent::tick(msecs);
+		CStateMachineExecutor::tick(msecs);
 
 		// Y también la lógica interna de la generación de almas, de forma independiente
 		tickSpawnSouls(msecs);

@@ -11,6 +11,10 @@ namespace AI{
 		CBurnTask(CPlaceable* target) : _target(target) {};
 		virtual ~CBurnTask() {};
 
+		virtual CSoulTask* clone(){
+			return new CBurnTask(_target);
+		}
+
 		virtual bool execute() {
 			// TODO
 			return false;

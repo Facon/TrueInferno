@@ -12,7 +12,7 @@
 namespace AI {
 	class CLAGetTaskAndTarget : public CLatentAction {
 	public:
-		CLAGetTaskAndTarget() {
+		CLAGetTaskAndTarget(CEntity* entity) : CLatentAction(entity) {
 			_task = nullptr;
 		}
 

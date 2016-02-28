@@ -5,6 +5,7 @@ namespace AI{
 	class CSoulTask {
 	public:
 		virtual bool execute() = 0;
+		virtual CSoulTask* clone() = 0;
 	};
 }
 

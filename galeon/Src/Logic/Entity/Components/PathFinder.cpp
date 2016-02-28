@@ -13,13 +13,11 @@ namespace Logic {
 		if (!CStateMachineExecutor::spawn(entity, map, entityInfo))
 			return false;
 
-		std::cout << "CPathFinder spawned!" << std::endl;
 		return true;
 	} // spawn
 
 	void CPathFinder::tick(unsigned int msecs){
 		CStateMachineExecutor::tick(msecs);
 	} // tick
-
 
 } // namespace Logic

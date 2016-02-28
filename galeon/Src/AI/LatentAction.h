@@ -99,6 +99,9 @@ namespace AI
 		Constructor
 		*/
 		CLatentAction() : _status(READY), _stopping(false) {};
+
+		CLatentAction(CEntity* entity) : _entity(entity), _status(READY), _stopping(false) {};
+
 		/**
 		Establece la entidad que ejecuta la acción.
 		*/

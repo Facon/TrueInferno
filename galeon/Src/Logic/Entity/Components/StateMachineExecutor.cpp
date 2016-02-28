@@ -26,18 +26,21 @@ namespace Logic
 	{
 		if(!IComponent::spawn(entity,map,entityInfo))
 			return false;
-		// Obtiene el nombre de la máquina de estado 
-		if(entityInfo->hasAttribute("behavior")) {
+
+		// Obtiene el nombre de la máquina de estados
+		/*if(entityInfo->hasAttribute("behavior")) {
 			std::string smName = entityInfo->getStringAttribute("behavior");
 			if (_currentStateMachine != 0) delete _currentStateMachine;
 
 			// Saca una instancia de la máquina de estado de la factoría
-			//_currentStateMachine = new AI::CSMPatrol(_entity);
-			//_currentStateMachine = AI::CStateMachineFactory::getStateMachine(smName, entity);
+			_currentStateMachine = AI::CStateMachineFactory::getStateMachine(smName, entity);
 
 			// Creamos la instancia de máquina de estados
 			_currentStateMachine = getStateMachine();
-		}
+		}*/
+
+		// Creamos la instancia de máquina de estados
+		_currentStateMachine = getStateMachine();
 
 		return true;
 	}
@@ -100,6 +103,15 @@ namespace Logic
 	}
 
 	bool CStateMachineExecutor::HandleMessage(const HellQuartersMessage& msg)
+	{
+		if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
+			return true;
+		if (_currentAction != NULL)
+			return _currentAction->HandleMessage(msg);
+		return false;
+	}
+
+	bool CStateMachineExecutor::HandleMessage(const SoulSenderMessage& msg)
 	{
 		if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
 			return true;

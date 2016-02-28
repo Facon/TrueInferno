@@ -11,6 +11,10 @@ namespace AI{
 		CWorkTask(CPlaceable* target) : _target(target) {};
 		virtual ~CWorkTask() {};
 
+		virtual CSoulTask* clone(){
+			return new CWorkTask(_target);
+		}
+
 		virtual bool execute() {
 			// TODO
 			return false;

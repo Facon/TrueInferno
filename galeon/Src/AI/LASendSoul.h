@@ -9,7 +9,7 @@
 namespace AI {
 	class CLASendSoul : public CLatentAction {
 	public:
-		CLASendSoul() {
+		CLASendSoul(CEntity* entity) : CLatentAction(entity) {
 			_task = nullptr;
 		}
 
@@ -30,10 +30,11 @@ namespace AI {
 	private:
 		const float SOUL_ON_TILE_HEIGHT = 2.0;
 
-		CSoulTask* _task;
+		//std::unique_ptr<AI::CSoulTask> _task;
+		AI::CSoulTask* _task;
 		int _numSouls;
 
-		bool createAndSendSoul();
+		bool createAndSendSouls();
 	};
 
 }

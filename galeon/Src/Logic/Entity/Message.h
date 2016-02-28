@@ -11,6 +11,7 @@ Contiene el tipo de datos de un mensaje.
 #define __Logic_Message_H
 
 #include <string>
+#include <memory>
 
 #include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
@@ -323,6 +324,7 @@ namespace Logic
 	public:
 		SoulSenderMessage(AI::CSoulTask* task, int numSouls) : Message(MessageType::SOUL_SENDER_REQUEST), _task(task), _numSouls(numSouls) {}
 
+		//std::unique_ptr<AI::CSoulTask> _task;
 		AI::CSoulTask* _task;
 		int _numSouls;
 

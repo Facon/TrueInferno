@@ -155,7 +155,7 @@ namespace Logic {
 		// Añadimos el edificio
 		buildingsFromType->insert(building);
 
-		std::cout << "Building registered: " << building->getBuildingType() << std::endl;
+		//std::cout << "Building registered: " << building->getBuildingType() << std::endl;
 	}
 
 	void CBuildingManager::unregisterBuilding(CPlaceable *building){
@@ -172,7 +172,7 @@ namespace Logic {
 			buildingsFromType->erase(building);
 		}
 
-		std::cout << "Building unregistered: " << building->getBuildingType() << std::endl;
+		//std::cout << "Building unregistered: " << building->getBuildingType() << std::endl;
 	}
 
 	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition, bool floating){

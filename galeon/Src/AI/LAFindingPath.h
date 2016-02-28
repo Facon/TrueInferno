@@ -8,7 +8,10 @@
 namespace AI {
 	class CLAFindingPath : public CLatentAction{
 	public:
-		CLAFindingPath() {}
+		CLAFindingPath(CEntity* entity) : CLatentAction(entity) {
+			_pathRequestReceived = false;
+		}
+
 		virtual ~CLAFindingPath() {}
 
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg)

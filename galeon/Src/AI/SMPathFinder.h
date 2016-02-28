@@ -11,7 +11,7 @@ namespace AI {
 	public:
 		CSMPathFinder(CEntity* entity) : CStateMachine(entity) {
 			// Bucle infinito procesando peticiones
-			int process = this->addNode(new CLAFindingPath());
+			int process = this->addNode(new CLAFindingPath(entity));
 			this->addEdge(process, process, new CConditionFinished());
 
 			this->setInitialNode(process);

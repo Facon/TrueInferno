@@ -34,40 +34,38 @@ namespace AI {
 		if (_task == nullptr)
 			return LAStatus::FAIL;
 
-		return createAndSendSoul() ? LAStatus::SUCCESS : LAStatus::FAIL;
+		return createAndSendSouls() ? LAStatus::SUCCESS : LAStatus::FAIL;
 	}
 
-	bool CLASendSoul::createAndSendSoul(){
-		CMap* map = Logic::CServer::getSingletonPtr()->getMap();
-		CEntity* newSoul = CEntityFactory::getSingletonPtr()->createEntity("Soul", map);
+	bool CLASendSoul::createAndSendSouls(){
+		bool ret = true;
 
-		if (!newSoul){
-			assert(false && "Can´t create new soul");
-			return false;
+		for (int i = 0; i < _numSouls; ++i){
+			// Creamos alma
+			CMap* map = Logic::CServer::getSingletonPtr()->getMap();
+			CEntity* newSoul = CEntityFactory::getSingletonPtr()->createEntity("Soul", map);
+
+			if (!newSoul){
+				assert(false && "Can´t create new soul");
+				ret = false;
+				continue;
+			}
+
+			// La ubicamos en nuestra propia posición
+			PositionMessage m;
+			m._type = MessageType::SET_POSITION;
+			m._position = _entity->getPosition();
+			m._position.y = SOUL_ON_TILE_HEIGHT;
+			if (!m.Dispatch(*newSoul)){
+				assert(false && "Can´t set soul on initial position");
+				ret = false;
+				continue;
+			}
+
+			// Le asignamos la tarea
+			std::cout << "Assigning task to soul..." << std::endl;
 		}
 
-		// TODO Enviar posición inicial y tarea a la vez a las N almas
-
-		// La ubicamos en nuestra propia posición
-		/*PositionMessage m;
-		m._type = MessageType::SET_POSITION;
-		m._position = _entity->getPosition();
-		m._position.y = SOUL_ON_TILE_HEIGHT;
-		if (!m.Dispatch(*newSoul)){
-			assert(false && "Can´t set soul on initial position");
-			return false;
-		}
-
-		return true;*/
-
-		// Le indicamos la ruta que tiene que recorrer
-		/*WalkSoulPathMessage m2(_pathReceived);
-		m2._type = MessageType::PERFORM_WALK_SOUL_PATH;
-		if (!m2.Dispatch(*newSoul)){
-			std::cout << "Can´t assign path to soul" << std::endl;
-			return false;
-		}*/
-
-		return true;
+		return ret;
 	}
 }

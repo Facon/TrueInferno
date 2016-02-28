@@ -11,7 +11,7 @@ namespace AI {
 	public:
 		CSMHellQuarters(CEntity* entity) : CStateMachine(entity) {
 			// Bucle infinito procesando peticiones
-			int process = this->addNode(new CLAGetTaskAndTarget());
+			int process = this->addNode(new CLAGetTaskAndTarget(entity));
 			this->addEdge(process, process, new CConditionFinished());
 			
 			this->setInitialNode(process);

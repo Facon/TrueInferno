@@ -9,18 +9,22 @@ namespace AI {
 		switch (msg._action){
 		case SEND_SOUL_BURN:{
 			CPlaceable *target = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Furnace);
+			//std::unique_ptr<CBurnTask> _task(new CBurnTask(target));
 			_task = new CBurnTask(target);
 			_numSouls = msg._numSouls;
 
 			break;
 		}
+
 		case SEND_SOUL_WORK:{
 			CPlaceable *target = CBuildingManager::getSingletonPtr()->getRandomBuilding();
+			//std::unique_ptr<CWorkTask> _task(new CWorkTask(target));
 			_task = new CWorkTask(target);
 			_numSouls = msg._numSouls;
 
 			break;
 		}
+
 		default:{
 			assert(false && "HellQuartersAction not implemented");
 			return false;
@@ -53,7 +57,8 @@ namespace AI {
 	}
 
 	bool CLAGetTaskAndTarget::sendSoul(){
-		SoulSenderMessage m(_task, _numSouls);
+		// Enviamos una copia de la tarea porque en este objeto la vamos a borrar
+		SoulSenderMessage m(_task->clone(), _numSouls);
 		return m.Dispatch(*_entity);
 	}
 }

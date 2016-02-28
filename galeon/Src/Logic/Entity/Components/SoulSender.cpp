@@ -13,7 +13,6 @@ namespace Logic {
 		if (!CStateMachineExecutor::spawn(entity, map, entityInfo))
 			return false;
 
-		std::cout << "CSoulSender spawned!" << std::endl;
 		return true;
 	} // spawn
 
