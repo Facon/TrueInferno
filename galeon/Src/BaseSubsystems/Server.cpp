@@ -37,7 +37,6 @@ usados. La mayoría de ellos son parte de Ogre.
 #include <CEGUI/System.h>
 #include <CEGUI/DefaultResourceProvider.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
-#include <CEGUI/ScriptModules/Lua/ScriptModule.h>
 
 /*
 #include <CEGUIDefaultResourceProvider.h>
@@ -299,11 +298,6 @@ namespace BaseSubsystems
 		CEGUI::OgreRenderer& CEGUIRenderer =
 			CEGUI::OgreRenderer::create(*_renderWindow);
 
-		//CEGUI::LuaScriptModule &luaModule =
-		//	CEGUI::LuaScriptModule::create(
-		//	ScriptManager::CScriptManager::GetSingleton().getNativeInterpreter());
-
-		//CEGUI::System::create(CEGUIRenderer, nullptr, nullptr, nullptr, &luaModule);
 		CEGUI::System::create(CEGUIRenderer);
 
 		_GUISystem = CEGUI::System::getSingletonPtr();
@@ -342,14 +336,7 @@ namespace BaseSubsystems
 	{
 		if (!ScriptManager::CScriptManager::Init())
 			return false;
-
-/*
-#ifndef NON_EXCLUSIVE_MODE_IN_WINDOW_MODE
-		ScriptManager::CScriptManager::GetSingleton()
-			.executeScript("MOUSE_EXCLUSIVE = true");
-#endif
-*/
-
+		
 		return true;
 
 	} // initScriptManager
