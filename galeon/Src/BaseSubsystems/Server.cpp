@@ -37,6 +37,8 @@ usados. La mayoría de ellos son parte de Ogre.
 #include <CEGUI/System.h>
 #include <CEGUI/DefaultResourceProvider.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
+//#include <CEGUI/ScriptModules/Lua/ScriptModule.h>
+
 /*
 #include <CEGUIDefaultResourceProvider.h>
 #include <CEGUIFont.h>
@@ -47,6 +49,9 @@ usados. La mayoría de ellos son parte de Ogre.
 
 // Para cerrar la aplicación si se cierra la ventana
 #include "Application/BaseApplication.h"
+
+// ScriptManager
+#include "BaseSubsystems/ScriptManager.h"
 
 /**
 Si se define la siguiente directiva, en modo ventana se reenderiza aunque
@@ -151,7 +156,8 @@ namespace BaseSubsystems
 
 	bool CServer::open()
 	{
-		if( !initOgre() ||
+		if (!initScriptManager() ||
+			!initOgre() ||
 			!initOIS() ||
 			!initCEGUI() )
 		{
@@ -171,6 +177,8 @@ namespace BaseSubsystems
 		releaseOIS();
 		
 		releaseOgre();
+
+		//releaseScriptManager();
 		
 	} // close
 
@@ -288,8 +296,13 @@ namespace BaseSubsystems
 	bool CServer::initCEGUI()
 	{
 		CEGUI::OgreRenderer& CEGUIRenderer =
-				 CEGUI::OgreRenderer::create(*_renderWindow);
+			CEGUI::OgreRenderer::create(*_renderWindow);
 
+		//CEGUI::LuaScriptModule &luaModule =
+		//	CEGUI::LuaScriptModule::create(
+		//	ScriptManager::CScriptManager::GetSingleton().getNativeInterpreter());
+
+		//CEGUI::System::create(CEGUIRenderer, nullptr, nullptr, nullptr, &luaModule);
 		CEGUI::System::create(CEGUIRenderer);
 
 		_GUISystem = CEGUI::System::getSingletonPtr();
@@ -321,6 +334,24 @@ namespace BaseSubsystems
 		return true;
 
 	} // initCEGUI
+
+	//--------------------------------------------------------
+
+	bool CServer::initScriptManager()
+	{
+		if (!ScriptManager::CScriptManager::Init())
+			return false;
+
+/*
+#ifndef NON_EXCLUSIVE_MODE_IN_WINDOW_MODE
+		ScriptManager::CScriptManager::GetSingleton()
+			.executeScript("MOUSE_EXCLUSIVE = true");
+#endif
+*/
+
+		return true;
+
+	} // initScriptManager
 
 	//--------------------------------------------------------
 
@@ -386,11 +417,19 @@ namespace BaseSubsystems
 			For detailed explanation:
 			http://stackoverflow.com/questions/18882760/debug-assertion-failed-expression-pfirstblock-phead
 			*/
-			//CEGUI::System::destroy();    
+			//CEGUI::System::destroy();
 			_GUISystem = 0;
 		}
 
 	} // releaseCEGUI
+
+	//--------------------------------------------------------
+
+	void CServer::releaseScriptManager()
+	{
+		ScriptManager::CScriptManager::GetPtrSingleton()->Release();
+
+	} // releaseScriptManager
 
 	//--------------------------------------------------------
 	
