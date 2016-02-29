@@ -135,9 +135,9 @@ namespace GUI
 
 			if (entity)
 			{
+				Logic::Tile* to = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
 				if (_roadInConstruction == 2)
 				{
-					Logic::Tile* to = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
 					std::vector<Logic::Tile*>* path= AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(_originRoadTile, to);
 
 					if (path)
@@ -171,8 +171,9 @@ namespace GUI
 						_placeableEntity = _placeableRoad[0];
 					}
 				}
-				else
-					Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, entity->getPosition());
+				else{
+					Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, to->getLogicPosition());
+				}
 
 			}
 		}
