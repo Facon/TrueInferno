@@ -37,7 +37,7 @@ usados. La mayoría de ellos son parte de Ogre.
 #include <CEGUI/System.h>
 #include <CEGUI/DefaultResourceProvider.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
-//#include <CEGUI/ScriptModules/Lua/ScriptModule.h>
+#include <CEGUI/ScriptModules/Lua/ScriptModule.h>
 
 /*
 #include <CEGUIDefaultResourceProvider.h>
@@ -45,13 +45,14 @@ usados. La mayoría de ellos son parte de Ogre.
 #include <CEGUIImageset.h>
 #include <CEGUIWindowManager.h>
 #include <falagard/CEGUIFalWidgetLookManager.h>
-#include <CEGUIScheme.h>*/
-
-// Para cerrar la aplicación si se cierra la ventana
-#include "Application/BaseApplication.h"
+#include <CEGUIScheme.h>
+*/
 
 // ScriptManager
 #include "BaseSubsystems/ScriptManager.h"
+
+// Para cerrar la aplicación si se cierra la ventana
+#include "Application/BaseApplication.h"
 
 /**
 Si se define la siguiente directiva, en modo ventana se reenderiza aunque
@@ -178,7 +179,7 @@ namespace BaseSubsystems
 		
 		releaseOgre();
 
-		//releaseScriptManager();
+		releaseScriptManager();
 		
 	} // close
 
