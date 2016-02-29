@@ -292,9 +292,7 @@ namespace Logic
 	{
 		Matrix4 transform = getTransform();
 
-		TransformMessage m;
-		m._type = MessageType::SET_TRANSFORM;
-		m._transform = transform;
+		TransformMessage m(transform);
 
 		return m.Dispatch(*this);
 	}
@@ -305,9 +303,7 @@ namespace Logic
 	{
 		updateTransformValuesFromMatrix(transform);
 
-		TransformMessage m;
-		m._type = MessageType::SET_TRANSFORM;
-		m._transform = transform;
+		TransformMessage m(transform);
 
 		return m.Dispatch(*this);
 
@@ -318,8 +314,8 @@ namespace Logic
 	bool CEntity::setPosition(const Vector3 &position)
 	{
 		_position = position;
-		return sendTransformMessage();
 
+		return sendTransformMessage();
 	} // setPosition
 
 	//---------------------------------------------------------
@@ -327,8 +323,8 @@ namespace Logic
 	bool CEntity::setRotation(const Vector3 &rotation)
 	{
 		_rotation = rotation;
+		
 		return sendTransformMessage();
-
 	} // setRotation
 
 	//---------------------------------------------------------
@@ -336,8 +332,8 @@ namespace Logic
 	bool CEntity::setDimensions(const Vector3 &dimensions)
 	{
 		_dimensions = dimensions;
+		
 		return sendTransformMessage();
-
 	} // setDimensions
 
 	//---------------------------------------------------------

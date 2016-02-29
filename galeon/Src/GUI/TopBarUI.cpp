@@ -27,7 +27,7 @@ namespace GUI
 
 	void TopBarUI::release()
 	{
-		_uiBarsWindow->destroy();
+		//_uiBarsWindow->destroy();
 	}
 
 	void TopBarUI::activate()

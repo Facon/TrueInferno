@@ -226,8 +226,9 @@ namespace Logic {
 			std::cout << "Can't place null placeable" << std::endl;
 			return false;
 		}
-
-		MovePlaceableMessage m(MessageType::PLACEABLE_PLACE);
+		
+		// TODO Check this is correct
+		MovePlaceableMessage m(MessageType::PLACEABLE_PLACE, Vector3(0.0f, 0.0f, 0.0f));
 
 		return m.Dispatch(*movableEntity);
 	}
