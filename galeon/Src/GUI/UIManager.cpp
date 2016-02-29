@@ -30,9 +30,9 @@ namespace GUI
 	{
 		// Releasing memory
 
-		_uiWindow->destroy();
 		_topBarUI.release();
 		_sideBarUI.release();
+		_uiWindow->destroy();
 	}
 
 	void UIManager::activate()

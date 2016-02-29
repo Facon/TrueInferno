@@ -330,7 +330,7 @@ namespace BaseSubsystems
 		{
 			_renderWindow->removeAllViewports();
 			_root->detachRenderTarget(_renderWindow);
-			delete _renderWindow;
+			//delete _renderWindow;
 			_renderWindow = 0;
 		}
 

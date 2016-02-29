@@ -134,9 +134,7 @@ namespace Logic
 			Vector3 newPosition = _entity->getPosition() + direction;
 			_entity->setPosition(newPosition);
 
-			TransformMessage msg;
-			msg._type = MessageType::SET_TRANSFORM;
-			msg._transform = _entity->getTransform();
+			TransformMessage msg(_entity->getTransform());
 
 			msg.Dispatch(*_entity);
 		}

@@ -87,8 +87,6 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CreateRefinery")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("ClearTerrain")->removeAllEvents();
-		
-		_uibuttonsWindow->destroy();
 
 		_placeableEntity = nullptr;
 	}
@@ -213,8 +211,10 @@ namespace GUI
 
 	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
-		Logic::HellQuartersActionMessage m(1);
-		m._type = Logic::MessageType::SEND_SOUL_WORK;
+		using namespace Logic;
+
+		HellQuartersActionMessage m(MessageType::SEND_SOUL_WORK, 1);
+
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 		
 		m.Dispatch(*hellQuarters->getEntity());
