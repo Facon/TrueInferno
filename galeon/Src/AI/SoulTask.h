@@ -17,7 +17,7 @@ namespace AI{
 			return _target;
 		}
 
-	private:
+	protected:
 		Logic::CPlaceable* _target;
 
 	};

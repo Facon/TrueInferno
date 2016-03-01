@@ -107,6 +107,9 @@
     <ClCompile Include="..\..\Src\AI\LAGetTargetAndRequestPath.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAExecutePath.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -188,6 +191,9 @@
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAGetTargetAndRequestPath.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAExecutePath.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

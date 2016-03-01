@@ -33,14 +33,13 @@ namespace AI {
 	protected:
 		virtual LAStatus OnStart() {
 			_pathRequestReceived = false;
-			return LAStatus::READY;
+			return LAStatus::SUSPENDED;
 		}
 
 		virtual LAStatus OnRun() {
 			// Si no ha llegado petición nos suspendemos
 			if (!_pathRequestReceived)
-				return LAStatus::SUSPENDED;
-			_pathRequestReceived = false;
+				return LAStatus::FAIL;
 
 			// Calculamos ruta desde la posición actual de la entidad hasta el objetivo que nos han dado
 			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(_entity->getPosition(), _walkingSoulTarget);

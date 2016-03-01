@@ -31,10 +31,24 @@ namespace AI {
 		const float SOUL_ON_TILE_HEIGHT = 2.0;
 
 		//std::unique_ptr<AI::CSoulTask> _task;
+
+		/* Tarea a asignar a las almas */
 		AI::CSoulTask* _task;
+
+		/* Número de almas que se enviarán a la tarea */
 		int _numSouls;
 
-		bool createAndSendSouls();
+		/* Vector con las nuevas almas creadas */
+		std::vector<CEntity*> _newSouls;
+
+		/* Número de almas ya enviadas */
+		int _numSoulsSent = 0;
+
+		/* Crea las almas. Devuelve true cuando se acabó de crear todas las almas */
+		bool createSouls();
+
+		/* Envía a las almas a su misión. Devuelve true cuando se acabó de enviar todas las almas */
+		bool sendSouls();
 	};
 
 }

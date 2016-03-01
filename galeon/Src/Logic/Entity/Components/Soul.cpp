@@ -7,7 +7,7 @@ namespace Logic
 
 	bool CSoul::spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo)
 	{
-		if (!IComponent::spawn(entity, map, entityInfo))
+		if (!CStateMachineExecutor::spawn(entity, map, entityInfo))
 			return false;
 
 		//if (entityInfo->hasAttribute("life"))

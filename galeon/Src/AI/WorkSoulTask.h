@@ -7,8 +7,11 @@
 namespace AI{
 
 	class CWorkTask : public CSoulTask {
+
 	public:
-		CWorkTask(CPlaceable* target) : _target(target) {};
+		CWorkTask(CPlaceable* target) {
+			_target = target;
+		};
 		virtual ~CWorkTask() {};
 
 		virtual CSoulTask* clone(){
@@ -20,8 +23,6 @@ namespace AI{
 			return false;
 		};
 
-	private:
-		CPlaceable* _target;
 	};
 
 }

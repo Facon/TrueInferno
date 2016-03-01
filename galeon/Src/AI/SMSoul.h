@@ -5,6 +5,7 @@
 #include "Logic\Entity\Message.h"
 #include "AI\Server.h"
 #include "AI\LAGetTargetAndRequestPath.h"
+#include "AI\LAExecutePath.h"
 
 namespace AI {
 	class CSMSoul : public CStateMachine<CLatentAction> {
@@ -12,7 +13,12 @@ namespace AI {
 		CSMSoul(CEntity* entity) : CStateMachine(entity) {
 			// Bucle infinito procesando peticiones
 			int process = this->addNode(new CLAGetTargetAndRequestPath(entity));
-			this->addEdge(process, process, new CConditionFinished());
+			int executePath = this->addNode(new CLAExecutePath(entity));
+			
+			this->addEdge(process, executePath, new CConditionSuccess());
+			this->addEdge(process, process, new CConditionFail());
+
+			this->addEdge(executePath, process, new CConditionFinished());
 
 			this->setInitialNode(process);
 			this->resetExecution();

@@ -85,6 +85,7 @@
     <ClCompile Include="..\..\Src\AI\DisjointSets.cpp" />
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAExecutePath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
     <ClCompile Include="..\..\Src\AI\LAGetTargetAndRequestPath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAGetTaskAndTarget.cpp" />
@@ -106,6 +107,7 @@
     <ClInclude Include="..\..\Src\AI\DynamicMovement.h" />
     <ClInclude Include="..\..\Src\AI\DynTriMat.h" />
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
+    <ClInclude Include="..\..\Src\AI\LAExecutePath.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />
     <ClInclude Include="..\..\Src\AI\LAFindingPath.h" />
     <ClInclude Include="..\..\Src\AI\LAGetTargetAndRequestPath.h" />

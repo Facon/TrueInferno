@@ -9,6 +9,7 @@ namespace AI {
 		if (msg._type != MessageType::SOUL_SENDER_REQUEST || _task != nullptr)
 			return false;
 
+		// Guardamos la informción del mensaje
 		_task = msg._task;
 		_numSouls = msg._numSouls;
 
@@ -25,22 +26,36 @@ namespace AI {
 			_task = nullptr;
 		}
 
+		// Limpiamos el vector de almas
+		_newSouls.clear();
+
+		_numSoulsSent = 0;
+
 		// Suspendemos la LA hasta que llegue el mensaje con la petición
 		return LAStatus::SUSPENDED;
 	}
 
 	CLatentAction::LAStatus CLASendSoul::OnRun() {
-		// Verificación por seguridad
+		// Verificamos que tenemos tarea
 		if (_task == nullptr)
 			return LAStatus::FAIL;
 
-		return createAndSendSouls() ? LAStatus::SUCCESS : LAStatus::FAIL;
+		// Si no se pudieron crear las almas esperamos al siguiente tick
+		if (!createSouls())
+			return LAStatus::RUNNING;
+
+		// Si no se pudieron enviar las almas esperamos al siguiente tick
+		if (!sendSouls())
+			return LAStatus::RUNNING;
+
+		return LAStatus::SUCCESS;
 	}
 
-	bool CLASendSoul::createAndSendSouls(){
+	bool CLASendSoul::createSouls(){
 		bool ret = true;
 
-		for (int i = 0; i < _numSouls; ++i){
+		// Creamos almas hasta completar las pedidas
+		for (int i = _newSouls.size(); i < _numSouls; ++i){
 			// Creamos alma
 			CMap* map = Logic::CServer::getSingletonPtr()->getMap();
 			CEntity* newSoul = CEntityFactory::getSingletonPtr()->createEntity("Soul", map);
@@ -48,7 +63,7 @@ namespace AI {
 			if (!newSoul){
 				assert(false && "Can´t create new soul");
 				ret = false;
-				continue;
+				break;
 			}
 
 			// La ubicamos en nuestra propia posición
@@ -59,16 +74,31 @@ namespace AI {
 			if (!m.Dispatch(*newSoul)){
 				assert(false && "Can´t set soul on initial position");
 				ret = false;
-				continue;
+				CEntityFactory::getSingletonPtr()->deferredDeleteEntity(newSoul);
+				break;
 			}
 
+			_newSouls.push_back(newSoul);
+		}
+
+		return ret;
+	}
+
+	bool CLASendSoul::sendSouls(){
+		bool ret = true;
+
+		// Comenzamos el bucle por la última alma enviada
+		for (unsigned int i = _numSoulsSent; i < _newSouls.size(); ++i){
 			// Le asignamos la tarea
 			SoulMessage m2(_task->clone());
-			if (!m2.Dispatch(*newSoul)){
-				assert(false && "Can´assign task to soul");
+			if (!m2.Dispatch(*_newSouls[i])){
+				//assert(false && "Can´t assign task to soul");
+				std::cout << "Can´t assign task to soul" << std::endl;
 				ret = false;
-				continue;
+				break;
 			}
+
+			++_numSoulsSent;
 		}
 
 		return ret;

@@ -6,7 +6,7 @@
 namespace AI {
 	bool CLAGetTargetAndRequestPath::HandleMessage(const SoulMessage& msg) {
 		// Rechazamos lo que no sean peticiones. No aceptamos más de una petición simultánea
-		if (msg._type != MessageType::SOUL_SENDER_REQUEST || _target != nullptr)
+		if (msg._type != MessageType::SOUL_REQUEST || _target != nullptr)
 			return false;
 
 		_target = msg._task->getTarget();
@@ -26,7 +26,7 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLAGetTargetAndRequestPath::OnRun() {
-		// Verificación por seguridad
+		// Verificamos que hay objetivo
 		if (_target == nullptr)
 			return LAStatus::FAIL;
 
