@@ -3,6 +3,7 @@
 
 #include "GUI/TopBarUI.h"
 #include "GUI/SideBarUI.h"
+#include "GUI/EventUI.h"
 
 namespace CEGUI
 {
@@ -18,6 +19,7 @@ namespace GUI
 
 		TopBarUI _topBarUI;
 		SideBarUI _sideBarUI;
+		EventUI _eventUI;
 		// Window for displaying resources
 		CEGUI::Window* _uiWindow;
 

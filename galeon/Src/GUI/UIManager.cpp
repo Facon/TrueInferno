@@ -23,6 +23,7 @@ namespace GUI
 		_uiWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UI.layout");
 		_topBarUI.init();
 		_sideBarUI.init();
+		_eventUI.init();
 
 	}
 
@@ -32,6 +33,7 @@ namespace GUI
 
 		_topBarUI.release();
 		_sideBarUI.release();
+		_eventUI.release();
 		_uiWindow->destroy();
 	}
 
@@ -42,6 +44,7 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_uiWindow);
 		_topBarUI.activate();
 		_sideBarUI.activate();
+		_eventUI.activate();
 		_uiWindow->setVisible(true);
 		_uiWindow->activate();
 
@@ -55,6 +58,7 @@ namespace GUI
 		_uiWindow->setVisible(false);
 		_topBarUI.deactivate();
 		_sideBarUI.deactivate();
+		_eventUI.deactivate();
 
 	}
 
@@ -62,6 +66,7 @@ namespace GUI
 	{
 		_topBarUI.tick(msecs);
 		_sideBarUI.tick(msecs);
+		_eventUI.tick(msecs);
 	}
 
 
