@@ -110,6 +110,16 @@ namespace AI {
 		const Logic::CPlaceable* placeableFrom = tileFrom->getPlaceableAbove();
 		if (placeableFrom != nullptr)
 			return getWalkingSoulAStarRoute(placeableFrom->getAdyacentTiles(), to->getAdyacentTiles());
+		else
+			return getWalkingSoulAStarRoute(tileFrom, to->getAdyacentTiles());
+	}
+
+	/////////////////////////////////////////
+
+	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(Logic::Tile* fromTile, std::unordered_set<Logic::Tile*> toTiles){
+		std::unordered_set<Logic::Tile*> fromTiles;
+		fromTiles.insert(fromTile);
+		return getWalkingSoulAStarRoute(fromTiles, toTiles);
 	}
 
 	/////////////////////////////////////////

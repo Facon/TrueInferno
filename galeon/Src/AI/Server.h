@@ -68,9 +68,7 @@ class CServer
 		*/
 		bool tick(float secs);
 
-		/**
-		Calcula con A* una ruta de soulpaths desde un cierto Tile a otro.
-		*/
+		/** Calcula con A* una ruta de soulpaths desde un cierto Tile a otro. */
 		std::vector<Logic::Tile*>* getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to);
 
 		/** Calcula con A* una ruta para almas caminantes desde un punto hasta un placeable */
@@ -81,6 +79,9 @@ class CServer
 
 		/** Calcula con A* una ruta para almas caminantes desde un conjunto de puntos a otro */
 		std::vector<Vector3>* getWalkingSoulAStarRoute(const std::vector<Vector3>& from, const std::vector<Vector3>& to);
+
+		/** Calcula con A* una ruta para almas caminantes desde un tile a un conjunto de tiles destino */
+		std::vector<Vector3>* getWalkingSoulAStarRoute(Logic::Tile* fromTile, std::unordered_set<Logic::Tile*> toTiles);
 
 		/** Calcula con A* una ruta para almas caminantes desde un conjunto de tiles a otro */
 		std::vector<Vector3>* getWalkingSoulAStarRoute(std::unordered_set<Logic::Tile*> fromTiles, std::unordered_set<Logic::Tile*> toTiles);
