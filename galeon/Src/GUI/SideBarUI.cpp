@@ -223,7 +223,11 @@ namespace GUI
 
 	bool SideBarUI::moveSoulReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Move Soul\n");
+		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_BURN, 1);
+		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
+
+		m.Dispatch(*hellQuarters->getEntity());
+
 		return true;
 	}
 

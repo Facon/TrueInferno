@@ -13,7 +13,7 @@ namespace AI {
 
 		// Reactivamos la LA
 		resume();
-
+		
 		return true;
 	}
 
@@ -30,7 +30,7 @@ namespace AI {
 		if (_target == nullptr)
 			return LAStatus::FAIL;
 
-		// Reintentamos hasta que podamos solicitar ruta
+		// Reintentamos hasta que consigamos ruta
 		return requestPath() ? LAStatus::SUCCESS : LAStatus::RUNNING;
 	}
 
