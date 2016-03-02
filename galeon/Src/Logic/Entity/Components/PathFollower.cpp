@@ -25,6 +25,7 @@ namespace Logic
 		{
 		case MessageType::PERFORM_WALK_SOUL_PATH:
 			addToQueue(*msg._path);
+			delete msg._path;
 			return true;
 		default:
 			break;

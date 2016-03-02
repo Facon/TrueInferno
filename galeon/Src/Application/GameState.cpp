@@ -69,6 +69,8 @@ namespace Application {
 		// Liberamos la escena física.
 		Physics::CServer::getSingletonPtr()->destroyScene();
 
+		_uiManager.release();
+
 		CApplicationState::release();
 
 	} // release

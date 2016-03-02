@@ -5,5 +5,5 @@ Tile CGraphics CPhysicEntity Tile
 SoulPath CGraphics CPhysicEntity CPlaceable
 HellQuarters CGraphics CPhysicEntity CPlaceable CHellQuarters CSoulSender
 Evilator CGraphics CPhysicEntity CPlaceable CWorkBuilding
-Furnace CGraphics CPhysicEntity CPlaceable CWorkBuilding CFurnace
+Furnace CGraphics CPhysicEntity CPlaceable CWorkBuilding
 Soul CGraphics PathFollower CPathFinder CSoul

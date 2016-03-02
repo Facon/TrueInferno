@@ -206,13 +206,17 @@ namespace Logic {
 		return newEntity;
 	}
 
+	void CBuildingManager::destroyPlaceable(CEntity *entity){
+		CEntityFactory::getSingletonPtr()->deleteEntity(entity);
+	}
+
 	bool CBuildingManager::floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition){
 		if (!movableEntity){
 			std::cout << "Can't float null placeable to '" << logicPosition << "'" << std::endl;
 			return false;
 		}
 
-		MovePlaceableMessage m(MessageType::PLACEABLE_FLOAT_TO, logicPosition);
+		MovePlaceableMessage m(logicPosition);
 
 		return m.Dispatch(*movableEntity);
 	}
@@ -222,10 +226,21 @@ namespace Logic {
 			std::cout << "Can't place null placeable" << std::endl;
 			return false;
 		}
-
-		MovePlaceableMessage m(MessageType::PLACEABLE_PLACE);
+		
+		MovePlaceableMessage m;
 
 		return m.Dispatch(*movableEntity);
+	}
+
+	bool CBuildingManager::checkValidPlaceablePosition(CEntity* placeableEntity, const Vector3& logicPosition){
+		if (!placeableEntity){
+			std::cout << "Can't check null placeable to'" << logicPosition << "'" << std::endl;
+			return false;
+		}
+
+		CheckValidPositionPlaceableMessage m(MessageType::PLACEABLE_CHECKPOSITION, placeableEntity, logicPosition);
+		 
+		return m.Dispatch(*placeableEntity);
 	}
 
 	CPlaceable* CBuildingManager::findBuilding(BuildingType buildingType){

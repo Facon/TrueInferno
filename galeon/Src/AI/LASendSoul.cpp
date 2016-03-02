@@ -67,10 +67,9 @@ namespace AI {
 			}
 
 			// La ubicamos en nuestra propia posición
-			PositionMessage m;
-			m._type = MessageType::SET_POSITION;
-			m._position = _entity->getPosition();
-			m._position.y = SOUL_ON_TILE_HEIGHT;
+			Vector3 newPosition = _entity->getPosition();
+			newPosition.y = SOUL_ON_TILE_HEIGHT;
+			PositionMessage m(newPosition);
 			if (!m.Dispatch(*newSoul)){
 				assert(false && "Can´t set soul on initial position");
 				ret = false;
@@ -92,8 +91,7 @@ namespace AI {
 			// Le asignamos la tarea
 			SoulMessage m2(_task->clone());
 			if (!m2.Dispatch(*_newSouls[i])){
-				//assert(false && "Can´t assign task to soul");
-				std::cout << "Can´t assign task to soul" << std::endl;
+				//std::cout << "Can´t assign task to soul" << std::endl;
 				ret = false;
 				break;
 			}

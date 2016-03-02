@@ -170,10 +170,11 @@ namespace Logic {
 		}
 
 		// La ubicamos en la posición inicial de la ruta
-		PositionMessage m;
-		m._type = MessageType::SET_POSITION;
-		m._position = (*_pathReceived)[0];
-		m._position.y += SOUL_ON_TILE_HEIGHT;
+		Vector3& position = (*_pathReceived)[0];
+		position.y += SOUL_ON_TILE_HEIGHT;
+		
+		PositionMessage m(position);
+		
 		if (!m.Dispatch(*newSoul)){
 			std::cout << "Can´t set soul on initial position" << std::endl;
 			return false;

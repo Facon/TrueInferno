@@ -30,7 +30,7 @@ namespace AI {
 		if (_path == nullptr)
 			return LAStatus::FAIL;
 
-		return sendPath() ? LAStatus::SUCCESS : LAStatus::FAIL;
+		return sendPath() ? LAStatus::SUCCESS : LAStatus::RUNNING;
 	}
 
 	bool CLAExecutePath::sendPath(){

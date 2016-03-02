@@ -37,25 +37,27 @@ namespace AI {
 		}
 
 		virtual LAStatus OnRun() {
-			// Si no ha llegado petición nos suspendemos
+			// Si no ha llegado petición, fallamos
 			if (!_pathRequestReceived)
 				return LAStatus::FAIL;
 
 			// Calculamos ruta desde la posición actual de la entidad hasta el objetivo que nos han dado
 			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(_entity->getPosition(), _walkingSoulTarget);
 
-			// Fallamos si no hay ruta
-			if (path == nullptr)
-				return LAStatus::FAIL;
+			// Reintentamos si no se encontró ruta
+			if (path == nullptr){
+				std::cout << "Path not found :(" << std::endl;
+				return LAStatus::RUNNING;
+			}
 
 			WalkSoulPathMessage message(path);
 			message._type = MessageType::RETURN_WALK_SOUL_PATH;
 			
 			// Acabamos enviando la ruta por mensaje a la entidad para que alguien la capture
-			if (message.Dispatch(*this))
+			if (message.Dispatch(*_entity))
 				return LAStatus::SUCCESS;
 			else
-				return LAStatus::FAIL;
+				return LAStatus::RUNNING; // Reintentamos si falla
 		}
 
 	private:

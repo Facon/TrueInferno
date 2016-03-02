@@ -56,6 +56,8 @@ namespace Application {
 	{
 		CApplicationState::release();
 
+		_menuWindow->getChildElement("Start")->removeAllEvents();
+		_menuWindow->getChildElement("Exit")->removeAllEvents();
 	} // release
 
 	//--------------------------------------------------------

@@ -26,7 +26,6 @@ using namespace Physics;
 using namespace Logic;
 using namespace physx;
 
-
 // �nica instancia del servidor
 CServer *CServer::_instance = NULL;
 
@@ -56,7 +55,6 @@ CServer::CServer() : _cudaContextManager(NULL), _scene(NULL)
 	// Se utiliza posteriormente al crear la escena f�sica.
 	// S�lo Windows
 #ifdef PX_WINDOWS
-
 	PxCudaContextManagerDesc cudaContextManagerDesc;
 	_cudaContextManager = PxCreateCudaContextManager(*_foundation, cudaContextManagerDesc, 
 		                                                   _profileZoneManager);
@@ -68,7 +66,6 @@ CServer::CServer() : _cudaContextManager(NULL), _scene(NULL)
 			_cudaContextManager = NULL;
 		}
 	}
-
 #endif
 
 	// Crear PxPhysics. Es el punto de entrada al SDK de PhysX
@@ -111,7 +108,6 @@ CServer::CServer() : _cudaContextManager(NULL), _scene(NULL)
 
 	// Intentar establecer la conexi�n
 	_pvdConnection = PxVisualDebuggerExt::createConnection(pvdConnectionManager, ip, port, timeout, connectionFlags);
-
 #endif
 } 
 
@@ -196,7 +192,7 @@ void CServer::Release()
 
 //--------------------------------------------------------
 
-void CServer::createScene ()
+void CServer::createScene()
 {
 	assert(_instance);
 	
@@ -242,7 +238,7 @@ void CServer::createScene ()
 
 //--------------------------------------------------------
 
-void CServer::destroyScene ()
+void CServer::destroyScene()
 {
 	assert(_instance);
 
@@ -309,7 +305,7 @@ PxRigidStatic* CServer::createStaticBox(const Vector3 &position, const Vector3 &
 	                                    int group, const IPhysics *component)
 {
 	assert(_scene);
-
+	
 	// Nota: PhysX coloca el sistema de coordenadas local en el centro de la caja, mientras
 	// que la l�gica asume que el origen del sistema de coordenadas est� en el centro de la 
 	// cara inferior. Para unificar necesitamos realizar una traslaci�n en el eje Y.
@@ -318,9 +314,13 @@ PxRigidStatic* CServer::createStaticBox(const Vector3 &position, const Vector3 &
 	
 	// Crear un cubo est�tico
 	PxTransform pose(Vector3ToPxVec3(position));
-	PxBoxGeometry geom(Vector3ToPxVec3(dimensions));
+
+	Vector3 physicsDimensions = dimensions / 2;
+	PxBoxGeometry geom(Vector3ToPxVec3(physicsDimensions));
+
 	PxMaterial *material = _defaultMaterial;
-	PxTransform localPose(PxVec3(0, dimensions.y, 0)); // Transformaci�n de coordenadas l�gicas a coodenadas de PhysX
+
+	PxTransform localPose(PxVec3(0, physicsDimensions.y, 0)); // Transformaci�n de coordenadas l�gicas a coodenadas de PhysX
 	PxRigidStatic *actor = PxCreateStatic(*_physics, pose, geom, *material, localPose);
 	
 	// Transformarlo en trigger si es necesario
@@ -359,10 +359,14 @@ PxRigidDynamic* CServer::createDynamicBox(const Vector3 &position, const Vector3
 
 	// Crear un cubo din�mico
 	PxTransform pose(Vector3ToPxVec3(position));
-	PxBoxGeometry geom(Vector3ToPxVec3(dimensions));
+
+	Vector3 physicsDimensions = dimensions / 2;
+	PxBoxGeometry geom(Vector3ToPxVec3(physicsDimensions));
+
 	PxMaterial *material = _defaultMaterial;
-	float density = mass / (dimensions.x * dimensions.y * dimensions.z);
-	PxTransform localPose(PxVec3(0, dimensions.y, 0)); // Transformaci�n de coordenadas l�gicas a coodenadas de PhysX
+	float density = mass / (physicsDimensions.x * physicsDimensions.y * physicsDimensions.z);
+
+	PxTransform localPose(PxVec3(0, physicsDimensions.y, 0)); // Transformaci�n de coordenadas l�gicas a coodenadas de PhysX
 
 	// Crear cubo din�mico o cinem�tico
 	PxRigidDynamic *actor;
@@ -443,11 +447,11 @@ void CServer::destroyActor(physx::PxActor *actor)
 
 //--------------------------------------------------------
 
-Matrix4 CServer::getActorTransform(const PxRigidActor *actor)
+Matrix4 CServer::getActorTransform(const physx::PxRigidActor *actor)
 {
 	assert(actor);
 
-	// Devolver la posici�n y orientaci�n en coordenadas l�gicas
+	// Devolver el transform en coordenadas l�gicas
 	return PxTransformToMatrix4(actor->getGlobalPose());
 }
 
@@ -477,11 +481,57 @@ void CServer::moveKinematicActor(physx::PxRigidDynamic *actor, const Vector3 &di
 
 //--------------------------------------------------------
 
-bool CServer::isKinematic(const PxRigidDynamic *actor)
+bool CServer::isKinematic(const physx::PxRigidDynamic *actor)
 {
 	assert(actor);
-
 	return actor->getRigidDynamicFlags() & PxRigidDynamicFlag::eKINEMATIC;
+}
+
+//--------------------------------------------------------
+
+void CServer::setActorTransform(physx::PxRigidActor *actor, const Matrix4 &transform)
+{
+	assert(_scene);
+	assert(actor);
+
+	/*
+	Ahora mismo se recibe una matriz de transformación que únicamente se emplea para
+	la traslación del actor físico a cualquier otro punto del mundo (haciendo algo
+	así como un teletransporte, de forma que no interactúa con otros actores que se
+	encuentren en el camino hasta su nueva posición).
+	
+	La normalización realizada sobre este transform es obligatoria para que sea válido
+	y se pueda llamar al método setGlobalPose() con él, lo que produce un reset de su
+	quartenion interno y evidencia que solo se tiene en cuenta la posición, ignorando
+	rotación y escalado.
+
+	Importante: Esto es así porque ni rotación ni escalado pueden hacerse en el mundo
+	físico de esta forma, simplemente cambiando el transform. En su lugar:
+	1) Para la rotación habría que manejar un actor kinemático y hacerlo mediante
+	   algún tipo de fuerza de ese tipo de PhysX.
+	2) Para el escalado habría que modificar la geometría (PxGeometry) asociada a la
+	   "forma" (PxShape) del actor.
+
+	@TODO Implementar rotación y escalado.
+
+	Por último, hay que tener en cuenta que la matriz de transformación que llega aquí
+	no es válida para la física, ya que es la misma con la que trabajan la parte lógica
+	y la parte gráfica. Para adaptar sus valores a PhysX habría que desplazar el pivote
+	al centro de la geometría y dividir sus dimensiones	entre 2.
+
+	P.D: La solución alternativa es buscar la forma de hacer el raycasting mediante Ogre
+	(¿detectando colisiones con las entidades gráficas?) y librarnos totalmente de PhysX.
+	*/
+
+	PxTransform pxTransform(Matrix4ToPxTransform(transform));
+	pxTransform = pxTransform.getNormalized();
+
+	// @TODO Esto es infame... Quitar este "apagado y encendido" del log de PhysX y
+	// hacerlo bien, empezando por desactivar el componente físico para los edificios
+	// en construcción.
+	_errorManager->setOff(true);
+	actor->setGlobalPose(pxTransform);
+	_errorManager->setOff(false);
 }
 
 //--------------------------------------------------------
@@ -517,7 +567,7 @@ PxCapsuleController* CServer::createCapsuleController(const Vector3 &position, f
 	PxCapsuleController *controller = (PxCapsuleController *) _controllerManager->createController(desc);
 	
 	// Anotar el componente l�gico asociado al actor dentro del controller (No es autom�tico)
-	controller->getActor()->userData = (void *) component;
+	controller->getActor()->userData = (void*) component;
 
 	return controller;
 }
@@ -558,10 +608,9 @@ void CServer::setControllerPosition(PxCapsuleController *controller, const Vecto
 
 	// Mover el character controller y devolver los flags de colisi�n
 	float offsetY = controller->getHeight() / 2.0f + controller->getRadius();
-	PxExtendedVec3 pos = Vector3ToPxExtendedVec3(position+Vector3(0,offsetY,0));
+	PxExtendedVec3 pos = Vector3ToPxExtendedVec3(position + Vector3(0, offsetY, 0));
 	controller->setPosition(pos);
 }
-
 
 //--------------------------------------------------------
 
@@ -573,7 +622,7 @@ void CServer::setGroupCollisions(int group1, int group2, bool enable)
 
 //--------------------------------------------------------
 
-Logic::CEntity* CServer::raycastClosest (const Ray& ray, float maxDist) const
+Logic::CEntity* CServer::raycastClosest(const Ray& ray, float maxDist) const
 {
 	assert(_scene);
 
@@ -596,7 +645,7 @@ Logic::CEntity* CServer::raycastClosest (const Ray& ray, float maxDist) const
 
 	if (intersection) {
 		// Devolver entidad l�gica asociada a la entidad f�sica impactada
-		IPhysics *component = (IPhysics *) hit.shape->getActor()->userData;
+		IPhysics *component = (IPhysics*) hit.shape->getActor()->userData;
 		return component->getEntity();
 	} else {
 		return NULL;
@@ -634,7 +683,7 @@ Logic::CEntity* CServer::raycastClosest(const Ray& ray, float maxDist, int group
 
 	return NULL;
 
-	// Nota: seguro que se puede hacer de manera mucho m�s eficiente usando los filtros
+	// Nota: Seguro que se puede hacer de manera mucho m�s eficiente usando los filtros
 	// de PhysX.
 }
 

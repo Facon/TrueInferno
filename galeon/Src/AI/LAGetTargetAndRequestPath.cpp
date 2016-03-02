@@ -30,7 +30,8 @@ namespace AI {
 		if (_target == nullptr)
 			return LAStatus::FAIL;
 
-		return requestPath() ? LAStatus::SUCCESS : LAStatus::FAIL;
+		// Reintentamos hasta que podamos solicitar ruta
+		return requestPath() ? LAStatus::SUCCESS : LAStatus::RUNNING;
 	}
 
 	bool CLAGetTargetAndRequestPath::requestPath(){

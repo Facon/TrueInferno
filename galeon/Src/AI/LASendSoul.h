@@ -42,7 +42,7 @@ namespace AI {
 		std::vector<CEntity*> _newSouls;
 
 		/* Número de almas ya enviadas */
-		int _numSoulsSent = 0;
+		int _numSoulsSent;
 
 		/* Crea las almas. Devuelve true cuando se acabó de crear todas las almas */
 		bool createSouls();
