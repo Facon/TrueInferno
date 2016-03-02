@@ -8,7 +8,11 @@ namespace AI {
 
 		switch (msg._action){
 		case SEND_SOUL_BURN:{
+			// Buscamos horno. Si no hay, no aceptamos el mensaje
 			CPlaceable *target = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Furnace);
+			if (target == nullptr)
+				return false;
+
 			//std::unique_ptr<CBurnTask> _task(new CBurnTask(target));
 			_task = new CBurnTask(target);
 			_numSouls = msg._numSouls;
@@ -17,7 +21,11 @@ namespace AI {
 		}
 
 		case SEND_SOUL_WORK:{
+			// Buscamos un edificio cualquiera. Si no hay ninguno o somos nosotros mismos, no aceptamos el mensaje
 			CPlaceable *target = CBuildingManager::getSingletonPtr()->getRandomBuilding();
+			if (target == nullptr || target->getEntity() == _entity)
+				return false;
+
 			//std::unique_ptr<CWorkTask> _task(new CWorkTask(target));
 			_task = new CWorkTask(target);
 			_numSouls = msg._numSouls;
