@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+	<Window type="OgreTray/StaticImage" name="EventWindow" >
+		<Property name="Area" value="{{0.1,0},{0.2,0},{0.7,0},{0.9,0}}" />
+		<Window type="OgreTray/StaticImage" name="EventImage" >
+			<Property name="Area" value="{{0.1,0},{0.1,0},{0.9,0},{0.55,0}}" />
+		</Window>
+		<Window type="OgreTray/StaticText" name="EventText" >
+			<Property name="Area" value="{{0.1,0},{0.6,0},{0.9,0},{0.8,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="Welcome to hell, TRUE CUBO!!!" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/Button" name="AcceptEvent" >
+			<Property name="Area" value="{{0.45,0},{0.85,0},{0.55,0},{0.95,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="Text" value="OK" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+	</Window>
+</GUILayout>
+
