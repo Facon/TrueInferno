@@ -46,7 +46,8 @@ namespace AI {
 
 			// Reintentamos si no se encontró ruta
 			if (path == nullptr){
-				std::cout << "Path not found :(" << std::endl;
+				// TODO Revisar por qué no se encuentra ruta A VECES, y da igual que se reintente
+				//std::cout << "Path not found :(" << std::endl;
 				return LAStatus::RUNNING;
 			}
 
