@@ -72,7 +72,7 @@ namespace Logic {
 		if (entityInfo->hasAttribute("floor_absolute_position0")){
 			// Hacemos flotar al edificio hasta su posición inicial
 			Vector3 initialPosition = entityInfo->getVector3Attribute("floor_absolute_position0");
-			floatTo(initialPosition);
+			floatTo(initialPosition, true);
 
 			// Get memory for all the tiles
 			_tiles = std::vector<Tile*>(_floorX * _floorZ);
@@ -149,7 +149,7 @@ namespace Logic {
 		return true;
 	}
 
-	void CPlaceable::floatTo(const Vector3 newOriginPosition){
+	void CPlaceable::floatTo(const Vector3 newOriginPosition, bool showFloating){
 		//std::cout << "Flotando a: " << newOriginPosition << std::endl;
 
 		if (newOriginPosition.x != round(newOriginPosition.x) && newOriginPosition.z != round(newOriginPosition.z)){
@@ -208,7 +208,7 @@ namespace Logic {
 		centerPosition /= _tiles.size();
 
 		// Añadimos cierta altura a la posición del Placeable para que parezca que está colocada encima o sobrevolando la Tile
-		centerPosition += Vector3(0, (_floating ? HEIGHT_FLOATING_OVER_TILE : HEIGHT_ON_TILE), 0);
+		centerPosition += Vector3(0, (showFloating ? HEIGHT_FLOATING_OVER_TILE : HEIGHT_ON_TILE), 0);
 
 		// Move entity physically
 		_entity->setPosition(centerPosition);
@@ -261,7 +261,7 @@ namespace Logic {
 
 	bool CPlaceable::HandleMessage(const MovePlaceableMessage& msg){
 		if (msg._type == MessageType::PLACEABLE_FLOAT_TO){
-			floatTo(msg._position);
+			floatTo(msg._position, msg._showFloating);
 			return true;
 		}
 

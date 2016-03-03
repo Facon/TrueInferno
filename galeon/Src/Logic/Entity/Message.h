@@ -300,13 +300,13 @@ namespace Logic
 	{
 	public:
 		const Vector3 _position;
-
+		bool _showFloating;
 		// Coloca el placeable en la posición actual
 		MovePlaceableMessage() : Message(MessageType::PLACEABLE_PLACE)
 		{}
 		
 		// Hace flotar al placeable hasta la posición dada
-		MovePlaceableMessage(const Vector3& position) : Message(MessageType::PLACEABLE_FLOAT_TO), _position(position)
+		MovePlaceableMessage(const Vector3& position, bool showFloating) : Message(MessageType::PLACEABLE_FLOAT_TO), _position(position), _showFloating(showFloating)
 		{}
 
 		virtual bool Dispatch(MessageHandler& handler) const
