@@ -37,13 +37,9 @@ usados. La mayoría de ellos son parte de Ogre.
 #include <CEGUI/System.h>
 #include <CEGUI/DefaultResourceProvider.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
-/*
-#include <CEGUIDefaultResourceProvider.h>
-#include <CEGUIFont.h>
-#include <CEGUIImageset.h>
-#include <CEGUIWindowManager.h>
-#include <falagard/CEGUIFalWidgetLookManager.h>
-#include <CEGUIScheme.h>*/
+
+//FMOD
+#include <Audio/Server.h>
 
 // Para cerrar la aplicación si se cierra la ventana
 #include "Application/BaseApplication.h"
@@ -153,7 +149,8 @@ namespace BaseSubsystems
 	{
 		if( !initOgre() ||
 			!initOIS() ||
-			!initCEGUI() )
+			!initCEGUI() ||
+			!initFMOD())
 		{
 			close();
 			return false;
@@ -172,6 +169,7 @@ namespace BaseSubsystems
 		
 		releaseOgre();
 		
+		releaseFMOD();
 	} // close
 
 	//--------------------------------------------------------
@@ -322,6 +320,11 @@ namespace BaseSubsystems
 
 	} // initCEGUI
 
+	bool CServer::initFMOD()
+	{
+		Audio::CServer::Init();
+	}
+
 	//--------------------------------------------------------
 
 	void CServer::releaseOgre()
@@ -394,6 +397,11 @@ namespace BaseSubsystems
 
 	//--------------------------------------------------------
 	
+	void CServer::releaseFMOD()
+	{
+		Audio::CServer::Release();
+	}
+
 	Ogre::Timer* CServer::getAppTimer() 
 	{
 		if(_root)
