@@ -6,6 +6,8 @@
 #include "AI\Server.h"
 #include "AI\LAGetTargetAndRequestPath.h"
 #include "AI\LAExecutePath.h"
+#include "AI\LAWaitFinishedPath.h"
+#include "AI\LAExecuteSoulTask.h"
 
 namespace AI {
 	class CSMSoul : public CStateMachine<CLatentAction> {
@@ -14,11 +16,19 @@ namespace AI {
 			// Bucle infinito procesando peticiones
 			int process = this->addNode(new CLAGetTargetAndRequestPath(entity));
 			int executePath = this->addNode(new CLAExecutePath(entity));
-			
+			int waitFinishedPath = this->addNode(new CLAWaitFinishedPath(entity));
+			int executeTask = this->addNode(new CLAExecuteSoulTask(entity));
+
 			this->addEdge(process, executePath, new CConditionSuccess());
 			this->addEdge(process, process, new CConditionFail());
 
-			this->addEdge(executePath, process, new CConditionFinished());
+			this->addEdge(executePath, waitFinishedPath, new CConditionSuccess());
+			this->addEdge(executePath, process, new CConditionFail());
+
+			this->addEdge(waitFinishedPath, executeTask, new CConditionSuccess());
+			this->addEdge(waitFinishedPath, process, new CConditionFail());
+
+			this->addEdge(executeTask, process, new CConditionFinished());
 
 			this->setInitialNode(process);
 			this->resetExecution();

@@ -87,10 +87,12 @@
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecutePath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAExecuteSoulTask.cpp" />
     <ClCompile Include="..\..\Src\AI\LAGetTargetAndRequestPath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAGetTaskAndTarget.cpp" />
     <ClCompile Include="..\..\Src\AI\LASendSoul.cpp" />
     <ClCompile Include="..\..\Src\AI\LatentAction.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAWaitFinishedPath.cpp" />
     <ClCompile Include="..\..\Src\AI\micropather.cpp" />
     <ClCompile Include="..\..\Src\AI\Movement.cpp" />
     <ClCompile Include="..\..\Src\AI\Server.cpp" />
@@ -109,11 +111,13 @@
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
     <ClInclude Include="..\..\Src\AI\LAExecutePath.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />
+    <ClInclude Include="..\..\Src\AI\LAExecuteSoulTask.h" />
     <ClInclude Include="..\..\Src\AI\LAFindingPath.h" />
     <ClInclude Include="..\..\Src\AI\LAGetTargetAndRequestPath.h" />
     <ClInclude Include="..\..\Src\AI\LAGetTaskAndTarget.h" />
     <ClInclude Include="..\..\Src\AI\LASendSoul.h" />
     <ClInclude Include="..\..\Src\AI\LatentAction.h" />
+    <ClInclude Include="..\..\Src\AI\LAWaitFinishedPath.h" />
     <ClInclude Include="..\..\Src\AI\micropather.h" />
     <ClInclude Include="..\..\Src\AI\Movement.h" />
     <ClInclude Include="..\..\Src\AI\Server.h" />

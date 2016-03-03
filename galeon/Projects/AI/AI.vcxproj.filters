@@ -110,6 +110,12 @@
     <ClCompile Include="..\..\Src\AI\LAExecutePath.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAWaitFinishedPath.cpp">
+      <Filter>Decision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAExecuteSoulTask.cpp">
+      <Filter>Decision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -195,6 +201,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAExecutePath.h">
       <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAWaitFinishedPath.h">
+      <Filter>Decision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAExecuteSoulTask.h">
+      <Filter>Decision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
