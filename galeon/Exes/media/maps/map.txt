@@ -43,7 +43,6 @@ Map = {
 		floor_z = 1,
 		placeableType = "SoulPath",
 		validTerrainType = "Empty",
-		color = {0.572, 0.415, 0.109},
 		material = "SoulPath",
 	},
 	
@@ -65,7 +64,6 @@ Map = {
 		floor_z = 2,
 		placeableType = "Building",
 		validTerrainType = "Empty",
-		color = {1, 0.68, 0.4},
 		material = "HellQuarters",
 		numInitialSouls = 5,
 		secondsBetweenSpawns = 10,
@@ -90,7 +88,6 @@ Map = {
 		floor_z = 1,
 		placeableType = "Building",
 		validTerrainType = "Empty",
-		color = {0.81, 0.32, 0.7},
 		material = "Evilator",
 		minWorkers = 1,
 		maxWorkers = 5,
@@ -114,7 +111,6 @@ Map = {
 		floor_z = 2,
 		placeableType = "Building",
 		validTerrainType = "Empty",
-		color = {0.721, 0, 0},
 		material = "Furnace",
 		minWorkers = 1,
 		maxWorkers = 5,
@@ -126,6 +122,5 @@ Map = {
 		orientation = 0,
 		model = "ogrehead.mesh",
 		visible = "true",
-		color = {0.5, 0.32, 0.8},
 	},
 }

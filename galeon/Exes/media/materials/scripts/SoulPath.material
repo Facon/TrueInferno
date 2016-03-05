@@ -5,7 +5,7 @@ material SoulPath
 	{
 		pass
 		{
-			ambient 1 1 1 1
+			ambient 0.572 0.415 0.109 1
 			diffuse 1 1 1 1
 		}
 	}
