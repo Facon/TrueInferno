@@ -91,33 +91,5 @@ namespace AI
 		// Cuando se aborta se queda en estado terminado con fallo
 		return FAIL;
 	}
-	/**
-	Devuelve true si a la acción le interesa el tipo de mensaje
-	enviado como parámetro.
-	<p>
-	Esta acción no acepta mensajes de ningún tipo.
-
-	@param msg Mensaje que ha recibido la entidad.
-	@return true Si la acción está en principio interesada
-	por ese mensaje.
-	*/
-	/*bool CLAWait::accept(const TMessage &message)
-	{
-		// TODO PRÁCTICA IA
-		// La acción no acepta mensajes
-		return false;
-	}*/
-	/**
-	Procesa el mensaje recibido. El método es invocado durante la
-	ejecución de la acción cuando se recibe el mensaje.
-
-	@param msg Mensaje recibido.
-	*/
-	/*void CLAWait::process(const TMessage &message)
-	{
-		// TODO PRÁCTICA IA
-		// La acción no procesa mensajes
-	}*/
-
 
 } //namespace AI 

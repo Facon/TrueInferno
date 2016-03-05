@@ -6,7 +6,6 @@
 #include "AI\LatentAction.h"
 
 namespace AI {
-
 	class CLAWaitTaskAndRequestPath : public CLatentAction {
 	public:
 		CLAWaitTaskAndRequestPath(CEntity* entity, CSMSoulData& smData) : CLatentAction(entity), _smData(smData) {}
@@ -21,11 +20,10 @@ namespace AI {
 		LAStatus OnRun();
 
 	private:
-		CSMSoulData _smData;
+		CSMSoulData& _smData;
 
 		bool requestPath();
 	};
-
 }
 
 #endif

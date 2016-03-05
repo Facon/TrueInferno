@@ -68,7 +68,6 @@ namespace AI
 	public:
 		bool check(CLatentAction* currentNode, CEntity* entity) 
 		{ 
-			// TODO PRÁCTICA IA
 			// Comprobar si el estado del nodo que se está ejecutando es terminado
 			return (currentNode->getStatus() == CLatentAction::SUCCESS) || 
 				(currentNode->getStatus() == CLatentAction::FAIL);
@@ -84,7 +83,6 @@ namespace AI
 	public:
 		bool check(CLatentAction* currentNode, CEntity* entity) 
 		{ 
-			// TODO PRÁCTICA IA
 			// Comprobar si el estado del nodo que se está ejecutando es éxito
 			return currentNode->getStatus() == CLatentAction::SUCCESS;
 		}
@@ -99,8 +97,6 @@ namespace AI
 	public:
 		bool check(CLatentAction* currentNode, CEntity* entity) 
 		{ 
-			
-			// TODO PRÁCTICA IA
 			// Comprobar si el estado del nodo que se está ejecutando es fallo
 			return currentNode->getStatus() == CLatentAction::FAIL;			
 		}
@@ -110,7 +106,7 @@ namespace AI
 	Esta clase define una condición que devuelve true 
 	si se recibió un mensaje de un tipo concreto en el último tick
 	*/
-	template <class TNode>
+	template <class TNode, class MessageClass>
 	class CConditionMessage : public ICondition<TNode>
 	{
 	public:
@@ -132,7 +128,6 @@ namespace AI
 
 		*/
 		bool check(TNode* currentNode, CEntity* entity) { 
-			// TODO PRÁCTICA IA
 			// Tenemos que comprobar el flag _received y luego actualizarlo
 			// de nuevo a false para el siguiente tick
 			bool receivedThisTick = _received;
@@ -148,7 +143,6 @@ namespace AI
 		por ese mensaje.
 		*/
 		/*virtual bool accept(const MessageType &message) {
-			// TODO PRÁCTICA IA
 			// La condición debe aceptar mensajes del tipo indicado en _messageType
 			return message._type == _messageType;
 		};*/
@@ -161,12 +155,11 @@ namespace AI
 		@param msg Mensaje recibido.
 		*/
 		/*virtual void process(const MessageType &message) {
-			// TODO PRÁCTICA IA
 			// Actualizamos el flag _received si el mensaje es del tipo _messageType
 			_received = _received || (message._type == _messageType); 
 		};*/
 
-		bool HandleMessage(const WalkSoulPathMessage& msg){
+		bool HandleMessage(const MessageClass& msg){
 			if (msg._type == _messageType){
 				// Actualizamos el flag _received si el mensaje es del tipo _messageType
 				_received = true;
@@ -196,8 +189,6 @@ namespace AI
 
 		bool check(CLatentAction* currentNode, CEntity* entity) 
 		{ 
-			
-			// TODO PRÁCTICA IA
 			// Tiene que devolver true cuando la posición de la entidad sea
 			// igual a la posición que ha recibido como parámetro (con la tolerancia)
 			return entity->getPosition().positionEquals(_position, _tolerance);

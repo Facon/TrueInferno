@@ -5,10 +5,15 @@
 
 namespace AI {
 	bool CLAWaitAndFollowPath::HandleMessage(const WalkSoulPathMessage& msg) {
-		// Rechazamos lo que no sean mensajes con la ruta. No aceptamos más de una ruta simultáneamente
-		if (msg._type != MessageType::RETURN_WALK_SOUL_PATH || _smData.getPath() != nullptr)
+		// Rechazamos lo que no sean mensajes con la ruta
+		if (msg._type != MessageType::RETURN_WALK_SOUL_PATH)
 			return false;
 
+		//No aceptamos más de una ruta simultáneamente
+		if (_smData.getPath() != nullptr)
+			return false;
+
+		// Guardamos la ruta
 		_smData.setPath(msg._path);
 
 		// Reactivamos la LA

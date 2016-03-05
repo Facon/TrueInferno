@@ -67,6 +67,7 @@ namespace Logic
 			SOUL_SENDER_RESPONSE,
 			SOUL_REQUEST,
 			SOUL_RESPONSE,
+			FURNACE_BURN_SOULS,
 		};
 	}
 
@@ -337,6 +338,20 @@ namespace Logic
 		WorkerMessage(int numWorkers) : Message(MessageType::UNASSIGNED), _numWorkers(numWorkers) {}
 
 		int _numWorkers;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	/** Mensaje para enviar números enteros: FURNACE_BURN_SOULS */
+	class NumberMessage : public Message
+	{
+	public:
+		NumberMessage(MessageType type, int number) : Message(type), _number(number) {}
+
+		int _number;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

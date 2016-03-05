@@ -12,19 +12,15 @@ namespace AI {
 
 		virtual ~CLAExecuteSoulTask() {}
 
-		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
-
 	protected:
 		LAStatus OnStart();
-
 		LAStatus OnRun();
 
 	private:
-		CSMSoulData _smData;
+		CSMSoulData& _smData;
 
 		bool CLAExecuteSoulTask::executeTask();
 	};
-
 }
 
 #endif

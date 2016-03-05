@@ -19,7 +19,7 @@ namespace AI {
 
 	CLatentAction::LAStatus CLAWaitTaskAndRequestPath::OnStart() {
 		// Inicializamos
-		_smData.setPath(nullptr);
+		_smData.setTask(nullptr);
 
 		// Suspendemos la LA hasta que llegue el mensaje con la petición
 		return LAStatus::SUSPENDED;

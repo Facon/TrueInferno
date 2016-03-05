@@ -24,7 +24,6 @@ namespace AI {
 
 		bool CLAWaitAndFollowPath::sendPath();
 	};
-
 }
 
 #endif

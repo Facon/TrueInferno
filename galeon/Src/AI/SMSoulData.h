@@ -12,7 +12,7 @@ namespace AI {
 	class CSMSoulData {
 
 	public:
-		CSMSoulData() : _task(nullptr), _path(nullptr) {}
+		CSMSoulData() : _task(nullptr), _path(nullptr), _numSouls(0) {}
 		
 		virtual ~CSMSoulData() {}
 

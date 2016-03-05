@@ -4,20 +4,8 @@
 #include "Logic\Maps\Map.h"
 
 namespace AI {
-	bool CLAExecuteSoulTask::HandleMessage(const WalkSoulPathMessage& msg) {
-		// Rechazamos lo que no sean mensajes de aviso de ruta finalizada
-		if (msg._type != MessageType::WALK_SOUL_PATH_FINISHED)
-			return false;
-
-		// Reactivamos la LA
-		resume();
-
-		return true;
-	}
-
 	CLatentAction::LAStatus CLAExecuteSoulTask::OnStart() {
-		// Suspendemos la LA hasta que llegue el mensaje de aviso de ruta finalizada
-		return LAStatus::SUSPENDED;
+		return LAStatus::RUNNING;
 	}
 
 	CLatentAction::LAStatus CLAExecuteSoulTask::OnRun() {
@@ -29,15 +17,6 @@ namespace AI {
 	}
 
 	bool CLAExecuteSoulTask::executeTask(){
-		// TODO
-		/*
-		WalkSoulPathMessage m(_path);
-		m._type = MessageType::PERFORM_WALK_SOUL_PATH;
-
-		return m.Dispatch(*_entity);
-		*/
-
-		std::cout << "TODO executeTask" << std::endl;
-		return false;
+		return _smData.getTask()->execute();
 	}
 }

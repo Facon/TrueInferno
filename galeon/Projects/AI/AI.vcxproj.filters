@@ -113,6 +113,9 @@
     <ClCompile Include="..\..\Src\AI\LAWaitTaskAndRequestPath.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LADestroyEntity.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -203,6 +206,9 @@
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAWaitTaskAndRequestPath.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LADestroyEntity.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
