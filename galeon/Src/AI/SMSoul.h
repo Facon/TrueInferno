@@ -1,26 +1,44 @@
 #ifndef SM_SOUL_
 #define SM_SOUL_
 
-#include "StateMachine.h"
 #include "Logic\Entity\Message.h"
+#include "AI\StateMachine.h"
 #include "AI\Server.h"
-#include "AI\LAGetTargetAndRequestPath.h"
-#include "AI\LAExecutePath.h"
+#include "AI\LAWaitTaskAndRequestPath.h"
+#include "AI\LAWaitAndFollowPath.h"
+#include "AI\LAExecuteSoulTask.h"
+#include "AI\SMSoulData.h"
+#include "AI\LatentAction.h"
+#include "AI\Condition.h"
 
 namespace AI {
-	class CSMSoul : public CStateMachine<CLatentAction> {
+	/**
+	Esta FSM controla la lógica fundamental de las almas.
+
+	Inicialmente el alma se pone a la espera de que le asignen un objetivo. En cuanto lo tiene solicita cálculo de ruta.
+	Cuando le llega la ruta la sigue.
+	Tras acabar la ruta ejecuta la tarea que tenía asignada.
+	*/ 
+	class CSMSoul : public CStateMachine<CLatentAction, CSMSoulData> {
 	public:
-		CSMSoul(CEntity* entity) : CStateMachine(entity) {
-			// Bucle infinito procesando peticiones
-			int process = this->addNode(new CLAGetTargetAndRequestPath(entity));
-			int executePath = this->addNode(new CLAExecutePath(entity));
-			
-			this->addEdge(process, executePath, new CConditionSuccess());
-			this->addEdge(process, process, new CConditionFail());
+		CSMSoul(CEntity* entity) : CStateMachine<CLatentAction, CSMSoulData>(entity) {
+			int waitTargetAndRequestPath = this->addNode(new CLAWaitTaskAndRequestPath(entity, _data));
+			int waitPathAndFollow = this->addNode(new CLAWaitAndFollowPath(entity, _data));
+			int executeTask = this->addNode(new CLAExecuteSoulTask(entity, _data));
 
-			this->addEdge(executePath, process, new CConditionFinished());
+			// Inicialmente el alma se pone a la espera de que le asignen un objetivo. En cuanto lo tiene solicita cálculo de ruta
+			this->setInitialNode(waitTargetAndRequestPath);
 
-			this->setInitialNode(process);
+			// Cuando le llega la ruta la sigue
+			this->addEdge(waitTargetAndRequestPath, waitPathAndFollow, new CConditionSuccess());
+			this->addEdge(waitTargetAndRequestPath, waitTargetAndRequestPath, new CConditionFail());
+
+			// Tras acabar la ruta ejecuta la tarea que tenía asignada
+			this->addEdge(waitPathAndFollow, executeTask, new CConditionMessage<CLatentAction>(MessageType::WALK_SOUL_PATH_FINISHED));
+
+			// Y tras ejecutar vuelve a empezar
+			this->addEdge(executeTask, waitTargetAndRequestPath, new CConditionFinished());
+
 			this->resetExecution();
 		}
 
@@ -45,6 +63,9 @@ namespace AI {
 
 			return ret;
 		}
+
+	private:
+		CSMSoulData _data;
 	};
 }
 

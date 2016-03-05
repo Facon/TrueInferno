@@ -7,9 +7,17 @@
 #include "AI\LASendSoul.h"
 
 namespace AI {
-	class CSMSoulSender : public CStateMachine<CLatentAction> {
+	class CSMSoulSenderData {
+	public:
+		CSMSoulSenderData() {}
+		virtual ~CSMSoulSenderData() {}
+	};
+
+	class CSMSoulSender : public CStateMachine<CLatentAction, CSMSoulSenderData> {
 	public:
 		CSMSoulSender(CEntity* entity) : CStateMachine(entity) {
+			CSMSoulSenderData data;
+
 			// Bucle infinito procesando peticiones
 			int process = this->addNode(new CLASendSoul(entity));
 			this->addEdge(process, process, new CConditionFinished());

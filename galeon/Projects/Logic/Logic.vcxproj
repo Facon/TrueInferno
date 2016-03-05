@@ -97,7 +97,6 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\RayPerception.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Soul.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulSender.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchPosition.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />

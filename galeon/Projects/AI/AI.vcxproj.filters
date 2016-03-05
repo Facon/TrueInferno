@@ -104,10 +104,13 @@
     <ClCompile Include="..\..\Src\AI\LASendSoul.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LAGetTargetAndRequestPath.cpp">
+    <ClCompile Include="..\..\Src\AI\LAWaitAndFollowPath.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LAExecutePath.cpp">
+    <ClCompile Include="..\..\Src\AI\LAExecuteSoulTask.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAWaitTaskAndRequestPath.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -190,10 +193,16 @@
     <ClInclude Include="..\..\Src\AI\SMSoul.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LAGetTargetAndRequestPath.h">
+    <ClInclude Include="..\..\Src\AI\SMSoulData.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LAExecutePath.h">
+    <ClInclude Include="..\..\Src\AI\LAWaitAndFollowPath.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAExecuteSoulTask.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAWaitTaskAndRequestPath.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,11 +19,17 @@ jerárquicas.
 
 #include "Logic/Entity/Entity.h"
 
-namespace AI 
+namespace AI
 {
 
-	template <class TNode>
+	template <class TNode, class SharedData>
 	class CStateMachine;
+
+	class CLAExecuteSMData {
+	public:
+		CLAExecuteSMData() {}
+		virtual ~CLAExecuteSMData() {}
+	};
 
 	/**
 	Esta acción ejecuta una máquina de estado de la clase CStateMachine
@@ -33,7 +39,8 @@ namespace AI
 
 	protected:
 		/**	Máquina de estado que estamos ejecutando */
-		CStateMachine<CLatentAction>* _stateMachine;
+		CStateMachine<CLatentAction, CLAExecuteSMData>* _stateMachine;
+
 		/** Acción de la máquina de estado que se está ejecutando */
 		CLatentAction* _currentAction;
 
@@ -43,7 +50,7 @@ namespace AI
 		
 		@param stateMachine Máquina de estado
 		*/
-		CLAExecuteSM(CStateMachine<CLatentAction>* stateMachine) : CLatentAction(), _stateMachine(stateMachine), _currentAction(NULL) {};
+		CLAExecuteSM(CStateMachine<CLatentAction, CLAExecuteSMData>* stateMachine) : CLatentAction(), _stateMachine(stateMachine), _currentAction(NULL) {};
 		/**
 		Destructor
 		*/

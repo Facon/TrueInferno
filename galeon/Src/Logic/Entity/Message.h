@@ -55,6 +55,7 @@ namespace Logic
 			REQUEST_WALK_SOUL_PATH,
 			RETURN_WALK_SOUL_PATH,
 			PERFORM_WALK_SOUL_PATH,
+			WALK_SOUL_PATH_FINISHED,
 			SEND_SOUL_WORK, 
 			SEND_SOUL_BURN,
 			PLACEABLE_FLOAT_TO,
@@ -66,7 +67,6 @@ namespace Logic
 			SOUL_SENDER_RESPONSE,
 			SOUL_REQUEST,
 			SOUL_RESPONSE,
-			SOUL_PATH_FINISHED,
 		};
 	}
 
@@ -345,15 +345,20 @@ namespace Logic
 	};
 
 	// TODO Remember to discuss if we should separate this in 2 classes
-	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH
+	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH, WALKING_SOUL_PATH_FINISHED
 	class WalkSoulPathMessage : public Message
 	{
 	public:
-		// Petición
+		// Petición de ruta (REQUEST_WALK_SOUL_PATH)
 		WalkSoulPathMessage(CPlaceable* const target) : Message(MessageType::REQUEST_WALK_SOUL_PATH), _target(target), _path(nullptr) {}
 		
-		// Respuesta
-		WalkSoulPathMessage(std::vector<Vector3>* const path) : _path(path) {}
+		// Respuesta/orden con la ruta (RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH)
+		WalkSoulPathMessage(std::vector<Vector3>* const path) : _target(nullptr), _path(path) {}
+
+		// Ruta finalizada (WALKING_SOUL_PATH_FINISHED)
+		WalkSoulPathMessage() : Message(MessageType::WALK_SOUL_PATH_FINISHED), _target(nullptr), _path(nullptr) {}
+
+		WalkSoulPathMessage(MessageType type) : Message(type), _target(nullptr), _path(nullptr) {}
 
 		CPlaceable* _target;
 		std::vector<Vector3>* _path;
@@ -400,12 +405,12 @@ namespace Logic
 		}
 	};
 
-	// SOUL_REQUEST, SOUL_RESPONSE, SOUL_PATH_FINISHED
+	// SOUL_REQUEST, SOUL_RESPONSE
 	class SoulMessage : public Message
 	{
 	public:
 		SoulMessage(AI::CSoulTask* task) : Message(MessageType::SOUL_REQUEST), _task(task) {}
-		SoulMessage(MessageType type) : Message(type), _task(0) {}
+		SoulMessage() : Message(MessageType::SOUL_RESPONSE), _task(0) {}
 
 		//std::unique_ptr<AI::CSoulTask> _task;
 		AI::CSoulTask* _task;
