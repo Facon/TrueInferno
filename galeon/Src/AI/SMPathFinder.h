@@ -7,9 +7,17 @@
 #include "AI\LAFindingPath.h"
 
 namespace AI {
-	class CSMPathFinder : public CStateMachine<CLatentAction> {
+	class CSMPathFinderData {
+	public:
+		CSMPathFinderData() {}
+		virtual ~CSMPathFinderData() {}
+	};
+
+	class CSMPathFinder : public CStateMachine<CLatentAction, CSMPathFinderData> {
 	public:
 		CSMPathFinder(CEntity* entity) : CStateMachine(entity) {
+			CSMPathFinderData data;
+
 			// Bucle infinito procesando peticiones
 			int process = this->addNode(new CLAFindingPath(entity));
 			this->addEdge(process, process, new CConditionFinished());

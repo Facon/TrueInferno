@@ -12,7 +12,7 @@
 #include "AI/LatentAction.h"
 
 namespace Logic {
-	class CSoul : public CStateMachineExecutor {
+	class CSoul : public CStateMachineExecutor<AI::CSMSoulData> {
 		RTTI_DECL;
 		DEC_FACTORY(CSoul);
 
@@ -25,7 +25,7 @@ namespace Logic {
 		virtual void tick(unsigned int msecs);
 
 	protected:
-		AI::CStateMachine<AI::CLatentAction>* getStateMachine(){
+		AI::CStateMachine<AI::CLatentAction, AI::CSMSoulData>* getStateMachine(){
 			return new AI::CSMSoul(_entity);
 		}
 

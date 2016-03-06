@@ -12,7 +12,7 @@
 #include "AI/LatentAction.h"
 
 namespace Logic {
-	class CPathFinder : public CStateMachineExecutor {
+	class CPathFinder : public CStateMachineExecutor<AI::CSMPathFinderData> {
 		RTTI_DECL;
 		DEC_FACTORY(CPathFinder);
 
@@ -36,7 +36,7 @@ namespace Logic {
 		virtual void tick(unsigned int msecs);
 
 	protected:
-		AI::CStateMachine<AI::CLatentAction>* getStateMachine(){
+		AI::CStateMachine<AI::CLatentAction, AI::CSMPathFinderData>* getStateMachine(){
 			return new AI::CSMPathFinder(_entity);
 		}
 

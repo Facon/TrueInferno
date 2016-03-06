@@ -7,9 +7,17 @@
 #include "LAGetTaskAndTarget.h"
 
 namespace AI {
-	class CSMHellQuarters : public CStateMachine<CLatentAction> {
+	class CSMHellQuartersData {
+	public:
+		CSMHellQuartersData() {}
+		virtual ~CSMHellQuartersData() {}
+	};
+
+	class CSMHellQuarters : public CStateMachine<CLatentAction, CSMHellQuartersData> {
 	public:
 		CSMHellQuarters(CEntity* entity) : CStateMachine(entity) {
+			CSMHellQuartersData data;
+
 			// Bucle infinito procesando peticiones
 			int process = this->addNode(new CLAGetTaskAndTarget(entity));
 			this->addEdge(process, process, new CConditionFinished());

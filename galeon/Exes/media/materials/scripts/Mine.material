@@ -1,11 +1,11 @@
 
-material SoulPath
+material Mine
 {
 	technique
 	{
 		pass
 		{
-			ambient 0.572 0.415 0.109 1
+			ambient 0.203 0.423 0.784 1
 			diffuse 1 1 1 1
 		}
 	}

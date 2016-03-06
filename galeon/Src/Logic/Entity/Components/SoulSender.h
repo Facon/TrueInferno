@@ -6,7 +6,7 @@
 #include "AI/SMSoulSender.h"
 
 namespace Logic {
-	class CSoulSender : public CStateMachineExecutor {
+	class CSoulSender : public CStateMachineExecutor<AI::CSMSoulSenderData> {
 		RTTI_DECL;
 		DEC_FACTORY(CSoulSender);
 
@@ -30,7 +30,7 @@ namespace Logic {
 		virtual void tick(unsigned int msecs);
 
 	protected:
-		AI::CStateMachine<AI::CLatentAction>* getStateMachine(){
+		AI::CStateMachine<AI::CLatentAction, AI::CSMSoulSenderData>* getStateMachine(){
 			return new AI::CSMSoulSender(_entity);
 		}
 

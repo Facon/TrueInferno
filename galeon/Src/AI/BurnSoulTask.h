@@ -19,8 +19,9 @@ namespace AI{
 		}
 
 		virtual bool execute() {
-			// TODO
-			return false;
+			// Notificamos al objetivo
+			NumberMessage m(MessageType::FURNACE_BURN_SOULS, 1);
+			return m.Dispatch(*_target->getEntity());
 		};
 
 	};

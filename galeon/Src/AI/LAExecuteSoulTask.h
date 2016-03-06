@@ -1,30 +1,26 @@
 #ifndef LA_EXECUTE_SOUL_TASK_
 #define LA_EXECUTE_SOUL_TASK_
 
-#include "StateMachine.h"
-#include "Server.h"
 #include "Logic\Entity\Message.h"
-#include "SoulTask.h"
-
-#include <vector>
+#include "AI\SMSoulData.h"
+#include "AI\LatentAction.h"
 
 namespace AI {
 	class CLAExecuteSoulTask : public CLatentAction {
-
 	public:
-		CLAExecuteSoulTask(CEntity* entity) : CLatentAction(entity) {
-		}
+		CLAExecuteSoulTask(CEntity* entity, CSMSoulData& smData) : CLatentAction(entity), _smData(smData) {}
 
 		virtual ~CLAExecuteSoulTask() {}
 
 	protected:
+		LAStatus OnStart();
 		LAStatus OnRun();
 
 	private:
-		CSoulTask* _task;
+		CSMSoulData& _smData;
 
+		bool CLAExecuteSoulTask::executeTask();
 	};
-
 }
 
 #endif

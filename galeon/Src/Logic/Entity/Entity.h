@@ -176,6 +176,7 @@ namespace Logic
 		bool HandleMessage(const SoulSenderMessage& msg);
 		bool HandleMessage(const SoulMessage& msg);
 		bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
+		bool HandleMessage(const NumberMessage& msg);
 		
 		/**
 		Devuelve el identificador �nico de la entidad.

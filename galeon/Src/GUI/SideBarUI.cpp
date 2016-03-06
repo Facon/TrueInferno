@@ -142,7 +142,7 @@ namespace GUI
 
 					if (path)
 					{
-						Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, to->getLogicPosition());
+						Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, to->getLogicPosition(), false);
 						if (_placeableRoadSize > 0){
 							for (int i = 0; i < _placeableRoadSize; ++i){
 								if (_placeableRoad[i])
@@ -166,13 +166,13 @@ namespace GUI
 						for (auto it = path->cbegin(); it != path->cend(); ++it)
 						{
 							Logic::Tile* tile = (*it);
-							_placeableRoad[j++] = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", tile->getLogicPosition(), true);
+							_placeableRoad[j++] = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", tile->getLogicPosition(), true, false);
 						}
 						_placeableEntity = _placeableRoad[0];
 					}
 				}
 				else{
-					Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, to->getLogicPosition());
+					Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, to->getLogicPosition(), true);
 				}
 
 			}
@@ -181,13 +181,15 @@ namespace GUI
 
 	bool SideBarUI::createFurnaceReleased(const CEGUI::EventArgs& e)
 	{
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Furnace", Vector3(0, 0, 0), true);
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Furnace", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
-	} 
+	}
 
 	bool SideBarUI::createRoadReleased(const CEGUI::EventArgs& e)
 	{
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 0, 0), true);
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 0, 0), true, true);
 		if (_placeableEntity){
 			_placeableRoad = new Logic::CEntity*[1];
 			_placeableRoadSize = 1;
@@ -199,19 +201,22 @@ namespace GUI
 
 	bool SideBarUI::createResource1BuildingReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Create Resource1\n");
-		return true;
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Mine", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 	bool SideBarUI::createResource2BuildingReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Create Resource2\n");
-		return true;
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "GasPlant", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 
 	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
+		ClearBuildingConstruction();
 		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_WORK, 1);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 		
@@ -223,6 +228,7 @@ namespace GUI
 
 	bool SideBarUI::moveSoulReleased(const CEGUI::EventArgs& e)
 	{
+		ClearBuildingConstruction();
 		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_BURN, 1);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
@@ -234,20 +240,23 @@ namespace GUI
 
 	bool SideBarUI::createEvilworksReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Create Evilworks\n");
-		return true;
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "EvilWorks", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 
 	bool SideBarUI::createRefineryReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Create Refinery\n");
-		return true;
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Refinery", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 
 	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
 	{
+		ClearBuildingConstruction();
 		printf("Repair Building\n");
 		return true;
 	}
@@ -255,10 +264,27 @@ namespace GUI
 
 	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
 	{
+		ClearBuildingConstruction();
 		printf("Clear Terrain\n");
 		return true;
 	}
 
+	void SideBarUI::ClearBuildingConstruction(){
+		_roadInConstruction = 0;
+		if (_placeableRoadSize > 0){
+			for (int i = 0; i < _placeableRoadSize; ++i){
+				if (_placeableRoad[i])
+					Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableRoad[i]);
+			}
+			_placeableRoadSize = 0;
+			free(_placeableRoad);
+			_placeableEntity = nullptr;
+		}
+		else if (_placeableEntity){
+			Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableEntity);
+			_placeableEntity = nullptr;
+		}
+	}
 
 	void SideBarUI::placeBuildingInConstruction()
 	{

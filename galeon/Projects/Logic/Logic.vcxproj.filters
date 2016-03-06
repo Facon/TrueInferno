@@ -142,7 +142,6 @@
     <ClCompile Include="..\..\Src\Logic\BuildingManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFinder.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulSender.cpp" />
   </ItemGroup>

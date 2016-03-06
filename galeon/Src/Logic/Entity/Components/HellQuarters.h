@@ -9,7 +9,7 @@
 #include <vector>
 
 namespace Logic {
-	class CHellQuarters : public CStateMachineExecutor{
+	class CHellQuarters : public CStateMachineExecutor<AI::CSMHellQuartersData>{
 		RTTI_DECL;
 		DEC_FACTORY(CHellQuarters);
 
@@ -33,7 +33,7 @@ namespace Logic {
 		virtual void tick(unsigned int msecs);
 
 	protected:
-		AI::CStateMachine<AI::CLatentAction>* getStateMachine(){
+		AI::CStateMachine<AI::CLatentAction, AI::CSMHellQuartersData>* getStateMachine(){
 			return new AI::CSMHellQuarters(_entity);
 		}
 

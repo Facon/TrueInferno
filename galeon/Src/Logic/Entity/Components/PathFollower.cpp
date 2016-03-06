@@ -36,23 +36,20 @@ namespace Logic
 
 	void PathFollower::tick(unsigned int msecs)
 	{
-		if (_path.empty() && (_entity->getPosition().squaredDistance(_targetPosition) <= ZERO_DISTANCE) && !_targetReached)
+		if (!_targetReached && _path.empty() && (_entity->getPosition().squaredDistance(_targetPosition) <= ZERO_DISTANCE))
 		{
-			std::cout << "Worker reached his destination!" << std::endl;
-
-			// Ask soul to execute its task
-			//SendMessage("executeTask", targetBuilding, SendMessageOptions.RequireReceiver);
-
-			// Informamos que hemos llegado
-			SoulMessage m(MessageType::SOUL_PATH_FINISHED);
-			m.Dispatch(*_entity);
-
-			//workerManager.disableWorker(this.gameObject);
-
+			//std::cout << "Worker reached his destination!" << std::endl;
 			_targetReached = true;
 		}
 
-		if (!_path.empty() && !_moving)
+		// Si hemos llegado pero todavía no hemos podido notificarlo
+		if (_targetReached && !_targetReachedNotified){
+			// Enviamos la notificación de que hemos llegado
+			WalkSoulPathMessage m(MessageType::WALK_SOUL_PATH_FINISHED);
+			_targetReachedNotified = m.Dispatch(*_entity);
+		}
+
+		if (!_moving && !_path.empty())
 		{
 			_moving = true;
 

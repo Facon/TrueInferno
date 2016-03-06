@@ -51,7 +51,7 @@ namespace Logic {
 		virtual void tick(unsigned int msecs);
 
 		/** Float this placeable to a given logic position*/
-		void floatTo(const Vector3 newOriginPosition);
+		void floatTo(const Vector3 newOriginPosition, bool showFloating);
 
 		/** Coloca el Placeable en la posición original */
 		bool place();

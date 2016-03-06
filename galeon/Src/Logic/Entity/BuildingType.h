@@ -8,7 +8,7 @@ namespace Logic {
 	enum BuildingType {
 		HellQuarters,
 		Furnace,
-		Evilworks,
+		EvilWorks,
 		Refinery,
 		Evilator,
 		Mine,

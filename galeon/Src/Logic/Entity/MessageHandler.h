@@ -25,6 +25,7 @@ namespace Logic
 	class SoulMessage;
 	class CheckValidPositionPlaceableMessage;
 	class MoveMessage;
+	class NumberMessage;
 
 	class MessageHandler
 	{
@@ -89,6 +90,9 @@ namespace Logic
 
         virtual bool HandleMessage(const MoveMessage& msg)
         { return false; }
+
+		virtual bool HandleMessage(const NumberMessage& msg)
+		{ return false; }
 
 	};
 } // namespace Logic

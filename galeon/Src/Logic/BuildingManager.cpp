@@ -109,11 +109,11 @@ namespace Logic {
 
 		// TODO Colocamos temporalmente hardcodeando posiciones en código
 		//CEntity* evilator = createPlaceable(map, "Evilator", Vector3(5, 0, 12));
-		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(8, 0, 4), false);
+		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(8, 0, 4), false, false);
 		if (!evilator)
 			return false;
 
-		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(12, 0, 4), false);
+		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(12, 0, 4), false, false);
 		if (!hellQuarters)
 			return false;
 
@@ -175,14 +175,14 @@ namespace Logic {
 		//std::cout << "Building unregistered: " << building->getBuildingType() << std::endl;
 	}
 
-	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition, bool floating){
+	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition, bool floating, bool showFloating){
 		bool ret = true;
 		
 		// Primero se intenta crear la entidad
 		CEntity* newEntity = CEntityFactory::getSingletonPtr()->createEntity(prefabName, map);
 		if (newEntity){
 			// En segundo lugar se desplaza
-			ret &= floatPlaceableTo(newEntity, logicPosition);
+			ret &= floatPlaceableTo(newEntity, logicPosition, showFloating);
 
 			// Por último, salvo que sea flotante, lo intentamos colocar en su posición
 			if (!floating)
@@ -210,13 +210,13 @@ namespace Logic {
 		CEntityFactory::getSingletonPtr()->deleteEntity(entity);
 	}
 
-	bool CBuildingManager::floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition){
+	bool CBuildingManager::floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition, bool showFloating){
 		if (!movableEntity){
 			std::cout << "Can't float null placeable to '" << logicPosition << "'" << std::endl;
 			return false;
 		}
 
-		MovePlaceableMessage m(logicPosition);
+		MovePlaceableMessage m(logicPosition, showFloating);
 
 		return m.Dispatch(*movableEntity);
 	}

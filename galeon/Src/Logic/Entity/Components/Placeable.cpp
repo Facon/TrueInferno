@@ -58,12 +58,19 @@ namespace Logic {
 		_floorOriginPosition = 0;
 
 		// Read floor's size
-		if (!entityInfo->hasAttribute("floor_x") || !entityInfo->hasAttribute("floor_z")){
-			std::cout << "floor_x and floor_z must be defined" << std::endl;
+		if (!entityInfo->hasAttribute("dimensions")){
+			assert(false && "Dimensions must be defined");
 			return false;
 		}
-		_floorX = entityInfo->getIntAttribute("floor_x");
-		_floorZ = entityInfo->getIntAttribute("floor_z");
+
+		// Chequeamos que las dimensiones X,Z sean números enteros
+		Vector3 dimensions = entityInfo->getVector3Attribute("dimensions");
+		if (dimensions.x != round(dimensions.x) || dimensions.z != round(dimensions.z)){
+			assert(false && "Dimensions X,Z must be integer");
+			return false;
+		}
+		_floorX = dimensions.x;
+		_floorZ = dimensions.z;
 
 		// Determinamos el tipo de placeable que es
 		_placeableType = parsePlaceableType(entityInfo->getStringAttribute("placeableType"));
@@ -72,7 +79,7 @@ namespace Logic {
 		if (entityInfo->hasAttribute("floor_absolute_position0")){
 			// Hacemos flotar al edificio hasta su posición inicial
 			Vector3 initialPosition = entityInfo->getVector3Attribute("floor_absolute_position0");
-			floatTo(initialPosition);
+			floatTo(initialPosition, true);
 
 			// Get memory for all the tiles
 			_tiles = std::vector<Tile*>(_floorX * _floorZ);
@@ -100,20 +107,6 @@ namespace Logic {
 	void CPlaceable::tick(unsigned int msecs){
 		//processWalkingSoulPathRequest();
 	} // tick
-
-	/*void CPlaceable::processWalkingSoulPathRequest(){
-		if (_walkingSoulTarget != nullptr){
-
-			// Calculate path from this placeable to the given target placeable
-			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(this, _walkingSoulTarget);
-			WalkSoulPathMessage message(path);
-			message._type = MessageType::RETURN_WALK_SOUL_PATH;
-			message.Dispatch(*this->getEntity());
-
-			// Clean request
-			_walkingSoulTarget = nullptr;
-		}
-	}*/
 
 	bool CPlaceable::place(){
 		// Si no estábamos flotando no hacemos nada porque ya estamos (teóricamente bien) colocados
@@ -149,11 +142,11 @@ namespace Logic {
 		return true;
 	}
 
-	void CPlaceable::floatTo(const Vector3 newOriginPosition){
+	void CPlaceable::floatTo(const Vector3 newOriginPosition, bool showFloating){
 		//std::cout << "Flotando a: " << newOriginPosition << std::endl;
 
-		if (newOriginPosition.x != round(newOriginPosition.x) && newOriginPosition.z != round(newOriginPosition.z)){
-			std::cout << "Ignoring floatTo to a non-integer [X,Z] position: " << newOriginPosition << std::endl;
+		if (newOriginPosition.x != round(newOriginPosition.x) || newOriginPosition.z != round(newOriginPosition.z)){
+			assert(false && "Ignoring floatTo to a non-integer [X,Z] position");
 			return;
 		}
 		
@@ -208,7 +201,7 @@ namespace Logic {
 		centerPosition /= _tiles.size();
 
 		// Añadimos cierta altura a la posición del Placeable para que parezca que está colocada encima o sobrevolando la Tile
-		centerPosition += Vector3(0, (_floating ? HEIGHT_FLOATING_OVER_TILE : HEIGHT_ON_TILE), 0);
+		centerPosition += Vector3(0, (showFloating ? HEIGHT_FLOATING_OVER_TILE : HEIGHT_ON_TILE), 0);
 
 		// Move entity physically
 		_entity->setPosition(centerPosition);
@@ -261,7 +254,7 @@ namespace Logic {
 
 	bool CPlaceable::HandleMessage(const MovePlaceableMessage& msg){
 		if (msg._type == MessageType::PLACEABLE_FLOAT_TO){
-			floatTo(msg._position);
+			floatTo(msg._position, msg._showFloating);
 			return true;
 		}
 
@@ -299,8 +292,8 @@ namespace Logic {
 		else if (name == "Furnace"){
 			return Furnace;
 		}
-		else if (name == "Evilworks"){
-			return Evilworks;
+		else if (name == "EvilWorks"){
+			return EvilWorks;
 		}
 		else if (name == "Refinery"){
 			return Refinery;
@@ -346,17 +339,6 @@ namespace Logic {
 			return Empty;
 		}
 	}
-
-	/*bool CPlaceable::HandleMessage(const WalkSoulPathMessage& msg){
-		if (msg._type != MessageType::REQUEST_WALK_SOUL_PATH)
-			return false;
-
-		assert(msg._target && "Message received with null target");
-
-		_walkingSoulTarget = msg._target;
-
-		return true;
-	}*/
 
 	bool CPlaceable::HandleMessage(const CheckValidPositionPlaceableMessage& msg){
 		if (msg._type == MessageType::PLACEABLE_CHECKPOSITION){

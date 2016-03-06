@@ -4,9 +4,19 @@
 #include "Logic\Maps\Map.h"
 
 namespace AI {
+	CLatentAction::LAStatus CLAExecuteSoulTask::OnStart() {
+		return LAStatus::RUNNING;
+	}
+
 	CLatentAction::LAStatus CLAExecuteSoulTask::OnRun() {
-		// TODO Ejecutamos la tarea que... nos han tenido que pasar en algún lado :s
-		std::cout << "Executing task" << std::endl;
-		return LAStatus::SUCCESS;
+		// Verificamos que hay tarea que ejecutar
+		if (_smData.getTask() == nullptr)
+			return LAStatus::FAIL;
+
+		return executeTask() ? LAStatus::SUCCESS : LAStatus::RUNNING;
+	}
+
+	bool CLAExecuteSoulTask::executeTask(){
+		return _smData.getTask()->execute();
 	}
 }
