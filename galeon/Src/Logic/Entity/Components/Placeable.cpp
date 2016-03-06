@@ -292,8 +292,8 @@ namespace Logic {
 		else if (name == "Furnace"){
 			return Furnace;
 		}
-		else if (name == "Evilworks"){
-			return Evilworks;
+		else if (name == "EvilWorks"){
+			return EvilWorks;
 		}
 		else if (name == "Refinery"){
 			return Refinery;

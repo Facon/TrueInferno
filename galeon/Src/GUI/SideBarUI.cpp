@@ -183,7 +183,7 @@ namespace GUI
 	{
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Furnace", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
-	} 
+	}
 
 	bool SideBarUI::createRoadReleased(const CEGUI::EventArgs& e)
 	{
@@ -199,14 +199,14 @@ namespace GUI
 
 	bool SideBarUI::createResource1BuildingReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Create Resource1\n");
-		return true;
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Mine", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 	bool SideBarUI::createResource2BuildingReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Create Resource2\n");
-		return true;
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "GasPlant", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 
@@ -234,15 +234,15 @@ namespace GUI
 
 	bool SideBarUI::createEvilworksReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Create Evilworks\n");
-		return true;
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "EvilWorks", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 
 	bool SideBarUI::createRefineryReleased(const CEGUI::EventArgs& e)
 	{
-		printf("Create Refinery\n");
-		return true;
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Refinery", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 

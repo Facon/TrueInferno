@@ -7,3 +7,10 @@ HellQuarters CGraphics CPhysicEntity CPlaceable CHellQuarters CSoulSender
 Evilator CGraphics CPhysicEntity CPlaceable CWorkBuilding
 Furnace CGraphics CPhysicEntity CPlaceable CWorkBuilding
 Soul CGraphics PathFollower CPathFinder CSoul
+Mine CGraphics CPhysicEntity CPlaceable CWorkBuilding
+GasPlant CGraphics CPhysicEntity CPlaceable CWorkBuilding
+EvilWorks CGraphics CPhysicEntity CPlaceable CWorkBuilding
+Refinery CGraphics CPhysicEntity CPlaceable CWorkBuilding
+ResearchLabs CGraphics CPhysicEntity CPlaceable CWorkBuilding
+PowerGenerator CGraphics CPhysicEntity CPlaceable CWorkBuilding
+Warehouse CGraphics CPhysicEntity CPlaceable CWorkBuilding

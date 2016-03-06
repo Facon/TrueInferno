@@ -1,0 +1,12 @@
+
+material GasPlant
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.560 0.890 0.701 1
+			diffuse 1 1 1 1
+		}
+	}
+}
