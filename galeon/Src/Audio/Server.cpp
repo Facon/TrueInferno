@@ -5,6 +5,8 @@
 
 namespace Audio
 {
+	FMOD::Studio::System* CServer::_system = nullptr;
+
 	CServer::CServer()
 	{}
 
@@ -13,8 +15,12 @@ namespace Audio
 
 	bool CServer::Init()
 	{
-		_system = nullptr;
 		assert(FMOD::Studio::System::create(&_system));
+
+		FMOD::Studio::Bank* bank = nullptr;
+		//_system->loadBankFile("");
+
+		return true;
 	}
 
 	void CServer::Release()
@@ -26,7 +32,9 @@ namespace Audio
 	{}
 
 	bool CServer::open()
-	{}
+	{
+		return true;
+	}
 	
 	void CServer::close()
 	{}

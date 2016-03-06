@@ -322,7 +322,7 @@ namespace BaseSubsystems
 
 	bool CServer::initFMOD()
 	{
-		Audio::CServer::Init();
+		return Audio::CServer::Init();
 	}
 
 	//--------------------------------------------------------
