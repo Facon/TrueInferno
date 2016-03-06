@@ -1,6 +1,7 @@
 #ifndef LOGIC_SOUND_H_
 #define LOGIC_SOUND_H_
 
+#include "BaseSubsystems/Math.h"
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
 

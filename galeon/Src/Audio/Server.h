@@ -3,10 +3,7 @@
 
 namespace FMOD
 {
-	namespace Studio
-	{
-		class System;
-	}
+	class System;
 }
 
 namespace Audio
@@ -14,7 +11,7 @@ namespace Audio
 	class CServer
 	{
 	public:
-		CServer* getSingletonPtr()
+		static CServer* getSingletonPtr()
 		{ return &_instance; }
 		
 		static bool Init();
@@ -29,7 +26,7 @@ namespace Audio
 		void close();
 
 		static CServer _instance;
-		static FMOD::Studio::System* _system;
+		static FMOD::System* _system;
 	};
 }
 

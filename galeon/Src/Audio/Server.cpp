@@ -1,11 +1,11 @@
 #include "Server.h"
 
-#include <FMOD/studio/fmod_studio.hpp>
+#include <FMOD/lowlevel/fmod.hpp>
 #include <cassert>
 
 namespace Audio
 {
-	FMOD::Studio::System* CServer::_system = nullptr;
+	FMOD::System* CServer::_system = nullptr;
 
 	CServer::CServer()
 	{}
@@ -15,10 +15,30 @@ namespace Audio
 
 	bool CServer::Init()
 	{
-		assert(FMOD::Studio::System::create(&_system));
+		FMOD_RESULT result;
+		
+		result = FMOD::System_Create(&_system);
 
-		FMOD::Studio::Bank* bank = nullptr;
-		//_system->loadBankFile("");
+		assert(!result);
+		
+		result = _system->init(32, FMOD_INIT_NORMAL, 0);
+
+		assert(!result);
+
+		FMOD::Sound* sound;
+		result = _system->createStream("media/sounds/hades.ogg", FMOD_DEFAULT, nullptr, &sound);
+
+		assert(!result);
+
+		FMOD::Channel* channel = nullptr;
+
+		result = _system->playSound(sound, 0, false, &channel);
+
+		assert(!result);
+
+		float volume = 1.0f;
+		// valor entre 0 y 1
+		channel->setVolume(volume);
 
 		return true;
 	}
@@ -26,6 +46,7 @@ namespace Audio
 	void CServer::Release()
 	{
 		_system->release();
+		_system->close();
 	}
 
 	void CServer::tick(unsigned int secs)

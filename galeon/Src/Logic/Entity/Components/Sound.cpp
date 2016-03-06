@@ -1,9 +1,15 @@
 #include "Sound.h"
 
 #include "Logic/Entity/Entity.h"
+#include "Logic/Maps/Map.h"
+#include "Map/MapEntity.h"
+#include "Audio/Server.h"
 
 namespace Logic
 {
+	RTTI_ROOT_IMPL(Sound);
+	IMP_FACTORY(Sound);
+
 	Sound::~Sound()
 	{}
 
@@ -12,9 +18,18 @@ namespace Logic
 		if (!IComponent::spawn(entity, map, entityInfo))
 			return false;
 
-		adjustTransform(_entity->getTransform());
-	}
+		if (entityInfo->hasAttribute("sound_file"))
+		{
+			std::string sound_name = entityInfo->getStringAttribute("sound_file");
 
+			//Audio::CServer::getSingletonPtr();
+			//sound_name
+		}
+
+		adjustTransform(_entity->getTransform());
+		return true;
+	}
+	
 	void Sound::adjustTransform(const Matrix4& transform)
 	{
 		Vector3 position;
@@ -33,8 +48,8 @@ namespace Logic
 		_transform.up.y = rotation.yAxis().y;
 		_transform.up.z = rotation.yAxis().z;
 	}
-
-	bool HandleMessage(const TransformMessage& m)
+	
+	bool Sound::HandleMessage(const TransformMessage& m)
 	{
 		return false;
 	}
