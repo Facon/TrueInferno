@@ -7,7 +7,6 @@
 		<Window type="OgreTray/StaticText" name="EventTitle" >
 			<Property name="Area" value="{{0.1,0},{0.05,0},{0.9,0},{0.09,0}}" />
 			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="Welcome to Hell" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 			<Property name="AlwaysOnTop" value="True" />
@@ -20,22 +19,31 @@
 		<Window type="OgreTray/StaticText" name="EventText" >
 			<Property name="Area" value="{{0.05,0},{0.1,0},{0.50,0},{0.55,0}}" />
 			<Property name="Font" value="Jura-12" />
-			<Property name="Text" value="Welcome to hell, yo TRUE CUBO!!! mucha mierda cabrones esto es turbio de cojones" />
 			<Property name="HorzFormatting" value="WordWrapJustified" />			
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		<Window type="OgreTray/StaticText" name="EventTextResume" >
 			<Property name="Area" value="{{0.05,0},{0.60,0},{0.50,0},{0.8,0}}" />
 			<Property name="Font" value="Jura-12-i" />
-			<Property name="Text" value="Yo que se haz algo" />
 			<Property name="HorzFormatting" value="WordWrapCentred" />			
 			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/StaticImage" name="ButtonBorderLine">
+			<Property name="Area" value="{{0.45,0},{0.85,0},{0.55,0},{0.95,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
+			<Property name="AlwaysOnTop" value="True" />
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/CreateEvilworks" />				
+				<Property name="AlwaysOnTop" value="True" />	
+			</Window>
 		</Window>
 		<Window type="OgreTray/Button" name="AcceptEvent" >
 			<Property name="Area" value="{{0.45,0},{0.85,0},{0.55,0},{0.95,0}}" />
 			<Property name="Font" value="Jura-18" />
 			<Property name="Text" value="OK" />
 			<Property name="AlwaysOnTop" value="True" />
+			<Property name="Alpha" value="0.0" />
 		</Window>
 	</Window>
 </GUILayout>
