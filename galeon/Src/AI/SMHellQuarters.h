@@ -28,6 +28,10 @@ namespace AI {
 
 		virtual ~CSMHellQuarters() {}
 
+		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+			return true;
+		}
+
 		bool HandleMessage(const HellQuartersMessage& msg){
 			bool ret = false;
 

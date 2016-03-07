@@ -16,6 +16,7 @@ Contiene el tipo de datos de un mensaje.
 #include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
 #include "AI/SoulTask.h"
+#include "Logic/ResourcesManager.h"
 
 // Predeclaraciones
 namespace Logic {
@@ -68,6 +69,7 @@ namespace Logic
 			SOUL_REQUEST,
 			SOUL_RESPONSE,
 			FURNACE_BURN_SOULS,
+			RESOURCES_CHANGE,
 		};
 	}
 
@@ -345,20 +347,6 @@ namespace Logic
 		}
 	};
 
-	/** Mensaje para enviar números enteros: FURNACE_BURN_SOULS */
-	class NumberMessage : public Message
-	{
-	public:
-		NumberMessage(MessageType type, int number) : Message(type), _number(number) {}
-
-		int _number;
-
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			return handler.HandleMessage(*this);
-		}
-	};
-
 	// TODO Remember to discuss if we should separate this in 2 classes
 	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH, WALKING_SOUL_PATH_FINISHED
 	class WalkSoulPathMessage : public Message
@@ -429,6 +417,35 @@ namespace Logic
 
 		//std::unique_ptr<AI::CSoulTask> _task;
 		AI::CSoulTask* _task;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	/** Mensaje para enviar números enteros: FURNACE_BURN_SOULS */
+	class NumberMessage : public Message
+	{
+	public:
+		NumberMessage(MessageType type, int number) : Message(type), _number(number) {}
+
+		int _number;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	/** Mensajes relativos a los recursos: RESOURCES_CHANGE */
+	class ResourceMessage : public Message
+	{
+	public:
+		ResourceMessage(const Logic::ResourceType& resourceType, int number) : Message(MessageType::RESOURCES_CHANGE), _resourceType(resourceType), _number(number) {}
+
+		Logic::ResourceType _resourceType;
+		int _number;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

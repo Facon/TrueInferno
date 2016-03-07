@@ -87,6 +87,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\CameraController.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\DamageTrigger.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Furnace.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\HellQuarters.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Life.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFinder.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="..\..\Src\Logic\BuildingManager.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\CameraController.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Furnace.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\HellQuarters.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFinder.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFollower.h" />

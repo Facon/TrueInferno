@@ -105,6 +105,10 @@ Map = {
 		material = "Furnace",
 		minWorkers = 1,
 		maxWorkers = 5,
+		cokePerSoul = 6,
+		crudePerSoul = 4,
+		burnPeriod = 2,
+		maxSoulsPerCycle = 5,
 	},
 	
 	Soul = {

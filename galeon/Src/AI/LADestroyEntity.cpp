@@ -6,7 +6,7 @@ namespace AI {
 		return LAStatus::RUNNING;
 	}
 
-	CLatentAction::LAStatus CLADestroyEntity::OnRun() {
+	CLatentAction::LAStatus CLADestroyEntity::OnRun(unsigned int msecs) {
 		Logic::CEntityFactory::getSingletonPtr()->deferredDeleteEntity(_entity);
 
 		return LAStatus::SUCCESS;

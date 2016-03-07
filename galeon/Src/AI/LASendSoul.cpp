@@ -35,7 +35,7 @@ namespace AI {
 		return LAStatus::SUSPENDED;
 	}
 
-	CLatentAction::LAStatus CLASendSoul::OnRun() {
+	CLatentAction::LAStatus CLASendSoul::OnRun(unsigned int msecs) {
 		// Verificamos que tenemos tarea
 		if (_task == nullptr)
 			return LAStatus::FAIL;

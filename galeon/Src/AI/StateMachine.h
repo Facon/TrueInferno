@@ -58,6 +58,9 @@ namespace AI
 		*/
 		virtual ~CStateMachine();
 		
+		/** Spawnea la máquina de estados. Se le pasa la entidad de mapa para que obtenga de ahí los atributos necesarios */
+		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo) = 0;
+
 		/**
 		Este método añade un nodo a la máquina de estado y devuelve un identificador
 		del nodo. Este identificador se usa para referirse a los nodos al añadir

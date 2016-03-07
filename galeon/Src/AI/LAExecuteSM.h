@@ -89,7 +89,7 @@ namespace AI
 		@return Estado de la acción tras la ejecución del método;
 		permite indicar si la acción ha terminado o se ha suspendido.
 		*/
-		virtual LAStatus OnRun() ;
+		virtual LAStatus OnRun(unsigned int msecs) ;
 
 		/**
 		Método invocado cuando la acción ha sido cancelada (el comportamiento

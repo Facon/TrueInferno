@@ -25,7 +25,7 @@ namespace AI {
 	protected:
 		LAStatus OnStart();
 
-		LAStatus OnRun();
+		LAStatus OnRun(unsigned int msecs);
 
 	private:
 		const float SOUL_ON_TILE_HEIGHT = 2.0;

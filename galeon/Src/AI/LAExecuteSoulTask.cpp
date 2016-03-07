@@ -8,7 +8,7 @@ namespace AI {
 		return LAStatus::RUNNING;
 	}
 
-	CLatentAction::LAStatus CLAExecuteSoulTask::OnRun() {
+	CLatentAction::LAStatus CLAExecuteSoulTask::OnRun(unsigned int msecs) {
 		// Verificamos que hay tarea que ejecutar
 		if (_smData.getTask() == nullptr)
 			return LAStatus::FAIL;

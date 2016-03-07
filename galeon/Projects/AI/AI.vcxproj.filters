@@ -116,11 +116,17 @@
     <ClCompile Include="..\..\Src\AI\LADestroyEntity.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LAWaitFinishedPath.cpp">
-      <Filter>Decision</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAExecuteSoulTask.cpp">
       <Filter>Decision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LABurnSouls.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAGatherSouls.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulBurner.cpp">
+      <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,11 +223,23 @@
     <ClInclude Include="..\..\Src\AI\LADestroyEntity.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LAWaitFinishedPath.h">
-      <Filter>Decision</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAExecuteSoulTask.h">
       <Filter>Decision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LABurnSouls.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAGatherSouls.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulBurner.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMSoulBurnerData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMSoulBurner.h">
+      <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

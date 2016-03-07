@@ -48,6 +48,10 @@ namespace AI {
 
 		virtual ~CSMSoul() {}
 
+		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+			return true;
+		}
+
 		bool HandleMessage(const SoulMessage& msg){
 			bool ret = false;
 

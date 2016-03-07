@@ -56,7 +56,7 @@ namespace AI {
 		return LAStatus::SUSPENDED;
 	}
 
-	CLatentAction::LAStatus CLAGetTaskAndTarget::OnRun() {
+	CLatentAction::LAStatus CLAGetTaskAndTarget::OnRun(unsigned int msecs) {
 		// Verificación por seguridad
 		if (_task == nullptr)
 			return LAStatus::FAIL;
