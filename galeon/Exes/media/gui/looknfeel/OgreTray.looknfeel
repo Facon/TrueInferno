@@ -776,8 +776,8 @@
         <PropertyLinkDefinition targetProperty="ScrollPosition" widget="__auto_vscrollbar__" type="float" name="VertScrollPosition"/>
         <PropertyLinkDefinition targetProperty="PageSize" widget="__auto_vscrollbar__" type="float" name="VertScrollPageSize"/>
         <PropertyLinkDefinition targetProperty="DocumentSize" widget="__auto_vscrollbar__" type="float" name="VertScrollDocumentSize"/>
-        <Property name="BackgroundEnabled" value="True"/>
-        <Property name="FrameEnabled" value="True"/>
+        <!--<Property name="BackgroundEnabled" value="True"/>
+        <Property name="FrameEnabled" value="True"/>-->
         <Property name="TextColours" value="tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000"/>
         <Property name="HorzFormatting" value="WordWrapLeftAligned"/>
         <Property name="Size" value="{{0, 256}, {0, 128}}" />
@@ -2941,8 +2941,8 @@
         <PropertyDefinition redrawOnWrite="true" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" type="ColourRect" name="ImageColours"/>
         <PropertyDefinition redrawOnWrite="true" initialValue="Stretched" type="VerticalFormatting" name="VertFormatting"/>
         <PropertyDefinition redrawOnWrite="true" initialValue="Stretched" type="HorizontalFormatting" name="HorzFormatting"/>
-        <Property name="BackgroundEnabled" value="True"/>
-        <Property name="FrameEnabled" value="True"/>
+        <!--<Property name="BackgroundEnabled" value="True"/>
+        <Property name="FrameEnabled" value="True"/>-->
         <Property name="Size" value="{{0, 128}, {0, 128}}" />
         <ImagerySection name="image_withframe">
             <ImageryComponent>

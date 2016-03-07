@@ -43,34 +43,34 @@ namespace GUI
 	{
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIButtonBar.layout");
 
-		_uibuttonsWindow->getChildElement("CreateFurnace")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateFurnace/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createFurnaceReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateRoad")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateRoad/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createRoadReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateResource1Building")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateResource1Building/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createResource1BuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateResource2Building")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateResource2Building/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createResource2BuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateSoul")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createSoulReleased, this));
 
-		_uibuttonsWindow->getChildElement("MoveSoul")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("MoveSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::moveSoulReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateEvilworks")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateEvilworks/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createEvilworksReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateRefinery")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateRefinery/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createRefineryReleased, this));
 
-		_uibuttonsWindow->getChildElement("RepairBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("RepairBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::repairBuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("ClearTerrain")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("ClearTerrain/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::clearTerrainReleased, this));
 	}
 
