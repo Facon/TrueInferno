@@ -5,6 +5,7 @@
 
 	<Window type="OgreTray/StaticImage" name="TopBar" >
 		<Property name="Area" value="{{0,0},{0,0},{1,0},{0.1,0}}" />
+		<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
 		<Window type="OgreTray/Title" name="Mineral" >
 			<Property name="Area" value="{{0.025,0},{0.2,0},{0.125,0},{0.8,0}}" />
 			<Property name="Font" value="Jura-12" />

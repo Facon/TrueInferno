@@ -33,6 +33,7 @@ namespace GUI
 	{
 		// Activamos la interfaz de usuario
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
+		setEventImage("EventTutorial1");
 		_uiEventWindow->setVisible(true);
 		_uiEventWindow->activate();
 	}
@@ -58,7 +59,7 @@ namespace GUI
 
 	void EventUI::setEventImage(std::string eventImage)
 	{
-		_uiEventWindow->getChild("EventImage")->setProperty("Image", "set:ImageForStaticImage image:"+eventImage);
+		_uiEventWindow->getChild("EventImage")->setProperty("Image","TrueInfernoEvents/" + eventImage);
 	}
 	void EventUI::setEventText(std::string eventText)
 	{
