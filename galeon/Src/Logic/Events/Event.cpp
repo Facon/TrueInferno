@@ -9,7 +9,7 @@ Evento de juego. Los eventos se dividirán de dos formas posibles: en función
 de su tipo, como eventos de información y eventos de decisión, y en función
 de su trigger, como eventos lanzados por tiempo y por condición/acción.
 
-@see Logic::Event
+@see Logic::CEventManager
 
 @author Raúl Segura
 @date Marzo, 2016

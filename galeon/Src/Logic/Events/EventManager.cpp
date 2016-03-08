@@ -9,7 +9,7 @@ Contiene la implementación del gestor de eventos del juego. Los eventos serán
 creados desde un script de LUA, procesados (en caso de que sea necesario)
 y encolados hasta que llegue el momento de su lanzamiento.
 
-@see Logic::CEventManager
+@see Logic::CScriptManager
 
 @author Raúl Segura
 @date Marzo, 2016
@@ -17,6 +17,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 
 #include "EventManager.h"
 #include "BuildingDestructionEvent.h"
+#include "TutorialEvent.h"
 
 #include "BaseSubsystems/ScriptManager.h"
 
@@ -111,9 +112,15 @@ namespace Logic {
 			return false;
 
 		// @TODO Borrar cuando se carguen desde LUA!
+		// Time events
 		addTimeEvent(new CBuildingDestructionEvent(40 * 1000));
 		addTimeEvent(new CBuildingDestructionEvent(75 * 1000));
 		addTimeEvent(new CBuildingDestructionEvent(110 * 1000));
+
+		// Condition events
+		addConditionEvent(new CTutorialEvent(0));
+		addConditionEvent(new CTutorialEvent(1));
+		addConditionEvent(new CTutorialEvent(2));
 
 		return true;
 
@@ -142,15 +149,48 @@ namespace Logic {
 
 	//--------------------------------------------------------
 	
-	bool CEventManager::addConditionEvent(ConditionEventType conditionType, CEvent* ev)
+	bool CEventManager::addConditionEvent(CEvent* ev)
 	{
 		if (ev->getEventTrigger() != CEvent::EventTrigger::CONDITION)
 			return false;
 
-		_conditionEvents[conditionType].push_back(ev);
-		return true;
+		// @TODO Implementar para usar con cualquier tipo de evento lanzado por condición.
+		CTutorialEvent *tutorialEvent = dynamic_cast<CTutorialEvent*>(ev);
+
+		if (tutorialEvent)
+		{
+			_conditionEvents[tutorialEvent->getConditionEventType()].push_back(tutorialEvent);
+			return true;
+		}
+
+		return false;
 
 	} // addConditionEvent
+
+	//--------------------------------------------------------
+	
+	bool CEventManager::launchConditionEvent(ConditionEventType conditionEventType)
+	{
+		std::list<CEvent*> eventsList = _conditionEvents[conditionEventType];
+
+		if (!eventsList.empty())
+		{
+			CEvent* conditionEvent = eventsList.front();
+			eventsList.pop_front();
+
+			CTutorialEvent *tutorialEvent = dynamic_cast<CTutorialEvent*>(conditionEvent);
+			bool launched = false;
+
+			if (tutorialEvent) {
+				launched = tutorialEvent->launch();
+			}
+
+			return launched;
+		}
+
+		return false;
+
+	} // launchConditionEvent
 
 	//--------------------------------------------------------
 

@@ -3,12 +3,12 @@
 //---------------------------------------------------------------------------
 
 /**
-@file BuildingDestructionEvent.h
+@file BuildingDestructionEvent.cpp
 
 Implementación de un evento de tipo INFO consistente en la destrucción de
 un edificio de forma aleatoria.
 
-@see Logic::BuildingDestructionEvent
+@see Logic::CEvent
 
 @author Raúl Segura
 @date Marzo, 2016
@@ -16,13 +16,13 @@ un edificio de forma aleatoria.
 
 #include "BuildingDestructionEvent.h"
 #include "Logic/BuildingManager.h"
-#include <iostream>
 
 namespace Logic {
 
 	void CBuildingDestructionEvent::execute()
 	{
 		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding();
+		// @TODO Mostrar panel de destrucción de edificio
 
 	} // execute
 	

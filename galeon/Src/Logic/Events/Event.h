@@ -21,6 +21,7 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 // Predeclaración de clases para ahorrar tiempo de compilación.
 namespace Logic
 {
+	enum ConditionEventType;
 }
 
 /**
@@ -66,7 +67,6 @@ namespace Logic
 			TIME,
 			// Eventos lanzados cuando se cumple una determinada
 			// condición durante la partida.
-			// @TODO Implementar toda la lógica de este tipo de eventos.
 			CONDITION
 		};
 
@@ -75,6 +75,9 @@ namespace Logic
 		*/
 		CEvent(EventType type, unsigned int time) :
 			_type(type), _trigger(TIME), _time(time) {};
+
+		CEvent(EventType type, ConditionEventType conditionType) :
+			_type(type), _trigger(CONDITION), _conditionType(conditionType) {};
 
 		/**
 		Destructor.
@@ -86,6 +89,7 @@ namespace Logic
 		*/
 		EventType getEventType() { return _type; }
 		EventTrigger getEventTrigger() { return _trigger; }
+		ConditionEventType getConditionEventType() { return _conditionType; }
 
 		/**
 		Comprueba si debe lanzar el evento y lo hace en caso positivo.
@@ -108,10 +112,16 @@ namespace Logic
 		EventTrigger _trigger;
 
 		/**
-		Tiempo de lanzamiento del evento en milisegundos.
-		NULL si _trigger != TIME.
+		Tipo de condición que lanza el evento.
+		NULL si _trigger != CONDITION.
 		*/
-		unsigned int _time;
+		ConditionEventType _conditionType;
+
+		/**
+		Tiempo de lanzamiento del evento en milisegundos.
+		0 si _trigger != TIME.
+		*/
+		unsigned int _time = 0;
 
 		/**
 		Comprueba si el evento debe ser lanzado atendiendo a su trigger.

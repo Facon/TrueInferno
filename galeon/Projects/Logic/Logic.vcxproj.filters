@@ -172,6 +172,9 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Sound.cpp">
       <Filter>Entity\Components\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\TutorialEvent.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -313,6 +316,9 @@
       <Filter>Entity\Components\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Events\ConditionEvents.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h">
       <Filter>Events\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -116,11 +116,18 @@ namespace Logic
 		/**
 		Añade un evento al índice de eventos lanzados por condición.
 
-		@param conditionType tipo de evento lanzado por condición.
 		@param event evento condicional a añadir al índice.
 		@return true si se añadió correctamente.
 		*/
-		bool addConditionEvent(ConditionEventType conditionType, CEvent* ev);
+		bool addConditionEvent(CEvent* ev);
+
+		/**
+		Lanza un evento condicional del tipo especificado.
+
+		@param conditionEventType tipo de evento condicional a lanzar.
+		@return true si se lanzó correctamente.
+		*/
+		bool launchConditionEvent(ConditionEventType conditionEventType);
 
 		/**
 		Devuelve la cola de eventos lanzados por tiempo del juego.

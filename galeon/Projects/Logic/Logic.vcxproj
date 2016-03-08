@@ -106,6 +106,7 @@
     <ClCompile Include="..\..\Src\Logic\Events\BuildingDestructionEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\Event.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\EventManager.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\TutorialEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\HFManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\EntityFactory.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="..\..\Src\Logic\Events\ConditionEvents.h" />
     <ClInclude Include="..\..\Src\Logic\Events\Event.h" />
     <ClInclude Include="..\..\Src\Logic\Events\EventManager.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h" />
     <ClInclude Include="..\..\Src\Logic\HFManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Documentation.h" />
