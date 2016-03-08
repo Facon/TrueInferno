@@ -8,7 +8,7 @@
     <Image height="514" name="CreateGasplant" width="457" xPos="1" yPos="255" />
     <Image height="721" name="CreateFurnace" width="501" xPos="461" yPos="256" />
     <Image height="475" name="BurnSoul" width="476" xPos="13" yPos="992" />
-    <Image height="479" name="ClearTerrain" width="476" xPos="529" yPos="990" />
-    <Image height="484" name="RepairBuilding" width="332" xPos="106" yPos="1502" />
+    <Image height="479" name="RepairBuilding" width="476" xPos="529" yPos="990" />
+    <Image height="484" name="ClearTerrain" width="332" xPos="106" yPos="1502" />
     <Image height="477" name="CreateSoul" width="482" xPos="528" yPos="1505" />
 </Imageset>

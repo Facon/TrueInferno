@@ -124,6 +124,9 @@ namespace Logic
 		// Devuelve un edificio aleatorio
 		CPlaceable* getRandomBuilding();
 
+		//Destruye un edificio aleatorio
+		bool DestroyRandomBuilding();
+
 	protected:
 
 		/**
@@ -173,6 +176,9 @@ namespace Logic
 		//bool loadPrefabs();
 
 		void printBuildingList() const;
+
+		CPlaceable* getRandomBuildingforDestruction();
+		bool CBuildingManager::checkValidBuildingTypeforDestruction();
 
 	}; // class BuildingManager
 

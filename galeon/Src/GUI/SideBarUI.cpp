@@ -257,6 +257,7 @@ namespace GUI
 	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
+		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding();
 		printf("Repair Building\n");
 		return true;
 	}
