@@ -1,5 +1,6 @@
 #include "ResourcesManager.h"
 #include <stdexcept>
+#include <cassert>
 
 namespace Logic
 {
@@ -50,4 +51,33 @@ namespace Logic
 				throw std::runtime_error("Invalid Resource.");
 		}
 	}
+
+	ResourceType ResourcesManager::parseResourceType(const std::string& name){
+		if (name == "MINERAL"){
+			return MINERAL;
+		}
+		else if (name == "GAS"){
+			return GAS;
+		}
+		else if (name == "COKE"){
+			return COKE;
+		}
+		else if (name == "CRUDE"){
+			return CRUDE;
+		}
+		else if (name == "PURE"){
+			return PURE;
+		}
+		else if (name == "REFINED"){
+			return REFINED;
+		}
+		else if (name == "AETHER"){
+			return AETHER;
+		}
+		else{
+			assert(false && "ResourceType name unknown");
+			return NONE;
+		}
+	}
+
 }

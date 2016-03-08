@@ -23,7 +23,7 @@ using namespace Logic;
 namespace AI 
 {
 	/**
-	Esta acción espera durante un periodo de tiempo (s) indicado en el constructor.
+	Esta acción espera durante un periodo de tiempo (ms) indicado en el constructor.
 	*/
 	class CLAWait : public CLatentAction
 	{

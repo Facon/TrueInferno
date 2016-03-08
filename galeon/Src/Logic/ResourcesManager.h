@@ -1,6 +1,8 @@
 #ifndef RESOURCEMANAGER_H_
 #define RESOURCEMANAGER_H_
 
+#include <string>
+
 namespace Logic
 {
 	enum ResourceType
@@ -32,6 +34,8 @@ namespace Logic
 		//float _hadesFavor = 0.0f;
 		
 	public:
+		static ResourceType parseResourceType(const std::string& name);
+
 		float getMineral() const { return _mineral; }
 		float getGas() const { return _gas; }
 		float getCoke() const { return _coke; }
@@ -57,6 +61,7 @@ namespace Logic
 		// TODO Refactorize/Generalize all resources
 		void increaseResources(ResourceType type, float num);
 	};
+
 }
 
 #endif //RESOURCEMANAGER_H_

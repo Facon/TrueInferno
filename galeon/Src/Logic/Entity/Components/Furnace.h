@@ -33,4 +33,4 @@ namespace Logic {
 
 } // namespace Logic
 
-#endif // SOUL_H_
+#endif // FURNACE_H_

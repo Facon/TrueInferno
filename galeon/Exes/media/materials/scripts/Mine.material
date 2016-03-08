@@ -5,7 +5,7 @@ material Mine
 	{
 		pass
 		{
-			ambient 0.203 0.423 0.784 1
+			ambient 0.560 0.890 0.701 1
 			diffuse 1 1 1 1
 		}
 	}

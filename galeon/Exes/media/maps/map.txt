@@ -138,6 +138,9 @@ Map = {
 		material = "Mine",
 		minWorkers = 1,
 		maxWorkers = 5,	
+		extractedResource = "MINERAL",
+		extractionPeriod = 5,
+		maxExtractedQuantity = 5,
 	},
 	
 	GasPlant = {
@@ -159,6 +162,9 @@ Map = {
 		material = "GasPlant",
 		minWorkers = 1,
 		maxWorkers = 5,	
+		extractedResource = "GAS",
+		extractionPeriod = 5,
+		maxExtractedQuantity = 5,
 	},
 	
 	EvilWorks = {
