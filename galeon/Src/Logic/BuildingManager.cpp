@@ -109,11 +109,11 @@ namespace Logic {
 
 		// TODO Colocamos temporalmente hardcodeando posiciones en código
 		//CEntity* evilator = createPlaceable(map, "Evilator", Vector3(5, 0, 12));
-		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(8, 0, 4), false);
+		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(8, 0, 4), false, false);
 		if (!evilator)
 			return false;
 
-		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(12, 0, 4), false);
+		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(12, 0, 4), false, false);
 		if (!hellQuarters)
 			return false;
 
@@ -155,7 +155,7 @@ namespace Logic {
 		// Añadimos el edificio
 		buildingsFromType->insert(building);
 
-		std::cout << "Building registered: " << building->getBuildingType() << std::endl;
+		//std::cout << "Building registered: " << building->getBuildingType() << std::endl;
 	}
 
 	void CBuildingManager::unregisterBuilding(CPlaceable *building){
@@ -172,17 +172,17 @@ namespace Logic {
 			buildingsFromType->erase(building);
 		}
 
-		std::cout << "Building unregistered: " << building->getBuildingType() << std::endl;
+		//std::cout << "Building unregistered: " << building->getBuildingType() << std::endl;
 	}
 
-	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition, bool floating){
+	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition, bool floating, bool showFloating){
 		bool ret = true;
 		
 		// Primero se intenta crear la entidad
 		CEntity* newEntity = CEntityFactory::getSingletonPtr()->createEntity(prefabName, map);
 		if (newEntity){
 			// En segundo lugar se desplaza
-			ret &= floatPlaceableTo(newEntity, logicPosition);
+			ret &= floatPlaceableTo(newEntity, logicPosition, showFloating);
 
 			// Por último, salvo que sea flotante, lo intentamos colocar en su posición
 			if (!floating)
@@ -206,13 +206,17 @@ namespace Logic {
 		return newEntity;
 	}
 
-	bool CBuildingManager::floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition){
+	void CBuildingManager::destroyPlaceable(CEntity *entity){
+		CEntityFactory::getSingletonPtr()->deleteEntity(entity);
+	}
+
+	bool CBuildingManager::floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition, bool showFloating){
 		if (!movableEntity){
 			std::cout << "Can't float null placeable to '" << logicPosition << "'" << std::endl;
 			return false;
 		}
 
-		MovePlaceableMessage m(MessageType::PLACEABLE_FLOAT_TO, logicPosition);
+		MovePlaceableMessage m(logicPosition, showFloating);
 
 		return m.Dispatch(*movableEntity);
 	}
@@ -222,16 +226,27 @@ namespace Logic {
 			std::cout << "Can't place null placeable" << std::endl;
 			return false;
 		}
-
-		MovePlaceableMessage m(MessageType::PLACEABLE_PLACE);
+		
+		MovePlaceableMessage m;
 
 		return m.Dispatch(*movableEntity);
+	}
+
+	bool CBuildingManager::checkValidPlaceablePosition(CEntity* placeableEntity, const Vector3& logicPosition){
+		if (!placeableEntity){
+			std::cout << "Can't check null placeable to'" << logicPosition << "'" << std::endl;
+			return false;
+		}
+
+		CheckValidPositionPlaceableMessage m(MessageType::PLACEABLE_CHECKPOSITION, placeableEntity, logicPosition);
+		 
+		return m.Dispatch(*placeableEntity);
 	}
 
 	CPlaceable* CBuildingManager::findBuilding(BuildingType buildingType){
 		// Obtenemos el conjunto de edificios para el tipo
 		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
-		if (buildingsFromType == nullptr)
+		if (buildingsFromType == nullptr || buildingsFromType->size() == 0)
 			return nullptr;
 
 		// Seleccionamos uno al azar
@@ -242,6 +257,34 @@ namespace Logic {
 		return *it;
 	}
 
+	CPlaceable* CBuildingManager::getRandomBuilding(){
+		// Obtenemos un tipo aleatorio
+		int randomIndex = rand() % _buildings.size();
+		auto it = _buildings.cbegin();
+		std::advance(it, randomIndex);
+		return findBuilding(it->first);
+	}
+
+	CPlaceable* CBuildingManager::getRandomBuildingforDestruction(){
+		// Obtenemos un tipo aleatorio
+		if (checkValidBuildingTypeforDestruction())
+		{
+			int randomIndex;
+			auto it = _buildings.cbegin();
+			do
+			{
+				it = _buildings.cbegin();
+				randomIndex = rand() % _buildings.size();
+				
+				std::advance(it, randomIndex);
+			}
+			while ((it->first == BuildingType::Evilator || randomIndex == BuildingType::HellQuarters || randomIndex == BuildingType::NonBuilding)||it->second->size()==0);
+
+			return findBuilding(it->first);
+		}
+		return nullptr;
+	}
+
 	void CBuildingManager::printBuildingList() const{
 		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
 			std::cout << "BuildingType=" << it->first << std::endl;
@@ -250,6 +293,28 @@ namespace Logic {
 				std::cout << (*it2)->getEntity()->getEntityID() << std::endl;
 			}
 		}
+	}
+
+	bool CBuildingManager::checkValidBuildingTypeforDestruction() 
+	{
+		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
+			if (it->first != BuildingType::Evilator && it->first != BuildingType::HellQuarters && it->first != BuildingType::NonBuilding)
+			{
+				if (it->second->size() > 0)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	bool CBuildingManager::DestroyRandomBuilding(){
+		CPlaceable* building = getRandomBuildingforDestruction();
+		if (building != nullptr){
+			unregisterBuilding(building);
+			destroyPlaceable(building->getEntity());
+			return true;
+		}
+		return false;
 	}
 
 } // namespace Logic

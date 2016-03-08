@@ -1,0 +1,12 @@
+
+material ResearchLabs
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.721 0 0 1
+			diffuse 1 1 1 1
+		}
+	}
+}

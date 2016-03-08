@@ -52,7 +52,7 @@ namespace AI
 		@return true Si la acción está en principio interesada
 		por ese mensaje.
 		*/
-		virtual bool accept(const MessageType &message);
+		virtual bool accept(const TMessage &message);
 		/**
 		Procesa el mensaje recibido. El método es invocado durante la
 		ejecución de la acción cuando se recibe el mensaje.
@@ -62,7 +62,7 @@ namespace AI
 
 		@param msg Mensaje recibido.
 		*/
-		virtual void process(const MessageType &message);
+		virtual void process(const TMessage &message);
 
 	protected:
 		/**

@@ -5,7 +5,7 @@
 namespace AI 
 {
 
-		/**
+	/**
 	Método invocado al principio de la ejecución de la acción,
 	para que se realicen las tareas que son únicamente necesarias
 	al principio (y no durante toda la vida de la acción).
@@ -84,6 +84,7 @@ namespace AI
 		_stateMachine->resetExecution(); // Redundante
 		return FAIL;
 	}
+
 	/**
 	Devuelve true si a la acción le interesa el tipo de mensaje
 	enviado como parámetro.
@@ -94,7 +95,7 @@ namespace AI
 	@return true Si la acción está en principio interesada
 	por ese mensaje.
 	*/
-	bool CLAExecuteSM::accept(const MessageType &message)
+	/*bool CLAExecuteSM::accept(const TMessage &message)
 	{
 		// TODO PRÁCTICA IA
 		// Para saber si un mensaje acepta, debemos delegar por 
@@ -105,14 +106,15 @@ namespace AI
 		if (_currentAction != NULL)
 			return _currentAction->accept(message);
 		return false;
-	}
+	}*/
+
 	/**
 	Procesa el mensaje recibido. El método es invocado durante la
 	ejecución de la acción cuando se recibe el mensaje.
 
 	@param msg Mensaje recibido.
 	*/
-	void CLAExecuteSM::process(const MessageType &message)
+	/*void CLAExecuteSM::process(const TMessage &message)
 	{
 		// TODO PRÁCTICA IA
 		// Igual que en accept, la responsabilidad de procesar
@@ -126,7 +128,7 @@ namespace AI
 
 		if (_currentAction != NULL)
 			_currentAction->process(message);
-	}
+	}*/
 
 
 } // namespace AI 

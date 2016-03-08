@@ -8,6 +8,7 @@
 #include "Logic/Entity/Message.h"
 #include "Logic/BuildingManager.h"
 #include "AI/Server.h"
+#include "Logic/Entity/Components/Placeable.h"
 #include <iostream>
 #include <cassert>
 
@@ -15,12 +16,11 @@ namespace Logic {
 	RTTI_ROOT_IMPL(CHellQuarters);
 	IMP_FACTORY(CHellQuarters);
 
-	const float CHellQuarters::SOUL_ON_TILE_HEIGHT = 2.0;
-
-	CHellQuarters::CHellQuarters() : IComponent() {
-	}
-
 	bool CHellQuarters::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+		// Garantizamos que se llama al padre
+		if (!CStateMachineExecutor::spawn(entity, map, entityInfo))
+			return false;
+
 		_timeSinceLastSpawn = 0;
 
 		assert(entityInfo->hasAttribute("numInitialSouls") && "numInitialSouls is not defined");
@@ -32,19 +32,15 @@ namespace Logic {
 		assert(entityInfo->hasAttribute("numSpawnedSouls") && "numSpawnedSouls is not defined");
 		_numSpawnedSouls = entityInfo->getIntAttribute("numSpawnedSouls");
 
-		_numSoulsToWork = 0;
-		_numSoulsToBurn = 0;
-
-		_sendingSoulToWorkState = SendingSoulToWorkState::Idle;
-		_pathReceived = nullptr;
-
 		return true;
 	} // spawn
 
 	void CHellQuarters::tick(unsigned int msecs){
-		tickSpawnSouls(msecs);
+		// Tickeamos la FSM
+		CStateMachineExecutor::tick(msecs);
 
-		tickSendSoulToWork(msecs);
+		// Y también la lógica interna de la generación de almas, de forma independiente
+		tickSpawnSouls(msecs);
 	} // tick
 
 	void CHellQuarters::tickSpawnSouls(unsigned int msecs){
@@ -60,35 +56,7 @@ namespace Logic {
 		}
 	}
 
-	bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg){
-		// Nos aseguramos que estamos recibiendo una respuesta y que estábamos en estado de esperarla
-		if (msg._type != MessageType::RETURN_WALK_SOUL_PATH || _sendingSoulToWorkState != WaitingForPath)
-			return false;
-
-		// Guardamos la ruta devuelta. Puede ser NULL si no se encontró ruta al destino solicitado
-		_pathReceived = msg._path;
-
-		// Cambiamos al estado de path recibido
-		_sendingSoulToWorkState = SendingSoulToWorkState::PathReceived;
-
-		return true;
-	}
-
-	bool CHellQuarters::HandleMessage(const HellQuartersActionMessage& msg){
-		// Ignoramos peticiones si no estamos en estado inactivo para mensajes de enviar a trabajar
-		if ((_sendingSoulToWorkState != SendingSoulToWorkState::Idle) || (msg._type != MessageType::SEND_SOUL_WORK))
-			return false;
-
-		_numSoulsToWork += msg._numSouls;
-		_sendingSoulToWorkState = SendingSoulToWorkState::Requested;
-
-		return true;
-	}
-
-	void CHellQuarters::requestSendSoulToBurn(){
-		// TODO Interfaz pública para iniciar la lógica de envío de almas a arder
-	}
-
+	/*
 	void CHellQuarters::tickSendSoulToWork(unsigned int msecs){
 		switch (_sendingSoulToWorkState){
 		// En caso de estar parados, no se hace nada
@@ -111,12 +79,12 @@ namespace Logic {
 			CPlaceable *evilator = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Evilator);
 
 			// Enviamos un mensaje para obtener la ruta hasta el Evilator
-			WalkSoulPathMessage message(evilator);
+			WalkSoulPathMessage message(evilator->getEntity()->getPosition());
 			message._type = MessageType::REQUEST_WALK_SOUL_PATH;
 			
 			// Si nadie atendió al mensaje
 			if (!message.Dispatch(*this->getEntity())){
-				std::cout << "No one answered the REQUEST_WALK_SOUL_PATH message" << std::endl;
+				std::cout << "No one answered the WALK_SOUL_PATH_REQUEST message" << std::endl;
 				_sendingSoulToWorkState = SendingSoulToWorkState::Fail;
 				return;
 			}
@@ -202,10 +170,11 @@ namespace Logic {
 		}
 
 		// La ubicamos en la posición inicial de la ruta
-		PositionMessage m;
-		m._type = MessageType::SET_POSITION;
-		m._position = (*_pathReceived)[0];
-		m._position.y += SOUL_ON_TILE_HEIGHT;
+		Vector3& position = (*_pathReceived)[0];
+		position.y += SOUL_ON_TILE_HEIGHT;
+		
+		PositionMessage m(position);
+		
 		if (!m.Dispatch(*newSoul)){
 			std::cout << "Can´t set soul on initial position" << std::endl;
 			return false;
@@ -221,5 +190,5 @@ namespace Logic {
 
 		return true;
 	}
-
+	*/
 } // namespace Logic

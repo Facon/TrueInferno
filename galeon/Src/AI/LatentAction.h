@@ -14,6 +14,7 @@ Clase que implementa las acciones latentes
 #define __AI_LatentAction_H
 
 #include "Logic/Entity/Entity.h"
+#include "Logic/Entity/Message.h"
 
 using namespace Logic;
 
@@ -72,7 +73,7 @@ namespace AI
 
 	@author Marco Antonio Gómez Martín
 	*/
-	class CLatentAction
+	class CLatentAction : public MessageHandler
 	{
 	public:
 		enum LAStatus {
@@ -98,6 +99,9 @@ namespace AI
 		Constructor
 		*/
 		CLatentAction() : _status(READY), _stopping(false) {};
+
+		CLatentAction(CEntity* entity) : _entity(entity), _status(READY), _stopping(false) {};
+
 		/**
 		Establece la entidad que ejecuta la acción.
 		*/
@@ -132,14 +136,14 @@ namespace AI
 		@return true Si la acción está en principio interesada
 		por ese mensaje.
 		*/
-		virtual bool accept(const MessageType &message) = 0;
+		//virtual bool accept(const TMessage &message) = 0;
 		/**
 		Procesa el mensaje recibido. El método es invocado durante la
 		ejecución de la acción cuando se recibe el mensaje.
 
 		@param msg Mensaje recibido.
 		*/
-		virtual void process(const MessageType &message) = 0;
+		//virtual void process(const TMessage &message) = 0;
 		/**
 		Devuelve el estado actual de la acción.
 		*/
@@ -166,7 +170,7 @@ namespace AI
 		para que se realicen las tareas que son únicamente necesarias
 		al principio (y no durante toda la vida de la acción).
 		@return Estado de la al que pasa la acción; si se indica que la
-		acción a terminado (LatentAction::Completed), se invocará
+		acción ha terminado (LatentAction::Completed), se invocará
 		al OnStop().
 		*/
 		virtual LAStatus OnStart() { return READY;}

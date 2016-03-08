@@ -1,31 +1,25 @@
 #ifndef HELL_QUARTERS_H_
 #define HELL_QUARTERS_H_
 
+#include "AI/SMHellQuarters.h"
 #include "BaseSubsystems/RTTI.h"
-#include "Logic/Entity/Component.h"
 #include "BaseSubsystems/Math.h"
+#include "Logic/Entity/Component.h"
+#include "Logic/Entity/Components/StateMachineExecutor.h"
 #include <vector>
 
 namespace Logic {
-	class CHellQuarters : public IComponent{
+	class CHellQuarters : public CStateMachineExecutor<AI::CSMHellQuartersData>{
 		RTTI_DECL;
 		DEC_FACTORY(CHellQuarters);
-
-		enum SendingSoulToWorkState{
-			Idle,
-			Requested,
-			WaitingForPath,
-			PathReceived,
-			Success,
-			Fail,
-			Clean
-		};
 
 	public:
 		/**
 		Constructor por defecto.
 		*/
-		CHellQuarters();
+		CHellQuarters() {};
+
+		virtual ~CHellQuarters() {};
 
 		/**
 		Inicialización del componente usando la descripción de la entidad que hay en
@@ -38,21 +32,12 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
-		/** Gestión de mensajes para enviar y recibir información de rutas de almas caminantes */
-		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
-
-		/** Gestión de mensajes para solicitar acciones en el HellQuarters */
-		virtual bool HandleMessage(const HellQuartersActionMessage& msg);
-
-		/** Interfaz pública para que se solicite el envío de un alma a trabajar */
-		void requestSendSoulToWork();
-
-		/** Interfaz pública para que se solicite el envío de un alma a arder */
-		void requestSendSoulToBurn();
+	protected:
+		AI::CStateMachine<AI::CLatentAction, AI::CSMHellQuartersData>* getStateMachine(){
+			return new AI::CSMHellQuarters(_entity);
+		}
 
 	private:
-		static const float SOUL_ON_TILE_HEIGHT;
-
 		// Tiempo (ms) entre generación de almas
 		unsigned int _timeBetweenSpawns;
 
@@ -65,25 +50,8 @@ namespace Logic {
 		// Número de almas disponibles
 		int _numAvailableSouls;
 
-		// Número de almas que se han solicitado enviar a trabajar
-		int _numSoulsToWork;
-
-		// Número de almas que se han solicitado enviar a arder
-		int _numSoulsToBurn;
-
-		// Estado del flujo de envío de almas a trabajar
-		SendingSoulToWorkState _sendingSoulToWorkState;
-
-		std::vector<Vector3>* _pathReceived;
-
 		/** Gestiona la lógica del spawn de almas */
 		void tickSpawnSouls(unsigned int msecs);
-
-		/** Gestiona la lógica del envío de almas a trabajar */
-		void tickSendSoulToWork(unsigned int msecs);
-
-		/** Crea y envía un alma a trabajar */
-		bool CHellQuarters::createAndSendSoulToWork();
 
 	}; // class CHellQuarters
 

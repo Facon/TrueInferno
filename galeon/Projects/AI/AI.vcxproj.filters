@@ -89,8 +89,32 @@
     <ClCompile Include="..\..\Src\AI\AStarFunctionsWalkingSoul.cpp">
       <Filter>Movement\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\SoulTask.cpp">
-      <Filter>Souls\Source Files</Filter>
+    <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LatentAction.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\SimpleLatentActions.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAGetTaskAndTarget.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LASendSoul.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAWaitAndFollowPath.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAExecuteSoulTask.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAWaitTaskAndRequestPath.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LADestroyEntity.cpp">
+      <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +153,63 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\SoulTask.h">
       <Filter>Souls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\Condition.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\StateMachine.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAExecuteSM.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LatentAction.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SimpleLatentActions.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMPathFinder.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAFindingPath.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMHellQuarters.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAGetTaskAndTarget.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\BurnSoulTask.h">
+      <Filter>Souls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\WorkSoulTask.h">
+      <Filter>Souls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMSoulSender.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LASendSoul.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMSoul.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMSoulData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAWaitAndFollowPath.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAExecuteSoulTask.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAWaitTaskAndRequestPath.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LADestroyEntity.h">
+      <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

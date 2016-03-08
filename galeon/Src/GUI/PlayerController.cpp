@@ -100,7 +100,6 @@ namespace GUI {
 			using namespace Logic;
 			
 			ControlMessage m;
-			m._type = MessageType::CONTROL;
 
 			switch(key.keyId)
 			{

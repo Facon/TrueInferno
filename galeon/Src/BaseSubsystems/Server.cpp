@@ -51,6 +51,9 @@ usados. La mayoría de ellos son parte de Ogre.
 // ScriptManager
 #include "BaseSubsystems/ScriptManager.h"
 
+//FMOD
+#include <Audio/Server.h>
+
 // Para cerrar la aplicación si se cierra la ventana
 #include "Application/BaseApplication.h"
 
@@ -160,7 +163,8 @@ namespace BaseSubsystems
 		if (!initScriptManager() ||
 			!initOgre() ||
 			!initOIS() ||
-			!initCEGUI() )
+			!initCEGUI() ||
+			!initFMOD())
 		{
 			close();
 			return false;
@@ -181,6 +185,7 @@ namespace BaseSubsystems
 
 		releaseScriptManager();
 		
+		releaseFMOD();
 	} // close
 
 	//--------------------------------------------------------
@@ -341,6 +346,13 @@ namespace BaseSubsystems
 
 	//--------------------------------------------------------
 
+	bool CServer::initFMOD()
+	{
+		return Audio::CServer::Init();
+	}
+
+	//--------------------------------------------------------
+
 	bool CServer::initScriptManager()
 	{
 		if (!ScriptManager::CScriptManager::Init())
@@ -358,7 +370,7 @@ namespace BaseSubsystems
 		{
 			_renderWindow->removeAllViewports();
 			_root->detachRenderTarget(_renderWindow);
-			delete _renderWindow;
+			//delete _renderWindow;
 			_renderWindow = 0;
 		}
 
@@ -430,6 +442,11 @@ namespace BaseSubsystems
 
 	//--------------------------------------------------------
 	
+	void CServer::releaseFMOD()
+	{
+		Audio::CServer::Release();
+	}
+
 	Ogre::Timer* CServer::getAppTimer() 
 	{
 		if(_root)

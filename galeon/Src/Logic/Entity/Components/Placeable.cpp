@@ -24,6 +24,14 @@ namespace Logic {
 		if (_placeableType == Building)
 			// Lo desregistramos en el manager
 			Logic::CBuildingManager::getSingletonPtr()->unregisterBuilding(this);
+
+		// Eliminamos la referencia al placeable en las tiles que ocupaba
+		for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
+			(*it)->setPlaceableAbove(nullptr);
+		}
+
+		_tiles.clear();
+		_adyacentTiles.clear();
 	}
 
 	bool CPlaceable::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
@@ -50,12 +58,19 @@ namespace Logic {
 		_floorOriginPosition = 0;
 
 		// Read floor's size
-		if (!entityInfo->hasAttribute("floor_x") || !entityInfo->hasAttribute("floor_z")){
-			std::cout << "floor_x and floor_z must be defined" << std::endl;
+		if (!entityInfo->hasAttribute("dimensions")){
+			assert(false && "Dimensions must be defined");
 			return false;
 		}
-		_floorX = entityInfo->getIntAttribute("floor_x");
-		_floorZ = entityInfo->getIntAttribute("floor_z");
+
+		// Chequeamos que las dimensiones X,Z sean números enteros
+		Vector3 dimensions = entityInfo->getVector3Attribute("dimensions");
+		if (dimensions.x != round(dimensions.x) || dimensions.z != round(dimensions.z)){
+			assert(false && "Dimensions X,Z must be integer");
+			return false;
+		}
+		_floorX = dimensions.x;
+		_floorZ = dimensions.z;
 
 		// Determinamos el tipo de placeable que es
 		_placeableType = parsePlaceableType(entityInfo->getStringAttribute("placeableType"));
@@ -64,7 +79,7 @@ namespace Logic {
 		if (entityInfo->hasAttribute("floor_absolute_position0")){
 			// Hacemos flotar al edificio hasta su posición inicial
 			Vector3 initialPosition = entityInfo->getVector3Attribute("floor_absolute_position0");
-			floatTo(initialPosition);
+			floatTo(initialPosition, true);
 
 			// Get memory for all the tiles
 			_tiles = std::vector<Tile*>(_floorX * _floorZ);
@@ -90,22 +105,8 @@ namespace Logic {
 	} // spawn
 
 	void CPlaceable::tick(unsigned int msecs){
-		processWalkingSoulPathRequest();
+		//processWalkingSoulPathRequest();
 	} // tick
-
-	void CPlaceable::processWalkingSoulPathRequest(){
-		if (_walkingSoulTarget != nullptr){
-
-			// Calculate path from this placeable to the given target placeable
-			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(this, _walkingSoulTarget);
-			WalkSoulPathMessage message(path);
-			message._type = MessageType::RETURN_WALK_SOUL_PATH;
-			message.Dispatch(*this->getEntity());
-
-			// Clean request
-			_walkingSoulTarget = nullptr;
-		}
-	}
 
 	bool CPlaceable::place(){
 		// Si no estábamos flotando no hacemos nada porque ya estamos (teóricamente bien) colocados
@@ -129,9 +130,11 @@ namespace Logic {
 		}
 
 		// Cambiamos la altura a justo encima de la tile
-		MoveMessage m;
-		m._point = _entity->getPosition();
-		m._point.y = HEIGHT_ON_TILE;
+		Vector3& position = _entity->getPosition();
+		position.y = HEIGHT_ON_TILE;
+		PositionMessage m(position);
+
+		m.Dispatch(*_entity);
 
 		// Cambiamos el estado
 		_floating = false;
@@ -139,29 +142,34 @@ namespace Logic {
 		return true;
 	}
 
-	void CPlaceable::floatTo(const Vector3 newOriginPosition){
+	void CPlaceable::floatTo(const Vector3 newOriginPosition, bool showFloating){
 		//std::cout << "Flotando a: " << newOriginPosition << std::endl;
 
+		if (newOriginPosition.x != round(newOriginPosition.x) || newOriginPosition.z != round(newOriginPosition.z)){
+			assert(false && "Ignoring floatTo to a non-integer [X,Z] position");
+			return;
+		}
+		
 		// Si no estábamos flotando
 		if (!_floating){
-			// Cambiamos el estado
+			// Hacemos que flote
 			_floating = true;
 
-			// Desregistramos el edificio del buildingManager
+			// Desregistramos el edificio del buildingManager para que no esté accesible
 			if (_placeableType == Building){
 				Logic::CBuildingManager::getSingletonPtr()->unregisterBuilding(this);
+			}
+
+			// Y eliminamos este placeable de sus tiles para que no comprueben conflicto de posición
+			for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
+				// Notify of the new entity above
+				(*it)->setPlaceableAbove(nullptr);
 			}
 		}
 
 		// Don't do anything if the origin position is not changing (and tiles have been already initialitated)
 		if ((newOriginPosition == _floorOriginPosition) && _tiles.capacity()>0)
 			return;
-
-		// Clear this placeable above in current tiles because it's no longer attached to those tiles
-		for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
-			// Notify of the new entity above
-			(*it)->setPlaceableAbove(nullptr);
-		}
 
 		// Store new origin position
 		_floorOriginPosition = newOriginPosition;
@@ -178,11 +186,14 @@ namespace Logic {
 			for (int z = 0; z < _floorZ; ++z) {
 				Tile* tile = _tileManager->getTile(_floorOriginPosition + Vector3(x, 0, z));
 
-				// Store it internally
-				_tiles.push_back(tile);
+				// Añadimos la Tile si no es null (i.e. se salió de los bordes)
+				if (tile != nullptr){
+					// Store it internally
+					_tiles.push_back(tile);
 
-				// Add it to the average position
-				centerPosition += tile->getEntity()->getPosition();
+					// Add it to the average position
+					centerPosition += tile->getEntity()->getPosition();
+				}
 			}
 		}
 
@@ -190,7 +201,7 @@ namespace Logic {
 		centerPosition /= _tiles.size();
 
 		// Añadimos cierta altura a la posición del Placeable para que parezca que está colocada encima o sobrevolando la Tile
-		centerPosition += Vector3(0, (_floating ? HEIGHT_FLOATING_OVER_TILE : HEIGHT_ON_TILE), 0);
+		centerPosition += Vector3(0, (showFloating ? HEIGHT_FLOATING_OVER_TILE : HEIGHT_ON_TILE), 0);
 
 		// Move entity physically
 		_entity->setPosition(centerPosition);
@@ -243,7 +254,7 @@ namespace Logic {
 
 	bool CPlaceable::HandleMessage(const MovePlaceableMessage& msg){
 		if (msg._type == MessageType::PLACEABLE_FLOAT_TO){
-			floatTo(msg._position);
+			floatTo(msg._position, msg._showFloating);
 			return true;
 		}
 
@@ -281,8 +292,8 @@ namespace Logic {
 		else if (name == "Furnace"){
 			return Furnace;
 		}
-		else if (name == "Evilworks"){
-			return Evilworks;
+		else if (name == "EvilWorks"){
+			return EvilWorks;
 		}
 		else if (name == "Refinery"){
 			return Refinery;
@@ -329,16 +340,13 @@ namespace Logic {
 		}
 	}
 
-	bool CPlaceable::HandleMessage(const WalkSoulPathMessage& msg){
-		if(msg._type != MessageType::REQUEST_WALK_SOUL_PATH)
-			return false;
-
-		assert(msg._target && "Message received with null target");
-
-		_walkingSoulTarget = msg._target;
-
-		return true;
+	bool CPlaceable::HandleMessage(const CheckValidPositionPlaceableMessage& msg){
+		if (msg._type == MessageType::PLACEABLE_CHECKPOSITION){
+			return checkPlacementIsPossible(_floorOriginPosition);
+		}
+		return false;
 	}
+
 
 	void CPlaceable::updateAdyacentTiles(){
 		// For each tile

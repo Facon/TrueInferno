@@ -229,10 +229,10 @@ void CPhysicEntity::onTrigger(IPhysics *otherComponent, bool enter)
 {
 	// Construimos un mensaje de tipo TOUCHED o UNTOUCHED y lo enviamos a 
 	// todos los componentes de la entidad. 
-	TouchMessage msg;
+	MessageType type = (enter) ? MessageType::TOUCHED : MessageType::UNTOUCHED;
+    CEntity& entity = *otherComponent->getEntity();
 
-	msg._type = (enter) ? MessageType::TOUCHED : MessageType::UNTOUCHED;
-    msg._entity = otherComponent->getEntity();
+	TouchMessage msg(type, entity);
 
 	msg.Dispatch(*_entity);
 }

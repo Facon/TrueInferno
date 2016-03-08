@@ -58,6 +58,8 @@ Thumbs.db
 /Exes/*
 !/Exes/media/
 !/Exes/resources.cfg
+!/Exes/*.lua
+!/Exes/fmod*.dll
 
 # PROJECTS FOLDER
 /Projects/**/Debug/

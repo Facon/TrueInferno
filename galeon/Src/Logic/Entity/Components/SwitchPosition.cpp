@@ -114,9 +114,8 @@ namespace Logic
 		}
 
 		// Notificamos el movimiento que deseamos realizar
-		KinematicMoveMessage m;
-		m._type = MessageType::KINEMATIC_MOVE;
-		m._shift = displ;
+		KinematicMoveMessage m(displ);
+		
 		bool accepted = m.Dispatch(*_entity);
 
 		// Si nadie captura el mensaje significa que no hay componente f�sico,

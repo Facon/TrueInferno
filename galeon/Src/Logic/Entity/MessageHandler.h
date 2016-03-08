@@ -19,10 +19,14 @@ namespace Logic
     class DamageMessage;
 	class WorkerMessage;
 	class WalkSoulPathMessage;
-	class HellQuartersActionMessage;
-	class MoveMessage;
+	class HellQuartersMessage;
 	class MovePlaceableMessage;
-	
+	class SoulSenderMessage;
+	class SoulMessage;
+	class CheckValidPositionPlaceableMessage;
+	class MoveMessage;
+	class NumberMessage;
+
 	class MessageHandler
 	{
 	public:
@@ -67,16 +71,28 @@ namespace Logic
 		{ return false; }
 
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg)
-		{  return false; }
+		{ return false; }
 
-		virtual bool HandleMessage(const HellQuartersActionMessage& msg)
-		{  return false; }
+		virtual bool HandleMessage(const HellQuartersMessage& msg)
+		{ return false; }
 
 		virtual bool HandleMessage(const MovePlaceableMessage& msg)
-		{  return false; }
+		{ return false; }
+
+		virtual bool HandleMessage(const SoulSenderMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const SoulMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const CheckValidPositionPlaceableMessage& msg)
+		{ return false; }
 
         virtual bool HandleMessage(const MoveMessage& msg)
         { return false; }
+
+		virtual bool HandleMessage(const NumberMessage& msg)
+		{ return false; }
 
 	};
 } // namespace Logic

@@ -16,7 +16,7 @@ de juego. Es una colección de componentes.
 
 #include "BaseSubsystems/Math.h"
 
-#include "Logic/Entity/MessageHandler.h"
+#include "Logic/Entity/Message.h"
 
 #include "Logic/Maps/EntityID.h"
 
@@ -171,9 +171,13 @@ namespace Logic
 		bool HandleMessage(const DamageMessage& msg);
 		bool HandleMessage(const WorkerMessage& msg);
 		bool HandleMessage(const WalkSoulPathMessage& msg);
-		bool HandleMessage(const HellQuartersActionMessage& msg);
+		bool HandleMessage(const HellQuartersMessage& msg);
 		bool HandleMessage(const MovePlaceableMessage& msg);
-
+		bool HandleMessage(const SoulSenderMessage& msg);
+		bool HandleMessage(const SoulMessage& msg);
+		bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
+		bool HandleMessage(const NumberMessage& msg);
+		
 		/**
 		Devuelve el identificador ï¿½nico de la entidad.
 

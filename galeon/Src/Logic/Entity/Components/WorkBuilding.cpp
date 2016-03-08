@@ -30,6 +30,9 @@ namespace Logic {
 		// Si había pendiente una orden de cambiar el número de trabajadores se procesa
 		if (_changeNumWorkers != 0){
 			_currentWorkers += _changeNumWorkers;
+
+			std::cout << "Current workers=" << _currentWorkers << std::endl;
+
 			_changeNumWorkers = 0;
 		}
 

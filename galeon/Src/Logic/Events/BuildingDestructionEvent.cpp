@@ -15,14 +15,14 @@ un edificio de forma aleatoria.
 */
 
 #include "BuildingDestructionEvent.h"
+#include "Logic/BuildingManager.h"
 #include <iostream>
 
 namespace Logic {
 
 	void CBuildingDestructionEvent::execute()
 	{
-		// @TODO Destruir un edificio aleatorio.
-		std::cout << "CBuildingDestructionEvent: " << _time / 1000 << std::endl;
+		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding();
 
 	} // execute
 	

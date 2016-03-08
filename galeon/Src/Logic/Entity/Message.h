@@ -5,15 +5,17 @@ Contiene el tipo de datos de un mensaje.
 
 @see Logic::TMessage
 
-@author David Llansó Garc�a
+@author David Llansó García
 */
 #ifndef __Logic_Message_H
 #define __Logic_Message_H
 
 #include <string>
+#include <memory>
 
 #include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
+#include "AI/SoulTask.h"
 
 // Predeclaraciones
 namespace Logic {
@@ -53,10 +55,19 @@ namespace Logic
 			REQUEST_WALK_SOUL_PATH,
 			RETURN_WALK_SOUL_PATH,
 			PERFORM_WALK_SOUL_PATH,
+			WALK_SOUL_PATH_FINISHED,
 			SEND_SOUL_WORK, 
 			SEND_SOUL_BURN,
 			PLACEABLE_FLOAT_TO,
 			PLACEABLE_PLACE,
+			PLACEABLE_CHECKPOSITION,
+			HELLQUARTERS_REQUEST,
+			HELLQUARTERS_RESPONSE,
+			SOUL_SENDER_REQUEST,
+			SOUL_SENDER_RESPONSE,
+			SOUL_REQUEST,
+			SOUL_RESPONSE,
+			FURNACE_BURN_SOULS,
 		};
 	}
 
@@ -78,10 +89,14 @@ namespace Logic
 	class Message
 	{
 	public:
-		Message() : _type(MessageType::UNASSIGNED) {}
-		Message(MessageType type) : _type(type) {}
-
 		MessageType _type;
+		
+		Message() : _type(MessageType::UNASSIGNED)
+		{}
+		
+		Message(MessageType type) : _type(type)
+		{}
+
 		virtual bool Dispatch(MessageHandler& handler) const = 0;
 	};
 
@@ -89,7 +104,10 @@ namespace Logic
 	class TransformMessage : public Message
 	{
 	public:
-		Matrix4 _transform;
+		const Matrix4& _transform;
+
+		TransformMessage(const Matrix4& transform) : Message(MessageType::SET_TRANSFORM), _transform(transform)
+		{}
 		
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -101,7 +119,10 @@ namespace Logic
 	class PositionMessage : public Message
 	{
 	public:
-		Vector3 _position;
+		const Vector3& _position;
+
+		PositionMessage(const Vector3& position) : Message(MessageType::SET_POSITION), _position(position)
+		{}
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -114,7 +135,10 @@ namespace Logic
 	{
 	public:
 		// Rotación con respecto a los ejes X(pitch), Y(yaw) y Z(roll).
-		Vector3 _rotation;
+		const Vector3& _rotation;
+
+		RotationMessage(const Vector3& rotation) : Message(MessageType::SET_ROTATION), _rotation(rotation)
+		{}
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -126,7 +150,10 @@ namespace Logic
 	class DimensionsMessage : public Message
 	{
 	public:
-		Vector3 _dimensions;
+		const Vector3& _dimensions;
+
+		DimensionsMessage(const Vector3& dimensions) : Message(MessageType::SET_DIMENSIONS), _dimensions(dimensions)
+		{}
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -138,7 +165,10 @@ namespace Logic
 	class ColorMessage : public Message
 	{
 	public:
-		Vector3 _rgb;
+		const Vector3& _rgb;
+
+		ColorMessage(const Vector3& rgb) : Message(MessageType::SET_COLOR), _rgb(rgb)
+		{}
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -150,7 +180,10 @@ namespace Logic
 	class MaterialMessage : public Message
 	{
 	public:
-		std::string _name;
+		const std::string _name; // Material doesn't work well using references in Ogre :(
+
+		MaterialMessage(const std::string& materialName) : Message(MessageType::SET_MATERIAL_NAME), _name(materialName)
+		{}
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -162,8 +195,11 @@ namespace Logic
 	class AnimationMessage : public Message
 	{
 	public:
-        std::string _action;
-        bool _activated = false;
+        const std::string& _action;
+        bool _activated;
+
+		AnimationMessage(MessageType type, const std::string& action, bool activated) : Message(type), _action(action), _activated(activated)
+		{}
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -190,6 +226,9 @@ namespace Logic
         ActionType _action;
         float _degreesMoved;
 
+		ControlMessage(ActionType action = ActionType::UNASSIGNED, float degreesMoved = 0.0f) : Message(MessageType::CONTROL), _action(action), _degreesMoved(degreesMoved)
+		{}
+
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
             return handler.HandleMessage(*this);
@@ -200,7 +239,10 @@ namespace Logic
     class PhysicMessage : public Message
     {
     public:
-        Vector3 _point;
+        const Vector3& _point;
+
+		PhysicMessage(const Vector3& point) : Message(MessageType::AVATAR_WALK), _point(point)
+		{}
 
         virtual bool Dispatch(MessageHandler& handler) const
         {
@@ -212,20 +254,26 @@ namespace Logic
 	class KinematicMoveMessage : public Message
 	{
 	public:
-		Vector3 _shift;
+        const Vector3& _shift;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			return handler.HandleMessage(*this);
-		}
+		KinematicMoveMessage(const Vector3& shift) : Message(MessageType::KINEMATIC_MOVE), _shift(shift)
+		{}
+
+        virtual bool Dispatch(MessageHandler& handler) const
+        {
+            return handler.HandleMessage(*this);
+        }
 	};
 
 	// TOUCHED, UNTOUCHED
 	class TouchMessage : public Message
 	{
 	public:
-		CEntity* _entity;
+		const CEntity& _entity;
 		
+		TouchMessage(MessageType type, const CEntity& entity) : Message(type), _entity(entity)
+		{}
+
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
             return handler.HandleMessage(*this);
@@ -237,8 +285,11 @@ namespace Logic
 	class DamageMessage : public Message
 	{
 	public:
-		unsigned int _damage = 0;
+		unsigned int _damage;
 		
+		DamageMessage(MessageType type, unsigned int damage) : Message(type), _damage(damage)
+		{}
+
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
             return handler.HandleMessage(*this);
@@ -249,9 +300,29 @@ namespace Logic
 	class MovePlaceableMessage : public Message
 	{
 	public:
-		MovePlaceableMessage(MessageType type, Vector3 position) : Message(type), _position(position) {}
-		MovePlaceableMessage(MessageType type) : Message(type) {}
+		const Vector3 _position;
+		bool _showFloating;
+		// Coloca el placeable en la posición actual
+		MovePlaceableMessage() : Message(MessageType::PLACEABLE_PLACE)
+		{}
+		
+		// Hace flotar al placeable hasta la posición dada
+		MovePlaceableMessage(const Vector3& position, bool showFloating) : Message(MessageType::PLACEABLE_FLOAT_TO), _position(position), _showFloating(showFloating)
+		{}
 
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// PLACEABLE_CHECKPOSITION
+	class CheckValidPositionPlaceableMessage : public Message
+	{
+	public:
+		CheckValidPositionPlaceableMessage(MessageType type, CEntity* entity, Vector3 position) : Message(type), _entity(entity), _position(position) {}
+
+		CEntity* _entity;
 		Vector3 _position;
 
 		virtual bool Dispatch(MessageHandler& handler) const
@@ -260,34 +331,11 @@ namespace Logic
 		}
 	};
 
-	// MOVE ??
-	class MoveMessage : public Message
-	{
-	public:
-		Vector3 _point;
-
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			return handler.HandleMessage(*this);
-		}
-	};
-
-	/*class SoulTaskMessage : public Message
-	{
-	public:
-		AI::SoulTask task;
-
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			return handler.HandleMessage(*this);
-		}
-	};*/
-
 	/** Mensaje con la cantidad de trabajadores a añadir (numWorkers > 0) o quitar (numWorkers < 0) */
 	class WorkerMessage : public Message
 	{
 	public:
-		WorkerMessage(int numWorkers) : _numWorkers(numWorkers) {}
+		WorkerMessage(int numWorkers) : Message(MessageType::UNASSIGNED), _numWorkers(numWorkers) {}
 
 		int _numWorkers;
 
@@ -297,12 +345,35 @@ namespace Logic
 		}
 	};
 
-	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH
+	/** Mensaje para enviar números enteros: FURNACE_BURN_SOULS */
+	class NumberMessage : public Message
+	{
+	public:
+		NumberMessage(MessageType type, int number) : Message(type), _number(number) {}
+
+		int _number;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// TODO Remember to discuss if we should separate this in 2 classes
+	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH, WALKING_SOUL_PATH_FINISHED
 	class WalkSoulPathMessage : public Message
 	{
 	public:
-		WalkSoulPathMessage(CPlaceable* target) : _target(target), _path(nullptr) {}
-		WalkSoulPathMessage(std::vector<Vector3>* path) : _target(nullptr), _path(path) {}
+		// Petición de ruta (REQUEST_WALK_SOUL_PATH)
+		WalkSoulPathMessage(CPlaceable* const target) : Message(MessageType::REQUEST_WALK_SOUL_PATH), _target(target), _path(nullptr) {}
+		
+		// Respuesta/orden con la ruta (RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH)
+		WalkSoulPathMessage(std::vector<Vector3>* const path) : _target(nullptr), _path(path) {}
+
+		// Ruta finalizada (WALKING_SOUL_PATH_FINISHED)
+		WalkSoulPathMessage() : Message(MessageType::WALK_SOUL_PATH_FINISHED), _target(nullptr), _path(nullptr) {}
+
+		WalkSoulPathMessage(MessageType type) : Message(type), _target(nullptr), _path(nullptr) {}
 
 		CPlaceable* _target;
 		std::vector<Vector3>* _path;
@@ -313,13 +384,51 @@ namespace Logic
 		}
 	};
 
-	// SEND_SOUL_WORK, SEND_SOUL_BURN
-	class HellQuartersActionMessage : public Message
+	enum HellQuartersAction{
+		SEND_SOUL_BURN,
+		SEND_SOUL_WORK,
+	};
+
+	// REQUEST_SEND_SOUL_WORK, REQUEST_SEND_SOUL_BURN
+	class HellQuartersMessage : public Message
 	{
 	public:
-		HellQuartersActionMessage(int numSouls) : _numSouls(numSouls) {}
+		HellQuartersMessage(HellQuartersAction action, int numSouls) : Message(MessageType::HELLQUARTERS_REQUEST), _action(action), _numSouls(numSouls) {}
 
+		HellQuartersAction _action;
 		int _numSouls;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// SOUL_SENDER_REQUEST, SOUL_SENDER_RESPONSE
+	class SoulSenderMessage : public Message
+	{
+	public:
+		SoulSenderMessage(AI::CSoulTask* task, int numSouls) : Message(MessageType::SOUL_SENDER_REQUEST), _task(task), _numSouls(numSouls) {}
+
+		//std::unique_ptr<AI::CSoulTask> _task;
+		AI::CSoulTask* _task;
+		unsigned int _numSouls;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	// SOUL_REQUEST, SOUL_RESPONSE
+	class SoulMessage : public Message
+	{
+	public:
+		SoulMessage(AI::CSoulTask* task) : Message(MessageType::SOUL_REQUEST), _task(task) {}
+		SoulMessage() : Message(MessageType::SOUL_RESPONSE), _task(0) {}
+
+		//std::unique_ptr<AI::CSoulTask> _task;
+		AI::CSoulTask* _task;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

@@ -2,12 +2,12 @@
 
 namespace Logic
 {
-	RTTI_ROOT_IMPL(Soul);
-	IMP_FACTORY(Soul);
+	RTTI_ROOT_IMPL(CSoul);
+	IMP_FACTORY(CSoul);
 
-	bool Soul::spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo)
+	bool CSoul::spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo)
 	{
-		if (!IComponent::spawn(entity, map, entityInfo))
+		if (!CStateMachineExecutor::spawn(entity, map, entityInfo))
 			return false;
 
 		//if (entityInfo->hasAttribute("life"))
@@ -16,4 +16,9 @@ namespace Logic
 		return true;
 
 	} // spawn
+
+	void CSoul::tick(unsigned int msecs){
+		CStateMachineExecutor::tick(msecs);
+	} // tick
+
 }
