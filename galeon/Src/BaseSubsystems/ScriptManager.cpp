@@ -16,7 +16,7 @@
 
 #include "ScriptManager.h"
 
-// Incluímos las cabedceras de Lua.
+// Incluímos las cabeceras de Lua.
 // Como es código C (no C++), hay que indicarselo al
 // compilador para que asuma el convenio de nombres
 // de C en el código objeto.
@@ -29,7 +29,7 @@ extern "C" {
 #include "luabind.hpp"
 
 #include <cassert>
-#include <iostream> // Mensajes de error
+#include <iostream>
 
 namespace ScriptManager {
 
@@ -126,9 +126,19 @@ int CScriptManager::getGlobal(const char *name, int defaultValue) {
 
 	assert(_lua);
 
-#ifdef _DEBUG
-	int topLua = lua_gettop(_lua);
-#endif
+	// LUABIND
+	luabind::object obj = luabind::globals(_lua)[name];
+
+	if (!obj.is_valid() || (luabind::type(obj) != LUA_TNUMBER))
+		return defaultValue;
+	else
+		return luabind::object_cast<int>(obj);
+
+	// LUA
+	/*
+	#ifdef _DEBUG
+		int topLua = lua_gettop(_lua);
+	#endif
 
 	int result;
 
@@ -150,6 +160,7 @@ int CScriptManager::getGlobal(const char *name, int defaultValue) {
 	assert(lua_gettop(_lua) == topLua);
 
 	return result;
+	*/
 
 } // getGlobal(int)
 
@@ -159,9 +170,19 @@ bool CScriptManager::getGlobal(const char *name, bool defaultValue) {
 
 	assert(_lua);
 
-#ifdef _DEBUG
-	int topLua = lua_gettop(_lua);
-#endif
+	// LUABIND
+	luabind::object obj = luabind::globals(_lua)[name];
+
+	if (!obj.is_valid() || (luabind::type(obj) != LUA_TBOOLEAN))
+		return defaultValue;
+	else
+		return luabind::object_cast<bool>(obj);
+
+	// LUA
+	/*
+	#ifdef _DEBUG
+		int topLua = lua_gettop(_lua);
+	#endif
 
 	bool result;
 
@@ -183,21 +204,31 @@ bool CScriptManager::getGlobal(const char *name, bool defaultValue) {
 	assert(lua_gettop(_lua) == topLua);
 
 	return result;
+	*/
 
 } // getGlobal(bool)
 
 //---------------------------------------------------------
 
-std::string CScriptManager::getGlobal(const char *name,
-                                const char *defaultValue) {
+std::string CScriptManager::getGlobal(const char *name, const char *defaultValue) {
 
-	size_t len;
 	assert(_lua);
 
-#ifdef _DEBUG
-	int topLua = lua_gettop(_lua);
-#endif
+	// LUABIND
+	luabind::object obj = luabind::globals(_lua)[name];
 
+	if (!obj.is_valid() || (luabind::type(obj) != LUA_TSTRING))
+		return defaultValue;
+	else
+		return luabind::object_cast<std::string>(obj);
+
+	// LUA
+	/*
+	#ifdef _DEBUG
+		int topLua = lua_gettop(_lua);
+	#endif
+
+	size_t len;
 	const char *result; // Antes de hacer la copia.
 
 	lua_getglobal(_lua, name);
@@ -233,6 +264,7 @@ std::string CScriptManager::getGlobal(const char *name,
 	assert(lua_gettop(_lua) == topLua);
 
 	return resultCopy;
+	*/
 
 } // getGlobal(char*)
 
@@ -462,10 +494,22 @@ std::string CScriptManager::getField(const char *table,
 bool CScriptManager::executeProcedure(const char *subroutineName) {
 
 	assert(_lua);
+	
+	// LUABIND
+	luabind::object obj = luabind::globals(_lua)[subroutineName];
 
-#ifdef _DEBUG
-	int topLua = lua_gettop(_lua);
-#endif
+	if (!obj.is_valid() || (luabind::type(obj) != LUA_TFUNCTION))
+		return false;
+	else {
+		obj();
+		return true;
+	}
+	
+	// LUA
+	/*
+	#ifdef _DEBUG
+		int topLua = lua_gettop(_lua);
+	#endif
 
 	// Lo primero es buscar la función (global) con ese
 	// nombre.
@@ -486,6 +530,7 @@ bool CScriptManager::executeProcedure(const char *subroutineName) {
 	assert(lua_gettop(_lua) == topLua);
 
 	return true;
+	*/
 
 } // executeProcedure
 
@@ -495,9 +540,22 @@ bool CScriptManager::executeProcedure(const char *subroutineName, int param1) {
 
 	assert(_lua);
 
-#ifdef _DEBUG
-	int topLua = lua_gettop(_lua);
-#endif
+	// LUABIND
+	try {
+		luabind::globals(_lua)[subroutineName](param1);
+	}
+	catch (luabind::error &ex) {
+		std::cout << ex.what() << std::endl;
+		return false;
+	}
+
+	return true;
+
+	// LUA
+	/*
+	#ifdef _DEBUG
+		int topLua = lua_gettop(_lua);
+	#endif
 
 	// Lo primero es buscar la función (global) con ese
 	// nombre.
@@ -521,6 +579,7 @@ bool CScriptManager::executeProcedure(const char *subroutineName, int param1) {
 	assert(lua_gettop(_lua) == topLua);
 
 	return true;
+	*/
 
 } // executeProcedure(int)
 
@@ -531,9 +590,28 @@ bool CScriptManager::executeFunction(const char *subroutineName,
 
 	assert(_lua);
 
-#ifdef _DEBUG
-	int topLua = lua_gettop(_lua);
-#endif
+	// LUABIND
+	try {
+		luabind::object res;
+		res = luabind::globals(_lua)[subroutineName](param1);
+
+		if (!res.is_valid() || (luabind::type(res) != LUA_TNUMBER))
+			return false;
+
+		result = luabind::object_cast<int>(res);
+	}
+	catch (luabind::error &ex) {
+		std::cout << ex.what() << std::endl;
+		return false;
+	}
+
+	return true;
+
+	// LUA
+	/*
+	#ifdef _DEBUG
+		int topLua = lua_gettop(_lua);
+	#endif
 
 	// Lo primero es buscar la función (global) con ese
 	// nombre.
@@ -566,6 +644,7 @@ bool CScriptManager::executeFunction(const char *subroutineName,
 	assert(lua_gettop(_lua) == topLua);
 
 	return true;
+	*/
 
 } // executeFunction
 
@@ -584,15 +663,12 @@ void CScriptManager::registerFunction(lua_CFunction f, const char *luaName) {
 //---------------------------------------------------------
 
 CScriptManager::CScriptManager() : _lua(NULL) {
-
 } // Constructor
 
 //---------------------------------------------------------
 
 CScriptManager::~CScriptManager() {
-
 	close();
-
 } // Destructor
 
 //---------------------------------------------------------
