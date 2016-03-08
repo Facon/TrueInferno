@@ -148,6 +148,7 @@
     <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h" />
     <ClInclude Include="..\..\Src\Logic\Events\BuildingDestructionEvent.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\ConditionEvents.h" />
     <ClInclude Include="..\..\Src\Logic\Events\Event.h" />
     <ClInclude Include="..\..\Src\Logic\Events\EventManager.h" />
     <ClInclude Include="..\..\Src\Logic\HFManager.h" />

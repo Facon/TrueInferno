@@ -9,7 +9,7 @@ Contiene la declaración del gestor de eventos del juego. Los eventos serán
 creados desde un script de LUA, procesados (en caso de que sea necesario)
 y encolados hasta que llegue el momento de su lanzamiento.
 
-@see Logic::EventManager
+@see Logic::CScriptManager
 
 @author Raúl Segura
 @date Marzo, 2016
@@ -19,12 +19,15 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #define __Logic_EventManager_H
 
 #include <queue>
+#include <list>
+#include <map>
 #include <string>
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
 {
 	class CEvent;
+	enum ConditionEventType;
 }
 
 /**
@@ -93,9 +96,14 @@ namespace Logic
 		void unloadEvents();
 
 		/**
-		Tipo cola de eventos de juego.
+		Tipo cola de eventos del juego.
 		*/
 		typedef std::queue<CEvent*> TEventQueue;
+
+		/**
+		Tipo índice de eventos condicionales del juego.
+		*/
+		typedef std::map<ConditionEventType, std::list<CEvent*>> TConditionEventMap;
 
 		/**
 		Añade un evento a la cola de eventos lanzados por tiempo.
@@ -104,6 +112,15 @@ namespace Logic
 		@return true si se añadió correctamente.
 		*/
 		bool addTimeEvent(CEvent* ev);
+
+		/**
+		Añade un evento al índice de eventos lanzados por condición.
+
+		@param conditionType tipo de evento lanzado por condición.
+		@param event evento condicional a añadir al índice.
+		@return true si se añadió correctamente.
+		*/
+		bool addConditionEvent(ConditionEventType conditionType, CEvent* ev);
 
 		/**
 		Devuelve la cola de eventos lanzados por tiempo del juego.
@@ -116,12 +133,22 @@ namespace Logic
 		*/
 		void clearTimeEventsQueue();
 
+		/**
+		Elimina todos los eventos lanzados por condición.
+		*/
+		void clearConditionEventsMap();
+
 	protected:
 
 		/**
 		Cola de eventos lanzados por tiempo.
 		*/
 		TEventQueue _timeEvents;
+
+		/**
+		Índice de eventos lanzados por condición.
+		*/
+		TConditionEventMap _conditionEvents;
 
 		/**
 		Constructor.

@@ -31,6 +31,8 @@ namespace Logic {
 	CEventManager::CEventManager()
 	{
 		_instance = this;
+		_timeEvents = TEventQueue();
+		_conditionEvents = TConditionEventMap();
 
 	} // CEventManager
 
@@ -109,8 +111,9 @@ namespace Logic {
 			return false;
 
 		// @TODO Borrar cuando se carguen desde LUA!
-		addTimeEvent(new CBuildingDestructionEvent(20 * 1000));
-		addTimeEvent(new CBuildingDestructionEvent(45 * 1000));
+		addTimeEvent(new CBuildingDestructionEvent(40 * 1000));
+		addTimeEvent(new CBuildingDestructionEvent(75 * 1000));
+		addTimeEvent(new CBuildingDestructionEvent(110 * 1000));
 
 		return true;
 
@@ -121,6 +124,7 @@ namespace Logic {
 	void CEventManager::unloadEvents()
 	{
 		clearTimeEventsQueue();
+		clearConditionEventsMap();
 
 	} // unloadEvents
 
@@ -135,6 +139,18 @@ namespace Logic {
 		return true;
 
 	} // addTimeEvent
+
+	//--------------------------------------------------------
+	
+	bool CEventManager::addConditionEvent(ConditionEventType conditionType, CEvent* ev)
+	{
+		if (ev->getEventTrigger() != CEvent::EventTrigger::CONDITION)
+			return false;
+
+		_conditionEvents[conditionType].push_back(ev);
+		return true;
+
+	} // addConditionEvent
 
 	//--------------------------------------------------------
 
@@ -159,6 +175,29 @@ namespace Logic {
 			ev = NULL;
 		}
 
-	} // clearEventsQueue
+	} // clearTimeEventsQueue
+
+	//--------------------------------------------------------
+
+	void CEventManager::clearConditionEventsMap() {
+		for (auto it = _conditionEvents.begin(); it != _conditionEvents.end(); ++it)
+		{
+			std::list<CEvent*> eventsList = it->second;
+
+			while (!eventsList.empty())
+			{
+				CEvent* ev = eventsList.front();
+				eventsList.pop_front();
+
+				delete ev;
+				ev = NULL;
+			}
+
+			eventsList.clear();
+		}
+
+		_conditionEvents.clear();
+
+	} // clearConditionEventsMap
 
 } // namespace Logic

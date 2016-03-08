@@ -8,7 +8,7 @@
 Declaración de un evento de tipo INFO consistente en la destrucción de
 un edificio de forma aleatoria.
 
-@see Logic::BuildingDestructionEvent
+@see Logic::CEvent
 
 @author Raúl Segura
 @date Marzo, 2016

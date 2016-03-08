@@ -312,5 +312,8 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Sound.h">
       <Filter>Entity\Components\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\ConditionEvents.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
