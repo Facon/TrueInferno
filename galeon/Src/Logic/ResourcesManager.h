@@ -21,20 +21,22 @@ namespace Logic
 	class ResourcesManager
 	{
 	protected:
-		static const float MINERAL_GATHERING_SPEED;
-		static const float GAS_GATHERING_SPEED;
-		
-		float _mineral = 0.0f;
-		float _gas = 0.0f;
-		float _coke = 0.0f;
-		float _crude = 0.0f;
-		float _pure = 0.0f;
-		float _refined = 0.0f;
-		float _aether = 0.0f;
+		/*static const float MINERAL_GATHERING_SPEED;
+		static const float GAS_GATHERING_SPEED;*/
+
+		float _mineral;
+		float _gas;
+		float _coke;
+		float _crude;
+		float _pure;
+		float _refined;
+		float _aether;
 		//float _hadesFavor = 0.0f;
-		
+
 	public:
 		static ResourceType parseResourceType(const std::string& name);
+
+		ResourcesManager() : _mineral(0), _gas(0), _coke(0), _crude(0), _pure(0), _refined(0), _aether(0) {}
 
 		float getMineral() const { return _mineral; }
 		float getGas() const { return _gas; }
@@ -45,18 +47,18 @@ namespace Logic
 		float getAether() const { return _aether; }
 		//float getHadesFavor() const { return _hadesFavor; }
 
-		void setMineral(const float mineral) { _mineral = mineral; }
+		/*void setMineral(const float mineral) { _mineral = mineral; }
 		void setGas(const float gas) { _gas = gas; }
 		void setCoke(const float coke) { _coke = coke; }
 		void setCrude(const float crude) { _crude = crude; }
 		void setPure(const float pure) { _pure = pure; }
 		void setRefined(const float refined) { _refined = refined; }
-		void setAether(const float aether) { _aether = aether; }
+		void setAether(const float aether) { _aether = aether; }*/
 		//void setHadesFavor(const float hadesFavor) { _hadesFavor = hadesFavor; }
 
-		void incMineral(int workers, float time);
+		/*void incMineral(int workers, float time);
 		
-		void incGas(int workers, float time);
+		void incGas(int workers, float time);*/
 		
 		// TODO Refactorize/Generalize all resources
 		void increaseResources(ResourceType type, float num);

@@ -1,4 +1,6 @@
 #include "Furnace.h"
+#include "Application/GaleonApplication.h"
+#include "Application/GameState.h"
 
 namespace Logic
 {
@@ -21,15 +23,18 @@ namespace Logic
 		if (msg._type != MessageType::RESOURCES_CHANGE)
 			return false;
 
-		if (msg._resourceType != ResourceType::COKE){
+		// TODO Atajo temporal para obtener el ResourcesManager
+		Logic::ResourcesManager resourcesManager = ((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
+
+		if (msg._resourceType == ResourceType::COKE){
 			_coke += msg._number;
 			std::cout << "Coke=" << _coke << std::endl;
-			// TODO Notify Logic::ResourcesManager
+			resourcesManager.increaseResources(msg._resourceType, msg._number);
 		}
-		else if (msg._resourceType != ResourceType::CRUDE){
+		else if (msg._resourceType == ResourceType::CRUDE){
 			_crude += msg._number;
 			std::cout << "Crude=" << _crude << std::endl;
-			// TODO Notify Logic::ResourcesManager
+			resourcesManager.increaseResources(msg._resourceType, msg._number);
 		}
 		else{
 			assert(false && "Resource not handled");
