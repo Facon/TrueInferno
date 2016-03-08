@@ -47,7 +47,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/OGRE;../../dependencies/include/OIS;../../dependencies/include/PhysX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/OGRE;../../dependencies/include/OIS;../../dependencies/include/PhysX;../../dependencies/include/FMOD;../../dependencies/include/;../../dependencies/include/FMOD/lowlevel;../../dependencies/include/FMOD/fsbank/;../../dependencies/include/FMOD/studio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -98,6 +98,8 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\RayPerception.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Soul.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulSender.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Sound.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchPosition.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />
@@ -136,6 +138,7 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\RayPerception.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Soul.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulSender.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Sound.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchPosition.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.h" />
@@ -167,6 +170,14 @@
   <ItemGroup>
     <ProjectReference Include="..\AI\AI.vcxproj">
       <Project>{7bbe92ad-192a-42db-9b43-829ee3b07e81}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\Audio\Audio.vcxproj">
+      <Project>{eabec6f3-3d48-406b-b981-2b547e0dff5e}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>

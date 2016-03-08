@@ -27,6 +27,8 @@ namespace GUI
 		void tick(unsigned int msecs);
 		void setEventImage(std::string eventImage);
 		void setEventText(std::string eventText);
+		void setEventTitle(std::string EventTextResume);
+		void setEventTextResume(std::string EventTextResume);
 	};
 }
 

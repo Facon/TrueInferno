@@ -53,9 +53,7 @@ Thumbs.db
 !/Doc/doxygenFooter.html
 
 # EXES FOLDER
-/Exes/*
-!/Exes/media/
-!/Exes/resources.cfg
+
 
 # PROJECTS FOLDER
 /Projects/**/Debug/

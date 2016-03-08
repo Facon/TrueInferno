@@ -87,6 +87,9 @@ namespace GUI {
 		// (automáticamente cargan los archivos looknfeel e imageset)
 		CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("OgreTray.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoEvents.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoIcons.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoUITextures.scheme");
 
 #ifndef NON_EXCLUSIVE_MODE_IN_WINDOW_MODE 
 		// Establecemos cual será el puntero del ratón.

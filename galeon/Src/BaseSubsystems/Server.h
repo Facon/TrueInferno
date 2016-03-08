@@ -235,6 +235,8 @@ namespace BaseSubsystems
 		@return true si todo fue correctamente.
 		*/
 		bool initCEGUI();
+		
+		bool initFMOD();
 
 		/**
 		Liberación de Ogre.
@@ -250,6 +252,8 @@ namespace BaseSubsystems
 		Liberación de CEGUI.
 		*/
 		void releaseCEGUI();
+
+		void releaseFMOD();
 
 		/**
 		Método que carga los recursos Ogre especificados en el fichero de 
