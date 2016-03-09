@@ -63,6 +63,14 @@ namespace Logic {
 			return false;
 		}
 
+		//extraemos los costes
+
+		if (entityInfo->hasAttribute("mineralCost"))
+			_mineralCost = entityInfo->getIntAttribute("mineralCost");
+
+		if (entityInfo->hasAttribute("gasCost"))
+			_mineralCost = entityInfo->getIntAttribute("gasCost");
+
 		// Chequeamos que las dimensiones X,Z sean números enteros
 		Vector3 dimensions = entityInfo->getVector3Attribute("dimensions");
 		if (dimensions.x != round(dimensions.x) || dimensions.z != round(dimensions.z)){

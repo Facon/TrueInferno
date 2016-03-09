@@ -326,13 +326,17 @@ namespace GUI
 				{
 					case 0:
 					{
-						if (ConsumeResourcesForConstruction())
-							Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableEntity);
-						else
-							Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableEntity);
+						_originRoadTile = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
+						if (Logic::CBuildingManager::getSingletonPtr()->checkValidPlaceablePosition(_placeableEntity, _originRoadTile->getLogicPosition()))
+						{
+							if (ConsumeResourcesForConstruction())
+								Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableEntity);
+							else
+								Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableEntity);
 
-						_placeableEntity = nullptr;
-						break;
+							_placeableEntity = nullptr;
+							break;
+						}
 					}
 					case 1:
 					{

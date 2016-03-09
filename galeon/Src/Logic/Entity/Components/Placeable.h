@@ -84,6 +84,11 @@ namespace Logic {
 
 		virtual bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
 
+		//getters de los costes
+		int GetMineralCost(){ return _mineralCost; }
+		int GetGasCost(){ return _gasCost; }
+
+
 	private:
 		/** Altura añadida a la posición del Placeable para que parezca que está justo encima */
 		const float HEIGHT_ON_TILE = 1.0f;
@@ -96,6 +101,10 @@ namespace Logic {
 
 		/** Flag set to true when logic position has changed */
 		//bool _logicPositionChanged;
+
+		//costes de fabricación del placeable
+		int _gasCost = 0;
+		int _mineralCost = 0;
 
 		/** Floor's x size */
 		int _floorX;
