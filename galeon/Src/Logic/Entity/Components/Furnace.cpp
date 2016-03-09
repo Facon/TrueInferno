@@ -24,17 +24,17 @@ namespace Logic
 			return false;
 
 		// TODO Atajo temporal para obtener el ResourcesManager
-		Logic::ResourcesManager resourcesManager = ((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
+		Logic::ResourcesManager *resourcesManager = ((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
 
 		if (msg._resourceType == ResourceType::COKE){
 			_coke += msg._number;
 			std::cout << "Coke=" << _coke << std::endl;
-			resourcesManager.increaseResources(msg._resourceType, msg._number);
+			resourcesManager->increaseResources(msg._resourceType, msg._number);
 		}
 		else if (msg._resourceType == ResourceType::CRUDE){
 			_crude += msg._number;
 			std::cout << "Crude=" << _crude << std::endl;
-			resourcesManager.increaseResources(msg._resourceType, msg._number);
+			resourcesManager->increaseResources(msg._resourceType, msg._number);
 		}
 		else{
 			assert(false && "Resource not handled");
