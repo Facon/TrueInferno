@@ -27,6 +27,7 @@ namespace Logic
 	class MoveMessage;
 	class NumberMessage;
 	class ResourceMessage;
+	class GetCostPlaceableMessage;
 
 	class MessageHandler
 	{
@@ -97,6 +98,12 @@ namespace Logic
 
 		virtual bool HandleMessage(const ResourceMessage& msg)
 		{ return false; }
+
+		virtual bool HandleMessage(const GetCostPlaceableMessage& msg)
+		{
+			return false;
+		}
+
 	};
 } // namespace Logic
 

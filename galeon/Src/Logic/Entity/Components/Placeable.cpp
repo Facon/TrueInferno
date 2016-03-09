@@ -12,6 +12,9 @@
 #include <iostream>
 #include <string>
 
+#include "Application/GaleonApplication.h"
+#include "Application/GameState.h"
+
 namespace Logic {
 	RTTI_ROOT_IMPL(CPlaceable);
 	IMP_FACTORY(CPlaceable);
@@ -69,7 +72,7 @@ namespace Logic {
 			_mineralCost = entityInfo->getIntAttribute("mineralCost");
 
 		if (entityInfo->hasAttribute("gasCost"))
-			_mineralCost = entityInfo->getIntAttribute("gasCost");
+			_gasCost = entityInfo->getIntAttribute("gasCost");
 
 		// Chequeamos que las dimensiones X,Z sean números enteros
 		Vector3 dimensions = entityInfo->getVector3Attribute("dimensions");
@@ -270,6 +273,32 @@ namespace Logic {
 			return place();
 		}
 
+		else{
+			assert(false && "Unimplemented routine for this MessageType");
+			return false;
+		}
+	}
+
+	bool CPlaceable::ConsumeResourcesForConstruction(){
+
+		Logic::ResourcesManager *resourcesManager = ((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
+
+		if (resourcesManager->getMineral() < _mineralCost)
+			return false;
+		if (resourcesManager->getGas() < _gasCost)
+			return false;
+
+		resourcesManager->decreaseResources(Logic::ResourceType::MINERAL, _mineralCost);
+		resourcesManager->decreaseResources(Logic::ResourceType::GAS, _gasCost);
+
+		return true;
+	}
+
+
+	bool CPlaceable::HandleMessage(const GetCostPlaceableMessage& msg){
+		if (msg._type == MessageType::PLACEABLE_CONSUME_COST){
+			return ConsumeResourcesForConstruction();
+		}
 		else{
 			assert(false && "Unimplemented routine for this MessageType");
 			return false;

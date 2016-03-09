@@ -28,8 +28,7 @@
 #include "Logic\Entity\Message.h"
 #include "AI/Server.h"
 
-#include "Application/GaleonApplication.h"
-#include "Application/GameState.h"
+
 
 namespace GUI
 {
@@ -185,8 +184,6 @@ namespace GUI
 	bool SideBarUI::createFurnaceReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		_mineralCost = 300;
-		_gasCost = 100;
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Furnace", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
@@ -194,7 +191,6 @@ namespace GUI
 	bool SideBarUI::createRoadReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		_mineralCost = 10;
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 0, 0), true, true);
 		if (_placeableEntity){
 			_placeableRoad = new Logic::CEntity*[1];
@@ -208,7 +204,6 @@ namespace GUI
 	bool SideBarUI::createResource1BuildingReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		_mineralCost = 50;
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Mine", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
@@ -216,7 +211,6 @@ namespace GUI
 	bool SideBarUI::createResource2BuildingReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		_mineralCost = 200;
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "GasPlant", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
@@ -249,8 +243,6 @@ namespace GUI
 	bool SideBarUI::createEvilworksReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		_mineralCost = 1000;
-		_gasCost = 500;
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "EvilWorks", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
@@ -259,8 +251,6 @@ namespace GUI
 	bool SideBarUI::createRefineryReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		_mineralCost = 2000;
-		_gasCost = 1000;
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Refinery", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
@@ -283,8 +273,6 @@ namespace GUI
 	}
 
 	void SideBarUI::ClearBuildingConstruction(){
-		_gasCost = 0;
-		_mineralCost = 0;
 		_roadInConstruction = 0;
 		if (_placeableRoadSize > 0){
 			for (int i = 0; i < _placeableRoadSize; ++i){
@@ -301,19 +289,15 @@ namespace GUI
 		}
 	}
 
-	bool SideBarUI::ConsumeResourcesForConstruction(){
-
-		Logic::ResourcesManager *resourcesManager = ((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
-
-		if (resourcesManager->getMineral() < _mineralCost)
+	bool checkPlaceableConsumeCost(Logic::CEntity* placeableEntity){
+		if (!placeableEntity){
+			std::cout << "Can't check consume costs on empty placeable" << std::endl;
 			return false;
-		if (resourcesManager->getGas() < _gasCost)
-			return false;
+		}
 
-		resourcesManager->decreaseResources(Logic::ResourceType::MINERAL, _mineralCost);
-		resourcesManager->decreaseResources(Logic::ResourceType::GAS, _gasCost);
+		Logic::GetCostPlaceableMessage m(Logic::MessageType::PLACEABLE_CONSUME_COST, placeableEntity);
 
-		return true;
+		return m.Dispatch(*placeableEntity);
 	}
 
 	void SideBarUI::placeBuildingInConstruction()
@@ -329,7 +313,7 @@ namespace GUI
 						_originRoadTile = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
 						if (Logic::CBuildingManager::getSingletonPtr()->checkValidPlaceablePosition(_placeableEntity, _originRoadTile->getLogicPosition()))
 						{
-							if (ConsumeResourcesForConstruction())
+							if (checkPlaceableConsumeCost(_placeableEntity))
 								Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableEntity);
 							else
 								Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableEntity);
@@ -351,7 +335,7 @@ namespace GUI
 					{
 						for (int i = 0; i < _placeableRoadSize; ++i)
 						{
-							if (ConsumeResourcesForConstruction())
+							if (checkPlaceableConsumeCost(_placeableRoad[i]))
 								Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableRoad[i]);
 							else
 								Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableRoad[i]);

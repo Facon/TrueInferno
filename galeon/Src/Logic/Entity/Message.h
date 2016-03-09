@@ -62,6 +62,7 @@ namespace Logic
 			PLACEABLE_FLOAT_TO,
 			PLACEABLE_PLACE,
 			PLACEABLE_CHECKPOSITION,
+			PLACEABLE_CONSUME_COST,
 			HELLQUARTERS_REQUEST,
 			HELLQUARTERS_RESPONSE,
 			SOUL_SENDER_REQUEST,
@@ -326,6 +327,19 @@ namespace Logic
 
 		CEntity* _entity;
 		Vector3 _position;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	class GetCostPlaceableMessage : public Message
+	{
+	public:
+		GetCostPlaceableMessage(MessageType type, CEntity* entity) : Message(type), _entity(entity) {}
+
+		CEntity* _entity;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

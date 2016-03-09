@@ -1,459 +1,459 @@
-16:18:14: Creating resource group General
-16:18:14: Creating resource group Internal
-16:18:14: Creating resource group Autodetect
-16:18:14: SceneManagerFactory for type 'DefaultSceneManager' registered.
-16:18:14: Registering ResourceManager for type Material
-16:18:14: Registering ResourceManager for type Mesh
-16:18:14: Registering ResourceManager for type Skeleton
-16:18:14: MovableObjectFactory for type 'ParticleSystem' registered.
-16:18:14: ArchiveFactory for archive type FileSystem registered.
-16:18:14: ArchiveFactory for archive type Zip registered.
-16:18:14: ArchiveFactory for archive type EmbeddedZip registered.
-16:18:14: DDS codec registering
-16:18:14: FreeImage version: 3.15.3
-16:18:14: This program uses FreeImage, a free, open source image library supporting all common bitmap formats. See http://freeimage.sourceforge.net for details
-16:18:14: Supported formats: bmp,ico,jpg,jif,jpeg,jpe,jng,koa,iff,lbm,mng,pbm,pbm,pcd,pcx,pgm,pgm,png,ppm,ppm,ras,tga,targa,tif,tiff,wap,wbmp,wbm,psd,cut,xbm,xpm,gif,hdr,g3,sgi,exr,j2k,j2c,jp2,pfm,pct,pict,pic
-16:18:14: Registering ResourceManager for type HighLevelGpuProgram
-16:18:14: Registering ResourceManager for type Compositor
-16:18:14: MovableObjectFactory for type 'Entity' registered.
-16:18:14: MovableObjectFactory for type 'Light' registered.
-16:18:14: MovableObjectFactory for type 'BillboardSet' registered.
-16:18:14: MovableObjectFactory for type 'ManualObject' registered.
-16:18:14: MovableObjectFactory for type 'BillboardChain' registered.
-16:18:14: MovableObjectFactory for type 'RibbonTrail' registered.
-16:18:14: Loading library .\RenderSystem_GL_d
-16:18:14: Installing plugin: GL RenderSystem
-16:18:14: OpenGL Rendering Subsystem created.
-16:18:14: Plugin successfully installed
-16:18:14: Loading library .\Plugin_ParticleFX_d
-16:18:14: Installing plugin: ParticleFX
-16:18:14: Particle Emitter Type 'Point' registered
-16:18:14: Particle Emitter Type 'Box' registered
-16:18:14: Particle Emitter Type 'Ellipsoid' registered
-16:18:14: Particle Emitter Type 'Cylinder' registered
-16:18:14: Particle Emitter Type 'Ring' registered
-16:18:14: Particle Emitter Type 'HollowEllipsoid' registered
-16:18:14: Particle Affector Type 'LinearForce' registered
-16:18:14: Particle Affector Type 'ColourFader' registered
-16:18:14: Particle Affector Type 'ColourFader2' registered
-16:18:14: Particle Affector Type 'ColourImage' registered
-16:18:14: Particle Affector Type 'ColourInterpolator' registered
-16:18:14: Particle Affector Type 'Scaler' registered
-16:18:14: Particle Affector Type 'Rotator' registered
-16:18:14: Particle Affector Type 'DirectionRandomiser' registered
-16:18:14: Particle Affector Type 'DeflectorPlane' registered
-16:18:14: Plugin successfully installed
-16:18:14: Loading library .\Plugin_CgProgramManager_d
-16:18:15: Installing plugin: Cg Program Manager
-16:18:15: Plugin successfully installed
-16:18:15: *-*-* OGRE Initialising
-16:18:15: *-*-* Version 1.9.0 (Ghadamon)
-16:18:15: Added resource location './media' of type 'FileSystem' to resource group 'General'
-16:18:15: Added resource location './media/fonts' of type 'FileSystem' to resource group 'General'
-16:18:15: Added resource location './media/materials/programs' of type 'FileSystem' to resource group 'General'
-16:18:15: Added resource location './media/materials/programs/metal' of type 'FileSystem' to resource group 'General'
-16:18:15: Added resource location './media/materials/scripts' of type 'FileSystem' to resource group 'General'
-16:18:15: Added resource location './media/materials/textures' of type 'FileSystem' to resource group 'General'
-16:18:15: Added resource location './media/models' of type 'FileSystem' to resource group 'General'
-16:18:15: CPU Identifier & Features
-16:18:15: -------------------------
-16:18:15:  *   CPU ID: GenuineIntel: Intel(R) Core(TM) i7-4720HQ CPU @ 2.60GHz
-16:18:15:  *      SSE: yes
-16:18:15:  *     SSE2: yes
-16:18:15:  *     SSE3: yes
-16:18:15:  *      MMX: yes
-16:18:15:  *   MMXEXT: yes
-16:18:15:  *    3DNOW: no
-16:18:15:  * 3DNOWEXT: no
-16:18:15:  *     CMOV: yes
-16:18:15:  *      TSC: yes
-16:18:15:  *      FPU: yes
-16:18:15:  *      PRO: yes
-16:18:15:  *       HT: no
-16:18:15: -------------------------
-16:18:15: *** Starting Win32GL Subsystem ***
-16:18:15: Registering ResourceManager for type Texture
-16:18:15: GLRenderSystem::_createRenderWindow "Galeon", 1024x768 windowed  miscParams: FSAA=0 FSAAHint= colourDepth=32 displayFrequency=0 gamma=false vsync=false vsyncInterval=1 
-16:18:15: Created Win32Window 'Galeon' : 1040x807, 32bpp
-16:18:15: GL_VERSION = 4.5.0 NVIDIA 362.00
-16:18:15: GL_VENDOR = NVIDIA Corporation
-16:18:15: GL_RENDERER = GeForce GTX 980M/PCIe/SSE2
-16:18:15: GL_EXTENSIONS = GL_AMD_multi_draw_indirect GL_AMD_seamless_cubemap_per_texture GL_AMD_vertex_shader_viewport_index GL_AMD_vertex_shader_layer GL_ARB_arrays_of_arrays GL_ARB_base_instance GL_ARB_bindless_texture GL_ARB_blend_func_extended GL_ARB_buffer_storage GL_ARB_clear_buffer_object GL_ARB_clear_texture GL_ARB_clip_control GL_ARB_color_buffer_float GL_ARB_compatibility GL_ARB_compressed_texture_pixel_storage GL_ARB_conservative_depth GL_ARB_compute_shader GL_ARB_compute_variable_group_size GL_ARB_conditional_render_inverted GL_ARB_copy_buffer GL_ARB_copy_image GL_ARB_cull_distance GL_ARB_debug_output GL_ARB_depth_buffer_float GL_ARB_depth_clamp GL_ARB_depth_texture GL_ARB_derivative_control GL_ARB_direct_state_access GL_ARB_draw_buffers GL_ARB_draw_buffers_blend GL_ARB_draw_indirect GL_ARB_draw_elements_base_vertex GL_ARB_draw_instanced GL_ARB_enhanced_layouts GL_ARB_ES2_compatibility GL_ARB_ES3_compatibility GL_ARB_ES3_1_compatibility GL_ARB_ES3_2_compatibility GL_ARB_explicit_attrib_location GL_ARB_explicit_uniform_location GL_ARB_fragment_coord_conventions GL_ARB_fragment_layer_viewport GL_ARB_fragment_program GL_ARB_fragment_program_shadow GL_ARB_fragment_shader GL_ARB_fragment_shader_interlock GL_ARB_framebuffer_no_attachments GL_ARB_framebuffer_object GL_ARB_framebuffer_sRGB GL_ARB_geometry_shader4 GL_ARB_get_program_binary GL_ARB_get_texture_sub_image GL_ARB_gpu_shader5 GL_ARB_gpu_shader_fp64 GL_ARB_gpu_shader_int64 GL_ARB_half_float_pixel GL_ARB_half_float_vertex GL_ARB_imaging GL_ARB_indirect_parameters GL_ARB_instanced_arrays GL_ARB_internalformat_query GL_ARB_internalformat_query2 GL_ARB_invalidate_subdata GL_ARB_map_buffer_alignment GL_ARB_map_buffer_range GL_ARB_multi_bind GL_ARB_multi_draw_indirect GL_ARB_multisample GL_ARB_multitexture GL_ARB_occlusion_query GL_ARB_occlusion_query2 GL_ARB_parallel_shader_compile GL_ARB_pipeline_statistics_query GL_ARB_pixel_buffer_object GL_ARB_point_parameters GL_ARB_point_sprite GL_ARB_post_depth_coverage GL_ARB_program_interface_query GL_ARB_provoking_vertex GL_ARB_query_buffer_object GL_ARB_robust_buffer_access_behavior GL_ARB_robustness GL_ARB_sample_locations GL_ARB_sample_shading GL_ARB_sampler_objects GL_ARB_seamless_cube_map GL_ARB_seamless_cubemap_per_texture GL_ARB_separate_shader_objects GL_ARB_shader_atomic_counter_ops GL_ARB_shader_atomic_counters GL_ARB_shader_ballot GL_ARB_shader_bit_encoding GL_ARB_shader_clock GL_ARB_shader_draw_parameters GL_ARB_shader_group_vote GL_ARB_shader_image_load_store GL_ARB_shader_image_size GL_ARB_shader_objects GL_ARB_shader_precision GL_ARB_shader_storage_buffer_object GL_ARB_shader_subroutine GL_ARB_shader_texture_image_samples GL_ARB_shader_texture_lod GL_ARB_shading_language_100 GL_ARB_shader_viewport_layer_array GL_ARB_shading_language_420pack GL_ARB_shading_language_include GL_ARB_shading_language_packing GL_ARB_shadow GL_ARB_sparse_buffer GL_ARB_sparse_texture GL_ARB_sparse_texture2 GL_ARB_sparse_texture_clamp GL_ARB_stencil_texturing GL_ARB_sync GL_ARB_tessellation_shader GL_ARB_texture_barrier GL_ARB_texture_border_clamp GL_ARB_texture_buffer_object GL_ARB_texture_buffer_object_rgb32 GL_ARB_texture_buffer_range GL_ARB_texture_compression GL_ARB_texture_compression_bptc GL_ARB_texture_compression_rgtc GL_ARB_texture_cube_map GL_ARB_texture_cube_map_array GL_ARB_texture_env_add GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_filter_minmax GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_mirrored_repeat GL_ARB_texture_multisample GL_ARB_texture_non_power_of_two GL_ARB_texture_query_levels GL_ARB_texture_query_lod GL_ARB_texture_rectangle GL_ARB_texture_rg GL_ARB_texture_rgb10_a2ui GL_ARB_texture_stencil8 GL_ARB_texture_storage GL_ARB_texture_storage_multisample GL_ARB_texture_swizzle GL_ARB_texture_view GL_ARB_timer_query GL_ARB_transform_feedback2 GL_ARB_transform_feedback3 GL_ARB_transform_feedback_instanced GL_ARB_transform_feedback_overflow_query GL_ARB_transpose_matrix GL_ARB_uniform_buffer_object GL_ARB_vertex_array_bgra GL_ARB_vertex_array_object GL_ARB_vertex_attrib_64bit GL_ARB_vertex_attrib_binding GL_ARB_vertex_buffer_object GL_ARB_vertex_program GL_ARB_vertex_shader GL_ARB_vertex_type_10f_11f_11f_rev GL_ARB_vertex_type_2_10_10_10_rev GL_ARB_viewport_array GL_ARB_window_pos GL_ATI_draw_buffers GL_ATI_texture_float GL_ATI_texture_mirror_once GL_S3_s3tc GL_EXT_texture_env_add GL_EXT_abgr GL_EXT_bgra GL_EXT_bindable_uniform GL_EXT_blend_color GL_EXT_blend_equation_separate GL_EXT_blend_func_separate GL_EXT_blend_minmax GL_EXT_blend_subtract GL_EXT_compiled_vertex_array GL_EXT_Cg_shader GL_EXT_depth_bounds_test GL_EXT_direct_state_access GL_EXT_draw_buffers2 GL_EXT_draw_instanced GL_EXT_draw_range_elements GL_EXT_fog_coord GL_EXT_framebuffer_blit GL_EXT_framebuffer_multisample GL_EXTX_framebuffer_mixed_formats GL_EXT_framebuffer_multisample_blit_scaled GL_EXT_framebuffer_object GL_EXT_framebuffer_sRGB GL_EXT_geometry_shader4 GL_EXT_gpu_program_parameters GL_EXT_gpu_shader4 GL_EXT_multi_draw_arrays GL_EXT_packed_depth_stencil GL_EXT_packed_float GL_EXT_packed_pixels GL_EXT_pixel_buffer_object GL_EXT_point_parameters GL_EXT_polygon_offset_clamp GL_EXT_post_depth_coverage GL_EXT_provoking_vertex GL_EXT_raster_multisample GL_EXT_rescale_normal GL_EXT_secondary_color GL_EXT_separate_shader_objects GL_EXT_separate_specular_color GL_EXT_shader_image_load_formatted GL_EXT_shader_image_load_store GL_EXT_shader_integer_mix GL_EXT_shadow_funcs GL_EXT_sparse_texture2 GL_EXT_stencil_two_side GL_EXT_stencil_wrap GL_EXT_texture3D GL_EXT_texture_array GL_EXT_texture_buffer_object GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_latc GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc GL_EXT_texture_cube_map GL_EXT_texture_edge_clamp GL_EXT_texture_env_combine GL_EXT_texture_env_dot3 GL_EXT_texture_filter_anisotropic GL_EXT_texture_filter_minmax GL_EXT_texture_integer GL_EXT_texture_lod GL_EXT_texture_lod_bias GL_EXT_texture_mirror_clamp GL_EXT_texture_object GL_EXT_texture_shared_exponent GL_EXT_texture_sRGB GL_EXT_texture_sRGB_decode GL_EXT_texture_storage GL_EXT_texture_swizzle GL_EXT_timer_query GL_EXT_transform_feedback2 GL_EXT_vertex_array GL_EXT_vertex_array_bgra GL_EXT_vertex_attrib_64bit GL_EXT_import_sync_object GL_IBM_rasterpos_clip GL_IBM_texture_mirrored_repeat GL_KHR_context_flush_control GL_KHR_debug GL_KHR_no_error GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_KTX_buffer_region GL_NV_bindless_multi_draw_indirect GL_NV_bindless_multi_draw_indirect_count GL_NV_bindless_texture GL_NV_blend_equation_advanced GL_NV_blend_equation_advanced_coherent GL_NV_blend_square GL_NV_command_list GL_NV_compute_program5 GL_NV_conditional_render GL_NV_conservative_raster GL_NV_conservative_raster_dilate GL_NV_copy_depth_to_color GL_NV_copy_image GL_NV_depth_buffer_float GL_NV_depth_clamp GL_NV_draw_texture GL_NV_ES1_1_compatibility GL_NV_ES3_1_compatibility GL_NV_explicit_multisample GL_NV_fence GL_NV_fill_rectangle GL_NV_float_buffer GL_NV_fog_distance GL_NV_fragment_coverage_to_color GL_NV_fragment_program GL_NV_fragment_program_option GL_NV_fragment_program2 GL_NV_fragment_shader_interlock GL_NV_framebuffer_mixed_samples GL_NV_framebuffer_multisample_coverage GL_NV_geometry_shader4 GL_NV_geometry_shader_passthrough GL_NV_gpu_program4 GL_NV_internalformat_sample_query GL_NV_gpu_program4_1 GL_NV_gpu_program5 GL_NV_gpu_program5_mem_extended GL_NV_gpu_program_fp64 GL_NV_gpu_shader5 GL_NV_half_float GL_NV_light_max_exponent GL_NV_multisample_coverage GL_NV_multisample_filter_hint GL_NV_occlusion_query GL_NV_packed_depth_stencil GL_NV_parameter_buffer_object GL_NV_parameter_buffer_object2 GL_NV_path_rendering GL_NV_path_rendering_shared_edge GL_NV_pixel_data_range GL_NV_point_sprite GL_NV_primitive_restart GL_NV_register_combiners GL_NV_register_combiners2 GL_NV_sample_locations GL_NV_sample_mask_override_coverage GL_NV_shader_atomic_counters GL_NV_shader_atomic_float GL_NV_shader_atomic_fp16_vector GL_NV_shader_atomic_int64 GL_NV_shader_buffer_load GL_NV_shader_storage_buffer_object GL_NV_texgen_reflection GL_NV_texture_barrier GL_NV_texture_compression_vtc GL_NV_texture_env_combine4 GL_NV_texture_multisample GL_NV_texture_rectangle GL_NV_texture_shader GL_NV_texture_shader2 GL_NV_texture_shader3 GL_NV_transform_feedback GL_NV_transform_feedback2 GL_NV_uniform_buffer_unified_memory GL_NV_vertex_array_range GL_NV_vertex_array_range2 GL_NV_vertex_attrib_integer_64bit GL_NV_vertex_buffer_unified_memory GL_NV_vertex_program GL_NV_vertex_program1_1 GL_NV_vertex_program2 GL_NV_vertex_program2_option GL_NV_vertex_program3 GL_NV_viewport_array2 GL_NVX_conditional_render GL_NVX_gpu_memory_info GL_NVX_nvenc_interop GL_NV_shader_thread_group GL_NV_shader_thread_shuffle GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_SGIS_generate_mipmap GL_SGIS_texture_lod GL_SGIX_depth_texture GL_SGIX_shadow GL_SUN_slice_accum GL_WIN_swap_hint WGL_EXT_swap_control 
-16:18:15: Supported WGL extensions: WGL_ARB_buffer_region WGL_ARB_create_context WGL_ARB_create_context_profile WGL_ARB_create_context_robustness WGL_ARB_context_flush_control WGL_ARB_extensions_string WGL_ARB_make_current_read WGL_ARB_multisample WGL_ARB_pbuffer WGL_ARB_pixel_format WGL_ARB_pixel_format_float WGL_ARB_render_texture WGL_ATI_pixel_format_float WGL_EXT_create_context_es_profile WGL_EXT_create_context_es2_profile WGL_EXT_extensions_string WGL_EXT_framebuffer_sRGB WGL_EXT_pixel_format_packed_float WGL_EXT_swap_control WGL_EXT_swap_control_tear WGL_NVX_DX_interop WGL_NV_DX_interop WGL_NV_DX_interop2 WGL_NV_copy_image WGL_NV_delay_before_swap WGL_NV_float_buffer WGL_NV_multisample_coverage WGL_NV_render_depth_texture WGL_NV_render_texture_rectangle 
-16:18:15: ***************************
-16:18:15: *** GL Renderer Started ***
-16:18:15: ***************************
-16:18:15: Registering ResourceManager for type GpuProgram
-16:18:15: GLSL support detected
-16:18:15: GL: Using GL_EXT_framebuffer_object for rendering to textures (best)
-16:18:15: FBO PF_UNKNOWN depth/stencil support: D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_L8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_A8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_A4L4 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_BYTE_LA depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_R5G6B5 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_B5G6R5 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_A4R4G4B4 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_A1R5G5B5 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_R8G8B8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_B8G8R8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_A8R8G8B8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_B8G8R8A8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_A2R10G10B10 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:15: FBO PF_A2B10G10R10 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_FLOAT16_RGB depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_FLOAT16_RGBA depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_FLOAT32_RGB depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_FLOAT32_RGBA depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_X8R8G8B8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_X8B8G8R8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_SHORT_RGBA depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_R3G3B2 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_FLOAT16_R depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_FLOAT32_R depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_FLOAT16_GR depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_FLOAT32_GR depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: FBO PF_SHORT_RGB depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
-16:18:16: [GL] : Valid FBO targets PF_UNKNOWN PF_L8 PF_A8 PF_A4L4 PF_BYTE_LA PF_R5G6B5 PF_B5G6R5 PF_A4R4G4B4 PF_A1R5G5B5 PF_R8G8B8 PF_B8G8R8 PF_A8R8G8B8 PF_B8G8R8A8 PF_A2R10G10B10 PF_A2B10G10R10 PF_FLOAT16_RGB PF_FLOAT16_RGBA PF_FLOAT32_RGB PF_FLOAT32_RGBA PF_X8R8G8B8 PF_X8B8G8R8 PF_SHORT_RGBA PF_R3G3B2 PF_FLOAT16_R PF_FLOAT32_R PF_FLOAT16_GR PF_FLOAT32_GR PF_SHORT_RGB 
-16:18:16: RenderSystem capabilities
-16:18:16: -------------------------
-16:18:16: RenderSystem Name: OpenGL Rendering Subsystem
-16:18:16: GPU Vendor: nvidia
-16:18:16: Device Name: GeForce GTX 980M/PCIe/SSE2
-16:18:16: Driver Version: 4.5.0.0
-16:18:16:  * Fixed function pipeline: yes
-16:18:16:  * Hardware generation of mipmaps: yes
-16:18:16:  * Texture blending: yes
-16:18:16:  * Anisotropic texture filtering: yes
-16:18:16:  * Dot product texture operation: yes
-16:18:16:  * Cube mapping: yes
-16:18:16:  * Hardware stencil buffer: yes
-16:18:16:    - Stencil depth: 8
-16:18:16:    - Two sided stencil support: yes
-16:18:16:    - Wrap stencil values: yes
-16:18:16:  * Hardware vertex / index buffers: yes
-16:18:16:  * Vertex programs: yes
-16:18:16:  * Number of floating-point constants for vertex programs: 1024
-16:18:16:  * Number of integer constants for vertex programs: 0
-16:18:16:  * Number of boolean constants for vertex programs: 0
-16:18:16:  * Fragment programs: yes
-16:18:16:  * Number of floating-point constants for fragment programs: 1024
-16:18:16:  * Number of integer constants for fragment programs: 0
-16:18:16:  * Number of boolean constants for fragment programs: 0
-16:18:16:  * Geometry programs: yes
-16:18:16:  * Number of floating-point constants for geometry programs: 2048
-16:18:16:  * Number of integer constants for geometry programs: 0
-16:18:16:  * Number of boolean constants for geometry programs: 0
-16:18:16:  * Tesselation Hull programs: no
-16:18:16:  * Number of floating-point constants for tesselation hull programs: 0
-16:18:16:  * Number of integer constants for tesselation hull programs: 0
-16:18:16:  * Number of boolean constants for tesselation hull programs: 0
-16:18:16:  * Tesselation Domain programs: no
-16:18:16:  * Number of floating-point constants for tesselation domain programs: 0
-16:18:16:  * Number of integer constants for tesselation domain programs: 0
-16:18:16:  * Number of boolean constants for tesselation domain programs: 0
-16:18:16:  * Compute programs: no
-16:18:16:  * Number of floating-point constants for compute programs: 0
-16:18:16:  * Number of integer constants for compute programs: 0
-16:18:16:  * Number of boolean constants for compute programs: 0
-16:18:16:  * Supported Shader Profiles: arbfp1 arbvp1 fp20 fp30 fp40 glsl gp4fp gp4gp gp4vp gpu_fp gpu_gp gpu_vp nvgp4 vp30 vp40
-16:18:16:  * Texture Compression: yes
-16:18:16:    - DXT: yes
-16:18:16:    - VTC: yes
-16:18:16:    - PVRTC: no
-16:18:16:    - ATC: no
-16:18:16:    - ETC1: no
-16:18:16:    - ETC2: no
-16:18:16:    - BC4/BC5: no
-16:18:16:    - BC6H/BC7: no
-16:18:16:  * Scissor Rectangle: yes
-16:18:16:  * Hardware Occlusion Query: yes
-16:18:16:  * User clip planes: yes
-16:18:16:  * VET_UBYTE4 vertex element type: yes
-16:18:16:  * Infinite far plane projection: yes
-16:18:16:  * Hardware render-to-texture: yes
-16:18:16:  * Floating point textures: yes
-16:18:16:  * Non-power-of-two textures: yes
-16:18:16:  * 1d textures: yes
-16:18:16:  * Volume textures: yes
-16:18:16:  * Multiple Render Targets: 8
-16:18:16:    - With different bit depths: yes
-16:18:16:  * Point Sprites: yes
-16:18:16:  * Extended point parameters: yes
-16:18:16:  * Max Point Size: 2047
-16:18:16:  * Vertex texture fetch: yes
-16:18:16:  * Number of world matrices: 0
-16:18:16:  * Number of texture units: 16
-16:18:16:  * Stencil buffer depth: 8
-16:18:16:  * Number of vertex blend matrices: 0
-16:18:16:    - Max vertex textures: 32
-16:18:16:    - Vertex textures shared: yes
-16:18:16:  * Render to Vertex Buffer : yes
-16:18:16:  * Hardware Atomic Counters: no
-16:18:16:  * GL 1.5 without VBO workaround: no
-16:18:16:  * Frame Buffer objects: yes
-16:18:16:  * Frame Buffer objects (ARB extension): no
-16:18:16:  * Frame Buffer objects (ATI extension): no
-16:18:16:  * PBuffer support: yes
-16:18:16:  * GL 1.5 without HW-occlusion workaround: no
-16:18:16:  * Vertex Array Objects: no
-16:18:16:  * Separate shader objects: no
-16:18:16: DefaultWorkQueue('Root') initialising on thread main.
-16:18:16: Particle Renderer Type 'billboard' registered
-16:18:16: Initialising resource group General
-16:18:16: Parsing scripts for resource group General
-16:18:16: Parsing script AmbientOneTexture_hlsl.program
-16:18:16: Parsing script monster.program
-16:18:16: Parsing script Normal_AO_Specular_Mapping_Shader.program
-16:18:16: Parsing script Normal_AO_Specular_Mapping_Shader.material
-16:18:16: Parsing script aranna.material
-16:18:16: Parsing script AttaObrera.material
-16:18:16: Parsing script AttaSoldada.material
-16:18:16: Parsing script barril.material
-16:18:16: Parsing script Escorpion.material
-16:18:16: Parsing script Evilator.material
-16:18:16: Parsing script EvilWorks.material
-16:18:16: Parsing script Furnace.material
-16:18:16: Parsing script GasPlant.material
-16:18:16: Parsing script HellQuarters.material
-16:18:16: Parsing script laberinto.material
-16:18:16: Parsing script loco.material
-16:18:16: Parsing script marine.material
-16:18:16: Parsing script Mine.material
-16:18:16: Parsing script PowerGenerator.material
-16:18:16: Parsing script Refinery.material
-16:18:16: Parsing script ResearchLabs.material
-16:18:16: Parsing script Soul.material
-16:18:16: Parsing script SoulPath.material
-16:18:16: Parsing script tile.material
-16:18:16: Parsing script TroncoArbol.material
-16:18:16: Parsing script Warehouse.material
-16:18:16: Finished parsing scripts for resource group General
-16:18:16: Creating resources for group General
-16:18:16: All done
-16:18:24: Mesh: Loading cube.mesh.
-16:18:24: Can't assign material tile to SubEntity of Tile_0_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_0_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_1_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_2_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_3_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_4_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_5_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_6_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_7_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_8_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_9_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_10_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_11_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_12_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_13_14 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_0 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_1 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_2 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_3 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_4 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_5 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_6 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_7 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_8 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_9 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_10 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_11 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_12 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_13 because this Material does not exist. Have you forgotten to define it in a .material script?
-16:18:24: Can't assign material tile to SubEntity of Tile_14_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:08: Creating resource group General
+17:17:08: Creating resource group Internal
+17:17:08: Creating resource group Autodetect
+17:17:08: SceneManagerFactory for type 'DefaultSceneManager' registered.
+17:17:08: Registering ResourceManager for type Material
+17:17:08: Registering ResourceManager for type Mesh
+17:17:08: Registering ResourceManager for type Skeleton
+17:17:08: MovableObjectFactory for type 'ParticleSystem' registered.
+17:17:08: ArchiveFactory for archive type FileSystem registered.
+17:17:08: ArchiveFactory for archive type Zip registered.
+17:17:08: ArchiveFactory for archive type EmbeddedZip registered.
+17:17:08: DDS codec registering
+17:17:08: FreeImage version: 3.15.3
+17:17:08: This program uses FreeImage, a free, open source image library supporting all common bitmap formats. See http://freeimage.sourceforge.net for details
+17:17:08: Supported formats: bmp,ico,jpg,jif,jpeg,jpe,jng,koa,iff,lbm,mng,pbm,pbm,pcd,pcx,pgm,pgm,png,ppm,ppm,ras,tga,targa,tif,tiff,wap,wbmp,wbm,psd,cut,xbm,xpm,gif,hdr,g3,sgi,exr,j2k,j2c,jp2,pfm,pct,pict,pic
+17:17:08: Registering ResourceManager for type HighLevelGpuProgram
+17:17:08: Registering ResourceManager for type Compositor
+17:17:08: MovableObjectFactory for type 'Entity' registered.
+17:17:08: MovableObjectFactory for type 'Light' registered.
+17:17:08: MovableObjectFactory for type 'BillboardSet' registered.
+17:17:08: MovableObjectFactory for type 'ManualObject' registered.
+17:17:08: MovableObjectFactory for type 'BillboardChain' registered.
+17:17:08: MovableObjectFactory for type 'RibbonTrail' registered.
+17:17:08: Loading library .\RenderSystem_GL_d
+17:17:08: Installing plugin: GL RenderSystem
+17:17:08: OpenGL Rendering Subsystem created.
+17:17:08: Plugin successfully installed
+17:17:08: Loading library .\Plugin_ParticleFX_d
+17:17:08: Installing plugin: ParticleFX
+17:17:08: Particle Emitter Type 'Point' registered
+17:17:08: Particle Emitter Type 'Box' registered
+17:17:08: Particle Emitter Type 'Ellipsoid' registered
+17:17:08: Particle Emitter Type 'Cylinder' registered
+17:17:08: Particle Emitter Type 'Ring' registered
+17:17:08: Particle Emitter Type 'HollowEllipsoid' registered
+17:17:08: Particle Affector Type 'LinearForce' registered
+17:17:08: Particle Affector Type 'ColourFader' registered
+17:17:08: Particle Affector Type 'ColourFader2' registered
+17:17:08: Particle Affector Type 'ColourImage' registered
+17:17:08: Particle Affector Type 'ColourInterpolator' registered
+17:17:08: Particle Affector Type 'Scaler' registered
+17:17:08: Particle Affector Type 'Rotator' registered
+17:17:08: Particle Affector Type 'DirectionRandomiser' registered
+17:17:08: Particle Affector Type 'DeflectorPlane' registered
+17:17:08: Plugin successfully installed
+17:17:08: Loading library .\Plugin_CgProgramManager_d
+17:17:08: Installing plugin: Cg Program Manager
+17:17:08: Plugin successfully installed
+17:17:08: *-*-* OGRE Initialising
+17:17:08: *-*-* Version 1.9.0 (Ghadamon)
+17:17:08: Added resource location './media' of type 'FileSystem' to resource group 'General'
+17:17:08: Added resource location './media/fonts' of type 'FileSystem' to resource group 'General'
+17:17:08: Added resource location './media/materials/programs' of type 'FileSystem' to resource group 'General'
+17:17:08: Added resource location './media/materials/programs/metal' of type 'FileSystem' to resource group 'General'
+17:17:08: Added resource location './media/materials/scripts' of type 'FileSystem' to resource group 'General'
+17:17:08: Added resource location './media/materials/textures' of type 'FileSystem' to resource group 'General'
+17:17:08: Added resource location './media/models' of type 'FileSystem' to resource group 'General'
+17:17:08: CPU Identifier & Features
+17:17:08: -------------------------
+17:17:08:  *   CPU ID: GenuineIntel: Intel(R) Core(TM) i7-4720HQ CPU @ 2.60GHz
+17:17:08:  *      SSE: yes
+17:17:08:  *     SSE2: yes
+17:17:08:  *     SSE3: yes
+17:17:08:  *      MMX: yes
+17:17:08:  *   MMXEXT: yes
+17:17:08:  *    3DNOW: no
+17:17:08:  * 3DNOWEXT: no
+17:17:08:  *     CMOV: yes
+17:17:08:  *      TSC: yes
+17:17:08:  *      FPU: yes
+17:17:08:  *      PRO: yes
+17:17:08:  *       HT: no
+17:17:08: -------------------------
+17:17:08: *** Starting Win32GL Subsystem ***
+17:17:08: Registering ResourceManager for type Texture
+17:17:08: GLRenderSystem::_createRenderWindow "Galeon", 1024x768 windowed  miscParams: FSAA=0 FSAAHint= colourDepth=32 displayFrequency=0 gamma=false vsync=false vsyncInterval=1 
+17:17:08: Created Win32Window 'Galeon' : 1040x807, 32bpp
+17:17:08: GL_VERSION = 4.5.0 NVIDIA 362.00
+17:17:08: GL_VENDOR = NVIDIA Corporation
+17:17:08: GL_RENDERER = GeForce GTX 980M/PCIe/SSE2
+17:17:08: GL_EXTENSIONS = GL_AMD_multi_draw_indirect GL_AMD_seamless_cubemap_per_texture GL_AMD_vertex_shader_viewport_index GL_AMD_vertex_shader_layer GL_ARB_arrays_of_arrays GL_ARB_base_instance GL_ARB_bindless_texture GL_ARB_blend_func_extended GL_ARB_buffer_storage GL_ARB_clear_buffer_object GL_ARB_clear_texture GL_ARB_clip_control GL_ARB_color_buffer_float GL_ARB_compatibility GL_ARB_compressed_texture_pixel_storage GL_ARB_conservative_depth GL_ARB_compute_shader GL_ARB_compute_variable_group_size GL_ARB_conditional_render_inverted GL_ARB_copy_buffer GL_ARB_copy_image GL_ARB_cull_distance GL_ARB_debug_output GL_ARB_depth_buffer_float GL_ARB_depth_clamp GL_ARB_depth_texture GL_ARB_derivative_control GL_ARB_direct_state_access GL_ARB_draw_buffers GL_ARB_draw_buffers_blend GL_ARB_draw_indirect GL_ARB_draw_elements_base_vertex GL_ARB_draw_instanced GL_ARB_enhanced_layouts GL_ARB_ES2_compatibility GL_ARB_ES3_compatibility GL_ARB_ES3_1_compatibility GL_ARB_ES3_2_compatibility GL_ARB_explicit_attrib_location GL_ARB_explicit_uniform_location GL_ARB_fragment_coord_conventions GL_ARB_fragment_layer_viewport GL_ARB_fragment_program GL_ARB_fragment_program_shadow GL_ARB_fragment_shader GL_ARB_fragment_shader_interlock GL_ARB_framebuffer_no_attachments GL_ARB_framebuffer_object GL_ARB_framebuffer_sRGB GL_ARB_geometry_shader4 GL_ARB_get_program_binary GL_ARB_get_texture_sub_image GL_ARB_gpu_shader5 GL_ARB_gpu_shader_fp64 GL_ARB_gpu_shader_int64 GL_ARB_half_float_pixel GL_ARB_half_float_vertex GL_ARB_imaging GL_ARB_indirect_parameters GL_ARB_instanced_arrays GL_ARB_internalformat_query GL_ARB_internalformat_query2 GL_ARB_invalidate_subdata GL_ARB_map_buffer_alignment GL_ARB_map_buffer_range GL_ARB_multi_bind GL_ARB_multi_draw_indirect GL_ARB_multisample GL_ARB_multitexture GL_ARB_occlusion_query GL_ARB_occlusion_query2 GL_ARB_parallel_shader_compile GL_ARB_pipeline_statistics_query GL_ARB_pixel_buffer_object GL_ARB_point_parameters GL_ARB_point_sprite GL_ARB_post_depth_coverage GL_ARB_program_interface_query GL_ARB_provoking_vertex GL_ARB_query_buffer_object GL_ARB_robust_buffer_access_behavior GL_ARB_robustness GL_ARB_sample_locations GL_ARB_sample_shading GL_ARB_sampler_objects GL_ARB_seamless_cube_map GL_ARB_seamless_cubemap_per_texture GL_ARB_separate_shader_objects GL_ARB_shader_atomic_counter_ops GL_ARB_shader_atomic_counters GL_ARB_shader_ballot GL_ARB_shader_bit_encoding GL_ARB_shader_clock GL_ARB_shader_draw_parameters GL_ARB_shader_group_vote GL_ARB_shader_image_load_store GL_ARB_shader_image_size GL_ARB_shader_objects GL_ARB_shader_precision GL_ARB_shader_storage_buffer_object GL_ARB_shader_subroutine GL_ARB_shader_texture_image_samples GL_ARB_shader_texture_lod GL_ARB_shading_language_100 GL_ARB_shader_viewport_layer_array GL_ARB_shading_language_420pack GL_ARB_shading_language_include GL_ARB_shading_language_packing GL_ARB_shadow GL_ARB_sparse_buffer GL_ARB_sparse_texture GL_ARB_sparse_texture2 GL_ARB_sparse_texture_clamp GL_ARB_stencil_texturing GL_ARB_sync GL_ARB_tessellation_shader GL_ARB_texture_barrier GL_ARB_texture_border_clamp GL_ARB_texture_buffer_object GL_ARB_texture_buffer_object_rgb32 GL_ARB_texture_buffer_range GL_ARB_texture_compression GL_ARB_texture_compression_bptc GL_ARB_texture_compression_rgtc GL_ARB_texture_cube_map GL_ARB_texture_cube_map_array GL_ARB_texture_env_add GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_filter_minmax GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_mirrored_repeat GL_ARB_texture_multisample GL_ARB_texture_non_power_of_two GL_ARB_texture_query_levels GL_ARB_texture_query_lod GL_ARB_texture_rectangle GL_ARB_texture_rg GL_ARB_texture_rgb10_a2ui GL_ARB_texture_stencil8 GL_ARB_texture_storage GL_ARB_texture_storage_multisample GL_ARB_texture_swizzle GL_ARB_texture_view GL_ARB_timer_query GL_ARB_transform_feedback2 GL_ARB_transform_feedback3 GL_ARB_transform_feedback_instanced GL_ARB_transform_feedback_overflow_query GL_ARB_transpose_matrix GL_ARB_uniform_buffer_object GL_ARB_vertex_array_bgra GL_ARB_vertex_array_object GL_ARB_vertex_attrib_64bit GL_ARB_vertex_attrib_binding GL_ARB_vertex_buffer_object GL_ARB_vertex_program GL_ARB_vertex_shader GL_ARB_vertex_type_10f_11f_11f_rev GL_ARB_vertex_type_2_10_10_10_rev GL_ARB_viewport_array GL_ARB_window_pos GL_ATI_draw_buffers GL_ATI_texture_float GL_ATI_texture_mirror_once GL_S3_s3tc GL_EXT_texture_env_add GL_EXT_abgr GL_EXT_bgra GL_EXT_bindable_uniform GL_EXT_blend_color GL_EXT_blend_equation_separate GL_EXT_blend_func_separate GL_EXT_blend_minmax GL_EXT_blend_subtract GL_EXT_compiled_vertex_array GL_EXT_Cg_shader GL_EXT_depth_bounds_test GL_EXT_direct_state_access GL_EXT_draw_buffers2 GL_EXT_draw_instanced GL_EXT_draw_range_elements GL_EXT_fog_coord GL_EXT_framebuffer_blit GL_EXT_framebuffer_multisample GL_EXTX_framebuffer_mixed_formats GL_EXT_framebuffer_multisample_blit_scaled GL_EXT_framebuffer_object GL_EXT_framebuffer_sRGB GL_EXT_geometry_shader4 GL_EXT_gpu_program_parameters GL_EXT_gpu_shader4 GL_EXT_multi_draw_arrays GL_EXT_packed_depth_stencil GL_EXT_packed_float GL_EXT_packed_pixels GL_EXT_pixel_buffer_object GL_EXT_point_parameters GL_EXT_polygon_offset_clamp GL_EXT_post_depth_coverage GL_EXT_provoking_vertex GL_EXT_raster_multisample GL_EXT_rescale_normal GL_EXT_secondary_color GL_EXT_separate_shader_objects GL_EXT_separate_specular_color GL_EXT_shader_image_load_formatted GL_EXT_shader_image_load_store GL_EXT_shader_integer_mix GL_EXT_shadow_funcs GL_EXT_sparse_texture2 GL_EXT_stencil_two_side GL_EXT_stencil_wrap GL_EXT_texture3D GL_EXT_texture_array GL_EXT_texture_buffer_object GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_latc GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc GL_EXT_texture_cube_map GL_EXT_texture_edge_clamp GL_EXT_texture_env_combine GL_EXT_texture_env_dot3 GL_EXT_texture_filter_anisotropic GL_EXT_texture_filter_minmax GL_EXT_texture_integer GL_EXT_texture_lod GL_EXT_texture_lod_bias GL_EXT_texture_mirror_clamp GL_EXT_texture_object GL_EXT_texture_shared_exponent GL_EXT_texture_sRGB GL_EXT_texture_sRGB_decode GL_EXT_texture_storage GL_EXT_texture_swizzle GL_EXT_timer_query GL_EXT_transform_feedback2 GL_EXT_vertex_array GL_EXT_vertex_array_bgra GL_EXT_vertex_attrib_64bit GL_EXT_import_sync_object GL_IBM_rasterpos_clip GL_IBM_texture_mirrored_repeat GL_KHR_context_flush_control GL_KHR_debug GL_KHR_no_error GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_KTX_buffer_region GL_NV_bindless_multi_draw_indirect GL_NV_bindless_multi_draw_indirect_count GL_NV_bindless_texture GL_NV_blend_equation_advanced GL_NV_blend_equation_advanced_coherent GL_NV_blend_square GL_NV_command_list GL_NV_compute_program5 GL_NV_conditional_render GL_NV_conservative_raster GL_NV_conservative_raster_dilate GL_NV_copy_depth_to_color GL_NV_copy_image GL_NV_depth_buffer_float GL_NV_depth_clamp GL_NV_draw_texture GL_NV_ES1_1_compatibility GL_NV_ES3_1_compatibility GL_NV_explicit_multisample GL_NV_fence GL_NV_fill_rectangle GL_NV_float_buffer GL_NV_fog_distance GL_NV_fragment_coverage_to_color GL_NV_fragment_program GL_NV_fragment_program_option GL_NV_fragment_program2 GL_NV_fragment_shader_interlock GL_NV_framebuffer_mixed_samples GL_NV_framebuffer_multisample_coverage GL_NV_geometry_shader4 GL_NV_geometry_shader_passthrough GL_NV_gpu_program4 GL_NV_internalformat_sample_query GL_NV_gpu_program4_1 GL_NV_gpu_program5 GL_NV_gpu_program5_mem_extended GL_NV_gpu_program_fp64 GL_NV_gpu_shader5 GL_NV_half_float GL_NV_light_max_exponent GL_NV_multisample_coverage GL_NV_multisample_filter_hint GL_NV_occlusion_query GL_NV_packed_depth_stencil GL_NV_parameter_buffer_object GL_NV_parameter_buffer_object2 GL_NV_path_rendering GL_NV_path_rendering_shared_edge GL_NV_pixel_data_range GL_NV_point_sprite GL_NV_primitive_restart GL_NV_register_combiners GL_NV_register_combiners2 GL_NV_sample_locations GL_NV_sample_mask_override_coverage GL_NV_shader_atomic_counters GL_NV_shader_atomic_float GL_NV_shader_atomic_fp16_vector GL_NV_shader_atomic_int64 GL_NV_shader_buffer_load GL_NV_shader_storage_buffer_object GL_NV_texgen_reflection GL_NV_texture_barrier GL_NV_texture_compression_vtc GL_NV_texture_env_combine4 GL_NV_texture_multisample GL_NV_texture_rectangle GL_NV_texture_shader GL_NV_texture_shader2 GL_NV_texture_shader3 GL_NV_transform_feedback GL_NV_transform_feedback2 GL_NV_uniform_buffer_unified_memory GL_NV_vertex_array_range GL_NV_vertex_array_range2 GL_NV_vertex_attrib_integer_64bit GL_NV_vertex_buffer_unified_memory GL_NV_vertex_program GL_NV_vertex_program1_1 GL_NV_vertex_program2 GL_NV_vertex_program2_option GL_NV_vertex_program3 GL_NV_viewport_array2 GL_NVX_conditional_render GL_NVX_gpu_memory_info GL_NVX_nvenc_interop GL_NV_shader_thread_group GL_NV_shader_thread_shuffle GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_SGIS_generate_mipmap GL_SGIS_texture_lod GL_SGIX_depth_texture GL_SGIX_shadow GL_SUN_slice_accum GL_WIN_swap_hint WGL_EXT_swap_control 
+17:17:08: Supported WGL extensions: WGL_ARB_buffer_region WGL_ARB_create_context WGL_ARB_create_context_profile WGL_ARB_create_context_robustness WGL_ARB_context_flush_control WGL_ARB_extensions_string WGL_ARB_make_current_read WGL_ARB_multisample WGL_ARB_pbuffer WGL_ARB_pixel_format WGL_ARB_pixel_format_float WGL_ARB_render_texture WGL_ATI_pixel_format_float WGL_EXT_create_context_es_profile WGL_EXT_create_context_es2_profile WGL_EXT_extensions_string WGL_EXT_framebuffer_sRGB WGL_EXT_pixel_format_packed_float WGL_EXT_swap_control WGL_EXT_swap_control_tear WGL_NVX_DX_interop WGL_NV_DX_interop WGL_NV_DX_interop2 WGL_NV_copy_image WGL_NV_delay_before_swap WGL_NV_float_buffer WGL_NV_multisample_coverage WGL_NV_render_depth_texture WGL_NV_render_texture_rectangle 
+17:17:08: ***************************
+17:17:08: *** GL Renderer Started ***
+17:17:08: ***************************
+17:17:08: Registering ResourceManager for type GpuProgram
+17:17:08: GLSL support detected
+17:17:08: GL: Using GL_EXT_framebuffer_object for rendering to textures (best)
+17:17:08: FBO PF_UNKNOWN depth/stencil support: D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_L8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_A8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_A4L4 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_BYTE_LA depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_R5G6B5 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_B5G6R5 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_A4R4G4B4 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_A1R5G5B5 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_R8G8B8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_B8G8R8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_A8R8G8B8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_B8G8R8A8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_A2R10G10B10 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_A2B10G10R10 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_FLOAT16_RGB depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_FLOAT16_RGBA depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:08: FBO PF_FLOAT32_RGB depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: FBO PF_FLOAT32_RGBA depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: FBO PF_X8R8G8B8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: FBO PF_X8B8G8R8 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: FBO PF_SHORT_RGBA depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: FBO PF_R3G3B2 depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: FBO PF_FLOAT16_R depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: FBO PF_FLOAT32_R depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: FBO PF_FLOAT16_GR depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: FBO PF_FLOAT32_GR depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: FBO PF_SHORT_RGB depth/stencil support: D0S0 D0S8 D16S0 D24S0 D32S0 Packed-D24S8 
+17:17:09: [GL] : Valid FBO targets PF_UNKNOWN PF_L8 PF_A8 PF_A4L4 PF_BYTE_LA PF_R5G6B5 PF_B5G6R5 PF_A4R4G4B4 PF_A1R5G5B5 PF_R8G8B8 PF_B8G8R8 PF_A8R8G8B8 PF_B8G8R8A8 PF_A2R10G10B10 PF_A2B10G10R10 PF_FLOAT16_RGB PF_FLOAT16_RGBA PF_FLOAT32_RGB PF_FLOAT32_RGBA PF_X8R8G8B8 PF_X8B8G8R8 PF_SHORT_RGBA PF_R3G3B2 PF_FLOAT16_R PF_FLOAT32_R PF_FLOAT16_GR PF_FLOAT32_GR PF_SHORT_RGB 
+17:17:09: RenderSystem capabilities
+17:17:09: -------------------------
+17:17:09: RenderSystem Name: OpenGL Rendering Subsystem
+17:17:09: GPU Vendor: nvidia
+17:17:09: Device Name: GeForce GTX 980M/PCIe/SSE2
+17:17:09: Driver Version: 4.5.0.0
+17:17:09:  * Fixed function pipeline: yes
+17:17:09:  * Hardware generation of mipmaps: yes
+17:17:09:  * Texture blending: yes
+17:17:09:  * Anisotropic texture filtering: yes
+17:17:09:  * Dot product texture operation: yes
+17:17:09:  * Cube mapping: yes
+17:17:09:  * Hardware stencil buffer: yes
+17:17:09:    - Stencil depth: 8
+17:17:09:    - Two sided stencil support: yes
+17:17:09:    - Wrap stencil values: yes
+17:17:09:  * Hardware vertex / index buffers: yes
+17:17:09:  * Vertex programs: yes
+17:17:09:  * Number of floating-point constants for vertex programs: 1024
+17:17:09:  * Number of integer constants for vertex programs: 0
+17:17:09:  * Number of boolean constants for vertex programs: 0
+17:17:09:  * Fragment programs: yes
+17:17:09:  * Number of floating-point constants for fragment programs: 1024
+17:17:09:  * Number of integer constants for fragment programs: 0
+17:17:09:  * Number of boolean constants for fragment programs: 0
+17:17:09:  * Geometry programs: yes
+17:17:09:  * Number of floating-point constants for geometry programs: 2048
+17:17:09:  * Number of integer constants for geometry programs: 0
+17:17:09:  * Number of boolean constants for geometry programs: 0
+17:17:09:  * Tesselation Hull programs: no
+17:17:09:  * Number of floating-point constants for tesselation hull programs: 0
+17:17:09:  * Number of integer constants for tesselation hull programs: 0
+17:17:09:  * Number of boolean constants for tesselation hull programs: 0
+17:17:09:  * Tesselation Domain programs: no
+17:17:09:  * Number of floating-point constants for tesselation domain programs: 0
+17:17:09:  * Number of integer constants for tesselation domain programs: 0
+17:17:09:  * Number of boolean constants for tesselation domain programs: 0
+17:17:09:  * Compute programs: no
+17:17:09:  * Number of floating-point constants for compute programs: 0
+17:17:09:  * Number of integer constants for compute programs: 0
+17:17:09:  * Number of boolean constants for compute programs: 0
+17:17:09:  * Supported Shader Profiles: arbfp1 arbvp1 fp20 fp30 fp40 glsl gp4fp gp4gp gp4vp gpu_fp gpu_gp gpu_vp nvgp4 vp30 vp40
+17:17:09:  * Texture Compression: yes
+17:17:09:    - DXT: yes
+17:17:09:    - VTC: yes
+17:17:09:    - PVRTC: no
+17:17:09:    - ATC: no
+17:17:09:    - ETC1: no
+17:17:09:    - ETC2: no
+17:17:09:    - BC4/BC5: no
+17:17:09:    - BC6H/BC7: no
+17:17:09:  * Scissor Rectangle: yes
+17:17:09:  * Hardware Occlusion Query: yes
+17:17:09:  * User clip planes: yes
+17:17:09:  * VET_UBYTE4 vertex element type: yes
+17:17:09:  * Infinite far plane projection: yes
+17:17:09:  * Hardware render-to-texture: yes
+17:17:09:  * Floating point textures: yes
+17:17:09:  * Non-power-of-two textures: yes
+17:17:09:  * 1d textures: yes
+17:17:09:  * Volume textures: yes
+17:17:09:  * Multiple Render Targets: 8
+17:17:09:    - With different bit depths: yes
+17:17:09:  * Point Sprites: yes
+17:17:09:  * Extended point parameters: yes
+17:17:09:  * Max Point Size: 2047
+17:17:09:  * Vertex texture fetch: yes
+17:17:09:  * Number of world matrices: 0
+17:17:09:  * Number of texture units: 16
+17:17:09:  * Stencil buffer depth: 8
+17:17:09:  * Number of vertex blend matrices: 0
+17:17:09:    - Max vertex textures: 32
+17:17:09:    - Vertex textures shared: yes
+17:17:09:  * Render to Vertex Buffer : yes
+17:17:09:  * Hardware Atomic Counters: no
+17:17:09:  * GL 1.5 without VBO workaround: no
+17:17:09:  * Frame Buffer objects: yes
+17:17:09:  * Frame Buffer objects (ARB extension): no
+17:17:09:  * Frame Buffer objects (ATI extension): no
+17:17:09:  * PBuffer support: yes
+17:17:09:  * GL 1.5 without HW-occlusion workaround: no
+17:17:09:  * Vertex Array Objects: no
+17:17:09:  * Separate shader objects: no
+17:17:09: DefaultWorkQueue('Root') initialising on thread main.
+17:17:09: Particle Renderer Type 'billboard' registered
+17:17:09: Initialising resource group General
+17:17:09: Parsing scripts for resource group General
+17:17:09: Parsing script AmbientOneTexture_hlsl.program
+17:17:09: Parsing script monster.program
+17:17:09: Parsing script Normal_AO_Specular_Mapping_Shader.program
+17:17:09: Parsing script Normal_AO_Specular_Mapping_Shader.material
+17:17:09: Parsing script aranna.material
+17:17:09: Parsing script AttaObrera.material
+17:17:09: Parsing script AttaSoldada.material
+17:17:09: Parsing script barril.material
+17:17:09: Parsing script Escorpion.material
+17:17:09: Parsing script Evilator.material
+17:17:09: Parsing script EvilWorks.material
+17:17:09: Parsing script Furnace.material
+17:17:09: Parsing script GasPlant.material
+17:17:09: Parsing script HellQuarters.material
+17:17:09: Parsing script laberinto.material
+17:17:09: Parsing script loco.material
+17:17:09: Parsing script marine.material
+17:17:09: Parsing script Mine.material
+17:17:09: Parsing script PowerGenerator.material
+17:17:09: Parsing script Refinery.material
+17:17:09: Parsing script ResearchLabs.material
+17:17:09: Parsing script Soul.material
+17:17:09: Parsing script SoulPath.material
+17:17:09: Parsing script tile.material
+17:17:09: Parsing script TroncoArbol.material
+17:17:09: Parsing script Warehouse.material
+17:17:09: Finished parsing scripts for resource group General
+17:17:09: Creating resources for group General
+17:17:09: All done
+17:17:13: Mesh: Loading cube.mesh.
+17:17:13: Can't assign material tile to SubEntity of Tile_0_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:13: Can't assign material tile to SubEntity of Tile_0_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:13: Can't assign material tile to SubEntity of Tile_0_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:13: Can't assign material tile to SubEntity of Tile_0_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:13: Can't assign material tile to SubEntity of Tile_0_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:13: Can't assign material tile to SubEntity of Tile_0_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:13: Can't assign material tile to SubEntity of Tile_0_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:13: Can't assign material tile to SubEntity of Tile_0_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:13: Can't assign material tile to SubEntity of Tile_0_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_0_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_0_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_0_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_0_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_0_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_0_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_1_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_2_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_3_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_4_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_5_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_6_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_7_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_8_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_9_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_10_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_11_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_12_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_13_14 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_0 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_1 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_2 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_3 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_4 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_5 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_6 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_7 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_8 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_9 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_10 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_11 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_12 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_13 because this Material does not exist. Have you forgotten to define it in a .material script?
+17:17:14: Can't assign material tile to SubEntity of Tile_14_14 because this Material does not exist. Have you forgotten to define it in a .material script?
