@@ -25,6 +25,8 @@ namespace GUI
 		int _placeableRoadSize;
 		Logic::Tile* _originRoadTile=nullptr;
 		int _roadInConstruction = false;
+		int _gasCost = 0;
+		int _mineralCost = 0;
 
 		bool createFurnaceReleased(const CEGUI::EventArgs& e);
 		bool createRoadReleased(const CEGUI::EventArgs& e);
@@ -37,6 +39,7 @@ namespace GUI
 		bool repairBuildingReleased(const CEGUI::EventArgs& e);
 		bool clearTerrainReleased(const CEGUI::EventArgs& e);
 		void ClearBuildingConstruction();
+		bool ConsumeResourcesForConstruction();
 
 	public:
 		SideBarUI();
