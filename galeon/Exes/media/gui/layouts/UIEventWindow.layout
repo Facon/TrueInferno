@@ -32,9 +32,11 @@
 			<Property name="Area" value="{{0.45,0},{0.85,0},{0.55,0},{0.95,0}}" />
 			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
-			<Window type="OgreTray/StaticImage" name="Image">
+			<Window type="OgreTray/StaticText" name="ButtonName">
 				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
-				<Property name="Image" value="TrueInfernoIcons/CreateEvilworks" />				
+				<Property name="Text" value="OK" />	
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />				
 				<Property name="AlwaysOnTop" value="True" />	
 			</Window>
 		</Window>

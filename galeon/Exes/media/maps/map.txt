@@ -111,7 +111,7 @@ Map = {
 		crudePerSoul = 4,
 		burnPeriod = 2,
 		maxSoulsPerCycle = 5,
-		mineralCost = 300,
+		mineralCost = 150,
 		gasCost = 100,
 	},
 	
@@ -121,6 +121,7 @@ Map = {
 		orientation = 0,
 		model = "ogrehead.mesh",
 		visible = "true",
+		speed = 1.5,
 	},
 	
 	Mine = {
@@ -144,7 +145,7 @@ Map = {
 		maxWorkers = 5,	
 		extractedResource = "MINERAL",
 		extractionPeriod = 5,
-		maxExtractedQuantity = 5,
+		maxExtractedQuantity = 20,
 		mineralCost = 50,
 		gasCost = 0,
 	},
@@ -170,8 +171,8 @@ Map = {
 		maxWorkers = 5,	
 		extractedResource = "GAS",
 		extractionPeriod = 5,
-		maxExtractedQuantity = 5,
-		mineralCost = 200,
+		maxExtractedQuantity = 20,
+		mineralCost = 100,
 		gasCost = 0,
 	},
 	
@@ -194,8 +195,8 @@ Map = {
 		material = "EvilWorks",
 		minWorkers = 1,
 		maxWorkers = 5,	
-		mineralCost = 1000,
-		gasCost = 500,		
+		mineralCost = 150,
+		gasCost = 75,
 	},
 	
 	Refinery = {
@@ -217,8 +218,8 @@ Map = {
 		material = "Refinery",
 		minWorkers = 1,
 		maxWorkers = 5,
-		mineralCost = 2000,
-		gasCost = 1000,		
+		mineralCost = 150,
+		gasCost = 75,
 	},
 	
 	ResearchLabs = {

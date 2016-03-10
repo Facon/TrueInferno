@@ -6,13 +6,21 @@ namespace Logic
 	class TimeManager
 	{
 	protected:
-		unsigned int _time;
+		long _time;
+
 	public:
 		TimeManager();
 		~TimeManager();
-		unsigned int getTime() const { return _time; }
-		void setTime(const unsigned int time) { _time = time; }
+
+		long getTime() const {
+			return _time; 
+		}
+		//void setTime(const unsigned int time) { _time = time; }
 		void tick(unsigned int msecs);
+
+	private:
+		/** Tiempo (ms) inicial */
+		const unsigned long _maxTime = 2 * 60 * 1000; // 2 minutos
 	};
 }
 

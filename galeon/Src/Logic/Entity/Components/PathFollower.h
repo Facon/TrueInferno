@@ -32,7 +32,7 @@ namespace Logic
 		void addToQueue(const std::vector<Vector3>& path);
 	
 	protected:
-		float _speed = 0.5f;
+		float _speed;
 		unsigned int _startTime;
 		float _journeyLength;
 		bool _moving;
