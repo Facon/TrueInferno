@@ -3,8 +3,8 @@
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Message.h"
 #include "Application/GaleonApplication.h"
-#include "BaseSubsystems/Math.h"
 #include <vector>
+#include "Map/MapEntity.h"
 
 namespace Logic
 {
@@ -15,6 +15,10 @@ namespace Logic
 	{
 		if (!IComponent::spawn(entity, map, entityInfo))
 			return false;
+
+		if (entityInfo->hasAttribute("speed")){
+			_speed = entityInfo->getFloatAttribute("speed");
+		}
 
 		return true;
 	}

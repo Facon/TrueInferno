@@ -121,6 +121,7 @@ Map = {
 		orientation = 0,
 		model = "ogrehead.mesh",
 		visible = "true",
+		speed = 1.5,
 	},
 	
 	Mine = {
