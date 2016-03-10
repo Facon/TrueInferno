@@ -47,7 +47,7 @@ namespace AI
 	@return Estado de la acción tras la ejecución del método;
 	permite indicar si la acción ha terminado o se ha suspendido.
 	*/
-	CLatentAction::LAStatus CLAExecuteSM::OnRun() 
+	CLatentAction::LAStatus CLAExecuteSM::OnRun(unsigned int msecs) 
 	{
 		// TODO PRÁCTICA IA
 		// En cada tick hay que ejecutar la máquina de estado
@@ -65,7 +65,7 @@ namespace AI
 			_currentAction = _stateMachine->getCurrentNode();
 		}
 		if (_currentAction != NULL)
-			_currentAction->tick();
+			_currentAction->tick(msecs);
 		return RUNNING;
 	}
 

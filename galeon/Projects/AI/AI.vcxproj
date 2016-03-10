@@ -85,8 +85,11 @@
     <ClCompile Include="..\..\Src\AI\DisjointSets.cpp" />
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
+    <ClCompile Include="..\..\Src\AI\LABurnSouls.cpp" />
     <ClCompile Include="..\..\Src\AI\LADestroyEntity.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSoulTask.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAExtractResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAGatherSouls.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitAndFollowPath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitTaskAndRequestPath.cpp" />
@@ -99,6 +102,7 @@
     <ClCompile Include="..\..\Src\AI\SimpleLatentActions.cpp" />
     <ClCompile Include="..\..\Src\AI\UndirectedGraph.cpp" />
     <ClCompile Include="..\..\Src\AI\WaypointGraph.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulBurner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\AStarFunctionsWalkingSoul.h" />
@@ -109,8 +113,11 @@
     <ClInclude Include="..\..\Src\AI\DynamicMovement.h" />
     <ClInclude Include="..\..\Src\AI\DynTriMat.h" />
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
+    <ClInclude Include="..\..\Src\AI\LABurnSouls.h" />
     <ClInclude Include="..\..\Src\AI\LADestroyEntity.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSoulTask.h" />
+    <ClInclude Include="..\..\Src\AI\LAExtractResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAGatherSouls.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitAndFollowPath.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />
     <ClInclude Include="..\..\Src\AI\LAFindingPath.h" />
@@ -122,6 +129,10 @@
     <ClInclude Include="..\..\Src\AI\Movement.h" />
     <ClInclude Include="..\..\Src\AI\Server.h" />
     <ClInclude Include="..\..\Src\AI\SimpleLatentActions.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceExtractorData.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceExtractor.h" />
+    <ClInclude Include="..\..\Src\AI\SMSoulBurner.h" />
+    <ClInclude Include="..\..\Src\AI\SMSoulBurnerData.h" />
     <ClInclude Include="..\..\Src\AI\SMHellQuarters.h" />
     <ClInclude Include="..\..\Src\AI\SMPathFinder.h" />
     <ClInclude Include="..\..\Src\AI\SMSoul.h" />
@@ -132,6 +143,7 @@
     <ClInclude Include="..\..\Src\AI\UndirectedGraph.h" />
     <ClInclude Include="..\..\Src\AI\WaypointGraph.h" />
     <ClInclude Include="..\..\Src\AI\WorkSoulTask.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulBurner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

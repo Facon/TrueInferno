@@ -284,6 +284,16 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
+	bool CEntity::HandleMessage(const ResourceMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
+	bool CEntity::HandleMessage(const GetCostPlaceableMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
 	//---------------------------------------------------------
 
 	void CEntity::updateTransformValuesFromMatrix(const Matrix4 &transform)

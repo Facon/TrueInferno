@@ -10,9 +10,6 @@ namespace Logic
 		if (!CStateMachineExecutor::spawn(entity, map, entityInfo))
 			return false;
 
-		//if (entityInfo->hasAttribute("life"))
-		//	_life = entityInfo->getFloatAttribute("life");
-
 		return true;
 
 	} // spawn

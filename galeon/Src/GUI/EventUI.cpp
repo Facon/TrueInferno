@@ -7,8 +7,7 @@
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/Window.h>
 #include <CEGUI/CEGUI.h>
-
-#include <iostream>
+#include <Audio/Server.h>
 
 namespace GUI
 {
@@ -40,6 +39,7 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
 		setEventWindowVisible(false);
 		_uiEventWindow->activate();
+		Audio::CServer::getSingletonPtr()->play();
 	}
 
 	void EventUI::deactivate()

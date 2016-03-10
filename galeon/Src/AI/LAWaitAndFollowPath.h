@@ -17,7 +17,7 @@ namespace AI {
 	protected:
 		LAStatus OnStart();
 
-		LAStatus OnRun();
+		LAStatus OnRun(unsigned int msecs);
 
 	private:
 		CSMSoulData _smData;

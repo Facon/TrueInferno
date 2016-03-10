@@ -289,6 +289,17 @@ namespace GUI
 		}
 	}
 
+	bool checkPlaceableConsumeCost(Logic::CEntity* placeableEntity){
+		if (!placeableEntity){
+			std::cout << "Can't check consume costs on empty placeable" << std::endl;
+			return false;
+		}
+
+		Logic::GetCostPlaceableMessage m(Logic::MessageType::PLACEABLE_CONSUME_COST, placeableEntity);
+
+		return m.Dispatch(*placeableEntity);
+	}
+
 	void SideBarUI::placeBuildingInConstruction()
 	{
 		if (_placeableEntity)
@@ -299,10 +310,17 @@ namespace GUI
 				{
 					case 0:
 					{
-						if (Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableEntity))
-							_placeableEntity = nullptr;		
-						break;
+						_originRoadTile = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
+						if (Logic::CBuildingManager::getSingletonPtr()->checkValidPlaceablePosition(_placeableEntity, _originRoadTile->getLogicPosition()))
+						{
+							if (checkPlaceableConsumeCost(_placeableEntity))
+								Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableEntity);
+							else
+								Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableEntity);
 
+							_placeableEntity = nullptr;
+							break;
+						}
 					}
 					case 1:
 					{
@@ -316,8 +334,12 @@ namespace GUI
 					case 2:
 					{
 						for (int i = 0; i < _placeableRoadSize; ++i)
-							Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableRoad[i]);
-
+						{
+							if (checkPlaceableConsumeCost(_placeableRoad[i]))
+								Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableRoad[i]);
+							else
+								Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableRoad[i]);
+						}
 						free(_placeableRoad);
 						_placeableRoad = nullptr;
 						_placeableEntity = nullptr;

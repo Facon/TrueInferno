@@ -115,7 +115,7 @@ namespace AI
 		la función Tick() cíclicamente o si, aún sin haber terminado,
 		no necesita (de momento) la invocación a Tick().
 		*/
-		LAStatus tick();
+		LAStatus tick(unsigned int msecs);
 		/**
 		Cancela la tarea que se está ejecutando; se entiende que este
 		método es llamado cuando el comportamiento al que pertenece
@@ -192,7 +192,7 @@ namespace AI
 		permite indicar si la acción ha terminado o se ha suspendido,
 		o si sigue en ejecución.
 		*/
-		virtual LAStatus OnRun() { return SUCCESS;}
+		virtual LAStatus OnRun(unsigned int msecs) { return SUCCESS; }
 
 		/**
 		Método invocado cuando la acción ha sido cancelada (el comportamiento

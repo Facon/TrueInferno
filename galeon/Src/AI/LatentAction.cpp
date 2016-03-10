@@ -10,7 +10,7 @@ namespace AI
 	la función Tick() cíclicamente o si, aún sin haber terminado,
 	no necesita (de momento) la invocación a Tick().
 	*/
-	CLatentAction::LAStatus CLatentAction::tick() 
+	CLatentAction::LAStatus CLatentAction::tick(unsigned int msecs)
 	{
 
 		// ¿Hay que empezar la tarea?
@@ -21,7 +21,7 @@ namespace AI
 		// Llamamos al Tick, si el OnStart no terminó
 		// con la ejecución
 		if ((_status == RUNNING)) {
-			_status = this->OnRun();
+			_status = this->OnRun(msecs);
 			// Si hemos pasado de RUNNING a un estado de finalización (SUCCESS o FAIL) 
 			// aún tenemos que parar
 			if (_status == SUCCESS || _status == FAIL)

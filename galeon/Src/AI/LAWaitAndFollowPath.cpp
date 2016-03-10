@@ -30,7 +30,7 @@ namespace AI {
 		return LAStatus::SUSPENDED;
 	}
 
-	CLatentAction::LAStatus CLAWaitAndFollowPath::OnRun() {
+	CLatentAction::LAStatus CLAWaitAndFollowPath::OnRun(unsigned int msecs) {
 		// Fallamos si no hay ruta
 		if (_smData.getPath() == nullptr)
 			return LAStatus::FAIL;

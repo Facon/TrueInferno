@@ -16,6 +16,7 @@ Contiene el tipo de datos de un mensaje.
 #include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
 #include "AI/SoulTask.h"
+#include "Logic/ResourcesManager.h"
 
 // Predeclaraciones
 namespace Logic {
@@ -61,6 +62,7 @@ namespace Logic
 			PLACEABLE_FLOAT_TO,
 			PLACEABLE_PLACE,
 			PLACEABLE_CHECKPOSITION,
+			PLACEABLE_CONSUME_COST,
 			HELLQUARTERS_REQUEST,
 			HELLQUARTERS_RESPONSE,
 			SOUL_SENDER_REQUEST,
@@ -68,6 +70,7 @@ namespace Logic
 			SOUL_REQUEST,
 			SOUL_RESPONSE,
 			FURNACE_BURN_SOULS,
+			RESOURCES_CHANGE,
 		};
 	}
 
@@ -331,13 +334,12 @@ namespace Logic
 		}
 	};
 
-	/** Mensaje con la cantidad de trabajadores a añadir (numWorkers > 0) o quitar (numWorkers < 0) */
-	class WorkerMessage : public Message
+	class GetCostPlaceableMessage : public Message
 	{
 	public:
-		WorkerMessage(int numWorkers) : Message(MessageType::UNASSIGNED), _numWorkers(numWorkers) {}
+		GetCostPlaceableMessage(MessageType type, CEntity* entity) : Message(type), _entity(entity) {}
 
-		int _numWorkers;
+		CEntity* _entity;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -345,13 +347,13 @@ namespace Logic
 		}
 	};
 
-	/** Mensaje para enviar números enteros: FURNACE_BURN_SOULS */
-	class NumberMessage : public Message
+	/** Mensaje con la cantidad de trabajadores a añadir (numWorkers > 0) o quitar (numWorkers < 0) */
+	class WorkerMessage : public Message
 	{
 	public:
-		NumberMessage(MessageType type, int number) : Message(type), _number(number) {}
+		WorkerMessage(int numWorkers) : Message(MessageType::UNASSIGNED), _numWorkers(numWorkers) {}
 
-		int _number;
+		int _numWorkers;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -429,6 +431,35 @@ namespace Logic
 
 		//std::unique_ptr<AI::CSoulTask> _task;
 		AI::CSoulTask* _task;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	/** Mensaje para enviar números enteros: FURNACE_BURN_SOULS */
+	class NumberMessage : public Message
+	{
+	public:
+		NumberMessage(MessageType type, int number) : Message(type), _number(number) {}
+
+		int _number;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	/** Mensajes relativos a los recursos: RESOURCES_CHANGE */
+	class ResourceMessage : public Message
+	{
+	public:
+		ResourceMessage(const Logic::ResourceType& resourceType, int number) : Message(MessageType::RESOURCES_CHANGE), _resourceType(resourceType), _number(number) {}
+
+		Logic::ResourceType _resourceType;
+		int _number;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

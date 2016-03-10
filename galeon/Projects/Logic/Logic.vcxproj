@@ -87,6 +87,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\CameraController.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\DamageTrigger.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Furnace.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\HellQuarters.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Life.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFinder.cpp" />
@@ -94,7 +95,9 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PhysicController.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PhysicEntity.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Placeable.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\RayPerception.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Soul.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulSender.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Sound.cpp" />
@@ -129,6 +132,7 @@
     <ClInclude Include="..\..\Src\Logic\BuildingManager.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\CameraController.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Furnace.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\HellQuarters.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFinder.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFollower.h" />
@@ -138,7 +142,9 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PhysicController.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PhysicEntity.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Placeable.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\RayPerception.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Soul.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulSender.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Sound.h" />

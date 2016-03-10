@@ -36,7 +36,7 @@ namespace AI {
 			return LAStatus::SUSPENDED;
 		}
 
-		virtual LAStatus OnRun() {
+		virtual LAStatus OnRun(unsigned int msecs) {
 			// Si no ha llegado petición, fallamos
 			if (!_pathRequestReceived)
 				return LAStatus::FAIL;

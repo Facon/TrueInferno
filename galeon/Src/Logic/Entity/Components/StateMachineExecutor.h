@@ -38,8 +38,7 @@ namespace Logic
 
 		/**
 		Inicialización del componente, utilizando la información extraída de
-		la entidad leída del mapa (Maps::CEntity). Toma del mapa el atributo
-		behavior, que indica el nombre de la máquina de estado a ejecutar.
+		la entidad leída del mapa (Maps::CEntity).
 
 		@param entity Entidad a la que pertenece el componente.
 		@param map Mapa Lógico en el que se registrará el objeto.
@@ -52,10 +51,12 @@ namespace Logic
 			if (!IComponent::spawn(entity, map, entityInfo))
 				return false;
 
-			// Creamos la instancia de máquina de estados. El método estará implementado en la clase hija
+			// Creamos la instancia de la máquina de estados
 			_currentStateMachine = getStateMachine();
+			assert(_currentStateMachine && "StateMachine created");
 
-			return true;
+			// La spawneamos con los atributos que necesite
+			return _currentStateMachine->spawn(entity, map, entityInfo);
 		}
 
 		/**
@@ -93,7 +94,7 @@ namespace Logic
 			}
 			// 2. Ejecutar la acción latente correspondiente al estado actual
 			if (_currentAction != NULL) {
-				_currentAction->tick();
+				_currentAction->tick(msecs);
 			}
 		}
 			
@@ -133,6 +134,15 @@ namespace Logic
 			return false;
 		}
 
+		bool HandleMessage(const NumberMessage& msg)
+		{
+			if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
+				return true;
+			if (_currentAction != NULL)
+				return _currentAction->HandleMessage(msg);
+			return false;
+		}
+
 	protected:
 		/**
 		Almacena la máquina de estado que se está ejecutando
@@ -144,8 +154,11 @@ namespace Logic
 		*/
 		AI::CLatentAction* _currentAction;
 
-		/** Instancia la máquina de estados. Debe ser implementado por la clase hija */
+		/** Instancia la máquina de estados. Debe ser implementado por la subclase */
 		virtual AI::CStateMachine<AI::CLatentAction, SharedData>* getStateMachine() = 0;
+
+		/** Inicializa los datos compartidos por la SM. Debe ser implementado por la subclase */
+		//virtual SharedData* getStateMachine() = 0;
 
 	}; // class CStateMachineExecutor 
 

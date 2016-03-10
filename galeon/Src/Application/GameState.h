@@ -177,8 +177,9 @@ namespace Application
 		*/
 		virtual bool mouseReleased(const GUI::CMouseState &mouseState);
 
-		Logic::ResourcesManager& getResourcesManager() { return _resourcesManager; }
-		Logic::HFManager& getHFManager() { return _hfManager; }
+		Logic::ResourcesManager* getResourcesManager() { return &_resourcesManager; }
+		Logic::HFManager* getHFManager() { return &_hfManager; }
+		Logic::TimeManager* getTimeManager() { return &_timeManager; }
 		GUI::UIManager* getUIManager() { return &_uiManager; }
 
 	protected:

@@ -23,7 +23,7 @@ using namespace Logic;
 namespace AI 
 {
 	/**
-	Esta acción espera durante un periodo de tiempo (s) indicado en el constructor.
+	Esta acción espera durante un periodo de tiempo (ms) indicado en el constructor.
 	*/
 	class CLAWait : public CLatentAction
 	{
@@ -79,7 +79,7 @@ namespace AI
 		@return Estado de la acción tras la ejecución del método;
 		permite indicar si la acción ha terminado o se ha suspendido.
 		*/
-		virtual LAStatus OnRun() ;
+		virtual LAStatus OnRun(unsigned int msecs) ;
 
 		/**
 		Método invocado cuando la acción ha sido cancelada (el comportamiento

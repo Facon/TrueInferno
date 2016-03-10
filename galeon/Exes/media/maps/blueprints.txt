@@ -5,10 +5,10 @@ Tile CGraphics CPhysicEntity Tile
 SoulPath CGraphics CPhysicEntity CPlaceable
 HellQuarters CGraphics CPhysicEntity CPlaceable CHellQuarters CSoulSender
 Evilator CGraphics CPhysicEntity CPlaceable CWorkBuilding
-Furnace CGraphics CPhysicEntity CPlaceable CWorkBuilding
+Furnace CGraphics CPhysicEntity CPlaceable CWorkBuilding CFurnace CSoulBurner
 Soul CGraphics PathFollower CPathFinder CSoul
-Mine CGraphics CPhysicEntity CPlaceable CWorkBuilding
-GasPlant CGraphics CPhysicEntity CPlaceable CWorkBuilding
+Mine CGraphics CPhysicEntity CPlaceable CWorkBuilding CResourceBuilding CResourceExtractor
+GasPlant CGraphics CPhysicEntity CPlaceable CWorkBuilding CResourceBuilding CResourceExtractor
 EvilWorks CGraphics CPhysicEntity CPlaceable CWorkBuilding
 Refinery CGraphics CPhysicEntity CPlaceable CWorkBuilding
 ResearchLabs CGraphics CPhysicEntity CPlaceable CWorkBuilding

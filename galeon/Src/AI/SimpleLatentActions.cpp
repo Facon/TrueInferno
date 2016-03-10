@@ -21,7 +21,7 @@ namespace AI
 	tiempo en el que terminará la acción mediante el atributo _time
 
 	@return Estado de la función; si se indica que la
-	acción a terminado (LatentAction::Completed), se invocará
+	acción ha terminado (LatentAction::Completed), se invocará
 	al OnStop().
 	*/
 	CLatentAction::LAStatus CLAWait::OnStart()
@@ -64,7 +64,7 @@ namespace AI
 	@return Estado de la acción tras la ejecución del método;
 	permite indicar si la acción ha terminado o se ha suspendido.
 	*/
-	CLatentAction::LAStatus CLAWait::OnRun() 
+	CLatentAction::LAStatus CLAWait::OnRun(unsigned int msecs) 
 	{
 		// TODO PRÁCTICA IA
 		// En cada paso de ejecución tendremos que comprobar si hemos

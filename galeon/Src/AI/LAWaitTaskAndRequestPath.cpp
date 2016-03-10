@@ -25,7 +25,7 @@ namespace AI {
 		return LAStatus::SUSPENDED;
 	}
 
-	CLatentAction::LAStatus CLAWaitTaskAndRequestPath::OnRun() {
+	CLatentAction::LAStatus CLAWaitTaskAndRequestPath::OnRun(unsigned int msecs) {
 		// Fallamos si no hay tarea
 		if (_smData.getTask() == nullptr)
 			return LAStatus::FAIL;

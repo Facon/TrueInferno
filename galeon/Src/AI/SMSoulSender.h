@@ -28,6 +28,10 @@ namespace AI {
 
 		virtual ~CSMSoulSender() {}
 
+		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+			return true;
+		}
+
 		bool HandleMessage(const SoulSenderMessage& msg){
 			bool ret = false;
 

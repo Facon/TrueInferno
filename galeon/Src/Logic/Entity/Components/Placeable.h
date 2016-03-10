@@ -84,6 +84,8 @@ namespace Logic {
 
 		virtual bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
 
+		virtual bool HandleMessage(const GetCostPlaceableMessage& msg);
+
 	private:
 		/** Altura añadida a la posición del Placeable para que parezca que está justo encima */
 		const float HEIGHT_ON_TILE = 1.0f;
@@ -96,6 +98,10 @@ namespace Logic {
 
 		/** Flag set to true when logic position has changed */
 		//bool _logicPositionChanged;
+
+		//costes de fabricación del placeable
+		int _gasCost = 0;
+		int _mineralCost = 0;
 
 		/** Floor's x size */
 		int _floorX;
@@ -132,6 +138,9 @@ namespace Logic {
 
 		/** Procesa peticiones pendientes de cálculo de rutas */
 		void processWalkingSoulPathRequest();
+
+		//consume los recursos de un edificio a placear
+		bool CPlaceable::ConsumeResourcesForConstruction();
 
 	protected:
 		/** Parsea un enum PlaceableType a partir del nombre en texto
