@@ -124,6 +124,8 @@ namespace Logic
 		// Devuelve un edificio aleatorio
 		CPlaceable* getRandomBuilding();
 
+		CPlaceable* getRandomBuildingForWork();
+
 		//Destruye un edificio aleatorio
 		bool DestroyRandomBuilding();
 
