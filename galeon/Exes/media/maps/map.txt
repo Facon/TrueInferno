@@ -195,7 +195,7 @@ Map = {
 		minWorkers = 1,
 		maxWorkers = 5,	
 		mineralCost = 1000,
-		gasCost = 500,		
+		gasCost = 500,
 	},
 	
 	Refinery = {

@@ -157,6 +157,8 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Logistics.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptySMComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -295,6 +297,12 @@
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Logistics.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptySMComponent.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

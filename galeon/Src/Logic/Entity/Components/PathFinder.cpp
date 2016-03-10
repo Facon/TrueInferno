@@ -2,7 +2,6 @@
 
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Entity.h"
-#include <iostream>
 
 namespace Logic {
 	RTTI_ROOT_IMPL(CPathFinder);

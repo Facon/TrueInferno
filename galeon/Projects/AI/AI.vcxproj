@@ -92,6 +92,7 @@
     <ClCompile Include="..\..\Src\AI\LAGatherSouls.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitAndFollowPath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAWaitLogisticsRequest.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitTaskAndRequestPath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAGetTaskAndTarget.cpp" />
     <ClCompile Include="..\..\Src\AI\LASendSoul.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="..\..\Src\AI\LAWaitAndFollowPath.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />
     <ClInclude Include="..\..\Src\AI\LAFindingPath.h" />
+    <ClInclude Include="..\..\Src\AI\LAWaitLogisticsRequest.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitTaskAndRequestPath.h" />
     <ClInclude Include="..\..\Src\AI\LAGetTaskAndTarget.h" />
     <ClInclude Include="..\..\Src\AI\LASendSoul.h" />
@@ -129,6 +131,8 @@
     <ClInclude Include="..\..\Src\AI\Movement.h" />
     <ClInclude Include="..\..\Src\AI\Server.h" />
     <ClInclude Include="..\..\Src\AI\SimpleLatentActions.h" />
+    <ClInclude Include="..\..\Src\AI\SMLogistics.h" />
+    <ClInclude Include="..\..\Src\AI\SMLogisticsData.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceExtractorData.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceExtractor.h" />
     <ClInclude Include="..\..\Src\AI\SMSoulBurner.h" />

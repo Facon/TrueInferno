@@ -71,6 +71,7 @@ namespace Logic
 			SOUL_RESPONSE,
 			FURNACE_BURN_SOULS,
 			RESOURCES_CHANGE,
+			LOGISTICS_REQUEST,
 		};
 	}
 
@@ -456,9 +457,9 @@ namespace Logic
 	class ResourceMessage : public Message
 	{
 	public:
-		ResourceMessage(const Logic::ResourceType& resourceType, int number) : Message(MessageType::RESOURCES_CHANGE), _resourceType(resourceType), _number(number) {}
+		ResourceMessage(const ResourceType& resourceType, int number) : Message(MessageType::RESOURCES_CHANGE), _resourceType(resourceType), _number(number) {}
 
-		Logic::ResourceType _resourceType;
+		ResourceType _resourceType;
 		int _number;
 
 		virtual bool Dispatch(MessageHandler& handler) const
@@ -466,6 +467,41 @@ namespace Logic
 			return handler.HandleMessage(*this);
 		}
 	};
+
+	enum LogisticsAction {
+		NEED_RESOURCES,
+		BRING_RESOURCES,
+	};
+
+	class LogisticsMessage : public Message
+	{
+	public:
+		// NEED_RESOURCES
+		LogisticsMessage(ResourceType type, unsigned int quantity) : 
+			Message(MessageType::LOGISTICS_REQUEST), 
+			_action(LogisticsAction::NEED_RESOURCES), 
+			_type(type), 
+			_quantity(quantity) {}
+
+		// BRING_RESOURCES
+		LogisticsMessage(ResourceType type, unsigned int quantity, std::string target) :
+			Message(MessageType::LOGISTICS_REQUEST),
+			_action(LogisticsAction::NEED_RESOURCES),
+			_type(type),
+			_quantity(quantity),
+			_target(target) {}
+
+		LogisticsAction _action;
+		ResourceType _type;
+		unsigned int _quantity;
+		std::string _target;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
 
 	/*
 	GameObject* receiver_object = blah;

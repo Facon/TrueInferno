@@ -4,13 +4,13 @@ Camera CCamera CameraController
 Tile CGraphics CPhysicEntity Tile
 SoulPath CGraphics CPhysicEntity CPlaceable
 HellQuarters CGraphics CPhysicEntity CPlaceable CHellQuarters CSoulSender
-Evilator CGraphics CPhysicEntity CPlaceable CWorkBuilding
-Furnace CGraphics CPhysicEntity CPlaceable CWorkBuilding CFurnace CSoulBurner
+Evilator CGraphics CPhysicEntity CPlaceable CWorkBuilding CLogistics CSoulSender
+Furnace CGraphics CPhysicEntity CPlaceable CWorkBuilding CFurnace CSoulBurner CLogistics
 Soul CGraphics PathFollower CPathFinder CSoul
-Mine CGraphics CPhysicEntity CPlaceable CWorkBuilding CResourceBuilding CResourceExtractor
-GasPlant CGraphics CPhysicEntity CPlaceable CWorkBuilding CResourceBuilding CResourceExtractor
-EvilWorks CGraphics CPhysicEntity CPlaceable CWorkBuilding
-Refinery CGraphics CPhysicEntity CPlaceable CWorkBuilding
-ResearchLabs CGraphics CPhysicEntity CPlaceable CWorkBuilding
-PowerGenerator CGraphics CPhysicEntity CPlaceable CWorkBuilding
-Warehouse CGraphics CPhysicEntity CPlaceable CWorkBuilding
+Mine CGraphics CPhysicEntity CPlaceable CWorkBuilding CResourceBuilding CResourceExtractor CLogistics
+GasPlant CGraphics CPhysicEntity CPlaceable CWorkBuilding CResourceBuilding CResourceExtractor CLogistics
+EvilWorks CGraphics CPhysicEntity CPlaceable CWorkBuilding CEvilWorks CLogistics CSoulSender
+Refinery CGraphics CPhysicEntity CPlaceable CWorkBuilding CLogistics CSoulSender
+ResearchLabs CGraphics CPhysicEntity CPlaceable CWorkBuilding CLogistics
+PowerGenerator CGraphics CPhysicEntity CPlaceable CWorkBuilding CLogistics CSoulSender
+Warehouse CGraphics CPhysicEntity CPlaceable CWorkBuilding CLogistics CSoulSender
