@@ -165,6 +165,11 @@ namespace Logic {
 			_conditionEvents[tutorialEvent->getConditionEventType()].push_back(tutorialEvent);
 			return true;
 		}
+		else {
+			CEndGameEvent *endGameEvent = dynamic_cast<CEndGameEvent*>(ev);
+			_conditionEvents[endGameEvent->getConditionEventType()].push_back(endGameEvent);
+			return true;
+		}
 
 		return false;
 
@@ -182,11 +187,16 @@ namespace Logic {
 			eventsList.pop_front();
 			_conditionEvents[conditionEventType] = eventsList;
 
+			// @TODO Implementar para usar con cualquier tipo de evento lanzado por condición.
 			CTutorialEvent *tutorialEvent = dynamic_cast<CTutorialEvent*>(conditionEvent);
 			bool launched = false;
 
 			if (tutorialEvent) {
 				launched = tutorialEvent->launch();
+			}
+			else {
+				CEndGameEvent *endGameEvent = dynamic_cast<CEndGameEvent*>(conditionEvent);
+				launched = endGameEvent->launch();
 			}
 
 			return launched;
