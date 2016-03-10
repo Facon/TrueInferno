@@ -8,6 +8,8 @@
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
 
+#include "Logic/Events/EventManager.h"
+#include "Logic/Events/ConditionEvents.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
@@ -315,12 +317,20 @@ namespace GUI
 					{
 						for (int i = 0; i < _placeableRoadSize; ++i)
 							Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableRoad[i]);
+
 						free(_placeableRoad);
 						_placeableRoad = nullptr;
 						_placeableEntity = nullptr;
 						_roadInConstruction = 0;
 						_placeableRoadSize = 0;
 						_originRoadTile = nullptr;
+
+						// @TODO Hacer esto bien...
+						if (_firstRoad) {
+							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+							_firstRoad = false;
+						}
+
 						break;
 					}
 				}

@@ -133,6 +133,9 @@ namespace Logic {
 		/** Procesa peticiones pendientes de cálculo de rutas */
 		void processWalkingSoulPathRequest();
 
+		/** Flag para comprobar si debe o no lanzar el evento del tutorial asociado a esta condición */
+		bool _firstBuilding = true;
+
 	protected:
 		/** Parsea un enum PlaceableType a partir del nombre en texto
 		TODO Mover junto al código del enum */

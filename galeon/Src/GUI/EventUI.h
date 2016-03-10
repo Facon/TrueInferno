@@ -14,6 +14,9 @@ namespace GUI
 	class EventUI
 	{
 	protected:
+		bool firstTick = true;
+		bool firstEventReleased = true;
+
 		CEGUI::Window* _uiEventWindow;
 		bool EventUI::AcceptEventReleased(const CEGUI::EventArgs& e);
 
@@ -27,8 +30,9 @@ namespace GUI
 		void tick(unsigned int msecs);
 		void setEventImage(std::string eventImage);
 		void setEventText(std::string eventText);
-		void setEventTitle(std::string EventTextResume);
+		void setEventTitle(std::string EventTitle);
 		void setEventTextResume(std::string EventTextResume);
+		void setEventWindowVisible(bool visible);
 	};
 }
 

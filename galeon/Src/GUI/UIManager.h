@@ -32,6 +32,7 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
+		EventUI *getEventUI(){ return &_eventUI; };
 		SideBarUI *getSideBarUI(){ return &_sideBarUI; };
 	};
 }

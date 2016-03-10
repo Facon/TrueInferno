@@ -23,6 +23,7 @@ namespace Logic
 namespace GUI 
 {
 	class CPlayerController;
+	class UIManager;
 }
 
 namespace CEGUI
@@ -78,6 +79,8 @@ namespace GUI
 		@return Instancia de la clase GUI que controla al jugador.
 		*/
 		CPlayerController *getPlayerController() {return _playerController;}
+
+		UIManager* getUIManager();
 
 		/***************************************************************
 		Métodos de CKeyboardListener

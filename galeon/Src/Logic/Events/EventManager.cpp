@@ -113,14 +113,16 @@ namespace Logic {
 
 		// @TODO Borrar cuando se carguen desde LUA!
 		// Time events
-		addTimeEvent(new CBuildingDestructionEvent(40 * 1000));
-		addTimeEvent(new CBuildingDestructionEvent(75 * 1000));
+		addTimeEvent(new CBuildingDestructionEvent(70 * 1000));
 		addTimeEvent(new CBuildingDestructionEvent(110 * 1000));
 
 		// Condition events
-		addConditionEvent(new CTutorialEvent(0));
 		addConditionEvent(new CTutorialEvent(1));
 		addConditionEvent(new CTutorialEvent(2));
+		addConditionEvent(new CTutorialEvent(3));
+		addConditionEvent(new CTutorialEvent(4));
+		addConditionEvent(new CTutorialEvent(5));
+		addConditionEvent(new CTutorialEvent(9));
 
 		return true;
 
@@ -177,6 +179,7 @@ namespace Logic {
 		{
 			CEvent* conditionEvent = eventsList.front();
 			eventsList.pop_front();
+			_conditionEvents[conditionEventType] = eventsList;
 
 			CTutorialEvent *tutorialEvent = dynamic_cast<CTutorialEvent*>(conditionEvent);
 			bool launched = false;

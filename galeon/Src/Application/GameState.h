@@ -179,7 +179,7 @@ namespace Application
 
 		Logic::ResourcesManager& getResourcesManager() { return _resourcesManager; }
 		Logic::HFManager& getHFManager() { return _hfManager; }
-		Logic::TimeManager& getTimeManager() { return _timeManager; }
+		GUI::UIManager* getUIManager() { return &_uiManager; }
 
 	protected:
 

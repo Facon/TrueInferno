@@ -15,14 +15,29 @@ un edificio de forma aleatoria.
 */
 
 #include "BuildingDestructionEvent.h"
+
+#include "GUI/Server.h"
+#include "GUI/UIManager.h"
+#include "GUI/EventUI.h"
+
 #include "Logic/BuildingManager.h"
 
 namespace Logic {
 
 	void CBuildingDestructionEvent::execute()
 	{
-		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding();
-		// @TODO Mostrar panel de destrucción de edificio
+		bool buildingDestroyed = Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding();
+
+		// Mostrar panel de destrucción de edificio
+		// @TODO Hacer esto bien...
+		if (buildingDestroyed) {
+			GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+			uiManager->getEventUI()->setEventImage("EventBuildingDestruction");
+			uiManager->getEventUI()->setEventTitle("Building Destruction");
+			uiManager->getEventUI()->setEventText("A building has been destroyed!");
+			uiManager->getEventUI()->setEventTextResume("");
+			uiManager->getEventUI()->setEventWindowVisible(true);
+		}
 
 	} // execute
 	

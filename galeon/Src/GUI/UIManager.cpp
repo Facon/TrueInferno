@@ -24,7 +24,6 @@ namespace GUI
 		_topBarUI.init();
 		_sideBarUI.init();
 		_eventUI.init();
-
 	}
 
 	void UIManager::release()
