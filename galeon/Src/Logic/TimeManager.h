@@ -20,7 +20,7 @@ namespace Logic
 
 	private:
 		/** Tiempo (ms) inicial */
-		const unsigned long _maxTime = 10 * 1000; // 2 minutos
+		const unsigned long _maxTime = 2 * 60 * 1000; // 2 minutos
 	};
 }
 
