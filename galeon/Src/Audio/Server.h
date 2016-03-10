@@ -4,6 +4,7 @@
 namespace FMOD
 {
 	class System;
+	class Channel;
 }
 
 namespace Audio
@@ -17,6 +18,7 @@ namespace Audio
 		static bool Init();
 		static void Release();
 
+		void play();
 		void tick(unsigned int secs);
 
 	protected:
@@ -27,6 +29,7 @@ namespace Audio
 
 		static CServer _instance;
 		static FMOD::System* _system;
+		static FMOD::Channel* _channel;
 	};
 }
 

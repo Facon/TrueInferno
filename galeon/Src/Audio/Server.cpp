@@ -5,7 +5,9 @@
 
 namespace Audio
 {
+	CServer CServer::_instance;
 	FMOD::System* CServer::_system = nullptr;
+	FMOD::Channel* CServer::_channel = nullptr;
 
 	CServer::CServer()
 	{}
@@ -26,19 +28,19 @@ namespace Audio
 		assert(!result);
 
 		FMOD::Sound* sound;
-		result = _system->createStream("media/sounds/hades.ogg", FMOD_DEFAULT, nullptr, &sound);
+		result = _system->createStream("media/sounds/audio_hito_3_suave.ogg", FMOD_DEFAULT, nullptr, &sound);
 
 		assert(!result);
 
-		FMOD::Channel* channel = nullptr;
+		//FMOD::Channel* channel = nullptr;
 
-		result = _system->playSound(sound, 0, false, &channel);
+		result = _system->playSound(sound, 0, true, &(CServer::_channel));
 
 		assert(!result);
 
 		float volume = 1.0f;
 		// valor entre 0 y 1
-		channel->setVolume(volume);
+		_channel->setVolume(volume);
 
 		return true;
 	}
@@ -47,6 +49,16 @@ namespace Audio
 	{
 		_system->release();
 		_system->close();
+	}
+
+	void CServer::play()
+	{
+		FMOD_RESULT result;
+
+		result = _channel->setPaused(false);
+
+		assert(!result);
+		_system->update();
 	}
 
 	void CServer::tick(unsigned int secs)

@@ -151,12 +151,18 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Furnace.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Sound.cpp">
       <Filter>Entity\Components\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Furnace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
