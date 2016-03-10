@@ -18,6 +18,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "EventManager.h"
 #include "BuildingDestructionEvent.h"
 #include "TutorialEvent.h"
+#include "EndGameEvent.h"
 
 #include "BaseSubsystems/ScriptManager.h"
 
@@ -122,7 +123,7 @@ namespace Logic {
 		addConditionEvent(new CTutorialEvent(3));
 		addConditionEvent(new CTutorialEvent(4));
 		addConditionEvent(new CTutorialEvent(5));
-		addConditionEvent(new CTutorialEvent(9));
+		addConditionEvent(new CEndGameEvent(true));
 
 		return true;
 

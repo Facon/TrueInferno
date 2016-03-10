@@ -41,7 +41,10 @@ namespace Logic
 	{
 		// Eventos disparados como parte del tutorial para guiar al
 		// jugador durante los primeros instantes de la partida.
-		TUTORIAL
+		TUTORIAL,
+		// Evento disparado al final de la partida para mostrar el
+		// resultado de la misma y la puntuación final.
+		END_GAME
 	};
 
 } // namespace Logic

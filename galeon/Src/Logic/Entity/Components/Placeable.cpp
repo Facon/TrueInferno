@@ -144,9 +144,8 @@ namespace Logic {
 
 		// Eventos del tutorial
 		// @TODO Hacer bien...
-		if (_firstBuilding && isBuilding()) {
+		if (isBuilding()) {
 			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
-			_firstBuilding = false;
 		}
 
 		return true;

@@ -8,6 +8,8 @@
 #include <CEGUI/Window.h>
 #include <CEGUI/CEGUI.h>
 
+#include <iostream>
+
 namespace GUI
 {
 	EventUI::EventUI()
@@ -61,10 +63,11 @@ namespace GUI
 		_uiEventWindow->setVisible(false);
 
 		// @TODO Hacer esto bien...
-		if (firstEventReleased)
-		{
+		if (firstEventReleased)	{
 			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
 			firstEventReleased = false;
+		} else if (_uiEventWindow->getChild("EventImage")->getProperty("Image") == "TrueInfernoEvents/EventTutorial4") {
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
 		}
 
 		return true;

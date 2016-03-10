@@ -243,6 +243,12 @@ namespace Logic {
 		return m.Dispatch(*placeableEntity);
 	}
 
+
+	int CBuildingManager::getBuildingTypeNumber(BuildingType buildingType){
+		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
+		return (buildingsFromType == nullptr) ? 0 : buildingsFromType->size();
+	}
+
 	CPlaceable* CBuildingManager::findBuilding(BuildingType buildingType){
 		// Obtenemos el conjunto de edificios para el tipo
 		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
