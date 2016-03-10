@@ -4,6 +4,7 @@
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/Window.h>
 #include <CEGUI/CEGUI.h>
+#include <Audio/Server.h>
 
 namespace GUI
 {
@@ -39,6 +40,7 @@ namespace GUI
 		setEventTextResume("ASSIERTION HAS FAILED");
 		_uiEventWindow->setVisible(true);
 		_uiEventWindow->activate();
+		Audio::CServer::getSingletonPtr()->play();
 	}
 
 	void EventUI::deactivate()
