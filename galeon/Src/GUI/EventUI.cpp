@@ -1,5 +1,8 @@
 #include "EventUI.h"
 
+#include "Logic/Events/EventManager.h"
+#include "Logic/Events/ConditionEvents.h"
+
 #include <CEGUI/System.h>
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/Window.h>
@@ -34,11 +37,7 @@ namespace GUI
 	{
 		// Activamos la interfaz de usuario
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
-		setEventImage("EventTutorial1");
-		setEventTitle("Welcome to HELL !!!");
-		setEventText("maldito CEGUI debe morir esto es un puto asco lololol assier arreglame el master");
-		setEventTextResume("ASSIERTION HAS FAILED");
-		_uiEventWindow->setVisible(true);
+		setEventWindowVisible(false);
 		_uiEventWindow->activate();
 		Audio::CServer::getSingletonPtr()->play();
 	}
@@ -52,13 +51,25 @@ namespace GUI
 
 	void EventUI::tick(unsigned int msecs)
 	{
-		
+		if (firstTick) {
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+			firstTick = false;
+		}		
 	}
 
 	bool EventUI::AcceptEventReleased(const CEGUI::EventArgs& e)
 	{
-		printf("evento aceptado\n");
+		// Al pulsar el botón OK simplemente se oculta la ventana.
 		_uiEventWindow->setVisible(false);
+
+		// @TODO Hacer esto bien...
+		if (firstEventReleased)	{
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+			firstEventReleased = false;
+		} else if (_uiEventWindow->getChild("EventImage")->getProperty("Image") == "TrueInfernoEvents/EventTutorial4") {
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+		}
+
 		return true;
 	}
 
@@ -80,6 +91,11 @@ namespace GUI
 	void EventUI::setEventTextResume(std::string EventTextResume)
 	{
 		_uiEventWindow->getChild("EventTextResume")->setText(EventTextResume);
+	}
+
+	void EventUI::setEventWindowVisible(bool visible)
+	{
+		_uiEventWindow->setVisible(visible);
 	}
 	
 }

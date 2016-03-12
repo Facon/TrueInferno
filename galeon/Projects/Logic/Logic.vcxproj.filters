@@ -44,6 +44,15 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{9a68b189-ac40-4452-ba8c-91831b00fb7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{216c283c-a8b2-404f-b446-6325d735dd73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Header Files">
+      <UniqueIdentifier>{4b346ce5-a721-4de0-bdb6-fe41c03b2534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Source Files">
+      <UniqueIdentifier>{da242379-3a6c-45aa-b90e-5716c28e3edf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp">
@@ -142,6 +151,15 @@
     <ClCompile Include="..\..\Src\Logic\BuildingManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\EventManager.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\Event.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\BuildingDestructionEvent.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -153,6 +171,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Sound.cpp">
       <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\TutorialEvent.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\EndGameEvent.cpp">
+      <Filter>Events\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Furnace.cpp">
       <Filter>Source Files</Filter>
@@ -282,6 +306,15 @@
     <ClInclude Include="..\..\Src\Logic\BuildingManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\EventManager.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\Event.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\BuildingDestructionEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
@@ -294,6 +327,15 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Sound.h">
       <Filter>Entity\Components\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\ConditionEvents.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\EndGameEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClCompile>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Furnace.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>

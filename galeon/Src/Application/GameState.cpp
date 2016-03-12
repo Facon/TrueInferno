@@ -17,6 +17,7 @@ Contiene la implementación del estado de juego.
 #include "GameState.h"
 
 #include "Logic/Server.h"
+#include "Logic/Events/EventManager.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Maps/Map.h"
 
@@ -33,20 +34,23 @@ Contiene la implementación del estado de juego.
 
 namespace Application {
 
-	bool CGameState::init() 
+	bool CGameState::init()
 	{
 		CApplicationState::init();
 
 		// Crear la escena física.
-		//Physics::CServer::getSingletonPtr()->setGroupCollisions(0,1,false);
 		Physics::CServer::getSingletonPtr()->createScene();
 
 		// Cargamos el archivo con las definiciones de las entidades del nivel.
 		if (!Logic::CEntityFactory::getSingletonPtr()->loadBluePrints("blueprints.txt"))
 			return false;
 
-		// Cargamos el nivel a partir del nombre del mapa. 
+		// Cargamos el nivel a partir del nombre del mapa.
 		if (!Logic::CServer::getSingletonPtr()->loadLevel("map.txt"))
+			return false;
+
+		// Cargar el script de eventos de LUA.
+		if (!Logic::CEventManager::getSingletonPtr()->loadEvents("Events.lua"))
 			return false;
 
 		// Cargamos la ventana que muestra el tiempo de juego transcurrido.
@@ -62,6 +66,8 @@ namespace Application {
 
 	void CGameState::release() 
 	{
+		Logic::CEventManager::getSingletonPtr()->unloadEvents();
+
 		Logic::CServer::getSingletonPtr()->unLoadLevel();
 
 		Logic::CEntityFactory::getSingletonPtr()->unloadBluePrints();

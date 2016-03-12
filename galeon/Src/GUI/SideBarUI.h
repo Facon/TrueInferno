@@ -26,6 +26,8 @@ namespace GUI
 		Logic::Tile* _originRoadTile=nullptr;
 		int _roadInConstruction = false;
 
+		bool _firstRoad = true;
+
 		bool createFurnaceReleased(const CEGUI::EventArgs& e);
 		bool createRoadReleased(const CEGUI::EventArgs& e);
 		bool createResource1BuildingReleased(const CEGUI::EventArgs& e);

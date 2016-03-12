@@ -11,8 +11,10 @@ la gestión de la interfaz con el usuario (entrada de periféricos, CEGui...).
 */
 
 #include "Server.h"
-
 #include "PlayerController.h"
+
+#include "Application/GaleonApplication.h"
+#include "Application/GameState.h"
 #include "BaseSubsystems/Server.h"
 
 #include <cassert>
@@ -73,6 +75,15 @@ namespace GUI {
 		}
 
 	} // Release
+
+	//--------------------------------------------------------
+
+	UIManager* CServer::getUIManager()
+	{
+		Application::CGameState *gameState =
+			(Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState();
+		return gameState->getUIManager();
+	}
 
 	//--------------------------------------------------------
 

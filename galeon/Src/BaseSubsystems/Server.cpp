@@ -37,6 +37,19 @@ usados. La mayoría de ellos son parte de Ogre.
 #include <CEGUI/System.h>
 #include <CEGUI/DefaultResourceProvider.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
+#include <CEGUI/ScriptModules/Lua/ScriptModule.h>
+
+/*
+#include <CEGUIDefaultResourceProvider.h>
+#include <CEGUIFont.h>
+#include <CEGUIImageset.h>
+#include <CEGUIWindowManager.h>
+#include <falagard/CEGUIFalWidgetLookManager.h>
+#include <CEGUIScheme.h>
+*/
+
+// ScriptManager
+#include "BaseSubsystems/ScriptManager.h"
 
 //FMOD
 #include <Audio/Server.h>
@@ -147,7 +160,8 @@ namespace BaseSubsystems
 
 	bool CServer::open()
 	{
-		if( !initOgre() ||
+		if (!initScriptManager() ||
+			!initOgre() ||
 			!initOIS() ||
 			!initCEGUI() ||
 			!initFMOD())
@@ -168,6 +182,8 @@ namespace BaseSubsystems
 		releaseOIS();
 		
 		releaseOgre();
+
+		releaseScriptManager();
 		
 		releaseFMOD();
 	} // close
@@ -286,7 +302,15 @@ namespace BaseSubsystems
 	bool CServer::initCEGUI()
 	{
 		CEGUI::OgreRenderer& CEGUIRenderer =
-				 CEGUI::OgreRenderer::create(*_renderWindow);
+			CEGUI::OgreRenderer::create(*_renderWindow);
+
+		/* Inicialización del módulo LUA de CEGUI:
+		CEGUI::LuaScriptModule &luaModule =
+			CEGUI::LuaScriptModule::create(
+			ScriptManager::CScriptManager::GetSingleton().getNativeInterpreter());
+
+		CEGUI::System::create(CEGUIRenderer, nullptr, nullptr, nullptr, &luaModule);
+		*/
 
 		CEGUI::System::create(CEGUIRenderer);
 
@@ -320,10 +344,23 @@ namespace BaseSubsystems
 
 	} // initCEGUI
 
+	//--------------------------------------------------------
+
 	bool CServer::initFMOD()
 	{
 		return Audio::CServer::Init();
 	}
+
+	//--------------------------------------------------------
+
+	bool CServer::initScriptManager()
+	{
+		if (!ScriptManager::CScriptManager::Init())
+			return false;
+		
+		return true;
+
+	} // initScriptManager
 
 	//--------------------------------------------------------
 
@@ -389,11 +426,19 @@ namespace BaseSubsystems
 			For detailed explanation:
 			http://stackoverflow.com/questions/18882760/debug-assertion-failed-expression-pfirstblock-phead
 			*/
-			//CEGUI::System::destroy();    
+			//CEGUI::System::destroy();
 			_GUISystem = 0;
 		}
 
 	} // releaseCEGUI
+
+	//--------------------------------------------------------
+
+	void CServer::releaseScriptManager()
+	{
+		ScriptManager::CScriptManager::GetPtrSingleton()->Release();
+
+	} // releaseScriptManager
 
 	//--------------------------------------------------------
 	

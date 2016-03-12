@@ -1,4 +1,6 @@
 #include "TimeManager.h"
+#include "Logic/Events/EventManager.h"
+#include "Logic/Events/ConditionEvents.h"
 
 namespace Logic
 {
@@ -15,7 +17,10 @@ namespace Logic
 		//_time = (_time - msecs) % _maxTime;
 
 		_time -= msecs;
-		if (_time < 0)
+		if (_time < 0) {
 			_time = 0;
+			// @TODO Hacer esto bien...
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::END_GAME);
+		}
 	}
 }

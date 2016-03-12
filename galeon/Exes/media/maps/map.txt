@@ -111,7 +111,7 @@ Map = {
 		crudePerSoul = 4,
 		burnPeriod = 2,
 		maxSoulsPerCycle = 5,
-		mineralCost = 200,
+		mineralCost = 150,
 		gasCost = 100,
 	},
 	
@@ -195,8 +195,8 @@ Map = {
 		material = "EvilWorks",
 		minWorkers = 1,
 		maxWorkers = 5,	
-		mineralCost = 200,
-		gasCost = 100,
+		mineralCost = 150,
+		gasCost = 75,
 	},
 	
 	Refinery = {
@@ -218,8 +218,8 @@ Map = {
 		material = "Refinery",
 		minWorkers = 1,
 		maxWorkers = 5,
-		mineralCost = 200,
-		gasCost = 100,
+		mineralCost = 150,
+		gasCost = 75,
 	},
 	
 	ResearchLabs = {

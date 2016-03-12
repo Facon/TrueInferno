@@ -8,6 +8,8 @@
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
 
+#include "Logic/Events/EventManager.h"
+#include "Logic/Events/ConditionEvents.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
@@ -27,8 +29,6 @@
 #include "Physics/Server.h"
 #include "Logic\Entity\Message.h"
 #include "AI/Server.h"
-
-
 
 namespace GUI
 {
@@ -346,6 +346,13 @@ namespace GUI
 						_roadInConstruction = 0;
 						_placeableRoadSize = 0;
 						_originRoadTile = nullptr;
+
+						// @TODO Hacer esto bien...
+						if (_firstRoad) {
+							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+							_firstRoad = false;
+						}
+
 						break;
 					}
 				}
