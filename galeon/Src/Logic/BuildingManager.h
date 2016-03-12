@@ -21,6 +21,7 @@ Contiene la declaración del gestor de edificios.
 #include <map>
 #include "BaseSubsystems/Math.h"
 #include "Logic/Entity/BuildingType.h"
+#include "Logic/Entity/Message.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
@@ -126,6 +127,9 @@ namespace Logic
 
 		//Destruye un edificio aleatorio
 		bool DestroyRandomBuilding();
+
+		/** Transmite un mensaje a todos los edificios registrados. Devuelve true si alguno aceptó el mensaje */
+		bool HandleMessage(const LogisticsMessage& msg);
 
 	protected:
 

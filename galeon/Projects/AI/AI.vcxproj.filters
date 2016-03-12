@@ -134,6 +134,15 @@
     <ClCompile Include="..\..\Src\AI\LAWaitLogisticsRequest.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAEmptyTemplate.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAFindProviders.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAExecuteLogisticsTasks.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -263,6 +272,18 @@
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAWaitLogisticsRequest.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAEmptyTemplate.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMEmptyTemplateData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAFindProviders.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAExecuteLogisticsTasks.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

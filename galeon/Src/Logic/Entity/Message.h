@@ -457,7 +457,10 @@ namespace Logic
 	class ResourceMessage : public Message
 	{
 	public:
-		ResourceMessage(const ResourceType& resourceType, int number) : Message(MessageType::RESOURCES_CHANGE), _resourceType(resourceType), _number(number) {}
+		ResourceMessage(const ResourceType& resourceType, int number) : 
+			Message(MessageType::RESOURCES_CHANGE), 
+			_resourceType(resourceType),
+			_number(number) {}
 
 		ResourceType _resourceType;
 		int _number;
@@ -470,30 +473,42 @@ namespace Logic
 
 	enum LogisticsAction {
 		NEED_RESOURCES,
-		BRING_RESOURCES,
+		BRING_RESOURCES_TO,
+		DO_YOU_HAVE_RESOURCES,
+		I_HAVE_RESOURCES,
 	};
 
+	/** Mensajes de comunicación relacionados con la logística de recursos */
 	class LogisticsMessage : public Message
 	{
 	public:
-		// NEED_RESOURCES
-		LogisticsMessage(ResourceType type, unsigned int quantity) : 
+		// LogisticsAction::NEED_RESOURCES
+		LogisticsMessage(LogisticsAction action, ResourceType resourceType, unsigned int resourceQuantity) :
 			Message(MessageType::LOGISTICS_REQUEST), 
-			_action(LogisticsAction::NEED_RESOURCES), 
-			_type(type), 
-			_quantity(quantity) {}
+			_action(action),
+			_resourceType(resourceType),
+			_resourceQuantity(resourceQuantity),
+			_target("") {}
 
-		// BRING_RESOURCES
-		LogisticsMessage(ResourceType type, unsigned int quantity, std::string target) :
-			Message(MessageType::LOGISTICS_REQUEST),
-			_action(LogisticsAction::NEED_RESOURCES),
-			_type(type),
-			_quantity(quantity),
+		// LogisticsAction::DO_YOU_HAVE_RESOURCES
+		LogisticsMessage(LogisticsAction action, ResourceType resourceType) :
+			Message(MessageType::UNASSIGNED),
+			_action(action),
+			_resourceType(resourceType),
+			_resourceQuantity(0),
+			_target("") {}
+
+		// LogisticsAction::BRING_RESOURCES_TO, LogisticsAction::I_HAVE_RESOURCES
+		LogisticsMessage(LogisticsAction action, ResourceType resourceType, unsigned int resourceQuantity, std::string target) :
+			Message(MessageType::UNASSIGNED),
+			_action(action),
+			_resourceType(resourceType),
+			_resourceQuantity(resourceQuantity),
 			_target(target) {}
 
 		LogisticsAction _action;
-		ResourceType _type;
-		unsigned int _quantity;
+		ResourceType _resourceType;
+		unsigned int _resourceQuantity;
 		std::string _target;
 
 		virtual bool Dispatch(MessageHandler& handler) const
@@ -501,7 +516,6 @@ namespace Logic
 			return handler.HandleMessage(*this);
 		}
 	};
-
 
 	/*
 	GameObject* receiver_object = blah;

@@ -317,4 +317,16 @@ namespace Logic {
 		return false;
 	}
 
+	bool CBuildingManager::HandleMessage(const LogisticsMessage& msg){
+		bool ret = false;
+
+		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
+			for (auto it2 = it->second->cbegin(); it2 != it->second->cend(); ++it2){
+				ret |= (*it2)->getEntity()->HandleMessage(msg);
+			}
+		}
+
+		return ret;
+	}
+
 } // namespace Logic

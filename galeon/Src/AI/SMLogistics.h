@@ -4,6 +4,8 @@
 #include "StateMachine.h"
 #include "Logic\Entity\Message.h"
 #include "AI\LAWaitLogisticsRequest.h"
+#include "AI\LAFindProviders.h"
+#include "AI\LAExecuteLogisticsTasks.h"
 #include "AI\Server.h"
 
 namespace AI {
@@ -18,16 +20,17 @@ namespace AI {
 	public:
 		CSMLogistics(CEntity* entity) : CStateMachine(entity) {
 			int waitRequest = this->addNode(new CLAWaitLogisticsRequest(entity, _data));
-			// TODO
-			//int findProviders = this->addNode(new CLAFindLogisticsTargets(entity, _data));
-			//int createTasks = this->addNode(new CLACreateLogisticsTasks(entity, _data));
-			//int executeTasks = this->addNode(new CLAExecuteLogisticsTasks(entity, _data));
+			int findProviders = this->addNode(new CLAFindProviders(entity, _data));
+			int executeTasks = this->addNode(new CLAExecuteLogisticsTasks(entity, _data));
 
-			// TODO
-			//this->addEdge(waitRequest, findProviders, new CConditionFinished());
-			//this->addEdge(findProviders, createTasks, new CConditionFinished());
-			//this->addEdge(createTasks, executeTasks, new CConditionFinished());
-			//this->addEdge(executeTasks, waitRequest, new CConditionFinished());
+			this->addEdge(waitRequest, findProviders, new CConditionSuccess());
+			this->addEdge(waitRequest, waitRequest, new CConditionFail());
+
+			this->addEdge(findProviders, executeTasks, new CConditionSuccess());
+			this->addEdge(findProviders, waitRequest, new CConditionFail());
+
+			this->addEdge(executeTasks, waitRequest, new CConditionSuccess());
+			this->addEdge(executeTasks, waitRequest, new CConditionFail());
 
 			this->setInitialNode(waitRequest);
 			this->resetExecution();

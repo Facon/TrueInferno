@@ -1,12 +1,13 @@
-#include "LAWaitLogisticsRequest.h"
+/*
+#include "LAEmptyTemplate.h"
 
 #include "Logic\Entity\Message.h"
-#include "AI\SMLogisticsData.h"
+#include "AI\SMEmptyTemplateData.h"
 
 namespace AI {
-	bool CLAWaitLogisticsRequest::HandleMessage(const LogisticsMessage& msg) {
+	bool CLAEmptyTemplate::HandleMessage(const EmptyTemplateMessage& msg) {
 		// Rechazamos lo que no sean mensajes de petición
-		if (msg._type != MessageType::LOGISTICS_REQUEST)
+		if (msg._type != MessageType::EMPTY_TEMPLATE_REQUEST)
 			return false;
 
 		// No se aceptan peticiones simultáneas
@@ -16,9 +17,7 @@ namespace AI {
 		_requestReceived = true;
 
 		// Guardamos datos en la memoria compartida de la SM
-		_smData.setAction(msg._action);
-		_smData.setResourceType(msg._resourceType);
-		_smData.setResourceQuantity(msg._resourceQuantity);
+		_smData.setXXX(msg._xxx);
 
 		// Reactivamos la LA
 		resume();
@@ -26,7 +25,7 @@ namespace AI {
 		return true;
 	}
 
-	CLatentAction::LAStatus CLAWaitLogisticsRequest::OnStart() {
+	CLatentAction::LAStatus CLAEmptyTemplate::OnStart() {
 		// Inicializamos
 		_requestReceived = false;
 
@@ -34,8 +33,10 @@ namespace AI {
 		return LAStatus::SUSPENDED;
 	}
 
-	CLatentAction::LAStatus CLAWaitLogisticsRequest::OnRun(unsigned int msecs) {
+	CLatentAction::LAStatus CLAEmptyTemplate::OnRun(unsigned int msecs) {
+		// ...
 		return LAStatus::SUCCESS;
 	}
 
 }
+*/

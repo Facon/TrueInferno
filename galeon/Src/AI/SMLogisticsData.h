@@ -1,38 +1,62 @@
 #ifndef SM_LOGISTICS_DATA_
 #define SM_LOGISTICS_DATA_
 
-#include "SoulTask.h"
+#include "Logic\ResourcesManager.h"
+#include <vector>
 
 namespace AI {
 	class CSMLogisticsData {
 
 	public:
-		CSMLogisticsData() : _task(nullptr) {}
+		CSMLogisticsData() : 
+			_resourceType(ResourceType::NONE),
+			_resourceQuantity(0) {}
 
-		virtual ~CSMLogisticsData() {
-			if (_task != nullptr){
-				delete _task;
-				_task = nullptr;
-			}
+		virtual ~CSMLogisticsData() {}
+
+		LogisticsAction getAction() const{
+			return _action;
+		}
+
+		void setAction(LogisticsAction action){
+			_action = action;
+		}
+
+		ResourceType getResourceType() const{
+			return _resourceType;
+		}
+
+		void setResourceType(ResourceType resourceType){
+			_resourceType = resourceType;
+		}
+
+		unsigned int getResourceQuantity() const{
+			return _resourceQuantity;
+		}
+
+		void setResourceQuantity(unsigned int resourceQuantity){
+			_resourceQuantity = resourceQuantity;
+		}
+
+		void clearProviderMessages(){
+			_msgs.clear();
+		}
+
+		void addProviderMessage(LogisticsMessage msg){
+			_msgs.push_back(msg);
+		}
+
+		std::vector<LogisticsMessage> getProviderMessages(){
+			return _msgs;
 		}
 		
-		CSoulTask* getTask(){
-			return _task;
-		}
-
-		void setTask(CSoulTask* task){
-			// Limpiamos la task anterior si había
-			if (_task != nullptr){
-				delete _task;
-				_task = nullptr;
-			}
-
-			// Guardamos una clon de la task pasada
-			_task = task->clone();
-		}
-
 	private:
-		CSoulTask* _task;
+		LogisticsAction _action;
+		ResourceType _resourceType;
+		unsigned int _resourceQuantity;
+
+		/** Vector con los mensajes recibidos con información de recursos */
+		std::vector<LogisticsMessage> _msgs;
 	};
 }
 
