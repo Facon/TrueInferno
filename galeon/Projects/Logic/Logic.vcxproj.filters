@@ -335,7 +335,7 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Events\EndGameEvent.h">
       <Filter>Events\Header Files</Filter>
-    </ClCompile>
+    </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Furnace.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
