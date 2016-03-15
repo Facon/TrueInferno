@@ -151,6 +151,7 @@
     <ClInclude Include="..\..\Src\AI\SMSoulSender.h" />
     <ClInclude Include="..\..\Src\AI\SoulTask.h" />
     <ClInclude Include="..\..\Src\AI\StateMachine.h" />
+    <ClInclude Include="..\..\Src\AI\TransportSoulTask.h" />
     <ClInclude Include="..\..\Src\AI\UndirectedGraph.h" />
     <ClInclude Include="..\..\Src\AI\WaypointGraph.h" />
     <ClInclude Include="..\..\Src\AI\WorkSoulTask.h" />

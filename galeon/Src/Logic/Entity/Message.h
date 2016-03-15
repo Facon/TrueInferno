@@ -488,7 +488,7 @@ namespace Logic
 			_action(action),
 			_resourceType(resourceType),
 			_resourceQuantity(resourceQuantity),
-			_target("") {}
+			_target(EntityID::UNASSIGNED) {}
 
 		// LogisticsAction::DO_YOU_HAVE_RESOURCES
 		LogisticsMessage(LogisticsAction action, ResourceType resourceType) :
@@ -496,10 +496,10 @@ namespace Logic
 			_action(action),
 			_resourceType(resourceType),
 			_resourceQuantity(0),
-			_target("") {}
+			_target(EntityID::UNASSIGNED) {}
 
 		// LogisticsAction::BRING_RESOURCES_TO, LogisticsAction::I_HAVE_RESOURCES
-		LogisticsMessage(LogisticsAction action, ResourceType resourceType, unsigned int resourceQuantity, std::string target) :
+		LogisticsMessage(LogisticsAction action, ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target) :
 			Message(MessageType::UNASSIGNED),
 			_action(action),
 			_resourceType(resourceType),
@@ -509,7 +509,7 @@ namespace Logic
 		LogisticsAction _action;
 		ResourceType _resourceType;
 		unsigned int _resourceQuantity;
-		std::string _target;
+		TEntityID _target;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

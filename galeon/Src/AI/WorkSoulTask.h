@@ -12,13 +12,14 @@ namespace AI{
 		CWorkTask(CPlaceable* target) {
 			_target = target;
 		};
+
 		virtual ~CWorkTask() {};
 
 		virtual CSoulTask* clone(){
 			return new CWorkTask(_target);
 		}
 
-		virtual bool execute() {
+		bool execute(CMap *map) {
 			// Notificamos al objetivo
 			WorkerMessage m(1);
 			return m.Dispatch(*_target->getEntity());
