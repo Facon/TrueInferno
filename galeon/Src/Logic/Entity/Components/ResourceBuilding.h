@@ -2,9 +2,10 @@
 #define RESOURCE_BUILDING_
 
 #include "Map/MapEntity.h"
-
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Component.h"
+
+#include <unordered_map>
 
 namespace Logic {
 	class CResourceBuilding : public IComponent {
@@ -12,8 +13,12 @@ namespace Logic {
 		DEC_FACTORY(CResourceBuilding);
 
 	public:
-		CResourceBuilding() : _resourceType(ResourceType::NONE), _resourceQuantity(0) {}
-		virtual ~CResourceBuilding() {}
+		CResourceBuilding() {}
+		
+		virtual ~CResourceBuilding() { 
+			_storedResources.clear(); 
+			_providedResources.clear();
+		}
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
@@ -21,12 +26,14 @@ namespace Logic {
 
 		virtual bool HandleMessage(const ResourceMessage& msg);
 
-	private:
-		/** Tipo del recurso almacenado */
-		ResourceType _resourceType;
+		// TODO Interfaz o mensajes para tratar disponibilidad de recursos
 
-		/** Cantidad del recurso almacenado */
-		int _resourceQuantity;
+	private:
+		/** Cantidad de recursos almacenados indexados por tipo */
+		std::unordered_map<ResourceType, int> _storedResources;
+
+		/** Recursos que se proveen */
+		std::unordered_set<ResourceType> _providedResources;
 	};
 	
 	REG_FACTORY(CResourceBuilding);

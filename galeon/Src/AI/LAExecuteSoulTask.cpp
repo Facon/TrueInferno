@@ -17,6 +17,6 @@ namespace AI {
 	}
 
 	bool CLAExecuteSoulTask::executeTask(){
-		return _smData.getTask()->execute();
+		return _smData.getTask()->execute(_entity->getMap());
 	}
 }

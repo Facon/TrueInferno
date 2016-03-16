@@ -12,7 +12,7 @@ namespace AI {
 		Vector3 pos;
 		CMap *map;
 
-		bool sortByDistance(LogisticsMessage i, LogisticsMessage j) {
+		bool operator() (LogisticsMessage i, LogisticsMessage j) {
 			Logic::CEntity* iEntity = map->getEntityByID(i._target);
 			if (iEntity == nullptr)
 				return false; // i es null ==> j antes que i
@@ -45,18 +45,19 @@ namespace AI {
 			// Nos aseguramos de no sobrepasar lo que nos queda por solicitar ni lo disponible en el proveedor
 			unsigned int request = std::min(_smData.getResourceQuantity(), it->_resourceQuantity);
 
-			// Enviamos la petición
-			SoulSenderMessage msg(new CTransportTask(it->_target), 1);
+			// Enviamos la petición de transporte de recursos desde el proveedor hacia nosotros. El alma primero viajará hacia el proveedor
+			SoulSenderMessage msg(new CTransportTask(it->_target, _entity->getEntityID(), it->_resourceType, request), 1);
 			
-			remaining -= request;
+			// Si el mensaje es aceptado reducimos la cantidad restante por solicitar
+			if(msg.Dispatch(*_entity))
+				remaining -= request;
 		}
-		
-		// TODO
-		return LAStatus::SUCCESS;
-	}
 
-	CLatentAction::LAStatus CLAExecuteLogisticsTasks::OnRun(unsigned int msecs) {
-		return LAStatus::SUCCESS;
+		// Si no quedó nada por solicitar tuvimos éxito
+		if (remaining == 0)
+			return LAStatus::SUCCESS;
+		else
+			return LAStatus::FAIL;
 	}
 
 }

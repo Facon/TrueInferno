@@ -86,6 +86,7 @@ Map = {
 		material = "Evilator",
 		minWorkers = 1,
 		maxWorkers = 5,
+		storedResource="REFINED",
 	},
 	
 	Furnace = {
@@ -113,6 +114,8 @@ Map = {
 		maxSoulsPerCycle = 5,
 		mineralCost = 300,
 		gasCost = 100,
+		storedResource="COKE CRUDE",
+		providedResource="COKE CRUDE",
 	},
 	
 	Soul = {
@@ -147,6 +150,8 @@ Map = {
 		maxExtractedQuantity = 5,
 		mineralCost = 50,
 		gasCost = 0,
+		storedResource="MINERAL",
+		providedResource="MINERAL",
 	},
 	
 	GasPlant = {
@@ -173,6 +178,8 @@ Map = {
 		maxExtractedQuantity = 5,
 		mineralCost = 200,
 		gasCost = 0,
+		storedResource="GAS",
+		providedResource="GAS",
 	},
 	
 	EvilWorks = {
@@ -196,6 +203,8 @@ Map = {
 		maxWorkers = 5,	
 		mineralCost = 1000,
 		gasCost = 500,
+		storedResource="CRUDE PURE",
+		providedResource="PURE",
 	},
 	
 	Refinery = {
@@ -218,7 +227,9 @@ Map = {
 		minWorkers = 1,
 		maxWorkers = 5,
 		mineralCost = 2000,
-		gasCost = 1000,		
+		gasCost = 1000,	
+		storedResource="PURE REFINED",
+		providedResource="REFINED",
 	},
 	
 	ResearchLabs = {
@@ -239,7 +250,8 @@ Map = {
 		validTerrainType = "Empty",
 		material = "ResearchLabs",
 		minWorkers = 1,
-		maxWorkers = 5,		
+		maxWorkers = 5,
+		storedResource="AETHER",
 	},
 	
 	PowerGenerator = {
@@ -260,7 +272,8 @@ Map = {
 		validTerrainType = "Empty",
 		material = "PowerGenerator",
 		minWorkers = 1,
-		maxWorkers = 5,		
+		maxWorkers = 5,
+		storedResource="COKE",
 	},
 
 	Warehouse = {
@@ -281,6 +294,8 @@ Map = {
 		validTerrainType = "Empty",
 		material = "Warehouse",
 		minWorkers = 1,
-		maxWorkers = 5,		
+		maxWorkers = 5,
+		storedResource="MINERAL GAS",
+		providedResource="MINERAL GAS",
 	},
 }

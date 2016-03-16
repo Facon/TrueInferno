@@ -14,8 +14,6 @@ namespace AI {
 	protected:
 		LAStatus OnStart();
 
-		LAStatus OnRun(unsigned int msecs);
-
 	private:
 		CSMLogisticsData _smData;
 	};
