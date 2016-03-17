@@ -15,7 +15,7 @@ namespace Logic
 		PURE,
 		REFINED,
 		AETHER,
-		//HADES_FAVOR
+		HADES_FAVOR
 	};
 
 	class ResourcesManager

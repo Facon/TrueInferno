@@ -151,7 +151,6 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Furnace.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Sound.cpp">
       <Filter>Entity\Components\Source Files</Filter>
     </ClCompile>
@@ -159,6 +158,8 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Logistics.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptySMComponent.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceTransformer.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulBurner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -290,9 +291,6 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Sound.h">
       <Filter>Entity\Components\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Furnace.h">
-      <Filter>Entity\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
@@ -303,6 +301,12 @@
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptySMComponent.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceTransformer.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulBurner.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -86,7 +86,13 @@ Map = {
 		material = "Evilator",
 		minWorkers = 1,
 		maxWorkers = 5,
-		storedResource="REFINED",
+		storedResources="REFINED,HADES_FAVOR",
+		transformsFrom="REFINED",
+		transformsInto="HADES_FAVOR",
+		transformRatio=0.8,
+		transformPeriod=5,
+		transformCostResource="GAS",
+		transformCostRatio=1,
 	},
 	
 	Furnace = {
@@ -114,8 +120,8 @@ Map = {
 		maxSoulsPerCycle = 5,
 		mineralCost = 300,
 		gasCost = 100,
-		storedResource="COKE CRUDE",
-		providedResource="COKE CRUDE",
+		storedResources="COKE,CRUDE",
+		providedResources="COKE,CRUDE",
 	},
 	
 	Soul = {
@@ -150,8 +156,8 @@ Map = {
 		maxExtractedQuantity = 5,
 		mineralCost = 50,
 		gasCost = 0,
-		storedResource="MINERAL",
-		providedResource="MINERAL",
+		storedResources="MINERAL",
+		providedResources="MINERAL",
 	},
 	
 	GasPlant = {
@@ -178,8 +184,8 @@ Map = {
 		maxExtractedQuantity = 5,
 		mineralCost = 200,
 		gasCost = 0,
-		storedResource="GAS",
-		providedResource="GAS",
+		storedResources="GAS",
+		providedResources="GAS",
 	},
 	
 	EvilWorks = {
@@ -203,8 +209,14 @@ Map = {
 		maxWorkers = 5,	
 		mineralCost = 1000,
 		gasCost = 500,
-		storedResource="CRUDE PURE",
-		providedResource="PURE",
+		storedResources="CRUDE,PURE",
+		providedResources="PURE",
+		transformsFrom="CRUDE",
+		transformsInto="PURE",
+		transformRatio=0.8,
+		transformPeriod=5,
+		transformCostResource="GAS",
+		transformCostRatio=1,
 	},
 	
 	Refinery = {
@@ -228,8 +240,14 @@ Map = {
 		maxWorkers = 5,
 		mineralCost = 2000,
 		gasCost = 1000,	
-		storedResource="PURE REFINED",
-		providedResource="REFINED",
+		storedResources="PURE,REFINED",
+		providedResources="REFINED",
+		transformsFrom="PURE",
+		transformsInto="REFINED",
+		transformRatio=0.8,
+		transformPeriod=5,
+		transformCostResource="GAS",
+		transformCostRatio=1,
 	},
 	
 	ResearchLabs = {
@@ -251,7 +269,7 @@ Map = {
 		material = "ResearchLabs",
 		minWorkers = 1,
 		maxWorkers = 5,
-		storedResource="AETHER",
+		storedResources="AETHER",
 	},
 	
 	PowerGenerator = {
@@ -273,7 +291,7 @@ Map = {
 		material = "PowerGenerator",
 		minWorkers = 1,
 		maxWorkers = 5,
-		storedResource="COKE",
+		storedResources="COKE",
 	},
 
 	Warehouse = {
@@ -295,7 +313,7 @@ Map = {
 		material = "Warehouse",
 		minWorkers = 1,
 		maxWorkers = 5,
-		storedResource="MINERAL GAS",
-		providedResource="MINERAL GAS",
+		storedResources="MINERAL,GAS",
+		providedResources="MINERAL,GAS",
 	},
 }

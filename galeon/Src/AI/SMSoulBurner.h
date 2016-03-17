@@ -41,8 +41,8 @@ namespace AI {
 			int gatherSouls = this->addNode(new CLAGatherSouls(_entity, _data, _burnPeriod, _maxSoulsPerCycle));
 			int burnSouls = this->addNode(new CLABurnSouls(_entity, _data, _cokePerSoul, _crudePerSoul));
 
-			this->addEdge(gatherSouls, burnSouls, new CConditionSuccess());
-			this->addEdge(burnSouls, gatherSouls, new CConditionSuccess());
+			this->addEdge(gatherSouls, burnSouls, new CConditionFinished());
+			this->addEdge(burnSouls, gatherSouls, new CConditionFinished());
 
 			this->setInitialNode(gatherSouls);
 			this->resetExecution();

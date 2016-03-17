@@ -16,23 +16,30 @@ namespace Logic
 		if (!IComponent::spawn(entity, map, entityInfo))
 			return false;
 
-		// Guardamos el mapa con las claves de recursos almacenables
-		assert(entityInfo->hasAttribute("storedResource"));
-		std::istringstream iss(entityInfo->getStringAttribute("storedResource"));
-		do {
-			std::string resource;
-			iss >> resource;
-			_storedResources[ResourcesManager::parseResourceType(resource)] = 0;
-		} while (iss);
+		// Guardamos el mapa de recursos almacenables
+		if (entityInfo->hasAttribute("storedResources")){
+			std::istringstream ss(entityInfo->getStringAttribute("storedResources"));
+			std::string item;
 
-		// Guardamos el set con los recursos que se proveen
-		if (entityInfo->hasAttribute("providedResource")){
-			std::istringstream iss(entityInfo->getStringAttribute("providedResource"));
-			do {
-				std::string resource;
-				iss >> resource;
-				_providedResources.emplace(ResourcesManager::parseResourceType(resource));
-			} while (iss);
+			// Para cada tipo separado por coma
+			while (std::getline(ss, item, ',')) {
+				if (item.size()>0)
+					_storedResources[ResourcesManager::parseResourceType(item)] = 0;
+			}
+		}
+		else{
+			assert(false && "No stored resources have been defined");
+		}
+
+		// Guardamos el set con los recursos que este componente provee
+		if (entityInfo->hasAttribute("providedResources")){
+			std::istringstream ss(entityInfo->getStringAttribute("providedResources"));
+			std::string item;
+
+			// Para cada tipo separado por coma
+			while (std::getline(ss, item, ',')) {
+				_providedResources.emplace(ResourcesManager::parseResourceType(item));
+			}
 		}
 
 		return true;

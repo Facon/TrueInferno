@@ -17,7 +17,7 @@ namespace Logic {
 		DEC_FACTORY(CSoulBurner);
 
 	public:
-		CSoulBurner() : _coke(0), _crude(0) {}
+		CSoulBurner() {}
 		virtual ~CSoulBurner() {}
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
@@ -29,16 +29,10 @@ namespace Logic {
 			return new AI::CSMSoulBurner(_entity);
 		}
 
-	private:
-		/** Cantidad de coke acumulado */
-		int _coke;
-
-		/** Cantidad de crude acumulado */
-		int _crude;
 	};
 	
 	REG_FACTORY(CSoulBurner);
 
 } // namespace Logic
 
-#endif // SOUL_H_
+#endif // SOUL_BURNER_

@@ -1,8 +1,5 @@
 #include "PathFinder.h"
 
-#include "Map/MapEntity.h"
-#include "Logic/Entity/Entity.h"
-
 namespace Logic {
 	RTTI_ROOT_IMPL(CPathFinder);
 	IMP_FACTORY(CPathFinder);
