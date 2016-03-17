@@ -125,9 +125,6 @@
     <ClCompile Include="..\..\Src\AI\LAGatherSouls.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulBurner.cpp">
-      <Filter>Decision\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAExtractResources.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>

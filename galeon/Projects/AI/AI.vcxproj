@@ -106,7 +106,6 @@
     <ClCompile Include="..\..\Src\AI\SimpleLatentActions.cpp" />
     <ClCompile Include="..\..\Src\AI\UndirectedGraph.cpp" />
     <ClCompile Include="..\..\Src\AI\WaypointGraph.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulBurner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\AStarFunctionsWalkingSoul.h" />
