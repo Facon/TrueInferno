@@ -155,11 +155,11 @@
       <Filter>Entity\Components\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Logistics.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptySMComponent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceTransformer.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulBurner.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -294,9 +294,6 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.h">
-      <Filter>Entity\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Logistics.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
@@ -307,6 +304,9 @@
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulBurner.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

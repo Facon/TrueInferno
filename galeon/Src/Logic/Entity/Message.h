@@ -462,18 +462,23 @@ namespace Logic
 	class ResourceMessage : public Message
 	{
 	public:
-		// RESOURCES_CHANGE: Solicita el cambio (positivo/negativo) en la cantidad de recursos del tipo dado
+		/** Constructor vacío por defecto. 
+		Necesario para poder tener variables auxiliares sin necesidad de punteros (e.g. en una LA de una SM)
+		*/
+		ResourceMessage() : Message(MessageType::UNASSIGNED) {}
+
+		/** RESOURCES_CHANGE: Solicita el cambio (positivo/negativo) en la cantidad de recursos del tipo dado */
 		ResourceMessage(const ResourceType& resourceType, int change) : 
 			Message(MessageType::RESOURCES_CHANGE), 
 			_resourceType(resourceType),
 			_change(change) {}
 
-		// RESOURCES_ASK: Solicita información sobre el recurso dado
+		/** RESOURCES_ASK: Solicita información sobre el recurso dado */
 		ResourceMessage(const ResourceType& resourceType) :
 			Message(MessageType::RESOURCES_ASK),
 			_resourceType(resourceType) {}
 
-		// RESOURCES_INFO: Devuelve la cantidad disponible y máxima del recurso indicado
+		/** RESOURCES_INFO: Devuelve la cantidad disponible y máxima del recurso indicado */
 		ResourceMessage(const ResourceType& resourceType, unsigned int available, unsigned int max) :
 			Message(MessageType::RESOURCES_INFO),
 			_resourceType(resourceType),

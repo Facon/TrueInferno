@@ -12,7 +12,7 @@ namespace AI {
 
 		virtual ~CLAEmptyTemplate() {}
 
-		virtual bool HandleMessage(const EmptyTemplateMessage& msg);
+		virtual bool HandleMessage(const XXXMessage& msg);
 
 	protected:
 		LAStatus OnStart();

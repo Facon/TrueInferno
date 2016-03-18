@@ -86,6 +86,7 @@
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAskAndWaitResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAAttendResourceBuildingRequest.cpp" />
     <ClCompile Include="..\..\Src\AI\LABurnSouls.cpp" />
     <ClCompile Include="..\..\Src\AI\LADestroyEntity.cpp" />
     <ClCompile Include="..\..\Src\AI\LAEmptyTemplate.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="..\..\Src\AI\DynTriMat.h" />
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
     <ClInclude Include="..\..\Src\AI\LAAskAndWaitResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAAttendResourceBuildingRequest.h" />
     <ClInclude Include="..\..\Src\AI\LABurnSouls.h" />
     <ClInclude Include="..\..\Src\AI\LADestroyEntity.h" />
     <ClInclude Include="..\..\Src\AI\LAEmptyTemplate.h" />
@@ -142,9 +144,12 @@
     <ClInclude Include="..\..\Src\AI\Movement.h" />
     <ClInclude Include="..\..\Src\AI\Server.h" />
     <ClInclude Include="..\..\Src\AI\SimpleLatentActions.h" />
+    <ClInclude Include="..\..\Src\AI\SMEmptyTemplate.h" />
     <ClInclude Include="..\..\Src\AI\SMEmptyTemplateData.h" />
     <ClInclude Include="..\..\Src\AI\SMLogistics.h" />
     <ClInclude Include="..\..\Src\AI\SMLogisticsData.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceBuilding.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceBuildingData.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceExtractorData.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceExtractor.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceTransformer.h" />

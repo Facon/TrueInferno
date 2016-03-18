@@ -87,6 +87,7 @@ Map = {
 		minWorkers = 1,
 		maxWorkers = 5,
 		storedResources="REFINED,HADES_FAVOR",
+		maxResources=100,
 		transformsFrom="REFINED",
 		transformsInto="HADES_FAVOR",
 		transformRatio=0.8,
@@ -121,6 +122,7 @@ Map = {
 		mineralCost = 300,
 		gasCost = 100,
 		storedResources="COKE,CRUDE",
+		maxResources=100,
 		providedResources="COKE,CRUDE",
 	},
 	
@@ -157,6 +159,7 @@ Map = {
 		mineralCost = 50,
 		gasCost = 0,
 		storedResources="MINERAL",
+		maxResources=100,
 		providedResources="MINERAL",
 	},
 	
@@ -185,6 +188,7 @@ Map = {
 		mineralCost = 200,
 		gasCost = 0,
 		storedResources="GAS",
+		maxResources=100,
 		providedResources="GAS",
 	},
 	
@@ -210,6 +214,7 @@ Map = {
 		mineralCost = 1000,
 		gasCost = 500,
 		storedResources="CRUDE,PURE",
+		maxResources=100,
 		providedResources="PURE",
 		transformsFrom="CRUDE",
 		transformsInto="PURE",
@@ -241,6 +246,7 @@ Map = {
 		mineralCost = 2000,
 		gasCost = 1000,	
 		storedResources="PURE,REFINED",
+		maxResources=100,
 		providedResources="REFINED",
 		transformsFrom="PURE",
 		transformsInto="REFINED",
@@ -270,6 +276,7 @@ Map = {
 		minWorkers = 1,
 		maxWorkers = 5,
 		storedResources="AETHER",
+		maxResources=100,
 	},
 	
 	PowerGenerator = {
@@ -292,6 +299,7 @@ Map = {
 		minWorkers = 1,
 		maxWorkers = 5,
 		storedResources="COKE",
+		maxResources=100,
 	},
 
 	Warehouse = {
@@ -314,6 +322,7 @@ Map = {
 		minWorkers = 1,
 		maxWorkers = 5,
 		storedResources="MINERAL,GAS",
+		maxResources=100,
 		providedResources="MINERAL,GAS",
 	},
 }

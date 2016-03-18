@@ -5,7 +5,7 @@
 #include "AI\SMEmptyTemplateData.h"
 
 namespace AI {
-	bool CLAEmptyTemplate::HandleMessage(const EmptyTemplateMessage& msg) {
+	bool CLAEmptyTemplate::HandleMessage(const XXXMessage& msg) {
 		// Rechazamos lo que no sean mensajes de petición
 		if (msg._type != MessageType::EMPTY_TEMPLATE_REQUEST)
 			return false;

@@ -152,6 +152,15 @@ namespace Logic
 			return false;
 		}
 
+		bool HandleMessage(const ResourceMessage& msg)
+		{
+			if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
+				return true;
+			if (_currentAction != NULL)
+				return _currentAction->HandleMessage(msg);
+			return false;
+		}
+
 	protected:
 		/**
 		Almacena la máquina de estado que se está ejecutando

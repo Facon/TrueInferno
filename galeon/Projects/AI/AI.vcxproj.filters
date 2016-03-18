@@ -149,6 +149,9 @@
     <ClCompile Include="..\..\Src\AI\LARecountResources.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAAttendResourceBuildingRequest.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -308,6 +311,18 @@
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LARecountResources.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMResourceBuildingData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMEmptyTemplate.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMResourceBuilding.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAAttendResourceBuildingRequest.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
