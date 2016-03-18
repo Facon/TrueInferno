@@ -5,25 +5,30 @@ namespace AI {
 	class CSMResourceTransformerData {
 
 	public:
-		CSMResourceTransformerData() : _numSoulsToBurn(0) {}
+		CSMResourceTransformerData() : _maxResources(0), _availableResources(0) {}
 
 		virtual ~CSMResourceTransformerData() {}
 
-		unsigned int getNumSoulsToBurn(){
-			return _numSoulsToBurn;
+		unsigned int getMaxResources() const{
+			return _maxResources;
 		}
 
-		void setNumSoulsToBurn(unsigned numSouls){
-			_numSoulsToBurn = numSouls;
+		void setMaxResources(unsigned int maxResources){
+			_maxResources = maxResources;
 		}
 
-		void increaseNumSoulsToBurn(unsigned numSouls){
-			_numSoulsToBurn += numSouls;
+		unsigned int getAvailableResources() const{
+			return _availableResources;
+		}
+
+		void setAvailableResources(unsigned int availableResources){
+			_availableResources = availableResources;
 		}
 
 	private:
-		/** Almas preparadas para ser quemadas */
-		unsigned int _numSoulsToBurn;
+		unsigned int _maxResources;
+		unsigned int _availableResources;
+
 	};
 
 }

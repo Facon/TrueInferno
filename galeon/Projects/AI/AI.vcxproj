@@ -85,6 +85,7 @@
     <ClCompile Include="..\..\Src\AI\DisjointSets.cpp" />
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAAskAndWaitResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LABurnSouls.cpp" />
     <ClCompile Include="..\..\Src\AI\LADestroyEntity.cpp" />
     <ClCompile Include="..\..\Src\AI\LAEmptyTemplate.cpp" />
@@ -93,6 +94,8 @@
     <ClCompile Include="..\..\Src\AI\LAExtractResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAFindProviders.cpp" />
     <ClCompile Include="..\..\Src\AI\LAGatherSouls.cpp" />
+    <ClCompile Include="..\..\Src\AI\LARecountResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LATransformResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitAndFollowPath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitLogisticsRequest.cpp" />
@@ -116,6 +119,7 @@
     <ClInclude Include="..\..\Src\AI\DynamicMovement.h" />
     <ClInclude Include="..\..\Src\AI\DynTriMat.h" />
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
+    <ClInclude Include="..\..\Src\AI\LAAskAndWaitResources.h" />
     <ClInclude Include="..\..\Src\AI\LABurnSouls.h" />
     <ClInclude Include="..\..\Src\AI\LADestroyEntity.h" />
     <ClInclude Include="..\..\Src\AI\LAEmptyTemplate.h" />
@@ -124,6 +128,8 @@
     <ClInclude Include="..\..\Src\AI\LAExtractResources.h" />
     <ClInclude Include="..\..\Src\AI\LAFindProviders.h" />
     <ClInclude Include="..\..\Src\AI\LAGatherSouls.h" />
+    <ClInclude Include="..\..\Src\AI\LARecountResources.h" />
+    <ClInclude Include="..\..\Src\AI\LATransformResources.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitAndFollowPath.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />
     <ClInclude Include="..\..\Src\AI\LAFindingPath.h" />

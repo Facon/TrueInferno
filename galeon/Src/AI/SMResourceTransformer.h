@@ -5,8 +5,9 @@
 #include "AI\StateMachine.h"
 #include "AI\Server.h"
 #include "AI\SMResourceTransformerData.h"
-#include "AI\LAGatherSouls.h"
-#include "AI\LABurnSouls.h"
+#include "AI\LARecountResources.h"
+#include "AI\LAAskAndWaitResources.h"
+#include "AI\LATransformResources.h"
 #include "AI\LatentAction.h"
 #include "AI\Condition.h"
 #include "Map\MapEntity.h"
@@ -16,6 +17,10 @@ namespace AI {
 	Esta FSM controla la lógica de transformación de recursos.
 
 	Cíclicamente se transforman recursos del tipo de entrada en el tipo de salida.
+	1) Contamos los recursos iniciales
+	2) Solicitamos hasta el límite
+	3) Contamos los recursos obtenidos
+	4) Transformamos
 	*/ 
 	class CSMResourceTransformer : public CStateMachine<CLatentAction, CSMResourceTransformerData> {
 	public:
@@ -43,15 +48,19 @@ namespace AI {
 			assert(entityInfo->hasAttribute("transformCostRatio"));
 			_costRatio = entityInfo->getFloatAttribute("transformCostRatio");
 
-			// TODO
 			// Creación de SM en base a los datos
-			//int gatherResources = this->addNode(new CLAGatherSouls(_entity, _data, _period, _maxSoulsPerCycle));
-			//int transformResources = this->addNode(new CLABurnSouls(_entity, _data, _cokePerSoul, _crudePerSoul));
+			int recountResourcesBeforeAsking = this->addNode(new CLARecountResources(_entity, _data, _resourceFrom));
+			int gatherResources = this->addNode(new CLAAskAndWaitResources(_entity, _data, _resourceFrom, _period));
+			// TODO Pedir y pagar costes
+			int recountResourcesBeforeTransforming = this->addNode(new CLARecountResources(_entity, _data, _resourceFrom));
+			int transformResources = this->addNode(new CLATransformResources(_entity, _data, _resourceFrom, _resourceInto, _transformRatio, _costResource, _costRatio));
 
-			//this->addEdge(gatherResources, transformResources, new CConditionFinished());
-			//this->addEdge(transformResources, gatherResources, new CConditionFinished());
+			this->addEdge(recountResourcesBeforeAsking, gatherResources, new CConditionFinished());
+			this->addEdge(gatherResources, recountResourcesBeforeTransforming, new CConditionFinished());
+			this->addEdge(recountResourcesBeforeTransforming, transformResources, new CConditionFinished());
+			this->addEdge(transformResources, recountResourcesBeforeAsking, new CConditionFinished());
 
-			//this->setInitialNode(gatherResources);
+			this->setInitialNode(recountResourcesBeforeAsking);
 			this->resetExecution();
 
 			return true;
@@ -80,4 +89,4 @@ namespace AI {
 	};
 }
 
-#endif
+#endif // SM_RESOURCE_TRANSFORMER_

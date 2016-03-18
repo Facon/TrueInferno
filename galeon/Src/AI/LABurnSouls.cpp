@@ -3,33 +3,42 @@
 
 namespace AI {
 	CLatentAction::LAStatus CLABurnSouls::OnStart() {
+		// Quemamos las almas encoladas actualmente
+		unsigned int _soulsToBurn = _smData.getNumSoulsToBurn();
+		
+		_cokeIncreased = false;
+		_crudeIncreased = false;
+		
+		//std::cout << "Souls to burn = " << _soulsToBurn << std::endl;
+
 		return LAStatus::RUNNING;
 	}
 
 	CLatentAction::LAStatus CLABurnSouls::OnRun(unsigned int msecs) {
-		// Quemamos las almas encoladas actualmente
-		std::cout << "Souls to burn = " << _smData.getNumSoulsToBurn() << std::endl;
-
-		// Notificamos el incremento de recursos
-		ResourceMessage mCoke(Logic::ResourceType::COKE, _smData.getNumSoulsToBurn()*_cokePerSoul);
-		if (!mCoke.Dispatch(*_entity))
-			return LAStatus::RUNNING;
-
-		ResourceMessage mCrude(Logic::ResourceType::CRUDE, _smData.getNumSoulsToBurn()*_crudePerSoul);
-		if (!mCrude.Dispatch(*_entity)){
-			// Deshacemos el incremento de coke ya realizado
-			mCoke._number *= -1;
-
+		// Notificamos el incremento de coke si no está hecho ya
+		if (!_cokeIncreased){
+			ResourceMessage mCoke(Logic::ResourceType::COKE, _soulsToBurn*_cokePerSoul);
+			// Si falla intentaremos en el siguiente tick
 			if (!mCoke.Dispatch(*_entity)){
-				assert(false && "Coke increase hasn't been undone");
-				return LAStatus::FAIL;
+				return LAStatus::RUNNING;
 			}
+			else
+				_cokeIncreased = true;
+		}
 
-			return LAStatus::RUNNING;
+		// Notificamos el incremento de crude si no está hecho ya
+		if (!_crudeIncreased){
+			ResourceMessage mCrude(Logic::ResourceType::CRUDE, _soulsToBurn*_crudePerSoul);
+			// Si falla intentaremos en el siguiente tick
+			if (!mCrude.Dispatch(*_entity)){
+				return LAStatus::RUNNING;
+			}
+			else
+				_crudeIncreased = true;
 		}
 
 		// Limpiamos las almas quemadas
-		_smData.setNumSoulsToBurn(0);
+		_smData.setNumSoulsToBurn(_smData.getNumSoulsToBurn() - _soulsToBurn);
 
 		return LAStatus::SUCCESS;
 	}

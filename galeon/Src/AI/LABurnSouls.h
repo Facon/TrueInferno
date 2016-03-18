@@ -24,6 +24,14 @@ namespace AI {
 		const int _cokePerSoul;
 
 		const int _crudePerSoul;
+
+		unsigned int _soulsToBurn;
+
+		/** Flag para señalar que el incremento de coke ya está hecho */
+		bool _cokeIncreased;
+
+		/** Flag para señalar que el incremento de crude ya está hecho */
+		bool _crudeIncreased;
 	};
 }
 

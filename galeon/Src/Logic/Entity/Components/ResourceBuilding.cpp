@@ -55,7 +55,7 @@ namespace Logic
 
 		// Si el tipo de recurso es aceptado por el componente
 		if (_storedResources.count(msg._resourceType) > 0){
-			int quantityChanged = msg._number;
+			int quantityChanged = msg._change;
 
 			// Si nos quieren quitan más de lo que tenemos
 			if ((quantityChanged < 0) && ((_storedResources[msg._resourceType] + quantityChanged) < 0)){

@@ -71,6 +71,8 @@ namespace Logic
 			SOUL_RESPONSE,
 			FURNACE_BURN_SOULS,
 			RESOURCES_CHANGE,
+			RESOURCES_ASK,
+			RESOURCES_INFO,
 			LOGISTICS_REQUEST,
 		};
 	}
@@ -453,17 +455,35 @@ namespace Logic
 		}
 	};
 
-	/** Mensajes relativos a los recursos: RESOURCES_CHANGE */
+	/** Mensajes relativos a los recursos: 
+		- RESOURCES_CHANGE: Modificación de recursos
+		- RESOURCES_ASK: Consulta de recursos disponibles
+		- RESOURCES_INFO: Información de recursos disponibles */
 	class ResourceMessage : public Message
 	{
 	public:
-		ResourceMessage(const ResourceType& resourceType, int number) : 
+		// RESOURCES_CHANGE: Solicita el cambio (positivo/negativo) en la cantidad de recursos del tipo dado
+		ResourceMessage(const ResourceType& resourceType, int change) : 
 			Message(MessageType::RESOURCES_CHANGE), 
 			_resourceType(resourceType),
-			_number(number) {}
+			_change(change) {}
+
+		// RESOURCES_ASK: Solicita información sobre el recurso dado
+		ResourceMessage(const ResourceType& resourceType) :
+			Message(MessageType::RESOURCES_ASK),
+			_resourceType(resourceType) {}
+
+		// RESOURCES_INFO: Devuelve la cantidad disponible y máxima del recurso indicado
+		ResourceMessage(const ResourceType& resourceType, unsigned int available, unsigned int max) :
+			Message(MessageType::RESOURCES_INFO),
+			_resourceType(resourceType),
+			_available(available),
+			_max(max) {}
 
 		ResourceType _resourceType;
-		int _number;
+		int _change;
+		unsigned int _available;
+		unsigned int _max;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
