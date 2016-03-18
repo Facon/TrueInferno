@@ -124,6 +124,9 @@ namespace Logic
 		else if (name == "AETHER"){
 			return AETHER;
 		}
+		else if (name == "HADES_FAVOR"){
+			return HADES_FAVOR;
+		}
 		else{
 			assert(false && "ResourceType name unknown");
 			return NONE;

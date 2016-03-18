@@ -3,9 +3,6 @@
 
 namespace AI {
 	CLatentAction::LAStatus CLABurnSouls::OnStart() {
-		// Quemamos las almas encoladas actualmente
-		unsigned int _soulsToBurn = _smData.getNumSoulsToBurn();
-		
 		_cokeIncreased = false;
 		_crudeIncreased = false;
 		
@@ -15,6 +12,9 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLABurnSouls::OnRun(unsigned int msecs) {
+		// Quemamos las almas encoladas actualmente
+		unsigned int _soulsToBurn = _smData.getNumSoulsToBurn();
+
 		// Notificamos el incremento de coke si no está hecho ya
 		if (!_cokeIncreased){
 			ResourceMessage mCoke(Logic::ResourceType::COKE, _soulsToBurn*_cokePerSoul);
