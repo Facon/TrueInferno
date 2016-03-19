@@ -43,6 +43,7 @@ namespace AI {
 		}
 
 		SM_HANDLE_MESSAGE(LogisticsMessage);
+		SM_HANDLE_MESSAGE(ResourceMessage);
 	};
 }
 

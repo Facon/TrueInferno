@@ -2,6 +2,10 @@
 #include <stdexcept>
 #include <cassert>
 
+#include "Application/GaleonApplication.h"
+#include "Application/GameState.h"
+#include "HFManager.h"
+
 namespace Logic
 {
 	/*const float ResourcesManager::MINERAL_GATHERING_SPEED = 20.f / 60.f;
@@ -42,11 +46,13 @@ namespace Logic
 			case ResourceType::AETHER:
 				_aether += num;
 				break;
-			/*
-			case ResourceType::HADES_FAVOR:
-				_hadesFavor += num;
+			case ResourceType::HADES_FAVOR:{
+				// TODO Atajo temporal para obtener el HFManager
+				HFManager *hfManager =
+					((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getHFManager();
+				hfManager->setHadesFavor(hfManager->getHadesFavor() + num);
+			}
 				break;
-			*/
 			default:
 				throw std::runtime_error("Invalid Resource.");
 		}

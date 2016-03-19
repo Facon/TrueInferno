@@ -34,11 +34,12 @@ namespace AI {
 		_requestReceived = false;
 
 		// Solicitamos información de recursos
-		ResourceMessage m(_resourceFrom);
+		ResourceMessage m;
+		m.assembleResourcesAsk(_resourceFrom, _entity->getEntityID());
 		
 		// Si tenemos respuesta
-		if (m.Dispatch(*this))
-			// Suspendemos la LA hasta que llegue un mensaje con los datos solicitados
+		if (m.Dispatch(*_entity))
+			// Suspenderemos la LA hasta que llegue un mensaje con los datos solicitados
 			return LAStatus::SUSPENDED;
 
 		// Si no, seguimos en OnStart

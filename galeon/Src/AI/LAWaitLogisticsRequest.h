@@ -23,7 +23,7 @@ namespace AI {
 		LAStatus OnRun(unsigned int msecs);
 
 	private:
-		CSMLogisticsData _smData;
+		CSMLogisticsData& _smData;
 
 		bool _requestReceived;
 	};

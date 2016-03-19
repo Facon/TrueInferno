@@ -17,7 +17,9 @@ namespace AI {
 
 		// Notificamos el incremento de coke si no está hecho ya
 		if (!_cokeIncreased){
-			ResourceMessage mCoke(Logic::ResourceType::COKE, _soulsToBurn*_cokePerSoul);
+			ResourceMessage mCoke;
+			mCoke.assembleResourcesChange(Logic::ResourceType::COKE, _soulsToBurn*_cokePerSoul);
+
 			// Si falla intentaremos en el siguiente tick
 			if (!mCoke.Dispatch(*_entity)){
 				return LAStatus::RUNNING;
@@ -28,7 +30,9 @@ namespace AI {
 
 		// Notificamos el incremento de crude si no está hecho ya
 		if (!_crudeIncreased){
-			ResourceMessage mCrude(Logic::ResourceType::CRUDE, _soulsToBurn*_crudePerSoul);
+			ResourceMessage mCrude;
+			mCrude.assembleResourcesChange(Logic::ResourceType::CRUDE, _soulsToBurn*_crudePerSoul);
+
 			// Si falla intentaremos en el siguiente tick
 			if (!mCrude.Dispatch(*_entity)){
 				return LAStatus::RUNNING;

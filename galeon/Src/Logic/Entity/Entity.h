@@ -23,6 +23,8 @@ de juego. Es una colección de componentes.
 #include <list>
 #include <string>
 
+#include "Component.h"
+
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Map
 {
@@ -32,7 +34,6 @@ namespace Map
 namespace Logic 
 {
 	class CMap;
-	class IComponent;
 	class CEntityFactory;
 }
 
@@ -288,6 +289,16 @@ namespace Logic
 		*/
 		bool isActivated() {return _activated;}
 
+		template <class ComponentClass>
+		ComponentClass* getComponent(){
+			for (auto it = _components.cbegin(); it != _components.cend(); ++it){
+				if ((*it)->GetRTTI().IsExactly(ComponentClass::rtti))
+					return (ComponentClass*)(*it);
+			}
+
+			return nullptr;
+		}
+
 	protected:
 
 		/**
@@ -317,7 +328,7 @@ namespace Logic
 		Logic::TEntityID _entityID;
 
 		/**
-		Tipo para la lista de componetes.
+		Tipo para la lista de componentes.
 		*/
 		typedef std::list<IComponent*> TComponentList;
 

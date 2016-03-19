@@ -230,6 +230,8 @@ namespace Logic {
 					return _tiles[x][z];
 			}
 		}
+
+		return nullptr;
 	}
 
 	//--------------------------------------------------------

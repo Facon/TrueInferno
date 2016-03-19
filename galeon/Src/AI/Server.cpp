@@ -110,6 +110,13 @@ namespace AI {
 
 	/////////////////////////////////////////
 
+	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(const Vector3& from, Logic::CEntity *to){
+		Logic::CPlaceable* placeableTo = to->getComponent<Logic::CPlaceable>();
+		return getWalkingSoulAStarRoute(from, placeableTo);
+	}
+
+	/////////////////////////////////////////
+
 	std::vector<Vector3>* CServer::getWalkingSoulAStarRoute(const Vector3& from, Logic::CPlaceable* to){
 		// Sacamos la tile más cercana a la posición dada
 		Logic::Tile* tileFrom = _tileManager->getNearestTile(from);

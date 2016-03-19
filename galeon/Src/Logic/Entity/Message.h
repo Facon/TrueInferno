@@ -370,17 +370,17 @@ namespace Logic
 	{
 	public:
 		// Petición de ruta (REQUEST_WALK_SOUL_PATH)
-		WalkSoulPathMessage(CPlaceable* const target) : Message(MessageType::REQUEST_WALK_SOUL_PATH), _target(target), _path(nullptr) {}
+		WalkSoulPathMessage(TEntityID target) : Message(MessageType::REQUEST_WALK_SOUL_PATH), _target(target), _path(nullptr) {}
 		
 		// Respuesta/orden con la ruta (RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH)
-		WalkSoulPathMessage(std::vector<Vector3>* const path) : _target(nullptr), _path(path) {}
+		WalkSoulPathMessage(std::vector<Vector3>* const path) : _target(EntityID::UNASSIGNED), _path(path) {}
 
 		// Ruta finalizada (WALKING_SOUL_PATH_FINISHED)
-		WalkSoulPathMessage() : Message(MessageType::WALK_SOUL_PATH_FINISHED), _target(nullptr), _path(nullptr) {}
+		WalkSoulPathMessage() : Message(MessageType::WALK_SOUL_PATH_FINISHED), _target(EntityID::UNASSIGNED), _path(nullptr) {}
 
-		WalkSoulPathMessage(MessageType type) : Message(type), _target(nullptr), _path(nullptr) {}
+		WalkSoulPathMessage(MessageType type) : Message(type), _target(EntityID::UNASSIGNED), _path(nullptr) {}
 
-		CPlaceable* _target;
+		TEntityID _target;
 		std::vector<Vector3>* _path;
 
 		virtual bool Dispatch(MessageHandler& handler) const
@@ -468,27 +468,33 @@ namespace Logic
 		ResourceMessage() : Message(MessageType::UNASSIGNED) {}
 
 		/** RESOURCES_CHANGE: Solicita el cambio (positivo/negativo) en la cantidad de recursos del tipo dado */
-		ResourceMessage(const ResourceType& resourceType, int change) : 
-			Message(MessageType::RESOURCES_CHANGE), 
-			_resourceType(resourceType),
-			_change(change) {}
+		void assembleResourcesChange(const ResourceType& resourceType, int change) {
+			_type = MessageType::RESOURCES_CHANGE;
+			_resourceType = resourceType;
+			_change = change;
+		}
 
-		/** RESOURCES_ASK: Solicita información sobre el recurso dado */
-		ResourceMessage(const ResourceType& resourceType) :
-			Message(MessageType::RESOURCES_ASK),
-			_resourceType(resourceType) {}
+		/** RESOURCES_ASK: Solicita información sobre el recurso dado de parte de caller, que será el que reciba la información */
+		void assembleResourcesAsk(const ResourceType& resourceType, TEntityID caller) {
+			_type = MessageType::RESOURCES_ASK;
+			_resourceType = resourceType;
+			_caller = caller;
+		}
 
 		/** RESOURCES_INFO: Devuelve la cantidad disponible y máxima del recurso indicado */
-		ResourceMessage(const ResourceType& resourceType, unsigned int available, unsigned int max) :
-			Message(MessageType::RESOURCES_INFO),
-			_resourceType(resourceType),
-			_available(available),
-			_max(max) {}
+		void assembleResourcesInfo(const ResourceType& resourceType, unsigned int available, unsigned int max, TEntityID caller) {
+			_type = MessageType::RESOURCES_INFO;
+			_resourceType = resourceType;
+			_available = available;
+			_max = max;
+			_caller = caller;
+		}
 
 		ResourceType _resourceType;
 		int _change;
 		unsigned int _available;
 		unsigned int _max;
+		TEntityID _caller;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -499,8 +505,6 @@ namespace Logic
 	enum LogisticsAction {
 		NEED_RESOURCES,
 		BRING_RESOURCES_TO,
-		DO_YOU_HAVE_RESOURCES,
-		I_HAVE_RESOURCES,
 	};
 
 	/** Mensajes de comunicación relacionados con la logística de recursos */
@@ -515,17 +519,9 @@ namespace Logic
 			_resourceQuantity(resourceQuantity),
 			_target(EntityID::UNASSIGNED) {}
 
-		// LogisticsAction::DO_YOU_HAVE_RESOURCES
-		LogisticsMessage(LogisticsAction action, ResourceType resourceType) :
-			Message(MessageType::UNASSIGNED),
-			_action(action),
-			_resourceType(resourceType),
-			_resourceQuantity(0),
-			_target(EntityID::UNASSIGNED) {}
-
-		// LogisticsAction::BRING_RESOURCES_TO, LogisticsAction::I_HAVE_RESOURCES
+		// LogisticsAction::BRING_RESOURCES_TO
 		LogisticsMessage(LogisticsAction action, ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target) :
-			Message(MessageType::UNASSIGNED),
+			Message(MessageType::LOGISTICS_REQUEST),
 			_action(action),
 			_resourceType(resourceType),
 			_resourceQuantity(resourceQuantity),

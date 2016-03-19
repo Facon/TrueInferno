@@ -20,7 +20,7 @@ namespace AI {
 		LAStatus OnRun(unsigned int msecs);
 
 	private:
-		CSMSoulData _smData;
+		CSMSoulData& _smData;
 
 		bool CLAWaitAndFollowPath::sendPath();
 	};

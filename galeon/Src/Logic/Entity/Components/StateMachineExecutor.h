@@ -97,69 +97,20 @@ namespace Logic
 				_currentAction->tick(msecs);
 			}
 		}
+		
+		SM_EXECUTOR_HANDLE_MESSAGE(WalkSoulPathMessage);
 
-		bool HandleMessage(const WalkSoulPathMessage& msg)
-		{
-			if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
-				return true;
-			if (_currentAction != NULL)
-				return _currentAction->HandleMessage(msg);
-			return false;
-		}
+		SM_EXECUTOR_HANDLE_MESSAGE(HellQuartersMessage);
 
-		bool HandleMessage(const HellQuartersMessage& msg)
-		{
-			if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
-				return true;
-			if (_currentAction != NULL)
-				return _currentAction->HandleMessage(msg);
-			return false;
-		}
+		SM_EXECUTOR_HANDLE_MESSAGE(SoulSenderMessage);
 
-		bool HandleMessage(const SoulSenderMessage& msg)
-		{
-			if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
-				return true;
-			if (_currentAction != NULL)
-				return _currentAction->HandleMessage(msg);
-			return false;
-		}
+		SM_EXECUTOR_HANDLE_MESSAGE(SoulMessage);
 
-		bool HandleMessage(const SoulMessage& msg)
-		{
-			if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
-				return true;
-			if (_currentAction != NULL)
-				return _currentAction->HandleMessage(msg);
-			return false;
-		}
+		SM_EXECUTOR_HANDLE_MESSAGE(NumberMessage);
 
-		bool HandleMessage(const NumberMessage& msg)
-		{
-			if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
-				return true;
-			if (_currentAction != NULL)
-				return _currentAction->HandleMessage(msg);
-			return false;
-		}
+		SM_EXECUTOR_HANDLE_MESSAGE(LogisticsMessage);
 
-		bool HandleMessage(const LogisticsMessage& msg)
-		{
-			if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
-				return true;
-			if (_currentAction != NULL)
-				return _currentAction->HandleMessage(msg);
-			return false;
-		}
-
-		bool HandleMessage(const ResourceMessage& msg)
-		{
-			if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg))
-				return true;
-			if (_currentAction != NULL)
-				return _currentAction->HandleMessage(msg);
-			return false;
-		}
+		SM_EXECUTOR_HANDLE_MESSAGE(ResourceMessage);
 
 	protected:
 		/**

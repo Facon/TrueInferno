@@ -19,7 +19,7 @@ namespace AI {
 		LAStatus OnRun(unsigned int msecs);
 
 	private:
-		CSMResourceTransformerData _smData;
+		CSMResourceTransformerData& _smData;
 		
 		const ResourceType _resourceFrom;
 

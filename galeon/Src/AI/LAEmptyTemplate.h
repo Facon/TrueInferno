@@ -20,7 +20,7 @@ namespace AI {
 		LAStatus OnRun(unsigned int msecs);
 
 	private:
-		CSMEmptyTemplateData _smData;
+		CSMEmptyTemplateData& _smData;
 
 		bool _requestReceived;
 	};

@@ -41,8 +41,8 @@ namespace AI {
 			if (!_pathRequestReceived)
 				return LAStatus::FAIL;
 
-			// Calculamos ruta desde la posición actual de la entidad hasta el objetivo que nos han dado
-			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(_entity->getPosition(), _walkingSoulTarget);
+			// Calculamos ruta desde la posición actual de la entidad hasta el objetivo
+			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(_entity->getPosition(), _entity->getMap()->getEntityByID(_walkingSoulTarget));
 
 			// Reintentamos si no se encontró ruta
 			if (path == nullptr){
@@ -62,7 +62,7 @@ namespace AI {
 		}
 
 	private:
-		CPlaceable* _walkingSoulTarget;
+		TEntityID _walkingSoulTarget;
 		bool _pathRequestReceived;
 	};
 

@@ -5,9 +5,9 @@
 #include "Logic\BuildingManager.h"
 
 namespace AI {
-	bool CLAFindProviders::HandleMessage(const LogisticsMessage& msg) {
+	bool CLAFindProviders::HandleMessage(const ResourceMessage& msg) {
 		// Rechazamos lo que no sean mensajes de información de recursos
-		if (msg._action != LogisticsAction::I_HAVE_RESOURCES)
+		if (msg._type != MessageType::RESOURCES_INFO)
 			return false;
 
 		// Guardamos los mensajes recibidos
@@ -21,8 +21,9 @@ namespace AI {
 		_smData.clearProviderMessages();
 		_elapsedTime = 0;
 
-		// Creamos el mensaje para preguntar disponibilidad de recursos
-		LogisticsMessage msg(LogisticsAction::DO_YOU_HAVE_RESOURCES, _smData.getResourceType());
+		// Creamos el mensaje para preguntar disponibilidad de recursos. Indicamos que somos nosotros los que preguntamos la info
+		ResourceMessage msg;
+		msg.assembleResourcesAsk(_smData.getResourceType(), _entity->getEntityID());
 
 		// Preguntamos a todos los edificios con el mensaje creado
 		if(Logic::CBuildingManager::getSingletonPtr()->HandleMessage(msg))

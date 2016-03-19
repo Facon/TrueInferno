@@ -6,6 +6,8 @@
 #include "Application/GaleonApplication.h"
 #include "Application/GameState.h"
 
+#include "Logic\Maps\EntityFactory.h"
+
 namespace AI {
 	bool CLAAttendResourceBuildingRequest::HandleMessage(const ResourceMessage& msg) {
 		// No se aceptan peticiones simultáneas
@@ -25,7 +27,7 @@ namespace AI {
 				std::cout << "Discarded changing (" << msg._change << ") resources below 0: " << newQuantity << std::endl;
 				return false;
 			}
-			else if (newQuantity > _smData.getMaxResources()){
+			else if (newQuantity > (int)_smData.getMaxResources()){
 				// Rechazamos para no sobrepasar el máximo
 				std::cout << "Discarded changing (" << msg._change << ") resources above limit: (" << _smData.getMaxResources() << "): " << newQuantity << std::endl;
 				return false;
@@ -43,9 +45,11 @@ namespace AI {
 		else{
 			return false;
 		}
-
+		
+		// Registramos que ya hemos recibido una petición este tick
 		_requestReceived = true;
 
+		// Guardamos el mensaje recibido
 		_msgReceived = msg;
 
 		// Reactivamos la LA
@@ -71,8 +75,15 @@ namespace AI {
 			return processResourcesChange();
 		}
 
-		else if (_msgReceived._type == MessageType::RESOURCES_INFO){
+		// Si es de petición de información
+		else if (_msgReceived._type == MessageType::RESOURCES_ASK){
 			return processResourcesInfo();
+		}
+
+		// En otro caso no deberíamos haber llegado aquí porque el mensaje no debería haberse aceptado
+		else{
+			assert(false && "Can't process this message type");
+			return LAStatus::FAIL;
 		}
 		
 		return LAStatus::SUCCESS;
@@ -80,6 +91,12 @@ namespace AI {
 
 	CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processResourcesChange(){
 		int change = _msgReceived._change;
+
+		// No deberíamos tener que procesar un mensaje con 0 recursos a cambiar
+		if (change == 0){
+			assert(false && "Discarding message with 0 resoures to change");
+			return LAStatus::SUCCESS;
+		}
 
 		// Los cambiamos
 		_smData.getStoredResources()[_msgReceived._resourceType] += change;
@@ -97,7 +114,7 @@ namespace AI {
 			change -= newQuantity;
 			newQuantity = 0;
 		}
-		else if (newQuantity > _smData.getMaxResources()){
+		else if (newQuantity > (int) _smData.getMaxResources()){
 			assert(false && "Changing resources over limit");
 
 			/** Si cantidad = 8 y cambio = 4 => nuevaCantidad = 12 (aunque el límite sea 10)
@@ -118,8 +135,23 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processResourcesInfo(){
-		// TODO Enviar mensaje con los recursos solicitados
-		return LAStatus::SUCCESS;
+		// Preparamos el mensaje de repuesta RESOURCES_INFO
+		ResourceType resourceType = _msgReceived._resourceType;
+		int resourceQuantity = _smData.getStoredResources()[resourceType];
+		ResourceMessage m;
+		m.assembleResourcesInfo(resourceType, resourceQuantity, _smData.getMaxResources(), _entity->getEntityID());
+		
+		// Buscamos la entidad que solicitó la información
+		CEntity* recipient = _entity->getMap()->getEntityByID(_msgReceived._caller);
+
+		// Le enviamos el mensaje a ver si lo acepta
+		if (m.Dispatch(*recipient))
+			return LAStatus::SUCCESS;
+
+		// O esperamos al siguiente tick
+		// TODO Hay que poner un límite a los reintentos. La entidad podría no existir
+		else
+			return LAStatus::RUNNING;
 	}
 	
 }

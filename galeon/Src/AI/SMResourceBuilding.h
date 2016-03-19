@@ -45,6 +45,7 @@ namespace AI {
 				}
 			}
 
+			// Guardamos el máximo almacenable de cada tipo de recurso
 			if (entityInfo->hasAttribute("maxResources")){
 				_data.setMaxResources(entityInfo->getIntAttribute("maxResources"));
 			}

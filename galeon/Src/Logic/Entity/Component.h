@@ -221,6 +221,8 @@ static bool RegisteredFactory_##Class = Class::regist();
 
 } // namespace Logic
 
+/** Macro para manejar mensajes en una SM (i.e. hijos de StateMachine)
+Propaga el mensaje adecuadamente para que llegue a las condiciones de transición entre estados */
 #define SM_HANDLE_MESSAGE(Class) \
 bool HandleMessage(const Class& msg){ \
 	bool ret = false; \
@@ -240,5 +242,15 @@ bool HandleMessage(const Class& msg){ \
 return ret; \
 }
 
+/** Macro para manejar mensajes en una componente ejecutor de SM (.e. hijos de StateMachineExecutor)
+Propaga el mensaje adecuadamente para que llegue a la propia SM y a la acción actual */
+#define SM_EXECUTOR_HANDLE_MESSAGE(Class) \
+bool HandleMessage(const Class& msg){ \
+	if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg)) \
+		return true; \
+	if (_currentAction != NULL) \
+		return _currentAction->HandleMessage(msg); \
+	return false; \
+}
 
 #endif // __Logic_Component_H

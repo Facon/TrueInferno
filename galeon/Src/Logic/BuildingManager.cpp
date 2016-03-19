@@ -320,10 +320,29 @@ namespace Logic {
 	bool CBuildingManager::HandleMessage(const LogisticsMessage& msg){
 		bool ret = false;
 
+		// Para cada tipo de edificio registrado
 		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
+			// Para cada uno de sus edificios
 			for (auto it2 = it->second->cbegin(); it2 != it->second->cend(); ++it2){
+				// Se reenvía el mensaje a la entidad del edificio
 				ret |= (*it2)->getEntity()->HandleMessage(msg);
 			}
+		}
+
+		return ret;
+	}
+
+	bool CBuildingManager::HandleMessage(const ResourceMessage& msg){
+		bool ret = false;
+
+		// Para cada tipo de edificio registrado
+		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
+			// Para cada uno de sus edificios
+			if (it->second != nullptr)
+				for (auto it2 = it->second->cbegin(); it2 != it->second->cend(); ++it2){
+					// Se reenvía el mensaje a la entidad del edificio
+					ret |= (*it2)->getEntity()->HandleMessage(msg);
+				}
 		}
 
 		return ret;

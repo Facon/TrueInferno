@@ -24,6 +24,7 @@ namespace Logic {
 	class Tile;
 	class CPlaceable;
 	class CTileManager;
+	class CEntity;
 }
 
 namespace AI {
@@ -70,6 +71,8 @@ class CServer
 
 		/** Calcula con A* una ruta de soulpaths desde un cierto Tile a otro. */
 		std::vector<Logic::Tile*>* getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to);
+
+		std::vector<Vector3>* getWalkingSoulAStarRoute(const Vector3& from, Logic::CEntity *to);
 
 		/** Calcula con A* una ruta para almas caminantes desde un punto hasta un placeable */
 		std::vector<Vector3>* getWalkingSoulAStarRoute(const Vector3& from, Logic::CPlaceable* to);

@@ -66,7 +66,7 @@ namespace AI {
 			return true;
 		}
 
-		SM_HANDLE_MESSAGE(NumberMessage);
+		SM_HANDLE_MESSAGE(ResourceMessage);
 
 	private:
 		/** Recurso de entrada */

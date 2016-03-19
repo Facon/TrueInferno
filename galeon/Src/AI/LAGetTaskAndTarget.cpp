@@ -1,5 +1,7 @@
 #include "LAGetTaskAndTarget.h"
 
+#include "Logic\Entity\Components\Placeable.h"
+
 namespace AI {
 	bool CLAGetTaskAndTarget::HandleMessage(const HellQuartersMessage& msg) {
 		// Rechazamos lo que no sean peticiones. No aceptamos más de una petición simultánea
@@ -14,7 +16,7 @@ namespace AI {
 				return false;
 
 			//std::unique_ptr<CBurnTask> _task(new CBurnTask(target));
-			_task = new CBurnTask(target);
+			_task = new CBurnTask(target->getEntity()->getMap(), target->getEntity()->getEntityID());
 			_numSouls = msg._numSouls;
 
 			break;
@@ -27,7 +29,7 @@ namespace AI {
 				return false;
 
 			//std::unique_ptr<CWorkTask> _task(new CWorkTask(target));
-			_task = new CWorkTask(target);
+			_task = new CWorkTask(target->getEntity()->getMap(), target->getEntity()->getEntityID());
 			_numSouls = msg._numSouls;
 
 			break;

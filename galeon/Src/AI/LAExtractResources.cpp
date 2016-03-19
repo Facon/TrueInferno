@@ -11,7 +11,8 @@ namespace AI {
 		unsigned int quantity = _maxExtractedQuantity;
 
 		// Notificamos el incremento de recursos
-		ResourceMessage m(_resourceType, quantity);
+		ResourceMessage m;
+		m.assembleResourcesChange(_resourceType, quantity);
 		if (!m.Dispatch(*_entity))
 			return LAStatus::RUNNING;
 

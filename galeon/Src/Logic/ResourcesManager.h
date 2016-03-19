@@ -36,7 +36,8 @@ namespace Logic
 	public:
 		static ResourceType parseResourceType(const std::string& name);
 
-		ResourcesManager() : _mineral(500), _gas(0), _coke(0), _crude(0), _pure(0), _refined(0), _aether(0) {}
+		//ResourcesManager() : _mineral(500), _gas(0), _coke(0), _crude(0), _pure(0), _refined(0), _aether(0) {}
+		ResourcesManager() : _mineral(1000000), _gas(1000000), _coke(0), _crude(0), _pure(0), _refined(0), _aether(0) {}
 
 		float getMineral() const { return _mineral; }
 		float getGas() const { return _gas; }

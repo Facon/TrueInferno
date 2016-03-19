@@ -15,7 +15,7 @@ namespace AI {
 
 		virtual ~CLAFindProviders() {}
 
-		virtual bool HandleMessage(const LogisticsMessage& msg);
+		virtual bool HandleMessage(const ResourceMessage& msg);
 
 	protected:
 		LAStatus OnStart();
@@ -23,7 +23,7 @@ namespace AI {
 		LAStatus OnRun(unsigned int msecs);
 
 	private:
-		CSMLogisticsData _smData;
+		CSMLogisticsData& _smData;
 
 		/** Tiempo (ms) que se espera a recibir respuestas */
 		unsigned int _maxWaitingTime;

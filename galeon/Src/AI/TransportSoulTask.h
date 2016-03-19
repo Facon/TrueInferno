@@ -9,7 +9,8 @@ namespace AI{
 	class CTransportTask : public CSoulTask {
 
 	public:
-		CTransportTask(const Logic::TEntityID& fromId, const Logic::TEntityID& toId, Logic::ResourceType resourceType, unsigned int resourceQuantity) : 
+		CTransportTask(Logic::CMap *map, const Logic::TEntityID& fromId, const Logic::TEntityID& toId, ResourceType resourceType, unsigned int resourceQuantity) :
+			CSoulTask(map, fromId),
 			_fromId(fromId), 
 			_toId(toId),
 			_resourceType(resourceType),
@@ -18,20 +19,38 @@ namespace AI{
 		virtual ~CTransportTask() {};
 
 		virtual CSoulTask* clone(){
-			return new CTransportTask(_fromId, _toId, _resourceType, _resourceQuantity);
+			return new CTransportTask(_map, _fromId, _toId, _resourceType, _resourceQuantity);
 		}
 
-		bool execute(CMap *map) {
-			// Notificamos al objetivo
-			CEntity *entity = map->getEntityByID(_fromId);
-			LogisticsMessage m(LogisticsAction::BRING_RESOURCES_TO, _resourceType, _resourceQuantity, _toId);
-			return m.Dispatch(*_target->getEntity());
+		bool execute() {
+			// Chequeamos que el objetivo siga existiendo
+			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
+
+			// Si lo está
+			if (targetEntity != nullptr){
+				// Notificamos al objetivo
+				LogisticsMessage m(LogisticsAction::BRING_RESOURCES_TO, _resourceType, _resourceQuantity, _toId);
+				return m.Dispatch(*targetEntity);
+			}
+
+			// Si no
+			else{
+				std::cout << "Soul's target for BurnSoulTask has disappeared" << std::endl;
+				return true;
+			}
 		};
 
 	private:
+		// Entidad desde la que debe partir el alma para comenzar el transporte
 		TEntityID _fromId;
+
+		// Entidad hasta la que deberá ir finalmente el alma
 		TEntityID _toId;
-		Logic::ResourceType _resourceType;
+
+		// Tipo de recurso que porta el alma
+		ResourceType _resourceType;
+
+		// Cantidad de recursos que porta el alma
 		unsigned int _resourceQuantity;
 	};
 

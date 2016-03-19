@@ -15,7 +15,7 @@ namespace AI {
 		LAStatus OnStart();
 
 	private:
-		CSMLogisticsData _smData;
+		CSMLogisticsData& _smData;
 	};
 }
 

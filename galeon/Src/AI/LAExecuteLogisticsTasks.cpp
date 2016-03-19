@@ -12,12 +12,12 @@ namespace AI {
 		Vector3 pos;
 		CMap *map;
 
-		bool operator() (LogisticsMessage i, LogisticsMessage j) {
-			Logic::CEntity* iEntity = map->getEntityByID(i._target);
+		bool operator() (ResourceMessage i, ResourceMessage j) {
+			Logic::CEntity* iEntity = map->getEntityByID(i._caller);
 			if (iEntity == nullptr)
 				return false; // i es null ==> j antes que i
 
-			Logic::CEntity* jEntity = map->getEntityByID(j._target);
+			Logic::CEntity* jEntity = map->getEntityByID(j._caller);
 			if (jEntity == nullptr)
 				return true; // j es null ==> i antes que j
 
@@ -28,7 +28,7 @@ namespace AI {
 
 	CLatentAction::LAStatus CLAExecuteLogisticsTasks::OnStart() {
 		// Obtenemos los mensajes de proveedores
-		std::vector<LogisticsMessage> providerMessages = _smData.getProviderMessages();
+		std::vector<ResourceMessage> providerMessages = _smData.getProviderMessages();
 
 		// Los ordenamos por distancia a nuestra posición
 		sorterByDistance.pos = _entity->getPosition();
@@ -43,10 +43,11 @@ namespace AI {
 				break;
 
 			// Nos aseguramos de no sobrepasar lo que nos queda por solicitar ni lo disponible en el proveedor
-			unsigned int request = std::min(_smData.getResourceQuantity(), it->_resourceQuantity);
+			unsigned int request = std::min(_smData.getResourceQuantity(), it->_available);
 
-			// Enviamos la petición de transporte de recursos desde el proveedor hacia nosotros. El alma primero viajará hacia el proveedor
-			SoulSenderMessage msg(new CTransportTask(it->_target, _entity->getEntityID(), it->_resourceType, request), 1);
+			/** Enviamos la petición de transporte de recursos desde el proveedor hacia nosotros.
+			El alma se creará en la ubicación actual, viajará hacia el proveedor y volverá con los recursos */
+			SoulSenderMessage msg(new CTransportTask(_entity->getMap(), it->_caller, _entity->getEntityID(), it->_resourceType, request), 1);
 			
 			// Si el mensaje es aceptado reducimos la cantidad restante por solicitar
 			if(msg.Dispatch(*_entity))

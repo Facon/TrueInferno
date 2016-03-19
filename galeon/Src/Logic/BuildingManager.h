@@ -131,6 +131,9 @@ namespace Logic
 		/** Transmite un mensaje a todos los edificios registrados. Devuelve true si alguno aceptó el mensaje */
 		bool HandleMessage(const LogisticsMessage& msg);
 
+		/** Transmite un mensaje a todos los edificios registrados. Devuelve true si alguno aceptó el mensaje */
+		bool HandleMessage(const ResourceMessage& msg);
+
 	protected:
 
 		/**

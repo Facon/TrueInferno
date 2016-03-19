@@ -39,15 +39,15 @@ namespace AI {
 		}
 
 		void clearProviderMessages(){
-			_msgs.clear();
+			_providerMessages.clear();
 		}
 
-		void addProviderMessage(LogisticsMessage msg){
-			_msgs.push_back(msg);
+		void addProviderMessage(ResourceMessage msg){
+			_providerMessages.push_back(msg);
 		}
 
-		std::vector<LogisticsMessage> getProviderMessages(){
-			return _msgs;
+		std::vector<ResourceMessage> getProviderMessages(){
+			return _providerMessages;
 		}
 		
 	private:
@@ -56,7 +56,7 @@ namespace AI {
 		unsigned int _resourceQuantity;
 
 		/** Vector con los mensajes recibidos con información de recursos */
-		std::vector<LogisticsMessage> _msgs;
+		std::vector<ResourceMessage> _providerMessages;
 	};
 }
 
