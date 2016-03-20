@@ -1,7 +1,7 @@
-#include "LAExecuteLogisticsTasks.h"
+#include "LAExecuteResourceDemandTasks.h"
 
 #include "Logic\Entity\Message.h"
-#include "AI\SMLogisticsData.h"
+#include "AI\SMResourceDemanderData.h"
 #include <algorithm>
 #include "Logic\Maps\Map.h"
 #include "TransportSoulTask.h"
@@ -26,24 +26,11 @@ namespace AI {
 
 	} sorterByDistance;
 
-	CLatentAction::LAStatus CLAExecuteLogisticsTasks::OnStart() {
+	CLatentAction::LAStatus CLAExecuteResourceDemandTasks::OnStart() {
 		return LAStatus::RUNNING;
 	}
 
-	CLatentAction::LAStatus CLAExecuteLogisticsTasks::OnRun(unsigned int msecs){
-		if (_smData.getAction() == LogisticsAction::NEED_RESOURCES)
-			return processNeedResources();
-
-		else if (_smData.getAction() == LogisticsAction::BRING_RESOURCES_TO)
-			return processBringResourcesTo();
-		
-		else{
-			assert(false && "Unimplemented logic for this LogisticsAction");
-			return LAStatus::FAIL;
-		}
-	}
-
-	CLatentAction::LAStatus CLAExecuteLogisticsTasks::processNeedResources() {
+	CLatentAction::LAStatus CLAExecuteResourceDemandTasks::OnRun(unsigned int msecs){
 		// Obtenemos los mensajes de proveedores
 		std::vector<ResourceMessage> providerMessages = _smData.getProviderMessages();
 
@@ -77,11 +64,6 @@ namespace AI {
 			return LAStatus::SUCCESS;
 		else
 			return LAStatus::FAIL;
-	}
-
-	CLatentAction::LAStatus CLAExecuteLogisticsTasks::processBringResourcesTo() {
-		std::cout << "Unimplemented logic for 'processBringResourcesTo'" << std::endl;
-		return LAStatus::FAIL; // TODO
 	}
 
 }

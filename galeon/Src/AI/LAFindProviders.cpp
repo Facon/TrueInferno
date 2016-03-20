@@ -1,7 +1,6 @@
 #include "LAFindProviders.h"
 
 #include "Logic\Entity\Message.h"
-#include "AI\SMEmptyTemplateData.h"
 #include "Logic\BuildingManager.h"
 
 namespace AI {

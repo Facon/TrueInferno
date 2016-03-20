@@ -28,7 +28,8 @@ namespace AI{
 			// Si lo está
 			if (targetEntity != nullptr){
 				// Notificamos al objetivo para que lleve los recursos al destino
-				LogisticsMessage m(LogisticsAction::BRING_RESOURCES_TO, _resourceType, _resourceQuantity, _toId);
+				LogisticsMessage m;
+				m.assembleProvideResources(_resourceType, _resourceQuantity, _toId);
 				return m.Dispatch(*targetEntity);
 			}
 

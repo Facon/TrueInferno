@@ -128,16 +128,10 @@
     <ClCompile Include="..\..\Src\AI\LAExtractResources.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LAWaitLogisticsRequest.cpp">
-      <Filter>Decision\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAEmptyTemplate.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAFindProviders.cpp">
-      <Filter>Decision\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LAExecuteLogisticsTasks.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAAskAndWaitResources.cpp">
@@ -150,6 +144,18 @@
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAAttendResourceBuildingRequest.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAWaitResourceDemand.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAWaitResourceProvide.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAExecuteResourceDemandTasks.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAExecuteResourceProvideTasks.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -274,15 +280,6 @@
     <ClInclude Include="..\..\Src\AI\LAExtractResources.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AI\SMLogisticsData.h">
-      <Filter>Decision\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AI\SMLogistics.h">
-      <Filter>Decision\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LAWaitLogisticsRequest.h">
-      <Filter>Decision\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAEmptyTemplate.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
@@ -290,9 +287,6 @@
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAFindProviders.h">
-      <Filter>Decision\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LAExecuteLogisticsTasks.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\TransportSoulTask.h">
@@ -323,6 +317,30 @@
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAAttendResourceBuildingRequest.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMResourceDemander.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMResourceDemanderData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMResourceProvider.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMResourceProviderData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAWaitResourceDemand.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAWaitResourceProvide.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAExecuteResourceDemandTasks.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAExecuteResourceProvideTasks.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

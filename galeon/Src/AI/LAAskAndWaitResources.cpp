@@ -14,7 +14,8 @@ namespace AI {
 			needed = 0;
 
 		// Pedimos los recursos calculados
-		LogisticsMessage m(LogisticsAction::NEED_RESOURCES, _resourceFrom, needed);
+		LogisticsMessage m;
+		m.assembleDemandResources(_resourceFrom, needed);
 		
 		// Intentamos transmitir la petición
 		if (m.Dispatch(*_entity))

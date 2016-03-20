@@ -1,28 +1,20 @@
-#ifndef SM_LOGISTICS_DATA_
-#define SM_LOGISTICS_DATA_
+#ifndef SM_RESOURCE_DEMANDER_DATA_H_
+#define SM_RESOURCE_DEMANDER_DATA_H_
 
 #include "Logic\ResourcesManager.h"
 #include <vector>
 
+using namespace Logic;
+
 namespace AI {
-	class CSMLogisticsData {
+	class CSMResourceDemanderData {
 
 	public:
-		CSMLogisticsData() : 
+		CSMResourceDemanderData() : 
 			_resourceType(ResourceType::NONE),
 			_resourceQuantity(0) {}
 
-		virtual ~CSMLogisticsData() {}
-
-		/** Devuelve la acción solicitada */
-		LogisticsAction getAction() const{
-			return _action;
-		}
-
-		/** Establece la acción solicitada */
-		void setAction(LogisticsAction action){
-			_action = action;
-		}
+		virtual ~CSMResourceDemanderData() {}
 
 		/** Devuelve el tipo de recurso asociado a la acción */
 		ResourceType getResourceType() const{
@@ -60,9 +52,6 @@ namespace AI {
 		}
 		
 	private:
-		/** Acción solicitada */
-		LogisticsAction _action;
-
 		/** Tipo de recurso asociado a la acción */
 		ResourceType _resourceType;
 
@@ -74,4 +63,4 @@ namespace AI {
 	};
 }
 
-#endif
+#endif // SM_RESOURCE_DEMANDER_DATA_H_

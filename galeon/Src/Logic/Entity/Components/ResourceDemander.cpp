@@ -1,13 +1,13 @@
-#include "Logistics.h"
+#include "ResourceDemander.h"
 
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Entity.h"
 
 namespace Logic {
-	RTTI_ROOT_IMPL(CLogistics);
-	IMP_FACTORY(CLogistics);
+	RTTI_ROOT_IMPL(CResourceDemander);
+	IMP_FACTORY(CResourceDemander);
 
-	bool CLogistics::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+	bool CResourceDemander::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 		// Garantizamos que se llama al padre
 		if (!CStateMachineExecutor::spawn(entity, map, entityInfo))
 			return false;
@@ -15,7 +15,7 @@ namespace Logic {
 		return true;
 	} // spawn
 
-	void CLogistics::tick(unsigned int msecs){
+	void CResourceDemander::tick(unsigned int msecs){
 		CStateMachineExecutor::tick(msecs);
 	} // tick
 

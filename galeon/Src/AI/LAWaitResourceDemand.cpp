@@ -1,12 +1,12 @@
-#include "LAWaitLogisticsRequest.h"
+#include "LAWaitResourceDemand.h"
 
 #include "Logic\Entity\Message.h"
-#include "AI\SMLogisticsData.h"
+#include "AI\SMResourceDemanderData.h"
 
 namespace AI {
-	bool CLAWaitLogisticsRequest::HandleMessage(const LogisticsMessage& msg) {
+	bool CLAWaitResourceDemand::HandleMessage(const LogisticsMessage& msg) {
 		// Rechazamos lo que no sean mensajes de petición
-		if (msg._type != MessageType::LOGISTICS_REQUEST)
+		if (msg._type != MessageType::LOGISTICS_DEMAND_RESOURCES)
 			return false;
 
 		// No se aceptan peticiones simultáneas
@@ -16,7 +16,6 @@ namespace AI {
 		_requestReceived = true;
 
 		// Guardamos datos en la memoria compartida de la SM
-		_smData.setAction(msg._action);
 		_smData.setResourceType(msg._resourceType);
 		_smData.setResourceQuantity(msg._resourceQuantity);
 
@@ -26,7 +25,7 @@ namespace AI {
 		return true;
 	}
 
-	CLatentAction::LAStatus CLAWaitLogisticsRequest::OnStart() {
+	CLatentAction::LAStatus CLAWaitResourceDemand::OnStart() {
 		// Inicializamos
 		_requestReceived = false;
 
@@ -34,7 +33,7 @@ namespace AI {
 		return LAStatus::SUSPENDED;
 	}
 
-	CLatentAction::LAStatus CLAWaitLogisticsRequest::OnRun(unsigned int msecs) {
+	CLatentAction::LAStatus CLAWaitResourceDemand::OnRun(unsigned int msecs) {
 		return LAStatus::SUCCESS;
 	}
 

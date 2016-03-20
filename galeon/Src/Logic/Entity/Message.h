@@ -73,7 +73,8 @@ namespace Logic
 			RESOURCES_CHANGE,
 			RESOURCES_ASK,
 			RESOURCES_INFO,
-			LOGISTICS_REQUEST,
+			LOGISTICS_DEMAND_RESOURCES,
+			LOGISTICS_PROVIDE_RESOURCES,
 		};
 	}
 
@@ -504,32 +505,28 @@ namespace Logic
 		}
 	};
 
-	enum LogisticsAction {
-		NEED_RESOURCES,
-		BRING_RESOURCES_TO,
-	};
-
 	/** Mensajes de comunicación relacionados con la logística de recursos */
 	class LogisticsMessage : public Message
 	{
 	public:
-		// LogisticsAction::NEED_RESOURCES
-		LogisticsMessage(LogisticsAction action, ResourceType resourceType, unsigned int resourceQuantity) :
-			Message(MessageType::LOGISTICS_REQUEST), 
-			_action(action),
-			_resourceType(resourceType),
-			_resourceQuantity(resourceQuantity),
-			_target(EntityID::UNASSIGNED) {}
+		LogisticsMessage() : Message(MessageType::UNASSIGNED) {}
 
-		// LogisticsAction::BRING_RESOURCES_TO
-		LogisticsMessage(LogisticsAction action, ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target) :
-			Message(MessageType::LOGISTICS_REQUEST),
-			_action(action),
-			_resourceType(resourceType),
-			_resourceQuantity(resourceQuantity),
-			_target(target) {}
+		// LOGISTICS_DEMAND_RESOURCES
+		void assembleDemandResources(ResourceType resourceType, unsigned int resourceQuantity) {
+			_type = MessageType::LOGISTICS_DEMAND_RESOURCES;
+			_resourceType = resourceType;
+			_resourceQuantity = resourceQuantity;
+			_target = EntityID::UNASSIGNED;
+		}
 
-		LogisticsAction _action;
+		// LOGISTICS_PROVIDE_RESOURCES
+		void assembleProvideResources(ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target) {
+			_type = MessageType::LOGISTICS_PROVIDE_RESOURCES;
+			_resourceType = resourceType;
+			_resourceQuantity = resourceQuantity;
+			_target = target;
+		}
+
 		ResourceType _resourceType;
 		unsigned int _resourceQuantity;
 		TEntityID _target;

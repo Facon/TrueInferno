@@ -1,5 +1,5 @@
-#ifndef LOGISTICS_H_
-#define LOGISTICS_H_
+#ifndef RESOURCE_PROVIDER_H_
+#define RESOURCE_PROVIDER_H_
 
 #include "StateMachineExecutor.h"
 
@@ -8,21 +8,21 @@
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Component.h"
 
-#include "AI/SMLogistics.h"
+#include "AI/SMResourceProvider.h"
 #include "AI/LatentAction.h"
 
 namespace Logic {
-	class CLogistics : public CStateMachineExecutor<AI::CSMLogisticsData> {
+	class CResourceProvider : public CStateMachineExecutor<AI::CSMResourceProviderData> {
 		RTTI_DECL;
-		DEC_FACTORY(CLogistics);
+		DEC_FACTORY(CResourceProvider);
 
 	public:
 		/**
 		Constructor por defecto.
 		*/
-		CLogistics() {}
+		CResourceProvider() {}
 
-		virtual ~CLogistics() {}
+		virtual ~CResourceProvider() {}
 
 		/**
 		Inicialización del componente usando la descripción de la entidad que hay en
@@ -36,14 +36,14 @@ namespace Logic {
 		virtual void tick(unsigned int msecs);
 
 	protected:
-		AI::CStateMachine<AI::CLatentAction, AI::CSMLogisticsData>* getStateMachine(){
-			return new AI::CSMLogistics(_entity);
+		AI::CStateMachine<AI::CLatentAction, AI::CSMResourceProviderData>* getStateMachine(){
+			return new AI::CSMResourceProvider(_entity);
 		}
 
-	}; // class CLogistics
+	}; // class CResourceProvider
 
-	REG_FACTORY(CLogistics);
+	REG_FACTORY(CResourceProvider);
 
 } // namespace Logic
 
-#endif // LOGISTICS_H_
+#endif // RESOURCE_PROVIDER_H_

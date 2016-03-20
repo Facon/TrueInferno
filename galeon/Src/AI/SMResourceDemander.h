@@ -1,31 +1,30 @@
-#ifndef SM_LOGISTICS_
-#define SM_LOGISTICS_
+#ifndef SM_RESOURCE_DEMANDER_H_
+#define SM_RESOURCE_DEMANDER_H_
 
 #include "StateMachine.h"
 #include "Logic\Entity\Message.h"
-#include "AI\LAWaitLogisticsRequest.h"
+#include "AI\LAWaitResourceDemand.h"
 #include "AI\LAFindProviders.h"
-#include "AI\LAExecuteLogisticsTasks.h"
-#include "AI\Server.h"
+#include "AI\LAExecuteResourceDemandTasks.h"
+#include "AI\SMResourceDemanderData.h"
 
 namespace AI {
 	/**
-	Clase con la lógica de SMLogistics que gestiona las tareas de logística de recursos de un edificio
-	- En el estado inicial espera peticiones de otras entidades/componentes
-	- Si recibe una petición pasa al estado de proceso
-	- Se queda a la espera 
-
+	Clase con la lógica de SMResourceDemander que gestiona las demandas de recursos de un edificio:
+	1) Espera peticiones de demanda de un recurso
+	2) Busca proveedores para cubrir la demanda
+	3) Crea tareas para enviar almas a los proveedores para que traigan los recursos
 	*/
-	class CSMLogistics : public CStateMachine<CLatentAction, CSMLogisticsData> {
+	class CSMResourceDemander : public CStateMachine<CLatentAction, CSMResourceDemanderData> {
 	public:
-		CSMLogistics(CEntity* entity) : CStateMachine(entity) {}
+		CSMResourceDemander(CEntity* entity) : CStateMachine(entity) {}
 
-		virtual ~CSMLogistics() {}
+		virtual ~CSMResourceDemander() {}
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
-			int waitRequest = this->addNode(new CLAWaitLogisticsRequest(entity, _data));
+			int waitRequest = this->addNode(new CLAWaitResourceDemand(entity, _data));
 			int findProviders = this->addNode(new CLAFindProviders(entity, _data));
-			int executeTasks = this->addNode(new CLAExecuteLogisticsTasks(entity, _data));
+			int executeTasks = this->addNode(new CLAExecuteResourceDemandTasks(entity, _data));
 
 			this->addEdge(waitRequest, findProviders, new CConditionSuccess());
 			this->addEdge(waitRequest, waitRequest, new CConditionFail());
