@@ -474,19 +474,20 @@ namespace Logic
 			_change = change;
 		}
 
-		/** RESOURCES_ASK: Solicita información sobre el recurso dado de parte de caller, que será el que reciba la información */
+		/** RESOURCES_ASK: Solicita información sobre el recurso del tipo dado y el ID de la entidad que envía la solicitud */
 		void assembleResourcesAsk(const ResourceType& resourceType, TEntityID caller) {
 			_type = MessageType::RESOURCES_ASK;
 			_resourceType = resourceType;
 			_caller = caller;
 		}
 
-		/** RESOURCES_INFO: Devuelve la cantidad disponible y máxima del recurso indicado */
-		void assembleResourcesInfo(const ResourceType& resourceType, unsigned int available, unsigned int max, TEntityID caller) {
+		/** RESOURCES_INFO: Devuelve la cantidad disponible y máxima del recurso indicado, si el recurso se provee externamente y el ID de la entidad que tiene los recursos */
+		void assembleResourcesInfo(const ResourceType& resourceType, unsigned int available, unsigned int max, bool provides, TEntityID caller) {
 			_type = MessageType::RESOURCES_INFO;
 			_resourceType = resourceType;
 			_available = available;
 			_max = max;
+			_provides = provides;
 			_caller = caller;
 		}
 
@@ -494,6 +495,7 @@ namespace Logic
 		int _change;
 		unsigned int _available;
 		unsigned int _max;
+		bool _provides;
 		TEntityID _caller;
 
 		virtual bool Dispatch(MessageHandler& handler) const

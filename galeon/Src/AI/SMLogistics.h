@@ -18,7 +18,11 @@ namespace AI {
 	*/
 	class CSMLogistics : public CStateMachine<CLatentAction, CSMLogisticsData> {
 	public:
-		CSMLogistics(CEntity* entity) : CStateMachine(entity) {
+		CSMLogistics(CEntity* entity) : CStateMachine(entity) {}
+
+		virtual ~CSMLogistics() {}
+
+		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			int waitRequest = this->addNode(new CLAWaitLogisticsRequest(entity, _data));
 			int findProviders = this->addNode(new CLAFindProviders(entity, _data));
 			int executeTasks = this->addNode(new CLAExecuteLogisticsTasks(entity, _data));
@@ -34,11 +38,7 @@ namespace AI {
 
 			this->setInitialNode(waitRequest);
 			this->resetExecution();
-		}
 
-		virtual ~CSMLogistics() {}
-
-		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			return true;
 		}
 

@@ -14,6 +14,12 @@ namespace AI {
 	protected:
 		LAStatus OnStart();
 
+		LAStatus OnRun(unsigned int msecs);
+
+		LAStatus processNeedResources();
+
+		LAStatus processBringResourcesTo();
+
 	private:
 		CSMLogisticsData& _smData;
 	};

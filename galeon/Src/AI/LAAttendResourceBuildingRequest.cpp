@@ -138,8 +138,9 @@ namespace AI {
 		// Preparamos el mensaje de repuesta RESOURCES_INFO
 		ResourceType resourceType = _msgReceived._resourceType;
 		int resourceQuantity = _smData.getStoredResources()[resourceType];
+		bool provides = _smData.getProvidedResources().count(resourceType) > 0;
 		ResourceMessage m;
-		m.assembleResourcesInfo(resourceType, resourceQuantity, _smData.getMaxResources(), _entity->getEntityID());
+		m.assembleResourcesInfo(resourceType, resourceQuantity, _smData.getMaxResources(), provides, _entity->getEntityID());
 		
 		// Buscamos la entidad que solicitó la información
 		CEntity* recipient = _entity->getMap()->getEntityByID(_msgReceived._caller);
