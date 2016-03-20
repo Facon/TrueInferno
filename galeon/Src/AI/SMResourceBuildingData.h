@@ -38,7 +38,7 @@ namespace AI {
 			return _maxResources;
 		}
 
-		void setMaxResources(int maxResources){
+		void setMaxResources(unsigned int maxResources){
 			_maxResources = maxResources;
 		}
 

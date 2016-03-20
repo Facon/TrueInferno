@@ -24,7 +24,7 @@ namespace AI {
 		// Notificamos el decremento de recursos de entrada si no está hecho ya
 		if (!_decrementDone){
 			ResourceMessage mDecrementFrom;
-			mDecrementFrom.assembleResourcesChange(_resourceFrom, (int)_transformed);
+			mDecrementFrom.assembleResourcesChange(_resourceFrom, -(int)_transformed);
 
 			// Si falla intentaremos en el siguiente tick
 			if (!mDecrementFrom.Dispatch(*_entity)){

@@ -158,7 +158,7 @@
     <ClCompile Include="..\..\Src\AI\LAExecuteResourceProvideTasks.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LAPayCosts.cpp">
+    <ClCompile Include="..\..\Src\AI\LAPickUpResources.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -343,14 +343,14 @@
     <ClInclude Include="..\..\Src\AI\LAExecuteResourceProvideTasks.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LAPayCosts.h">
-      <Filter>Decision\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\AI\RequestTransportSoulTask.h">
       <Filter>Souls\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\PerformTransportSoulTask.h">
       <Filter>Souls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAPickUpResources.h">
+      <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -96,7 +96,7 @@
     <ClCompile Include="..\..\Src\AI\LAExtractResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAFindProviders.cpp" />
     <ClCompile Include="..\..\Src\AI\LAGatherSouls.cpp" />
-    <ClCompile Include="..\..\Src\AI\LAPayCosts.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAPickUpResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LARecountResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LATransformResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitAndFollowPath.cpp" />
@@ -134,7 +134,7 @@
     <ClInclude Include="..\..\Src\AI\LAExtractResources.h" />
     <ClInclude Include="..\..\Src\AI\LAFindProviders.h" />
     <ClInclude Include="..\..\Src\AI\LAGatherSouls.h" />
-    <ClInclude Include="..\..\Src\AI\LAPayCosts.h" />
+    <ClInclude Include="..\..\Src\AI\LAPickUpResources.h" />
     <ClInclude Include="..\..\Src\AI\LARecountResources.h" />
     <ClInclude Include="..\..\Src\AI\LATransformResources.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitAndFollowPath.h" />

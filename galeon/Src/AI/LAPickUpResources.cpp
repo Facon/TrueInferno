@@ -1,10 +1,10 @@
-#include "LAPayCosts.h"
+#include "LAPickUpResources.h"
 
 #include "Logic\Entity\Message.h"
 #include "AI\SMResourceProviderData.h"
 
 namespace AI {
-	bool CLAPayCosts::HandleMessage(const ResourceMessage& msg) {
+	bool CLAPickUpResources::HandleMessage(const ResourceMessage& msg) {
 		/* TODO De momento la confirmación de pago de costes no se envía por mensaje
 		// Rechazamos lo que no sean mensajes de petición
 		if (msg._type != MessageType::RESOURCES_CHANGED)
@@ -24,15 +24,15 @@ namespace AI {
 		return false;
 	}
 
-	CLatentAction::LAStatus CLAPayCosts::OnStart() {
+	CLatentAction::LAStatus CLAPickUpResources::OnStart() {
 		// Inicializamos
 		_requestReceived = false;
 
-		// Se envía la solicitud de pago de costes
+		// Recogemos los recursos
 		ResourceMessage m;
-		m.assembleResourcesChange(_smData.getResourceType(), _smData.getResourceQuantity());
+		m.assembleResourcesChange(_smData.getResourceType(), -(int)_smData.getResourceQuantity());
 		
-		// Si lo aceptan es que se completó el pago
+		// Si lo aceptan es que se completó la recolección
 		// TODO Sería conveniente enviar la petición de pago exigiendo confirmación. En este punto pasaríamos a esperar dicho mensaje
 		if (m.Dispatch(*_entity))
 			return LAStatus::RUNNING;
@@ -42,7 +42,7 @@ namespace AI {
 			return LAStatus::READY;
 	}
 
-	CLatentAction::LAStatus CLAPayCosts::OnRun(unsigned int msecs) {
+	CLatentAction::LAStatus CLAPickUpResources::OnRun(unsigned int msecs) {
 		return LAStatus::SUCCESS;
 	}
 
