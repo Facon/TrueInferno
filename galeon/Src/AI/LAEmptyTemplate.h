@@ -1,6 +1,6 @@
 /*
-#ifndef LA_TEMPLATE_
-#define LA_TEMPLATE_
+#ifndef LA_TEMPLATE_H_
+#define LA_TEMPLATE_H_
 
 #include "AI\LatentAction.h"
 #include "AI\SMEmptyTemplateData.h"
@@ -26,5 +26,5 @@ namespace AI {
 	};
 }
 
-#endif
+#endif // LA_TEMPLATE_H_
 */

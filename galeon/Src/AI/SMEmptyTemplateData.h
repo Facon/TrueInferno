@@ -1,6 +1,6 @@
 /*
-#ifndef SM_EMPTY_TEMPLATE_DATA_
-#define SM_EMPTY_TEMPLATE_DATA_
+#ifndef SM_EMPTY_TEMPLATE_DATA_H_
+#define SM_EMPTY_TEMPLATE_DATA_H_
 
 namespace AI {
 	class CSMEmptyTemplateData {
@@ -22,5 +22,5 @@ namespace AI {
 	};
 }
 
-#endif
+#endif // SM_EMPTY_TEMPLATE_DATA_H_
 */

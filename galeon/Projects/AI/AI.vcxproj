@@ -96,6 +96,7 @@
     <ClCompile Include="..\..\Src\AI\LAExtractResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAFindProviders.cpp" />
     <ClCompile Include="..\..\Src\AI\LAGatherSouls.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAPayCosts.cpp" />
     <ClCompile Include="..\..\Src\AI\LARecountResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LATransformResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitAndFollowPath.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="..\..\Src\AI\LAExtractResources.h" />
     <ClInclude Include="..\..\Src\AI\LAFindProviders.h" />
     <ClInclude Include="..\..\Src\AI\LAGatherSouls.h" />
+    <ClInclude Include="..\..\Src\AI\LAPayCosts.h" />
     <ClInclude Include="..\..\Src\AI\LARecountResources.h" />
     <ClInclude Include="..\..\Src\AI\LATransformResources.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitAndFollowPath.h" />
@@ -146,6 +148,7 @@
     <ClInclude Include="..\..\Src\AI\LatentAction.h" />
     <ClInclude Include="..\..\Src\AI\micropather.h" />
     <ClInclude Include="..\..\Src\AI\Movement.h" />
+    <ClInclude Include="..\..\Src\AI\RequestTransportSoulTask.h" />
     <ClInclude Include="..\..\Src\AI\Server.h" />
     <ClInclude Include="..\..\Src\AI\SimpleLatentActions.h" />
     <ClInclude Include="..\..\Src\AI\SMEmptyTemplate.h" />
@@ -169,7 +172,7 @@
     <ClInclude Include="..\..\Src\AI\SMSoulSender.h" />
     <ClInclude Include="..\..\Src\AI\SoulTask.h" />
     <ClInclude Include="..\..\Src\AI\StateMachine.h" />
-    <ClInclude Include="..\..\Src\AI\TransportSoulTask.h" />
+    <ClInclude Include="..\..\Src\AI\PerformTransportSoulTask.h" />
     <ClInclude Include="..\..\Src\AI\UndirectedGraph.h" />
     <ClInclude Include="..\..\Src\AI\WaypointGraph.h" />
     <ClInclude Include="..\..\Src\AI\WorkSoulTask.h" />

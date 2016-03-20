@@ -71,6 +71,7 @@ namespace Logic
 			SOUL_RESPONSE,
 			FURNACE_BURN_SOULS,
 			RESOURCES_CHANGE,
+			RESOURCES_CHANGED,
 			RESOURCES_ASK,
 			RESOURCES_INFO,
 			LOGISTICS_DEMAND_RESOURCES,
@@ -457,7 +458,8 @@ namespace Logic
 	};
 
 	/** Mensajes relativos a los recursos: 
-		- RESOURCES_CHANGE: Modificación de recursos
+		- RESOURCES_CHANGE: Solicitud de modificación de recursos
+		- (TODO De momento la confirmación equivale a que el HandleMessage devuelva true) RESOURCES_CHANGED: Confirmación a la solicitud de modificación de recursos
 		- RESOURCES_ASK: Consulta de recursos disponibles
 		- RESOURCES_INFO: Información de recursos disponibles */
 	class ResourceMessage : public Message

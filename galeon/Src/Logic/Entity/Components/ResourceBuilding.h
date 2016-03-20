@@ -1,5 +1,5 @@
-#ifndef RESOURCE_BUILDING_
-#define RESOURCE_BUILDING_
+#ifndef RESOURCE_BUILDING_H_
+#define RESOURCE_BUILDING_H_
 
 #include "StateMachineExecutor.h"
 
@@ -34,4 +34,4 @@ namespace Logic {
 
 } // namespace Logic
 
-#endif // RESOURCE_BUILDING_
+#endif // RESOURCE_BUILDING_H_

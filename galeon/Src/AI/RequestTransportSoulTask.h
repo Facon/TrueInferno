@@ -1,29 +1,34 @@
-#ifndef TRANSPORT_SOUL_TASK_
-#define TRANSPORT_SOUL_TASK_
+#ifndef REQUEST_TRANSPORT_SOUL_TASK_H_
+#define REQUEST_TRANSPORT_SOUL_TASK_H_
 
 #include "SoulTask.h"
 #include "Logic\Entity\Message.h"
+#include "Logic\ResourcesManager.h"
+#include "Logic\Maps\Map.h"
+#include "Logic\Entity\Entity.h"
+
+using namespace Logic;
 
 namespace AI{
 
-	class CTransportTask : public CSoulTask {
+	class CRequestTransportSoulTask : public CSoulTask {
 
 	public:
-		CTransportTask(Logic::CMap *map, const Logic::TEntityID& fromId, const Logic::TEntityID& toId, ResourceType resourceType, unsigned int resourceQuantity) :
-			CSoulTask(map, fromId), // El objetivo es el punto de inicio del transporte
+		CRequestTransportSoulTask(CMap *map, const TEntityID& fromId, const TEntityID& toId, ResourceType resourceType, unsigned int resourceQuantity) :
+			CSoulTask(map, fromId), // El objetivo es el punto de inicio donde solicitaremos el transporte
 			_toId(toId),
 			_resourceType(resourceType),
 			_resourceQuantity(resourceQuantity) {};
 
-		virtual ~CTransportTask() {};
+		virtual ~CRequestTransportSoulTask() {};
 
 		virtual CSoulTask* clone(){
-			return new CTransportTask(_map, _target, _toId, _resourceType, _resourceQuantity);
+			return new CRequestTransportSoulTask(_map, _target, _toId, _resourceType, _resourceQuantity);
 		}
 
 		bool execute() {
 			// Chequeamos que el objetivo al que acabamos de llegar siga existiendo
-			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
+			CEntity* targetEntity = _map->getEntityByID(_target);
 
 			// Si lo está
 			if (targetEntity != nullptr){
@@ -35,7 +40,7 @@ namespace AI{
 
 			// Si no
 			else{
-				std::cout << "Soul's target for TransportTask has disappeared" << std::endl;
+				std::cout << "Soul's target for RequestTransportSoulTask has disappeared" << std::endl;
 				return true;
 			}
 		};
@@ -47,13 +52,13 @@ namespace AI{
 		// Entidad hasta la que deberá ir finalmente el alma
 		TEntityID _toId;
 
-		// Tipo de recurso que porta el alma
+		// Tipo de recurso que portará el alma
 		ResourceType _resourceType;
 
-		// Cantidad de recursos que porta el alma
+		// Cantidad de recursos que portará el alma
 		unsigned int _resourceQuantity;
 	};
 
 }
 
-#endif
+#endif // REQUEST_TRANSPORT_SOUL_TASK_H_

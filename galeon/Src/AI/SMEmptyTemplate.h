@@ -1,6 +1,6 @@
 /*
-#ifndef SM_EMPTY_TEMPLATE_
-#define SM_EMPTY_TEMPLATE_
+#ifndef SM_EMPTY_TEMPLATE_H_
+#define SM_EMPTY_TEMPLATE_H_
 
 #include "Logic\Entity\Message.h"
 
@@ -34,5 +34,5 @@ namespace AI {
 	};
 }
 
-#endif // SM_EMPTY_TEMPLATE_
+#endif // SM_EMPTY_TEMPLATE_H_
 */

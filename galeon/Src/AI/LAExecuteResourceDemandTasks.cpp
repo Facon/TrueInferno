@@ -4,7 +4,7 @@
 #include "AI\SMResourceDemanderData.h"
 #include <algorithm>
 #include "Logic\Maps\Map.h"
-#include "TransportSoulTask.h"
+#include "RequestTransportSoulTask.h"
 
 namespace AI {
 	// Objeto para ordenar por distancia a un punto fijo
@@ -52,7 +52,7 @@ namespace AI {
 
 			/** Enviamos la petición de transporte de recursos desde el proveedor hacia nosotros.
 			El alma se creará en la ubicación actual, viajará hacia el proveedor y volverá con los recursos */
-			SoulSenderMessage msg(new CTransportTask(_entity->getMap(), it->_caller, _entity->getEntityID(), it->_resourceType, request), 1);
+			SoulSenderMessage msg(new CRequestTransportSoulTask(_entity->getMap(), it->_caller, _entity->getEntityID(), it->_resourceType, request), 1);
 
 			// Si el mensaje es aceptado reducimos la cantidad restante por solicitar
 			if (msg.Dispatch(*_entity))

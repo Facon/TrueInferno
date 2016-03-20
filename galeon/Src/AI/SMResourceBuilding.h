@@ -1,5 +1,5 @@
-#ifndef SM_RESOURCE_BUILDING_
-#define SM_RESOURCE_BUILDING_
+#ifndef SM_RESOURCE_BUILDING_H_
+#define SM_RESOURCE_BUILDING_H_
 
 #include "StateMachine.h"
 #include "Logic\Entity\Message.h"
@@ -68,4 +68,4 @@ namespace AI {
 
 }
 
-#endif // SM_RESOURCE_BUILDING_
+#endif // SM_RESOURCE_BUILDING_H_

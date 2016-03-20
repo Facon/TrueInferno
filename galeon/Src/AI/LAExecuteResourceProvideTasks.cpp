@@ -2,9 +2,7 @@
 
 #include "Logic\Entity\Message.h"
 #include "AI\SMResourceProviderData.h"
-#include <algorithm>
-#include "Logic\Maps\Map.h"
-#include "TransportSoulTask.h"
+#include "PerformTransportSoulTask.h"
 
 namespace AI {
 	CLatentAction::LAStatus CLAExecuteResourceProvideTasks::OnStart() {
@@ -12,8 +10,21 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLAExecuteResourceProvideTasks::OnRun(unsigned int msecs){
-		std::cout << "Unimplemented logic for 'processBringResourcesTo'" << std::endl;
-		return LAStatus::FAIL; // TODO
+		// Preparamos el mensaje para que se envíe un alma hasta el objetivo portando el tipo y cantidad de los recursos dados
+		SoulSenderMessage msg(new CPerformTransportSoulTask(
+			_entity->getMap(), 
+			_smData.getTarget(), 
+			_smData.getResourceType(), 
+			_smData.getResourceQuantity()), 
+			1);
+
+		// Solicitamos el envío de alma
+		if (msg.Dispatch(*_entity))
+			return LAStatus::SUCCESS;
+		
+		// Reintentamos en el siguiente tick si no hubo éxito
+		else
+			return LAStatus::RUNNING;
 	}
 
 }
