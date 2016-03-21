@@ -45,6 +45,8 @@ Thumbs.db
 !/dependencies/lib/*/PhysX*.lib
 !/dependencies/lib/*/PxTask*.lib
 
+/dependencies/luabind/bin/
+
 /dependencies/VisualLeakDetector/src/bin/
 /dependencies/VisualLeakDetector/src/obj/
 
@@ -53,13 +55,19 @@ Thumbs.db
 !/Doc/doxygenFooter.html
 
 # EXES FOLDER
-
+/Exes/*
+!/Exes/media/
+!/Exes/resources.cfg
+!/Exes/*.lua
+!/Exes/fmod*.dll
 
 # PROJECTS FOLDER
 /Projects/**/Debug/
 /Projects/**/Release/
 /Projects/**/*.log
 
-# CLion files
+# ===== #
+# CLion #
+# ===== #
 .idea
 build
