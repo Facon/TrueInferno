@@ -11,9 +11,9 @@
 namespace AI {
 	/**
 	Clase con la lógica de SMResourceProvider que gestiona las peticiones al edificio como proveedor de recursos
-	1) Espera peticiones de proveedor de recursos
-	2) Recoge los recursos
-	3) Envía un alma a transportar los recursos
+	1) Espera peticiones de provisión de recursos
+	2) Recoge los recursos reservados
+	3) Envía un alma a transportar los recursos de vuelta al que los pidió
 	*/
 	class CSMResourceProvider : public CStateMachine<CLatentAction, CSMResourceProviderData> {
 	public:

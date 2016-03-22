@@ -28,9 +28,9 @@ namespace AI {
 		// Inicializamos
 		_requestReceived = false;
 
-		// Recogemos los recursos
+		// Recogemos los recursos que fueron reservados previamente
 		ResourceMessage m;
-		m.assembleResourcesChange(_smData.getResourceType(), -(int)_smData.getResourceQuantity());
+		m.assembleResourcesClaim(_smData.getResourceType(), (int)_smData.getResourceQuantity());
 		
 		// Si lo aceptan es que se completó la recolección
 		// TODO Sería conveniente enviar la petición de pago exigiendo confirmación. En este punto pasaríamos a esperar dicho mensaje

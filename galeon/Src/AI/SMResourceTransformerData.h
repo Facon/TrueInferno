@@ -5,7 +5,7 @@ namespace AI {
 	class CSMResourceTransformerData {
 
 	public:
-		CSMResourceTransformerData() : _maxResources(0), _availableResources(0) {}
+		CSMResourceTransformerData() : _maxResources(0), _availableResources(0), _storedResources(0) {}
 
 		virtual ~CSMResourceTransformerData() {}
 
@@ -17,18 +17,26 @@ namespace AI {
 			_maxResources = maxResources;
 		}
 
-		unsigned int getAvailableResources() const{
+		int getAvailableResources() const{
 			return _availableResources;
 		}
 
-		void setAvailableResources(unsigned int availableResources){
+		void setAvailableResources(int availableResources){
 			_availableResources = availableResources;
+		}
+
+		int getStoredResources() const{
+			return _storedResources;
+		}
+
+		void setStoredResources(int storedResources){
+			_storedResources = storedResources;
 		}
 
 	private:
 		unsigned int _maxResources;
-		unsigned int _availableResources;
-
+		int _availableResources;
+		int _storedResources;
 	};
 
 }

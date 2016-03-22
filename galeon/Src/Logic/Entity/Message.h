@@ -70,10 +70,12 @@ namespace Logic
 			SOUL_REQUEST,
 			SOUL_RESPONSE,
 			FURNACE_BURN_SOULS,
-			RESOURCES_CHANGE,
-			RESOURCES_CHANGED,
 			RESOURCES_ASK,
 			RESOURCES_INFO,
+			RESOURCES_CHANGE,
+			RESOURCES_RESERVE,
+			RESOURCES_FREE,
+			RESOURCES_CLAIM,
 			LOGISTICS_DEMAND_RESOURCES,
 			LOGISTICS_PROVIDE_RESOURCES,
 		};
@@ -458,10 +460,14 @@ namespace Logic
 	};
 
 	/** Mensajes relativos a los recursos: 
-		- RESOURCES_CHANGE: Solicitud de modificación de recursos
-		- (TODO De momento la confirmación equivale a que el HandleMessage devuelva true) RESOURCES_CHANGED: Confirmación a la solicitud de modificación de recursos
-		- RESOURCES_ASK: Consulta de recursos disponibles
-		- RESOURCES_INFO: Información de recursos disponibles */
+		- RESOURCES_ASK: Solicitud de información de recursos de la entidad
+		- RESOURCES_INFO: Información de recursos de la entidad
+		- RESOURCES_CHANGE: Solicitud de modificación de recursos almacenados
+		- RESOURCES_RESERVE: Solicitud de reserva de recursos disponibles para que otras solicitudes no puedan reservarlos simultáneamente
+		- RESOURCES_FREE: Solicitud de liberación de recursos reservados previamente
+		- RESOURCES_CLAIM: Solicitud de reclamación de los recursos reservados previamente
+		(TODO Añadir, si procede, RESOURCES_CHANGED: Confirmación a la solicitud de modificación de recursos. De momento la confirmación equivale a que el HandleMessage devuelva true)
+	*/
 	class ResourceMessage : public Message
 	{
 	public:
@@ -470,13 +476,6 @@ namespace Logic
 		*/
 		ResourceMessage() : Message(MessageType::UNASSIGNED) {}
 
-		/** RESOURCES_CHANGE: Solicita el cambio (positivo/negativo) en la cantidad de recursos del tipo dado */
-		void assembleResourcesChange(const ResourceType& resourceType, int change) {
-			_type = MessageType::RESOURCES_CHANGE;
-			_resourceType = resourceType;
-			_change = change;
-		}
-
 		/** RESOURCES_ASK: Solicita información sobre el recurso del tipo dado y el ID de la entidad que envía la solicitud */
 		void assembleResourcesAsk(const ResourceType& resourceType, TEntityID caller) {
 			_type = MessageType::RESOURCES_ASK;
@@ -484,21 +483,54 @@ namespace Logic
 			_caller = caller;
 		}
 
-		/** RESOURCES_INFO: Devuelve la cantidad disponible y máxima del recurso indicado, si el recurso se provee externamente y el ID de la entidad que tiene los recursos */
-		void assembleResourcesInfo(const ResourceType& resourceType, unsigned int available, unsigned int max, bool provides, TEntityID caller) {
+		/** RESOURCES_INFO: Devuelve la cantidad real, disponible y máxima del recurso indicado, si el recurso se provee externamente y el ID de la entidad que tiene los recursos */
+		void assembleResourcesInfo(const ResourceType& resourceType, int stored, int available, unsigned int max, bool provided, TEntityID caller) {
 			_type = MessageType::RESOURCES_INFO;
 			_resourceType = resourceType;
+			_stored = stored;
 			_available = available;
 			_max = max;
-			_provides = provides;
+			_provided = provided;
 			_caller = caller;
+		}
+
+		/** RESOURCES_CHANGE: Solicita el cambio (positivo/negativo) en la cantidad de recursos del tipo dado */
+		void assembleResourcesChange(const ResourceType& resourceType, int change) {
+			_type = MessageType::RESOURCES_CHANGE;
+			_resourceType = resourceType;
+			_change = change;
+		}
+
+		/** RESOURCES_RESERVE: Reserva la cantidad de recursos del tipo dado. 
+		No cambia la cantidad real almacenada sino la cantidad disponible para que otras solicitudes no puedan reservar lo reservado previamente.
+		El que reserva recursos contrae la responsabilidad de liberarlos (RESOURCES_FREE) o reclamarlos (RESOURCES_CLAIM).
+		*/
+		void assembleResourcesReserve(const ResourceType& resourceType, int change) {
+			_type = MessageType::RESOURCES_RESERVE;
+			_resourceType = resourceType;
+			_change = change;
+		}
+
+		/** RESOURCES_FREE: Libera la cantidad de recursos reservada del tipo dado para que otras solicitudes puedan volverlo a reservar */
+		void assembleResourcesFree(const ResourceType& resourceType, int change) {
+			_type = MessageType::RESOURCES_FREE;
+			_resourceType = resourceType;
+			_change = change;
+		}
+
+		/** RESOURCES_CLAIM: Reclama (i.e. libera la reserva y modifica) la cantidad de recursos del tipo dado para efectivamente consumir lo reservado */
+		void assembleResourcesClaim(const ResourceType& resourceType, int change) {
+			_type = MessageType::RESOURCES_CLAIM;
+			_resourceType = resourceType;
+			_change = change;
 		}
 
 		ResourceType _resourceType;
 		int _change;
-		unsigned int _available;
-		unsigned int _max;
-		bool _provides;
+		int _stored;
+		int _available;
+		int _max;
+		bool _provided;
 		TEntityID _caller;
 
 		virtual bool Dispatch(MessageHandler& handler) const
@@ -513,7 +545,7 @@ namespace Logic
 	public:
 		LogisticsMessage() : Message(MessageType::UNASSIGNED) {}
 
-		// LOGISTICS_DEMAND_RESOURCES
+		// LOGISTICS_DEMAND_RESOURCES: Solicita buscar la cantidad de recursos indicada del tipo dado
 		void assembleDemandResources(ResourceType resourceType, unsigned int resourceQuantity) {
 			_type = MessageType::LOGISTICS_DEMAND_RESOURCES;
 			_resourceType = resourceType;
@@ -521,7 +553,7 @@ namespace Logic
 			_target = EntityID::UNASSIGNED;
 		}
 
-		// LOGISTICS_PROVIDE_RESOURCES
+		// LOGISTICS_PROVIDE_RESOURCES: Obliga a proveer la cantidad indicada del recurso dado al objetivo proporcionado
 		void assembleProvideResources(ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target) {
 			_type = MessageType::LOGISTICS_PROVIDE_RESOURCES;
 			_resourceType = resourceType;

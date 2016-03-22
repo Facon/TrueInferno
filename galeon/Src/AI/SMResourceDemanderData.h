@@ -27,12 +27,12 @@ namespace AI {
 		}
 
 		/** Devuelve la cantidad de recurso asociada a la acción */
-		unsigned int getResourceQuantity() const{
+		int getResourceQuantity() const{
 			return _resourceQuantity;
 		}
 		
 		/** Establece la cantidad de recurso asociada a la acción */
-		void setResourceQuantity(unsigned int resourceQuantity){
+		void setResourceQuantity(int resourceQuantity){
 			_resourceQuantity = resourceQuantity;
 		}
 
@@ -56,9 +56,9 @@ namespace AI {
 		ResourceType _resourceType;
 
 		/** Cantidad de recurso asociada a la acción */
-		unsigned int _resourceQuantity;
+		int _resourceQuantity;
 
-		/** Vector con los mensajes recibidos con información de recursos */
+		/** Vector con los mensajes recibidos con información de recursos de los proveedores */
 		std::vector<ResourceMessage> _providerMessages;
 	};
 }

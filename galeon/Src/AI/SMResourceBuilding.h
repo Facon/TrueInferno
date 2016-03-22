@@ -8,7 +8,16 @@
 #include "AI\SMResourceBuildingData.h"
 
 namespace AI {
-
+	/** FSM con la lógica de un edificio de recursos para procesar operaciones de consulta y modificación de sus recursos
+	Los recursos que guarda el edificio se almacenan intermante en el objeto de clase CSMResourceBuildingData.
+		
+	Atiende las siguientes variedades de ResourceMessage:
+	- MessageType::RESOURCES_ASK: Devuelve asíncronamente un ResourceMessage de tipo MessageType::RESOURCES_INFO en respuesta.
+	- MessageType::RESOURCES_CHANGE: Solicitud de modificación de recursos almacenados. Devuelve true en el HandleMessage si los ha podido cambiar.
+	- MessageType::RESOURCES_RESERVE: Solicitud de reserva de recursos disponibles para que otras solicitudes no puedan reservarlos simultáneamente. Devuelve true en el HandleMessage si los ha podido reservar.
+	- MessageType::RESOURCES_FREE: Solicitud de liberación de recursos reservados previamente. Devuelve true en el HandleMessage si los ha podido liberar.
+	- MessageType::RESOURCES_CLAIM: Solicitud de reclamación de los recursos reservados previamente. Devuelve true en el HandleMessage si los ha podido reclamar.
+	*/
 	class CSMResourceBuilding : public CStateMachine<CLatentAction, CSMResourceBuildingData> {
 	public:
 		CSMResourceBuilding(CEntity* entity) : CStateMachine(entity) {}
@@ -26,7 +35,7 @@ namespace AI {
 				while (std::getline(ss, item, ',')) {
 					if (item.size()>0)
 						// Inicializamos la cantidad de recursos almacenados de ese tipo
-						_data.getStoredResources()[ResourcesManager::parseResourceType(item)] = 0;
+						_data.registerStoredResourceType(ResourcesManager::parseResourceType(item));
 				}
 			}
 			else{

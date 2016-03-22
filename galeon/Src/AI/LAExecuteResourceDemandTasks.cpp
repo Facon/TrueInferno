@@ -48,7 +48,7 @@ namespace AI {
 				break;
 
 			// Nos aseguramos de no sobrepasar lo que nos queda por solicitar ni lo disponible en el proveedor
-			unsigned int request = std::min(_smData.getResourceQuantity(), it->_available);
+			int request = std::min(_smData.getResourceQuantity(), it->_available);
 
 			/** Enviamos la petición de transporte de recursos desde el proveedor hacia nosotros.
 			El alma se creará en la ubicación actual, viajará hacia el proveedor y volverá con los recursos */

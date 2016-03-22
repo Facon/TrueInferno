@@ -21,6 +21,7 @@ namespace AI {
 
 		// Guardamos la info en la memoria compartida
 		_smData.setMaxResources(msg._max);
+		_smData.setStoredResources(msg._stored);
 		_smData.setAvailableResources(msg._available);
 
 		// Reactivamos la LA
@@ -33,7 +34,7 @@ namespace AI {
 		// Inicializamos
 		_requestReceived = false;
 
-		// Solicitamos información de recursos
+		// Solicitamos información de recursos a nosotros mismos
 		ResourceMessage m;
 		m.assembleResourcesAsk(_resourceFrom, _entity->getEntityID());
 		

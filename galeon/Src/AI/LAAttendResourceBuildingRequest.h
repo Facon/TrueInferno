@@ -27,7 +27,7 @@ namespace AI {
 		// Mensaje con la petición recibida
 		ResourceMessage _msgReceived;
 
-		CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processResourcesChange();
+		//CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processResourcesChange();
 
 		CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processResourcesInfo();
 	};

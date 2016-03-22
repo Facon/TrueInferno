@@ -98,6 +98,7 @@
     <ClCompile Include="..\..\Src\AI\LAGatherSouls.cpp" />
     <ClCompile Include="..\..\Src\AI\LAPickUpResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LARecountResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAReserveFromProviders.cpp" />
     <ClCompile Include="..\..\Src\AI\LATransformResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitAndFollowPath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="..\..\Src\AI\LAGatherSouls.h" />
     <ClInclude Include="..\..\Src\AI\LAPickUpResources.h" />
     <ClInclude Include="..\..\Src\AI\LARecountResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAReserveFromProviders.h" />
     <ClInclude Include="..\..\Src\AI\LATransformResources.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitAndFollowPath.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />

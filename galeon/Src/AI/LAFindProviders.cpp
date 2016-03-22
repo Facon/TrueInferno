@@ -9,8 +9,8 @@ namespace AI {
 		if (msg._type != MessageType::RESOURCES_INFO)
 			return false;
 
-		// Guardamos la información si la entidad provee externamente el recurso y tiene algo que ofrecer
-		if (msg._provides && msg._available > 0)
+		// Guardamos la información si la entidad consultada provee externamente el recurso y tiene algo que ofrecernos
+		if (msg._provided && msg._available > 0)
 			_smData.addProviderMessage(msg);
 
 		return true;
