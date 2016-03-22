@@ -7,7 +7,7 @@
 namespace AI {
 	class CLAExecuteResourceDemandTasks : public CLatentAction {
 	public:
-		CLAExecuteResourceDemandTasks(CEntity* entity, CSMResourceDemanderData& smData) : CLatentAction(entity), _smData(smData) {}
+		CLAExecuteResourceDemandTasks(CEntity* entity, CSMResourceDemanderData& smData) : CLatentAction(entity), _smData(smData), _nextProvider(0) {}
 
 		virtual ~CLAExecuteResourceDemandTasks() {}
 
@@ -18,6 +18,9 @@ namespace AI {
 
 	private:
 		CSMResourceDemanderData& _smData;
+
+		// Índice para recorrer el vector de proveedores entre distintos ticks
+		int _nextProvider = 0;
 	};
 }
 

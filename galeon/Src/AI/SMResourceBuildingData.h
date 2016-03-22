@@ -1,6 +1,9 @@
 #ifndef SM_RESOURCE_BUILDING_DATA_
 #define SM_RESOURCE_BUILDING_DATA_
 
+#include "Application/GaleonApplication.h"
+#include "Application/GameState.h"
+
 #include <unordered_map>
 #include <unordered_set>
 #include <iostream> 
@@ -79,12 +82,20 @@ namespace AI {
 			// Registramos el nuevo valor con el cambio aplicado
 			_storedResources[type] = aux;
 
+			// Notificamos al ResourcesManager
+			// TODO Atajo temporal para obtener el ResourcesManager
+			Logic::ResourcesManager *resourcesManager =
+				((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
+			resourcesManager->increaseResources(type, quantity);
+
 			return true;
 		}
 
-		/** Reserva los recursos del tipo dado según la cantidad positiva indicada.
+		/** Reserva los recursos del tipo dado según la cantidad positiva indicada. 
+		Con el flag allowPartial a true se permiten reservas parciales, esto es, se reserva todo lo que haya disponible aunque no llegue a lo solicitado.
+		En finallyReserved se almacena la cantidad finalmente reservada.
 		Devuelve true o false según si la operación se realizó correctamente o no */
-		bool reserveResources(ResourceType type, int quantity){
+		bool reserveResources(ResourceType type, int quantity, bool allowPartial, int& finallyReserved){
 			if (!isResourceTypeStored(type)){
 				assert(false && "Resource not stored. Check wether it's stored before doing anything!");
 				return 0;
@@ -99,11 +110,24 @@ namespace AI {
 
 			// Si se sobrepasa la cantidad disponible para reservar
 			if (aux > getAvailableResources(type)){
-				std::cout << "Discarded reserving " << quantity << " resources because there are only available " << getAvailableResources(type) << std::endl;
-				return false;
+				// Fallamos si no se deseaba reserva parcial
+				if (!allowPartial){
+					std::cout << "Discarded reserving " << quantity << " resources because there are only available " << getAvailableResources(type) << std::endl;
+					finallyReserved = 0;
+					return false;
+				}
+
+				// Si se permiten, reservamos hasta donde sea posible
+				else{
+					finallyReserved = getAvailableResources(type);
+					_reservedResources[type] = _reservedResources[type] + finallyReserved;
+					return true;
+				}
 			}
 
 			_reservedResources[type] = aux;
+			finallyReserved = quantity;
+
 			return true;
 		}
 

@@ -34,8 +34,18 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLAFindProviders::OnRun(unsigned int msecs) {
-		if ((_elapsedTime += msecs) >= _maxWaitingTime)
-			return LAStatus::SUCCESS;
+		// Si transcurrió el tiempo de espera
+		if ((_elapsedTime += msecs) >= _maxWaitingTime){
+			// Fallamos si no hay ningún proveedor
+			if (_smData.getProviderMessages().empty())
+				return LAStatus::FAIL;
+
+			// Éxito si hubo alguno
+			else
+				return LAStatus::SUCCESS;
+		}
+
+		// Si no, seguimos esperando
 		else
 			return LAStatus::RUNNING;
 	}

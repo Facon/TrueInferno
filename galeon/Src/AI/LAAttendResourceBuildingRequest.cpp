@@ -3,9 +3,6 @@
 #include "Logic\Entity\Message.h"
 #include "AI\SMResourceBuildingData.h"
 
-#include "Application/GaleonApplication.h"
-#include "Application/GameState.h"
-
 #include "Logic\Maps\EntityFactory.h"
 
 namespace AI {
@@ -21,37 +18,34 @@ namespace AI {
 				return false;
 
 			// Intentamos hacer el cambio
-			return _smData.changeStoredResources(msg._resourceType, msg._change);
+			return _smData.changeStoredResources(msg._resourceType, msg._quantity);
 		}
 
 		// Si es una solicitud de reserva de recursos
-		if (msg._type == MessageType::RESOURCES_RESERVE){
+		else if (msg._type == MessageType::RESOURCES_RESERVE){
 			// Rechazamos si el recurso no lo almacenamos
 			if (!_smData.isResourceTypeStored(msg._resourceType))
 				return false;
-
-			// Intentamos hacer la reserva
-			return _smData.reserveResources(msg._resourceType, msg._change);
 		}
 
 		// Si es una solicitud de liberación de recursos reservados
-		if (msg._type == MessageType::RESOURCES_FREE){
+		else if (msg._type == MessageType::RESOURCES_FREE){
 			// Rechazamos si el recurso no lo almacenamos
 			if (!_smData.isResourceTypeStored(msg._resourceType))
 				return false;
 
 			// Intentamos hacer la liberación
-			return _smData.freeReservedResources(msg._resourceType, msg._change);
+			return _smData.freeReservedResources(msg._resourceType, msg._quantity);
 		}
 
 		// Si es una solicitud de reclamación de recursos
-		if (msg._type == MessageType::RESOURCES_CLAIM){
+		else if (msg._type == MessageType::RESOURCES_CLAIM){
 			// Rechazamos si el recurso no lo almacenamos
 			if (!_smData.isResourceTypeStored(msg._resourceType))
 				return false;
 
 			// Intentamos hacer la reclamación
-			return _smData.claimReservedResources(msg._resourceType, msg._change);
+			return _smData.claimReservedResources(msg._resourceType, msg._quantity);
 		}
 
 		// Si es una petición de información de cantidad de recurso
@@ -63,7 +57,6 @@ namespace AI {
 
 		// Rechazamos todo lo demás
 		else{
-			assert(false && "Unimplemented logic for this ResourceMessage's message type");
 			return false;
 		}
 		
@@ -83,6 +76,8 @@ namespace AI {
 		// Inicializamos
 		_requestReceived = false;
 		_msgReceived = ResourceMessage();
+		_finallyReserved = 0;
+		_processDone = false;
 
 		// Suspendemos la LA hasta que llegue un mensaje de petición
 		return LAStatus::SUSPENDED;
@@ -98,14 +93,19 @@ namespace AI {
 
 		// Si es de petición de información
 		if (_msgReceived._type == MessageType::RESOURCES_ASK){
-			return processResourcesInfo();
+			return processAskResources();
+		}
+
+		// Si es de petición de reserva
+		else if (_msgReceived._type == MessageType::RESOURCES_RESERVE){
+			return processReserveResources();
 		}
 	
 		return LAStatus::SUCCESS;
 	}
 
 	/*CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processResourcesChange(){
-		int change = _msgReceived._change;
+		int change = _msgReceived._quantity;
 
 		// No deberíamos tener que procesar un mensaje con 0 recursos a cambiar
 		if (change == 0){
@@ -149,26 +149,70 @@ namespace AI {
 		return LAStatus::SUCCESS;
 	}*/
 
-	CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processResourcesInfo(){
+	CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processAskResources(){
+		// Buscamos la entidad que solicitó la información
+		CEntity* recipient = _entity->getMap()->getEntityByID(_msgReceived._caller);
+		if (recipient == nullptr){
+			std::cout << "Caller entity no longer exists" << std::endl;
+			return LAStatus::FAIL;
+		}
+
 		// Preparamos el mensaje de repuesta RESOURCES_INFO
 		ResourceType resourceType = _msgReceived._resourceType;
 		int stored = _smData.getStoredResources(resourceType);
-		int available = _smData.getStoredResources(resourceType);
+		int available = _smData.getAvailableResources(resourceType);
 		bool provided = _smData.getProvidedResources().count(resourceType) > 0;
 		ResourceMessage m;
 		m.assembleResourcesInfo(resourceType, stored, available, _smData.getMaxResources(), provided, _entity->getEntityID());
 		
-		// Buscamos la entidad que solicitó la información
-		CEntity* recipient = _entity->getMap()->getEntityByID(_msgReceived._caller);
-
-		// Le enviamos el mensaje para que lo acepta
+		// Enviamos el mensaje para que lo acepte
 		if (m.Dispatch(*recipient))
 			return LAStatus::SUCCESS;
 
 		// O esperamos al siguiente tick
-		// TODO HAY que poner límite a los reintentos. La entidad puede dejar de existir
+		// TODO HAY que poner límite a los reintentos. La entidad puede estar "muerta" aunque el puntero no sea nulo
 		else
 			return LAStatus::RUNNING;
 	}
-	
+
+	CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processReserveResources(){
+		// Buscamos la entidad que solicitó la información
+		CEntity* recipient = _entity->getMap()->getEntityByID(_msgReceived._caller);
+		if (recipient == nullptr){
+			std::cout << "Caller entity no longer exists" << std::endl;
+
+			if (_processDone)
+				_smData.freeReservedResources(_msgReceived._resourceType, _finallyReserved);
+
+			return LAStatus::FAIL;
+		}
+
+		// Se intenta reservar hasta lo solicitado si no se había hecho ya la operación
+		if (!_processDone){
+			if (_smData.reserveResources(_msgReceived._resourceType, _msgReceived._quantity, true, _finallyReserved)){
+				_processDone = true;
+			}
+
+			// Dado que se permiten reservas parciales, un retorno falso probablemente implique error
+			else{
+				assert("Error reserving resources" && false);
+				_finallyReserved = 0;
+				_processDone = true;
+			}
+		}
+
+		// Preparamos el mensaje de repuesta RESOURCES_RESERVED con lo finalmente reservado
+		ResourceMessage m;
+		m.assembleResourcesReserved(_msgReceived._resourceType, _finallyReserved);
+
+		// Enviamos el mensaje para que lo acepte
+		if (m.Dispatch(*recipient))
+			return LAStatus::SUCCESS;
+
+		// O esperamos al siguiente tick
+		// TODO HAY que poner límite a los reintentos. La entidad puede estar "muerta" aunque el puntero no sea nulo
+		else
+			return LAStatus::RUNNING;
+	}
+
 }

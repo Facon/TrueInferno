@@ -47,7 +47,7 @@ namespace AI {
 		}
 
 		/** Devuelve el vector con los mensajes recibidos de los proveedores de recursos */
-		std::vector<ResourceMessage> getProviderMessages(){
+		std::vector<ResourceMessage>& getProviderMessages(){
 			return _providerMessages;
 		}
 		

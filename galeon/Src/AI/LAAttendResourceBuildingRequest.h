@@ -7,7 +7,8 @@
 namespace AI {
 	class CLAAttendResourceBuildingRequest : public CLatentAction {
 	public:
-		CLAAttendResourceBuildingRequest(CEntity* entity, CSMResourceBuildingData& smData) : CLatentAction(entity), _smData(smData), _requestReceived(false) {}
+		CLAAttendResourceBuildingRequest(CEntity* entity, CSMResourceBuildingData& smData) : CLatentAction(entity), _smData(smData), 
+			_requestReceived(false), _finallyReserved(0), _processDone(false) {}
 
 		virtual ~CLAAttendResourceBuildingRequest() {}
 
@@ -27,9 +28,17 @@ namespace AI {
 		// Mensaje con la petición recibida
 		ResourceMessage _msgReceived;
 
+		// Cantidad de recursos finalmente reservados
+		int _finallyReserved;
+
+		// Flag para indicar que el procesado ya está hecho y sólo falta que acepten el mensaje
+		bool _processDone;
+
 		//CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processResourcesChange();
 
-		CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processResourcesInfo();
+		CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processAskResources();
+
+		CLatentAction::LAStatus CLAAttendResourceBuildingRequest::processReserveResources();
 	};
 }
 

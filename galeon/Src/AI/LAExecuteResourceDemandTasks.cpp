@@ -1,69 +1,51 @@
 #include "LAExecuteResourceDemandTasks.h"
 
 #include "Logic\Entity\Message.h"
-#include "AI\SMResourceDemanderData.h"
-#include <algorithm>
 #include "Logic\Maps\Map.h"
+#include "AI\SMResourceDemanderData.h"
 #include "RequestTransportSoulTask.h"
 
 namespace AI {
-	// Objeto para ordenar por distancia a un punto fijo
-	struct st_sorterByDistance{
-		Vector3 pos;
-		CMap *map;
-
-		bool operator() (ResourceMessage i, ResourceMessage j) {
-			Logic::CEntity* iEntity = map->getEntityByID(i._caller);
-			if (iEntity == nullptr)
-				return false; // i es null ==> j antes que i
-
-			Logic::CEntity* jEntity = map->getEntityByID(j._caller);
-			if (jEntity == nullptr)
-				return true; // j es null ==> i antes que j
-
-			return (pos.squaredDistance(iEntity->getPosition()) < pos.squaredDistance(jEntity->getPosition()));
-		}
-
-	} sorterByDistance;
-
 	CLatentAction::LAStatus CLAExecuteResourceDemandTasks::OnStart() {
+		// Inicialización
+		_nextProvider = 0;
+
 		return LAStatus::RUNNING;
 	}
 
 	CLatentAction::LAStatus CLAExecuteResourceDemandTasks::OnRun(unsigned int msecs){
-		// Obtenemos los mensajes de proveedores
+		// Obtenemos los mensajes de proveedores con las cantidades exactas a reservar
 		std::vector<ResourceMessage> providerMessages = _smData.getProviderMessages();
 
-		// Los ordenamos por distancia a nuestra posición
-		sorterByDistance.pos = _entity->getPosition();
-		sorterByDistance.map = _entity->getMap();
-		std::sort(providerMessages.begin(), providerMessages.end(), sorterByDistance);
+		// Fallamos si no había ningún proveedor
+		if (providerMessages.empty())
+			return LAStatus::FAIL;
 
-		// Desde el más próximo al más lejano vamos solicitando lo que tengan disponible hasta completar nuestra necesidad
-		int remaining = (int)_smData.getResourceQuantity();
+		// Para cada proveedor
+		while (_nextProvider < providerMessages.size()){
+			ResourceMessage providerMessage = providerMessages[_nextProvider];
 
-		for (auto it = providerMessages.cbegin(); it != providerMessages.cend(); ++it){
-			// Finalizamos si ya solicitamos todo lo posible
-			if (remaining <= 0)
-				break;
-
-			// Nos aseguramos de no sobrepasar lo que nos queda por solicitar ni lo disponible en el proveedor
-			int request = std::min(_smData.getResourceQuantity(), it->_available);
+			// Saltamos aquellos a los que no tenemos que enviar alma porque no pudimos reservar nada
+			if (providerMessage._quantity <= 0){
+				++_nextProvider;
+				continue;
+			}
 
 			/** Enviamos la petición de transporte de recursos desde el proveedor hacia nosotros.
-			El alma se creará en la ubicación actual, viajará hacia el proveedor y volverá con los recursos */
-			SoulSenderMessage msg(new CRequestTransportSoulTask(_entity->getMap(), it->_caller, _entity->getEntityID(), it->_resourceType, request), 1);
+			El alma se creará en la ubicación actual, viajará hacia el proveedor y volverá a nosotros con los recursos */
+			SoulSenderMessage msg(new CRequestTransportSoulTask(
+				_entity->getMap(), 	providerMessage._caller, _entity->getEntityID(), 
+				providerMessage._resourceType, providerMessage._quantity), 1);
+			
+			// Intentamos enviar, reintentando en el siguiente tick si no nos aceptan el mensaje ahora
+			if (!msg.Dispatch(*_entity))
+				return LAStatus::RUNNING;
 
-			// Si el mensaje es aceptado reducimos la cantidad restante por solicitar
-			if (msg.Dispatch(*_entity))
-				remaining -= request;
+			// Avanzamos a la siguiente iteración
+			++_nextProvider;
 		}
 
-		// Si no quedó nada por solicitar tuvimos éxito
-		if (remaining <= 0)
-			return LAStatus::SUCCESS;
-		else
-			return LAStatus::FAIL;
+		return LAStatus::SUCCESS;
 	}
 
 }

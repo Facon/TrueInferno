@@ -74,6 +74,7 @@ namespace Logic
 			RESOURCES_INFO,
 			RESOURCES_CHANGE,
 			RESOURCES_RESERVE,
+			RESOURCES_RESERVED,
 			RESOURCES_FREE,
 			RESOURCES_CLAIM,
 			LOGISTICS_DEMAND_RESOURCES,
@@ -474,7 +475,9 @@ namespace Logic
 		/** Constructor vacío por defecto. 
 		Necesario para poder tener variables auxiliares sin necesidad de punteros (e.g. en una LA de una SM)
 		*/
-		ResourceMessage() : Message(MessageType::UNASSIGNED) {}
+		ResourceMessage() : Message(MessageType::UNASSIGNED), _resourceType(ResourceType::NONE), 
+			_quantity(0), _stored(0), _available(0), _max(0), 
+			_provided(false), _caller(EntityID::UNASSIGNED) {}
 
 		/** RESOURCES_ASK: Solicita información sobre el recurso del tipo dado y el ID de la entidad que envía la solicitud */
 		void assembleResourcesAsk(const ResourceType& resourceType, TEntityID caller) {
@@ -495,38 +498,50 @@ namespace Logic
 		}
 
 		/** RESOURCES_CHANGE: Solicita el cambio (positivo/negativo) en la cantidad de recursos del tipo dado */
-		void assembleResourcesChange(const ResourceType& resourceType, int change) {
+		void assembleResourcesChange(const ResourceType& resourceType, int quantity) {
 			_type = MessageType::RESOURCES_CHANGE;
 			_resourceType = resourceType;
-			_change = change;
+			_quantity = quantity;
 		}
 
-		/** RESOURCES_RESERVE: Reserva la cantidad de recursos del tipo dado. 
-		No cambia la cantidad real almacenada sino la cantidad disponible para que otras solicitudes no puedan reservar lo reservado previamente.
+		/** RESOURCES_RESERVE: Intenta reservar todo lo posible hasta la cantidad de recursos indicada del tipo dado para la entidad indicada. 
+		No cambia la cantidad real almacenada sino la cantidad disponible para evitar que otras solicitudes simultáneas nos quiten nuestra reserva.
 		El que reserva recursos contrae la responsabilidad de liberarlos (RESOURCES_FREE) o reclamarlos (RESOURCES_CLAIM).
+		Tras la reserva la entidad indicada recibirá un mensaje RESOURCES_RESERVED con la cantidad finalmente reservada.
 		*/
-		void assembleResourcesReserve(const ResourceType& resourceType, int change) {
+		void assembleResourcesReserve(const ResourceType& resourceType, int quantity, TEntityID caller) {
 			_type = MessageType::RESOURCES_RESERVE;
 			_resourceType = resourceType;
-			_change = change;
+			_quantity = quantity;
+			_caller = caller;
+		}
+
+		/** RESOURCES_RESERVED: Informa de la cantidad de recursos finalmente reservada del tipo dado.
+		No cambia la cantidad real almacenada sino la cantidad disponible para evitar que otras solicitudes simultáneas nos quiten nuestra reserva.
+		El que reserva recursos contrae la responsabilidad de liberarlos (RESOURCES_FREE) o reclamarlos (RESOURCES_CLAIM).
+		*/
+		void assembleResourcesReserved(const ResourceType& resourceType, int quantity) {
+			_type = MessageType::RESOURCES_RESERVED;
+			_resourceType = resourceType;
+			_quantity = quantity;
 		}
 
 		/** RESOURCES_FREE: Libera la cantidad de recursos reservada del tipo dado para que otras solicitudes puedan volverlo a reservar */
-		void assembleResourcesFree(const ResourceType& resourceType, int change) {
+		void assembleResourcesFree(const ResourceType& resourceType, int quantity) {
 			_type = MessageType::RESOURCES_FREE;
 			_resourceType = resourceType;
-			_change = change;
+			_quantity = quantity;
 		}
 
 		/** RESOURCES_CLAIM: Reclama (i.e. libera la reserva y modifica) la cantidad de recursos del tipo dado para efectivamente consumir lo reservado */
-		void assembleResourcesClaim(const ResourceType& resourceType, int change) {
+		void assembleResourcesClaim(const ResourceType& resourceType, int quantity) {
 			_type = MessageType::RESOURCES_CLAIM;
 			_resourceType = resourceType;
-			_change = change;
+			_quantity = quantity;
 		}
 
 		ResourceType _resourceType;
-		int _change;
+		int _quantity;
 		int _stored;
 		int _available;
 		int _max;
@@ -543,7 +558,8 @@ namespace Logic
 	class LogisticsMessage : public Message
 	{
 	public:
-		LogisticsMessage() : Message(MessageType::UNASSIGNED) {}
+		LogisticsMessage() : Message(MessageType::UNASSIGNED), _resourceType(ResourceType::NONE), 
+			_resourceQuantity(0), _target(EntityID::UNASSIGNED) {}
 
 		// LOGISTICS_DEMAND_RESOURCES: Solicita buscar la cantidad de recursos indicada del tipo dado
 		void assembleDemandResources(ResourceType resourceType, unsigned int resourceQuantity) {
