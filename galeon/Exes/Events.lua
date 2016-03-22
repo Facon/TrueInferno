@@ -1,2 +1,1 @@
-print "Loading events..."
-print "Finished events load"
+print("Loading Events.lua...")
