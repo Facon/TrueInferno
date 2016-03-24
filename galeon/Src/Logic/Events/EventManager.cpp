@@ -83,22 +83,18 @@ namespace Logic {
 
 	void CEventManager::tick(unsigned int msecs)
 	{
-		CBuildingDestructionEvent *ev;
+		CEvent *ev;
 		bool launch = true;
 
 		while (!_timeEvents.empty() && launch)
 		{
-			// @TODO Implementar para usar con cualquier tipo de evento.
-			ev = dynamic_cast<CBuildingDestructionEvent*>(_timeEvents.front());
+			ev = _timeEvents.front();
+			launch = ev->launch();
 
-			if (ev) {
-				launch = ev->launch();
-
-				if (launch) {
-					_timeEvents.pop();
-					delete ev;
-					ev = NULL;
-				}
+			if (launch) {
+				_timeEvents.pop();
+				delete ev;
+				ev = NULL;
 			}
 		}
 
@@ -114,7 +110,7 @@ namespace Logic {
 
 		// @TODO Borrar cuando se carguen desde LUA!
 		// Time events
-		addTimeEvent(new CBuildingDestructionEvent(70 * 1000));
+		addTimeEvent(new CBuildingDestructionEvent(55 * 1000));
 		addTimeEvent(new CBuildingDestructionEvent(110 * 1000));
 
 		// Condition events
@@ -157,21 +153,8 @@ namespace Logic {
 		if (ev->getEventTrigger() != CEvent::EventTrigger::CONDITION)
 			return false;
 
-		// @TODO Implementar para usar con cualquier tipo de evento lanzado por condición.
-		CTutorialEvent *tutorialEvent = dynamic_cast<CTutorialEvent*>(ev);
-
-		if (tutorialEvent)
-		{
-			_conditionEvents[tutorialEvent->getConditionEventType()].push_back(tutorialEvent);
-			return true;
-		}
-		else {
-			CEndGameEvent *endGameEvent = dynamic_cast<CEndGameEvent*>(ev);
-			_conditionEvents[endGameEvent->getConditionEventType()].push_back(endGameEvent);
-			return true;
-		}
-
-		return false;
+		_conditionEvents[ev->getConditionEventType()].push_back(ev);
+		return true;
 
 	} // addConditionEvent
 
@@ -187,19 +170,7 @@ namespace Logic {
 			eventsList.pop_front();
 			_conditionEvents[conditionEventType] = eventsList;
 
-			// @TODO Implementar para usar con cualquier tipo de evento lanzado por condición.
-			CTutorialEvent *tutorialEvent = dynamic_cast<CTutorialEvent*>(conditionEvent);
-			bool launched = false;
-
-			if (tutorialEvent) {
-				launched = tutorialEvent->launch();
-			}
-			else {
-				CEndGameEvent *endGameEvent = dynamic_cast<CEndGameEvent*>(conditionEvent);
-				launched = endGameEvent->launch();
-			}
-
-			return launched;
+			return conditionEvent->launch();
 		}
 
 		return false;
