@@ -28,7 +28,7 @@ namespace Logic {
 		bool launched = mustBeLaunched();
 
 		if (launched)
-			execute();
+			this->execute();
 
 		return launched;
 

@@ -54,7 +54,7 @@ namespace Logic
 		/**
 		Destructor.
 		*/
-		virtual ~CEndGameEvent() {};
+		~CEndGameEvent() {};
 
 	protected:
 
@@ -67,7 +67,7 @@ namespace Logic
 		Método encargado únicamente de ejecutar la lógica específica
 		asociada al evento.
 		*/
-		virtual void execute();
+		void execute();
 		
 	}; // class CEndGameEvent
 
