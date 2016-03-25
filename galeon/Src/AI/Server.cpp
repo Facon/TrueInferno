@@ -215,8 +215,6 @@ namespace AI {
 		// Transformamos el retorno
 		std::vector<Vector3>* out = new std::vector<Vector3>();
 
-		// ¿Es necesario añadir la posición actual del Placeable?
-		//out->push_back(from->getEntity()->getPosition());
 		for (auto it = bestPath->cbegin(); it != bestPath->cend(); it++) {
 			Logic::Tile* tile = (Logic::Tile*)(*it);
 			out->push_back(tile->getEntity()->getPosition());

@@ -8,7 +8,7 @@
 namespace AI {
 	class CLAFindingPath : public CLatentAction{
 	public:
-		CLAFindingPath(CEntity* entity) : CLatentAction(entity) {
+		CLAFindingPath(CEntity* entity) : CLatentAction(entity), _walkingSoulTarget(EntityID::UNASSIGNED), _pathRequestReceived(false) {
 			_pathRequestReceived = false;
 		}
 
@@ -32,6 +32,7 @@ namespace AI {
 
 	protected:
 		virtual LAStatus OnStart() {
+			_walkingSoulTarget = EntityID::UNASSIGNED;
 			_pathRequestReceived = false;
 			return LAStatus::SUSPENDED;
 		}
@@ -41,8 +42,17 @@ namespace AI {
 			if (!_pathRequestReceived)
 				return LAStatus::FAIL;
 
+			// Localizamos la entidad objetivo
+			Logic::CEntity* targetEntity = _entity->getMap()->getEntityByID(_walkingSoulTarget);
+
+			// Controlamos que siga existiendo
+			if (targetEntity == nullptr){
+				std::cout << "Can't find path to target because target's entity no longer exists" << std::endl;
+				return LAStatus::FAIL;
+			}
+
 			// Calculamos ruta desde la posición actual de la entidad hasta el objetivo
-			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(_entity->getPosition(), _entity->getMap()->getEntityByID(_walkingSoulTarget));
+			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(_entity->getPosition(), targetEntity);
 
 			// Reintentamos si no se encontró ruta
 			if (path == nullptr){
