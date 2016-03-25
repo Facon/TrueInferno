@@ -1,9 +1,9 @@
-﻿Compilación iniciada a las 22/03/2016 16:27:16.
-     1>Proyecto "C:\Users\Raul\Documents\Git\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" en el nodo 2 (Build destinos).
+﻿Build started 25/03/2016 15:47:31.
+     1>Project "D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" on node 2 (Build target(s)).
      1>Link:
-         LUA.vcxproj -> C:\Users\Raul\Documents\Git\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Release\lua51.dll
-     1>Compilación del proyecto terminada "C:\Users\Raul\Documents\Git\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" (Build destinos).
+         LUA.vcxproj -> D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Release\lua51.dll
+     1>Done Building Project "D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" (Build target(s)).
 
-Compilación correcta.
+Build succeeded.
 
-Tiempo transcurrido 00:00:00.43
+Time Elapsed 00:00:00.17
