@@ -243,6 +243,12 @@ namespace Logic {
 		return m.Dispatch(*placeableEntity);
 	}
 
+
+	int CBuildingManager::getBuildingTypeNumber(BuildingType buildingType){
+		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
+		return (buildingsFromType == nullptr) ? 0 : buildingsFromType->size();
+	}
+
 	CPlaceable* CBuildingManager::findBuilding(BuildingType buildingType){
 		// Obtenemos el conjunto de edificios para el tipo
 		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
@@ -278,11 +284,26 @@ namespace Logic {
 				
 				std::advance(it, randomIndex);
 			}
-			while ((it->first == BuildingType::Evilator || randomIndex == BuildingType::HellQuarters || randomIndex == BuildingType::NonBuilding)||it->second->size()==0);
+			while ((it->first == BuildingType::Evilator || randomIndex == BuildingType::HellQuarters || randomIndex == BuildingType::NonBuilding) || it->second == nullptr || it->second->size() == 0);
 
 			return findBuilding(it->first);
 		}
 		return nullptr;
+	}
+
+	CPlaceable* CBuildingManager::getRandomBuildingForWork(){
+		// Obtenemos un tipo aleatorio
+		int randomIndex;
+		auto it = _buildings.cbegin();
+		do
+		{
+			it = _buildings.cbegin();
+			randomIndex = rand() % _buildings.size();
+
+			std::advance(it, randomIndex);
+		} while ((it->first == BuildingType::HellQuarters || randomIndex == BuildingType::NonBuilding) || it->second == nullptr || it->second->size() == 0);
+
+		return findBuilding(it->first);
 	}
 
 	void CBuildingManager::printBuildingList() const{
@@ -300,7 +321,7 @@ namespace Logic {
 		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
 			if (it->first != BuildingType::Evilator && it->first != BuildingType::HellQuarters && it->first != BuildingType::NonBuilding)
 			{
-				if (it->second->size() > 0)
+				if (it->second != nullptr && it->second->size() > 0)
 					return true;
 			}
 		}

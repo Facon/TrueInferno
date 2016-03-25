@@ -24,7 +24,7 @@ namespace AI {
 
 		case SEND_SOUL_WORK:{
 			// Buscamos un edificio cualquiera. Si no hay ninguno o somos nosotros mismos, no aceptamos el mensaje
-			CPlaceable *target = CBuildingManager::getSingletonPtr()->getRandomBuilding();
+			CPlaceable *target = CBuildingManager::getSingletonPtr()->getRandomBuildingForWork();
 			if (target == nullptr || target->getEntity() == _entity)
 				return false;
 

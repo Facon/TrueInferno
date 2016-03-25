@@ -48,7 +48,7 @@ namespace Graphics
 		deactivate();
 		_sceneMgr->destroyStaticGeometry(_staticGeometry);
 		delete _camera;
-		_root->destroySceneManager(_sceneMgr);
+		//_root->destroySceneManager(_sceneMgr);
 
 	} // ~CScene
 

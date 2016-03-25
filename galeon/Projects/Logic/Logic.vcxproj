@@ -47,8 +47,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/OGRE;../../dependencies/include/OIS;../../dependencies/include/PhysX;../../dependencies/include/FMOD;../../dependencies/include/;../../dependencies/include/FMOD/lowlevel;../../dependencies/include/FMOD/fsbank/;../../dependencies/include/FMOD/studio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/OGRE;../../dependencies/include/OIS;../../dependencies/include/PhysX;../../dependencies/include/lua;../../dependencies/include/luabind;../../dependencies/include/FMOD;../../dependencies/include/;../../dependencies/include/FMOD/lowlevel;../../dependencies/include/FMOD/fsbank/;../../dependencies/include/FMOD/studio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;LUABIND_DYNAMIC_LINK;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -67,8 +67,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/OGRE;../../dependencies/include/OIS;../../dependencies/include/PhysX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/OGRE;../../dependencies/include/OIS;../../dependencies/include/PhysX;../../dependencies/include/lua;../../dependencies/include/luabind;../../dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;LUABIND_DYNAMIC_LINK;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -110,6 +110,11 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\WorkBuilding.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\BuildingDestructionEvent.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\EndGameEvent.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\Event.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\EventManager.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\TutorialEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\HFManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\EntityFactory.cpp" />
@@ -158,6 +163,12 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\WorkBuilding.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\BuildingDestructionEvent.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\ConditionEvents.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\EndGameEvent.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\Event.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\EventManager.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h" />
     <ClInclude Include="..\..\Src\Logic\HFManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Documentation.h" />

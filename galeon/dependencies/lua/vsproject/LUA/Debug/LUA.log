@@ -1,0 +1,9 @@
+﻿Build started 25/03/2016 15:47:33.
+     1>Project "D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         LUA.vcxproj -> D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Debug\lua51.dll
+     1>Done Building Project "D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.17

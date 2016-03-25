@@ -61,6 +61,7 @@
    <copy file="dependencies/build/dependencies/bin/zlib_d.dll" todir="../bin/Debug"/>
    <copy file="dependencies/build/dependencies/bin/jpeg_d.dll" todir="../bin/Debug"/>
    <copy file="dependencies/build/dependencies/bin/freetype_d.dll" todir="../bin/Debug"/>
+   <copy file="dependencies/build/dependencies/bin/toluapp_d.dll" todir="../bin/Debug"/>
 
 </target>
 
@@ -84,6 +85,7 @@
    <copy file="dependencies/build/dependencies/bin/zlib.dll" todir="../bin/Release"/>
    <copy file="dependencies/build/dependencies/bin/jpeg.dll" todir="../bin/Release"/>
    <copy file="dependencies/build/dependencies/bin/freetype.dll" todir="../bin/Release"/>
+   <copy file="dependencies/build/dependencies/bin/toluapp.dll" todir="../bin/Release"/>
 </target>
 
 
@@ -159,9 +161,9 @@ Parametros:
       <arg value='-DOGRE_INCLUDE_DIR="../../include/OGRE"'/>
       <arg value='-DOGRE_HOME="../../Ogre"'/>
       <arg value='-DOGRE_FOUND=TRUE'/>
-      <arg value='-DLUA_LIB="../dependencies/build/dependencies/lib/dynamic/lua.lib"'/>
-      <arg value='-DLUA_LIB_DBG="../dependencies/build/dependencies/lib/dynamic/lua_d.lib"'/>
-      <arg value='-DLUA_H_PATH="../dependencies/src/lua-5.1.4/src"'/>
+      <arg value='-DLUA_LIB="../../lib/Release/lua51.lib"'/>
+      <arg value='-DLUA_LIB_DBG="../../lib/Debug/lua51.lib"'/>
+      <arg value='-DLUA_H_PATH="../../lua/src"'/>
       <arg value='-DTOLUAPP_LIB="../dependencies/build/dependencies/lib/dynamic/toluapp.lib"'/>
       <arg value='-DTOLUAPP_LIB_DBG="../dependencies/build/dependencies/lib/dynamic/toluapp_d.lib"'/>
       <arg value='-DTOLUAPP_H_PATH="../dependencies/src/tolua++-1.0.93/include"'/>

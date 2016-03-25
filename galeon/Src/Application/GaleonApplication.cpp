@@ -57,7 +57,6 @@ namespace Application {
 		if(!setState("game"))
 			return false;
 
-
 		return true;
 
 	} // init

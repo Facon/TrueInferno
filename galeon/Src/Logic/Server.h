@@ -122,7 +122,7 @@ namespace Logic
 		bool loadLevel(const std::string &filename);
 
 		/**
-		Si hay un nivel cargado lo descarga  destruye.
+		Si hay un nivel cargado lo destruye.
 		*/
 		void unLoadLevel();
 

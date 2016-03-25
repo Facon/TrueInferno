@@ -119,11 +119,16 @@ namespace Logic
 		/** Comprueba si un placeable está en una posición válida */
 		bool checkValidPlaceablePosition(CEntity* placeableEntity, const Vector3& logicPosition);
 
+		// Devuelve el número de edificios de un tipo dado
+		int getBuildingTypeNumber(BuildingType buildingType);
+
 		// Localiza un edificio por el tipo dado
 		CPlaceable* findBuilding(BuildingType buildingType);
 
 		// Devuelve un edificio aleatorio
 		CPlaceable* getRandomBuilding();
+
+		CPlaceable* getRandomBuildingForWork();
 
 		//Destruye un edificio aleatorio
 		bool DestroyRandomBuilding();

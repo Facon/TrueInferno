@@ -3,6 +3,8 @@
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
+#include "Logic/Events/EventManager.h"
+#include "Logic/Events/ConditionEvents.h"
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/Entity/PlaceableType.h"
@@ -117,9 +119,10 @@ namespace Logic {
 
 	void CPlaceable::tick(unsigned int msecs){
 		//processWalkingSoulPathRequest();
+
 	} // tick
 
-	bool CPlaceable::place(){
+	bool CPlaceable::place() {
 		// Si no estábamos flotando no hacemos nada porque ya estamos (teóricamente bien) colocados
 		if (!_floating)
 			return true;
@@ -149,6 +152,12 @@ namespace Logic {
 
 		// Cambiamos el estado
 		_floating = false;
+
+		// Eventos del tutorial
+		// @TODO Hacer bien...
+		if (isBuilding()) {
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+		}
 
 		return true;
 	}
