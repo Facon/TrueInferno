@@ -23,12 +23,13 @@ namespace AI{
 
 			// Si lo está
 			if (targetEntity != nullptr){
-				// Notificamos al objetivo
-				Logic::WorkerMessage m(1);
+				// Activamos el trabajador en el objetivo
+				Logic::WorkerMessage m(TMessage::WORKER_ACTIVATED, 1);
 				return m.Dispatch(*targetEntity);
 			}
 
-			// Si no
+			// Si no, la solución más sencilla es descartar al trabajador
+			// TODO Quedaría mejor si le asignamos otra tarea
 			else{
 				std::cout << "Soul's target for WorkSoulTask has disappeared" << std::endl;
 				return true;

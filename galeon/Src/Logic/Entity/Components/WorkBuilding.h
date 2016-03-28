@@ -5,6 +5,11 @@
 #include "Logic/Entity/Component.h"
 
 namespace Logic {
+	/**
+	Componente que gestiona los trabajadores de un edifcio.
+	Los edificios tienen un mínimo y un máximo número de trabajadores.
+	Los trabajadores se asignan a los edificios cuando empiezan a viajar hacia ellos. Una vez en el edificio los trabajadores pasan a estar activos.
+	*/
 	class CWorkBuilding : public IComponent{
 		RTTI_DECL;
 		DEC_FACTORY(CWorkBuilding);
@@ -39,11 +44,17 @@ namespace Logic {
 		// Número máximo de trabajadores permitido
 		unsigned int _maxWorkers;
 
-		// Número actual de trabajadores
-		unsigned int _currentWorkers;
+		// Número de trabajadores activos
+		unsigned int _activeWorkers;
 
-		// Número de trabajadores solicitados a cambiar para el próximo tick
-		int _changeNumWorkers;
+		// Número de trabajadores asignados (= activos + los que están de camino)
+		unsigned int _assignedWorkers;
+
+		// Cantidad (positiva o negativa) de trabajadores activos pendiente de cambiar
+		int _changeActive;
+
+		// Cantidad (positiva o negativa) de trabajadores asignados pendiente de cambiar
+		int _changeAssigned;
 
 	}; // class CWorkBuilding
 

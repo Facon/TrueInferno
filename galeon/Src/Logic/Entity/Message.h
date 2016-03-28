@@ -79,6 +79,8 @@ namespace Logic
 			RESOURCES_CLAIM,
 			LOGISTICS_DEMAND_RESOURCES,
 			LOGISTICS_PROVIDE_RESOURCES,
+			WORKER_ASSIGNED,
+			WORKER_ACTIVATED,
 		};
 	}
 
@@ -355,13 +357,17 @@ namespace Logic
 		}
 	};
 
-	/** Mensaje con la cantidad de trabajadores a añadir (numWorkers > 0) o quitar (numWorkers < 0) */
+	/** Mensajes de trabajadores:
+	- WORKER_ASSIGNED: Cantidad a aumentar o disminuir de trabajadores asignados al edificio (i.e. un trabajador va a ir a trabajar al edificio)
+	- WORKER_ACTIVATED: Cantidad a aumentar o disminuir de trabajadores activados en el edificio (i.e. un trabajador ha llegado al edificio y empieza a trabajar)
+	*/
 	class WorkerMessage : public Message
 	{
 	public:
-		WorkerMessage(int numWorkers) : Message(MessageType::UNASSIGNED), _numWorkers(numWorkers) {}
+		WorkerMessage(MessageType type, int change) : Message(type), _change(change) {}
 
-		int _numWorkers;
+		// Cambio solicitado
+		unsigned int _change;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

@@ -19,31 +19,59 @@ namespace Logic {
 		assert(entityInfo->hasAttribute("maxWorkers") && "maxWorkers is not defined");
 		_maxWorkers = entityInfo->getIntAttribute("maxWorkers");
 		
-		_currentWorkers = 0;
+		_activeWorkers = 0;
 
-		_changeNumWorkers = 0;
+		_assignedWorkers = 0;
+
+		_changeActive = 0;
+		_changeAssigned = 0;
 
 		return true;
 	} // spawn
 
 	void CWorkBuilding::tick(unsigned int msecs){
-		// Si había pendiente una orden de cambiar el número de trabajadores se procesa
-		if (_changeNumWorkers != 0){
-			_currentWorkers += _changeNumWorkers;
+		// Si había pendiente una orden de cambiar el número de trabajadores activos, se procesa
+		if (_changeActive != 0){
+			_activeWorkers += _changeActive;
 
-			std::cout << "Current workers=" << _currentWorkers << std::endl;
+			std::cout << "Current active workers=" << _activeWorkers << std::endl;
 
-			_changeNumWorkers = 0;
+			_changeActive = 0;
+		}
+
+		// Si había pendiente una orden de cambiar el número de trabajadores asignados, se procesa
+		if (_changeAssigned != 0){
+			_assignedWorkers += _changeAssigned;
+
+			std::cout << "Current assigned workers=" << _assignedWorkers << std::endl;
+
+			_changeAssigned = 0;
 		}
 
 	} // tick
 
 	bool CWorkBuilding::isActive(){
-		return _currentWorkers >= _minWorkers;
+		return _activeWorkers >= _minWorkers;
 	}
 
 	bool CWorkBuilding::HandleMessage(const WorkerMessage& msg){
-		_changeNumWorkers += msg._numWorkers;
+		switch(msg._type){
+		case TMessage::WORKER_ACTIVATED:{
+			_changeActive += msg._change;
+			break;
+		}
+
+		case TMessage::WORKER_ASSIGNED:{
+			_changeAssigned += msg._change;
+			break;
+		}
+
+		default:{
+			assert("Unmiplemented logic for message type" && false);
+			return false;
+		}
+		}
+
 		return true;
 	}
 
