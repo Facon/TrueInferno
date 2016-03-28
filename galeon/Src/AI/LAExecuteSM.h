@@ -19,11 +19,17 @@ jerárquicas.
 
 #include "Logic/Entity/Entity.h"
 
-namespace AI 
+namespace AI
 {
 
-	template <class TNode>
+	template <class TNode, class SharedData>
 	class CStateMachine;
+
+	class CLAExecuteSMData {
+	public:
+		CLAExecuteSMData() {}
+		virtual ~CLAExecuteSMData() {}
+	};
 
 	/**
 	Esta acción ejecuta una máquina de estado de la clase CStateMachine
@@ -33,7 +39,8 @@ namespace AI
 
 	protected:
 		/**	Máquina de estado que estamos ejecutando */
-		CStateMachine<CLatentAction>* _stateMachine;
+		CStateMachine<CLatentAction, CLAExecuteSMData>* _stateMachine;
+
 		/** Acción de la máquina de estado que se está ejecutando */
 		CLatentAction* _currentAction;
 
@@ -43,7 +50,7 @@ namespace AI
 		
 		@param stateMachine Máquina de estado
 		*/
-		CLAExecuteSM(CStateMachine<CLatentAction>* stateMachine) : CLatentAction(), _stateMachine(stateMachine), _currentAction(NULL) {};
+		CLAExecuteSM(CStateMachine<CLatentAction, CLAExecuteSMData>* stateMachine) : CLatentAction(), _stateMachine(stateMachine), _currentAction(NULL) {};
 		/**
 		Destructor
 		*/
@@ -82,7 +89,7 @@ namespace AI
 		@return Estado de la acción tras la ejecución del método;
 		permite indicar si la acción ha terminado o se ha suspendido.
 		*/
-		virtual LAStatus OnRun() ;
+		virtual LAStatus OnRun(unsigned int msecs) ;
 
 		/**
 		Método invocado cuando la acción ha sido cancelada (el comportamiento
@@ -105,14 +112,14 @@ namespace AI
 		@return true Si la acción está en principio interesada
 		por ese mensaje.
 		*/
-		virtual bool accept(const MessageType &message);
+		//virtual bool accept(const TMessage &message);
 		/**
 		Procesa el mensaje recibido. El método es invocado durante la
 		ejecución de la acción cuando se recibe el mensaje.
 
 		@param msg Mensaje recibido.
 		*/
-		virtual void process(const MessageType &message);
+		//virtual void process(const TMessage &message);
 
 	};
 

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Imageset autoScaled="vertical" imagefile="TrueInfernoIcons.png" name="TrueInfernoIcons" nativeHorzRes="800" nativeVertRes="600" version="2">
+    <Image height="62" name="CreateMine" width="63" xPos="0" yPos="1" />
+    <Image height="64" name="BorderLine" width="64" xPos="64" yPos="0" />
+    <Image height="45" name="CreateSoulpath" width="66" xPos="128" yPos="10" />
+    <Image height="178" name="CreateRefinery" width="202" xPos="211" yPos="31" />
+    <Image height="250" name="CreateEvilworks" width="250" xPos="437" yPos="2" />
+    <Image height="514" name="CreateGasplant" width="457" xPos="1" yPos="255" />
+    <Image height="721" name="CreateFurnace" width="501" xPos="461" yPos="256" />
+    <Image height="475" name="BurnSoul" width="476" xPos="13" yPos="992" />
+    <Image height="479" name="RepairBuilding" width="476" xPos="529" yPos="990" />
+    <Image height="484" name="ClearTerrain" width="332" xPos="106" yPos="1502" />
+    <Image height="477" name="CreateSoul" width="482" xPos="528" yPos="1505" />
+</Imageset>

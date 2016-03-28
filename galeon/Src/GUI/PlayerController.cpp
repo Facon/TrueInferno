@@ -60,22 +60,24 @@ namespace GUI {
 	{
 		if(_controlledAvatar)
 		{
-			Logic::ControlMessage m;
-			m._type = Logic::MessageType::CONTROL;
+			using namespace Logic;
+
+			ControlMessage m;
+			m._type = MessageType::CONTROL;
 
 			switch(key.keyId)
 			{
 			case GUI::Key::W:
-				m._action = "moveForward";
+				m._action = ActionType::MOVE_FORWARD;
 				break;
 			case GUI::Key::S:
-				m._action = "moveBackward";
+				m._action = ActionType::MOVE_BACKWARD;
 				break;
 			case GUI::Key::A:
-				m._action = "strafeLeft";
+				m._action = ActionType::STRAFE_LEFT;
 				break;
 			case GUI::Key::D:
-				m._action = "strafeRight";
+				m._action = ActionType::STRAFE_RIGHT;
 				break;
 			default:
 				return false;
@@ -95,19 +97,20 @@ namespace GUI {
 	{
 		if(_controlledAvatar)
 		{
-			Logic::ControlMessage m;
-			m._type = Logic::MessageType::CONTROL;
+			using namespace Logic;
+			
+			ControlMessage m;
 
 			switch(key.keyId)
 			{
 			case GUI::Key::W:
 			case GUI::Key::S:
-				m._action = "stopMove";
+				m._action = ActionType::STOP_MOVE;
 				break;
 
 			case GUI::Key::A:
 			case GUI::Key::D:
-				m._action = "stopStrafe";
+				m._action = ActionType::STOP_STRAFE;
 				break;
 
 			default:

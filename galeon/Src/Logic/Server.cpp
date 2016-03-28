@@ -11,6 +11,7 @@ la gestión de la lógica del juego.
 */
 
 #include "Server.h"
+#include "Logic/Events/EventManager.h"
 #include "Logic/Maps/Map.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Maps/Managers/TileManager.h"
@@ -100,6 +101,10 @@ namespace Logic {
 		if (!Logic::CBuildingManager::Init())
 			return false;
 
+		// Inicializamos el gestor de eventos de juego.
+		if (!Logic::CEventManager::Init())
+			return false;
+
 		return true;
 
 	} // open
@@ -109,6 +114,8 @@ namespace Logic {
 	void CServer::close() 
 	{
 		unLoadLevel();
+
+		Logic::CEventManager::Release();
 
 		Logic::CBuildingManager::Release();
 
@@ -191,10 +198,12 @@ namespace Logic {
 		Logic::CEntityFactory::getSingletonPtr()->deleteDefferedEntities();
 
 		_map->tick(msecs);
+		Logic::CEventManager::getSingletonPtr()->tick(msecs);
 
 		// TODO Quitar cuando se esté disponible el control para crear edificios
 		if (TEST_ROAD_BUILDING)
 			testRoadBuild(msecs);
+
 	} // tick
 
 	// TODO TEST
@@ -213,7 +222,7 @@ namespace Logic {
 				// Construímos
 				for (auto it = path->cbegin(); it != path->cend(); ++it){
 					Tile* tile = (*it);
-					Logic::CEntity* entity = CBuildingManager::getSingletonPtr()->createPlaceable(_map, "SoulPath", tile->getLogicPosition(), false);
+					Logic::CEntity* entity = CBuildingManager::getSingletonPtr()->createPlaceable(_map, "SoulPath", tile->getLogicPosition(), false, false);
 					if (!entity){
 						std::cout << "Can't create soulpath in " << tile->getLogicPosition() << std::endl;
 					}

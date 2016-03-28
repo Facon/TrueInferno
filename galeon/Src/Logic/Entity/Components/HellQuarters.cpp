@@ -5,21 +5,22 @@
 #include "Map/MapEntity.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
+#include "Logic/Entity/Message.h"
 #include "Logic/BuildingManager.h"
 #include "AI/Server.h"
-#include "AI/SoulTask.h"
+#include "Logic/Entity/Components/Placeable.h"
 #include <iostream>
 #include <cassert>
-#include "Logic/Entity/Components/Placeable.h"
 
 namespace Logic {
 	RTTI_ROOT_IMPL(CHellQuarters);
 	IMP_FACTORY(CHellQuarters);
 
-	CHellQuarters::CHellQuarters() : IComponent() {
-	}
-
 	bool CHellQuarters::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+		// Garantizamos que se llama al padre
+		if (!CStateMachineExecutor::spawn(entity, map, entityInfo))
+			return false;
+
 		_timeSinceLastSpawn = 0;
 
 		assert(entityInfo->hasAttribute("numInitialSouls") && "numInitialSouls is not defined");
@@ -31,16 +32,15 @@ namespace Logic {
 		assert(entityInfo->hasAttribute("numSpawnedSouls") && "numSpawnedSouls is not defined");
 		_numSpawnedSouls = entityInfo->getIntAttribute("numSpawnedSouls");
 
-		_hellQuartersActionState = HellQuartersActionState::Idle;
-		_actionRequested = nullptr;
-
 		return true;
 	} // spawn
 
 	void CHellQuarters::tick(unsigned int msecs){
-		tickSpawnSouls(msecs);
+		// Tickeamos la FSM
+		CStateMachineExecutor::tick(msecs);
 
-		tickActions(msecs);
+		// Y también la lógica interna de la generación de almas, de forma independiente
+		tickSpawnSouls(msecs);
 	} // tick
 
 	void CHellQuarters::tickSpawnSouls(unsigned int msecs){
@@ -56,176 +56,139 @@ namespace Logic {
 		}
 	}
 
-	bool CHellQuarters::HandleMessage(const HellQuartersActionMessage& msg){
-		if (_hellQuartersActionState != HellQuartersActionState::Idle){
-			assert(false && "HellQuarters is not expecting this message");
-			return false;
-		}
-
-		switch (msg._action){
-
-		case TMessage::HellQuartersAction::SendSoulToBurn:
-
-		case TMessage::HellQuartersAction::SendSoulToWork:{
-			_actionRequested = new HellQuartersActionMessage(msg);
-			_hellQuartersActionState = HellQuartersActionState::ActionRequested;
-
-			return true;
-			break;
-		}
-			
-		default:{
-			assert(false && "Unimplemented HellQuarters action");
-			return false;
-		}
-		}
-	}
-
-	bool CHellQuarters::HandleMessage(const SoulSenderResponseMessage& msg){
-		if (_hellQuartersActionState != HellQuartersActionState::WaitingTaskStart){
-			assert(false && "HellQuarters is not expecting this message");
-			return false;
-		}
-
-		if (msg._status){
-			_hellQuartersActionState = HellQuartersActionState::Success;
-		}
-		else{
-			_hellQuartersActionState = HellQuartersActionState::Fail;
-		}
-	}
-
-	bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg){
-		// Nos aseguramos que estamos recibiendo una respuesta y que estábamos en estado de esperarla
-		if (msg._type != MessageType::RETURN_WALK_SOUL_PATH || _hellQuartersActionState != HellQuartersActionState::WaitingPath){
-			assert(false && "HellQuarters is not expecting this message");
-			return false;
-		}
-
-		// Guardamos la ruta devuelta. Puede ser NULL si no se encontró ruta al destino solicitado
-		_pathReceived = msg._path;
-
-		if (msg._path)
-			// Cambiamos al estado de path recibido
-			_hellQuartersActionState = HellQuartersActionState::PathReceived;
-		else
-			_hellQuartersActionState = HellQuartersActionState::Fail;
-
-		return true;
-	}
-
-	void CHellQuarters::tickActions(unsigned int msecs){
-		switch (_hellQuartersActionState){
-
+	/*
+	void CHellQuarters::tickSendSoulToWork(unsigned int msecs){
+		switch (_sendingSoulToWorkState){
 		// En caso de estar parados, no se hace nada
-		case HellQuartersActionState::Idle:{
+		case Idle:{
 			break;
 		}
 
-		case HellQuartersActionState::ActionRequested:{
+		case Requested:{
 			// Reservamos las almas
-			_numAvailableSouls -= _actionRequested->_numSouls;
+			_numAvailableSouls -= _numSoulsToWork;
 
-			// Comprobamos que hay almas suficientes
 			if (_numAvailableSouls < 0){
 				std::cout << "There are no available souls" << std::endl;
-				_hellQuartersActionState = HellQuartersActionState::Fail;
+				_sendingSoulToWorkState = SendingSoulToWorkState::Fail;
 				return;
 			}
 
-			CPlaceable* target = nullptr;
+			// TODO De momento, enviamos siempre al Evilator
+			// Localizamos el Evilator
+			CPlaceable *evilator = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Evilator);
 
-			switch (_actionRequested->_action){
-			case TMessage::HellQuartersAction::SendSoulToBurn:{
-				target = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Furnace);
-				_task = AI::CSendMessageTask(target->getEntity(), SoulActionMessage(_actionRequested->_numSouls, TMessage::SoulAction::BurnSoul));
-				break;
-			}
-
-			case TMessage::HellQuartersAction::SendSoulToWork:{
-				target = CBuildingManager::getSingletonPtr()->getRandomBuilding();
-				_task = AI::CSendMessageTask(target->getEntity(), SoulActionMessage(_actionRequested->_numSouls, TMessage::SoulAction::WorkSoul));
-				break;
-			}
-
-			default:
-				assert(false && "Unimplemented HellQuarters action");
-				_hellQuartersActionState = HellQuartersActionState::Fail;
-				return;
-			}
-
-			// Enviamos un mensaje para obtener ruta hasta el objetivo
-			WalkSoulPathMessage message(target);
-
+			// Enviamos un mensaje para obtener la ruta hasta el Evilator
+			WalkSoulPathMessage message(evilator->getEntity()->getPosition());
+			message._type = MessageType::REQUEST_WALK_SOUL_PATH;
+			
 			// Si nadie atendió al mensaje
 			if (!message.Dispatch(*this->getEntity())){
-				std::cout << "No one answered the REQUEST_WALK_SOUL_PATH message" << std::endl;
-				_hellQuartersActionState = HellQuartersActionState::Fail;
+				std::cout << "No one answered the WALK_SOUL_PATH_REQUEST message" << std::endl;
+				_sendingSoulToWorkState = SendingSoulToWorkState::Fail;
 				return;
 			}
 
 			// Nos ponemos a esperar a la ruta
-			_hellQuartersActionState = HellQuartersActionState::WaitingPath;
+			_sendingSoulToWorkState = SendingSoulToWorkState::WaitingForPath;
 			break;
 		}
 
-		case HellQuartersActionState::WaitingPath:{
+		// En el caso de estar esperando no hacemos nada y seguimos a la espera de que llegue el mensaje
+		case WaitingForPath:{
 			break;
 		}
 
-		case HellQuartersActionState::PathReceived:{
-			// Enviamos la solicitud de ejecución de tarea
-			SoulSenderRequestMessage m(_pathReceived, _task);
-
-			if (m.Dispatch(*_entity)){
-				_hellQuartersActionState = HellQuartersActionState::WaitingTaskStart;
+		// En ruta recibida, creamos el alma y le pasamos la ruta
+		case PathReceived:{
+			// Si la ruta recibida es válida
+			if (_pathReceived != nullptr && _pathReceived->size()>0){
+				std::cout << "Path received! :)" << std::endl;
+				
+				// Creamos y enviamos el alma a trabajar
+				if (createAndSendSoulToWork()){
+					// Si se llevó a cabo
+					_sendingSoulToWorkState = SendingSoulToWorkState::Success;
+					return;
+				}
 			}
+
+			// Si no es válida
 			else{
-				_hellQuartersActionState = HellQuartersActionState::Fail;
+				std::cout << "There is no path :(" << std::endl;
 			}
-			
+
+			// Si llegamos hasta aquí: fallo
+			_sendingSoulToWorkState = SendingSoulToWorkState::Fail;
 			break;
 		}
 
-		case HellQuartersActionState::WaitingTaskStart:{
-			break;
-		}
-
-		case HellQuartersActionState::Fail:{
-			// Recuperamos las almas reservadas dado que no han podido usarse realmente
-			_numAvailableSouls += _actionRequested->_numSouls;
+		case Fail:{
+			// Recuperamos las almas reservadas dado que no han podido enviarse satisfactoriamente a trabajar
+			_numAvailableSouls += _numSoulsToWork;
 
 			// Pasamos al estado de limpieza
-			_hellQuartersActionState = HellQuartersActionState::Clean;
+			_sendingSoulToWorkState = SendingSoulToWorkState::Clean;
 
 			break;
 		}
 
-		case HellQuartersActionState::Success:{
+		case Success:{
 			// Pasamos al estado de limpieza
-			_hellQuartersActionState = HellQuartersActionState::Clean;
+			_sendingSoulToWorkState = SendingSoulToWorkState::Clean;
 
 			break;
 		}
 
-		case HellQuartersActionState::Clean:{
+		case Clean:{
+			_numSoulsToWork = 0;
+
 			// Liberamos memoria
-			if (_actionRequested){
-				delete(_actionRequested);
-				_actionRequested = nullptr;
+			if (_pathReceived){
+				delete(_pathReceived);
+				_pathReceived = nullptr;
 			}
 
-			_hellQuartersActionState = HellQuartersActionState::Idle;
-
+			_sendingSoulToWorkState = SendingSoulToWorkState::Idle;
 			break;
 		}
 
 		default:{
 			assert(true && "Unimplemented logic for all states");
-
 			break;
 		}
 		}
 	}
 
+	bool CHellQuarters::createAndSendSoulToWork(){
+		CMap* map = CServer::getSingletonPtr()->getMap();
+		CEntity* newSoul = CEntityFactory::getSingletonPtr()->createEntity("Soul", map);
+
+		if (!newSoul){
+			std::cout << "Can´t create new soul" << std::endl;
+			return false;
+		}
+
+		// La ubicamos en la posición inicial de la ruta
+		Vector3& position = (*_pathReceived)[0];
+		position.y += SOUL_ON_TILE_HEIGHT;
+		
+		PositionMessage m(position);
+		
+		if (!m.Dispatch(*newSoul)){
+			std::cout << "Can´t set soul on initial position" << std::endl;
+			return false;
+		}
+
+		// Le indicamos la ruta que tiene que recorrer
+		WalkSoulPathMessage m2(_pathReceived);
+		m2._type = MessageType::PERFORM_WALK_SOUL_PATH;
+		if (!m2.Dispatch(*newSoul)){
+			std::cout << "Can´t assign path to soul" << std::endl;
+			return false;
+		}
+
+		return true;
+	}
+	*/
 } // namespace Logic

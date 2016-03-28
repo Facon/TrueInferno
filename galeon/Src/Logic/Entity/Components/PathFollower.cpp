@@ -3,8 +3,8 @@
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Message.h"
 #include "Application/GaleonApplication.h"
-#include "BaseSubsystems/Math.h"
 #include <vector>
+#include "Map/MapEntity.h"
 
 namespace Logic
 {
@@ -16,6 +16,10 @@ namespace Logic
 		if (!IComponent::spawn(entity, map, entityInfo))
 			return false;
 
+		if (entityInfo->hasAttribute("speed")){
+			_speed = entityInfo->getFloatAttribute("speed");
+		}
+
 		return true;
 	}
 
@@ -25,6 +29,7 @@ namespace Logic
 		{
 		case MessageType::PERFORM_WALK_SOUL_PATH:
 			addToQueue(*msg._path);
+			delete msg._path;
 			return true;
 		default:
 			break;
@@ -35,19 +40,20 @@ namespace Logic
 
 	void PathFollower::tick(unsigned int msecs)
 	{
-		if (_path.empty() && (_entity->getPosition().squaredDistance(_targetPosition) <= ZERO_DISTANCE) && !_targetReached)
+		if (!_targetReached && _path.empty() && (_entity->getPosition().squaredDistance(_targetPosition) <= ZERO_DISTANCE))
 		{
-			std::cout << "Worker reached his destination!" << std::endl;
-
-			// Ask soul to execute its task
-			//SendMessage("executeTask", targetBuilding, SendMessageOptions.RequireReceiver);
-
-			//workerManager.disableWorker(this.gameObject);
-
+			//std::cout << "Worker reached his destination!" << std::endl;
 			_targetReached = true;
 		}
 
-		if (!_path.empty() && !_moving)
+		// Si hemos llegado pero todavía no hemos podido notificarlo
+		if (_targetReached && !_targetReachedNotified){
+			// Enviamos la notificación de que hemos llegado
+			WalkSoulPathMessage m(MessageType::WALK_SOUL_PATH_FINISHED);
+			_targetReachedNotified = m.Dispatch(*_entity);
+		}
+
+		if (!_moving && !_path.empty())
 		{
 			_moving = true;
 

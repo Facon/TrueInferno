@@ -3,65 +3,199 @@
 <GUILayout version="4" >
 	<Window type="OgreTray/StaticImage" name="SideBar" >
 		<Property name="Area" value="{{0.8,0},{0.1,0},{1,0},{1,0}}" />
-		<Window type="OgreTray/Button" name="CreateFurnace" >
+		<Property name="Image" value="TrueInfernoUITextures/Sidebar" />
+		<Property name="HorzFormatting" value="LeftAligned" />
+		<Property name="VertFormatting" value="TopAligned" />
+		
+		<Window type="OgreTray/StaticImage" name="CreateFurnace">
 			<Property name="Area" value="{{0.05,0},{0.150,0},{0.475,0},{0.274,0}}" />
-			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="CBuild" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/CreateFurnace" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
 		</Window>
-		<Window type="OgreTray/Button" name="CreateRoad" >
+		<Window type="OgreTray/StaticImage" name="CreateRoad">
 			<Property name="Area" value="{{0.525,0},{0.150,0},{0.95,0},{0.274,0}}" />
-			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="CRoad" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/CreateSoulpath" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
 		</Window>
-		<Window type="OgreTray/Button" name="CreateResource1Building" >
+		<Window type="OgreTray/StaticImage" name="CreateResource1Building">
 			<Property name="Area" value="{{0.05,0},{0.280,0},{0.475,0},{0.404,0}}" />
-			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="CRes1" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/CreateMine" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
 		</Window>
-		<Window type="OgreTray/Button" name="CreateResource2Building" >
+		<Window type="OgreTray/StaticImage" name="CreateResource2Building">
 			<Property name="Area" value="{{0.525,0},{0.280,0},{0.95,0},{0.404,0}}" />
-			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="CRes2" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/CreateGasplant" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
 		</Window>
-		<Window type="OgreTray/Button" name="CreateSoul" >
+		<Window type="OgreTray/StaticImage" name="CreateSoul">
 			<Property name="Area" value="{{0.05,0},{0.410,0},{0.475,0},{0.534,0}}" />
-			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="CSoul" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/CreateSoul" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
 		</Window>
-		<Window type="OgreTray/Button" name="MoveSoul" >
+		<Window type="OgreTray/StaticImage" name="MoveSoul">
 			<Property name="Area" value="{{0.525,0},{0.410,0},{0.95,0},{0.534,0}}" />
-			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="MSoul" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/BurnSoul" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
 		</Window>
-		<Window type="OgreTray/Button" name="CreateEvilworks" >
+		<Window type="OgreTray/StaticImage" name="CreateEvilworks">
 			<Property name="Area" value="{{0.05,0},{0.540,0},{0.475,0},{0.664,0}}" />
-			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="CEvil" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/CreateEvilworks" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
 		</Window>
-		<Window type="OgreTray/Button" name="CreateRefinery" >
+		<Window type="OgreTray/StaticImage" name="CreateRefinery">
 			<Property name="Area" value="{{0.525,0},{0.540,0},{0.95,0},{0.664,0}}" />
-			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="CRefin" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/CreateRefinery" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
 		</Window>
-		<Window type="OgreTray/Button" name="RepairBuilding" >
+		<Window type="OgreTray/StaticImage" name="RepairBuilding">
 			<Property name="Area" value="{{0.05,0},{0.670,0},{0.475,0},{0.794,0}}" />
-			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="Repair" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/RepairBuilding" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
 		</Window>
-		<Window type="OgreTray/Button" name="ClearTerrain" >
+		<Window type="OgreTray/StaticImage" name="ClearTerrain">
 			<Property name="Area" value="{{0.525,0},{0.670,0},{0.95,0},{0.794,0}}" />
-			<Property name="Font" value="Jura-18" />
-			<Property name="Text" value="Shovel" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
 			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/ClearTerrain" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
 		</Window>
 	</Window>
 </GUILayout>

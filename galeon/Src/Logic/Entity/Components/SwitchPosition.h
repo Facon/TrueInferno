@@ -1,7 +1,7 @@
 /**
 @file SwitchPosition.h
 
-Contiene la declaraci�n del componente que controla el movimiento de
+Contiene la declaración del componente que controla el movimiento de
 una entidad que tiene dos estado (posiciones) para ir de una a otra.
 
 @see Logic::CSwitchPosition
@@ -25,7 +25,7 @@ namespace Logic
 	(posiciones) y la mueve de uno a otro.
 	<p>
 	Las posiciones entre las que se transita pueden configurarse desde el mapa.
-	De la misma manera se puede estableces el atributo "loop" que mantendr� constante
+	De la misma manera se puede estableces el atributo "loop" que mantendrá constante
 	las transiciones. El atributo "speed" determina la velocidad del movimiento.
 	<p>
 	Recibe mensajes de tipo "SWITCH" para transitar de un estado a otro en caso de
@@ -34,7 +34,7 @@ namespace Logic
 	
     @ingroup logicGroup
 
-	@author David Llansó Garc�a
+	@author David Llansó García
 	@date Octubre, 2010
 	*/
 	class CSwitchPosition : public IComponent

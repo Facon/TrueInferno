@@ -14,17 +14,22 @@ namespace Logic
     class AnimationMessage;
     class ControlMessage;
 	class PhysicMessage;
-    class MoveMessage;
+	class KinematicMoveMessage;
     class TouchMessage;
     class DamageMessage;
 	class WorkerMessage;
 	class WalkSoulPathMessage;
-	class HellQuartersActionMessage;
-	class SoulActionMessage;
+	class HellQuartersMessage;
 	class MovePlaceableMessage;
-	class SoulSenderRequestMessage;
-	class SoulSenderResponseMessage;
-	
+	class SoulSenderMessage;
+	class SoulMessage;
+	class CheckValidPositionPlaceableMessage;
+	class MoveMessage;
+	class NumberMessage;
+	class ResourceMessage;
+	class GetCostPlaceableMessage;
+	class LogisticsMessage;
+
 	class MessageHandler
 	{
 	public:
@@ -56,7 +61,7 @@ namespace Logic
 		virtual bool HandleMessage(const PhysicMessage& msg)
 		{ return false; }
 
-        virtual bool HandleMessage(const MoveMessage& msg)
+		virtual bool HandleMessage(const KinematicMoveMessage& msg)
         { return false; }
 
         virtual bool HandleMessage(const TouchMessage& msg)
@@ -69,28 +74,42 @@ namespace Logic
 		{ return false; }
 
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg)
-		{  return false; }
+		{ return false; }
 
-		virtual bool HandleMessage(const HellQuartersActionMessage& msg)
-		{  return false; }
-
-		virtual bool HandleMessage(const SoulActionMessage& msg)
-		{
-			return false;
-		}
+		virtual bool HandleMessage(const HellQuartersMessage& msg)
+		{ return false; }
 
 		virtual bool HandleMessage(const MovePlaceableMessage& msg)
-		{  return false; }
+		{ return false; }
 
-		virtual bool HandleMessage(const SoulSenderRequestMessage& msg)
+		virtual bool HandleMessage(const SoulSenderMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const SoulMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const CheckValidPositionPlaceableMessage& msg)
+		{ return false; }
+
+        virtual bool HandleMessage(const MoveMessage& msg)
+        { return false; }
+
+		virtual bool HandleMessage(const NumberMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const ResourceMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const GetCostPlaceableMessage& msg)
 		{
 			return false;
 		}
 
-		virtual bool HandleMessage(const SoulSenderResponseMessage& msg)
+		virtual bool HandleMessage(const LogisticsMessage& msg)
 		{
 			return false;
 		}
+
 	};
 } // namespace Logic
 

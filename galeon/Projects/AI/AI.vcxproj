@@ -46,8 +46,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\Src;../../dependencies/include/OGRE;../../dependencies/include/OIS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\Src;../../dependencies/include/OGRE;../../dependencies/include/OIS;../../dependencies/include/lua;../../dependencies/include/luabind;../../dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;LUABIND_DYNAMIC_LINK;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -65,8 +65,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\Src;../../dependencies/include/OGRE;../../dependencies/include/OIS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\Src;../../dependencies/include/OGRE;../../dependencies/include/OIS;../../dependencies/include/lua;../../dependencies/include/luabind;../../dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;LUABIND_DYNAMIC_LINK;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -85,25 +85,100 @@
     <ClCompile Include="..\..\Src\AI\DisjointSets.cpp" />
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAAskAndWaitResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAAttendResourceBuildingRequest.cpp" />
+    <ClCompile Include="..\..\Src\AI\LABurnSouls.cpp" />
+    <ClCompile Include="..\..\Src\AI\LADestroyEntity.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAEmptyTemplate.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAExecuteResourceDemandTasks.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAExecuteResourceProvideTasks.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAExecuteSoulTask.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAExtractResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAFindProviders.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAGatherSouls.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAPickUpResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LARecountResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAReserveFromProviders.cpp" />
+    <ClCompile Include="..\..\Src\AI\LATransformResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAWaitAndFollowPath.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAWaitResourceDemand.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAWaitResourceProvide.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAWaitTaskAndRequestPath.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAGetTaskAndTarget.cpp" />
+    <ClCompile Include="..\..\Src\AI\LASendSoul.cpp" />
+    <ClCompile Include="..\..\Src\AI\LatentAction.cpp" />
     <ClCompile Include="..\..\Src\AI\micropather.cpp" />
     <ClCompile Include="..\..\Src\AI\Movement.cpp" />
     <ClCompile Include="..\..\Src\AI\Server.cpp" />
+    <ClCompile Include="..\..\Src\AI\SimpleLatentActions.cpp" />
     <ClCompile Include="..\..\Src\AI\UndirectedGraph.cpp" />
     <ClCompile Include="..\..\Src\AI\WaypointGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\AStarFunctionsWalkingSoul.h" />
     <ClInclude Include="..\..\Src\AI\AStarFunctionsSoulPath.h" />
+    <ClInclude Include="..\..\Src\AI\BurnSoulTask.h" />
+    <ClInclude Include="..\..\Src\AI\Condition.h" />
     <ClInclude Include="..\..\Src\AI\DisjointSets.h" />
     <ClInclude Include="..\..\Src\AI\DynamicMovement.h" />
     <ClInclude Include="..\..\Src\AI\DynTriMat.h" />
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
+    <ClInclude Include="..\..\Src\AI\LAAskAndWaitResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAAttendResourceBuildingRequest.h" />
+    <ClInclude Include="..\..\Src\AI\LABurnSouls.h" />
+    <ClInclude Include="..\..\Src\AI\LADestroyEntity.h" />
+    <ClInclude Include="..\..\Src\AI\LAEmptyTemplate.h" />
+    <ClInclude Include="..\..\Src\AI\LAExecuteResourceDemandTasks.h" />
+    <ClInclude Include="..\..\Src\AI\LAExecuteResourceProvideTasks.h" />
+    <ClInclude Include="..\..\Src\AI\LAExecuteSoulTask.h" />
+    <ClInclude Include="..\..\Src\AI\LAExtractResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAFindProviders.h" />
+    <ClInclude Include="..\..\Src\AI\LAGatherSouls.h" />
+    <ClInclude Include="..\..\Src\AI\LAPickUpResources.h" />
+    <ClInclude Include="..\..\Src\AI\LARecountResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAReserveFromProviders.h" />
+    <ClInclude Include="..\..\Src\AI\LATransformResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAWaitAndFollowPath.h" />
+    <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />
+    <ClInclude Include="..\..\Src\AI\LAFindingPath.h" />
+    <ClInclude Include="..\..\Src\AI\LAWaitResourceDemand.h" />
+    <ClInclude Include="..\..\Src\AI\LAWaitResourceProvide.h" />
+    <ClInclude Include="..\..\Src\AI\LAWaitTaskAndRequestPath.h" />
+    <ClInclude Include="..\..\Src\AI\LAGetTaskAndTarget.h" />
+    <ClInclude Include="..\..\Src\AI\LASendSoul.h" />
+    <ClInclude Include="..\..\Src\AI\LatentAction.h" />
     <ClInclude Include="..\..\Src\AI\micropather.h" />
     <ClInclude Include="..\..\Src\AI\Movement.h" />
+    <ClInclude Include="..\..\Src\AI\RequestTransportSoulTask.h" />
     <ClInclude Include="..\..\Src\AI\Server.h" />
+    <ClInclude Include="..\..\Src\AI\SimpleLatentActions.h" />
+    <ClInclude Include="..\..\Src\AI\SMEmptyTemplate.h" />
+    <ClInclude Include="..\..\Src\AI\SMEmptyTemplateData.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceBuilding.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceBuildingData.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceDemander.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceDemanderData.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceExtractorData.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceExtractor.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceProvider.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceProviderData.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceTransformer.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceTransformerData.h" />
+    <ClInclude Include="..\..\Src\AI\SMSoulBurner.h" />
+    <ClInclude Include="..\..\Src\AI\SMSoulBurnerData.h" />
+    <ClInclude Include="..\..\Src\AI\SMHellQuarters.h" />
+    <ClInclude Include="..\..\Src\AI\SMPathFinder.h" />
+    <ClInclude Include="..\..\Src\AI\SMSoul.h" />
+    <ClInclude Include="..\..\Src\AI\SMSoulData.h" />
+    <ClInclude Include="..\..\Src\AI\SMSoulSender.h" />
     <ClInclude Include="..\..\Src\AI\SoulTask.h" />
+    <ClInclude Include="..\..\Src\AI\StateMachine.h" />
+    <ClInclude Include="..\..\Src\AI\PerformTransportSoulTask.h" />
     <ClInclude Include="..\..\Src\AI\UndirectedGraph.h" />
     <ClInclude Include="..\..\Src\AI\WaypointGraph.h" />
+    <ClInclude Include="..\..\Src\AI\WorkSoulTask.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulBurner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

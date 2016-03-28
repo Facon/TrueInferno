@@ -54,9 +54,8 @@ namespace Application {
 		if(!addState("exit", new CExitState(this)))
 			return false;
 
-		if(!setState("menu"))
+		if(!setState("game"))
 			return false;
-
 
 		return true;
 

@@ -1,15 +1,26 @@
 #include "TimeManager.h"
+#include "Logic/Events/EventManager.h"
+#include "Logic/Events/ConditionEvents.h"
 
 namespace Logic
 {
-	TimeManager::TimeManager() : _time(120000) // 2 min.
-	{}
+	TimeManager::TimeManager() // 2 min.
+	{
+		_time = _maxTime;
+	}
 
 	TimeManager::~TimeManager()
 	{}
 
 	void TimeManager::tick(unsigned int msecs)
 	{
-		_time = (_time - msecs) % 120000;
+		//_time = (_time - msecs) % _maxTime;
+
+		_time -= msecs;
+		if (_time < 0) {
+			_time = 0;
+			// @TODO Hacer esto bien...
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::END_GAME);
+		}
 	}
 }

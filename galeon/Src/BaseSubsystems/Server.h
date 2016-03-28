@@ -235,6 +235,15 @@ namespace BaseSubsystems
 		@return true si todo fue correctamente.
 		*/
 		bool initCEGUI();
+		
+		bool initFMOD();
+
+		/**
+		Inicialización del ScriptManager.
+
+		@return true si todo fue correctamente.
+		*/
+		bool initScriptManager();
 
 		/**
 		Liberación de Ogre.
@@ -250,6 +259,13 @@ namespace BaseSubsystems
 		Liberación de CEGUI.
 		*/
 		void releaseCEGUI();
+		
+		/**
+		Liberación del ScriptManager.
+		*/
+		void releaseScriptManager();
+
+		void releaseFMOD();
 
 		/**
 		Método que carga los recursos Ogre especificados en el fichero de 

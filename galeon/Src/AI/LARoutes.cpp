@@ -83,8 +83,8 @@ namespace AI
 	void CLARouteToRandom::sendMoveMessage(bool walk, Vector3 target)
 	{
 		// Envía un mensaje para calcular una ruta
-		Message message2;
-		message2._type = MessageType::ROUTE_TO;
+		TMessage message2;
+		message2._type = Message::ROUTE_TO;
 		// El bool indica si el receptor debe calcular la ruta 
 		// o debe dejar de recorrer la ruta actual y parar
 		message2._bool = walk;
@@ -127,12 +127,12 @@ namespace AI
 	por ese mensaje.
 	*/
 
-	bool CLARouteToRandom::accept(const MessageType &message)
+	bool CLARouteToRandom::accept(const TMessage &message)
 	{
 		// TODO PRÁCTICA IA
 		// Esta acción acepta mensajes del tipo FINISHED_ROUTE
 
-		return (message._type == MessageType::FINISHED_ROUTE);
+		return (message._type == Message::FINISHED_ROUTE);
 	}
 	/**
 	Procesa el mensaje recibido. El método es invocado durante la
@@ -143,14 +143,14 @@ namespace AI
 
 	@param msg Mensaje recibido.
 	*/
-	void CLARouteToRandom::process(const MessageType &message)
+	void CLARouteToRandom::process(const TMessage &message)
 	{
 		// TODO PRÁCTICA IA
 		// Si se recibe un mensaje de fallo de la ruta hay que terminar con fallo.
 		// Si es de finalización de la ruta hay que terminar con éxito.
 		// Para terminar una acción latente usamos el método finish (ver LatentAction.h)
 
-		if (message._type == MessageType::FINISHED_ROUTE) {
+		if (message._type == Message::FINISHED_ROUTE) {
 			finish(message._bool);
 		}
 	}

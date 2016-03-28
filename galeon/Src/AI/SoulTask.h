@@ -1,23 +1,34 @@
 #ifndef SOUL_TASK_H_
 #define SOUL_TASK_H_
 
-#include "Logic\Entity\Message.h"
-#include "Logic\Entity\Entity.h"
+#include "Logic\Maps\Map.h"
 
 namespace AI{
 	class CSoulTask {
-		virtual bool executeTask();
-	};
 
-	class CSendMessageTask : public CSoulTask{
 	public:
-		CSendMessageTask(Logic::CEntity *target, const Logic::SoulActionMessage& message) : _target(target), _message(message) {}
+		CSoulTask(Logic::CMap *map, const Logic::TEntityID& target) : _map(map), _target(target) {}
 
-		Logic::CEntity *_target;
-		Logic::SoulActionMessage _message;
+		virtual ~CSoulTask() {};
 
-		bool CSendMessageTask::executeTask() { return _message.Dispatch(*_target); };
+		/** Método que se ejecutará en el objetivo al llegar el alma */
+		virtual bool execute() = 0;
+
+		/** Devuelve el objetivo hasta donde debe desplazarse el alma */
+		virtual Logic::TEntityID getTarget(){
+			return _target;
+		}
+
+		/** Método para clonar una instancia y poder transmitir con tranquilidad copias de la instancia como punteros a CSoulTask. Debe ser implementado en la clase hija */
+		virtual CSoulTask* clone() = 0;
+
+	protected:
+		Logic::CMap *_map;
+
+		/** Objetivo hasta donde debe desplazarse el alma */
+		Logic::TEntityID _target;
 	};
+
 }
 
 #endif

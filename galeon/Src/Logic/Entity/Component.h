@@ -221,4 +221,36 @@ static bool RegisteredFactory_##Class = Class::regist();
 
 } // namespace Logic
 
+/** Macro para manejar mensajes en una SM (i.e. hijos de StateMachine)
+Propaga el mensaje adecuadamente para que llegue a las condiciones de transición entre estados */
+#define SM_HANDLE_MESSAGE(Class) \
+bool HandleMessage(const Class& msg){ \
+	bool ret = false; \
+	/* Si no hay un nodo actual no hay aristas interesadas así que lo primero es comprobar si hay un nodo válido en _currentNodeId */ \
+	if (_currentNodeId != -1) {  \
+		/* Buscamos la lista de aristas que salen del nodo actual */ \
+		EdgeList::iterator it = _edges->find(_currentNodeId); \
+		if (it != _edges->end()) { \
+			PairVector* vector = (*it).second; \
+			/* Para cada elemento del vector (arista que sale del nodo actual) */ \
+			for (PairVector::iterator edgeIt = vector->begin(); edgeIt != vector->end(); edgeIt++){ \
+				/* Procesamos en la arista (o sea, la condición) */ \
+				ret |= (edgeIt->first->HandleMessage(msg)); /* Si alguna arista acepta, aceptaremos al final */ \
+			} \
+		}  \
+	} \
+return ret; \
+}
+
+/** Macro para manejar mensajes en una componente ejecutor de SM (.e. hijos de StateMachineExecutor)
+Propaga el mensaje adecuadamente para que llegue a la propia SM y a la acción actual */
+#define SM_EXECUTOR_HANDLE_MESSAGE(Class) \
+bool HandleMessage(const Class& msg){ \
+	if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg)) \
+		return true; \
+	if (_currentAction != NULL) \
+		return _currentAction->HandleMessage(msg); \
+	return false; \
+}
+
 #endif // __Logic_Component_H

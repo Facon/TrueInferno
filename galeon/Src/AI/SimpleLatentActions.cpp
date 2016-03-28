@@ -21,7 +21,7 @@ namespace AI
 	tiempo en el que terminará la acción mediante el atributo _time
 
 	@return Estado de la función; si se indica que la
-	acción a terminado (LatentAction::Completed), se invocará
+	acción ha terminado (LatentAction::Completed), se invocará
 	al OnStop().
 	*/
 	CLatentAction::LAStatus CLAWait::OnStart()
@@ -64,7 +64,7 @@ namespace AI
 	@return Estado de la acción tras la ejecución del método;
 	permite indicar si la acción ha terminado o se ha suspendido.
 	*/
-	CLatentAction::LAStatus CLAWait::OnRun() 
+	CLatentAction::LAStatus CLAWait::OnRun(unsigned int msecs) 
 	{
 		// TODO PRÁCTICA IA
 		// En cada paso de ejecución tendremos que comprobar si hemos
@@ -91,33 +91,5 @@ namespace AI
 		// Cuando se aborta se queda en estado terminado con fallo
 		return FAIL;
 	}
-	/**
-	Devuelve true si a la acción le interesa el tipo de mensaje
-	enviado como parámetro.
-	<p>
-	Esta acción no acepta mensajes de ningún tipo.
-
-	@param msg Mensaje que ha recibido la entidad.
-	@return true Si la acción está en principio interesada
-	por ese mensaje.
-	*/
-	bool CLAWait::accept(const MessageType &message)
-	{
-		// TODO PRÁCTICA IA
-		// La acción no acepta mensajes
-		return false;
-	}
-	/**
-	Procesa el mensaje recibido. El método es invocado durante la
-	ejecución de la acción cuando se recibe el mensaje.
-
-	@param msg Mensaje recibido.
-	*/
-	void CLAWait::process(const MessageType &message)
-	{
-		// TODO PRÁCTICA IA
-		// La acción no procesa mensajes
-	}
-
 
 } //namespace AI 

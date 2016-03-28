@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<Imageset autoScaled="vertical" imagefile="TrueInfernoUITextures.png" name="TrueInfernoUITextures" nativeHorzRes="2048" nativeVertRes="1024" version="2">
+    <Image height="1022" name="Resourcebar" width="1020" xPos="1" yPos="2" />
+    <Image height="1014" name="Sidebar" width="1020" xPos="1025" yPos="3" />
+</Imageset>

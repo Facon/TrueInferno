@@ -1,0 +1,12 @@
+
+material Mine
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.133 0.607 0.188 1
+			diffuse 1 1 1 1
+		}
+	}
+}

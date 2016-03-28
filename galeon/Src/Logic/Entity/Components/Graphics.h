@@ -35,12 +35,10 @@ namespace Logic
 	que especializan éste (CAnimatedGraphics y CStaticGraphics).
 	<p>
 	Acepta mensajes de:
-	1) cambio de posición, orientación y dimensiones (escala)
-	   mediante SET_POSITION, SET_ROTATION y SET_DIMENSIONS.
-	2) cambio de la matriz de transformación (posición +
-	   orientación + escala) mediante el mensaje SET_TRANSFORM.
-	3) cambio de color mediante el mensaje SET_COLOR.
-	4) cambio de material mediante el mensaje SET_MATERIAL_NAME.
+	1) cambio de la matriz de transformación (posición +
+	   orientación + escalado) mediante el mensaje SET_TRANSFORM.
+	2) cambio de color mediante el mensaje SET_COLOR.
+	3) cambio de material mediante el mensaje SET_MATERIAL_NAME.
 	
     @ingroup logicGroup
 
@@ -83,9 +81,6 @@ namespace Logic
 		Mensajes.
 		*/
 		bool HandleMessage(const TransformMessage& m);
-		bool HandleMessage(const PositionMessage& msg);
-		bool HandleMessage(const RotationMessage& msg);
-		bool HandleMessage(const DimensionsMessage& msg);
 		bool HandleMessage(const ColorMessage& m);
 		bool HandleMessage(const MaterialMessage& m);
 

@@ -3,6 +3,9 @@
 #include "Logic/Entity/Message.h"
 #include "Logic/Entity/Entity.h"
 #include "Map/MapEntity.h"
+#include "Logic/Server.h"
+#include "GUI/Server.h"
+#include "GUI/PlayerController.h"
 
 namespace Logic
 {
@@ -23,32 +26,46 @@ namespace Logic
 
 	bool CameraController::activate()
 	{
+		CServer::getSingletonPtr()->setPlayer(_entity);
+		GUI::CServer::getSingletonPtr()->getPlayerController()->setControlledAvatar(_entity);
+		
 		return true;
 	}
 
 	void CameraController::deactivate()
 	{
-
+		GUI::CServer::getSingletonPtr()->getPlayerController()->setControlledAvatar(nullptr);
+		CServer::getSingletonPtr()->setPlayer(nullptr);
 	}
 
 	bool CameraController::HandleMessage(const ControlMessage& msg)
 	{
 		bool received = true;
 
-		if (!msg._action.compare("moveForward"))
+		switch (msg._action)
+		{
+		case ActionType::MOVE_FORWARD:
 			moveForward();
-		else if (!msg._action.compare("moveBackward"))
+			break;
+		case ActionType::MOVE_BACKWARD:
 			moveBackward();
-		else if (!msg._action.compare("stopMove"))
-			stopMove();
-		else if (!msg._action.compare("strafeLeft"))
+			break;
+		case ActionType::STRAFE_LEFT:
 			strafeLeft();
-		else if (!msg._action.compare("strafeRight"))
+			break;
+		case ActionType::STRAFE_RIGHT:
 			strafeRight();
-		else if (!msg._action.compare("stopStrafe"))
+			break;
+		case ActionType::STOP_MOVE:
+			stopMove();
+			break;
+		case ActionType::STOP_STRAFE:
 			stopStrafe();
-		else
+			break;
+		default:
 			received = false;
+			break;
+		}
 
 		return received;
 	}
@@ -117,9 +134,7 @@ namespace Logic
 			Vector3 newPosition = _entity->getPosition() + direction;
 			_entity->setPosition(newPosition);
 
-			TransformMessage msg;
-			msg._type = MessageType::SET_TRANSFORM;
-			msg._transform = _entity->getTransform();
+			TransformMessage msg(_entity->getTransform());
 
 			msg.Dispatch(*_entity);
 		}

@@ -31,8 +31,7 @@ namespace Logic
 	CEntity::CEntity(TEntityID entityID) : _entityID(entityID),
 				_map(0), _type(""), _name(""),
 				_position(Vector3(0, 0, 0)), _rotation(Vector3(0, 0, 0)),
-				_dimensions(Vector3(1, 1, 1)),
-				_isPlayer(false), _activated(false)
+				_dimensions(Vector3(1, 1, 1)), _activated(false)
 	{
 	} // CEntity
 	
@@ -66,8 +65,8 @@ namespace Logic
 		if (entityInfo->hasAttribute("dimensions"))
 			_dimensions = entityInfo->getVector3Attribute("dimensions");
 
-		if (entityInfo->getName() == "Camera")
-			_isPlayer = true;
+		//if (entityInfo->getName() == "Camera")
+		//	_isPlayer = true;
 
 		// Inicializamos los componentes
 		TComponentList::const_iterator it;
@@ -75,7 +74,7 @@ namespace Logic
 		bool correct = true;
 
 		for( it = _components.begin(); it != _components.end() && correct; ++it )
-			correct = (*it)->spawn(this,map,entityInfo) && correct;
+			correct = (*it)->spawn(this, map, entityInfo) && correct;
 
 		return correct;
 
@@ -85,15 +84,6 @@ namespace Logic
 
 	bool CEntity::activate() 
 	{
-		// Si somos jugador, se lo decimos al servidor
-		// y nos registramos para que nos informen
-		// de los movimientos que debemos realizar
-		if (isPlayer())
-		{
-			CServer::getSingletonPtr()->setPlayer(this);
-			GUI::CServer::getSingletonPtr()->getPlayerController()->setControlledAvatar(this);
-		}
-
 		// Activamos los componentes
 		TComponentList::const_iterator it;
 
@@ -112,15 +102,6 @@ namespace Logic
 
 	void CEntity::deactivate() 
 	{
-		// Si �ramos el jugador, le decimos al servidor que ya no hay.
-		// y evitamos que se nos siga informando de los movimientos que 
-		// debemos realizar
-		if (isPlayer())
-		{
-			GUI::CServer::getSingletonPtr()->getPlayerController()->setControlledAvatar(0);
-			CServer::getSingletonPtr()->setPlayer(0);
-		}
-
 		TComponentList::const_iterator it;
 
 		// Desactivamos los componentes
@@ -213,21 +194,20 @@ namespace Logic
 
 	bool CEntity::HandleMessage(const PositionMessage& msg)
 	{
-		_position = msg._position;
-		SEND_MESSAGE_TO_ALL_COMPONENTS;
+		return setPosition(msg._position);
 	}
 
 	bool CEntity::HandleMessage(const RotationMessage& msg)
 	{
-		_rotation = msg._rotation;
-		SEND_MESSAGE_TO_ALL_COMPONENTS;
+		return setRotation(msg._rotation);
 	}
 
 	bool CEntity::HandleMessage(const DimensionsMessage& msg)
 	{
-		_dimensions = msg._dimensions;
-		SEND_MESSAGE_TO_ALL_COMPONENTS;
+		return setDimensions(msg._dimensions);
 	}
+
+	//---------------------------------------------------------
 
 	bool CEntity::HandleMessage(const ColorMessage& msg)
 	{
@@ -274,12 +254,7 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
-	bool CEntity::HandleMessage(const HellQuartersActionMessage& msg)
-	{
-		SEND_MESSAGE_TO_ALL_COMPONENTS;
-	}
-
-	bool CEntity::HandleMessage(const SoulActionMessage& msg)
+	bool CEntity::HandleMessage(const HellQuartersMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
@@ -289,12 +264,37 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
-	bool CEntity::HandleMessage(const SoulSenderRequestMessage& msg)
+	bool CEntity::HandleMessage(const SoulSenderMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
-	bool CEntity::HandleMessage(const SoulSenderResponseMessage& msg)
+	bool CEntity::HandleMessage(const SoulMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
+	bool CEntity::HandleMessage(const CheckValidPositionPlaceableMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
+	bool CEntity::HandleMessage(const NumberMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
+	bool CEntity::HandleMessage(const ResourceMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
+	bool CEntity::HandleMessage(const GetCostPlaceableMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
+	bool CEntity::HandleMessage(const LogisticsMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
@@ -319,58 +319,52 @@ namespace Logic
 
 	//---------------------------------------------------------
 
-	void CEntity::setTransform(const Matrix4 &transform)
+	bool CEntity::sendTransformMessage()
+	{
+		Matrix4 transform = getTransform();
+
+		TransformMessage m(transform);
+
+		return m.Dispatch(*this);
+	}
+
+	//---------------------------------------------------------
+
+	bool CEntity::setTransform(const Matrix4 &transform)
 	{
 		updateTransformValuesFromMatrix(transform);
 
-		TransformMessage m;
-		m._type = MessageType::SET_TRANSFORM;
-		m._transform = transform;
+		TransformMessage m(transform);
 
-		m.Dispatch(*this);
+		return m.Dispatch(*this);
 
 	} // setTransform
 
 	//---------------------------------------------------------
 
-	void CEntity::setPosition(const Vector3 &position)
+	bool CEntity::setPosition(const Vector3 &position)
 	{
 		_position = position;
 
-		PositionMessage m;
-		m._type = MessageType::SET_POSITION;
-		m._position = _position;
-
-        m.Dispatch(*this);
-
+		return sendTransformMessage();
 	} // setPosition
 
 	//---------------------------------------------------------
 
-	void CEntity::setRotation(const Vector3 &rotation)
+	bool CEntity::setRotation(const Vector3 &rotation)
 	{
 		_rotation = rotation;
-
-		RotationMessage m;
-		m._type = MessageType::SET_ROTATION;
-		m._rotation = _rotation;
-
-		m.Dispatch(*this);
-
+		
+		return sendTransformMessage();
 	} // setRotation
 
 	//---------------------------------------------------------
 
-	void CEntity::setDimensions(const Vector3 &dimensions)
+	bool CEntity::setDimensions(const Vector3 &dimensions)
 	{
 		_dimensions = dimensions;
-
-		DimensionsMessage m;
-		m._type = MessageType::SET_DIMENSIONS;
-		m._dimensions = _dimensions;
-
-        m.Dispatch(*this);
-
+		
+		return sendTransformMessage();
 	} // setDimensions
 
 	//---------------------------------------------------------

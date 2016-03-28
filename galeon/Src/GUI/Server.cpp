@@ -1,18 +1,20 @@
 /**
 @file Server.cpp
 
-Contiene la implementaciÛn de la clase CServer, Singleton que se encarga de
-la gestiÛn de la interfaz con el usuario (entrada de perifÈricos, CEGui...).
+Contiene la implementaci√≥n de la clase CServer, Singleton que se encarga de
+la gesti√≥n de la interfaz con el usuario (entrada de perif√©ricos, CEGui...).
 
 @see GUI::CServer
 
-@author David LlansÛ
+@author David Llans√≥
 @date Agosto, 2010
 */
 
 #include "Server.h"
-
 #include "PlayerController.h"
+
+#include "Application/GaleonApplication.h"
+#include "Application/GameState.h"
 #include "BaseSubsystems/Server.h"
 
 #include <cassert>
@@ -46,7 +48,7 @@ namespace GUI {
 
 	bool CServer::Init()
 	{
-		assert(!_instance && "Segunda inicializaciÛn de GUI::CServer no permitida!");
+		assert(!_instance && "Segunda inicializaci√≥n de GUI::CServer no permitida!");
 
 		new CServer();
 
@@ -64,7 +66,7 @@ namespace GUI {
 
 	void CServer::Release()
 	{
-		assert(_instance && "GUI::CServer no est· inicializado!");
+		assert(_instance && "GUI::CServer no est√° inicializado!");
 
 		if(_instance)
 		{
@@ -76,6 +78,15 @@ namespace GUI {
 
 	//--------------------------------------------------------
 
+	UIManager* CServer::getUIManager()
+	{
+		Application::CGameState *gameState =
+			(Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState();
+		return gameState->getUIManager();
+	}
+
+	//--------------------------------------------------------
+
 	bool CServer::open()
 	{
 		_playerController = new CPlayerController();
@@ -84,12 +95,15 @@ namespace GUI {
 
 		// Cargamos las distintas plantillas o esquemas de fichero
 		// que usaremos en nuestro GUI.
-		// (autom·ticamente cargan los archivos looknfeel e imageset)
+		// (autom√°ticamente cargan los archivos looknfeel e imageset)
 		CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("OgreTray.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoEvents.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoIcons.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoUITextures.scheme");
 
 #ifndef NON_EXCLUSIVE_MODE_IN_WINDOW_MODE 
-		// Establecemos cual ser· el puntero del ratÛn.
+		// Establecemos cual ser√° el puntero del rat√≥n.
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 #endif	
 		
@@ -124,7 +138,7 @@ namespace GUI {
 		_GUISystem->getDefaultGUIContext().injectChar(key.text);    
 
 		
-		// Queremos que si hay m·s oyentes tambiÈn reciban el evento
+		// Queremos que si hay m√°s oyentes tambi√©n reciban el evento
 		return false;
 
 	} // keyPressed
@@ -136,7 +150,7 @@ namespace GUI {
 		_GUISystem->getDefaultGUIContext().injectKeyUp((CEGUI::Key::Scan)key.keyId);
 
 		
-		// Queremos que si hay m·s oyentes tambiÈn reciban el evento
+		// Queremos que si hay m√°s oyentes tambi√©n reciban el evento
 		return false;
 
 	} // keyReleased
@@ -150,7 +164,7 @@ namespace GUI {
 #else 
 		_GUISystem->getDefaultGUIContext().injectMouseMove((float)mouseState.movX,(float)mouseState.movY);
 #endif	
-		// Queremos que si hay m·s oyentes tambiÈn reciban el evento
+		// Queremos que si hay m√°s oyentes tambi√©n reciban el evento
 		return false;
 
 	} // mouseMoved
@@ -163,13 +177,16 @@ namespace GUI {
 		{
 		case Button::LEFT:
 			_GUISystem->getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton);
+			break;
 		case Button::RIGHT:
 			_GUISystem->getDefaultGUIContext().injectMouseButtonDown(CEGUI::RightButton);
+			break;
 		case Button::MIDDLE:
 			_GUISystem->getDefaultGUIContext().injectMouseButtonDown(CEGUI::MiddleButton);
+			break;
 		}
 
-		// Queremos que si hay m·s oyentes tambiÈn reciban el evento
+		// Queremos que si hay m√°s oyentes tambi√©n reciban el evento
 		return false;
 
 	} // mousePressed
@@ -182,13 +199,16 @@ namespace GUI {
 		{
 		case Button::LEFT:
 			_GUISystem->getDefaultGUIContext().injectMouseButtonUp(CEGUI::LeftButton);
+			break;
 		case Button::RIGHT:
 			_GUISystem->getDefaultGUIContext().injectMouseButtonUp(CEGUI::RightButton);
+			break;
 		case Button::MIDDLE:
 			_GUISystem->getDefaultGUIContext().injectMouseButtonUp(CEGUI::MiddleButton);
+			break;
 		}
 
-		// Queremos que si hay m·s oyentes tambiÈn reciban el evento
+		// Queremos que si hay m√°s oyentes tambi√©n reciban el evento
 		return false;
 
 	} // mouseReleased

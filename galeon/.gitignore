@@ -37,13 +37,22 @@ Thumbs.db
 /dependencies/bin/*/*
 !/dependencies/bin/*/nvTools*.dll
 !/dependencies/bin/*/PhysX*.dll
+!/dependencies/bin/*/fmod*.dll
+!/dependencies/bin/*/fsbank*.dll
 
 /dependencies/include/*
 !/dependencies/include/PhysX/
+!/dependencies/include/FMOD/
 
 /dependencies/lib/*/*
 !/dependencies/lib/*/PhysX*.lib
 !/dependencies/lib/*/PxTask*.lib
+!/dependencies/lib/*/fmod*.lib
+!/dependencies/lib/*/fsbank*.lib
+
+/dependencies/luabind/bin/
+
+/dependencies/luabind/bin/
 
 /dependencies/VisualLeakDetector/src/bin/
 /dependencies/VisualLeakDetector/src/obj/
@@ -56,12 +65,15 @@ Thumbs.db
 /Exes/*
 !/Exes/media/
 !/Exes/resources.cfg
+!/Exes/*.lua
 
 # PROJECTS FOLDER
 /Projects/**/Debug/
 /Projects/**/Release/
 /Projects/**/*.log
 
-# CLion files
+# ===== #
+# CLion #
+# ===== #
 .idea
 build

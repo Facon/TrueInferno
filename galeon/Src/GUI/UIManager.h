@@ -3,6 +3,7 @@
 
 #include "GUI/TopBarUI.h"
 #include "GUI/SideBarUI.h"
+#include "GUI/EventUI.h"
 
 namespace CEGUI
 {
@@ -18,6 +19,7 @@ namespace GUI
 
 		TopBarUI _topBarUI;
 		SideBarUI _sideBarUI;
+		EventUI _eventUI;
 		// Window for displaying resources
 		CEGUI::Window* _uiWindow;
 
@@ -26,9 +28,11 @@ namespace GUI
 		UIManager(Logic::ResourcesManager& rm, Logic::HFManager& hfm, Logic::TimeManager& tm);
 		~UIManager();
 		void init();
+		void release();
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
+		EventUI *getEventUI(){ return &_eventUI; };
 		SideBarUI *getSideBarUI(){ return &_sideBarUI; };
 	};
 }

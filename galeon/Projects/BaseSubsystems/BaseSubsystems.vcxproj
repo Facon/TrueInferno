@@ -47,8 +47,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/OIS;../../dependencies/include/OGRE;../../dependencies/include/cegui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/OIS;../../dependencies/include/OGRE;../../dependencies/include/cegui;../../dependencies/include/;../../dependencies/include/lua;../../dependencies/include/luabind;../../dependencies/include/FMOD/lowlevel;../../dependencies/include/FMOD/fsbank/;../../dependencies/include/FMOD/studio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;LUABIND_DYNAMIC_LINK;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -66,8 +66,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/OIS;../../dependencies/include/OGRE;../../dependencies/include/cegui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/OIS;../../dependencies/include/OGRE;../../dependencies/include/cegui;../../dependencies/include/lua;../../dependencies/include/luabind;../../dependencies/include/;../../dependencies/include/FMOD/lowlevel;../../dependencies/include/FMOD/fsbank/;../../dependencies/include/FMOD/studio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;LUABIND_DYNAMIC_LINK;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -82,6 +82,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\BaseSubsystems\RTTI.cpp" />
+    <ClCompile Include="..\..\Src\BaseSubsystems\ScriptManager.cpp" />
     <ClCompile Include="..\..\Src\BaseSubsystems\Server.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +90,7 @@
     <ClInclude Include="..\..\Src\BaseSubsystems\Factory.h" />
     <ClInclude Include="..\..\Src\BaseSubsystems\Math.h" />
     <ClInclude Include="..\..\Src\BaseSubsystems\RTTI.h" />
+    <ClInclude Include="..\..\Src\BaseSubsystems\ScriptManager.h" />
     <ClInclude Include="..\..\Src\BaseSubsystems\Server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

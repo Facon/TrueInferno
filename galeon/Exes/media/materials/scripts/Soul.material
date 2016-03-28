@@ -1,0 +1,48 @@
+
+material Ogre/Eyes
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.32 0.8 1
+			diffuse 1 1 1 1
+		}
+	}
+}
+
+material Ogre/Skin
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.32 0.8 1
+			diffuse 1 1 1 1
+		}
+	}
+}
+
+material Ogre/Earring
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.32 0.8 1
+			diffuse 1 1 1 1
+		}
+	}
+}
+
+material Ogre/Tusks
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.32 0.8 1
+			diffuse 1 1 1 1
+		}
+	}
+}

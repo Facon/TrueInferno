@@ -56,22 +56,33 @@ namespace Logic
 	{
 		bool received = true;
 
-		if (!msg._action.compare("walk"))
+		switch (msg._action)
+		{
+		case ActionType::MOVE_FORWARD:
 			walk();
-		else if (!msg._action.compare("walkBack"))
+			break;
+		case ActionType::MOVE_BACKWARD:
 			walkBack();
-		else if (!msg._action.compare("stopWalk"))
-			stopWalk();
-		else if (!msg._action.compare("strafeLeft"))
+			break;
+		case ActionType::STRAFE_LEFT:
 			strafeLeft();
-		else if (!msg._action.compare("strafeRight"))
+			break;
+		case ActionType::STRAFE_RIGHT:
 			strafeRight();
-		else if (!msg._action.compare("stopStrafe"))
+			break;
+		case ActionType::STOP_MOVE:
+			stopWalk();
+			break;
+		case ActionType::STOP_STRAFE:
 			stopStrafe();
-		else if (!msg._action.compare("turn"))
+			break;
+		case ActionType::TURN:
 			turn(msg._degreesMoved);
-		else
+			break;
+		default:
 			received = false;
+			break;
+		}
 
 		return received;
 	}
@@ -90,10 +101,7 @@ namespace Logic
 		_walking = true;
 
 		// Cambiamos la animaci�n
-		AnimationMessage msg;
-		msg._type = MessageType::SET_ANIMATION;
-		msg._action = "Walk";
-		msg._activated = true;
+		AnimationMessage msg(MessageType::SET_ANIMATION, "Walk", true);
 
 		msg.Dispatch(*_entity);
 	} // walk
@@ -105,10 +113,7 @@ namespace Logic
 		_walkingBack = true;
 
 		// Cambiamos la animaci�n
-		AnimationMessage msg;
-		msg._type = MessageType::SET_ANIMATION;
-		msg._action = "WalkBack";
-		msg._activated = true;
+		AnimationMessage msg(MessageType::SET_ANIMATION, "WalkBack", true);
 
 		msg.Dispatch(*_entity);
 	} // walkBack
@@ -123,10 +128,7 @@ namespace Logic
 		// lateralmente
 		if(!(_strafingLeft || _strafingRight))
 		{
-			AnimationMessage msg;
-			msg._type = MessageType::SET_ANIMATION;
-			msg._action = "Idle";
-			msg._activated = true;
+			AnimationMessage msg(MessageType::SET_ANIMATION, "Idle", true);
 
             msg.Dispatch(*_entity);
 		}
@@ -140,10 +142,7 @@ namespace Logic
 		_strafingLeft = true;
 
 		// Cambiamos la animaci�n
-		AnimationMessage msg;
-		msg._type = MessageType::SET_ANIMATION;
-		msg._action = "StrafeLeft";
-		msg._activated = true;
+		AnimationMessage msg(MessageType::SET_ANIMATION, "StrafeLeft", true);
 
         msg.Dispatch(*_entity);
 	} // walk
@@ -155,10 +154,7 @@ namespace Logic
 		_strafingRight = true;
 
 		// Cambiamos la animaci�n
-		AnimationMessage msg;
-		msg._type = MessageType::SET_ANIMATION;
-		msg._action = "StrafeRight";
-		msg._activated = true;
+		AnimationMessage msg(MessageType::SET_ANIMATION, "StrafeRight", true);
 
         msg.Dispatch(*_entity);
 	} // walkBack
@@ -172,12 +168,9 @@ namespace Logic
 		// Cambiamos la animaci�n si no seguimos andando
 		if(!(_walking || _walkingBack))
 		{
-			AnimationMessage message;
-			message._type = MessageType::SET_ANIMATION;
-			message._action = "Idle";
-			message._activated = true;
+			AnimationMessage msg(MessageType::SET_ANIMATION, "Idle", true);
 
-            message.Dispatch(*_entity);
+            msg.Dispatch(*_entity);
 		}
 
 	} // stopWalk
@@ -229,9 +222,7 @@ namespace Logic
 			Vector3 newPosition = _entity->getPosition() + direction;
 			_entity->setPosition(newPosition);
 
-			TransformMessage msg;
-			msg._type = MessageType::SET_TRANSFORM;
-			msg._transform = _entity->getTransform();
+			TransformMessage msg(_entity->getTransform());
 
 			msg.Dispatch(*_entity);
 		}

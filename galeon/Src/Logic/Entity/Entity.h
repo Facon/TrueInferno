@@ -16,12 +16,14 @@ de juego. Es una colección de componentes.
 
 #include "BaseSubsystems/Math.h"
 
-#include "Logic/Entity/MessageHandler.h"
+#include "Logic/Entity/Message.h"
 
 #include "Logic/Maps/EntityID.h"
 
 #include <list>
 #include <string>
+
+#include "Component.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Map
@@ -32,7 +34,6 @@ namespace Map
 namespace Logic 
 {
 	class CMap;
-	class IComponent;
 	class CEntityFactory;
 }
 
@@ -43,7 +44,7 @@ namespace Logic
 	Clase que representa una entidad en el entorno virtual. Las entidades
 	son meros contenedores de componentes, y su funcionamiento depende
 	de cuï¿½les tenga. Ademï¿½s, la clase contiene una serie de atributos que
-	pueden ser accedidos desde los componentes (Id, nombre, etc.).
+	pueden ser accedidos desde los componentes (id, nombre, etc.).
 	<p>
 	Tras la creaciï¿½n de la entidad, donde se inicializan los valores de la
 	entidad a su valor por defecto, se invocarï¿½ a su mï¿½todo spawn() en el
@@ -157,16 +158,6 @@ namespace Logic
 		*/
 		void destroyAllComponents();
 
-		/**
-		Recibe un mensaje que envia a todos los componentes de la lista menos 
-		al componente que lo envia, si ï¿½ste se especifica en el segundo campo.
-
-		@param message Mensaje a enviar.
-		@param emitter Componente emisor, si lo hay. No se le enviarï¿½ el mensaje.
-		@return true si al menos un componente aceptï¿½ el mensaje
-		*/
-		//bool emitMessage(const Message &message, IComponent* emitter = 0);
-
 		// Para cada tipo de mensaje se hace la gestión apropiada.
 		bool HandleMessage(const TransformMessage& msg);
 		bool HandleMessage(const PositionMessage& msg);
@@ -181,29 +172,22 @@ namespace Logic
 		bool HandleMessage(const DamageMessage& msg);
 		bool HandleMessage(const WorkerMessage& msg);
 		bool HandleMessage(const WalkSoulPathMessage& msg);
-		bool HandleMessage(const HellQuartersActionMessage& msg);
-		bool HandleMessage(const SoulActionMessage& msg);
+		bool HandleMessage(const HellQuartersMessage& msg);
 		bool HandleMessage(const MovePlaceableMessage& msg);
-		bool HandleMessage(const SoulSenderRequestMessage& msg);
-		bool HandleMessage(const SoulSenderResponseMessage& msg);
-
+		bool HandleMessage(const SoulSenderMessage& msg);
+		bool HandleMessage(const SoulMessage& msg);
+		bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
+		bool HandleMessage(const NumberMessage& msg);
+		bool HandleMessage(const ResourceMessage& msg);
+		bool HandleMessage(const GetCostPlaceableMessage& msg);
+		bool HandleMessage(const LogisticsMessage& msg);
+		
 		/**
 		Devuelve el identificador ï¿½nico de la entidad.
 
 		@return Identificador.
 		*/
 		Logic::TEntityID getEntityID() const { return _entityID; }
-
-		/**
-		Método que indica si la entidad es o no el jugador.
-		Seguro que hay formas mejores desde el punto de vista de
-		diseño de hacerlo, pero esta es la más rápida: la entidad 
-		con la descripción de la entidad tiene esta descripciï¿½n que
-		establece en el spawn().
-		
-		@return true si la entidad es el jugador.
-		*/
-		bool isPlayer() { return _isPlayer; }
 
 		/**
 		Devuelve el mapa donde estï¿½ la entidad.
@@ -240,7 +224,7 @@ namespace Logic
 
 		@param transform Nueva matriz de transformación de la entidad.
 		*/
-		void setTransform(const Matrix4& transform);
+		bool setTransform(const Matrix4& transform);
 
 		/**
 		Establece la posición de la entidad. Avisa a los componentes
@@ -248,7 +232,7 @@ namespace Logic
 
 		@param position Nueva posición de la entidad.
 		*/
-		void setPosition(const Vector3 &position);
+		bool setPosition(const Vector3 &position);
 
 		/**
 		Establece la rotación de la entidad. Avisa a los componentes
@@ -256,7 +240,7 @@ namespace Logic
 
 		@param rotation Nueva rotación de la entidad.
 		*/
-		void setRotation(const Vector3 &rotation);
+		bool setRotation(const Vector3 &rotation);
 
 		/**
 		Establece las dimensiones de la entidad. Avisa a los componentes
@@ -264,7 +248,7 @@ namespace Logic
 
 		@param dimensions Nuevas dimensiones de la entidad.
 		*/
-		void setDimensions(const Vector3 &dimensions);
+		bool setDimensions(const Vector3 &dimensions);
 
 		/**
 		Devuelve la matriz de transformación de la entidad.
@@ -305,6 +289,16 @@ namespace Logic
 		*/
 		bool isActivated() {return _activated;}
 
+		template <class ComponentClass>
+		ComponentClass* getComponent(){
+			for (auto it = _components.cbegin(); it != _components.cend(); ++it){
+				if ((*it)->GetRTTI().IsExactly(ComponentClass::rtti))
+					return (ComponentClass*)(*it);
+			}
+
+			return nullptr;
+		}
+
 	protected:
 
 		/**
@@ -315,6 +309,12 @@ namespace Logic
 		@param transform Nueva matriz de transformación.
 		*/
 		void updateTransformValuesFromMatrix(const Matrix4 &transform);
+
+		/**
+		Construye la matriz de transformación de la entidad y envía un
+		mensaje para avisar a los componentes del cambio.
+		*/
+		bool sendTransformMessage();
 
 		/**
 		Clase amiga que puede modificar los atributos (en concreto se 
@@ -328,7 +328,7 @@ namespace Logic
 		Logic::TEntityID _entityID;
 
 		/**
-		Tipo para la lista de componetes.
+		Tipo para la lista de componentes.
 		*/
 		typedef std::list<IComponent*> TComponentList;
 

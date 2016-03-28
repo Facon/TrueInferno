@@ -11,7 +11,8 @@ cegui_add_library(${DEPNAME} SOURCES NONE)
 set_target_properties(${DEPNAME}_static PROPERTIES
     COMPILE_DEFINITIONS "TOLUA_STATIC;LUA_STATIC")
 
-target_link_libraries(${DEPNAME} lua)
+target_link_libraries(${DEPNAME} debug "${CMAKE_BINARY_DIR}/../../../lib/Debug/lua51.lib")
+target_link_libraries(${DEPNAME} optimized "${CMAKE_BINARY_DIR}/../../../lib/Release/lua51.lib")
 
 foreach(_H_FILE ${HEADERS})
     add_custom_command(TARGET ${DEPNAME} POST_BUILD 

@@ -164,9 +164,9 @@ namespace Application
 		CApplicationState *getState() {return _currentState;}
 
 		/**
-		Devuelve el tiempo de la aplicación.
+		Devuelve el tiempo (ms) de la aplicación.
 
-		@return Tiempo que la aplicación lleva activa.
+		@return Tiempo (ms) que la aplicación lleva activa.
 		*/
 		unsigned int getAppTime();
 

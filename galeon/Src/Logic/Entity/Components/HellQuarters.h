@@ -1,26 +1,15 @@
 #ifndef HELL_QUARTERS_H_
 #define HELL_QUARTERS_H_
 
+#include "AI/SMHellQuarters.h"
 #include "BaseSubsystems/RTTI.h"
-#include "Logic/Entity/Component.h"
 #include "BaseSubsystems/Math.h"
-#include "Logic/Entity/Message.h"
+#include "Logic/Entity/Component.h"
+#include "Logic/Entity/Components/StateMachineExecutor.h"
 #include <vector>
 
 namespace Logic {
-
-	enum HellQuartersActionState{
-		Idle,
-		ActionRequested,
-		WaitingPath,
-		PathReceived,
-		WaitingTaskStart,
-		Fail,
-		Success,
-		Clean
-	};
-
-	class CHellQuarters : public IComponent{
+	class CHellQuarters : public CStateMachineExecutor<AI::CSMHellQuartersData>{
 		RTTI_DECL;
 		DEC_FACTORY(CHellQuarters);
 
@@ -28,7 +17,9 @@ namespace Logic {
 		/**
 		Constructor por defecto.
 		*/
-		CHellQuarters();
+		CHellQuarters() {};
+
+		virtual ~CHellQuarters() {};
 
 		/**
 		Inicialización del componente usando la descripción de la entidad que hay en
@@ -41,17 +32,12 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
-		/** Gestión de mensajes para solicitar acciones en el HellQuarters */
-		virtual bool HandleMessage(const HellQuartersActionMessage& msg);
+	protected:
+		AI::CStateMachine<AI::CLatentAction, AI::CSMHellQuartersData>* getStateMachine(){
+			return new AI::CSMHellQuarters(_entity);
+		}
 
-		/** Gestión de mensajes para recoger respuestas del SoulSender */
-		virtual bool HandleMessage(const SoulSenderResponseMessage& msg);
-
-		bool CHellQuarters::HandleMessage(const WalkSoulPathMessage& msg);
-			
 	private:
-		static const float SOUL_ON_TILE_HEIGHT;
-
 		// Tiempo (ms) entre generación de almas
 		unsigned int _timeBetweenSpawns;
 
@@ -66,17 +52,6 @@ namespace Logic {
 
 		/** Gestiona la lógica del spawn de almas */
 		void tickSpawnSouls(unsigned int msecs);
-
-		/** Gestiona la lógica de acciones solicitadas */
-		void tickActions(unsigned int msecs);
-
-		HellQuartersActionState _hellQuartersActionState;
-
-		HellQuartersActionMessage* _actionRequested;
-
-		std::vector<Vector3>* _pathReceived;
-
-		AI::CSoulTask _task;
 
 	}; // class CHellQuarters
 

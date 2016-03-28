@@ -230,6 +230,8 @@ namespace Logic {
 					return _tiles[x][z];
 			}
 		}
+
+		return nullptr;
 	}
 
 	//--------------------------------------------------------
@@ -285,9 +287,7 @@ namespace Logic {
 				std::string materialName(baseMaterialName);
 				materialName += terrainTypeChar;
 
-				MaterialMessage message;
-				message._type = MessageType::SET_MATERIAL_NAME;
-				message._name = (((x + z) % 2 == 0) ? materialName : materialName + "_alt");
+				MaterialMessage message((((x + z) % 2 == 0) ? materialName : materialName + "_alt"));
 
 				message.Dispatch(*_tiles[x][z]->getEntity());
 				_tiles[x][z]->setTerrainType(terrainType);

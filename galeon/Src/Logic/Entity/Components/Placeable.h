@@ -51,7 +51,7 @@ namespace Logic {
 		virtual void tick(unsigned int msecs);
 
 		/** Float this placeable to a given logic position*/
-		void floatTo(const Vector3 newOriginPosition);
+		void floatTo(const Vector3 newOriginPosition, bool showFloating);
 
 		/** Coloca el Placeable en la posición original */
 		bool place();
@@ -80,20 +80,28 @@ namespace Logic {
 
 		virtual bool HandleMessage(const MovePlaceableMessage& msg);
 
-		virtual bool HandleMessage(const WalkSoulPathMessage& msg);
+		//virtual bool HandleMessage(const WalkSoulPathMessage& msg);
+
+		virtual bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
+
+		virtual bool HandleMessage(const GetCostPlaceableMessage& msg);
 
 	private:
 		/** Altura añadida a la posición del Placeable para que parezca que está justo encima */
-		const float HEIGHT_ON_TILE = 1.0;
+		const float HEIGHT_ON_TILE = 1.0f;
 
 		/** Altura añadida a la posición del Placeable para que parezca que flota por encima */
-		const float HEIGHT_FLOATING_OVER_TILE = 1.5;
+		const float HEIGHT_FLOATING_OVER_TILE = 1.5f;
 
 		/** Floor's absolute logic origin position in the matrix */
 		Vector3 _floorOriginPosition;
 
 		/** Flag set to true when logic position has changed */
 		//bool _logicPositionChanged;
+
+		//costes de fabricación del placeable
+		int _gasCost = 0;
+		int _mineralCost = 0;
 
 		/** Floor's x size */
 		int _floorX;
@@ -130,6 +138,9 @@ namespace Logic {
 
 		/** Procesa peticiones pendientes de cálculo de rutas */
 		void processWalkingSoulPathRequest();
+
+		//consume los recursos de un edificio a placear
+		bool CPlaceable::ConsumeResourcesForConstruction();
 
 	protected:
 		/** Parsea un enum PlaceableType a partir del nombre en texto

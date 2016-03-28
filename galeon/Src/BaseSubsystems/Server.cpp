@@ -5,12 +5,12 @@
 /**
 @file Server.cpp
 
-Contiene la implementaciÛn de la clase principal que engloba los subsistemas
-usados. La mayorÌa de ellos son parte de Ogre.
+Contiene la implementaci√≥n de la clase principal que engloba los subsistemas
+usados. La mayor√≠a de ellos son parte de Ogre.
 
 @see BaseSubsystems::CServer
 
-@author David LlansÛ
+@author David Llans√≥
 @date Julio, 2010
 */
 
@@ -37,20 +37,29 @@ usados. La mayorÌa de ellos son parte de Ogre.
 #include <CEGUI/System.h>
 #include <CEGUI/DefaultResourceProvider.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
+#include <CEGUI/ScriptModules/Lua/ScriptModule.h>
+
 /*
 #include <CEGUIDefaultResourceProvider.h>
 #include <CEGUIFont.h>
 #include <CEGUIImageset.h>
 #include <CEGUIWindowManager.h>
 #include <falagard/CEGUIFalWidgetLookManager.h>
-#include <CEGUIScheme.h>*/
+#include <CEGUIScheme.h>
+*/
 
-// Para cerrar la aplicaciÛn si se cierra la ventana
+// ScriptManager
+#include "BaseSubsystems/ScriptManager.h"
+
+//FMOD
+#include <Audio/Server.h>
+
+// Para cerrar la aplicaci√≥n si se cierra la ventana
 #include "Application/BaseApplication.h"
 
 /**
 Si se define la siguiente directiva, en modo ventana se reenderiza aunque
-la ventana estÈ en background (siempre que estÈ visible)
+la ventana est√© en background (siempre que est√© visible)
 */
 #define RENDER_IN_BACKGROUND
 
@@ -60,7 +69,7 @@ namespace BaseSubsystems
 	/**
 	Clase auxiliar que hereda de Ogre y que sirve para modificar el 
 	comportamiento habitual de cierre de ventana. No queremos cerrarla
-	desde aquÌ, queremos que sea la aplicaciÛn.
+	desde aqu√≠, queremos que sea la aplicaci√≥n.
 	*/
 	class WindowEventListener : public Ogre::WindowEventListener
 	{
@@ -72,16 +81,16 @@ namespace BaseSubsystems
 		}
 		
 		/**
-		En vez de dejar que el mÈtodo de salida habitual funcione 
-		lo reescribimos para que se le comunique a la aplicaciÛn.
+		En vez de dejar que el m√©todo de salida habitual funcione 
+		lo reescribimos para que se le comunique a la aplicaci√≥n.
 		Al devolver false la ventana no se cierra, lo haremos desde
-		la aplicaciÛn.
+		la aplicaci√≥n.
 		<p>
-		Este mÈtodo es llamado al solicitar el cierre de la ventana
+		Este m√©todo es llamado al solicitar el cierre de la ventana
 		tanto con Alt-F4 como al pulsar la 'x' de la ventana.
 
 		@param renderWindow Ventana sobre la que se produce el evento.
-		@return Siempre falso, asÌ no se realiza ninguna acciÛn.
+		@return Siempre falso, as√≠ no se realiza ninguna acci√≥n.
 		*/
 		bool windowClosing(Ogre::RenderWindow* renderWindow)
 		{
@@ -100,7 +109,7 @@ namespace BaseSubsystems
 		_inputSystem(0),
 		_windowEventListener(0)
 	{
-		assert(!_instance && "Segunda inicializaciÛn de BaseSubsystems::CServer no permitida!");
+		assert(!_instance && "Segunda inicializaci√≥n de BaseSubsystems::CServer no permitida!");
 
 		_instance = this;
 
@@ -120,7 +129,7 @@ namespace BaseSubsystems
 
 	bool CServer::Init() 
 	{
-		assert(!_instance && "Segunda inicializaciÛn de BaseSubsystems::CServer no permitida!");
+		assert(!_instance && "Segunda inicializaci√≥n de BaseSubsystems::CServer no permitida!");
 
 		new CServer();
 
@@ -138,7 +147,7 @@ namespace BaseSubsystems
 
 	void CServer::Release()
 	{
-		assert(_instance && "BaseSubsystems::CServer no est· inicializado!");
+		assert(_instance && "BaseSubsystems::CServer no est√° inicializado!");
 		if(_instance)
 		{
 			_instance->close();
@@ -151,9 +160,11 @@ namespace BaseSubsystems
 
 	bool CServer::open()
 	{
-		if( !initOgre() ||
+		if (!initScriptManager() ||
+			!initOgre() ||
 			!initOIS() ||
-			!initCEGUI() )
+			!initCEGUI() ||
+			!initFMOD())
 		{
 			close();
 			return false;
@@ -171,38 +182,41 @@ namespace BaseSubsystems
 		releaseOIS();
 		
 		releaseOgre();
+
+		releaseScriptManager();
 		
+		releaseFMOD();
 	} // close
 
 	//--------------------------------------------------------
 
 	bool CServer::initOgre()
 	{
-		// Inicializamos el punto de acceso a Ogre con una definiciÛn
+		// Inicializamos el punto de acceso a Ogre con una definici√≥n
 		// diferente de los plugins si estamos en release o en debug.
 #ifdef _DEBUG
 		_root = new Ogre::Root("plugins_d.cfg");
 #else
 		_root = new Ogre::Root("plugins.cfg");
 #endif
-		// Cargamos las rutas de los recursos desde el archivo de configuraciÛn
+		// Cargamos las rutas de los recursos desde el archivo de configuraci√≥n
 		setupOgreResources();
 
-		// Cargamos los ajustes de configuraciÛn.
+		// Cargamos los ajustes de configuraci√≥n.
 		if(!configureOgre())
 			return false;
 		
 		// Inicializamos los recursos y el sistema de renderizado.
 		if(!initOgreResources())
 		{
-			// La unicializaciÛn puede haber fallado por cargar una
-			// configuraciÛn incorrecta, por haber actualizado hardware o
-			// cambiado de m·quina. Mostramos la ventana de configuraciÛn.
+			// La unicializaci√≥n puede haber fallado por cargar una
+			// configuraci√≥n incorrecta, por haber actualizado hardware o
+			// cambiado de m√°quina. Mostramos la ventana de configuraci√≥n.
 			if(!configureOgre(true)) {
 				// Si el juego no se puede configurar se finaliza
 				return false;
 			}
-			// Si tras actualizar la configuraciÛn sigue sin poderse desistimos.
+			// Si tras actualizar la configuraci√≥n sigue sin poderse desistimos.
 			if(!initOgreResources())
 				return false;
 		}
@@ -215,8 +229,8 @@ namespace BaseSubsystems
 	bool CServer::initOIS()
 	{
 		// Cogemos el identificador y las dimensiones de la ventana
-		// de renderizado para el gestor de perifÈricos de entrada.
-		// Para saber el espacio de actuaciÛn del ratÛn.
+		// de renderizado para el gestor de perif√©ricos de entrada.
+		// Para saber el espacio de actuaci√≥n del rat√≥n.
 		unsigned int width, height, windowHnd;
 		getWindowExtents(width,height);
 		if((width == -1) || (height == -1))
@@ -225,7 +239,7 @@ namespace BaseSubsystems
 		if((windowHnd = getWindowHnd()) == -1)
 			return false;
 
-		// Preparamos variables para la inicializaciÛn del sistema
+		// Preparamos variables para la inicializaci√≥n del sistema
 		// de entrada.
 		OIS::ParamList paramList;
 		std::ostringstream windowHndStr;
@@ -234,8 +248,8 @@ namespace BaseSubsystems
 		paramList.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
 		
 #if defined NON_EXCLUSIVE_MODE_IN_WINDOW_MODE
-		// Si estamos en modo ventana no queremos ratÛn y teclado en modo exclusivo,
-		// queremos que las dem·s aplicaciones puedan usarlo.
+		// Si estamos en modo ventana no queremos rat√≥n y teclado en modo exclusivo,
+		// queremos que las dem√°s aplicaciones puedan usarlo.
 		if(!_renderWindow->isFullScreen())
 		{
 #if defined OIS_WIN32_PLATFORM 
@@ -268,14 +282,14 @@ namespace BaseSubsystems
 			_keyboard = static_cast<OIS::Keyboard*>(_inputSystem->createInputObject(OIS::OISKeyboard, true));
 		}
 
-		// Si es posible creamos el buffer del ratÛn.
+		// Si es posible creamos el buffer del rat√≥n.
 		if (_inputSystem->getNumberOfDevices(OIS::OISMouse) > 0) 
 		{
 			_mouse = static_cast<OIS::Mouse*>(_inputSystem->createInputObject(OIS::OISMouse, true));
 
 			// Establecemos las dimensiones de la ventana de
-			// renderizado para saber el espacio de actuaciÛn 
-			// del ratÛn.
+			// renderizado para saber el espacio de actuaci√≥n 
+			// del rat√≥n.
 			setWindowExtents(width, height);
 		}
 
@@ -288,14 +302,22 @@ namespace BaseSubsystems
 	bool CServer::initCEGUI()
 	{
 		CEGUI::OgreRenderer& CEGUIRenderer =
-				 CEGUI::OgreRenderer::create(*_renderWindow);
+			CEGUI::OgreRenderer::create(*_renderWindow);
+
+		/* Inicializaci√≥n del m√≥dulo LUA de CEGUI:
+		CEGUI::LuaScriptModule &luaModule =
+			CEGUI::LuaScriptModule::create(
+			ScriptManager::CScriptManager::GetSingleton().getNativeInterpreter());
+
+		CEGUI::System::create(CEGUIRenderer, nullptr, nullptr, nullptr, &luaModule);
+		*/
 
 		CEGUI::System::create(CEGUIRenderer);
 
 		_GUISystem = CEGUI::System::getSingletonPtr();
 
 		// Inicializamos los directorios necesarios para el Resource Provider,
-		// asÌ cuando creemos un recurso no tenemos que dar una ruta completa.
+		// as√≠ cuando creemos un recurso no tenemos que dar una ruta completa.
 		CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>(
 			_GUISystem->getResourceProvider());
 
@@ -324,13 +346,31 @@ namespace BaseSubsystems
 
 	//--------------------------------------------------------
 
+	bool CServer::initFMOD()
+	{
+		return Audio::CServer::Init();
+	}
+
+	//--------------------------------------------------------
+
+	bool CServer::initScriptManager()
+	{
+		if (!ScriptManager::CScriptManager::Init())
+			return false;
+		
+		return true;
+
+	} // initScriptManager
+
+	//--------------------------------------------------------
+
 	void CServer::releaseOgre()
 	{
 		if(_renderWindow)
 		{
 			_renderWindow->removeAllViewports();
 			_root->detachRenderTarget(_renderWindow);
-			delete _renderWindow;
+			//delete _renderWindow;
 			_renderWindow = 0;
 		}
 
@@ -378,14 +418,35 @@ namespace BaseSubsystems
 	{
 		if(_GUISystem)
 		{
-			CEGUI::System::destroy();    
+			/*
+			The problem is that memory is allocated on the .dll side, then that same memory is freed on the application side.
+			This means that memory manager A is allocating memory, and memory manager B is releasing that same memory,
+			which generates errors.
+			
+			For detailed explanation:
+			http://stackoverflow.com/questions/18882760/debug-assertion-failed-expression-pfirstblock-phead
+			*/
+			//CEGUI::System::destroy();
 			_GUISystem = 0;
 		}
 
 	} // releaseCEGUI
 
 	//--------------------------------------------------------
+
+	void CServer::releaseScriptManager()
+	{
+		ScriptManager::CScriptManager::GetPtrSingleton()->Release();
+
+	} // releaseScriptManager
+
+	//--------------------------------------------------------
 	
+	void CServer::releaseFMOD()
+	{
+		Audio::CServer::Release();
+	}
+
 	Ogre::Timer* CServer::getAppTimer() 
 	{
 		if(_root)
@@ -403,7 +464,7 @@ namespace BaseSubsystems
 		// OGRE         //
 		//////////////////
 
-		// Carga las rutas de los recursos desde el archivo de configuraciÛn
+		// Carga las rutas de los recursos desde el archivo de configuraci√≥n
 		Ogre::ConfigFile cf;
 		cf.load("resources.cfg");
 
@@ -439,9 +500,9 @@ namespace BaseSubsystems
 		// OGRE         //
 		//////////////////
 
-		// Carga los ajustes de configudaciÛn desde ogre.cfg
+		// Carga los ajustes de configudaci√≥n desde ogre.cfg
 		if(force || !_root->restoreConfig()) {
-			// Si no hay archivo de configuraciÛn se lanza la ventana de configuraciÛn
+			// Si no hay archivo de configuraci√≥n se lanza la ventana de configuraci√≥n
 			if(!_root->showConfigDialog()) {
 				// Si el juego no se puede configurar se finaliza
 				return false;
@@ -463,10 +524,10 @@ namespace BaseSubsystems
 		{
 			// Inicializa el sistema de renderizado y crea la ventanapor defecto. 
 			// El true nos evita llamar a Root::createRenderWindow y se invoca 
-			// con los par·metros actuales del sistema de reenderizado.
+			// con los par√°metros actuales del sistema de reenderizado.
 			_renderWindow = _root->initialise(true,"Galeon");
 
-			// AÒadimos un listener que gestiona el evento de cierre de la ventana.
+			// A√±adimos un listener que gestiona el evento de cierre de la ventana.
 			_windowEventListener = new WindowEventListener();
 			Ogre::WindowEventUtilities::addWindowEventListener(_renderWindow,_windowEventListener);
 
@@ -493,7 +554,7 @@ namespace BaseSubsystems
 
 	void CServer::getWindowExtents(unsigned int &width, unsigned int &height) 
 	{
-		assert(_renderWindow && "°No hay ventana de renderizado!");
+		assert(_renderWindow && "¬°No hay ventana de renderizado!");
 		if(_renderWindow)
 		{
 			width = _renderWindow->getWidth();
@@ -508,7 +569,7 @@ namespace BaseSubsystems
 
 	const unsigned int CServer::getWindowHnd() 
 	{
-		assert(_renderWindow && "°No hay ventana de renderizado!");
+		assert(_renderWindow && "¬°No hay ventana de renderizado!");
 		if(_renderWindow)
 		{
 			unsigned int windowHnd;
@@ -527,7 +588,7 @@ namespace BaseSubsystems
 		// Ogre    //
 		/////////////
 
-		// Redimensionamos y cambiamos la resoluciÛn de la 
+		// Redimensionamos y cambiamos la resoluci√≥n de la 
 		// pantalla.
 		bool fullScreen = _renderWindow->isFullScreen();
 		_renderWindow->setFullscreen(fullScreen,width,height);
@@ -536,7 +597,7 @@ namespace BaseSubsystems
 		// OIS     //
 		/////////////
 
-		// Actualizamos el estado del ratÛn de OIS
+		// Actualizamos el estado del rat√≥n de OIS
 		const OIS::MouseState &mouseStateOIS = _mouse->getMouseState();
 		mouseStateOIS.width  = width;
 		mouseStateOIS.height = height;

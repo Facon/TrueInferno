@@ -1,0 +1,12 @@
+
+material EvilWorks
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.521 0.521 0.521 1
+			diffuse 1 1 1 1
+		}
+	}
+}
