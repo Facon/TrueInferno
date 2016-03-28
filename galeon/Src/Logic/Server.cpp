@@ -15,6 +15,7 @@ la gestión de la lógica del juego.
 #include "Logic/Maps/Map.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Logic/Maps/Managers/WorkManager.h"
 #include "Logic/BuildingManager.h"
 
 #include "Logic/Entity/Entity.h"
@@ -37,7 +38,6 @@ namespace Logic {
 	CServer::CServer() : _map(0)
 	{
 		_instance = this;
-		_timeSinceRoadBuild = 0;
 
 	} // CServer
 
@@ -97,6 +97,10 @@ namespace Logic {
 		if (!Logic::CTileManager::Init())
 			return false;
 
+		// Inicializamos el gestor del trabajo.
+		if (!Logic::CWorkManager::Init())
+			return false;
+
 		// Inicializamos el gestor de edificios.
 		if (!Logic::CBuildingManager::Init())
 			return false;
@@ -118,6 +122,8 @@ namespace Logic {
 		Logic::CEventManager::Release();
 
 		Logic::CBuildingManager::Release();
+
+		Logic::CWorkManager::Release();
 
 		Logic::CTileManager::Release();
 
@@ -199,42 +205,7 @@ namespace Logic {
 
 		_map->tick(msecs);
 		Logic::CEventManager::getSingletonPtr()->tick(msecs);
-
-		// TODO Quitar cuando se esté disponible el control para crear edificios
-		if (TEST_ROAD_BUILDING)
-			testRoadBuild(msecs);
-
+	
 	} // tick
-
-	// TODO TEST
-	void CServer::testRoadBuild(unsigned int msecs){
-		// Test de construcción de carreteras
-		CTileManager* tileManager = CTileManager::getSingletonPtr();
-		_timeSinceRoadBuild += msecs;
-		if (_timeSinceRoadBuild >= TIME_BETWEEN_ROAD_BUILDING){
-			Tile* from = tileManager->getRandomTile();
-			Tile* to = tileManager->getRandomTile();
-
-			std::vector<Tile*>* path = AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(from, to);
-			if (path != nullptr){
-				std::cout << "Soulpath found from " << from->getLogicPosition() << " to " << to->getLogicPosition() << std::endl;
-
-				// Construímos
-				for (auto it = path->cbegin(); it != path->cend(); ++it){
-					Tile* tile = (*it);
-					Logic::CEntity* entity = CBuildingManager::getSingletonPtr()->createPlaceable(_map, "SoulPath", tile->getLogicPosition(), false, false);
-					if (!entity){
-						std::cout << "Can't create soulpath in " << tile->getLogicPosition() << std::endl;
-					}
-				}
-
-				delete path;
-			}
-			else{
-				std::cout << "Can't get soulpath from " << from->getLogicPosition() << " to " << to->getLogicPosition() << std::endl;
-			}
-			_timeSinceRoadBuild -= TIME_BETWEEN_ROAD_BUILDING;
-		}
-	}
 
 } // namespace Logic

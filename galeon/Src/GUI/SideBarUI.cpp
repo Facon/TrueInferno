@@ -27,7 +27,7 @@
 #include <OgreSceneQuery.h>
 
 #include "Physics/Server.h"
-#include "Logic\Entity\Message.h"
+#include "Logic/Entity/Message.h"
 #include "AI/Server.h"
 
 namespace GUI
@@ -219,7 +219,7 @@ namespace GUI
 	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_WORK, 1);
+		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_WORK);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 		
 		m.Dispatch(*hellQuarters->getEntity());
@@ -231,7 +231,7 @@ namespace GUI
 	bool SideBarUI::moveSoulReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_BURN, 1);
+		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_BURN);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
 		m.Dispatch(*hellQuarters->getEntity());

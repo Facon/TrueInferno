@@ -24,6 +24,13 @@ namespace Logic {
 
 		virtual void tick(unsigned int msecs);
 
+
+		/** Devuelve el número actual de almas preparadas para ser quemadas */
+		int getCurrentSoulsToBurn();
+
+		/** Devuelve el número máximo de almas que pueden quemarse en cada ciclo */
+		int getMaxSoulsToBurn();
+
 	protected:
 		AI::CStateMachine<AI::CLatentAction, AI::CSMSoulBurnerData>* getStateMachine(){
 			return new AI::CSMSoulBurner(_entity);

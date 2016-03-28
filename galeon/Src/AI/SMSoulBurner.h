@@ -70,6 +70,16 @@ namespace AI {
 			return ret;
 		}
 
+		/** Devuelve el número actual de almas preparadas para ser quemadas */
+		int getCurrentSoulsToBurn(){
+			return _data.getNumSoulsToBurn();
+		}
+
+		/** Devuelve el número máximo de almas que pueden quemarse en cada ciclo */
+		int getMaxSoulsToBurn(){
+			return _maxSoulsPerCycle;
+		}
+
 	private:
 		/** Cantidad de coke que da cada alma */
 		int _cokePerSoul;

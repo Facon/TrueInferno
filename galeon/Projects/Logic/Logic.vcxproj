@@ -121,6 +121,7 @@
     <ClCompile Include="..\..\Src\Logic\Maps\EntityID.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\TileManager.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\WorkManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Map.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Component.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Entity.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="..\..\Src\Logic\Maps\EntityID.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\TileManager.h" />
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\WorkManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Map.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Component.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Documentation.h" />

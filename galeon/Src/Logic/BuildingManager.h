@@ -133,6 +133,9 @@ namespace Logic
 		//Destruye un edificio aleatorio
 		bool DestroyRandomBuilding();
 
+		/** Devuelve la estructura de datos con los edificios */
+		std::map<BuildingType, std::set<CPlaceable*>*>& getBuildings();
+
 		/** Transmite un mensaje a todos los edificios registrados. Devuelve true si alguno aceptó el mensaje */
 		bool HandleMessage(const LogisticsMessage& msg);
 

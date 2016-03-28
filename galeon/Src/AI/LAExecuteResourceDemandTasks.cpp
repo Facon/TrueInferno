@@ -22,7 +22,7 @@ namespace AI {
 			return LAStatus::FAIL;
 
 		// Para cada proveedor
-		while (_nextProvider < providerMessages.size()){
+		while (_nextProvider < (int)providerMessages.size()){
 			ResourceMessage providerMessage = providerMessages[_nextProvider];
 
 			// Saltamos aquellos a los que no tenemos que enviar alma porque no pudimos reservar nada

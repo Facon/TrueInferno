@@ -8,7 +8,7 @@
 namespace AI {
 	class CLAWaitTaskAndRequestPath : public CLatentAction {
 	public:
-		CLAWaitTaskAndRequestPath(CEntity* entity, CSMSoulData& smData) : CLatentAction(entity), _smData(smData) {}
+		CLAWaitTaskAndRequestPath(CEntity* entity, CSMSoulData& smData) : CLatentAction(entity), _smData(smData), _taskStarted(false) {}
 
 		virtual ~CLAWaitTaskAndRequestPath() {}
 
@@ -22,7 +22,11 @@ namespace AI {
 	private:
 		CSMSoulData& _smData;
 
+		/** Solicita una ruta al objetivo de la petición almacenada */
 		bool requestPath();
+
+		/** Flag a true cuando la tarea ya ha posido ser empezada correctamente */
+		bool _taskStarted;
 	};
 }
 

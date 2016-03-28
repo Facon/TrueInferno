@@ -37,6 +37,22 @@ namespace Logic {
 		/** Gestor de mensajes de trabajadores. Modifica la cantidad de trabajadores presentes en el edificio */
 		virtual bool CWorkBuilding::HandleMessage(const WorkerMessage& msg);
 
+		int getMinWorkers() const {
+			return _minWorkers;
+		}
+
+		int getMaxWorkers() const {
+			return _maxWorkers;
+		}
+
+		int getActiveWorkers() const {
+			return _activeWorkers;
+		}
+
+		int getAssignedWorkers() const {
+			return _assignedWorkers;
+		}
+
 	private:
 		// Número mínimo de trabajadores para que funcione el edificio
 		unsigned int _minWorkers;

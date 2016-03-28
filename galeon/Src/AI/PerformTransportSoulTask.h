@@ -25,6 +25,10 @@ namespace AI{
 			return new CPerformTransportSoulTask(_map, _target, _resourceType, _resourceQuantity);
 		}
 
+		bool start(){
+			return true;
+		}
+
 		bool execute() {
 			// Chequeamos que el objetivo al que acabamos de llegar siga existiendo
 			CEntity* targetEntity = _map->getEntityByID(_target);

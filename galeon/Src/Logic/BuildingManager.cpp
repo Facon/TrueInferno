@@ -301,7 +301,7 @@ namespace Logic {
 			randomIndex = rand() % _buildings.size();
 
 			std::advance(it, randomIndex);
-		} while ((it->first == BuildingType::HellQuarters || randomIndex == BuildingType::NonBuilding) || it->second == nullptr || it->second->size() == 0);
+		} while ((it->first == BuildingType::HellQuarters || it->first == BuildingType::NonBuilding) || it->second == nullptr || it->second->size() == 0);
 
 		return findBuilding(it->first);
 	}
@@ -337,6 +337,11 @@ namespace Logic {
 		}
 		return false;
 	}
+
+	std::map<BuildingType, std::set<CPlaceable*>*>& CBuildingManager::getBuildings(){
+		return _buildings;
+	}
+
 
 	bool CBuildingManager::HandleMessage(const LogisticsMessage& msg){
 		bool ret = false;

@@ -1,3 +1,4 @@
+/*
 #include "StateMachineExecutor.h"
 #include "Map/MapEntity.h"
 
@@ -21,7 +22,8 @@ namespace Logic
 	/**
 	Este método delega en el método HandleMessage de la acción latente que se
 	está ejecutando (_currentAction).
-	*/
+	/
 
 
 }
+*/

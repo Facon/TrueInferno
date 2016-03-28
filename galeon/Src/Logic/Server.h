@@ -19,7 +19,6 @@ namespace Logic
 {
 	class CMap;
 	class CEntity;
-	class CTileManager;
 }
 
 /**
@@ -168,12 +167,6 @@ namespace Logic
 		Única instancia de la clase.
 		*/
 		static CServer* _instance;
-
-		/* Variables para el test de construcción de carreteras. Con el flag a false no hace nada */
-		const bool TEST_ROAD_BUILDING = false; // TODO TEST
-		const unsigned int TIME_BETWEEN_ROAD_BUILDING = 3000; // TODO TEST
-		float _timeSinceRoadBuild; // TODO TEST
-		void testRoadBuild(unsigned int msecs); // TODO TEST
 
 	}; // class CServer
 

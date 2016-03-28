@@ -9,6 +9,7 @@ namespace AI {
 		if (msg._type != MessageType::SOUL_REQUEST || _smData.getTask() != nullptr)
 			return false;
 
+		// Guardamos la tarea
 		_smData.setTask(msg._task);
 
 		// Reactivamos la LA
@@ -21,6 +22,8 @@ namespace AI {
 		// Inicializamos
 		_smData.setTask(nullptr);
 
+		_taskStarted = false;
+
 		// Suspendemos la LA hasta que llegue el mensaje con la petición
 		return LAStatus::SUSPENDED;
 	}
@@ -29,6 +32,16 @@ namespace AI {
 		// Fallamos si no hay tarea
 		if (_smData.getTask() == nullptr)
 			return LAStatus::FAIL;
+
+		// Si la tarea todavía no se ha arrancado
+		if (!_taskStarted){
+			// La arrancamos
+			if (_smData.getTask()->start())
+				_taskStarted = true;
+			// Si no se pudo arrancar esperamos al siguiente tick
+			else
+				return LAStatus::RUNNING;
+		}
 
 		// Intentamos o reintentamos obtener ruta
 		return requestPath() ? LAStatus::SUCCESS : LAStatus::RUNNING;

@@ -1,6 +1,7 @@
 #include "LAGetTaskAndTarget.h"
 
 #include "Logic\Entity\Components\Placeable.h"
+#include "Logic\Maps\Managers\WorkManager.h"
 
 namespace AI {
 	bool CLAGetTaskAndTarget::HandleMessage(const HellQuartersMessage& msg) {
@@ -11,26 +12,27 @@ namespace AI {
 		switch (msg._action){
 		case SEND_SOUL_BURN:{
 			// Buscamos horno. Si no hay, no aceptamos el mensaje
-			CPlaceable *target = CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::Furnace);
-			if (target == nullptr)
+			TEntityID target = CWorkManager::getSingletonPtr()->findFurnace();
+			// Si se devolvió el ID especial UNASSIGNED es que no había ningún edificio para trabajar
+			if (target == EntityID::UNASSIGNED)
 				return false;
 
 			//std::unique_ptr<CBurnTask> _task(new CBurnTask(target));
-			_task = new CBurnTask(target->getEntity()->getMap(), target->getEntity()->getEntityID());
-			_numSouls = msg._numSouls;
+			_task = new CBurnTask(_entity->getMap(), target);
 
 			break;
 		}
 
 		case SEND_SOUL_WORK:{
-			// Buscamos un edificio cualquiera. Si no hay ninguno o somos nosotros mismos, no aceptamos el mensaje
-			CPlaceable *target = CBuildingManager::getSingletonPtr()->getRandomBuildingForWork();
-			if (target == nullptr || target->getEntity() == _entity)
+			// Buscamos un edificio donde trabajar
+			TEntityID target = CWorkManager::getSingletonPtr()->findBuildingToWork();
+
+			// Si se devolvió el ID especial UNASSIGNED es que no había ningún edificio para trabajar
+			if (target == EntityID::UNASSIGNED)
 				return false;
 
 			//std::unique_ptr<CWorkTask> _task(new CWorkTask(target));
-			_task = new CWorkTask(target->getEntity()->getMap(), target->getEntity()->getEntityID());
-			_numSouls = msg._numSouls;
+			_task = new CWorkTask(_entity->getMap(), target);
 
 			break;
 		}
@@ -68,7 +70,7 @@ namespace AI {
 
 	bool CLAGetTaskAndTarget::sendSoul(){
 		// Enviamos una copia de la tarea porque en este objeto la vamos a borrar
-		SoulSenderMessage m(_task->clone(), _numSouls);
+		SoulSenderMessage m(_task->clone(), 1);
 		return m.Dispatch(*_entity);
 	}
 }

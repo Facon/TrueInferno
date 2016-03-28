@@ -11,6 +11,9 @@ namespace AI{
 
 		virtual ~CSoulTask() {};
 
+		/** Método que se ejecutará al comenzar la tarea */
+		virtual bool start() = 0;
+
 		/** Método que se ejecutará en el objetivo al llegar el alma */
 		virtual bool execute() = 0;
 

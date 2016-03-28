@@ -32,7 +32,6 @@ namespace AI {
 
 	private:
 		CSoulTask* _task;
-		int _numSouls;
 
 		bool sendSoul();
 	};

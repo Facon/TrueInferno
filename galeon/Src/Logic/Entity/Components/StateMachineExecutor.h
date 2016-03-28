@@ -126,9 +126,6 @@ namespace Logic
 		/** Instancia la máquina de estados. Debe ser implementado por la subclase */
 		virtual AI::CStateMachine<AI::CLatentAction, SharedData>* getStateMachine() = 0;
 
-		/** Inicializa los datos compartidos por la SM. Debe ser implementado por la subclase */
-		//virtual SharedData* getStateMachine() = 0;
-
 	}; // class CStateMachineExecutor 
 
 }// namespace Logic

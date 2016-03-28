@@ -409,10 +409,9 @@ namespace Logic
 	class HellQuartersMessage : public Message
 	{
 	public:
-		HellQuartersMessage(HellQuartersAction action, int numSouls) : Message(MessageType::HELLQUARTERS_REQUEST), _action(action), _numSouls(numSouls) {}
+		HellQuartersMessage(HellQuartersAction action) : Message(MessageType::HELLQUARTERS_REQUEST), _action(action) {}
 
 		HellQuartersAction _action;
-		int _numSouls;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

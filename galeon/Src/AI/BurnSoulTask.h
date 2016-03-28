@@ -17,6 +17,10 @@ namespace AI{
 			return new CBurnTask(_map, _target);
 		}
 
+		bool start(){
+			return true;
+		}
+
 		bool execute() {
 			// Chequeamos que el objetivo siga existiendo
 			Logic::CEntity* targetEntity = _map->getEntityByID(_target);

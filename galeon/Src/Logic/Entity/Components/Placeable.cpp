@@ -45,7 +45,7 @@ namespace Logic {
 		_tiles.clear();
 		_adyacentTiles.clear();
 		_placeableType = NonPlaceable;
-		_buildingType = NonBuilding;
+		_buildingType = Unassigned;
 		_walkingSoulTarget = nullptr;
 		_validTerrainTypes.clear();
 
@@ -365,7 +365,7 @@ namespace Logic {
 		else{
 			assert(false && "BuildingType name unknown");
 			// TODO lanzar excepción en vez de assert
-			return NonBuilding;
+			return Unassigned;
 		}
 	}
 

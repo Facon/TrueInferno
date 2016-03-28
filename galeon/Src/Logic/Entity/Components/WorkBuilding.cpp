@@ -20,7 +20,6 @@ namespace Logic {
 		_maxWorkers = entityInfo->getIntAttribute("maxWorkers");
 		
 		_activeWorkers = 0;
-
 		_assignedWorkers = 0;
 
 		_changeActive = 0;
@@ -34,7 +33,7 @@ namespace Logic {
 		if (_changeActive != 0){
 			_activeWorkers += _changeActive;
 
-			std::cout << "Current active workers=" << _activeWorkers << std::endl;
+			//std::cout << "Current active workers=" << _activeWorkers << std::endl;
 
 			_changeActive = 0;
 		}
@@ -43,7 +42,7 @@ namespace Logic {
 		if (_changeAssigned != 0){
 			_assignedWorkers += _changeAssigned;
 
-			std::cout << "Current assigned workers=" << _assignedWorkers << std::endl;
+			//std::cout << "Current assigned workers=" << _assignedWorkers << std::endl;
 
 			_changeAssigned = 0;
 		}
