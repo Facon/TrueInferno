@@ -465,6 +465,7 @@ namespace Logic
 		- RESOURCES_INFO: Información de recursos de la entidad
 		- RESOURCES_CHANGE: Solicitud de modificación de recursos almacenados
 		- RESOURCES_RESERVE: Solicitud de reserva de recursos disponibles para que otras solicitudes no puedan reservarlos simultáneamente
+		- RESOURCES_RESERVED: Confirmación de cantidad final reservada de recursos
 		- RESOURCES_FREE: Solicitud de liberación de recursos reservados previamente
 		- RESOURCES_CLAIM: Solicitud de reclamación de los recursos reservados previamente
 		(TODO Añadir, si procede, RESOURCES_CHANGED: Confirmación a la solicitud de modificación de recursos. De momento la confirmación equivale a que el HandleMessage devuelva true)
