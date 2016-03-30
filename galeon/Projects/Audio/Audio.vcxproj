@@ -49,7 +49,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/FMOD;../../dependencies/include/;../../dependencies/include/FMOD/lowlevel;../../dependencies/include/FMOD/fsbank/;../../dependencies/include/FMOD/studio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/;../../dependencies/include/FMOD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -65,7 +65,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/FMOD;../../dependencies/include/;../../dependencies/include/FMOD/lowlevel;../../dependencies/include/FMOD/fsbank/;../../dependencies/include/FMOD/studio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Src;../../dependencies/include/;../../dependencies/include/FMOD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
