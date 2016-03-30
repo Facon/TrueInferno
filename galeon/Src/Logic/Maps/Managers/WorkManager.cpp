@@ -133,7 +133,7 @@ namespace Logic {
 	TEntityID CWorkManager::findFurnace(){
 		// Buscaremos el horno con mayor capacidad actual para quemar almas
 		TEntityID target = EntityID::UNASSIGNED;
-		float maxSoulsToBurn = FLT_MIN;
+		int maxSoulsToBurn = INT_MIN;
 
 		// Obtenemos los hornos (si hay alguno)
 		std::set<CPlaceable*>* _furnaces = CBuildingManager::getSingletonPtr()->getBuildings()[BuildingType::Furnace];
@@ -165,8 +165,19 @@ namespace Logic {
 			// Obtenemos la capacidad restante del horno
 			int remainingSoulsToBurn = soulBurner->getMaxSoulsToBurn() - soulBurner->getCurrentSoulsToBurn();
 
-			// Y actualizamos, si procede, la mejor capacidad encontrada hasta el momento
-			if (remainingSoulsToBurn > maxSoulsToBurn){
+			// Actualizaremos si...
+			bool update = false;
+
+			// ...se mejora la mayor capacidad encontrada hasta el momento
+			if (remainingSoulsToBurn > maxSoulsToBurn)
+				update = true;
+
+			// TODO ...o si iguala y está más cerca
+			/*else if (remainingSoulsToBurn == maxSoulsToBurn){
+				//update = 
+			}*/
+
+			if (update){
 				maxSoulsToBurn = remainingSoulsToBurn;
 				target = entity->getEntityID();
 			}

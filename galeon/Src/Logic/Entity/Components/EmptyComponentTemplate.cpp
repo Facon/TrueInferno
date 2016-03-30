@@ -9,10 +9,6 @@ namespace Logic {
 	RTTI_ROOT_IMPL(CTile);
 	IMP_FACTORY(CTile);
 
-	CTile::CTile() : IComponent() {
-
-	}
-
 	bool CTile::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 		std::cout << "CTile spawned!" << std::endl;
 		return true;

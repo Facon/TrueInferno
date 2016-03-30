@@ -246,6 +246,14 @@ return ret; \
 Propaga el mensaje adecuadamente para que llegue a la propia SM y a la acción actual */
 #define SM_EXECUTOR_HANDLE_MESSAGE(Class) \
 bool HandleMessage(const Class& msg){ \
+	/* Chequeamos si estamos deshabilitados a nivel lógico */ \
+	CToggleable* toggleAble = _entity->getComponent<CToggleable>(); \
+\
+	/* Si lo estamos, evitamos el tick  */ \
+	if (toggleAble != nullptr && !toggleAble->isLogicEnabled()){ \
+		return false; \
+	} \
+\
 	if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg)) \
 		return true; \
 	if (_currentAction != NULL) \

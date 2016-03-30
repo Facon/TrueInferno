@@ -14,6 +14,7 @@ ejecutar máquinas de estado de la clase CStateMachine.
 
 #include "Logic/Entity/Component.h"
 #include "AI/StateMachine.h"
+#include "Logic/Entity/Components/Toggleable.h"
 
 namespace Logic
 {
@@ -71,6 +72,14 @@ namespace Logic
 		*/
 		void tick(unsigned int msecs)
 		{
+			// Chequeamos si estamos deshabilitados a nivel lógico
+			CToggleable* toggleAble = _entity->getComponent<CToggleable>();
+			
+			// Si lo estamos, evitamos el tick
+			if (toggleAble != nullptr && !toggleAble->isLogicEnabled()){
+				return;
+			}
+
 			IComponent::tick(msecs);
 
 			// En cada tick del ejecutor de máquinas de estado tenemos que 

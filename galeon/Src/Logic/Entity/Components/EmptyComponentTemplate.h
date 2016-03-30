@@ -13,7 +13,12 @@ namespace Logic {
 		/**
 		Constructor por defecto.
 		/
-		CTile();
+		CTile() {}
+
+		/**
+		Desstructor por defecto.
+		/
+		~CTile() {}
 
 		/**
 		Inicialización del componente usando la descripción de la entidad que hay en

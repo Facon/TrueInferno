@@ -2,6 +2,7 @@
 
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Message.h"
+#include "Logic/Entity/Entity.h"
 #include <iostream>
 #include <cassert>
 
@@ -29,17 +30,36 @@ namespace Logic {
 	} // spawn
 
 	void CWorkBuilding::tick(unsigned int msecs){
-		// Si había pendiente una orden de cambiar el número de trabajadores activos, se procesa
+		// Si había pendiente una orden de cambiar el número de trabajadores activos
 		if (_changeActive != 0){
+			// Guardamos la cantidad antigua de trabajadores activos
+			int oldActive = _activeWorkers;
+			
+			// Aplicamos el cambio
 			_activeWorkers += _changeActive;
+			
+			// Si estábamos por debajo del mínimo pero ahora lo superamos
+			if ((oldActive < (int)_minWorkers) && (_activeWorkers >= _minWorkers)){
+				// Activamos lógicamente el edificio
+				ToggleMessage m(true);
+				assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage");
+			}
+
+			// Si estábamos por encima del mínimo pero ya no lo superamos
+			else if ((oldActive >= (int)_minWorkers) && (_activeWorkers < _minWorkers)){
+				// Desactivamos lógicamente el edificio
+				ToggleMessage m(false);
+				assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage");
+			}
 
 			//std::cout << "Current active workers=" << _activeWorkers << std::endl;
 
 			_changeActive = 0;
 		}
 
-		// Si había pendiente una orden de cambiar el número de trabajadores asignados, se procesa
+		// Si había pendiente una orden de cambiar el número de trabajadores asignados
 		if (_changeAssigned != 0){
+			// Aplicamos el cambio
 			_assignedWorkers += _changeAssigned;
 
 			//std::cout << "Current assigned workers=" << _assignedWorkers << std::endl;

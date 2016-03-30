@@ -593,6 +593,20 @@ namespace Logic
 		}
 	};
 
+	/** Mensajes relacionados con el habilitado/deshabilitado lógico de una entidad */
+	class ToggleMessage : public Message
+	{
+	public:
+		ToggleMessage(bool enabled) : Message(TMessage::UNASSIGNED), _enabled(enabled) {}
+
+		bool _enabled;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
 	/*
 	GameObject* receiver_object = blah;
 	

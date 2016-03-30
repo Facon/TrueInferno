@@ -109,6 +109,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchPosition.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Toggleable.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\WorkBuilding.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\BuildingDestructionEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\EndGameEvent.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchPosition.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Tile.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Toggleable.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\WorkBuilding.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h" />
