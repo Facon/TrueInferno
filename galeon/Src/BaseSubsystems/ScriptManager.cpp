@@ -607,45 +607,6 @@ bool CScriptManager::executeFunction(const char *subroutineName,
 
 	return true;
 
-	// LUA
-	/*
-	#ifdef _DEBUG
-		int topLua = lua_gettop(_lua);
-	#endif
-
-	// Lo primero es buscar la función (global) con ese
-	// nombre.
-	lua_getglobal(_lua, subroutineName);
-
-	if (!lua_isfunction(_lua, -1)) {
-		// ¡¡Vaya!!
-		lua_pop(_lua, 1);
-		return false;
-	}
-
-	// Apilamos el parámetro.
-	lua_pushnumber(_lua, param1);
-
-	// Llamamos a la función, con un argumento y con
-	// resultado.
-	lua_call(_lua, 1, 1);
-
-	if (!lua_isnumber(_lua, -1)) {
-		// ¡¡Vaya!!
-		lua_pop(_lua, 1);
-		return false;
-	}
-	result = (int) lua_tonumber(_lua, -1);
-
-	lua_pop(_lua, 1);
-
-	// sanity-check: no dejamos nada en la cima de la pila...
-	// (recuerda que assert sólo compila el interior en modo debug)
-	assert(lua_gettop(_lua) == topLua);
-
-	return true;
-	*/
-
 } // executeFunction
 
 //---------------------------------------------------------
