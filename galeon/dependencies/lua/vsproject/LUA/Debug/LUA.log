@@ -1,18 +1,41 @@
-<<<<<<< HEAD
-﻿Build started 25/03/2016 15:47:33.
+﻿Build started 30/03/2016 16:53:09.
      1>Project "D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" on node 2 (Build target(s)).
-=======
-﻿Compilación iniciada a las 24/03/2016 13:17:48.
-     1>Proyecto "C:\Users\Raul\Documents\Git\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" en el nodo 2 (Build destinos).
->>>>>>> origin/master
      1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Debug\lua51.dll" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Debug\lua51.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Debug\lua51.lib" /MACHINE:X86 /SAFESEH /DLL Debug\lapi.obj
+         Debug\lauxlib.obj
+         Debug\lbaselib.obj
+         Debug\lcode.obj
+         Debug\ldblib.obj
+         Debug\ldebug.obj
+         Debug\ldo.obj
+         Debug\ldump.obj
+         Debug\lfunc.obj
+         Debug\lgc.obj
+         Debug\linit.obj
+         Debug\liolib.obj
+         Debug\llex.obj
+         Debug\lmathlib.obj
+         Debug\lmem.obj
+         Debug\loadlib.obj
+         Debug\lobject.obj
+         Debug\lopcodes.obj
+         Debug\loslib.obj
+         Debug\lparser.obj
+         Debug\lstate.obj
+         Debug\lstring.obj
+         Debug\lstrlib.obj
+         Debug\ltable.obj
+         Debug\ltablib.obj
+         Debug\ltm.obj
+         Debug\lundump.obj
+         Debug\lvm.obj
+         Debug\lzio.obj
+         Debug\print.obj
+     1>lapi.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+            Creating library D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Debug\lua51.lib and object D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Debug\lua51.exp
          LUA.vcxproj -> D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Debug\lua51.dll
      1>Done Building Project "D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-<<<<<<< HEAD
-Time Elapsed 00:00:00.17
-=======
-Tiempo transcurrido 00:00:03.03
->>>>>>> origin/master
+Time Elapsed 00:00:00.40
