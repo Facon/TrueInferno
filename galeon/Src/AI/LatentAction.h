@@ -149,6 +149,11 @@ namespace AI
 		*/
 		LAStatus getStatus() {return _status; };
 
+		/**
+		Desactiva la acción latente. Se invoca automáticamente al desactivar el componente SMExecutor
+		*/
+		virtual void deactivate(){}
+
 	private:
 		/**
 		Estado de la acción

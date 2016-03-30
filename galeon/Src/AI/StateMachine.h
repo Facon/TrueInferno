@@ -122,6 +122,11 @@ namespace AI
 		*/
 		void resetExecution(){ _currentNodeId = -1; };
 
+		/**
+		Desactiva la máquina de estados. Se invoca automáticamente al desactivar el componente SMExecutor
+		*/
+		virtual void deactivate(){}
+
 	protected:
 		/**
 		Tipo que guarda la información de las aristas salientes de un nodo.

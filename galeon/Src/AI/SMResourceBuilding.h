@@ -72,6 +72,10 @@ namespace AI {
 			return true;
 		}
 
+		virtual void deactivate(){
+			std::cout << "TODO Deactivate stored resources" << std::endl;
+		}
+
 		SM_HANDLE_MESSAGE(ResourceMessage);
 	};
 

@@ -106,6 +106,14 @@ namespace Logic
 				_currentAction->tick(msecs);
 			}
 		}
+
+		/** Desactiva la SM y la acción actual */
+		virtual void deactivate() {
+			if (_currentStateMachine != NULL)
+				_currentStateMachine->deactivate();
+			if (_currentAction != NULL)
+				_currentAction->deactivate();
+		}
 		
 		SM_EXECUTOR_HANDLE_MESSAGE(WalkSoulPathMessage);
 
