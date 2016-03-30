@@ -134,34 +134,6 @@ int CScriptManager::getGlobal(const char *name, int defaultValue) {
 	else
 		return luabind::object_cast<int>(obj);
 
-	// LUA
-	/*
-	#ifdef _DEBUG
-		int topLua = lua_gettop(_lua);
-	#endif
-
-	int result;
-
-	lua_getglobal(_lua, name);
-
-	if (!lua_isnumber(_lua, -1))
-		result = defaultValue;
-	else
-		result = (int) lua_tonumber(_lua, -1);
-
-	// Quitamos de la pila de Lua el elemento apilado por
-	// lua_getglobal.
-	// Si la variable global no existía, nos habrá
-	// apilado nil, de modo que siempre hay algo :-)
-	lua_pop(_lua, 1);
-
-	// sanity-check: no dejamos nada en la cima de la pila...
-	// (recuerda que assert sólo compila el interior en modo debug)
-	assert(lua_gettop(_lua) == topLua);
-
-	return result;
-	*/
-
 } // getGlobal(int)
 
 //---------------------------------------------------------
@@ -178,34 +150,6 @@ bool CScriptManager::getGlobal(const char *name, bool defaultValue) {
 	else
 		return luabind::object_cast<bool>(obj);
 
-	// LUA
-	/*
-	#ifdef _DEBUG
-		int topLua = lua_gettop(_lua);
-	#endif
-
-	bool result;
-
-	lua_getglobal(_lua, name);
-
-	if (!lua_isboolean(_lua, -1))
-		result = defaultValue;
-	else
-		result = lua_toboolean(_lua, -1)==0?false:true;
-
-	// Quitamos de la pila de Lua el elemento apilado por
-	// lua_getglobal.
-	// Si la variable global no existía, nos habrá
-	// apilado nil, de modo que siempre hay algo :-)
-	lua_pop(_lua, 1);
-
-	// sanity-check: no dejamos nada en la cima de la pila...
-	// (recuerda que assert sólo compila el interior en modo debug)
-	assert(lua_gettop(_lua) == topLua);
-
-	return result;
-	*/
-
 } // getGlobal(bool)
 
 //---------------------------------------------------------
@@ -221,51 +165,7 @@ std::string CScriptManager::getGlobal(const char *name, const char *defaultValue
 		return defaultValue;
 	else
 		return luabind::object_cast<std::string>(obj);
-
-	// LUA
-	/*
-	#ifdef _DEBUG
-		int topLua = lua_gettop(_lua);
-	#endif
-
-	size_t len;
-	const char *result; // Antes de hacer la copia.
-
-	lua_getglobal(_lua, name);
-
-	if (!lua_isstring(_lua, -1))
-		result = defaultValue;
-	else {
-		result = lua_tolstring(_lua, -1, &len);
-
-		// lua_tolstring siempre nos pone el \0
-		// al final, pero podría haber alguno más
-		// por el medio.
-		// Si es así, entonces strlen(result)
-		// (que busca el \0) parará "antes de
-		// tiempo" y habrá diferencias en las
-		// longitudes apreciables.
-		assert(len == strlen(result));
-	}
-
-	// Hacemos la copia. La hacemos antes de quitar
-	// el elemento de la pila, porque Lua podría decidir
-	// recoger la basura y liberar la cadena result.
-	std::string resultCopy(result);
-
-	// Quitamos de la pila de Lua el elemento apilado por
-	// lua_getglobal.
-	// Si la variable global no existía, nos habrá
-	// apilado nil, de modo que siempre hay algo :-)
-	lua_pop(_lua, 1);
-
-	// sanity-check: no dejamos nada en la cima de la pila...
-	// (recuerda que assert sólo compila el interior en modo debug)
-	assert(lua_gettop(_lua) == topLua);
-
-	return resultCopy;
-	*/
-
+	
 } // getGlobal(char*)
 
 //---------------------------------------------------------
@@ -505,33 +405,6 @@ bool CScriptManager::executeProcedure(const char *subroutineName) {
 		return true;
 	}
 	
-	// LUA
-	/*
-	#ifdef _DEBUG
-		int topLua = lua_gettop(_lua);
-	#endif
-
-	// Lo primero es buscar la función (global) con ese
-	// nombre.
-	lua_getglobal(_lua, subroutineName);
-
-	if (!lua_isfunction(_lua, -1)) {
-		// ¡¡Vaya!!
-		lua_pop(_lua, 1);
-		return false;
-	}
-
-	// Llamamos a la función, sin argumentos y sin
-	// resultado.
-	lua_call(_lua, 0, 0);
-
-	// sanity-check: no dejamos nada en la cima de la pila...
-	// (recuerda que assert sólo compila el interior en modo debug)
-	assert(lua_gettop(_lua) == topLua);
-
-	return true;
-	*/
-
 } // executeProcedure
 
 //---------------------------------------------------------
@@ -550,37 +423,7 @@ bool CScriptManager::executeProcedure(const char *subroutineName, int param1) {
 	}
 
 	return true;
-
-	// LUA
-	/*
-	#ifdef _DEBUG
-		int topLua = lua_gettop(_lua);
-	#endif
-
-	// Lo primero es buscar la función (global) con ese
-	// nombre.
-	lua_getglobal(_lua, subroutineName);
-
-	if (!lua_isfunction(_lua, -1)) {
-		// ¡¡Vaya!!
-		lua_pop(_lua, 1);
-		return false;
-	}
-
-	// Apilamos el parámetro.
-	lua_pushnumber(_lua, param1);
-
-	// Llamamos a la función, con un argumento y sin
-	// resultado.
-	lua_call(_lua, 1, 0);
-
-	// sanity-check: no dejamos nada en la cima de la pila...
-	// (recuerda que assert sólo compila el interior en modo debug)
-	assert(lua_gettop(_lua) == topLua);
-
-	return true;
-	*/
-
+	
 } // executeProcedure(int)
 
 //---------------------------------------------------------
@@ -606,45 +449,6 @@ bool CScriptManager::executeFunction(const char *subroutineName,
 	}
 
 	return true;
-
-	// LUA
-	/*
-	#ifdef _DEBUG
-		int topLua = lua_gettop(_lua);
-	#endif
-
-	// Lo primero es buscar la función (global) con ese
-	// nombre.
-	lua_getglobal(_lua, subroutineName);
-
-	if (!lua_isfunction(_lua, -1)) {
-		// ¡¡Vaya!!
-		lua_pop(_lua, 1);
-		return false;
-	}
-
-	// Apilamos el parámetro.
-	lua_pushnumber(_lua, param1);
-
-	// Llamamos a la función, con un argumento y con
-	// resultado.
-	lua_call(_lua, 1, 1);
-
-	if (!lua_isnumber(_lua, -1)) {
-		// ¡¡Vaya!!
-		lua_pop(_lua, 1);
-		return false;
-	}
-	result = (int) lua_tonumber(_lua, -1);
-
-	lua_pop(_lua, 1);
-
-	// sanity-check: no dejamos nada en la cima de la pila...
-	// (recuerda que assert sólo compila el interior en modo debug)
-	assert(lua_gettop(_lua) == topLua);
-
-	return true;
-	*/
 
 } // executeFunction
 
