@@ -6,6 +6,8 @@
 #include "Logic\ResourcesManager.h"
 #include "Logic\Maps\Map.h"
 #include "Logic\Entity\Entity.h"
+#include "Application/GaleonApplication.h"
+#include "Application/GameState.h"
 
 using namespace Logic;
 
@@ -14,7 +16,7 @@ namespace AI{
 	class CPerformTransportSoulTask : public CSoulTask {
 
 	public:
-		CPerformTransportSoulTask(CMap *map, const TEntityID& toId, ResourceType resourceType, unsigned int resourceQuantity) :
+		CPerformTransportSoulTask(CMap *map, const TEntityID& toId, ResourceType resourceType, int resourceQuantity) :
 			CSoulTask(map, toId), // El objetivo es el punto de final del transporte donde entregaremos los recursos
 			_resourceType(resourceType),
 			_resourceQuantity(resourceQuantity) {};
@@ -38,12 +40,24 @@ namespace AI{
 				// Entrengamos los recursos en el objetivo
 				ResourceMessage m;
 				m.assembleResourcesChange(_resourceType, _resourceQuantity);
-				return m.Dispatch(*targetEntity);
+				bool ret = m.Dispatch(*targetEntity);
+
+				// En caso correcto los recursos han sido entregados por lo que podemos limpiar
+				if (ret){
+					_resourceType = ResourceType::NONE;
+					_resourceQuantity = 0;
+				}
+
+				return ret;
 			}
 
 			// Si no
 			else{
 				std::cout << "Soul's target for PerformTransportSoulTask has disappeared" << std::endl;
+
+				// No perdemos los recursos. Si el alma desaparece, sus recursos se irán con ella y no hace falta notificarlo al ResourcesManager
+				// También podremos querer buscarle otro objetivo
+
 				return true;
 			}
 		};
@@ -53,7 +67,7 @@ namespace AI{
 		ResourceType _resourceType;
 
 		// Cantidad de recursos que porta el alma
-		unsigned int _resourceQuantity;
+		int _resourceQuantity;
 	};
 
 }

@@ -1,5 +1,5 @@
-#ifndef SM_SOUL_BURNER_DATA_
-#define SM_SOUL_BURNER_DATA_
+#ifndef SM_SOUL_H_BURNER_DATA_
+#define SM_SOUL_H_BURNER_DATA_
 
 namespace AI {
 	class CSMSoulBurnerData {

@@ -143,7 +143,7 @@ namespace AI {
 		// TODO Atajo temporal para obtener el ResourcesManager
 		Logic::ResourcesManager *resourcesManager =
 			((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
-		resourcesManager->increaseResources(_msgReceived._resourceType, change);
+		resourcesManager->changeResources(_msgReceived._resourceType, change);
 
 		// Y finalizamos
 		return LAStatus::SUCCESS;

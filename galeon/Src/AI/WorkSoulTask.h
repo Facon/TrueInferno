@@ -26,6 +26,8 @@ namespace AI{
 			if (targetEntity != nullptr){
 				// Asignamos el trabajador al objetivo
 				Logic::WorkerMessage m(TMessage::WORKER_ASSIGNED, 1);
+				
+				// Damos por ejecutada la tarea si nos aceptan el mensaje
 				return m.Dispatch(*targetEntity);
 			}
 

@@ -125,7 +125,7 @@ namespace AI
 		/**
 		Desactiva la máquina de estados. Se invoca automáticamente al desactivar el componente SMExecutor
 		*/
-		virtual void deactivate(){}
+		virtual void deactivate() {}
 
 	protected:
 		/**

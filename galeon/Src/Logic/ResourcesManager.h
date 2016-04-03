@@ -61,9 +61,7 @@ namespace Logic
 		
 		void incGas(int workers, float time);*/
 		
-		// TODO Refactorize/Generalize all resources
-		void increaseResources(ResourceType type, float num);
-		bool decreaseResources(ResourceType type, float num);
+		void changeResources(ResourceType type, float num);
 	};
 
 }

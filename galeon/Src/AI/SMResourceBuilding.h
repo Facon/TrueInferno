@@ -6,6 +6,7 @@
 #include "AI\Server.h"
 #include "AI\LAAttendResourceBuildingRequest.h"
 #include "AI\SMResourceBuildingData.h"
+#include "Map\MapEntity.h"
 
 namespace AI {
 	/** FSM con la lógica de un edificio de recursos para procesar operaciones de consulta y modificación de sus recursos
@@ -73,7 +74,8 @@ namespace AI {
 		}
 
 		virtual void deactivate(){
-			std::cout << "TODO Deactivate stored resources" << std::endl;
+			// Al desactivarnos limpiamos los recursos que quedaran
+			_data.cleanResources();
 		}
 
 		SM_HANDLE_MESSAGE(ResourceMessage);

@@ -21,7 +21,7 @@ namespace Logic
 		increaseResources(ResourceType::GAS, GAS_GATHERING_SPEED * workers * time);
 	}*/
 	
-	void ResourcesManager::increaseResources(ResourceType type, float num)
+	void ResourcesManager::changeResources(ResourceType type, float num)
 	{
 		switch(type)
 		{
@@ -56,56 +56,6 @@ namespace Logic
 			default:
 				throw std::runtime_error("Invalid Resource.");
 		}
-	}
-
-	bool ResourcesManager::decreaseResources(ResourceType type, float num)
-	{
-		switch (type)
-		{
-		case ResourceType::MINERAL:
-			if (_mineral < num)
-				return false;
-			_mineral -= num;
-			break;
-		case ResourceType::GAS:
-			if (_gas < num)
-				return false;
-			_gas -= num;
-			break;
-		case ResourceType::COKE:
-			if (_coke < num)
-				return false;
-			_coke -= num;
-			break;
-		case ResourceType::CRUDE:
-			if (_crude < num)
-				return false;
-			_crude -= num;
-			break;
-		case ResourceType::PURE:
-			if (_pure < num)
-				return false;
-			_pure -= num;
-			break;
-		case ResourceType::REFINED:
-			if (_refined < num)
-				return false;
-			_refined -= num;
-			break;
-		case ResourceType::AETHER:
-			if (_aether < num)
-				return false;
-			_aether -= num;
-			break;
-			/*
-			case ResourceType::HADES_FAVOR:
-			_hadesFavor += num;
-			break;
-			*/
-		default:
-			throw std::runtime_error("Invalid Resource.");
-		}
-		return true;
 	}
 
 	ResourceType ResourcesManager::parseResourceType(const std::string& name){

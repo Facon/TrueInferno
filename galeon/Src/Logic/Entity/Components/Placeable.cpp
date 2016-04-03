@@ -297,8 +297,8 @@ namespace Logic {
 		if (resourcesManager->getGas() < _gasCost)
 			return false;
 
-		resourcesManager->decreaseResources(Logic::ResourceType::MINERAL, _mineralCost);
-		resourcesManager->decreaseResources(Logic::ResourceType::GAS, _gasCost);
+		resourcesManager->changeResources(Logic::ResourceType::MINERAL, -_mineralCost);
+		resourcesManager->changeResources(Logic::ResourceType::GAS, -_gasCost);
 
 		return true;
 	}

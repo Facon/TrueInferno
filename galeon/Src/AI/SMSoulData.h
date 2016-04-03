@@ -1,5 +1,5 @@
-#ifndef SM_SOUL_DATA_
-#define SM_SOUL_DATA_
+#ifndef SM_SOUL_H_DATA_
+#define SM_SOUL_H_DATA_
 
 #include <vector>
 #include "OgreVector3.h"

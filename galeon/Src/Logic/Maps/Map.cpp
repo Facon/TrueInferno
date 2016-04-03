@@ -119,6 +119,8 @@ namespace Logic {
 		for(; it != end; it++)
 			correct = (*it).second->activate() && correct;
 
+		_activated = correct;
+
 		return correct;
 
 	} // getEntity

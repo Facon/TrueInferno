@@ -8,7 +8,7 @@
 namespace AI {
 	class CLADestroyEntity : public CLatentAction {
 	public:
-		CLADestroyEntity(CEntity* entity) : CLatentAction(entity) {}
+		CLADestroyEntity(CEntity* entity, CSMSoulData& smData) : CLatentAction(entity), _smData(smData) {}
 
 		virtual ~CLADestroyEntity() {}
 
@@ -16,6 +16,9 @@ namespace AI {
 		LAStatus OnStart();
 
 		LAStatus OnRun(unsigned int msecs);
+
+	private:
+		CSMSoulData& _smData;
 	};
 }
 

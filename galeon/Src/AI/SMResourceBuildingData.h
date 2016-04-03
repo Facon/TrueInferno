@@ -86,7 +86,7 @@ namespace AI {
 			// TODO Atajo temporal para obtener el ResourcesManager
 			Logic::ResourcesManager *resourcesManager =
 				((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
-			resourcesManager->increaseResources(type, quantity);
+			resourcesManager->changeResources(type, quantity);
 
 			return true;
 		}
@@ -179,6 +179,20 @@ namespace AI {
 
 		void setMaxResources(unsigned int maxResources){
 			_maxResources = maxResources;
+		}
+
+		/** Limpia los recursos almacenados */
+		void cleanResources() {
+			for (auto it = _storedResources.cbegin(); it != _storedResources.cend(); ++it){
+				ResourceType type = it->first;
+				int quantity = it->second; // TODO Saltar si es 0
+
+				// Notificamos al ResourcesManager
+				// TODO Atajo temporal para obtener el ResourcesManager
+				Logic::ResourcesManager *resourcesManager =
+					((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
+				resourcesManager->changeResources(type, -quantity);
+			}
 		}
 
 	private:

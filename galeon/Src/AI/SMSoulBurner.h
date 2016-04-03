@@ -1,5 +1,5 @@
-#ifndef SM_SOUL_BURNER_
-#define SM_SOUL_BURNER_
+#ifndef SM_SOUL_H_BURNER_
+#define SM_SOUL_H_BURNER_
 
 #include "Logic\Entity\Message.h"
 #include "AI\StateMachine.h"

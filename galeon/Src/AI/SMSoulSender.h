@@ -1,5 +1,5 @@
-#ifndef SM_SOUL_SENDER_
-#define SM_SOUL_SENDER_
+#ifndef SM_SOUL_H_SENDER_
+#define SM_SOUL_H_SENDER_
 
 #include "StateMachine.h"
 #include "Logic\Entity\Message.h"

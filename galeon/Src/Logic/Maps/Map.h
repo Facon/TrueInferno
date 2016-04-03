@@ -158,6 +158,13 @@ namespace Logic
 		*/
 		Graphics::CScene *getScene() {return _scene;}
 
+		/**
+		Devuelve si el mapa está activo.
+		
+		@return bool si el mapa está activo o no
+		*/
+		bool isActivated() { return _activated; }
+
 	private:
 
 		/**
@@ -180,6 +187,11 @@ namespace Logic
 		las entidades.
 		*/
 		Graphics::CScene* _scene;
+
+		/**
+		Indica si el mapa está activo.
+		*/
+		bool _activated;
 
 	}; // class CMap
 

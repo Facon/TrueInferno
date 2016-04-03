@@ -209,14 +209,18 @@ namespace Logic
 		// Añadimos la nueva entidad en el mapa antes de inicializarla.
 		map->addEntity(ret);
 
-		// Y lo inicializamos
-		if (ret->spawn(map, entityInfo))
-			return ret;
-		else {
+		// Y la inicializamos
+		if (!ret->spawn(map, entityInfo)){
 			map->removeEntity(ret);
 			delete ret;
 			return 0;
 		}
+
+		// Activamos la entidad si el mapa ya está activo
+		if (map->isActivated())
+			ret->activate();
+
+		return ret;
 
 	} // createEntity
 	

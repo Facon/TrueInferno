@@ -13,10 +13,7 @@ namespace AI {
 		if (_smData.getTask() == nullptr)
 			return LAStatus::FAIL;
 
-		return executeTask() ? LAStatus::SUCCESS : LAStatus::RUNNING;
+		return _smData.getTask()->execute() ? LAStatus::SUCCESS : LAStatus::RUNNING;
 	}
 
-	bool CLAExecuteSoulTask::executeTask(){
-		return _smData.getTask()->execute();
-	}
 }

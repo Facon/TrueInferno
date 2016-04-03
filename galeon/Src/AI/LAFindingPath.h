@@ -8,7 +8,7 @@
 namespace AI {
 	class CLAFindingPath : public CLatentAction{
 	public:
-		CLAFindingPath(CEntity* entity) : CLatentAction(entity), _walkingSoulTarget(EntityID::UNASSIGNED), _pathRequestReceived(false) {
+		CLAFindingPath(CEntity* entity) : CLatentAction(entity), _walkingSoulTarget(EntityID::UNASSIGNED), _pathRequestReceived(false), _pathCalculated(nullptr) {
 			_pathRequestReceived = false;
 		}
 
@@ -20,9 +20,14 @@ namespace AI {
 			if (msg._type != Logic::TMessage::REQUEST_WALK_SOUL_PATH || _pathRequestReceived)
 				return false;
 
+			// Hemos recibido petición
 			_pathRequestReceived = true;
 
+			// Guardamos el objetivo
 			_walkingSoulTarget = msg._target;
+
+			// Todavía no hemos calculado la ruta
+			_pathCalculated = nullptr;
 
 			// Reactivamos la LatentAction
 			resume();
@@ -34,6 +39,7 @@ namespace AI {
 		virtual LAStatus OnStart() {
 			_walkingSoulTarget = EntityID::UNASSIGNED;
 			_pathRequestReceived = false;
+			_pathCalculated = false;
 			return LAStatus::SUSPENDED;
 		}
 
@@ -48,23 +54,19 @@ namespace AI {
 			// Controlamos que siga existiendo
 			if (targetEntity == nullptr){
 				std::cout << "Can't find path to target because target's entity no longer exists" << std::endl;
-				return LAStatus::FAIL;
+				_pathCalculated = nullptr;
 			}
 
-			// Calculamos ruta desde la posición actual de la entidad hasta el objetivo
-			std::vector<Vector3>* path = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(_entity->getPosition(), targetEntity);
+			// Si existe y aún no está calculada la ruta
+			else if (_pathCalculated == nullptr)
+				// Calculamos ruta desde la posición actual de la entidad hasta el objetivo
+				_pathCalculated = AI::CServer::getSingletonPtr()->getWalkingSoulAStarRoute(_entity->getPosition(), targetEntity);
 
-			// Reintentamos si no se encontró ruta
-			if (path == nullptr){
-				// TODO Revisar por qué no se encuentra ruta A VECES, y da igual que se reintente
-				//std::cout << "Path not found :(" << std::endl;
-				return LAStatus::RUNNING;
-			}
-
-			WalkSoulPathMessage message(path);
+			// Preparamos el mensaje de vuelta
+			WalkSoulPathMessage message(_pathCalculated);
 			message._type = MessageType::RETURN_WALK_SOUL_PATH;
 			
-			// Acabamos enviando la ruta por mensaje a la entidad para que alguien la capture
+			// Enviamos el mensaje a nuestra entidad para informar de la ruta calculada
 			if (message.Dispatch(*_entity))
 				return LAStatus::SUCCESS;
 			else
@@ -72,8 +74,14 @@ namespace AI {
 		}
 
 	private:
+		// Identificador de la entidad a la que queremos ir
 		TEntityID _walkingSoulTarget;
+
+		// Flag que indica si se ha recibido petición de búsqueda de ruta
 		bool _pathRequestReceived;
+
+		// Path calculado. Puede ser nulo si no hay ruta posible
+		std::vector<Vector3>* _pathCalculated;
 	};
 
 }

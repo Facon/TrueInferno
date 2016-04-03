@@ -18,8 +18,6 @@ namespace AI {
 
 	private:
 		CSMSoulData& _smData;
-
-		bool CLAExecuteSoulTask::executeTask();
 	};
 }
 
