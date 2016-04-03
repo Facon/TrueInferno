@@ -272,6 +272,10 @@ namespace Logic {
 		return _placeableType == Building;
 	}
 
+	bool CPlaceable::isSoulPath() const{
+		return _placeableType == SoulPath;
+	}
+
 	bool CPlaceable::HandleMessage(const MovePlaceableMessage& msg){
 		if (msg._type == MessageType::PLACEABLE_FLOAT_TO){
 			floatTo(msg._position, msg._showFloating);

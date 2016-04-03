@@ -157,10 +157,10 @@ namespace GUI
 
 						int j = 0;
 
-						//borrarñapa
-						if (path->size() > 1){
+						//borrarñapa (ÁVV: en principio las rutas ya nunca van a tener el primer nodo repetido por lo que esto ya no haría falta)
+						/*if (path->size()){
 							path->erase(path->cbegin());
-						}
+						}*/
 
 						//finborrarñapa
 						_placeableRoad = new Logic::CEntity*[path->size()];
@@ -171,6 +171,10 @@ namespace GUI
 							_placeableRoad[j++] = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", tile->getLogicPosition(), true, false);
 						}
 						_placeableEntity = _placeableRoad[0];
+
+						// Liberamos la ruta
+						delete path;
+						path = nullptr;
 					}
 				}
 				else{

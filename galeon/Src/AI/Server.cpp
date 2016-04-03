@@ -75,7 +75,7 @@ namespace AI {
 	/**
 	Calcula con A* una ruta de soulpaths desde un cierto Tile a otro.
 	*/
-	std::vector<Logic::Tile*>* CServer::getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to){
+	std::vector<Logic::Tile*>* CServer::getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to, bool skipExistingSoulPaths){
 
 		// Reseteamos para asegurarnos que los vecinos se recalculan por si el mapa ha cambiado
 		// TODO Llamar únicamente cuando se modifique el mapa para las soulpaths: Soulpath eliminada (las construídas no cambian nada), edificio construído sobre una casilla vacía, etc.
@@ -98,10 +98,15 @@ namespace AI {
 
 		// Transformamos el retorno
 		std::vector<Logic::Tile*>* out = new std::vector<Logic::Tile*>();
-		out->push_back(from);
 		for (std::vector<void*>::iterator it = path->begin(); it != path->end(); it++) {
 			Logic::Tile* tile = (Logic::Tile*)(*it);
-			out->push_back(tile);
+
+			// Si solicitaron saltar las soulpaths existentes y la tile contiene soulpath
+			if (skipExistingSoulPaths && tile->getPlaceableAbove()!=nullptr && tile->getPlaceableAbove()->isSoulPath())
+				continue;
+
+			else
+				out->push_back(tile);
 		}
 
 		delete path;

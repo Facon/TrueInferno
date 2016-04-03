@@ -69,8 +69,11 @@ class CServer
 		*/
 		bool tick(float secs);
 
-		/** Calcula con A* una ruta de soulpaths desde un cierto Tile a otro. */
-		std::vector<Logic::Tile*>* getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to);
+		/**
+		Calcula con A* una ruta de soulpaths desde un cierto Tile a otro.
+		Con el flag skipExistingSoulPaths a true las soulpaths ya existentes no se añaden al vector devuelto
+		*/
+		std::vector<Logic::Tile*>* getSoulPathAStarRoute(Logic::Tile* from, Logic::Tile* to, bool skipExistingSoulPaths=true);
 
 		std::vector<Vector3>* getWalkingSoulAStarRoute(const Vector3& from, Logic::CEntity *to);
 

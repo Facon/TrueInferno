@@ -78,6 +78,9 @@ namespace Logic {
 		/** Devuelve un boolean a true si el Placeable corresponde a un edificio */
 		bool isBuilding() const;
 
+		/** Devuelve un boolean a true si el Placeable corresponde a una soulpath */
+		bool isSoulPath() const;
+
 		virtual bool HandleMessage(const MovePlaceableMessage& msg);
 
 		//virtual bool HandleMessage(const WalkSoulPathMessage& msg);
