@@ -154,6 +154,10 @@ namespace Logic {
 		TODO Mover junto al código del enum */
 		static BuildingType parseBuildingType(const std::string& name);
 
+		/** Imprime el texto asociado a un enum BuildingType
+		TODO Mover junto al código del enum */
+		static std::string printBuildingType(BuildingType type);
+
 		/** Parsea un enum TerrainType a partir del nombre en texto
 		TODO Mover junto al código del enum */
 		static TerrainType parseTerrainType(const std::string& name);

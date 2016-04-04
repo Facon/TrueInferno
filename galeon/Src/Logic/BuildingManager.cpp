@@ -170,9 +170,14 @@ namespace Logic {
 		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
 		if (buildingsFromType != nullptr){
 			buildingsFromType->erase(building);
+
+			// Si era el último de su tipo eliminamos el set
+			if (buildingsFromType->empty())
+				_buildings.erase(buildingType);
 		}
 
 		//std::cout << "Building unregistered: " << building->getBuildingType() << std::endl;
+		//printBuildingList();
 	}
 
 	CEntity* CBuildingManager::createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition, bool floating, bool showFloating){
@@ -207,7 +212,10 @@ namespace Logic {
 	}
 
 	void CBuildingManager::destroyPlaceable(CEntity *entity){
+		// Se elimina la entidad inmediatamente. OJO: NO usar deleteDeferred porque, por algún motivo, no elimina correctamente la entidad
 		CEntityFactory::getSingletonPtr()->deleteEntity(entity);
+
+		// No hace falta desregistrar porque se hace automáticamente en el destructor de Placeable
 	}
 
 	bool CBuildingManager::floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition, bool showFloating){
@@ -292,12 +300,13 @@ namespace Logic {
 	}
 
 	void CBuildingManager::printBuildingList() const{
+		std::cout << "Buildings=" << std::endl;
 		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
-			std::cout << "BuildingType=" << it->first << std::endl;
+			std::cout << CPlaceable::printBuildingType(it->first) << ": " << it->second->size() << std::endl;
 
-			for (auto it2 = it->second->cbegin(); it2 != it->second->cend(); ++it2){
+			/*for (auto it2 = it->second->cbegin(); it2 != it->second->cend(); ++it2){
 				std::cout << (*it2)->getEntity()->getEntityID() << std::endl;
-			}
+			}*/
 		}
 	}
 
@@ -316,7 +325,7 @@ namespace Logic {
 	bool CBuildingManager::DestroyRandomBuilding(){
 		CPlaceable* building = getRandomBuildingforDestruction();
 		if (building != nullptr){
-			unregisterBuilding(building);
+			// Invocamos la destrucción del placeable. Internamente se harán todas las operaciones necesarias para asegurar la consistencia de los datos
 			destroyPlaceable(building->getEntity());
 			return true;
 		}

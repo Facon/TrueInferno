@@ -373,6 +373,42 @@ namespace Logic {
 		}
 	}
 
+	std::string CPlaceable::printBuildingType(BuildingType type){
+		if (type == BuildingType::HellQuarters){
+			return "HellQuarters";
+		}
+		else if (type == BuildingType::Furnace){
+			return "Furnace";
+		}
+		else if (type == BuildingType::EvilWorks){
+			return "EvilWorks";
+		}
+		else if (type == BuildingType::Refinery){
+			return "Refinery";
+		}
+		else if (type == BuildingType::Evilator){
+			return "Evilator";
+		}
+		else if (type == BuildingType::Mine){
+			return "Mine";
+		}
+		else if (type == BuildingType::GasPlant){
+			return "GasPlant";
+		}
+		else if (type == BuildingType::ResearchLabs){
+			return "ResearchLabs";
+		}
+		else if (type == BuildingType::PowerGenerator){
+			return "PowerGenerator";
+		}
+		else if (type == BuildingType::Warehouse){
+			return "Warehouse";
+		}
+		else{
+			return "unknown";
+		}
+	}
+
 	TerrainType CPlaceable::parseTerrainType(const std::string& name){
 		if (name == "Empty"){
 			return Empty;
