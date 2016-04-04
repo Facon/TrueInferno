@@ -30,9 +30,11 @@ namespace Logic {
 			// Lo desregistramos en el manager
 			Logic::CBuildingManager::getSingletonPtr()->unregisterBuilding(this);
 
-		// Eliminamos la referencia al placeable en las tiles que ocupaba
+		// Y eliminamos este placeable de sus tiles para que no comprueben conflicto de posición
 		for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
-			(*it)->setPlaceableAbove(nullptr);
+			// Sólo eliminamos si somos nosotros
+			if ((*it)->getPlaceableAbove() == this)
+				(*it)->setPlaceableAbove(nullptr);
 		}
 
 		_tiles.clear();
@@ -123,7 +125,7 @@ namespace Logic {
 	} // tick
 
 	bool CPlaceable::place() {
-		// Si no estábamos flotando no hacemos nada porque ya estamos (teóricamente bien) colocados
+		// Si no estábamos flotando no hacemos nada porque ya estábamos (teóricamente bien) colocados
 		if (!_floating)
 			return true;
 
@@ -134,6 +136,8 @@ namespace Logic {
 
 		// For each of our tiles
 		for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
+			assert("Can't place if there's a Placeable!" && (*it)->getPlaceableAbove()==nullptr);
+
 			// Notify of the new entity above
 			(*it)->setPlaceableAbove(this);
 		}
@@ -182,8 +186,9 @@ namespace Logic {
 
 			// Y eliminamos este placeable de sus tiles para que no comprueben conflicto de posición
 			for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
-				// Notify of the new entity above
-				(*it)->setPlaceableAbove(nullptr);
+				// Sólo eliminamos si somos nosotros
+				if((*it)->getPlaceableAbove() == this)
+					(*it)->setPlaceableAbove(nullptr);
 			}
 		}
 

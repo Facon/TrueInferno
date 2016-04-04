@@ -137,10 +137,12 @@ namespace GUI
 
 			if (entity)
 			{
-				Logic::Tile* to = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
-				if (_roadInConstruction == 2)
+				// Obtenemos la Tile sacando el componente directamente
+				Logic::Tile* to = entity->getComponent<Logic::Tile>();
+
+				if (_roadInConstruction == 2) // TODO Convendría usar un enum para mejorar legiblidad
 				{
-					std::vector<Logic::Tile*>* path= AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(_originRoadTile, to);
+					std::vector<Logic::Tile*>* path= AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(_originRoadTile, to, true);
 
 					if (path)
 					{

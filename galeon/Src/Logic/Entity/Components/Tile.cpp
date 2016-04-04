@@ -36,16 +36,6 @@ namespace Logic {
 		return true;
 	} // spawn
 
-	/*
-	bool Tile::accept(const TMessage &message){
-		return true;
-	} // accept
-	
-	void Tile::process(const TMessage &message) {
-
-	} // process
-	*/
-
 	void Tile::tick(unsigned int msecs) {
 	} // tick
 

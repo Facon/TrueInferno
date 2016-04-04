@@ -203,7 +203,7 @@ namespace Logic {
 
 			// Eliminamos la instancia si se llegó a crear
 			if (newEntity)
-				CEntityFactory::getSingletonPtr()->deferredDeleteEntity(newEntity);
+				CEntityFactory::getSingletonPtr()->deleteEntity(newEntity);
 
 			return nullptr;
 		}
