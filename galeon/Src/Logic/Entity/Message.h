@@ -81,6 +81,8 @@ namespace Logic
 			LOGISTICS_PROVIDE_RESOURCES,
 			WORKER_ASSIGNED,
 			WORKER_ACTIVATED,
+			POWER_REQUEST_ATTACHMENT,
+			POWER_ATTACHMENT_INFO,
 		};
 	}
 
@@ -600,6 +602,29 @@ namespace Logic
 		ToggleMessage(bool enabled) : Message(TMessage::UNASSIGNED), _enabled(enabled) {}
 
 		bool _enabled;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	/** Mensajes para el protocolo de comunicación entre generadores y consumidores de energía: 
+		- POWER_REQUEST_ATTACHMENT: Petición de conexión a un generador
+		- POWER_ATTACHMENT_INFO: Comunicación de consumidor conectado/desconectado
+	*/
+	class PowerMessage : public Message
+	{
+	public:
+
+		// POWER_REQUEST_ATTACHMENT
+		PowerMessage(TEntityID caller) : Message(TMessage::POWER_REQUEST_ATTACHMENT), _caller(caller) {}
+
+		// POWER_ATTACHMENT_INFO
+		PowerMessage(TEntityID caller, bool attach) : Message(TMessage::POWER_ATTACHMENT_INFO), _caller(caller), _attach(attach) {}
+
+		TEntityID _caller;
+		bool _attach;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

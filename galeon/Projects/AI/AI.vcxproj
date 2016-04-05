@@ -161,6 +161,10 @@
     <ClInclude Include="..\..\Src\AI\SimpleLatentActions.h" />
     <ClInclude Include="..\..\Src\AI\SMEmptyTemplate.h" />
     <ClInclude Include="..\..\Src\AI\SMEmptyTemplateData.h" />
+    <ClInclude Include="..\..\Src\AI\SMPowerConsumer.h" />
+    <ClInclude Include="..\..\Src\AI\SMPowerConsumerData.h" />
+    <ClInclude Include="..\..\Src\AI\SMPowerGenerator.h" />
+    <ClInclude Include="..\..\Src\AI\SMPowerGeneratorData.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceBuilding.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceBuildingData.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceDemander.h" />

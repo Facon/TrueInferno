@@ -376,5 +376,17 @@
     <ClInclude Include="..\..\Src\AI\LAGetSoulTaskTarget.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMPowerGeneratorData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMPowerConsumer.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMPowerConsumerData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMPowerGenerator.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

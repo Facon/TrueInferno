@@ -1,20 +1,18 @@
-/*
-#ifndef SM_EMPTY_TEMPLATE_H_
-#define SM_EMPTY_TEMPLATE_H_
+#ifndef SM_POWER_GENERATOR_H_
+#define SM_POWER_GENERATOR_H_
 
 #include "Logic\Entity\Message.h"
 
 #include "AI\StateMachine.h"
 #include "AI\Server.h"
 #include "AI\LAGetTaskAndTarget.h"
-#include "AI\SMEmptyTemplateData.h"
+#include "AI\SMPowerGeneratorData.h"
 
 namespace AI {
 
-	class CSMEmptyTemplate : public CStateMachine<CLatentAction, CSMEmptyTemplateData> {
+	class CSMPowerGenerator : public CStateMachine<CLatentAction, CSMPowerGeneratorData> {
 	public:
-		CSMEmptyTemplate(CEntity* entity) : CStateMachine(entity) {
-			
+		CSMPowerGenerator(CEntity* entity) : CStateMachine(entity) {
 			// Bucle infinito procesando peticiones
 			int process = this->addNode(new CLAGetTaskAndTarget(entity));
 			this->addEdge(process, process, new CConditionFinished());
@@ -23,15 +21,14 @@ namespace AI {
 			this->resetExecution();
 		}
 
-		virtual ~CSMEmptyTemplate() {}
+		virtual ~CSMPowerGenerator() {}
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			return true;
 		}
 
-		SM_HANDLE_MESSAGE(XXXMessage);
+		SM_HANDLE_MESSAGE(PowerMessage);
 	};
 }
 
-#endif // SM_EMPTY_TEMPLATE_H_
-*/
+#endif // SM_POWER_GENERATOR_H_
