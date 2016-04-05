@@ -86,6 +86,7 @@
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAskAndWaitResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAAttachToGenerator.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAttendResourceBuildingRequest.cpp" />
     <ClCompile Include="..\..\Src\AI\LABurnSouls.cpp" />
     <ClCompile Include="..\..\Src\AI\LADestroyEntity.cpp" />
@@ -94,6 +95,7 @@
     <ClCompile Include="..\..\Src\AI\LAExecuteResourceProvideTasks.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSoulTask.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExtractResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAFindGenerator.cpp" />
     <ClCompile Include="..\..\Src\AI\LAFindProviders.cpp" />
     <ClCompile Include="..\..\Src\AI\LAGatherSouls.cpp" />
     <ClCompile Include="..\..\Src\AI\LAGetSoulTaskTarget.cpp" />
@@ -105,6 +107,7 @@
     <ClCompile Include="..\..\Src\AI\LATransformResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAFollowPath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAWaitGeneratorDetachment.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitResourceDemand.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitResourceProvide.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitSoulTask.cpp" />
@@ -128,6 +131,7 @@
     <ClInclude Include="..\..\Src\AI\DynTriMat.h" />
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
     <ClInclude Include="..\..\Src\AI\LAAskAndWaitResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAAttachToGenerator.h" />
     <ClInclude Include="..\..\Src\AI\LAAttendResourceBuildingRequest.h" />
     <ClInclude Include="..\..\Src\AI\LABurnSouls.h" />
     <ClInclude Include="..\..\Src\AI\LADestroyEntity.h" />
@@ -136,6 +140,7 @@
     <ClInclude Include="..\..\Src\AI\LAExecuteResourceProvideTasks.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSoulTask.h" />
     <ClInclude Include="..\..\Src\AI\LAExtractResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAFindGenerator.h" />
     <ClInclude Include="..\..\Src\AI\LAFindProviders.h" />
     <ClInclude Include="..\..\Src\AI\LAGatherSouls.h" />
     <ClInclude Include="..\..\Src\AI\LAGetSoulTaskTarget.h" />
@@ -148,6 +153,7 @@
     <ClInclude Include="..\..\Src\AI\LAFollowPath.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />
     <ClInclude Include="..\..\Src\AI\LAFindingPath.h" />
+    <ClInclude Include="..\..\Src\AI\LAWaitGeneratorDetachment.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitResourceDemand.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitResourceProvide.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitSoulTask.h" />

@@ -5,19 +5,37 @@
 
 #include "AI\StateMachine.h"
 #include "AI\Server.h"
-#include "AI\LAGetTaskAndTarget.h"
+#include "AI\LAFindGenerator.h"
+#include "AI\LAAttachToGenerator.h"
+#include "AI\LAWaitGeneratorDetachment.h"
 #include "AI\SMPowerConsumerData.h"
 
 namespace AI {
-
+	/**
+	Máquina de estados para los consumidores de energía PowerConsumer.
+	- La entidad comienza en el estado de búsqueda de generador
+	- Permanece en búsqueda hasta que encuentra uno y pasa a intentar conectarse
+	- Si la conexión va bien pasa al estado de espera, si no, vuelve a buscar otro generador
+	- En estado de espera no se hace nada hasta recibir desconexión. Si se desconecta, intenta buscar otro generador
+	*/
 	class CSMPowerConsumer : public CStateMachine<CLatentAction, CSMPowerConsumerData> {
 	public:
 		CSMPowerConsumer(CEntity* entity) : CStateMachine(entity) {
-			// Bucle infinito procesando peticiones
-			int process = this->addNode(new CLAGetTaskAndTarget(entity));
-			this->addEdge(process, process, new CConditionFinished());
-			
-			this->setInitialNode(process);
+			// Empezamos en estado de búsqueda de generador
+			int findGenerator = this->addNode(new CLAFindGenerator(entity));
+			int attachToGenerator = this->addNode(new CLAAttachToGenerator(entity));
+			int waitDetachment = this->addNode(new CLAWaitGeneratorDetachment(entity));
+
+			this->addEdge(findGenerator, attachToGenerator, new CConditionSuccess());
+			this->addEdge(findGenerator, findGenerator, new CConditionFail());
+
+			this->addEdge(attachToGenerator, waitDetachment, new CConditionSuccess());
+			this->addEdge(attachToGenerator, findGenerator, new CConditionFail());
+
+			this->addEdge(waitDetachment, findGenerator, new CConditionSuccess());
+			this->addEdge(waitDetachment, waitDetachment, new CConditionFail());
+
+			this->setInitialNode(findGenerator);
 			this->resetExecution();
 		}
 
