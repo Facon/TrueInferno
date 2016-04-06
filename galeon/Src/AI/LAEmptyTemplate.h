@@ -8,7 +8,7 @@
 namespace AI {
 	class CLAEmptyTemplate : public CLatentAction {
 	public:
-		CLAEmptyTemplate(CEntity* entity, CSMEmptyTemplateData& smData) : CLatentAction(entity), _smData(smData), _requestReceived(false) {}
+		CLAEmptyTemplate(CEntity* entity, CSMEmptyTemplateData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
 
 		virtual ~CLAEmptyTemplate() {}
 
@@ -22,7 +22,7 @@ namespace AI {
 	private:
 		CSMEmptyTemplateData& _smData;
 
-		bool _requestReceived;
+		bool _received;
 	};
 }
 

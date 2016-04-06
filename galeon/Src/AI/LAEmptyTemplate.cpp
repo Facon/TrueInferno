@@ -11,10 +11,10 @@ namespace AI {
 			return false;
 
 		// No se aceptan peticiones simultáneas
-		if (_requestReceived)
+		if (_received)
 			return false;
 
-		_requestReceived = true;
+		_received = true;
 
 		// Guardamos datos en la memoria compartida de la SM
 		_smData.setXXX(msg._xxx);
@@ -27,7 +27,7 @@ namespace AI {
 
 	CLatentAction::LAStatus CLAEmptyTemplate::OnStart() {
 		// Inicializamos
-		_requestReceived = false;
+		_received = false;
 
 		// Suspendemos la LA hasta que llegue un mensaje de petición
 		return LAStatus::SUSPENDED;

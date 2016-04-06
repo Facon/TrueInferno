@@ -7,7 +7,7 @@
 namespace AI {
 	class CLAAttachToGenerator : public CLatentAction {
 	public:
-		CLAAttachToGenerator(CEntity* entity, CSMPowerConsumerData& smData) : CLatentAction(entity), _smData(smData), _requestReceived(false) {}
+		CLAAttachToGenerator(CEntity* entity, CSMPowerConsumerData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
 
 		virtual ~CLAAttachToGenerator() {}
 
@@ -21,7 +21,8 @@ namespace AI {
 	private:
 		CSMPowerConsumerData& _smData;
 
-		bool _requestReceived;
+		// Flag a true si ya hemos recibido respuesta en este tick
+		bool _received;
 	};
 }
 

@@ -21,17 +21,20 @@ namespace AI {
 	class CSMPowerConsumer : public CStateMachine<CLatentAction, CSMPowerConsumerData> {
 	public:
 		CSMPowerConsumer(CEntity* entity) : CStateMachine(entity) {
-			// Empezamos en estado de búsqueda de generador
-			int findGenerator = this->addNode(new CLAFindGenerator(entity));
-			int attachToGenerator = this->addNode(new CLAAttachToGenerator(entity));
-			int waitDetachment = this->addNode(new CLAWaitGeneratorDetachment(entity));
+			int findGenerator = this->addNode(new CLAFindGenerator(entity, _data));
+			int attachToGenerator = this->addNode(new CLAAttachToGenerator(entity, _data));
+			int waitDetachment = this->addNode(new CLAWaitGeneratorDetachment(entity, _data));
 
+			// La entidad comienza en el estado de búsqueda de generador
+			// Permanece en búsqueda hasta que encuentra uno y pasa a intentar conectarse
 			this->addEdge(findGenerator, attachToGenerator, new CConditionSuccess());
 			this->addEdge(findGenerator, findGenerator, new CConditionFail());
 
+			// Si la conexión va bien pasa al estado de espera, si no, vuelve a buscar otro generador
 			this->addEdge(attachToGenerator, waitDetachment, new CConditionSuccess());
 			this->addEdge(attachToGenerator, findGenerator, new CConditionFail());
 
+			// En estado de espera no se hace nada hasta recibir desconexión.Si se desconecta, intenta buscar otro generador
 			this->addEdge(waitDetachment, findGenerator, new CConditionSuccess());
 			this->addEdge(waitDetachment, waitDetachment, new CConditionFail());
 

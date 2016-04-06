@@ -173,14 +173,14 @@
     <ClCompile Include="..\..\Src\AI\LAGetSoulTaskTarget.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LAFindGenerator.cpp">
-      <Filter>Decision</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAAttachToGenerator.cpp">
-      <Filter>Decision</Filter>
+      <Filter>Decision\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAWaitGeneratorDetachment.cpp">
-      <Filter>Decision</Filter>
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAFindGenerator.cpp">
+      <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -397,14 +397,14 @@
     <ClInclude Include="..\..\Src\AI\SMPowerGenerator.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAWaitGeneratorDetachment.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAFindGenerator.h">
-      <Filter>Decision</Filter>
+      <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAAttachToGenerator.h">
-      <Filter>Decision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LAWaitGeneratorDetachment.h">
-      <Filter>Decision</Filter>
+      <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

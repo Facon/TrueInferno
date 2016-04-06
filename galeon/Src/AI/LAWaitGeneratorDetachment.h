@@ -7,7 +7,7 @@
 namespace AI {
 	class CLAWaitGeneratorDetachment : public CLatentAction {
 	public:
-		CLAWaitGeneratorDetachment(CEntity* entity, CSMPowerConsumerData& smData) : CLatentAction(entity), _smData(smData), _requestReceived(false) {}
+		CLAWaitGeneratorDetachment(CEntity* entity, CSMPowerConsumerData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
 
 		virtual ~CLAWaitGeneratorDetachment() {}
 
@@ -21,7 +21,11 @@ namespace AI {
 	private:
 		CSMPowerConsumerData& _smData;
 
-		bool _requestReceived;
+		// Flag a true si ya hemos recibido respuesta en este tick
+		bool _received;
+
+		// Flag a true si nos han indicado desconexión y false conexión
+		bool _detach;
 	};
 }
 

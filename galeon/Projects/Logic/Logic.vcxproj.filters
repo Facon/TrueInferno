@@ -199,9 +199,6 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceProvider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Logic\Maps\Managers\WorkManager.cpp">
-      <Filter>Entity\Components\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Toggleable.cpp">
       <Filter>Entity\Components\Source Files</Filter>
     </ClCompile>
@@ -210,6 +207,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PowerConsumer.cpp">
       <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\WorkManager.cpp">
+      <Filter>Maps\Managers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\PowerManager.cpp">
+      <Filter>Maps\Managers\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -381,9 +384,6 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceProvider.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Logic\Maps\Managers\WorkManager.h">
-      <Filter>Entity\Components\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Toggleable.h">
       <Filter>Entity\Components\Header Files</Filter>
     </ClInclude>
@@ -392,6 +392,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PowerConsumer.h">
       <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\WorkManager.h">
+      <Filter>Maps\Managers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\PowerManager.h">
+      <Filter>Maps\Managers\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

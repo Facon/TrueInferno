@@ -1,23 +1,34 @@
 #ifndef SM_POWER_CONSUMER_DATA_H_
 #define SM_POWER_CONSUMER_DATA_H_
 
+#include "Logic\Entity\Entity.h"
+
 namespace AI {
 	class CSMPowerConsumerData {
 
 	public:
-		CSMPowerConsumerData() {}
+		CSMPowerConsumerData() : _powerGenerator(EntityID::UNASSIGNED), _attached(false) {}
 		virtual ~CSMPowerConsumerData() {}
 
-		/*XXX getXXX() const{
-			return _action;
+		TEntityID getPowerGenerator() const{
+			return _powerGenerator;
 		}
 
-		void setXXX(XXX xxx){
-			_xxx = xxx;
+		void setPowerGenerator(TEntityID powerGenerator){
+			_powerGenerator = powerGenerator;
 		}
 	
+		bool getAttached() const{
+			return _attached;
+		}
+
+		void setAttached(bool attached){
+			_attached = attached;
+		}
+
 	private:
-		XXX _xxx;*/
+		TEntityID _powerGenerator;
+		bool _attached;
 	};
 }
 

@@ -16,7 +16,7 @@ namespace AI {
 		CSMEmptyTemplate(CEntity* entity) : CStateMachine(entity) {
 			
 			// Bucle infinito procesando peticiones
-			int process = this->addNode(new CLAGetTaskAndTarget(entity));
+			int process = this->addNode(new CLAGetTaskAndTarget(entity, _data));
 			this->addEdge(process, process, new CConditionFinished());
 			
 			this->setInitialNode(process);

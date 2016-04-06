@@ -13,11 +13,13 @@ namespace AI {
 	class CSMPowerGenerator : public CStateMachine<CLatentAction, CSMPowerGeneratorData> {
 	public:
 		CSMPowerGenerator(CEntity* entity) : CStateMachine(entity) {
-			// Bucle infinito procesando peticiones
-			int process = this->addNode(new CLAGetTaskAndTarget(entity));
+			/*int s1 = this->addNode(new CLAWaitConsumerAttachment(entity));
+			int s2 = this->addNode(new CLACheckConsumption(entity));
+			int s3 = this->addNode(new CLADetachConsumers(entity));
+			
 			this->addEdge(process, process, new CConditionFinished());
 			
-			this->setInitialNode(process);
+			this->setInitialNode(process);*/
 			this->resetExecution();
 		}
 
