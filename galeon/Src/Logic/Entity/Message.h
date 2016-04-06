@@ -618,13 +618,19 @@ namespace Logic
 	public:
 
 		// POWER_REQUEST_ATTACHMENT
-		PowerMessage(TEntityID caller) : Message(TMessage::POWER_REQUEST_ATTACHMENT), _caller(caller) {}
+		PowerMessage(TEntityID caller, int consumption) : Message(TMessage::POWER_REQUEST_ATTACHMENT), _caller(caller), _consumption(consumption) {}
 
 		// POWER_ATTACHMENT_INFO
-		PowerMessage(TEntityID caller, bool attach) : Message(TMessage::POWER_ATTACHMENT_INFO), _caller(caller), _attach(attach) {}
+		PowerMessage(TEntityID caller, bool attach, int consumption) : Message(TMessage::POWER_ATTACHMENT_INFO), _caller(caller), _attach(attach), _consumption(consumption) {}
 
+		// Entidad a conectar/desconectar
 		TEntityID _caller;
+
+		// Flag a true si se quiere informar de una conexión o false para desconexión
 		bool _attach;
+
+		// Unidades de consumo de la entidad
+		int _consumption;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

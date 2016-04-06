@@ -182,6 +182,15 @@
     <ClCompile Include="..\..\Src\AI\LAFindGenerator.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAWaitConsumerChange.cpp">
+      <Filter>Decision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LACheckNewConsumption.cpp">
+      <Filter>Decision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAFillReserves.cpp">
+      <Filter>Decision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -405,6 +414,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAAttachToGenerator.h">
       <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAWaitConsumerChange.h">
+      <Filter>Decision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LACheckNewConsumption.h">
+      <Filter>Decision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAFillReserves.h">
+      <Filter>Decision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

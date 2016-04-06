@@ -6,7 +6,7 @@
 
 #include "AI\StateMachine.h"
 #include "AI\Server.h"
-#include "AI\LAGetTaskAndTarget.h"
+#include "AI\LAXXX.h"
 #include "AI\SMEmptyTemplateData.h"
 
 namespace AI {
@@ -14,12 +14,18 @@ namespace AI {
 	class CSMEmptyTemplate : public CStateMachine<CLatentAction, CSMEmptyTemplateData> {
 	public:
 		CSMEmptyTemplate(CEntity* entity) : CStateMachine(entity) {
+			int start = this->addNode(new CLAXXX(entity, _data));
+
+			this->addEdge(start, stateX, new CConditionSuccess());
+			this->addEdge(start, start, new CConditionFail());
+
+			this->addEdge(stateX, stateY, new CConditionSuccess());
+			this->addEdge(stateX, start, new CConditionFail());
+
+			this->addEdge(stateY, stateX, new CConditionSuccess());
+			this->addEdge(stateY, start, new CConditionFail());
 			
-			// Bucle infinito procesando peticiones
-			int process = this->addNode(new CLAGetTaskAndTarget(entity, _data));
-			this->addEdge(process, process, new CConditionFinished());
-			
-			this->setInitialNode(process);
+			this->setInitialNode(start);
 			this->resetExecution();
 		}
 
