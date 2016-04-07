@@ -50,6 +50,18 @@ namespace AI {
 		}
 
 		SM_HANDLE_MESSAGE(PowerMessage);
+
+		virtual void deactivate(){
+			// Al desactivarnos nos desconectamos del generador
+			if (_data.getAttached() && _data.getPowerGenerator()!=EntityID::UNASSIGNED){
+				CEntity *generator = _entity->getMap()->getEntityByID(_data.getPowerGenerator());
+				if (generator != nullptr){
+					PowerMessage m(_entity->getEntityID(), false, 10); // TODO
+					assert(m.Dispatch(*generator) && "Can't detach from PowerGenerator on deactivation");
+				}
+			}
+		}
+
 	};
 }
 

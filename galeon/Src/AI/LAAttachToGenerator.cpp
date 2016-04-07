@@ -16,8 +16,9 @@ namespace AI {
 		assert(msg._caller == _smData.getPowerGenerator() && "The requested PowerGenerator to attach is different from the received");
 		assert(msg._caller != Logic::EntityID::UNASSIGNED && "PowerGenerator caller is unknown");
 
-		// Actualizamos el generador al que finalmente nos hemos conectado
-		_smData.setPowerGenerator(msg._caller);
+		// Si nos hemos conectado guardamos el generador
+		if (msg._attach)
+			_smData.setPowerGenerator(msg._caller);
 
 		// Y el estado de conexión
 		_smData.setAttached(msg._attach);
@@ -26,6 +27,8 @@ namespace AI {
 
 		// Reactivamos la LA
 		resume();
+
+		std::cout << "Attached=" << _smData.getAttached() << std::endl;
 
 		return true;
 	}

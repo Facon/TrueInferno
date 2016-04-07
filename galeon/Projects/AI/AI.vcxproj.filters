@@ -191,7 +191,10 @@
     <ClCompile Include="..\..\Src\AI\LAWaitConsumerChange.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LAAnswerCostumer.cpp">
+    <ClCompile Include="..\..\Src\AI\LAConsumeResources.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAAnswerConsumer.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -427,13 +430,16 @@
     <ClInclude Include="..\..\Src\AI\LACheckNewConsumption.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LAAnswerCostumer.h">
-      <Filter>Decision\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\AI\SMResourceConsumer.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\SMResourceConsumerData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAConsumeResources.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAAnswerConsumer.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

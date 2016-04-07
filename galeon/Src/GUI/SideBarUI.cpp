@@ -265,7 +265,7 @@ namespace GUI
 	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding();
+		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding(); // TODO TEST
 		printf("Repair Building\n");
 		return true;
 	}
@@ -274,6 +274,8 @@ namespace GUI
 	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
+		// TODO TEST
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "PowerGenerator", Vector3(0, 0, 0), true, true); 
 		printf("Clear Terrain\n");
 		return true;
 	}

@@ -7,7 +7,7 @@
 #include "AI\Server.h"
 #include "AI\LAWaitConsumerChange.h"
 #include "AI\LACheckNewConsumption.h"
-#include "AI\LAAnswerCostumer.h"
+#include "AI\LAAnswerConsumer.h"
 #include "AI\LAFillReserves.h"
 #include "AI\SMPowerGeneratorData.h"
 
@@ -28,7 +28,7 @@ namespace AI {
 		CSMPowerGenerator(CEntity* entity) : CStateMachine(entity) {
 			int waitConsumer = this->addNode(new CLAWaitConsumerChange(entity, _data));
 			int checkNewConsumption = this->addNode(new CLACheckNewConsumption(entity, _data));
-			int answerCostumer = this->addNode(new CLAAnswerCostumer(entity, _data));
+			int answerConsumer = this->addNode(new CLAAnswerConsumer(entity, _data));
 			int fillReserves = this->addNode(new CLAFillReserves(entity, _data));
 
 			// Inicialmente se pone a la espera de solicitudes de cambio de consumidores
@@ -43,14 +43,14 @@ namespace AI {
 				- Pasa a responder al consumidor para aceptar la conexión
 				- Si no, intenta asegurarse reservas
 			*/
-			this->addEdge(checkNewConsumption, answerCostumer, new CConditionSuccess());
+			this->addEdge(checkNewConsumption, answerConsumer, new CConditionSuccess());
 			this->addEdge(checkNewConsumption, fillReserves, new CConditionFail());
 
 			// Tras conseguir(o no) reservas pasa al estado de respuesta al consumidor
-			this->addEdge(fillReserves, answerCostumer, new CConditionFinished());
+			this->addEdge(fillReserves, answerConsumer, new CConditionFinished());
 
 			// Tras la respuesta al consumidor siempre vuelve al estado de espera
-			this->addEdge(answerCostumer, waitConsumer, new CConditionFinished());
+			this->addEdge(answerConsumer, waitConsumer, new CConditionFinished());
 
 			this->resetExecution();
 		}

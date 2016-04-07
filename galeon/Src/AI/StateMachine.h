@@ -25,6 +25,59 @@ de ejemplo.
 #include "SimpleLatentActions.h"
 #include "LAExecuteSM.h"
 
+/** Macro para manejar mensajes en una SM (i.e. hijos de StateMachine)
+Propaga el mensaje adecuadamente en una SM para que llegue a las condiciones de transición entre estados.
+*/
+#define SM_HANDLE_MESSAGE(Class) \
+bool HandleMessage(const Class& msg){ \
+	bool ret = false; \
+\
+	/* Si no hay un nodo actual no hay aristas interesadas así que lo primero es comprobar si hay un nodo válido en _currentNodeId */ \
+	if (_currentNodeId != -1) {  \
+		/* Buscamos la lista de aristas que salen del nodo actual */ \
+		EdgeList::iterator it = _edges->find(_currentNodeId); \
+		if (it != _edges->end()) { \
+			PairVector* vector = (*it).second; \
+\
+			/* Para cada elemento del vector (arista que sale del nodo actual) */ \
+			for (PairVector::iterator edgeIt = vector->begin(); edgeIt != vector->end(); edgeIt++){ \
+				/* Procesamos en la arista (o sea, la condición) */ \
+				ret |= (edgeIt->first->HandleMessage(msg)); /* Si alguna arista acepta, aceptaremos al final */ \
+			} \
+		}  \
+	} \
+\
+	return ret; \
+}
+
+/** Macro para manejar mensajes en una SM (i.e. hijos de StateMachine)
+Permite procesar globalmente el mensaje en la SM con el método SMHandleMessage y propaga el mensaje
+adecuadamente para que llegue a las condiciones de transición entre estados
+*/
+#define SM_HANDLE_MESSAGE_WGLOBAL(Class) \
+bool HandleMessage(const Class& msg){ \
+	bool ret = false; \
+\
+	ret |= SMGlobalHandleMessage(msg); \
+\
+	/* Si no hay un nodo actual no hay aristas interesadas así que lo primero es comprobar si hay un nodo válido en _currentNodeId */ \
+	if (_currentNodeId != -1) {  \
+		/* Buscamos la lista de aristas que salen del nodo actual */ \
+		EdgeList::iterator it = _edges->find(_currentNodeId); \
+		if (it != _edges->end()) { \
+			PairVector* vector = (*it).second; \
+\
+			/* Para cada elemento del vector (arista que sale del nodo actual) */ \
+			for (PairVector::iterator edgeIt = vector->begin(); edgeIt != vector->end(); edgeIt++){ \
+				/* Procesamos en la arista (o sea, la condición) */ \
+				ret |= (edgeIt->first->HandleMessage(msg)); /* Si alguna arista acepta, aceptaremos al final */ \
+						} \
+				}  \
+		} \
+\
+	return ret; \
+}
+
 using namespace Logic;
 
 namespace AI 

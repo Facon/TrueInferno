@@ -5,7 +5,7 @@ material PowerGenerator
 	{
 		pass
 		{
-			ambient 0.721 0 0 1
+			ambient 0.258 0.968 1
 			diffuse 1 1 1 1
 		}
 	}

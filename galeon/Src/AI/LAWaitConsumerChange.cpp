@@ -5,9 +5,9 @@
 
 namespace AI {
 	bool CLAWaitConsumerChange::HandleMessage(const PowerMessage& msg) {
-		// Aceptamos desconexiones
+		// Aceptamos desconexiones siempre
 		if (msg._type == MessageType::POWER_ATTACHMENT_INFO && msg._attach == false){
-			// Eliminamos al consumidor de la lista
+			// Eliminamos al consumidor internamente
 			_smData.removeConsumer(msg._caller);
 
 			return true;

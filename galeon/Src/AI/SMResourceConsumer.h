@@ -5,7 +5,7 @@
 #include "AI\StateMachine.h"
 #include "AI\Server.h"
 #include "AI\SMResourceConsumerData.h"
-#include "AI\LAExtractResources.h"
+#include "AI\LAConsumeResources.h"
 #include "AI\LatentAction.h"
 #include "AI\Condition.h"
 #include "Map\MapEntity.h"
@@ -21,37 +21,46 @@ namespace AI {
 		virtual ~CSMResourceConsumer() {}
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
-			// TODO
-
 			// Lectura de datos
-			/*assert(entityInfo->hasAttribute("maxExtractedQuantity"));
-			_maxExtractedQuantity = entityInfo->getIntAttribute("maxExtractedQuantity");
+			assert(entityInfo->hasAttribute("consumedResource"));
+			_consumedResource = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("consumedResource"));
 
-			assert(entityInfo->hasAttribute("extractionPeriod"));
-			_extractionPeriod = 1000 * entityInfo->getIntAttribute("extractionPeriod");
+			assert(entityInfo->hasAttribute("consumptionPeriod"));
+			_consumptionPeriod = 1000 * entityInfo->getIntAttribute("consumptionPeriod");
 
 			// Creación de SM en base a los datos
-			int waitCycle = this->addNode(new CLAWait(_extractionPeriod));
-			int extractResources = this->addNode(new CLAExtractResources(_entity, _data, _extractedResource, _maxExtractedQuantity));
+			int waitCycle = this->addNode(new CLAWait(_consumptionPeriod));
+			int extractResources = this->addNode(new CLAConsumeResources(_entity, _data, _consumedResource));
 
-			this->addEdge(waitCycle, extractResources, new CConditionSuccess());
-			this->addEdge(extractResources, waitCycle, new CConditionSuccess());
+			this->addEdge(waitCycle, extractResources, new CConditionFinished());
+			this->addEdge(extractResources, waitCycle, new CConditionFinished());
 
 			this->setInitialNode(waitCycle);
-			this->resetExecution();*/
+			this->resetExecution();
 
 			return true;
 		}
 
+		bool SMGlobalHandleMessage(const PowerMessage& msg){
+			if (msg._type != MessageType::POWER_ATTACHMENT_INFO)
+				return false;
+
+			// Si hay conexión el consumo aumenta, si es desconexión disminuye
+			_data.modifyConsumption(msg._attach ? msg._consumption : -msg._consumption);
+
+			std::cout << "Current consumption = " << _data.getConsumption() << std::endl;
+
+			return true;
+		}
+
+		SM_HANDLE_MESSAGE_WGLOBAL(PowerMessage);
+
 	private:
-		/** Tipo del recurso que se extrae */
-		ResourceType _extractedResource;
+		/** Tipo del recurso que se consume */
+		ResourceType _consumedResource;
 
-		/** Cantidad máxima de recurso que da el edificio por ciclo a plena producción */
-		unsigned int _maxExtractedQuantity;
-
-		/** Periodo (ms) con que se extraen recursos */
-		int _extractionPeriod;
+		/** Periodo (ms) con que se consumen recursos */
+		int _consumptionPeriod;
 	};
 }
 
