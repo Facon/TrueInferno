@@ -214,6 +214,9 @@
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\PowerManager.cpp">
       <Filter>Maps\Managers\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceConsumer.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -398,6 +401,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\PowerManager.h">
       <Filter>Maps\Managers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceConsumer.h">
+      <Filter>Entity\Components\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

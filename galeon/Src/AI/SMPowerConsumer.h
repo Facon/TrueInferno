@@ -26,6 +26,8 @@ namespace AI {
 			int waitDetachment = this->addNode(new CLAWaitGeneratorDetachment(entity, _data));
 
 			// La entidad comienza en el estado de búsqueda de generador
+			this->setInitialNode(findGenerator);
+
 			// Permanece en búsqueda hasta que encuentra uno y pasa a intentar conectarse
 			this->addEdge(findGenerator, attachToGenerator, new CConditionSuccess());
 			this->addEdge(findGenerator, findGenerator, new CConditionFail());
@@ -38,7 +40,6 @@ namespace AI {
 			this->addEdge(waitDetachment, findGenerator, new CConditionSuccess());
 			this->addEdge(waitDetachment, waitDetachment, new CConditionFail());
 
-			this->setInitialNode(findGenerator);
 			this->resetExecution();
 		}
 

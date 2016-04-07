@@ -13,6 +13,7 @@ namespace AI {
 		LogisticsMessage m;
 		m.assembleDemandResources(ResourceType::COKE, cokeNeeded);
 
+		// Repetimos el envío del mensaje hasta que nos lo acepten
 		if (m.Dispatch(*_entity)){
 			_smData.setNewConsumerAccepted(true); // TODO Necesitamos respuesta para saber si podemos aceptar!
 			return LAStatus::SUCCESS;

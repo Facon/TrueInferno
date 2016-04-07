@@ -27,6 +27,7 @@ namespace AI {
 			_newConsumption = newConsumption;
 		}
 
+		// Añade un nuevo consumidor con su correspondiente consumo periódico
 		void addConsumer(TEntityID consumer, int consumption){
 			// Si el consumidor existe
 			if (_consumers.count(consumer) > 0){
@@ -41,6 +42,7 @@ namespace AI {
 			_totalConsumption += consumption;
 		}
 
+		// Elimina un consumidor y recalcula el consumo periódico total
 		void removeConsumer(TEntityID consumer){
 			// Si el consumidor no existe
 			if (_consumers.count(consumer) == 0){

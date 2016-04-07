@@ -430,5 +430,11 @@
     <ClInclude Include="..\..\Src\AI\LAAnswerCostumer.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMResourceConsumer.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMResourceConsumerData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

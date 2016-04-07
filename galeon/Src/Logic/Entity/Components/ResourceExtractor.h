@@ -1,5 +1,5 @@
-#ifndef RESOURCE_EXTRACTOR_
-#define RESOURCE_EXTRACTOR_
+#ifndef RESOURCE_EXTRACTOR_H_
+#define RESOURCE_EXTRACTOR_H_
 
 #include "StateMachineExecutor.h"
 #include "Map/MapEntity.h"
@@ -33,4 +33,4 @@ namespace Logic {
 
 } // namespace Logic
 
-#endif // SOUL_H_
+#endif // RESOURCE_EXTRACTOR_H_
