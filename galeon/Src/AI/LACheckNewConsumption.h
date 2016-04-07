@@ -1,18 +1,17 @@
-/*
-#ifndef LA_TEMPLATE_H_
-#define LA_TEMPLATE_H_
+#ifndef LA_CHECK_NEW_CONSUMPTION_H_
+#define LA_CHECK_NEW_CONSUMPTION_H_
 
 #include "AI\LatentAction.h"
-#include "AI\SMEmptyTemplateData.h"
+#include "AI\SMPowerGeneratorData.h"
 
 namespace AI {
-	class CLAEmptyTemplate : public CLatentAction {
+	class CLACheckNewConsumption : public CLatentAction {
 	public:
-		CLAEmptyTemplate(CEntity* entity, CSMEmptyTemplateData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
+		CLACheckNewConsumption(CEntity* entity, CSMPowerGeneratorData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
 
-		virtual ~CLAEmptyTemplate() {}
+		virtual ~CLACheckNewConsumption() {}
 
-		virtual bool HandleMessage(const XXXMessage& msg);
+		virtual bool HandleMessage(const ResourceMessage& msg);
 
 	protected:
 		LAStatus OnStart();
@@ -20,11 +19,10 @@ namespace AI {
 		LAStatus OnRun(unsigned int msecs);
 
 	private:
-		CSMEmptyTemplateData& _smData;
+		CSMPowerGeneratorData& _smData;
 
 		bool _received;
 	};
 }
 
-#endif // LA_TEMPLATE_H_
-*/
+#endif // LA_CHECK_NEW_CONSUMPTION_H_

@@ -182,14 +182,17 @@
     <ClCompile Include="..\..\Src\AI\LAFindGenerator.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LAWaitConsumerChange.cpp">
-      <Filter>Decision</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\AI\LACheckNewConsumption.cpp">
-      <Filter>Decision</Filter>
+      <Filter>Decision\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAFillReserves.cpp">
-      <Filter>Decision</Filter>
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAWaitConsumerChange.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAAnswerCostumer.cpp">
+      <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -416,13 +419,16 @@
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAWaitConsumerChange.h">
-      <Filter>Decision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LACheckNewConsumption.h">
-      <Filter>Decision</Filter>
+      <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAFillReserves.h">
-      <Filter>Decision</Filter>
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LACheckNewConsumption.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAAnswerCostumer.h">
+      <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,42 +1,24 @@
-/*
-#include "LAEmptyTemplate.h"
+#include "LAFillReserves.h"
 
 #include "Logic\Entity\Message.h"
-#include "AI\SMEmptyTemplateData.h"
+#include "AI\SMPowerGeneratorData.h"
 
 namespace AI {
-	bool CLAEmptyTemplate::HandleMessage(const XXXMessage& msg) {
-		// Rechazamos lo que no sean mensajes de petición
-		if (msg._type != MessageType::EMPTY_TEMPLATE_REQUEST)
-			return false;
 
-		// No se aceptan peticiones simultáneas
-		if (_received)
-			return false;
+	CLatentAction::LAStatus CLAFillReserves::OnStart() {
+		// Determinamos lo que necesitamos de coke
+		int cokeNeeded = _smData.getTotalConsumption() + _smData.getNewConsumption() - _smData.getCurrentCoke();
 
-		_received = true;
+		// Intentamos reservar lo que nos falta
+		LogisticsMessage m;
+		m.assembleDemandResources(ResourceType::COKE, cokeNeeded);
 
-		// Guardamos datos en la memoria compartida de la SM
-		_smData.setXXX(msg._xxx);
-
-		// Reactivamos la LA
-		resume();
-
-		return true;
-	}
-
-	CLatentAction::LAStatus CLAEmptyTemplate::OnStart() {
-		// Inicializamos
-		_received = false;
-
-		// Suspendemos la LA hasta que llegue un mensaje de petición
-		return LAStatus::SUSPENDED;
-	}
-
-	CLatentAction::LAStatus CLAEmptyTemplate::OnRun(unsigned int msecs) {
-		// ...
-		return LAStatus::SUCCESS;
+		if (m.Dispatch(*_entity)){
+			_smData.setNewConsumerAccepted(true); // TODO Necesitamos respuesta para saber si podemos aceptar!
+			return LAStatus::SUCCESS;
+		}
+		else
+			return LAStatus::READY;
 	}
 
 }
-*/

@@ -43,6 +43,7 @@ namespace AI {
 		_received = false;
 		_smData.setNewConsumer(EntityID::UNASSIGNED);
 		_smData.setNewConsumption(0);
+		_smData.setNewConsumerAccepted(false);
 
 		// Suspendemos la LA hasta que llegue un mensaje de petición
 		return LAStatus::SUSPENDED;

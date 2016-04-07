@@ -7,6 +7,7 @@
 #include "AI\Server.h"
 #include "AI\LAWaitConsumerChange.h"
 #include "AI\LACheckNewConsumption.h"
+#include "AI\LAAnswerCostumer.h"
 #include "AI\LAFillReserves.h"
 #include "AI\SMPowerGeneratorData.h"
 
@@ -16,18 +17,20 @@ namespace AI {
 	public:
 		CSMPowerGenerator(CEntity* entity) : CStateMachine(entity) {
 			int waitConsumer = this->addNode(new CLAWaitConsumerChange(entity, _data));
-			// TODO
-			/*int checkNewConsumption = this->addNode(new CLACheckNewConsumption(entity, _data));
-			//int fillReserves = this->addNode(new CLAFillReserves(entity, _data));
-			
+			int checkNewConsumption = this->addNode(new CLACheckNewConsumption(entity, _data));
+			int answerCostumer = this->addNode(new CLAAnswerCostumer(entity, _data));
+			int fillReserves = this->addNode(new CLAFillReserves(entity, _data));
+
 			this->addEdge(waitConsumer, checkNewConsumption, new CConditionSuccess());
 			this->addEdge(waitConsumer, waitConsumer, new CConditionFail());
 
-			this->addEdge(checkNewConsumption, fillReserves, new CConditionSuccess());
-			this->addEdge(checkNewConsumption, waitConsumer, new CConditionFail());
+			this->addEdge(checkNewConsumption, answerCostumer, new CConditionSuccess());
+			this->addEdge(checkNewConsumption, fillReserves, new CConditionFail());
 
-			this->addEdge(fillReserves, waitConsumer, new CConditionSuccess());
-			this->addEdge(fillReserves, waitConsumer, new CConditionFail());*/
+			this->addEdge(answerCostumer, waitConsumer, new CConditionFinished());
+
+			this->addEdge(fillReserves, answerCostumer, new CConditionSuccess());
+			this->addEdge(fillReserves, waitConsumer, new CConditionFail());
 
 			this->setInitialNode(waitConsumer);
 			this->resetExecution();
@@ -40,6 +43,7 @@ namespace AI {
 		}
 
 		SM_HANDLE_MESSAGE(PowerMessage);
+		SM_HANDLE_MESSAGE(ResourceMessage);
 	};
 }
 

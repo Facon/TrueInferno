@@ -8,7 +8,7 @@ namespace AI {
 	class CSMPowerGeneratorData {
 
 	public:
-		CSMPowerGeneratorData() : _newConsumer(EntityID::UNASSIGNED), _newConsumption(0), _totalConsumption(0) {}
+		CSMPowerGeneratorData() : _newConsumer(EntityID::UNASSIGNED), _newConsumption(0), _totalConsumption(0), _currentCoke(0), _newConsumerAccepted(false) {}
 		virtual ~CSMPowerGeneratorData() {}
 
 		TEntityID getNewConsumer() const{
@@ -30,7 +30,7 @@ namespace AI {
 		void addConsumer(TEntityID consumer, int consumption){
 			// Si el consumidor existe
 			if (_consumers.count(consumer) > 0){
-				assert(false && "Can't add twice a consumer");
+				assert(false && "Can't add twice the same consumer");
 				return;
 			}
 
@@ -49,10 +49,30 @@ namespace AI {
 			}
 
 			// Actualizamos el consumo total
-			_totalConsumption -= _consumers[consumer];;
+			_totalConsumption -= _consumers[consumer];
 
 			// Actualizamos la lista de consumidores
 			_consumers.erase(consumer);
+		}
+
+		int getTotalConsumption() const{
+			return _totalConsumption;
+		}
+
+		void setCurrentCoke(int currentCoke){
+			_currentCoke = currentCoke;
+		}
+
+		int getCurrentCoke() const{
+			return _currentCoke;
+		}
+
+		void setNewConsumerAccepted(bool accepted){
+			_newConsumerAccepted = accepted;
+		}
+
+		bool getNewConsumerAccepted() const{
+			return _newConsumerAccepted;
 		}
 
 	private:
@@ -67,6 +87,12 @@ namespace AI {
 
 		// Consumo actual total
 		int _totalConsumption;
+
+		// Cantidad de coke actual
+		int _currentCoke;
+
+		// Decisión de aceptar o rechazar al nuevo consumidor
+		bool _newConsumerAccepted;
 	};
 }
 
