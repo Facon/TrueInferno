@@ -183,6 +183,7 @@ namespace Logic
 		bool HandleMessage(const LogisticsMessage& msg);
 		bool HandleMessage(const ToggleMessage& msg);
 		bool HandleMessage(const PowerMessage& msg);
+		bool HandleMessage(const ConsumptionMessage& msg);
 		
 		/**
 		Devuelve el identificador �nico de la entidad.
@@ -291,6 +292,7 @@ namespace Logic
 		*/
 		bool isActivated() {return _activated;}
 
+		/** Magic method to get a Component from an Entity */
 		template <class ComponentClass>
 		ComponentClass* getComponent(){
 			for (auto it = _components.cbegin(); it != _components.cend(); ++it){

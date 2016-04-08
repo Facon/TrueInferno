@@ -83,6 +83,9 @@ namespace Logic
 			WORKER_ACTIVATED,
 			POWER_REQUEST_ATTACHMENT,
 			POWER_ATTACHMENT_INFO,
+			CONSUMPTION_START,
+			CONSUMPTION_STOPPED,
+			CONSUMPTION_CHANGE,
 		};
 	}
 
@@ -617,10 +620,10 @@ namespace Logic
 	{
 	public:
 
-		// POWER_REQUEST_ATTACHMENT
+		// POWER_REQUEST_ATTACHMENT: Solicita la conexión de un consumidor nuevo (la desconexión nunca se solicita, se envía directamente POWER_ATTACHMENT_INFO para informar del cambio)
 		PowerMessage(TEntityID caller, int consumption) : Message(TMessage::POWER_REQUEST_ATTACHMENT), _caller(caller), _consumption(consumption) {}
 
-		// POWER_ATTACHMENT_INFO
+		// POWER_ATTACHMENT_INFO: Informa de la conexión o desconexión de un consumidor
 		PowerMessage(TEntityID caller, bool attach, int consumption) : Message(TMessage::POWER_ATTACHMENT_INFO), _caller(caller), _attach(attach), _consumption(consumption) {}
 
 		// Entidad a conectar/desconectar
@@ -631,6 +634,36 @@ namespace Logic
 
 		// Unidades de consumo de la entidad
 		int _consumption;
+
+		virtual bool Dispatch(MessageHandler& handler) const
+		{
+			return handler.HandleMessage(*this);
+		}
+	};
+
+	class ConsumptionMessage : public Message
+	{
+	public:
+		ConsumptionMessage() : Message(TMessage::UNASSIGNED), _totalConsumption(0) {}
+
+		// CONSUMPTION_START: Solicita el comienzo de los periodos de consumo
+		void assembleConsumptionStart() {
+			_type = TMessage::CONSUMPTION_START;
+		}
+
+		// CONSUMPTION_STOPPED: Informa de que los ciclos de consumo han parado (i.e. se han acabado los recursos)
+		void assembleConsumptionStopped() {
+			_type = TMessage::CONSUMPTION_STOPPED;
+		}
+
+		// CONSUMPTION_CHANGE: Informa de la nueva cantidad total que hay que consumir
+		void assembleConsumptionChange(int totalConsumption) {
+			_type = TMessage::CONSUMPTION_CHANGE;
+			_totalConsumption = 0;
+		}
+
+		// Consumo total deseado
+		int _totalConsumption;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

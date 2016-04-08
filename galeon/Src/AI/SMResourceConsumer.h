@@ -27,15 +27,27 @@ namespace AI {
 
 			assert(entityInfo->hasAttribute("consumptionPeriod"));
 			_consumptionPeriod = 1000 * entityInfo->getIntAttribute("consumptionPeriod");
-
+			
+			// TODO
+			/*
 			// Creación de SM en base a los datos
-			int waitCycle = this->addNode(new CLAWait(_consumptionPeriod));
-			int extractResources = this->addNode(new CLAConsumeResources(_entity, _data, _consumedResource));
+			int stop = this->addNode(new CLAWait());
+			int wait = this->addNode(new CLAWait(_consumptionPeriod));
+			int reserve = this->addNode(new CLAReserveResourcesToConsume(_entity, _data, _consumedResource));
+			int consume = this->addNode(new CLAConsumeResources(_entity, _data, _consumedResource));
 
-			this->addEdge(waitCycle, extractResources, new CConditionFinished());
-			this->addEdge(extractResources, waitCycle, new CConditionFinished());
+			// Inicialmente la entidad empieza en estado parado
+			this->setInitialNode(stop);
 
-			this->setInitialNode(waitCycle);
+			// Pasa al estado de espera
+			this->addEdge(stop, wait, new CConditionMessage<CLatentAction, ConsumeMessage>()
+
+			this->addEdge(wait, reserve, new CConditionFinished());
+
+			this->addEdge(reserve, consume, new CConditionSuccess());
+			this->addEdge(reserve, empty, new CConditionFail());
+			*/
+
 			this->resetExecution();
 
 			return true;
@@ -54,6 +66,8 @@ namespace AI {
 		}
 
 		SM_HANDLE_MESSAGE_WGLOBAL(PowerMessage);
+		
+		SM_HANDLE_MESSAGE(ConsumptionMessage);
 
 	private:
 		/** Tipo del recurso que se consume */

@@ -62,7 +62,11 @@ namespace AI {
 		}
 
 		SM_HANDLE_MESSAGE(PowerMessage);
+
 		SM_HANDLE_MESSAGE(ResourceMessage);
+
+		SM_HANDLE_MESSAGE(ConsumptionMessage);
+
 	};
 }
 
