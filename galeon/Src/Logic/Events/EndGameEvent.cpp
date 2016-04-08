@@ -15,12 +15,24 @@ el panel de fin del juego (con victoria o derrota).
 */
 
 #include "EndGameEvent.h"
+#include "BaseSubsystems/ScriptManager.h"
 
 #include "GUI/Server.h"
 #include "GUI/UIManager.h"
 #include "GUI/EventUI.h"
 
 namespace Logic {
+
+	void CEndGameEvent::luaRegister()
+	{
+		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
+			[
+				luabind::class_<CEndGameEvent, CEvent>("CEndGameEvent")
+				.def(luabind::constructor<bool>())
+			];
+	}
+
+	//--------------------------------------------------------
 
 	void CEndGameEvent::execute()
 	{

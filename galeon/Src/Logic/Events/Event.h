@@ -21,7 +21,7 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 // Predeclaración de clases para ahorrar tiempo de compilación.
 namespace Logic
 {
-	enum ConditionEventType;
+	enum ConditionTriggerType;
 }
 
 /**
@@ -48,6 +48,9 @@ namespace Logic
 
 	public:
 
+		/**
+		Posibles tipos de eventos.
+		*/
 		enum EventType
 		{
 			// Eventos habituales del juego. Normalmente informativos,
@@ -61,6 +64,9 @@ namespace Logic
 			DECISION
 		};
 
+		/**
+		Posibles triggers de eventos.
+		*/
 		enum EventTrigger
 		{
 			// Eventos lanzados al llegar a un tiempo concreto de juego.
@@ -71,13 +77,28 @@ namespace Logic
 		};
 
 		/**
+		Posibles tipos de triggers CONDITION.
+		IMPORTANTE: No cambiar el valor entero asociado a cada valor del
+		enumerado y añadir cada nuevo valor en CEvent::luaRegister().
+		*/
+		enum ConditionTriggerType
+		{
+			// Eventos disparados como parte del tutorial para guiar al
+			// jugador durante los primeros instantes de la partida.
+			TUTORIAL = 0,
+			// Eventos disparados al final de la partida para mostrar el
+			// resultado de la misma y la puntuación final.
+			END_GAME = 1
+		};
+
+		/**
 		Constructores.
 		*/
-		CEvent(EventType type, unsigned int time) :
-			_type(type), _trigger(TIME), _time(time) {};
+		CEvent(EventType type, unsigned long time) :
+			_type(type), _trigger(TIME), _time(time) {}
 
-		CEvent(EventType type, ConditionEventType conditionType) :
-			_type(type), _trigger(CONDITION), _conditionType(conditionType) {};
+		CEvent(EventType type, ConditionTriggerType conditionType) :
+			_type(type), _trigger(CONDITION), _conditionType(conditionType) {}
 
 		/**
 		Destructor.
@@ -85,11 +106,17 @@ namespace Logic
 		virtual ~CEvent() {}
 
 		/**
+		Registra esta clase evento en el contexto de Lua.
+		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
+		*/
+		static void luaRegister();
+
+		/**
 		Getters.
 		*/
 		EventType getEventType() { return _type; }
 		EventTrigger getEventTrigger() { return _trigger; }
-		ConditionEventType getConditionEventType() { return _conditionType; }
+		ConditionTriggerType getConditionTriggerType() { return _conditionType; }
 
 		/**
 		Comprueba si debe lanzar el evento y lo hace en caso positivo.
@@ -115,13 +142,13 @@ namespace Logic
 		Tipo de condición que lanza el evento.
 		NULL si _trigger != CONDITION.
 		*/
-		ConditionEventType _conditionType;
+		ConditionTriggerType _conditionType;
 
 		/**
 		Tiempo de lanzamiento del evento en milisegundos.
 		0 si _trigger != TIME.
 		*/
-		unsigned int _time = 0;
+		unsigned long _time = 0;
 
 		/**
 		Comprueba si el evento debe ser lanzado atendiendo a su trigger.

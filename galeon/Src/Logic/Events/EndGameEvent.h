@@ -18,7 +18,6 @@ el panel de fin del juego (con victoria o derrota).
 #define __Logic_EndGameEvent_H
 
 #include "Event.h"
-#include "ConditionEvents.h"
 
 /**
 Namespace que engloba la lógica del juego. Engloba desde el mapa lógico
@@ -49,12 +48,18 @@ namespace Logic
 		Constructor.
 		*/
 		CEndGameEvent(bool victory) :
-			CEvent(INFO, ConditionEventType::END_GAME), _victory(victory)	{};
+			CEvent(INFO, CEvent::ConditionTriggerType::END_GAME), _victory(victory)	{};
 
 		/**
 		Destructor.
 		*/
 		~CEndGameEvent() {};
+
+		/**
+		Registra esta clase evento en el contexto de Lua.
+		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
+		*/
+		static void luaRegister();
 
 	protected:
 

@@ -348,9 +348,6 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Logic\Events\ConditionEvents.h">
-      <Filter>Events\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h">
       <Filter>Events\Header Files</Filter>
     </ClInclude>

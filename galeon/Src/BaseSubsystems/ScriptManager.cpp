@@ -26,8 +26,6 @@ extern "C" {
 #include <lualib.h>
 }
 
-#include "luabind.hpp"
-
 #include <cassert>
 #include <iostream>
 
