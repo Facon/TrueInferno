@@ -102,14 +102,14 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	bool CEventManager::loadInitialEvents(const std::string& filename)
+	bool CEventManager::loadEventsScript(const std::string& filename)
 	{
 		if (!ScriptManager::CScriptManager::GetPtrSingleton()->loadScript(filename.c_str()))
 			return false;
 
 		return true;
 
-	} // loadInitialEvents
+	} // loadEventsScript
 
 	//--------------------------------------------------------
 
@@ -180,7 +180,6 @@ namespace Logic {
 	//--------------------------------------------------------
 
 	void CEventManager::luaRegister() {
-		// @TODO Mover scripts de Lua a los sources del proyecto
 		// @TODO Sistema de mensajes a lua
 
 		// Jerarquía de eventos.

@@ -21,7 +21,7 @@ del juego.
 #include <cassert>
 #include <map>
 
-// HACK. Debería leerse de algún fichero de configuración
+// TODO: HACK. Debería leerse de algún fichero de configuración
 #define BLUEPRINTS_FILE_PATH "./media/maps/"
 
 /**

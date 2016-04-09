@@ -1,7 +1,7 @@
-local launchEvents = false;
+local launchInitialEvents = false;
 
-if launchEvents then
-	print("Loading Events.lua...")
+if launchInitialEvents then
+	print("Loading InitialEvents.lua...")
 	
 	-- Building destruction
 	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(40 * 1000));

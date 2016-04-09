@@ -84,13 +84,12 @@ namespace Logic
 		void tick(unsigned int msecs);
 
 		/**
-		Carga el script de LUA encargado de leer y crear los eventos
-		predefinidos inicialmente.
+		Carga un script de LUA encargado de crear y lanzar eventos.
 
-		@param filename nombre del script LUA con los eventos iniciales.
+		@param filename nombre del script.
 		@return true si la carga se hizo correctamente.
 		*/
-		bool loadInitialEvents(const std::string& filename);
+		bool loadEventsScript(const std::string& filename);
 
 		/**
 		Destruye todos los eventos cargados.

@@ -53,6 +53,9 @@
     <Filter Include="Events\Source Files">
       <UniqueIdentifier>{da242379-3a6c-45aa-b90e-5716c28e3edf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events\Lua Files">
+      <UniqueIdentifier>{e2bf1a8b-e0cb-47a6-84e3-7a10503e1447}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp">
@@ -378,5 +381,10 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Toggleable.h">
       <Filter>Entity\Components\Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Src\Logic\Events\InitialEvents.lua">
+      <Filter>Events\Lua Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

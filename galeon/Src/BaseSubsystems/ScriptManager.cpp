@@ -29,6 +29,9 @@ extern "C" {
 #include <cassert>
 #include <iostream>
 
+// TODO: HACK. Debería leerse de algún fichero de configuración
+#define LUA_SCRIPTS_PATH "../Src/Logic/Events/"
+
 namespace ScriptManager {
 
 // Única instancia de la clase.
@@ -85,13 +88,16 @@ bool CScriptManager::loadScript(const char *script) {
 
 	assert(_lua);
 
-	if (luaL_loadfile(_lua, script) != 0) {
-		std::cout << "ScriptManager WARNING: error de sintaxis en el fichero " << script << std::endl;
+	std::string completePath(LUA_SCRIPTS_PATH);
+	completePath = completePath + script;
+
+	if (luaL_loadfile(_lua, completePath.c_str()) != 0) {
+		std::cout << "ScriptManager WARNING: error de sintaxis en el fichero " << completePath << std::endl;
 		return false;
 	}
 
 	if (lua_pcall(_lua, 0, 0, 0) != 0) {
-		std::cout << "Error en la ejecución de " << script << ": " <<
+		std::cout << "Error en la ejecución de " << completePath << ": " <<
 			lua_tostring(_lua, -1) << std::endl;
 		lua_pop(_lua, 1);
 		return false;

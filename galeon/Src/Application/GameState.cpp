@@ -50,7 +50,7 @@ namespace Application {
 			return false;
 
 		// Cargar el script de LUA con los eventos definidos inicialmente.
-		if (!Logic::CEventManager::getSingletonPtr()->loadInitialEvents("Events.lua"))
+		if (!Logic::CEventManager::getSingletonPtr()->loadEventsScript("InitialEvents.lua"))
 			return false;
 
 		// Cargamos la ventana que muestra el tiempo de juego transcurrido.
