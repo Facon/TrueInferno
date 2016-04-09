@@ -619,12 +619,22 @@ namespace Logic
 	class PowerMessage : public Message
 	{
 	public:
+		PowerMessage() : Message(TMessage::UNASSIGNED), _caller(EntityID::UNASSIGNED), _attach(false), _consumption(0) {}
 
 		// POWER_REQUEST_ATTACHMENT: Solicita la conexión de un consumidor nuevo (la desconexión nunca se solicita, se envía directamente POWER_ATTACHMENT_INFO para informar del cambio)
-		PowerMessage(TEntityID caller, int consumption) : Message(TMessage::POWER_REQUEST_ATTACHMENT), _caller(caller), _consumption(consumption) {}
+		void assemblePowerRequestAttachment(TEntityID caller, int consumption) {
+			_type = TMessage::POWER_REQUEST_ATTACHMENT;
+			_caller = caller;
+			_consumption = consumption;
+		}
 
 		// POWER_ATTACHMENT_INFO: Informa de la conexión o desconexión de un consumidor
-		PowerMessage(TEntityID caller, bool attach, int consumption) : Message(TMessage::POWER_ATTACHMENT_INFO), _caller(caller), _attach(attach), _consumption(consumption) {}
+		void assemblePowerAttachmentInfo(TEntityID caller, bool attach, int consumption) {
+			_type = TMessage::POWER_ATTACHMENT_INFO;
+			_caller = caller;
+			_attach = attach;
+			_consumption = consumption;
+		}
 
 		// Entidad a conectar/desconectar
 		TEntityID _caller;
@@ -644,26 +654,32 @@ namespace Logic
 	class ConsumptionMessage : public Message
 	{
 	public:
-		ConsumptionMessage() : Message(TMessage::UNASSIGNED), _totalConsumption(0) {}
+		ConsumptionMessage() : Message(TMessage::UNASSIGNED), _consumptionChange(0), _resourceType(ResourceType::NONE) {}
 
-		// CONSUMPTION_START: Solicita el comienzo de los periodos de consumo
-		void assembleConsumptionStart() {
+		// CONSUMPTION_START: Solicita el comienzo de los ciclos de consumo
+		void assembleConsumptionStart(ResourceType resourceType) {
 			_type = TMessage::CONSUMPTION_START;
+			_resourceType = resourceType;
 		}
 
 		// CONSUMPTION_STOPPED: Informa de que los ciclos de consumo han parado (i.e. se han acabado los recursos)
-		void assembleConsumptionStopped() {
+		void assembleConsumptionStopped(ResourceType resourceType) {
 			_type = TMessage::CONSUMPTION_STOPPED;
+			_resourceType = resourceType;
 		}
 
-		// CONSUMPTION_CHANGE: Informa de la nueva cantidad total que hay que consumir
-		void assembleConsumptionChange(int totalConsumption) {
+		// CONSUMPTION_CHANGE: Informa de la variación deseada en el consumo
+		void assembleConsumptionChange(int consumptionChange, ResourceType resourceType) {
 			_type = TMessage::CONSUMPTION_CHANGE;
-			_totalConsumption = 0;
+			_consumptionChange = consumptionChange;
+			_resourceType = resourceType;
 		}
 
-		// Consumo total deseado
-		int _totalConsumption;
+		// Cambio de consumo
+		int _consumptionChange;
+
+		// Recurso consumido
+		ResourceType _resourceType;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

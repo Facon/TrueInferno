@@ -5,7 +5,10 @@
 #include "AI\StateMachine.h"
 #include "AI\Server.h"
 #include "AI\SMResourceConsumerData.h"
+#include "AI\LAReserveResourcesToConsume.h"
 #include "AI\LAConsumeResources.h"
+#include "AI\LAAcceptConsumptionChanges.h"
+#include "AI\LAStopConsumingResources.h"
 #include "AI\LatentAction.h"
 #include "AI\Condition.h"
 #include "Map\MapEntity.h"
@@ -28,46 +31,44 @@ namespace AI {
 			assert(entityInfo->hasAttribute("consumptionPeriod"));
 			_consumptionPeriod = 1000 * entityInfo->getIntAttribute("consumptionPeriod");
 			
-			// TODO
-			/*
 			// Creación de SM en base a los datos
-			int stop = this->addNode(new CLAWait());
-			int wait = this->addNode(new CLAWait(_consumptionPeriod));
-			int reserve = this->addNode(new CLAReserveResourcesToConsume(_entity, _data, _consumedResource));
-			int consume = this->addNode(new CLAConsumeResources(_entity, _data, _consumedResource));
+			int stopped = this->addNode(new CLAWait());
+			int waiting = this->addNode(new CLAWait(_consumptionPeriod));
+			int reserving = this->addNode(new CLAReserveResourcesToConsume(_entity, _data, _consumedResource));
+			int consuming = this->addNode(new CLAConsumeResources(_entity, _data, _consumedResource));
+			int accept = this->addNode(new CLAAcceptConsumptionChanges(_entity, _data, _consumedResource));
+			int stopping = this->addNode(new CLAStopConsumingResources(_entity, _data, _consumedResource));
 
 			// Inicialmente la entidad empieza en estado parado
-			this->setInitialNode(stop);
+			this->setInitialNode(stopped);
 
-			// Pasa al estado de espera
-			this->addEdge(stop, wait, new CConditionMessage<CLatentAction, ConsumeMessage>()
+			// Pasa al estado de espera cuando se le solicita empezar a consumir
+			this->addEdge(stopped, waiting, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_START));
 
-			this->addEdge(wait, reserve, new CConditionFinished());
+			// Una vez finalizada la espera, reserva recursos para poder consumirlos
+			this->addEdge(waiting, reserving, new CConditionFinished());
 
-			this->addEdge(reserve, consume, new CConditionSuccess());
-			this->addEdge(reserve, empty, new CConditionFail());
-			*/
+			// Si tuvo éxito la reserva, pasa a consumirlos. Si no, falla y empieza a pararse
+			this->addEdge(reserving, consuming, new CConditionSuccess());
+			this->addEdge(reserving, stopping, new CConditionFail());
+
+			// Después de consumir se aceptan nuevos consumos
+			this->addEdge(consuming, accept, new CConditionFinished());
+
+			// Y se pone a la espera del siguiente ciclo de consumo
+			this->addEdge(accept, waiting, new CConditionFinished());
+			
+			// Parada en dos fases
+			this->addEdge(stopping, stopped, new CConditionFinished());
 
 			this->resetExecution();
 
 			return true;
 		}
 
-		bool SMGlobalHandleMessage(const PowerMessage& msg){
-			if (msg._type != MessageType::POWER_ATTACHMENT_INFO)
-				return false;
-
-			// Si hay conexión el consumo aumenta, si es desconexión disminuye
-			_data.modifyConsumption(msg._attach ? msg._consumption : -msg._consumption);
-
-			std::cout << "Current consumption = " << _data.getConsumption() << std::endl;
-
-			return true;
-		}
-
-		SM_HANDLE_MESSAGE_WGLOBAL(PowerMessage);
-		
 		SM_HANDLE_MESSAGE(ConsumptionMessage);
+
+		SM_HANDLE_MESSAGE(ResourceMessage);
 
 	private:
 		/** Tipo del recurso que se consume */

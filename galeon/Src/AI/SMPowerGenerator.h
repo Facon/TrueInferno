@@ -22,8 +22,8 @@ namespace AI {
 	- Tras conseguir (o no) reservas pasa al estado de respuesta al consumidor
 	- Tras la respuesta al consumidor siempre vuelve al estado de espera
 	*/
-
 	class CSMPowerGenerator : public CStateMachine<CLatentAction, CSMPowerGeneratorData> {
+
 	public:
 		CSMPowerGenerator(CEntity* entity) : CStateMachine(entity) {
 			int waitConsumer = this->addNode(new CLAWaitConsumerChange(entity, _data));
@@ -39,14 +39,14 @@ namespace AI {
 			this->addEdge(waitConsumer, waitConsumer, new CConditionFail());
 
 			/* 
-			Si puede soportar el consumo nuevo :
-				- Pasa a responder al consumidor para aceptar la conexión
-				- Si no, intenta asegurarse reservas
+			* Si puede soportar el consumo nuevo :
+			*	- Pasa a responder al consumidor para aceptar la conexión
+			*	- Si no, intenta asegurarse reservas
 			*/
 			this->addEdge(checkNewConsumption, answerConsumer, new CConditionSuccess());
 			this->addEdge(checkNewConsumption, fillReserves, new CConditionFail());
 
-			// Tras conseguir(o no) reservas pasa al estado de respuesta al consumidor
+			// Tras conseguir (o no) reservas pasa al estado de respuesta al consumidor
 			this->addEdge(fillReserves, answerConsumer, new CConditionFinished());
 
 			// Tras la respuesta al consumidor siempre vuelve al estado de espera

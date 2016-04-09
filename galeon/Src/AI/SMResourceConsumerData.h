@@ -5,7 +5,7 @@ namespace AI {
 	class CSMResourceConsumerData {
 
 	public:
-		CSMResourceConsumerData() : _consumption(0) {}
+		CSMResourceConsumerData() : _consumption(0), _reservedForConsume(0) {}
 
 		virtual ~CSMResourceConsumerData() {}
 
@@ -19,9 +19,22 @@ namespace AI {
 			_consumption += change;
 		}
 
+		// Devuelve la cantidad de recurso que tenemos reservada
+		int getReservedForConsume() const{
+			return _reservedForConsume;
+		}
+
+		// Establece la cantidad de recurso que tenemos reservada
+		void setReservedForConsume(int reservedForConsume) {
+			_reservedForConsume = reservedForConsume;
+		}
+
 	private:
 		// Cantidad de recurso que se debe consumir en cada periodo
 		int _consumption;
+
+		// Cantidad de recurso que tenemos reservada
+		int _reservedForConsume;
 	};
 }
 

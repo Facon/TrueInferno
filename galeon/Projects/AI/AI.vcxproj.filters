@@ -197,6 +197,15 @@
     <ClCompile Include="..\..\Src\AI\LAAnswerConsumer.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAAcceptConsumptionChanges.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAReserveResourcesToConsume.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAStopConsumingResources.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -440,6 +449,15 @@
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAAnswerConsumer.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAStopConsumingResources.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAReserveResourcesToConsume.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAAcceptConsumptionChanges.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -45,7 +45,8 @@ namespace AI {
 			return LAStatus::FAIL;
 
 		// Preparamos la solicitud de conexión indicando quiénes somos y nuestro consumo
-		PowerMessage m(this->_entity->getEntityID(), 10); // TODO Leer en el spawn
+		PowerMessage m;
+		m.assemblePowerRequestAttachment(this->_entity->getEntityID(), 10); // TODO Leer en el spawn
 
 		// Reintentamos la petición de conexión hasta que nos la acepten en algún tick
 		if (m.Dispatch(*powerGenerator)){

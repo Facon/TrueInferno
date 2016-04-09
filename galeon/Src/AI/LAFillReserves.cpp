@@ -16,6 +16,7 @@ namespace AI {
 		// Repetimos el envío del mensaje hasta que nos lo acepten
 		if (m.Dispatch(*_entity)){
 			_smData.setNewConsumerAccepted(true); // TODO Necesitamos respuesta para saber si podemos aceptar!
+			std::cout << "Filling=" << cokeNeeded << std::endl;
 			return LAStatus::SUCCESS;
 		}
 		else

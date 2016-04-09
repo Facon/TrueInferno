@@ -56,7 +56,8 @@ namespace AI {
 			if (_data.getAttached() && _data.getPowerGenerator()!=EntityID::UNASSIGNED){
 				CEntity *generator = _entity->getMap()->getEntityByID(_data.getPowerGenerator());
 				if (generator != nullptr){
-					PowerMessage m(_entity->getEntityID(), false, 10); // TODO
+					PowerMessage m;
+					m.assemblePowerAttachmentInfo(_entity->getEntityID(), false, 10); // TODO
 					assert(m.Dispatch(*generator) && "Can't detach from PowerGenerator on deactivation");
 				}
 			}

@@ -48,8 +48,8 @@ namespace AI {
 		int newConsumption = _smData.getNewConsumption();
 		int currentCoke = _smData.getCurrentCoke();
 
-		// Si el nuevo consumo es aceptable: éxito
-		if ((totalConsumption + newConsumption) < currentCoke){
+		// Si el nuevo consumo total es aceptable: éxito
+		if (currentCoke >= (totalConsumption + newConsumption)){
 			_smData.setNewConsumerAccepted(true);
 			return LAStatus::SUCCESS;
 		}

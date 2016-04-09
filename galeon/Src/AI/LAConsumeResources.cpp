@@ -7,15 +7,18 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLAConsumeResources::OnRun(unsigned int msecs) {
-		// Si no hay nada que consumir, finalizamos
-		if(_smData.getConsumption() == 0)
+		// Si no ha había nada reservado no hay nada que hacer
+		if(_smData.getReservedForConsume() == 0)
 			return LAStatus::SUCCESS;
 
-		// Notificamos el consumo de recursos
+		// Consumimos lo reservado
 		ResourceMessage m;
-		m.assembleResourcesChange(_resourceType, -_smData.getConsumption());
-		if (!m.Dispatch(*_entity))
+		m.assembleResourcesClaim(_resourceType, _smData.getReservedForConsume());
+		if (!m.Dispatch(*_entity)){
+			std::cout << "Consumed=" << _smData.getReservedForConsume() << std::endl;
+			_smData.setReservedForConsume(0);
 			return LAStatus::RUNNING;
+		}
 
 		return LAStatus::SUCCESS;
 	}
