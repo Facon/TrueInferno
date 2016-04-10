@@ -25,7 +25,7 @@ namespace GUI
 
 
 	public:
-		UIManager(Logic::ResourcesManager& rm, Logic::HFManager& hfm, Logic::TimeManager& tm);
+		UIManager();
 		~UIManager();
 		void init();
 		void release();

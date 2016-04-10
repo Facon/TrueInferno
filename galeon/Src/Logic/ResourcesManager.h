@@ -24,6 +24,8 @@ namespace Logic
 		/*static const float MINERAL_GATHERING_SPEED;
 		static const float GAS_GATHERING_SPEED;*/
 
+		static ResourcesManager _instance;
+
 		float _mineral;
 		float _gas;
 		float _coke;
@@ -33,11 +35,20 @@ namespace Logic
 		float _aether;
 		//float _hadesFavor = 0.0f;
 
+	private:
+		ResourcesManager() : _mineral(1000000), _gas(1000000), _coke(0), _crude(0), _pure(0), _refined(0), _aether(0)
+		{}
+
 	public:
 		static ResourceType parseResourceType(const std::string& name);
 
 		//ResourcesManager() : _mineral(500), _gas(0), _coke(0), _crude(0), _pure(0), _refined(0), _aether(0) {}
-		ResourcesManager() : _mineral(1000000), _gas(1000000), _coke(0), _crude(0), _pure(0), _refined(0), _aether(0) {}
+
+		static ResourcesManager& getSingleton()
+		{ return _instance; }
+
+		static ResourcesManager* getSingletonPtr()
+		{ return &_instance; }
 
 		float getMineral() const { return _mineral; }
 		float getGas() const { return _gas; }

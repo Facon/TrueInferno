@@ -34,6 +34,8 @@ namespace Logic
 	class MessageHandler
 	{
 	public:
+		virtual bool HandleMessage(const Message& msg)
+		{ return false; }
 
 		virtual bool HandleMessage(const TransformMessage& msg)
 		{ return false; }

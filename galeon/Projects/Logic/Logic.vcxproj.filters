@@ -381,5 +381,8 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Toggleable.h">
       <Filter>Entity\Components\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\MessageHandler.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
