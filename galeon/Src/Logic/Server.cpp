@@ -16,6 +16,7 @@ la gestión de la lógica del juego.
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Logic/Maps/Managers/WorkManager.h"
+#include "Logic/Maps/Managers/PowerManager.h"
 #include "Logic/BuildingManager.h"
 
 #include "Logic/Entity/Entity.h"
@@ -109,6 +110,10 @@ namespace Logic {
 		if (!Logic::CEventManager::Init())
 			return false;
 
+		// Inicializamos el manager de la energía.
+		if (!Logic::CPowerManager::Init())
+			return false;
+
 		return true;
 
 	} // open
@@ -118,6 +123,8 @@ namespace Logic {
 	void CServer::close() 
 	{
 		unLoadLevel();
+
+		Logic::CPowerManager::Release();
 
 		Logic::CEventManager::Release();
 
@@ -205,6 +212,8 @@ namespace Logic {
 
 		_map->tick(msecs);
 		Logic::CEventManager::getSingletonPtr()->tick(msecs);
+
+		Logic::CPowerManager::getSingletonPtr()->tick(msecs);
 	
 	} // tick
 

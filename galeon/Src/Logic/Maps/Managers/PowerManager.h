@@ -74,6 +74,8 @@ namespace Logic
 		*/
 		TEntityID findPowerGenerator(CEntity* powerConsumer);
 
+		void tick(unsigned int msecs);
+
 	protected:
 
 		/**
@@ -107,6 +109,15 @@ namespace Logic
 		Única instancia de la clase.
 		*/
 		static CPowerManager *_instance;
+
+		// Periodo (ms) con el que se chequean y se intentan abastecer los generadores con mayor necesidad
+		int _refillPeriod = 1000;
+
+		// Tiempo transcurrido desde el último reabastecimiento de los generadores
+		int _timeSinceLastRefill;
+
+		// Intenta reabastecer los generadores con mayor necesidad
+		void refillPowerGenerators();
 
 	}; // class PowerManager
 

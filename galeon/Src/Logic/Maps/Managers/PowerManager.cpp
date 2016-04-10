@@ -22,6 +22,8 @@ Contiene la implementación del gestor de energía.
 #include <cassert>
 #include <limits>
 
+#include <set>
+
 namespace Logic {
 
 	CPowerManager* CPowerManager::_instance = 0;
@@ -31,6 +33,7 @@ namespace Logic {
 	CPowerManager::CPowerManager()
 	{
 		_instance = this;
+		_timeSinceLastRefill = 0;
 
 	} // CPowerManager
 
@@ -57,6 +60,8 @@ namespace Logic {
 			return false;
 		}
 
+		_instance->_timeSinceLastRefill = 0;
+
 		return true;
 
 	} // Init
@@ -79,6 +84,7 @@ namespace Logic {
 
 	bool CPowerManager::open()
 	{
+		_timeSinceLastRefill = 0;
 		return true;
 
 	} // open
@@ -135,6 +141,63 @@ namespace Logic {
 			return CBuildingManager::getSingletonPtr()->findBuilding(BuildingType::PowerGenerator)->getEntity()->getEntityID();
 		else
 			return EntityID::UNASSIGNED;
+	}
+
+
+	void CPowerManager::tick(unsigned int msecs){
+		// Si pasó suficiente tiempo desde el último reabastecimiento
+		_timeSinceLastRefill += msecs;
+		if (_timeSinceLastRefill >= _refillPeriod){
+			// Reabastecemos
+			refillPowerGenerators();
+
+			// Damos tiempo para el siguiente reabastecimiento
+			_timeSinceLastRefill -= _refillPeriod;
+		}
+	}
+
+	void CPowerManager::refillPowerGenerators(){
+		// TODO Temporalmente se rastrean todos los edificios hasta encontrar los PowerGenerators. Convendría mantenerlos bien registrados en una única lista
+
+		// Buscamos el edificio con mayor necesidad de combustible según su consumo y reserva actual
+		CEntity* target = nullptr;
+		int maxNeeded = INT_MIN;
+
+		// Obtenemos los edificios de tipo PowerGenerator
+		std::set<CPlaceable*>* _generators = CBuildingManager::getSingletonPtr()->getBuildings()[BuildingType::PowerGenerator];
+		
+		// Si no hay generadores no se hace nada
+		if (_generators == nullptr)
+			return;
+
+		// Para cada PowerGenerator
+		for (auto it = _generators->cbegin(); it != _generators->cend(); ++it){
+			CPowerGenerator* generator = (*it)->getEntity()->getComponent<CPowerGenerator>();
+
+			// Descartamos los que no tienen consumo o no están activos
+			if (generator->getConsumption() == 0)
+				continue;
+
+			// Calculamos su necesidad de combustible
+			int needed = generator->getCurrentReserves() - generator->getConsumption();
+
+			// Y actualizamos, si procede, el mejor ratio encontrado hasta el momento
+			if (needed > maxNeeded){
+				maxNeeded = needed;
+				target = generator->getEntity();
+			}
+		}
+
+		// Si encontramos algún edificio con necesidad
+		if (target!=nullptr && maxNeeded > 0){
+			// Pedimos a la logística del edificio que busque los recursos que necesita
+			LogisticsMessage m;
+			m.assembleDemandResources(ResourceType::COKE, maxNeeded);
+
+			if (!m.Dispatch(*target))
+				std::cout << "Can't refill PowerGenerator" << std::endl;
+		}
+
 	}
 
 } // namespace Logic

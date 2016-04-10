@@ -154,7 +154,7 @@ namespace Logic
 
 	protected:
 		/**
-		Almacena la máquina de estado que se está ejecutando
+		Almacena la máquina de estados que se está ejecutando
 		*/
 		AI::CStateMachine<AI::CLatentAction, SharedData>* _currentStateMachine;
 

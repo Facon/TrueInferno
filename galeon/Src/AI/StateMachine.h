@@ -180,6 +180,13 @@ namespace AI
 		*/
 		virtual void deactivate() {}
 
+		/**
+		Devuelve el objeto de datos compartido de la máquina de estados
+		*/
+		SharedData getSharedData(){
+			return _data;
+		}
+
 	protected:
 		/**
 		Tipo que guarda la información de las aristas salientes de un nodo.

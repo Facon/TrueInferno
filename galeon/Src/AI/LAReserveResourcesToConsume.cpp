@@ -29,6 +29,10 @@ namespace AI {
 		_received = false;
 		_smData.setReservedForConsume(0);
 
+		// Si no hay consumo, no hay nada que hacer
+		if (_smData.getConsumption() == 0)
+			return LAStatus::SUCCESS;
+
 		// Preparamos el mensaje de reserva de recursos
 		ResourceMessage m;
 		m.assembleResourcesReserve(_consumedResource, _smData.getConsumption(), _entity->getEntityID());

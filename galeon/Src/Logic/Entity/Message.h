@@ -84,6 +84,7 @@ namespace Logic
 			POWER_REQUEST_ATTACHMENT,
 			POWER_ATTACHMENT_INFO,
 			CONSUMPTION_START,
+			CONSUMPTION_STOP,
 			CONSUMPTION_STOPPED,
 			CONSUMPTION_CHANGE,
 		};
@@ -656,9 +657,15 @@ namespace Logic
 	public:
 		ConsumptionMessage() : Message(TMessage::UNASSIGNED), _consumptionChange(0), _resourceType(ResourceType::NONE) {}
 
-		// CONSUMPTION_START: Solicita el comienzo de los ciclos de consumo
+		// CONSUMPTION_START: Solicita el comienzo de los ciclos de consumo (i.e. se ha conectado el primer consumidor)
 		void assembleConsumptionStart(ResourceType resourceType) {
 			_type = TMessage::CONSUMPTION_START;
+			_resourceType = resourceType;
+		}
+
+		// CONSUMPTION_STOP: Solicita el fin de los ciclos de consumo (i.e. se ha desconectado el último consumidor)
+		void assembleConsumptionStop(ResourceType resourceType) {
+			_type = TMessage::CONSUMPTION_STOP;
 			_resourceType = resourceType;
 		}
 

@@ -52,7 +52,7 @@ namespace AI {
 			this->addEdge(reserving, consuming, new CConditionSuccess());
 			this->addEdge(reserving, stopping, new CConditionFail());
 
-			// Después de consumir se aceptan nuevos consumos
+			// Después de consumir se aceptan los cambios de consumo
 			this->addEdge(consuming, accept, new CConditionFinished());
 
 			// Y se pone a la espera del siguiente ciclo de consumo
@@ -60,6 +60,12 @@ namespace AI {
 			
 			// Parada en dos fases
 			this->addEdge(stopping, stopped, new CConditionFinished());
+
+			// Desde cualquier estado pasamos a parando si se recibimos un aviso de parada de consumo
+			this->addEdge(waiting, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
+			this->addEdge(reserving, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
+			this->addEdge(consuming, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
+			this->addEdge(accept, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
 
 			this->resetExecution();
 

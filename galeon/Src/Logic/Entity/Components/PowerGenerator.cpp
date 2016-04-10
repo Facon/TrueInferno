@@ -19,4 +19,12 @@ namespace Logic {
 		CStateMachineExecutor::tick(msecs);
 	} // tick
 
+	int CPowerGenerator::getConsumption(){
+		return _currentStateMachine->getSharedData().getTotalConsumption();
+	}
+
+	int CPowerGenerator::getCurrentReserves(){
+		return _currentStateMachine->getSharedData().getCurrentCoke();
+	}
+
 } // namespace Logic

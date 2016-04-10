@@ -27,12 +27,12 @@ namespace AI {
 			_newConsumption = newConsumption;
 		}
 
-		// Añade un nuevo consumidor con su correspondiente consumo periódico
-		void addConsumer(TEntityID consumer, int consumption){
-			// Si el consumidor existe
+		// Añade un nuevo consumidor con su correspondiente consumo periódico. Devuelve true si realmente se añadió un nuevo consumidor
+		bool addConsumer(TEntityID consumer, int consumption){
+			// Si el consumidor existe, de momento, no aceptaríamos volverlo a añadir
 			if (_consumers.count(consumer) > 0){
 				assert(false && "Can't add twice the same consumer");
-				return;
+				return false;
 			}
 
 			// Actualizamos la lista de consumidores
@@ -40,14 +40,15 @@ namespace AI {
 
 			// Y el consumo total
 			_totalConsumption += consumption;
+
+			return true;
 		}
 
-		// Elimina un consumidor y recalcula el consumo periódico total
-		void removeConsumer(TEntityID consumer){
+		// Elimina un consumidor y recalcula el consumo periódico total. Devuelve true si realmente se eliminó un consumidor
+		bool removeConsumer(TEntityID consumer){
 			// Si el consumidor no existe
 			if (_consumers.count(consumer) == 0){
-				assert(false && "Can't remove a consumer not present in the consumer list");
-				return;
+				return false;
 			}
 
 			// Actualizamos el consumo total
@@ -55,6 +56,18 @@ namespace AI {
 
 			// Actualizamos la lista de consumidores
 			_consumers.erase(consumer);
+
+			return true;
+		}
+
+		// Devuelve la cantidad de consumidores actualmente registrados
+		int getNumConsumers() const {
+			return _consumers.size();
+		}
+
+		// Devuelve los consumidores actualmente registrados
+		std::map<TEntityID, int> getConsumers() const {
+			return _consumers;
 		}
 
 		int getTotalConsumption() const{

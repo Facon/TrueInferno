@@ -86,7 +86,7 @@
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAcceptConsumptionChanges.cpp" />
-    <ClCompile Include="..\..\Src\AI\LAAnswerConsumer.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAAcceptOrRejectConsumer.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAskAndWaitResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAttachToGenerator.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAttendResourceBuildingRequest.cpp" />
@@ -94,6 +94,7 @@
     <ClCompile Include="..\..\Src\AI\LACheckNewConsumption.cpp" />
     <ClCompile Include="..\..\Src\AI\LAConsumeResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LADestroyEntity.cpp" />
+    <ClCompile Include="..\..\Src\AI\LADetachConsumers.cpp" />
     <ClCompile Include="..\..\Src\AI\LAEmptyTemplate.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteResourceDemandTasks.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteResourceProvideTasks.cpp" />
@@ -139,7 +140,7 @@
     <ClInclude Include="..\..\Src\AI\DynTriMat.h" />
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
     <ClInclude Include="..\..\Src\AI\LAAcceptConsumptionChanges.h" />
-    <ClInclude Include="..\..\Src\AI\LAAnswerConsumer.h" />
+    <ClInclude Include="..\..\Src\AI\LAAcceptOrRejectConsumer.h" />
     <ClInclude Include="..\..\Src\AI\LAAskAndWaitResources.h" />
     <ClInclude Include="..\..\Src\AI\LAAttachToGenerator.h" />
     <ClInclude Include="..\..\Src\AI\LAAttendResourceBuildingRequest.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="..\..\Src\AI\LACheckNewConsumption.h" />
     <ClInclude Include="..\..\Src\AI\LAConsumeResources.h" />
     <ClInclude Include="..\..\Src\AI\LADestroyEntity.h" />
+    <ClInclude Include="..\..\Src\AI\LADetachConsumers.h" />
     <ClInclude Include="..\..\Src\AI\LAEmptyTemplate.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteResourceDemandTasks.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteResourceProvideTasks.h" />

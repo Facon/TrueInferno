@@ -35,6 +35,12 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
+		/** Devuelve el consumo actual del generador */
+		int getConsumption();
+
+		/** Devuelve las reservas actuales de combustible para el generador */
+		int getCurrentReserves();
+
 	protected:
 		AI::CStateMachine<AI::CLatentAction, AI::CSMPowerGeneratorData>* getStateMachine(){
 			return new AI::CSMPowerGenerator(_entity);
