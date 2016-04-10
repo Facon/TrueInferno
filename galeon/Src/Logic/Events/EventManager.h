@@ -23,6 +23,8 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include <map>
 #include <string>
 
+#include "Logic/Entity/MessageHandler.h"
+
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
 {
@@ -50,7 +52,7 @@ namespace Logic
 	@author Raúl Segura
 	@date Marzo, 2016
 	*/
-	class CEventManager
+	class CEventManager : public MessageHandler
 	{
 	public:
 		/**
@@ -144,6 +146,32 @@ namespace Logic
 		Elimina todos los eventos lanzados por condición.
 		*/
 		void clearConditionEventsMap();
+
+		// Manejo de mensajes, tiene que manejar todos los tipos de mensajes sin excepción.
+		bool HandleMessage(const Message& msg);
+		bool HandleMessage(const TransformMessage& msg);
+		bool HandleMessage(const PositionMessage& msg);
+		bool HandleMessage(const RotationMessage& msg);
+		bool HandleMessage(const DimensionsMessage& msg);
+		bool HandleMessage(const ColorMessage& msg);
+		bool HandleMessage(const MaterialMessage& msg);
+		bool HandleMessage(const AnimationMessage& msg);
+		bool HandleMessage(const ControlMessage& msg);
+		bool HandleMessage(const PhysicMessage& msg);
+		bool HandleMessage(const TouchMessage& msg);
+		bool HandleMessage(const DamageMessage& msg);
+		bool HandleMessage(const WorkerMessage& msg);
+		bool HandleMessage(const WalkSoulPathMessage& msg);
+		bool HandleMessage(const HellQuartersMessage& msg);
+		bool HandleMessage(const MovePlaceableMessage& msg);
+		bool HandleMessage(const SoulSenderMessage& msg);
+		bool HandleMessage(const SoulMessage& msg);
+		bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
+		bool HandleMessage(const NumberMessage& msg);
+		bool HandleMessage(const ResourceMessage& msg);
+		bool HandleMessage(const GetCostPlaceableMessage& msg);
+		bool HandleMessage(const LogisticsMessage& msg);
+		bool HandleMessage(const ToggleMessage& msg);
 
 	protected:
 

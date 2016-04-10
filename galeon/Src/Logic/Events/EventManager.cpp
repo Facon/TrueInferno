@@ -225,4 +225,77 @@ namespace Logic {
 
 	} // clearConditionEventsMap
 
+	bool HandleMessage(const Message& msg)
+	{ return false; }
+
+	bool HandleMessage(const TransformMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const PositionMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const RotationMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const DimensionsMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const ColorMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const MaterialMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const AnimationMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const ControlMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const PhysicMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const TouchMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const DamageMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const WorkerMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const WalkSoulPathMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const HellQuartersMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const MovePlaceableMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const SoulSenderMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const SoulMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const CheckValidPositionPlaceableMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const NumberMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const ResourceMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const GetCostPlaceableMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const LogisticsMessage& msg)
+	{ return false; }
+
+	bool HandleMessage(const ToggleMessage& msg)
+	{ return false; }
+
+
 } // namespace Logic
