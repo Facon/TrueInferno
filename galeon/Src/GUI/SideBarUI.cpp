@@ -5,6 +5,9 @@
 #include <CEGUI/Window.h>
 #include <CEGUI/CEGUI.h>
 
+#include "GUI/Server.h"
+#include "UIManager.h"
+
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
 
@@ -120,7 +123,7 @@ namespace GUI
 		_uibuttonsWindow->setVisible(false);
 	}
 
-	Logic::CEntity* getTileEntityFromRaycast(){
+	Logic::CEntity* getEntityFromRaycastToGroup(int collisiongroup){
 
 		Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
 
@@ -137,7 +140,7 @@ namespace GUI
 			mousePos.d_x / width,
 			mousePos.d_y / height);
 
-		Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000, 1);
+		Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000, collisiongroup);
 
 		return entity;
 	}
@@ -154,7 +157,7 @@ namespace GUI
 
 		if (_placeableEntity){
 
-			Logic::CEntity* entity = getTileEntityFromRaycast();
+			Logic::CEntity* entity = getEntityFromRaycastToGroup(1);
 
 			if (entity)
 			{
@@ -348,11 +351,11 @@ namespace GUI
 		return m.Dispatch(*placeableEntity);
 	}
 
-	void SideBarUI::placeBuildingInConstruction()
+	void SideBarUI::playerInteractionWithLeftClick()
 	{
 		if (_placeableEntity)
 		{
-			Logic::CEntity* entity = getTileEntityFromRaycast();
+			Logic::CEntity* entity = getEntityFromRaycastToGroup(1);
 			if (entity){
 				switch (_roadInConstruction)
 				{
@@ -406,5 +409,19 @@ namespace GUI
 				}
 			}
 		}
+		else{
+			Logic::CEntity* entity = getEntityFromRaycastToGroup(2);
+			if (entity){
+				GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+				uiManager->getBuildingSelectionUI()->setEventWindowVisible(true, entity);
+				_uibuttonsWindow->setVisible(false);
+			}		
+		}
 	}
+
+	void SideBarUI::setEventWindowVisible(bool visible)
+	{
+		_uibuttonsWindow->setVisible(visible);
+	}
+
 }

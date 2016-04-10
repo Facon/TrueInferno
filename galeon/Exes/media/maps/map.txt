@@ -65,6 +65,10 @@ Map = {
 		numInitialSouls = 5,
 		secondsBetweenSpawns = 10,
 		numSpawnedSouls = 5,
+		physic_group = 2,
+		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EventBuildingDestruction",
 	},
 	
 	Evilator = {
@@ -94,6 +98,10 @@ Map = {
 		transformPeriod=5,
 		transformCostResource="GAS",
 		transformCostRatio=1,
+		physic_group = 2,
+		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EventBuildingDestruction",
 	},
 	
 	Furnace = {
@@ -124,6 +132,10 @@ Map = {
 		storedResources="COKE,CRUDE",
 		maxResources = 1000,
 		providedResources="COKE,CRUDE",
+		physic_group = 2,
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EventTutorial1",
 	},
 	
 	Soul = {
@@ -162,6 +174,10 @@ Map = {
 		storedResources="MINERAL",
 		maxResources = 1000,
 		providedResources="MINERAL",
+		physic_group = 2,
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EventTutorial1",
 	},
 	
 	GasPlant = {
@@ -191,6 +207,10 @@ Map = {
 		storedResources="GAS",
 		maxResources = 1000,
 		providedResources="GAS",
+		physic_group = 2,
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EventTutorial2",
 	},
 	
 	EvilWorks = {
@@ -223,6 +243,10 @@ Map = {
 		transformPeriod=5,
 		transformCostResource="GAS",
 		transformCostRatio=1,
+		physic_group = 2,
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EventTutorial2",
 	},
 	
 	Refinery = {
@@ -255,6 +279,10 @@ Map = {
 		transformPeriod=5,
 		transformCostResource="GAS",
 		transformCostRatio=1,
+		physic_group = 2,
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EventTutorial3",
 	},
 	
 	ResearchLabs = {
@@ -276,8 +304,14 @@ Map = {
 		material = "ResearchLabs",
 		minWorkers = 1,
 		maxWorkers = 5,
+		mineralCost = 150,
+		gasCost = 75,
 		storedResources="AETHER",
 		maxResources = 1000,
+		physic_group = 2,
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EventTutorial3",
 	},
 	
 	PowerGenerator = {
@@ -299,8 +333,14 @@ Map = {
 		material = "PowerGenerator",
 		minWorkers = 1,
 		maxWorkers = 5,
+		mineralCost = 150,
+		gasCost = 75,
 		storedResources="COKE",
 		maxResources = 1000,
+		physic_group = 2,
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EventTutorial4",
 	},
 
 	Warehouse = {
@@ -322,8 +362,14 @@ Map = {
 		material = "Warehouse",
 		minWorkers = 1,
 		maxWorkers = 5,
+		mineralCost = 150,
+		gasCost = 75,
 		storedResources="MINERAL,GAS",
 		maxResources = 1000,
 		providedResources="MINERAL,GAS",
+		physic_group = 2,
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EventTutorial4",
 	},
 }

@@ -4,6 +4,7 @@
 #include "GUI/TopBarUI.h"
 #include "GUI/SideBarUI.h"
 #include "GUI/EventUI.h"
+#include "GUI/BuildingSelectionUI.h"
 
 namespace CEGUI
 {
@@ -20,6 +21,7 @@ namespace GUI
 		TopBarUI _topBarUI;
 		SideBarUI _sideBarUI;
 		EventUI _eventUI;
+		BuildingSelectionUI _buildingSelectionUI;
 		// Window for displaying resources
 		CEGUI::Window* _uiWindow;
 
@@ -34,6 +36,7 @@ namespace GUI
 		void tick(unsigned int msecs);
 		EventUI *getEventUI(){ return &_eventUI; };
 		SideBarUI *getSideBarUI(){ return &_sideBarUI; };
+		BuildingSelectionUI *getBuildingSelectionUI(){ return &_buildingSelectionUI; };
 	};
 }
 

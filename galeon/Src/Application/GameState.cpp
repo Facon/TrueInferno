@@ -177,7 +177,7 @@ namespace Application {
 
 		
 		if (mouseState.button == GUI::Button::TButton::LEFT){
-			_uiManager.getSideBarUI()->placeBuildingInConstruction();
+			_uiManager.getSideBarUI()->playerInteractionWithLeftClick();
 		}
 
 		return false;
