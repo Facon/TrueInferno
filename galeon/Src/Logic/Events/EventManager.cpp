@@ -225,76 +225,76 @@ namespace Logic {
 
 	} // clearConditionEventsMap
 
-	bool HandleMessage(const Message& msg)
+	bool CEventManager::HandleMessage(const Message& msg)
 	{ return false; }
 
-	bool HandleMessage(const TransformMessage& msg)
+	bool CEventManager::HandleMessage(const TransformMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const PositionMessage& msg)
+	bool CEventManager::HandleMessage(const PositionMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const RotationMessage& msg)
+	bool CEventManager::HandleMessage(const RotationMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const DimensionsMessage& msg)
+	bool CEventManager::HandleMessage(const DimensionsMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const ColorMessage& msg)
+	bool CEventManager::HandleMessage(const ColorMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const MaterialMessage& msg)
+	bool CEventManager::HandleMessage(const MaterialMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const AnimationMessage& msg)
+	bool CEventManager::HandleMessage(const AnimationMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const ControlMessage& msg)
+	bool CEventManager::HandleMessage(const ControlMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const PhysicMessage& msg)
+	bool CEventManager::HandleMessage(const PhysicMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const TouchMessage& msg)
+	bool CEventManager::HandleMessage(const TouchMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const DamageMessage& msg)
+	bool CEventManager::HandleMessage(const DamageMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const WorkerMessage& msg)
+	bool CEventManager::HandleMessage(const WorkerMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const WalkSoulPathMessage& msg)
+	bool CEventManager::HandleMessage(const WalkSoulPathMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const HellQuartersMessage& msg)
+	bool CEventManager::HandleMessage(const HellQuartersMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const MovePlaceableMessage& msg)
+	bool CEventManager::HandleMessage(const MovePlaceableMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const SoulSenderMessage& msg)
+	bool CEventManager::HandleMessage(const SoulSenderMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const SoulMessage& msg)
+	bool CEventManager::HandleMessage(const SoulMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const CheckValidPositionPlaceableMessage& msg)
+	bool CEventManager::HandleMessage(const CheckValidPositionPlaceableMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const NumberMessage& msg)
+	bool CEventManager::HandleMessage(const NumberMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const ResourceMessage& msg)
+	bool CEventManager::HandleMessage(const ResourceMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const GetCostPlaceableMessage& msg)
+	bool CEventManager::HandleMessage(const GetCostPlaceableMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const LogisticsMessage& msg)
+	bool CEventManager::HandleMessage(const LogisticsMessage& msg)
 	{ return false; }
 
-	bool HandleMessage(const ToggleMessage& msg)
+	bool CEventManager::HandleMessage(const ToggleMessage& msg)
 	{ return false; }
 
 
