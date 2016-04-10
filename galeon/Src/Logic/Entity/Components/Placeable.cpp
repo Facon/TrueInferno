@@ -299,7 +299,7 @@ namespace Logic {
 
 	bool CPlaceable::ConsumeResourcesForConstruction(){
 
-		Logic::ResourcesManager *resourcesManager = ((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
+		Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
 
 		if (resourcesManager->getMineral() < _mineralCost)
 			return false;

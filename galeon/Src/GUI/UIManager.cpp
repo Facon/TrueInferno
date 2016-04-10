@@ -6,7 +6,7 @@
 
 namespace GUI
 {
-	UIManager::UIManager(Logic::ResourcesManager& rm, Logic::HFManager& hfm, Logic::TimeManager& tm) : _topBarUI(rm, hfm, tm)
+	UIManager::UIManager()
 	{
 	}
 
@@ -67,7 +67,4 @@ namespace GUI
 		_sideBarUI.tick(msecs);
 		_eventUI.tick(msecs);
 	}
-
-
-
 }

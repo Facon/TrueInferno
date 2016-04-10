@@ -159,6 +159,7 @@ namespace Logic
 		void destroyAllComponents();
 
 		// Para cada tipo de mensaje se hace la gestión apropiada.
+		bool HandleMessage(const Message& msg);
 		bool HandleMessage(const TransformMessage& msg);
 		bool HandleMessage(const PositionMessage& msg);
 		bool HandleMessage(const RotationMessage& msg);
@@ -182,7 +183,7 @@ namespace Logic
 		bool HandleMessage(const GetCostPlaceableMessage& msg);
 		bool HandleMessage(const LogisticsMessage& msg);
 		bool HandleMessage(const ToggleMessage& msg);
-		
+
 		/**
 		Devuelve el identificador ï¿½nico de la entidad.
 

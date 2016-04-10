@@ -84,8 +84,7 @@ namespace AI {
 
 			// Notificamos al ResourcesManager
 			// TODO Atajo temporal para obtener el ResourcesManager
-			Logic::ResourcesManager *resourcesManager =
-				((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
+			Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
 			resourcesManager->changeResources(type, quantity);
 
 			return true;
@@ -189,8 +188,7 @@ namespace AI {
 
 				// Notificamos al ResourcesManager
 				// TODO Atajo temporal para obtener el ResourcesManager
-				Logic::ResourcesManager *resourcesManager =
-					((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
+				Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
 				resourcesManager->changeResources(type, -quantity);
 			}
 		}

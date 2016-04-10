@@ -4,23 +4,26 @@
 
 namespace Logic
 {
-	TimeManager::TimeManager() // 2 min.
-	{
-		_time = _maxTime;
-	}
+	const unsigned long long TimeManager::_maxTime = 2 * 60 * 1000; // 2 minutos
 
-	TimeManager::~TimeManager()
-	{}
+	TimeManager TimeManager::_instance = TimeManager();
+
+	TimeManager::TimeManager() : _time(_maxTime), _pause(false) // 2 min.
+	{
+	}
 
 	void TimeManager::tick(unsigned int msecs)
 	{
 		//_time = (_time - msecs) % _maxTime;
 
-		_time -= msecs;
-		if (_time < 0) {
-			_time = 0;
-			// @TODO Hacer esto bien...
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::END_GAME);
+		if (!_pause)
+		{
+			_time -= msecs;
+			if (_time < 0) {
+				_time = 0;
+				// @TODO Hacer esto bien...
+				Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::END_GAME);
+			}
 		}
 	}
 }

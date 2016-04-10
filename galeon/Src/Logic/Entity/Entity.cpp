@@ -186,6 +186,11 @@ namespace Logic
 
 	//---------------------------------------------------------
 
+	bool CEntity::HandleMessage(const Message& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
 	bool CEntity::HandleMessage(const TransformMessage& msg)
 	{
 		updateTransformValuesFromMatrix(msg._transform);
@@ -208,7 +213,7 @@ namespace Logic
 	}
 
 	//---------------------------------------------------------
-
+	
 	bool CEntity::HandleMessage(const ColorMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
@@ -253,7 +258,7 @@ namespace Logic
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
-
+	
 	bool CEntity::HandleMessage(const HellQuartersMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
@@ -303,7 +308,7 @@ namespace Logic
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
-
+	
 	//---------------------------------------------------------
 
 	void CEntity::updateTransformValuesFromMatrix(const Matrix4 &transform)
