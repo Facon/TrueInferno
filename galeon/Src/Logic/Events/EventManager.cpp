@@ -20,6 +20,8 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "EndGameEvent.h"
 #include "TutorialEvent.h"
 
+#include "Logic/Entity/Message.h"
+
 #include "BaseSubsystems/ScriptManager.h"
 
 #include <cassert>
@@ -180,8 +182,6 @@ namespace Logic {
 	//--------------------------------------------------------
 
 	void CEventManager::luaRegister() {
-		// @TODO Sistema de mensajes a lua
-
 		// Jerarquía de eventos.
 		CEvent::luaRegister();
 
@@ -201,6 +201,9 @@ namespace Logic {
 					luabind::def("getSingletonPtr", &CEventManager::getSingletonPtr)
 				]
 			];
+
+		// Jerarquía de mensajes.
+		Logic::Message::luaRegister();
 
 	} // luaRegister
 

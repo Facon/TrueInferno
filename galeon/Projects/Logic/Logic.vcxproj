@@ -111,6 +111,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Toggleable.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\WorkBuilding.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Message.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\BuildingDestructionEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\EndGameEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\Event.cpp" />

@@ -13,8 +13,11 @@ Contiene el tipo de datos de un mensaje.
 #include <string>
 #include <memory>
 
-#include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
+
+#include "BaseSubsystems/Math.h"
+#include "BaseSubsystems/ScriptManager.h"
+
 #include "AI/SoulTask.h"
 #include "Logic/ResourcesManager.h"
 
@@ -87,9 +90,8 @@ namespace Logic
     typedef TMessage::MessageType MessageType;
 
 	/**
-	Contiene el tipo de datos de un mensaje. Tiene una serie de
-	atributos gen�ricos que se interpretar�n en funci�n del tipo 
-	de mensaje.
+	Clase raíz de la jerarquía de mensajes.
+	Contiene únicamente el tipo de mensaje.
 
 	@ingroup logicGroup
     @ingroup entityGroup
@@ -111,6 +113,12 @@ namespace Logic
 		{}
 
 		virtual bool Dispatch(MessageHandler& handler) const = 0;
+
+		/**
+		Registra las clases de mensaje necesarias en el contexto de Lua.
+		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
+		*/
+		static void luaRegister();
 	};
 
 	// SET_TRANSFORM
@@ -400,15 +408,16 @@ namespace Logic
 		}
 	};
 
-	enum HellQuartersAction{
-		SEND_SOUL_BURN,
-		SEND_SOUL_WORK,
-	};
-
 	// REQUEST_SEND_SOUL_WORK, REQUEST_SEND_SOUL_BURN
 	class HellQuartersMessage : public Message
 	{
 	public:
+
+		enum HellQuartersAction {
+			SEND_SOUL_BURN,
+			SEND_SOUL_WORK,
+		};
+
 		HellQuartersMessage(HellQuartersAction action) : Message(MessageType::HELLQUARTERS_REQUEST), _action(action) {}
 
 		HellQuartersAction _action;

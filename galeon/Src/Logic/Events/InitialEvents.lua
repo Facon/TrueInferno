@@ -17,3 +17,6 @@ if launchInitialEvents then
 	-- End game
 	CEventManager.getSingletonPtr():addConditionEvent(CEndGameEvent(true));
 end
+
+-- Message test
+-- local hqMessage = HellQuartersMessage(HellQuartersMessage.SEND_SOUL_BURN);
