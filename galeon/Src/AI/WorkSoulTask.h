@@ -25,7 +25,7 @@ namespace AI{
 			// Si lo está
 			if (targetEntity != nullptr){
 				// Asignamos el trabajador al objetivo
-				Logic::WorkerMessage m(TMessage::WORKER_ASSIGNED, 1);
+				Logic::WorkerMessage m(MessageType::WORKER_ASSIGNED, 1);
 				return m.Dispatch(*targetEntity);
 			}
 
@@ -44,7 +44,7 @@ namespace AI{
 			// Si lo está
 			if (targetEntity != nullptr){
 				// Activamos el trabajador en el objetivo
-				Logic::WorkerMessage m(TMessage::WORKER_ACTIVATED, 1);
+				Logic::WorkerMessage m(MessageType::WORKER_ACTIVATED, 1);
 				return m.Dispatch(*targetEntity);
 			}
 

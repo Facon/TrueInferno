@@ -3,7 +3,7 @@
 
 Contiene el tipo de datos de un mensaje.
 
-@see Logic::TMessage
+@see Logic::Message
 
 @author David Llansó García
 */
@@ -22,7 +22,8 @@ Contiene el tipo de datos de un mensaje.
 #include "Logic/ResourcesManager.h"
 
 // Predeclaraciones
-namespace Logic {
+namespace Logic
+{
 	class CEntity;
 	class CPlaceable;
 };
@@ -30,10 +31,20 @@ namespace Logic {
 namespace Logic
 {
 	/**
-	Namespace para los tipos de mensajes posibles.
+	Clase raíz de la jerarquía de mensajes.
+	Contiene únicamente el tipo de mensaje.
+
+	@ingroup logicGroup
+    @ingroup entityGroup
+
+	@author David Llansó Garc�a
+	@date Julio, 2010
+    @ingroup grupoEntidad
 	*/
-	namespace TMessage
+	class Message
 	{
+	public:
+
 		enum MessageType
 		{
 			UNASSIGNED = 0xFFFFFFFF,
@@ -60,7 +71,7 @@ namespace Logic
 			RETURN_WALK_SOUL_PATH,
 			PERFORM_WALK_SOUL_PATH,
 			WALK_SOUL_PATH_FINISHED,
-			SEND_SOUL_WORK, 
+			SEND_SOUL_WORK,
 			SEND_SOUL_BURN,
 			PLACEABLE_FLOAT_TO,
 			PLACEABLE_PLACE,
@@ -85,25 +96,7 @@ namespace Logic
 			WORKER_ASSIGNED,
 			WORKER_ACTIVATED,
 		};
-	}
 
-    typedef TMessage::MessageType MessageType;
-
-	/**
-	Clase raíz de la jerarquía de mensajes.
-	Contiene únicamente el tipo de mensaje.
-
-	@ingroup logicGroup
-    @ingroup entityGroup
-
-	@author David Llansó Garc�a
-	@date Julio, 2010
-    @ingroup grupoEntidad
-	*/
-	
-	class Message
-	{
-	public:
 		MessageType _type;
 		
 		Message() : _type(MessageType::UNASSIGNED)
@@ -120,6 +113,11 @@ namespace Logic
 		*/
 		static void luaRegister();
 	};
+
+	/*
+	Tipo de mensaje.
+	*/
+	typedef Logic::Message::MessageType MessageType;
 
 	// SET_TRANSFORM
 	class TransformMessage : public Message
@@ -606,7 +604,7 @@ namespace Logic
 	class ToggleMessage : public Message
 	{
 	public:
-		ToggleMessage(bool enabled) : Message(TMessage::UNASSIGNED), _enabled(enabled) {}
+		ToggleMessage(bool enabled) : Message(MessageType::UNASSIGNED), _enabled(enabled) {}
 
 		bool _enabled;
 
