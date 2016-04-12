@@ -170,6 +170,8 @@ namespace Logic {
 
 	bool CEventManager::open() {
 		luaRegister();
+		loadEventsScript("EventManager.lua");
+
 		return true;
 
 	} // open

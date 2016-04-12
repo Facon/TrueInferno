@@ -389,5 +389,8 @@
     <None Include="..\..\Src\Logic\Events\InitialEvents.lua">
       <Filter>Events\Lua Files</Filter>
     </None>
+    <None Include="..\..\Src\Logic\Events\EventManager.lua">
+      <Filter>Events\Lua Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

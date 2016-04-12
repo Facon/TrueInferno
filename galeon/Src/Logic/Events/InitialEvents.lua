@@ -1,7 +1,7 @@
 local launchInitialEvents = false;
 
 if launchInitialEvents then
-	print("Loading InitialEvents.lua...")
+	print("[LUA] Loading InitialEvents.lua...");
 	
 	-- Building destruction
 	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(40 * 1000));
@@ -17,6 +17,3 @@ if launchInitialEvents then
 	-- End game
 	CEventManager.getSingletonPtr():addConditionEvent(CEndGameEvent(true));
 end
-
--- Message test
--- local hqMessage = HellQuartersMessage(HellQuartersMessage.SEND_SOUL_BURN);

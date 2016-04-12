@@ -229,6 +229,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Src\Logic\Events\EventManager.lua" />
     <None Include="..\..\Src\Logic\Events\InitialEvents.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

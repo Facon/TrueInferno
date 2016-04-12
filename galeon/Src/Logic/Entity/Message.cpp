@@ -18,15 +18,15 @@ namespace Logic
 				luabind::class_<Message>("Message")
 				.enum_("MessageType")
 				[
-					luabind::value("SEND_SOUL_BURN", 0),
-					luabind::value("SEND_SOUL_WORK", 1),
-					luabind::value("RESOURCES_ASK", 2),
-					luabind::value("RESOURCES_INFO", 3),
-					luabind::value("RESOURCES_CHANGE", 4),
-					luabind::value("RESOURCES_RESERVE", 5),
-					luabind::value("RESOURCES_RESERVED", 6),
-					luabind::value("RESOURCES_FREE", 7),
-					luabind::value("RESOURCES_CLAIM", 8)
+					luabind::value("MT_SEND_SOUL_BURN", Message::SEND_SOUL_BURN),
+					luabind::value("MT_SEND_SOUL_WORK", Message::SEND_SOUL_WORK),
+					luabind::value("MT_RESOURCES_ASK", Message::RESOURCES_ASK),
+					luabind::value("MT_RESOURCES_INFO", Message::RESOURCES_INFO),
+					luabind::value("MT_RESOURCES_CHANGE", Message::RESOURCES_CHANGE),
+					luabind::value("MT_RESOURCES_RESERVE", Message::RESOURCES_RESERVE),
+					luabind::value("MT_RESOURCES_RESERVED", Message::RESOURCES_RESERVED),
+					luabind::value("MT_RESOURCES_FREE", Message::RESOURCES_FREE),
+					luabind::value("MT_RESOURCES_CLAIM", Message::RESOURCES_CLAIM)
 				],
 				// Children
 				// HellQuartersMessages
@@ -35,8 +35,8 @@ namespace Logic
 				.def(luabind::constructor<HellQuartersMessage::HellQuartersAction>())
 				.enum_("HellQuartersAction")
 				[
-					luabind::value("SEND_SOUL_BURN", 0),
-					luabind::value("SEND_SOUL_WORK", 1)
+					luabind::value("HQA_SEND_SOUL_BURN", HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN),
+					luabind::value("HQA_SEND_SOUL_WORK", HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK)
 				]
 			];
 	}
