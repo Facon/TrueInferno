@@ -66,7 +66,7 @@ namespace AI {
 		}
 
 		// Devuelve los consumidores actualmente registrados
-		std::map<TEntityID, int> getConsumers() const {
+		std::map<TEntityID, int>& getConsumers() {
 			return _consumers;
 		}
 

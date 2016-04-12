@@ -44,6 +44,9 @@ namespace AI {
 
 			// Pasa al estado de espera cuando se le solicita empezar a consumir
 			this->addEdge(stopped, waiting, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_START));
+			
+			// Parados "ignoramos" mensajes de cambio de consumo
+			//this->addEdge(stopped, stopped, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_CHANGE));
 
 			// Una vez finalizada la espera, reserva recursos para poder consumirlos
 			this->addEdge(waiting, reserving, new CConditionFinished());

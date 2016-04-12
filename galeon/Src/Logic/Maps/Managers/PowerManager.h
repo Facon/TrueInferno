@@ -111,7 +111,7 @@ namespace Logic
 		static CPowerManager *_instance;
 
 		// Periodo (ms) con el que se chequean y se intentan abastecer los generadores con mayor necesidad
-		int _refillPeriod = 1000;
+		int _refillPeriod;
 
 		// Tiempo transcurrido desde el último reabastecimiento de los generadores
 		int _timeSinceLastRefill;

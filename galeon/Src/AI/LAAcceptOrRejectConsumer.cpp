@@ -7,6 +7,7 @@ namespace AI {
 	CLatentAction::LAStatus CLAAcceptOrRejectConsumer::OnStart() {
 		// Inicializamos
 		_consumerNotified = false;
+		_consumptionChangeNotified = false;
 		_firstConsumer = false;
 		_lastConsumer = false;
 		_firstConsumerNotified = false;
@@ -35,8 +36,8 @@ namespace AI {
 	CLatentAction::LAStatus CLAAcceptOrRejectConsumer::OnRun(unsigned int msecs) {
 		/* Hacemos 3 cosas:
 		* 1) Notificar a la entidad del consumidor de su conexión/desconexión
-		* 2) Notificar a nuestra entidad si era el primer consumidor o el último para empezar o parar el consumo
-		* 3) Notificar a nuestra entidad del cambio en el consumo
+		* 2) Notificar a nuestra entidad del cambio en el consumo
+		* 3) Notificar a nuestra entidad si era el primer consumidor o el último para empezar o parar el consumo (OJO: parar el consumo DESPUÉS de notificar el cambio)
 		*/
 
 		// Notificamos al consumidor de la conexión/desconexión si no lo habíamos hecho ya
@@ -60,6 +61,23 @@ namespace AI {
 				// Damos por notificado al consumidor porque ha desaparecido
 				_consumerNotified = true;
 			}
+		}
+
+		// Notificamos el cambio de consumo si no estaba hecho ya
+		if (!_consumptionChangeNotified){
+			// Avisamos del cambio del consumo
+			ConsumptionMessage consumptionMsg;
+
+			// El cambio es positivo si es una conexión y negativo en caso contrario
+			int consumptionChange = (_smData.getNewConsumerAccepted() ? 1 : -1) * _smData.getNewConsumption();
+
+			consumptionMsg.assembleConsumptionChange(consumptionChange, ResourceType::COKE);
+
+			if (consumptionMsg.Dispatch(*_entity))
+				_consumptionChangeNotified = true;
+
+			else
+				return LAStatus::RUNNING;
 		}
 
 		// Si era el primer consumidor y todavía no lo hemos notificado
@@ -90,18 +108,7 @@ namespace AI {
 				return LAStatus::RUNNING;
 		}
 
-		// Avisamos del cambio del consumo
-		ConsumptionMessage consumptionMsg;
-
-		// El cambio es positivo si es una conexión y negativo en caso contrario
-		int consumptionChange = (_smData.getNewConsumerAccepted() ? 1 : -1) * _smData.getNewConsumption();
-
-		consumptionMsg.assembleConsumptionChange(consumptionChange, ResourceType::COKE);
-
-		if (consumptionMsg.Dispatch(*_entity))
-			return LAStatus::SUCCESS;
-		else
-			return LAStatus::RUNNING;
+		return LAStatus::SUCCESS;
 	}
 
 }

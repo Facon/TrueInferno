@@ -30,10 +30,8 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	CPowerManager::CPowerManager()
-	{
+	CPowerManager::CPowerManager() : _refillPeriod(3000), _timeSinceLastRefill(0) {
 		_instance = this;
-		_timeSinceLastRefill = 0;
 
 	} // CPowerManager
 
@@ -163,8 +161,10 @@ namespace Logic {
 		CEntity* target = nullptr;
 		int maxNeeded = INT_MIN;
 
+		std::map<BuildingType, std::set<CPlaceable*>*> _buildings = CBuildingManager::getSingletonPtr()->getBuildings();
+
 		// Obtenemos los edificios de tipo PowerGenerator
-		std::set<CPlaceable*>* _generators = CBuildingManager::getSingletonPtr()->getBuildings()[BuildingType::PowerGenerator];
+		std::set<CPlaceable*>* _generators = _buildings[BuildingType::PowerGenerator];
 		
 		// Si no hay generadores no se hace nada
 		if (_generators == nullptr)
@@ -174,12 +174,10 @@ namespace Logic {
 		for (auto it = _generators->cbegin(); it != _generators->cend(); ++it){
 			CPowerGenerator* generator = (*it)->getEntity()->getComponent<CPowerGenerator>();
 
-			// Descartamos los que no tienen consumo o no están activos
-			if (generator->getConsumption() == 0)
-				continue;
+			// TODO Descartamos los que no están activos
 
 			// Calculamos su necesidad de combustible
-			int needed = generator->getCurrentReserves() - generator->getConsumption();
+			int needed = generator->getConsumption() - generator->getCurrentReserves();
 
 			// Y actualizamos, si procede, el mejor ratio encontrado hasta el momento
 			if (needed > maxNeeded){
@@ -188,14 +186,14 @@ namespace Logic {
 			}
 		}
 
-		// Si encontramos algún edificio con necesidad
-		if (target!=nullptr && maxNeeded > 0){
-			// Pedimos a la logística del edificio que busque los recursos que necesita
+		// Si encontramos algún edificio a abastecer
+		if (target!=nullptr){
+			// Pedimos a la logística del edificio que busque los recursos que necesita o todos los que haya disponibles si no necesita nada
 			LogisticsMessage m;
-			m.assembleDemandResources(ResourceType::COKE, maxNeeded);
+			m.assembleDemandResources(ResourceType::COKE, maxNeeded > 0 ? maxNeeded : INT_MAX);
 
-			if (!m.Dispatch(*target))
-				std::cout << "Can't refill PowerGenerator" << std::endl;
+			// TODO ¿Reintentamos o elegimos otro objetivo?
+			m.Dispatch(*target);
 		}
 
 	}

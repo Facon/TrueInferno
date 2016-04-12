@@ -33,12 +33,12 @@ namespace AI {
 		if (_smData.getConsumption() == 0)
 			return LAStatus::SUCCESS;
 
-		// Preparamos el mensaje de reserva de recursos
+		// Preparamos el mensaje de reserva de recursos que se enviará a nuestra propia entidad
 		ResourceMessage m;
 		m.assembleResourcesReserve(_consumedResource, _smData.getConsumption(), _entity->getEntityID());
 
 		// Reintentamos el mensaje hasta que se acepte
-		if (m.Dispatch(*this))
+		if (m.Dispatch(*_entity))
 			// Suspendemos la LA hasta que llegue el mensaje de confirmación
 			return LAStatus::SUSPENDED;
 		else

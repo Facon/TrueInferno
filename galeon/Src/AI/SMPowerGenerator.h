@@ -30,7 +30,7 @@ namespace AI {
 			int waitConsumer = this->addNode(new CLAWaitConsumerChange(entity, _data));
 			int checkNewConsumption = this->addNode(new CLACheckNewConsumption(entity, _data));
 			int acceptOrReject = this->addNode(new CLAAcceptOrRejectConsumer(entity, _data));
-			int fillReserves = this->addNode(new CLAFillReserves(entity, _data));
+			//int fillReserves = this->addNode(new CLAFillReserves(entity, _data));
 			int detachConsumers = this->addNode(new CLADetachConsumers(entity, _data));
 
 			// Inicialmente se pone a la espera de solicitudes de cambio de consumidores
@@ -46,10 +46,11 @@ namespace AI {
 			*	- Si no, intenta asegurarse reservas
 			*/
 			this->addEdge(checkNewConsumption, acceptOrReject, new CConditionSuccess());
-			this->addEdge(checkNewConsumption, fillReserves, new CConditionFail());
+			this->addEdge(checkNewConsumption, acceptOrReject, new CConditionFail());
+			//this->addEdge(checkNewConsumption, fillReserves, new CConditionFail());
 
 			// Tras conseguir (o no) reservas pasa al estado de respuesta al consumidor
-			this->addEdge(fillReserves, acceptOrReject, new CConditionFinished());
+			//this->addEdge(fillReserves, acceptOrReject, new CConditionFinished());
 
 			// Tras la respuesta al consumidor siempre vuelve al estado de espera
 			this->addEdge(acceptOrReject, waitConsumer, new CConditionFinished());
@@ -58,7 +59,7 @@ namespace AI {
 			this->addEdge(waitConsumer, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
 			this->addEdge(checkNewConsumption, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
 			this->addEdge(acceptOrReject, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
-			this->addEdge(fillReserves, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
+			//this->addEdge(fillReserves, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
 
 			// Del estado de desconexión se vuelve al de espera inicial
 			this->addEdge(detachConsumers, waitConsumer, new CConditionFinished());

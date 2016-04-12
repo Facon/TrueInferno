@@ -2,6 +2,7 @@
 
 #include "Logic\Entity\Message.h"
 #include "AI\SMPowerGeneratorData.h"
+#include <map>
 
 namespace AI {
 	CLatentAction::LAStatus CLADetachConsumers::OnStart() {
@@ -13,9 +14,10 @@ namespace AI {
 		PowerMessage m;
 		m.assemblePowerAttachmentInfo(_entity->getEntityID(), false, 0);
 
-		// Para cada consumidor
-		for (auto it = _smData.getConsumers().begin(); it != _smData.getConsumers().end(); ++it) {
-			TEntityID consumerId = (*it).first;
+		// Mientras queden consumidores conectados
+		auto it = _smData.getConsumers().begin();
+		while (it != _smData.getConsumers().end()){
+			TEntityID consumerId = it->first;
 
 			// Localizamos la entidad
 			CEntity* consumer = _entity->getMap()->getEntityByID(consumerId);
@@ -29,6 +31,8 @@ namespace AI {
 
 			// Eliminamos al consumidor de nuestra estructura
 			_smData.removeConsumer(consumerId);
+
+			it = _smData.getConsumers().begin();
 		}
 
 		return LAStatus::SUCCESS;

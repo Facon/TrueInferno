@@ -17,7 +17,7 @@ namespace AI {
 		_received = true;
 
 		// Guardamos datos en la memoria compartida de la SM
-		_smData.setCurrentCoke(msg._quantity);
+		_smData.setCurrentCoke(msg._available);
 
 		// Reactivamos la LA
 		resume();
@@ -47,6 +47,8 @@ namespace AI {
 		int totalConsumption = _smData.getTotalConsumption();
 		int newConsumption = _smData.getNewConsumption();
 		int currentCoke = _smData.getCurrentCoke();
+
+		std::cout << "Checking consumption: " << currentCoke << " >= " << (totalConsumption + newConsumption) << std::endl;
 
 		// Si el nuevo consumo total es aceptable: éxito
 		if (currentCoke >= (totalConsumption + newConsumption)){

@@ -336,7 +336,6 @@ namespace Logic {
 		return _buildings;
 	}
 
-
 	bool CBuildingManager::HandleMessage(const LogisticsMessage& msg){
 		bool ret = false;
 

@@ -23,6 +23,9 @@ namespace AI {
 		// Flag a true cuando el consumidor ya ha sido notificado
 		bool _consumerNotified;
 
+		// Flag a true cuando hemos notificado el cambio de consumo
+		bool _consumptionChangeNotified;
+
 		// Flag a true cuando estamos añadiendo el primer consumidor
 		bool _firstConsumer;
 		
