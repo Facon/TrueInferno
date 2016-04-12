@@ -23,13 +23,12 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include <map>
 #include <string>
 
+#include "Event.h"
 #include "Logic/Entity/MessageHandler.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
 {
-	class CEvent;
-	enum ConditionEventType;
 }
 
 /**
@@ -55,11 +54,12 @@ namespace Logic
 	class CEventManager : public MessageHandler
 	{
 	public:
+
 		/**
 		Devuelve la única instancia de la clase.
 		@return Puntero a la instancia de la clase.
 		*/
-		static Logic::CEventManager *getSingletonPtr() { return _instance; }
+		static CEventManager *getSingletonPtr() { return _instance; }
 
 		/**
 		Inicializa la instancia y los recursos estáticos.
@@ -85,12 +85,12 @@ namespace Logic
 		void tick(unsigned int msecs);
 
 		/**
-		Carga el script de LUA encargado de leer y crear los eventos.
+		Carga un script de LUA encargado de crear y lanzar eventos.
 
-		@param filename nombre del script LUA con los eventos del juego.
+		@param filename nombre del script.
 		@return true si la carga se hizo correctamente.
 		*/
-		bool loadEvents(const std::string& filename);
+		bool loadEventsScript(const std::string& filename);
 
 		/**
 		Destruye todos los eventos cargados.
@@ -105,10 +105,11 @@ namespace Logic
 		/**
 		Tipo índice de eventos condicionales del juego.
 		*/
-		typedef std::map<ConditionEventType, std::list<CEvent*>> TConditionEventMap;
+		typedef std::map<CEvent::ConditionTriggerType, std::list<CEvent*>> TConditionEventMap;
 
 		/**
-		Añade un evento a la cola de eventos lanzados por tiempo.
+		Añade un evento a la cola de eventos lanzados por tiempo. Este
+		nuevo evento debe ser añadido en orden.
 
 		@param event evento por tiempo a añadir a la cola.
 		@return true si se añadió correctamente.
@@ -126,10 +127,10 @@ namespace Logic
 		/**
 		Lanza un evento condicional del tipo especificado.
 
-		@param conditionEventType tipo de evento condicional a lanzar.
+		@param conditionTriggerType tipo de evento condicional a lanzar.
 		@return true si se lanzó correctamente.
 		*/
-		bool launchConditionEvent(ConditionEventType conditionEventType);
+		bool launchConditionEvent(CEvent::ConditionTriggerType conditionTriggerType);
 
 		/**
 		Devuelve la cola de eventos lanzados por tiempo del juego.
@@ -194,6 +195,13 @@ namespace Logic
 		Destructor.
 		*/
 		virtual ~CEventManager();
+
+		/**
+		Método encargado de registrar en el contexto de Lua todas aquellas
+		clases y funciones necesarias para el completo manejo de los eventos
+		de juego desde Lua.
+		*/
+		void luaRegister();
 
 		/**
 		Segunda fase de la construcción del objeto. Sirve para hacer

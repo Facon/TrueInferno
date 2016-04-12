@@ -17,7 +17,7 @@ namespace AI {
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg)
 		{
 			// Rechazamos mensajes que no sean de petición y rechazamos también si ya había llegado uno
-			if (msg._type != Logic::TMessage::REQUEST_WALK_SOUL_PATH || _pathRequestReceived)
+			if (msg._type != MessageType::REQUEST_WALK_SOUL_PATH || _pathRequestReceived)
 				return false;
 
 			// Hemos recibido petición

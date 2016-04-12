@@ -111,6 +111,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Toggleable.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\WorkBuilding.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Message.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\BuildingDestructionEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\EndGameEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\Event.cpp" />
@@ -168,7 +169,6 @@
     <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h" />
     <ClInclude Include="..\..\Src\Logic\Events\BuildingDestructionEvent.h" />
-    <ClInclude Include="..\..\Src\Logic\Events\ConditionEvents.h" />
     <ClInclude Include="..\..\Src\Logic\Events\EndGameEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\Event.h" />
     <ClInclude Include="..\..\Src\Logic\Events\EventManager.h" />
@@ -228,6 +228,10 @@
       <Project>{599f27dc-a593-4e7c-a461-d7b3198118b0}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Src\Logic\Events\EventManager.lua" />
+    <None Include="..\..\Src\Logic\Events\InitialEvents.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

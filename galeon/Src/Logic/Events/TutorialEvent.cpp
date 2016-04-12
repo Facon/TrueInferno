@@ -15,12 +15,24 @@ uno de los paneles del tutorial.
 */
 
 #include "TutorialEvent.h"
+#include "BaseSubsystems/ScriptManager.h"
 
 #include "GUI/Server.h"
 #include "GUI/UIManager.h"
 #include "GUI/EventUI.h"
 
 namespace Logic {
+
+	void CTutorialEvent::luaRegister()
+	{
+		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
+			[
+				luabind::class_<CTutorialEvent, CEvent>("CTutorialEvent")
+				.def(luabind::constructor<int>())
+			];
+	}
+
+	//--------------------------------------------------------
 
 	void CTutorialEvent::execute()
 	{

@@ -10,7 +10,7 @@ namespace AI {
 			return false;
 
 		switch (msg._action){
-		case SEND_SOUL_BURN:{
+		case HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN:{
 			// Buscamos horno. Si no hay, no aceptamos el mensaje
 			TEntityID target = CWorkManager::getSingletonPtr()->findFurnace();
 			// Si se devolvió el ID especial UNASSIGNED es que no había ningún edificio para trabajar
@@ -23,7 +23,7 @@ namespace AI {
 			break;
 		}
 
-		case SEND_SOUL_WORK:{
+		case HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK:{
 			// Buscamos un edificio donde trabajar
 			TEntityID target = CWorkManager::getSingletonPtr()->findBuildingToWork();
 

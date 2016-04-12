@@ -3,7 +3,7 @@
 
 Contiene el tipo de datos de un mensaje.
 
-@see Logic::TMessage
+@see Logic::Message
 
 @author David Llansó García
 */
@@ -13,13 +13,17 @@ Contiene el tipo de datos de un mensaje.
 #include <string>
 #include <memory>
 
-#include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
+
+#include "BaseSubsystems/Math.h"
+#include "BaseSubsystems/ScriptManager.h"
+
 #include "AI/SoulTask.h"
 #include "Logic/ResourcesManager.h"
 
 // Predeclaraciones
-namespace Logic {
+namespace Logic
+{
 	class CEntity;
 	class CPlaceable;
 };
@@ -27,10 +31,20 @@ namespace Logic {
 namespace Logic
 {
 	/**
-	Namespace para los tipos de mensajes posibles.
+	Clase raíz de la jerarquía de mensajes.
+	Contiene únicamente el tipo de mensaje.
+
+	@ingroup logicGroup
+    @ingroup entityGroup
+
+	@author David Llansó Garc�a
+	@date Julio, 2010
+    @ingroup grupoEntidad
 	*/
-	namespace TMessage
+	class Message
 	{
+	public:
+
 		enum MessageType
 		{
 			UNASSIGNED = 0xFFFFFFFF,
@@ -57,7 +71,7 @@ namespace Logic
 			RETURN_WALK_SOUL_PATH,
 			PERFORM_WALK_SOUL_PATH,
 			WALK_SOUL_PATH_FINISHED,
-			SEND_SOUL_WORK, 
+			SEND_SOUL_WORK,
 			SEND_SOUL_BURN,
 			PLACEABLE_FLOAT_TO,
 			PLACEABLE_PLACE,
@@ -82,26 +96,7 @@ namespace Logic
 			WORKER_ASSIGNED,
 			WORKER_ACTIVATED,
 		};
-	}
 
-    typedef TMessage::MessageType MessageType;
-
-	/**
-	Contiene el tipo de datos de un mensaje. Tiene una serie de
-	atributos gen�ricos que se interpretar�n en funci�n del tipo 
-	de mensaje.
-
-	@ingroup logicGroup
-    @ingroup entityGroup
-
-	@author David Llansó Garc�a
-	@date Julio, 2010
-    @ingroup grupoEntidad
-	*/
-	
-	class Message
-	{
-	public:
 		MessageType _type;
 		
 		Message() : _type(MessageType::UNASSIGNED)
@@ -111,7 +106,18 @@ namespace Logic
 		{}
 
 		virtual bool Dispatch(MessageHandler& handler) const = 0;
+
+		/**
+		Registra las clases de mensaje necesarias en el contexto de Lua.
+		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
+		*/
+		static void luaRegister();
 	};
+
+	/*
+	Tipo de mensaje.
+	*/
+	typedef Logic::Message::MessageType MessageType;
 
 	// SET_TRANSFORM
 	class TransformMessage : public Message
@@ -400,15 +406,16 @@ namespace Logic
 		}
 	};
 
-	enum HellQuartersAction{
-		SEND_SOUL_BURN,
-		SEND_SOUL_WORK,
-	};
-
 	// REQUEST_SEND_SOUL_WORK, REQUEST_SEND_SOUL_BURN
 	class HellQuartersMessage : public Message
 	{
 	public:
+
+		enum HellQuartersAction {
+			SEND_SOUL_BURN,
+			SEND_SOUL_WORK,
+		};
+
 		HellQuartersMessage(HellQuartersAction action) : Message(MessageType::HELLQUARTERS_REQUEST), _action(action) {}
 
 		HellQuartersAction _action;
@@ -597,7 +604,7 @@ namespace Logic
 	class ToggleMessage : public Message
 	{
 	public:
-		ToggleMessage(bool enabled) : Message(TMessage::UNASSIGNED), _enabled(enabled) {}
+		ToggleMessage(bool enabled) : Message(MessageType::UNASSIGNED), _enabled(enabled) {}
 
 		bool _enabled;
 

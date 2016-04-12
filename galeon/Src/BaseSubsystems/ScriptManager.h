@@ -25,6 +25,7 @@ struct lua_State;
 
 typedef int (*lua_CFunction) (lua_State *L);
 
+#include "luabind.hpp"
 #include <string>
 
 namespace ScriptManager {

@@ -1,6 +1,5 @@
 #include "TimeManager.h"
 #include "Logic/Events/EventManager.h"
-#include "Logic/Events/ConditionEvents.h"
 
 namespace Logic
 {
@@ -22,7 +21,7 @@ namespace Logic
 			if (_time < 0) {
 				_time = 0;
 				// @TODO Hacer esto bien...
-				Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::END_GAME);
+				Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::END_GAME);
 			}
 		}
 	}

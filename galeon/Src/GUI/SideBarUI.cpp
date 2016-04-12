@@ -9,7 +9,7 @@
 #include "Map/MapEntity.h"
 
 #include "Logic/Events/EventManager.h"
-#include "Logic/Events/ConditionEvents.h"
+#include "Logic/Events/Event.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
@@ -246,7 +246,7 @@ namespace GUI
 	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_WORK);
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 		
 		m.Dispatch(*hellQuarters->getEntity());
@@ -258,7 +258,7 @@ namespace GUI
 	bool SideBarUI::moveSoulReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_BURN);
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
 		m.Dispatch(*hellQuarters->getEntity());
@@ -397,7 +397,7 @@ namespace GUI
 
 						// @TODO Hacer esto bien...
 						if (_firstRoad) {
-							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 							_firstRoad = false;
 						}
 
