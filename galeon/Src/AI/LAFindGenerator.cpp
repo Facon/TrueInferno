@@ -5,6 +5,7 @@
 #include "Logic\Maps\Managers\PowerManager.h"
 
 namespace AI {
+	RTTI_IMPL(CLAFindGenerator, CLatentAction);
 
 	CLatentAction::LAStatus CLAFindGenerator::OnStart() {
 		// Inicializamos

@@ -4,6 +4,8 @@
 #include "AI\SMEmptyTemplateData.h"
 
 namespace AI {
+	RTTI_IMPL(CLAAcceptConsumptionChanges, CLatentAction);
+	
 	bool CLAAcceptConsumptionChanges::HandleMessage(const ConsumptionMessage& msg) {
 		// Rechazamos lo que no sean mensajes de cambio de consumo sobre el recurso que consumimos
 		if (msg._type != MessageType::CONSUMPTION_CHANGE || msg._resourceType != _resourceType)

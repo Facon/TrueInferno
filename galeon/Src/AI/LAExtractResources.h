@@ -8,6 +8,8 @@
 
 namespace AI {
 	class CLAExtractResources : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAExtractResources(CEntity* entity, CSMResourceExtractorData& smData, ResourceType resourceType, unsigned int maxExtractedQuantity) :
 			CLatentAction(entity), _smData(smData), _resourceType(resourceType), _maxExtractedQuantity(maxExtractedQuantity) {}

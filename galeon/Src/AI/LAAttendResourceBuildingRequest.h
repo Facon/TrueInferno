@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLAAttendResourceBuildingRequest : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAAttendResourceBuildingRequest(CEntity* entity, CSMResourceBuildingData& smData) : CLatentAction(entity), _smData(smData), 
 			_requestReceived(false), _finallyReserved(0), _processDone(false) {}

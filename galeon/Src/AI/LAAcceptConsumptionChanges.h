@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLAAcceptConsumptionChanges : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAAcceptConsumptionChanges(CEntity* entity, CSMResourceConsumerData& smData, ResourceType resourceType) :
 		CLatentAction(entity), _smData(smData), _resourceType(resourceType) {}

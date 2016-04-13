@@ -1,6 +1,8 @@
 #include "LAGetWalkingSoulPath.h"
 
 namespace AI {
+	RTTI_IMPL(CLAGetWalkingSoulPath, CLatentAction);
+	
 	CLatentAction::LAStatus CLAGetWalkingSoulPath::OnStart() {
 		// Inicializamos la ruta a null
 		_smData.setPath(nullptr);

@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLADetachConsumers : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLADetachConsumers(CEntity* entity, CSMPowerGeneratorData& smData) : CLatentAction(entity), _smData(smData) {}
 

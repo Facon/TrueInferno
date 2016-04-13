@@ -17,7 +17,6 @@ de ejemplo.
 #ifndef __AI_StateMachine_H
 #define __AI_StateMachine_H
 
-
 #include "Condition.h"
 #include "Logic/Entity/Entity.h"
 
@@ -25,8 +24,14 @@ de ejemplo.
 #include "SimpleLatentActions.h"
 #include "LAExecuteSM.h"
 
+#include <string>
+
+/** Flag para activar el log para el debug de las SM.
+* Adicionalmente las SMs que se quieran analizar deben crearse con _debug a true */
+//#define DEBUG_SM
+
 /** Macro para manejar mensajes en una SM (i.e. hijos de StateMachine)
-Propaga el mensaje adecuadamente en una SM para que llegue a las condiciones de transición entre estados.
+* Propaga el mensaje adecuadamente en una SM para que llegue a las condiciones de transición entre estados.
 */
 #define SM_HANDLE_MESSAGE(Class) \
 bool HandleMessage(const Class& msg){ \
@@ -51,8 +56,8 @@ bool HandleMessage(const Class& msg){ \
 }
 
 /** Macro para manejar mensajes en una SM (i.e. hijos de StateMachine)
-Permite procesar globalmente el mensaje en la SM con el método SMHandleMessage y propaga el mensaje
-adecuadamente para que llegue a las condiciones de transición entre estados
+* Permite procesar globalmente el mensaje en la SM con el método SMHandleMessage y propaga el mensaje
+* adecuadamente para que llegue a las condiciones de transición entre estados
 */
 #define SM_HANDLE_MESSAGE_WGLOBAL(Class) \
 bool HandleMessage(const Class& msg){ \
@@ -99,12 +104,12 @@ namespace AI
 		/**
 		Constructor
 		*/
-		CStateMachine() : _entity(0), _currentNodeId(-1), _initialNodeId(-1) { _edges = new EdgeList(); };
+		CStateMachine() : _entity(0), _currentNodeId(-1), _initialNodeId(-1), _name(""), _debug(false) { _edges = new EdgeList(); };
 		
 		/**
 		Constructor que recibe la entidad que ejecuta la máquina de estado
 		*/
-		CStateMachine(CEntity* entity) : _entity(entity), _currentNodeId(-1), _initialNodeId(-1) { _edges = new EdgeList(); };
+		CStateMachine(CEntity* entity) : _entity(entity), _currentNodeId(-1), _initialNodeId(-1), _name(""), _debug(false) { _edges = new EdgeList(); };
 		
 		/**
 		Destructor
@@ -231,6 +236,11 @@ namespace AI
 		*/
 		EdgeList * _edges;
 
+		// Nombre de la SM
+		std::string _name;
+
+		bool _debug;
+
 	}; // class CStateMachine
 	
 	/**
@@ -346,6 +356,15 @@ namespace AI
 				if (edgeIt->first->check(node, _entity)) {
 					// Sólo hacemos la primera transición que encontramos
 					int newNode = edgeIt->second;
+
+#ifdef DEBUG_SM
+					if (_debug){
+						//std::cout << _entity->getEntityID() << "," << _name << "," << _nodes[_currentNodeId]->getName() << "," << _nodes[newNode]->getName() << std::endl;
+						//std::cout << _entity->getEntityID() << "," << _name << "," << _currentNodeId << "," << newNode << std::endl;
+						std::cout << _entity->getEntityID() << "," << _name << "," << _nodes[_currentNodeId]->GetRTTI().GetClassName() << "," << _nodes[newNode]->GetRTTI().GetClassName() << std::endl;
+					}
+#endif
+
 					_currentNodeId = newNode;
 					// Si la transición se hace cierta siempre consideramos que el comportamiento cambia
 					// Esto implica que si se activa una arista circular (empieza y termina en el mismo nodo)

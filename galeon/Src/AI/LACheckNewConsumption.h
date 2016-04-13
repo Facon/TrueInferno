@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLACheckNewConsumption : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLACheckNewConsumption(CEntity* entity, CSMPowerGeneratorData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
 

@@ -4,6 +4,8 @@
 #include "Logic\Maps\Managers\WorkManager.h"
 
 namespace AI {
+	RTTI_IMPL(CLAGetTaskAndTarget, CLatentAction);
+
 	bool CLAGetTaskAndTarget::HandleMessage(const HellQuartersMessage& msg) {
 		// Rechazamos lo que no sean peticiones. No aceptamos más de una petición simultánea
 		if (msg._type != MessageType::HELLQUARTERS_REQUEST || _task != nullptr)

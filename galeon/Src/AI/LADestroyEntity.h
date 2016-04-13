@@ -7,6 +7,8 @@
 
 namespace AI {
 	class CLADestroyEntity : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLADestroyEntity(CEntity* entity, CSMSoulData& smData) : CLatentAction(entity), _smData(smData) {}
 

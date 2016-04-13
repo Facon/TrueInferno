@@ -5,6 +5,8 @@
 #include "PerformTransportSoulTask.h"
 
 namespace AI {
+	RTTI_IMPL(CLAExecuteResourceProvideTasks, CLatentAction);
+	
 	CLatentAction::LAStatus CLAExecuteResourceProvideTasks::OnStart() {
 		return LAStatus::RUNNING;
 	}

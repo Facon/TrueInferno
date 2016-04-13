@@ -4,6 +4,8 @@
 #include "Logic\Maps\Map.h"
 
 namespace AI {
+	RTTI_IMPL(CLASendSoul, CLatentAction);
+	
 	bool CLASendSoul::HandleMessage(const SoulSenderMessage& msg) {
 		// Rechazamos lo que no sean peticiones. No aceptamos más de una petición simultánea
 		if (msg._type != MessageType::SOUL_SENDER_REQUEST || _task != nullptr)

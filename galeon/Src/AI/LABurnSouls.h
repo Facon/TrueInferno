@@ -7,6 +7,8 @@
 
 namespace AI {
 	class CLABurnSouls : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLABurnSouls(CEntity* entity, CSMSoulBurnerData& smData, int cokePerSoul, int crudePerSoul) : 
 			CLatentAction(entity), _smData(smData), _cokePerSoul(cokePerSoul), _crudePerSoul(crudePerSoul) {}

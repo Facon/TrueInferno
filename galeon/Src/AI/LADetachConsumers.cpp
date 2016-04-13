@@ -5,11 +5,15 @@
 #include <map>
 
 namespace AI {
+	RTTI_IMPL(CLADetachConsumers, CLatentAction);
+	
 	CLatentAction::LAStatus CLADetachConsumers::OnStart() {
 		return LAStatus::RUNNING;
 	}
 
 	CLatentAction::LAStatus CLADetachConsumers::OnRun(unsigned int msecs) {
+		std::cout << "Detaching consumers..." << std::endl;
+
 		// Preparamos el mensaje de desconexión
 		PowerMessage m;
 		m.assemblePowerAttachmentInfo(_entity->getEntityID(), false, 0);

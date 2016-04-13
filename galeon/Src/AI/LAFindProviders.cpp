@@ -4,6 +4,8 @@
 #include "Logic\BuildingManager.h"
 
 namespace AI {
+	RTTI_IMPL(CLAFindProviders, CLatentAction);
+	
 	bool CLAFindProviders::HandleMessage(const ResourceMessage& msg) {
 		// Rechazamos lo que no sean mensajes de información de recursos
 		if (msg._type != MessageType::RESOURCES_INFO)

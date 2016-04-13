@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLAStopConsumingResources : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAStopConsumingResources(CEntity* entity, CSMResourceConsumerData& smData, ResourceType resourceType) :
 			CLatentAction(entity), _smData(smData), _resourceType(resourceType) {}

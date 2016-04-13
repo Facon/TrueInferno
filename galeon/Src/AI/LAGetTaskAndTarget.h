@@ -1,7 +1,7 @@
 #ifndef LA_GET_TASK_TARGET_
 #define LA_GET_TASK_TARGET_
 
-#include "StateMachine.h"
+#include "LatentAction.h"
 #include "Server.h"
 #include "SoulTask.h"
 #include "WorkSoulTask.h"
@@ -11,6 +11,8 @@
 
 namespace AI {
 	class CLAGetTaskAndTarget : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAGetTaskAndTarget(CEntity* entity) : CLatentAction(entity) {
 			_task = nullptr;

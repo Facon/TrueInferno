@@ -2,6 +2,8 @@
 #include "Logic\ResourcesManager.h"
 
 namespace AI {
+	RTTI_IMPL(CLATransformResources, CLatentAction);
+	
 	CLatentAction::LAStatus CLATransformResources::OnStart() {
 		// Leemos la cantidad de recursos que van a ser transformados
 		_transformed = _smData.getAvailableResources();

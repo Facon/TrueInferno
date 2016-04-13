@@ -11,6 +11,7 @@ namespace AI
 //////////////////////////////
 //	Implementación de CLAWait
 //////////////////////////////
+	RTTI_IMPL(CLAWait, CLatentAction);
 
 	/**
 	Método invocado al principio de la ejecución de la acción,

@@ -7,6 +7,8 @@
 
 namespace AI {
 	class CLAEmptyTemplate : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAEmptyTemplate(CEntity* entity, CSMEmptyTemplateData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
 

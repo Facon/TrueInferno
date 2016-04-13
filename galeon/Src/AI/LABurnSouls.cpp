@@ -2,6 +2,8 @@
 #include "Logic\ResourcesManager.h"
 
 namespace AI {
+	RTTI_IMPL(CLABurnSouls, CLatentAction);
+
 	CLatentAction::LAStatus CLABurnSouls::OnStart() {
 		_cokeIncreased = false;
 		_crudeIncreased = false;

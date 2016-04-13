@@ -7,6 +7,8 @@
 
 namespace AI {
 	class CLAGetWalkingSoulPath : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAGetWalkingSoulPath(CEntity* entity, CSMSoulData& smData) : CLatentAction(entity), _smData(smData), _pathMessageReceived(false) {}
 

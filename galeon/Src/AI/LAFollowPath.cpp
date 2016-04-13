@@ -4,6 +4,7 @@
 #include "Logic\Maps\Map.h"
 
 namespace AI {
+	RTTI_IMPL(CLAFollowPath, CLatentAction);
 
 	CLatentAction::LAStatus CLAFollowPath::OnStart() {
 		return LAStatus::RUNNING;

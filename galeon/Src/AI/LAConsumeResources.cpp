@@ -2,6 +2,8 @@
 #include "Logic\ResourcesManager.h"
 
 namespace AI {
+	RTTI_IMPL(CLAConsumeResources, CLatentAction);
+	
 	CLatentAction::LAStatus CLAConsumeResources::OnStart() {
 		return LAStatus::RUNNING;
 	}

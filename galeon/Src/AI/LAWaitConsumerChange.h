@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLAWaitConsumerChange : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAWaitConsumerChange(CEntity* entity, CSMPowerGeneratorData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
 

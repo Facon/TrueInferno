@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLAFillReserves : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAFillReserves(CEntity* entity, CSMPowerGeneratorData& smData) : CLatentAction(entity), _smData(smData) {}
 

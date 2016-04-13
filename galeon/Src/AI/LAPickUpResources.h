@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLAPickUpResources : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAPickUpResources(CEntity* entity, CSMResourceProviderData& smData) : CLatentAction(entity), _smData(smData), _requestReceived(false) {}
 

@@ -4,6 +4,7 @@
 #include "AI\SMPowerGeneratorData.h"
 
 namespace AI {
+	RTTI_IMPL(CLAFillReserves, CLatentAction);
 
 	CLatentAction::LAStatus CLAFillReserves::OnStart() {
 		// Determinamos lo que necesitamos de coke

@@ -7,6 +7,8 @@
 
 namespace AI {
 	class CLATransformResources : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLATransformResources(CEntity* entity, CSMResourceTransformerData& smData, 
 			ResourceType resourceFrom, ResourceType resourceInto, 

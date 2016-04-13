@@ -21,8 +21,23 @@ namespace AI {
 	class CSMPowerConsumer : public CStateMachine<CLatentAction, CSMPowerConsumerData> {
 	public:
 		CSMPowerConsumer(CEntity* entity) : CStateMachine(entity) {
+			_name = "PowerConsumer";
+			_debug = false;
+		}
+
+		virtual ~CSMPowerConsumer() {}
+
+		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+			// Lectura de datos
+			assert(entityInfo->hasAttribute("consumptionUnits"));
+			int consumptionUnits = entityInfo->getIntAttribute("consumptionUnits");
+
+			assert(entityInfo->hasAttribute("consumptionPeriod"));
+			int consumptionPeriod = 1000 * entityInfo->getIntAttribute("consumptionPeriod");
+
+			// Creación de SM en base a los datos
 			int findGenerator = this->addNode(new CLAFindGenerator(entity, _data));
-			int attachToGenerator = this->addNode(new CLAAttachToGenerator(entity, _data));
+			int attachToGenerator = this->addNode(new CLAAttachToGenerator(entity, _data, consumptionUnits, consumptionPeriod));
 			int waitDetachment = this->addNode(new CLAWaitGeneratorDetachment(entity, _data));
 
 			// La entidad comienza en el estado de búsqueda de generador
@@ -36,16 +51,12 @@ namespace AI {
 			this->addEdge(attachToGenerator, waitDetachment, new CConditionSuccess());
 			this->addEdge(attachToGenerator, findGenerator, new CConditionFail());
 
-			// En estado de espera no se hace nada hasta recibir desconexión.Si se desconecta, intenta buscar otro generador
+			// En estado de espera no se hace nada hasta recibir desconexión. Si se desconecta, intenta buscar otro generador
 			this->addEdge(waitDetachment, findGenerator, new CConditionSuccess());
 			this->addEdge(waitDetachment, waitDetachment, new CConditionFail());
 
 			this->resetExecution();
-		}
 
-		virtual ~CSMPowerConsumer() {}
-
-		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			return true;
 		}
 

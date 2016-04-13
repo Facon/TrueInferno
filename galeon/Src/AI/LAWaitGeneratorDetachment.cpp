@@ -4,6 +4,8 @@
 #include "AI\SMPowerConsumerData.h"
 
 namespace AI {
+	RTTI_IMPL(CLAWaitGeneratorDetachment, CLatentAction);
+	
 	bool CLAWaitGeneratorDetachment::HandleMessage(const PowerMessage& msg) {
 		// Rechazamos lo que no sean mensajes de petición
 		if (msg._type != MessageType::POWER_ATTACHMENT_INFO)

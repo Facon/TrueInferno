@@ -5,6 +5,8 @@
 #include <algorithm>
 
 namespace AI {
+	RTTI_IMPL(CLAReserveFromProviders, CLatentAction);
+	
 	bool CLAReserveFromProviders::HandleMessage(const ResourceMessage& msg){
 		// Esperamos únicamente confirmaciones de reserva
 		if (msg._type != MessageType::RESOURCES_RESERVED)

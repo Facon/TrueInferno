@@ -1,13 +1,15 @@
 #ifndef LA_SEND_SOUL_
 #define LA_SEND_SOUL_
 
-#include "StateMachine.h"
+#include "LatentAction.h"
 #include "Server.h"
 #include "SoulTask.h"
 #include "Logic\Entity\Message.h"
 
 namespace AI {
 	class CLASendSoul : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLASendSoul(CEntity* entity) : CLatentAction(entity) {
 			_task = nullptr;

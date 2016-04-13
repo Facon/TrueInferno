@@ -1,6 +1,8 @@
 #include "LAWaitSoulTask.h"
 
 namespace AI {
+	RTTI_IMPL(CLAWaitSoulTask, CLatentAction);
+	
 	bool CLAWaitSoulTask::HandleMessage(const SoulMessage& msg) {
 		// Rechazamos lo que no sean peticiones. No aceptamos más de una tarea a la vez
 		if (msg._type != MessageType::SOUL_REQUEST || _smData.getTask() != nullptr)

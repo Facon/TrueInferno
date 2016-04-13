@@ -7,6 +7,8 @@
 
 namespace AI {
 	class CLAFollowPath : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAFollowPath(CEntity* entity, CSMSoulData& smData) : CLatentAction(entity), _smData(smData) {}
 

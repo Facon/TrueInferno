@@ -6,6 +6,8 @@
 #include "Logic\Maps\EntityFactory.h"
 
 namespace AI {
+	RTTI_IMPL(CLAAttendResourceBuildingRequest, CLatentAction);
+	
 	bool CLAAttendResourceBuildingRequest::HandleMessage(const ResourceMessage& msg) {
 		// No se aceptan peticiones simultáneas
 		if (_requestReceived)

@@ -7,6 +7,8 @@
 
 namespace AI {
 	class CLAFindProviders : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAFindProviders(CEntity* entity, CSMResourceDemanderData& smData) : 
 			CLatentAction(entity), 

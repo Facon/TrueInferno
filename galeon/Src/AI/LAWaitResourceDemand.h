@@ -10,6 +10,8 @@ namespace Logic {
 
 namespace AI {
 	class CLAWaitResourceDemand : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAWaitResourceDemand(CEntity* entity, CSMResourceDemanderData& smData) : CLatentAction(entity), _smData(smData), _requestReceived(false) {}
 

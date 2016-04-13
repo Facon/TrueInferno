@@ -3,9 +3,12 @@
 
 #include "AI\LatentAction.h"
 #include "AI\SMPowerConsumerData.h"
+#include "BaseSubsystems\RTTI.h"
 
 namespace AI {
 	class CLAFindGenerator : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAFindGenerator(CEntity* entity, CSMPowerConsumerData& smData) : CLatentAction(entity), _smData(smData), _requestReceived(false) {}
 

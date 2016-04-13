@@ -4,6 +4,8 @@
 #include "AI\SMResourceConsumerData.h"
 
 namespace AI {
+	RTTI_IMPL(CLAStopConsumingResources, CLatentAction);
+	
 	CLatentAction::LAStatus CLAStopConsumingResources::OnStart() {
 		// Si había recursos que liberar
 		if (_smData.getReservedForConsume() > 0){

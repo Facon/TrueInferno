@@ -6,6 +6,7 @@
 
 namespace AI {
 	class CLAAcceptOrRejectConsumer : public CLatentAction {
+		RTTI_DECL;
 
 	public:
 		CLAAcceptOrRejectConsumer(CEntity* entity, CSMPowerGeneratorData& smData) : CLatentAction(entity), _smData(smData), _consumerNotified(false) {}

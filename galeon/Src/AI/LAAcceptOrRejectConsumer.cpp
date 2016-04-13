@@ -4,6 +4,8 @@
 #include "AI\SMPowerGeneratorData.h"
 
 namespace AI {
+	RTTI_IMPL(CLAAcceptOrRejectConsumer, CLatentAction);
+	
 	CLatentAction::LAStatus CLAAcceptOrRejectConsumer::OnStart() {
 		// Inicializamos
 		_consumerNotified = false;
@@ -36,8 +38,8 @@ namespace AI {
 	CLatentAction::LAStatus CLAAcceptOrRejectConsumer::OnRun(unsigned int msecs) {
 		/* Hacemos 3 cosas:
 		* 1) Notificar a la entidad del consumidor de su conexión/desconexión
-		* 2) Notificar a nuestra entidad del cambio en el consumo
-		* 3) Notificar a nuestra entidad si era el primer consumidor o el último para empezar o parar el consumo (OJO: parar el consumo DESPUÉS de notificar el cambio)
+		* 2) Notificar a nuestra entidad si era el primer consumidor o el último para empezar o parar el consumo
+		* 3) Notificar a nuestra entidad del cambio en el consumo (NOTA: después de haber notificado el comienzo del consumo)
 		*/
 
 		// Notificamos al consumidor de la conexión/desconexión si no lo habíamos hecho ya
@@ -63,23 +65,6 @@ namespace AI {
 			}
 		}
 
-		// Notificamos el cambio de consumo si no estaba hecho ya
-		if (!_consumptionChangeNotified){
-			// Avisamos del cambio del consumo
-			ConsumptionMessage consumptionMsg;
-
-			// El cambio es positivo si es una conexión y negativo en caso contrario
-			int consumptionChange = (_smData.getNewConsumerAccepted() ? 1 : -1) * _smData.getNewConsumption();
-
-			consumptionMsg.assembleConsumptionChange(consumptionChange, ResourceType::COKE);
-
-			if (consumptionMsg.Dispatch(*_entity))
-				_consumptionChangeNotified = true;
-
-			else
-				return LAStatus::RUNNING;
-		}
-
 		// Si era el primer consumidor y todavía no lo hemos notificado
 		if (_firstConsumer && !_firstConsumerNotified){
 			// Ordenamos que empiece el consumo
@@ -103,6 +88,23 @@ namespace AI {
 			// Reintentamos el envío hasta que se acepte
 			if (m.Dispatch(*_entity))
 				_lastConsumerNotified = true;
+
+			else
+				return LAStatus::RUNNING;
+		}
+
+		// Notificamos el cambio de consumo en el caso de nuevos consumidores si no estaba hecho ya
+		if (!_consumptionChangeNotified && _smData.getNewConsumerAccepted()){
+			// Avisamos del cambio del consumo
+			ConsumptionMessage consumptionMsg;
+
+			// El cambio es positivo si es una conexión y negativo en caso contrario
+			int consumptionChange = (_smData.getNewConsumerAccepted() ? 1 : -1) * _smData.getNewConsumption();
+
+			consumptionMsg.assembleConsumptionChange(consumptionChange, ResourceType::COKE);
+
+			if (consumptionMsg.Dispatch(*_entity))
+				_consumptionChangeNotified = true;
 
 			else
 				return LAStatus::RUNNING;

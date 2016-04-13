@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLAWaitGeneratorDetachment : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAWaitGeneratorDetachment(CEntity* entity, CSMPowerConsumerData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
 

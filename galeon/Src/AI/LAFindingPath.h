@@ -6,7 +6,9 @@
 #include "AI\Server.h"
 
 namespace AI {
-	class CLAFindingPath : public CLatentAction{
+	class CLAFindingPath : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAFindingPath(CEntity* entity) : CLatentAction(entity), _walkingSoulTarget(EntityID::UNASSIGNED), _pathRequestReceived(false), _pathCalculated(nullptr) {
 			_pathRequestReceived = false;
@@ -84,6 +86,7 @@ namespace AI {
 		std::vector<Vector3>* _pathCalculated;
 	};
 
+	RTTI_IMPL(CLAFindingPath, CLatentAction);
 }
 
 #endif

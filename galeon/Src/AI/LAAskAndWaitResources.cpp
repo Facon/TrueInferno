@@ -2,6 +2,8 @@
 #include "Logic\Maps\EntityFactory.h"
 
 namespace AI {
+	RTTI_IMPL(CLAAskAndWaitResources, CLatentAction);
+	
 	CLatentAction::LAStatus CLAAskAndWaitResources::OnStart() {
 		// Reiniciamos el tiempo pasado
 		_elapsedTime = 0;

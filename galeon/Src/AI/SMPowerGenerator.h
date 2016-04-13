@@ -27,6 +27,9 @@ namespace AI {
 
 	public:
 		CSMPowerGenerator(CEntity* entity) : CStateMachine(entity) {
+			_name = "PowerGenerator";
+			_debug = false;
+
 			int waitConsumer = this->addNode(new CLAWaitConsumerChange(entity, _data));
 			int checkNewConsumption = this->addNode(new CLACheckNewConsumption(entity, _data));
 			int acceptOrReject = this->addNode(new CLAAcceptOrRejectConsumer(entity, _data));

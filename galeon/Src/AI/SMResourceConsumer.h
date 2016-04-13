@@ -19,7 +19,10 @@ namespace AI {
 	*/ 
 	class CSMResourceConsumer : public CStateMachine<CLatentAction, CSMResourceConsumerData> {
 	public:
-		CSMResourceConsumer(CEntity* entity) : CStateMachine<CLatentAction, CSMResourceConsumerData>(entity) {}
+		CSMResourceConsumer(CEntity* entity) : CStateMachine<CLatentAction, CSMResourceConsumerData>(entity) {
+			_name = "ResourceConsumer";
+			_debug = true;
+		}
 
 		virtual ~CSMResourceConsumer() {}
 
@@ -28,12 +31,12 @@ namespace AI {
 			assert(entityInfo->hasAttribute("consumedResource"));
 			_consumedResource = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("consumedResource"));
 
-			assert(entityInfo->hasAttribute("consumptionPeriod"));
-			_consumptionPeriod = 1000 * entityInfo->getIntAttribute("consumptionPeriod");
+			assert(entityInfo->hasAttribute("normalizedConsumptionPeriod"));
+			_normalizedConsumptionPeriod = 1000 * entityInfo->getIntAttribute("normalizedConsumptionPeriod");
 			
 			// Creación de SM en base a los datos
 			int stopped = this->addNode(new CLAWait());
-			int waiting = this->addNode(new CLAWait(_consumptionPeriod));
+			int waiting = this->addNode(new CLAWait(_normalizedConsumptionPeriod));
 			int reserving = this->addNode(new CLAReserveResourcesToConsume(_entity, _data, _consumedResource));
 			int consuming = this->addNode(new CLAConsumeResources(_entity, _data, _consumedResource));
 			int accept = this->addNode(new CLAAcceptConsumptionChanges(_entity, _data, _consumedResource));
@@ -83,8 +86,8 @@ namespace AI {
 		/** Tipo del recurso que se consume */
 		ResourceType _consumedResource;
 
-		/** Periodo (ms) con que se consumen recursos */
-		int _consumptionPeriod;
+		/** Periodo (ms) normalizado con que se consumen recursos */
+		int _normalizedConsumptionPeriod;
 	};
 }
 

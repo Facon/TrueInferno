@@ -4,6 +4,8 @@
 #include "AI\SMResourceConsumerData.h"
 
 namespace AI {
+	RTTI_IMPL(CLAReserveResourcesToConsume, CLatentAction);
+	
 	bool CLAReserveResourcesToConsume::HandleMessage(const ResourceMessage& msg) {
 		// Rechazamos lo que no sean mensajes de petición o reservas de un recurso distinto al esperado
 		if (msg._type != MessageType::RESOURCES_RESERVED || msg._resourceType != _consumedResource)

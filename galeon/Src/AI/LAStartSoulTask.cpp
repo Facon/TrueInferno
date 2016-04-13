@@ -4,6 +4,8 @@
 #include "Logic\Maps\Map.h"
 
 namespace AI {
+	RTTI_IMPL(CLAStartSoulTask, CLatentAction);
+	
 	CLatentAction::LAStatus CLAStartSoulTask::OnStart() {
 		// Intentamos empezar la tarea
 		// TODO Cambiar bool por enumerado para abortar en caso de fallo. Actualmente los fallos no reintentables nos están devolviendo true!

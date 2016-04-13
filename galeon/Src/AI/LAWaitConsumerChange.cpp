@@ -4,6 +4,8 @@
 #include "AI\SMPowerGeneratorData.h"
 
 namespace AI {
+	RTTI_IMPL(CLAWaitConsumerChange, CLatentAction);
+	
 	bool CLAWaitConsumerChange::HandleMessage(const PowerMessage& msg) {
 		// Aceptamos desconexiones siempre
 		if (msg._type == MessageType::POWER_ATTACHMENT_INFO && msg._attach == false){

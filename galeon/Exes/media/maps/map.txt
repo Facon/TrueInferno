@@ -162,6 +162,8 @@ Map = {
 		storedResources="MINERAL",
 		maxResources = 1000,
 		providedResources="MINERAL",
+		consumptionPeriod = 10,
+		consumptionUnits = 1,
 	},
 	
 	GasPlant = {
@@ -191,6 +193,8 @@ Map = {
 		storedResources="GAS",
 		maxResources = 1000,
 		providedResources="GAS",
+		consumptionPeriod = 10,
+		consumptionUnits = 1,
 	},
 	
 	EvilWorks = {
@@ -215,7 +219,7 @@ Map = {
 		mineralCost = 150,
 		gasCost = 75,
 		storedResources="CRUDE,PURE",
-		maxResources = 50,
+		maxResources = 500,
 		providedResources="PURE",
 		transformsFrom="CRUDE",
 		transformsInto="PURE",
@@ -223,6 +227,8 @@ Map = {
 		transformPeriod=5,
 		transformCostResource="GAS",
 		transformCostRatio=1,
+		consumptionPeriod = 10,
+		consumptionUnits = 1,
 	},
 	
 	Refinery = {
@@ -247,7 +253,7 @@ Map = {
 		mineralCost = 150,
 		gasCost = 75,
 		storedResources="PURE,REFINED",
-		maxResources = 25,
+		maxResources = 250,
 		providedResources="REFINED",
 		transformsFrom="PURE",
 		transformsInto="REFINED",
@@ -255,8 +261,10 @@ Map = {
 		transformPeriod=5,
 		transformCostResource="GAS",
 		transformCostRatio=1,
+		consumptionPeriod = 10,
+		consumptionUnits = 1,
 	},
-	
+		
 	ResearchLabs = {
 		prefab = true,
 		type = "ResearchLabs",
@@ -278,8 +286,10 @@ Map = {
 		maxWorkers = 5,
 		storedResources="AETHER",
 		maxResources = 1000,
+		consumptionPeriod = 10,
+		consumptionUnits = 1,
 	},
-	
+		
 	PowerGenerator = {
 		prefab = true,
 		type = "PowerGenerator",
@@ -302,7 +312,7 @@ Map = {
 		storedResources="COKE",
 		maxResources = 1000,
 		consumedResource="COKE",
-		consumptionPeriod=1,
+		normalizedConsumptionPeriod=1,
 	},
 
 	Warehouse = {

@@ -4,6 +4,8 @@
 #include "AI\SMEmptyTemplateData.h"
 
 namespace AI {
+	RTTI_IMPL(CLARecountResources, CLatentAction);
+	
 	bool CLARecountResources::HandleMessage(const ResourceMessage& msg) {
 		// Rechazamos lo que no sean mensajes de información de recursos
 		if (msg._type != MessageType::RESOURCES_INFO)

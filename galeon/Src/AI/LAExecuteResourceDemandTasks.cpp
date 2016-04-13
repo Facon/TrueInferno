@@ -6,6 +6,8 @@
 #include "RequestTransportSoulTask.h"
 
 namespace AI {
+	RTTI_IMPL(CLAExecuteResourceDemandTasks, CLatentAction);
+	
 	CLatentAction::LAStatus CLAExecuteResourceDemandTasks::OnStart() {
 		// Inicialización
 		_nextProvider = 0;

@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLAExecuteResourceProvideTasks : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAExecuteResourceProvideTasks(CEntity* entity, CSMResourceProviderData& smData) : CLatentAction(entity), _smData(smData) {}
 

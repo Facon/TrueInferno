@@ -8,6 +8,8 @@
 
 namespace AI {
 	class CLAConsumeResources : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAConsumeResources(CEntity* entity, CSMResourceConsumerData& smData, ResourceType resourceType) :
 			CLatentAction(entity), _smData(smData), _resourceType(resourceType) {}

@@ -75,6 +75,8 @@ namespace AI
 	*/
 	class CLatentAction : public MessageHandler
 	{
+		RTTI_DECL;
+
 	public:
 		enum LAStatus {
 			/// Indica que la acción latente aún no se ha empezado
@@ -98,9 +100,9 @@ namespace AI
 		/**
 		Constructor
 		*/
-		CLatentAction() : _status(READY), _stopping(false) {};
+		CLatentAction() : _status(READY), _stopping(false), _name("") {};
 
-		CLatentAction(CEntity* entity) : _entity(entity), _status(READY), _stopping(false) {};
+		CLatentAction(CEntity* entity) : _entity(entity), _status(READY), _stopping(false), _name("") {};
 
 		/**
 		Establece la entidad que ejecuta la acción.
@@ -153,6 +155,10 @@ namespace AI
 		Desactiva la acción latente. Se invoca automáticamente al desactivar el componente SMExecutor
 		*/
 		virtual void deactivate(){}
+
+		std::string getName() const {
+			return _name;
+		}
 
 	private:
 		/**
@@ -225,6 +231,8 @@ namespace AI
 		*/
 		void resume() {if (_status == SUSPENDED) _status = RUNNING; };
 
+		/** Nombre de la LA */
+		std::string _name;
 
 	}; // class CLatentAction	
 

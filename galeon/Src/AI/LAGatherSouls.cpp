@@ -2,6 +2,8 @@
 #include "Logic\Maps\EntityFactory.h"
 
 namespace AI {
+	RTTI_IMPL(CLAGatherSouls, CLatentAction);
+	
 	bool CLAGatherSouls::HandleMessage(const NumberMessage& msg){
 		if (msg._type != MessageType::FURNACE_BURN_SOULS)
 			return false;

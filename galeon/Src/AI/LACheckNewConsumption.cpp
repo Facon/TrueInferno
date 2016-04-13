@@ -5,6 +5,8 @@
 #include "Logic\ResourcesManager.h"
 
 namespace AI {
+	RTTI_IMPL(CLACheckNewConsumption, CLatentAction);
+
 	bool CLACheckNewConsumption::HandleMessage(const ResourceMessage& msg) {
 		// Rechazamos lo que no sean mensajes de información de recursos de coke
 		if (msg._type != MessageType::RESOURCES_INFO || msg._resourceType != ResourceType::COKE)
@@ -47,8 +49,6 @@ namespace AI {
 		int totalConsumption = _smData.getTotalConsumption();
 		int newConsumption = _smData.getNewConsumption();
 		int currentCoke = _smData.getCurrentCoke();
-
-		std::cout << "Checking consumption: " << currentCoke << " >= " << (totalConsumption + newConsumption) << std::endl;
 
 		// Si el nuevo consumo total es aceptable: éxito
 		if (currentCoke >= (totalConsumption + newConsumption)){

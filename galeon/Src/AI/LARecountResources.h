@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLARecountResources : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLARecountResources(CEntity* entity, CSMResourceTransformerData& smData, ResourceType resourceFrom) : CLatentAction(entity), _smData(smData), _resourceFrom(resourceFrom) {}
 

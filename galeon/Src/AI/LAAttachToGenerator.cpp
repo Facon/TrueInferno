@@ -2,8 +2,11 @@
 
 #include "Logic\Entity\Message.h"
 #include "AI\SMPowerConsumerData.h"
+#include "Logic\Entity\Entity.h"
 
 namespace AI {
+	RTTI_IMPL(CLAAttachToGenerator, CLatentAction);
+	
 	bool CLAAttachToGenerator::HandleMessage(const PowerMessage& msg) {
 		// Rechazamos lo que no sean mensajes de información de conexión a generador
 		if (msg._type != MessageType::POWER_ATTACHMENT_INFO)
@@ -19,6 +22,15 @@ namespace AI {
 		// Si nos hemos conectado guardamos el generador
 		if (msg._attach)
 			_smData.setPowerGenerator(msg._caller);
+		else
+			_smData.setPowerGenerator(EntityID::UNASSIGNED);
+
+		if (_smData.getAttached() != msg._attach){
+			if (msg._attach)
+				std::cout << "Attached:" << _entity->getEntityID() << std::endl;
+			else
+				std::cout << "Detached:" << _entity->getEntityID() << std::endl;
+		}
 
 		// Y el estado de conexión
 		_smData.setAttached(msg._attach);
@@ -27,8 +39,6 @@ namespace AI {
 
 		// Reactivamos la LA
 		resume();
-
-		std::cout << "Attached=" << _smData.getAttached() << std::endl;
 
 		return true;
 	}
@@ -46,7 +56,7 @@ namespace AI {
 
 		// Preparamos la solicitud de conexión indicando quiénes somos y nuestro consumo
 		PowerMessage m;
-		m.assemblePowerRequestAttachment(this->_entity->getEntityID(), 10); // TODO Leer en el spawn
+		m.assemblePowerRequestAttachment(this->_entity->getEntityID(), _consumptionUnits);
 
 		// Reintentamos la petición de conexión hasta que nos la acepten en algún tick
 		if (m.Dispatch(*powerGenerator)){

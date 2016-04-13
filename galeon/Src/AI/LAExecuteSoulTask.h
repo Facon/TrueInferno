@@ -7,6 +7,8 @@
 
 namespace AI {
 	class CLAExecuteSoulTask : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAExecuteSoulTask(CEntity* entity, CSMSoulData& smData) : CLatentAction(entity), _smData(smData) {}
 
