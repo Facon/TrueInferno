@@ -32,8 +32,8 @@ namespace Logic {
 				luabind::class_<CEvent>("CEvent")
 				.enum_("ConditionTriggerType")
 				[
-					luabind::value("TUTORIAL", 0),
-					luabind::value("END_GAME", 1)
+					luabind::value("TUTORIAL", CEvent::ConditionTriggerType::TUTORIAL),
+					luabind::value("END_GAME", CEvent::ConditionTriggerType::END_GAME)
 				]
 			];
 	}
