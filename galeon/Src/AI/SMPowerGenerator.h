@@ -7,7 +7,7 @@
 #include "AI\Server.h"
 #include "AI\LAWaitConsumerChange.h"
 #include "AI\LACheckNewConsumption.h"
-#include "AI\LAAcceptOrRejectConsumer.h"
+#include "AI\LAAcceptOrRejectNewConsumer.h"
 #include "AI\LAFillReserves.h"
 #include "AI\LADetachConsumers.h"
 #include "AI\SMPowerGeneratorData.h"
@@ -17,10 +17,7 @@ namespace AI {
 	Máquina de estados para los generadores de energía PowerGenerator.
 	- Inicialmente se pone a la espera de solicitudes de cambio de consumidores
 	- Si llega una solicitud de nuevo consumidor se pasa al estado de comprobación de nuevo consumo
-	- Si puede soportar el consumo nuevo:
-		- Pasa a responder al consumidor para aceptar la conexión
-		- Si no, intenta asegurarse reservas
-	- Tras conseguir (o no) reservas pasa al estado de respuesta al consumidor
+	- Tras comprobar el consumo responde al consumidor
 	- Tras la respuesta al consumidor siempre vuelve al estado de espera
 	*/
 	class CSMPowerGenerator : public CStateMachine<CLatentAction, CSMPowerGeneratorData> {
@@ -32,8 +29,7 @@ namespace AI {
 
 			int waitConsumer = this->addNode(new CLAWaitConsumerChange(entity, _data));
 			int checkNewConsumption = this->addNode(new CLACheckNewConsumption(entity, _data));
-			int acceptOrReject = this->addNode(new CLAAcceptOrRejectConsumer(entity, _data));
-			//int fillReserves = this->addNode(new CLAFillReserves(entity, _data));
+			int acceptOrReject = this->addNode(new CLAAcceptOrRejectNewConsumer(entity, _data));
 			int detachConsumers = this->addNode(new CLADetachConsumers(entity, _data));
 
 			// Inicialmente se pone a la espera de solicitudes de cambio de consumidores
@@ -43,17 +39,9 @@ namespace AI {
 			this->addEdge(waitConsumer, checkNewConsumption, new CConditionSuccess());
 			this->addEdge(waitConsumer, waitConsumer, new CConditionFail());
 
-			/* 
-			* Si puede soportar el consumo nuevo :
-			*	- Pasa a responder al consumidor para aceptar la conexión
-			*	- Si no, intenta asegurarse reservas
-			*/
+			//  Tras comprobar el consumo responde al consumidor
 			this->addEdge(checkNewConsumption, acceptOrReject, new CConditionSuccess());
 			this->addEdge(checkNewConsumption, acceptOrReject, new CConditionFail());
-			//this->addEdge(checkNewConsumption, fillReserves, new CConditionFail());
-
-			// Tras conseguir (o no) reservas pasa al estado de respuesta al consumidor
-			//this->addEdge(fillReserves, acceptOrReject, new CConditionFinished());
 
 			// Tras la respuesta al consumidor siempre vuelve al estado de espera
 			this->addEdge(acceptOrReject, waitConsumer, new CConditionFinished());
@@ -62,7 +50,6 @@ namespace AI {
 			this->addEdge(waitConsumer, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
 			this->addEdge(checkNewConsumption, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
 			this->addEdge(acceptOrReject, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
-			//this->addEdge(fillReserves, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
 
 			// Del estado de desconexión se vuelve al de espera inicial
 			this->addEdge(detachConsumers, waitConsumer, new CConditionFinished());

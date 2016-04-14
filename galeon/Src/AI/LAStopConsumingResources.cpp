@@ -7,6 +7,8 @@ namespace AI {
 	RTTI_IMPL(CLAStopConsumingResources, CLatentAction);
 	
 	CLatentAction::LAStatus CLAStopConsumingResources::OnStart() {
+		_smData.cleanConsumption();
+
 		// Si había recursos que liberar
 		if (_smData.getReservedForConsume() > 0){
 			// Liberamos lo que quedaba reservado

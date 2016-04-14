@@ -10,7 +10,7 @@ namespace AI {
 		virtual ~CSMResourceConsumerData() {}
 
 		// Devuelve la cantidad de recurso que se debe consumir en cada periodo
-		int getConsumption() const{
+		int getConsumption() const {
 			return _consumption;
 		}
 
@@ -19,8 +19,13 @@ namespace AI {
 			_consumption += change;
 		}
 
+		// Resetea el consumo
+		void cleanConsumption() {
+			_consumption = 0;
+		}
+
 		// Devuelve la cantidad de recurso que tenemos reservada
-		int getReservedForConsume() const{
+		int getReservedForConsume() const {
 			return _reservedForConsume;
 		}
 

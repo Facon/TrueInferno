@@ -18,6 +18,7 @@ namespace AI {
 		_received = true;
 
 		// Guardamos lo finalmente reservado
+		// NOTA: En esta LA no se libera lo reservado. En otras LAs se conumirá (i.e. se reclamará lo reservado) o se liberará
 		_smData.setReservedForConsume(msg._quantity);
 
 		// Reactivamos la LA
@@ -53,11 +54,21 @@ namespace AI {
 			return LAStatus::FAIL;
 		}
 		
-		// Chequeamos lo recibido vs el consumo actual
-		if (_smData.getReservedForConsume() >= _smData.getConsumption()){
+		// Chequeamos si hemos podido reservar el consumo actual
+		if (_smData.getReservedForConsume() == _smData.getConsumption()){
 			return LAStatus::SUCCESS;
 		}
-		else{
+
+		// O más
+		else if (_smData.getReservedForConsume() > _smData.getConsumption()){
+			// No deberíamos haber podido reservar más
+			assert(false && "Reserved more resources than current consumption");
+			return LAStatus::SUCCESS;
+		}
+
+		// O menos
+		else {
+			// Fallamos porque no se pudo reservar lo suficiente para el consumo
 			return LAStatus::FAIL;
 		}
 	}

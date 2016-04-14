@@ -9,7 +9,8 @@ namespace AI {
 		RTTI_DECL;
 
 	public:
-		CLAWaitGeneratorDetachment(CEntity* entity, CSMPowerConsumerData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
+		CLAWaitGeneratorDetachment(CEntity* entity, CSMPowerConsumerData& smData) : 
+			CLatentAction(entity), _smData(smData), _received(false), _detach(false), _generatorAssigned(EntityID::UNASSIGNED) {}
 
 		virtual ~CLAWaitGeneratorDetachment() {}
 
@@ -28,6 +29,9 @@ namespace AI {
 
 		// Flag a true si nos han indicado desconexión y false conexión
 		bool _detach;
+
+		// Id del generador al que nos han asignado
+		TEntityID _generatorAssigned;
 	};
 }
 

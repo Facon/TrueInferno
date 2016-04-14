@@ -203,10 +203,10 @@
     <ClCompile Include="..\..\Src\AI\LAStopConsumingResources.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LAAcceptOrRejectConsumer.cpp">
+    <ClCompile Include="..\..\Src\AI\LADetachConsumers.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\AI\LADetachConsumers.cpp">
+    <ClCompile Include="..\..\Src\AI\LAAcceptOrRejectNewConsumer.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -460,10 +460,10 @@
     <ClInclude Include="..\..\Src\AI\LAAcceptConsumptionChanges.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LAAcceptOrRejectConsumer.h">
+    <ClInclude Include="..\..\Src\AI\LADetachConsumers.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\AI\LADetachConsumers.h">
+    <ClInclude Include="..\..\Src\AI\LAAcceptOrRejectNewConsumer.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

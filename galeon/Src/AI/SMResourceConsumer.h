@@ -72,6 +72,9 @@ namespace AI {
 			this->addEdge(reserving, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
 			this->addEdge(consuming, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
 			this->addEdge(accept, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
+			
+			// Salvo en el estado de parada donde ignoramos el mensaje para permanecer en el mismo estado
+			this->addEdge(stopped, stopped, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
 
 			this->resetExecution();
 

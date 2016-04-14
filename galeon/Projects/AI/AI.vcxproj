@@ -86,7 +86,7 @@
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAcceptConsumptionChanges.cpp" />
-    <ClCompile Include="..\..\Src\AI\LAAcceptOrRejectConsumer.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAAcceptOrRejectNewConsumer.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAskAndWaitResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAttachToGenerator.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAttendResourceBuildingRequest.cpp" />
@@ -140,7 +140,7 @@
     <ClInclude Include="..\..\Src\AI\DynTriMat.h" />
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
     <ClInclude Include="..\..\Src\AI\LAAcceptConsumptionChanges.h" />
-    <ClInclude Include="..\..\Src\AI\LAAcceptOrRejectConsumer.h" />
+    <ClInclude Include="..\..\Src\AI\LAAcceptOrRejectNewConsumer.h" />
     <ClInclude Include="..\..\Src\AI\LAAskAndWaitResources.h" />
     <ClInclude Include="..\..\Src\AI\LAAttachToGenerator.h" />
     <ClInclude Include="..\..\Src\AI\LAAttendResourceBuildingRequest.h" />

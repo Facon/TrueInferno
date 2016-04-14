@@ -30,14 +30,14 @@ namespace AI {
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			// Lectura de datos
 			assert(entityInfo->hasAttribute("consumptionUnits"));
-			int consumptionUnits = entityInfo->getIntAttribute("consumptionUnits");
+			_consumptionUnits = entityInfo->getIntAttribute("consumptionUnits");
 
 			assert(entityInfo->hasAttribute("consumptionPeriod"));
-			int consumptionPeriod = 1000 * entityInfo->getIntAttribute("consumptionPeriod");
+			_consumptionPeriod = 1000 * entityInfo->getIntAttribute("consumptionPeriod");
 
 			// Creación de SM en base a los datos
 			int findGenerator = this->addNode(new CLAFindGenerator(entity, _data));
-			int attachToGenerator = this->addNode(new CLAAttachToGenerator(entity, _data, consumptionUnits, consumptionPeriod));
+			int attachToGenerator = this->addNode(new CLAAttachToGenerator(entity, _data, _consumptionUnits, _consumptionPeriod));
 			int waitDetachment = this->addNode(new CLAWaitGeneratorDetachment(entity, _data));
 
 			// La entidad comienza en el estado de búsqueda de generador
@@ -68,12 +68,18 @@ namespace AI {
 				CEntity *generator = _entity->getMap()->getEntityByID(_data.getPowerGenerator());
 				if (generator != nullptr){
 					PowerMessage m;
-					m.assemblePowerAttachmentInfo(_entity->getEntityID(), false, 10); // TODO
+					m.assemblePowerAttachmentInfo(_entity->getEntityID(), false, _consumptionUnits);
 					assert(m.Dispatch(*generator) && "Can't detach from PowerGenerator on deactivation");
 				}
 			}
 		}
 
+	private:
+		// Unidades de recurso de energía consumido por periodo de tiempo
+		int _consumptionUnits;
+
+		// Periodo (ms) con que se consumen recursos de energía
+		int _consumptionPeriod;
 	};
 }
 

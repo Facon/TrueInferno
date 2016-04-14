@@ -12,11 +12,11 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLADetachConsumers::OnRun(unsigned int msecs) {
-		std::cout << "Detaching consumers..." << std::endl;
+		std::cout << "Detaching " << _smData.getConsumers().size() << " consumers..." << std::endl;
 
 		// Preparamos el mensaje de desconexión
-		PowerMessage m;
-		m.assemblePowerAttachmentInfo(_entity->getEntityID(), false, 0);
+		PowerMessage powerMsg;
+		powerMsg.assemblePowerAttachmentInfo(_entity->getEntityID(), false, 0);
 
 		// Mientras queden consumidores conectados
 		auto it = _smData.getConsumers().begin();
@@ -29,7 +29,7 @@ namespace AI {
 			// Si no es nula, le intentamos enviar el mensaje
 			if (consumer != nullptr){
 				// Reintentaremos el envío en el siguiente tick si no nos lo aceptan
-				if (!m.Dispatch(*consumer))
+				if (!powerMsg.Dispatch(*consumer))
 					return LAStatus::RUNNING;
 			}
 
@@ -38,6 +38,16 @@ namespace AI {
 
 			it = _smData.getConsumers().begin();
 		}
+
+		assert(_smData.getConsumers().size()==0 && "Some consumers were not detached");
+
+		/* Paramos el consumo si no lo estaba ya de por sí 
+		* (es probable que hayamos entrado en este estado porque el consumidor se quedó sin recursos y nos lo solicitó) */
+		ConsumptionMessage consumptionMsg;
+		consumptionMsg.assembleConsumptionStop(ResourceType::COKE);
+
+		if (!consumptionMsg.Dispatch(*_entity))
+			return LAStatus::RUNNING;
 
 		return LAStatus::SUCCESS;
 	}

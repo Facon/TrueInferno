@@ -1,21 +1,19 @@
-#include "LAAcceptOrRejectConsumer.h"
+#include "LAAcceptOrRejectNewConsumer.h"
 
 #include "Logic\Entity\Message.h"
 #include "AI\SMPowerGeneratorData.h"
 
 namespace AI {
-	RTTI_IMPL(CLAAcceptOrRejectConsumer, CLatentAction);
+	RTTI_IMPL(CLAAcceptOrRejectNewConsumer, CLatentAction);
 	
-	CLatentAction::LAStatus CLAAcceptOrRejectConsumer::OnStart() {
+	CLatentAction::LAStatus CLAAcceptOrRejectNewConsumer::OnStart() {
 		// Inicializamos
 		_consumerNotified = false;
 		_consumptionChangeNotified = false;
 		_firstConsumer = false;
-		_lastConsumer = false;
 		_firstConsumerNotified = false;
-		_lastConsumerNotified = false;
 
-		// Añadimos o eliminamos al consumidor en la lista de conexiones de consumidores del PowerGenerator
+		// Añadimos al consumidor a la lista de conexiones de consumidores del PowerGenerator
 		if (_smData.getNewConsumerAccepted()){
 			bool added = _smData.addConsumer(_smData.getNewConsumer(), _smData.getNewConsumption());
 
@@ -24,18 +22,10 @@ namespace AI {
 				_firstConsumer = true;
 		}
 
-		else{
-			bool removed = _smData.removeConsumer(_smData.getNewConsumer());
-			
-			// Si se eliminó consumidor y la lista está vacía es que era el último
-			if (removed && _smData.getNumConsumers() == 0)
-				_lastConsumer = true;
-		}
-
 		return LAStatus::RUNNING;
 	}
 
-	CLatentAction::LAStatus CLAAcceptOrRejectConsumer::OnRun(unsigned int msecs) {
+	CLatentAction::LAStatus CLAAcceptOrRejectNewConsumer::OnRun(unsigned int msecs) {
 		/* Hacemos 3 cosas:
 		* 1) Notificar a la entidad del consumidor de su conexión/desconexión
 		* 2) Notificar a nuestra entidad si era el primer consumidor o el último para empezar o parar el consumo
@@ -52,8 +42,9 @@ namespace AI {
 				powerMsg.assemblePowerAttachmentInfo(_entity->getEntityID(), _smData.getNewConsumerAccepted(), _smData.getNewConsumption());
 
 				// Reintentamos el envío hasta que se acepte
-				if (powerMsg.Dispatch(*consumer))
+				if (powerMsg.Dispatch(*consumer)){
 					_consumerNotified = true;
+				}
 
 				else
 					return LAStatus::RUNNING;
@@ -74,20 +65,6 @@ namespace AI {
 			// Reintentamos el envío hasta que se acepte
 			if (m.Dispatch(*_entity))
 				_firstConsumerNotified = true;
-
-			else
-				return LAStatus::RUNNING;
-		}
-
-		// Si era el último consumidor y todavía no lo hemos notificado
-		else if (_lastConsumer && !_lastConsumerNotified){
-			// Ordenamos que pare el consumo
-			ConsumptionMessage m;
-			m.assembleConsumptionStop(ResourceType::COKE);
-
-			// Reintentamos el envío hasta que se acepte
-			if (m.Dispatch(*_entity))
-				_lastConsumerNotified = true;
 
 			else
 				return LAStatus::RUNNING;

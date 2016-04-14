@@ -1,17 +1,17 @@
-#ifndef LA_ACCEPT_OR_REJECT_CONSUMER_H_
-#define LA_ACCEPT_OR_REJECT_CONSUMER_H_
+#ifndef LA_ACCEPT_OR_REJECT_NEW_CONSUMER_H_
+#define LA_ACCEPT_OR_REJECT_NEW_CONSUMER_H_
 
 #include "AI\LatentAction.h"
 #include "AI\SMPowerGeneratorData.h"
 
 namespace AI {
-	class CLAAcceptOrRejectConsumer : public CLatentAction {
+	class CLAAcceptOrRejectNewConsumer : public CLatentAction {
 		RTTI_DECL;
 
 	public:
-		CLAAcceptOrRejectConsumer(CEntity* entity, CSMPowerGeneratorData& smData) : CLatentAction(entity), _smData(smData), _consumerNotified(false) {}
+		CLAAcceptOrRejectNewConsumer(CEntity* entity, CSMPowerGeneratorData& smData) : CLatentAction(entity), _smData(smData), _consumerNotified(false) {}
 
-		virtual ~CLAAcceptOrRejectConsumer() {}
+		virtual ~CLAAcceptOrRejectNewConsumer() {}
 
 	protected:
 		LAStatus OnStart();
@@ -29,16 +29,10 @@ namespace AI {
 
 		// Flag a true cuando estamos añadiendo el primer consumidor
 		bool _firstConsumer;
-		
-		// Flag a true cuando estamos eliminando el útlimo consumidor
-		bool _lastConsumer;
 
 		// Flag a true cuando ya hemos notificado el primer consumidor
 		bool _firstConsumerNotified;
-
-		// Flag a true cuando ya hemos notificado el último consumidor
-		bool _lastConsumerNotified;
 	};
 }
 
-#endif // LA_ACCEPT_OR_REJECT_CONSUMER_H_
+#endif // LA_ACCEPT_OR_REJECT_NEW_CONSUMER_H_

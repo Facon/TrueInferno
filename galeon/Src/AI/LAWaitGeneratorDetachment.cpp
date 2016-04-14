@@ -30,6 +30,8 @@ namespace AI {
 	CLatentAction::LAStatus CLAWaitGeneratorDetachment::OnStart() {
 		// Inicializamos
 		_received = false;
+		_detach = false;
+		_generatorAssigned = EntityID::UNASSIGNED;
 
 		// Suspendemos la LA hasta que llegue un mensaje de petición
 		return LAStatus::SUSPENDED;
@@ -38,13 +40,29 @@ namespace AI {
 	CLatentAction::LAStatus CLAWaitGeneratorDetachment::OnRun(unsigned int msecs) {
 		assert(_received && "No message received");
 
-		// Si solicitaron desconexión la espera ha sido exitosa
-		if (_detach)
-			return LAStatus::SUCCESS;
+		// Si solicitaron desconexión
+		if (_detach){
+			// Eliminamos el generador al que estábamos conectados
+			_smData.setPowerGenerator(EntityID::UNASSIGNED);
+			_smData.setAttached(false);
 
-		// Si no, seguimos esperando
-		else
+			std::cout << "Detached:" << _entity->getEntityID() << std::endl;
+
+			// La espera ha sido exitosa
+			return LAStatus::SUCCESS;
+		}
+
+		// Si solicitaron conexión
+		else{
+			assert(false && "Can't change generator when waiting detachment");
+
+			// Nos cambiamos de generador
+			_smData.setPowerGenerator(_generatorAssigned);
+			_smData.setAttached(true);
+		
+			// Seguimos esperando
 			return LAStatus::RUNNING;
+		}
 	}
 
 }

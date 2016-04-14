@@ -29,7 +29,7 @@ namespace AI {
 			if (msg._attach)
 				std::cout << "Attached:" << _entity->getEntityID() << std::endl;
 			else
-				std::cout << "Detached:" << _entity->getEntityID() << std::endl;
+				assert(false && "Can't change from attached to detached when trying to attach");
 		}
 
 		// Y el estado de conexión
@@ -46,6 +46,7 @@ namespace AI {
 	CLatentAction::LAStatus CLAAttachToGenerator::OnStart() {
 		// Inicializamos
 		_received = false;
+		_smData.setAttached(false);
 
 		// Localizamos la entidad del generador al que nos queremos conectar
 		CEntity *powerGenerator = _entity->getMap()->getEntityByID(_smData.getPowerGenerator());
