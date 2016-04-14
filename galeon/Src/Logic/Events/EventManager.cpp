@@ -247,6 +247,7 @@ namespace Logic {
 	} // clearConditionEventsMap
 
 	//--------------------------------------------------------
+	//--------------------------------------------------------
 
 	bool CEventManager::HandleMessage(const Message& msg)
 	{ return false; }
