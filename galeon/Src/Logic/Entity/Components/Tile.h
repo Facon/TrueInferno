@@ -31,10 +31,10 @@ namespace Logic {
 
         /*
 		// Aceptación de mensajes
-		virtual bool accept(const TMessage &message);
+		virtual bool accept(const MessageType &message);
 
 		// Procesamiento de mensajes
-		virtual void process(const TMessage &message);
+		virtual void process(const MessageType &message);
         */
 		/**
 		Actualizaci�n por frame

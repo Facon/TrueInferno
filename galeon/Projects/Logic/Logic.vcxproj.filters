@@ -53,6 +53,9 @@
     <Filter Include="Events\Source Files">
       <UniqueIdentifier>{da242379-3a6c-45aa-b90e-5716c28e3edf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events\Lua Files">
+      <UniqueIdentifier>{e2bf1a8b-e0cb-47a6-84e3-7a10503e1447}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp">
@@ -217,6 +220,9 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceConsumer.cpp">
       <Filter>Entity\Components\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Message.cpp">
+      <Filter>Entity\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -360,9 +366,6 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Logic\Events\ConditionEvents.h">
-      <Filter>Events\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h">
       <Filter>Events\Header Files</Filter>
     </ClInclude>
@@ -405,5 +408,16 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceConsumer.h">
       <Filter>Entity\Components\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\MessageHandler.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Src\Logic\Events\InitialEvents.lua">
+      <Filter>Events\Lua Files</Filter>
+    </None>
+    <None Include="..\..\Src\Logic\Events\EventManager.lua">
+      <Filter>Events\Lua Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

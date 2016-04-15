@@ -46,10 +46,10 @@ namespace AI {
 			this->setInitialNode(stopped);
 
 			// Pasa al estado de espera cuando se le solicita empezar a consumir
-			this->addEdge(stopped, waiting, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_START));
+			this->addEdge(stopped, waiting, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_START));
 			
 			// Parados "ignoramos" mensajes de cambio de consumo
-			//this->addEdge(stopped, stopped, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_CHANGE));
+			//this->addEdge(stopped, stopped, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_CHANGE));
 
 			// Una vez finalizada la espera, reserva recursos para poder consumirlos
 			this->addEdge(waiting, reserving, new CConditionFinished());
@@ -68,13 +68,13 @@ namespace AI {
 			this->addEdge(stopping, stopped, new CConditionFinished());
 
 			// Desde cualquier estado pasamos a parando si se recibimos un aviso de parada de consumo
-			this->addEdge(waiting, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
-			this->addEdge(reserving, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
-			this->addEdge(consuming, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
-			this->addEdge(accept, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
+			this->addEdge(waiting, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_STOP));
+			this->addEdge(reserving, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_STOP));
+			this->addEdge(consuming, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_STOP));
+			this->addEdge(accept, stopping, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_STOP));
 			
 			// Salvo en el estado de parada donde ignoramos el mensaje para permanecer en el mismo estado
-			this->addEdge(stopped, stopped, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOP));
+			this->addEdge(stopped, stopped, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_STOP));
 
 			this->resetExecution();
 

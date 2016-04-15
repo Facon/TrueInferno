@@ -3,7 +3,7 @@
 
 Contiene el tipo de datos de un mensaje.
 
-@see Logic::TMessage
+@see Logic::Message
 
 @author David Llansó García
 */
@@ -13,13 +13,17 @@ Contiene el tipo de datos de un mensaje.
 #include <string>
 #include <memory>
 
-#include "BaseSubsystems/Math.h"
 #include "MessageHandler.h"
+
+#include "BaseSubsystems/Math.h"
+#include "BaseSubsystems/ScriptManager.h"
+
 #include "AI/SoulTask.h"
 #include "Logic/ResourcesManager.h"
 
 // Predeclaraciones
-namespace Logic {
+namespace Logic
+{
 	class CEntity;
 	class CPlaceable;
 };
@@ -27,10 +31,20 @@ namespace Logic {
 namespace Logic
 {
 	/**
-	Namespace para los tipos de mensajes posibles.
+	Clase raíz de la jerarquía de mensajes.
+	Contiene únicamente el tipo de mensaje.
+
+	@ingroup logicGroup
+    @ingroup entityGroup
+
+	@author David Llansó Garc�a
+	@date Julio, 2010
+    @ingroup grupoEntidad
 	*/
-	namespace TMessage
+	class Message
 	{
+	public:
+
 		enum MessageType
 		{
 			UNASSIGNED = 0xFFFFFFFF,
@@ -57,7 +71,7 @@ namespace Logic
 			RETURN_WALK_SOUL_PATH,
 			PERFORM_WALK_SOUL_PATH,
 			WALK_SOUL_PATH_FINISHED,
-			SEND_SOUL_WORK, 
+			SEND_SOUL_WORK,
 			SEND_SOUL_BURN,
 			PLACEABLE_FLOAT_TO,
 			PLACEABLE_PLACE,
@@ -88,26 +102,7 @@ namespace Logic
 			CONSUMPTION_STOPPED,
 			CONSUMPTION_CHANGE,
 		};
-	}
 
-    typedef TMessage::MessageType MessageType;
-
-	/**
-	Contiene el tipo de datos de un mensaje. Tiene una serie de
-	atributos gen�ricos que se interpretar�n en funci�n del tipo 
-	de mensaje.
-
-	@ingroup logicGroup
-    @ingroup entityGroup
-
-	@author David Llansó Garc�a
-	@date Julio, 2010
-    @ingroup grupoEntidad
-	*/
-	
-	class Message
-	{
-	public:
 		MessageType _type;
 		
 		Message() : _type(MessageType::UNASSIGNED)
@@ -117,7 +112,18 @@ namespace Logic
 		{}
 
 		virtual bool Dispatch(MessageHandler& handler) const = 0;
+
+		/**
+		Registra las clases de mensaje necesarias en el contexto de Lua.
+		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
+		*/
+		static void luaRegister();
 	};
+
+	/*
+	Tipo de mensaje.
+	*/
+	typedef Logic::Message::MessageType MessageType;
 
 	// SET_TRANSFORM
 	class TransformMessage : public Message
@@ -406,15 +412,16 @@ namespace Logic
 		}
 	};
 
-	enum HellQuartersAction{
-		SEND_SOUL_BURN,
-		SEND_SOUL_WORK,
-	};
-
 	// REQUEST_SEND_SOUL_WORK, REQUEST_SEND_SOUL_BURN
 	class HellQuartersMessage : public Message
 	{
 	public:
+
+		enum HellQuartersAction {
+			SEND_SOUL_BURN,
+			SEND_SOUL_WORK,
+		};
+
 		HellQuartersMessage(HellQuartersAction action) : Message(MessageType::HELLQUARTERS_REQUEST), _action(action) {}
 
 		HellQuartersAction _action;
@@ -603,7 +610,7 @@ namespace Logic
 	class ToggleMessage : public Message
 	{
 	public:
-		ToggleMessage(bool enabled) : Message(TMessage::UNASSIGNED), _enabled(enabled) {}
+		ToggleMessage(bool enabled) : Message(MessageType::UNASSIGNED), _enabled(enabled) {}
 
 		bool _enabled;
 
@@ -620,18 +627,18 @@ namespace Logic
 	class PowerMessage : public Message
 	{
 	public:
-		PowerMessage() : Message(TMessage::UNASSIGNED), _caller(EntityID::UNASSIGNED), _attach(false), _consumption(0) {}
+		PowerMessage() : Message(MessageType::UNASSIGNED), _caller(EntityID::UNASSIGNED), _attach(false), _consumption(0) {}
 
 		// POWER_REQUEST_ATTACHMENT: Solicita la conexión de un consumidor nuevo (la desconexión nunca se solicita, se envía directamente POWER_ATTACHMENT_INFO para informar del cambio)
 		void assemblePowerRequestAttachment(TEntityID caller, int consumption) {
-			_type = TMessage::POWER_REQUEST_ATTACHMENT;
+			_type = MessageType::POWER_REQUEST_ATTACHMENT;
 			_caller = caller;
 			_consumption = consumption;
 		}
 
 		// POWER_ATTACHMENT_INFO: Informa de la conexión o desconexión de un consumidor
 		void assemblePowerAttachmentInfo(TEntityID caller, bool attach, int consumption) {
-			_type = TMessage::POWER_ATTACHMENT_INFO;
+			_type = MessageType::POWER_ATTACHMENT_INFO;
 			_caller = caller;
 			_attach = attach;
 			_consumption = consumption;
@@ -655,29 +662,29 @@ namespace Logic
 	class ConsumptionMessage : public Message
 	{
 	public:
-		ConsumptionMessage() : Message(TMessage::UNASSIGNED), _consumptionChange(0), _resourceType(ResourceType::NONE) {}
+		ConsumptionMessage() : Message(MessageType::UNASSIGNED), _consumptionChange(0), _resourceType(ResourceType::NONE) {}
 
 		// CONSUMPTION_START: Solicita el comienzo de los ciclos de consumo (i.e. se ha conectado el primer consumidor)
 		void assembleConsumptionStart(ResourceType resourceType) {
-			_type = TMessage::CONSUMPTION_START;
+			_type = MessageType::CONSUMPTION_START;
 			_resourceType = resourceType;
 		}
 
 		// CONSUMPTION_STOP: Solicita el fin de los ciclos de consumo (i.e. se ha desconectado el último consumidor)
 		void assembleConsumptionStop(ResourceType resourceType) {
-			_type = TMessage::CONSUMPTION_STOP;
+			_type = MessageType::CONSUMPTION_STOP;
 			_resourceType = resourceType;
 		}
 
 		// CONSUMPTION_STOPPED: Informa de que los ciclos de consumo han parado (i.e. se han acabado los recursos)
 		void assembleConsumptionStopped(ResourceType resourceType) {
-			_type = TMessage::CONSUMPTION_STOPPED;
+			_type = MessageType::CONSUMPTION_STOPPED;
 			_resourceType = resourceType;
 		}
 
 		// CONSUMPTION_CHANGE: Informa de la variación deseada en el consumo
 		void assembleConsumptionChange(int consumptionChange, ResourceType resourceType) {
-			_type = TMessage::CONSUMPTION_CHANGE;
+			_type = MessageType::CONSUMPTION_CHANGE;
 			_consumptionChange = consumptionChange;
 			_resourceType = resourceType;
 		}

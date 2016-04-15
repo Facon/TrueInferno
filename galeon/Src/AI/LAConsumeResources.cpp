@@ -19,7 +19,7 @@ namespace AI {
 		ResourceMessage m;
 		m.assembleResourcesClaim(_resourceType, _smData.getReservedForConsume());
 		if (m.Dispatch(*_entity)){
-			std::cout << "Consumed=" << _smData.getReservedForConsume() << std::endl;
+			//std::cout << "Consumed=" << _smData.getReservedForConsume() << std::endl;
 			_smData.setReservedForConsume(0);
 			return LAStatus::SUCCESS; 
 		}

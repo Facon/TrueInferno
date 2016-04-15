@@ -47,9 +47,9 @@ namespace AI {
 			this->addEdge(acceptOrReject, waitConsumer, new CConditionFinished());
 
 			// Desde cualquier estado, si se recibe un aviso de parada de consumo, hay que pasar a desconectar a todos los clientes
-			this->addEdge(waitConsumer, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
-			this->addEdge(checkNewConsumption, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
-			this->addEdge(acceptOrReject, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(TMessage::CONSUMPTION_STOPPED));
+			this->addEdge(waitConsumer, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_STOPPED));
+			this->addEdge(checkNewConsumption, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_STOPPED));
+			this->addEdge(acceptOrReject, detachConsumers, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_STOPPED));
 
 			// Del estado de desconexión se vuelve al de espera inicial
 			this->addEdge(detachConsumers, waitConsumer, new CConditionFinished());

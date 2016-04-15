@@ -17,10 +17,12 @@ y encolados hasta que llegue el momento de su lanzamiento.
 
 #include "EventManager.h"
 #include "BuildingDestructionEvent.h"
-#include "TutorialEvent.h"
 #include "EndGameEvent.h"
+#include "TutorialEvent.h"
 
+#include "Application/GaleonApplication.h"
 #include "BaseSubsystems/ScriptManager.h"
+#include "Logic/Entity/Message.h"
 
 #include <cassert>
 
@@ -33,7 +35,7 @@ namespace Logic {
 	CEventManager::CEventManager()
 	{
 		_instance = this;
-		_timeEvents = TEventQueue();
+		_timeEvents = TEventVector();
 		_conditionEvents = TConditionEventMap();
 
 	} // CEventManager
@@ -92,7 +94,7 @@ namespace Logic {
 			launch = ev->launch();
 
 			if (launch) {
-				_timeEvents.pop();
+				_timeEvents.erase(_timeEvents.begin());
 				delete ev;
 				ev = NULL;
 			}
@@ -102,28 +104,14 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	bool CEventManager::loadEvents(const std::string& filename)
+	bool CEventManager::loadEventsScript(const std::string& filename)
 	{
-		// Ejecutar script.
 		if (!ScriptManager::CScriptManager::GetPtrSingleton()->loadScript(filename.c_str()))
 			return false;
 
-		// @TODO Borrar cuando se carguen desde LUA!
-		// Time events
-		addTimeEvent(new CBuildingDestructionEvent(55 * 1000));
-		addTimeEvent(new CBuildingDestructionEvent(110 * 1000));
-
-		// Condition events
-		addConditionEvent(new CTutorialEvent(1));
-		addConditionEvent(new CTutorialEvent(2));
-		addConditionEvent(new CTutorialEvent(3));
-		addConditionEvent(new CTutorialEvent(4));
-		addConditionEvent(new CTutorialEvent(5));
-		addConditionEvent(new CEndGameEvent(true));
-
 		return true;
 
-	} // loadEvents
+	} // loadEventsScript
 
 	//--------------------------------------------------------
 
@@ -138,10 +126,19 @@ namespace Logic {
 	
 	bool CEventManager::addTimeEvent(CEvent* ev)
 	{
-		if (ev->getEventTrigger() != CEvent::EventTrigger::TIME)
+		if (ev->getEventTrigger() != CEvent::EventTrigger::TIME ||
+				ev->getTime() < Application::CGaleonApplication::getSingletonPtr()->getAppTime())
 			return false;
 
-		_timeEvents.push(ev);
+		unsigned long eventTime = ev->getTime();
+		auto it = _timeEvents.begin();
+
+		for (it; it != _timeEvents.end(); ++it) {
+			if (eventTime < (*it)->getTime())
+				break;
+		}
+
+		_timeEvents.insert(it, ev);
 		return true;
 
 	} // addTimeEvent
@@ -153,22 +150,22 @@ namespace Logic {
 		if (ev->getEventTrigger() != CEvent::EventTrigger::CONDITION)
 			return false;
 
-		_conditionEvents[ev->getConditionEventType()].push_back(ev);
+		_conditionEvents[ev->getConditionTriggerType()].push_back(ev);
 		return true;
 
 	} // addConditionEvent
 
 	//--------------------------------------------------------
 	
-	bool CEventManager::launchConditionEvent(ConditionEventType conditionEventType)
+	bool CEventManager::launchConditionEvent(CEvent::ConditionTriggerType conditionTriggerType)
 	{
-		std::list<CEvent*> eventsList = _conditionEvents[conditionEventType];
+		std::list<CEvent*> eventsList = _conditionEvents[conditionTriggerType];
 
 		if (!eventsList.empty())
 		{
 			CEvent* conditionEvent = eventsList.front();
 			eventsList.pop_front();
-			_conditionEvents[conditionEventType] = eventsList;
+			_conditionEvents[conditionTriggerType] = eventsList;
 
 			return conditionEvent->launch();
 		}
@@ -180,7 +177,11 @@ namespace Logic {
 	//--------------------------------------------------------
 
 	bool CEventManager::open() {
+		luaRegister();
+		loadEventsScript("EventManager.lua");
+
 		return true;
+
 	} // open
 
 	//--------------------------------------------------------
@@ -190,11 +191,39 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	void CEventManager::luaRegister() {
+		// Jerarquía de eventos.
+		CEvent::luaRegister();
+
+		CBuildingDestructionEvent::luaRegister();
+		CEndGameEvent::luaRegister();
+		CTutorialEvent::luaRegister();
+
+		// EventManager.
+		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
+			[
+				luabind::class_<CEventManager>("CEventManager")
+				.def("addTimeEvent", &CEventManager::addTimeEvent)
+				.def("addConditionEvent", &CEventManager::addConditionEvent)
+				.def("launchConditionEvent", &CEventManager::launchConditionEvent)
+				.scope
+				[
+					luabind::def("getSingletonPtr", &CEventManager::getSingletonPtr)
+				]
+			];
+
+		// Jerarquía de mensajes.
+		Logic::Message::luaRegister();
+
+	} // luaRegister
+
+	//--------------------------------------------------------
+
 	void CEventManager::clearTimeEventsQueue() {
 		while (!_timeEvents.empty())
 		{
 			CEvent* ev = _timeEvents.front();
-			_timeEvents.pop();
+			_timeEvents.erase(_timeEvents.begin());
 
 			delete ev;
 			ev = NULL;
@@ -224,5 +253,79 @@ namespace Logic {
 		_conditionEvents.clear();
 
 	} // clearConditionEventsMap
+
+	//--------------------------------------------------------
+
+	bool CEventManager::HandleMessage(const Message& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const TransformMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const PositionMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const RotationMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const DimensionsMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const ColorMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const MaterialMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const AnimationMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const ControlMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const PhysicMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const TouchMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const DamageMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const WorkerMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const WalkSoulPathMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const HellQuartersMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const MovePlaceableMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const SoulSenderMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const SoulMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const CheckValidPositionPlaceableMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const NumberMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const ResourceMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const GetCostPlaceableMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const LogisticsMessage& msg)
+	{ return false; }
+
+	bool CEventManager::HandleMessage(const ToggleMessage& msg)
+	{ return false; }
 
 } // namespace Logic

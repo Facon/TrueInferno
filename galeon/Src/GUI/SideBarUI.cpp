@@ -9,7 +9,7 @@
 #include "Map/MapEntity.h"
 
 #include "Logic/Events/EventManager.h"
-#include "Logic/Events/ConditionEvents.h"
+#include "Logic/Events/Event.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
@@ -74,6 +74,15 @@ namespace GUI
 
 		_uibuttonsWindow->getChildElement("ClearTerrain/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::clearTerrainReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreateResearchLab/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createResearchLabReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreateWarehouse/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createWarehouseReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreatePowerGenerator/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createPowerGeneratorReleased, this));
 	}
 
 	void SideBarUI::release()
@@ -89,6 +98,9 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CreateRefinery")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("ClearTerrain")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateResearchLab")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateWarehouse")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->removeAllEvents();
 
 		_placeableEntity = nullptr;
 	}
@@ -119,6 +131,7 @@ namespace GUI
 		CEGUI::Vector2f mousePos =
 			context.getMouseCursor().getPosition();
 
+
 		Ogre::Ray mouseRay =
 			mCamera->getCameraToViewportRay(
 			mousePos.d_x / width,
@@ -131,6 +144,14 @@ namespace GUI
 
 	void SideBarUI::tick(unsigned int msecs)
 	{
+		//resize en CEGUI tiene algun fallo con los botones
+		//Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
+
+		//float width = (float)mCamera->getViewportWidth();
+		//float height = (float)mCamera->getViewportHeight();
+		//printf("width %f height %f\n", width, height);
+		//CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Sizef(width,height));
+
 		if (_placeableEntity){
 
 			Logic::CEntity* entity = getTileEntityFromRaycast();
@@ -225,7 +246,7 @@ namespace GUI
 	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_WORK);
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 		
 		m.Dispatch(*hellQuarters->getEntity());
@@ -237,7 +258,7 @@ namespace GUI
 	bool SideBarUI::moveSoulReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_BURN);
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
 		m.Dispatch(*hellQuarters->getEntity());
@@ -278,6 +299,27 @@ namespace GUI
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "PowerGenerator", Vector3(0, 0, 0), true, true); 
 		printf("Clear Terrain\n");
 		return true;
+	}
+
+	bool SideBarUI::createResearchLabReleased(const CEGUI::EventArgs& e)
+	{
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "ResearchLabs", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
+	}
+
+	bool SideBarUI::createWarehouseReleased(const CEGUI::EventArgs& e)
+	{
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Warehouse", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
+	}
+
+	bool SideBarUI::createPowerGeneratorReleased(const CEGUI::EventArgs& e)
+	{
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "PowerGenerator", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 	void SideBarUI::ClearBuildingConstruction(){
@@ -357,7 +399,7 @@ namespace GUI
 
 						// @TODO Hacer esto bien...
 						if (_firstRoad) {
-							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 							_firstRoad = false;
 						}
 

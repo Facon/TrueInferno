@@ -75,12 +75,12 @@ namespace Logic {
 
 	bool CWorkBuilding::HandleMessage(const WorkerMessage& msg){
 		switch(msg._type){
-		case TMessage::WORKER_ACTIVATED:{
+		case MessageType::WORKER_ACTIVATED:{
 			_changeActive += msg._change;
 			break;
 		}
 
-		case TMessage::WORKER_ASSIGNED:{
+		case MessageType::WORKER_ASSIGNED:{
 			_changeAssigned += msg._change;
 			break;
 		}

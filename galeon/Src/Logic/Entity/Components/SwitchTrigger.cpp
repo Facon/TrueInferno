@@ -60,7 +60,7 @@ namespace Logic
 	//---------------------------------------------------------
 
 	/*
-	bool CSwitchTrigger::accept(const TMessage &message)
+	bool CSwitchTrigger::accept(const MessageType &message)
 	{
 		return message._type == Message::TOUCHED ||
 			message._type == Message::UNTOUCHED;
@@ -69,7 +69,7 @@ namespace Logic
 	
 	//---------------------------------------------------------
 
-	void CSwitchTrigger::process(const TMessage &message)
+	void CSwitchTrigger::process(const MessageType &message)
 	{
 		switch(message._type)
 		{
@@ -77,14 +77,14 @@ namespace Logic
 		case Message::UNTOUCHED:
 			if(_target)
 			{
-				TMessage m;
+				MessageType m;
 				m._type = Message::SWITCH;
 				if (message._type == Message::TOUCHED) {
 					m._int = 1;
 				} else {
 					m._int = 0;
 				}
-				_target->emitMessage(m);
+				_target->emiMessageType(m);
 			}
 			break;
 		}

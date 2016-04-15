@@ -18,16 +18,17 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #ifndef __Logic_EventManager_H
 #define __Logic_EventManager_H
 
-#include <queue>
 #include <list>
+#include <vector>
 #include <map>
 #include <string>
+
+#include "Event.h"
+#include "Logic/Entity/MessageHandler.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
 {
-	class CEvent;
-	enum ConditionEventType;
 }
 
 /**
@@ -50,14 +51,15 @@ namespace Logic
 	@author Raúl Segura
 	@date Marzo, 2016
 	*/
-	class CEventManager
+	class CEventManager : public MessageHandler
 	{
 	public:
+
 		/**
 		Devuelve la única instancia de la clase.
 		@return Puntero a la instancia de la clase.
 		*/
-		static Logic::CEventManager *getSingletonPtr() { return _instance; }
+		static CEventManager *getSingletonPtr() { return _instance; }
 
 		/**
 		Inicializa la instancia y los recursos estáticos.
@@ -83,12 +85,12 @@ namespace Logic
 		void tick(unsigned int msecs);
 
 		/**
-		Carga el script de LUA encargado de leer y crear los eventos.
+		Carga un script de LUA encargado de crear y lanzar eventos.
 
-		@param filename nombre del script LUA con los eventos del juego.
+		@param filename nombre del script.
 		@return true si la carga se hizo correctamente.
 		*/
-		bool loadEvents(const std::string& filename);
+		bool loadEventsScript(const std::string& filename);
 
 		/**
 		Destruye todos los eventos cargados.
@@ -96,17 +98,18 @@ namespace Logic
 		void unloadEvents();
 
 		/**
-		Tipo cola de eventos del juego.
+		Tipo vector de eventos del juego.
 		*/
-		typedef std::queue<CEvent*> TEventQueue;
+		typedef std::vector<CEvent*> TEventVector;
 
 		/**
 		Tipo índice de eventos condicionales del juego.
 		*/
-		typedef std::map<ConditionEventType, std::list<CEvent*>> TConditionEventMap;
+		typedef std::map<CEvent::ConditionTriggerType, std::list<CEvent*>> TConditionEventMap;
 
 		/**
-		Añade un evento a la cola de eventos lanzados por tiempo.
+		Añade un evento a la cola de eventos lanzados por tiempo. Este
+		nuevo evento debe ser añadido en orden.
 
 		@param event evento por tiempo a añadir a la cola.
 		@return true si se añadió correctamente.
@@ -124,16 +127,16 @@ namespace Logic
 		/**
 		Lanza un evento condicional del tipo especificado.
 
-		@param conditionEventType tipo de evento condicional a lanzar.
+		@param conditionTriggerType tipo de evento condicional a lanzar.
 		@return true si se lanzó correctamente.
 		*/
-		bool launchConditionEvent(ConditionEventType conditionEventType);
+		bool launchConditionEvent(CEvent::ConditionTriggerType conditionTriggerType);
 
 		/**
 		Devuelve la cola de eventos lanzados por tiempo del juego.
-		@return cola de eventos por tiempo.
+		@return vector de eventos por tiempo.
 		*/
-		const TEventQueue getTimeEventsQueue() { return _timeEvents; }
+		const TEventVector getTimeEventsQueue() { return _timeEvents; }
 
 		/**
 		Elimina todos los eventos lanzados por tiempo.
@@ -145,12 +148,38 @@ namespace Logic
 		*/
 		void clearConditionEventsMap();
 
+		// Manejo de mensajes, tiene que manejar todos los tipos de mensajes sin excepción.
+		bool HandleMessage(const Message& msg);
+		bool HandleMessage(const TransformMessage& msg);
+		bool HandleMessage(const PositionMessage& msg);
+		bool HandleMessage(const RotationMessage& msg);
+		bool HandleMessage(const DimensionsMessage& msg);
+		bool HandleMessage(const ColorMessage& msg);
+		bool HandleMessage(const MaterialMessage& msg);
+		bool HandleMessage(const AnimationMessage& msg);
+		bool HandleMessage(const ControlMessage& msg);
+		bool HandleMessage(const PhysicMessage& msg);
+		bool HandleMessage(const TouchMessage& msg);
+		bool HandleMessage(const DamageMessage& msg);
+		bool HandleMessage(const WorkerMessage& msg);
+		bool HandleMessage(const WalkSoulPathMessage& msg);
+		bool HandleMessage(const HellQuartersMessage& msg);
+		bool HandleMessage(const MovePlaceableMessage& msg);
+		bool HandleMessage(const SoulSenderMessage& msg);
+		bool HandleMessage(const SoulMessage& msg);
+		bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
+		bool HandleMessage(const NumberMessage& msg);
+		bool HandleMessage(const ResourceMessage& msg);
+		bool HandleMessage(const GetCostPlaceableMessage& msg);
+		bool HandleMessage(const LogisticsMessage& msg);
+		bool HandleMessage(const ToggleMessage& msg);
+
 	protected:
 
 		/**
 		Cola de eventos lanzados por tiempo.
 		*/
-		TEventQueue _timeEvents;
+		TEventVector _timeEvents;
 
 		/**
 		Índice de eventos lanzados por condición.
@@ -166,6 +195,13 @@ namespace Logic
 		Destructor.
 		*/
 		virtual ~CEventManager();
+
+		/**
+		Método encargado de registrar en el contexto de Lua todas aquellas
+		clases y funciones necesarias para el completo manejo de los eventos
+		de juego desde Lua.
+		*/
+		void luaRegister();
 
 		/**
 		Segunda fase de la construcción del objeto. Sirve para hacer

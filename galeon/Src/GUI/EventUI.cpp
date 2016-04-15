@@ -1,7 +1,6 @@
 #include "EventUI.h"
 
 #include "Logic/Events/EventManager.h"
-#include "Logic/Events/ConditionEvents.h"
 
 #include <CEGUI/System.h>
 #include <CEGUI/WindowManager.h>
@@ -52,7 +51,7 @@ namespace GUI
 	void EventUI::tick(unsigned int msecs)
 	{
 		if (firstTick) {
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 			firstTick = false;
 		}		
 	}
@@ -64,10 +63,10 @@ namespace GUI
 
 		// @TODO Hacer esto bien...
 		if (firstEventReleased)	{
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 			firstEventReleased = false;
 		} else if (_uiEventWindow->getChild("EventImage")->getProperty("Image") == "TrueInfernoEvents/EventTutorial4") {
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 		}
 
 		return true;

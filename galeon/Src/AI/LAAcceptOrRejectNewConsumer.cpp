@@ -44,6 +44,7 @@ namespace AI {
 				// Reintentamos el envío hasta que se acepte
 				if (powerMsg.Dispatch(*consumer)){
 					_consumerNotified = true;
+					_smData.setNewConsumer(EntityID::UNASSIGNED);
 				}
 
 				else

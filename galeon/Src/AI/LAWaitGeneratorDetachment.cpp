@@ -46,7 +46,7 @@ namespace AI {
 			_smData.setPowerGenerator(EntityID::UNASSIGNED);
 			_smData.setAttached(false);
 
-			std::cout << "Detached:" << _entity->getEntityID() << std::endl;
+			//std::cout << "Detached:" << _entity->getEntityID() << std::endl;
 
 			// La espera ha sido exitosa
 			return LAStatus::SUCCESS;

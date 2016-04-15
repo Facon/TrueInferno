@@ -60,7 +60,7 @@ namespace Logic
 	
 	//---------------------------------------------------------
 	/*
-	bool CSwitchPosition::accept(const TMessage &message)
+	bool CSwitchPosition::accept(const MessageType &message)
 	{
 		return message._type == Message::SWITCH;
 
@@ -68,7 +68,7 @@ namespace Logic
 	
 	//---------------------------------------------------------
 
-	void CSwitchPosition::process(const TMessage &message)
+	void CSwitchPosition::process(const MessageType &message)
 	{
 		switch(message._type)
 		{

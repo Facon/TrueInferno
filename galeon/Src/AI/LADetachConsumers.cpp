@@ -41,6 +41,19 @@ namespace AI {
 
 		assert(_smData.getConsumers().size()==0 && "Some consumers were not detached");
 
+		// Si había nuevo consumidor esperando respuesta, lo liberamos también
+		if (_smData.getNewConsumer() != EntityID::UNASSIGNED){
+			CEntity *consumer = _entity->getMap()->getEntityByID(_smData.getNewConsumer());
+			if (consumer != nullptr){
+				// Reintentamos el envío hasta que se acepte
+				if (powerMsg.Dispatch(*consumer)){
+					_smData.setNewConsumer(EntityID::UNASSIGNED);
+				}
+				else
+					return LAStatus::RUNNING;
+			}
+		}
+
 		/* Paramos el consumo si no lo estaba ya de por sí 
 		* (es probable que hayamos entrado en este estado porque el consumidor se quedó sin recursos y nos lo solicitó) */
 		ConsumptionMessage consumptionMsg;

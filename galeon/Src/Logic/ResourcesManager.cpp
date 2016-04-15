@@ -21,6 +21,8 @@ namespace Logic
 		increaseResources(ResourceType::GAS, GAS_GATHERING_SPEED * workers * time);
 	}*/
 	
+	ResourcesManager ResourcesManager::_instance = ResourcesManager();
+
 	void ResourcesManager::changeResources(ResourceType type, float num)
 	{
 		switch(type)
@@ -48,8 +50,7 @@ namespace Logic
 				break;
 			case ResourceType::HADES_FAVOR:{
 				// TODO Atajo temporal para obtener el HFManager
-				HFManager *hfManager =
-					((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getHFManager();
+				HFManager* hfManager = HFManager::getSingletonPtr();
 				hfManager->setHadesFavor(hfManager->getHadesFavor() + num);
 			}
 				break;

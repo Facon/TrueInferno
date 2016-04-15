@@ -39,6 +39,9 @@ namespace GUI
 		bool repairBuildingReleased(const CEGUI::EventArgs& e);
 		bool clearTerrainReleased(const CEGUI::EventArgs& e);
 		void ClearBuildingConstruction();
+		bool createResearchLabReleased(const CEGUI::EventArgs& e);
+		bool createWarehouseReleased(const CEGUI::EventArgs& e);
+		bool createPowerGeneratorReleased(const CEGUI::EventArgs& e);
 
 	public:
 		SideBarUI();

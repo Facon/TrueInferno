@@ -49,8 +49,8 @@ namespace Application {
 		if (!Logic::CServer::getSingletonPtr()->loadLevel("map.txt"))
 			return false;
 
-		// Cargar el script de eventos de LUA.
-		if (!Logic::CEventManager::getSingletonPtr()->loadEvents("Events.lua"))
+		// Cargar el script de LUA con los eventos definidos inicialmente.
+		if (!Logic::CEventManager::getSingletonPtr()->loadEventsScript("InitialEvents.lua"))
 			return false;
 
 		// Cargamos la ventana que muestra el tiempo de juego transcurrido.

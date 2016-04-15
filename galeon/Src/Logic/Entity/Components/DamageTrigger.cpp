@@ -38,7 +38,7 @@ namespace Logic
 
 	//---------------------------------------------------------
 	/*
-	bool CDamageTrigger::accept(const TMessage &message)
+	bool CDamageTrigger::accept(const MessageType &message)
 	{
 		return message._type == Message::TOUCHED;
 
@@ -46,16 +46,16 @@ namespace Logic
 	
 	//---------------------------------------------------------
 
-	void CDamageTrigger::process(const TMessage &message)
+	void CDamageTrigger::process(const MessageType &message)
 	{
 		switch(message._type)
 		{
 		case Message::TOUCHED:
 			{
-				TMessage m;
+				MessageType m;
 				m._type = Message::DAMAGED;
 				m._float = _damage;
-				message._entity->emitMessage(m);
+				message._entity->emiMessageType(m);
 
 				std::cout << message._entity->getName()<< std::endl;
 			}

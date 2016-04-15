@@ -41,8 +41,9 @@ Thumbs.db
 !/dependencies/bin/*/fsbank*.dll
 
 /dependencies/include/*
-!/dependencies/include/PhysX/
+!/dependencies/include/boost/
 !/dependencies/include/FMOD/
+!/dependencies/include/PhysX/
 
 /dependencies/lib/*/*
 !/dependencies/lib/*/PhysX*.lib

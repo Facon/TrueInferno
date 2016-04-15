@@ -25,12 +25,12 @@ namespace AI {
 		else
 			_smData.setPowerGenerator(EntityID::UNASSIGNED);
 
-		if (_smData.getAttached() != msg._attach){
+		/*if (_smData.getAttached() != msg._attach){
 			if (msg._attach)
 				std::cout << "Attached:" << _entity->getEntityID() << std::endl;
 			else
 				assert(false && "Can't change from attached to detached when trying to attach");
-		}
+		}*/
 
 		// Y el estado de conexión
 		_smData.setAttached(msg._attach);

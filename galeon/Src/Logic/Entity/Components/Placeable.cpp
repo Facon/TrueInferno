@@ -4,7 +4,6 @@
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Events/EventManager.h"
-#include "Logic/Events/ConditionEvents.h"
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/Entity/PlaceableType.h"
@@ -160,7 +159,7 @@ namespace Logic {
 		// Eventos del tutorial
 		// @TODO Hacer bien...
 		if (isBuilding()) {
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 		}
 
 		return true;
@@ -299,7 +298,7 @@ namespace Logic {
 
 	bool CPlaceable::ConsumeResourcesForConstruction(){
 
-		Logic::ResourcesManager *resourcesManager = ((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
+		Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
 
 		if (resourcesManager->getMineral() < _mineralCost)
 			return false;

@@ -19,9 +19,26 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 
 #include "Application/GaleonApplication.h"
 
+#include "BaseSubsystems/ScriptManager.h"
+
 #include <iostream>
 
 namespace Logic {
+
+	void CEvent::luaRegister()
+	{
+		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
+			[
+				luabind::class_<CEvent>("CEvent")
+				.enum_("ConditionTriggerType")
+				[
+					luabind::value("TUTORIAL", CEvent::ConditionTriggerType::TUTORIAL),
+					luabind::value("END_GAME", CEvent::ConditionTriggerType::END_GAME)
+				]
+			];
+	}
+
+	//--------------------------------------------------------
 
 	bool CEvent::launch()
 	{
