@@ -3,9 +3,10 @@ local launchInitialEvents = false;
 if launchInitialEvents then
 	print("[LUA] Loading InitialEvents.lua...");
 	
-	-- Building destruction
+	-- Time events
+	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(105 * 1000));
 	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(40 * 1000));
-	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(75 * 1000));
+	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(80 * 1000));
 
 	-- Tutorial
 	CEventManager.getSingletonPtr():addConditionEvent(CTutorialEvent(1));

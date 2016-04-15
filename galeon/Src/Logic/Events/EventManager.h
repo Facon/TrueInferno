@@ -18,8 +18,8 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #ifndef __Logic_EventManager_H
 #define __Logic_EventManager_H
 
-#include <queue>
 #include <list>
+#include <vector>
 #include <map>
 #include <string>
 
@@ -98,9 +98,9 @@ namespace Logic
 		void unloadEvents();
 
 		/**
-		Tipo cola de eventos del juego.
+		Tipo vector de eventos del juego.
 		*/
-		typedef std::queue<CEvent*> TEventQueue;
+		typedef std::vector<CEvent*> TEventVector;
 
 		/**
 		Tipo índice de eventos condicionales del juego.
@@ -134,9 +134,9 @@ namespace Logic
 
 		/**
 		Devuelve la cola de eventos lanzados por tiempo del juego.
-		@return cola de eventos por tiempo.
+		@return vector de eventos por tiempo.
 		*/
-		const TEventQueue getTimeEventsQueue() { return _timeEvents; }
+		const TEventVector getTimeEventsQueue() { return _timeEvents; }
 
 		/**
 		Elimina todos los eventos lanzados por tiempo.
@@ -179,7 +179,7 @@ namespace Logic
 		/**
 		Cola de eventos lanzados por tiempo.
 		*/
-		TEventQueue _timeEvents;
+		TEventVector _timeEvents;
 
 		/**
 		Índice de eventos lanzados por condición.

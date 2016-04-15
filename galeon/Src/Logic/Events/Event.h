@@ -118,6 +118,8 @@ namespace Logic
 		EventTrigger getEventTrigger() { return _trigger; }
 		ConditionTriggerType getConditionTriggerType() { return _conditionType; }
 
+		unsigned long getTime() { return _time; }
+
 		/**
 		Comprueba si debe lanzar el evento y lo hace en caso positivo.
 		En caso negativo, simplemente no hace nada.

@@ -20,9 +20,9 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "EndGameEvent.h"
 #include "TutorialEvent.h"
 
-#include "Logic/Entity/Message.h"
-
+#include "Application/GaleonApplication.h"
 #include "BaseSubsystems/ScriptManager.h"
+#include "Logic/Entity/Message.h"
 
 #include <cassert>
 
@@ -35,7 +35,7 @@ namespace Logic {
 	CEventManager::CEventManager()
 	{
 		_instance = this;
-		_timeEvents = TEventQueue();
+		_timeEvents = TEventVector();
 		_conditionEvents = TConditionEventMap();
 
 	} // CEventManager
@@ -94,7 +94,7 @@ namespace Logic {
 			launch = ev->launch();
 
 			if (launch) {
-				_timeEvents.pop();
+				_timeEvents.erase(_timeEvents.begin());
 				delete ev;
 				ev = NULL;
 			}
@@ -126,11 +126,19 @@ namespace Logic {
 	
 	bool CEventManager::addTimeEvent(CEvent* ev)
 	{
-		if (ev->getEventTrigger() != CEvent::EventTrigger::TIME)
+		if (ev->getEventTrigger() != CEvent::EventTrigger::TIME ||
+				ev->getTime() < Application::CGaleonApplication::getSingletonPtr()->getAppTime())
 			return false;
 
-		// @TODO Añadir en orden (u ordenar después...)
-		_timeEvents.push(ev);
+		unsigned long eventTime = ev->getTime();
+		auto it = _timeEvents.begin();
+
+		for (it; it != _timeEvents.end(); ++it) {
+			if (eventTime < (*it)->getTime())
+				break;
+		}
+
+		_timeEvents.insert(it, ev);
 		return true;
 
 	} // addTimeEvent
@@ -215,7 +223,7 @@ namespace Logic {
 		while (!_timeEvents.empty())
 		{
 			CEvent* ev = _timeEvents.front();
-			_timeEvents.pop();
+			_timeEvents.erase(_timeEvents.begin());
 
 			delete ev;
 			ev = NULL;
