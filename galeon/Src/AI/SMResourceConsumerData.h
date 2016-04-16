@@ -10,12 +10,12 @@ namespace AI {
 		virtual ~CSMResourceConsumerData() {}
 
 		// Devuelve la cantidad de recurso que se debe consumir en cada periodo
-		int getConsumption() const {
+		float getConsumption() const {
 			return _consumption;
 		}
 
 		// Modifica el consumo en la cantidad dada
-		void modifyConsumption(int change) {
+		void modifyConsumption(float change) {
 			_consumption += change;
 		}
 
@@ -36,7 +36,7 @@ namespace AI {
 
 	private:
 		// Cantidad de recurso que se debe consumir en cada periodo
-		int _consumption;
+		float _consumption;
 
 		// Cantidad de recurso que tenemos reservada
 		int _reservedForConsume;

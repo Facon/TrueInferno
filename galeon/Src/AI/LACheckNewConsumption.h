@@ -9,7 +9,8 @@ namespace AI {
 		RTTI_DECL;
 
 	public:
-		CLACheckNewConsumption(CEntity* entity, CSMPowerGeneratorData& smData) : CLatentAction(entity), _smData(smData), _received(false) {}
+		CLACheckNewConsumption(CEntity* entity, CSMPowerGeneratorData& smData) : 
+			CLatentAction(entity), _smData(smData), _received(false) {}
 
 		virtual ~CLACheckNewConsumption() {}
 

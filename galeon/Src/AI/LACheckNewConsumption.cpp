@@ -46,8 +46,8 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLACheckNewConsumption::OnRun(unsigned int msecs) {
-		int totalConsumption = _smData.getTotalConsumption();
-		int newConsumption = _smData.getNewConsumption();
+		int totalConsumption = _smData.getTotalConsumptionUnits();
+		int newConsumption = _smData.getNewConsumptionUnits();
 		int currentCoke = _smData.getCurrentCoke();
 
 		// Si el nuevo consumo total es aceptable para nuestras reservas: éxito

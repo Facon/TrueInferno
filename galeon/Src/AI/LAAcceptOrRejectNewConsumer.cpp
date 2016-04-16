@@ -15,7 +15,12 @@ namespace AI {
 
 		// Añadimos al consumidor a la lista de conexiones de consumidores del PowerGenerator
 		if (_smData.getNewConsumerAccepted()){
-			bool added = _smData.addConsumer(_smData.getNewConsumer(), _smData.getNewConsumption());
+			Logic::Consumer consumer;
+			consumer.id = _smData.getNewConsumer();
+			consumer.consumption = _smData.getNewConsumptionUnits();
+			consumer.period = _smData.getNewConsumptionPeriod();
+
+			bool added = _smData.addConsumer(consumer);
 
 			// Si se añadió consumidor y la lista tiene un único consumidor es que es el primero
 			if (added && _smData.getNumConsumers() == 1)
@@ -39,7 +44,7 @@ namespace AI {
 			if (consumer != nullptr){
 				// Preparamos el mensaje con la conexión/desconexión
 				PowerMessage powerMsg;
-				powerMsg.assemblePowerAttachmentInfo(_entity->getEntityID(), _smData.getNewConsumerAccepted(), _smData.getNewConsumption());
+				powerMsg.assemblePowerAttachmentInfo(_entity->getEntityID(), _smData.getNewConsumerAccepted(), _smData.getNewConsumptionUnits(), _smData.getNewConsumptionPeriod());
 
 				// Reintentamos el envío hasta que se acepte
 				if (powerMsg.Dispatch(*consumer)){
@@ -77,9 +82,9 @@ namespace AI {
 			ConsumptionMessage consumptionMsg;
 
 			// El cambio es positivo si es una conexión y negativo en caso contrario
-			int consumptionChange = (_smData.getNewConsumerAccepted() ? 1 : -1) * _smData.getNewConsumption();
+			int consumptionChange = (_smData.getNewConsumerAccepted() ? 1 : -1) * _smData.getNewConsumptionUnits();
 
-			consumptionMsg.assembleConsumptionChange(consumptionChange, ResourceType::COKE);
+			consumptionMsg.assembleConsumptionChange(ResourceType::COKE, consumptionChange, _smData.getNewConsumptionPeriod());
 
 			if (consumptionMsg.Dispatch(*_entity))
 				_consumptionChangeNotified = true;

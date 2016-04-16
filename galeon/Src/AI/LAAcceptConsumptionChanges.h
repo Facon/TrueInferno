@@ -9,8 +9,8 @@ namespace AI {
 		RTTI_DECL;
 
 	public:
-		CLAAcceptConsumptionChanges(CEntity* entity, CSMResourceConsumerData& smData, ResourceType resourceType) :
-		CLatentAction(entity), _smData(smData), _resourceType(resourceType) {}
+		CLAAcceptConsumptionChanges(CEntity* entity, CSMResourceConsumerData& smData, ResourceType resourceType, int normalizedConsumptionPeriod) :
+			CLatentAction(entity), _smData(smData), _resourceType(resourceType), _normalizedConsumptionPeriod(normalizedConsumptionPeriod) {}
 
 		virtual ~CLAAcceptConsumptionChanges() {}
 
@@ -24,7 +24,11 @@ namespace AI {
 	private:
 		CSMResourceConsumerData& _smData;
 
+		// Tipo de recurso consumido
 		ResourceType _resourceType;
+
+		// Periodo (ms) normalizado de consumición de recursos
+		int _normalizedConsumptionPeriod;
 	};
 }
 

@@ -627,21 +627,25 @@ namespace Logic
 	class PowerMessage : public Message
 	{
 	public:
-		PowerMessage() : Message(MessageType::UNASSIGNED), _caller(EntityID::UNASSIGNED), _attach(false), _consumption(0) {}
+		PowerMessage() : 
+			Message(MessageType::UNASSIGNED), _caller(EntityID::UNASSIGNED), 
+			_attach(false), _consumptionUnits(0), _consumptionPeriod(0) {}
 
 		// POWER_REQUEST_ATTACHMENT: Solicita la conexión de un consumidor nuevo (la desconexión nunca se solicita, se envía directamente POWER_ATTACHMENT_INFO para informar del cambio)
-		void assemblePowerRequestAttachment(TEntityID caller, int consumption) {
+		void assemblePowerRequestAttachment(TEntityID caller, int consumptionUnits, int consumptionPeriod) {
 			_type = MessageType::POWER_REQUEST_ATTACHMENT;
 			_caller = caller;
-			_consumption = consumption;
+			_consumptionUnits = consumptionUnits;
+			_consumptionPeriod = consumptionPeriod;
 		}
 
 		// POWER_ATTACHMENT_INFO: Informa de la conexión o desconexión de un consumidor
-		void assemblePowerAttachmentInfo(TEntityID caller, bool attach, int consumption) {
+		void assemblePowerAttachmentInfo(TEntityID caller, bool attach, int consumptionUnits, int consumptionPeriod) {
 			_type = MessageType::POWER_ATTACHMENT_INFO;
 			_caller = caller;
 			_attach = attach;
-			_consumption = consumption;
+			_consumptionUnits = consumptionUnits;
+			_consumptionPeriod = consumptionPeriod;
 		}
 
 		// Entidad a conectar/desconectar
@@ -651,7 +655,10 @@ namespace Logic
 		bool _attach;
 
 		// Unidades de consumo de la entidad
-		int _consumption;
+		int _consumptionUnits;
+
+		// Periodo de consumo de la entidad
+		int _consumptionPeriod;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -662,7 +669,9 @@ namespace Logic
 	class ConsumptionMessage : public Message
 	{
 	public:
-		ConsumptionMessage() : Message(MessageType::UNASSIGNED), _consumptionChange(0), _resourceType(ResourceType::NONE) {}
+		ConsumptionMessage() : 
+			Message(MessageType::UNASSIGNED), _resourceType(ResourceType::NONE),
+			_consumptionChange(0), _consumptionPeriod(0) {}
 
 		// CONSUMPTION_START: Solicita el comienzo de los ciclos de consumo (i.e. se ha conectado el primer consumidor)
 		void assembleConsumptionStart(ResourceType resourceType) {
@@ -683,14 +692,18 @@ namespace Logic
 		}
 
 		// CONSUMPTION_CHANGE: Informa de la variación deseada en el consumo
-		void assembleConsumptionChange(int consumptionChange, ResourceType resourceType) {
+		void assembleConsumptionChange(ResourceType resourceType, int consumptionChange, int consumptionPeriod) {
 			_type = MessageType::CONSUMPTION_CHANGE;
-			_consumptionChange = consumptionChange;
 			_resourceType = resourceType;
+			_consumptionChange = consumptionChange;
+			_consumptionPeriod = consumptionPeriod;
 		}
 
 		// Cambio de consumo
 		int _consumptionChange;
+
+		// Periodo (ms) con que se consume
+		int _consumptionPeriod;
 
 		// Recurso consumido
 		ResourceType _resourceType;

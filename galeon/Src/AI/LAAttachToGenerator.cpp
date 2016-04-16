@@ -57,7 +57,7 @@ namespace AI {
 
 		// Preparamos la solicitud de conexión indicando quiénes somos y nuestro consumo
 		PowerMessage m;
-		m.assemblePowerRequestAttachment(this->_entity->getEntityID(), _consumptionUnits);
+		m.assemblePowerRequestAttachment(this->_entity->getEntityID(), _consumptionUnits, _consumptionPeriod);
 
 		// Reintentamos la petición de conexión hasta que nos la acepten en algún tick
 		if (m.Dispatch(*powerGenerator)){

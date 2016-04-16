@@ -163,7 +163,7 @@ Map = {
 		maxResources = 1000,
 		providedResources="MINERAL",
 		consumptionPeriod = 10,
-		consumptionUnits = 1,
+		consumptionUnits = 5,
 	},
 	
 	GasPlant = {
@@ -194,7 +194,7 @@ Map = {
 		maxResources = 1000,
 		providedResources="GAS",
 		consumptionPeriod = 10,
-		consumptionUnits = 1,
+		consumptionUnits = 5,
 	},
 	
 	EvilWorks = {
@@ -228,7 +228,7 @@ Map = {
 		transformCostResource="GAS",
 		transformCostRatio=1,
 		consumptionPeriod = 10,
-		consumptionUnits = 1,
+		consumptionUnits = 5,
 	},
 	
 	Refinery = {
@@ -262,7 +262,7 @@ Map = {
 		transformCostResource="GAS",
 		transformCostRatio=1,
 		consumptionPeriod = 10,
-		consumptionUnits = 1,
+		consumptionUnits = 5,
 	},
 		
 	ResearchLabs = {
@@ -287,7 +287,7 @@ Map = {
 		storedResources="AETHER",
 		maxResources = 1000,
 		consumptionPeriod = 10,
-		consumptionUnits = 1,
+		consumptionUnits = 5,
 	},
 		
 	PowerGenerator = {
@@ -337,5 +337,7 @@ Map = {
 		storedResources="MINERAL,GAS",
 		maxResources = 1000,
 		providedResources="MINERAL,GAS",
+		consumptionPeriod = 10,
+		consumptionUnits = 5,
 	},
 }

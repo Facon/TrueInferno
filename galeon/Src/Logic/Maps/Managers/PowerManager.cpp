@@ -177,7 +177,7 @@ namespace Logic {
 			// TODO Descartamos los que no están activos
 
 			// Calculamos su necesidad de combustible
-			int needed = generator->getConsumption() - generator->getCurrentReserves();
+			int needed = generator->getConsumptionUnits() - generator->getCurrentReserves();
 
 			// Y actualizamos, si procede, el mejor ratio encontrado hasta el momento
 			if (needed > maxNeeded){

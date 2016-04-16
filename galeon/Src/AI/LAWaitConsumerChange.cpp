@@ -25,7 +25,8 @@ namespace AI {
 
 			// Guardamos datos en la memoria compartida de la SM
 			_smData.setNewConsumer(msg._caller);
-			_smData.setNewConsumption(msg._consumption);
+			_smData.setNewConsumptionUnits(msg._consumptionUnits);
+			_smData.setNewConsumptionPeriod(msg._consumptionPeriod);
 
 			// Reactivamos la LA para chequear el nuevo consumo
 			resume();
@@ -44,7 +45,8 @@ namespace AI {
 		// Inicializamos
 		_received = false;
 		_smData.setNewConsumer(EntityID::UNASSIGNED);
-		_smData.setNewConsumption(0);
+		_smData.setNewConsumptionUnits(0);
+		_smData.setNewConsumptionPeriod(0);
 		_smData.setNewConsumerAccepted(false);
 
 		// Suspendemos la LA hasta que llegue un mensaje de petición

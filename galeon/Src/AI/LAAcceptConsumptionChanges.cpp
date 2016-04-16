@@ -11,8 +11,11 @@ namespace AI {
 		if (msg._type != MessageType::CONSUMPTION_CHANGE || msg._resourceType != _resourceType)
 			return false;
 
+		// Normalizamos el nuevo consumo a nuestro propio periodo
+		float change = _normalizedConsumptionPeriod * msg._consumptionChange / (float)msg._consumptionPeriod;
+
 		// Guardamos el cambio de consumo en la memoria compartida de la SM
-		_smData.modifyConsumption(msg._consumptionChange);
+		_smData.modifyConsumption(change);
 
 		return true;
 	}

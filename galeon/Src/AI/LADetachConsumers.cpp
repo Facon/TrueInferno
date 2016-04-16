@@ -16,7 +16,7 @@ namespace AI {
 
 		// Preparamos el mensaje de desconexión
 		PowerMessage powerMsg;
-		powerMsg.assemblePowerAttachmentInfo(_entity->getEntityID(), false, 0);
+		powerMsg.assemblePowerAttachmentInfo(_entity->getEntityID(), false, 0, -1);
 
 		// Mientras queden consumidores conectados
 		auto it = _smData.getConsumers().begin();

@@ -35,8 +35,11 @@ namespace Logic {
 		*/
 		virtual void tick(unsigned int msecs);
 
-		/** Devuelve el consumo actual del generador */
-		int getConsumption();
+		/** Devuelve las unidades de consumo actual del generador */
+		int getConsumptionUnits();
+
+		/** Devuelve el periodo (ms) de consumo actual del generador */
+		int getConsumptionPeriod();
 
 		/** Devuelve las reservas actuales de combustible para el generador */
 		int getCurrentReserves();

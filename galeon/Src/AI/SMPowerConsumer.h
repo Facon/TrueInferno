@@ -68,7 +68,7 @@ namespace AI {
 				CEntity *generator = _entity->getMap()->getEntityByID(_data.getPowerGenerator());
 				if (generator != nullptr){
 					PowerMessage m;
-					m.assemblePowerAttachmentInfo(_entity->getEntityID(), false, _consumptionUnits);
+					m.assemblePowerAttachmentInfo(_entity->getEntityID(), false, _consumptionUnits, _consumptionPeriod);
 					assert(m.Dispatch(*generator) && "Can't detach from PowerGenerator on deactivation");
 				}
 			}

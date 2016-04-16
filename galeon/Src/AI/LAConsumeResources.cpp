@@ -1,5 +1,6 @@
 #include "LAConsumeResources.h"
 #include "Logic\ResourcesManager.h"
+#include <math.h>
 
 namespace AI {
 	RTTI_IMPL(CLAConsumeResources, CLatentAction);
@@ -13,7 +14,7 @@ namespace AI {
 		if(_smData.getReservedForConsume() == 0)
 			return LAStatus::SUCCESS;
 
-		assert(_smData.getReservedForConsume() == _smData.getConsumption() && "Consumption and reserved for consume must be equal");
+		assert(_smData.getReservedForConsume() == (int) ceil(_smData.getConsumption()) && "Consumption and reserved for consume must be equal");
 
 		// Enviamos un mensaje para consumir lo reservado
 		ResourceMessage m;

@@ -1,6 +1,7 @@
 #ifndef SM_POWER_GENERATOR_DATA_H_
 #define SM_POWER_GENERATOR_DATA_H_
 
+#include "Logic\Entity\Consumer.h"
 #include "Logic\Entity\Entity.h"
 #include <map>
 
@@ -8,7 +9,12 @@ namespace AI {
 	class CSMPowerGeneratorData {
 
 	public:
-		CSMPowerGeneratorData() : _newConsumer(EntityID::UNASSIGNED), _newConsumption(0), _totalConsumption(0), _currentCoke(0), _newConsumerAccepted(false) {}
+		CSMPowerGeneratorData() : 
+			_newConsumer(EntityID::UNASSIGNED),
+			_newConsumptionUnits(0), _newConsumptionPeriod(0),
+			_totalConsumptionUnits(0), _totalConsumptionPeriod(-1),
+			_currentCoke(0), _newConsumerAccepted(false) {}
+
 		virtual ~CSMPowerGeneratorData() {}
 
 		TEntityID getNewConsumer() const{
@@ -19,43 +25,59 @@ namespace AI {
 			_newConsumer = newConsumer;
 		}
 
-		int getNewConsumption() const{
-			return _newConsumption;
+		int getNewConsumptionUnits() const{
+			return _newConsumptionUnits;
 		}
 
-		void setNewConsumption(int newConsumption){
-			_newConsumption = newConsumption;
+		void setNewConsumptionUnits(int newConsumptionUnits){
+			_newConsumptionUnits = newConsumptionUnits;
 		}
 
-		// Añade un nuevo consumidor con su correspondiente consumo periódico. Devuelve true si realmente se añadió un nuevo consumidor
-		bool addConsumer(TEntityID consumer, int consumption){
+		int getNewConsumptionPeriod() const{
+			return _newConsumptionPeriod;
+		}
+
+		void setNewConsumptionPeriod(int newConsumptionPeriod){
+			_newConsumptionPeriod = newConsumptionPeriod;
+		}
+
+		// Añade un nuevo consumidor con su correspondiente consumo periódico. Devuelve true si se añadió realmente un nuevo elemento
+		bool addConsumer(Logic::Consumer consumer){
 			// Si el consumidor existe, de momento, no aceptaríamos volverlo a añadir
-			if (_consumers.count(consumer) > 0){
+			if (_consumers.count(consumer.id) > 0){
 				assert(false && "Can't add twice the same consumer");
 				return false;
 			}
 
+			// Verificamos que el periodo sea el mismo si ya había alguno indicado
+			if (_totalConsumptionPeriod == -1)
+				_totalConsumptionPeriod = consumer.period;
+			else
+				assert(_totalConsumptionPeriod == consumer.period && "Can't mix different consumption periods");
+
 			// Actualizamos la lista de consumidores
-			_consumers[consumer] = consumption;
+			_consumers[consumer.id] = consumer;
 
 			// Y el consumo total
-			_totalConsumption += consumption;
+			_totalConsumptionUnits += consumer.consumption;
 
 			return true;
 		}
 
-		// Elimina un consumidor y recalcula el consumo periódico total. Devuelve true si realmente se eliminó un consumidor
-		bool removeConsumer(TEntityID consumer){
+		// Elimina un consumidor y recalcula el consumo periódico total. Devuelve true si realmente se eliminó algún consumidor
+		bool removeConsumer(int consumerId){
 			// Si el consumidor no existe
-			if (_consumers.count(consumer) == 0){
+			if (_consumers.count(consumerId) == 0){
 				return false;
 			}
 
+			Logic::Consumer consumer = _consumers[consumerId];
+
 			// Actualizamos el consumo total
-			_totalConsumption -= _consumers[consumer];
+			_totalConsumptionUnits -= consumer.consumption;
 
 			// Actualizamos la lista de consumidores
-			_consumers.erase(consumer);
+			_consumers.erase(consumer.id);
 
 			return true;
 		}
@@ -66,12 +88,16 @@ namespace AI {
 		}
 
 		// Devuelve los consumidores actualmente registrados
-		std::map<TEntityID, int>& getConsumers() {
+		std::map<int, Logic::Consumer>& getConsumers() {
 			return _consumers;
 		}
 
-		int getTotalConsumption() const{
-			return _totalConsumption;
+		int getTotalConsumptionUnits() const{
+			return _totalConsumptionUnits;
+		}
+
+		int getTotalConsumptionPeriod() const{
+			return _totalConsumptionPeriod;
 		}
 
 		void setCurrentCoke(int currentCoke){
@@ -94,14 +120,20 @@ namespace AI {
 		// Entidad consumidora nueva
 		TEntityID _newConsumer;
 
-		// Consumo de la nueva entidad
-		int _newConsumption;
+		// Unidades de consumo de la nueva entidad
+		int _newConsumptionUnits;
+
+		// Periodo (ms) de consumo de la nueva entidad
+		int _newConsumptionPeriod;
 
 		// Consumidores actuales
-		std::map<TEntityID, int> _consumers;
+		std::map<int, Logic::Consumer> _consumers;
 
 		// Consumo actual total
-		int _totalConsumption;
+		int _totalConsumptionUnits;
+
+		// Periodo (ms) del consumo total
+		int _totalConsumptionPeriod;
 
 		// Cantidad de coke actual
 		int _currentCoke;

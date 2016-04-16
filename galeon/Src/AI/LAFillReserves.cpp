@@ -8,7 +8,7 @@ namespace AI {
 
 	CLatentAction::LAStatus CLAFillReserves::OnStart() {
 		// Determinamos lo que necesitamos de coke
-		int cokeNeeded = _smData.getTotalConsumption() + _smData.getNewConsumption() - _smData.getCurrentCoke();
+		int cokeNeeded = _smData.getTotalConsumptionUnits() + _smData.getNewConsumptionUnits() - _smData.getCurrentCoke();
 
 		// Intentamos reservar lo que nos falta
 		LogisticsMessage m;

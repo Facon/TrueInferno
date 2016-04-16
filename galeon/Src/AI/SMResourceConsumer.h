@@ -39,7 +39,7 @@ namespace AI {
 			int waiting = this->addNode(new CLAWait(_normalizedConsumptionPeriod));
 			int reserving = this->addNode(new CLAReserveResourcesToConsume(_entity, _data, _consumedResource));
 			int consuming = this->addNode(new CLAConsumeResources(_entity, _data, _consumedResource));
-			int accept = this->addNode(new CLAAcceptConsumptionChanges(_entity, _data, _consumedResource));
+			int accept = this->addNode(new CLAAcceptConsumptionChanges(_entity, _data, _consumedResource, _normalizedConsumptionPeriod));
 			int stopping = this->addNode(new CLAStopConsumingResources(_entity, _data, _consumedResource));
 
 			// Inicialmente la entidad empieza en estado parado
@@ -48,9 +48,6 @@ namespace AI {
 			// Pasa al estado de espera cuando se le solicita empezar a consumir
 			this->addEdge(stopped, waiting, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_START));
 			
-			// Parados "ignoramos" mensajes de cambio de consumo
-			//this->addEdge(stopped, stopped, new CConditionMessage<CLatentAction, ConsumptionMessage>(MessageType::CONSUMPTION_CHANGE));
-
 			// Una vez finalizada la espera, reserva recursos para poder consumirlos
 			this->addEdge(waiting, reserving, new CConditionFinished());
 
