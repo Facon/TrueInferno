@@ -3,6 +3,7 @@
 #include "Logic\Entity\Message.h"
 #include "AI\SMPowerConsumerData.h"
 #include "Logic\Entity\Entity.h"
+#include "Logic\Entity\LogicRequirement.h"
 
 namespace AI {
 	RTTI_IMPL(CLAAttachToGenerator, CLatentAction);
@@ -72,8 +73,13 @@ namespace AI {
 		assert(_received && "No message received");
 
 		// Chequeamos que recibimos confirmación de conexión válida
-		if (_smData.getAttached() && _smData.getPowerGenerator()!=EntityID::UNASSIGNED)
+		if (_smData.getAttached() && _smData.getPowerGenerator() != EntityID::UNASSIGNED){
+			// Elinimamos el requisito de energía dado que nos acabamos de conectar a un generador
+			ToggleMessage m(LogicRequirement::Energy, false);
+			assert(m.Dispatch(*_entity) && "Can't remove 'Energy' requirement");
+
 			return LAStatus::SUCCESS;
+		}
 
 		else
 			return LAStatus::FAIL;

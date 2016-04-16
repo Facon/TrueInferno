@@ -16,6 +16,11 @@ Contiene la declaraci�n de la clase base de los componentes.
 #include "Logic/Maps/ComponentFactory.h"
 #include "Logic/Entity/MessageHandler.h"
 
+#include "LogicRequirement.h"
+
+#include <set>
+#include <string>
+
 // Predeclaraci�n de clases para ahorrar tiempo de compilaci�n
 namespace Map
 {
@@ -168,6 +173,21 @@ namespace Logic
 		los otros componentes
 		*/
 		CEntity *_entity;
+
+		/**
+		Conjunto de requisitos que el componente ignora para poder ser tickeado y procesar mensajes.
+		En caso de querer ignorar todos es conveniente usar LogicRequirement::All para no tener que añadir uno por uno.
+		*/
+		std::set<LogicRequirement> _skippedRequirements;
+
+		/**
+		Método que define los requisitos lógicos que el componente deberá ignorar para que no eviten su funcionamiento normal. Esto es necesario para:
+		- No deshabilitar nunca componentes que son ajenos a la lógica (e.g. CGraphics, CPhysicEntity)
+		- No deshabilitar un componente necesario para eliminar un requisito (e.g. CPowerConsumer obtiene energía, luego debe ignorar el requisito 'Energy'
+		El método por defecto hará que se ignoren TODOS los requisitos para que el componente no se deshabilita nunca.
+		Los hijos deben sobreescribir el método según necesiten.
+		*/
+		virtual void defineSkippedRequirements();
 
 	}; // class IComponent
 

@@ -2,6 +2,7 @@
 
 #include "Logic\Entity\Message.h"
 #include "AI\SMPowerConsumerData.h"
+#include "Logic\Entity\LogicRequirement.h"
 
 namespace AI {
 	RTTI_IMPL(CLAWaitGeneratorDetachment, CLatentAction);
@@ -47,6 +48,10 @@ namespace AI {
 			_smData.setAttached(false);
 
 			//std::cout << "Detached:" << _entity->getEntityID() << std::endl;
+
+			// Añadimos el requisito de energía dado que nos acabamos de desconectar de un generador
+			ToggleMessage m(LogicRequirement::Energy, true);
+			assert(m.Dispatch(*_entity) && "Can't add 'Energy' requirement");
 
 			// La espera ha sido exitosa
 			return LAStatus::SUCCESS;

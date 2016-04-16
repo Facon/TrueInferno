@@ -40,6 +40,8 @@ namespace Logic {
 			return new AI::CSMPowerConsumer(_entity);
 		}
 
+		virtual void CPowerConsumer::defineSkippedRequirements();
+
 	}; // class CPowerConsumer
 
 	REG_FACTORY(CPowerConsumer);

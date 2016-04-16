@@ -173,6 +173,7 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Toggleable.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\WorkBuilding.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Consumer.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\LogicRequirement.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\MessageHandler.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h" />

@@ -53,6 +53,9 @@ namespace Logic {
 			return _assignedWorkers;
 		}
 
+	protected:
+		virtual void CWorkBuilding::defineSkippedRequirements();
+
 	private:
 		// Número mínimo de trabajadores para que funcione el edificio
 		unsigned int _minWorkers;

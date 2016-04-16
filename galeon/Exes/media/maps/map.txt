@@ -94,6 +94,7 @@ Map = {
 		transformPeriod=5,
 		transformCostResource="GAS",
 		transformCostRatio=1,
+		requirements = "Workers",
 	},
 	
 	Furnace = {
@@ -124,6 +125,7 @@ Map = {
 		storedResources="COKE,CRUDE",
 		maxResources = 1000,
 		providedResources="COKE,CRUDE",
+		requirements = "Workers",
 	},
 	
 	Soul = {
@@ -164,6 +166,7 @@ Map = {
 		providedResources="MINERAL",
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
+		requirements = "Energy,Workers",
 	},
 	
 	GasPlant = {
@@ -195,6 +198,7 @@ Map = {
 		providedResources="GAS",
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
+		requirements = "Energy,Workers",
 	},
 	
 	EvilWorks = {
@@ -229,6 +233,7 @@ Map = {
 		transformCostRatio=1,
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
+		requirements = "Energy,Workers",
 	},
 	
 	Refinery = {
@@ -263,6 +268,7 @@ Map = {
 		transformCostRatio=1,
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
+		requirements = "Energy,Workers",
 	},
 		
 	ResearchLabs = {
@@ -288,6 +294,7 @@ Map = {
 		maxResources = 1000,
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
+		requirements = "Energy,Workers",		
 	},
 		
 	PowerGenerator = {
@@ -313,6 +320,7 @@ Map = {
 		maxResources = 1000,
 		consumedResource="COKE",
 		normalizedConsumptionPeriod=1,
+		requirements = "Workers",		
 	},
 
 	Warehouse = {
@@ -339,5 +347,6 @@ Map = {
 		providedResources="MINERAL,GAS",
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
+		requirements = "Energy,Workers",		
 	},
 }

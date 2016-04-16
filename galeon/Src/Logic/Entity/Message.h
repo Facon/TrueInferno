@@ -26,6 +26,7 @@ namespace Logic
 {
 	class CEntity;
 	class CPlaceable;
+	enum LogicRequirement;
 };
 
 namespace Logic
@@ -610,9 +611,17 @@ namespace Logic
 	class ToggleMessage : public Message
 	{
 	public:
-		ToggleMessage(bool enabled) : Message(MessageType::UNASSIGNED), _enabled(enabled) {}
+		ToggleMessage(LogicRequirement requirement, bool add) :
+			Message(MessageType::UNASSIGNED), _requirement(requirement), _add(add) {}
 
-		bool _enabled;
+		// Criterio por el que se quiere habilitar/deshabilitar
+		//std::string _criterion;
+
+		// Requisito lógico por el que se quiere habilitar o deshabilitar
+		LogicRequirement _requirement;
+
+		// Flag a true para indicar que se quiere añadir un requisito al habilitado de la entidad
+		bool _add;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

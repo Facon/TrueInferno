@@ -19,4 +19,9 @@ namespace Logic {
 		CStateMachineExecutor::tick(msecs);
 	} // tick
 
+	// Ignoramos el requisito de la energía
+	void CPowerConsumer::defineSkippedRequirements(){
+		_skippedRequirements.insert(LogicRequirement::Energy);
+	}
+
 } // namespace Logic

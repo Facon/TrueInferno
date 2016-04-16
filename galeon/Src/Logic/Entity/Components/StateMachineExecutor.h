@@ -24,7 +24,7 @@ bool HandleMessage(const Class& msg){ \
 	CToggleable* toggleAble = _entity->getComponent<CToggleable>(); \
 \
 	/* Si lo estamos, evitamos el tick  */ \
-	if (toggleAble != nullptr && !toggleAble->isLogicEnabled()){ \
+	if (toggleAble != nullptr && !toggleAble->isLogicEnabled(_skippedRequirements)){ \
 		return false; \
 		} \
 \
@@ -95,7 +95,7 @@ namespace Logic
 			CToggleable* toggleAble = _entity->getComponent<CToggleable>();
 			
 			// Si lo estamos, evitamos el tick
-			if (toggleAble != nullptr && !toggleAble->isLogicEnabled()){
+			if (toggleAble != nullptr && !toggleAble->isLogicEnabled(_skippedRequirements)){
 				return;
 			}
 
@@ -165,6 +165,14 @@ namespace Logic
 
 		/** Instancia la máquina de estados. Debe ser implementado por la subclase */
 		virtual AI::CStateMachine<AI::CLatentAction, SharedData>* getStateMachine() = 0;
+
+		/** 
+		Sobreescribimos los requisitos a evitar. Por defecto no ignoraremos NINGÚN requisito ya que las SMs normalmente son Lógica.
+		Si algún SMExecutor quiere evitar un requisito en concreto deberá especificarlo.
+		*/
+		virtual void defineSkippedRequirements(){
+			_skippedRequirements.clear();
+		}
 
 	}; // class CStateMachineExecutor 
 
