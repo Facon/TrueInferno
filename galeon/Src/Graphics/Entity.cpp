@@ -243,7 +243,9 @@ namespace Graphics
 		assert(_entityNode && "La entidad no ha sido cargada");
 		if (_entity) {
 			Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(0)->getMaterial();
-			entityMaterial->getTechnique(0)->getPass(0)->setAmbient(color.x, color.y, color.z);
+			Ogre::MaterialPtr entityMaterialClone = entityMaterial->clone(_entityNode->getName() + "_" + entityMaterial->getName());
+			entityMaterialClone->getTechnique(0)->getPass(0)->setAmbient(color.x, color.y, color.z);
+			_entity->getSubEntity(0)->setMaterial(entityMaterialClone);
 		}
 
 	} // setColor
