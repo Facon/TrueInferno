@@ -239,29 +239,11 @@ namespace AI
 		// Nombre de la SM
 		std::string _name;
 
+		// Flag para activar el debug de cambio de estados en esta SM. Ver macro DEBUG_SM
 		bool _debug;
 
 	}; // class CStateMachine
 	
-	/**
-	Factoría que devuelve máquinas de estado predefinidas.
-	Sólo reconoce el valor "wander" como entrada, 
-	que recorre puntos aleatorios del mapa
-	*/
-	/*class CStateMachineFactory 
-	{
-	public:
-		static CStateMachine<CLatentAction>* getStateMachine(std::string smName, CEntity * entity)
-		{
-			if (smName == "wander") {
-				return new CSMWander(entity);
-			} else if (smName == "hfsm") {
-				return new CSMHierarchical(entity);
-			}
-			return 0;
-		}
-	};*/
-
 //////////////////////////////
 //	Implementación de CStateMachine
 //////////////////////////////

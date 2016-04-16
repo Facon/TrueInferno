@@ -69,6 +69,45 @@ namespace AI {
 
 		SM_HANDLE_MESSAGE(ConsumptionMessage);
 
+		/*
+		Desactivación del PowerGenerator. La lógica es prácticamente igual que CLADetachConsumers sólo que aquí es síncrona porque no podemos esperar a otro tick.
+		Si da problemas convendría delegar la tarea en el PowerManager
+		*/
+		void deactivate(){
+			// Preparamos el mensaje de desconexión
+			PowerMessage powerMsg;
+			powerMsg.assemblePowerAttachmentInfo(_entity->getEntityID(), false, 0, -1);
+
+			// Mientras queden consumidores conectados
+			auto it = _data.getConsumers().begin();
+			while (it != _data.getConsumers().end()){
+				TEntityID consumerId = it->first;
+
+				// Localizamos la entidad
+				CEntity* consumer = _entity->getMap()->getEntityByID(consumerId);
+
+				// Si no es nula, le intentamos enviar el mensaje
+				if (consumer != nullptr){
+					assert(powerMsg.Dispatch(*consumer) && "Can't detach existing consumer while deactivating PowerGenerator");
+				}
+
+				++it;
+			}
+
+			// Borrado de los consumidores
+			_data.getConsumers().clear();
+
+			assert(_data.getConsumers().size() == 0 && "Some consumers were not detached");
+
+			// Si había nuevo consumidor esperando respuesta, lo liberamos también
+			if (_data.getNewConsumer() != EntityID::UNASSIGNED){
+				CEntity *consumer = _entity->getMap()->getEntityByID(_data.getNewConsumer());
+				if (consumer != nullptr){
+					assert(powerMsg.Dispatch(*consumer) && "Can't detach new consumer while deactivating PowerGenerator");
+					_data.setNewConsumer(EntityID::UNASSIGNED);
+				}
+			}
+		}
 	};
 }
 
