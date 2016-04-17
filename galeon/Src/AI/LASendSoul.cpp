@@ -14,6 +14,12 @@ namespace AI {
 			return false;
 
 		// Guardamos la informción del mensaje
+		
+		if (_task)
+		{
+			delete _task;
+		}
+
 		_task = msg._task;
 		_numSouls = msg._numSouls;
 
@@ -95,11 +101,6 @@ namespace AI {
 			// Le asignamos la tarea
 			CSoulTask* clone = _task->clone();
 			
-			// Sacamos entidad gráfica
-			CMap* map = Logic::CServer::getSingletonPtr()->getMap();
-			CEntity* entity = map->getEntityByID(clone->getTarget());
-			Graphics::CEntity* graphics = entity->getComponent<CGraphics>()->getGraphicsEntity();
-			
 			SoulMessage m2(clone);
 			if (!m2.Dispatch(*_newSouls[i])){
 				//std::cout << "Can´t assign task to soul" << std::endl;
@@ -107,9 +108,6 @@ namespace AI {
 				ret = false;
 				break;
 			}
-
-			// Pasamos el nuevo color a la entidad gráfica del alma
-			_newSouls[i]->getComponent<CGraphics>()->getGraphicsEntity()->setColor(graphics->getColor());
 
 			++_numSoulsSent;
 		}
