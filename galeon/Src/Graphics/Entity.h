@@ -173,7 +173,7 @@ namespace Graphics
 
 		 @return Valores (r,g,b) del color interpolados entre 0 y 1.
 		*/
-		const Vector3 &getColor();
+		Vector3 getColor();
 
 		/**
 		 Cambia el material de la entidad.

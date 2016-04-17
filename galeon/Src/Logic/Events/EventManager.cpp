@@ -257,75 +257,171 @@ namespace Logic {
 	//--------------------------------------------------------
 
 	bool CEventManager::HandleMessage(const Message& msg)
-	{ return false; }
+	{
+		assert(!"Estás enviando un Message sin tipo.");
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const TransformMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const PositionMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const RotationMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const DimensionsMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const ColorMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const MaterialMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const AnimationMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const ControlMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const PhysicMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const TouchMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const DamageMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const WorkerMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const WalkSoulPathMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const HellQuartersMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const MovePlaceableMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const SoulSenderMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const SoulMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const CheckValidPositionPlaceableMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const NumberMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const ResourceMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const GetCostPlaceableMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const LogisticsMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 	bool CEventManager::HandleMessage(const ToggleMessage& msg)
-	{ return false; }
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
 
 } // namespace Logic

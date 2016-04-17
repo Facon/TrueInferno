@@ -77,6 +77,8 @@ namespace Logic
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
+		virtual Graphics::CEntity* getGraphicsEntity();
+
 		/**
 		Mensajes.
 		*/

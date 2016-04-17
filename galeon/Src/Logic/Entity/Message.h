@@ -15,6 +15,8 @@ Contiene el tipo de datos de un mensaje.
 
 #include "MessageHandler.h"
 
+#include "Logic/Events/EventManager.h"
+
 #include "BaseSubsystems/Math.h"
 #include "BaseSubsystems/ScriptManager.h"
 
@@ -126,6 +128,9 @@ namespace Logic
 	*/
 	typedef Logic::Message::MessageType MessageType;
 
+	#define RESEND(message) \
+		CEventManager::getSingletonPtr()->HandleMessage(message);
+
 	// SET_TRANSFORM
 	class TransformMessage : public Message
 	{
@@ -137,6 +142,8 @@ namespace Logic
 		
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -152,6 +159,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -168,6 +177,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -183,6 +194,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -198,6 +211,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -213,6 +228,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -229,6 +246,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
             return handler.HandleMessage(*this);
 		}
 	};
@@ -257,6 +276,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
             return handler.HandleMessage(*this);
 		}
 	};
@@ -287,6 +308,8 @@ namespace Logic
 
         virtual bool Dispatch(MessageHandler& handler) const
         {
+			RESEND(*this);
+
             return handler.HandleMessage(*this);
         }
 	};
@@ -302,6 +325,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
             return handler.HandleMessage(*this);
 		}
 	};
@@ -318,6 +343,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
             return handler.HandleMessage(*this);
 		}
 	};
@@ -338,6 +365,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -353,6 +382,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -366,6 +397,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -384,6 +417,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -409,6 +444,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -429,6 +466,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -445,6 +484,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -461,6 +502,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -475,6 +518,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -570,6 +615,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -603,6 +650,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};
@@ -625,6 +674,8 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
+			RESEND(*this);
+
 			return handler.HandleMessage(*this);
 		}
 	};

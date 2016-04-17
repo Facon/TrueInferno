@@ -14,7 +14,14 @@ namespace AI {
 	public:
 		CSMSoulData() : _task(nullptr), _path(nullptr), _numSouls(0) {}
 		
-		virtual ~CSMSoulData() {}
+		virtual ~CSMSoulData()
+		{
+			if (_task)
+			{
+				delete _task;
+				_task = nullptr;
+			}
+		}
 
 		CSoulTask* getTask(){
 			return _task;
