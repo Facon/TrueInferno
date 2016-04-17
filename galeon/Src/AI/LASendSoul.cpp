@@ -2,6 +2,8 @@
 #include "Logic\Maps\EntityFactory.h"
 #include "Logic\Server.h"
 #include "Logic\Maps\Map.h"
+#include "Logic/Entity/Components/Graphics.h"
+#include "Graphics\Entity.h"
 
 namespace AI {
 	RTTI_IMPL(CLASendSoul, CLatentAction);
@@ -91,12 +93,23 @@ namespace AI {
 		// Comenzamos el bucle por la última alma enviada
 		for (unsigned int i = _numSoulsSent; i < _newSouls.size(); ++i){
 			// Le asignamos la tarea
-			SoulMessage m2(_task->clone());
+			CSoulTask* clone = _task->clone();
+			
+			// Sacamos entidad gráfica
+			CMap* map = Logic::CServer::getSingletonPtr()->getMap();
+			CEntity* entity = map->getEntityByID(clone->getTarget());
+			Graphics::CEntity* graphics = entity->getComponent<CGraphics>()->getGraphicsEntity();
+			
+			SoulMessage m2(clone);
 			if (!m2.Dispatch(*_newSouls[i])){
 				//std::cout << "Can´t assign task to soul" << std::endl;
+				
 				ret = false;
 				break;
 			}
+
+			// Pasamos el nuevo color a la entidad gráfica del alma
+			_newSouls[i]->getComponent<CGraphics>()->getGraphicsEntity()->setColor(graphics->getColor());
 
 			++_numSoulsSent;
 		}
