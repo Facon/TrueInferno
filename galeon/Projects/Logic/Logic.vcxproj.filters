@@ -211,6 +211,9 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Message.cpp">
       <Filter>Entity\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -386,6 +389,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\MessageHandler.h">
       <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.h">
+      <Filter>Events\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
