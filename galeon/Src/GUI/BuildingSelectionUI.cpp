@@ -44,6 +44,37 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uipopupWindow);
 	}
 
+	void BuildingSelectionUI::changePopupLayout(std::string layout){
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
+		_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(layout);
+		bindPopupButtons(layout);
+		loadAssets();
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uipopupWindow);
+	}
+
+	void BuildingSelectionUI::bindPopupButtons(std::string layout){
+
+		if (layout == "UIBuildingSelectionPopupHellquarters.layout"){
+			_uipopupWindow->getChildElement("CloseWindow/Text/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
+			_uipopupWindow->getChildElement("Gods/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::godsReleased, this));
+			_uipopupWindow->getChildElement("Missions/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::missionsReleased, this));
+			_uipopupWindow->getChildElement("Trial/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::trialReleased, this));
+		}
+
+		if (layout == "UIBuildingSelectionPopupTrial.layout"){
+			_uipopupWindow->getChildElement("CloseWindow/Text/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
+			_uipopupWindow->getChildElement("CreateSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::createSoulReleased, this));
+			_uipopupWindow->getChildElement("BurnSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::burnSoulReleased, this));
+		}
+	}
+
 	void BuildingSelectionUI::bindButtons(){
 
 		_uibuttonsWindow->getChildElement("UpgradeBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
@@ -53,12 +84,21 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CloseWindow/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
-		_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uipopupWindow->getChildElement("CloseWindow/Text/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
 		if (_buildingEntity->getComponent<Logic::CBuildingSelection>()->getSidebarLayoutTemplate() == "UIBuildingSelectionButtonBar.layout"){
 			_uibuttonsWindow->getChildElement("DestroyBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::destroyBuildingReleased, this));
+		}
+
+		if (_buildingEntity->getComponent<Logic::CBuildingSelection>()->getPopupLayoutTemplate() == "UIBuildingSelectionPopupHellquarters.layout"){
+			_uipopupWindow->getChildElement("Gods/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::godsReleased, this));
+			_uipopupWindow->getChildElement("Missions/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::missionsReleased, this));
+			_uipopupWindow->getChildElement("Trial/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::trialReleased, this));
 		}
 	}
 
@@ -123,8 +163,27 @@ namespace GUI
 	{
 	}
 
+	bool BuildingSelectionUI::godsReleased(const CEGUI::EventArgs& e)
+	{
+		printf("gods pushed\n");
+		return true;
+	}
+
+	bool BuildingSelectionUI::missionsReleased(const CEGUI::EventArgs& e)
+	{
+		printf("mission pushed\n");
+		return true;
+	}
+
+	bool BuildingSelectionUI::trialReleased(const CEGUI::EventArgs& e)
+	{
+		changePopupLayout("UIBuildingSelectionPopupTrial.layout");
+		return true;
+	}
+
 	bool BuildingSelectionUI::upgradeBuildingReleased(const CEGUI::EventArgs& e)
 	{
+		printf("upgrade pushed\n");
 		return true;
 	}
 
@@ -138,6 +197,31 @@ namespace GUI
 	bool BuildingSelectionUI::closeWindowReleased(const CEGUI::EventArgs& e)
 	{
 		closeWindow();
+		return true;
+	}
+
+	bool BuildingSelectionUI::returnToBuildingReleased(const CEGUI::EventArgs& e)
+	{
+		changePopupLayout(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getPopupLayoutTemplate());
+		return true;
+	}
+
+	bool BuildingSelectionUI::createSoulReleased(const CEGUI::EventArgs& e)
+	{
+		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_WORK);
+		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
+
+		m.Dispatch(*hellQuarters->getEntity());
+		return true;
+	}
+
+	bool BuildingSelectionUI::burnSoulReleased(const CEGUI::EventArgs& e)
+	{
+		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_BURN);
+		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
+
+		m.Dispatch(*hellQuarters->getEntity());
+
 		return true;
 	}
 

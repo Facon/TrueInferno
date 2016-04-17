@@ -21,12 +21,21 @@ namespace GUI
 		// Cargamos la ventana que muestra la barra superior
 
 		_uiWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UI.layout");
+		_uiWindow->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::SubscriberSlot(&UIManager::HandleRootMouseDown, this));
 		_topBarUI.init();
 		_sideBarUI.init();
 		_eventUI.init();
 		_buildingSelectionUI.init();
 
 	}
+
+	bool UIManager::HandleRootMouseDown(const CEGUI::EventArgs& e)
+	{
+		if (e.handled==0)
+			_sideBarUI.playerInteractionWithLeftClick();
+		return true;
+	}
+
 
 	void UIManager::release()
 	{

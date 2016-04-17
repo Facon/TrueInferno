@@ -67,7 +67,7 @@ Map = {
 		numSpawnedSouls = 5,
 		physic_group = 2,
 		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
-		popuplayout = "UIBuildingSelectionPopup.layout",
+		popuplayout = "UIBuildingSelectionPopupHellquarters.layout",
 		image = "EventBuildingDestruction",
 	},
 	

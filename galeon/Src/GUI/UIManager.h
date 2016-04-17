@@ -24,7 +24,7 @@ namespace GUI
 		BuildingSelectionUI _buildingSelectionUI;
 		// Window for displaying resources
 		CEGUI::Window* _uiWindow;
-
+		bool UIManager::HandleRootMouseDown(const CEGUI::EventArgs& e);
 
 	public:
 		UIManager(Logic::ResourcesManager& rm, Logic::HFManager& hfm, Logic::TimeManager& tm);
