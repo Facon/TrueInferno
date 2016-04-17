@@ -105,6 +105,11 @@ namespace Logic
 
 	} // createGraphicsEntity
 	
+	Graphics::CEntity* CGraphics::getGraphicsEntity()
+	{
+		return _graphicsEntity;
+	}
+
 	//---------------------------------------------------------
 	
 	bool CGraphics::HandleMessage(const TransformMessage& m)

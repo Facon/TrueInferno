@@ -2,6 +2,8 @@
 #include "Logic\Maps\EntityFactory.h"
 #include "Logic\Server.h"
 #include "Logic\Maps\Map.h"
+#include "Logic/Entity/Components/Graphics.h"
+#include "Graphics\Entity.h"
 
 namespace AI {
 	RTTI_IMPL(CLASendSoul, CLatentAction);
@@ -12,6 +14,12 @@ namespace AI {
 			return false;
 
 		// Guardamos la informción del mensaje
+		
+		if (_task)
+		{
+			delete _task;
+		}
+
 		_task = msg._task;
 		_numSouls = msg._numSouls;
 
@@ -91,9 +99,12 @@ namespace AI {
 		// Comenzamos el bucle por la última alma enviada
 		for (unsigned int i = _numSoulsSent; i < _newSouls.size(); ++i){
 			// Le asignamos la tarea
-			SoulMessage m2(_task->clone());
+			CSoulTask* clone = _task->clone();
+			
+			SoulMessage m2(clone);
 			if (!m2.Dispatch(*_newSouls[i])){
 				//std::cout << "Can´t assign task to soul" << std::endl;
+				
 				ret = false;
 				break;
 			}

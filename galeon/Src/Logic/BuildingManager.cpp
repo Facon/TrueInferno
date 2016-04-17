@@ -45,7 +45,15 @@ namespace Logic {
 		_instance = 0;
 
 		// Liberamos la  estructura de datos para los edificios
-		for (auto it = _buildings.begin(); it != _buildings.end(); ++it){
+		for (auto it = _buildings.begin(); it != _buildings.end(); ++it)
+		{
+			for (auto it2 = (*it).second->cbegin(); it2 != (*it).second->cend(); ++it2)
+			{
+				delete (*it2);
+			}
+
+			it->second->clear();
+
 			delete it->second;
 			it->second = nullptr;
 		}
