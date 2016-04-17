@@ -2,6 +2,7 @@
 #define RESOURCEMANAGER_H_
 
 #include <string>
+#include <map>
 
 namespace Logic
 {
@@ -26,23 +27,22 @@ namespace Logic
 
 		static ResourcesManager _instance;
 
-		float _mineral;
-		float _gas;
-		float _coke;
-		float _crude;
-		float _pure;
-		float _refined;
-		float _aether;
-		//float _hadesFavor = 0.0f;
-
 	private:
-		ResourcesManager() : _mineral(1000000), _gas(1000000), _coke(0), _crude(0), _pure(0), _refined(0), _aether(0)
-		{}
+		ResourcesManager() {
+			_resources[ResourceType::MINERAL] = 100000;
+			_resources[ResourceType::GAS] = 100000;
+			_resources[ResourceType::COKE] = 0;
+			_resources[ResourceType::CRUDE] = 0;
+			_resources[ResourceType::PURE] = 0;
+			_resources[ResourceType::REFINED] = 0;
+			_resources[ResourceType::AETHER] = 0;
+		}
+
+		// Mapa genérico con los recursos
+		std::map<ResourceType, float> _resources;
 
 	public:
 		static ResourceType parseResourceType(const std::string& name);
-
-		//ResourcesManager() : _mineral(500), _gas(0), _coke(0), _crude(0), _pure(0), _refined(0), _aether(0) {}
 
 		static ResourcesManager& getSingleton()
 		{ return _instance; }
@@ -50,29 +50,23 @@ namespace Logic
 		static ResourcesManager* getSingletonPtr()
 		{ return &_instance; }
 
-		float getMineral() const { return _mineral; }
-		float getGas() const { return _gas; }
-		float getCoke() const { return _coke; }
-		float getCrude() const { return _crude; }
-		float getPure() const { return _pure; }
-		float getRefined() const { return _refined; }
-		float getAether() const { return _aether; }
-		//float getHadesFavor() const { return _hadesFavor; }
-
-		/*void setMineral(const float mineral) { _mineral = mineral; }
-		void setGas(const float gas) { _gas = gas; }
-		void setCoke(const float coke) { _coke = coke; }
-		void setCrude(const float crude) { _crude = crude; }
-		void setPure(const float pure) { _pure = pure; }
-		void setRefined(const float refined) { _refined = refined; }
-		void setAether(const float aether) { _aether = aether; }*/
-		//void setHadesFavor(const float hadesFavor) { _hadesFavor = hadesFavor; }
-
-		/*void incMineral(int workers, float time);
+		/** Devuelve la cantidad actual de recursos del tipo consultado */
+		int getResource(ResourceType type) const;
 		
-		void incGas(int workers, float time);*/
-		
+		/** Cambia la cantidad de recursos del tipo dado en la cantidad (positiva o negativa) indicada */
 		void changeResources(ResourceType type, float num);
+
+		/** Chequea si puede permitirse pagar la cantidad de recursos, cost, del tipo indicado, type.
+		* Si allowPartial es true se permiten costes parciales y el coste final quse pagaría se devuelve en finalCost.
+		* Devuelve true si se podría pagar la totalidad de los costes o parte (en caso de permitir costes parciales), y false en otro caso
+		*/
+		bool canAffordCost(ResourceType type, int cost, bool allowPartial, int& finalCost);
+
+		/** Paga la cantidad de recursos, cost, del tipo indicado, type.
+		* Si allowPartial es true se permiten costes parciales y el coste final pagado se devuelve en finalCost.
+		* Devuelve true si se pudo pagar la totalidad de los costes o parte (en caso de permitir costes parciales), y false en otro caso.
+		*/
+		bool payCost(ResourceType type, int cost, bool allowPartial, int& finalCost);
 	};
 
 }

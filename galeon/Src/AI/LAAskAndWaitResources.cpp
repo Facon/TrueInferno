@@ -11,9 +11,11 @@ namespace AI {
 		// Calculamos los recursos necesarios para completar hasta el máximo
 		int needed = _smData.getMaxResources() - _smData.getAvailableResources();
 
-		// Si la cuenta sale negativa es que ya estamos a tope
-		if (needed < 0)
+		// Si la cuenta sale negativa es que ya estamos a tope y no necesitamos nada
+		if (needed < 0){
 			needed = 0;
+			return LAStatus::SUCCESS;
+		}
 
 		// Pedimos los recursos calculados
 		LogisticsMessage m;

@@ -303,13 +303,16 @@ namespace Logic {
 
 		Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
 
-		if (resourcesManager->getMineral() < _mineralCost)
+		// Chequeeamos inicialmente los costes para todos los recursos
+		int finalCost;
+		if (!resourcesManager->canAffordCost(ResourceType::MINERAL, _mineralCost, false, finalCost))
 			return false;
-		if (resourcesManager->getGas() < _gasCost)
+		if (!resourcesManager->canAffordCost(ResourceType::GAS, _gasCost, false, finalCost))
 			return false;
 
-		resourcesManager->changeResources(Logic::ResourceType::MINERAL, -_mineralCost);
-		resourcesManager->changeResources(Logic::ResourceType::GAS, -_gasCost);
+		// Computamos los costes
+		assert(resourcesManager->payCost(ResourceType::MINERAL, _mineralCost, false, finalCost) && "Can't pay mineral costs");
+		assert(resourcesManager->payCost(ResourceType::GAS, _gasCost, false, finalCost) && "Can't pay gas costs");
 
 		return true;
 	}

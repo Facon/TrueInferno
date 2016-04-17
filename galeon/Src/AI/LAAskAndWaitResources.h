@@ -32,7 +32,7 @@ namespace AI {
 		/** Recurso de entrada */
 		const ResourceType _resourceFrom;
 
-		/** Periodo (ms) con que se transforman cíclicamente los recursos */
+		/** Periodo (ms) que se esperará a acumular recursos */
 		const unsigned int _period;
 	};
 

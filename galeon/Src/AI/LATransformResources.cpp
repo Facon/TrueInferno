@@ -5,19 +5,32 @@ namespace AI {
 	RTTI_IMPL(CLATransformResources, CLatentAction);
 	
 	CLatentAction::LAStatus CLATransformResources::OnStart() {
+		// Inicializamos
+		_decrementDone = false;
+		_incrementDone = false;
+
 		// Leemos la cantidad de recursos que van a ser transformados
 		_transformed = _smData.getAvailableResources();
-
-		// TODO Quitar lo no transformable por coste
-		// transformed = ...
 
 		// Si no hay nada que transformar, hemos acabado
 		if (_transformed == 0){
 			return LAStatus::SUCCESS;
 		}
-		
-		_decrementDone = false;
-		_incrementDone = false;
+
+		// Intentamos pagar el coste de transformación para todos los recursos a transformar: costeMáx = cantidadMáx * ratio
+		if ((_costRatio > ZERO_COST_RATIO) && (_costResource != ResourceType::NONE)){
+			int paidCost;
+			ResourcesManager::getSingleton().payCost(_costResource, (int)truncf(_transformed * _costRatio), true, paidCost);
+
+			/* En base al coste válido que se ha podido pagar, paidCost, sabemos cuánto podemos transformar realmente:
+			* costeVáldo = cantidadVálida * ratio => cantidadVálida = costeVáldo / ratio */
+			_transformed = (int)truncf(paidCost / _costRatio);
+		}
+
+		// Si no hay nada que transformar tras asjustar por costes, hemos acabado
+		if (_transformed == 0){
+			return LAStatus::SUCCESS;
+		}
 
 		return LAStatus::RUNNING;
 	}

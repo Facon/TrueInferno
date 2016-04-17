@@ -61,12 +61,12 @@ namespace GUI
 		Logic::ResourcesManager& rm = Logic::ResourcesManager::getSingleton();
 		Logic::HFManager& hf = Logic::HFManager::getSingleton();
 
-		_uiBarsWindow->getChild("Mineral")->setText("Mineral  " + std::to_string(static_cast<int>(trunc(rm.getMineral()))));
-		_uiBarsWindow->getChild("Gas")->setText("Gas  " + std::to_string(static_cast<int>(trunc(rm.getGas()))));
-		_uiBarsWindow->getChild("Coke")->setText("Coke  " + std::to_string(static_cast<int>(trunc(rm.getCoke()))));
-		_uiBarsWindow->getChild("Crude")->setText("Crude  " + std::to_string(static_cast<int>(trunc(rm.getCrude()))));
-		_uiBarsWindow->getChild("Pure")->setText("Pure  " + std::to_string(static_cast<int>(trunc(rm.getPure()))));
-		_uiBarsWindow->getChild("Refined")->setText("Refined  " + std::to_string(static_cast<int>(trunc(rm.getRefined()))));
+		_uiBarsWindow->getChild("Mineral")->setText("Mineral  " + std::to_string(static_cast<int>(trunc(rm.getResource(ResourceType::MINERAL)))));
+		_uiBarsWindow->getChild("Gas")->setText("Gas  " + std::to_string(static_cast<int>(trunc(rm.getResource(ResourceType::GAS)))));
+		_uiBarsWindow->getChild("Coke")->setText("Coke  " + std::to_string(static_cast<int>(trunc(rm.getResource(ResourceType::COKE)))));
+		_uiBarsWindow->getChild("Crude")->setText("Crude  " + std::to_string(static_cast<int>(trunc(rm.getResource(ResourceType::CRUDE)))));
+		_uiBarsWindow->getChild("Pure")->setText("Pure  " + std::to_string(static_cast<int>(trunc(rm.getResource(ResourceType::PURE)))));
+		_uiBarsWindow->getChild("Refined")->setText("Refined  " + std::to_string(static_cast<int>(trunc(rm.getResource(ResourceType::REFINED)))));
 		_uiBarsWindow->getChild("TimeLeft")->setText("Time:  " + std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
 		_uiBarsWindow->getChild("HadesFavor")->setText("HF: " + std::to_string(static_cast<int>(trunc(hf.getHadesFavor()))));
 	}
