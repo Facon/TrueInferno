@@ -20,7 +20,7 @@ namespace Logic
 		DEC_FACTORY(PathFollower);
 
 	public:
-		PathFollower() : IComponent(), _speed(0.5f), _startTime(0), _journeyLength(0.0f), 
+		PathFollower() : IComponent(), _startTime(0), _journeyLength(0.0f), 
 			_moving(false), _targetReached(false), _targetReachedNotified(false),
 			_startPosition(0.0f, 0.0f, 0.0f), _targetPosition(0.0f, 0.0f, 0.0f)
 		{}
@@ -32,7 +32,6 @@ namespace Logic
 		void addToQueue(const std::vector<Vector3>& path);
 	
 	protected:
-		float _speed;
 		unsigned int _startTime;
 		float _journeyLength;
 		bool _moving;

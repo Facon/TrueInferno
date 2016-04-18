@@ -134,6 +134,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Graphics.cpp" />
     <ClCompile Include="..\..\Src\Logic\ResourcesManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Server.cpp" />
+    <ClCompile Include="..\..\Src\Logic\SoulManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +196,7 @@
     <ClInclude Include="..\..\Src\Logic\Documentation.h" />
     <ClInclude Include="..\..\Src\Logic\ResourcesManager.h" />
     <ClInclude Include="..\..\Src\Logic\Server.h" />
+    <ClInclude Include="..\..\Src\Logic\SoulManager.h" />
     <ClInclude Include="..\..\Src\Logic\TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
