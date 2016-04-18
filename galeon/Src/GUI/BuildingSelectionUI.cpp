@@ -44,11 +44,11 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uipopupWindow);
 	}
 
-	void BuildingSelectionUI::changePopupLayout(std::string layout){
+	void BuildingSelectionUI::changePopupLayout(std::string layout, std::string name, std::string image){
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
 		_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(layout);
 		bindPopupButtons(layout);
-		loadAssets();
+		loadAssetsPopup(name, image);
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uipopupWindow);
 	}
 
@@ -80,6 +80,9 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("UpgradeBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::upgradeBuildingReleased, this));
 
+		_uibuttonsWindow->getChildElement("DisableBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&BuildingSelectionUI::disableBuildingReleased, this));
+
 
 		_uibuttonsWindow->getChildElement("CloseWindow/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
@@ -108,6 +111,12 @@ namespace GUI
 
 	}
 
+	void BuildingSelectionUI::loadAssetsPopup(std::string name, std::string image){
+		_uipopupWindow->getChild("BuildingName")->setText(name);
+		_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoEvents/" + image);
+
+	}
+
 	void BuildingSelectionUI::init()
 	{
 		
@@ -119,6 +128,9 @@ namespace GUI
 
 		_uibuttonsWindow->getChildElement("DestroyBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::destroyBuildingReleased, this));
+
+		_uibuttonsWindow->getChildElement("DisableBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&BuildingSelectionUI::disableBuildingReleased, this));
 
 		_uibuttonsWindow->getChildElement("CloseWindow/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
@@ -134,6 +146,7 @@ namespace GUI
 		// Remove all events to avoid memory leaks
 		_uibuttonsWindow->getChildElement("UpgradeBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("DestroyBuilding")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("DisableBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CloseWindow")->removeAllEvents();
 		_uipopupWindow->getChildElement("CloseWindow")->removeAllEvents();
 	}
@@ -177,13 +190,19 @@ namespace GUI
 
 	bool BuildingSelectionUI::trialReleased(const CEGUI::EventArgs& e)
 	{
-		changePopupLayout("UIBuildingSelectionPopupTrial.layout");
+		changePopupLayout("UIBuildingSelectionPopupTrial.layout", "Trial of Souls", "EventTutorial5");
 		return true;
 	}
 
 	bool BuildingSelectionUI::upgradeBuildingReleased(const CEGUI::EventArgs& e)
 	{
 		printf("upgrade pushed\n");
+		return true;
+	}
+
+	bool BuildingSelectionUI::disableBuildingReleased(const CEGUI::EventArgs& e)
+	{
+		printf("disable pushed\n");
 		return true;
 	}
 
@@ -202,7 +221,7 @@ namespace GUI
 
 	bool BuildingSelectionUI::returnToBuildingReleased(const CEGUI::EventArgs& e)
 	{
-		changePopupLayout(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getPopupLayoutTemplate());
+		changePopupLayout(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getPopupLayoutTemplate(), _buildingEntity->getComponent<Logic::CBuildingSelection>()->getBuildingName(), _buildingEntity->getComponent<Logic::CBuildingSelection>()->getBuildingImage());
 		return true;
 	}
 

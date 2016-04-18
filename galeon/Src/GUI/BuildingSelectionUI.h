@@ -25,6 +25,7 @@ namespace GUI
 
 		bool upgradeBuildingReleased(const CEGUI::EventArgs& e);
 		bool destroyBuildingReleased(const CEGUI::EventArgs& e);
+		bool disableBuildingReleased(const CEGUI::EventArgs& e);
 		bool closeWindowReleased(const CEGUI::EventArgs& e);
 		bool godsReleased(const CEGUI::EventArgs& e);
 		bool missionsReleased(const CEGUI::EventArgs& e);
@@ -35,12 +36,13 @@ namespace GUI
 		void bindPopupButtons(std::string layout);
 		void bindButtons();
 		void loadAssets();
+		void loadAssetsPopup(std::string name, std::string image);
 
 	public:
 		BuildingSelectionUI();
 		~BuildingSelectionUI();
 		void changeLayout();
-		void changePopupLayout(std::string layout);
+		void changePopupLayout(std::string layout, std::string name, std::string image);
 		void init();
 		void release();
 		void activate();

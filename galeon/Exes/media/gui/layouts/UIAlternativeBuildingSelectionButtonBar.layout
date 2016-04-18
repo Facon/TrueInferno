@@ -28,6 +28,26 @@
 			</Window>
 		</Window>
 		
+		<Window type="OgreTray/StaticImage" name="DisableBuilding">
+			<Property name="Area" value="{{0.525,0},{0.410,0},{0.95,0},{0.534,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
+			<Property name="AlwaysOnTop" value="True" />
+			 
+			
+			<Window type="OgreTray/StaticImage" name="Image">
+				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/BurnSoul" />				
+				<Property name="AlwaysOnTop" value="True" />	
+				 
+				
+				<Window type="OgreTray/Button" name="Button" >
+					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+					<Property name="Alpha" value="0.0" />
+					 
+				</Window>
+			</Window>
+		</Window>
+		
 		<Window type="OgreTray/StaticImage" name="CloseWindow">
 			<Property name="Area" value="{{0.2725,0},{0.800,0},{0.7275,0},{0.924,0}}" />
 			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
