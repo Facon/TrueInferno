@@ -18,6 +18,7 @@ la gestión de la lógica del juego.
 #include "Logic/Maps/Managers/WorkManager.h"
 #include "Logic/Maps/Managers/PowerManager.h"
 #include "Logic/BuildingManager.h"
+#include "Logic/SoulManager.h"
 
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
@@ -106,6 +107,10 @@ namespace Logic {
 		if (!Logic::CBuildingManager::Init())
 			return false;
 
+		// Inicializamos el gestor de almas.
+		if (!Logic::CSoulManager::Init())
+			return false;
+
 		// Inicializamos el gestor de eventos de juego.
 		if (!Logic::CEventManager::Init())
 			return false;
@@ -127,6 +132,8 @@ namespace Logic {
 		Logic::CPowerManager::Release();
 
 		Logic::CEventManager::Release();
+
+		Logic::CSoulManager::Release();
 
 		Logic::CBuildingManager::Release();
 

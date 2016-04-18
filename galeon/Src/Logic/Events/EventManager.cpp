@@ -18,6 +18,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "EventManager.h"
 #include "BuildingDestructionEvent.h"
 #include "EndGameEvent.h"
+#include "SoulsSpeedReductionEvent.h"
 #include "TutorialEvent.h"
 
 #include "Application/GaleonApplication.h"
@@ -197,6 +198,7 @@ namespace Logic {
 
 		CBuildingDestructionEvent::luaRegister();
 		CEndGameEvent::luaRegister();
+		CSoulsSpeedReductionEvent::luaRegister();
 		CTutorialEvent::luaRegister();
 
 		// EventManager.
