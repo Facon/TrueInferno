@@ -55,7 +55,7 @@ namespace GUI
 	void BuildingSelectionUI::bindPopupButtons(std::string layout){
 
 		if (layout == "UIBuildingSelectionPopupHellquarters.layout"){
-			_uipopupWindow->getChildElement("CloseWindow/Text/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 			_uipopupWindow->getChildElement("Gods/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::godsReleased, this));
@@ -66,12 +66,22 @@ namespace GUI
 		}
 
 		if (layout == "UIBuildingSelectionPopupTrial.layout"){
-			_uipopupWindow->getChildElement("CloseWindow/Text/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
 			_uipopupWindow->getChildElement("CreateSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::createSoulReleased, this));
 			_uipopupWindow->getChildElement("BurnSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::burnSoulReleased, this));
+		}
+
+		if (layout == "UIBuildingSelectionPopupGods.layout"){
+			_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
+		}
+
+		if (layout == "UIBuildingSelectionPopupMissions.layout"){
+			_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
 		}
 	}
 
@@ -87,7 +97,7 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CloseWindow/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
-		_uipopupWindow->getChildElement("CloseWindow/Text/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
 		if (_buildingEntity->getComponent<Logic::CBuildingSelection>()->getSidebarLayoutTemplate() == "UIBuildingSelectionButtonBar.layout"){
@@ -107,13 +117,13 @@ namespace GUI
 
 	void BuildingSelectionUI::loadAssets(){
 		_uipopupWindow->getChild("BuildingName")->setText(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getBuildingName());
-		_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoEvents/" + _buildingEntity->getComponent<Logic::CBuildingSelection>()->getBuildingImage());
+		_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoBuildings/" + _buildingEntity->getComponent<Logic::CBuildingSelection>()->getBuildingImage());
 
 	}
 
 	void BuildingSelectionUI::loadAssetsPopup(std::string name, std::string image){
 		_uipopupWindow->getChild("BuildingName")->setText(name);
-		_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoEvents/" + image);
+		_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoBuildings/" + image);
 
 	}
 
@@ -135,7 +145,7 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CloseWindow/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
-		_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
 		
@@ -178,19 +188,19 @@ namespace GUI
 
 	bool BuildingSelectionUI::godsReleased(const CEGUI::EventArgs& e)
 	{
-		printf("gods pushed\n");
+		changePopupLayout("UIBuildingSelectionPopupGods.layout", "Gods", "Gods");
 		return true;
 	}
 
 	bool BuildingSelectionUI::missionsReleased(const CEGUI::EventArgs& e)
 	{
-		printf("mission pushed\n");
+		changePopupLayout("UIBuildingSelectionPopupMissions.layout", "Missions", "Missions");
 		return true;
 	}
 
 	bool BuildingSelectionUI::trialReleased(const CEGUI::EventArgs& e)
 	{
-		changePopupLayout("UIBuildingSelectionPopupTrial.layout", "Trial of Souls", "EventTutorial5");
+		changePopupLayout("UIBuildingSelectionPopupTrial.layout", "Trial of Souls", "Trial");
 		return true;
 	}
 

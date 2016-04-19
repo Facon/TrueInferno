@@ -60,11 +60,11 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CreateResource2Building/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createResource2BuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::createSoulReleased, this));
+		//_uibuttonsWindow->getChildElement("CreateSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			//CEGUI::SubscriberSlot(&SideBarUI::createSoulReleased, this));
 
-		_uibuttonsWindow->getChildElement("MoveSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::moveSoulReleased, this));
+		//_uibuttonsWindow->getChildElement("MoveSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			//CEGUI::SubscriberSlot(&SideBarUI::moveSoulReleased, this));
 
 		_uibuttonsWindow->getChildElement("CreateEvilworks/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createEvilworksReleased, this));
@@ -95,8 +95,8 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CreateRoad")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateResource1Building")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateResource2Building")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateSoul")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("MoveSoul")->removeAllEvents();
+		//_uibuttonsWindow->getChildElement("CreateSoul")->removeAllEvents();
+		//_uibuttonsWindow->getChildElement("MoveSoul")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateEvilworks")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateRefinery")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();

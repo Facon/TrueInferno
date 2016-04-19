@@ -68,7 +68,7 @@ Map = {
 		physic_group = 2,
 		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopupHellquarters.layout",
-		image = "EventBuildingDestruction",
+		image = "HellQuarters",
 	},
 	
 	Evilator = {
@@ -101,7 +101,7 @@ Map = {
 		physic_group = 2,
 		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "EventBuildingDestruction",
+		image = "Evilator",
 	},
 	
 	Furnace = {
@@ -135,7 +135,7 @@ Map = {
 		physic_group = 2,
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "EventTutorial1",
+		image = "Furnace",
 	},
 	
 	Soul = {
@@ -177,7 +177,7 @@ Map = {
 		physic_group = 2,
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "EventTutorial1",
+		image = "Mine",
 	},
 	
 	GasPlant = {
@@ -210,7 +210,7 @@ Map = {
 		physic_group = 2,
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "EventTutorial2",
+		image = "GasPlant",
 	},
 	
 	EvilWorks = {
@@ -246,7 +246,7 @@ Map = {
 		physic_group = 2,
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "EventTutorial2",
+		image = "EvilWorks",
 	},
 	
 	Refinery = {
@@ -282,7 +282,7 @@ Map = {
 		physic_group = 2,
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "EventTutorial3",
+		image = "Refinery",
 	},
 	
 	ResearchLabs = {
@@ -311,7 +311,7 @@ Map = {
 		physic_group = 2,
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "EventTutorial3",
+		image = "ResearchLabs",
 	},
 	
 	PowerGenerator = {
@@ -340,7 +340,7 @@ Map = {
 		physic_group = 2,
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "EventTutorial4",
+		image = "PowerGenerator",
 	},
 
 	Warehouse = {
@@ -370,6 +370,6 @@ Map = {
 		physic_group = 2,
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "EventTutorial4",
+		image = "Warehouse",
 	},
 }

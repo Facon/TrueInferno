@@ -16,7 +16,7 @@
 			
 			<Window type="OgreTray/StaticImage" name="Image">
 				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
-				<Property name="Image" value="TrueInfernoIcons/RepairBuilding" />				
+				<Property name="Image" value="TrueInfernoIcons/UpgradeBuilding" />				
 				<Property name="AlwaysOnTop" value="True" />	
 				 
 				
@@ -36,7 +36,7 @@
 			
 			<Window type="OgreTray/StaticImage" name="Image">
 				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
-				<Property name="Image" value="TrueInfernoIcons/BurnSoul" />				
+				<Property name="Image" value="TrueInfernoIcons/SwitchBuilding" />				
 				<Property name="AlwaysOnTop" value="True" />	
 				 
 				
@@ -56,7 +56,7 @@
 			
 			<Window type="OgreTray/StaticImage" name="Image">
 				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
-				<Property name="Image" value="TrueInfernoIcons/CreateEvilworks" />				
+				<Property name="Image" value="TrueInfernoIcons/Cancel" />				
 				<Property name="AlwaysOnTop" value="True" />	
 				 
 				
