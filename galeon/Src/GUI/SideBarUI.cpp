@@ -30,6 +30,8 @@
 #include "Logic/Entity/Message.h"
 #include "AI/Server.h"
 
+#include "Logic\ResourcesManager.h"
+
 namespace GUI
 {
 	SideBarUI::SideBarUI()
@@ -286,7 +288,9 @@ namespace GUI
 	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding(); // TODO TEST
+		//Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding(); // TODO TEST
+		int aux;
+		Logic::ResourcesManager::getSingletonPtr()->incrementResources(Logic::ResourceType::MINERAL, 100, false, true, aux); // TODO TEST
 		printf("Repair Building\n");
 		return true;
 	}

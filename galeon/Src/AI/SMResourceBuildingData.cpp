@@ -63,9 +63,8 @@ namespace AI {
 		_storedResources[type] = aux;
 
 		// Notificamos al ResourcesManager
-		// TODO Atajo temporal para obtener el ResourcesManager
 		Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
-		resourcesManager->changeResources(type, quantity);
+		resourcesManager->changeDisplayedResources(type, quantity);
 
 		return true;
 	}

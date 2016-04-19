@@ -31,6 +31,9 @@ namespace Logic {
 		/** Devuelve la cantidad de recursos disponibles del tipo dado = Recursos existentes menos los reservados */
 		int getAvailableResources(ResourceType type);
 
+		/** Devuelve la cantidad máxima de recursos almacenables del tipo dado */
+		int getMaxResources(ResourceType type);
+
 		/** Modifica los recursos del tipo dado según la cantidad positiva o negativa indicada.
 		Devuelve true o false según si la operación se realizó correctamente o no */
 		bool changeStoredResources(ResourceType type, int quantity);

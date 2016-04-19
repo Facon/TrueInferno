@@ -53,21 +53,63 @@ namespace Logic
 		static ResourcesManager* getSingletonPtr()
 		{ return &_instance; }
 
-		/** Devuelve la cantidad actual de recursos del tipo consultado */
-		int getResource(ResourceType type) const;
+		/**
+		* Devuelve la cantidad actualmente mostrada de recursos del tipo consultado
+		*/
+		int getDisplayedResources(ResourceType type) const;
 		
-		/** Cambia la cantidad de recursos del tipo dado en la cantidad (positiva o negativa) indicada */
-		void changeResources(ResourceType type, float num);
+		/** 
+		* Cambia la cantidad mostrada de recursos del tipo y cantidad dados.
+		* NOTA: Este método sólo cambia el display de recursos, no añade ni quita físicamente recursos en el sistema:
+		* Ver @incrementResources y @decrementResources
+		*/
+		void changeDisplayedResources(ResourceType type, float num);
 
-		/** Busca recursos del tipo dado entre todos los edificios.
-		Devuelve un mapa con las cantidades de recursos de cada edificio */
+		/** 
+		* Busca recursos disponibles (i.e. no reservados por un alma transportista, por ejemplo) de un tipo determinado entre los componentes de recursos dados.
+		*
+		* @param[in] type tipo de los recursos a buscar
+		* @param[in] resourceBuildings vector de componentes CResourceBuilding sobre los que realizar la búsqueda
+		* @param[out] totalAvailable cantidad total disponible encontrada
+		* @return Mapa con la cifra de recursos disponibles de cada componente
+		*/
 		std::map<CResourceBuilding*, int> ResourcesManager::findResources(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalAvailable);
 
-		/** Chequea y paga o sólo chequea la cantidad de recursos, cost, del tipo indicado, type.
-		* Si allowPartial es true se permiten costes parciales y el coste final pagado se devuelve en finalCost.
-		* Devuelve true si se pudo pagar la totalidad de los costes o parte (en caso de permitir costes parciales), y false en otro caso.
+		/**
+		* Busca recursos almacenables de un tipo determinado entre los componentes de recursos dados.
+		*
+		* @param[in] type tipo de los recursos a buscar
+		* @param[in] resourceBuildings vector de componentes CResourceBuilding sobre los que realizar la búsqueda
+		* @param[out] totalStorage cantidad total almacenable encontrada
+		* @return Mapa con la cifra de recursos almacenables de cada componente
 		*/
-		bool payCost(ResourceType type, int cost, bool onlyCheck, bool allowPartial, int& finalCost);
+		std::map<CResourceBuilding*, int> ResourcesManager::findStorage(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalStorage);
+
+		/**
+		* Chequea si es posible decrementar y, opcionalmente, decrementa, una cantidad dada de recursos de un tipo en los edificios de recursos.
+		* La implementación actual reparte el decremento entre todos los edificios de forma proporcional a la cantidad de recursos disponibles que tiene cada uno.
+		*
+		* @param[in] type tipo del recurso a decrementar
+		* @param[in] decrement cantidad a decrementar
+		* @param[in] onlyCheck flag a true si sólo se desea comprobar si sería posible realizar el decremento (e.g. para comprobar si se puede pagar un coste de construcción)
+		* @param[in] allowPartial flag a true si se desea decrementar hasta lo que haya disponible cuando no es posible decrementar todo lo solicitado (e.g. para pagar el coste de transformación de todos los recursos posibles)
+		* @param[out] finalDecrement cantidad finalmente decrementada
+		* @return true si se pudo decrementar todo o parcialmente (en caso de allowPartial=true) lo solicitado / false en otro caso
+		*/
+		bool decrementResources(ResourceType type, int decrement, bool onlyCheck, bool allowPartial, int& finalDecrement);
+
+		/**
+		* Chequea si es posible incrementar y, opcionalmente, incrementa, una cantidad dada de recursos de un tipo en los edificios de recursos.
+		* La implementación actual reparte el incremento entre todos los edificios de forma proporcional a la cantidad de espacio almacenable que tiene cada uno.
+		*
+		* @param[in] type tipo del recurso a incrementar
+		* @param[in] increment cantidad a incrementar
+		* @param[in] onlyCheck flag a true si sólo se desea comprobar si sería posible realizar el incremento
+		* @param[in] allowPartial flag a true si se desea incrementar hasta lo que se pueda almacenar cuando no es posible incrementar todo lo solicitado
+		* @param[out] finalIncrement cantidad finalmente incrementada
+		* @return true si se pudo incrementar todo o parcialmente (en caso de allowPartial=true) lo solicitado / false en otro caso
+		*/
+		bool incrementResources(ResourceType type, int increment, bool onlyCheck, bool allowPartial, int& finalIncrement);
 	};
 
 }
