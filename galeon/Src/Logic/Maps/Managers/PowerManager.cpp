@@ -163,13 +163,13 @@ namespace Logic {
 
 		std::map<BuildingType, std::set<CPlaceable*>*> _buildings = CBuildingManager::getSingletonPtr()->getBuildings();
 
+		// Si no hay generadores no se hace nada
+		if (_buildings.count(BuildingType::PowerGenerator) == 0)
+			return;
+
 		// Obtenemos los edificios de tipo PowerGenerator
 		std::set<CPlaceable*>* _generators = _buildings[BuildingType::PowerGenerator];
 		
-		// Si no hay generadores no se hace nada
-		if (_generators == nullptr)
-			return;
-
 		// Para cada PowerGenerator
 		for (auto it = _generators->cbegin(); it != _generators->cend(); ++it){
 			CPowerGenerator* generator = (*it)->getEntity()->getComponent<CPowerGenerator>();

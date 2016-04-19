@@ -1,11 +1,15 @@
 #include "ResourcesManager.h"
-#include <stdexcept>
-#include <cassert>
 
 #include "Application/GaleonApplication.h"
 #include "Application/GameState.h"
 #include "HFManager.h"
 #include <algorithm>
+#include "BuildingManager.h"
+#include "Logic\Entity\Components\ResourceBuilding.h"
+
+#include <stdexcept>
+#include <cassert>
+#include <map>
 
 namespace Logic
 {
@@ -80,26 +84,47 @@ namespace Logic
 		}
 	}
 
-	bool ResourcesManager::canAffordCost(ResourceType type, int cost, bool allowPartial, int& finalCost){
-		assert((cost >= 0) && "Cost must be positive");
+	std::map<CResourceBuilding*, int> ResourcesManager::findResources(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalAvailable){
+		// Obtenemos todos los recursos disponibles indexados por entidad
+		std::map<CResourceBuilding*, int> availabilityMap;
 
-		// Inicializamos
-		finalCost = 0;
+		// Y el total
+		totalAvailable = 0;
 
-		// Control de costes negativos ó 0
+		for (auto itBuilding = resourceBuildings.cbegin(); itBuilding != resourceBuildings.cend(); ++itBuilding) {
+			int buildingAvailable = (*itBuilding)->getAvailableResources(type);
+
+			// Si tiene algo de recurso disponible
+			if (buildingAvailable > 0){
+				// Indexamos el edificio
+				availabilityMap[(*itBuilding)->getEntity()->getComponent<CResourceBuilding>()] = buildingAvailable;
+
+				// Agregamos su disponibilidad al total
+				totalAvailable += buildingAvailable;
+			}
+		}
+
+		return availabilityMap;
+	}
+
+	bool ResourcesManager::payCost(ResourceType type, int cost, bool onlyCheck, bool allowPartial, int& finalCost){
+		// Controlamos costes negativos ó 0
 		if (cost <= 0){
+			assert(cost >= 0 && "Cost must be positive");
 			finalCost = 0;
 			return true;
 		}
 
-		// TODO Mecanismo antiguo: Restamos directamente aquí en vez de quitar de los edificios de recursos
+		// Obtenemos todos los ResourceBuilding entre los edificios
+		std::vector<CResourceBuilding*> resourceBuildings = CBuildingManager::getSingletonPtr()->getBuildings<CResourceBuilding>();
 
-		// Determinamos cuánto hay disponible: available
-		int available = (int)truncf(_resources[type]);
+		// Obtenemos la información de disponibilidad de recursos
+		int totalAvailable;
+		std::map<CResourceBuilding*, int> availabilityMap = findResources(type, resourceBuildings, totalAvailable);
 
-		// Vemos si cubre el coste para saber cuánto se podría pagar: paid
+		// Vemos si el total disponible cubre el coste completo
 		// Si cubre
-		if (available >= cost){
+		if (totalAvailable >= cost){
 			// Podemos pagar el coste total
 			finalCost = cost;
 		}
@@ -113,19 +138,41 @@ namespace Logic
 			}
 
 			// Si se permiten, marcamos que podemos pagar hasta lo disponible
-			finalCost = available;
+			finalCost = totalAvailable;
 		}
 
-		return true;
-	}
+		// Si sólo había que chequear, finalizamos con éxito
+		if (onlyCheck)
+			return true;
 
-	bool ResourcesManager::payCost(ResourceType type, int cost, bool allowPartial, int& finalCost){
-		// Si no podemos permitirnos pagar el coste no hay nada que hacer
-		if (!canAffordCost(type, cost, allowPartial, finalCost))
-			return false;
+		// Modificamos recursos en cada edificio repartiendo de forma proporcional a lo que tengan
+		// TODO Covendría ordenar de mayor a menor capacidad para que los flecos del reparto se asignen al que más tiene
+		int totalRequested = finalCost;
+		for (auto it = availabilityMap.cbegin(); it != availabilityMap.cend(); ++it){
+			// Calculamos la proporción que solicitaremos al edificio
+			float proportion = (*it).second * 1.0 / totalAvailable;
+			
+			// Y la hacemos relativa al coste final que vamos a pagar
+			// Redondeamos hacia arriba para evitar repartir un pago, p.ej. de 100 entre 3 (-> 33) que resultaría en un pago de 99
+			int buildingRequested = (int) ceil(proportion * finalCost);
 
-		// Modificamos recursos
-		changeResources(type, -1.0 * finalCost);
+			// Ajustamos a lo que nos quede para no pedir de más
+			// e.g. 100 entre 3: 1º daría 34, 2º daría 34, 3º daría 32
+			buildingRequested = fmin(buildingRequested, totalRequested);
+
+			(it->first)->changeStoredResources(type, -buildingRequested);
+
+			// Vamos sumando porque con el redondeo a entero podríamos acabar antes
+			totalRequested -= buildingRequested;
+
+			// Paramos si ya se solicitó todo lo que necesitábamos
+			if (totalRequested <= 0){
+				break;
+			}
+		}
+
+		// El reparto debería cuadrar perfectamente
+		assert(totalRequested == 0 && "Error in cost payment algorithm");
 
 		return true;
 	}

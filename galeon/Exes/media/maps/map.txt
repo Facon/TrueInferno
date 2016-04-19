@@ -65,6 +65,10 @@ Map = {
 		numInitialSouls = 5,
 		secondsBetweenSpawns = 10,
 		numSpawnedSouls = 5,
+		storedResources="GAS,MINERAL",
+		maxResources = 100000,
+		initialResources = 1000,
+		providedResources="GAS,MINERAL",
 	},
 	
 	Evilator = {

@@ -209,6 +209,9 @@
     <ClCompile Include="..\..\Src\AI\LAAcceptOrRejectNewConsumer.cpp">
       <Filter>Decision\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\SMResourceBuildingData.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">

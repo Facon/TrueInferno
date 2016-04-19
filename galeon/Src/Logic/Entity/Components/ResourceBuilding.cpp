@@ -16,4 +16,28 @@ namespace Logic {
 		CStateMachineExecutor::tick(msecs);
 	} // tick
 
+	int CResourceBuilding::getStoredResources(ResourceType type){
+		return _currentStateMachine->getSharedData().getStoredResources(type);
+	}
+
+	int CResourceBuilding::getAvailableResources(ResourceType type){
+		return _currentStateMachine->getSharedData().getAvailableResources(type);
+	}
+
+	bool CResourceBuilding::changeStoredResources(ResourceType type, int quantity){
+		return _currentStateMachine->getSharedData().changeStoredResources(type, quantity);
+	}
+
+	bool CResourceBuilding::reserveResources(ResourceType type, int quantity, bool allowPartial, int& finallyReserved){
+		return _currentStateMachine->getSharedData().reserveResources(type, quantity, allowPartial, finallyReserved);
+	}
+
+	bool CResourceBuilding::freeReservedResources(ResourceType type, int quantity){
+		return _currentStateMachine->getSharedData().freeReservedResources(type, quantity);
+	}
+
+	bool CResourceBuilding::claimReservedResources(ResourceType type, int quantity){
+		return _currentStateMachine->getSharedData().claimReservedResources(type, quantity);
+	}
+
 } // namespace Logic

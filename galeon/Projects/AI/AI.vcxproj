@@ -127,6 +127,7 @@
     <ClCompile Include="..\..\Src\AI\Movement.cpp" />
     <ClCompile Include="..\..\Src\AI\Server.cpp" />
     <ClCompile Include="..\..\Src\AI\SimpleLatentActions.cpp" />
+    <ClCompile Include="..\..\Src\AI\SMResourceBuildingData.cpp" />
     <ClCompile Include="..\..\Src\AI\UndirectedGraph.cpp" />
     <ClCompile Include="..\..\Src\AI\WaypointGraph.cpp" />
   </ItemGroup>

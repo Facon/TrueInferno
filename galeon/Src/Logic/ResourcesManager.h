@@ -3,9 +3,12 @@
 
 #include <string>
 #include <map>
+#include <vector>
 
 namespace Logic
 {
+	class CResourceBuilding;
+
 	enum ResourceType
 	{
 		NONE = 0xFFFFFFFF,
@@ -29,8 +32,8 @@ namespace Logic
 
 	private:
 		ResourcesManager() {
-			_resources[ResourceType::MINERAL] = 100000;
-			_resources[ResourceType::GAS] = 100000;
+			_resources[ResourceType::MINERAL] = 0;
+			_resources[ResourceType::GAS] = 0;
 			_resources[ResourceType::COKE] = 0;
 			_resources[ResourceType::CRUDE] = 0;
 			_resources[ResourceType::PURE] = 0;
@@ -56,17 +59,15 @@ namespace Logic
 		/** Cambia la cantidad de recursos del tipo dado en la cantidad (positiva o negativa) indicada */
 		void changeResources(ResourceType type, float num);
 
-		/** Chequea si puede permitirse pagar la cantidad de recursos, cost, del tipo indicado, type.
-		* Si allowPartial es true se permiten costes parciales y el coste final quse pagaría se devuelve en finalCost.
-		* Devuelve true si se podría pagar la totalidad de los costes o parte (en caso de permitir costes parciales), y false en otro caso
-		*/
-		bool canAffordCost(ResourceType type, int cost, bool allowPartial, int& finalCost);
+		/** Busca recursos del tipo dado entre todos los edificios.
+		Devuelve un mapa con las cantidades de recursos de cada edificio */
+		std::map<CResourceBuilding*, int> ResourcesManager::findResources(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalAvailable);
 
-		/** Paga la cantidad de recursos, cost, del tipo indicado, type.
+		/** Chequea y paga o sólo chequea la cantidad de recursos, cost, del tipo indicado, type.
 		* Si allowPartial es true se permiten costes parciales y el coste final pagado se devuelve en finalCost.
 		* Devuelve true si se pudo pagar la totalidad de los costes o parte (en caso de permitir costes parciales), y false en otro caso.
 		*/
-		bool payCost(ResourceType type, int cost, bool allowPartial, int& finalCost);
+		bool payCost(ResourceType type, int cost, bool onlyCheck, bool allowPartial, int& finalCost);
 	};
 
 }

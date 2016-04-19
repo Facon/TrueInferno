@@ -56,12 +56,24 @@ namespace AI {
 			}
 
 			// Guardamos el máximo almacenable de cada tipo de recurso
+			// TODO Leer para cada recurso por separado
 			if (entityInfo->hasAttribute("maxResources")){
 				_data.setMaxResources(entityInfo->getIntAttribute("maxResources"));
 			}
 			else{
 				std::cout << "No resource limit has been defined" << std::endl;
 			}
+
+			// Guardamos la cantidad inicial de recursos
+			// TODO Leer para cada recurso por separado
+			if (entityInfo->hasAttribute("initialResources")){
+				_data.setInitialResources(entityInfo->getIntAttribute("initialResources"));
+			}
+
+			// Inicializamos los recursos iniciales
+			_data.initResources();
+
+			// Construcción de SM
 
 			// Bucle infinito procesando peticiones
 			int process = this->addNode(new CLAAttendResourceBuildingRequest(entity, _data));
