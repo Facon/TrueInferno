@@ -38,7 +38,7 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
 		setEventWindowVisible(false);
 		_uiEventWindow->activate();
-		Audio::CServer::getSingletonPtr()->play();
+		//Audio::CServer::getSingletonPtr()->play();
 	}
 
 	void EventUI::deactivate()

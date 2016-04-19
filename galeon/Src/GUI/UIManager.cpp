@@ -21,10 +21,21 @@ namespace GUI
 		// Cargamos la ventana que muestra la barra superior
 
 		_uiWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UI.layout");
+		_uiWindow->subscribeEvent(CEGUI::Window::EventMouseButtonDown, CEGUI::SubscriberSlot(&UIManager::HandleRootMouseDown, this));
 		_topBarUI.init();
 		_sideBarUI.init();
 		_eventUI.init();
+		_buildingSelectionUI.init();
+
 	}
+
+	bool UIManager::HandleRootMouseDown(const CEGUI::EventArgs& e)
+	{
+		if (e.handled==0)
+			_sideBarUI.playerInteractionWithLeftClick();
+		return true;
+	}
+
 
 	void UIManager::release()
 	{
@@ -33,6 +44,7 @@ namespace GUI
 		_topBarUI.release();
 		_sideBarUI.release();
 		_eventUI.release();
+		_buildingSelectionUI.release();
 		_uiWindow->destroy();
 	}
 
@@ -44,6 +56,7 @@ namespace GUI
 		_topBarUI.activate();
 		_sideBarUI.activate();
 		_eventUI.activate();
+		_buildingSelectionUI.activate();
 		_uiWindow->setVisible(true);
 		_uiWindow->activate();
 
@@ -57,6 +70,7 @@ namespace GUI
 		_uiWindow->setVisible(false);
 		_topBarUI.deactivate();
 		_sideBarUI.deactivate();
+		_buildingSelectionUI.deactivate();
 		_eventUI.deactivate();
 
 	}
@@ -66,5 +80,6 @@ namespace GUI
 		_topBarUI.tick(msecs);
 		_sideBarUI.tick(msecs);
 		_eventUI.tick(msecs);
+		_buildingSelectionUI.tick(msecs);
 	}
 }

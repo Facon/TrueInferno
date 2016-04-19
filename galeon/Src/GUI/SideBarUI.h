@@ -7,7 +7,6 @@ namespace Logic
 	class CEntity;
 	class Tile;
 }
-//lo de antes ver si kitar
 namespace CEGUI
 {
 	class Window;
@@ -51,7 +50,8 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
-		void placeBuildingInConstruction();
+		void playerInteractionWithLeftClick();
+		void setEventWindowVisible(bool visible);
 	};
 }
 
