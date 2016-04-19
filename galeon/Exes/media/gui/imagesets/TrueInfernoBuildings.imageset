@@ -1,0 +1,15 @@
+<Imageset autoScaled="" imagefile="..\master\proyecto\prototipounity\TrueInferno\galeon\Exes\media\gui\imagesets\TrueinfernoBuildings.png" name="Unknown" nativeHorzRes="800" nativeVertRes="600" version="2">
+    <Image height="870" name="Trial" width="1600" xPos="5" yPos="0" />
+    <Image height="828" name="Furnace" width="1190" xPos="1621" yPos="27" />
+    <Image height="716" name="Evilator" width="994" xPos="2847" yPos="15" />
+    <Image height="738" name="Warehouse" width="882" xPos="3857" yPos="11" />
+    <Image height="232" name="ResearchLabs" width="444" xPos="4757" yPos="689" />
+    <Image height="638" name="EvilWorks" width="880" xPos="4753" yPos="31" />
+    <Image height="616" name="GaPlant" width="788" xPos="5649" yPos="15" />
+    <Image height="316" name="Missions" width="602" xPos="6519" yPos="5" />
+    <Image height="352" name="Gods" width="622" xPos="6449" yPos="329" />
+    <Image height="374" name="Mine" width="466" xPos="7093" yPos="395" />
+    <Image height="346" name="Refinery" width="470" xPos="7169" yPos="25" />
+    <Image height="326" name="Hellquarters" width="370" xPos="7675" yPos="9" />
+    <Image height="466" name="PowerGenerator" width="464" xPos="7567" yPos="401" />
+</Imageset>
