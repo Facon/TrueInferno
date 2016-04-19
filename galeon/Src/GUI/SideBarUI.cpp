@@ -284,17 +284,15 @@ namespace GUI
 		return (_placeableEntity != nullptr);
 	}
 
-
 	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
 		//Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding(); // TODO TEST
 		int aux;
-		Logic::ResourcesManager::getSingletonPtr()->incrementResources(Logic::ResourceType::MINERAL, 100, false, true, aux); // TODO TEST
+		//Logic::ResourcesManager::getSingletonPtr()->incrementResources(Logic::ResourceType::MINERAL, 100, false, true, aux); // TODO TEST
 		printf("Repair Building\n");
 		return true;
 	}
-
 
 	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
 	{

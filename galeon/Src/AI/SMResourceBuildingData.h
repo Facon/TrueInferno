@@ -26,22 +26,41 @@ namespace AI {
 		void registerStoredResourceType(ResourceType type);
 
 		/** Devuelve true o false según si el tipo de recurso es almacenable en esta entidad o no */
-		bool isResourceTypeStored(ResourceType type);
+		bool isResourceTypeStored(ResourceType type) const;
 
 		/** Devuelve la cantidad de recursos almacenados del tipo dado */
-		int getStoredResources(ResourceType type);
+		int getStoredResources(ResourceType type) const;
 
 		/** Devuelve la cantidad de recursos disponibles del tipo dado = Recursos existentes menos los reservados */
-		int getAvailableResources(ResourceType type);
+		int getAvailableResources(ResourceType type) const;
+
+		/** Getter del máximo de recursos */
+		unsigned int getMaxResources(ResourceType type) const;
+
+		/** Setter del máximo de recursos */
+		// TODO Incluir máximo separado por tipo de recurso
+		void setMaxResources(unsigned int maxResources);
+
+		/** Getter de la cantidad inicial de recursos */
+		unsigned int getInitialResources(ResourceType type) const;
+
+		/** Setter de la cantidad inicial de recursos */
+		// TODO Incluir cantidad inicial separada por tipo de recurso
+		void setInitialResources(unsigned int initialResources);
 
 		/** Modifica los recursos del tipo dado según la cantidad positiva o negativa indicada.
 		Devuelve true o false según si la operación se realizó correctamente o no */
 		bool changeStoredResources(ResourceType type, int quantity);
 
-		/** Reserva los recursos del tipo dado según la cantidad positiva indicada. 
-		Con el flag allowPartial a true se permiten reservas parciales, esto es, se reserva todo lo que haya disponible aunque no llegue a lo solicitado.
-		En finallyReserved se almacena la cantidad finalmente reservada.
-		Devuelve true o false según si la operación se realizó correctamente o no */
+		/**
+		* Reserva los recursos del tipo dado según la cantidad positiva indicada. 
+		* 
+		* @param[in] type tipo de los recursos a reservar
+		* @param[in] quantity cantidad de recursos a reservar
+		* @param[in] allowPartial flag a true para permite reservas parciales, esto es, reservar todo lo que haya disponible aunque no se llegue a lo solicitado
+		* @param[out] finallyReserved cantidad finalmente reservada
+		* @return true o false según si la operación total o parcial se realizó correctamente o no 
+		*/
 		bool reserveResources(ResourceType type, int quantity, bool allowPartial, int& finallyReserved);
 
 		/** Libera los recursos reservados del tipo dado según la cantidad positiva indicada.
@@ -57,18 +76,6 @@ namespace AI {
 
 		/** Registra un tipo */
 		//void registerStoredResourceType(std::unordered_set<ResourceType>& providedResources);
-
-		/** Getter del máximo de recursos */
-		unsigned int getMaxResources() const;
-
-		/** Setter del máximo de recursos */
-		void setMaxResources(unsigned int maxResources);
-
-		/** Getter de la cantidad inicial de recursos */
-		unsigned int getInitialResources() const;
-
-		/** Setter de la cantidad inicial de recursos */
-		void setInitialResources(unsigned int initialResources);
 
 		/** Inicializa los recursos de partida */
 		void initResources();
@@ -87,9 +94,11 @@ namespace AI {
 		std::unordered_set<ResourceType> _providedResources;
 
 		/** Máxima cantidad que se puede almacenar de cada tipo */
+		// TODO Definir máximo por recurso
 		unsigned int _maxResources;
 
 		/** Cantidad inicial de cada tipo */
+		// TODO Definir cantida inicial por recurso
 		unsigned int _initialResources;
 	};
 }

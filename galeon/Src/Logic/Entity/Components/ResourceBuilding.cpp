@@ -25,7 +25,7 @@ namespace Logic {
 	}
 
 	int CResourceBuilding::getMaxResources(ResourceType type){
-		return _currentStateMachine->getSharedData().getMaxResources();
+		return _currentStateMachine->getSharedData().getMaxResources(type);
 	}
 
 	bool CResourceBuilding::changeStoredResources(ResourceType type, int quantity){

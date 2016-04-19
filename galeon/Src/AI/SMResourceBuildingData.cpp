@@ -17,26 +17,50 @@ namespace AI {
 	}
 
 	/** Devuelve true o false según si el tipo de recurso es almacenable en esta entidad o no */
-	bool CSMResourceBuildingData::isResourceTypeStored(ResourceType type){
+	bool CSMResourceBuildingData::isResourceTypeStored(ResourceType type) const {
 		return (_storedResources.count(type) > 0);
 	}
 
 	/** Devuelve la cantidad de recursos almacenados del tipo dado */
-	int CSMResourceBuildingData::getStoredResources(ResourceType type) {
+	int CSMResourceBuildingData::getStoredResources(ResourceType type) const {
 		if (!isResourceTypeStored(type)){
 			return 0;
 		}
 
-		return _storedResources[type];
+		return _storedResources.at(type);
 	}
 
 	/** Devuelve la cantidad de recursos disponibles del tipo dado = Recursos existentes menos los reservados */
-	int CSMResourceBuildingData::getAvailableResources(ResourceType type) {
+	int CSMResourceBuildingData::getAvailableResources(ResourceType type) const {
 		if (!isResourceTypeStored(type)){
 			return 0;
 		}
 
-		return _storedResources[type] - _reservedResources[type];
+		return _storedResources.at(type) - _reservedResources.at(type);
+	}
+
+	unsigned int CSMResourceBuildingData::getMaxResources(ResourceType type) const{
+		if (!isResourceTypeStored(type)){
+			return 0;
+		}
+
+		return _maxResources;
+	}
+
+	void CSMResourceBuildingData::setMaxResources(unsigned int maxResources){
+		_maxResources = maxResources;
+	}
+
+	unsigned int CSMResourceBuildingData::getInitialResources(ResourceType type) const{
+		if (!isResourceTypeStored(type)){
+			return 0;
+		}
+
+		return _initialResources;
+	}
+
+	void CSMResourceBuildingData::setInitialResources(unsigned int initialResources){
+		_initialResources = initialResources;
 	}
 
 	/** Modifica los recursos del tipo dado según la cantidad positiva o negativa indicada.
@@ -148,22 +172,6 @@ namespace AI {
 	/*void CSMResourceBuildingData::registerStoredResourceType(std::unordered_set<ResourceType>& providedResources) {
 		providedResources = _providedResources;
 	}*/
-
-	unsigned int CSMResourceBuildingData::getMaxResources() const{
-		return _maxResources;
-	}
-
-	void CSMResourceBuildingData::setMaxResources(unsigned int maxResources){
-		_maxResources = maxResources;
-	}
-
-	unsigned int CSMResourceBuildingData::getInitialResources() const{
-		return _initialResources;
-	}
-
-	void CSMResourceBuildingData::setInitialResources(unsigned int initialResources){
-		_initialResources = initialResources;
-	}
 
 	void CSMResourceBuildingData::initResources(){
 		for (auto it = _storedResources.cbegin(); it != _storedResources.cend(); ++it){
