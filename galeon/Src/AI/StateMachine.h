@@ -188,7 +188,7 @@ namespace AI
 		/**
 		Devuelve el objeto de datos compartido de la máquina de estados
 		*/
-		SharedData getSharedData(){
+		SharedData& getSharedData(){
 			return _data;
 		}
 
