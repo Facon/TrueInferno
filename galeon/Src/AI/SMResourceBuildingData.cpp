@@ -194,7 +194,7 @@ namespace AI {
 				changeStoredResources(type, -quantity);
 
 			// Eliminamos la capacidad de almacenamiento
-			changeMaxResources(type, -getMaxResources(type));
+			changeMaxResources(type, -(int)getMaxResources(type));
 		}
 	}
 }

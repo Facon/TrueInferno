@@ -69,6 +69,9 @@ Map = {
 		maxResources = 100000,
 		initialResources = 1000,
 		providedResources="GAS,MINERAL",
+		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopupHellquarters.layout",
+		image = "HellQuarters",
 	},
 	
 	Evilator = {
@@ -97,6 +100,9 @@ Map = {
 		transformRatio=0.8,
 		transformPeriod=5,
 		requirements = "Workers",
+		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "Evilator",
 	},
 	
 	Furnace = {
@@ -128,6 +134,9 @@ Map = {
 		maxResources = 1000,
 		providedResources="COKE,CRUDE",
 		requirements = "Workers",
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "Furnace",
 	},
 	
 	Soul = {
@@ -136,7 +145,6 @@ Map = {
 		orientation = 0,
 		model = "ogrehead.mesh",
 		visible = "true",
-		speed = 1.5,
 	},
 	
 	Mine = {
@@ -169,6 +177,9 @@ Map = {
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
 		requirements = "Energy,Workers",
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "Mine",
 	},
 	
 	GasPlant = {
@@ -201,6 +212,9 @@ Map = {
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
 		requirements = "Energy,Workers",
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "GasPlant",
 	},
 	
 	EvilWorks = {
@@ -234,6 +248,9 @@ Map = {
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
 		requirements = "Energy,Workers",
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "EvilWorks",
 	},
 	
 	Refinery = {
@@ -269,6 +286,9 @@ Map = {
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
 		requirements = "Energy,Workers",
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "Refinery",
 	},
 		
 	ResearchLabs = {
@@ -296,7 +316,10 @@ Map = {
 		maxResources = 1000,
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
-		requirements = "Energy,Workers",		
+		requirements = "Energy,Workers",
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "ResearchLabs",		
 	},
 		
 	PowerGenerator = {
@@ -324,7 +347,10 @@ Map = {
 		maxResources = 1000,
 		consumedResource="COKE",
 		normalizedConsumptionPeriod=1,
-		requirements = "Workers",		
+		requirements = "Workers",
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "PowerGenerator",		
 	},
 
 	Warehouse = {
@@ -353,6 +379,9 @@ Map = {
 		providedResources="MINERAL,GAS",
 		consumptionPeriod = 10,
 		consumptionUnits = 5,
-		requirements = "Energy,Workers",		
+		requirements = "Energy,Workers",
+		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
+		popuplayout = "UIBuildingSelectionPopup.layout",
+		image = "Warehouse",		
 	},
 }
