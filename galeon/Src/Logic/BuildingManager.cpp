@@ -221,7 +221,7 @@ namespace Logic {
 
 	void CBuildingManager::destroyPlaceable(CEntity *entity){
 		// Se elimina la entidad inmediatamente. OJO: NO usar deleteDeferred porque, por algún motivo, no elimina correctamente la entidad
-		CEntityFactory::getSingletonPtr()->deleteEntity(entity);
+		CEntityFactory::getSingletonPtr()->deferredDeleteEntity(entity);
 
 		// No hace falta desregistrar porque se hace automáticamente en el destructor de Placeable
 	}
