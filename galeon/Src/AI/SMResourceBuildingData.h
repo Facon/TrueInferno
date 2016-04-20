@@ -14,16 +14,19 @@ namespace AI {
 	class CSMResourceBuildingData {
 
 	public:
-		CSMResourceBuildingData() : _maxResources(0), _initialResources(0) {}
+		CSMResourceBuildingData() {}
 
 		virtual ~CSMResourceBuildingData() {
 			_storedResources.clear();
 			_reservedResources.clear();
+			_maxResources.clear();
 			_providedResources.clear();
 		}
 
-		/** Registra el tipo de recurso dado para ser almacenado */
-		void registerStoredResourceType(ResourceType type);
+		/** 
+		Registra el tipo de recurso a ser almacenado con su cantidad inicial y su máximo.
+		*/
+		void registerStoredResourceType(ResourceType type, int initialResources, int maxResources);
 
 		/** Devuelve true o false según si el tipo de recurso es almacenable en esta entidad o no */
 		bool isResourceTypeStored(ResourceType type) const;
@@ -37,20 +40,17 @@ namespace AI {
 		/** Getter del máximo de recursos */
 		unsigned int getMaxResources(ResourceType type) const;
 
-		/** Setter del máximo de recursos */
-		// TODO Incluir máximo separado por tipo de recurso
-		void setMaxResources(unsigned int maxResources);
-
-		/** Getter de la cantidad inicial de recursos */
-		unsigned int getInitialResources(ResourceType type) const;
-
-		/** Setter de la cantidad inicial de recursos */
-		// TODO Incluir cantidad inicial separada por tipo de recurso
-		void setInitialResources(unsigned int initialResources);
-
-		/** Modifica los recursos del tipo dado según la cantidad positiva o negativa indicada.
-		Devuelve true o false según si la operación se realizó correctamente o no */
+		/**
+		* Modifica los recursos almacenados del tipo dado según la cantidad positiva o negativa indicada.
+		* Devuelve true o false según si la operación se realizó correctamente o no
+		*/
 		bool changeStoredResources(ResourceType type, int quantity);
+
+		/**
+		* Modifica los recursos máximos del tipo dado según la cantidad positiva o negativa indicada.
+		* Devuelve true o false según si la operación se realizó correctamente o no
+		*/
+		bool changeMaxResources(ResourceType type, int quantity);
 
 		/**
 		* Reserva los recursos del tipo dado según la cantidad positiva indicada. 
@@ -77,29 +77,21 @@ namespace AI {
 		/** Registra un tipo */
 		//void registerStoredResourceType(std::unordered_set<ResourceType>& providedResources);
 
-		/** Inicializa los recursos de partida */
-		void initResources();
-
-		/** Limpia los recursos almacenados */
-		void cleanResources();
+		/** Desactiva el objeto limpiando y notificando todo lo que sea necesario */
+		void deactivate();
 
 	private:
 		/** Cantidad de recursos almacenados indexados por tipo */
 		std::unordered_map<ResourceType, int> _storedResources;
 
+		/** Cantidad máxima de recursos almacenados indexados por tipo */
+		std::unordered_map<ResourceType, int> _maxResources;
+		
 		/** Cantidad de recursos disponibles (i.e. no reservados) indexados por tipo */
 		std::unordered_map<ResourceType, int> _reservedResources;
 
 		/** Recursos que se proveen */
 		std::unordered_set<ResourceType> _providedResources;
-
-		/** Máxima cantidad que se puede almacenar de cada tipo */
-		// TODO Definir máximo por recurso
-		unsigned int _maxResources;
-
-		/** Cantidad inicial de cada tipo */
-		// TODO Definir cantida inicial por recurso
-		unsigned int _initialResources;
 	};
 }
 

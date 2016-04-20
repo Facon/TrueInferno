@@ -161,18 +161,15 @@ namespace Logic {
 		CEntity* target = nullptr;
 		int maxNeeded = INT_MIN;
 
-		std::map<BuildingType, std::set<CPlaceable*>*> _buildings = CBuildingManager::getSingletonPtr()->getBuildings();
+		std::vector<CPowerGenerator*> _generators = CBuildingManager::getSingletonPtr()->getBuildings<CPowerGenerator>();
 
 		// Si no hay generadores no se hace nada
-		if (_buildings.count(BuildingType::PowerGenerator) == 0)
+		if (_generators.empty())
 			return;
 
-		// Obtenemos los edificios de tipo PowerGenerator
-		std::set<CPlaceable*>* _generators = _buildings[BuildingType::PowerGenerator];
-		
 		// Para cada PowerGenerator
-		for (auto it = _generators->cbegin(); it != _generators->cend(); ++it){
-			CPowerGenerator* generator = (*it)->getEntity()->getComponent<CPowerGenerator>();
+		for (auto it = _generators.cbegin(); it != _generators.cend(); ++it){
+			CPowerGenerator* generator = (*it);
 
 			// TODO Descartamos los que no están activos
 
@@ -187,7 +184,7 @@ namespace Logic {
 		}
 
 		// Si encontramos algún edificio a abastecer
-		if (target!=nullptr){
+		if (target != nullptr){
 			// Pedimos a la logística del edificio que busque los recursos que necesita o todos los que haya disponibles si no necesita nada
 			LogisticsMessage m;
 			m.assembleDemandResources(ResourceType::COKE, maxNeeded > 0 ? maxNeeded : INT_MAX);

@@ -8,12 +8,15 @@ using namespace Logic;
 
 namespace AI {
 	/** Registra el tipo de recurso dado para ser almacenado */
-	void CSMResourceBuildingData::registerStoredResourceType(ResourceType type) {
-		// Inicializamos los recursos almacenados de ese tipo a 0
+	void CSMResourceBuildingData::registerStoredResourceType(ResourceType type, int initialResources, int maxResources) {
+		// Primero registramos los tipos en los arrays
 		_storedResources[type] = 0;
-
-		// Ídem para los recursos reservables
+		_maxResources[type] = 0;
 		_reservedResources[type] = 0;
+
+		// Después inicializamos el valor máximo y el inicial
+		changeMaxResources(type, maxResources);
+		changeStoredResources(type, initialResources);
 	}
 
 	/** Devuelve true o false según si el tipo de recurso es almacenable en esta entidad o no */
@@ -44,30 +47,14 @@ namespace AI {
 			return 0;
 		}
 
-		return _maxResources;
-	}
-
-	void CSMResourceBuildingData::setMaxResources(unsigned int maxResources){
-		_maxResources = maxResources;
-	}
-
-	unsigned int CSMResourceBuildingData::getInitialResources(ResourceType type) const{
-		if (!isResourceTypeStored(type)){
-			return 0;
-		}
-
-		return _initialResources;
-	}
-
-	void CSMResourceBuildingData::setInitialResources(unsigned int initialResources){
-		_initialResources = initialResources;
+		return _maxResources.at(type);
 	}
 
 	/** Modifica los recursos del tipo dado según la cantidad positiva o negativa indicada.
 	Devuelve true o false según si la operación se realizó correctamente o no */
 	bool CSMResourceBuildingData::changeStoredResources(ResourceType type, int quantity){
 		if (!isResourceTypeStored(type)){
-			return 0;
+			return false;
 		}
 
 		int aux = _storedResources[type] + quantity;
@@ -78,8 +65,8 @@ namespace AI {
 			return false;
 		}
 
-		else if (aux > (int)_maxResources){
-			std::cout << "Discarded changing " << quantity << " resources because there are already stored " << _storedResources[type] << " (limit = " << _maxResources << ")" << std::endl;
+		else if (aux > (int)_maxResources[type]){
+			std::cout << "Discarded changing " << quantity << " resources because there are already stored " << _storedResources[type] << " (limit = " << _maxResources[type] << ")" << std::endl;
 			return false;
 		}
 
@@ -93,13 +80,36 @@ namespace AI {
 		return true;
 	}
 
+	bool CSMResourceBuildingData::changeMaxResources(ResourceType type, int quantity) {
+		if (!isResourceTypeStored(type)){
+			return false;
+		}
+
+		int aux = getMaxResources(type) + quantity;
+
+		// Controlamos que el nuevo valor no sobrepase los límites
+		if (aux < 0){
+			std::cout << "Discarded changing " << quantity << " max resources ecause current maximum is " << getMaxResources(type) << std::endl;
+			return false;
+		}
+
+		// Registramos el nuevo valor con el cambio aplicado
+		_maxResources[type] = aux;
+
+		// Notificamos al ResourcesManager
+		Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
+		resourcesManager->changeDisplayedMaxResources(type, quantity);
+
+		return true;
+	}
+
 	/** Reserva los recursos del tipo dado según la cantidad positiva indicada. 
 	Con el flag allowPartial a true se permiten reservas parciales, esto es, se reserva todo lo que haya disponible aunque no llegue a lo solicitado.
 	En finallyReserved se almacena la cantidad finalmente reservada.
 	Devuelve true o false según si la operación se realizó correctamente o no */
 	bool CSMResourceBuildingData::reserveResources(ResourceType type, int quantity, bool allowPartial, int& finallyReserved){
 		if (!isResourceTypeStored(type)){
-			return 0;
+			return false;
 		}
 
 		if (quantity <= 0){
@@ -136,7 +146,7 @@ namespace AI {
 	Devuelve true o false según si la operación se realizó correctamente o no */
 	bool CSMResourceBuildingData::freeReservedResources(ResourceType type, int quantity){
 		if (!isResourceTypeStored(type)){
-			return 0;
+			return false;
 		}
 
 		if (quantity <= 0){
@@ -173,21 +183,18 @@ namespace AI {
 		providedResources = _providedResources;
 	}*/
 
-	void CSMResourceBuildingData::initResources(){
-		for (auto it = _storedResources.cbegin(); it != _storedResources.cend(); ++it){
-			ResourceType type = it->first;
-			changeStoredResources(type, _initialResources);
-		}
-	}
-
-	/** Limpia los recursos almacenados */
-	void CSMResourceBuildingData::cleanResources() {
+	void CSMResourceBuildingData::deactivate() {
+		/** Limpia los recursos almacenados y máximos */
 		for (auto it = _storedResources.cbegin(); it != _storedResources.cend(); ++it){
 			ResourceType type = it->first;
 			int quantity = it->second;
 
+			// Eliminamos los recursos que había almacenados
 			if (quantity > 0)
 				changeStoredResources(type, -quantity);
+
+			// Eliminamos la capacidad de almacenamiento
+			changeMaxResources(type, -getMaxResources(type));
 		}
 	}
 }

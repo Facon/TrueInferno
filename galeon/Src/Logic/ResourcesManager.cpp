@@ -29,13 +29,13 @@ namespace Logic
 	ResourcesManager ResourcesManager::_instance = ResourcesManager();
 
 	int ResourcesManager::getDisplayedResources(ResourceType type) const {
-		return (int) truncf(_resources.at(type));
+		return (int) truncf(_currentResources.at(type));
 	}
 
 	void ResourcesManager::changeDisplayedResources(ResourceType type, float num) {
 		// Todos los recursos, salvo el favor de Hades, se obtienen del mapa genérico
 		if (type != ResourceType::HADES_FAVOR) {
-			_resources[type] += num;
+			_currentResources[type] += num;
 		}
 
 		else{
@@ -43,6 +43,14 @@ namespace Logic
 			HFManager* hfManager = HFManager::getSingletonPtr();
 			hfManager->setHadesFavor(hfManager->getHadesFavor() + num);
 		}
+	}
+
+	int ResourcesManager::getDisplayedMaxResources(ResourceType type) const {
+		return (int) truncf(_maxResources.at(type));
+	}
+
+	void ResourcesManager::changeDisplayedMaxResources(ResourceType type, int num) {
+		_maxResources[type] += num;
 	}
 
 	ResourceType ResourcesManager::parseResourceType(const std::string& name){

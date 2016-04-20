@@ -148,6 +148,9 @@ namespace Logic
 
 			// Para cada tipo de edificio registrado
 			for (auto itType = _buildings.cbegin(); itType != _buildings.cend(); ++itType){
+				if ((itType->second) == nullptr)
+					continue;
+
 				// Para cada uno de sus edificios
 				for (auto itBuilding = itType->second->cbegin(); itBuilding != itType->second->cend(); ++itBuilding){
 					ComponentClass *component = (*itBuilding)->getEntity()->getComponent<ComponentClass>();

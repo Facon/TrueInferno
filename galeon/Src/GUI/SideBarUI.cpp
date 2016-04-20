@@ -287,9 +287,9 @@ namespace GUI
 	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		//Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding(); // TODO TEST
-		int aux;
-		//Logic::ResourcesManager::getSingletonPtr()->incrementResources(Logic::ResourceType::MINERAL, 100, false, true, aux); // TODO TEST
+		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding(); // TODO TEST borrar edificio
+		//int aux;
+		//Logic::ResourcesManager::getSingletonPtr()->incrementResources(Logic::ResourceType::MINERAL, 100, false, true, aux); // TODO TEST incrementar recursos
 		printf("Repair Building\n");
 		return true;
 	}
