@@ -31,6 +31,9 @@
     <ClCompile Include="..\..\Src\GUI\EventUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\GUI\BuildingSelectionUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\GUI\Documentation.h">
@@ -56,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\GUI\EventUI.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\GUI\BuildingSelectionUI.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

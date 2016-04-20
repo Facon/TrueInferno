@@ -84,6 +84,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Logic\BuildingManager.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\BuildingSelection.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\CameraController.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\DamageTrigger.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp" />
@@ -119,6 +120,7 @@
     <ClCompile Include="..\..\Src\Logic\Events\EndGameEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\Event.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\EventManager.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\TutorialEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\HFManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp" />
@@ -137,10 +139,12 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Graphics.cpp" />
     <ClCompile Include="..\..\Src\Logic\ResourcesManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Server.cpp" />
+    <ClCompile Include="..\..\Src\Logic\SoulManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\BuildingManager.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\BuildingSelection.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\CameraController.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptySMComponent.h" />
@@ -181,6 +185,7 @@
     <ClInclude Include="..\..\Src\Logic\Events\EndGameEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\Event.h" />
     <ClInclude Include="..\..\Src\Logic\Events\EventManager.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h" />
     <ClInclude Include="..\..\Src\Logic\HFManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h" />
@@ -203,6 +208,7 @@
     <ClInclude Include="..\..\Src\Logic\Documentation.h" />
     <ClInclude Include="..\..\Src\Logic\ResourcesManager.h" />
     <ClInclude Include="..\..\Src\Logic\Server.h" />
+    <ClInclude Include="..\..\Src\Logic\SoulManager.h" />
     <ClInclude Include="..\..\Src\Logic\TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
