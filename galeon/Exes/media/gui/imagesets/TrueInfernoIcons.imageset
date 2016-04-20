@@ -1,27 +1,31 @@
 <?xml version="1.0"?>
 <Imageset autoScaled="vertical" imagefile="TrueInfernoIcons.png" name="TrueInfernoIcons" nativeHorzRes="64" nativeVertRes="64" version="2">
     <Image height="64" name="Cancel" width="64" xPos="256" yPos="0" />
-    <Image height="64" name="DestroyBuilding" width="64" xPos="385" yPos="0" />
-    <Image height="64" name="Missions" width="64" xPos="831" yPos="0" />
-    <Image height="64" name="CreatePowerGenerator" width="64" xPos="960" yPos="0" />
-    <Image height="64" name="CreateMine" width="64" xPos="768" yPos="0" />
-    <Image height="64" name="CreateResearchLabs" width="64" xPos="1153" yPos="0" />
-    <Image height="64" name="SwitchBuilding" width="64" xPos="1216" yPos="0" />
-    <Image height="64" name="Trial" width="64" xPos="1280" yPos="0" />
-    <Image height="64" name="CreateWarehouse" width="64" xPos="1408" yPos="0" />
-    <Image height="64" name="UpgradeBuilding" width="64" xPos="1345" yPos="0" />
+    <Image height="64" name="DestroyBuilding" width="64" xPos="513" yPos="0" />
+    <Image height="64" name="Missions" width="64" xPos="960" yPos="0" />
+    <Image height="64" name="CreatePowerGenerator" width="64" xPos="1088" yPos="0" />
+    <Image height="64" name="CreateResearchLabs" width="64" xPos="1410" yPos="0" />
+    <Image height="64" name="SwitchBuilding" width="64" xPos="1474" yPos="0" />
+    <Image height="64" name="Trial" width="64" xPos="1601" yPos="0" />
+    <Image height="64" name="CreateWarehouse" width="64" xPos="1728" yPos="0" />
+    <Image height="64" name="UpgradeBuilding" width="64" xPos="1664" yPos="0" />
     <Image height="64" name="BorderLine" width="64" xPos="0" yPos="0" />
     <Image height="64" name="Accept" width="64" xPos="64" yPos="0" />
     <Image height="64" name="BurnSoul" width="64" xPos="128" yPos="0" />
     <Image height="64" name="ClearTerrain" width="64" xPos="191" yPos="0" />
-    <Image height="64" name="Decline" width="64" xPos="321" yPos="0" />
-    <Image height="64" name="CreateSoulpath" width="64" xPos="449" yPos="0" />
-    <Image height="64" name="CreateEvilworks" width="64" xPos="512" yPos="0" />
-    <Image height="64" name="CreateFurnace" width="64" xPos="577" yPos="0" />
-    <Image height="64" name="CreateGasplant" width="64" xPos="641" yPos="0" />
-    <Image height="64" name="Gods" width="64" xPos="704" yPos="0" />
-    <Image height="64" name="CreateMine" width="64" xPos="768" yPos="0" />
-    <Image height="64" name="CreateSoul" width="64" xPos="896" yPos="0" />
-    <Image height="64" name="CreateRefinery" width="64" xPos="1025" yPos="0" />
-    <Image height="64" name="RepairBuilding" width="64" xPos="1089" yPos="0" />
+    <Image height="64" name="Decline" width="64" xPos="449" yPos="0" />
+    <Image height="64" name="CreateSoulpath" width="64" xPos="577" yPos="0" />
+    <Image height="64" name="CreateEvilworks" width="64" xPos="641" yPos="0" />
+    <Image height="64" name="CreateFurnace" width="64" xPos="704" yPos="0" />
+    <Image height="64" name="CreateGasplant" width="64" xPos="768" yPos="0" />
+    <Image height="64" name="Gods" width="64" xPos="832" yPos="0" />
+    <Image height="64" name="CreateSoul" width="64" xPos="1024" yPos="0" />
+    <Image height="64" name="CreateRefinery" width="64" xPos="1281" yPos="0" />
+    <Image height="64" name="RepairBuilding" width="64" xPos="1345" yPos="0" />
+    <Image height="64" name="Coke" width="64" xPos="320" yPos="0" />
+    <Image height="64" name="Time" width="64" xPos="1537" yPos="0" />
+    <Image height="64" name="Crude" width="64" xPos="384" yPos="0" />
+    <Image height="64" name="Pure" width="64" xPos="1152" yPos="0" />
+    <Image height="64" name="Refined" width="64" xPos="1216" yPos="0" />
+    <Image height="64" name="CreateMine" width="64" xPos="896" yPos="0" />
 </Imageset>

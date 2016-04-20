@@ -6,6 +6,8 @@
 	<Font filename="Jura-12.font" />
 	<Font filename="Jura-10.font" />
 	<Font filename="Jura-8.font" />
+	<Font filename="Jura-6.font" />
+	<Font filename="Jura-7.font" />
 	<Font filename="Jura-12-Italic.font" />
     <LookNFeel filename="OgreTray.looknfeel" />
     <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
