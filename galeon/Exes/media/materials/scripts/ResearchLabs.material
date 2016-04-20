@@ -5,7 +5,7 @@ material ResearchLabs
 	{
 		pass
 		{
-			ambient 0.721 0 0 1
+			ambient 0.486 0 0.721 1
 			diffuse 1 1 1 1
 		}
 	}

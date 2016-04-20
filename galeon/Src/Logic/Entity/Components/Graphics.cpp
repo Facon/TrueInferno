@@ -130,5 +130,20 @@ namespace Logic
 		return true;
 	} // SET_MATERIAL_NAME
 
+	bool CGraphics::HandleMessage(const ToggleMessage& m)
+	{
+		// Sólo atendemos mensajes de información de cambio
+		if (m._type != MessageType::TOGGLE_INFO)
+			return false;
+
+		// Oscurecemos o aclaramos el color dependiendo de si deshabilitan o habilitan
+		if (m._enabled)
+			_graphicsEntity->makeClearerColor();
+		else
+			_graphicsEntity->makeDarkerColor();
+		
+		return true;
+	}
+
 } // namespace Logic
 

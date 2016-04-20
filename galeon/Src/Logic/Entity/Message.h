@@ -104,6 +104,8 @@ namespace Logic
 			CONSUMPTION_STOP,
 			CONSUMPTION_STOPPED,
 			CONSUMPTION_CHANGE,
+			TOGGLE_REQUEST,
+			TOGGLE_INFO,
 		};
 
 		MessageType _type;
@@ -660,8 +662,13 @@ namespace Logic
 	class ToggleMessage : public Message
 	{
 	public:
+		// TOGGLE_REQUEST: Solicita añadir o eliminar un requisito para permitir el habilitado de la entidad
 		ToggleMessage(LogicRequirement requirement, bool add) :
-			Message(MessageType::UNASSIGNED), _requirement(requirement), _add(add) {}
+			Message(MessageType::TOGGLE_REQUEST), _requirement(requirement), _add(add) {}
+
+		// TOGGLE_INFO: Informa de un cambio en el habilitado o deshabilitado de la entidads
+		ToggleMessage(bool enabled) :
+			Message(MessageType::TOGGLE_INFO), _enabled(enabled) {}
 
 		// Criterio por el que se quiere habilitar/deshabilitar
 		//std::string _criterion;
@@ -671,6 +678,9 @@ namespace Logic
 
 		// Flag a true para indicar que se quiere añadir un requisito al habilitado de la entidad
 		bool _add;
+
+		// Flag a true si se está informando del habilitado de la entidad o false para el deshbilitado
+		bool _enabled;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

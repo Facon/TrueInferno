@@ -269,6 +269,56 @@ namespace Graphics
 	
 	//--------------------------------------------------------
 	
+	void CEntity::makeDarkerColor(float factor)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		assert((factor > 0) && (factor < 1) && "Factor must be in (0,1)");
+
+		if (_entity) {
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+			{
+				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
+				Ogre::MaterialPtr entityMaterialClone = entityMaterial->clone(_entityNode->getName() + "_" + entityMaterial->getName());
+
+				// Cogemos el color actual
+				Ogre::ColourValue color = entityMaterialClone->getTechnique(0)->getPass(0)->getAmbient();
+
+				// Y se le aplica una multiplicación para hacerlo más oscuro
+				entityMaterialClone->getTechnique(0)->getPass(0)->setAmbient(color.r * factor, color.g * factor, color.b * factor);
+
+				_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+			}
+		}
+
+	} // setLogicDisabledColor
+
+	//--------------------------------------------------------
+
+	void CEntity::makeClearerColor(float factor)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		assert((factor > 0) && (factor < 1) && "Factor must be in (0,1)");
+
+		if (_entity) {
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+			{
+				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
+				Ogre::MaterialPtr entityMaterialClone = entityMaterial->clone(_entityNode->getName() + "_" + entityMaterial->getName());
+
+				// Cogemos el color actual
+				Ogre::ColourValue color = entityMaterialClone->getTechnique(0)->getPass(0)->getAmbient();
+
+				// Y se le aplica la multiplicación inversa que hicimos al desactivar para devolverla al color inicial
+				entityMaterialClone->getTechnique(0)->getPass(0)->setAmbient(color.r / factor, color.g / factor, color.b / factor);
+
+				_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+			}
+		}
+
+	} // setLogicEnabledColor
+
+	//--------------------------------------------------------
+
 	void CEntity::setMaterialName(const std::string &materialName)
 	{
 		assert(_entityNode && "La entidad no ha sido cargada");

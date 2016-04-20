@@ -57,6 +57,16 @@ namespace Logic {
 		*/
 		std::set<LogicRequirement> _requirements;
 
+		/**
+		* Añade un requisito para el habilitado lógico
+		*/
+		bool CToggleable::addRequirement(LogicRequirement requirement);
+
+		/**
+		* Elimina un requisito para el habilitado lógico
+		*/
+		bool CToggleable::removeRequirement(LogicRequirement requirement);
+
 	}; // class CToggleable
 
 	REG_FACTORY(CToggleable);

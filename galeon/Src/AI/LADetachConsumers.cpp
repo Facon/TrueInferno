@@ -12,7 +12,7 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLADetachConsumers::OnRun(unsigned int msecs) {
-		std::cout << "Detaching " << _smData.getConsumers().size() << " consumers..." << std::endl;
+		//std::cout << "Detaching " << _smData.getConsumers().size() << " consumers..." << std::endl;
 
 		// Preparamos el mensaje de desconexión
 		PowerMessage powerMsg;

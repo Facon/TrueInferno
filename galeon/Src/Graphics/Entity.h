@@ -30,6 +30,9 @@ namespace Graphics
 	class CScene;
 }
 
+// Factor para oscurecer los colores. Cuanto más cerca de 0 más oscuro
+#define CHANGE_COLOR_FACTOR 0.4
+
 namespace Graphics 
 {
 	/**
@@ -174,6 +177,16 @@ namespace Graphics
 		 @return Valores (r,g,b) del color interpolados entre 0 y 1.
 		*/
 		Vector3 getColor();
+
+		/**
+		* Cambia el color para oscurecerlo aplicando el factor dado (0,1). Cuanto más cerca de 0, más oscuro.
+		*/
+		void makeDarkerColor(float factor = CHANGE_COLOR_FACTOR);
+
+		/**
+		* Cambia el color para aclararlo aplicando el factor dado (0,1). Cuanto más cerca de 0, más claro.
+		*/
+		void makeClearerColor(float factor = CHANGE_COLOR_FACTOR);
 
 		/**
 		 Cambia el material de la entidad.

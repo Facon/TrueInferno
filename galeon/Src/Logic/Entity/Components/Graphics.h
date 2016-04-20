@@ -85,6 +85,7 @@ namespace Logic
 		bool HandleMessage(const TransformMessage& m);
 		bool HandleMessage(const ColorMessage& m);
 		bool HandleMessage(const MaterialMessage& m);
+		bool HandleMessage(const ToggleMessage& m);
 
 	protected:
 

@@ -23,7 +23,7 @@ namespace Logic {
 		_newEnabled = _enabled;
 		*/
 
-		// Guardamos el set con los requisitos de la entidad (si hay alguno)
+		// Guardamos el set con los requisitos iniciales de la entidad (si hay alguno)
 		if (entityInfo->hasAttribute("requirements")){
 			std::istringstream ss(entityInfo->getStringAttribute("requirements"));
 			std::string item;
@@ -31,7 +31,7 @@ namespace Logic {
 			// Para cada elemento separado por coma
 			while (std::getline(ss, item, ',')) {
 				// Almacenamos el requisito
-				_requirements.emplace(parseLogicRequirement(item));
+				addRequirement(parseLogicRequirement(item));
 			}
 		}
 
@@ -77,6 +77,10 @@ namespace Logic {
 
 
 	bool CToggleable::HandleMessage(const ToggleMessage& msg){
+		// Sólo se aceptan solicitudes de cambio
+		if (msg._type != MessageType::TOGGLE_REQUEST)
+			return false;
+
 		/*
 		// Si no había actualización en curso
 		if (!_update){
@@ -96,21 +100,53 @@ namespace Logic {
 
 		// Si tenemos que añadir requisito
 		if (msg._add) {
-			bool added = (_requirements.emplace(msg._requirement)).second;
-			assert(added && "Adding requirement more than once");
-
-			std::cout << "Logic: Added '" << printLogicRequirement(msg._requirement) << "' requirement" << std::endl;
+			addRequirement(msg._requirement);
 		}
 
 		// Si no, tenemos que eliminar requisito
 		else {
-			bool erased = _requirements.erase(msg._requirement) != 0;
-			assert(erased && "Deleting requirement that doesn't exist");
-
-			std::cout << "Logic: Removed '" << printLogicRequirement(msg._requirement) << "' requirement. " << _requirements.size() << " requirements left" << std::endl;
+			removeRequirement(msg._requirement);
 		}
 
 		return true;
+	}
+
+	bool CToggleable::addRequirement(LogicRequirement requirement){
+		// Chequeamos si es el primero en añadirse
+		bool wasEmpty = false;
+		if (_requirements.empty()){
+			wasEmpty = true;
+		}
+
+		// Chequeamos que un mismo requisito no se intente añadir varias veces
+		bool added = (_requirements.emplace(requirement)).second;
+		assert(added && "Adding requirement more than once");
+
+		// Si se ha añadido algo y la lista de requisitos estaba vacía: Fue el primero en añadirse ==> La entidad acaba de ser desactivada lógicamente
+		if (added && wasEmpty){
+			ToggleMessage m(false);
+			assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage to disable entity");
+		}
+
+		//std::cout << "Logic: Added '" << printLogicRequirement(requirement) << "' requirement" << std::endl;
+
+		return added;
+	}
+
+	bool CToggleable::removeRequirement(LogicRequirement requirement){
+		// Chequeamos que un requisito exista antes de intentar eliminarlo
+		bool removed = _requirements.erase(requirement) != 0;
+		assert(removed && "Removing requirement that doesn't exist");
+
+		// Si se ha borrado algo y la lista de requisitos ahora está vacía: Fue el último por eliminar ==> La entidad acaba de ser activada lógicamente
+		if (removed && _requirements.empty()){
+			ToggleMessage m(true);
+			assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage to enable entity");
+		}
+
+		//std::cout << "Logic: Removed '" << printLogicRequirement(requirement) << "' requirement. " << _requirements.size() << " requirements left" << std::endl;
+
+		return removed;
 	}
 
 
