@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Imageset autoScaled="vertical" imagefile="TrueInfernoBuildings.png" name="TrueInfernoBuildings" nativeHorzRes="4408" nativeVertRes="884" version="2">
+<Imageset autoScaled="horizontal" imagefile="TrueInfernoBuildings.png" name="TrueInfernoBuildings" nativeHorzRes="2850" nativeVertRes="1890" version="2">
     <Image height="348" name="Trial" width="631" xPos="7" yPos="2" />
     <Image height="394" name="Warehouse" width="597" xPos="4" yPos="354" />
     <Image height="313" name="ResearchLabs" width="509" xPos="634" yPos="455" />

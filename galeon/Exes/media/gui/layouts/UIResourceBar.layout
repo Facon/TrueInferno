@@ -4,118 +4,169 @@
     
 
 	<Window type="OgreTray/StaticImage" name="TopBar" >
-		<Property name="Area" value="{{0,0},{0,0},{1,0},{0.1,0}}" />
+		<Property name="Area" value="{{0,0},{0,0},{1,0},{0.05,0}}" />
 		<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
 		<Property name="HorzFormatting" value="Tiled" />
 		<Property name="VertFormatting" value="CentreAligned" />
 		
-		<Window type="OgreTray/StaticImage" name="MineralBorderLine">
-			<Property name="Area" value="{{0.025,0},{0.2,0},{0.125,0},{0.8,0}}" />
-			<Property name="Image" value="OgreTrayImages/Shade" />				
-			<Property name="AlwaysOnTop" value="True" />
+				
+		<Window type="OgreTray/StaticImage" name="MineralIcon">
+				<Property name="Area" value="{{0.005,0},{0.2,0},{0.025,0},{0.8,0}}" />
+				<Property name="Image" value="TrueInfernoIcons/CreateMine" />				
+				<Property name="AlwaysOnTop" value="True" />
 		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="MineralBorderLine">
+			<Property name="Area" value="{{0.026,0},{0.2,0},{0.105,0},{0.8,0}}" />
+			<Property name="Image" value="OgreTrayImages/Shade" />				
+			<Property name="AlwaysOnTop" value="True" />		
+		</Window>
+		
 		<Window type="OgreTray/StaticText" name="Mineral" >
-			<Property name="Area" value="{{0.025,0},{0.2,0},{0.125,0},{0.8,0}}" />
-			<Property name="Font" value="Jura-10" />
-			<Property name="Text" value="Mineral  0" />
+			<Property name="Area" value="{{0.026,0},{0.2,0},{0.105,0},{0.8,0}}" />
+			<Property name="Font" value="Jura-7" />
+			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="GasIcon">
+			<Property name="Area" value="{{0.12,0},{0.2,0},{0.14,0},{0.8,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/CreateGasplant" />				
+			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="GasBorderLine">
-			<Property name="Area" value="{{0.13,0},{0.2,0},{0.23,0},{0.8,0}}" />
+			<Property name="Area" value="{{0.141,0},{0.2,0},{0.22,0},{0.8,0}}" />
 			<Property name="Image" value="OgreTrayImages/Shade" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
+		
 		<Window type="OgreTray/StaticText" name="Gas" >
-			<Property name="Area" value="{{0.13,0},{0.2,0},{0.23,0},{0.8,0}}" />
-			<Property name="Font" value="Jura-10" />
-			<Property name="Text" value="Gas        0" />
+			<Property name="Area" value="{{0.141,0},{0.2,0},{0.22,0},{0.8,0}}" />
+			<Property name="Font" value="Jura-7" />
+			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 		</Window>
 		
+		<Window type="OgreTray/StaticImage" name="CokeIcon">
+			<Property name="Area" value="{{0.235,0},{0.2,0},{0.255,0},{0.8,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/Coke" />				
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
 		<Window type="OgreTray/StaticImage" name="CokeBorderLine">
-			<Property name="Area" value="{{0.235,0},{0.2,0},{0.335,0},{0.8,0}}" />
+			<Property name="Area" value="{{0.256,0},{0.2,0},{0.335,0},{0.8,0}}" />
 			<Property name="Image" value="OgreTrayImages/Shade" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		<Window type="OgreTray/StaticText" name="Coke" >
-			<Property name="Area" value="{{0.235,0},{0.2,0},{0.335,0},{0.8,0}}" />
-			<Property name="Font" value="Jura-10" />
-			<Property name="Text" value="Coke       0" />
+			<Property name="Area" value="{{0.256,0},{0.2,0},{0.335,0},{0.8,0}}" />
+			<Property name="Font" value="Jura-7" />
+			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 		</Window>
 		
+		<Window type="OgreTray/StaticImage" name="CrudeIcon">
+			<Property name="Area" value="{{0.35,0},{0.2,0},{0.37,0},{0.8,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/Crude" />				
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
 		<Window type="OgreTray/StaticImage" name="CrudeBorderLine">
-			<Property name="Area" value="{{0.34,0},{0.2,0},{0.44,0},{0.8,0}}" />
+			<Property name="Area" value="{{0.371,0},{0.2,0},{0.45,0},{0.8,0}}" />
 			<Property name="Image" value="OgreTrayImages/Shade" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		<Window type="OgreTray/StaticText" name="Crude" >
-			<Property name="Area" value="{{0.34,0},{0.2,0},{0.44,0},{0.8,0}}" />
-			<Property name="Font" value="Jura-10" />
-			<Property name="Text" value="Crude     0" />
+			<Property name="Area" value="{{0.371,0},{0.2,0},{0.45,0},{0.8,0}}" />
+			<Property name="Font" value="Jura-7" />
+			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 		</Window>
 		
+		<Window type="OgreTray/StaticImage" name="PureIcon">
+			<Property name="Area" value="{{0.465,0},{0.2,0},{0.485,0},{0.8,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/Pure" />				
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
 		<Window type="OgreTray/StaticImage" name="PureBorderLine">
-			<Property name="Area" value="{{0.445,0},{0.2,0},{0.545,0},{0.8,0}}" />
+			<Property name="Area" value="{{0.486,0},{0.2,0},{0.565,0},{0.8,0}}" />
 			<Property name="Image" value="OgreTrayImages/Shade" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		<Window type="OgreTray/StaticText" name="Pure" >
-			<Property name="Area" value="{{0.445,0},{0.2,0},{0.545,0},{0.8,0}}" />
-			<Property name="Font" value="Jura-10" />
-			<Property name="Text" value="Pure       0" />
+			<Property name="Area" value="{{0.486,0},{0.2,0},{0.565,0},{0.8,0}}" />
+			<Property name="Font" value="Jura-7" />
+			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 		</Window>
 		
+		<Window type="OgreTray/StaticImage" name="RefinedIcon">
+			<Property name="Area" value="{{0.58,0},{0.2,0},{0.60,0},{0.8,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/Refined" />				
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
 		<Window type="OgreTray/StaticImage" name="RefinedBorderLine">
-			<Property name="Area" value="{{0.55,0},{0.2,0},{0.65,0},{0.8,0}}" />
+			<Property name="Area" value="{{0.601,0},{0.2,0},{0.68,0},{0.8,0}}" />
 			<Property name="Image" value="OgreTrayImages/Shade" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		<Window type="OgreTray/StaticText" name="Refined" >
-			<Property name="Area" value="{{0.55,0},{0.2,0},{0.65,0},{0.8,0}}" />
-			<Property name="Font" value="Jura-10" />
-			<Property name="Text" value="Refined   0" />
+			<Property name="Area" value="{{0.601,0},{0.2,0},{0.68,0},{0.8,0}}" />
+			<Property name="Font" value="Jura-7" />
+			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 		</Window>
 		
+		<Window type="OgreTray/StaticImage" name="TimeIcon">
+			<Property name="Area" value="{{0.78,0},{0.2,0},{0.80,0},{0.8,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/Time" />				
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
 		<Window type="OgreTray/StaticImage" name="TimeLeftBorderLine">
-			<Property name="Area" value="{{0.77,0},{0.2,0},{0.87,0},{0.8,0}}" />
+			<Property name="Area" value="{{0.801,0},{0.2,0},{0.88,0},{0.8,0}}" />
 			<Property name="Image" value="OgreTrayImages/Shade" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		<Window type="OgreTray/StaticText" name="TimeLeft" >
-			<Property name="Area" value="{{0.77,0},{0.2,0},{0.87,0},{0.8,0}}" />
-			<Property name="Font" value="Jura-10" />
-			<Property name="Text" value="Time   2:00" />
+			<Property name="Area" value="{{0.801,0},{0.2,0},{0.88,0},{0.8,0}}" />
+			<Property name="Font" value="Jura-7" />
+			<Property name="Text" value="2:00" />
 			<Property name="AlwaysOnTop" value="True" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 		</Window>
 		
+		<Window type="OgreTray/StaticImage" name="HadesFavorIcon">
+			<Property name="Area" value="{{0.895,0},{0.2,0},{0.915,0},{0.8,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/Gods" />				
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
 		<Window type="OgreTray/StaticImage" name="HadesFavorBorderLine">
-			<Property name="Area" value="{{0.875,0},{0.2,0},{0.975,0},{0.8,0}}" />
+			<Property name="Area" value="{{0.916,0},{0.2,0},{0.995,0},{0.8,0}}" />
 			<Property name="Image" value="OgreTrayImages/Shade" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		<Window type="OgreTray/StaticText" name="HadesFavor" >
-			<Property name="Area" value="{{0.875,0},{0.2,0},{0.975,0},{0.8,0}}" />
-			<Property name="Font" value="Jura-10" />
-			<Property name="Text" value="HF         0" />
+			<Property name="Area" value="{{0.916,0},{0.2,0},{0.995,0},{0.8,0}}" />
+			<Property name="Font" value="Jura-7" />
+			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />

@@ -62,49 +62,43 @@ namespace GUI
 		Logic::HFManager& hf = Logic::HFManager::getSingleton();
 
 		_uiBarsWindow->getChild("Mineral")->setText(
-			"Mineral  " + 
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedResources(ResourceType::MINERAL)))) +
 			" / " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedMaxResources(ResourceType::MINERAL))))
 			);
 
 		_uiBarsWindow->getChild("Gas")->setText(
-			"Gas  " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedResources(ResourceType::GAS)))) +
 			" / " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedMaxResources(ResourceType::GAS))))
 			);
 
 		_uiBarsWindow->getChild("Coke")->setText(
-			"Coke  " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedResources(ResourceType::COKE)))) +
 			" / " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedMaxResources(ResourceType::COKE))))
 			);
 
 		_uiBarsWindow->getChild("Crude")->setText(
-			"Crude  " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedResources(ResourceType::CRUDE)))) +
 			" / " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedMaxResources(ResourceType::CRUDE))))
 			);
 
 		_uiBarsWindow->getChild("Pure")->setText(
-			"Pure  " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedResources(ResourceType::PURE)))) +
 			" / " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedMaxResources(ResourceType::PURE))))
 			);
 
 		_uiBarsWindow->getChild("Refined")->setText(
-			"Refined  " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedResources(ResourceType::REFINED)))) +
 			" / " +
 			std::to_string(static_cast<int>(trunc(rm.getDisplayedMaxResources(ResourceType::REFINED))))
 			);
 
-		_uiBarsWindow->getChild("TimeLeft")->setText("Time:  " + std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
-		_uiBarsWindow->getChild("HadesFavor")->setText("HF: " + std::to_string(static_cast<int>(trunc(hf.getHadesFavor()))));
+		_uiBarsWindow->getChild("TimeLeft")->setText(std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
+		_uiBarsWindow->getChild("HadesFavor")->setText(std::to_string(static_cast<int>(trunc(hf.getHadesFavor()))));
 	}
 
 }
