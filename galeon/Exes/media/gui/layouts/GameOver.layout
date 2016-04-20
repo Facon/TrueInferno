@@ -5,7 +5,7 @@
         <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Window Type="OgreTray/StaticImage" Name="GameOver/BackGround" >
             <Property Name="Font" Value="FairChar-30" />
-            <Property Name="Text" Value="GALEON" />
+            <Property Name="Text" Value="TrueInferno" />
             <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
             <Window Type="OgreTray/Title" Name="GameOver/BackGround/" >
                 <Property Name="Font" Value="FairChar-30" />
