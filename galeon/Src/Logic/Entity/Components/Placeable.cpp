@@ -156,13 +156,12 @@ namespace Logic {
 		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...
 		if (_placeableType == Building)
 		{
-			if (getBuildingType() == Furnace) position.y -= _entity->getDimensions().y / 3;
-			else if (getBuildingType() == Refinery) position.y -= _entity->getDimensions().y / 2;
-			else if (_placeableType == Building) position.y -= _entity->getDimensions().y / 2;
+			if (getBuildingType() == Furnace) position.y = HEIGHT_ON_TILE + 0.6f;
+			else if (_placeableType == Building) position.y = HEIGHT_ON_TILE;
 		}
 		else if (_placeableType == SoulPath)
 		{
-			position.y -= 0.5f;
+			position.y = 0.6f;
 		}
 
 		PositionMessage m(position);
@@ -240,7 +239,23 @@ namespace Logic {
 		centerPosition /= _tiles.size();
 
 		// Añadimos cierta altura a la posición del Placeable para que parezca que está colocada encima o sobrevolando la Tile
-		centerPosition += Vector3(0, HEIGHT_ON_TILE + _entity->getDimensions().y / 2, 0);
+		float buildingHeightIncrement;
+
+		// @TODO Es necesario incluir aquí una distinción para todos los edificios que tengan un
+		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...
+		if (_placeableType == Building)
+		{
+			if (getBuildingType() == Furnace) buildingHeightIncrement = HEIGHT_ON_TILE + 0.3f;
+			else if (getBuildingType() == Refinery) buildingHeightIncrement = 0.5f;
+			else if (_placeableType == Building) buildingHeightIncrement = HEIGHT_ON_TILE;
+		}
+		else if (_placeableType == SoulPath)
+		{
+			buildingHeightIncrement = 0.3f;
+		}
+
+		float centerHeight = (showFloating) ? HEIGHT_ON_TILE + buildingHeightIncrement : 0.6f;
+		centerPosition += Vector3(0, centerHeight, 0);
 
 		// Move entity physically
 		_entity->setPosition(centerPosition);
