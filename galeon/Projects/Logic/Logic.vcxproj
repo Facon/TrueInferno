@@ -94,6 +94,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PowerConsumer.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PowerGenerator.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceConsumer.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceGatherer.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceProvider.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFinder.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFollower.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PowerConsumer.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PowerGenerator.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceConsumer.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceGatherer.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceProvider.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFinder.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFollower.h" />

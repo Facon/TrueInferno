@@ -469,5 +469,11 @@
     <ClInclude Include="..\..\Src\AI\LAAcceptOrRejectNewConsumer.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMResourceGatherer.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\SMResourceGathererData.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

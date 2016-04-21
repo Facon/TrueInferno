@@ -198,6 +198,8 @@
     <ClInclude Include="..\..\Src\AI\SMResourceDemanderData.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceExtractorData.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceExtractor.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceGatherer.h" />
+    <ClInclude Include="..\..\Src\AI\SMResourceGathererData.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceProvider.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceProviderData.h" />
     <ClInclude Include="..\..\Src\AI\SMResourceTransformer.h" />
