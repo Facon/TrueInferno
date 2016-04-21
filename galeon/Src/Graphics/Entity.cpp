@@ -28,12 +28,12 @@ Contiene la implementación de la clase que representa una entidad gráfica.
 
 namespace Graphics 
 {
-	CEntity::CEntity(const std::string &name, const std::string &mesh)
-		: _entity(0), _entityNode(0), _scene(0), _loaded(false),
-		  _meshDimensions(Vector3(100.f, 100.f, 100.f))
+	CEntity::CEntity(const std::string &name, const std::string &mesh, const Vector3 &meshDimensions)
+		: _entity(0), _entityNode(0), _scene(0), _loaded(false)
 	{
 		_name = name;
 		_mesh = mesh;
+		_meshDimensions = meshDimensions;
 
 	} // CEntity
 
@@ -272,8 +272,10 @@ namespace Graphics
 	void CEntity::setMaterialName(const std::string &materialName)
 	{
 		assert(_entityNode && "La entidad no ha sido cargada");
-		if (_entity)
-			_entity->getSubEntity(0)->setMaterialName(materialName);
+		if (_entity) {
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+				_entity->getSubEntity(i)->setMaterialName(materialName);
+		}
 
 	} // setMaterial
 	

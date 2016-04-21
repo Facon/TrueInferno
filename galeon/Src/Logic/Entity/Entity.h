@@ -287,6 +287,13 @@ namespace Logic
 		Vector3 getDimensions() const { return _dimensions; }
 
 		/**
+		Devuelve las dimensiones del modelo de la entidad.
+
+		@return Dimensiones del modelo de la entidad.
+		*/
+		Vector3 getMeshDimensions() const { return _meshDimensions; }
+
+		/**
 		Indica si la entidad se encuentra activa.
 
 		@return true si la entidad está activa.
@@ -377,6 +384,11 @@ namespace Logic
 		Dimensiones de la entidad.
 		*/
 		Vector3 _dimensions;
+
+		/**
+		Dimensiones del modelo de la entidad.
+		*/
+		Vector3 _meshDimensions = Vector3(100.f, 100.f, 100.f);
 
 		/**
 		Atributo que indica si la entidad es el jugador; por defecto

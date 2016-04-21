@@ -75,7 +75,7 @@ namespace Graphics
 		@param mesh Nombre del modelo que debe cargarse.
 		@param meshDimensions Dimensiones del modelo que debe cargarse.
 		*/
-		CEntity(const std::string &name, const std::string &mesh);
+		CEntity(const std::string &name, const std::string &mesh, const Vector3 &meshDimensions);
 
 		/**
 		Destructor de la aplicación.
