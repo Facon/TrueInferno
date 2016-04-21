@@ -200,7 +200,7 @@ namespace GUI
 
 	bool BuildingSelectionUI::trialReleased(const CEGUI::EventArgs& e)
 	{
-		changePopupLayout("UIBuildingSelectionPopupTrial.layout", "Trial of Souls", "Trial");
+		changePopupLayout("UIBuildingSelectionPopupTrial.layout", "Souls Trial", "Trial");
 		return true;
 	}
 
