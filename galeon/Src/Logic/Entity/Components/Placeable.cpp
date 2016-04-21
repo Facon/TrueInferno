@@ -157,6 +157,7 @@ namespace Logic {
 		if (_placeableType == Building)
 		{
 			if (getBuildingType() == Furnace) position.y -= _entity->getDimensions().y / 3;
+			else if (getBuildingType() == Refinery) position.y -= _entity->getDimensions().y / 2;
 			else if (_placeableType == Building) position.y -= _entity->getDimensions().y / 2;
 		}
 		else if (_placeableType == SoulPath)
