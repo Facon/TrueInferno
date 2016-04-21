@@ -151,9 +151,20 @@ namespace Logic {
 
 		// Cambiamos la altura a justo encima de la tile
 		Vector3& position = _entity->getPosition();
-		position.y = HEIGHT_ON_TILE;
-		PositionMessage m(position);
 
+		// @TODO Es necesario incluir aquí una distinción para todos los edificios que tengan un
+		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...
+		if (_placeableType == Building)
+		{
+			if (getBuildingType() == Furnace) position.y -= _entity->getDimensions().y / 3;
+			else if (_placeableType == Building) position.y -= _entity->getDimensions().y / 2;
+		}
+		else if (_placeableType == SoulPath)
+		{
+			position.y -= 0.5f;
+		}
+
+		PositionMessage m(position);
 		m.Dispatch(*_entity);
 
 		// Cambiamos el estado
@@ -228,7 +239,7 @@ namespace Logic {
 		centerPosition /= _tiles.size();
 
 		// Añadimos cierta altura a la posición del Placeable para que parezca que está colocada encima o sobrevolando la Tile
-		centerPosition += Vector3(0, (showFloating ? HEIGHT_FLOATING_OVER_TILE : HEIGHT_ON_TILE), 0);
+		centerPosition += Vector3(0, HEIGHT_ON_TILE + _entity->getDimensions().y / 2, 0);
 
 		// Move entity physically
 		_entity->setPosition(centerPosition);

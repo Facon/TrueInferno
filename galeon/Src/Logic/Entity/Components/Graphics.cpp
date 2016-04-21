@@ -76,13 +76,13 @@ namespace Logic
 
 		if(isStatic)
 		{
-			_graphicsEntity = new Graphics::CStaticEntity(_entity->getName(),_model);
+			_graphicsEntity = new Graphics::CStaticEntity(_entity->getName(), _model, _entity->getMeshDimensions());
 			if(!_scene->addStaticEntity((Graphics::CStaticEntity*)_graphicsEntity))
 				return 0;
 		}
 		else
 		{
-			_graphicsEntity = new Graphics::CEntity(_entity->getName(),_model);
+			_graphicsEntity = new Graphics::CEntity(_entity->getName(),_model, _entity->getMeshDimensions());
 			if(!_scene->addEntity(_graphicsEntity))
 				return 0;
 		}

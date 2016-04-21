@@ -28,7 +28,7 @@ namespace Logic
 
 	Graphics::CEntity* CAnimatedGraphics::createGraphicsEntity(const Map::CEntity *entityInfo)
 	{
-		_animatedGraphicsEntity = new Graphics::CAnimatedEntity(_entity->getName(),_model);
+		_animatedGraphicsEntity = new Graphics::CAnimatedEntity(_entity->getName(),_model, _entity->getMeshDimensions());
 		if(!_scene->addEntity(_animatedGraphicsEntity))
 			return 0;
 

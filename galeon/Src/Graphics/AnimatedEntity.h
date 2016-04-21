@@ -84,8 +84,8 @@ namespace Graphics
 		@param name Nombre de la entidad.
 		@param mesh Nombre del modelo que debe cargarse.
 		*/
-		CAnimatedEntity(const std::string &name, const std::string &mesh):
-					CEntity(name,mesh), _currentAnimation(0) {}
+		CAnimatedEntity(const std::string &name, const std::string &mesh, const Vector3 &meshDimensions):
+					CEntity(name,mesh,meshDimensions), _currentAnimation(0) {}
 
 		/**
 		Destructor de la aplicación.
