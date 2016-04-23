@@ -93,19 +93,19 @@ namespace GUI
 	void SideBarUI::release()
 	{
 		// Remove all events to avoid memory leaks
-		_uibuttonsWindow->getChildElement("CreateFurnace")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateRoad")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateResource1Building")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateResource2Building")->removeAllEvents();
-		//_uibuttonsWindow->getChildElement("CreateSoul")->removeAllEvents();
-		//_uibuttonsWindow->getChildElement("MoveSoul")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateEvilworks")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateRefinery")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("ClearTerrain")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateResearchLab")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateWarehouse")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateFurnace/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateRoad/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateResource1Building/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateResource2Building/Image/Button")->removeAllEvents();
+		//_uibuttonsWindow->getChildElement("CreateSoul/Image/Button")->removeAllEvents();
+		//_uibuttonsWindow->getChildElement("MoveSoul/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateEvilworks/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateRefinery/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("RepairBuilding/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("ClearTerrain/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateResearchLab/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateWarehouse/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreatePowerGenerator/Image/Button")->removeAllEvents();
 
 		_placeableEntity = nullptr;
 	}

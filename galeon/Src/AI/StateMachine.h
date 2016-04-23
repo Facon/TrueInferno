@@ -258,6 +258,7 @@ namespace AI
 				// Borra la condición
 				delete it2->first;
 			}
+
 			// Borra el vector
 			delete v;
 		}
