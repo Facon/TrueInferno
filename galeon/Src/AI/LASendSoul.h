@@ -4,14 +4,15 @@
 #include "LatentAction.h"
 #include "Server.h"
 #include "SoulTask.h"
-#include "Logic\Entity\Message.h"
+#include "Logic/Entity/Message.h"
+#include "Logic/Maps/EntityFactory.h"
 
 namespace AI {
 	class CLASendSoul : public CLatentAction {
 		RTTI_DECL;
 
 	public:
-		CLASendSoul(CEntity* entity) : CLatentAction(entity) {
+		CLASendSoul(CEntity* entity) : CLatentAction(entity), _newSouls() {
 			_task = nullptr;
 		}
 
@@ -20,6 +21,8 @@ namespace AI {
 				delete _task;
 				_task = nullptr;
 			}
+			
+			_newSouls.clear();
 		}
 
 		virtual bool HandleMessage(const SoulSenderMessage& msg);
