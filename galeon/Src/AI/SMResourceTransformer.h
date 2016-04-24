@@ -55,9 +55,9 @@ namespace AI {
 				_costRatio = 0;
 
 			// Creación de SM en base a los datos
-			int recountResourcesBeforeAsking = this->addNode(new CLARecountResources(_entity, _data, _resourceFrom));
+			int recountResourcesBeforeAsking = this->addNode(new CLARecountResources<CSMResourceTransformerData>(_entity, _data, _resourceFrom));
 			int gatherResources = this->addNode(new CLAAskAndWaitResources(_entity, _data, _resourceFrom, _period));
-			int recountResourcesBeforeTransforming = this->addNode(new CLARecountResources(_entity, _data, _resourceFrom));
+			int recountResourcesBeforeTransforming = this->addNode(new CLARecountResources<CSMResourceTransformerData>(_entity, _data, _resourceFrom));
 			int transformResources = this->addNode(new CLATransformResources(_entity, _data, _resourceFrom, _resourceInto, _transformRatio, _costResource, _costRatio));
 
 			this->addEdge(recountResourcesBeforeAsking, gatherResources, new CConditionFinished());

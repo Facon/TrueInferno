@@ -6,7 +6,7 @@
 #include "AI\Server.h"
 #include "AI\SMResourceGathererData.h"
 #include "AI\LARecountResources.h"
-#include "AI\LAAskAndWaitResources.h"
+#include "AI\LAAskResources.h"
 #include "AI\LatentAction.h"
 #include "AI\Condition.h"
 #include "Map\MapEntity.h"
@@ -15,11 +15,12 @@
 
 namespace AI {
 	/**
-	FSM que controla la lógica de la búsqueda cíclica de recursos.
+	FSM que realiza una búsqueda cíclica de recursos.
 
+	Por cada tipo de recurso almacenado:
 	- Cuenta los recursos de partida del recurso
 	- En base a la cantidad actual y límite de los recursos, solicita la máxima cantidad posible que no desborde dicha capacidad
-	*/ 
+	*/
 	class CSMResourceGatherer : public CStateMachine<CLatentAction, CSMResourceGathererData> {
 	public:
 		CSMResourceGatherer(CEntity* entity) : CStateMachine<CLatentAction, CSMResourceGathererData>(entity) {}
@@ -37,7 +38,7 @@ namespace AI {
 				while (std::getline(ss, item, ',')) {
 					if (item.size()>0){
 						ResourceType resourceType = ResourcesManager::parseResourceType(item);
-						_data.addGatheredResource(resourceType);
+						//_data.addGatheredResource(resourceType);
 						_gatheredResources.emplace(resourceType);
 					}
 				}
@@ -57,13 +58,13 @@ namespace AI {
 			// El primer recurso lo hacemos aparte
 			ResourceType firstResourceType = (*it);
 
-			// TODO
-			/*
-
-			// Creamos estados y la transición
-			int firstRecount = this->addNode(new CLARecountResources(_entity, _data, firstResourceType));
-			int ask = this->addNode(new CLAAskResources(_entity, _data, firstResourceType));
+			// Creamos estados y transición
+			int firstRecount = this->addNode(new CLARecountResources<CSMResourceGathererData>(_entity, _data, firstResourceType));
+			int ask = this->addNode(new CLAAskResources<CSMResourceGathererData>(_entity, _data, firstResourceType));
 			this->addEdge(firstRecount, ask, new CConditionFinished());
+
+			// Avanzamos el iterador de recursos
+			++it;
 
 			// Establecemos su fase de recuento como la inicial de la FSM
 			this->setInitialNode(firstRecount);
@@ -77,8 +78,8 @@ namespace AI {
 				int previousAsk = ask;
 
 				// Creamos los estados
-				int recount = this->addNode(new CLARecountResources(_entity, _data, resourceType));
-				ask = this->addNode(new CLAAskResources(_entity, _data, resourceType, _period));
+				int recount = this->addNode(new CLARecountResources<CSMResourceGathererData>(_entity, _data, resourceType));
+				ask = this->addNode(new CLAAskResources<CSMResourceGathererData>(_entity, _data, resourceType));
 
 				// Añadimos la transición entre la última fase del recurso anterior a la primera de éste
 				this->addEdge(previousAsk, recount, new CConditionFinished());
@@ -100,8 +101,6 @@ namespace AI {
 			this->addEdge(wait, firstRecount, new CConditionFinished());
 			
 			this->resetExecution();
-
-			*/
 
 			return true;
 		}

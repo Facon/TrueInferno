@@ -1,8 +1,6 @@
 #include "LARecountResources.h"
 
-#include "Logic\Entity\Message.h"
-#include "AI\SMEmptyTemplateData.h"
-
+/*
 namespace AI {
 	RTTI_IMPL(CLARecountResources, CLatentAction);
 	
@@ -17,7 +15,7 @@ namespace AI {
 
 		// En principio parece viable aceptar peticiones simultáneas. Si da problemas descomentar lo siguiente para evitarlas
 		/*if (_requestReceived)
-			return false;*/
+			return false;
 
 		_requestReceived = true;
 
@@ -55,3 +53,4 @@ namespace AI {
 	}
 
 }
+*/

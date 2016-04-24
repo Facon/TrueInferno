@@ -88,6 +88,7 @@
     <ClCompile Include="..\..\Src\AI\LAAcceptConsumptionChanges.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAcceptOrRejectNewConsumer.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAskAndWaitResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAAskResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAttachToGenerator.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAttendResourceBuildingRequest.cpp" />
     <ClCompile Include="..\..\Src\AI\LABurnSouls.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="..\..\Src\AI\LAAcceptConsumptionChanges.h" />
     <ClInclude Include="..\..\Src\AI\LAAcceptOrRejectNewConsumer.h" />
     <ClInclude Include="..\..\Src\AI\LAAskAndWaitResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAAskResources.h" />
     <ClInclude Include="..\..\Src\AI\LAAttachToGenerator.h" />
     <ClInclude Include="..\..\Src\AI\LAAttendResourceBuildingRequest.h" />
     <ClInclude Include="..\..\Src\AI\LABurnSouls.h" />

@@ -89,7 +89,7 @@ namespace AI {
 
 		// Controlamos que el nuevo valor no sobrepase los límites
 		if (aux < 0){
-			std::cout << "Discarded changing " << quantity << " max resources ecause current maximum is " << getMaxResources(type) << std::endl;
+			std::cout << "Discarded changing " << quantity << " max resources because current maximum is " << getMaxResources(type) << std::endl;
 			return false;
 		}
 
