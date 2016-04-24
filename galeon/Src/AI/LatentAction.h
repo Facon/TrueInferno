@@ -104,6 +104,9 @@ namespace AI
 
 		CLatentAction(CEntity* entity) : _entity(entity), _status(READY), _stopping(false), _name("") {};
 
+		virtual ~CLatentAction()
+		{};
+
 		/**
 		Establece la entidad que ejecuta la acción.
 		*/

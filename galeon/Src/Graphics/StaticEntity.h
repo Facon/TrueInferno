@@ -59,9 +59,10 @@ namespace Graphics
 
 		@param name Nombre de la entidad.
 		@param mesh Nombre del modelo que debe cargarse.
+		@param meshDimensions Dimensiones del modelo que debe cargarse.
 		*/
-		CStaticEntity(const std::string &name, const std::string &mesh):
-					CEntity(name,mesh) {}
+		CStaticEntity(const std::string &name, const std::string &mesh, const Vector3 &meshDimensions):
+					CEntity(name,mesh,meshDimensions) {}
 
 		/**
 		Destructor de la aplicación.

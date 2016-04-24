@@ -65,6 +65,9 @@ namespace Logic
 		if (entityInfo->hasAttribute("dimensions"))
 			_dimensions = entityInfo->getVector3Attribute("dimensions");
 
+		if (entityInfo->hasAttribute("mesh_dimensions"))
+			_meshDimensions = entityInfo->getVector3Attribute("mesh_dimensions");
+
 		//if (entityInfo->getName() == "Camera")
 		//	_isPlayer = true;
 
@@ -332,9 +335,8 @@ namespace Logic
 			orientation.getYaw().valueDegrees(),
 			orientation.getRoll().valueDegrees());
 
-		// @TODO _dimensions = Obtener dimensiones en función de la escala
-		// Valorar si deberíamos guardar también la escala junto con las dimensiones
-		_dimensions = scale * 100;
+		// Obtener dimensiones en función de la escala y las dimensiones de la malla
+		_dimensions = scale * _meshDimensions;
 	}
 
 	//---------------------------------------------------------
@@ -396,7 +398,7 @@ namespace Logic
 
 		// @TODO scale = Obtener escala en función de las dimensiones
 		// Valorar si deberíamos guardar también la escala junto con las dimensiones
-		scale = _dimensions / 100;
+		scale = _dimensions / _meshDimensions;
 
 		orientation = Math::getOrientationFromRadians(
 			Radian(_rotation.x), Radian(_rotation.y), Radian(_rotation.z));

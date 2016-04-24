@@ -42,7 +42,6 @@ namespace Logic {
 	CBuildingManager::~CBuildingManager()
 	{
 		assert(_instance);
-		_instance = 0;
 
 		// Liberamos la  estructura de datos para los edificios
 		for (auto it = _buildings.begin(); it != _buildings.end(); ++it)
@@ -57,8 +56,10 @@ namespace Logic {
 			delete it->second;
 			it->second = nullptr;
 		}
+
 		_buildings.clear();
 
+		_instance = nullptr;
 	} // ~CBuildingManager
 
 	//--------------------------------------------------------
@@ -182,6 +183,8 @@ namespace Logic {
 			// Si era el último de su tipo eliminamos el set
 			if (buildingsFromType->empty())
 				_buildings.erase(buildingType);
+
+			delete buildingsFromType;
 		}
 
 		//std::cout << "Building unregistered: " << building->getBuildingType() << std::endl;

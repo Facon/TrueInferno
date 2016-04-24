@@ -154,11 +154,11 @@ namespace GUI
 	void BuildingSelectionUI::release()
 	{
 		// Remove all events to avoid memory leaks
-		_uibuttonsWindow->getChildElement("UpgradeBuilding")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("DestroyBuilding")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("DisableBuilding")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CloseWindow")->removeAllEvents();
-		_uipopupWindow->getChildElement("CloseWindow")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("UpgradeBuilding/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("DestroyBuilding/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("DisableBuilding/Image/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CloseWindow/Image/Button")->removeAllEvents();
+		_uipopupWindow->getChildElement("CloseWindow/Button")->removeAllEvents();
 	}
 
 	void BuildingSelectionUI::activate()
@@ -200,7 +200,7 @@ namespace GUI
 
 	bool BuildingSelectionUI::trialReleased(const CEGUI::EventArgs& e)
 	{
-		changePopupLayout("UIBuildingSelectionPopupTrial.layout", "Trial of Souls", "Trial");
+		changePopupLayout("UIBuildingSelectionPopupTrial.layout", "Souls Trial", "Trial");
 		return true;
 	}
 

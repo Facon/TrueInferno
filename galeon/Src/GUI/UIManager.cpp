@@ -45,6 +45,7 @@ namespace GUI
 		_sideBarUI.release();
 		_eventUI.release();
 		_buildingSelectionUI.release();
+		_uiWindow->removeAllEvents();
 		_uiWindow->destroy();
 	}
 
