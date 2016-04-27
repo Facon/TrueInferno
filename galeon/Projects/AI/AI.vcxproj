@@ -124,6 +124,7 @@
     <ClCompile Include="..\..\Src\AI\LAGetTaskAndTarget.cpp" />
     <ClCompile Include="..\..\Src\AI\LASendSoul.cpp" />
     <ClCompile Include="..\..\Src\AI\LatentAction.cpp" />
+    <ClCompile Include="..\..\Src\AI\Manager\AIManager.cpp" />
     <ClCompile Include="..\..\Src\AI\micropather.cpp" />
     <ClCompile Include="..\..\Src\AI\Movement.cpp" />
     <ClCompile Include="..\..\Src\AI\Server.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="..\..\Src\AI\LAGetTaskAndTarget.h" />
     <ClInclude Include="..\..\Src\AI\LASendSoul.h" />
     <ClInclude Include="..\..\Src\AI\LatentAction.h" />
+    <ClInclude Include="..\..\Src\AI\Manager\AIManager.h" />
     <ClInclude Include="..\..\Src\AI\micropather.h" />
     <ClInclude Include="..\..\Src\AI\Movement.h" />
     <ClInclude Include="..\..\Src\AI\RequestTransportSoulTask.h" />

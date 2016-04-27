@@ -57,6 +57,9 @@
       <UniqueIdentifier>{28856eea-60f1-4c47-bbfc-e53218d10a1b}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{a21c1c16-1253-401a-b965-cb6d3a32a66b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\AI\Server.cpp">
@@ -214,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AI\LAAskResources.cpp">
       <Filter>Decision\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AI\Manager\AIManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -480,6 +486,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAAskResources.h">
       <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\Manager\AIManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

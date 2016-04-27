@@ -17,6 +17,7 @@ la gestión de la lógica del juego.
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Logic/Maps/Managers/WorkManager.h"
 #include "Logic/Maps/Managers/PowerManager.h"
+#include "AI/Manager/AIManager.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/SoulManager.h"
 
@@ -115,6 +116,10 @@ namespace Logic {
 		if (!Logic::CEventManager::Init())
 			return false;
 
+		// Inicializamos el gestor de IA.
+		if (!Logic::CAIManager::Init())
+			return false;
+
 		// Inicializamos el manager de la energía.
 		if (!Logic::CPowerManager::Init())
 			return false;
@@ -130,6 +135,8 @@ namespace Logic {
 		unLoadLevel();
 
 		Logic::CPowerManager::Release();
+
+		Logic::CAIManager::Release();
 
 		Logic::CEventManager::Release();
 
@@ -219,6 +226,8 @@ namespace Logic {
 
 		_map->tick(msecs);
 		Logic::CEventManager::getSingletonPtr()->tick(msecs);
+
+		Logic::CAIManager::getSingletonPtr()->tick(msecs);
 
 		Logic::CPowerManager::getSingletonPtr()->tick(msecs);
 	

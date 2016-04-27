@@ -492,6 +492,15 @@ bool CScriptManager::open() {
 	// print() en Lua.
 	luaopen_base(_lua);
 
+	// Abrimos la librería table
+	luaopen_table(_lua);
+
+	// Abrimos la librería math
+	luaopen_math(_lua);
+
+	// Abrimos la librería os
+	luaopen_os(_lua);
+
 	// Añadimos el namespace luabind (que es C++!)
 	luabind::open(_lua);
 
