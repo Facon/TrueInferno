@@ -1,60 +1,64 @@
 -- class 'God'
 
+if godTraitsIncluded == nil
+then
+	if loadFromCpp == nil
+	then
+		dofile("godTraits.lua")
+	else
+		dofile("../Src/Logic/Events/godTraits.lua")
+	end
+end
+
 God = {}
 function God:new (name)
 	local self = setmetatable({}, God)
 	
+	-- Nombre del dios
 	self.name = name
 	
-	self.generous = 0
-	self.clumsy = 0
-	self.crazy = 0
-	self.businessman = 0
-	self.aggressive = 0
-	self.cheater = 0
-	self.arrogant = 0
-	self.vengeful = 0
+	--[[
+	Lista de rasgos del dios. 
+	Los rasgos se indexan por nombre y tienen un valor entre 0 (nada marcado) y 1 (totalmente marcado). 
+	Inicialmente se asigna a cada rasgo la misma  cantidad fija.
+	Cada dios deberá sobreescribir los rasgos que interesen para definir su personalidad
+	--]]
+	self.traits = {}
+	
+	-- Inicializamos los rasgos a un valor por defecto bajo no nulo. Así se diferencia del caso de un dios que no queremos que presente un rasgo en absoluto.
+	for godTraitIndex,godTrait in pairs(godTraits)
+	do
+		self.traits[godTrait.name] = 0.2
+	end
 	
 	return self
 end
 
---[[
-function God:new (generous, clumsy, crazy, businessman, aggressive, cheater, arrogant)
-	self.generous = generous;
-	self.clumsy = clumsy;
-	self.crazy = crazy;
-	self.businessman = businessman;
-	self.aggressive = aggressive;
-	self.cheater = cheater;
-	self.arrogant = arrogant;
-end
---]]
+Hades = God:new("Hades")
+Hades.traits.crazy = 1
+Hades.traits.arrogant = 1
+Hades.traits.vengeful = 1
+Hades.traits.clumsy = 0
 
---Hades = God:new(0.1, 0.1, 0.5, 0.5, 1, 1, 1);
-Hades = God:new("Hades");
-Hades.crazy = 1;
-Hades.arrogant = 1;
-Hades.vengeful = 1;
+Lucifer = God:new("Lucifer")
+Lucifer.traits.aggressive = 1
+Lucifer.traits.arrogant = 1
+Lucifer.traits.vengeful = 1
 
-Lucifer = God:new("Lucifer");
-Lucifer.aggressive  = 1;
-Lucifer.arrogant = 1;
-Lucifer.vengeful = 1;
+Osiris = God:new("Osiris")
+Osiris.traits.businessman = 1
+Osiris.traits.generous = 1
+Osiris.traits.cheater = 1
 
-Osiris = God:new("Osiris");
-Osiris.businessman = 1;
-Osiris.generous = 1;
-Osiris.cheater = 1;
+Hel = God:new("Hel")
+Hel.traits.crazy = 1
+Hel.traits.arrogant = 1
+Hel.traits.generous = 1
 
-Hel = God:new("Hel");
-Hel.crazy = 1;
-Hel.arrogant = 1;
-Hel.generous = 1;
-
-Cthulhu = God:new("Cthulhu");
-Cthulhu.generous = 1;
-Cthulhu.clumsy = 1;
-Cthulhu.crazy = 1;
+Cthulhu = God:new("Cthulhu")
+Cthulhu.traits.generous = 1
+Cthulhu.traits.clumsy = 1
+Cthulhu.traits.crazy = 1
 
 gods = 
 {
@@ -66,13 +70,15 @@ gods =
 }
 
 --[[
-for godIndex,god in pairs(gods) 
+for index,god in pairs(gods) 
 do 
-	for traitName,traitValue in pairs(god) 
+	print(index)
+	print("name = " .. god.name)
+	for name,value in pairs(god.traits) 
 	do
-		print(traitName,traitValue) 
+		print(name .. " = " .. value)
 	end
 end
 --]]
 
-print ("gods loaded!")
+print (table.getn(gods) .. " gods loaded!")

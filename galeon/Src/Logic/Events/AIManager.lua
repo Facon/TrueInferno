@@ -2,16 +2,17 @@
 
 -- @author Álvaro Valera
 
+-- Clase AIManager
+class 'AIManager'
+
+-- Configuración de inclusión de ficheros. Cargando desde C++ las rutas son relativas a una ruta definida en el ScriptManager
+loadFromCpp = 1
+
+-- TODO usar require para no cargar módulos duplicados
+-- Carga de módulos desde la ruta base definida en C++
 dofile("../Src/Logic/Events/gods.lua")
 dofile("../Src/Logic/Events/events.lua")
 dofile("../Src/Logic/Events/eviluators.lua")
-
---dofile("gods.lua")
---dofile("events.lua")
---dofile("eviluators.lua")
-
--- Clase AIManager
-class 'AIManager'
 
 --AIManager = {}
 function AIManager:__init()
@@ -22,49 +23,41 @@ function AIManager:__init()
 	math.randomseed( os.time() )
 
 	-- Tiempo (ms) hasta el primer evento aleatorio
-	timeUntilFirstEvent = 1000
+	self.timeUntilFirstEvent = 1000
 
 	-- Tiempo (ms) mínimo entre eventos aleatorios
-	minTimeBetweenEvents = 2000
+	self.minTimeBetweenEvents = 2000
 
 	-- Tiempo (ms) máximo entre eventos aleatorios
-	maxTimeBetweenEvents = 3000
+	self.maxTimeBetweenEvents = 3000
 	
 	-- Tiempo (ms) que debe transcurrir hasta el próximo evento aleatorio. Se inicializa al valor de espera para el primer evento
-	timeUntilNextEvent = timeUntilFirstEvent
+	self.timeUntilNextEvent = self.timeUntilFirstEvent
 
 	-- Combinaciones de evento-dios
-	godEvents = {}
+	self.godEvents = {}
 	for godIndex,god in pairs(gods) 
 	do
 		for eventIndex,event in pairs(events) 
 		do
 			local godEvent = {god = god, event = event}
-			table.insert(godEvents, godEvent)
+			table.insert(self.godEvents, godEvent)
 		end
 	end
 	
-end
-
-function AIManager:tick(msecs)
-	-- Reducimos el tiempo para el próximo evento
-	timeUntilNextEvent = timeUntilNextEvent - msecs
-
-	-- Si toca lanzar
-	if timeUntilNextEvent <= 0
-	then
-		-- TODO Evaluar todos los eventos y decidir cuál se lanza
-	
-		-- Escogemos un evento aleatorio
-		local randomIndex = math.random(table.getn(godEvents))
-		local randomEvent = godEvents[randomIndex]
-	
-		print("Random event! " .. randomEvent.event.name .. " - " .. randomEvent.god.name)
-		
-		-- Reiniciamos el tiempo hasta el próximo evento de forma aleatoria
-		timeUntilNextEvent = math.random(minTimeBetweenEvents, maxTimeBetweenEvents)
+	-- Inicializamos los tiempos desde el último evento lanzado por cada tipo. Se deja preparado para cuando se lance evento
+	self.timeSinceLastEventType = {}
+	for eventIndex,event in pairs(events) 
+	do
+		self.timeSinceLastEventType[event.name] = self.timeUntilFirstEvent
 	end
-	
+		
+	-- Inicializamos los tiempos desde el último evento lanzado por cada dios. Se deja preparado para cuando se lance evento
+	self.timeSinceLastGod = {}
+	for godIndex,god in pairs(gods) 
+	do
+		self.timeSinceLastGod[god.name] = self.timeUntilFirstEvent
+	end
 end
 
 -- Función global para llamar al tick del objeto aiManager
@@ -72,5 +65,66 @@ function tickAIManager(msecs)
 	aiManager:tick(msecs);
 end
 
+function AIManager:tick(msecs)
+	-- Reducimos el tiempo para el próximo evento
+	self.timeUntilNextEvent = self.timeUntilNextEvent - msecs
+
+	-- Si toca lanzar
+	if self.timeUntilNextEvent <= 0
+	then
+		-- Seleccionamos un evento de dios a lanzar
+		local chosenGodEvent = self:chooseGodEvent()
+	
+		print("Chosen event! " .. chosenGodEvent.event.name .. " - " .. chosenGodEvent.god.name)
+
+		-- TODO Lanzar!
+
+		-- Reiniciamos el tiempo que pasará hasta el próximo evento de forma aleatoria
+		self.timeUntilNextEvent = math.random(self.minTimeBetweenEvents, self.maxTimeBetweenEvents)
+		
+		-- Actualizamos los tiempos desde el último evento lanzado por cada tipo. Se deja preparado para el siguiente lanzamiento
+		self.timeSinceLastEventType[chosenGodEvent.event.name] = 0
+		for eventIndex,event in pairs(events) 
+		do
+			self.timeSinceLastEventType[event.name] = self.timeSinceLastEventType[event.name] + self.timeUntilNextEvent
+		end
+					
+		-- Actualizamos los tiempos desde el último evento lanzado por cada dios. Se deja preparado para el siguiente lanzamiento
+		self.timeSinceLastGod[chosenGodEvent.god.name] = 0
+		for godIndex,god in pairs(gods) 
+		do
+			self.timeSinceLastGod[god.name] = self.timeSinceLastGod[god.name] + self.timeUntilNextEvent
+		end
+	end
+end
+
+function AIManager:chooseGodEvent()
+	local bestScore = 0
+	local bestGodEvent = nil
+
+	for godEventIndex,godEvent in pairs(self.godEvents) 
+	do
+		local score = 0
+		for eviluatorIndex,weightedEviluator in pairs(weightedEviluators)
+		do
+			score = score + weightedEviluator.weight * weightedEviluator.eviluator.evaluate(godEvent)
+		end
+
+		print("Event! " .. godEvent.event.name .. " - " .. godEvent.god.name .. " -> " .. score)
+		
+		-- Actualización del mejor encontrado
+		if score > bestScore
+		then
+			bestScore = score
+			bestGodEvent = godEvent
+		end
+	end
+	
+	return bestGodEvent
+end
+
 -- Creación del AIManager global
 aiManager = AIManager();
+
+-- TODO TEST
+aiManager:tick(5000)
