@@ -84,6 +84,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Logic\BuildingManager.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Billboard.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\BuildingSelection.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\CameraController.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\DamageTrigger.cpp" />
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\BuildingManager.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Billboard.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\BuildingSelection.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\CameraController.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.h" />
