@@ -126,6 +126,7 @@ namespace Logic {
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
 			[
 				luabind::class_<CAIManager>("CAIManager")
+				.def("getGlobalTime", &CAIManager::getGlobalTime)
 				.scope
 				[
 					luabind::def("getSingletonPtr", &CAIManager::getSingletonPtr)
@@ -135,6 +136,10 @@ namespace Logic {
 	} // luaRegister
 
 	//--------------------------------------------------------
+
+	unsigned int CAIManager::getGlobalTime(){
+		return Application::CGaleonApplication::getSingletonPtr()->getAppTime();
+	}
 
 	bool CAIManager::HandleMessage(const Message& msg)
 	{

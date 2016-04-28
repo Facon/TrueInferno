@@ -65,6 +65,7 @@ function tickAIManager(msecs)
 	aiManager:tick(msecs);
 end
 
+-- Tick periódico con que el AIManager es invocado desde C++
 function AIManager:tick(msecs)
 	-- Reducimos el tiempo para el próximo evento
 	self.timeUntilNextEvent = self.timeUntilNextEvent - msecs
@@ -72,13 +73,21 @@ function AIManager:tick(msecs)
 	-- Si toca lanzar
 	if self.timeUntilNextEvent <= 0
 	then
-		-- Seleccionamos un evento de dios a lanzar
+		-- Seleccionamos un evento-dios a lanzar
 		local chosenGodEvent = self:chooseGodEvent()
 	
 		print("Chosen event! " .. chosenGodEvent.event.name .. " - " .. chosenGodEvent.god.name)
 
-		-- TODO Lanzar!
+		-- Lanzamos el evento
+		chosenGodEvent.event.throw()
 
+		-- Se actualizan los contadores de tiempo en función del evento-dios lanzado
+		self:updateTimeCounters(chosenGodEvent)
+	end
+end
+
+-- Función de actualización de los contadores de tiempo
+function AIManager:updateTimeCounters(chosenGodEvent)
 		-- Reiniciamos el tiempo que pasará hasta el próximo evento de forma aleatoria
 		self.timeUntilNextEvent = math.random(self.minTimeBetweenEvents, self.maxTimeBetweenEvents)
 		
@@ -95,19 +104,28 @@ function AIManager:tick(msecs)
 		do
 			self.timeSinceLastGod[god.name] = self.timeSinceLastGod[god.name] + self.timeUntilNextEvent
 		end
-	end
 end
 
+-- Función que determina el evento-dios a lanzar
 function AIManager:chooseGodEvent()
+	-- Buscamos el evento-dios con mejor score
 	local bestScore = 0
 	local bestGodEvent = nil
 
+	-- Para cada evento-dios
 	for godEventIndex,godEvent in pairs(self.godEvents) 
 	do
+		-- Inicializamos su score
 		local score = 0
+		
+		-- Acumulamos el score de cada eviluator
 		for eviluatorIndex,weightedEviluator in pairs(weightedEviluators)
 		do
-			score = score + weightedEviluator.weight * weightedEviluator.eviluator.evaluate(godEvent)
+			-- Sólo aplicamos los eviluators con peso
+			if(weightedEviluator.weight > 0)
+			then
+				score = score + weightedEviluator.weight * weightedEviluator.eviluator.evaluate(godEvent)
+			end
 		end
 
 		print("Event! " .. godEvent.event.name .. " - " .. godEvent.god.name .. " -> " .. score)
@@ -126,5 +144,5 @@ end
 -- Creación del AIManager global
 aiManager = AIManager();
 
--- TODO TEST
-aiManager:tick(5000)
+-- DEBUG Se fuerza el primer tick para poder ver la traza del error con breakpoint en CAIManager::open() de C++
+--aiManager:tick(aiManager.timeUntilFirstEvent)

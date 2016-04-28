@@ -53,8 +53,8 @@ namespace Logic
 		/**
 		Constructores.
 		*/
-		CSoulsSpeedReductionEvent(unsigned long time, bool restore = false) :
-			CEvent(INFO, time), _restore(restore) {};
+		CSoulsSpeedReductionEvent(unsigned long time, bool absoluteTime = true, bool restore = false) :
+			CEvent(INFO, time, absoluteTime), _restore(restore) {};
 
 		CSoulsSpeedReductionEvent(ConditionTriggerType condEventType, bool restore = false, bool dummy = true) :
 			CEvent(INFO, condEventType), _restore(restore) {};

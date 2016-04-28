@@ -18,6 +18,8 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 #ifndef __Logic_Event_H
 #define __Logic_Event_H
 
+#include "Application/GaleonApplication.h"
+
 // Predeclaración de clases para ahorrar tiempo de compilación.
 namespace Logic
 {
@@ -94,9 +96,30 @@ namespace Logic
 		/**
 		Constructores.
 		*/
-		CEvent(EventType type, unsigned long time) :
-			_type(type), _trigger(TIME), _time(time) {}
 
+		/**
+		Construye un evento con trigger basado en tiempo.
+		@param type Tipo del evento.
+		@param time En función del parámetro absoluteTime, instante temporal absoluto en el que se lanzará el evento 
+		o relativo al instante actual.
+		@absoluteTime Flag a true para lanzar el evento en un instante temporal absoluto o relativo al instante actual.
+		*/
+		CEvent(EventType type, unsigned long time, bool absoluteTime = true) :
+			_type(type), _trigger(TIME) {
+			// Si el tiempo es absoluto
+			if (absoluteTime)
+				// El instante de lanzamiento es el proporcionado
+				_time = time;
+
+			// Si no
+			else // !absoluteTime
+				// El instante de lanzamiento es relativo al instante actual
+				_time = Application::CGaleonApplication::getSingletonPtr()->getAppTime() + time;
+		}
+
+		/**
+		Construye un evento con trigger basado en condición.
+		*/
 		CEvent(EventType type, ConditionTriggerType conditionType) :
 			_type(type), _trigger(CONDITION), _conditionType(conditionType) {}
 

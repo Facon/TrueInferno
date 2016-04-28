@@ -52,7 +52,7 @@ namespace Logic
 		/**
 		Constructores.
 		*/
-		CBuildingDestructionEvent(unsigned long time) : CEvent(INFO, time) {};
+		CBuildingDestructionEvent(unsigned long time, bool absoluteTime = true) : CEvent(INFO, time, absoluteTime) {};
 		CBuildingDestructionEvent(ConditionTriggerType condEventType, bool dummy = true) : CEvent(INFO, condEventType) {};
 
 		/**

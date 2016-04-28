@@ -34,6 +34,8 @@ function God:new (name)
 	return self
 end
 
+-- Definición de los dioses y sus correspondientes atributos (ver godTraits.lua)
+-- TODO Convendría normalizar rasgos en cada dios para evitar que los dioses con muchos rasgos tengan preferencia
 Hades = God:new("Hades")
 Hades.traits.crazy = 1
 Hades.traits.arrogant = 1
@@ -69,6 +71,7 @@ gods =
 	Cthulhu,
 }
 
+-- DEBUG
 --[[
 for index,god in pairs(gods) 
 do 

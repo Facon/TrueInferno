@@ -16,6 +16,9 @@ function Event:new (name)
 	
 	-- Nombre del evento
 	self.name = name
+
+	-- Función para lanzar el evento en C++. Debe ser implementada por cada evento
+	self.throw = function() end
 	
 	-- Fases del juego en las que aplica
 	self.gameStages = 
@@ -57,11 +60,19 @@ BuildingDestructionEvent = Event:new("BuildingDestructionEvent")
 BuildingDestructionEvent.good = 0
 BuildingDestructionEvent.evil = 1.0
 BuildingDestructionEvent.godTraits.aggressive = 1.0
+BuildingDestructionEvent.throw = function()
+	local timeToLaunch = CAIManager.getSingletonPtr():getGlobalTime()
+	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(timeToLaunch));
+end
 
 SoulsSpeedReductionEvent = Event:new("SoulsSpeedReductionEvent")
 SoulsSpeedReductionEvent.good = 0
 SoulsSpeedReductionEvent.evil = 0.8
 SoulsSpeedReductionEvent.godTraits.cheater = 1.0
+SoulsSpeedReductionEvent.throw = function()
+	local timeToLaunch = CAIManager.getSingletonPtr():getGlobalTime()
+	CEventManager.getSingletonPtr():addTimeEvent(CSoulsSpeedReductionEvent(timeToLaunch, false));
+end
 
 -- CResearchChallengeEvent
 -- CResourceDemandEvent
@@ -77,6 +88,7 @@ events =
 	SoulsSpeedReductionEvent,
 }
 
+-- DEBUG
 --[[
 for eventIndex,event in pairs(events) 
 do 
