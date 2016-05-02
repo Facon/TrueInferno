@@ -231,6 +231,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\BuildingSelection.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceGatherer.cpp" />
+    <ClCompile Include="..\..\Src\Logic\SoulsTrialManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -436,6 +439,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceGatherer.h">
       <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\SoulsTrialManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

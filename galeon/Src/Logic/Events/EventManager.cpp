@@ -168,7 +168,14 @@ namespace Logic {
 			eventsList.pop_front();
 			_conditionEvents[conditionTriggerType] = eventsList;
 
-			return conditionEvent->launch();
+			bool launch = conditionEvent->launch();
+
+			if (launch) {
+				delete conditionEvent;
+				conditionEvent = NULL;
+			}
+
+			return launch;
 		}
 
 		return false;

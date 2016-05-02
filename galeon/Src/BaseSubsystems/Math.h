@@ -20,6 +20,8 @@ Se ofrecen también una serie de funciones auxiliares.
 #ifndef __BaseSubsystems_Math_H
 #define __BaseSubsystems_Math_H
 
+#include <stdlib.h>
+
 // Includes de Ogre donde se definen los tipos
 #include <OgreVector2.h>
 #include <OgreVector3.h>
@@ -230,7 +232,21 @@ namespace Math
 	static V lerp(const V& v0, const V& v1, const T& t)
 	{
 		return Ogre::Math::lerp<V, T>(v0, v1, t);
-	}
+
+	} // lerp
+	
+	/**
+	Número entero aleatorio dentro del rango dado.
+
+	@param min Valor mínimo del rango.
+	@param max Valor máximo del rango.
+	@return Número aleatorio entre [min, max].
+	*/
+	static unsigned int random(const unsigned int min, const unsigned int max)
+	{
+		return min + (rand() % (max - min));
+
+	} // random
 
 } // namespace Math
 

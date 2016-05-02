@@ -16,6 +16,12 @@ Contiene la declaración del gestor de almas.
 #ifndef __SOUL_MANAGER_H
 #define __SOUL_MANAGER_H
 
+#include <set>
+#include <map>
+
+#include "Logic/Entity/Components/Placeable.h"
+#include "Logic/Entity/Components/Soul.h"
+
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
 {
@@ -46,14 +52,12 @@ namespace Logic
 	public:
 		/**
 		Devuelve la única instancia de la clase.
-
 		@return Puntero a la instancia de la clase.
 		*/
 		static CSoulManager *getSingletonPtr() { return _instance; }
 
 		/**
 		Inicializa la instancia y los recursos estáticos.
-
 		@return true si la inicialización se hizo correctamente.
 		*/
 		static bool Init();
@@ -63,6 +67,28 @@ namespace Logic
 		Debe llamarse al finalizar la aplicación.
 		*/
 		static void Release();
+
+		/**
+		Registra un trabajador en el índice.
+		Hay que llamar a unregisterWorker() cuando el trabajador vaya a
+		destruirse o a changeWorkerBuilding() si va a cambiar de edificio.
+		*/
+		void registerWorker(CSoul *worker, CPlaceable *building);
+
+		/**
+		Elimina un trabajador del registro.
+		*/
+		void unregisterWorker(CSoul *worker);
+
+		/**
+		Asigna un trabajador previamente registrado a otro edificio.
+		*/
+		void changeWorkerBuilding(CSoul *worker, CPlaceable *newBuilding);
+
+		/**
+		Devuelve el conjunto de trabajadores de un edificio.
+		*/
+		std::set<CSoul*>* getBuildingWorkers(CPlaceable *building);
 
 		/**
 		Devuelve la velocidad de movimiento de las almas.
@@ -125,6 +151,13 @@ namespace Logic
 		Única instancia de la clase.
 		*/
 		static CSoulManager *_instance;
+
+		/**
+		Índice que contiene la referencia a cada uno de los trabajadores
+		del juego agrupados por el edificio en el que trabajan.
+		Se almacenan punteros a sus correspondientes componentes CSoul.
+		*/
+		std::map<CPlaceable*, std::set<CSoul*>*> _workers;
 
 	}; // class CSoulManager
 
