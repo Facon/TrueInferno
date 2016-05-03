@@ -127,9 +127,13 @@ namespace Logic {
 	
 	bool CEventManager::addTimeEvent(CEvent* ev)
 	{
-		if (ev->getEventTrigger() != CEvent::EventTrigger::TIME ||
-				ev->getTime() < Application::CGaleonApplication::getSingletonPtr()->getAppTime())
+		if (ev->getEventTrigger() != CEvent::EventTrigger::TIME)
 			return false;
+		
+		if (ev->getTime() < Application::CGaleonApplication::getSingletonPtr()->getAppTime()){
+			assert(false && "Event to be thrown in the past!");
+			return false;
+		}
 
 		unsigned long eventTime = ev->getTime();
 		auto it = _timeEvents.begin();
@@ -225,7 +229,7 @@ namespace Logic {
 		while (!_timeEvents.empty())
 		{
 			CEvent* ev = _timeEvents.front();
-			_timeEvents.erase(_timeEvents.begin());
+			_timeEvents.erase(_timeEvents.begin()); // TODO Revisar si no estamos borrando por duplicado con esto y el delete!
 
 			delete ev;
 			ev = NULL;
