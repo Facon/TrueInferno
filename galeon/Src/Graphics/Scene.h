@@ -32,6 +32,7 @@ namespace Ogre
 	class SceneManager;
 	class StaticGeometry;
 	class Light;
+	class BillboardSet;
 }
 namespace Graphics 
 {
@@ -140,7 +141,7 @@ namespace Graphics
 		*/
 		void removeStaticEntity(CStaticEntity* entity);
 
-		
+		Ogre::BillboardSet* createBillboardSet(CEntity* entity, const std::string& name);
 
 	protected:
 
