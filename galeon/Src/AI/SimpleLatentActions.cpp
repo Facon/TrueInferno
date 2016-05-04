@@ -1,6 +1,6 @@
 #include "SimpleLatentActions.h"
 
-#include "Application/BaseApplication.h"
+#include "Logic/TimeManager.h"
 
 #include "StateMachine.h"
 
@@ -39,7 +39,7 @@ namespace AI
 		// para sacar el timer de la aplicación y usar su método 
 		// getMilliseconds.
 
-		unsigned int currentTime = Application::CBaseApplication::getSingletonPtr()->getAppTime();
+		unsigned int currentTime = Logic::TimeManager::getSingletonPtr()->getElapsedTime();
 		_endingTime = currentTime + _time;
 		return RUNNING; 
 	}
@@ -73,7 +73,7 @@ namespace AI
 		// la acción tendrá que pasar a un estado de terminado con éxito o
 		// quedarse en el mismo estado en ejecución.
 
-		unsigned int currentTime = Application::CBaseApplication::getSingletonPtr()->getAppTime();
+		unsigned int currentTime = Logic::TimeManager::getSingletonPtr()->getElapsedTime();
 		return (currentTime > _endingTime) ? SUCCESS : RUNNING;
 	}
 

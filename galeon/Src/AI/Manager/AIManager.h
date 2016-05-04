@@ -94,7 +94,7 @@ namespace Logic
 
 		@return Tiempo (ms) que la aplicación lleva activa.
 		*/
-		unsigned int getGlobalTime();
+		long getGlobalTime() const;
 
 		// Manejo de mensajes, tiene que manejar todos los tipos de mensajes sin excepción.
 		bool HandleMessage(const Message& msg);

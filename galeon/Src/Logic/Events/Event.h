@@ -18,7 +18,7 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 #ifndef __Logic_Event_H
 #define __Logic_Event_H
 
-#include "Application/GaleonApplication.h"
+#include "Logic/TimeManager.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación.
 namespace Logic
@@ -114,7 +114,7 @@ namespace Logic
 			// Si no
 			else // !absoluteTime
 				// El instante de lanzamiento es relativo al instante actual
-				_time = Application::CGaleonApplication::getSingletonPtr()->getAppTime() + time;
+				_time = Logic::TimeManager::getSingletonPtr()->getElapsedTime() + time;
 		}
 
 		/**

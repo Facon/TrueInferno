@@ -23,14 +23,14 @@ function AIManager:__init()
 	math.randomseed( os.time() )
 
 	-- Tiempo (ms) hasta el primer evento aleatorio
-	self.timeUntilFirstEvent = 1000
+	self.timeUntilFirstEvent = 15000
 
 	-- Tiempo (ms) mínimo entre eventos aleatorios
-	self.minTimeBetweenEvents = 2000
+	self.minTimeBetweenEvents = 15000
 
 	-- Tiempo (ms) máximo entre eventos aleatorios
-	self.maxTimeBetweenEvents = 3000
-	
+	self.maxTimeBetweenEvents = 15000
+
 	-- Tiempo (ms) que debe transcurrir hasta el próximo evento aleatorio. Se inicializa al valor de espera para el primer evento
 	self.timeUntilNextEvent = self.timeUntilFirstEvent
 
@@ -128,7 +128,7 @@ function AIManager:chooseGodEvent()
 			end
 		end
 
-		print("Event! " .. godEvent.event.name .. " - " .. godEvent.god.name .. " -> " .. score)
+		--print("Event! " .. godEvent.event.name .. " - " .. godEvent.god.name .. " -> " .. score)
 		
 		-- Actualización del mejor encontrado
 		if score > bestScore

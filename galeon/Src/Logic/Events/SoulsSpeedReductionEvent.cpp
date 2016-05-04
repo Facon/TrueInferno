@@ -69,7 +69,7 @@ namespace Logic {
 
 		// Crear el evento opuesto para restablecer los valores alterados
 		CEventManager::getSingletonPtr()->addTimeEvent(
-			new CSoulsSpeedReductionEvent(_time + 10 * 1000, true));
+			new CSoulsSpeedReductionEvent(_time + 10 * 1000, true, true));
 
 	} // apply
 

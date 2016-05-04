@@ -1,6 +1,8 @@
 #ifndef TIMEMANAGER_H_
 #define TIMEMANAGER_H_
 
+#include <algorithm>
+
 namespace Logic
 {
 	class TimeManager
@@ -8,7 +10,10 @@ namespace Logic
 	protected:
 		static TimeManager _instance;
 
+		/** Tiempo (ms) transcurrido */
 		long _time;
+
+		/** Flag a true si el tiempo está pausado */
 		bool _pause;
 
 	private:
@@ -21,8 +26,13 @@ namespace Logic
 		static TimeManager* getSingletonPtr()
 		{ return &_instance; }
 
-		long getTime() const
+		/** Devuelve el tiempo (ms) transcurrido */
+		long getElapsedTime() const
 		{ return _time; }
+
+		/** Devuelve el tiempo (ms) restante */
+		long getRemainingTime() const
+		{ return (_maxRoundTime - _time); }
 
 		bool getPause() const
 		{ return _pause; }
@@ -35,7 +45,7 @@ namespace Logic
 
 	private:
 		/** Tiempo (ms) inicial */
-		static const unsigned long long _maxTime; // 2 minutos
+		static const long _maxRoundTime; // 2 minutos
 	};
 }
 

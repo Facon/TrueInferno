@@ -21,7 +21,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "SoulsSpeedReductionEvent.h"
 #include "TutorialEvent.h"
 
-#include "Application/GaleonApplication.h"
+#include "Logic/TimeManager.h"
 #include "BaseSubsystems/ScriptManager.h"
 #include "Logic/Entity/Message.h"
 
@@ -130,7 +130,7 @@ namespace Logic {
 		if (ev->getEventTrigger() != CEvent::EventTrigger::TIME)
 			return false;
 		
-		if (ev->getTime() < Application::CGaleonApplication::getSingletonPtr()->getAppTime()){
+		if (ev->getTime() < Logic::TimeManager::getSingletonPtr()->getElapsedTime()){
 			assert(false && "Event to be thrown in the past!");
 			return false;
 		}

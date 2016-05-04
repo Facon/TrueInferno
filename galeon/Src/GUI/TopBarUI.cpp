@@ -52,7 +52,7 @@ namespace GUI
 		Logic::TimeManager& tm = Logic::TimeManager::getSingleton();
 		tm.tick(msecs);
 
-		float total_seconds = tm.getTime() / 1000.0f;
+		float total_seconds = tm.getRemainingTime() / 1000.0f;
 		unsigned int minutes = static_cast<unsigned int>(trunc(total_seconds / 60.0f));
 		unsigned int seconds = static_cast<unsigned int>(((total_seconds / 60.0f) - minutes) * 60.0f);
 

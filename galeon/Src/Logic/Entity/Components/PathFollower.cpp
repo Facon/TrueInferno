@@ -3,9 +3,9 @@
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Message.h"
 #include "Logic/SoulManager.h"
-#include "Application/GaleonApplication.h"
-#include <vector>
+#include "Logic/TimeManager.h"
 #include "Map/MapEntity.h"
+#include <vector>
 
 namespace Logic
 {
@@ -65,14 +65,14 @@ namespace Logic
 			// TODO Mirar como hacer la rotación sin usar LookAt
 			//this.transform.LookAt(targetPosition);
 			
-			_startTime = Application::CGaleonApplication::getSingletonPtr()->getAppTime();
+			_startTime = Logic::TimeManager::getSingletonPtr()->getElapsedTime();
 			_journeyLength = _startPosition.distance(_targetPosition);
 		}
 
 		if (_moving)
 		{
 			// Lerp
-			unsigned int appTime = Application::CGaleonApplication::getSingletonPtr()->getAppTime();
+			unsigned int appTime = Logic::TimeManager::getSingletonPtr()->getElapsedTime();
 			float distCovered = ((appTime - _startTime) / 1000.0f) * CSoulManager::getSingletonPtr()->getMovementSpeed(); // Dividido entre 1000.0f para pasarlo a segundos
 			float fracJourney = distCovered / _journeyLength;
 			_entity->setPosition(Math::lerp<Vector3, float>(_startPosition, _targetPosition, fracJourney));

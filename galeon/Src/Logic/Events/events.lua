@@ -61,7 +61,7 @@ BuildingDestructionEvent.good = 0
 BuildingDestructionEvent.evil = 1.0
 BuildingDestructionEvent.godTraits.aggressive = 1.0
 BuildingDestructionEvent.throw = function()
-	local timeToLaunch = CAIManager.getSingletonPtr():getGlobalTime()
+	local timeToLaunch = CAIManager.getSingletonPtr():getGlobalTime() + 100
 	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(timeToLaunch));
 end
 
@@ -70,8 +70,8 @@ SoulsSpeedReductionEvent.good = 0
 SoulsSpeedReductionEvent.evil = 0.8
 SoulsSpeedReductionEvent.godTraits.cheater = 1.0
 SoulsSpeedReductionEvent.throw = function()
-	local timeToLaunch = CAIManager.getSingletonPtr():getGlobalTime()
-	CEventManager.getSingletonPtr():addTimeEvent(CSoulsSpeedReductionEvent(timeToLaunch, false));
+	local timeToLaunch = CAIManager.getSingletonPtr():getGlobalTime() + 100
+	CEventManager.getSingletonPtr():addTimeEvent(CSoulsSpeedReductionEvent(timeToLaunch, true));
 end
 
 -- CResearchChallengeEvent

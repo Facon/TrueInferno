@@ -17,8 +17,7 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 
 #include "Event.h"
 
-#include "Application/GaleonApplication.h"
-
+#include "Logic/TimeManager.h"
 #include "BaseSubsystems/ScriptManager.h"
 
 #include <iostream>
@@ -59,7 +58,7 @@ namespace Logic {
 		// va por delante tantos segundos como se tarde en cargar la aplicación. Habrá que
 		// cambiar la implementación del TimeManager porque ahora mismo solo contiene el
 		// tiempo decreciente.
-		return (_trigger == TIME && _time <= Application::CGaleonApplication::getSingletonPtr()->getAppTime())
+		return (_trigger == TIME && _time <= Logic::TimeManager::getSingletonPtr()->getElapsedTime())
 			|| _trigger == CONDITION;
 
 	} // mustBeLaunched

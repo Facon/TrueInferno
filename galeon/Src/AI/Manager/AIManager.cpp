@@ -23,6 +23,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 
 #include "Application/GaleonApplication.h"
 #include "BaseSubsystems/ScriptManager.h"
+#include "Logic/TimeManager.h"
 #include "Logic/Entity/Message.h"
 
 #include <cassert>
@@ -137,8 +138,8 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	unsigned int CAIManager::getGlobalTime(){
-		return Application::CGaleonApplication::getSingletonPtr()->getAppTime();
+	long CAIManager::getGlobalTime() const {
+		return Logic::TimeManager::getSingletonPtr()->getElapsedTime();
 	}
 
 	bool CAIManager::HandleMessage(const Message& msg)
