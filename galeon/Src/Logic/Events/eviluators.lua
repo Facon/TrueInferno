@@ -169,14 +169,14 @@ weightedEviluators =
 	---[[	
 	{
 		eviluator=TimeSinceLastEventTypeEviluator, 
-		weight=0.2,
+		weight=0.1,
 	},
 	--]]
 
 	---[[	
 	{
 		eviluator=TimeSinceLastGodEviluator, 
-		weight=0.3,
+		weight=0.2,
 	},
 	--]]	
 }

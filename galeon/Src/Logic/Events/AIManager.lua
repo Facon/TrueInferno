@@ -115,11 +115,11 @@ end
 -- Función de actualización del nivel de dificultad
 function AIManager:updateDifficulty()
 	-- TODO Actualizar en función de los puntos del jugador y la curva deseada
-	if(CAIManager.getSingletonPtr():getElapsedTime() > 30000)
+	if(CAIManager.getSingletonPtr():getElapsedTime() > 60000)
 	then
-		self.desiredDifficulty = 0.8
+		self.desiredDifficulty = 1
 	else
-		self.desiredDifficulty = 0.2		
+		self.desiredDifficulty = 0		
 	end
 end
 
