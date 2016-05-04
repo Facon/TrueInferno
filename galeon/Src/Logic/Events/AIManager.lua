@@ -34,6 +34,9 @@ function AIManager:__init()
 	-- Tiempo (ms) que debe transcurrir hasta el próximo evento aleatorio. Se inicializa al valor de espera para el primer evento
 	self.timeUntilNextEvent = self.timeUntilFirstEvent
 
+	-- Dificultad deseada. Debe actualizarse conforme avanza la partida. Ha de estar siempre entre 0 (más fácil) y 1 (más difícil)
+	self.desiredDifficulty = 0.2
+	
 	-- Combinaciones de evento-dios
 	self.godEvents = {}
 	for godIndex,god in pairs(gods) 
@@ -83,6 +86,9 @@ function AIManager:tick(msecs)
 
 		-- Se actualizan los contadores de tiempo en función del evento-dios lanzado
 		self:updateTimeCounters(chosenGodEvent)
+		
+		-- Se actualiza el nivel de dificultad deseado
+		self:updateDifficulty()
 	end
 end
 
@@ -104,6 +110,17 @@ function AIManager:updateTimeCounters(chosenGodEvent)
 		do
 			self.timeSinceLastGod[god.name] = self.timeSinceLastGod[god.name] + self.timeUntilNextEvent
 		end
+end
+
+-- Función de actualización del nivel de dificultad
+function AIManager:updateDifficulty()
+	-- TODO Actualizar en función de los puntos del jugador y la curva deseada
+	if(CAIManager.getSingletonPtr():getElapsedTime() > 30000)
+	then
+		self.desiredDifficulty = 0.8
+	else
+		self.desiredDifficulty = 0.2		
+	end
 end
 
 -- Función que determina el evento-dios a lanzar
@@ -128,7 +145,7 @@ function AIManager:chooseGodEvent()
 			end
 		end
 
-		--print("Event! " .. godEvent.event.name .. " - " .. godEvent.god.name .. " -> " .. score)
+		print("Event! " .. godEvent.event.name .. " - " .. godEvent.god.name .. " -> " .. score)
 		
 		-- Actualización del mejor encontrado
 		if score > bestScore

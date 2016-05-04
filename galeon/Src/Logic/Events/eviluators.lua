@@ -31,20 +31,25 @@ end
 -- Definición de los eviluators: 
 -- Deben tener un nombre y una función evaluate(godEvent) que devuelve un valor decimal entre 0 (utilidad nula) y 1 (utilidad máxima).
 
--- EvilEviluator: Asigna mayor utilidad cuanto mayor sea el factor de maldad evil
-EvilEviluator = Eviluator:new("EvilEviluator")
-EvilEviluator.evaluate = 
+-- DifficultyEviluator: Asigna mayor utilidad cuanto más se ajuste la dificultad de la partida al factor de bondad/maldad del evento
+DifficultyEviluator = Eviluator:new("DifficultyEviluator")
+DifficultyEviluator.evaluate = 
 	function(godEvent)
-		return godEvent.event.evil
+		-- TODO precalcular para todos los eventos en la inicialización
+		-- 1 si el evento totalmente malvado (evil=1.0), 0 si el evento es totalmente bueno (good=1.0)
+		local eventDifficulty = (1 + godEvent.event.evil - godEvent.event.good) / 2
+		
+		-- Calculamos la diferencia absoluta entre dificultades y truncamos su valor a 1
+		local diff = math.abs(aiManager.desiredDifficulty - eventDifficulty)
+		if(diff > 1)
+		then
+			diff = 1
+		end
+		
+		-- Cuanto más cercanos los valores de dificultad, la diferencia es más próxima a 0, y el complemento a 1 es más próximo a 1
+		return 1 - diff
 	end
-
--- GoodEviluator: Asigna mayor utilidad cuanto mayor sea el factor de bondad good
-GoodEviluator = Eviluator:new("GoodEviluator")
-GoodEviluator.evaluate = 
-	function(godEvent)
-		return godEvent.event.good
-	end
-
+	
 -- RandomEviluator: Asigna utilidad al azar
 RandomEviluator = Eviluator:new("RandomEviluator")
 RandomEviluator.evaluate = 
@@ -128,15 +133,8 @@ weightedEviluators =
 {
 	---[[
 	{
-		eviluator=EvilEviluator, 
-		weight=0.5,
-	},
-	--]]
-	
-	---[[
-	{
-		eviluator=GoodEviluator, 
-		weight=0.5,
+		eviluator=DifficultyEviluator, 
+		weight=1.0,
 	},
 	--]]
 	
@@ -147,7 +145,7 @@ weightedEviluators =
 	},
 	--]]
 	
-	---[[	
+	--[[	
 	{
 		eviluator=RandomEviluator, 
 		weight=0.1,
@@ -171,14 +169,14 @@ weightedEviluators =
 	---[[	
 	{
 		eviluator=TimeSinceLastEventTypeEviluator, 
-		weight=0.25,
+		weight=0.2,
 	},
 	--]]
 
 	---[[	
 	{
 		eviluator=TimeSinceLastGodEviluator, 
-		weight=0.5,
+		weight=0.3,
 	},
 	--]]	
 }

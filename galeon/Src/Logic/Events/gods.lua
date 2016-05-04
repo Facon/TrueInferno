@@ -38,9 +38,10 @@ end
 -- TODO Convendría normalizar rasgos en cada dios para evitar que los dioses con muchos rasgos tengan preferencia
 Hades = God:new("Hades")
 Hades.traits.crazy = 1
-Hades.traits.arrogant = 1
+Hades.traits.arrogant = 0.7
 Hades.traits.vengeful = 1
 Hades.traits.clumsy = 0
+Hades.traits.vengeful = 1
 
 Lucifer = God:new("Lucifer")
 Lucifer.traits.aggressive = 1
@@ -49,18 +50,23 @@ Lucifer.traits.vengeful = 1
 
 Osiris = God:new("Osiris")
 Osiris.traits.businessman = 1
-Osiris.traits.generous = 1
+Lucifer.traits.arrogant = 1
 Osiris.traits.cheater = 1
+Osiris.traits.generous = 1
+Osiris.traits.vengeful = 0.75
 
 Hel = God:new("Hel")
 Hel.traits.crazy = 1
-Hel.traits.arrogant = 1
+Hel.traits.arrogant = 0.5
 Hel.traits.generous = 1
+Hel.traits.clumsy = 0.2
+Hel.traits.vengeful = 0.5
 
 Cthulhu = God:new("Cthulhu")
 Cthulhu.traits.generous = 1
 Cthulhu.traits.clumsy = 1
 Cthulhu.traits.crazy = 1
+Cthulhu.traits.vengeful = 1
 
 gods = 
 {

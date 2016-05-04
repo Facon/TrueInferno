@@ -127,7 +127,7 @@ namespace Logic {
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
 			[
 				luabind::class_<CAIManager>("CAIManager")
-				.def("getGlobalTime", &CAIManager::getGlobalTime)
+				.def("getElapsedTime", &CAIManager::getElapsedTime)
 				.scope
 				[
 					luabind::def("getSingletonPtr", &CAIManager::getSingletonPtr)
@@ -138,7 +138,7 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	long CAIManager::getGlobalTime() const {
+	long CAIManager::getElapsedTime() const {
 		return Logic::TimeManager::getSingletonPtr()->getElapsedTime();
 	}
 

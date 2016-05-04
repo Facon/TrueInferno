@@ -89,12 +89,12 @@ namespace Logic
 		bool loadAIScript(const std::string& filename);
 
 		/**
-		Devuelve el tiempo (ms) de la aplicación.
+		Devuelve el tiempo transcurrido (ms) de la aplicación.
 		Es una función-puente para que Lua no tenga que acceder a otras partes del motor.
 
 		@return Tiempo (ms) que la aplicación lleva activa.
 		*/
-		long getGlobalTime() const;
+		long getElapsedTime() const;
 
 		// Manejo de mensajes, tiene que manejar todos los tipos de mensajes sin excepción.
 		bool HandleMessage(const Message& msg);
