@@ -31,14 +31,14 @@ end
 -- Definición de los eviluators: 
 -- Deben tener un nombre y una función evaluate(godEvent) que devuelve un valor decimal entre 0 (utilidad nula) y 1 (utilidad máxima).
 
--- EvilEviluator: Asigna mayor utilidad cuanto mayor sea el factor evil
+-- EvilEviluator: Asigna mayor utilidad cuanto mayor sea el factor de maldad evil
 EvilEviluator = Eviluator:new("EvilEviluator")
 EvilEviluator.evaluate = 
 	function(godEvent)
 		return godEvent.event.evil
 	end
 
--- GoodEviluator: Asigna mayor utilidad cuanto mayor sea el factor good
+-- GoodEviluator: Asigna mayor utilidad cuanto mayor sea el factor de bondad good
 GoodEviluator = Eviluator:new("GoodEviluator")
 GoodEviluator.evaluate = 
 	function(godEvent)
@@ -103,29 +103,54 @@ TimeSinceLastGodEviluator.evaluate =
 	
 		return aiManager.timeSinceLastGod[godEvent.god.name] / maxValue
 	end
+
+-- PersonalityEviluator: Añadimos un eviluator que tiene en cuenta los rasgos de dios y asigna mayor utilidad si el dios es afín a lanzar evento de esas características
+PersonalityEviluator = Eviluator:new("PersonalityEviluator")
+PersonalityEviluator.evaluate =
+	function(godEvent)
+		-- Inicializamos score
+		local score = 0
+	
+		-- Para cada rasgo de dios
+		for index,godTrait in pairs(godTraits)
+		do
+			-- Agregamos el producto de la presencia del rasgo en el dios por la del evento
+			score = score + godEvent.god.traits[godTrait.name] * godEvent.event.godTraits[godTrait.name]			
+		end
+		
+		-- Devolvemos el score promediado por la cantidad de rasgos
+		return score / table.getn(godTraits)
+	end
 	
 -- Configuración de los eviluators a usar y sus pesos relativos (no es necesario que sumen 1)
 -- Asignar peso 0 es equivalente a no querer usar el eviluator
 weightedEviluators = 
 {
-	--[[
+	---[[
 	{
 		eviluator=EvilEviluator, 
-		weight=1,
+		weight=0.5,
 	},
 	--]]
 	
-	--[[
+	---[[
 	{
 		eviluator=GoodEviluator, 
-		weight=1,
+		weight=0.5,
 	},
 	--]]
 	
-	--[[	
+	---[[
+	{
+		eviluator=PersonalityEviluator,
+		weight=1.0,
+	},
+	--]]
+	
+	---[[	
 	{
 		eviluator=RandomEviluator, 
-		weight=0,
+		weight=0.1,
 	},
 	--]]
 	
@@ -146,47 +171,17 @@ weightedEviluators =
 	---[[	
 	{
 		eviluator=TimeSinceLastEventTypeEviluator, 
-		weight=1,
+		weight=0.25,
 	},
 	--]]
 
-	--[[	
+	---[[	
 	{
 		eviluator=TimeSinceLastGodEviluator, 
-		weight=1,
+		weight=0.5,
 	},
 	--]]	
 }
-
---[[
--- Añadimos un eviluator por rasgo de dios que simboliza la afinidad de un dios a lanzar ciertos eventos
-for index,godTrait in pairs(godTraits)
-do
-	local traitEviluator = Eviluator:new(godTrait.name .. "TraitEviluator")
-	
-	-- La evaluación es el producto del rasgo del dios por la presencia del rasgo en el evento
-	traitEviluator.evaluate =
-		function(godEvent)
-			return godEvent.god.traits[godTrait.name] * godEvent.event.godTraits[godTrait.name]
-		end
-		
-	-- Por defecto el peso es el mismo para todos los rasgos
-	weightedEviluator =
-	{
-		eviluator = traitEviluator, 
-		weight = 1,
-	}
-		
-	-- Por ejemplo, si queremos acentuar el rasgo "aggressive"
-	--if godTrait.name == "aggressive"
-	--then
-	--	weightedEviluator.weight = 2
-	--end
-		
-	-- Insertamos el eviluator con su peso
-	table.insert(weightedEviluators, weightedEviluator)
-end
---]]
 
 -- TODO Normalización genérica de los eviluators:
 -- 1) Se crea una función preevaluate que hace lo que la función evaulate actual
