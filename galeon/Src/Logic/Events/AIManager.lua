@@ -8,6 +8,9 @@ class 'AIManager'
 -- Configuración de inclusión de ficheros. Cargando desde C++ las rutas son relativas a una ruta definida en el ScriptManager
 loadFromCpp = 1
 
+-- Flag para habilitar/deshabilitar fácilmente la IA
+aiEnabled = true
+
 -- TODO usar require para no cargar módulos duplicados
 -- Carga de módulos desde la ruta base definida en C++
 dofile("../Src/Logic/Events/gods.lua")
@@ -82,7 +85,10 @@ function AIManager:tick(msecs)
 		print("Chosen event! " .. chosenGodEvent.event.name .. " - " .. chosenGodEvent.god.name)
 
 		-- Lanzamos el evento
-		chosenGodEvent.event.throw()
+		if(aiEnabled)
+		then
+			chosenGodEvent.event.throw()
+		end
 
 		-- Se actualizan los contadores de tiempo en función del evento-dios lanzado
 		self:updateTimeCounters(chosenGodEvent)
@@ -145,7 +151,7 @@ function AIManager:chooseGodEvent()
 			end
 		end
 
-		print("Event! " .. godEvent.event.name .. " - " .. godEvent.god.name .. " -> " .. score)
+		--print("Event! " .. godEvent.event.name .. " - " .. godEvent.god.name .. " -> " .. score)
 		
 		-- Actualización del mejor encontrado
 		if score > bestScore
