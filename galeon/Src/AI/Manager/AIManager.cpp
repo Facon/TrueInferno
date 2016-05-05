@@ -15,20 +15,19 @@ y encolados hasta que llegue el momento de su lanzamiento.
 @date Abril, 2016
 */
 
+#include <cassert>
+
 #include "AIManager.h"
 #include "Logic/Events/BuildingDestructionEvent.h"
 #include "Logic/Events/EndGameEvent.h"
 #include "Logic/Events/SoulsSpeedReductionEvent.h"
 #include "Logic/Events/TutorialEvent.h"
-
 #include "Application/GaleonApplication.h"
 #include "BaseSubsystems/ScriptManager.h"
 #include "Logic/TimeManager.h"
 #include "Logic/Entity/Message.h"
 
-#include <cassert>
-
-namespace Logic {
+namespace AI {
 
 	CAIManager* CAIManager::_instance = 0;
 
@@ -46,6 +45,19 @@ namespace Logic {
 	{
 		assert(_instance);
 		_instance = 0;
+
+		// Borramos todos los dioses
+		for (auto it = _gods.begin(); it != _gods.end(); ++it){
+			delete(it->second);
+			it->second = nullptr;
+		}
+
+		// Limpiamos las estructuras
+		_gods.clear();
+		_ranking.clear();
+
+		// Apuntamos theBoss a null porque su memoria ya debería estar liberada en _gods
+		_theBoss = nullptr;
 
 	} // ~CAIManager
 
@@ -85,11 +97,6 @@ namespace Logic {
 
 	void CAIManager::tick(unsigned int msecs)
 	{
-		//int result;
-		//ScriptManager::CScriptManager::GetPtrSingleton()->executeFunction("aiManager.tick", msecs, result);
-		//std::cout << "Result = " << result << std::endl;
-
-		//ScriptManager::CScriptManager::GetPtrSingleton()->executeProcedure("aiManager:tick", msecs);
 		ScriptManager::CScriptManager::GetPtrSingleton()->executeProcedure("tickAIManager", msecs);
 
 	} // tick
@@ -128,6 +135,7 @@ namespace Logic {
 			[
 				luabind::class_<CAIManager>("CAIManager")
 				.def("getElapsedTime", &CAIManager::getElapsedTime)
+				.def("addGod", &CAIManager::addGod)
 				.scope
 				[
 					luabind::def("getSingletonPtr", &CAIManager::getSingletonPtr)
@@ -140,6 +148,28 @@ namespace Logic {
 
 	long CAIManager::getElapsedTime() const {
 		return Logic::TimeManager::getSingletonPtr()->getElapsedTime();
+	}
+
+	void CAIManager::addGod(const std::string& name, bool isBoss){
+		// Creamos el nuevo dios
+		CGod* newGod = new CGod(name, isBoss);
+		
+		// Lo insertamos en el contenedor de dioses
+		_gods[name] = newGod;
+
+		// Si es el jefe lo marcamos aparte
+		if (isBoss) {
+			_theBoss = newGod;
+		}
+
+		// Si no, lo añadimos al ranking
+		else { // isBoss == false
+			_ranking.insert(newGod);
+		}
+	}
+
+	const std::map<std::string, CGod*> CAIManager::getGodRanking() {
+		return _gods;
 	}
 
 	bool CAIManager::HandleMessage(const Message& msg)

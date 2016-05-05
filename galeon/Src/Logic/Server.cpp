@@ -117,7 +117,7 @@ namespace Logic {
 			return false;
 
 		// Inicializamos el gestor de IA.
-		if (!Logic::CAIManager::Init())
+		if (!AI::CAIManager::Init())
 			return false;
 
 		// Inicializamos el manager de la energía.
@@ -136,7 +136,7 @@ namespace Logic {
 
 		Logic::CPowerManager::Release();
 
-		Logic::CAIManager::Release();
+		AI::CAIManager::Release();
 
 		Logic::CEventManager::Release();
 
@@ -227,7 +227,7 @@ namespace Logic {
 		_map->tick(msecs);
 		Logic::CEventManager::getSingletonPtr()->tick(msecs);
 
-		Logic::CAIManager::getSingletonPtr()->tick(msecs);
+		AI::CAIManager::getSingletonPtr()->tick(msecs);
 
 		Logic::CPowerManager::getSingletonPtr()->tick(msecs);
 	

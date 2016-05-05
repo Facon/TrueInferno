@@ -11,11 +11,14 @@ then
 end
 
 God = {}
-function God:new (name)
+function God:new (name, isBoss)
 	local self = setmetatable({}, God)
 	
 	-- Nombre del dios
 	self.name = name
+
+	-- Flag para indicar si es el jefe
+	self.isBoss = isBoss
 	
 	--[[
 	Lista de rasgos del dios. 
@@ -24,45 +27,48 @@ function God:new (name)
 	Cada dios deberá sobreescribir los rasgos que interesen para definir su personalidad
 	--]]
 	self.traits = {}
-	
+
 	-- Inicializamos los rasgos a un valor por defecto bajo no nulo. Así se diferencia del caso de un dios que no queremos que presente un rasgo en absoluto.
 	for godTraitIndex,godTrait in pairs(godTraits)
 	do
 		self.traits[godTrait.name] = 0.2
 	end
 	
+	-- Registramos el dios en C++
+	CAIManager.getSingletonPtr():addGod(self.name, self.isBoss);
+	
 	return self
 end
 
 -- Definición de los dioses y sus correspondientes atributos (ver godTraits.lua)
 -- TODO Convendría normalizar rasgos en cada dios para evitar que los dioses con muchos rasgos tengan preferencia
-Hades = God:new("Hades")
+Hades = God:new("Hades", true)
 Hades.traits.crazy = 1
 Hades.traits.arrogant = 0.7
 Hades.traits.vengeful = 1
 Hades.traits.clumsy = 0
 Hades.traits.vengeful = 1
 
-Lucifer = God:new("Lucifer")
+Lucifer = God:new("Lucifer", false)
 Lucifer.traits.aggressive = 1
 Lucifer.traits.arrogant = 1
 Lucifer.traits.vengeful = 1
 
-Osiris = God:new("Osiris")
+Osiris = God:new("Osiris", false)
 Osiris.traits.businessman = 1
 Lucifer.traits.arrogant = 1
 Osiris.traits.cheater = 1
 Osiris.traits.generous = 1
 Osiris.traits.vengeful = 0.75
 
-Hel = God:new("Hel")
+Hel = God:new("Hel", false)
 Hel.traits.crazy = 1
 Hel.traits.arrogant = 0.5
 Hel.traits.generous = 1
 Hel.traits.clumsy = 0.2
 Hel.traits.vengeful = 0.5
 
-Cthulhu = God:new("Cthulhu")
+Cthulhu = God:new("Cthulhu", false)
 Cthulhu.traits.generous = 1
 Cthulhu.traits.clumsy = 1
 Cthulhu.traits.crazy = 1

@@ -221,6 +221,9 @@
     <ClCompile Include="..\..\Src\AI\Manager\AIManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\God.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -489,6 +492,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\Manager\AIManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\God.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -84,6 +84,7 @@
     <ClCompile Include="..\..\Src\AI\AStarFunctionsSoulPath.cpp" />
     <ClCompile Include="..\..\Src\AI\DisjointSets.cpp" />
     <ClCompile Include="..\..\Src\AI\DynamicMovement.cpp" />
+    <ClCompile Include="..\..\Src\AI\God.cpp" />
     <ClCompile Include="..\..\Src\AI\KinematicMovement.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAcceptConsumptionChanges.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAcceptOrRejectNewConsumer.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="..\..\Src\AI\DisjointSets.h" />
     <ClInclude Include="..\..\Src\AI\DynamicMovement.h" />
     <ClInclude Include="..\..\Src\AI\DynTriMat.h" />
+    <ClInclude Include="..\..\Src\AI\God.h" />
     <ClInclude Include="..\..\Src\AI\KinematicMovement.h" />
     <ClInclude Include="..\..\Src\AI\LAAcceptConsumptionChanges.h" />
     <ClInclude Include="..\..\Src\AI\LAAcceptOrRejectNewConsumer.h" />

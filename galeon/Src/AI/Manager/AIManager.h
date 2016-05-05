@@ -16,34 +16,20 @@ Contiene la declaración del gestor de la IA de los enemigos en el juego.
 #ifndef AI_MANAGER_H_
 #define AI_MANAGER_H_
 
-#include <list>
-#include <vector>
-#include <map>
 #include <string>
+#include <set>
+#include <map>
 
+#include "AI/God.h"
 #include "Logic/Events/Event.h"
 #include "Logic/Entity/MessageHandler.h"
 
-// Predeclaración de clases para ahorrar tiempo de compilación
-namespace Logic
-{
-}
+using namespace Logic;
 
-/**
-Namespace que engloba la lógica del juego. Engloba desde el mapa lógico
-contenedor de todas las entidades del juego hasta las propias entidades,
-sus componentes, mensajes, factorias de entidades y componentes, etc.
-(para más información ver @ref LogicGroup).
-
-@author David Llansó
-@date Agosto, 2010
-*/
-namespace Logic
+namespace AI
 {
 	/**
 	Manager singleton que gestiona la IA de los enemigos en el juego.
-
-	@ingroup logicGroup
 
 	@author Álvaro Valera
 	@date Abril, 2016
@@ -95,6 +81,17 @@ namespace Logic
 		@return Tiempo (ms) que la aplicación lleva activa.
 		*/
 		long getElapsedTime() const;
+
+		/** 
+		Añade un dios al juego.
+		Típicamente querremos invocar este método desde Lua.
+		*/
+		void addGod(const std::string& name, bool isBoss);
+
+		/** 
+		Devuelve el ranking de dioses ordenado por puntuación (de mayor a menor)
+		*/
+		const std::map<std::string, CGod*> CAIManager::getGodRanking();
 
 		// Manejo de mensajes, tiene que manejar todos los tipos de mensajes sin excepción.
 		bool HandleMessage(const Message& msg);
@@ -162,6 +159,24 @@ namespace Logic
 		Única instancia de la clase.
 		*/
 		static CAIManager *_instance;
+
+		/** Dioses de la partida indexados por nombre */
+		std::map<std::string, CGod*> _gods;
+
+		/** Función para ordenar dioses por score en el ranking */
+		//bool godScoreCompare(CGod* lhs, CGod* rhs) { return lhs->getScore() < rhs->getScore(); }
+		struct godScoreCompare {
+			bool operator() (CGod* lhs, CGod* rhs) const
+			{
+				return lhs->getScore() < rhs->getScore();
+			}
+		};
+
+		/** Ranking de dioses */
+		std::multiset<CGod*, godScoreCompare> _ranking;
+
+		/** El jefe */
+		CGod* _theBoss;
 
 	}; // class AIManager
 
