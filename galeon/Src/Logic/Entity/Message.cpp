@@ -32,7 +32,8 @@ namespace Logic
 				// HellQuartersMessages
 				luabind::class_<HellQuartersMessage, Message>("HellQuartersMessage")
 				.def_readwrite("_action", &HellQuartersMessage::_action)
-				.def(luabind::constructor<HellQuartersMessage::HellQuartersAction>())
+				.def_readwrite("_numSouls", &HellQuartersMessage::_numSouls)
+				.def(luabind::constructor<HellQuartersMessage::HellQuartersAction, int>())
 				.enum_("HellQuartersAction")
 				[
 					luabind::value("HQA_SEND_SOUL_BURN", HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN),

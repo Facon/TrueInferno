@@ -462,9 +462,11 @@ namespace Logic
 			SEND_SOUL_WORK,
 		};
 
-		HellQuartersMessage(HellQuartersAction action) : Message(MessageType::HELLQUARTERS_REQUEST), _action(action) {}
+		HellQuartersMessage(HellQuartersAction action, int numSouls = 1) :
+			Message(MessageType::HELLQUARTERS_REQUEST), _action(action), _numSouls(numSouls) {}
 
 		HellQuartersAction _action;
+		unsigned int _numSouls;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -478,7 +480,8 @@ namespace Logic
 	class SoulSenderMessage : public Message
 	{
 	public:
-		SoulSenderMessage(AI::CSoulTask* task, int numSouls) : Message(MessageType::SOUL_SENDER_REQUEST), _task(task), _numSouls(numSouls) {}
+		SoulSenderMessage(AI::CSoulTask* task, int numSouls) :
+			Message(MessageType::SOUL_SENDER_REQUEST), _task(task), _numSouls(numSouls) {}
 
 		//std::unique_ptr<AI::CSoulTask> _task;
 		AI::CSoulTask* _task;

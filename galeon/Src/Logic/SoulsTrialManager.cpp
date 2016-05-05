@@ -17,7 +17,8 @@ Contiene la implementación del gestor del Juicio de Almas.
 #include <cassert>
 #include <cstdio>
 
-#include "BaseSubsystems\Math.h"
+#include "BaseSubsystems/Math.h"
+#include "Logic/BuildingManager.h"
 
 namespace Logic {
 
@@ -74,13 +75,23 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	void CSoulsTrialManager::tick(unsigned int msecs)
+	void CSoulsTrialManager::tick(unsigned long msecs)
 	{
 		_timeSinceLastSoulsGeneration += msecs;
 
 		if (_timeSinceLastSoulsGeneration >= _timeForNextSoulsGeneration)
 		{
+			//std::cout << "pre souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
+
 			processNewGroupOfSouls();
+
+			//std::cout << "mid souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
+			//unsigned int toWork[] = { 5, 3, 3, 3 }; //
+			//unsigned int toBurn[] = { 5, 2, 2, 4 }; //
+			//bool createsouls = createSouls(toWork, toBurn); //
+			//std::cout << "create si o no = " << createsouls << std::endl; //
+			//std::cout << "pst souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
+
 			_timeForNextSoulsGeneration = Math::random(_minSoulsGenerationTime, _maxSoulsGenerationTime);
 			_timeSinceLastSoulsGeneration = 0;
 		}
@@ -118,6 +129,53 @@ namespace Logic {
 		}
 
 	} // processNewGroupOfSouls
+
+	//--------------------------------------------------------
+	
+	bool CSoulsTrialManager::createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4])
+	{
+		// Comprobación del número de almas recibido y disponible de cada categoría
+		for (unsigned int i = 0; i < 4 ; ++i)
+		{
+			if (_souls[i] < numSoulsToWork[i] + numSoulsToBurn[i])
+				return false;
+		}
+
+		// Creación de las almas
+		for (unsigned int i = 0; i < 4; ++i)
+		{
+			createSoulsToWork(numSoulsToWork[i]); // Almas a trabajar
+			createSoulsToBurn(numSoulsToBurn[i]); // Almas a quemar
+
+			_souls[i] -= numSoulsToWork[i];
+			_souls[i] -= numSoulsToBurn[i];
+		}
+
+		return true;
+
+	} // createSouls
+
+	//--------------------------------------------------------
+
+	void CSoulsTrialManager::createSoulsToWork(unsigned int numSouls)
+	{
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK, numSouls);
+		Logic::CPlaceable *hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
+
+		m.Dispatch(*hellQuarters->getEntity());
+
+	} // createSoulsToWork
+
+	//--------------------------------------------------------
+
+	void CSoulsTrialManager::createSoulsToBurn(unsigned int numSouls)
+	{
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN, numSouls);
+		Logic::CPlaceable *hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
+
+		m.Dispatch(*hellQuarters->getEntity());
+
+	} // createSoulsToBurn
 
 	//--------------------------------------------------------
 

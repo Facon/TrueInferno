@@ -110,7 +110,7 @@ namespace Logic
 
 		@param msecs milisegundos transcurridos desde el último tick.
 		*/
-		void tick(unsigned int msecs);
+		void tick(unsigned long msecs);
 
 		/**
 		Aumenta el nivel del Juez encargado del Juicio de Almas.
@@ -122,6 +122,21 @@ namespace Logic
 		cada una de ellas a una categoría.
 		*/
 		void processNewGroupOfSouls();
+
+		/**
+		Función llamada cuando el jugador decida manualmente cuántas
+		almas de cada categoría quiere convertir en trabajadores y
+		enviar a quemar.
+		<p>
+		Llevará a cabo la creación de las almas, comprobando previamente
+		que las cantidades recibidas son correctas con respecto al
+		número de almas disponibles.
+
+		@param numSoulsToWork número de almas de cada categoría a trabajar.
+		@param numSoulsToBurn número de almas de cada categoría a quemar.
+		@return true si los valores de cada categoría son correctos.
+		*/
+		bool createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4]);
 
 	protected:
 
@@ -150,6 +165,13 @@ namespace Logic
 		estáticos se hace en Release().
 		*/
 		void close();
+
+		/**
+		Métodos auxiliares, llamados desde createSouls(), para la propia
+		creación de ambos tipos de almas.
+		*/
+		void createSoulsToWork(unsigned int numSouls);
+		void createSoulsToBurn(unsigned int numSouls);
 
 	private:
 
