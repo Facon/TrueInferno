@@ -16,6 +16,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 */
 
 #include <cassert>
+#include <iostream>
 
 #include "AIManager.h"
 #include "Logic/Events/BuildingDestructionEvent.h"
@@ -97,8 +98,21 @@ namespace AI {
 
 	void CAIManager::tick(unsigned int msecs)
 	{
+		// Tick Lua AIManager
 		ScriptManager::CScriptManager::GetPtrSingleton()->executeProcedure("tickAIManager", msecs);
 
+		// Tick gods
+		for (auto it = _gods.begin(); it != _gods.end(); ++it){
+			(it->second)->tick(msecs);
+		}
+
+		// TODO TEST
+		if (TimeManager::getSingletonPtr()->getElapsedTime() % 50 == 0){
+			std::cout << "Ranking!" << std::endl;
+			for (auto it = _ranking.begin(); it != _ranking.end(); ++it)
+				std::cout << (*it)->getName() << ": " << (*it)->getScore() << std::endl;
+		}
+		
 	} // tick
 
 	//--------------------------------------------------------

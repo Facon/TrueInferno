@@ -60,7 +60,7 @@ namespace AI
 		Función llamada en cada frame para que se realicen las funciones
 		de actualización adecuadas.
 		<p>
-		Si ha pasado determinado tiempo desde el último evento, lanzará un evento aleatorio nuevo.
+		Si ha pasado determinado tiempo desde el último evento, lanzará (desde Lua) un evento aleatorio nuevo.
 
 		@param msecs milisegundos transcurridos desde el último tick.
 		*/
@@ -84,7 +84,7 @@ namespace AI
 
 		/** 
 		Añade un dios al juego.
-		Típicamente querremos invocar este método desde Lua.
+		Típicamente querremos invocar este método desde Lua que es donde se configuran los dioses.
 		*/
 		void addGod(const std::string& name, bool isBoss);
 
@@ -172,7 +172,7 @@ namespace AI
 			}
 		};
 
-		/** Ranking de dioses */
+		/** Ranking de dioses ordenados por score creciente */
 		std::multiset<CGod*, godScoreCompare> _ranking;
 
 		/** El jefe */

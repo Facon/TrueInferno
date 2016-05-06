@@ -29,6 +29,7 @@ la gestión de la lógica del juego.
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
 
+#include <cstdlib>
 #include <cassert>
 #include <cstdio>
 
@@ -88,6 +89,9 @@ namespace Logic {
 
 	bool CServer::open()
 	{
+		// Aleatorizamos la semilla de los números pseudoaleatorios
+		std::srand(std::time(0));
+
 		// Inicializamos el parser de mapas.
 		if (!Map::CMapParser::Init())
 			return false;

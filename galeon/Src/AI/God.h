@@ -19,7 +19,7 @@ Modela un dios, que son los enemigos del juego controlados por la IA.
 
 namespace AI {
 
-	namespace GodMood{
+	namespace GodMood {
 		const int WORST_MOOD = -3;
 		const int INITIAL_MOOD = 0;
 		const int BEST_MOOD = 3;
@@ -27,7 +27,7 @@ namespace AI {
 
 	class CGod {
 	public:
-		CGod(const std::string& name, bool isBoss) : _name(name), _score(0), _mood(GodMood::INITIAL_MOOD), _isBoss(isBoss) {}
+		CGod(const std::string& name, bool isBoss);
 
 		virtual ~CGod() {}
 
@@ -43,6 +43,16 @@ namespace AI {
 		/** Getter for isBoss */
 		const bool isBoss() const { return _isBoss; };
 
+		/**
+		Función llamada en cada frame para que se realicen las funciones
+		de actualización adecuadas.
+		<p>
+		Si ha pasado determinado tiempo desde el último evento, lanzará (desde Lua) un evento aleatorio nuevo.
+
+		@param msecs milisegundos transcurridos desde el último tick.
+		*/
+		void tick(unsigned int msecs);
+
 	private:
 		/** God's name */
 		std::string _name;
@@ -55,6 +65,21 @@ namespace AI {
 
 		/** Flag set to true if this god is the boss */
 		bool _isBoss;
+
+		/** Target score for the round */
+		int _targetScore;
+
+		/** Tiempo(ms) mínimo entre actualizaciones de score */
+		const int minTimeBetweenScoreUpdate = 3000;
+
+		/** Tiempo(ms) máximo entre actualizaciones de score */
+		const int maxTimeBetweenScoreUpdate = 5000;
+
+		/** Tiempo(ms) que debe transcurrir hasta la próxima actualización de score */
+		int _timeForNextScoreUpdate;
+
+		/** Actualiza el tiempo hasta la siguiente actualización de score */
+		void updateTimeForNextScoreUpdate();
 	};
 }
 
