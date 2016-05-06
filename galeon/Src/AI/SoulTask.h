@@ -17,6 +17,11 @@ namespace AI{
 		/** Método que se ejecutará en el objetivo al llegar el alma */
 		virtual bool execute() = 0;
 
+		/** Devuelve el mapa al que pertenece el alma */
+		virtual Logic::CMap* getMap(){
+			return _map;
+		}
+
 		/** Devuelve el objetivo hasta donde debe desplazarse el alma */
 		virtual Logic::TEntityID getTarget(){
 			return _target;

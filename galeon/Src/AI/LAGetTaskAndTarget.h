@@ -15,14 +15,17 @@ namespace AI {
 
 	public:
 		CLAGetTaskAndTarget(CEntity* entity) : CLatentAction(entity) {
-			_task = nullptr;
+			_workTask = nullptr;
+			_burnTask = nullptr;
 		}
 
-		virtual ~CLAGetTaskAndTarget() {
-			if (_task){
-				delete _task;
-				_task = nullptr;
-			}
+		virtual ~CLAGetTaskAndTarget()
+		{
+			if (_workTask)
+				deleteTask(_workTask);
+
+			if (_burnTask)
+				deleteTask(_burnTask);
 		}
 
 		virtual bool HandleMessage(const HellQuartersMessage& msg);
@@ -33,9 +36,25 @@ namespace AI {
 		LAStatus OnRun(unsigned int msecs);
 
 	private:
-		CSoulTask* _task;
+		CSoulTask* _workTask;
+		CSoulTask* _burnTask;
 
-		bool sendSoul();
+		bool sendSoul(bool workTask);
+
+		bool createWorkTask();
+		bool createBurnTask();
+
+		void deleteTask(CSoulTask *task)
+		{
+			delete task;
+			task = nullptr;
+		}
+
+		/**
+		Almas restantes por crear y enviar.
+		*/
+		int _pendingSoulsToBurn = 0;
+		int _pendingSoulsToWork = 0;
 	};
 
 }

@@ -46,9 +46,19 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLASendSoul::OnRun(unsigned int msecs) {
+		// Acumulamos el tiempo transcurrido desde el último tick
+		_timeSinceLastSoulSent += msecs;
+
 		// Verificamos que tenemos tarea
 		if (_task == nullptr)
 			return LAStatus::FAIL;
+
+		// Verificamos que se puede enviar un nuevo alma...
+		if (_timeSinceLastSoulSent < _timeBetweenSouls)
+			return LAStatus::RUNNING;
+
+		// ...y reseteamos el tiempo acumulado
+		_timeSinceLastSoulSent = 0;
 
 		// Si no se pudieron crear las almas esperamos al siguiente tick
 		if (!createSouls())
