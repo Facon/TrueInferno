@@ -16,6 +16,7 @@ Contiene la declaración del gestor de la IA de los enemigos en el juego.
 #ifndef AI_MANAGER_H_
 #define AI_MANAGER_H_
 
+#include <vector>
 #include <string>
 #include <set>
 #include <map>
@@ -88,10 +89,15 @@ namespace AI
 		*/
 		void addGod(const std::string& name, bool isBoss);
 
+		/**
+		Elimina un dios del juego.
+		*/
+		bool removeGood(const std::string& name);
+
 		/** 
 		Devuelve el ranking de dioses ordenado por puntuación (de mayor a menor)
 		*/
-		const std::map<std::string, CGod*> CAIManager::getGodRanking();
+		std::vector<CGod*> getGodRanking();
 
 		// Manejo de mensajes, tiene que manejar todos los tipos de mensajes sin excepción.
 		bool HandleMessage(const Message& msg);
@@ -160,23 +166,19 @@ namespace AI
 		*/
 		static CAIManager *_instance;
 
-		/** Dioses de la partida indexados por nombre */
+		/** Mapa de todos los dioses (jefe incluido) indexados por nombre */
 		std::map<std::string, CGod*> _gods;
 
-		/** Función para ordenar dioses por score en el ranking */
-		//bool godScoreCompare(CGod* lhs, CGod* rhs) { return lhs->getScore() < rhs->getScore(); }
-		struct godScoreCompare {
-			bool operator() (CGod* lhs, CGod* rhs) const
-			{
-				return lhs->getScore() < rhs->getScore();
-			}
-		};
-
-		/** Ranking de dioses ordenados por score creciente */
-		std::multiset<CGod*, godScoreCompare> _ranking;
+		/** Ranking de dioses. 
+		Nota: Usar getGodRanking() para obtener el listado ordenado.
+		*/
+		std::vector<CGod*> _ranking;
 
 		/** El jefe */
 		CGod* _theBoss;
+
+		// TODO: Quitar en cuanto se muestre el ranking en la GUI
+		int _timeSinceLastRankingDisplay;
 
 	}; // class AIManager
 

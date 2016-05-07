@@ -43,6 +43,18 @@ namespace AI {
 		/** Getter for isBoss */
 		const bool isBoss() const { return _isBoss; };
 
+		/** Getter for isEliminated */
+		const bool isEliminated() const { return _isEliminated; };
+
+		/** Getter for targetScore */
+		const int getTargetScore() const { return _targetScore; };
+
+		/** Setter for targetScore */
+		void setTargetScore(int targetScore) { _targetScore = targetScore; };
+
+		/** Eliminates god */
+		void eliminate();
+
 		/**
 		Función llamada en cada frame para que se realicen las funciones
 		de actualización adecuadas.
@@ -75,11 +87,14 @@ namespace AI {
 		/** Tiempo(ms) máximo entre actualizaciones de score */
 		const int maxTimeBetweenScoreUpdate = 5000;
 
-		/** Tiempo(ms) que debe transcurrir hasta la próxima actualización de score */
-		int _timeForNextScoreUpdate;
+		/** Tiempo(ms) restante para la próxima actualización de score */
+		int _remainingTimeForNextScoreUpdate;
 
-		/** Actualiza el tiempo hasta la siguiente actualización de score */
-		void updateTimeForNextScoreUpdate();
+		/** Obtiene un tiempo aleatorio la siguiente actualización de score */
+		int getRandomTimeForNextScoreUpdate();
+
+		/** Flag a true cuando el dios está eliminado */
+		bool _isEliminated;
 	};
 }
 

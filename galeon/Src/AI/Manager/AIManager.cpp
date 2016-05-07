@@ -17,6 +17,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 
 #include <cassert>
 #include <iostream>
+#include <algorithm>
 
 #include "AIManager.h"
 #include "Logic/Events/BuildingDestructionEvent.h"
@@ -37,6 +38,7 @@ namespace AI {
 	CAIManager::CAIManager()
 	{
 		_instance = this;
+		_timeSinceLastRankingDisplay = 0;
 
 	} // CAIManager
 
@@ -106,11 +108,18 @@ namespace AI {
 			(it->second)->tick(msecs);
 		}
 
-		// TODO TEST
-		if (TimeManager::getSingletonPtr()->getElapsedTime() % 50 == 0){
-			std::cout << "Ranking!" << std::endl;
-			for (auto it = _ranking.begin(); it != _ranking.end(); ++it)
+		// TODO: Quitar en cuanto se muestre el ranking en la GUI
+		_timeSinceLastRankingDisplay += msecs;
+		if (_timeSinceLastRankingDisplay >= 5000){
+			std::cout << "Ranking" << std::endl;
+			
+			std::vector<CGod*> ranking = getGodRanking();
+
+			for (auto it = ranking.begin(); it != ranking.end(); ++it)
 				std::cout << (*it)->getName() << ": " << (*it)->getScore() << std::endl;
+			std::cout << std::endl;
+
+			_timeSinceLastRankingDisplay = 0;
 		}
 		
 	} // tick
@@ -178,12 +187,47 @@ namespace AI {
 
 		// Si no, lo añadimos al ranking
 		else { // isBoss == false
-			_ranking.insert(newGod);
+			_ranking.push_back(newGod);
 		}
 	}
 
-	const std::map<std::string, CGod*> CAIManager::getGodRanking() {
-		return _gods;
+	bool CAIManager::removeGood(const std::string& name){
+		// Localizamos al dios
+		CGod* god = _gods[name];
+		
+		// Chequeamos que el dios exista
+		if (god == nullptr){
+			assert(false && "God can't be removed because it's not in the game");
+			return false;
+		}
+
+		// No permitimos que se elimine al jefe
+		if (god->isBoss()){
+			assert(false && "Can't remove boss god");
+			return false;
+		}
+			
+		// Notificamos al dios que está eliminado
+		god->eliminate();
+
+		// TODO ¿Lo eliminamos también del ranking o de la lista de dioses?
+
+		return true;
+	}
+
+	/** Función para ordenar dioses en orden de score descendiente */
+	struct st_godScoreCompare {
+		bool operator() (CGod* lhs, CGod* rhs)
+		{
+			return lhs->getScore() > rhs->getScore();
+		}
+	} godScoreCompare;
+
+	std::vector<CGod*> CAIManager::getGodRanking() {
+		// Reordenamos los dioses por puntuación
+		std::sort(_ranking.begin(), _ranking.end(), godScoreCompare);
+
+		return _ranking;
 	}
 
 	bool CAIManager::HandleMessage(const Message& msg)
