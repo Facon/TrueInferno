@@ -1,6 +1,8 @@
 <?xml version="1.0" ?>
 <GUIScheme version="5" name="OgreTray">
     <Imageset filename="OgreTray.imageset" />
+	<Imageset filename="TrueInfernoIcons.imageset" />
+	<Imageset filename="TrueInfernoUITextures.imageset" />
     <Font filename="DejaVuSans-12.font" />
 	<Font filename="Jura-18.font" />
 	<Font filename="Jura-12.font" />
@@ -11,7 +13,29 @@
 	<Font filename="Jura-12-Italic.font" />
     <LookNFeel filename="OgreTray.looknfeel" />
     <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
-
+	
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateSoul" 		 		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateSoul" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonBurnSoul"   				targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonBurnSoul" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonGods"   					targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonGods" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonMissions"   				targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonMissions" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonTrial"   				targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonTrial" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonDestroyBuilding"   		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonDestroyBuilding" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonUpgradeBuilding"   		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonUpgradeBuilding" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonDisableBuilding"   		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonDisableBuilding" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCloseWindow"   			targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCloseWindow" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonText" 			 		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonText" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateRoad"   			targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateRoad" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreatePowerGenerator"	targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreatePowerGenerator" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateFurnace"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateFurnace" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateMine"    			targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateMine" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateGasPlant"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateGasPlant" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateEvilworks"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateEvilworks" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateRefinery"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateRefinery" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateResearchLab"    	targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateResearchLab" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateWarehouse"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateWarehouse" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonRepairBuilding"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonRepairBuilding" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonClearTerrain"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonClearTerrain" />
+	
     <FalagardMapping windowType="OgreTray/Label"                targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="OgreTray/Label" />
     <FalagardMapping windowType="OgreTray/Button"               targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/PushButton" />
     <FalagardMapping windowType="OgreTray/Titlebar"             targetType="CEGUI/Titlebar"         renderer="Core/Titlebar"            lookNFeel="OgreTray/Titlebar" />

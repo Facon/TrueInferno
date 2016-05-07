@@ -55,62 +55,62 @@ namespace GUI
 	void BuildingSelectionUI::bindPopupButtons(std::string layout){
 
 		if (layout == "UIBuildingSelectionPopupHellquarters.layout"){
-			_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
-			_uipopupWindow->getChildElement("Gods/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("Gods")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::godsReleased, this));
-			_uipopupWindow->getChildElement("Missions/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("Missions")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::missionsReleased, this));
-			_uipopupWindow->getChildElement("Trial/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("Trial")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::trialReleased, this));
 		}
 
 		if (layout == "UIBuildingSelectionPopupTrial.layout"){
-			_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
-			_uipopupWindow->getChildElement("CreateSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("CreateSoul")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::createSoulReleased, this));
-			_uipopupWindow->getChildElement("BurnSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("BurnSoul")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::burnSoulReleased, this));
 		}
 
 		if (layout == "UIBuildingSelectionPopupGods.layout"){
-			_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
 		}
 
 		if (layout == "UIBuildingSelectionPopupMissions.layout"){
-			_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
 		}
 	}
 
 	void BuildingSelectionUI::bindButtons(){
 
-		_uibuttonsWindow->getChildElement("UpgradeBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("UpgradeBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::upgradeBuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("DisableBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("DisableBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::disableBuildingReleased, this));
 
 
-		_uibuttonsWindow->getChildElement("CloseWindow/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
-		_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
 		if (_buildingEntity->getComponent<Logic::CBuildingSelection>()->getSidebarLayoutTemplate() == "UIBuildingSelectionButtonBar.layout"){
-			_uibuttonsWindow->getChildElement("DestroyBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uibuttonsWindow->getChildElement("DestroyBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::destroyBuildingReleased, this));
 		}
 
 		if (_buildingEntity->getComponent<Logic::CBuildingSelection>()->getPopupLayoutTemplate() == "UIBuildingSelectionPopupHellquarters.layout"){
-			_uipopupWindow->getChildElement("Gods/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("Gods")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::godsReleased, this));
-			_uipopupWindow->getChildElement("Missions/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("Missions")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::missionsReleased, this));
-			_uipopupWindow->getChildElement("Trial/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			_uipopupWindow->getChildElement("Trial")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::trialReleased, this));
 		}
 	}
@@ -133,19 +133,19 @@ namespace GUI
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIBuildingSelectionButtonBar.layout");
 		_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIBuildingSelectionPopup.layout");
 
-		_uibuttonsWindow->getChildElement("UpgradeBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("UpgradeBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::upgradeBuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("DestroyBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("DestroyBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::destroyBuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("DisableBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("DisableBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::disableBuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("CloseWindow/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
-		_uipopupWindow->getChildElement("CloseWindow/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
 		
@@ -154,11 +154,11 @@ namespace GUI
 	void BuildingSelectionUI::release()
 	{
 		// Remove all events to avoid memory leaks
-		_uibuttonsWindow->getChildElement("UpgradeBuilding/Image/Button")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("DestroyBuilding/Image/Button")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("DisableBuilding/Image/Button")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CloseWindow/Image/Button")->removeAllEvents();
-		_uipopupWindow->getChildElement("CloseWindow/Button")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("UpgradeBuilding")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("DestroyBuilding")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("DisableBuilding")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CloseWindow")->removeAllEvents();
+		_uipopupWindow->getChildElement("CloseWindow")->removeAllEvents();
 	}
 
 	void BuildingSelectionUI::activate()
