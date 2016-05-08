@@ -24,6 +24,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "Logic/TimeManager.h"
 #include "BaseSubsystems/ScriptManager.h"
 #include "Logic/Entity/Message.h"
+#include "Logic/SoulsTrialManager.h"
 
 #include <cassert>
 
@@ -172,7 +173,14 @@ namespace Logic {
 			eventsList.pop_front();
 			_conditionEvents[conditionTriggerType] = eventsList;
 
-			return conditionEvent->launch();
+			bool launch = conditionEvent->launch();
+
+			if (launch) {
+				delete conditionEvent;
+				conditionEvent = NULL;
+			}
+
+			return launch;
 		}
 
 		return false;
@@ -217,6 +225,9 @@ namespace Logic {
 					luabind::def("getSingletonPtr", &CEventManager::getSingletonPtr)
 				]
 			];
+
+		// SoulsTrialManager.
+		CSoulsTrialManager::luaRegister();
 
 		// Jerarquía de mensajes.
 		Logic::Message::luaRegister();
@@ -395,7 +406,7 @@ namespace Logic {
 		return false;
 	}
 
-	bool CEventManager::HandleMessage(const NumberMessage& msg)
+	bool CEventManager::HandleMessage(const SoulBurnMessage& msg)
 	{
 		//std::cout << msg._type << "\n";
 

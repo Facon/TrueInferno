@@ -1,144 +1,473 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\Src\Logic\BuildingManager.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Billboard.cpp" />
+    <Filter Include="Maps">
+      <UniqueIdentifier>{ca38a90d-e0c2-43cb-84f4-3492d4693f17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maps\Source Files">
+      <UniqueIdentifier>{dd68b4c5-41da-4e9d-b064-4ae065e3ccef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{05994364-9d20-405c-8c14-2757dfa1104b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Source Files">
+      <UniqueIdentifier>{0e8edd8a-2878-4e33-9aa8-bcf3b46137d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Entity\Components">
+      <UniqueIdentifier>{e9ceafce-bc53-40d2-a4a3-6ebdb6c987aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Components\Source Files">
+      <UniqueIdentifier>{0d3eb664-af15-498e-9e00-23d67b9c271e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Components\Header Files">
+      <UniqueIdentifier>{40d43982-4d6f-4a4a-b427-ce5753f432e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maps\Managers">
+      <UniqueIdentifier>{5f29a869-ef9d-45ec-96f6-c32ccc0754fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maps\Header Files">
+      <UniqueIdentifier>{320db237-96cd-4066-90fc-d696d208ff57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maps\Managers\Source Files">
+      <UniqueIdentifier>{cfb5c5d5-81bb-407f-88db-83002e5eb2c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maps\Managers\Header Files">
+      <UniqueIdentifier>{7de8ab9b-481b-4694-a463-53c4f2a7c5ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{a58979d1-8f3d-4661-9b13-fc66d5a2e82c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{9a68b189-ac40-4452-ba8c-91831b00fb7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{216c283c-a8b2-404f-b446-6325d735dd73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Header Files">
+      <UniqueIdentifier>{4b346ce5-a721-4de0-bdb6-fe41c03b2534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Source Files">
+      <UniqueIdentifier>{da242379-3a6c-45aa-b90e-5716c28e3edf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Lua Files">
+      <UniqueIdentifier>{e2bf1a8b-e0cb-47a6-84e3-7a10503e1447}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp">
+      <Filter>Maps\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\EntityFactory.cpp">
+      <Filter>Maps\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\EntityID.cpp">
+      <Filter>Maps\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Map.cpp">
+      <Filter>Maps\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Component.cpp">
+      <Filter>Entity\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Entity.cpp">
+      <Filter>Entity\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\AnimatedGraphics.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\AvatarController.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Camera.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\DamageTrigger.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Graphics.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Life.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\PhysicEntity.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchPosition.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\RayPerception.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\PhysicController.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\TileManager.cpp">
+      <Filter>Maps\Managers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.cpp">
+      <Filter>Maps\Managers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp">
+      <Filter>Maps\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Placeable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\TimeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\ResourcesManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\HFManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\CameraController.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Soul.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFollower.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\HellQuarters.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\WorkBuilding.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\BuildingManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\EventManager.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\Event.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\BuildingDestructionEvent.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulSender.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Sound.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\TutorialEvent.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\EndGameEvent.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptySMComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceTransformer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulBurner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceDemander.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Toggleable.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\PowerGenerator.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\PowerConsumer.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\WorkManager.cpp">
+      <Filter>Maps\Managers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\PowerManager.cpp">
+      <Filter>Maps\Managers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceConsumer.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Message.cpp">
+      <Filter>Entity\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.cpp">
+      <Filter>Events\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\SoulManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\BuildingSelection.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\CameraController.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\DamageTrigger.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\EmptySMComponent.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\HellQuarters.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Life.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\PowerConsumer.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\PowerGenerator.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceConsumer.cpp" />
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceGatherer.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceProvider.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFinder.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\PathFollower.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\PhysicController.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\PhysicEntity.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Placeable.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\RayPerception.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceDemander.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceTransformer.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Soul.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulBurner.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\SoulSender.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Sound.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchPosition.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Tile.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Toggleable.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\WorkBuilding.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Message.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Events\BuildingDestructionEvent.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Events\EndGameEvent.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Events\Event.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Events\EventManager.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Events\TutorialEvent.cpp" />
-    <ClCompile Include="..\..\Src\Logic\HFManager.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\EntityFactory.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\EntityID.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\Managers\PowerManager.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\Managers\TileManager.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\Managers\WorkManager.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\Map.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Component.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Entity.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\AnimatedGraphics.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\AvatarController.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Camera.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Entity\Components\Graphics.cpp" />
-    <ClCompile Include="..\..\Src\Logic\ResourcesManager.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Server.cpp" />
-    <ClCompile Include="..\..\Src\Logic\SoulManager.cpp" />
-    <ClCompile Include="..\..\Src\Logic\TimeManager.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Maps\Managers\GameManager.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Events\EndRoundEvent.cpp" />
+    <ClCompile Include="..\..\Src\Logic\SoulsTrialManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Entity\Components\Billboard.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\GameManager.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\EndRoundEvent.cpp">
+      <Filter>Entity\Components\Source Files</Filter>
+	</ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\Logic\BuildingManager.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Billboard.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\BuildingSelection.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\CameraController.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptySMComponent.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\HellQuarters.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\PowerConsumer.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\PowerGenerator.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceConsumer.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceGatherer.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceProvider.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFinder.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFollower.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Physics.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\DamageTrigger.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Life.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\PhysicController.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\PhysicEntity.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Placeable.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\RayPerception.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceDemander.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceTransformer.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Soul.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulBurner.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulSender.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Sound.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchPosition.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Tile.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Toggleable.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\WorkBuilding.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Consumer.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\LogicRequirement.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\MessageHandler.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h" />
-    <ClInclude Include="..\..\Src\Logic\Events\BuildingDestructionEvent.h" />
-    <ClInclude Include="..\..\Src\Logic\Events\EndGameEvent.h" />
-    <ClInclude Include="..\..\Src\Logic\Events\Event.h" />
-    <ClInclude Include="..\..\Src\Logic\Events\EventManager.h" />
-    <ClInclude Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.h" />
-    <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h" />
-    <ClInclude Include="..\..\Src\Logic\HFManager.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\Documentation.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\EntityFactory.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\EntityID.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\Managers\PowerManager.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\Managers\TileManager.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\Managers\WorkManager.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\Map.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Component.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Documentation.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Entity.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Message.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\AnimatedGraphics.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\AvatarController.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Camera.h" />
-    <ClInclude Include="..\..\Src\Logic\Entity\Components\Graphics.h" />
-    <ClInclude Include="..\..\Src\Logic\Documentation.h" />
-    <ClInclude Include="..\..\Src\Logic\ResourcesManager.h" />
-    <ClInclude Include="..\..\Src\Logic\Server.h" />
-    <ClInclude Include="..\..\Src\Logic\SoulManager.h" />
-    <ClInclude Include="..\..\Src\Logic\TimeManager.h" />
-    <ClInclude Include="..\..\Src\Logic\Maps\Managers\GameManager.h" />
-    <ClInclude Include="..\..\Src\Logic\Events\EndRoundEvent.h" />
+    <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
+      <Filter>Maps\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Documentation.h">
+      <Filter>Maps\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\EntityFactory.h">
+      <Filter>Maps\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\EntityID.h">
+      <Filter>Maps\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Map.h">
+      <Filter>Maps\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Component.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Documentation.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Entity.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Message.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\AnimatedGraphics.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\AvatarController.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Camera.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Graphics.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Documentation.h">
+      <Filter>Maps\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\DamageTrigger.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Life.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\PhysicEntity.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchPosition.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\SwitchTrigger.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\RayPerception.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\PhysicController.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Physics.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Tile.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptyComponentTemplate.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Placeable.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\TileManager.h">
+      <Filter>Maps\Managers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.h">
+      <Filter>Maps\Managers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\TimeManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\ResourcesManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\HFManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\CameraController.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Soul.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFollower.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\HellQuarters.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\WorkBuilding.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\BuildingManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\EventManager.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\Event.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\BuildingDestructionEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\StateMachineExecutor.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\PathFinder.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulSender.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Sound.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceExtractor.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\EndGameEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\EmptySMComponent.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceTransformer.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\SoulBurner.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceBuilding.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceDemander.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceProvider.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Toggleable.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\PowerGenerator.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\PowerConsumer.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\WorkManager.h">
+      <Filter>Maps\Managers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\PowerManager.h">
+      <Filter>Maps\Managers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceConsumer.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\MessageHandler.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Consumer.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\LogicRequirement.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.h">
+      <Filter>Events\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\SoulManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\BuildingSelection.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceGatherer.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Entity\Components\Billboard.h">
+      <Filter>Entity\Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\SoulsTrialManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\GameManager.h">
+		<Filter>Header Files</Filter>
+	</ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\EndRoundEvent.h">
+		<Filter>Header Files</Filter>    
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Src\Logic\Events\EventManager.lua" />
-    <None Include="..\..\Src\Logic\Events\InitialEvents.lua" />
+    <None Include="..\..\Src\Logic\Events\InitialEvents.lua">
+      <Filter>Events\Lua Files</Filter>
+    </None>
+    <None Include="..\..\Src\Logic\Events\EventManager.lua">
+      <Filter>Events\Lua Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

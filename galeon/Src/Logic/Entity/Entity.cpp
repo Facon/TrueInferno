@@ -287,7 +287,7 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
-	bool CEntity::HandleMessage(const NumberMessage& msg)
+	bool CEntity::HandleMessage(const SoulBurnMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}

@@ -9,26 +9,30 @@ namespace AI{
 	class CBurnTask : public CSoulTask {
 
 	public:
-		CBurnTask(Logic::CMap *map, const Logic::TEntityID& target) : CSoulTask(map, target) {};
+		CBurnTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::CSoulsTrialManager::SoulsCategory category) :
+			CSoulTask(map, target, category) {};
 
 		virtual ~CBurnTask() {};
 
 		virtual CSoulTask* clone(){
-			return new CBurnTask(_map, _target);
+			return new CBurnTask(_map, _target, _category);
 		}
 
-		bool start(){
+		bool start()
+		{
 			return true;
 		}
 
-		bool execute() {
+		bool execute()
+		{
 			// Chequeamos que el objetivo siga existiendo
 			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 
 			// Si lo está
-			if (targetEntity != nullptr){
+			if (targetEntity != nullptr)
+			{
 				// Notificamos al objetivo
-				NumberMessage m(MessageType::FURNACE_BURN_SOULS, 1);
+				SoulBurnMessage m(1, _category);
 				return m.Dispatch(*targetEntity);
 			}
 

@@ -389,7 +389,7 @@ namespace AI {
 		return false;
 	}
 
-	bool CAIManager::HandleMessage(const NumberMessage& msg)
+	bool CAIManager::HandleMessage(const SoulBurnMessage& msg)
 	{
 		//std::cout << msg._type << "\n";
 

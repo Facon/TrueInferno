@@ -19,59 +19,18 @@
 			<Property name="Area" value="{{0.05,0},{0.1,0},{0.95,0},{0.8,0}}" />
 		</Window>
 		
-		<Window type="OgreTray/StaticImage" name="CloseWindow">
+		<Window type="OgreTray/TrueInfernoButtonCancel" name="CloseWindow" >
 			<Property name="Area" value="{{0.94,0},{0.01,0},{0.99,0},{0.06,0}}" />
-			<Property name="Image" value="TrueInfernoIcons/Cancel" />				
-			<Property name="AlwaysOnTop" value="True" />			
-						
-				<Window type="OgreTray/Button" name="Button" >
-					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-					<Property name="Font" value="Jura-12" />
-					<Property name="Text" value="Close" />
-					<Property name="AlwaysOnTop" value="True" />
-					<Property name="Alpha" value="0.0" />
-				</Window>
-		</Window>		
+		</Window>	
 		
-		<Window type="OgreTray/StaticImage" name="CreateSoul">
+		<Window type="OgreTray/TrueInfernoButtonCreateSoul" name="CreateSoul" >
 			<Property name="Area" value="{{0.345,0},{0.81,0},{0.485,0},{0.95,0}}" />
-			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
-			<Property name="AlwaysOnTop" value="True" />
-			 
-			
-			<Window type="OgreTray/StaticImage" name="Image">
-				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
-				<Property name="Image" value="TrueInfernoIcons/CreateSoul" />				
-				<Property name="AlwaysOnTop" value="True" />	
-				 
-				
-				<Window type="OgreTray/Button" name="Button" >
-					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-					<Property name="Alpha" value="0.0" />
-					 
-				</Window>
-			</Window>
 		</Window>
 		
-		<Window type="OgreTray/StaticImage" name="BurnSoul">
+		<Window type="OgreTray/TrueInfernoButtonBurnSoul" name="BurnSoul" >
 			<Property name="Area" value="{{0.515,0},{0.81,0},{0.655,0},{0.95,0}}" />
-			<Property name="Image" value="TrueInfernoIcons/BorderLine" />				
-			<Property name="AlwaysOnTop" value="True" />
-			 
-			
-			<Window type="OgreTray/StaticImage" name="Image">
-				<Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.8,0}}" />
-				<Property name="Image" value="TrueInfernoIcons/BurnSoul" />				
-				<Property name="AlwaysOnTop" value="True" />	
-				 
-				
-				<Window type="OgreTray/Button" name="Button" >
-					<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-					<Property name="Alpha" value="0.0" />
-					 
-				</Window>
-			</Window>
-		</Window>	
+		</Window>
+
 		
 	</Window>
 </GUILayout>

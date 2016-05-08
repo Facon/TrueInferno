@@ -27,6 +27,7 @@ la gestión de la lógica del juego.
 #include "Logic/BuildingManager.h"
 #include "Logic/SoulManager.h"
 #include "Logic/Maps/Managers/GameManager.h"
+#include "Logic/SoulsTrialManager.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "AI/Server.h"
@@ -120,6 +121,10 @@ namespace Logic {
 		if (!Logic::CSoulManager::Init())
 			return false;
 
+		// Inicializamos el gestor de almas.
+		if (!Logic::CSoulsTrialManager::Init())
+			return false;
+
 		// Inicializamos el gestor de eventos de juego.
 		if (!Logic::CEventManager::Init())
 			return false;
@@ -153,6 +158,8 @@ namespace Logic {
 		AI::CAIManager::Release();
 
 		Logic::CEventManager::Release();
+
+		Logic::CSoulsTrialManager::Release();
 
 		Logic::CSoulManager::Release();
 
@@ -243,6 +250,8 @@ namespace Logic {
 		_map->tick(msecs);
 
 		Logic::CTimeManager::getSingletonPtr()->tick(msecs);
+
+		Logic::CSoulsTrialManager::getSingletonPtr()->tick(msecs);
 
 		Logic::CEventManager::getSingletonPtr()->tick(msecs);
 

@@ -146,11 +146,25 @@ end
 -- Función de actualización del nivel de dificultad
 function AIManager:updateDifficulty()
 	-- TODO Actualizar en función de los puntos del jugador y la curva deseada
-	if(CTimeManager.getSingletonPtr():getElapsedGlboalTime() > 60000)
+	if(CTimeManager.getSingletonPtr():getElapsedGlboalTime() <= 30000)
 	then
-		self.desiredDifficulty = 1
+		self.desiredDifficulty = 0.0
+
+	elseif(CTimeManager.getSingletonPtr():getElapsedGlboalTime() <= 60000)
+	then
+		self.desiredDifficulty = 0.25
+		
+	elseif(CTimeManager.getSingletonPtr():getElapsedGlboalTime() <= 120000)
+	then
+		self.desiredDifficulty = 0.5
+
+	elseif(CTimeManager.getSingletonPtr():getElapsedGlboalTime() <= 180000)
+	then
+		self.desiredDifficulty = 0.75
+
 	else
-		self.desiredDifficulty = 0		
+		self.desiredDifficulty = 1.0
+		
 	end
 end
 
