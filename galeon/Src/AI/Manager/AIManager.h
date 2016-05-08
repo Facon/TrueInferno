@@ -119,7 +119,7 @@ namespace AI
 		bool HandleMessage(const SoulSenderMessage& msg);
 		bool HandleMessage(const SoulMessage& msg);
 		bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
-		bool HandleMessage(const NumberMessage& msg);
+		bool HandleMessage(const SoulBurnMessage& msg);
 		bool HandleMessage(const ResourceMessage& msg);
 		bool HandleMessage(const GetCostPlaceableMessage& msg);
 		bool HandleMessage(const LogisticsMessage& msg);

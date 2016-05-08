@@ -239,31 +239,6 @@ namespace GUI
 		return (_placeableEntity != nullptr);
 	}
 
-
-	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
-	{
-		ClearBuildingConstruction();
-		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK);
-		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
-		
-		m.Dispatch(*hellQuarters->getEntity());
-		
-		return true;
-	}
-
-
-	bool SideBarUI::moveSoulReleased(const CEGUI::EventArgs& e)
-	{
-		ClearBuildingConstruction();
-		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN);
-		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
-
-		m.Dispatch(*hellQuarters->getEntity());
-
-		return true;
-	}
-
-
 	bool SideBarUI::createEvilworksReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();

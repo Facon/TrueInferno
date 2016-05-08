@@ -4,6 +4,12 @@
 #include <vector>
 #include "OgreVector3.h"
 
+using namespace Logic;
+
+namespace Logic {
+	class CPlaceable;
+}
+
 namespace AI {
 	class CSoulTask;
 }
@@ -12,7 +18,7 @@ namespace AI {
 	class CSMSoulData {
 
 	public:
-		CSMSoulData() : _task(nullptr), _path(nullptr), _numSouls(0) {}
+		CSMSoulData() : _task(nullptr), _building(nullptr), _path(nullptr), _numSouls(0) {}
 		
 		virtual ~CSMSoulData()
 		{
@@ -29,6 +35,18 @@ namespace AI {
 
 		void setTask(CSoulTask* task){
 			_task = task;
+		}
+
+		CPlaceable* getBuilding(){
+			return _building;
+		}
+
+		void setBuilding(CPlaceable* building){
+			_building = building;
+		}
+
+		void clearBuilding(){
+			_building = nullptr;
 		}
 
 		int getNumSouls(){
@@ -49,6 +67,8 @@ namespace AI {
 	
 	private:
 		CSoulTask* _task;
+
+		CPlaceable* _building;
 
 		int _numSouls;
 

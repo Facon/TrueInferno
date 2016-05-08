@@ -230,13 +230,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\BuildingSelection.cpp" />
-<<<<<<< 15d1adcfdaa5c045db30fc5765e32f472ecc9e83
     <ClCompile Include="..\..\Src\Logic\Entity\Components\ResourceGatherer.cpp" />
-=======
+    <ClCompile Include="..\..\Src\Logic\SoulsTrialManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Entity\Components\Billboard.cpp">
       <Filter>Entity\Components\Source Files</Filter>
     </ClCompile>
->>>>>>> First implementation for billboards.
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -440,13 +440,14 @@
     <ClInclude Include="..\..\Src\Logic\Entity\Components\BuildingSelection.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
-<<<<<<< 15d1adcfdaa5c045db30fc5765e32f472ecc9e83
     <ClInclude Include="..\..\Src\Logic\Entity\Components\ResourceGatherer.h">
       <Filter>Entity\Header Files</Filter>
-=======
+    </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Billboard.h">
       <Filter>Entity\Components\Header Files</Filter>
->>>>>>> First implementation for billboards.
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\SoulsTrialManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

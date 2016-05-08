@@ -13,15 +13,16 @@ Contiene el tipo de datos de un mensaje.
 #include <string>
 #include <memory>
 
-#include "MessageHandler.h"
+#include "AI/SoulTask.h"
 
-#include "Logic/Events/EventManager.h"
+#include "MessageHandler.h"
 
 #include "BaseSubsystems/Math.h"
 #include "BaseSubsystems/ScriptManager.h"
 
-#include "AI/SoulTask.h"
 #include "Logic/ResourcesManager.h"
+#include "Logic/Events/EventManager.h"
+#include "Logic/SoulsTrialManager.h"
 
 // Predeclaraciones
 namespace Logic
@@ -462,9 +463,12 @@ namespace Logic
 			SEND_SOUL_WORK,
 		};
 
-		HellQuartersMessage(HellQuartersAction action) : Message(MessageType::HELLQUARTERS_REQUEST), _action(action) {}
+		HellQuartersMessage(HellQuartersAction action, int numSouls, CSoulsTrialManager::SoulsCategory soulsCategory) :
+			Message(MessageType::HELLQUARTERS_REQUEST), _action(action), _numSouls(numSouls), _soulsCategory(soulsCategory) {}
 
 		HellQuartersAction _action;
+		unsigned int _numSouls;
+		CSoulsTrialManager::SoulsCategory _soulsCategory;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
@@ -478,7 +482,8 @@ namespace Logic
 	class SoulSenderMessage : public Message
 	{
 	public:
-		SoulSenderMessage(AI::CSoulTask* task, int numSouls) : Message(MessageType::SOUL_SENDER_REQUEST), _task(task), _numSouls(numSouls) {}
+		SoulSenderMessage(AI::CSoulTask* task, int numSouls) :
+			Message(MessageType::SOUL_SENDER_REQUEST), _task(task), _numSouls(numSouls) {}
 
 		//std::unique_ptr<AI::CSoulTask> _task;
 		AI::CSoulTask* _task;
@@ -510,13 +515,15 @@ namespace Logic
 		}
 	};
 
-	/** Mensaje para enviar números enteros: FURNACE_BURN_SOULS */
-	class NumberMessage : public Message
+	// FURNACE_BURN_SOULS
+	class SoulBurnMessage : public Message
 	{
 	public:
-		NumberMessage(MessageType type, int number) : Message(type), _number(number) {}
+		SoulBurnMessage(int numSouls, CSoulsTrialManager::SoulsCategory soulsCategory) :
+			Message(MessageType::FURNACE_BURN_SOULS), _numSouls(numSouls), _soulsCategory(soulsCategory) {}
 
-		int _number;
+		int _numSouls;
+		CSoulsTrialManager::SoulsCategory _soulsCategory;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

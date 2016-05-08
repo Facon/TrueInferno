@@ -1,29 +1,54 @@
 #ifndef SM_SOUL_H_BURNER_DATA_
 #define SM_SOUL_H_BURNER_DATA_
 
-namespace AI {
-	class CSMSoulBurnerData {
+#include <queue>
+#include "Logic\SoulsTrialManager.h"
+
+namespace AI
+{
+	class CSMSoulBurnerData
+	{
 
 	public:
-		CSMSoulBurnerData() : _numSoulsToBurn(0) {}
+
+		CSMSoulBurnerData() { _soulsCategoryToBurn = TSoulsCategoryQueue(); }
 
 		virtual ~CSMSoulBurnerData() {}
 
-		unsigned int getNumSoulsToBurn(){
-			return _numSoulsToBurn;
+		unsigned int getNumSoulsToBurn()
+		{
+			return _soulsCategoryToBurn.size();
 		}
 
-		void setNumSoulsToBurn(unsigned numSouls){
-			_numSoulsToBurn = numSouls;
+		void addSoulToBurn(CSoulsTrialManager::SoulsCategory soulCategory)
+		{
+			_soulsCategoryToBurn.push(soulCategory);
 		}
 
-		void increaseNumSoulsToBurn(unsigned numSouls){
-			_numSoulsToBurn += numSouls;
+		CSoulsTrialManager::SoulsCategory getNextSoulToBurn()
+		{
+			CSoulsTrialManager::SoulsCategory nextSoul = _soulsCategoryToBurn.front();
+			_soulsCategoryToBurn.pop();
+
+			return nextSoul;
+		}
+
+		void cleanSoulsToBurn()
+		{
+			while (!_soulsCategoryToBurn.empty())
+			{
+				_soulsCategoryToBurn.pop();
+			}
 		}
 
 	private:
-		/** Almas preparadas para ser quemadas */
-		unsigned int _numSoulsToBurn;
+
+		/** Tipo cola de almas a quemar */
+		typedef std::queue<CSoulsTrialManager::SoulsCategory> TSoulsCategoryQueue;
+
+		/** (Categoría de las) Almas preparadas para ser quemadas */
+		TSoulsCategoryQueue _soulsCategoryToBurn;
+
 	};
 
 }

@@ -1,4 +1,4 @@
-local launchInitialEvents = true;
+local launchInitialEvents = false;
 
 if launchInitialEvents then
 	print("[LUA] Loading InitialEvents.lua...");
