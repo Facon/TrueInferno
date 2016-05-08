@@ -235,6 +235,7 @@ namespace GUI
 		return true;
 	}
 
+	// TODO Comentar cuando funcione el Juicio de Almas para evitar confusiones
 	bool BuildingSelectionUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
 		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK);
@@ -245,7 +246,7 @@ namespace GUI
 		return true;
 	}
 
-
+	// TODO Comentar cuando funcione el Juicio de Almas para evitar confusiones
 	bool BuildingSelectionUI::burnSoulReleased(const CEGUI::EventArgs& e)
 	{
 		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN);

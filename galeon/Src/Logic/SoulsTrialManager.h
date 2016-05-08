@@ -80,7 +80,8 @@ namespace Logic
 			UNKNOWN,
 			HEAVY,  // +11 Crude
 			WASTED, // +11 Coke
-			LIGHT   // +3  Aether
+			LIGHT,  // +3  Aether
+			NONE
 		};
 
 		/**
@@ -118,6 +119,17 @@ namespace Logic
 		void levelUp();
 
 		/**
+		Devuelve la lista de categorías de almas: Unknown, Heavy,
+		Wasted y Light
+		*/
+		std::string* getSoulsCategories();
+
+		/**
+		Devuelve la cantidad de almas disponibles de cada categoría.
+		*/
+		unsigned int* getAvailableSouls() { return _souls; }
+
+		/**
 		Simula la llegada de un nuevo grupo de almas, asignando
 		cada una de ellas a una categoría.
 		*/
@@ -130,13 +142,17 @@ namespace Logic
 		<p>
 		Llevará a cabo la creación de las almas, comprobando previamente
 		que las cantidades recibidas son correctas con respecto al
-		número de almas disponibles.
+		número de almas disponibles. Si la cantidad solicitada para
+		alguna de las categorías es superior al límite, se devolverá
+		esa misma categoría a fin de poder indicar al jugador dónde
+		está al error.
 
 		@param numSoulsToWork número de almas de cada categoría a trabajar.
 		@param numSoulsToBurn número de almas de cada categoría a quemar.
-		@return true si los valores de cada categoría son correctos.
+		@return SoulsCategory::NONE si los valores de cada categoría son
+		correctos.
 		*/
-		bool createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4]);
+		SoulsCategory createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4]);
 
 	protected:
 
@@ -189,8 +205,8 @@ namespace Logic
 		/**
 		Rango de tiempo (ms) para la llegada periódica de grupos de almas.
 		*/
-		unsigned int _minSoulsGenerationTime = 0.1 * 60 * 1000;
-		unsigned int _maxSoulsGenerationTime = 0.3 * 60 * 1000;
+		unsigned int _minSoulsGenerationTime = 10 * 1000;
+		unsigned int _maxSoulsGenerationTime = 30 * 1000;
 
 		unsigned int _timeForNextSoulsGeneration;
 		unsigned int _timeSinceLastSoulsGeneration = 0;

@@ -81,10 +81,13 @@ namespace Logic {
 
 		if (_timeSinceLastSoulsGeneration >= _timeForNextSoulsGeneration)
 		{
+			// TODO Borrar cuando funcione el Juicio de Almas
 			//std::cout << "pre souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
 
 			processNewGroupOfSouls();
+			// TODO ¿Reproducimos algún sonido o notificación de almas nuevas?
 
+			// TODO Borrar cuando funcione el Juicio de Almas
 			//std::cout << "mid souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
 			//unsigned int toWork[] = { 5, 3, 3, 3 }; //
 			//unsigned int toBurn[] = { 5, 2, 2, 4 }; //
@@ -106,6 +109,15 @@ namespace Logic {
 		_judgeLevel++;
 		
 	} // levelUp
+
+	//--------------------------------------------------------
+
+	std::string* CSoulsTrialManager::getSoulsCategories()
+	{
+		std::string soulsCategories[4] = { "Unknown", "Heavy", "Wasted", "Light" };
+		return soulsCategories;
+
+	} // getSoulsCategories
 
 	//--------------------------------------------------------
 
@@ -132,13 +144,13 @@ namespace Logic {
 
 	//--------------------------------------------------------
 	
-	bool CSoulsTrialManager::createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4])
+	CSoulsTrialManager::SoulsCategory CSoulsTrialManager::createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4])
 	{
 		// Comprobación del número de almas recibido y disponible de cada categoría
 		for (unsigned int i = 0; i < 4 ; ++i)
 		{
 			if (_souls[i] < numSoulsToWork[i] + numSoulsToBurn[i])
-				return false;
+				return static_cast<SoulsCategory>(i);
 		}
 
 		// Creación de las almas
@@ -151,7 +163,7 @@ namespace Logic {
 			_souls[i] -= numSoulsToBurn[i];
 		}
 
-		return true;
+		return SoulsCategory::NONE;
 
 	} // createSouls
 
