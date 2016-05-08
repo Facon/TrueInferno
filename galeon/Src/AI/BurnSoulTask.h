@@ -9,12 +9,13 @@ namespace AI{
 	class CBurnTask : public CSoulTask {
 
 	public:
-		CBurnTask(Logic::CMap *map, const Logic::TEntityID& target) : CSoulTask(map, target) {};
+		CBurnTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::CSoulsTrialManager::SoulsCategory category) :
+			CSoulTask(map, target, category) {};
 
 		virtual ~CBurnTask() {};
 
 		virtual CSoulTask* clone(){
-			return new CBurnTask(_map, _target);
+			return new CBurnTask(_map, _target, _category);
 		}
 
 		bool start(){

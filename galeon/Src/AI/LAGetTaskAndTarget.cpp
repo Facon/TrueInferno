@@ -16,13 +16,17 @@ namespace AI {
 		{
 			case HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN:
 			{
-				_pendingSoulsToBurn += msg._numSouls;
+				for (unsigned int i = 0; i < msg._numSouls; ++i)
+					_pendingSoulsToBurn.push(msg._soulsCategory);
+
 				break;
 			}
 
 			case HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK:
 			{
-				_pendingSoulsToWork += msg._numSouls;
+				for (unsigned int i = 0; i < msg._numSouls; ++i)
+					_pendingSoulsToWork.push(msg._soulsCategory);
+
 				break;
 			}
 
@@ -52,7 +56,7 @@ namespace AI {
 
 	CLatentAction::LAStatus CLAGetTaskAndTarget::OnRun(unsigned int msecs)
 	{
-		if (_pendingSoulsToWork == 0 && _pendingSoulsToBurn == 0)
+		if (_pendingSoulsToWork.empty() && _pendingSoulsToBurn.empty())
 			// No hay almas por crear. Suspendemos hasta nueva petición
 			return LAStatus::SUSPENDED;
 
@@ -60,11 +64,11 @@ namespace AI {
 		bool burnTask = false;
 
 		// Creación de tareas
-		if (_pendingSoulsToWork > 0)
+		if (!_pendingSoulsToWork.empty())
 			// Crear y enviar alma a trabajar
 			workTask = createWorkTask();
 
-		if (_pendingSoulsToBurn > 0)
+		if (!_pendingSoulsToBurn.empty())
 			// Crear y enviar alma a quemarse
 			burnTask = createBurnTask();
 
@@ -77,7 +81,7 @@ namespace AI {
 			sendWork = sendSoul(true);
 
 			if (sendWork)
-				--_pendingSoulsToWork;
+				_pendingSoulsToWork.pop();
 		}
 
 		if (burnTask)
@@ -85,7 +89,7 @@ namespace AI {
 			sendBurn = sendSoul(false);
 
 			if (sendBurn)
-				--_pendingSoulsToBurn;
+				_pendingSoulsToBurn.pop();
 		}
 
 		// Devolvemos siempre RUNNING, independientemente de que hayan podido crearse almas en
@@ -103,7 +107,7 @@ namespace AI {
 			return false;
 
 		//std::unique_ptr<CWorkTask> _task(new CWorkTask(target));
-		_workTask = new CWorkTask(_entity->getMap(), target);
+		_workTask = new CWorkTask(_entity->getMap(), target, _pendingSoulsToWork.front());
 		return true;
 	}
 
@@ -117,7 +121,7 @@ namespace AI {
 			return false;
 
 		//std::unique_ptr<CBurnTask> _task(new CBurnTask(target));
-		_burnTask = new CBurnTask(_entity->getMap(), target);
+		_burnTask = new CBurnTask(_entity->getMap(), target, _pendingSoulsToBurn.front());
 		return true;
 	}
 

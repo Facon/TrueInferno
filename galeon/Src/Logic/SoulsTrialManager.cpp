@@ -109,10 +109,10 @@ namespace Logic {
 
 			// TODO Borrar cuando funcione el Juicio de Almas
 			//std::cout << "mid souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
-			//unsigned int toWork[] = { 5, 3, 3, 3 }; //
-			//unsigned int toBurn[] = { 5, 2, 2, 4 }; //
-			//bool createsouls = createSouls(toWork, toBurn); //
-			//std::cout << "create si o no = " << createsouls << std::endl; //
+			//unsigned int toWork[] = { 2, 1, 2, 1 }; //
+			//unsigned int toBurn[] = { 2, 2, 2, 1 }; //
+			//SoulsCategory category = createSouls(toWork, toBurn); //
+			//std::cout << "create si o no = " << (category == SoulsCategory::NONE) << std::endl; //
 			//std::cout << "pst souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
 
 			_timeForNextSoulsGeneration = Math::random(_minSoulsGenerationTime, _maxSoulsGenerationTime);
@@ -213,7 +213,9 @@ namespace Logic {
 
 	bool CSoulsTrialManager::open()
 	{
-		_souls[4] = { 0 };
+		for (unsigned int i = 0; i < 4; ++i)
+			_souls[i] = 0;
+
 		_timeForNextSoulsGeneration = (_minSoulsGenerationTime + _maxSoulsGenerationTime) / 2;
 		return true;
 

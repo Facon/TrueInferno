@@ -10,12 +10,13 @@ namespace AI{
 	class CWorkTask : public CSoulTask {
 
 	public:
-		CWorkTask(Logic::CMap *map, const Logic::TEntityID& target) : CSoulTask(map, target) {};
+		CWorkTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::CSoulsTrialManager::SoulsCategory category) :
+			CSoulTask(map, target, category) {};
 
 		virtual ~CWorkTask() {};
 
 		virtual CSoulTask* clone(){
-			return new CWorkTask(_map, _target);
+			return new CWorkTask(_map, _target, _category);
 		}
 
 		bool start(){

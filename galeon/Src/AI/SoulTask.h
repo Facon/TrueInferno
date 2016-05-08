@@ -2,12 +2,16 @@
 #define SOUL_TASK_H_
 
 #include "Logic\Maps\Map.h"
+#include "Logic\SoulsTrialManager.h"
 
-namespace AI{
-	class CSoulTask {
+namespace AI
+{
+	class CSoulTask
+	{
 
 	public:
-		CSoulTask(Logic::CMap *map, const Logic::TEntityID& target) : _map(map), _target(target) {}
+		CSoulTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::CSoulsTrialManager::SoulsCategory category) :
+			_map(map), _target(target), _category(category) {}
 
 		virtual ~CSoulTask() {};
 
@@ -35,6 +39,9 @@ namespace AI{
 
 		/** Objetivo hasta donde debe desplazarse el alma */
 		Logic::TEntityID _target;
+
+		/** Categoría asignada al alma durante el Juicio de Almas inicial */
+		Logic::CSoulsTrialManager::SoulsCategory _category;
 	};
 
 }

@@ -1,13 +1,16 @@
 #ifndef LA_GET_TASK_TARGET_
 #define LA_GET_TASK_TARGET_
 
+#include <queue>
+
 #include "LatentAction.h"
 #include "Server.h"
 #include "SoulTask.h"
 #include "WorkSoulTask.h"
 #include "BurnSoulTask.h"
-#include "Logic\BuildingManager.h"
 #include "Logic\Entity\Message.h"
+#include "Logic\BuildingManager.h"
+#include "Logic\SoulsTrialManager.h"
 
 namespace AI {
 	class CLAGetTaskAndTarget : public CLatentAction {
@@ -17,6 +20,9 @@ namespace AI {
 		CLAGetTaskAndTarget(CEntity* entity) : CLatentAction(entity) {
 			_workTask = nullptr;
 			_burnTask = nullptr;
+
+			_pendingSoulsToWork = TSoulsCategoryQueue();
+			_pendingSoulsToBurn = TSoulsCategoryQueue();
 		}
 
 		virtual ~CLAGetTaskAndTarget()
@@ -51,10 +57,12 @@ namespace AI {
 		}
 
 		/**
-		Almas restantes por crear y enviar.
+		(Categoría de las) Almas restantes por crear y enviar.
 		*/
-		int _pendingSoulsToBurn = 0;
-		int _pendingSoulsToWork = 0;
+		typedef std::queue<CSoulsTrialManager::SoulsCategory> TSoulsCategoryQueue;
+
+		TSoulsCategoryQueue _pendingSoulsToWork;
+		TSoulsCategoryQueue _pendingSoulsToBurn;
 	};
 
 }
