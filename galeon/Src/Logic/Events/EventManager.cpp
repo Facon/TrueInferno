@@ -402,7 +402,7 @@ namespace Logic {
 		return false;
 	}
 
-	bool CEventManager::HandleMessage(const NumberMessage& msg)
+	bool CEventManager::HandleMessage(const SoulBurnMessage& msg)
 	{
 		//std::cout << msg._type << "\n";
 

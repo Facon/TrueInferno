@@ -142,7 +142,7 @@ namespace Logic
 
 		SM_EXECUTOR_HANDLE_MESSAGE(SoulMessage);
 
-		SM_EXECUTOR_HANDLE_MESSAGE(NumberMessage);
+		SM_EXECUTOR_HANDLE_MESSAGE(SoulBurnMessage);
 
 		SM_EXECUTOR_HANDLE_MESSAGE(LogisticsMessage);
 

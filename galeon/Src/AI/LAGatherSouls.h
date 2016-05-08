@@ -18,7 +18,7 @@ namespace AI {
 
 		virtual ~CLAGatherSouls() {}
 
-		bool HandleMessage(const NumberMessage& msg);
+		bool HandleMessage(const SoulBurnMessage& msg);
 
 	protected:
 		LAStatus OnStart();

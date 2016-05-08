@@ -515,13 +515,15 @@ namespace Logic
 		}
 	};
 
-	/** Mensaje para enviar números enteros: FURNACE_BURN_SOULS */
-	class NumberMessage : public Message
+	// FURNACE_BURN_SOULS
+	class SoulBurnMessage : public Message
 	{
 	public:
-		NumberMessage(MessageType type, int number) : Message(type), _number(number) {}
+		SoulBurnMessage(int numSouls, CSoulsTrialManager::SoulsCategory soulsCategory) :
+			Message(MessageType::FURNACE_BURN_SOULS), _numSouls(numSouls), _soulsCategory(soulsCategory) {}
 
-		int _number;
+		int _numSouls;
+		CSoulsTrialManager::SoulsCategory _soulsCategory;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{
