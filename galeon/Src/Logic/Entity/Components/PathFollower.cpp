@@ -65,14 +65,14 @@ namespace Logic
 			// TODO Mirar como hacer la rotación sin usar LookAt
 			//this.transform.LookAt(targetPosition);
 			
-			_startTime = Logic::TimeManager::getSingletonPtr()->getElapsedTime();
+			_startTime = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime();
 			_journeyLength = _startPosition.distance(_targetPosition);
 		}
 
 		if (_moving)
 		{
 			// Lerp
-			unsigned int appTime = Logic::TimeManager::getSingletonPtr()->getElapsedTime();
+			unsigned int appTime = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime();
 			float distCovered = ((appTime - _startTime) / 1000.0f) * CSoulManager::getSingletonPtr()->getMovementSpeed(); // Dividido entre 1000.0f para pasarlo a segundos
 			float fracJourney = distCovered / _journeyLength;
 			_entity->setPosition(Math::lerp<Vector3, float>(_startPosition, _targetPosition, fracJourney));

@@ -1,20 +1,20 @@
 //---------------------------------------------------------------------------
-// CEndGameEvent.cpp
+// CEndRoundEvent.cpp
 //---------------------------------------------------------------------------
 
 /**
-@file CEndGameEvent.cpp
+@file CEndRoundEvent.cpp
 
-Implementación de un evento de tipo INFO consistente únicamente en mostrar
-el panel de fin del juego (con victoria o derrota).
+Implementación de un evento de tipo INFO que muestra al jugador
+el desenlace de la ronda (victoria o derrota).
 
 @see Logic::CEvent
 
-@author Raúl Segura
-@date Marzo, 2016
+@author Álvaro Valera
+@date Mayo, 2016
 */
 
-#include "EndGameEvent.h"
+#include "EndRoundEvent.h"
 #include "BaseSubsystems/ScriptManager.h"
 
 #include "GUI/Server.h"
@@ -23,18 +23,18 @@ el panel de fin del juego (con victoria o derrota).
 
 namespace Logic {
 
-	void CEndGameEvent::luaRegister()
+	void CEndRoundEvent::luaRegister()
 	{
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
 			[
-				luabind::class_<CEndGameEvent, CEvent>("CEndGameEvent")
+				luabind::class_<CEndRoundEvent, CEvent>("CEndRoundEvent")
 				.def(luabind::constructor<bool>())
 			];
 	}
 
 	//--------------------------------------------------------
 
-	void CEndGameEvent::execute()
+	void CEndRoundEvent::execute()
 	{
 		// @TODO Hacer esto bien...
 		std::string eventImage, eventTitle, eventText, eventTextResume;
@@ -43,8 +43,8 @@ namespace Logic {
 		{
 		case true:
 			eventImage = "EventVictory";
-			eventTitle = "VICTORY!";
-			eventText = "YOU DID IT! You ARE the WINNER!";
+			eventTitle = "You are in the NEXT ROUND!";
+			eventText = "YES!! That’s how it’s done, kiddo. I KNEW you had potential. HAH!! Look at your rivals’ faces, you really pissed them off. This deserves some extra points. Here you go. Hades’ Favor increased! +66.666 Now on to the next round! Give’em Hell!";
 			eventTextResume = "";
 			break;
 

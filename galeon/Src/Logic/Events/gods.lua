@@ -2,11 +2,11 @@
 
 if godTraitsIncluded == nil
 then
-	if loadFromCpp == nil
+	if loadFromCpp ~= nil
 	then
-		dofile("godTraits.lua")
-	else
 		dofile("../Src/Logic/Events/godTraits.lua")
+	else
+		dofile("godTraits.lua")
 	end
 end
 
@@ -33,9 +33,6 @@ function God:new (name, isBoss)
 	do
 		self.traits[godTrait.name] = 0.2
 	end
-	
-	-- Registramos el dios en C++
-	CAIManager.getSingletonPtr():addGod(self.name, self.isBoss);
 	
 	return self
 end
@@ -82,6 +79,15 @@ gods =
 	Hel,
 	Cthulhu,
 }
+
+-- Registramos los dioses en C++
+for index,god in pairs(gods)
+do
+	if loadFromCpp ~= nil
+	then
+		CAIManager.getSingletonPtr():addGod(god.name, god.isBoss)
+	end
+end
 
 -- DEBUG
 --[[

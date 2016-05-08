@@ -90,7 +90,10 @@ namespace Logic
 			TUTORIAL,
 			// Eventos disparados al final de la partida para mostrar el
 			// resultado de la misma y la puntuación final.
-			END_GAME
+			END_GAME,
+			// Eventos disparados al final de la ronda para mostrar el
+			// resultado de la misma.
+			END_ROUND
 		};
 
 		/**
@@ -114,7 +117,7 @@ namespace Logic
 			// Si no
 			else // !absoluteTime
 				// El instante de lanzamiento es relativo al instante actual
-				_time = Logic::TimeManager::getSingletonPtr()->getElapsedTime() + time;
+				_time = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime() + time;
 		}
 
 		/**

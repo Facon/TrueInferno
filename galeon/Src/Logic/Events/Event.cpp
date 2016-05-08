@@ -54,11 +54,11 @@ namespace Logic {
 
 	bool CEvent::mustBeLaunched()
 	{
-		// @TODO Usar aquí el TimeManager para los tiempos exactos, ya que el AppTime siempre
+		// @TODO Usar aquí el CTimeManager para los tiempos exactos, ya que el AppTime siempre
 		// va por delante tantos segundos como se tarde en cargar la aplicación. Habrá que
-		// cambiar la implementación del TimeManager porque ahora mismo solo contiene el
+		// cambiar la implementación del CTimeManager porque ahora mismo solo contiene el
 		// tiempo decreciente.
-		return (_trigger == TIME && _time <= Logic::TimeManager::getSingletonPtr()->getElapsedTime())
+		return (_trigger == TIME && _time <= Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime())
 			|| _trigger == CONDITION;
 
 	} // mustBeLaunched

@@ -2,11 +2,11 @@
 
 if godTraitsIncluded == nil
 then
-	if loadFromCpp == nil
+	if loadFromCpp ~= nil
 	then
-		dofile("godTraits.lua")
-	else
 		dofile("../Src/Logic/Events/godTraits.lua")
+	else
+		dofile("godTraits.lua")
 	end
 end
 
@@ -61,7 +61,7 @@ BuildingDestructionEvent.good = 0
 BuildingDestructionEvent.evil = 1.0
 BuildingDestructionEvent.godTraits.aggressive = 1.0
 BuildingDestructionEvent.throw = function()
-	local timeToLaunch = CAIManager.getSingletonPtr():getElapsedTime() + 100
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(timeToLaunch));
 end
 
@@ -70,7 +70,7 @@ SoulsSpeedReductionEvent.good = 0
 SoulsSpeedReductionEvent.evil = 0.4
 SoulsSpeedReductionEvent.godTraits.cheater = 1.0
 SoulsSpeedReductionEvent.throw = function()
-	local timeToLaunch = CAIManager.getSingletonPtr():getElapsedTime() + 100
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	CEventManager.getSingletonPtr():addTimeEvent(CSoulsSpeedReductionEvent(timeToLaunch, true));
 end
 

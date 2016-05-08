@@ -120,6 +120,7 @@
     <ClCompile Include="..\..\Src\Logic\Entity\Message.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\BuildingDestructionEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\EndGameEvent.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\EndRoundEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\Event.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\EventManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.cpp" />
@@ -129,6 +130,7 @@
     <ClCompile Include="..\..\Src\Logic\Maps\EntityFactory.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\EntityID.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Maps\Managers\GameManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\PowerManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\TileManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\Managers\WorkManager.cpp" />
@@ -187,6 +189,7 @@
     <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h" />
     <ClInclude Include="..\..\Src\Logic\Events\BuildingDestructionEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\EndGameEvent.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\EndRoundEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\Event.h" />
     <ClInclude Include="..\..\Src\Logic\Events\EventManager.h" />
     <ClInclude Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.h" />
@@ -197,6 +200,7 @@
     <ClInclude Include="..\..\Src\Logic\Maps\EntityFactory.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\EntityID.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\EmptyManagerTemplate.h" />
+    <ClInclude Include="..\..\Src\Logic\Maps\Managers\GameManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\PowerManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\TileManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\WorkManager.h" />

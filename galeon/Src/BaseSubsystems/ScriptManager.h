@@ -266,6 +266,8 @@ public:
 
 	bool executeProcedure(const char *subroutineName, int param1);
 
+	bool executeProcedure(const char *subroutineName, std::string param1);
+
 	bool executeFunction(const char *subroutineName, int param1, int &result);
 
 	/**

@@ -130,7 +130,7 @@ namespace Logic {
 		if (ev->getEventTrigger() != CEvent::EventTrigger::TIME)
 			return false;
 		
-		if (ev->getTime() < Logic::TimeManager::getSingletonPtr()->getElapsedTime()){
+		if (ev->getTime() < Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime()){
 			assert(false && "Event to be thrown in the past!");
 			return false;
 		}

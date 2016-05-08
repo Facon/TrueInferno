@@ -37,8 +37,8 @@ namespace AI
 	*/
 	class CAIManager : public MessageHandler
 	{
-	public:
 
+	public:
 		/**
 		Devuelve la única instancia de la clase.
 		@return Puntero a la instancia de la clase.
@@ -75,14 +75,6 @@ namespace AI
 		*/
 		bool loadAIScript(const std::string& filename);
 
-		/**
-		Devuelve el tiempo transcurrido (ms) de la aplicación.
-		Es una función-puente para que Lua no tenga que acceder a otras partes del motor.
-
-		@return Tiempo (ms) que la aplicación lleva activa.
-		*/
-		long getElapsedTime() const;
-
 		/** 
 		Añade un dios al juego.
 		Típicamente querremos invocar este método desde Lua que es donde se configuran los dioses.
@@ -90,14 +82,20 @@ namespace AI
 		void addGod(const std::string& name, bool isBoss);
 
 		/**
-		Elimina un dios del juego.
+		Elimina un dios en el juego.
 		*/
-		bool removeGood(const std::string& name);
+		bool eliminateGod(const std::string& name);
 
 		/** 
 		Devuelve el ranking de dioses ordenado por puntuación (de mayor a menor)
 		*/
 		std::vector<CGod*> getGodRanking();
+
+		/** Devuelve el dios activo peor del ranking */
+		CGod* getWorstActiveGod();
+
+		/** Realiza las operaciones necesarias para comenzar la siguiente ronda */
+		void startNextRound();
 
 		// Manejo de mensajes, tiene que manejar todos los tipos de mensajes sin excepción.
 		bool HandleMessage(const Message& msg);
@@ -126,7 +124,6 @@ namespace AI
 		bool HandleMessage(const ToggleMessage& msg);
 
 	protected:
-
 		/**
 		Constructor.
 		*/
@@ -179,6 +176,14 @@ namespace AI
 
 		// TODO: Quitar en cuanto se muestre el ranking en la GUI
 		int _timeSinceLastRankingDisplay;
+
+		/**
+		Asigna las puntuaciones objetivos de los dioses con una puntuación base y una variación aleatoria.
+
+		@param baseScore Cantidad base para la puntuación objetivo
+		@param maxDifference Diferencia máxima por encima y por abajo que se permitirá variar con respecto a la cantidad base
+		*/
+		void assignGodTargetScores(int baseScore, int maxDifference);
 
 	}; // class AIManager
 

@@ -432,6 +432,25 @@ bool CScriptManager::executeProcedure(const char *subroutineName, int param1) {
 
 //---------------------------------------------------------
 
+bool CScriptManager::executeProcedure(const char *subroutineName, std::string param1) {
+
+	assert(_lua);
+
+	// LUABIND
+	try {
+		luabind::globals(_lua)[subroutineName](param1);
+	}
+	catch (luabind::error &ex) {
+		std::cout << ex.what() << std::endl;
+		return false;
+	}
+
+	return true;
+
+} // executeProcedure(int)
+
+//---------------------------------------------------------
+
 bool CScriptManager::executeFunction(const char *subroutineName,
                                      int param1, int &result) {
 

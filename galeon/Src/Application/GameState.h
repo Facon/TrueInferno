@@ -19,9 +19,6 @@ Contiene la declaración del estado de juego.
 
 #include "ApplicationState.h"
 #include "GUI/UIManager.h"
-#include "Logic/ResourcesManager.h"
-#include "Logic/HFManager.h"
-#include "Logic/TimeManager.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Application 

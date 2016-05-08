@@ -20,6 +20,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include <algorithm>
 
 #include "AIManager.h"
+
 #include "Logic/Events/BuildingDestructionEvent.h"
 #include "Logic/Events/EndGameEvent.h"
 #include "Logic/Events/SoulsSpeedReductionEvent.h"
@@ -59,7 +60,7 @@ namespace AI {
 		_gods.clear();
 		_ranking.clear();
 
-		// Apuntamos theBoss a null porque su memoria ya debería estar liberada en _gods
+		// Apuntamos theBoss a null porque su memoria ya debería estar liberada tras vaciar _gods
 		_theBoss = nullptr;
 
 	} // ~CAIManager
@@ -141,6 +142,10 @@ namespace AI {
 		luaRegister();
 		loadAIScript("AIManager.lua");
 
+		// TODO Leer valores de fichero de configuración
+		int base = 1000;
+		assignGodTargetScores(base, (int) (base * 0.25));
+
 		return true;
 
 	} // open
@@ -157,7 +162,6 @@ namespace AI {
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
 			[
 				luabind::class_<CAIManager>("CAIManager")
-				.def("getElapsedTime", &CAIManager::getElapsedTime)
 				.def("addGod", &CAIManager::addGod)
 				.scope
 				[
@@ -168,10 +172,6 @@ namespace AI {
 	} // luaRegister
 
 	//--------------------------------------------------------
-
-	long CAIManager::getElapsedTime() const {
-		return Logic::TimeManager::getSingletonPtr()->getElapsedTime();
-	}
 
 	void CAIManager::addGod(const std::string& name, bool isBoss){
 		// Creamos el nuevo dios
@@ -191,26 +191,29 @@ namespace AI {
 		}
 	}
 
-	bool CAIManager::removeGood(const std::string& name){
+	bool CAIManager::eliminateGod(const std::string& name){
 		// Localizamos al dios
 		CGod* god = _gods[name];
 		
 		// Chequeamos que el dios exista
 		if (god == nullptr){
-			assert(false && "God can't be removed because it's not in the game");
+			assert(false && "God can't be eliminated because it's not in the game");
 			return false;
 		}
 
 		// No permitimos que se elimine al jefe
 		if (god->isBoss()){
-			assert(false && "Can't remove boss god");
+			assert(false && "Can't eliminate boss god");
 			return false;
 		}
 			
-		// Notificamos al dios que está eliminado
+		// Notificamos al dios que está eliminado en C++
 		god->eliminate();
 
-		// TODO ¿Lo eliminamos también del ranking o de la lista de dioses?
+		// Notificamos al dios que está eliminado en Lua
+		ScriptManager::CScriptManager::GetPtrSingleton()->executeProcedure("eliminateGodAIManager", name);
+
+		// TODO ¿Lo eliminamos del ranking o de la lista de dioses?
 
 		return true;
 	}
@@ -228,6 +231,29 @@ namespace AI {
 		std::sort(_ranking.begin(), _ranking.end(), godScoreCompare);
 
 		return _ranking;
+	}
+
+	CGod* CAIManager::getWorstActiveGod(){
+		// Obtenemos el ranking actualizado
+		std::vector<CGod*> ranking = getGodRanking();
+
+		// Desde el final (i.e. el dios con peor puntuación) buscamos al primer dios activo
+		for (auto it = ranking.rbegin(); it != ranking.rend(); ++it){
+			if (!(*it)->isEliminated())
+				return (*it);
+		}
+
+		// Si llegamos al final es que no había ningún dios activo en el ranking
+		return nullptr;
+	}
+
+	void CAIManager::startNextRound(){
+		// No hace falta eliminar dios porque ya se ha hecho desde el GameManager
+
+		// Asignamos nueva puntuación objetivo a los dioses
+		// TODO Leer externamente o definir fórmula de incremento
+		int base = getGodRanking().front()->getScore() + 1000;
+		assignGodTargetScores(base, (int) (base * 0.25));
 	}
 
 	bool CAIManager::HandleMessage(const Message& msg)
@@ -396,6 +422,13 @@ namespace AI {
 		//std::cout << msg._type << "\n";
 
 		return false;
+	}
+
+	void CAIManager::assignGodTargetScores(int baseScore, int maxDifference){
+		for (auto it = _gods.begin(); it != _gods.end(); ++it){
+			int randomDifference = - maxDifference + std::rand() % (2 * maxDifference);
+			it->second->setTargetScore(baseScore + randomDifference);
+		}
 	}
 
 } // namespace Logic

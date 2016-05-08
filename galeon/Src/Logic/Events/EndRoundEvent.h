@@ -1,21 +1,21 @@
 //---------------------------------------------------------------------------
-// EndGameEvent.h
+// EndRoundEvent.h
 //---------------------------------------------------------------------------
 
 /**
-@file EndGameEvent.h
+@file EndRoundEvent.h
 
-Declaración de un evento de tipo INFO consistente únicamente en mostrar
-el panel de fin del juego (con victoria o derrota).
+Declaración de un evento de tipo INFO que muestra al jugador
+el desenlace de la ronda (victoria o derrota).
 
 @see Logic::CEvent
 
-@author Raúl Segura
-@date Marzo, 2016
+@author Álvaro Valera
+@date Mayo, 2016
 */
 
-#ifndef __Logic_EndGameEvent_H
-#define __Logic_EndGameEvent_H
+#ifndef END_ROUND_EVENT_H_
+#define END_ROUND_EVENT_H_
 
 #include "Event.h"
 
@@ -31,15 +31,15 @@ sus componentes, mensajes, factorias de entidades y componentes, etc.
 namespace Logic
 {
 	/**
-	Clase que representa un evento de fin del juego encargado simplemente
-	de mostrar el panel final de victoria o derrota.
+	Clase que representa un evento de fin de ronda para
+	mostrar el panel de victoria o derrota.
 
 	@ingroup logicGroup
 
-	@author Raúl Segura
-	@date Marzo, 2016
+	@author Álvaro Valera
+	@date Mayo, 2016
 	*/
-	class CEndGameEvent : public CEvent
+	class CEndRoundEvent : public CEvent
 	{
 
 	public:
@@ -47,22 +47,22 @@ namespace Logic
 		/**
 		Constructor basado en trigger.
 		*/
-		CEndGameEvent(bool victory) :
-			CEvent(INFO, CEvent::ConditionTriggerType::END_GAME), _victory(victory)	{};
+		CEndRoundEvent(bool victory) :
+			CEvent(INFO, CEvent::ConditionTriggerType::END_ROUND), _victory(victory) {};
 
 		/**
 		Constructor basado en tiempo.
 
-		@param victory Flag a true si el resultado de la ronda es de victoria para el jugador, a false para derrota
+		@param victory Flag a true si el resultado de la partida es de victoria para el jugador, a false para derrota
 		@param delay Retraso en ms para lanzar el evento desde el instante de tiempo actual
 		*/
-		CEndGameEvent(bool victory, int delay) :
+		CEndRoundEvent(bool victory, int delay) :
 			CEvent(INFO, delay, false), _victory(victory) {};
 
 		/**
 		Destructor.
 		*/
-		~CEndGameEvent() {};
+		~CEndRoundEvent() {};
 
 		/**
 		Registra esta clase evento en el contexto de Lua.
@@ -73,7 +73,7 @@ namespace Logic
 	protected:
 
 		/**
-		Resultado de la partida (Victoria o Derrota).
+		Resultado de la ronda (Victoria o Derrota).
 		*/
 		bool _victory;
 
@@ -83,8 +83,8 @@ namespace Logic
 		*/
 		void execute();
 		
-	}; // class CEndGameEvent
+	}; // class CEndRoundEvent
 
 } // namespace Logic
 
-#endif // __Logic_EndGameEvent_H
+#endif // END_ROUND_EVENT_H_

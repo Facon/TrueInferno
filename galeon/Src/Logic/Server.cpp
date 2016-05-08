@@ -10,28 +10,28 @@ la gestión de la lógica del juego.
 @date Agosto, 2010
 */
 
+#include <cstdlib>
+#include <cassert>
+#include <cstdio>
+
 #include "Server.h"
+
 #include "Logic/Events/EventManager.h"
 #include "Logic/Maps/Map.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Logic/TimeManager.h"
 #include "Logic/Maps/Managers/WorkManager.h"
 #include "Logic/Maps/Managers/PowerManager.h"
 #include "AI/Manager/AIManager.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/SoulManager.h"
-
+#include "Logic/Maps/Managers/GameManager.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
-
 #include "AI/Server.h"
-
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
-
-#include <cstdlib>
-#include <cassert>
-#include <cstdio>
 
 namespace Logic {
 
@@ -100,6 +100,10 @@ namespace Logic {
 		if (!Logic::CEntityFactory::Init())
 			return false;
 
+		// Inicializamos el manager del tiempo.
+		if (!Logic::CTimeManager::Init())
+			return false;
+
 		// Inicializamos el gestor de la matriz de tiles.
 		if (!Logic::CTileManager::Init())
 			return false;
@@ -128,6 +132,10 @@ namespace Logic {
 		if (!Logic::CPowerManager::Init())
 			return false;
 
+		// Inicializamos el manager de partida.
+		if (!Logic::CGameManager::Init())
+			return false;
+
 		return true;
 
 	} // open
@@ -137,6 +145,8 @@ namespace Logic {
 	void CServer::close() 
 	{
 		unLoadLevel();
+
+		Logic::CGameManager::Release();
 
 		Logic::CPowerManager::Release();
 
@@ -151,6 +161,8 @@ namespace Logic {
 		Logic::CWorkManager::Release();
 
 		Logic::CTileManager::Release();
+
+		Logic::CTimeManager::Release();
 
 		Logic::CEntityFactory::Release();
 		
@@ -229,12 +241,17 @@ namespace Logic {
 		Logic::CEntityFactory::getSingletonPtr()->deleteDefferedEntities();
 
 		_map->tick(msecs);
+
+		Logic::CTimeManager::getSingletonPtr()->tick(msecs);
+
 		Logic::CEventManager::getSingletonPtr()->tick(msecs);
 
 		AI::CAIManager::getSingletonPtr()->tick(msecs);
 
 		Logic::CPowerManager::getSingletonPtr()->tick(msecs);
 	
+		Logic::CGameManager::getSingletonPtr()->tick(msecs);
+
 	} // tick
 
 } // namespace Logic

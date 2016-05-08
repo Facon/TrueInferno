@@ -14,7 +14,7 @@ if launchInitialEvents then
 	CEventManager.getSingletonPtr():addConditionEvent(CTutorialEvent(3));
 	CEventManager.getSingletonPtr():addConditionEvent(CTutorialEvent(4));
 	CEventManager.getSingletonPtr():addConditionEvent(CTutorialEvent(5));
-
+	
 	-- End game
-	CEventManager.getSingletonPtr():addConditionEvent(CEndGameEvent(true));
+	-- CEventManager.getSingletonPtr():addConditionEvent(CEndGameEvent(true));
 end

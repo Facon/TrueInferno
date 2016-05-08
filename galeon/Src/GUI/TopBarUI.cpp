@@ -49,10 +49,9 @@ namespace GUI
 	{
 		using namespace Logic;
 
-		Logic::TimeManager& tm = Logic::TimeManager::getSingleton();
-		tm.tick(msecs);
+		Logic::CTimeManager& tm = Logic::CTimeManager::getSingleton();
 
-		float total_seconds = tm.getRemainingTime() / 1000.0f;
+		float total_seconds = tm.getRemainingRoundTime() / 1000.0f;
 		unsigned int minutes = static_cast<unsigned int>(trunc(total_seconds / 60.0f));
 		unsigned int seconds = static_cast<unsigned int>(((total_seconds / 60.0f) - minutes) * 60.0f);
 

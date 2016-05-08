@@ -10,7 +10,7 @@ namespace Logic
 {
 	class ResourcesManager;
 	class HFManager;
-	class TimeManager;
+	class CTimeManager;
 }
 
 namespace GUI

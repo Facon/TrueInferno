@@ -2,11 +2,11 @@
 
 if godTraitsIncluded == nil
 then
-	if loadFromCpp == nil
+	if loadFromCpp ~= nil
 	then
-		dofile("godTraits.lua")
-	else
 		dofile("../Src/Logic/Events/godTraits.lua")
+	else
+		dofile("godTraits.lua")
 	end
 end
 
