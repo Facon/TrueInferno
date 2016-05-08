@@ -24,6 +24,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "Application/GaleonApplication.h"
 #include "BaseSubsystems/ScriptManager.h"
 #include "Logic/Entity/Message.h"
+#include "Logic/SoulsTrialManager.h"
 
 #include <cassert>
 
@@ -220,6 +221,9 @@ namespace Logic {
 					luabind::def("getSingletonPtr", &CEventManager::getSingletonPtr)
 				]
 			];
+
+		// SoulsTrialManager.
+		CSoulsTrialManager::luaRegister();
 
 		// Jerarquía de mensajes.
 		Logic::Message::luaRegister();

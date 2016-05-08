@@ -20,6 +20,8 @@ Contiene la implementación del gestor del Juicio de Almas.
 #include "BaseSubsystems/Math.h"
 #include "Logic/BuildingManager.h"
 
+#include "Logic/Entity/Components/Soul.h"
+
 namespace Logic {
 
 	CSoulsTrialManager* CSoulsTrialManager::_instance = 0;
@@ -72,6 +74,24 @@ namespace Logic {
 		}
 
 	} // Release
+
+	//--------------------------------------------------------
+
+	void CSoulsTrialManager::luaRegister()
+	{
+		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
+		[
+			luabind::class_<CSoulsTrialManager>("CSoulsTrialManager")
+			.enum_("SoulsCategory")
+			[
+				luabind::value("STC_UNKNOWN", CSoulsTrialManager::SoulsCategory::UNKNOWN),
+				luabind::value("STC_HEAVY", CSoulsTrialManager::SoulsCategory::HEAVY),
+				luabind::value("STC_WASTED", CSoulsTrialManager::SoulsCategory::WASTED),
+				luabind::value("STC_LIGHT", CSoulsTrialManager::SoulsCategory::LIGHT)
+			]
+		];
+
+	} // luaRegister
 
 	//--------------------------------------------------------
 
@@ -156,8 +176,8 @@ namespace Logic {
 		// Creación de las almas
 		for (unsigned int i = 0; i < 4; ++i)
 		{
-			createSoulsToWork(numSoulsToWork[i]); // Almas a trabajar
-			createSoulsToBurn(numSoulsToBurn[i]); // Almas a quemar
+			createSoulsToWork(numSoulsToWork[i], static_cast<SoulsCategory>(i)); // Almas a trabajar
+			createSoulsToBurn(numSoulsToBurn[i], static_cast<SoulsCategory>(i)); // Almas a quemar
 
 			_souls[i] -= numSoulsToWork[i];
 			_souls[i] -= numSoulsToBurn[i];
@@ -169,9 +189,9 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	void CSoulsTrialManager::createSoulsToWork(unsigned int numSouls)
+	void CSoulsTrialManager::createSoulsToWork(unsigned int numSouls, SoulsCategory soulsCategory)
 	{
-		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK, numSouls);
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK, numSouls, soulsCategory);
 		Logic::CPlaceable *hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
 		m.Dispatch(*hellQuarters->getEntity());
@@ -180,9 +200,9 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	void CSoulsTrialManager::createSoulsToBurn(unsigned int numSouls)
+	void CSoulsTrialManager::createSoulsToBurn(unsigned int numSouls, SoulsCategory soulsCategory)
 	{
-		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN, numSouls);
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN, numSouls, soulsCategory);
 		Logic::CPlaceable *hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
 		m.Dispatch(*hellQuarters->getEntity());
@@ -193,6 +213,7 @@ namespace Logic {
 
 	bool CSoulsTrialManager::open()
 	{
+		_souls[4] = { 0 };
 		_timeForNextSoulsGeneration = (_minSoulsGenerationTime + _maxSoulsGenerationTime) / 2;
 		return true;
 

@@ -1,0 +1,9 @@
+Managers = {
+	
+	SoulsTrialManager = {
+		type = "Camera",
+		distance = 60,
+		speed = 0.05,
+	},
+	
+}

@@ -31,9 +31,13 @@ namespace Logic
 				// Children
 				// HellQuartersMessages
 				luabind::class_<HellQuartersMessage, Message>("HellQuartersMessage")
+				// Atributos
 				.def_readwrite("_action", &HellQuartersMessage::_action)
 				.def_readwrite("_numSouls", &HellQuartersMessage::_numSouls)
-				.def(luabind::constructor<HellQuartersMessage::HellQuartersAction, int>())
+				.def_readwrite("_soulsCategory", &HellQuartersMessage::_soulsCategory)
+				// Constructor
+				.def(luabind::constructor<HellQuartersMessage::HellQuartersAction, int, CSoulsTrialManager::SoulsCategory>())
+				// Enum
 				.enum_("HellQuartersAction")
 				[
 					luabind::value("HQA_SEND_SOUL_BURN", HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN),

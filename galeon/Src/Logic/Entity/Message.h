@@ -13,15 +13,16 @@ Contiene el tipo de datos de un mensaje.
 #include <string>
 #include <memory>
 
-#include "MessageHandler.h"
+#include "AI/SoulTask.h"
 
-#include "Logic/Events/EventManager.h"
+#include "MessageHandler.h"
 
 #include "BaseSubsystems/Math.h"
 #include "BaseSubsystems/ScriptManager.h"
 
-#include "AI/SoulTask.h"
 #include "Logic/ResourcesManager.h"
+#include "Logic/Events/EventManager.h"
+#include "Logic/SoulsTrialManager.h"
 
 // Predeclaraciones
 namespace Logic
@@ -462,11 +463,12 @@ namespace Logic
 			SEND_SOUL_WORK,
 		};
 
-		HellQuartersMessage(HellQuartersAction action, int numSouls = 1) :
-			Message(MessageType::HELLQUARTERS_REQUEST), _action(action), _numSouls(numSouls) {}
+		HellQuartersMessage(HellQuartersAction action, int numSouls, CSoulsTrialManager::SoulsCategory soulsCategory) :
+			Message(MessageType::HELLQUARTERS_REQUEST), _action(action), _numSouls(numSouls), _soulsCategory(soulsCategory) {}
 
 		HellQuartersAction _action;
 		unsigned int _numSouls;
+		CSoulsTrialManager::SoulsCategory _soulsCategory;
 
 		virtual bool Dispatch(MessageHandler& handler) const
 		{

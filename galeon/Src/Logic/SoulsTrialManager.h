@@ -16,7 +16,7 @@ Contiene la declaración del gestor del Juicio de Almas.
 #ifndef __SOULS_TRIAL_MANAGER_H
 #define __SOULS_TRIAL_MANAGER_H
 
-#include "Logic/Entity/Components/Soul.h"
+#include <string>
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
@@ -103,6 +103,12 @@ namespace Logic
 		static void Release();
 
 		/**
+		Registra esta clase en el contexto de Lua.
+		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
+		*/
+		static void luaRegister();
+
+		/**
 		Función llamada en cada frame para que se realicen las funciones
 		de actualización adecuadas.
 		<p>
@@ -186,8 +192,8 @@ namespace Logic
 		Métodos auxiliares, llamados desde createSouls(), para la propia
 		creación de ambos tipos de almas.
 		*/
-		void createSoulsToWork(unsigned int numSouls);
-		void createSoulsToBurn(unsigned int numSouls);
+		void createSoulsToWork(unsigned int numSouls, SoulsCategory soulsCategory);
+		void createSoulsToBurn(unsigned int numSouls, SoulsCategory soulsCategory);
 
 	private:
 
@@ -200,7 +206,7 @@ namespace Logic
 		Cantidad de almas disponibles de cada categoría: Unknown, Heavy,
 		Wasted y Light, respectivamente.
 		*/
-		unsigned int _souls[4] = {};
+		unsigned int _souls[4];
 
 		/**
 		Rango de tiempo (ms) para la llegada periódica de grupos de almas.

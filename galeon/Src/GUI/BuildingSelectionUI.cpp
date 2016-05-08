@@ -12,12 +12,12 @@
 #include "GUI/Server.h"
 
 #include "Logic/Events/EventManager.h"
-//#include "Logic/Events/ConditionEvents.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
 #include "Logic/Entity/Components/BuildingSelection.h"
 #include "Logic/BuildingManager.h"
+#include "Logic/SoulsTrialManager.h"
 #include "Logic/Server.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Maps/Managers/TileManager.h"
@@ -238,7 +238,7 @@ namespace GUI
 	// TODO Comentar cuando funcione el Juicio de Almas para evitar confusiones
 	bool BuildingSelectionUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
-		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK);
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK, 1, Logic::CSoulsTrialManager::SoulsCategory::UNKNOWN);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
 		m.Dispatch(*hellQuarters->getEntity());
@@ -249,7 +249,7 @@ namespace GUI
 	// TODO Comentar cuando funcione el Juicio de Almas para evitar confusiones
 	bool BuildingSelectionUI::burnSoulReleased(const CEGUI::EventArgs& e)
 	{
-		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN);
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN, 1, Logic::CSoulsTrialManager::SoulsCategory::UNKNOWN);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
 		m.Dispatch(*hellQuarters->getEntity());
