@@ -16,17 +16,16 @@ namespace AI
 	CLatentAction::LAStatus CLABurnSouls::OnRun(unsigned int msecs)
 	{
 		// Quemamos las almas encoladas actualmente
-		int soulCoke = 0;
 		int soulCrude = 0;
+		int soulCoke = 0;
 
 		while (_smData.getNumSoulsToBurn() > 0)
 		{
 			CSoulsTrialManager::SoulsCategory nextSoulCategory = _smData.getNextSoulToBurn();
-			// @TODO Get from category
-			soulCoke = 5; soulCrude = 10;
+			CSoulsTrialManager::getSingletonPtr()->calculateSoulEvil(nextSoulCategory, soulCrude, soulCoke);
 
-			_totalCokeToIncrease += soulCoke;
 			_totalCrudeToIncrease += soulCrude;
+			_totalCokeToIncrease += soulCoke;
 		}
 
 		// Notificamos el incremento de Coke si no está hecho ya
