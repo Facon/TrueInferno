@@ -9,7 +9,7 @@
 loadFromCpp = 1
 
 -- Flag para habilitar/deshabilitar fácilmente la IA
-aiEnabled = true
+aiEnabled = false
 
 -- TODO usar require para no cargar módulos duplicados
 -- Carga de módulos desde la ruta base definida en C++
