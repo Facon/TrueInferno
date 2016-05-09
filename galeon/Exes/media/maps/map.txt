@@ -68,6 +68,8 @@ Map = {
 		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopupHellquarters.layout",
 		image = "HellQuarters",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "HELLQUARTERS",
 	},
 	
 	Evilator = {
@@ -99,6 +101,8 @@ Map = {
 		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Evilator",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "EVILATOR",
 	},
 	
 	Furnace = {
@@ -132,6 +136,8 @@ Map = {
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Furnace",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "FURNACE",
 	},
 	
 	Soul = {
@@ -142,7 +148,8 @@ Map = {
 		mesh_dimensions = { 100, 100, 100 },
 		visible = "true",
 		material = "Soul",
-		billboardMaterial = "Billboard/Worker",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "SOUL",
 	},
 	
 	Mine = {
@@ -178,6 +185,8 @@ Map = {
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Mine",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "MINE",
 	},
 	
 	GasPlant = {
@@ -213,6 +222,8 @@ Map = {
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "GasPlant",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "GAS_PLANT",
 	},
 	
 	EvilWorks = {
@@ -249,6 +260,8 @@ Map = {
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "EvilWorks",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "EVILWORKS",
 	},
 	
 	Refinery = {
@@ -288,6 +301,8 @@ Map = {
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Refinery",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "REFINERY",
 	},
 		
 	ResearchLabs = {
@@ -318,7 +333,9 @@ Map = {
 		requirements = "Energy,Workers",
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "ResearchLabs",		
+		image = "ResearchLabs",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "RESEARCH_LABS",
 	},
 		
 	PowerGenerator = {
@@ -349,7 +366,9 @@ Map = {
 		requirements = "Workers",
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "PowerGenerator",		
+		image = "PowerGenerator",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "POWER_GENERATOR",
 	},
 
 	Warehouse = {
@@ -382,6 +401,8 @@ Map = {
 		requirements = "Energy,Workers",
 		sidebarlayout = "UIBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopup.layout",
-		image = "Warehouse",		
+		image = "Warehouse",
+		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardMaterial = "WAREHOUSE",
 	},
 }

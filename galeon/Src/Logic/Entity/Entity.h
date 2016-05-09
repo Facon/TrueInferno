@@ -185,7 +185,8 @@ namespace Logic
 		bool HandleMessage(const ToggleMessage& msg);
 		bool HandleMessage(const PowerMessage& msg);
 		bool HandleMessage(const ConsumptionMessage& msg);
-		
+		bool HandleMessage(const IconMessage& msg);
+
 		/**
 		Devuelve el identificador ï¿½nico de la entidad.
 
@@ -270,28 +271,28 @@ namespace Logic
 
 		@return Posición de la entidad en el entorno.
 		*/
-		Vector3 getPosition() const { return _position; }
+		Vector3 getPosition() const;
 
 		/**
 		Devuelve la rotación de la entidad.
 
 		@return Rotación de la entidad en el entorno.
 		*/
-		Vector3 getRotation() const { return _rotation; }
+		Vector3 getRotation() const;
 
 		/**
 		Devuelve las dimensiones de la entidad.
 
 		@return Dimensiones de la entidad.
 		*/
-		Vector3 getDimensions() const { return _dimensions; }
+		Vector3 getDimensions() const;
 
 		/**
 		Devuelve las dimensiones del modelo de la entidad.
 
 		@return Dimensiones del modelo de la entidad.
 		*/
-		Vector3 getMeshDimensions() const { return _meshDimensions; }
+		Vector3 getMeshDimensions() const;
 
 		/**
 		Indica si la entidad se encuentra activa.

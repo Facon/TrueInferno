@@ -10,7 +10,7 @@ namespace AI
 	{
 
 	public:
-		CSoulTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::CSoulsTrialManager::SoulsCategory category) :
+		CSoulTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::SoulsTrialManager::SoulsCategory category) :
 			_map(map), _target(target), _category(category) {}
 
 		virtual ~CSoulTask() {};
@@ -41,7 +41,7 @@ namespace AI
 		Logic::TEntityID _target;
 
 		/** Categoría asignada al alma durante el Juicio de Almas inicial */
-		Logic::CSoulsTrialManager::SoulsCategory _category;
+		Logic::SoulsTrialManager::SoulsCategory _category;
 	};
 
 }

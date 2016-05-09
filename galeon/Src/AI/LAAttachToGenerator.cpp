@@ -2,6 +2,7 @@
 
 #include "Logic\Entity\Message.h"
 #include "AI\SMPowerConsumerData.h"
+#include "Logic\Maps\Map.h"
 #include "Logic\Entity\Entity.h"
 #include "Logic\Entity\LogicRequirement.h"
 

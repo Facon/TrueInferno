@@ -1,6 +1,5 @@
 #include "BillboardSet.h"
 
-#include <string>
 #include <OgreSceneManager.h>
 #include <OgreBillboardSet.h>
 
@@ -9,18 +8,37 @@
 
 namespace Graphics
 {
-	BillboardSet::BillboardSet(Graphics::CEntity* entity, const std::string& name, const std::string& materialName) : _name(name)
+	std::map<std::string, Ogre::BillboardSet*> BillboardSet::bbSets;
+
+	BillboardSet::BillboardSet(Graphics::CEntity* entity, const std::string& name, const std::string& materialName)
 	{
-		static unsigned int i = 0;
-		CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
-		_bbSet = scene->createBillboardSet(entity, name + "_" + std::to_string(i));
-		_bbSet->setMaterialName(materialName);
-		_bbSet->setDefaultDimensions(1, 1);
-		++i;
+		std::map<std::string, Ogre::BillboardSet*>::const_iterator bbSet = bbSets.find(name);
+
+		if (bbSet == bbSets.cend())
+		{
+			CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
+			Ogre::BillboardSet* bbSet = scene->createBillboardSet(entity, name);
+			bbSet->setMaterialName(materialName);
+			bbSet->setDefaultDimensions(1, 1);
+
+			// Specific parts
+			if (materialName == "Billboard/TrueInfernoIcons")
+			{
+				bbSet->setTextureStacksAndSlices(1, 28);
+			}
+
+			_bbSet = bbSet;
+			bbSets.insert(std::pair<std::string, Ogre::BillboardSet*>(name, bbSet));
+		}
 	}
 
 	BillboardSet::~BillboardSet()
 	{
+	}
+
+	Ogre::BillboardSet* BillboardSet::getBillboardSet()
+	{
+		return _bbSet;
 	}
 
 	Ogre::Billboard* BillboardSet::createBillboard(Vector3& vector)

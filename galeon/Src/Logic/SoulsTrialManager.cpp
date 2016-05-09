@@ -5,11 +5,11 @@
 /**
 @file SoulsTrialManager.cpp
 
-Contiene la implementación del gestor del Juicio de Almas.
+Contiene la implementaciï¿½n del gestor del Juicio de Almas.
 
 @see Logic::CSoulsTrialManager
 
-@author Raúl Segura
+@author Raï¿½l Segura
 @date Abril, 2016
 */
 
@@ -22,6 +22,7 @@ Contiene la implementación del gestor del Juicio de Almas.
 #include "Logic/BuildingManager.h"
 
 #include "Logic/Entity/Components/Soul.h"
+#include "BaseSubsystems/ScriptManager.h"
 
 namespace Logic {
 
@@ -48,7 +49,7 @@ namespace Logic {
 
 	bool CSoulsTrialManager::Init()
 	{
-		assert(!_instance && "Segunda inicialización de Logic::CSoulsTrialManager no permitida!");
+		assert(!_instance && "Segunda inicializaciï¿½n de Logic::CSoulsTrialManager no permitida!");
 
 		new CSoulsTrialManager();
 
@@ -66,7 +67,7 @@ namespace Logic {
 
 	void CSoulsTrialManager::Release()
 	{
-		assert(_instance && "Logic::CSoulsTrialManager no está inicializado!");
+		assert(_instance && "Logic::CSoulsTrialManager no estï¿½ inicializado!");
 
 		if (_instance)
 		{
@@ -103,10 +104,10 @@ namespace Logic {
 			luabind::class_<CSoulsTrialManager>("CSoulsTrialManager")
 			.enum_("SoulsCategory")
 			[
-				luabind::value("STC_UNKNOWN", CSoulsTrialManager::SoulsCategory::UNKNOWN),
-				luabind::value("STC_HEAVY", CSoulsTrialManager::SoulsCategory::HEAVY),
-				luabind::value("STC_WASTED", CSoulsTrialManager::SoulsCategory::WASTED),
-				luabind::value("STC_LIGHT", CSoulsTrialManager::SoulsCategory::LIGHT)
+				luabind::value("STC_UNKNOWN", SoulsTrialManager::SoulsCategory::UNKNOWN),
+				luabind::value("STC_HEAVY", SoulsTrialManager::SoulsCategory::HEAVY),
+				luabind::value("STC_WASTED", SoulsTrialManager::SoulsCategory::WASTED),
+				luabind::value("STC_LIGHT", SoulsTrialManager::SoulsCategory::LIGHT)
 			]
 		];
 
@@ -124,7 +125,7 @@ namespace Logic {
 			//std::cout << "pre souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
 
 			processNewGroupOfSouls();
-			// TODO ¿Reproducimos algún sonido o notificación de almas nuevas?
+			// TODO ï¿½Reproducimos algï¿½n sonido o notificaciï¿½n de almas nuevas?
 
 			// TODO Borrar cuando funcione el Juicio de Almas
 			//std::cout << "mid souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
@@ -150,14 +151,14 @@ namespace Logic {
 	} // levelUp
 
 	//--------------------------------------------------------
-
-	std::string* CSoulsTrialManager::getSoulsCategories()
+	/*
+	std::string CSoulsTrialManager::getSoulsCategories()
 	{
 		std::string soulsCategories[4] = { "Unknown", "Heavy", "Wasted", "Light" };
 		return soulsCategories;
 
 	} // getSoulsCategories
-
+	*/
 	//--------------------------------------------------------
 
 	void CSoulsTrialManager::processNewGroupOfSouls()
@@ -183,26 +184,26 @@ namespace Logic {
 
 	//--------------------------------------------------------
 	
-	CSoulsTrialManager::SoulsCategory CSoulsTrialManager::createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4])
+	SoulsTrialManager::SoulsCategory CSoulsTrialManager::createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4])
 	{
-		// Comprobación del número de almas recibido y disponible de cada categoría
+		// Comprobaciï¿½n del nï¿½mero de almas recibido y disponible de cada categorï¿½a
 		for (unsigned int i = 0; i < 4 ; ++i)
 		{
 			if (_souls[i] < numSoulsToWork[i] + numSoulsToBurn[i])
-				return static_cast<SoulsCategory>(i);
+				return static_cast<SoulsTrialManager::SoulsCategory>(i);
 		}
 
-		// Creación de las almas
+		// Creaciï¿½n de las almas
 		for (unsigned int i = 0; i < 4; ++i)
 		{
-			createSoulsToWork(numSoulsToWork[i], static_cast<SoulsCategory>(i)); // Almas a trabajar
-			createSoulsToBurn(numSoulsToBurn[i], static_cast<SoulsCategory>(i)); // Almas a quemar
+			createSoulsToWork(numSoulsToWork[i], static_cast<SoulsTrialManager::SoulsCategory>(i)); // Almas a trabajar
+			createSoulsToBurn(numSoulsToBurn[i], static_cast<SoulsTrialManager::SoulsCategory>(i)); // Almas a quemar
 
 			_souls[i] -= numSoulsToWork[i];
 			_souls[i] -= numSoulsToBurn[i];
 		}
 
-		return SoulsCategory::NONE;
+		return SoulsTrialManager::SoulsCategory::NONE;
 
 	} // createSouls
 
@@ -237,7 +238,7 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	void CSoulsTrialManager::createSoulsToWork(unsigned int numSouls, SoulsCategory soulsCategory)
+	void CSoulsTrialManager::createSoulsToWork(unsigned int numSouls, SoulsTrialManager::SoulsCategory soulsCategory)
 	{
 		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK, numSouls, soulsCategory);
 		Logic::CPlaceable *hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
@@ -248,7 +249,7 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	void CSoulsTrialManager::createSoulsToBurn(unsigned int numSouls, SoulsCategory soulsCategory)
+	void CSoulsTrialManager::createSoulsToBurn(unsigned int numSouls, SoulsTrialManager::SoulsCategory soulsCategory)
 	{
 		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN, numSouls, soulsCategory);
 		Logic::CPlaceable *hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);

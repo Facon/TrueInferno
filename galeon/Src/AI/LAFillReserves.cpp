@@ -2,6 +2,7 @@
 
 #include "Logic\Entity\Message.h"
 #include "AI\SMPowerGeneratorData.h"
+#include "Logic/ResourcesManager.h"
 
 namespace AI {
 	RTTI_IMPL(CLAFillReserves, CLatentAction);

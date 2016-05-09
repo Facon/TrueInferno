@@ -15,7 +15,7 @@ namespace AI{
 
 	public:
 		CRequestTransportSoulTask(CMap *map, const TEntityID& fromId, const TEntityID& toId, ResourceType resourceType, unsigned int resourceQuantity,
-			Logic::CSoulsTrialManager::SoulsCategory category = Logic::CSoulsTrialManager::SoulsCategory::UNKNOWN) :
+			Logic::SoulsTrialManager::SoulsCategory category = Logic::SoulsTrialManager::SoulsCategory::UNKNOWN) :
 			CSoulTask(map, fromId, category), // El objetivo es el punto de inicio donde solicitaremos el transporte
 			_toId(toId),
 			_resourceType(resourceType),

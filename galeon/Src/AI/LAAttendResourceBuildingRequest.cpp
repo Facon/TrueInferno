@@ -3,6 +3,7 @@
 #include "Logic\Entity\Message.h"
 #include "AI\SMResourceBuildingData.h"
 
+#include "Logic\Maps\Map.h"
 #include "Logic\Maps\EntityFactory.h"
 
 namespace AI {

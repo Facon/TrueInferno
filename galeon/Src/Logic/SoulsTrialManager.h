@@ -69,13 +69,12 @@ namespace Logic
 	@author Raúl Segura
 	@date Abril, 2016
 	*/
-	class CSoulsTrialManager
-	{
-	public:
 
-		/**
-		Categorías de almas en función de su composición aproximada.
-		*/
+	/**
+	Categorías de almas en función de su composición aproximada.
+	*/
+	namespace SoulsTrialManager
+	{
 		enum SoulsCategory
 		{
 			UNKNOWN,
@@ -84,7 +83,11 @@ namespace Logic
 			LIGHT,  // +3  Aether
 			NONE
 		};
+	}
 
+	class CSoulsTrialManager
+	{
+	public:
 		/**
 		Devuelve la única instancia de la clase.
 		@return Puntero a la instancia de la clase.
@@ -139,7 +142,7 @@ namespace Logic
 		Devuelve la lista de categorías de almas: Unknown, Heavy,
 		Wasted y Light
 		*/
-		std::string* getSoulsCategories();
+		//std::string getSoulsCategories();
 
 		/**
 		Devuelve la cantidad de almas disponibles de cada categoría.
@@ -169,7 +172,7 @@ namespace Logic
 		@return SoulsCategory::NONE si los valores de cada categoría son
 		correctos.
 		*/
-		SoulsCategory createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4]);
+		SoulsTrialManager::SoulsCategory createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4]);
 
 		/**
 		Funciones encargadas de determinar la composición exacta de cada
@@ -217,8 +220,8 @@ namespace Logic
 		Métodos auxiliares, llamados desde createSouls(), para la propia
 		creación de ambos tipos de almas.
 		*/
-		void createSoulsToWork(unsigned int numSouls, SoulsCategory soulsCategory);
-		void createSoulsToBurn(unsigned int numSouls, SoulsCategory soulsCategory);
+		void createSoulsToWork(unsigned int numSouls, SoulsTrialManager::SoulsCategory soulsCategory);
+		void createSoulsToBurn(unsigned int numSouls, SoulsTrialManager::SoulsCategory soulsCategory);
 
 		/**
 		Método auxiliar para el cálculo de la cantidad exacta de recursos

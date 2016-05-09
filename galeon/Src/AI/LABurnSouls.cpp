@@ -28,7 +28,7 @@ namespace AI
 			_totalCokeToIncrease += soulCoke;
 		}
 
-		// Notificamos el incremento de Coke si no está hecho ya
+		// Notificamos el incremento de Coke si no estï¿½ hecho ya
 		if (!_cokeIncreased)
 		{
 			ResourceMessage mCoke;
@@ -43,7 +43,7 @@ namespace AI
 				_cokeIncreased = true;
 		}
 
-		// Notificamos el incremento de Crude si no está hecho ya
+		// Notificamos el incremento de Crude si no estï¿½ hecho ya
 		if (!_crudeIncreased)
 		{
 			ResourceMessage mCrude;

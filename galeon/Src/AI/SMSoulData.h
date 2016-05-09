@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "OgreVector3.h"
+#include "AI\SoulTask.h"
 
 using namespace Logic;
 

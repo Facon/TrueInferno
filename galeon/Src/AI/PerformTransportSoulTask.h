@@ -16,8 +16,8 @@ namespace AI{
 	class CPerformTransportSoulTask : public CSoulTask {
 
 	public:
-		CPerformTransportSoulTask(CMap *map, const TEntityID& toId, ResourceType resourceType, int resourceQuantity,
-			Logic::CSoulsTrialManager::SoulsCategory category = Logic::CSoulsTrialManager::SoulsCategory::UNKNOWN) :
+		CPerformTransportSoulTask(CMap *map, const TEntityID& toId, ResourceType::ResourceType resourceType, int resourceQuantity,
+			Logic::SoulsTrialManager::SoulsCategory category = Logic::SoulsTrialManager::SoulsCategory::UNKNOWN) :
 			CSoulTask(map, toId, category), // El objetivo es el punto de final del transporte donde entregaremos los recursos
 			_resourceType(resourceType),
 			_resourceQuantity(resourceQuantity) {};

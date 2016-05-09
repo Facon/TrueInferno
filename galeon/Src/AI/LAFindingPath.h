@@ -3,6 +3,7 @@
 
 #include "StateMachine.h"
 #include "Logic\Entity\Message.h"
+#include "Logic\Maps\Map.h"
 #include "AI\Server.h"
 
 namespace AI {

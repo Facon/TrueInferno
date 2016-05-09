@@ -1,6 +1,8 @@
 #include "LAAcceptOrRejectNewConsumer.h"
 
 #include "Logic\Entity\Message.h"
+#include "Logic/ResourcesManager.h"
+#include "Logic\Maps\Map.h"
 #include "AI\SMPowerGeneratorData.h"
 
 namespace AI {

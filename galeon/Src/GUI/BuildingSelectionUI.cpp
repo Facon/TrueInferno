@@ -251,7 +251,7 @@ namespace GUI
 	// TODO Comentar cuando funcione el Juicio de Almas para evitar confusiones
 	/*bool BuildingSelectionUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
-		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK, 1, Logic::CSoulsTrialManager::SoulsCategory::UNKNOWN);
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK, 1, Logic::SoulsTrialManager::SoulsCategory::UNKNOWN);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
 		m.Dispatch(*hellQuarters->getEntity());
@@ -262,7 +262,7 @@ namespace GUI
 	// TODO Comentar cuando funcione el Juicio de Almas para evitar confusiones
 	bool BuildingSelectionUI::burnSoulReleased(const CEGUI::EventArgs& e)
 	{
-		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN, 1, Logic::CSoulsTrialManager::SoulsCategory::UNKNOWN);
+		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_BURN, 1, Logic::SoulsTrialManager::SoulsCategory::UNKNOWN);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
 		m.Dispatch(*hellQuarters->getEntity());

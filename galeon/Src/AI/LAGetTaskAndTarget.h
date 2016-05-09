@@ -59,7 +59,7 @@ namespace AI {
 		/**
 		(Categoría de las) Almas restantes por crear y enviar.
 		*/
-		typedef std::queue<CSoulsTrialManager::SoulsCategory> TSoulsCategoryQueue;
+		typedef std::queue<SoulsTrialManager::SoulsCategory> TSoulsCategoryQueue;
 
 		TSoulsCategoryQueue _pendingSoulsToWork;
 		TSoulsCategoryQueue _pendingSoulsToBurn;
