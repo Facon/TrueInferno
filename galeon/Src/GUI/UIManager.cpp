@@ -25,6 +25,7 @@ namespace GUI
 		_topBarUI.init();
 		_sideBarUI.init();
 		_eventUI.init();
+		_rankUI.init();
 		_buildingSelectionUI.init();
 
 	}
@@ -44,6 +45,7 @@ namespace GUI
 		_topBarUI.release();
 		_sideBarUI.release();
 		_eventUI.release();
+		_rankUI.release();
 		_buildingSelectionUI.release();
 		_uiWindow->removeAllEvents();
 		_uiWindow->destroy();
@@ -56,6 +58,7 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_uiWindow);
 		_topBarUI.activate();
 		_sideBarUI.activate();
+		_rankUI.activate();
 		_eventUI.activate();
 		_buildingSelectionUI.activate();
 		_uiWindow->setVisible(true);
@@ -70,6 +73,7 @@ namespace GUI
 		_uiWindow->deactivate();
 		_uiWindow->setVisible(false);
 		_topBarUI.deactivate();
+		_rankUI.deactivate();
 		_sideBarUI.deactivate();
 		_buildingSelectionUI.deactivate();
 		_eventUI.deactivate();
@@ -80,6 +84,7 @@ namespace GUI
 	{
 		_topBarUI.tick(msecs);
 		_sideBarUI.tick(msecs);
+		_rankUI.tick(msecs);
 		_eventUI.tick(msecs);
 		_buildingSelectionUI.tick(msecs);
 	}
