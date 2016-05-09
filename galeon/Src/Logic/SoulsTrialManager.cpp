@@ -16,6 +16,7 @@ Contiene la implementación del gestor del Juicio de Almas.
 #include "SoulsTrialManager.h"
 #include <cassert>
 #include <cstdio>
+#include <algorithm>
 
 #include "BaseSubsystems/Math.h"
 #include "Logic/BuildingManager.h"
@@ -189,6 +190,35 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	bool CSoulsTrialManager::calculateSoulEvil(SoulsCategory soulCategory, int& soulCrude, int& soulCoke)
+	{
+		if (soulCategory == SoulsCategory::NONE)
+			return false;
+		
+		int soulAether = 0;
+		calculateSoulComposition(soulCategory, soulCrude, soulCoke, soulAether);
+
+		return true;
+
+	} // calculateSoulEvil
+
+	//--------------------------------------------------------
+
+	bool CSoulsTrialManager::calculateSoulAether(SoulsCategory soulCategory, int& soulAether)
+	{
+		if (soulCategory == SoulsCategory::NONE)
+			return false;
+
+		int soulCrude = 0;
+		int soulCoke = 0;
+		calculateSoulComposition(soulCategory, soulCrude, soulCoke, soulAether);
+
+		return true;
+
+	} // calculateSoulAether
+
+	//--------------------------------------------------------
+
 	void CSoulsTrialManager::createSoulsToWork(unsigned int numSouls, SoulsCategory soulsCategory)
 	{
 		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK, numSouls, soulsCategory);
@@ -208,6 +238,73 @@ namespace Logic {
 		m.Dispatch(*hellQuarters->getEntity());
 
 	} // createSoulsToBurn
+
+	//--------------------------------------------------------
+
+	void CSoulsTrialManager::calculateSoulComposition(SoulsCategory soulCategory,
+		int& soulCrude, int& soulCoke, int& soulAether)
+	{
+		soulCrude = soulCoke = soulAether = 0;
+		int unitsLeft = 21;
+		
+		switch (soulCategory)
+		{
+		case SoulsCategory::UNKNOWN:
+			// ??
+			soulCrude = Math::random(5, 21);
+			unitsLeft -= soulCrude;
+
+			if (unitsLeft > 0)
+			{
+				soulAether = Math::random(0, std::min(unitsLeft, 5));
+				unitsLeft -= soulAether;
+			}
+
+			soulCoke = unitsLeft;
+			break;
+
+		case SoulsCategory::HEAVY:
+			// +11 Crude
+			soulCrude = Math::random(11, 21);
+			unitsLeft -= soulCrude;
+
+			if (unitsLeft > 0)
+			{
+				soulAether = Math::random(0, std::min(unitsLeft, 5));
+				unitsLeft -= soulAether;
+			}
+
+			soulCoke = unitsLeft;
+			break;
+
+		case SoulsCategory::WASTED:
+			// +11 Coke
+			soulCoke = Math::random(11, 16);
+			unitsLeft -= soulCoke;
+
+			soulCrude = Math::random(5, unitsLeft);
+			unitsLeft -= soulCrude;
+
+			soulAether = unitsLeft;
+			break;
+
+		case SoulsCategory::LIGHT:
+			// +3 Aether
+			soulAether = Math::random(3, 5);
+			unitsLeft -= soulAether;
+
+			soulCrude = Math::random(5, unitsLeft);
+			unitsLeft -= soulCrude;
+
+			soulCoke = unitsLeft;
+			break;
+
+		default:
+			assert(false && "Invalid soul category for composition calculation");
+			return;
+		}
+
+	} // calculateSoulComposition
 
 	//--------------------------------------------------------
 

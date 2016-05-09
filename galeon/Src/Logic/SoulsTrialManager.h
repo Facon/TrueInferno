@@ -160,6 +160,20 @@ namespace Logic
 		*/
 		SoulsCategory createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4]);
 
+		/**
+		Funciones encargadas de determinar la composición exacta de cada
+		alma, en función de su categoría, y devolver el valor exacto de
+		cada tipo de recurso.
+
+		@param soulCategory categoría del alma.
+		@param soulCrude cantidad de Crude del alma.
+		@param soulCoke cantidad de Coke del alma.
+		@param soulAether cantidad de Éter del alma.
+		@return true si la categoría recibida es distinta de NONE.
+		*/
+		bool calculateSoulEvil(SoulsCategory soulCategory, int& soulCrude, int& soulCoke);
+		bool calculateSoulAether(SoulsCategory soulCategory, int& soulAether);
+
 	protected:
 
 		/**
@@ -194,6 +208,18 @@ namespace Logic
 		*/
 		void createSoulsToWork(unsigned int numSouls, SoulsCategory soulsCategory);
 		void createSoulsToBurn(unsigned int numSouls, SoulsCategory soulsCategory);
+
+		/**
+		Método auxiliar para el cálculo de la cantidad exacta de recursos
+		de cada tipo de un determinado alma.
+
+		@param soulCategory categoría del alma.
+		@param soulCrude cantidad de Crude del alma (entre 5 y 21).
+		@param soulCoke cantidad de Coke del alma (entre 0 y 16).
+		@param soulAether cantidad de Éter del alma (entre 0 y 5).
+		*/
+		void calculateSoulComposition(SoulsCategory soulCategory,
+			int& soulCrude, int& soulCoke, int& soulAether);
 
 	private:
 
