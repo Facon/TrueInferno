@@ -9,7 +9,7 @@ material Billboard/Worker
 			
 			texture_unit
 			{
-				texture worker2.png
+				texture worker.png
 				texture_address_mode clamp
 			}
 		}
