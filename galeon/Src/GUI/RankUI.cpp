@@ -34,6 +34,9 @@ namespace GUI
 		// Activamos la interfaz de usuario
 		_uiRankWindow->setVisible(true);
 		_uiRankWindow->activate();
+		
+		// Pintamos por primera vez el ranking
+		updateGodRank();
 	}
 
 	void RankUI::deactivate()
