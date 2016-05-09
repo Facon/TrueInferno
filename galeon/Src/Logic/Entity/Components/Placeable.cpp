@@ -157,6 +157,7 @@ namespace Logic {
 		if (_placeableType == Building)
 		{
 			if (getBuildingType() == Furnace) position.y = HEIGHT_ON_TILE + 0.6f;
+			else if (getBuildingType() == Refinery) position.y = HEIGHT_ON_TILE + 0.15f;
 			else if (_placeableType == Building) position.y = HEIGHT_ON_TILE;
 		}
 		else if (_placeableType == SoulPath)
@@ -246,7 +247,7 @@ namespace Logic {
 		if (_placeableType == Building)
 		{
 			if (getBuildingType() == Furnace) buildingHeightIncrement = HEIGHT_ON_TILE + 0.3f;
-			else if (getBuildingType() == Refinery) buildingHeightIncrement = 0.5f;
+			else if (getBuildingType() == Refinery) buildingHeightIncrement = HEIGHT_ON_TILE;
 			else if (_placeableType == Building) buildingHeightIncrement = HEIGHT_ON_TILE;
 		}
 		else if (_placeableType == SoulPath)
