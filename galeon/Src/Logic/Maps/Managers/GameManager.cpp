@@ -91,7 +91,7 @@ namespace Logic {
 
 	void CGameManager::roundFinished(){
 		// Cogemos la puntuación del jugador
-		int playerScore = HFManager::getSingletonPtr()->getHadesFavor();
+		int playerScore = (int)HFManager::getSingletonPtr()->getHadesFavor();
 
 		// Buscamos al dios activo con menos puntuación
 		AI::CGod* worstActiveGod = AI::CAIManager::getSingletonPtr()->getWorstActiveGod();

@@ -15,7 +15,6 @@ namespace GUI
 	protected:
 		// Window for displaying resources
 		CEGUI::Window* _uiRankWindow;
-		void addGodRank();
 		bool start = true;
 
 	public:
@@ -26,6 +25,9 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
+
+		/** Solicita actualización del ranking de dioses */
+		void updateGodRank();
 	};
 }
 

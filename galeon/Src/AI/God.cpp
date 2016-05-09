@@ -21,6 +21,8 @@ Modela un dios, que son los enemigos del juego controlados por la IA.
 #include "God.h"
 
 #include "Logic\TimeManager.h"
+#include "GUI\UIManager.h"
+#include "GUI\Server.h"
 
 namespace AI {
 	CGod::CGod(const std::string& name, bool isBoss) : 
@@ -44,7 +46,7 @@ namespace AI {
 		// Si es el jefe, está eliminado o ha alcanzado la puntuación objetivo, no hacemos nada
 		if (_isBoss || _isEliminated || (_score >= _targetScore))
 			return;
-		
+
 		// Reducimos el tiempo restante la siguiente actualización de score
 		_remainingTimeForNextScoreUpdate -= msecs;
 
@@ -62,13 +64,22 @@ namespace AI {
 
 			// Calculamos la velocidad necesaria (puntos/s) para llegar a la puntuación objetivo en el tiempo de ronda restante
 			float scoreSpeed = (_targetScore - _score) / (float)roundRemainingTime;
-	
+
 			// Avanzamos la puntuación a la velocidad calculada durante un periodo de aleatorio o todo lo posible
-			_score += (int) (scoreSpeed * std::min(roundRemainingTime, (long)getRandomTimeForNextScoreUpdate()));
+			changeScore((int)(scoreSpeed * std::min(roundRemainingTime, (long)getRandomTimeForNextScoreUpdate())));
 
 			// Obtenemos nuevo tiempo la siguiente actualización de score
 			_remainingTimeForNextScoreUpdate = getRandomTimeForNextScoreUpdate();
 		}
+	}
 
-	} // tick
+	void CGod::changeScore(int change){
+		/** Modificamos la puntuación */
+		_score += change;
+
+		/** Actualizamos la GUI = Fresquísimo acoplamiento */
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->getRankUI()->updateGodRank();
+	}
+
 }

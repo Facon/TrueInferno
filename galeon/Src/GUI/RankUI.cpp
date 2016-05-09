@@ -43,7 +43,7 @@ namespace GUI
 		_uiRankWindow->setVisible(false);
 	}
 
-	void RankUI::addGodRank()
+	void RankUI::updateGodRank()
 	{
 		std::vector<AI::CGod*> ranking = AI::CAIManager::getSingletonPtr()->getGodRanking();
 
@@ -78,7 +78,7 @@ namespace GUI
 
 	void RankUI::tick(unsigned int msecs)
 	{
-		addGodRank();
+		//updateGodRank();
 	}
 
 }

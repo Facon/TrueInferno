@@ -65,14 +65,17 @@ namespace AI {
 		*/
 		void tick(unsigned int msecs);
 
+		/** Cambia la puntuación del dios según la cantidad (positiva o negativa) indicada */
+		void changeScore(int change);
+
 	private:
-		/** God's name */
+		/** Nombre del dios */
 		std::string _name;
 
-		/** God's score */
+		/** Score del dios. Para modificarlo usar changeScore */
 		int _score;
 
-		/** God's mood */
+		/** Rollito del dios */
 		int _mood;
 
 		/** Flag set to true if this god is the boss */
