@@ -18,6 +18,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include <cassert>
 #include <iostream>
 #include <algorithm>
+#include <climits>
 
 #include "AIManager.h"
 
@@ -39,7 +40,9 @@ namespace AI {
 	CAIManager::CAIManager()
 	{
 		_instance = this;
-		_timeSinceLastRankingDisplay = 0;
+
+		// Creamos el player
+		_player = new CPlayer();
 
 	} // CAIManager
 
@@ -62,6 +65,10 @@ namespace AI {
 
 		// Apuntamos theBoss a null porque su memoria ya debería estar liberada tras vaciar _gods
 		_theBoss = nullptr;
+
+		// Liberamos el jugador
+		delete(_player);
+		_player = nullptr;
 
 	} // ~CAIManager
 
@@ -108,20 +115,6 @@ namespace AI {
 		for (auto it = _gods.begin(); it != _gods.end(); ++it){
 			(it->second)->tick(msecs);
 		}
-
-		// TODO: Quitar en cuanto se muestre el ranking en la GUI
-		_timeSinceLastRankingDisplay += msecs;
-		if (_timeSinceLastRankingDisplay >= 5000){
-			std::cout << "Ranking" << std::endl;
-			
-			std::vector<CGod*> ranking = getGodRanking();
-
-			for (auto it = ranking.begin(); it != ranking.end(); ++it)
-				std::cout << (*it)->getName() << ": " << (*it)->getScore() << std::endl;
-			std::cout << std::endl;
-
-			_timeSinceLastRankingDisplay = 0;
-		}
 		
 	} // tick
 
@@ -143,8 +136,11 @@ namespace AI {
 		loadAIScript("AIManager.lua");
 
 		// TODO Leer valores de fichero de configuración
-		int base = 1000;
+		int base = 500;
 		assignGodTargetScores(base, (int) (base * 0.25));
+
+		// Metemos en el ranking al player
+		_ranking.push_back(_player);
 
 		return true;
 
@@ -153,6 +149,7 @@ namespace AI {
 	//--------------------------------------------------------
 
 	void CAIManager::close() {
+
 	} // close
 
 	//--------------------------------------------------------
@@ -220,13 +217,13 @@ namespace AI {
 
 	/** Función para ordenar dioses en orden de score descendiente */
 	struct st_godScoreCompare {
-		bool operator() (CGod* lhs, CGod* rhs)
+		bool operator() (IRankedCharacter* lhs, IRankedCharacter* rhs)
 		{
 			return lhs->getScore() > rhs->getScore();
 		}
 	} godScoreCompare;
 
-	std::vector<CGod*> CAIManager::getGodRanking() {
+	std::vector<IRankedCharacter*> CAIManager::getGodRanking() {
 		// Reordenamos los dioses por puntuación
 		std::sort(_ranking.begin(), _ranking.end(), godScoreCompare);
 
@@ -234,17 +231,25 @@ namespace AI {
 	}
 
 	CGod* CAIManager::getWorstActiveGod(){
-		// Obtenemos el ranking actualizado
-		std::vector<CGod*> ranking = getGodRanking();
+		// Buscaremos el dios activo con peor puntuación
+		int worstScore = INT_MAX;
+		CGod *worstGod = nullptr;
 
-		// Desde el final (i.e. el dios con peor puntuación) buscamos al primer dios activo
-		for (auto it = ranking.rbegin(); it != ranking.rend(); ++it){
-			if (!(*it)->isEliminated())
-				return (*it);
+		for (auto it = _gods.cbegin(); it != _gods.cend(); ++it){
+			CGod* god = (it->second);
+
+			// Descartamos dioses no activos y al jefe
+			if (god->isBoss() || god->isEliminated())
+				continue;
+
+			if (god->getScore() < worstScore){
+				worstGod = god;
+				worstScore = god->getScore();
+			}
 		}
 
 		// Si llegamos al final es que no había ningún dios activo en el ranking
-		return nullptr;
+		return worstGod;
 	}
 
 	void CAIManager::startNextRound(){
@@ -252,7 +257,7 @@ namespace AI {
 
 		// Asignamos nueva puntuación objetivo a los dioses
 		// TODO Leer externamente o definir fórmula de incremento
-		int base = getGodRanking().front()->getScore() + 1000;
+		int base = getGodRanking().front()->getScore() + 500;
 		assignGodTargetScores(base, (int) (base * 0.25));
 	}
 

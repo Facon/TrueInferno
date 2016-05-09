@@ -48,7 +48,7 @@ namespace GUI
 
 	void RankUI::updateGodRank()
 	{
-		std::vector<AI::CGod*> ranking = AI::CAIManager::getSingletonPtr()->getGodRanking();
+		std::vector<AI::IRankedCharacter*> ranking = AI::CAIManager::getSingletonPtr()->getGodRanking();
 
 		if (!start)
 		{

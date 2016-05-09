@@ -187,6 +187,8 @@
     <ClInclude Include="..\..\Src\AI\Manager\AIManager.h" />
     <ClInclude Include="..\..\Src\AI\micropather.h" />
     <ClInclude Include="..\..\Src\AI\Movement.h" />
+    <ClInclude Include="..\..\Src\AI\Player.h" />
+    <ClInclude Include="..\..\Src\AI\RankedCharacter.h" />
     <ClInclude Include="..\..\Src\AI\RequestTransportSoulTask.h" />
     <ClInclude Include="..\..\Src\AI\Server.h" />
     <ClInclude Include="..\..\Src\AI\SimpleLatentActions.h" />

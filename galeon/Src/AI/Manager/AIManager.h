@@ -21,7 +21,9 @@ Contiene la declaración del gestor de la IA de los enemigos en el juego.
 #include <set>
 #include <map>
 
+#include "AI/RankedCharacter.h"
 #include "AI/God.h"
+#include "AI/Player.h"
 #include "Logic/Events/Event.h"
 #include "Logic/Entity/MessageHandler.h"
 
@@ -89,7 +91,7 @@ namespace AI
 		/** 
 		Devuelve el ranking de dioses ordenado por puntuación (de mayor a menor)
 		*/
-		std::vector<CGod*> getGodRanking();
+		std::vector<IRankedCharacter*> getGodRanking();
 
 		/** Devuelve el dios activo peor del ranking */
 		CGod* getWorstActiveGod();
@@ -169,13 +171,13 @@ namespace AI
 		/** Ranking de dioses. 
 		Nota: Usar getGodRanking() para obtener el listado ordenado.
 		*/
-		std::vector<CGod*> _ranking;
+		std::vector<IRankedCharacter*> _ranking;
 
 		/** El jefe */
 		CGod* _theBoss;
 
-		// TODO: Quitar en cuanto se muestre el ranking en la GUI
-		int _timeSinceLastRankingDisplay;
+		/** El jugador */
+		CPlayer* _player;
 
 		/**
 		Asigna las puntuaciones objetivos de los dioses con una puntuación base y una variación aleatoria.

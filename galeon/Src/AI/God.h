@@ -16,6 +16,9 @@ Modela un dios, que son los enemigos del juego controlados por la IA.
 #define GOD_H_
 
 #include <string>
+#include <iostream>
+
+#include "RankedCharacter.h"
 
 namespace AI {
 
@@ -25,14 +28,14 @@ namespace AI {
 		const int BEST_MOOD = 3;
 	}
 
-	class CGod {
+	class CGod : public IRankedCharacter {
 	public:
 		CGod(const std::string& name, bool isBoss);
 
 		virtual ~CGod() {}
 
 		/** Getter for name */
-		const std::string getName() const { return _name; };
+		const std::string& getName() const { return _name; };
 
 		/** Getter for score */
 		const int getScore() const { return _score; };
@@ -50,7 +53,12 @@ namespace AI {
 		const int getTargetScore() const { return _targetScore; };
 
 		/** Setter for targetScore */
-		void setTargetScore(int targetScore) { _targetScore = targetScore; };
+		void setTargetScore(int targetScore) {
+			_targetScore = targetScore;
+
+			/*if (!_isBoss && !_isEliminated)
+				std::cout << _name << ": " << _score << " -> " << _targetScore << std::endl;*/
+		};
 
 		/** Eliminates god */
 		void eliminate();
