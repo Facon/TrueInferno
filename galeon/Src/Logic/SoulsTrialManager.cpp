@@ -100,20 +100,9 @@ namespace Logic {
 		_timeSinceLastSoulsGeneration += msecs;
 
 		if (_timeSinceLastSoulsGeneration >= _timeForNextSoulsGeneration)
-		{
-			// TODO Borrar cuando funcione el Juicio de Almas
-			//std::cout << "pre souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
-
+		{			
 			processNewGroupOfSouls();
 			// TODO ¿Reproducimos algún sonido o notificación de almas nuevas?
-
-			// TODO Borrar cuando funcione el Juicio de Almas
-			//std::cout << "mid souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
-			//unsigned int toWork[] = { 2, 1, 2, 1 }; //
-			//unsigned int toBurn[] = { 2, 2, 2, 1 }; //
-			//SoulsCategory category = createSouls(toWork, toBurn); //
-			//std::cout << "create si o no = " << (category == SoulsCategory::NONE) << std::endl; //
-			//std::cout << "pst souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
 
 			_timeForNextSoulsGeneration = Math::random(_minSoulsGenerationTime, _maxSoulsGenerationTime);
 			_timeSinceLastSoulsGeneration = 0;
