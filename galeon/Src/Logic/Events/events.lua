@@ -71,7 +71,16 @@ SoulsSpeedReductionEvent.evil = 0.4
 SoulsSpeedReductionEvent.godTraits.cheater = 1.0
 SoulsSpeedReductionEvent.throw = function()
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
-	CEventManager.getSingletonPtr():addTimeEvent(CSoulsSpeedReductionEvent(timeToLaunch, true));
+	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent(timeToLaunch, 0.25, 10*1000, true));
+end
+
+SoulSpeedIncreaseEvent = Event:new("SoulSpeedIncreaseEvent")
+SoulSpeedIncreaseEvent.good = 0.3
+SoulSpeedIncreaseEvent.evil = 0
+SoulSpeedIncreaseEvent.godTraits.generous = 1.0
+SoulSpeedIncreaseEvent.throw = function()
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent(timeToLaunch, 4, 10*1000, true));
 end
 
 -- CResearchChallengeEvent
@@ -86,6 +95,7 @@ events =
 {
 	BuildingDestructionEvent,
 	SoulsSpeedReductionEvent,
+	SoulSpeedIncreaseEvent,
 }
 
 -- DEBUG

@@ -17,4 +17,8 @@ if launchInitialEvents then
 	
 	-- End game
 	-- CEventManager.getSingletonPtr():addConditionEvent(CEndGameEvent(true));
+	
+	-- TEST
+	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent(15*1000, 0.25, 30*1000, true));
+	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent(30*1000, 2, 30*1000, true));
 end

@@ -242,7 +242,8 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Events\EndRoundEvent.cpp">
       <Filter>Entity\Components\Source Files</Filter>
-	</ClCompile>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Logic\Events\SoulSpeedAlterationEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -456,10 +457,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Maps\Managers\GameManager.h">
-		<Filter>Header Files</Filter>
-	</ClInclude>
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Events\EndRoundEvent.h">
-		<Filter>Header Files</Filter>    
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\SoulSpeedAlterationEvent.h">
+      <Filter>Entity\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

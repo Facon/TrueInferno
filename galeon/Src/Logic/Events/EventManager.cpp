@@ -19,6 +19,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "BuildingDestructionEvent.h"
 #include "EndGameEvent.h"
 #include "SoulsSpeedReductionEvent.h"
+#include "SoulSpeedAlterationEvent.h"
 #include "TutorialEvent.h"
 
 #include "Logic/TimeManager.h"
@@ -211,6 +212,7 @@ namespace Logic {
 		CBuildingDestructionEvent::luaRegister();
 		CEndGameEvent::luaRegister();
 		CSoulsSpeedReductionEvent::luaRegister();
+		CSoulSpeedAlterationEvent::luaRegister();
 		CTutorialEvent::luaRegister();
 
 		// EventManager.
