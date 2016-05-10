@@ -28,12 +28,12 @@ namespace AI {
 	CGod::CGod(const std::string& name, bool isBoss) : 
 		_name(name), _score(0), _targetScore(0), _mood(GodMood::INITIAL_MOOD), _isBoss(isBoss), _isEliminated(false) {
 
-		// Inicializamos el tiempo para la siguiente actualización de score
-		_remainingTimeForNextScoreUpdate = getRandomTimeForNextScoreUpdate();
+		// Inicializamos el tiempo para la primera actualización de score
+		_remainingTimeForNextScoreUpdate = getRandomTimeForNextScoreUpdate(minTimeForFirstScoreUpdate, maxTimeForFirstScoreUpdate);
 	}
 
-	int CGod::getRandomTimeForNextScoreUpdate(){
-		return std::rand() % (maxTimeBetweenScoreUpdate - minTimeBetweenScoreUpdate + 1) + minTimeBetweenScoreUpdate;
+	int CGod::getRandomTimeForNextScoreUpdate(int minTime, int maxTime){
+		return std::rand() % (maxTime - minTime + 1) + minTime;
 	}
 
 	void CGod::eliminate(){
@@ -66,10 +66,11 @@ namespace AI {
 			float scoreSpeed = (_targetScore - _score) / (float)roundRemainingTime;
 
 			// Avanzamos la puntuación a la velocidad calculada durante un periodo de aleatorio o todo lo posible
-			changeScore((int)(scoreSpeed * std::min(roundRemainingTime, (long)getRandomTimeForNextScoreUpdate())));
+			long randomTimeForUpdate = (long) getRandomTimeForNextScoreUpdate(minTimeBetweenScoreUpdate, maxTimeBetweenScoreUpdate);
+			changeScore(std::roundl(scoreSpeed * std::min(roundRemainingTime, randomTimeForUpdate)));
 
 			// Obtenemos nuevo tiempo la siguiente actualización de score
-			_remainingTimeForNextScoreUpdate = getRandomTimeForNextScoreUpdate();
+			_remainingTimeForNextScoreUpdate = getRandomTimeForNextScoreUpdate(minTimeBetweenScoreUpdate, maxTimeBetweenScoreUpdate);
 		}
 	}
 

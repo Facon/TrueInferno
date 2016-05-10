@@ -135,9 +135,8 @@ namespace AI {
 		luaRegister();
 		loadAIScript("AIManager.lua");
 
-		// TODO Leer valores de fichero de configuración
-		int base = 500;
-		assignGodTargetScores(base, (int) (base * 0.25));
+		// Asignación de scores objetivo iniciales
+		assignGodTargetScores(_baseScorePerRound, (int)(_baseScorePerRound * _scoreMaxRelativeDeviation));
 
 		// Metemos en el ranking al player
 		_ranking.push_back(_player);
@@ -210,8 +209,6 @@ namespace AI {
 		// Notificamos al dios que está eliminado en Lua
 		ScriptManager::CScriptManager::GetPtrSingleton()->executeProcedure("eliminateGodAIManager", name);
 
-		// TODO ¿Lo eliminamos del ranking o de la lista de dioses?
-
 		return true;
 	}
 
@@ -256,9 +253,10 @@ namespace AI {
 		// No hace falta eliminar dios porque ya se ha hecho desde el GameManager
 
 		// Asignamos nueva puntuación objetivo a los dioses
-		// TODO Leer externamente o definir fórmula de incremento
-		int base = getGodRanking().front()->getScore() + 500;
-		assignGodTargetScores(base, (int) (base * 0.25));
+
+		// Tomamos como base la puntuación actual del mejor dios + el score base por ronda
+		int base = getGodRanking().front()->getScore() + _baseScorePerRound;
+		assignGodTargetScores(base, (int)(base * _scoreMaxRelativeDeviation));
 	}
 
 	bool CAIManager::HandleMessage(const Message& msg)

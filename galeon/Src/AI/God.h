@@ -92,17 +92,28 @@ namespace AI {
 		/** Target score for the round */
 		int _targetScore;
 
+		/** Tiempo(ms) mínimo hasta la primera actualización de score */
+		const int minTimeForFirstScoreUpdate = 30000;
+
+		/** Tiempo(ms) mínimo hasta la primera actualización de score */
+		const int maxTimeForFirstScoreUpdate = 40000;
+
 		/** Tiempo(ms) mínimo entre actualizaciones de score */
 		const int minTimeBetweenScoreUpdate = 3000;
 
 		/** Tiempo(ms) máximo entre actualizaciones de score */
-		const int maxTimeBetweenScoreUpdate = 5000;
+		const int maxTimeBetweenScoreUpdate = 6000;
 
 		/** Tiempo(ms) restante para la próxima actualización de score */
 		int _remainingTimeForNextScoreUpdate;
 
-		/** Obtiene un tiempo aleatorio la siguiente actualización de score */
-		int getRandomTimeForNextScoreUpdate();
+		/**
+		Obtiene un tiempo aleatorio la siguiente actualización de score 
+		
+		@param minTime rango inferior mímimo para el tiempo aleatorio
+		@param maxTime rango inferior máximo para el tiempo aleatorio
+		*/
+		int getRandomTimeForNextScoreUpdate(int minTime, int maxTime);
 
 		/** Flag a true cuando el dios está eliminado */
 		bool _isEliminated;

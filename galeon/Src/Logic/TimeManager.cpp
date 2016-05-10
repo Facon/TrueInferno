@@ -7,7 +7,7 @@
 namespace Logic
 {
 	// TODO Leer desde configuración externa
-	const long CTimeManager::_maxRoundTime = 0.5 * 60 * 1000; // 2 minutos
+	const long CTimeManager::_maxRoundTime = 3 * 60 * 1000; // 3 minutos por ronda
 
 	CTimeManager CTimeManager::_instance = CTimeManager();
 

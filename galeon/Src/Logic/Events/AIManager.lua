@@ -47,10 +47,10 @@ function AIManager:__init()
 	self.timeUntilFirstEvent = 30000
 
 	-- Tiempo (ms) mínimo entre eventos aleatorios
-	self.minTimeBetweenEvents = 30000
+	self.minTimeBetweenEvents = 15000
 
 	-- Tiempo (ms) máximo entre eventos aleatorios
-	self.maxTimeBetweenEvents = 30000
+	self.maxTimeBetweenEvents = 25000
 
 	-- Tiempo (ms) que debe transcurrir hasta el próximo evento aleatorio. Se inicializa al valor de espera para el primer evento
 	self.timeUntilNextEvent = self.timeUntilFirstEvent

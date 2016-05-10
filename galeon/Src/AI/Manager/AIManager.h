@@ -187,6 +187,14 @@ namespace AI
 		*/
 		void assignGodTargetScores(int baseScore, int maxDifference);
 
+		// TODO Leer valores de fichero de configuración
+		/** Puntuación básica a batir en cada ronda */
+		const int _baseScorePerRound = 200;
+
+		// TODO Leer valores de fichero de configuración
+		/** Desviación (0,1) relativa máxima aleatoria para la puntuación básica a batir en cada ronda */
+		const float _scoreMaxRelativeDeviation = 0.25;
+
 	}; // class AIManager
 
 } // namespace Logic
