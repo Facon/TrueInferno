@@ -108,7 +108,17 @@ namespace Logic
 
 		@param player Entidad del jugador.
 		*/
-		void setPlayer(CEntity *player) {_player = player;}
+		void setPlayer(CEntity *player) { _player = player; }
+
+		/**
+		Carga el fichero de configuración con los valores (variables
+		y constantes) de juego para los managers. Los valores previos
+		serán sobreescritos.
+
+		@param filename Nombre del fichero a cargar.
+		@return true si la carga fue correcta.
+		*/
+		bool loadManagersConfigurationValues(const std::string &filename);
 
 		/**
 		Carga un nuevo nivel a partir del nombre del mapa que se

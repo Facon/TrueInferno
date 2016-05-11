@@ -78,6 +78,24 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	void CSoulsTrialManager::spawn(const Map::CEntity *managerInfo)
+	{
+		if (managerInfo->hasAttribute("minSoulsGenerationTimeSeconds"))
+			_minSoulsGenerationTime = managerInfo->getIntAttribute("minSoulsGenerationTimeSeconds") * 1000;
+
+		if (managerInfo->hasAttribute("maxSoulsGenerationTimeSeconds"))
+			_maxSoulsGenerationTime = managerInfo->getIntAttribute("maxSoulsGenerationTimeSeconds") * 1000;
+
+		if (managerInfo->hasAttribute("minSoulsPerGroup"))
+			_minSoulsPerGroup = managerInfo->getIntAttribute("minSoulsPerGroup");
+
+		if (managerInfo->hasAttribute("maxSoulsPerGroup"))
+			_maxSoulsPerGroup = managerInfo->getIntAttribute("maxSoulsPerGroup");
+
+	} // Spawn
+
+	//--------------------------------------------------------
+
 	void CSoulsTrialManager::luaRegister()
 	{
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())

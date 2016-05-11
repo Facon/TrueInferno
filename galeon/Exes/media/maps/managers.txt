@@ -1,9 +1,11 @@
-Managers = {
+Map = {
 	
 	SoulsTrialManager = {
-		type = "Camera",
-		distance = 60,
-		speed = 0.05,
+		type = "SoulsTrialManager",
+		minSoulsGenerationTimeSeconds = 10,
+		maxSoulsGenerationTimeSeconds = 30,
+		minSoulsPerGroup = 15,
+		maxSoulsPerGroup = 25,
 	},
 	
 }
