@@ -68,10 +68,9 @@ namespace GUI
 		if (layout == "UIBuildingSelectionPopupTrial.layout"){
 			_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
-			_uipopupWindow->getChildElement("CreateSoul")->subscribeEvent(CEGUI::PushButton::EventClicked,
-				CEGUI::SubscriberSlot(&BuildingSelectionUI::createSoulReleased, this));
-			_uipopupWindow->getChildElement("BurnSoul")->subscribeEvent(CEGUI::PushButton::EventClicked,
-				CEGUI::SubscriberSlot(&BuildingSelectionUI::burnSoulReleased, this));
+			_uipopupWindow->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::judgeSoulsReleased, this));
+
 		}
 
 		if (layout == "UIBuildingSelectionPopupGods.layout"){
@@ -123,7 +122,16 @@ namespace GUI
 
 	void BuildingSelectionUI::loadAssetsPopup(std::string name, std::string image){
 		_uipopupWindow->getChild("BuildingName")->setText(name);
-		_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoBuildings/" + image);
+		
+		
+		if (name == "Souls Trial"){
+			CEGUI::Editbox* editbox = (CEGUI::Editbox*)_uipopupWindow->getChild("HeavySoulsBurn");
+
+		}
+		else
+		{
+			_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoBuildings/" + image);
+		}
 
 	}
 
@@ -236,7 +244,7 @@ namespace GUI
 	}
 
 	// TODO Comentar cuando funcione el Juicio de Almas para evitar confusiones
-	bool BuildingSelectionUI::createSoulReleased(const CEGUI::EventArgs& e)
+	/*bool BuildingSelectionUI::createSoulReleased(const CEGUI::EventArgs& e)
 	{
 		Logic::HellQuartersMessage m(Logic::HellQuartersMessage::HellQuartersAction::SEND_SOUL_WORK, 1, Logic::CSoulsTrialManager::SoulsCategory::UNKNOWN);
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
@@ -253,6 +261,27 @@ namespace GUI
 		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
 
 		m.Dispatch(*hellQuarters->getEntity());
+
+		return true;
+	}*/
+
+	bool BuildingSelectionUI::judgeSoulsReleased(const CEGUI::EventArgs& e)
+	{
+		int HeavyBurned = std::atoi(_uipopupWindow->getChild("HeavySoulsBurn")->getText().c_str());
+		int HeavyWorker = std::atoi(_uipopupWindow->getChild("HeavySoulsWork")->getText().c_str());
+		int WastedBurned = std::atoi(_uipopupWindow->getChild("WastedSoulsBurn")->getText().c_str());
+		int WastedWorker = std::atoi(_uipopupWindow->getChild("WastedSoulsWork")->getText().c_str());
+		int LightBurned = std::atoi(_uipopupWindow->getChild("LightSoulsBurn")->getText().c_str());
+		int LightWorker = std::atoi(_uipopupWindow->getChild("LightSoulsWork")->getText().c_str());
+		int LukuaunBurned = std::atoi(_uipopupWindow->getChild("LukuaunSoulsBurn")->getText().c_str());
+		int LukuaunWorker = std::atoi(_uipopupWindow->getChild("LukuaunSoulsWork")->getText().c_str());
+
+		printf("heavy sousl burned %i working %i\n", HeavyBurned, HeavyWorker);
+		printf("wasted sousl burned %i working %i\n", WastedBurned, WastedWorker);
+		printf("light sousl burned %i working %i\n", LightBurned, LightWorker);
+		printf("lukuaun sousl burned %i working %i\n", LukuaunBurned, LukuaunWorker);
+
+		closeWindow();
 
 		return true;
 	}
