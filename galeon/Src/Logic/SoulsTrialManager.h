@@ -19,8 +19,9 @@ Contiene la declaración del gestor del Juicio de Almas.
 #include <string>
 
 // Predeclaración de clases para ahorrar tiempo de compilación
-namespace Logic
+namespace Map
 {
+	class CEntity;
 }
 
 /**
@@ -107,6 +108,16 @@ namespace Logic
 		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
 		*/
 		static void luaRegister();
+
+		/**
+		Inicialización de los valores de configuración del manager,
+		utilizando la información extraída de una entidad de mapa
+		(Map::CEntity) leída previamente.
+
+		@param entity Entidad de mapa con los valores de configuración
+		leídos para el manager.
+		*/
+		void spawn(const Map::CEntity *managerInfo);
 
 		/**
 		Función llamada en cada frame para que se realicen las funciones

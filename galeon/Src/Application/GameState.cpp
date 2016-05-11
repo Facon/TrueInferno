@@ -41,6 +41,10 @@ namespace Application {
 		// Crear la escena física.
 		Physics::CServer::getSingletonPtr()->createScene();
 
+		// Cargamos el archivo con los valores de configuración de los managers.
+		if (!Logic::CServer::getSingletonPtr()->loadManagersConfigurationValues("managers.txt"))
+			return false;
+
 		// Cargamos el archivo con las definiciones de las entidades del nivel.
 		if (!Logic::CEntityFactory::getSingletonPtr()->loadBluePrints("blueprints.txt"))
 			return false;
