@@ -119,7 +119,7 @@ MinorGodBoostEvent.throw = function(god)
 	local title = "God Boost"
 	local description = god.name .. " is cheating! Now " .. god.genre .. " will get Hades Favour faster for a while..."
 	local image = "EventSoulsSpeedReduction"
-	CEventManager.getSingletonPtr():addTimeEvent(CMinorGodBoostEvent(timeToLaunch, god.name, title, description, image, 1, 20*1000, true));
+	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent(timeToLaunch, god.name, title, description, image, 1, 20*1000, true));
 end
 
 MajorGodBoostEvent = Event:new("MajorGodBoostEvent")
@@ -132,7 +132,7 @@ MajorGodBoostEvent.throw = function(god)
 	local title = "God Boost"
 	local description = god.name .. " is cheating! Now " .. god.genre .. " will get Hades Favour faster for a while..."
 	local image = "EventSoulsSpeedReduction"
-	CEventManager.getSingletonPtr():addTimeEvent(CMajorGodBoostEvent(timeToLaunch, god.name, title, description, image, 2, 20*1000, true));
+	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent(timeToLaunch, god.name, title, description, image, 2, 20*1000, true));
 end
 
 MinorGodPenalizationEvent = Event:new("MinorGodPenalizationEvent")

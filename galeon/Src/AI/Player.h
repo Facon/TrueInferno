@@ -34,7 +34,7 @@ namespace AI {
 		/** Getter for score */
 		virtual const int getScore() const {
 			// Reads score directly from the specific Manager
-			return Logic::HFManager::getSingletonPtr()->getHadesFavor();
+			return (int) Logic::HFManager::getSingletonPtr()->getHadesFavor();
 		}
 
 	private:
