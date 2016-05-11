@@ -57,6 +57,10 @@ namespace Logic
 		CSoulSpeedAlterationEvent(unsigned long time, float factor, int duration, bool absoluteTime = true, bool restore = false) :
 			CEvent(INFO, time, absoluteTime), _factor(factor), _duration(duration), _restore(restore) {};
 
+		static CSoulSpeedAlterationEvent* addCSoulSpeedAlterationEvent(unsigned long time, float factor, int duration, bool absoluteTime = true, bool restore = false) {
+			return new CSoulSpeedAlterationEvent(time, factor, duration, absoluteTime, restore);
+		}
+
 		/**
 		Destructor.
 		*/

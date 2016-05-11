@@ -66,6 +66,12 @@ namespace Logic
 			CEvent(INFO, time, absoluteTime), _godName(godName), _title(""), _description(""), _image(""),
 			_factor(factor), _duration(0), _restore(true) {};
 
+		static CGodBoostEvent* addCGodBoostEvent(
+			unsigned long time, const std::string& godName, const std::string& title, const std::string& description, const std::string& image,
+			float factor, int duration, bool absoluteTime = true) {
+			return new CGodBoostEvent(time, godName, title, description, image, factor, duration, absoluteTime);
+		}
+
 		/**
 		Destructor.
 		*/

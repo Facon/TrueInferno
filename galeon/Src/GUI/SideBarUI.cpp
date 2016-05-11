@@ -258,8 +258,6 @@ namespace GUI
 	{
 		ClearBuildingConstruction();
 		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding(); // TODO TEST borrar edificio
-		//int aux;
-		//Logic::ResourcesManager::getSingletonPtr()->incrementResources(Logic::ResourceType::MINERAL, 100, false, true, aux); // TODO TEST incrementar recursos
 		printf("Repair Building\n");
 		return true;
 	}
@@ -267,8 +265,6 @@ namespace GUI
 	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		// TODO TEST
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "PowerGenerator", Vector3(0, 0, 0), true, true); 
 		printf("Clear Terrain\n");
 		return true;
 	}

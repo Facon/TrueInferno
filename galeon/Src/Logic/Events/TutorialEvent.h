@@ -51,6 +51,10 @@ namespace Logic
 		CTutorialEvent(int tutorialpanelIndex) :
 			CEvent(INFO, CEvent::ConditionTriggerType::TUTORIAL), _tutorialPanelIndex(tutorialpanelIndex)	{};
 
+		static CTutorialEvent* addCTutorialEvent(int tutorialpanelIndex) {
+			return new CTutorialEvent(tutorialpanelIndex);
+		};
+
 		/**
 		Destructor.
 		*/

@@ -114,14 +114,14 @@ namespace AI {
 		int _targetScore;
 
 		/** Tiempo(ms) mínimo hasta la primera actualización de score */
+		const int minTimeForFirstScoreUpdate = 10000;
 		// TODO TEST
 		//const int minTimeForFirstScoreUpdate = 30000;
-		const int minTimeForFirstScoreUpdate = 10000;
-
+		
 		/** Tiempo(ms) mínimo hasta la primera actualización de score */
+		const int maxTimeForFirstScoreUpdate = 10000;
 		// TODO TEST
 		//const int maxTimeForFirstScoreUpdate = 40000;
-		const int maxTimeForFirstScoreUpdate = 10000;
 
 		/** Tiempo(ms) mínimo entre actualizaciones de score */
 		const int minTimeBetweenScoreUpdate = 3000;

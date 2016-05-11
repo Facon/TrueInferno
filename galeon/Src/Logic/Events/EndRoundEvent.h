@@ -64,12 +64,6 @@ namespace Logic
 		*/
 		~CEndRoundEvent() {};
 
-		/**
-		Registra esta clase evento en el contexto de Lua.
-		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
-		*/
-		static void luaRegister();
-
 	protected:
 
 		/**

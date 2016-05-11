@@ -18,6 +18,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "EventManager.h"
 #include "BuildingDestructionEvent.h"
 #include "EndGameEvent.h"
+#include "EndRoundEvent.h"
 #include "SoulsSpeedReductionEvent.h"
 #include "SoulSpeedAlterationEvent.h"
 #include "GodBoostEvent.h"
@@ -210,9 +211,8 @@ namespace Logic {
 		// Jerarquía de eventos.
 		CEvent::luaRegister();
 
+		// Registramos los eventos que se pueden lanzar desde Lua
 		CBuildingDestructionEvent::luaRegister();
-		CEndGameEvent::luaRegister();
-		CSoulsSpeedReductionEvent::luaRegister();
 		CSoulSpeedAlterationEvent::luaRegister();
 		CGodBoostEvent::luaRegister();
 		CTutorialEvent::luaRegister();

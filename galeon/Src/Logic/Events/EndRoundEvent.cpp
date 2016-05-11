@@ -23,17 +23,6 @@ el desenlace de la ronda (victoria o derrota).
 
 namespace Logic {
 
-	void CEndRoundEvent::luaRegister()
-	{
-		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
-			[
-				luabind::class_<CEndRoundEvent, CEvent>("CEndRoundEvent")
-				.def(luabind::constructor<bool>())
-			];
-	}
-
-	//--------------------------------------------------------
-
 	void CEndRoundEvent::execute()
 	{
 		// @TODO Hacer esto bien...

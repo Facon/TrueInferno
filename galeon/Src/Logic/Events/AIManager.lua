@@ -9,9 +9,7 @@
 loadFromCpp = 1
 
 -- Flag para habilitar/deshabilitar fácilmente la IA
--- TODO TEST
---aiEnabled = false
-aiEnabled = true
+aiEnabled = false
 
 -- TODO usar require para no cargar módulos duplicados
 -- Carga de módulos desde la ruta base definida en C++
@@ -46,9 +44,9 @@ function AIManager:__init()
 	math.randomseed( os.time() )
 
 	-- Tiempo (ms) hasta el primer evento aleatorio
-	 -- TODO TEST
-	--self.timeUntilFirstEvent = 30000
 	self.timeUntilFirstEvent = 10000
+	-- TODO TEST
+	--self.timeUntilFirstEvent = 30000
 
 	-- Tiempo (ms) mínimo entre eventos aleatorios
 	self.minTimeBetweenEvents = 15000

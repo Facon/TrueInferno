@@ -32,7 +32,10 @@ namespace Logic {
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
 			[
 				luabind::class_<CSoulSpeedAlterationEvent, CEvent>("CSoulSpeedAlterationEvent")
-				.def(luabind::constructor<long, float, int, bool>())
+				.scope
+				[
+					luabind::def("addCSoulSpeedAlterationEvent", &CSoulSpeedAlterationEvent::addCSoulSpeedAlterationEvent)
+				]
 			];
 	}
 

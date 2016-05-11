@@ -30,8 +30,10 @@ namespace Logic {
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
 			[
 				luabind::class_<CBuildingDestructionEvent, CEvent>("CBuildingDestructionEvent")
-				.def(luabind::constructor<long>())
-				.def(luabind::constructor<ConditionTriggerType, bool>())
+				.scope
+				[
+					luabind::def("addCBuildingDestructionEvent", &CBuildingDestructionEvent::addCBuildingDestructionEvent)
+				]
 			];
 	}
 

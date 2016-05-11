@@ -27,18 +27,6 @@ durante un cierto tiempo.
 
 namespace Logic {
 
-	void CSoulsSpeedReductionEvent::luaRegister()
-	{
-		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
-			[
-				luabind::class_<CSoulsSpeedReductionEvent, CEvent>("CSoulsSpeedReductionEvent")
-				.def(luabind::constructor<long, bool>())
-				.def(luabind::constructor<ConditionTriggerType, bool, bool>())
-			];
-	}
-
-	//--------------------------------------------------------
-
 	void CSoulsSpeedReductionEvent::execute()
 	{
 		_restore ? restore() : apply();

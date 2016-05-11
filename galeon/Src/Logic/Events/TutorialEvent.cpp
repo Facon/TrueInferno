@@ -28,7 +28,10 @@ namespace Logic {
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
 			[
 				luabind::class_<CTutorialEvent, CEvent>("CTutorialEvent")
-				.def(luabind::constructor<int>())
+				.scope
+				[
+					luabind::def("addCTutorialEvent", &CTutorialEvent::addCTutorialEvent)
+				]
 			];
 	}
 
