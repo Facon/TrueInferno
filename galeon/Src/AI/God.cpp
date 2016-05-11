@@ -70,7 +70,7 @@ namespace AI {
 
 			// Avanzamos la puntuación a la velocidad calculada durante un periodo de aleatorio o todo lo posible
 			long randomTimeForUpdate = (long) getRandomTimeForNextScoreUpdate(minTimeBetweenScoreUpdate, maxTimeBetweenScoreUpdate);
-			changeScore(std::roundl(scoreSpeed * std::min(roundRemainingTime, randomTimeForUpdate)));
+			changeScore((int) std::round(scoreSpeed * std::min(roundRemainingTime, randomTimeForUpdate)));
 
 			// Obtenemos nuevo tiempo para la siguiente actualización de score
 			_remainingTimeForNextScoreUpdate = getRandomTimeForNextScoreUpdate(minTimeBetweenScoreUpdate, maxTimeBetweenScoreUpdate);

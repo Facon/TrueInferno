@@ -94,7 +94,7 @@ namespace Logic {
 	bool CServer::open()
 	{
 		// Aleatorizamos la semilla de los números pseudoaleatorios
-		std::srand(std::time(0));
+		std::srand((int)std::time(0));
 
 		// Inicializamos el parser de mapas.
 		if (!Map::CMapParser::Init())
