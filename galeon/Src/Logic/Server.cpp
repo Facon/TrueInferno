@@ -34,6 +34,9 @@ la gestión de la lógica del juego.
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
 
+// HACK. Debería leerse de algún fichero de configuración
+#define MANAGERS_FILE_PATH "./media/maps/"
+
 namespace Logic {
 
 	CServer* CServer::_instance = 0;
@@ -176,6 +179,41 @@ namespace Logic {
 		Map::CMapParser::Release();
 
 	} // close
+
+	//--------------------------------------------------------
+
+	bool CServer::loadManagersConfigurationValues(const std::string &filename)
+	{
+		// Completamos la ruta con el nombre de fichero dado
+		std::string completePath(MANAGERS_FILE_PATH);
+		completePath = completePath + filename;
+
+		// Parseamos el fichero
+		if (!Map::CMapParser::getSingletonPtr()->parseFile(completePath))
+		{
+			assert(!"No se ha podido parsear el fichero de configuración de managers.");
+			return false;
+		}
+
+		// Extraemos las entidades del parseo...
+		Map::CMapParser::TEntityList managersList =
+			Map::CMapParser::getSingletonPtr()->getEntityList();
+
+		// ...y cargamos los valores leídos para cada manager
+		Map::CMapParser::TEntityList::const_iterator it, end;
+		it = managersList.begin();
+		end = managersList.end();
+
+		for (; it != end; it++) {
+			Map::CEntity *manager = *it;
+
+			if (manager->getType() == "SoulsTrialManager")
+				CSoulsTrialManager::getSingletonPtr()->spawn(manager);
+		}
+
+		return true;
+
+	} // loadManagersConfigurationValues
 
 	//--------------------------------------------------------
 
