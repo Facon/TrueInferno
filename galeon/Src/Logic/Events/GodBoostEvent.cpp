@@ -30,7 +30,7 @@ namespace Logic {
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
 			[
 				luabind::class_<CGodBoostEvent, CEvent>("CGodBoostEvent")
-				.def(luabind::constructor<long, std::string, std::string, std::string, std::string, float, int, bool>())
+				.def(luabind::constructor<long, const std::string&, const std::string&, const std::string&, const std::string&, float, int, bool>())
 			];
 	}
 

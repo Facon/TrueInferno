@@ -53,7 +53,7 @@ namespace Logic
 
 		/**  Constructor para crear el evento. */
 		CGodBoostEvent(
-			unsigned long time, const std::string& godName, const std::string& title, const std::string& description, std::string& image,
+			unsigned long time, const std::string& godName, const std::string& title, const std::string& description, const std::string& image,
 			float factor, int duration, bool absoluteTime = true) :
 			
 			CEvent(INFO, time, absoluteTime), _godName(godName), _title(title), _description(description), _image(image),
