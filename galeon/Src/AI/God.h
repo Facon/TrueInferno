@@ -60,7 +60,7 @@ namespace AI {
 				std::cout << _name << ": " << _score << " -> " << _targetScore << std::endl;*/
 		};
 
-		/** Eliminates god */
+		/** Eliminates this god */
 		void eliminate();
 
 		/**
@@ -75,6 +75,27 @@ namespace AI {
 
 		/** Cambia la puntuación del dios según la cantidad (positiva o negativa) indicada */
 		void changeScore(int change);
+
+		/**
+		Aplica un factor aditivo a la velcoidad base de modificación del score del dios:
+		velocidad = (1 + boostFactor) * velocidadBase
+
+		e.g. Si boostFactor = 1 => velocidad = (1 + 1) * velocidadBase = 2 * velocidadBase = 200% velocidadBase (velocidad duplicada)
+		e.g. Si boostFactor = 2 => velocidad = (1 + 2) * velocidadBase = 3 * velocidadBase = 300% velocidadBase (velocidad triplicada)
+		e.g. Si boostFactor = -1 => velocidad = (1 - 1) * velocidadBase = 0 * velocidadBase = 0% velocidadBase (velocidad anulada)
+		e.g. Si boostFactor = -2 => velocidad = (1 - 2) * velocidadBase = -1 * velocidadBase = -100% velocidadBase (velocidad negativa!)
+		e.g. Si boostFactor = -0.5 => velocidad = (1 - 0.5) * velocidadBase = 0.5 * velocidadBase = 50% velocidadBase (velocidad a la mitad)
+
+		@param factor Factor por el cual se modifica el ritmo de crecimiento del score
+		*/
+		void applyBoost(float boostFactor);
+
+		/**
+		Deshace la operación realizada en applyBoost
+
+		@param factor Factor a deshacer
+		*/
+		void removeBoost(float boostFactor);
 
 	private:
 		/** Nombre del dios */
@@ -93,10 +114,14 @@ namespace AI {
 		int _targetScore;
 
 		/** Tiempo(ms) mínimo hasta la primera actualización de score */
-		const int minTimeForFirstScoreUpdate = 30000;
+		// TODO TEST
+		//const int minTimeForFirstScoreUpdate = 30000;
+		const int minTimeForFirstScoreUpdate = 10000;
 
 		/** Tiempo(ms) mínimo hasta la primera actualización de score */
-		const int maxTimeForFirstScoreUpdate = 40000;
+		// TODO TEST
+		//const int maxTimeForFirstScoreUpdate = 40000;
+		const int maxTimeForFirstScoreUpdate = 10000;
 
 		/** Tiempo(ms) mínimo entre actualizaciones de score */
 		const int minTimeBetweenScoreUpdate = 3000;
@@ -117,6 +142,9 @@ namespace AI {
 
 		/** Flag a true cuando el dios está eliminado */
 		bool _isEliminated;
+
+		/** Factor que altera el ritmo de modificación del score del dios */
+		float _boostFactor;
 	};
 }
 

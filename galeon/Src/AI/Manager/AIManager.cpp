@@ -259,6 +259,10 @@ namespace AI {
 		assignGodTargetScores(base, (int)(base * _scoreMaxRelativeDeviation));
 	}
 
+	CGod* CAIManager::getGod(const std::string& name){
+		return _gods[name];
+	}
+
 	bool CAIManager::HandleMessage(const Message& msg)
 	{
 		assert(!"Estás enviando un Message sin tipo.");

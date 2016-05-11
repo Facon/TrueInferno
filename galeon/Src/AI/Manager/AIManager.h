@@ -99,6 +99,9 @@ namespace AI
 		/** Realiza las operaciones necesarias para comenzar la siguiente ronda */
 		void startNextRound();
 
+		/** Devuelve el dios con el nombre indicado */
+		CGod* getGod(const std::string& name);
+
 		// Manejo de mensajes, tiene que manejar todos los tipos de mensajes sin excepción.
 		bool HandleMessage(const Message& msg);
 		bool HandleMessage(const TransformMessage& msg);

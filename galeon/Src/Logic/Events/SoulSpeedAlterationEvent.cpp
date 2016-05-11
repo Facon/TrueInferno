@@ -12,7 +12,7 @@ durante un cierto tiempo.
 @see Logic::CEvent
 
 @author Álvaro Valera
-@date Abril, 2016
+@date Mayo, 2016
 */
 
 #include "SoulSpeedAlterationEvent.h"
@@ -72,7 +72,7 @@ namespace Logic {
 			eventText += "Go, souls, go!";
 
 			// TODO Reemplazar por imagen correcta
-			uiManager->getEventUI()->setEventImage("EventSoulsSpeedIncrease");
+			uiManager->getEventUI()->setEventImage("EventSoulsSpeedReduction");
 			uiManager->getEventUI()->setEventTitle("Useful souls");
 		}
 

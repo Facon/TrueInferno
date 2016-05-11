@@ -11,12 +11,15 @@ then
 end
 
 God = {}
-function God:new (name, isBoss)
+function God:new (name, genre, isBoss)
 	local self = setmetatable({}, God)
 	
 	-- Nombre del dios
 	self.name = name
 
+	-- Género del dios
+	self.genre = genre
+	
 	-- Flag para indicar si es el jefe
 	self.isBoss = isBoss
 	
@@ -39,33 +42,33 @@ end
 
 -- Definición de los dioses y sus correspondientes atributos (ver godTraits.lua)
 -- TODO Convendría normalizar rasgos en cada dios para evitar que los dioses con muchos rasgos tengan preferencia
-Hades = God:new("Hades", true)
+Hades = God:new("Hades", "he", true)
 Hades.traits.crazy = 1
 Hades.traits.arrogant = 0.7
 Hades.traits.vengeful = 1
 Hades.traits.clumsy = 0
 Hades.traits.vengeful = 1
 
-Lucifer = God:new("Lucifer", false)
+Lucifer = God:new("Lucifer", "she", false)
 Lucifer.traits.aggressive = 1
 Lucifer.traits.arrogant = 1
 Lucifer.traits.vengeful = 1
 
-Osiris = God:new("Osiris", false)
+Osiris = God:new("Osiris", "he", false)
 Osiris.traits.businessman = 1
 Lucifer.traits.arrogant = 1
 Osiris.traits.cheater = 1
 Osiris.traits.generous = 1
 Osiris.traits.vengeful = 0.75
 
-Hel = God:new("Hel", false)
+Hel = God:new("Hel", "she", false)
 Hel.traits.crazy = 1
 Hel.traits.arrogant = 0.5
 Hel.traits.generous = 1
 Hel.traits.clumsy = 0.2
 Hel.traits.vengeful = 0.5
 
-Cthulhu = God:new("Cthulhu", false)
+Cthulhu = God:new("Cthulhu", "it", false)
 Cthulhu.traits.generous = 1
 Cthulhu.traits.clumsy = 1
 Cthulhu.traits.crazy = 1

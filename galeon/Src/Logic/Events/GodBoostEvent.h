@@ -1,23 +1,22 @@
 //---------------------------------------------------------------------------
-// SoulSpeedAlterationEvent.h
+// GodBoostEvent.h
 //---------------------------------------------------------------------------
 
 /**
-@file SoulSpeedAlterationEvent.h
+@file GodBoostEvent.h
 
-Declaración de un evento de tipo INFO consistente en alterar la velocidad
-de movimiento y de recolección de recursos de las almas durante un cierto
-tiempo.
+Declaración de la clase CGodBoostEvent.
 
 @see Logic::CEvent
-@see Logic::CSoulsSpeedReductionEvent
 
 @author Álvaro Valera
 @date Mayo, 2016
 */
 
-#ifndef SOUL_SPEED_ALTERATION_EVENT_H_
-#define SOUL_SPEED_ALTERATION_EVENT_H_
+#ifndef GOD_BOOST_EVENT_H_
+#define GOD_BOOST_EVENT_H_
+
+#include <string>
 
 #include "Event.h"
 
@@ -38,29 +37,39 @@ sus componentes, mensajes, factorias de entidades y componentes, etc.
 namespace Logic
 {
 	/**
-	Clase que representa un evento de alteración de todas las almas
-	de la ciudad.
+	Clase que representa un evento que otorga a un dios un boost
+	temporal sobre la velocidad de incrementeo del score durante
+	un tiempo determinado.
 
 	@ingroup logicGroup
 
-	@author Raúl Segura
-	@date Abril, 2016
+	@author Álvaro Valera
+	@date Mayo, 2016
 	*/
-	class CSoulSpeedAlterationEvent : public CEvent
+	class CGodBoostEvent : public CEvent
 	{
 
 	public:
 
-		/**
-		Constructor.
-		*/
-		CSoulSpeedAlterationEvent(unsigned long time, float factor, int duration, bool absoluteTime = true, bool restore = false) :
-			CEvent(INFO, time, absoluteTime), _factor(factor), _duration(duration), _restore(restore) {};
+		/**  Constructor para crear el evento. */
+		CGodBoostEvent(
+			unsigned long time, const std::string& godName, const std::string& title, const std::string& description, std::string& image,
+			float factor, int duration, bool absoluteTime = true) :
+			
+			CEvent(INFO, time, absoluteTime), _godName(godName), _title(title), _description(description), _image(image),
+			_factor(factor), _duration(duration), _restore(false) {};
+
+		/**  Constructor para detener el efecto el evento. */
+		CGodBoostEvent(
+			unsigned long time, const std::string& godName, float factor, bool absoluteTime = true) :
+
+			CEvent(INFO, time, absoluteTime), _godName(godName), _title(""), _description(""), _image(""),
+			_factor(factor), _duration(0), _restore(true) {};
 
 		/**
 		Destructor.
 		*/
-		~CSoulSpeedAlterationEvent() {};
+		~CGodBoostEvent() {};
 
 		/**
 		Registra esta clase evento en el contexto de Lua.
@@ -97,16 +106,28 @@ namespace Logic
 
 	private:
 		/**
-		Factor por el cual se altera la velocidad de las almas. 
+		Factor por el cual se altera la velocidad del score del dios. 
 		Si factor < 1.0, el evento ralentiza. Si factor > 1, el evento acelera.
 		*/
 		float _factor;
 
-		/** Duración (ms) de la alteración de velocidad */
+		/** Duración (ms) del evento */
 		int _duration;
+
+		/** Nombre del dios afectado por el evento */
+		std::string _godName;
 		
-	}; // class CSoulSpeedAlterationEvent
+		/** Texto descriptivo del evento para mostrar en el panel */
+		std::string _description;
+
+		/** Título para el panel */
+		std::string _title;
+
+		/** Identificador de imagen de fondo para el panel */
+		std::string _image;
+
+	}; // class CGodBoostEvent
 
 } // namespace Logic
 
-#endif // SOUL_SPEED_ALTERATION_EVENT_H_
+#endif // GOD_BOOST_EVENT_H_

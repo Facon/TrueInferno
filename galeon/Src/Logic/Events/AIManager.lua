@@ -9,7 +9,9 @@
 loadFromCpp = 1
 
 -- Flag para habilitar/deshabilitar fácilmente la IA
-aiEnabled = false
+-- TODO TEST
+--aiEnabled = false
+aiEnabled = true
 
 -- TODO usar require para no cargar módulos duplicados
 -- Carga de módulos desde la ruta base definida en C++
@@ -44,7 +46,9 @@ function AIManager:__init()
 	math.randomseed( os.time() )
 
 	-- Tiempo (ms) hasta el primer evento aleatorio
-	self.timeUntilFirstEvent = 30000
+	 -- TODO TEST
+	--self.timeUntilFirstEvent = 30000
+	self.timeUntilFirstEvent = 10000
 
 	-- Tiempo (ms) mínimo entre eventos aleatorios
 	self.minTimeBetweenEvents = 15000
@@ -64,8 +68,12 @@ function AIManager:__init()
 	do
 		for eventIndex,event in pairs(events) 
 		do
-			local godEvent = {god = god, event = event}
-			table.insert(self.godEvents, godEvent)
+			-- Nos quedamos con los eventos de dioses normales o que permitan ser lanzados por el jefe
+			if((god.isBoss == false) or (event.allowsBoss == true))
+			then
+				local godEvent = {god = god, event = event}
+				table.insert(self.godEvents, godEvent)
+			end
 		end
 	end
 	
@@ -107,7 +115,7 @@ function AIManager:tick(msecs)
 			-- Lanzamos el evento
 			if(aiEnabled)
 			then
-				chosenGodEvent.event.throw()
+				chosenGodEvent.event.throw(chosenGodEvent.god)
 			end
 
 			-- Se actualizan los contadores de tiempo en función del evento-dios lanzado
