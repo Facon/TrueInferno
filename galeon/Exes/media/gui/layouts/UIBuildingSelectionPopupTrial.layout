@@ -15,16 +15,16 @@
 		
 		<Window type="OgreTray/StaticImage" name="BurnSoul" >
 			<Property name="Image" value="TrueInfernoIcons/BurnSoul" />
-			<Property name="Area" value="{{0.513,0},{0.17,0},{0.653,0},{0.31,0}}" />
+			<Property name="Area" value="{{0.568,0},{0.17,0},{0.708,0},{0.31,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CreateSoul" >
 			<Property name="Image" value="TrueInfernoIcons/CreateSoul" />
-			<Property name="Area" value="{{0.683,0},{0.17,0},{0.823,0},{0.31,0}}" />
+			<Property name="Area" value="{{0.738,0},{0.17,0},{0.878,0},{0.31,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="HeavySoulText" >
-			<Property name="Area" value="{{0.177,0},{0.32,0},{0.503,0},{0.42,0}}" />
+			<Property name="Area" value="{{0.110,0},{0.32,0},{0.436,0},{0.42,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
@@ -32,22 +32,31 @@
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
+		<Window type="OgreTray/StaticText" name="HeavySoulTotal" >
+			<Property name="Area" value="{{0.417,0},{0.32,0},{0.547,0},{0.42,0}}" />
+			<Property name="Font" value="Jura-12" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="RightAligned" />
+			<Property name="Text" value="0" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
 		<Window type="TaharezLook/Editbox" name="HeavySoulsBurn" >
-			<Property name="Area" value="{{0.513,0},{0.32,0},{0.653,0},{0.42,0}}" />
+			<Property name="Area" value="{{0.568,0},{0.32,0},{0.708,0},{0.42,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="HeavySoulsWork" >
-			<Property name="Area" value="{{0.683,0},{0.32,0},{0.823,0},{0.42,0}}" />
+			<Property name="Area" value="{{0.738,0},{0.32,0},{0.878,0},{0.42,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
-				<Window type="OgreTray/StaticText" name="WastedSoulText" >
-			<Property name="Area" value="{{0.177,0},{0.43,0},{0.503,0},{0.53,0}}" />
+		<Window type="OgreTray/StaticText" name="WastedSoulText" >
+			<Property name="Area" value="{{0.110,0},{0.43,0},{0.436,0},{0.53,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
@@ -55,22 +64,31 @@
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
+		<Window type="OgreTray/StaticText" name="WastedSoulTotal" >
+			<Property name="Area" value="{{0.417,0},{0.43,0},{0.547,0},{0.53,0}}" />
+			<Property name="Font" value="Jura-12" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="RightAligned" />
+			<Property name="Text" value="0" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
 		<Window type="TaharezLook/Editbox" name="WastedSoulsBurn" >
-			<Property name="Area" value="{{0.513,0},{0.43,0},{0.653,0},{0.53,0}}" />
+			<Property name="Area" value="{{0.568,0},{0.43,0},{0.708,0},{0.53,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="WastedSoulsWork" >
-			<Property name="Area" value="{{0.683,0},{0.43,0},{0.823,0},{0.53,0}}" />
+			<Property name="Area" value="{{0.738,0},{0.43,0},{0.878,0},{0.53,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
-				<Window type="OgreTray/StaticText" name="LightSoulText" >
-			<Property name="Area" value="{{0.177,0},{0.54,0},{0.503,0},{0.64,0}}" />
+		<Window type="OgreTray/StaticText" name="LightSoulText" >
+			<Property name="Area" value="{{0.110,0},{0.54,0},{0.436,0},{0.64,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
@@ -78,38 +96,56 @@
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
+		<Window type="OgreTray/StaticText" name="LightSoulTotal" >
+			<Property name="Area" value="{{0.417,0},{0.54,0},{0.547,0},{0.64,0}}" />
+			<Property name="Font" value="Jura-12" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="RightAligned" />
+			<Property name="Text" value="0" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
 		<Window type="TaharezLook/Editbox" name="LightSoulsBurn" >
-			<Property name="Area" value="{{0.513,0},{0.54,0},{0.653,0},{0.64,0}}" />
+			<Property name="Area" value="{{0.568,0},{0.54,0},{0.708,0},{0.64,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="LightSoulsWork" >
-			<Property name="Area" value="{{0.683,0},{0.54,0},{0.823,0},{0.64,0}}" />
+			<Property name="Area" value="{{0.738,0},{0.54,0},{0.878,0},{0.64,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
-				<Window type="OgreTray/StaticText" name="LukuaunSoulText" >
-			<Property name="Area" value="{{0.177,0},{0.65,0},{0.503,0},{0.75,0}}" />
+		<Window type="OgreTray/StaticText" name="UnknownSoulText" >
+			<Property name="Area" value="{{0.110,0},{0.65,0},{0.436,0},{0.75,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
-			<Property name="Text" value="Lukuaun" />
+			<Property name="Text" value="Unknown" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
-		<Window type="TaharezLook/Editbox" name="LukuaunSoulsBurn" >
-			<Property name="Area" value="{{0.513,0},{0.65,0},{0.653,0},{0.75,0}}" />
+		<Window type="OgreTray/StaticText" name="UnknownSoulTotal" >
+			<Property name="Area" value="{{0.417,0},{0.65,0},{0.547,0},{0.75,0}}" />
+			<Property name="Font" value="Jura-12" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="RightAligned" />
+			<Property name="Text" value="9991" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="TaharezLook/Editbox" name="UnknownSoulsBurn" >
+			<Property name="Area" value="{{0.568,0},{0.65,0},{0.708,0},{0.75,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
-		<Window type="TaharezLook/Editbox" name="LukuaunSoulsWork" >
-			<Property name="Area" value="{{0.683,0},{0.65,0},{0.823,0},{0.75,0}}" />
+		<Window type="TaharezLook/Editbox" name="UnknownSoulsWork" >
+			<Property name="Area" value="{{0.738,0},{0.65,0},{0.878,0},{0.75,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
