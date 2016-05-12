@@ -1,7 +1,7 @@
 #ifndef __Logic_Billboard_H
 #define __Logic_Billboard_H
 
-#include <map>
+#include <unordered_map>
 
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
@@ -36,7 +36,7 @@ namespace Logic
 		bool HandleMessage(const IconMessage& msg);
 
 	protected:
-		static const std::map<std::string, IconType::IconType> iconTableConversor;
+		static const std::unordered_map<std::string, IconType::IconType> iconTableConversor;
 
 		Graphics::BillboardSet* _bbSet;
 		Ogre::Billboard* _billboard;

@@ -21,7 +21,7 @@ namespace AI
 
 		while (_smData.getNumSoulsToBurn() > 0)
 		{
-			CSoulsTrialManager::SoulsCategory nextSoulCategory = _smData.getNextSoulToBurn();
+			SoulsTrialManager::SoulsCategory nextSoulCategory = _smData.getNextSoulToBurn();
 			CSoulsTrialManager::getSingletonPtr()->calculateSoulEvil(nextSoulCategory, soulCrude, soulCoke);
 
 			_totalCrudeToIncrease += soulCrude;

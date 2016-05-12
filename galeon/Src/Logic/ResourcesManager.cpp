@@ -70,8 +70,8 @@ namespace Logic
 			return CRUDE;
 		}
 
-		else if (name == "PURE"){
-			return PURE;
+		else if (name == "SPURE"){
+			return SPURE;
 		}
 
 		else if (name == "REFINED"){

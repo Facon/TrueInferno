@@ -84,7 +84,7 @@ namespace GUI
 	{
 		_topBarUI.tick(msecs);
 		_sideBarUI.tick(msecs);
-		_rankUI.tick(msecs);
+		//_rankUI.tick(msecs);
 		_eventUI.tick(msecs);
 		_buildingSelectionUI.tick(msecs);
 	}

@@ -185,8 +185,8 @@ namespace Logic
 		@param soulAether cantidad de Éter del alma.
 		@return true si la categoría recibida es distinta de NONE.
 		*/
-		bool calculateSoulEvil(SoulsCategory soulCategory, int& soulCrude, int& soulCoke);
-		bool calculateSoulAether(SoulsCategory soulCategory, int& soulAether);
+		bool calculateSoulEvil(SoulsTrialManager::SoulsCategory soulCategory, int& soulCrude, int& soulCoke);
+		bool calculateSoulAether(SoulsTrialManager::SoulsCategory soulCategory, int& soulAether);
 
 	protected:
 
@@ -232,7 +232,7 @@ namespace Logic
 		@param soulCoke cantidad de Coke del alma (entre 0 y 16).
 		@param soulAether cantidad de Éter del alma (entre 0 y 5).
 		*/
-		void calculateSoulComposition(SoulsCategory soulCategory,
+		void calculateSoulComposition(SoulsTrialManager::SoulsCategory soulCategory,
 			int& soulCrude, int& soulCoke, int& soulAether);
 
 	private:

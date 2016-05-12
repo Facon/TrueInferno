@@ -24,10 +24,7 @@ namespace Logic
 	class CPlaceable;
 	enum LogicRequirement;
 	
-	namespace ResourceType
-	{
-		enum ResourceType;
-	}
+	enum ResourceType;
 
 	class CSoulsTrialManager;
 	
@@ -437,34 +434,34 @@ namespace Logic
 		ResourceMessage();
 
 		/** RESOURCES_ASK: Solicita información sobre el recurso del tipo dado y el ID de la entidad que envía la solicitud */
-		void assembleResourcesAsk(const ResourceType::ResourceType& resourceType, TEntityID caller);
+		void assembleResourcesAsk(const ResourceType& resourceType, TEntityID caller);
 
 		/** RESOURCES_INFO: Devuelve la cantidad real, disponible y máxima del recurso indicado, si el recurso se provee externamente y el ID de la entidad que tiene los recursos */
-		void assembleResourcesInfo(const ResourceType::ResourceType& resourceType, int stored, int available, unsigned int max, bool provided, TEntityID caller);
+		void assembleResourcesInfo(const ResourceType& resourceType, int stored, int available, unsigned int max, bool provided, TEntityID caller);
 
 		/** RESOURCES_CHANGE: Solicita el cambio (positivo/negativo) en la cantidad de recursos del tipo dado */
-		void assembleResourcesChange(const ResourceType::ResourceType& resourceType, int quantity);
+		void assembleResourcesChange(const ResourceType& resourceType, int quantity);
 
 		/** RESOURCES_RESERVE: Intenta reservar todo lo posible hasta la cantidad de recursos indicada del tipo dado para la entidad indicada. 
 		No cambia la cantidad real almacenada sino la cantidad disponible para evitar que otras solicitudes simultáneas nos quiten nuestra reserva.
 		El que reserva recursos contrae la responsabilidad de liberarlos (RESOURCES_FREE) o reclamarlos (RESOURCES_CLAIM).
 		Tras la reserva la entidad indicada recibirá un mensaje RESOURCES_RESERVED con la cantidad finalmente reservada.
 		*/
-		void assembleResourcesReserve(const ResourceType::ResourceType& resourceType, int quantity, TEntityID caller);
+		void assembleResourcesReserve(const ResourceType& resourceType, int quantity, TEntityID caller);
 
 		/** RESOURCES_RESERVED: Informa de la cantidad de recursos finalmente reservada del tipo dado.
 		No cambia la cantidad real almacenada sino la cantidad disponible para evitar que otras solicitudes simultáneas nos quiten nuestra reserva.
 		El que reserva recursos contrae la responsabilidad de liberarlos (RESOURCES_FREE) o reclamarlos (RESOURCES_CLAIM).
 		*/
-		void assembleResourcesReserved(const ResourceType::ResourceType& resourceType, int quantity);
+		void assembleResourcesReserved(const ResourceType& resourceType, int quantity);
 
 		/** RESOURCES_FREE: Libera la cantidad de recursos reservada del tipo dado para que otras solicitudes puedan volverlo a reservar */
-		void assembleResourcesFree(const ResourceType::ResourceType& resourceType, int quantity);
+		void assembleResourcesFree(const ResourceType& resourceType, int quantity);
 
 		/** RESOURCES_CLAIM: Reclama (i.e. libera la reserva y modifica) la cantidad de recursos del tipo dado para efectivamente consumir lo reservado */
-		void assembleResourcesClaim(const ResourceType::ResourceType& resourceType, int quantity);
+		void assembleResourcesClaim(const ResourceType& resourceType, int quantity);
 
-		ResourceType::ResourceType _resourceType;
+		ResourceType _resourceType;
 		int _quantity;
 		int _stored;
 		int _available;
@@ -482,12 +479,12 @@ namespace Logic
 		LogisticsMessage();
 
 		// LOGISTICS_DEMAND_RESOURCES: Solicita buscar la cantidad de recursos indicada del tipo dado
-		void assembleDemandResources(ResourceType::ResourceType resourceType, unsigned int resourceQuantity);
+		void assembleDemandResources(ResourceType resourceType, unsigned int resourceQuantity);
 
 		// LOGISTICS_PROVIDE_RESOURCES: Obliga a proveer la cantidad indicada del recurso dado al objetivo proporcionado
-		void assembleProvideResources(ResourceType::ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target);
+		void assembleProvideResources(ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target);
 
-		ResourceType::ResourceType _resourceType;
+		ResourceType _resourceType;
 		unsigned int _resourceQuantity;
 		TEntityID _target;
 
@@ -555,16 +552,16 @@ namespace Logic
 		ConsumptionMessage();
 
 		// CONSUMPTION_START: Solicita el comienzo de los ciclos de consumo (i.e. se ha conectado el primer consumidor)
-		void assembleConsumptionStart(ResourceType::ResourceType resourceType);
+		void assembleConsumptionStart(ResourceType resourceType);
 
 		// CONSUMPTION_STOP: Solicita el fin de los ciclos de consumo (i.e. se ha desconectado el último consumidor)
-		void assembleConsumptionStop(ResourceType::ResourceType resourceType);
+		void assembleConsumptionStop(ResourceType resourceType);
 
 		// CONSUMPTION_STOPPED: Informa de que los ciclos de consumo han parado (i.e. se han acabado los recursos)
-		void assembleConsumptionStopped(ResourceType::ResourceType resourceType);
+		void assembleConsumptionStopped(ResourceType resourceType);
 
 		// CONSUMPTION_CHANGE: Informa de la variación deseada en el consumo
-		void assembleConsumptionChange(ResourceType::ResourceType resourceType, int consumptionChange, int consumptionPeriod);
+		void assembleConsumptionChange(ResourceType resourceType, int consumptionChange, int consumptionPeriod);
 
 		// Cambio de consumo
 		int _consumptionChange;
@@ -573,7 +570,7 @@ namespace Logic
 		int _consumptionPeriod;
 
 		// Recurso consumido
-		ResourceType::ResourceType _resourceType;
+		ResourceType _resourceType;
 
 		virtual bool Dispatch(MessageHandler& handler) const;
 	};
@@ -593,7 +590,7 @@ namespace Logic
 			SOUL_PATH,
 			COMPASS_ROSE,
 			FURNACE,
-			TOXIC, // WTF?
+			GAS_PLANT,
 			HELLQUARTERS, // WTF?
 			MINE, // WTF?
 			CROSS_SWORD, // WTF?

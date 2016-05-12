@@ -290,14 +290,14 @@ namespace Logic
 		_quantity(0), _stored(0), _available(0), _max(0),_provided(false), _caller(EntityID::UNASSIGNED)
 	{}
 
-	void ResourceMessage::assembleResourcesAsk(const ResourceType::ResourceType& resourceType, TEntityID caller)
+	void ResourceMessage::assembleResourcesAsk(const ResourceType& resourceType, TEntityID caller)
 	{
 		_type = MessageType::RESOURCES_ASK;
 		_resourceType = resourceType;
 		_caller = caller;
 	}
 
-	void ResourceMessage::assembleResourcesInfo(const ResourceType::ResourceType& resourceType, int stored, int available, unsigned int max, bool provided, TEntityID caller)
+	void ResourceMessage::assembleResourcesInfo(const ResourceType& resourceType, int stored, int available, unsigned int max, bool provided, TEntityID caller)
 	{
 		_type = MessageType::RESOURCES_INFO;
 		_resourceType = resourceType;
@@ -308,14 +308,14 @@ namespace Logic
 		_caller = caller;
 	}
 
-	void ResourceMessage::assembleResourcesChange(const ResourceType::ResourceType& resourceType, int quantity)
+	void ResourceMessage::assembleResourcesChange(const ResourceType& resourceType, int quantity)
 	{
 		_type = MessageType::RESOURCES_CHANGE;
 		_resourceType = resourceType;
 		_quantity = quantity;
 	}
 
-	void ResourceMessage::assembleResourcesReserve(const ResourceType::ResourceType& resourceType, int quantity, TEntityID caller)
+	void ResourceMessage::assembleResourcesReserve(const ResourceType& resourceType, int quantity, TEntityID caller)
 	{
 		_type = MessageType::RESOURCES_RESERVE;
 		_resourceType = resourceType;
@@ -323,21 +323,21 @@ namespace Logic
 		_caller = caller;
 	}
 
-	void ResourceMessage::assembleResourcesReserved(const ResourceType::ResourceType& resourceType, int quantity)
+	void ResourceMessage::assembleResourcesReserved(const ResourceType& resourceType, int quantity)
 	{
 		_type = MessageType::RESOURCES_RESERVED;
 		_resourceType = resourceType;
 		_quantity = quantity;
 	}
 
-	void ResourceMessage::assembleResourcesFree(const ResourceType::ResourceType& resourceType, int quantity)
+	void ResourceMessage::assembleResourcesFree(const ResourceType& resourceType, int quantity)
 	{
 		_type = MessageType::RESOURCES_FREE;
 		_resourceType = resourceType;
 		_quantity = quantity;
 	}
 
-	void ResourceMessage::assembleResourcesClaim(const ResourceType::ResourceType& resourceType, int quantity)
+	void ResourceMessage::assembleResourcesClaim(const ResourceType& resourceType, int quantity)
 	{
 		_type = MessageType::RESOURCES_CLAIM;
 		_resourceType = resourceType;
@@ -355,7 +355,7 @@ namespace Logic
 		_resourceQuantity(0), _target(EntityID::UNASSIGNED)
 	{}
 
-	void LogisticsMessage::assembleDemandResources(ResourceType::ResourceType resourceType, unsigned int resourceQuantity)
+	void LogisticsMessage::assembleDemandResources(ResourceType resourceType, unsigned int resourceQuantity)
 	{
 		_type = MessageType::LOGISTICS_DEMAND_RESOURCES;
 		_resourceType = resourceType;
@@ -363,7 +363,7 @@ namespace Logic
 		_target = EntityID::UNASSIGNED;
 	}
 
-	void LogisticsMessage::assembleProvideResources(ResourceType::ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target)
+	void LogisticsMessage::assembleProvideResources(ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target)
 	{
 		_type = MessageType::LOGISTICS_PROVIDE_RESOURCES;
 		_resourceType = resourceType;
@@ -426,25 +426,25 @@ namespace Logic
 		_consumptionChange(0), _consumptionPeriod(0)
 	{}
 
-	void ConsumptionMessage::assembleConsumptionStart(ResourceType::ResourceType resourceType)
+	void ConsumptionMessage::assembleConsumptionStart(ResourceType resourceType)
 	{
 		_type = MessageType::CONSUMPTION_START;
 		_resourceType = resourceType;
 	}
 
-	void ConsumptionMessage::assembleConsumptionStop(ResourceType::ResourceType resourceType)
+	void ConsumptionMessage::assembleConsumptionStop(ResourceType resourceType)
 	{
 		_type = MessageType::CONSUMPTION_STOP;
 		_resourceType = resourceType;
 	}
 
-	void ConsumptionMessage::assembleConsumptionStopped(ResourceType::ResourceType resourceType)
+	void ConsumptionMessage::assembleConsumptionStopped(ResourceType resourceType)
 	{
 		_type = MessageType::CONSUMPTION_STOPPED;
 		_resourceType = resourceType;
 	}
 
-	void ConsumptionMessage::assembleConsumptionChange(ResourceType::ResourceType resourceType, int consumptionChange, int consumptionPeriod)
+	void ConsumptionMessage::assembleConsumptionChange(ResourceType resourceType, int consumptionChange, int consumptionPeriod)
 	{
 		_type = MessageType::CONSUMPTION_CHANGE;
 		_resourceType = resourceType;

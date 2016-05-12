@@ -8,14 +8,14 @@
 
 namespace Graphics
 {
-	std::map<std::string, Ogre::BillboardSet*> BillboardSet::bbSets;
+	//std::map<std::string, Ogre::BillboardSet*> BillboardSet::bbSets;
 
 	BillboardSet::BillboardSet(Graphics::CEntity* entity, const std::string& name, const std::string& materialName)
 	{
-		std::map<std::string, Ogre::BillboardSet*>::const_iterator bbSet = bbSets.find(name);
+		//std::map<std::string, Ogre::BillboardSet*>::const_iterator bbSet = bbSets.find(name);
 
-		if (bbSet == bbSets.cend())
-		{
+		//if (bbSet == bbSets.cend())
+		//{
 			CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
 			Ogre::BillboardSet* bbSet = scene->createBillboardSet(entity, name);
 			bbSet->setMaterialName(materialName);
@@ -28,8 +28,12 @@ namespace Graphics
 			}
 
 			_bbSet = bbSet;
-			bbSets.insert(std::pair<std::string, Ogre::BillboardSet*>(name, bbSet));
-		}
+		//	bbSets.insert(std::pair<std::string, Ogre::BillboardSet*>(name, bbSet));
+		//}
+		//else
+		//{
+			//_bbSet = bbSet->second;
+		//}
 	}
 
 	BillboardSet::~BillboardSet()

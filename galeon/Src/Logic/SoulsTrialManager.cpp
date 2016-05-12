@@ -209,9 +209,9 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	bool CSoulsTrialManager::calculateSoulEvil(SoulsCategory soulCategory, int& soulCrude, int& soulCoke)
+	bool CSoulsTrialManager::calculateSoulEvil(SoulsTrialManager::SoulsCategory soulCategory, int& soulCrude, int& soulCoke)
 	{
-		if (soulCategory == SoulsCategory::NONE)
+		if (soulCategory == SoulsTrialManager::SoulsCategory::NONE)
 			return false;
 		
 		int soulAether = 0;
@@ -223,9 +223,9 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	bool CSoulsTrialManager::calculateSoulAether(SoulsCategory soulCategory, int& soulAether)
+	bool CSoulsTrialManager::calculateSoulAether(SoulsTrialManager::SoulsCategory soulCategory, int& soulAether)
 	{
-		if (soulCategory == SoulsCategory::NONE)
+		if (soulCategory == SoulsTrialManager::SoulsCategory::NONE)
 			return false;
 
 		int soulCrude = 0;
@@ -260,12 +260,14 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	void CSoulsTrialManager::calculateSoulComposition(SoulsCategory soulCategory,
+	void CSoulsTrialManager::calculateSoulComposition(SoulsTrialManager::SoulsCategory soulCategory,
 		int& soulCrude, int& soulCoke, int& soulAether)
 	{
 		soulCrude = soulCoke = soulAether = 0;
 		int unitsLeft = 21;
 		
+		using namespace SoulsTrialManager;
+
 		switch (soulCategory)
 		{
 		case SoulsCategory::UNKNOWN:

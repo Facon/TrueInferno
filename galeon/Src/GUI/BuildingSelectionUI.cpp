@@ -127,10 +127,10 @@ namespace GUI
 		if (name == "Souls Trial"){
 			//CEGUI::Editbox* editbox = (CEGUI::Editbox*)_uipopupWindow->getChild("HeavySoulsBurn");
 			unsigned int* getAvailableSouls = Logic::CSoulsTrialManager::getSingletonPtr()->getAvailableSouls();
-			_uipopupWindow->getChild("HeavySoulTotal")->setText(std::to_string(getAvailableSouls[Logic::CSoulsTrialManager::HEAVY]));
-			_uipopupWindow->getChild("WastedSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::CSoulsTrialManager::WASTED]));
-			_uipopupWindow->getChild("LightSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::CSoulsTrialManager::LIGHT]));
-			_uipopupWindow->getChild("UnknownSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::CSoulsTrialManager::UNKNOWN]));
+			_uipopupWindow->getChild("HeavySoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::HEAVY]));
+			_uipopupWindow->getChild("WastedSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::WASTED]));
+			_uipopupWindow->getChild("LightSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::LIGHT]));
+			_uipopupWindow->getChild("UnknownSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::UNKNOWN]));
 
 		}
 		else
@@ -275,18 +275,18 @@ namespace GUI
 		unsigned int soulstowork[4];
 		unsigned int soulstoburn[4];
 
-		soulstowork[Logic::CSoulsTrialManager::HEAVY] = std::atoi(_uipopupWindow->getChild("HeavySoulsWork")->getText().c_str());
-		soulstowork[Logic::CSoulsTrialManager::WASTED] = std::atoi(_uipopupWindow->getChild("WastedSoulsWork")->getText().c_str());
-		soulstowork[Logic::CSoulsTrialManager::LIGHT] = std::atoi(_uipopupWindow->getChild("LightSoulsWork")->getText().c_str());
-		soulstowork[Logic::CSoulsTrialManager::UNKNOWN] = std::atoi(_uipopupWindow->getChild("UnknownSoulsWork")->getText().c_str());
+		soulstowork[Logic::SoulsTrialManager::HEAVY] = std::atoi(_uipopupWindow->getChild("HeavySoulsWork")->getText().c_str());
+		soulstowork[Logic::SoulsTrialManager::WASTED] = std::atoi(_uipopupWindow->getChild("WastedSoulsWork")->getText().c_str());
+		soulstowork[Logic::SoulsTrialManager::LIGHT] = std::atoi(_uipopupWindow->getChild("LightSoulsWork")->getText().c_str());
+		soulstowork[Logic::SoulsTrialManager::UNKNOWN] = std::atoi(_uipopupWindow->getChild("UnknownSoulsWork")->getText().c_str());
 
-		soulstoburn[Logic::CSoulsTrialManager::HEAVY] = std::atoi(_uipopupWindow->getChild("HeavySoulsBurn")->getText().c_str());
-		soulstoburn[Logic::CSoulsTrialManager::WASTED] = std::atoi(_uipopupWindow->getChild("WastedSoulsBurn")->getText().c_str());
-		soulstoburn[Logic::CSoulsTrialManager::LIGHT] = std::atoi(_uipopupWindow->getChild("LightSoulsBurn")->getText().c_str());
-		soulstoburn[Logic::CSoulsTrialManager::UNKNOWN] = std::atoi(_uipopupWindow->getChild("UnknownSoulsBurn")->getText().c_str());
+		soulstoburn[Logic::SoulsTrialManager::HEAVY] = std::atoi(_uipopupWindow->getChild("HeavySoulsBurn")->getText().c_str());
+		soulstoburn[Logic::SoulsTrialManager::WASTED] = std::atoi(_uipopupWindow->getChild("WastedSoulsBurn")->getText().c_str());
+		soulstoburn[Logic::SoulsTrialManager::LIGHT] = std::atoi(_uipopupWindow->getChild("LightSoulsBurn")->getText().c_str());
+		soulstoburn[Logic::SoulsTrialManager::UNKNOWN] = std::atoi(_uipopupWindow->getChild("UnknownSoulsBurn")->getText().c_str());
 
-			if (Logic::CSoulsTrialManager::getSingletonPtr()->createSouls(soulstowork, soulstoburn) == Logic::CSoulsTrialManager::NONE)
-				closeWindow();
+		if (Logic::CSoulsTrialManager::getSingletonPtr()->createSouls(soulstowork, soulstoburn) == Logic::SoulsTrialManager::NONE)
+			closeWindow();
 
 		return true;
 	}

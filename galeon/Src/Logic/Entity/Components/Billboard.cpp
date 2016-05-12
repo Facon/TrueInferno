@@ -14,7 +14,7 @@ namespace Logic
 	RTTI_ROOT_IMPL(Billboard);
 	IMP_FACTORY(Billboard);
 
-	const std::map<std::string, IconType::IconType> Billboard::iconTableConversor;/* =
+	const std::unordered_map<std::string, IconType::IconType> Billboard::iconTableConversor =
 	{
 		{ "OK", IconType::OK },
 		{ "BURNING", IconType::BURNING }, // WTF?
@@ -27,14 +27,14 @@ namespace Logic
 		{ "SOUL_PATH", IconType::SOUL_PATH },
 		{ "COMPASS_ROSE", IconType::COMPASS_ROSE },
 		{ "FURNACE", IconType::FURNACE },
-		{ "TOXIC", IconType::TOXIC }, // WTF?
+		{ "GAS_PLANT", IconType::GAS_PLANT }, // WTF?
 		{ "HELLQUARTERS", IconType::HELLQUARTERS }, // WTF?
 		{ "MINE", IconType::MINE }, // WTF?
 		{ "CROSS_SWORD", IconType::CROSS_SWORD }, // WTF?
 		{ "SOUL", IconType::SOUL }, // WTF?
 		{ "WIFI", IconType::WIFI }, // WTF?
 		{ "TOXIC2", IconType::TOXIC2 }, // WTF?
-		{ "TOXIC3", IconType::TOXIC3 }, // WTF?
+		{ "EVILATOR", IconType::TOXIC3 }, // WTF?
 		{ "REFINERY", IconType::REFINERY },
 		{ "REPAIR", IconType::REPAIR },
 		{ "RESEARCH_LABS", IconType::RESEARCH_LABS },
@@ -44,13 +44,19 @@ namespace Logic
 		{ "COGS", IconType::COGS }, // WTF?
 		{ "WAREHOUSE", IconType::WAREHOUSE },
 	};
-	*/
+	
 	Billboard::Billboard() : IComponent()
 	{
 	}
 
 	Billboard::~Billboard()
 	{
+		if (_bbSet != nullptr)
+		{
+			delete _bbSet;
+			_bbSet = nullptr;
+		}
+
 		if (_billboard != nullptr)
 		{
 			delete _billboard;
@@ -71,6 +77,7 @@ namespace Logic
 			_billboard = _bbSet->createBillboard(Vector3(0.0f, 0.0f, 0.0f));
 
 			IconMessage m(iconTableConversor.at(defaultIcon));
+			m.Dispatch(*this);
 			//_entity->getComponent<Graphics>()
 		}
 
