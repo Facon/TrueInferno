@@ -172,8 +172,11 @@ namespace Logic {
 			buildingsFromType->erase(building);
 
 			// Si era el último de su tipo eliminamos el set
-			if (buildingsFromType->empty())
+			if (buildingsFromType->empty()){
 				_buildings.erase(buildingType);
+				delete buildingsFromType;
+				buildingsFromType = nullptr;
+			}
 		}
 
 		//std::cout << "Building unregistered: " << building->getBuildingType() << std::endl;
