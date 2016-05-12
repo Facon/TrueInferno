@@ -2,6 +2,7 @@
 #define BUILDINGSELECTIONUI_H_
 
 #include <string>
+#include <vector>
 
 namespace Logic
 {

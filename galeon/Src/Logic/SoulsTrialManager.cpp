@@ -169,13 +169,13 @@ namespace Logic {
 			unsigned int rndReveal = Math::random(0, 100);
 
 			if (rndReveal > _judgeLevel * REVEAL_SOUL_PROB) {
-				_souls[0]++; // Unknown soul
+				_souls[SoulsCategory::UNKNOWN]++; // Unknown soul
 			} else {
 				unsigned int rndCategory = Math::random(0, 100);
 
-				if (rndCategory < _heavySoulProb) _souls[1]++; // Heavy soul
-				else if (rndCategory < _wastedSoulProb) _souls[2]++; // Wasted soul
-				else _souls[3]++; // Light soul
+				if (rndCategory < _heavySoulProb) _souls[SoulsCategory::HEAVY]++; // Heavy soul
+				else if (rndCategory < _wastedSoulProb) _souls[SoulsCategory::WASTED]++; // Wasted soul
+				else _souls[SoulsCategory::LIGHT]++; // Light soul
 			}
 		}
 
@@ -183,26 +183,34 @@ namespace Logic {
 
 	//--------------------------------------------------------
 	
-	CSoulsTrialManager::SoulsCategory CSoulsTrialManager::createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4])
+	std::vector<CSoulsTrialManager::SoulsCategory> CSoulsTrialManager::createSouls(
+		unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4])
 	{
 		// Comprobación del número de almas recibido y disponible de cada categoría
+		std::vector<SoulsCategory> wrongCategories;
+
 		for (unsigned int i = 0; i < 4 ; ++i)
 		{
-			if (_souls[i] < numSoulsToWork[i] + numSoulsToBurn[i])
-				return static_cast<SoulsCategory>(i);
+			SoulsCategory soulsCategory = static_cast<SoulsCategory>(i);
+			if (_souls[soulsCategory] < numSoulsToWork[soulsCategory] + numSoulsToBurn[soulsCategory])
+				wrongCategories.push_back(soulsCategory);
 		}
+
+		if (!wrongCategories.empty())
+			return wrongCategories;
 
 		// Creación de las almas
 		for (unsigned int i = 0; i < 4; ++i)
 		{
-			createSoulsToWork(numSoulsToWork[i], static_cast<SoulsCategory>(i)); // Almas a trabajar
-			createSoulsToBurn(numSoulsToBurn[i], static_cast<SoulsCategory>(i)); // Almas a quemar
+			SoulsCategory soulsCategory = static_cast<SoulsCategory>(i);
+			createSoulsToWork(numSoulsToWork[soulsCategory], soulsCategory); // Almas a trabajar
+			createSoulsToBurn(numSoulsToBurn[soulsCategory], soulsCategory); // Almas a quemar
 
-			_souls[i] -= numSoulsToWork[i];
-			_souls[i] -= numSoulsToBurn[i];
+			_souls[soulsCategory] -= numSoulsToWork[soulsCategory];
+			_souls[soulsCategory] -= numSoulsToBurn[soulsCategory];
 		}
 
-		return SoulsCategory::NONE;
+		return wrongCategories;
 
 	} // createSouls
 

@@ -17,6 +17,7 @@ Contiene la declaración del gestor del Juicio de Almas.
 #define __SOULS_TRIAL_MANAGER_H
 
 #include <string>
+#include <vector>
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Map
@@ -153,23 +154,23 @@ namespace Logic
 		void processNewGroupOfSouls();
 
 		/**
-		Función llamada cuando el jugador decida manualmente cuántas
-		almas de cada categoría quiere convertir en trabajadores y
-		enviar a quemar.
+		Función llamada cuando el jugador decida manualmente cuántas almas
+		de cada categoría quiere convertir en trabajadores y enviar a
+		quemar.
 		<p>
 		Llevará a cabo la creación de las almas, comprobando previamente
 		que las cantidades recibidas son correctas con respecto al
-		número de almas disponibles. Si la cantidad solicitada para
-		alguna de las categorías es superior al límite, se devolverá
-		esa misma categoría a fin de poder indicar al jugador dónde
-		está al error.
+		número de almas disponibles; y devolverá un vector con todas
+		aquellas categorías para las que se haya solicitado una cantidad
+		de almas superior al límite, a fin de poder indicar al jugador
+		dónde está al error.
 
 		@param numSoulsToWork número de almas de cada categoría a trabajar.
 		@param numSoulsToBurn número de almas de cada categoría a quemar.
-		@return SoulsCategory::NONE si los valores de cada categoría son
-		correctos.
+		@return vector de categorías para las que no hay suficientes almas
+		disponibles.
 		*/
-		SoulsCategory createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4]);
+		std::vector<SoulsCategory> createSouls(unsigned int numSoulsToWork[4], unsigned int numSoulsToBurn[4]);
 
 		/**
 		Funciones encargadas de determinar la composición exacta de cada

@@ -285,7 +285,10 @@ namespace GUI
 		soulstoburn[Logic::CSoulsTrialManager::LIGHT] = std::atoi(_uipopupWindow->getChild("LightSoulsBurn")->getText().c_str());
 		soulstoburn[Logic::CSoulsTrialManager::UNKNOWN] = std::atoi(_uipopupWindow->getChild("UnknownSoulsBurn")->getText().c_str());
 
-			if (Logic::CSoulsTrialManager::getSingletonPtr()->createSouls(soulstowork, soulstoburn) == Logic::CSoulsTrialManager::NONE)
+		std::vector<Logic::CSoulsTrialManager::SoulsCategory> wrongCategories =
+			Logic::CSoulsTrialManager::getSingletonPtr()->createSouls(soulstowork, soulstoburn);
+
+		if (wrongCategories.empty())
 				closeWindow();
 
 		return true;
