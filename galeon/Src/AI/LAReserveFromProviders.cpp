@@ -1,5 +1,6 @@
 #include "LAReserveFromProviders.h"
 
+#include "Logic\Maps\Map.h"
 #include "Logic\Entity\Message.h"
 #include "AI\SMResourceDemanderData.h"
 #include <algorithm>

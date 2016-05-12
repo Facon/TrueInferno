@@ -13,24 +13,31 @@ Contiene el tipo de datos de un mensaje.
 #include <string>
 #include <memory>
 
-#include "AI/SoulTask.h"
-
-#include "MessageHandler.h"
-
 #include "BaseSubsystems/Math.h"
-#include "BaseSubsystems/ScriptManager.h"
-
-#include "Logic/ResourcesManager.h"
-#include "Logic/Events/EventManager.h"
-#include "Logic/SoulsTrialManager.h"
+#include "MessageHandler.h"
 
 // Predeclaraciones
 namespace Logic
 {
+	typedef unsigned int TEntityID;
 	class CEntity;
 	class CPlaceable;
 	enum LogicRequirement;
+	
+	enum ResourceType;
+
+	class CSoulsTrialManager;
+	
+	namespace SoulsTrialManager
+	{
+		enum SoulsCategory;
+	}
 };
+
+namespace AI
+{
+	class CSoulTask;
+}
 
 namespace Logic
 {
@@ -107,15 +114,13 @@ namespace Logic
 			CONSUMPTION_CHANGE,
 			TOGGLE_REQUEST,
 			TOGGLE_INFO,
+			ICON,
 		};
 
 		MessageType _type;
 		
-		Message() : _type(MessageType::UNASSIGNED)
-		{}
-		
-		Message(MessageType type) : _type(type)
-		{}
+		Message();
+		Message(MessageType type);
 
 		virtual bool Dispatch(MessageHandler& handler) const = 0;
 
@@ -131,24 +136,15 @@ namespace Logic
 	*/
 	typedef Logic::Message::MessageType MessageType;
 
-	#define RESEND(message) \
-		CEventManager::getSingletonPtr()->HandleMessage(message);
-
 	// SET_TRANSFORM
 	class TransformMessage : public Message
 	{
 	public:
 		const Matrix4& _transform;
 
-		TransformMessage(const Matrix4& transform) : Message(MessageType::SET_TRANSFORM), _transform(transform)
-		{}
+		TransformMessage(const Matrix4& transform);
 		
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// SET_POSITION
@@ -157,15 +153,9 @@ namespace Logic
 	public:
 		const Vector3& _position;
 
-		PositionMessage(const Vector3& position) : Message(MessageType::SET_POSITION), _position(position)
-		{}
+		PositionMessage(const Vector3& position);
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// SET_ROTATION
@@ -175,15 +165,9 @@ namespace Logic
 		// Rotación con respecto a los ejes X(pitch), Y(yaw) y Z(roll).
 		const Vector3& _rotation;
 
-		RotationMessage(const Vector3& rotation) : Message(MessageType::SET_ROTATION), _rotation(rotation)
-		{}
+		RotationMessage(const Vector3& rotation);
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// SET_DIMENSIONS
@@ -192,15 +176,9 @@ namespace Logic
 	public:
 		const Vector3& _dimensions;
 
-		DimensionsMessage(const Vector3& dimensions) : Message(MessageType::SET_DIMENSIONS), _dimensions(dimensions)
-		{}
+		DimensionsMessage(const Vector3& dimensions);
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		bool Dispatch(MessageHandler& handler) const;
 	};
 	
 	// SET_COLOR
@@ -209,15 +187,9 @@ namespace Logic
 	public:
 		const Vector3& _rgb;
 
-		ColorMessage(const Vector3& rgb) : Message(MessageType::SET_COLOR), _rgb(rgb)
-		{}
+		ColorMessage(const Vector3& rgb);
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// SET_MATERIAL_NAME
@@ -226,15 +198,9 @@ namespace Logic
 	public:
 		const std::string _name; // Material doesn't work well using references in Ogre :(
 
-		MaterialMessage(const std::string& materialName) : Message(MessageType::SET_MATERIAL_NAME), _name(materialName)
-		{}
+		MaterialMessage(const std::string& materialName);
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// SET_ANIMATION, STOP_ANIMATION
@@ -244,15 +210,9 @@ namespace Logic
         const std::string& _action;
         bool _activated;
 
-		AnimationMessage(MessageType type, const std::string& action, bool activated) : Message(type), _action(action), _activated(activated)
-		{}
+		AnimationMessage(MessageType type, const std::string& action, bool activated);
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-            return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 	
 	enum ActionType
@@ -274,15 +234,9 @@ namespace Logic
         ActionType _action;
         float _degreesMoved;
 
-		ControlMessage(ActionType action = ActionType::UNASSIGNED, float degreesMoved = 0.0f) : Message(MessageType::CONTROL), _action(action), _degreesMoved(degreesMoved)
-		{}
+		ControlMessage(ActionType action = ActionType::UNASSIGNED, float degreesMoved = 0.0f);
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-            return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 	
 	// AVATAR_WALK
@@ -291,13 +245,9 @@ namespace Logic
     public:
         const Vector3& _point;
 
-		PhysicMessage(const Vector3& point) : Message(MessageType::AVATAR_WALK), _point(point)
-		{}
+		PhysicMessage(const Vector3& point);
 
-        virtual bool Dispatch(MessageHandler& handler) const
-        {
-            return handler.HandleMessage(*this);
-        }
+		virtual bool Dispatch(MessageHandler& handler) const;
     };
 
 	// KINEMATIC_MOVE
@@ -306,15 +256,9 @@ namespace Logic
 	public:
         const Vector3& _shift;
 
-		KinematicMoveMessage(const Vector3& shift) : Message(MessageType::KINEMATIC_MOVE), _shift(shift)
-		{}
+		KinematicMoveMessage(const Vector3& shift);
 
-        virtual bool Dispatch(MessageHandler& handler) const
-        {
-			RESEND(*this);
-
-            return handler.HandleMessage(*this);
-        }
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// TOUCHED, UNTOUCHED
@@ -323,15 +267,9 @@ namespace Logic
 	public:
 		const CEntity& _entity;
 		
-		TouchMessage(MessageType type, const CEntity& entity) : Message(type), _entity(entity)
-		{}
+		TouchMessage(MessageType type, const CEntity& entity);
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-            return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 	
 	// SWITCH,
@@ -341,15 +279,9 @@ namespace Logic
 	public:
 		unsigned int _damage;
 		
-		DamageMessage(MessageType type, unsigned int damage) : Message(type), _damage(damage)
-		{}
+		DamageMessage(MessageType type, unsigned int damage);
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-            return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 	
 	// PLACEABLE_FLOAT_TO, PLACEABLE_PLACE
@@ -359,51 +291,34 @@ namespace Logic
 		const Vector3 _position;
 		bool _showFloating;
 		// Coloca el placeable en la posición actual
-		MovePlaceableMessage() : Message(MessageType::PLACEABLE_PLACE)
-		{}
+		MovePlaceableMessage();
 		
 		// Hace flotar al placeable hasta la posición dada
-		MovePlaceableMessage(const Vector3& position, bool showFloating) : Message(MessageType::PLACEABLE_FLOAT_TO), _position(position), _showFloating(showFloating)
-		{}
+		MovePlaceableMessage(const Vector3& position, bool showFloating);
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// PLACEABLE_CHECKPOSITION
 	class CheckValidPositionPlaceableMessage : public Message
 	{
 	public:
-		CheckValidPositionPlaceableMessage(MessageType type, CEntity* entity, Vector3 position) : Message(type), _entity(entity), _position(position) {}
+		CheckValidPositionPlaceableMessage(MessageType type, CEntity* entity, const Vector3& position);
 
 		CEntity* _entity;
-		Vector3 _position;
+		const Vector3& _position;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	class GetCostPlaceableMessage : public Message
 	{
 	public:
-		GetCostPlaceableMessage(MessageType type, CEntity* entity) : Message(type), _entity(entity) {}
+		GetCostPlaceableMessage(MessageType type, CEntity* entity);
 
 		CEntity* _entity;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	/** Mensajes de trabajadores:
@@ -413,17 +328,12 @@ namespace Logic
 	class WorkerMessage : public Message
 	{
 	public:
-		WorkerMessage(MessageType type, int change) : Message(type), _change(change) {}
+		WorkerMessage(MessageType type, int change);
 
 		// Cambio solicitado
 		unsigned int _change;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// TODO Remember to discuss if we should separate this in 2 classes
@@ -432,25 +342,20 @@ namespace Logic
 	{
 	public:
 		// Petición de ruta (REQUEST_WALK_SOUL_PATH)
-		WalkSoulPathMessage(TEntityID target) : Message(MessageType::REQUEST_WALK_SOUL_PATH), _target(target), _path(nullptr) {}
+		WalkSoulPathMessage(TEntityID target);
 		
 		// Respuesta/orden con la ruta (RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH)
-		WalkSoulPathMessage(std::vector<Vector3>* const path) : _target(EntityID::UNASSIGNED), _path(path) {}
+		WalkSoulPathMessage(std::vector<Vector3>* const path);
 
 		// Ruta finalizada (WALKING_SOUL_PATH_FINISHED)
-		WalkSoulPathMessage() : Message(MessageType::WALK_SOUL_PATH_FINISHED), _target(EntityID::UNASSIGNED), _path(nullptr) {}
+		WalkSoulPathMessage();
 
-		WalkSoulPathMessage(MessageType type) : Message(type), _target(EntityID::UNASSIGNED), _path(nullptr) {}
+		WalkSoulPathMessage(MessageType type);
 
 		TEntityID _target;
 		std::vector<Vector3>* _path;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// REQUEST_SEND_SOUL_WORK, REQUEST_SEND_SOUL_BURN
@@ -463,74 +368,51 @@ namespace Logic
 			SEND_SOUL_WORK,
 		};
 
-		HellQuartersMessage(HellQuartersAction action, int numSouls, CSoulsTrialManager::SoulsCategory soulsCategory) :
-			Message(MessageType::HELLQUARTERS_REQUEST), _action(action), _numSouls(numSouls), _soulsCategory(soulsCategory) {}
+		HellQuartersMessage(HellQuartersAction action, int numSouls, SoulsTrialManager::SoulsCategory soulsCategory);
 
 		HellQuartersAction _action;
 		unsigned int _numSouls;
-		CSoulsTrialManager::SoulsCategory _soulsCategory;
+		SoulsTrialManager::SoulsCategory _soulsCategory;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// SOUL_SENDER_REQUEST, SOUL_SENDER_RESPONSE
 	class SoulSenderMessage : public Message
 	{
 	public:
-		SoulSenderMessage(AI::CSoulTask* task, int numSouls) :
-			Message(MessageType::SOUL_SENDER_REQUEST), _task(task), _numSouls(numSouls) {}
+		SoulSenderMessage(AI::CSoulTask* task, int numSouls);
 
 		//std::unique_ptr<AI::CSoulTask> _task;
 		AI::CSoulTask* _task;
 		unsigned int _numSouls;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// SOUL_REQUEST, SOUL_RESPONSE
 	class SoulMessage : public Message
 	{
 	public:
-		SoulMessage(AI::CSoulTask* task) : Message(MessageType::SOUL_REQUEST), _task(task) {}
-		SoulMessage() : Message(MessageType::SOUL_RESPONSE), _task(0) {}
+		SoulMessage(AI::CSoulTask* task);
+		SoulMessage();
 
 		//std::unique_ptr<AI::CSoulTask> _task;
 		AI::CSoulTask* _task;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	// FURNACE_BURN_SOULS
 	class SoulBurnMessage : public Message
 	{
 	public:
-		SoulBurnMessage(int numSouls, CSoulsTrialManager::SoulsCategory soulsCategory) :
-			Message(MessageType::FURNACE_BURN_SOULS), _numSouls(numSouls), _soulsCategory(soulsCategory) {}
+		SoulBurnMessage(int numSouls, SoulsTrialManager::SoulsCategory soulsCategory);
 
 		int _numSouls;
-		CSoulsTrialManager::SoulsCategory _soulsCategory;
+		SoulsTrialManager::SoulsCategory _soulsCategory;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	/** Mensajes relativos a los recursos: 
@@ -549,70 +431,35 @@ namespace Logic
 		/** Constructor vacío por defecto. 
 		Necesario para poder tener variables auxiliares sin necesidad de punteros (e.g. en una LA de una SM)
 		*/
-		ResourceMessage() : Message(MessageType::UNASSIGNED), _resourceType(ResourceType::NONE), 
-			_quantity(0), _stored(0), _available(0), _max(0), 
-			_provided(false), _caller(EntityID::UNASSIGNED) {}
+		ResourceMessage();
 
 		/** RESOURCES_ASK: Solicita información sobre el recurso del tipo dado y el ID de la entidad que envía la solicitud */
-		void assembleResourcesAsk(const ResourceType& resourceType, TEntityID caller) {
-			_type = MessageType::RESOURCES_ASK;
-			_resourceType = resourceType;
-			_caller = caller;
-		}
+		void assembleResourcesAsk(const ResourceType& resourceType, TEntityID caller);
 
 		/** RESOURCES_INFO: Devuelve la cantidad real, disponible y máxima del recurso indicado, si el recurso se provee externamente y el ID de la entidad que tiene los recursos */
-		void assembleResourcesInfo(const ResourceType& resourceType, int stored, int available, unsigned int max, bool provided, TEntityID caller) {
-			_type = MessageType::RESOURCES_INFO;
-			_resourceType = resourceType;
-			_stored = stored;
-			_available = available;
-			_max = max;
-			_provided = provided;
-			_caller = caller;
-		}
+		void assembleResourcesInfo(const ResourceType& resourceType, int stored, int available, unsigned int max, bool provided, TEntityID caller);
 
 		/** RESOURCES_CHANGE: Solicita el cambio (positivo/negativo) en la cantidad de recursos del tipo dado */
-		void assembleResourcesChange(const ResourceType& resourceType, int quantity) {
-			_type = MessageType::RESOURCES_CHANGE;
-			_resourceType = resourceType;
-			_quantity = quantity;
-		}
+		void assembleResourcesChange(const ResourceType& resourceType, int quantity);
 
 		/** RESOURCES_RESERVE: Intenta reservar todo lo posible hasta la cantidad de recursos indicada del tipo dado para la entidad indicada. 
 		No cambia la cantidad real almacenada sino la cantidad disponible para evitar que otras solicitudes simultáneas nos quiten nuestra reserva.
 		El que reserva recursos contrae la responsabilidad de liberarlos (RESOURCES_FREE) o reclamarlos (RESOURCES_CLAIM).
 		Tras la reserva la entidad indicada recibirá un mensaje RESOURCES_RESERVED con la cantidad finalmente reservada.
 		*/
-		void assembleResourcesReserve(const ResourceType& resourceType, int quantity, TEntityID caller) {
-			_type = MessageType::RESOURCES_RESERVE;
-			_resourceType = resourceType;
-			_quantity = quantity;
-			_caller = caller;
-		}
+		void assembleResourcesReserve(const ResourceType& resourceType, int quantity, TEntityID caller);
 
 		/** RESOURCES_RESERVED: Informa de la cantidad de recursos finalmente reservada del tipo dado.
 		No cambia la cantidad real almacenada sino la cantidad disponible para evitar que otras solicitudes simultáneas nos quiten nuestra reserva.
 		El que reserva recursos contrae la responsabilidad de liberarlos (RESOURCES_FREE) o reclamarlos (RESOURCES_CLAIM).
 		*/
-		void assembleResourcesReserved(const ResourceType& resourceType, int quantity) {
-			_type = MessageType::RESOURCES_RESERVED;
-			_resourceType = resourceType;
-			_quantity = quantity;
-		}
+		void assembleResourcesReserved(const ResourceType& resourceType, int quantity);
 
 		/** RESOURCES_FREE: Libera la cantidad de recursos reservada del tipo dado para que otras solicitudes puedan volverlo a reservar */
-		void assembleResourcesFree(const ResourceType& resourceType, int quantity) {
-			_type = MessageType::RESOURCES_FREE;
-			_resourceType = resourceType;
-			_quantity = quantity;
-		}
+		void assembleResourcesFree(const ResourceType& resourceType, int quantity);
 
 		/** RESOURCES_CLAIM: Reclama (i.e. libera la reserva y modifica) la cantidad de recursos del tipo dado para efectivamente consumir lo reservado */
-		void assembleResourcesClaim(const ResourceType& resourceType, int quantity) {
-			_type = MessageType::RESOURCES_CLAIM;
-			_resourceType = resourceType;
-			_quantity = quantity;
-		}
+		void assembleResourcesClaim(const ResourceType& resourceType, int quantity);
 
 		ResourceType _resourceType;
 		int _quantity;
@@ -622,47 +469,26 @@ namespace Logic
 		bool _provided;
 		TEntityID _caller;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	/** Mensajes de comunicación relacionados con la logística de recursos */
 	class LogisticsMessage : public Message
 	{
 	public:
-		LogisticsMessage() : Message(MessageType::UNASSIGNED), _resourceType(ResourceType::NONE), 
-			_resourceQuantity(0), _target(EntityID::UNASSIGNED) {}
+		LogisticsMessage();
 
 		// LOGISTICS_DEMAND_RESOURCES: Solicita buscar la cantidad de recursos indicada del tipo dado
-		void assembleDemandResources(ResourceType resourceType, unsigned int resourceQuantity) {
-			_type = MessageType::LOGISTICS_DEMAND_RESOURCES;
-			_resourceType = resourceType;
-			_resourceQuantity = resourceQuantity;
-			_target = EntityID::UNASSIGNED;
-		}
+		void assembleDemandResources(ResourceType resourceType, unsigned int resourceQuantity);
 
 		// LOGISTICS_PROVIDE_RESOURCES: Obliga a proveer la cantidad indicada del recurso dado al objetivo proporcionado
-		void assembleProvideResources(ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target) {
-			_type = MessageType::LOGISTICS_PROVIDE_RESOURCES;
-			_resourceType = resourceType;
-			_resourceQuantity = resourceQuantity;
-			_target = target;
-		}
+		void assembleProvideResources(ResourceType resourceType, unsigned int resourceQuantity, const TEntityID& target);
 
 		ResourceType _resourceType;
 		unsigned int _resourceQuantity;
 		TEntityID _target;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	/** Mensajes relacionados con el habilitado/deshabilitado lógico de una entidad */
@@ -670,12 +496,10 @@ namespace Logic
 	{
 	public:
 		// TOGGLE_REQUEST: Solicita añadir o eliminar un requisito para permitir el habilitado de la entidad
-		ToggleMessage(LogicRequirement requirement, bool add) :
-			Message(MessageType::TOGGLE_REQUEST), _requirement(requirement), _add(add) {}
+		ToggleMessage(LogicRequirement requirement, bool add);
 
 		// TOGGLE_INFO: Informa de un cambio en el habilitado o deshabilitado de la entidads
-		ToggleMessage(bool enabled) :
-			Message(MessageType::TOGGLE_INFO), _enabled(enabled) {}
+		ToggleMessage(bool enabled);
 
 		// Criterio por el que se quiere habilitar/deshabilitar
 		//std::string _criterion;
@@ -689,12 +513,7 @@ namespace Logic
 		// Flag a true si se está informando del habilitado de la entidad o false para el deshbilitado
 		bool _enabled;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			RESEND(*this);
-
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	/** Mensajes para el protocolo de comunicación entre generadores y consumidores de energía: 
@@ -704,26 +523,13 @@ namespace Logic
 	class PowerMessage : public Message
 	{
 	public:
-		PowerMessage() : 
-			Message(MessageType::UNASSIGNED), _caller(EntityID::UNASSIGNED), 
-			_attach(false), _consumptionUnits(0), _consumptionPeriod(0) {}
+		PowerMessage();
 
 		// POWER_REQUEST_ATTACHMENT: Solicita la conexión de un consumidor nuevo (la desconexión nunca se solicita, se envía directamente POWER_ATTACHMENT_INFO para informar del cambio)
-		void assemblePowerRequestAttachment(TEntityID caller, int consumptionUnits, int consumptionPeriod) {
-			_type = MessageType::POWER_REQUEST_ATTACHMENT;
-			_caller = caller;
-			_consumptionUnits = consumptionUnits;
-			_consumptionPeriod = consumptionPeriod;
-		}
+		void assemblePowerRequestAttachment(TEntityID caller, int consumptionUnits, int consumptionPeriod);
 
 		// POWER_ATTACHMENT_INFO: Informa de la conexión o desconexión de un consumidor
-		void assemblePowerAttachmentInfo(TEntityID caller, bool attach, int consumptionUnits, int consumptionPeriod) {
-			_type = MessageType::POWER_ATTACHMENT_INFO;
-			_caller = caller;
-			_attach = attach;
-			_consumptionUnits = consumptionUnits;
-			_consumptionPeriod = consumptionPeriod;
-		}
+		void assemblePowerAttachmentInfo(TEntityID caller, bool attach, int consumptionUnits, int consumptionPeriod);
 
 		// Entidad a conectar/desconectar
 		TEntityID _caller;
@@ -737,44 +543,25 @@ namespace Logic
 		// Periodo de consumo de la entidad
 		int _consumptionPeriod;
 
-		virtual bool Dispatch(MessageHandler& handler) const
-		{
-			return handler.HandleMessage(*this);
-		}
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	class ConsumptionMessage : public Message
 	{
 	public:
-		ConsumptionMessage() : 
-			Message(MessageType::UNASSIGNED), _resourceType(ResourceType::NONE),
-			_consumptionChange(0), _consumptionPeriod(0) {}
+		ConsumptionMessage();
 
 		// CONSUMPTION_START: Solicita el comienzo de los ciclos de consumo (i.e. se ha conectado el primer consumidor)
-		void assembleConsumptionStart(ResourceType resourceType) {
-			_type = MessageType::CONSUMPTION_START;
-			_resourceType = resourceType;
-		}
+		void assembleConsumptionStart(ResourceType resourceType);
 
 		// CONSUMPTION_STOP: Solicita el fin de los ciclos de consumo (i.e. se ha desconectado el último consumidor)
-		void assembleConsumptionStop(ResourceType resourceType) {
-			_type = MessageType::CONSUMPTION_STOP;
-			_resourceType = resourceType;
-		}
+		void assembleConsumptionStop(ResourceType resourceType);
 
 		// CONSUMPTION_STOPPED: Informa de que los ciclos de consumo han parado (i.e. se han acabado los recursos)
-		void assembleConsumptionStopped(ResourceType resourceType) {
-			_type = MessageType::CONSUMPTION_STOPPED;
-			_resourceType = resourceType;
-		}
+		void assembleConsumptionStopped(ResourceType resourceType);
 
 		// CONSUMPTION_CHANGE: Informa de la variación deseada en el consumo
-		void assembleConsumptionChange(ResourceType resourceType, int consumptionChange, int consumptionPeriod) {
-			_type = MessageType::CONSUMPTION_CHANGE;
-			_resourceType = resourceType;
-			_consumptionChange = consumptionChange;
-			_consumptionPeriod = consumptionPeriod;
-		}
+		void assembleConsumptionChange(ResourceType resourceType, int consumptionChange, int consumptionPeriod);
 
 		// Cambio de consumo
 		int _consumptionChange;
@@ -785,10 +572,51 @@ namespace Logic
 		// Recurso consumido
 		ResourceType _resourceType;
 
-		virtual bool Dispatch(MessageHandler& handler) const
+		virtual bool Dispatch(MessageHandler& handler) const;
+	};
+
+	namespace IconType
+	{
+		enum IconType
 		{
-			return handler.HandleMessage(*this);
-		}
+			OK = 0,
+			BURNING, // WTF?
+			SHOVEL,
+			CLOSE,
+			ROCKS,
+			STAR, // WTF?
+			NOT_OK,
+			FLAMES,
+			SOUL_PATH,
+			COMPASS_ROSE,
+			FURNACE,
+			GAS_PLANT,
+			HELLQUARTERS, // WTF?
+			MINE, // WTF?
+			CROSS_SWORD, // WTF?
+			SOUL, // WTF?
+			WIFI, // WTF?
+			TOXIC2, // WTF?
+			TOXIC3, // WTF?
+			REFINERY, 
+			REPAIR,
+			RESEARCH_LABS,
+			POWER_GENERATOR,
+			CLOCK,
+			JUDGEMENT,
+			COGS, // WTF?
+			WAREHOUSE,
+		};
+	}
+
+	class IconMessage : public Message
+	{
+	public:
+		IconType::IconType _icon;
+
+		IconMessage(IconType::IconType icon);
+
+		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
 	/*

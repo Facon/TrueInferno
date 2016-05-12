@@ -2,6 +2,7 @@
 #define SM_RESOURCE_GATHERER_DATA_H_
 
 #include <map>
+#include "Logic/ResourcesManager.h"
 
 namespace AI {
 	class CSMResourceGathererData {

@@ -16,7 +16,7 @@ namespace Logic
 		GAS,
 		COKE,
 		CRUDE,
-		PURE,
+		SPURE,
 		REFINED,
 		AETHER,
 		HADES_FAVOR
@@ -115,7 +115,7 @@ namespace Logic
 			_currentResources[ResourceType::GAS] = 0;
 			_currentResources[ResourceType::COKE] = 0;
 			_currentResources[ResourceType::CRUDE] = 0;
-			_currentResources[ResourceType::PURE] = 0;
+			_currentResources[ResourceType::SPURE] = 0;
 			_currentResources[ResourceType::REFINED] = 0;
 			_currentResources[ResourceType::AETHER] = 0;
 
@@ -123,7 +123,7 @@ namespace Logic
 			_maxResources[ResourceType::GAS] = 0;
 			_maxResources[ResourceType::COKE] = 0;
 			_maxResources[ResourceType::CRUDE] = 0;
-			_maxResources[ResourceType::PURE] = 0;
+			_maxResources[ResourceType::SPURE] = 0;
 			_maxResources[ResourceType::REFINED] = 0;
 			_maxResources[ResourceType::AETHER] = 0;
 		}

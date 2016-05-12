@@ -3,6 +3,7 @@
 
 #include "Logic\Entity\Message.h"
 
+#include "Logic\Maps\Map.h"
 #include "AI\StateMachine.h"
 #include "AI\Server.h"
 #include "AI\LAWaitConsumerChange.h"

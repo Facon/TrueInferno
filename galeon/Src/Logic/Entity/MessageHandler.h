@@ -32,6 +32,7 @@ namespace Logic
 	class ToggleMessage;
 	class PowerMessage;
 	class ConsumptionMessage;
+	class IconMessage;
 
 	class MessageHandler
 	{
@@ -118,6 +119,9 @@ namespace Logic
 		{ return false; }
 
 		virtual bool HandleMessage(const ConsumptionMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const IconMessage& msg)
 		{ return false; }
 
 	};

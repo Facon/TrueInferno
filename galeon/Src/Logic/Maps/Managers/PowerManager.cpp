@@ -14,6 +14,7 @@ Contiene la implementación del gestor de energía.
 */
 
 #include "PowerManager.h"
+#include "Logic/ResourcesManager.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/Entity/Components/Placeable.h"
 #include "Logic/Entity/Components/PowerGenerator.h"

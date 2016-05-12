@@ -9,7 +9,7 @@ namespace AI{
 	class CBurnTask : public CSoulTask {
 
 	public:
-		CBurnTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::CSoulsTrialManager::SoulsCategory category) :
+		CBurnTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::SoulsTrialManager::SoulsCategory category) :
 			CSoulTask(map, target, category) {};
 
 		virtual ~CBurnTask() {};

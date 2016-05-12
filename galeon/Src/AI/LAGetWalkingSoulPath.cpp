@@ -1,5 +1,7 @@
 #include "LAGetWalkingSoulPath.h"
 
+#include "AI/SoulTask.h"
+
 namespace AI {
 	RTTI_IMPL(CLAGetWalkingSoulPath, CLatentAction);
 	

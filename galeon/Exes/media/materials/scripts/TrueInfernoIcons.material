@@ -1,0 +1,17 @@
+material Billboard/TrueInfernoIcons
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend alpha_blend
+			
+			texture_unit
+			{
+				texture TrueInfernoIcons.png
+				texture_address_mode clamp
+			}
+		}
+	}
+}

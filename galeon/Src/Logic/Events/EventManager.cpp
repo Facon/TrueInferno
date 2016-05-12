@@ -445,4 +445,11 @@ namespace Logic {
 		return false;
 	}
 
+	bool CEventManager::HandleMessage(const IconMessage& msg)
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
+
 } // namespace Logic

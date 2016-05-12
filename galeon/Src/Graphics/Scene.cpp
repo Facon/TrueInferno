@@ -170,13 +170,17 @@ namespace Graphics
 
 	Ogre::BillboardSet* CScene::createBillboardSet(CEntity* entity, const std::string& name)
 	{
-		Ogre::BillboardSet* bbSet = _sceneMgr->createBillboardSet(name);
+		static unsigned int index = 0;
+
+		Ogre::BillboardSet* bbSet = _sceneMgr->createBillboardSet(name + "_" + std::to_string(index));
 
 		//Ogre::SceneNode* childNode = entity->_entityNode->getParentSceneNode()->createChildSceneNode(Vector3(0.0f, 2.0f, 0.0f));
 		Ogre::SceneNode* childNode = entity->_entityNode->createChildSceneNode();
 		childNode->setInheritScale(false);
 		childNode->setPosition(Vector3(0.0f, 200.0f, 0.0f));
 		childNode->attachObject(bbSet);
+
+		++index;
 
 		return bbSet;
 	}

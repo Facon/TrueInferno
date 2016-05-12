@@ -2,6 +2,7 @@
 #define __Graphics_Billboard_H
 
 #include <string>
+#include <map>
 #include "BaseSubsystems\Math.h"
 
 namespace Ogre
@@ -18,18 +19,21 @@ namespace Graphics
 
 namespace Graphics
 {
+	// This class use Flyweight design pattern because we need to share resources between multiple instances
+	// without using more memory
 	class BillboardSet
 	{
+	protected:
+		static std::map<std::string, Ogre::BillboardSet*> bbSets;
+
 	public:
-		BillboardSet()
-		{};
 		BillboardSet(Graphics::CEntity* entity, const std::string& name, const std::string& materialName);
 		virtual ~BillboardSet();
 
 		Ogre::Billboard* createBillboard(Vector3& vector);
+		Ogre::BillboardSet* getBillboardSet();
 
 	protected:
-		std::string _name;
 		Ogre::BillboardSet* _bbSet;
 	};
 }

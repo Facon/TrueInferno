@@ -1,6 +1,8 @@
 #include "LADetachConsumers.h"
 
 #include "Logic\Entity\Message.h"
+#include "Logic\Maps\Map.h"
+#include "Logic/ResourcesManager.h"
 #include "AI\SMPowerGeneratorData.h"
 #include <map>
 

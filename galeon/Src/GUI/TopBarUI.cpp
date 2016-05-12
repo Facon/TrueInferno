@@ -85,9 +85,9 @@ namespace GUI
 			);
 
 		_uiBarsWindow->getChild("Pure")->setText(
-			std::to_string(static_cast<int>(trunc(rm.getDisplayedResources(ResourceType::PURE)))) +
+			std::to_string(static_cast<int>(trunc(rm.getDisplayedResources(ResourceType::SPURE)))) +
 			" / " +
-			std::to_string(static_cast<int>(trunc(rm.getDisplayedMaxResources(ResourceType::PURE))))
+			std::to_string(static_cast<int>(trunc(rm.getDisplayedMaxResources(ResourceType::SPURE))))
 			);
 
 		_uiBarsWindow->getChild("Refined")->setText(
