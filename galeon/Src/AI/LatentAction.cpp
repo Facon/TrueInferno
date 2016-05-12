@@ -2,6 +2,8 @@
 
 namespace AI 
 {
+	RTTI_ROOT_IMPL(CLatentAction);
+
 	/**
 	Método llamado cíclicamente por el responsable de la ejecución
 	de la función latente.

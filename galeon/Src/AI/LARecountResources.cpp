@@ -1,9 +1,9 @@
 #include "LARecountResources.h"
 
-#include "Logic\Entity\Message.h"
-#include "AI\SMEmptyTemplateData.h"
-
+/*
 namespace AI {
+	RTTI_IMPL(CLARecountResources, CLatentAction);
+	
 	bool CLARecountResources::HandleMessage(const ResourceMessage& msg) {
 		// Rechazamos lo que no sean mensajes de información de recursos
 		if (msg._type != MessageType::RESOURCES_INFO)
@@ -15,7 +15,7 @@ namespace AI {
 
 		// En principio parece viable aceptar peticiones simultáneas. Si da problemas descomentar lo siguiente para evitarlas
 		/*if (_requestReceived)
-			return false;*/
+			return false;
 
 		_requestReceived = true;
 
@@ -53,3 +53,4 @@ namespace AI {
 	}
 
 }
+*/

@@ -17,13 +17,71 @@ de ejemplo.
 #ifndef __AI_StateMachine_H
 #define __AI_StateMachine_H
 
-
 #include "Condition.h"
 #include "Logic/Entity/Entity.h"
 
 #include "LatentAction.h"
 #include "SimpleLatentActions.h"
 #include "LAExecuteSM.h"
+
+#include <string>
+
+/** Flag para activar el log para el debug de las SM.
+* Adicionalmente las SMs que se quieran analizar deben crearse con _debug a true */
+//#define DEBUG_SM
+
+/** Macro para manejar mensajes en una SM (i.e. hijos de StateMachine)
+* Propaga el mensaje adecuadamente en una SM para que llegue a las condiciones de transición entre estados.
+*/
+#define SM_HANDLE_MESSAGE(Class) \
+bool HandleMessage(const Class& msg){ \
+	bool ret = false; \
+\
+	/* Si no hay un nodo actual no hay aristas interesadas así que lo primero es comprobar si hay un nodo válido en _currentNodeId */ \
+	if (_currentNodeId != -1) {  \
+		/* Buscamos la lista de aristas que salen del nodo actual */ \
+		EdgeList::iterator it = _edges->find(_currentNodeId); \
+		if (it != _edges->end()) { \
+			PairVector* vector = (*it).second; \
+\
+			/* Para cada elemento del vector (arista que sale del nodo actual) */ \
+			for (PairVector::iterator edgeIt = vector->begin(); edgeIt != vector->end(); edgeIt++){ \
+				/* Procesamos en la arista (o sea, la condición) */ \
+				ret |= (edgeIt->first->HandleMessage(msg)); /* Si alguna arista acepta, aceptaremos al final */ \
+			} \
+		}  \
+	} \
+\
+	return ret; \
+}
+
+/** Macro para manejar mensajes en una SM (i.e. hijos de StateMachine)
+* Permite procesar globalmente el mensaje en la SM con el método SMHandleMessage y propaga el mensaje
+* adecuadamente para que llegue a las condiciones de transición entre estados
+*/
+#define SM_HANDLE_MESSAGE_WGLOBAL(Class) \
+bool HandleMessage(const Class& msg){ \
+	bool ret = false; \
+\
+	ret |= SMGlobalHandleMessage(msg); \
+\
+	/* Si no hay un nodo actual no hay aristas interesadas así que lo primero es comprobar si hay un nodo válido en _currentNodeId */ \
+	if (_currentNodeId != -1) {  \
+		/* Buscamos la lista de aristas que salen del nodo actual */ \
+		EdgeList::iterator it = _edges->find(_currentNodeId); \
+		if (it != _edges->end()) { \
+			PairVector* vector = (*it).second; \
+\
+			/* Para cada elemento del vector (arista que sale del nodo actual) */ \
+			for (PairVector::iterator edgeIt = vector->begin(); edgeIt != vector->end(); edgeIt++){ \
+				/* Procesamos en la arista (o sea, la condición) */ \
+				ret |= (edgeIt->first->HandleMessage(msg)); /* Si alguna arista acepta, aceptaremos al final */ \
+						} \
+				}  \
+		} \
+\
+	return ret; \
+}
 
 using namespace Logic;
 
@@ -46,12 +104,12 @@ namespace AI
 		/**
 		Constructor
 		*/
-		CStateMachine() : _entity(0), _currentNodeId(-1), _initialNodeId(-1) { _edges = new EdgeList(); };
+		CStateMachine() : _entity(0), _currentNodeId(-1), _initialNodeId(-1), _name(""), _debug(false) { _edges = new EdgeList(); };
 		
 		/**
 		Constructor que recibe la entidad que ejecuta la máquina de estado
 		*/
-		CStateMachine(CEntity* entity) : _entity(entity), _currentNodeId(-1), _initialNodeId(-1) { _edges = new EdgeList(); };
+		CStateMachine(CEntity* entity) : _entity(entity), _currentNodeId(-1), _initialNodeId(-1), _name(""), _debug(false) { _edges = new EdgeList(); };
 		
 		/**
 		Destructor
@@ -127,6 +185,13 @@ namespace AI
 		*/
 		virtual void deactivate() {}
 
+		/**
+		Devuelve el objeto de datos compartido de la máquina de estados
+		*/
+		SharedData& getSharedData(){
+			return _data;
+		}
+
 	protected:
 		/**
 		Tipo que guarda la información de las aristas salientes de un nodo.
@@ -171,27 +236,14 @@ namespace AI
 		*/
 		EdgeList * _edges;
 
+		// Nombre de la SM
+		std::string _name;
+
+		// Flag para activar el debug de cambio de estados en esta SM. Ver macro DEBUG_SM
+		bool _debug;
+
 	}; // class CStateMachine
 	
-	/**
-	Factoría que devuelve máquinas de estado predefinidas.
-	Sólo reconoce el valor "wander" como entrada, 
-	que recorre puntos aleatorios del mapa
-	*/
-	/*class CStateMachineFactory 
-	{
-	public:
-		static CStateMachine<CLatentAction>* getStateMachine(std::string smName, CEntity * entity)
-		{
-			if (smName == "wander") {
-				return new CSMWander(entity);
-			} else if (smName == "hfsm") {
-				return new CSMHierarchical(entity);
-			}
-			return 0;
-		}
-	};*/
-
 //////////////////////////////
 //	Implementación de CStateMachine
 //////////////////////////////
@@ -206,6 +258,7 @@ namespace AI
 				// Borra la condición
 				delete it2->first;
 			}
+
 			// Borra el vector
 			delete v;
 		}
@@ -286,6 +339,15 @@ namespace AI
 				if (edgeIt->first->check(node, _entity)) {
 					// Sólo hacemos la primera transición que encontramos
 					int newNode = edgeIt->second;
+
+#ifdef DEBUG_SM
+					if (_debug){
+						//std::cout << _entity->getEntityID() << "," << _name << "," << _nodes[_currentNodeId]->getName() << "," << _nodes[newNode]->getName() << std::endl;
+						//std::cout << _entity->getEntityID() << "," << _name << "," << _currentNodeId << "," << newNode << std::endl;
+						std::cout << _entity->getEntityID() << "," << _name << "," << _nodes[_currentNodeId]->GetRTTI().GetClassName() << "," << _nodes[newNode]->GetRTTI().GetClassName() << std::endl;
+					}
+#endif
+
 					_currentNodeId = newNode;
 					// Si la transición se hace cierta siempre consideramos que el comportamiento cambia
 					// Esto implica que si se activa una arista circular (empieza y termina en el mismo nodo)

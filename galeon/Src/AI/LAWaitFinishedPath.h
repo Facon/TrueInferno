@@ -8,6 +8,7 @@
 
 namespace AI {
 	class CLAWaitFinishedPath : public CLatentAction {
+		RTTI_DECL;
 
 	public:
 		CLAWaitFinishedPath(CEntity* entity) : CLatentAction(entity) {

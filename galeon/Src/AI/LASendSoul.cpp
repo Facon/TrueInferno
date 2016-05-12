@@ -2,14 +2,24 @@
 #include "Logic\Maps\EntityFactory.h"
 #include "Logic\Server.h"
 #include "Logic\Maps\Map.h"
+#include "Logic/Entity/Components/Graphics.h"
+#include "Graphics\Entity.h"
 
 namespace AI {
+	RTTI_IMPL(CLASendSoul, CLatentAction);
+	
 	bool CLASendSoul::HandleMessage(const SoulSenderMessage& msg) {
 		// Rechazamos lo que no sean peticiones. No aceptamos más de una petición simultánea
 		if (msg._type != MessageType::SOUL_SENDER_REQUEST || _task != nullptr)
 			return false;
 
 		// Guardamos la informción del mensaje
+		
+		if (_task)
+		{
+			delete _task;
+		}
+
 		_task = msg._task;
 		_numSouls = msg._numSouls;
 
@@ -36,9 +46,19 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLASendSoul::OnRun(unsigned int msecs) {
+		// Acumulamos el tiempo transcurrido desde el último tick
+		_timeSinceLastSoulSent += msecs;
+
 		// Verificamos que tenemos tarea
 		if (_task == nullptr)
 			return LAStatus::FAIL;
+
+		// Verificamos que se puede enviar un nuevo alma...
+		if (_timeSinceLastSoulSent < _timeBetweenSouls)
+			return LAStatus::RUNNING;
+
+		// ...y reseteamos el tiempo acumulado
+		_timeSinceLastSoulSent = 0;
 
 		// Si no se pudieron crear las almas esperamos al siguiente tick
 		if (!createSouls())
@@ -89,9 +109,12 @@ namespace AI {
 		// Comenzamos el bucle por la última alma enviada
 		for (unsigned int i = _numSoulsSent; i < _newSouls.size(); ++i){
 			// Le asignamos la tarea
-			SoulMessage m2(_task->clone());
+			CSoulTask* clone = _task->clone();
+			
+			SoulMessage m2(clone);
 			if (!m2.Dispatch(*_newSouls[i])){
 				//std::cout << "Can´t assign task to soul" << std::endl;
+				
 				ret = false;
 				break;
 			}

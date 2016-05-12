@@ -50,14 +50,26 @@ namespace Logic
 	public:
 
 		/**
-		Constructor.
+		Constructores.
 		*/
-		CBuildingDestructionEvent(unsigned int time) : CEvent(INFO, time) {};
+		CBuildingDestructionEvent(unsigned long time, bool absoluteTime = true) : CEvent(INFO, time, absoluteTime) {};
+
+		CBuildingDestructionEvent(ConditionTriggerType condEventType, bool dummy = true) : CEvent(INFO, condEventType) {};
+
+		static CBuildingDestructionEvent* addCBuildingDestructionEvent(unsigned long time, bool absoluteTime = true) {
+			return new CBuildingDestructionEvent(time, absoluteTime);
+		};
 
 		/**
 		Destructor.
 		*/
 		~CBuildingDestructionEvent() {};
+
+		/**
+		Registra esta clase evento en el contexto de Lua.
+		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
+		*/
+		static void luaRegister();
 
 	protected:
 

@@ -32,11 +32,22 @@ class RTTI
         virtual const RTTI & GetRTTI() { return rtti; } \
         static const RTTI rtti;
 
+// Versión de RTTI_DECL para clases con template: Añade declaración de parámetro de plantilla y quita el virtual porque da conflicto
+#define RTTI_DECL_TEMPLATE(templateClassName) \
+	public: \
+		template <class templateClassName> \
+        const RTTI & GetRTTI() { return rtti; } \
+        static const RTTI rtti;
+
 #define RTTI_ROOT_IMPL(name) \
     const RTTI name::rtti(#name);
 
 #define RTTI_IMPL(name,parent) \
     const RTTI name::rtti(#name, parent::rtti);
+
+#define RTTI_IMPL_TEMPLATE(name,parent,templateClassName) \
+	template <class templateClassName> \
+    const RTTI name<templateClassName>::rtti(#name, parent::rtti);
 
 
 #endif  // _RTTI_H_

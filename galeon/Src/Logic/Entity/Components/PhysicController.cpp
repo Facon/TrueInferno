@@ -62,14 +62,14 @@ bool CPhysicController::spawn(CEntity* entity, CMap *map, const Map::CEntity *en
 
 //---------------------------------------------------------
 /*
-bool CPhysicController::accept(const TMessage &message)
+bool CPhysicController::accept(const MessageType &message)
 {
 	return message._type == Message::AVATAR_WALK //|| message._type == Message::SET_TRANSFORM;
 } 
 
 //---------------------------------------------------------
 
-void CPhysicController::process(const TMessage &message)
+void CPhysicController::process(const MessageType &message)
 {
 	switch(message._type)
 	{

@@ -4,6 +4,8 @@
 #include "AI\SMResourceDemanderData.h"
 
 namespace AI {
+	RTTI_IMPL(CLAWaitResourceDemand, CLatentAction);
+	
 	bool CLAWaitResourceDemand::HandleMessage(const LogisticsMessage& msg) {
 		// Rechazamos lo que no sean mensajes de petición
 		if (msg._type != MessageType::LOGISTICS_DEMAND_RESOURCES)

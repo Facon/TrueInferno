@@ -76,13 +76,13 @@ namespace Logic
 
 		if(isStatic)
 		{
-			_graphicsEntity = new Graphics::CStaticEntity(_entity->getName(),_model);
+			_graphicsEntity = new Graphics::CStaticEntity(_entity->getName(), _model, _entity->getMeshDimensions());
 			if(!_scene->addStaticEntity((Graphics::CStaticEntity*)_graphicsEntity))
 				return 0;
 		}
 		else
 		{
-			_graphicsEntity = new Graphics::CEntity(_entity->getName(),_model);
+			_graphicsEntity = new Graphics::CEntity(_entity->getName(),_model, _entity->getMeshDimensions());
 			if(!_scene->addEntity(_graphicsEntity))
 				return 0;
 		}
@@ -105,6 +105,11 @@ namespace Logic
 
 	} // createGraphicsEntity
 	
+	Graphics::CEntity* CGraphics::getGraphicsEntity()
+	{
+		return _graphicsEntity;
+	}
+
 	//---------------------------------------------------------
 	
 	bool CGraphics::HandleMessage(const TransformMessage& m)
@@ -124,6 +129,21 @@ namespace Logic
 		_graphicsEntity->setMaterialName(m._name);
 		return true;
 	} // SET_MATERIAL_NAME
+
+	bool CGraphics::HandleMessage(const ToggleMessage& m)
+	{
+		// Sólo atendemos mensajes de información de cambio
+		if (m._type != MessageType::TOGGLE_INFO)
+			return false;
+
+		// Oscurecemos o aclaramos el color dependiendo de si deshabilitan o habilitan
+		if (m._enabled)
+			_graphicsEntity->makeClearerColor();
+		else
+			_graphicsEntity->makeDarkerColor();
+		
+		return true;
+	}
 
 } // namespace Logic
 

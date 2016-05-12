@@ -15,12 +15,24 @@ el panel de fin del juego (con victoria o derrota).
 */
 
 #include "EndGameEvent.h"
+#include "BaseSubsystems/ScriptManager.h"
 
 #include "GUI/Server.h"
 #include "GUI/UIManager.h"
 #include "GUI/EventUI.h"
 
 namespace Logic {
+
+	void CEndGameEvent::luaRegister()
+	{
+		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
+			[
+				luabind::class_<CEndGameEvent, CEvent>("CEndGameEvent")
+				.def(luabind::constructor<bool>())
+			];
+	}
+
+	//--------------------------------------------------------
 
 	void CEndGameEvent::execute()
 	{
@@ -31,10 +43,11 @@ namespace Logic {
 		{
 		case true:
 			eventImage = "EventVictory";
-			eventTitle = "You are in the NEXT ROUND!";
-			eventText = "YES!! That’s how it’s done, kiddo. I KNEW you had potential. HAH!! Look at your rivals’ faces, you really pissed them off. This deserves some extra points. Here you go. Hades’ Favor increased! +66.666 Now on to the next round! Give’em Hell!";
+			eventTitle = "VICTORY!";
+			eventText = "YOU DID IT! You ARE the WINNER!";
 			eventTextResume = "";
 			break;
+
 		case false:
 			eventImage = "EventDefeat";
 			eventTitle = "You have been ELIMINATED!";

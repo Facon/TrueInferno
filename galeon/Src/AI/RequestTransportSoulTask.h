@@ -14,8 +14,9 @@ namespace AI{
 	class CRequestTransportSoulTask : public CSoulTask {
 
 	public:
-		CRequestTransportSoulTask(CMap *map, const TEntityID& fromId, const TEntityID& toId, ResourceType resourceType, unsigned int resourceQuantity) :
-			CSoulTask(map, fromId), // El objetivo es el punto de inicio donde solicitaremos el transporte
+		CRequestTransportSoulTask(CMap *map, const TEntityID& fromId, const TEntityID& toId, ResourceType resourceType, unsigned int resourceQuantity,
+			Logic::CSoulsTrialManager::SoulsCategory category = Logic::CSoulsTrialManager::SoulsCategory::UNKNOWN) :
+			CSoulTask(map, fromId, category), // El objetivo es el punto de inicio donde solicitaremos el transporte
 			_toId(toId),
 			_resourceType(resourceType),
 			_resourceQuantity(resourceQuantity) {};
@@ -23,7 +24,7 @@ namespace AI{
 		virtual ~CRequestTransportSoulTask() {};
 
 		virtual CSoulTask* clone(){
-			return new CRequestTransportSoulTask(_map, _target, _toId, _resourceType, _resourceQuantity);
+			return new CRequestTransportSoulTask(_map, _target, _toId, _resourceType, _resourceQuantity, _category);
 		}
 
 		bool start(){

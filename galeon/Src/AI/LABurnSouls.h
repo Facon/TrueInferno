@@ -7,9 +7,11 @@
 
 namespace AI {
 	class CLABurnSouls : public CLatentAction {
+		RTTI_DECL;
+
 	public:
-		CLABurnSouls(CEntity* entity, CSMSoulBurnerData& smData, int cokePerSoul, int crudePerSoul) : 
-			CLatentAction(entity), _smData(smData), _cokePerSoul(cokePerSoul), _crudePerSoul(crudePerSoul) {}
+		CLABurnSouls(CEntity* entity, CSMSoulBurnerData& smData) : 
+			CLatentAction(entity), _smData(smData) {}
 
 		virtual ~CLABurnSouls() {}
 
@@ -21,15 +23,13 @@ namespace AI {
 	private:
 		CSMSoulBurnerData& _smData;
 
-		const int _cokePerSoul;
-
-		const int _crudePerSoul;
-
-		/** Flag para señalar que el incremento de coke ya está hecho */
+		/** Flags para señalar que el incremento de coke y crude ya está hecho */
 		bool _cokeIncreased;
-
-		/** Flag para señalar que el incremento de crude ya está hecho */
 		bool _crudeIncreased;
+
+		/** Suma de las cantidades de coke y crude de cada alma a quemar */
+		int _totalCokeToIncrease;
+		int _totalCrudeToIncrease;
 	};
 }
 

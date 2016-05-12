@@ -28,6 +28,7 @@ de una escena.
 #include <OgreViewport.h>
 #include <OgreStaticGeometry.h>
 #include <OgreColourValue.h>
+#include <OgreBillboardSet.h>
 
 namespace Graphics 
 {
@@ -48,7 +49,9 @@ namespace Graphics
 		deactivate();
 		_sceneMgr->destroyStaticGeometry(_staticGeometry);
 		delete _camera;
-		//_root->destroySceneManager(_sceneMgr);
+
+		if (_sceneMgr != nullptr)
+			_root->destroySceneManager(_sceneMgr);
 
 	} // ~CScene
 
@@ -164,5 +167,18 @@ namespace Graphics
 		}
 
 	} // buildStaticGeometry
+
+	Ogre::BillboardSet* CScene::createBillboardSet(CEntity* entity, const std::string& name)
+	{
+		Ogre::BillboardSet* bbSet = _sceneMgr->createBillboardSet(name);
+
+		//Ogre::SceneNode* childNode = entity->_entityNode->getParentSceneNode()->createChildSceneNode(Vector3(0.0f, 2.0f, 0.0f));
+		Ogre::SceneNode* childNode = entity->_entityNode->createChildSceneNode();
+		childNode->setInheritScale(false);
+		childNode->setPosition(Vector3(0.0f, 200.0f, 0.0f));
+		childNode->attachObject(bbSet);
+
+		return bbSet;
+	}
 
 } // namespace Graphics

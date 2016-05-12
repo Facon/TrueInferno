@@ -6,7 +6,9 @@
 #include "AI\Server.h"
 
 namespace AI {
-	class CLAFindingPath : public CLatentAction{
+	class CLAFindingPath : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAFindingPath(CEntity* entity) : CLatentAction(entity), _walkingSoulTarget(EntityID::UNASSIGNED), _pathRequestReceived(false), _pathCalculated(nullptr) {
 			_pathRequestReceived = false;
@@ -17,7 +19,7 @@ namespace AI {
 		virtual bool HandleMessage(const WalkSoulPathMessage& msg)
 		{
 			// Rechazamos mensajes que no sean de petición y rechazamos también si ya había llegado uno
-			if (msg._type != Logic::TMessage::REQUEST_WALK_SOUL_PATH || _pathRequestReceived)
+			if (msg._type != MessageType::REQUEST_WALK_SOUL_PATH || _pathRequestReceived)
 				return false;
 
 			// Hemos recibido petición
@@ -84,6 +86,7 @@ namespace AI {
 		std::vector<Vector3>* _pathCalculated;
 	};
 
+	RTTI_IMPL(CLAFindingPath, CLatentAction);
 }
 
 #endif

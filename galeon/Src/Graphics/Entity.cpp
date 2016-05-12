@@ -28,12 +28,12 @@ Contiene la implementación de la clase que representa una entidad gráfica.
 
 namespace Graphics 
 {
-	CEntity::CEntity(const std::string &name, const std::string &mesh)
-		: _entity(0), _entityNode(0), _scene(0), _loaded(false),
-		  _meshDimensions(Vector3(100.f, 100.f, 100.f))
+	CEntity::CEntity(const std::string &name, const std::string &mesh, const Vector3 &meshDimensions)
+		: _entity(0), _entityNode(0), _scene(0), _loaded(false)
 	{
 		_name = name;
 		_mesh = mesh;
+		_meshDimensions = meshDimensions;
 
 	} // CEntity
 
@@ -242,15 +242,20 @@ namespace Graphics
 	{
 		assert(_entityNode && "La entidad no ha sido cargada");
 		if (_entity) {
-			Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(0)->getMaterial();
-			entityMaterial->getTechnique(0)->getPass(0)->setAmbient(color.x, color.y, color.z);
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+			{
+				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
+				Ogre::MaterialPtr entityMaterialClone = entityMaterial->clone(_entityNode->getName() + "_" + entityMaterial->getName());
+				entityMaterialClone->getTechnique(0)->getPass(0)->setAmbient(color.x, color.y, color.z);
+				_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+			}
 		}
 
 	} // setColor
 	
 	//--------------------------------------------------------
 	
-	const Vector3& CEntity::getColor()
+	Vector3 CEntity::getColor()
 	{
 		if (_entityNode) {
 			Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(0)->getMaterial();
@@ -264,11 +269,63 @@ namespace Graphics
 	
 	//--------------------------------------------------------
 	
+	void CEntity::makeDarkerColor(float factor)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		assert((factor > 0) && (factor < 1) && "Factor must be in (0,1)");
+
+		if (_entity) {
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+			{
+				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
+				Ogre::MaterialPtr entityMaterialClone = entityMaterial->clone(_entityNode->getName() + "_" + entityMaterial->getName());
+
+				// Cogemos el color actual
+				Ogre::ColourValue color = entityMaterialClone->getTechnique(0)->getPass(0)->getAmbient();
+
+				// Y se le aplica una multiplicación para hacerlo más oscuro
+				entityMaterialClone->getTechnique(0)->getPass(0)->setAmbient(color.r * factor, color.g * factor, color.b * factor);
+
+				_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+			}
+		}
+
+	} // setLogicDisabledColor
+
+	//--------------------------------------------------------
+
+	void CEntity::makeClearerColor(float factor)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		assert((factor > 0) && (factor < 1) && "Factor must be in (0,1)");
+
+		if (_entity) {
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+			{
+				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
+				Ogre::MaterialPtr entityMaterialClone = entityMaterial->clone(_entityNode->getName() + "_" + entityMaterial->getName());
+
+				// Cogemos el color actual
+				Ogre::ColourValue color = entityMaterialClone->getTechnique(0)->getPass(0)->getAmbient();
+
+				// Y se le aplica la multiplicación inversa que hicimos al desactivar para devolverla al color inicial
+				entityMaterialClone->getTechnique(0)->getPass(0)->setAmbient(color.r / factor, color.g / factor, color.b / factor);
+
+				_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+			}
+		}
+
+	} // setLogicEnabledColor
+
+	//--------------------------------------------------------
+
 	void CEntity::setMaterialName(const std::string &materialName)
 	{
 		assert(_entityNode && "La entidad no ha sido cargada");
-		if (_entity)
-			_entity->getSubEntity(0)->setMaterialName(materialName);
+		if (_entity) {
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+				_entity->getSubEntity(i)->setMaterialName(materialName);
+		}
 
 	} // setMaterial
 	

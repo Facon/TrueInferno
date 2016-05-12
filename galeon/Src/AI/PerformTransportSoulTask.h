@@ -16,15 +16,16 @@ namespace AI{
 	class CPerformTransportSoulTask : public CSoulTask {
 
 	public:
-		CPerformTransportSoulTask(CMap *map, const TEntityID& toId, ResourceType resourceType, int resourceQuantity) :
-			CSoulTask(map, toId), // El objetivo es el punto de final del transporte donde entregaremos los recursos
+		CPerformTransportSoulTask(CMap *map, const TEntityID& toId, ResourceType resourceType, int resourceQuantity,
+			Logic::CSoulsTrialManager::SoulsCategory category = Logic::CSoulsTrialManager::SoulsCategory::UNKNOWN) :
+			CSoulTask(map, toId, category), // El objetivo es el punto de final del transporte donde entregaremos los recursos
 			_resourceType(resourceType),
 			_resourceQuantity(resourceQuantity) {};
 
 		virtual ~CPerformTransportSoulTask() {};
 
 		virtual CSoulTask* clone(){
-			return new CPerformTransportSoulTask(_map, _target, _resourceType, _resourceQuantity);
+			return new CPerformTransportSoulTask(_map, _target, _resourceType, _resourceQuantity, _category);
 		}
 
 		bool start(){

@@ -4,7 +4,6 @@
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Events/EventManager.h"
-#include "Logic/Events/ConditionEvents.h"
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/Entity/PlaceableType.h"
@@ -30,9 +29,11 @@ namespace Logic {
 			// Lo desregistramos en el manager
 			Logic::CBuildingManager::getSingletonPtr()->unregisterBuilding(this);
 
-		// Eliminamos la referencia al placeable en las tiles que ocupaba
+		// Y eliminamos este placeable de sus tiles para que no comprueben conflicto de posición
 		for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
-			(*it)->setPlaceableAbove(nullptr);
+			// Sólo eliminamos si somos nosotros
+			if ((*it)->getPlaceableAbove() == this)
+				(*it)->setPlaceableAbove(nullptr);
 		}
 
 		_tiles.clear();
@@ -40,6 +41,9 @@ namespace Logic {
 	}
 
 	bool CPlaceable::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+		if(!IComponent::spawn(entity,map,entityInfo))
+			return false;
+	
 		// Inicialización
 		_tileManager = nullptr;
 		_tiles.clear();
@@ -123,7 +127,7 @@ namespace Logic {
 	} // tick
 
 	bool CPlaceable::place() {
-		// Si no estábamos flotando no hacemos nada porque ya estamos (teóricamente bien) colocados
+		// Si no estábamos flotando no hacemos nada porque ya estábamos (teóricamente bien) colocados
 		if (!_floating)
 			return true;
 
@@ -134,6 +138,8 @@ namespace Logic {
 
 		// For each of our tiles
 		for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
+			assert("Can't place if there's a Placeable!" && (*it)->getPlaceableAbove()==nullptr);
+
 			// Notify of the new entity above
 			(*it)->setPlaceableAbove(this);
 		}
@@ -145,9 +151,21 @@ namespace Logic {
 
 		// Cambiamos la altura a justo encima de la tile
 		Vector3& position = _entity->getPosition();
-		position.y = HEIGHT_ON_TILE;
-		PositionMessage m(position);
 
+		// @TODO Es necesario incluir aquí una distinción para todos los edificios que tengan un
+		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...
+		if (_placeableType == Building)
+		{
+			if (getBuildingType() == Furnace) position.y = HEIGHT_ON_TILE + 0.6f;
+			else if (getBuildingType() == Refinery) position.y = HEIGHT_ON_TILE + 0.15f;
+			else if (_placeableType == Building) position.y = HEIGHT_ON_TILE;
+		}
+		else if (_placeableType == SoulPath)
+		{
+			position.y = 0.6f;
+		}
+
+		PositionMessage m(position);
 		m.Dispatch(*_entity);
 
 		// Cambiamos el estado
@@ -156,7 +174,7 @@ namespace Logic {
 		// Eventos del tutorial
 		// @TODO Hacer bien...
 		if (isBuilding()) {
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 		}
 
 		return true;
@@ -182,8 +200,9 @@ namespace Logic {
 
 			// Y eliminamos este placeable de sus tiles para que no comprueben conflicto de posición
 			for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
-				// Notify of the new entity above
-				(*it)->setPlaceableAbove(nullptr);
+				// Sólo eliminamos si somos nosotros
+				if((*it)->getPlaceableAbove() == this)
+					(*it)->setPlaceableAbove(nullptr);
 			}
 		}
 
@@ -221,7 +240,23 @@ namespace Logic {
 		centerPosition /= _tiles.size();
 
 		// Añadimos cierta altura a la posición del Placeable para que parezca que está colocada encima o sobrevolando la Tile
-		centerPosition += Vector3(0, (showFloating ? HEIGHT_FLOATING_OVER_TILE : HEIGHT_ON_TILE), 0);
+		float buildingHeightIncrement;
+
+		// @TODO Es necesario incluir aquí una distinción para todos los edificios que tengan un
+		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...
+		if (_placeableType == Building)
+		{
+			if (getBuildingType() == Furnace) buildingHeightIncrement = HEIGHT_ON_TILE + 0.3f;
+			else if (getBuildingType() == Refinery) buildingHeightIncrement = HEIGHT_ON_TILE;
+			else if (_placeableType == Building) buildingHeightIncrement = HEIGHT_ON_TILE;
+		}
+		else if (_placeableType == SoulPath)
+		{
+			buildingHeightIncrement = 0.3f;
+		}
+
+		float centerHeight = (showFloating) ? HEIGHT_ON_TILE + buildingHeightIncrement : 0.6f;
+		centerPosition += Vector3(0, centerHeight, 0);
 
 		// Move entity physically
 		_entity->setPosition(centerPosition);
@@ -294,15 +329,18 @@ namespace Logic {
 
 	bool CPlaceable::ConsumeResourcesForConstruction(){
 
-		Logic::ResourcesManager *resourcesManager = ((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
+		Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
 
-		if (resourcesManager->getMineral() < _mineralCost)
+		// Chequeeamos inicialmente los costes para todos los recursos
+		int finalCost;
+		if (!resourcesManager->decrementResources(ResourceType::MINERAL, _mineralCost, true, false, finalCost))
 			return false;
-		if (resourcesManager->getGas() < _gasCost)
+		if (!resourcesManager->decrementResources(ResourceType::GAS, _gasCost, true, false, finalCost))
 			return false;
 
-		resourcesManager->changeResources(Logic::ResourceType::MINERAL, -_mineralCost);
-		resourcesManager->changeResources(Logic::ResourceType::GAS, -_gasCost);
+		// Computamos los costes
+		assert(resourcesManager->decrementResources(ResourceType::MINERAL, _mineralCost, false, false, finalCost) && "Can't pay mineral costs");
+		assert(resourcesManager->decrementResources(ResourceType::GAS, _gasCost, false, false, finalCost) && "Can't pay gas costs");
 
 		return true;
 	}

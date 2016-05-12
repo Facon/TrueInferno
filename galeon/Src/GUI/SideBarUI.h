@@ -7,7 +7,6 @@ namespace Logic
 	class CEntity;
 	class Tile;
 }
-//lo de antes ver si kitar
 namespace CEGUI
 {
 	class Window;
@@ -39,6 +38,9 @@ namespace GUI
 		bool repairBuildingReleased(const CEGUI::EventArgs& e);
 		bool clearTerrainReleased(const CEGUI::EventArgs& e);
 		void ClearBuildingConstruction();
+		bool createResearchLabReleased(const CEGUI::EventArgs& e);
+		bool createWarehouseReleased(const CEGUI::EventArgs& e);
+		bool createPowerGeneratorReleased(const CEGUI::EventArgs& e);
 
 	public:
 		SideBarUI();
@@ -48,7 +50,8 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
-		void placeBuildingInConstruction();
+		void playerInteractionWithLeftClick();
+		void setEventWindowVisible(bool visible);
 	};
 }
 

@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLAGetSoulTaskTarget : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAGetSoulTaskTarget(CEntity* entity, CSMSoulData& smData) : CLatentAction(entity), _smData(smData) {}
 

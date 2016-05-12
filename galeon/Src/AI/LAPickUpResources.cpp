@@ -4,6 +4,8 @@
 #include "AI\SMResourceProviderData.h"
 
 namespace AI {
+	RTTI_IMPL(CLAPickUpResources, CLatentAction);
+	
 	bool CLAPickUpResources::HandleMessage(const ResourceMessage& msg) {
 		/* TODO De momento la confirmación de pago de costes no se envía por mensaje
 		// Rechazamos lo que no sean mensajes de petición

@@ -1,215 +1,98 @@
-#ifndef SM_RESOURCE_BUILDING_DATA_
-#define SM_RESOURCE_BUILDING_DATA_
-
-#include "Application/GaleonApplication.h"
-#include "Application/GameState.h"
+#ifndef SM_RESOURCE_BUILDING_DATA_H_
+#define SM_RESOURCE_BUILDING_DATA_H_
 
 #include <unordered_map>
 #include <unordered_set>
-#include <iostream> 
+
+namespace Logic {
+	enum ResourceType;
+}
+
+using namespace Logic;
 
 namespace AI {
 	class CSMResourceBuildingData {
 
 	public:
-		CSMResourceBuildingData() : _maxResources(0) {
-			_storedResources.clear();
-			_reservedResources.clear();
-			_providedResources.clear();
-		}
+		CSMResourceBuildingData() {}
 
 		virtual ~CSMResourceBuildingData() {
 			_storedResources.clear();
 			_reservedResources.clear();
+			_maxResources.clear();
 			_providedResources.clear();
 		}
 
-		/** Registra el tipo de recurso dado para ser almacenado */
-		void registerStoredResourceType(ResourceType type) {
-			// Inicializamos los recursos almacenados de ese tipo a 0
-			_storedResources[type] = 0;
-
-			// Ídem para los recursos reservables
-			_reservedResources[type] = 0;
-		}
+		/** 
+		Registra el tipo de recurso a ser almacenado con su cantidad inicial y su máximo.
+		*/
+		void registerStoredResourceType(ResourceType type, int initialResources, int maxResources);
 
 		/** Devuelve true o false según si el tipo de recurso es almacenable en esta entidad o no */
-		bool isResourceTypeStored(ResourceType type){
-			return (_storedResources.count(type) > 0);
-		}
+		bool isResourceTypeStored(ResourceType type) const;
 
 		/** Devuelve la cantidad de recursos almacenados del tipo dado */
-		int getStoredResources(ResourceType type) {
-			if (!isResourceTypeStored(type)){
-				assert(false && "Resource not stored. Check wether it's stored before doing anything!");
-				return 0;
-			}
-
-			return _storedResources[type];
-		}
+		int getStoredResources(ResourceType type) const;
 
 		/** Devuelve la cantidad de recursos disponibles del tipo dado = Recursos existentes menos los reservados */
-		int getAvailableResources(ResourceType type) {
-			if (!isResourceTypeStored(type)){
-				assert(false && "Resource not stored. Check wether it's stored before doing anything!");
-				return 0;
-			}
+		int getAvailableResources(ResourceType type) const;
 
-			return _storedResources[type] - _reservedResources[type];
-		}
+		/** Getter del máximo de recursos */
+		unsigned int getMaxResources(ResourceType type) const;
 
-		/** Modifica los recursos del tipo dado según la cantidad positiva o negativa indicada.
-		Devuelve true o false según si la operación se realizó correctamente o no */
-		bool changeStoredResources(ResourceType type, int quantity){
-			if (!isResourceTypeStored(type)){
-				assert(false && "Resource not stored. Check wether it's stored before doing anything!");
-				return 0;
-			}
+		/**
+		* Modifica los recursos almacenados del tipo dado según la cantidad positiva o negativa indicada.
+		* Devuelve true o false según si la operación se realizó correctamente o no
+		*/
+		bool changeStoredResources(ResourceType type, int quantity);
 
-			int aux = _storedResources[type] + quantity;
+		/**
+		* Modifica los recursos máximos del tipo dado según la cantidad positiva o negativa indicada.
+		* Devuelve true o false según si la operación se realizó correctamente o no
+		*/
+		bool changeMaxResources(ResourceType type, int quantity);
 
-			// Controlamos que el nuevo valor no sobrepase los límites
-			if (aux < 0){
-				std::cout << "Discarded changing " << quantity << " resources because there are only stored " << _storedResources[type] << std::endl;
-				return false;
-			}
-
-			else if (aux > (int)_maxResources){
-				std::cout << "Discarded changing " << quantity << " resources because there are already stored " << _storedResources[type] << " (limit = " << _maxResources << ")" << std::endl;
-				return false;
-			}
-
-			// Registramos el nuevo valor con el cambio aplicado
-			_storedResources[type] = aux;
-
-			// Notificamos al ResourcesManager
-			// TODO Atajo temporal para obtener el ResourcesManager
-			Logic::ResourcesManager *resourcesManager =
-				((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
-			resourcesManager->changeResources(type, quantity);
-
-			return true;
-		}
-
-		/** Reserva los recursos del tipo dado según la cantidad positiva indicada. 
-		Con el flag allowPartial a true se permiten reservas parciales, esto es, se reserva todo lo que haya disponible aunque no llegue a lo solicitado.
-		En finallyReserved se almacena la cantidad finalmente reservada.
-		Devuelve true o false según si la operación se realizó correctamente o no */
-		bool reserveResources(ResourceType type, int quantity, bool allowPartial, int& finallyReserved){
-			if (!isResourceTypeStored(type)){
-				assert(false && "Resource not stored. Check wether it's stored before doing anything!");
-				return 0;
-			}
-
-			if (quantity <= 0){
-				assert(false && "Reserved quantity must be > 0");
-				return false;
-			}
-
-			int aux = _reservedResources[type] + quantity;
-
-			// Si se sobrepasa la cantidad disponible para reservar
-			if (aux > getAvailableResources(type)){
-				// Fallamos si no se deseaba reserva parcial
-				if (!allowPartial){
-					std::cout << "Discarded reserving " << quantity << " resources because there are only available " << getAvailableResources(type) << std::endl;
-					finallyReserved = 0;
-					return false;
-				}
-
-				// Si se permiten, reservamos hasta donde sea posible
-				else{
-					finallyReserved = getAvailableResources(type);
-					_reservedResources[type] = _reservedResources[type] + finallyReserved;
-					return true;
-				}
-			}
-
-			_reservedResources[type] = aux;
-			finallyReserved = quantity;
-
-			return true;
-		}
+		/**
+		* Reserva los recursos del tipo dado según la cantidad positiva indicada. 
+		* 
+		* @param[in] type tipo de los recursos a reservar
+		* @param[in] quantity cantidad de recursos a reservar
+		* @param[in] allowPartial flag a true para permite reservas parciales, esto es, reservar todo lo que haya disponible aunque no se llegue a lo solicitado
+		* @param[out] finallyReserved cantidad finalmente reservada
+		* @return true o false según si la operación total o parcial se realizó correctamente o no 
+		*/
+		bool reserveResources(ResourceType type, int quantity, bool allowPartial, int& finallyReserved);
 
 		/** Libera los recursos reservados del tipo dado según la cantidad positiva indicada.
 		Devuelve true o false según si la operación se realizó correctamente o no */
-		bool freeReservedResources(ResourceType type, int quantity){
-			if (!isResourceTypeStored(type)){
-				assert(false && "Resource not stored. Check wether it's stored before doing anything!");
-				return 0;
-			}
-
-			if (quantity <= 0){
-				assert(false && "Freed quantity must be > 0");
-				return false;
-			}
-
-			int aux = _reservedResources[type] - quantity;
-
-			// Controlamos que no se libere más de lo que estaba reservado
-			if (aux < 0){
-				assert(false && "Can't free resources that weren't reserved");
-				return false;
-			}
-
-			_reservedResources[type] = aux;
-			return true;
-		}
+		bool freeReservedResources(ResourceType type, int quantity);
 
 		/** Reclama los recursos previamente reservados del tipo dado en la cantidad indicada
 		Devuelve true o false según si la operación se realizó correctamente o no */
-		bool claimReservedResources(ResourceType type, int quantity){
-			if (!changeStoredResources(type, -quantity))
-				return false;
-			
-			return freeReservedResources(type, quantity);
-		}
+		bool claimReservedResources(ResourceType type, int quantity);
 
-		std::unordered_set<ResourceType>& getProvidedResources() {
-			return _providedResources;
-		}
+		/** Devuelve la lista de recursos que la entidad provee */
+		std::unordered_set<ResourceType>& getProvidedResources();
 
-		void registerStoredResourceType(std::unordered_set<ResourceType>& providedResources) {
-			providedResources = _providedResources;
-		}
+		/** Registra un tipo */
+		//void registerStoredResourceType(std::unordered_set<ResourceType>& providedResources);
 
-		unsigned int getMaxResources() const{
-			return _maxResources;
-		}
-
-		void setMaxResources(unsigned int maxResources){
-			_maxResources = maxResources;
-		}
-
-		/** Limpia los recursos almacenados */
-		void cleanResources() {
-			for (auto it = _storedResources.cbegin(); it != _storedResources.cend(); ++it){
-				ResourceType type = it->first;
-				int quantity = it->second; // TODO Saltar si es 0
-
-				// Notificamos al ResourcesManager
-				// TODO Atajo temporal para obtener el ResourcesManager
-				Logic::ResourcesManager *resourcesManager =
-					((Application::CGameState*) Application::CGaleonApplication::getSingletonPtr()->getState())->getResourcesManager();
-				resourcesManager->changeResources(type, -quantity);
-			}
-		}
+		/** Desactiva el objeto limpiando y notificando todo lo que sea necesario */
+		void deactivate();
 
 	private:
 		/** Cantidad de recursos almacenados indexados por tipo */
 		std::unordered_map<ResourceType, int> _storedResources;
 
+		/** Cantidad máxima de recursos almacenados indexados por tipo */
+		std::unordered_map<ResourceType, int> _maxResources;
+		
 		/** Cantidad de recursos disponibles (i.e. no reservados) indexados por tipo */
 		std::unordered_map<ResourceType, int> _reservedResources;
 
-		/** Recursos que se proveen 
-		TODO ¿Tiene sentido guardar y usar esta información en el ResourceBuilding? */
+		/** Recursos que se proveen */
 		std::unordered_set<ResourceType> _providedResources;
-
-		/** Máxima cantidad que se puede almacenar de cada tipo */
-		unsigned int _maxResources;
 	};
-
 }
 
-#endif // SM_RESOURCE_BUILDING_DATA_
+#endif // SM_RESOURCE_BUILDING_DATA_H_

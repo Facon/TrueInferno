@@ -27,19 +27,25 @@ namespace AI
 	*/
 	class CLAWait : public CLatentAction
 	{
+		RTTI_DECL;
+
 	public:
 		/**
 		Constructor.
 		
 		@param time Tiempo (ms) de espera
 		*/
-		CLAWait(unsigned long time) : CLatentAction(), _time(time) {};
+		CLAWait(unsigned long time) : CLatentAction(), _time(time) {
+			_name = "CLAWait";
+		};
 
 		/**
 		Constructor. Espera tiempo infinito
 
 		*/
-		CLAWait() : CLatentAction(), _time(INFINITE_TIME) {};
+		CLAWait() : CLatentAction(), _time(INFINITE_TIME) {
+			_name = "CLAWait";
+		};
 
 		/**
 		Destructor

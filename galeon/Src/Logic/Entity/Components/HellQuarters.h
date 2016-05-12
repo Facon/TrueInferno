@@ -37,22 +37,6 @@ namespace Logic {
 			return new AI::CSMHellQuarters(_entity);
 		}
 
-	private:
-		// Tiempo (ms) entre generación de almas
-		unsigned int _timeBetweenSpawns;
-
-		// Cantidad de almas generadas
-		unsigned int _numSpawnedSouls;
-
-		// Tiempo (ms) desde la úlitma generación de almas
-		unsigned int _timeSinceLastSpawn;
-
-		// Número de almas disponibles
-		int _numAvailableSouls;
-
-		/** Gestiona la lógica del spawn de almas */
-		void tickSpawnSouls(unsigned int msecs);
-
 	}; // class CHellQuarters
 
 	REG_FACTORY(CHellQuarters);

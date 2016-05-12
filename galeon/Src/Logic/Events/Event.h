@@ -18,10 +18,12 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 #ifndef __Logic_Event_H
 #define __Logic_Event_H
 
+#include "Logic/TimeManager.h"
+
 // Predeclaración de clases para ahorrar tiempo de compilación.
 namespace Logic
 {
-	enum ConditionEventType;
+	enum ConditionTriggerType;
 }
 
 /**
@@ -48,6 +50,9 @@ namespace Logic
 
 	public:
 
+		/**
+		Posibles tipos de eventos.
+		*/
 		enum EventType
 		{
 			// Eventos habituales del juego. Normalmente informativos,
@@ -61,6 +66,9 @@ namespace Logic
 			DECISION
 		};
 
+		/**
+		Posibles triggers de eventos.
+		*/
 		enum EventTrigger
 		{
 			// Eventos lanzados al llegar a un tiempo concreto de juego.
@@ -71,13 +79,52 @@ namespace Logic
 		};
 
 		/**
+		Posibles tipos de triggers CONDITION.
+		IMPORTANTE: No cambiar el valor entero asociado a cada valor del
+		enumerado y añadir cada nuevo valor en CEvent::luaRegister().
+		*/
+		enum ConditionTriggerType
+		{
+			// Eventos disparados como parte del tutorial para guiar al
+			// jugador durante los primeros instantes de la partida.
+			TUTORIAL,
+			// Eventos disparados al final de la partida para mostrar el
+			// resultado de la misma y la puntuación final.
+			END_GAME,
+			// Eventos disparados al final de la ronda para mostrar el
+			// resultado de la misma.
+			END_ROUND
+		};
+
+		/**
 		Constructores.
 		*/
-		CEvent(EventType type, unsigned int time) :
-			_type(type), _trigger(TIME), _time(time) {};
 
-		CEvent(EventType type, ConditionEventType conditionType) :
-			_type(type), _trigger(CONDITION), _conditionType(conditionType) {};
+		/**
+		Construye un evento con trigger basado en tiempo.
+		@param type Tipo del evento.
+		@param time En función del parámetro absoluteTime, instante temporal absoluto en el que se lanzará el evento 
+		o relativo al instante actual.
+		@absoluteTime Flag a true para lanzar el evento en un instante temporal absoluto o relativo al instante actual.
+		*/
+		CEvent(EventType type, unsigned long time, bool absoluteTime = true) :
+			_type(type), _trigger(TIME) {
+			// Si el tiempo es absoluto
+			if (absoluteTime)
+				// El instante de lanzamiento es el proporcionado
+				_time = time;
+
+			// Si no
+			else // !absoluteTime
+				// El instante de lanzamiento es relativo al instante actual
+				_time = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime() + time;
+		}
+
+		/**
+		Construye un evento con trigger basado en condición.
+		*/
+		CEvent(EventType type, ConditionTriggerType conditionType) :
+			_type(type), _trigger(CONDITION), _conditionType(conditionType) {}
 
 		/**
 		Destructor.
@@ -85,11 +132,19 @@ namespace Logic
 		virtual ~CEvent() {}
 
 		/**
+		Registra esta clase evento en el contexto de Lua.
+		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
+		*/
+		static void luaRegister();
+
+		/**
 		Getters.
 		*/
 		EventType getEventType() { return _type; }
 		EventTrigger getEventTrigger() { return _trigger; }
-		ConditionEventType getConditionEventType() { return _conditionType; }
+		ConditionTriggerType getConditionTriggerType() { return _conditionType; }
+
+		unsigned long getTime() { return _time; }
 
 		/**
 		Comprueba si debe lanzar el evento y lo hace en caso positivo.
@@ -115,13 +170,13 @@ namespace Logic
 		Tipo de condición que lanza el evento.
 		NULL si _trigger != CONDITION.
 		*/
-		ConditionEventType _conditionType;
+		ConditionTriggerType _conditionType;
 
 		/**
 		Tiempo de lanzamiento del evento en milisegundos.
 		0 si _trigger != TIME.
 		*/
-		unsigned int _time = 0;
+		unsigned long _time = 0;
 
 		/**
 		Comprueba si el evento debe ser lanzado atendiendo a su trigger.

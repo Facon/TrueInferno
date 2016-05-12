@@ -3,6 +3,7 @@
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Message.h"
 #include "Logic/Entity/Entity.h"
+#include "Logic/Entity/LogicRequirement.h"
 #include <iostream>
 #include <cassert>
 
@@ -14,6 +15,9 @@ namespace Logic {
 	}
 
 	bool CWorkBuilding::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+		if(!IComponent::spawn(entity,map,entityInfo))
+			return false;
+	
 		assert(entityInfo->hasAttribute("minWorkers") && "minWorkers is not defined");
 		_minWorkers = entityInfo->getIntAttribute("minWorkers");
 
@@ -40,16 +44,16 @@ namespace Logic {
 			
 			// Si estábamos por debajo del mínimo pero ahora lo superamos
 			if ((oldActive < (int)_minWorkers) && (_activeWorkers >= _minWorkers)){
-				// Activamos lógicamente el edificio
-				ToggleMessage m(true);
-				assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage");
+				// Eliminamos el requisito de trabajadores
+				ToggleMessage m(LogicRequirement::Workers, false);
+				assert(m.Dispatch(*_entity) && "Can't remove 'Workers' requirement");
 			}
 
 			// Si estábamos por encima del mínimo pero ya no lo superamos
 			else if ((oldActive >= (int)_minWorkers) && (_activeWorkers < _minWorkers)){
-				// Desactivamos lógicamente el edificio
-				ToggleMessage m(false);
-				assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage");
+				// Añadimos el requisito de trabajadores
+				ToggleMessage m(LogicRequirement::Workers, true);
+				assert(m.Dispatch(*_entity) && "Can't add 'Workers' requirement");
 			}
 
 			//std::cout << "Current active workers=" << _activeWorkers << std::endl;
@@ -75,12 +79,12 @@ namespace Logic {
 
 	bool CWorkBuilding::HandleMessage(const WorkerMessage& msg){
 		switch(msg._type){
-		case TMessage::WORKER_ACTIVATED:{
+		case MessageType::WORKER_ACTIVATED:{
 			_changeActive += msg._change;
 			break;
 		}
 
-		case TMessage::WORKER_ASSIGNED:{
+		case MessageType::WORKER_ASSIGNED:{
 			_changeAssigned += msg._change;
 			break;
 		}
@@ -92,6 +96,11 @@ namespace Logic {
 		}
 
 		return true;
+	}
+
+	// Ignoramos el requisito de los trabajadores
+	void CWorkBuilding::defineSkippedRequirements(){
+		_skippedRequirements.insert(LogicRequirement::Workers);
 	}
 
 } // namespace Logic

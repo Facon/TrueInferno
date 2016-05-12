@@ -2,6 +2,8 @@
 #include "Logic\Maps\EntityFactory.h"
 
 namespace AI {
+	RTTI_IMPL(CLADestroyEntity, CLatentAction);
+	
 	CLatentAction::LAStatus CLADestroyEntity::OnStart() {
 		return LAStatus::RUNNING;
 	}

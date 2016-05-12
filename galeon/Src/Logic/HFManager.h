@@ -6,9 +6,20 @@ namespace Logic
 	class HFManager
 	{
 	protected:
-		float _hadesFavor = 0.0f;
+		static HFManager _instance;
+		float _hadesFavor;
+
+	private:
+		HFManager() : _hadesFavor(0.0f)
+		{}
 
 	public:
+		static HFManager& getSingleton()
+		{ return _instance; }
+
+		static HFManager* getSingletonPtr()
+		{ return &_instance; }
+
 		float getHadesFavor() const { return _hadesFavor; }
 
 		void setHadesFavor(const float hadesFavor) { _hadesFavor = hadesFavor; }

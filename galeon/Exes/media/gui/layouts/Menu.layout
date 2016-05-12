@@ -6,11 +6,11 @@
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="OgreTray/StaticImage" name="BackGround" >
             <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-            <Property name="Text" value="GALEON" />
+            <Property name="Text" value="TrueInferno" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Window type="OgreTray/Title" >
                 <Property name="Area" value="{{0.3,0},{0.2,0},{0.7,0},{0.4,0}}" />
-                <Property name="Text" value="GALEON" />
+                <Property name="Text" value="TrueInferno" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="AlwaysOnTop" value="True" />
             </Window>

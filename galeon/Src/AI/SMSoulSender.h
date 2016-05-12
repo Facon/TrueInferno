@@ -26,7 +26,9 @@ namespace AI {
 			this->resetExecution();
 		}
 
-		virtual ~CSMSoulSender() {}
+		virtual ~CSMSoulSender()
+		{
+		}
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			return true;

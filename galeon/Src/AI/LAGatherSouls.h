@@ -10,13 +10,15 @@ namespace AI {
 	Representa la acción de acumular almas durante un tiempo determinado y hasta una cantidad determinada
 	*/
 	class CLAGatherSouls : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAGatherSouls(CEntity* entity, CSMSoulBurnerData& smData, unsigned int burnPeriod, unsigned int maxSoulsPerCycle) : 
 			CLatentAction(entity), _smData(smData), _burnPeriod(burnPeriod), _maxSoulsPerCycle(maxSoulsPerCycle) {}
 
 		virtual ~CLAGatherSouls() {}
 
-		bool HandleMessage(const NumberMessage& msg);
+		bool HandleMessage(const SoulBurnMessage& msg);
 
 	protected:
 		LAStatus OnStart();

@@ -190,6 +190,10 @@ namespace AI {
 
 			Logic::Tile* tileFrom = (*it);
 
+			// Ignoramos las tiles de origen que no permiten pasar almas para evitar el bug de caminos entre edificios adyacentes. Al ser un tile de destino la tile de origen el algoritmo ni expande
+			if (!tileFrom->canPassWalkingSoul())
+				continue;
+
 			// Buscamos path
 			int solved = _aStarWalkingSoul->Solve((void*)tileFrom, tos, path, &cost);
 
@@ -227,6 +231,10 @@ namespace AI {
 
 		delete bestPath;
 		bestPath = nullptr;
+
+		// TODO No generar rutas con el primer elemento repetido
+		/*if (bestPath!=nullptr && bestPath->size() >= 2)
+			assert(bestPath[0]==bestPath[1]);*/
 
 		return out;
 	}

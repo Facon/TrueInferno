@@ -1,6 +1,6 @@
 #include "SimpleLatentActions.h"
 
-#include "Application/BaseApplication.h"
+#include "Logic/TimeManager.h"
 
 #include "StateMachine.h"
 
@@ -11,6 +11,7 @@ namespace AI
 //////////////////////////////
 //	Implementación de CLAWait
 //////////////////////////////
+	RTTI_IMPL(CLAWait, CLatentAction);
 
 	/**
 	Método invocado al principio de la ejecución de la acción,
@@ -38,7 +39,7 @@ namespace AI
 		// para sacar el timer de la aplicación y usar su método 
 		// getMilliseconds.
 
-		unsigned int currentTime = Application::CBaseApplication::getSingletonPtr()->getAppTime();
+		unsigned int currentTime = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime();
 		_endingTime = currentTime + _time;
 		return RUNNING; 
 	}
@@ -72,7 +73,7 @@ namespace AI
 		// la acción tendrá que pasar a un estado de terminado con éxito o
 		// quedarse en el mismo estado en ejecución.
 
-		unsigned int currentTime = Application::CBaseApplication::getSingletonPtr()->getAppTime();
+		unsigned int currentTime = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime();
 		return (currentTime > _endingTime) ? SUCCESS : RUNNING;
 	}
 

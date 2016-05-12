@@ -28,7 +28,7 @@ namespace Logic
 
 	Graphics::CEntity* CAnimatedGraphics::createGraphicsEntity(const Map::CEntity *entityInfo)
 	{
-		_animatedGraphicsEntity = new Graphics::CAnimatedEntity(_entity->getName(),_model);
+		_animatedGraphicsEntity = new Graphics::CAnimatedEntity(_entity->getName(),_model, _entity->getMeshDimensions());
 		if(!_scene->addEntity(_animatedGraphicsEntity))
 			return 0;
 
@@ -47,7 +47,7 @@ namespace Logic
 	
 	//---------------------------------------------------------
 	/*
-	bool CAnimatedGraphics::accept(const TMessage &message)
+	bool CAnimatedGraphics::accept(const MessageType &message)
 	{
 		return CGraphics::accept(message) ||
 			   message._type == Message::SET_ANIMATION ||
@@ -57,7 +57,7 @@ namespace Logic
 	
 	//---------------------------------------------------------
 
-	void CAnimatedGraphics::process(const TMessage &message)
+	void CAnimatedGraphics::process(const MessageType &message)
 	{
 		CGraphics::process(message);
 

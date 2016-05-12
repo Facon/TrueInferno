@@ -1,6 +1,8 @@
 #include "LAWaitFinishedPath.h"
 
 namespace AI {
+	RTTI_IMPL(CLAWaitFinishedPath, CLatentAction);
+	
 	bool CLAWaitFinishedPath::HandleMessage(const SoulMessage& msg) {
 		// Rechazamos lo que no sean mensajes con la ruta
 		if (msg._type != MessageType::SOUL_PATH_FINISHED)

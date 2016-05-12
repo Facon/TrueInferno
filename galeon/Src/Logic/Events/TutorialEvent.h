@@ -18,7 +18,6 @@ uno de los paneles del tutorial.
 #define __Logic_TutorialEvent_H
 
 #include "Event.h"
-#include "ConditionEvents.h"
 
 /**
 Namespace que engloba la lógica del juego. Engloba desde el mapa lógico
@@ -50,12 +49,22 @@ namespace Logic
 		Constructor.
 		*/
 		CTutorialEvent(int tutorialpanelIndex) :
-			CEvent(INFO, ConditionEventType::TUTORIAL), _tutorialPanelIndex(tutorialpanelIndex)	{};
+			CEvent(INFO, CEvent::ConditionTriggerType::TUTORIAL), _tutorialPanelIndex(tutorialpanelIndex)	{};
+
+		static CTutorialEvent* addCTutorialEvent(int tutorialpanelIndex) {
+			return new CTutorialEvent(tutorialpanelIndex);
+		};
 
 		/**
 		Destructor.
 		*/
 		~CTutorialEvent() {};
+
+		/**
+		Registra esta clase evento en el contexto de Lua.
+		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
+		*/
+		static void luaRegister();
 
 	protected:
 

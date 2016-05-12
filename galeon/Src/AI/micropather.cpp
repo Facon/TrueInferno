@@ -746,8 +746,8 @@ int MicroPather::Solve(void* startNode, std::unordered_set<void*> endNodes, std:
 
 	*cost = 0.0f;
 
-	if (endNodes.count(startNode)>0)
-		return START_END_SAME;
+	/*if (endNodes.count(startNode)>0)
+		return START_END_SAME;*/
 
 	++frame;
 

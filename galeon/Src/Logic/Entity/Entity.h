@@ -159,6 +159,7 @@ namespace Logic
 		void destroyAllComponents();
 
 		// Para cada tipo de mensaje se hace la gestión apropiada.
+		bool HandleMessage(const Message& msg);
 		bool HandleMessage(const TransformMessage& msg);
 		bool HandleMessage(const PositionMessage& msg);
 		bool HandleMessage(const RotationMessage& msg);
@@ -177,11 +178,13 @@ namespace Logic
 		bool HandleMessage(const SoulSenderMessage& msg);
 		bool HandleMessage(const SoulMessage& msg);
 		bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
-		bool HandleMessage(const NumberMessage& msg);
+		bool HandleMessage(const SoulBurnMessage& msg);
 		bool HandleMessage(const ResourceMessage& msg);
 		bool HandleMessage(const GetCostPlaceableMessage& msg);
 		bool HandleMessage(const LogisticsMessage& msg);
 		bool HandleMessage(const ToggleMessage& msg);
+		bool HandleMessage(const PowerMessage& msg);
+		bool HandleMessage(const ConsumptionMessage& msg);
 		
 		/**
 		Devuelve el identificador ï¿½nico de la entidad.
@@ -284,12 +287,20 @@ namespace Logic
 		Vector3 getDimensions() const { return _dimensions; }
 
 		/**
+		Devuelve las dimensiones del modelo de la entidad.
+
+		@return Dimensiones del modelo de la entidad.
+		*/
+		Vector3 getMeshDimensions() const { return _meshDimensions; }
+
+		/**
 		Indica si la entidad se encuentra activa.
 
 		@return true si la entidad está activa.
 		*/
 		bool isActivated() {return _activated;}
 
+		/** Magic method to get a Component from an Entity */
 		template <class ComponentClass>
 		ComponentClass* getComponent(){
 			for (auto it = _components.cbegin(); it != _components.cend(); ++it){
@@ -373,6 +384,11 @@ namespace Logic
 		Dimensiones de la entidad.
 		*/
 		Vector3 _dimensions;
+
+		/**
+		Dimensiones del modelo de la entidad.
+		*/
+		Vector3 _meshDimensions = Vector3(100.f, 100.f, 100.f);
 
 		/**
 		Atributo que indica si la entidad es el jugador; por defecto

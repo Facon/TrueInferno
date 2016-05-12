@@ -10,24 +10,32 @@ la gestión de la lógica del juego.
 @date Agosto, 2010
 */
 
+#include <cstdlib>
+#include <cassert>
+#include <cstdio>
+
 #include "Server.h"
+
 #include "Logic/Events/EventManager.h"
 #include "Logic/Maps/Map.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Logic/TimeManager.h"
 #include "Logic/Maps/Managers/WorkManager.h"
+#include "Logic/Maps/Managers/PowerManager.h"
+#include "AI/Manager/AIManager.h"
 #include "Logic/BuildingManager.h"
-
+#include "Logic/SoulManager.h"
+#include "Logic/Maps/Managers/GameManager.h"
+#include "Logic/SoulsTrialManager.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
-
 #include "AI/Server.h"
-
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
 
-#include <cassert>
-#include <cstdio>
+// HACK. Debería leerse de algún fichero de configuración
+#define MANAGERS_FILE_PATH "./media/maps/"
 
 namespace Logic {
 
@@ -85,12 +93,19 @@ namespace Logic {
 
 	bool CServer::open()
 	{
+		// Aleatorizamos la semilla de los números pseudoaleatorios
+		std::srand((int)std::time(0));
+
 		// Inicializamos el parser de mapas.
 		if (!Map::CMapParser::Init())
 			return false;
 
 		// Inicializamos la factoría de entidades.
 		if (!Logic::CEntityFactory::Init())
+			return false;
+
+		// Inicializamos el manager del tiempo.
+		if (!Logic::CTimeManager::Init())
 			return false;
 
 		// Inicializamos el gestor de la matriz de tiles.
@@ -105,8 +120,28 @@ namespace Logic {
 		if (!Logic::CBuildingManager::Init())
 			return false;
 
+		// Inicializamos el gestor de almas.
+		if (!Logic::CSoulManager::Init())
+			return false;
+
+		// Inicializamos el gestor de almas.
+		if (!Logic::CSoulsTrialManager::Init())
+			return false;
+
 		// Inicializamos el gestor de eventos de juego.
 		if (!Logic::CEventManager::Init())
+			return false;
+
+		// Inicializamos el gestor de IA.
+		if (!AI::CAIManager::Init())
+			return false;
+
+		// Inicializamos el manager de la energía.
+		if (!Logic::CPowerManager::Init())
+			return false;
+
+		// Inicializamos el manager de partida.
+		if (!Logic::CGameManager::Init())
 			return false;
 
 		return true;
@@ -119,7 +154,17 @@ namespace Logic {
 	{
 		unLoadLevel();
 
+		Logic::CGameManager::Release();
+
+		Logic::CPowerManager::Release();
+
+		AI::CAIManager::Release();
+
 		Logic::CEventManager::Release();
+
+		Logic::CSoulsTrialManager::Release();
+
+		Logic::CSoulManager::Release();
 
 		Logic::CBuildingManager::Release();
 
@@ -127,11 +172,48 @@ namespace Logic {
 
 		Logic::CTileManager::Release();
 
+		Logic::CTimeManager::Release();
+
 		Logic::CEntityFactory::Release();
 		
 		Map::CMapParser::Release();
 
 	} // close
+
+	//--------------------------------------------------------
+
+	bool CServer::loadManagersConfigurationValues(const std::string &filename)
+	{
+		// Completamos la ruta con el nombre de fichero dado
+		std::string completePath(MANAGERS_FILE_PATH);
+		completePath = completePath + filename;
+
+		// Parseamos el fichero
+		if (!Map::CMapParser::getSingletonPtr()->parseFile(completePath))
+		{
+			assert(!"No se ha podido parsear el fichero de configuración de managers.");
+			return false;
+		}
+
+		// Extraemos las entidades del parseo...
+		Map::CMapParser::TEntityList managersList =
+			Map::CMapParser::getSingletonPtr()->getEntityList();
+
+		// ...y cargamos los valores leídos para cada manager
+		Map::CMapParser::TEntityList::const_iterator it, end;
+		it = managersList.begin();
+		end = managersList.end();
+
+		for (; it != end; it++) {
+			Map::CEntity *manager = *it;
+
+			if (manager->getType() == "SoulsTrialManager")
+				CSoulsTrialManager::getSingletonPtr()->spawn(manager);
+		}
+
+		return true;
+
+	} // loadManagersConfigurationValues
 
 	//--------------------------------------------------------
 
@@ -204,8 +286,19 @@ namespace Logic {
 		Logic::CEntityFactory::getSingletonPtr()->deleteDefferedEntities();
 
 		_map->tick(msecs);
+
+		Logic::CTimeManager::getSingletonPtr()->tick(msecs);
+
+		Logic::CSoulsTrialManager::getSingletonPtr()->tick(msecs);
+
 		Logic::CEventManager::getSingletonPtr()->tick(msecs);
+
+		AI::CAIManager::getSingletonPtr()->tick(msecs);
+
+		Logic::CPowerManager::getSingletonPtr()->tick(msecs);
 	
+		Logic::CGameManager::getSingletonPtr()->tick(msecs);
+
 	} // tick
 
 } // namespace Logic

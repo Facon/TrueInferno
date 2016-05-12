@@ -17,11 +17,27 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 
 #include "Event.h"
 
-#include "Application/GaleonApplication.h"
+#include "Logic/TimeManager.h"
+#include "BaseSubsystems/ScriptManager.h"
 
 #include <iostream>
 
 namespace Logic {
+
+	void CEvent::luaRegister()
+	{
+		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
+			[
+				luabind::class_<CEvent>("CEvent")
+				.enum_("ConditionTriggerType")
+				[
+					luabind::value("TUTORIAL", CEvent::ConditionTriggerType::TUTORIAL),
+					luabind::value("END_GAME", CEvent::ConditionTriggerType::END_GAME)
+				]
+			];
+	}
+
+	//--------------------------------------------------------
 
 	bool CEvent::launch()
 	{
@@ -38,11 +54,11 @@ namespace Logic {
 
 	bool CEvent::mustBeLaunched()
 	{
-		// @TODO Usar aquí el TimeManager para los tiempos exactos, ya que el AppTime siempre
+		// @TODO Usar aquí el CTimeManager para los tiempos exactos, ya que el AppTime siempre
 		// va por delante tantos segundos como se tarde en cargar la aplicación. Habrá que
-		// cambiar la implementación del TimeManager porque ahora mismo solo contiene el
+		// cambiar la implementación del CTimeManager porque ahora mismo solo contiene el
 		// tiempo decreciente.
-		return (_trigger == TIME && _time <= Application::CGaleonApplication::getSingletonPtr()->getAppTime())
+		return (_trigger == TIME && _time <= Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime())
 			|| _trigger == CONDITION;
 
 	} // mustBeLaunched

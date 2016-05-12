@@ -22,12 +22,12 @@ Contiene la declaración del gestor de edificios.
 #include "BaseSubsystems/Math.h"
 #include "Logic/Entity/BuildingType.h"
 #include "Logic/Entity/Message.h"
+#include "Logic/Entity/Components/Placeable.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
 {
 	class CMap;
-	class CPlaceable;
 	class CEntity;
 }
 
@@ -141,6 +141,26 @@ namespace Logic
 
 		/** Transmite un mensaje a todos los edificios registrados. Devuelve true si alguno aceptó el mensaje */
 		bool HandleMessage(const ResourceMessage& msg);
+
+		template <class ComponentClass>
+		std::vector<ComponentClass*> getBuildings(){
+			std::vector<ComponentClass*> list;
+
+			// Para cada tipo de edificio registrado
+			for (auto itType = _buildings.cbegin(); itType != _buildings.cend(); ++itType){
+				if ((itType->second) == nullptr)
+					continue;
+
+				// Para cada uno de sus edificios
+				for (auto itBuilding = itType->second->cbegin(); itBuilding != itType->second->cend(); ++itBuilding){
+					ComponentClass *component = (*itBuilding)->getEntity()->getComponent<ComponentClass>();
+					if (component != nullptr)
+						list.push_back(component);
+				}
+			}
+
+			return list;
+		}
 
 	protected:
 

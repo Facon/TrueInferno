@@ -37,8 +37,8 @@ namespace AI {
 			int waitCycle = this->addNode(new CLAWait(_extractionPeriod));
 			int extractResources = this->addNode(new CLAExtractResources(_entity, _data, _extractedResource, _maxExtractedQuantity));
 
-			this->addEdge(waitCycle, extractResources, new CConditionSuccess());
-			this->addEdge(extractResources, waitCycle, new CConditionSuccess());
+			this->addEdge(waitCycle, extractResources, new CConditionFinished());
+			this->addEdge(extractResources, waitCycle, new CConditionFinished());
 
 			this->setInitialNode(waitCycle);
 			this->resetExecution();

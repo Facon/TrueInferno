@@ -2,6 +2,8 @@
 #define TOGGLEABLE_H_
 
 #include "Logic/Entity/Component.h"
+#include "Logic/Entity/LogicRequirement.h"
+#include <set>
 
 namespace Logic {
 	/** Componente que controla el habilitado y deshabilitado a nivel lógico de la entidad */
@@ -11,41 +13,60 @@ namespace Logic {
 
 	public:
 		/**
-		Constructor por defecto.
+		* Constructor por defecto.
 		*/
-		CToggleable() : _enabled(false) {}
+		//CToggleable() : _enabled(false) {}
+		CToggleable() {}
 
 		/**
-		Destructor por defecto.
+		* Destructor por defecto.
 		*/
 		virtual ~CToggleable() {}
 
 		/**
-		Inicialización del componente usando la descripción de la entidad que hay en
-		el fichero de mapa.
+		* Inicialización del componente usando la descripción de la entidad que hay en
+		* el fichero de mapa.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
 		/**
-		Actualización por frame
+		* Actualización por frame
 		*/
 		virtual void tick(unsigned int msecs);
 
 		virtual bool HandleMessage(const ToggleMessage& msg);
 
-		/** Devuelve si la entidad está habilitada o no a nivel lógico */
-		bool isLogicEnabled() const;
+		/** 
+		Devuelve verdadero o falso según si estamos habilitados o no para tickear/recibir mensajes.
+		El método recibe la lista de requisitos que se deben ignorar.
+		*/
+		bool isLogicEnabled(const std::set<LogicRequirement>& skippedRequirements) const;
 
 	private:
 		/** Flag que indica si la entidad está habilitada o no a nivel lógico */
-		bool _enabled;
+		//bool _enabled;
 
-		/** Flag para indicar que hay que actualizar el flago de habilitado lógico */
-		bool _update;
+		/** Flag para indicar que hay que actualizar el flag de habilitado lógico */
+		//bool _update;
 
 		/** Valor nuevo de habilitado lógico para el siguiente tick */
-		bool _newEnabled;
+		//bool _newEnabled;
 		
+		/** Criterios de deshabilitación: work, energy, etc. 
+		* Si existe un elemento significa que la entidad lo necesita para que su lógica funcione adecuadamente.
+		*/
+		std::set<LogicRequirement> _requirements;
+
+		/**
+		* Añade un requisito para el habilitado lógico
+		*/
+		bool CToggleable::addRequirement(LogicRequirement requirement);
+
+		/**
+		* Elimina un requisito para el habilitado lógico
+		*/
+		bool CToggleable::removeRequirement(LogicRequirement requirement);
+
 	}; // class CToggleable
 
 	REG_FACTORY(CToggleable);

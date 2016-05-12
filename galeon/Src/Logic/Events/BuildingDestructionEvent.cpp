@@ -15,6 +15,7 @@ un edificio de forma aleatoria.
 */
 
 #include "BuildingDestructionEvent.h"
+#include "BaseSubsystems/ScriptManager.h"
 
 #include "GUI/Server.h"
 #include "GUI/UIManager.h"
@@ -23,6 +24,20 @@ un edificio de forma aleatoria.
 #include "Logic/BuildingManager.h"
 
 namespace Logic {
+
+	void CBuildingDestructionEvent::luaRegister()
+	{
+		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
+			[
+				luabind::class_<CBuildingDestructionEvent, CEvent>("CBuildingDestructionEvent")
+				.scope
+				[
+					luabind::def("addCBuildingDestructionEvent", &CBuildingDestructionEvent::addCBuildingDestructionEvent)
+				]
+			];
+	}
+
+	//--------------------------------------------------------
 
 	void CBuildingDestructionEvent::execute()
 	{

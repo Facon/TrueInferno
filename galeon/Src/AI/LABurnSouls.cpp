@@ -1,49 +1,64 @@
 #include "LABurnSouls.h"
 #include "Logic\ResourcesManager.h"
 
-namespace AI {
-	CLatentAction::LAStatus CLABurnSouls::OnStart() {
-		_cokeIncreased = false;
-		_crudeIncreased = false;
-		
-		//std::cout << "Souls to burn = " << _soulsToBurn << std::endl;
+namespace AI
+{
+	RTTI_IMPL(CLABurnSouls, CLatentAction);
+
+	CLatentAction::LAStatus CLABurnSouls::OnStart()
+	{
+		_cokeIncreased = _crudeIncreased = false;
+		_totalCokeToIncrease = _totalCrudeToIncrease = 0;
 
 		return LAStatus::RUNNING;
 	}
 
-	CLatentAction::LAStatus CLABurnSouls::OnRun(unsigned int msecs) {
+	CLatentAction::LAStatus CLABurnSouls::OnRun(unsigned int msecs)
+	{
 		// Quemamos las almas encoladas actualmente
-		unsigned int _soulsToBurn = _smData.getNumSoulsToBurn();
+		int soulCrude = 0;
+		int soulCoke = 0;
 
-		// Notificamos el incremento de coke si no está hecho ya
-		if (!_cokeIncreased){
+		while (_smData.getNumSoulsToBurn() > 0)
+		{
+			CSoulsTrialManager::SoulsCategory nextSoulCategory = _smData.getNextSoulToBurn();
+			CSoulsTrialManager::getSingletonPtr()->calculateSoulEvil(nextSoulCategory, soulCrude, soulCoke);
+
+			_totalCrudeToIncrease += soulCrude;
+			_totalCokeToIncrease += soulCoke;
+		}
+
+		// Notificamos el incremento de Coke si no está hecho ya
+		if (!_cokeIncreased)
+		{
 			ResourceMessage mCoke;
-			mCoke.assembleResourcesChange(Logic::ResourceType::COKE, _soulsToBurn * _cokePerSoul);
+			mCoke.assembleResourcesChange(Logic::ResourceType::COKE, _totalCokeToIncrease);
 
 			// Si falla intentaremos en el siguiente tick
-			if (!mCoke.Dispatch(*_entity)){
+			if (!mCoke.Dispatch(*_entity))
+			{
 				return LAStatus::RUNNING;
 			}
 			else
 				_cokeIncreased = true;
 		}
 
-		// Notificamos el incremento de crude si no está hecho ya
-		if (!_crudeIncreased){
+		// Notificamos el incremento de Crude si no está hecho ya
+		if (!_crudeIncreased)
+		{
 			ResourceMessage mCrude;
-			mCrude.assembleResourcesChange(Logic::ResourceType::CRUDE, _soulsToBurn * _crudePerSoul);
+			mCrude.assembleResourcesChange(Logic::ResourceType::CRUDE, _totalCrudeToIncrease);
 
 			// Si falla intentaremos en el siguiente tick
-			if (!mCrude.Dispatch(*_entity)){
+			if (!mCrude.Dispatch(*_entity))
+			{
 				return LAStatus::RUNNING;
 			}
 			else
 				_crudeIncreased = true;
 		}
 
-		// Limpiamos las almas quemadas
-		_smData.setNumSoulsToBurn(_smData.getNumSoulsToBurn() - _soulsToBurn);
-
+		// Si ya se han realizado ambos incrementos...
 		return LAStatus::SUCCESS;
 	}
 }

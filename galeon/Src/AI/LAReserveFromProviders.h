@@ -6,6 +6,8 @@
 
 namespace AI {
 	class CLAReserveFromProviders : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAReserveFromProviders(CEntity* entity, CSMResourceDemanderData& smData) : 
 			CLatentAction(entity), _smData(smData), _remainingToReserve(0), _nextProviderToReserve(0) {}

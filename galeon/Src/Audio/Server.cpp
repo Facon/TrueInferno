@@ -53,6 +53,10 @@ namespace Audio
 
 	void CServer::play()
 	{
+		// TODO Disable sound
+		if (true)
+			return;
+
 		FMOD_RESULT result;
 
 		result = _channel->setPaused(false);

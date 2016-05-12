@@ -1,0 +1,17 @@
+material Billboard/Worker
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend alpha_blend
+			
+			texture_unit
+			{
+				texture worker.png
+				texture_address_mode clamp
+			}
+		}
+	}
+}

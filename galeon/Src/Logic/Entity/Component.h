@@ -16,6 +16,11 @@ Contiene la declaraci�n de la clase base de los componentes.
 #include "Logic/Maps/ComponentFactory.h"
 #include "Logic/Entity/MessageHandler.h"
 
+#include "LogicRequirement.h"
+
+#include <set>
+#include <string>
+
 // Predeclaraci�n de clases para ahorrar tiempo de compilaci�n
 namespace Map
 {
@@ -169,6 +174,21 @@ namespace Logic
 		*/
 		CEntity *_entity;
 
+		/**
+		Conjunto de requisitos que el componente ignora para poder ser tickeado y procesar mensajes.
+		En caso de querer ignorar todos es conveniente usar LogicRequirement::All para no tener que añadir uno por uno.
+		*/
+		std::set<LogicRequirement> _skippedRequirements;
+
+		/**
+		Método que define los requisitos lógicos que el componente deberá ignorar para que no eviten su funcionamiento normal. Esto es necesario para:
+		- No deshabilitar nunca componentes que son ajenos a la lógica (e.g. CGraphics, CPhysicEntity)
+		- No deshabilitar un componente necesario para eliminar un requisito (e.g. CPowerConsumer obtiene energía, luego debe ignorar el requisito 'Energy'
+		El método por defecto hará que se ignoren TODOS los requisitos para que el componente no se deshabilita nunca.
+		Los hijos deben sobreescribir el método según necesiten.
+		*/
+		virtual void defineSkippedRequirements();
+
 	}; // class IComponent
 
 
@@ -220,45 +240,5 @@ Macro que invoca al m�todo que registra la clase en la factor�a.
 static bool RegisteredFactory_##Class = Class::regist();
 
 } // namespace Logic
-
-/** Macro para manejar mensajes en una SM (i.e. hijos de StateMachine)
-Propaga el mensaje adecuadamente para que llegue a las condiciones de transición entre estados */
-#define SM_HANDLE_MESSAGE(Class) \
-bool HandleMessage(const Class& msg){ \
-	bool ret = false; \
-	/* Si no hay un nodo actual no hay aristas interesadas así que lo primero es comprobar si hay un nodo válido en _currentNodeId */ \
-	if (_currentNodeId != -1) {  \
-		/* Buscamos la lista de aristas que salen del nodo actual */ \
-		EdgeList::iterator it = _edges->find(_currentNodeId); \
-		if (it != _edges->end()) { \
-			PairVector* vector = (*it).second; \
-			/* Para cada elemento del vector (arista que sale del nodo actual) */ \
-			for (PairVector::iterator edgeIt = vector->begin(); edgeIt != vector->end(); edgeIt++){ \
-				/* Procesamos en la arista (o sea, la condición) */ \
-				ret |= (edgeIt->first->HandleMessage(msg)); /* Si alguna arista acepta, aceptaremos al final */ \
-			} \
-		}  \
-	} \
-return ret; \
-}
-
-/** Macro para manejar mensajes en una componente ejecutor de SM (.e. hijos de StateMachineExecutor)
-Propaga el mensaje adecuadamente para que llegue a la propia SM y a la acción actual */
-#define SM_EXECUTOR_HANDLE_MESSAGE(Class) \
-bool HandleMessage(const Class& msg){ \
-	/* Chequeamos si estamos deshabilitados a nivel lógico */ \
-	CToggleable* toggleAble = _entity->getComponent<CToggleable>(); \
-\
-	/* Si lo estamos, evitamos el tick  */ \
-	if (toggleAble != nullptr && !toggleAble->isLogicEnabled()){ \
-		return false; \
-	} \
-\
-	if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg)) \
-		return true; \
-	if (_currentAction != NULL) \
-		return _currentAction->HandleMessage(msg); \
-	return false; \
-}
 
 #endif // __Logic_Component_H

@@ -5,8 +5,12 @@
 #include "AI\LatentAction.h"
 #include "AI\SMResourceTransformerData.h"
 
+#define ZERO_COST_RATIO 0.0001
+
 namespace AI {
 	class CLATransformResources : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLATransformResources(CEntity* entity, CSMResourceTransformerData& smData, 
 			ResourceType resourceFrom, ResourceType resourceInto, 

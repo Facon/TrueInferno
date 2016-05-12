@@ -4,6 +4,8 @@
 #include "Logic\Maps\Map.h"
 
 namespace AI {
+	RTTI_IMPL(CLAExecuteSoulTask, CLatentAction);
+	
 	CLatentAction::LAStatus CLAExecuteSoulTask::OnStart() {
 		return LAStatus::RUNNING;
 	}

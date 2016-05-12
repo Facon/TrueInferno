@@ -2,9 +2,10 @@
 
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Message.h"
-#include "Application/GaleonApplication.h"
-#include <vector>
+#include "Logic/SoulManager.h"
+#include "Logic/TimeManager.h"
 #include "Map/MapEntity.h"
+#include <vector>
 
 namespace Logic
 {
@@ -15,10 +16,6 @@ namespace Logic
 	{
 		if (!IComponent::spawn(entity, map, entityInfo))
 			return false;
-
-		if (entityInfo->hasAttribute("speed")){
-			_speed = entityInfo->getFloatAttribute("speed");
-		}
 
 		return true;
 	}
@@ -68,15 +65,15 @@ namespace Logic
 			// TODO Mirar como hacer la rotación sin usar LookAt
 			//this.transform.LookAt(targetPosition);
 			
-			_startTime = Application::CGaleonApplication::getSingletonPtr()->getAppTime();
+			_startTime = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime();
 			_journeyLength = _startPosition.distance(_targetPosition);
 		}
 
 		if (_moving)
 		{
 			// Lerp
-			unsigned int appTime = Application::CGaleonApplication::getSingletonPtr()->getAppTime();
-			float distCovered = ((appTime - _startTime) / 1000.0f) * _speed; // / 1000.0f for secs instead of msecs
+			unsigned int appTime = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime();
+			float distCovered = ((appTime - _startTime) / 1000.0f) * CSoulManager::getSingletonPtr()->getMovementSpeed(); // Dividido entre 1000.0f para pasarlo a segundos
 			float fracJourney = distCovered / _journeyLength;
 			_entity->setPosition(Math::lerp<Vector3, float>(_startPosition, _targetPosition, fracJourney));
 			// Si llega al destino, meter moving a false

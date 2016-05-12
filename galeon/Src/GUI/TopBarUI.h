@@ -10,7 +10,7 @@ namespace Logic
 {
 	class ResourcesManager;
 	class HFManager;
-	class TimeManager;
+	class CTimeManager;
 }
 
 namespace GUI
@@ -18,19 +18,10 @@ namespace GUI
 	class TopBarUI
 	{
 	protected:
-		// Resource Manager used ingame
-		Logic::ResourcesManager& _resourceManager;
-
-		// Hades' Favor
-		Logic::HFManager& _hfManager;
-
-		// Time of round
-		Logic::TimeManager& _timeManager;
-
 		// Window for displaying resources
 		CEGUI::Window* _uiBarsWindow;
 	public:
-		TopBarUI(Logic::ResourcesManager& rm, Logic::HFManager& hfm, Logic::TimeManager& tm);
+		TopBarUI();
 		~TopBarUI();
 		void init();
 		void release();

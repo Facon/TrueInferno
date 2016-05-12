@@ -16,6 +16,25 @@ ejecutar máquinas de estado de la clase CStateMachine.
 #include "AI/StateMachine.h"
 #include "Logic/Entity/Components/Toggleable.h"
 
+/** Macro para manejar mensajes en una componente ejecutor de SM (.e. hijos de StateMachineExecutor)
+Propaga el mensaje adecuadamente para que llegue a la propia SM y a la acción actual */
+#define SM_EXECUTOR_HANDLE_MESSAGE(Class) \
+bool HandleMessage(const Class& msg){ \
+	/* Chequeamos si estamos deshabilitados a nivel lógico */ \
+	CToggleable* toggleAble = _entity->getComponent<CToggleable>(); \
+\
+	/* Si lo estamos, evitamos el tick  */ \
+	if (toggleAble != nullptr && !toggleAble->isLogicEnabled(_skippedRequirements)){ \
+		return false; \
+		} \
+\
+	if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg)) \
+		return true; \
+	if (_currentAction != NULL) \
+		return _currentAction->HandleMessage(msg); \
+	return false; \
+}
+
 namespace Logic
 {
 	/**
@@ -76,7 +95,7 @@ namespace Logic
 			CToggleable* toggleAble = _entity->getComponent<CToggleable>();
 			
 			// Si lo estamos, evitamos el tick
-			if (toggleAble != nullptr && !toggleAble->isLogicEnabled()){
+			if (toggleAble != nullptr && !toggleAble->isLogicEnabled(_skippedRequirements)){
 				return;
 			}
 
@@ -123,15 +142,19 @@ namespace Logic
 
 		SM_EXECUTOR_HANDLE_MESSAGE(SoulMessage);
 
-		SM_EXECUTOR_HANDLE_MESSAGE(NumberMessage);
+		SM_EXECUTOR_HANDLE_MESSAGE(SoulBurnMessage);
 
 		SM_EXECUTOR_HANDLE_MESSAGE(LogisticsMessage);
 
 		SM_EXECUTOR_HANDLE_MESSAGE(ResourceMessage);
 
+		SM_EXECUTOR_HANDLE_MESSAGE(PowerMessage);
+
+		SM_EXECUTOR_HANDLE_MESSAGE(ConsumptionMessage);
+
 	protected:
 		/**
-		Almacena la máquina de estado que se está ejecutando
+		Almacena la máquina de estados que se está ejecutando
 		*/
 		AI::CStateMachine<AI::CLatentAction, SharedData>* _currentStateMachine;
 
@@ -142,6 +165,14 @@ namespace Logic
 
 		/** Instancia la máquina de estados. Debe ser implementado por la subclase */
 		virtual AI::CStateMachine<AI::CLatentAction, SharedData>* getStateMachine() = 0;
+
+		/** 
+		Sobreescribimos los requisitos a evitar. Por defecto no ignoraremos NINGÚN requisito ya que las SMs normalmente son Lógica.
+		Si algún SMExecutor quiere evitar un requisito en concreto deberá especificarlo.
+		*/
+		virtual void defineSkippedRequirements(){
+			_skippedRequirements.clear();
+		}
 
 	}; // class CStateMachineExecutor 
 

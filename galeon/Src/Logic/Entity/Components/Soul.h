@@ -7,6 +7,7 @@
 
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Component.h"
+#include "Logic/Entity/Components/Placeable.h"
 
 #include "AI/SMSoul.h"
 #include "AI/LatentAction.h"
@@ -23,6 +24,13 @@ namespace Logic {
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
 		virtual void tick(unsigned int msecs);
+
+		/**
+		Edificio al que está asignado el trabajador.
+		*/
+		CPlaceable* getBuilding();
+		void setBuilding(CPlaceable *building);
+		void clearBuilding();
 
 	protected:
 		AI::CStateMachine<AI::CLatentAction, AI::CSMSoulData>* getStateMachine(){

@@ -10,6 +10,8 @@ namespace AI {
 	Representa la acción de acumular recursos de entrada durante un tiempo determinado
 	*/
 	class CLAAskAndWaitResources : public CLatentAction {
+		RTTI_DECL;
+
 	public:
 		CLAAskAndWaitResources(CEntity* entity, CSMResourceTransformerData& smData, ResourceType resourceFrom, unsigned int period) :
 			CLatentAction(entity), _smData(smData), _resourceFrom(resourceFrom), _period(period) {}
@@ -30,7 +32,7 @@ namespace AI {
 		/** Recurso de entrada */
 		const ResourceType _resourceFrom;
 
-		/** Periodo (ms) con que se transforman cíclicamente los recursos */
+		/** Periodo (ms) que se esperará a acumular recursos */
 		const unsigned int _period;
 	};
 

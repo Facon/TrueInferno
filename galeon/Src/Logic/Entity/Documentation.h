@@ -249,12 +249,12 @@ Por lo tanto, para ser capaces de recibir mensajes, los IComponent deben
 sobreescribir dos métodos: el Logic::IComponent::acept y 
 Logic::IComponent::process.
 En ambos casos se recibe como parámetro el mensaje. Para saber de qué tipo es
-habrá que consultar el atributo Logic::TMessage::_type.
+habrá que consultar el atributo Logic::MessageType::_type.
 
 Para la implementación de los mensajes se ha optado conscientemente por una 
-implementación sencilla que con un tipo de mensaje genérico Logic::TMessage
+implementación sencilla que con un tipo de mensaje genérico Logic::MessageType
 que tiene una serie de atributos también genéricos y en función del tipo 
-(Logic::TMessage::_type) de mensaje se usarán unos u otros. Esta aproximación 
+(Logic::MessageType::_type) de mensaje se usarán unos u otros. Esta aproximación 
 es sencilla, pero no es óptima desde el punto de vista de rendimiento.
 Para llevar a cabo un proyecto serio esta implementación <b>debe</b> ser 
 reconsiderada.
@@ -273,12 +273,12 @@ class CMyComponent : public Logic::IComponent
 public:
    ...
 
-   bool accept(const TMessage &message)
+   bool accept(const MessageType &message)
    {
       return message._type == Message::SET_POSITION;
    }
 
-   void process(const TMessage &message)
+   void process(const MessageType &message)
    {
       switch(message._type)
       {

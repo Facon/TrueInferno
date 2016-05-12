@@ -6,6 +6,8 @@
 #include "Logic\Maps\EntityFactory.h"
 
 namespace AI {
+	RTTI_IMPL(CLAAttendResourceBuildingRequest, CLatentAction);
+	
 	bool CLAAttendResourceBuildingRequest::HandleMessage(const ResourceMessage& msg) {
 		// No se aceptan peticiones simultáneas
 		if (_requestReceived)
@@ -163,7 +165,7 @@ namespace AI {
 		int available = _smData.getAvailableResources(resourceType);
 		bool provided = _smData.getProvidedResources().count(resourceType) > 0;
 		ResourceMessage m;
-		m.assembleResourcesInfo(resourceType, stored, available, _smData.getMaxResources(), provided, _entity->getEntityID());
+		m.assembleResourcesInfo(resourceType, stored, available, _smData.getMaxResources(resourceType), provided, _entity->getEntityID());
 		
 		// Enviamos el mensaje para que lo acepte
 		if (m.Dispatch(*recipient))

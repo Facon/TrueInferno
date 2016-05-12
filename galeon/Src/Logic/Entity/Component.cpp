@@ -21,6 +21,11 @@ namespace Logic
 	bool IComponent::spawn(CEntity *entity, CMap *map, const Map::CEntity *entityInfo) 
 	{
 		_entity = entity;
+
+		// Definimos los requisitos lógicos que este componente ignorará
+		_skippedRequirements.clear();
+		defineSkippedRequirements();
+
 		return true;
 
 	} // spawn
@@ -33,5 +38,9 @@ namespace Logic
 		// Entity should do the work now
 
 	} // tick
+
+	void IComponent::defineSkippedRequirements(){
+		_skippedRequirements.insert(LogicRequirement::All);
+	}
 
 } // namespace Logic

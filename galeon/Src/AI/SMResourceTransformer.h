@@ -14,13 +14,13 @@
 
 namespace AI {
 	/**
-	Esta FSM controla la lógica de transformación de recursos.
+	Esta FSM controla la lógica de transformación cíclica de recursos de entrada en recursos de salida.
 
-	Cíclicamente se transforman recursos del tipo de entrada en el tipo de salida.
-	1) Contamos los recursos iniciales
-	2) Solicitamos hasta el límite
-	3) Contamos los recursos obtenidos
-	4) Transformamos
+	- Cuenta los recursos de partida del recurso de entrada y de salida
+	- En base a la cantidad actual y límite de los recursos de entrada, solicita la máxima cantidad posible que no desborde dicha capacidad
+	- Cuenta los recursos conseguidos
+	- Paga los costes
+	- Transforma los recursos de entrada en salida
 	*/ 
 	class CSMResourceTransformer : public CStateMachine<CLatentAction, CSMResourceTransformerData> {
 	public:
@@ -42,17 +42,22 @@ namespace AI {
 			assert(entityInfo->hasAttribute("transformPeriod"));
 			_period = 1000 * entityInfo->getIntAttribute("transformPeriod");
 
-			assert(entityInfo->hasAttribute("transformCostResource"));
-			_costResource = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("transformCostResource"));
+			// El recurso de coste de la transformación es opcional
+			if (entityInfo->hasAttribute("transformCostResource"))
+				_costResource = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("transformCostResource"));
+			else
+				_costResource = ResourceType::NONE;
 
-			assert(entityInfo->hasAttribute("transformCostRatio"));
-			_costRatio = entityInfo->getFloatAttribute("transformCostRatio");
+			// El ratio de coste de la transformación es opcional
+			if (entityInfo->hasAttribute("transformCostRatio"))
+				_costRatio = entityInfo->getFloatAttribute("transformCostRatio");
+			else
+				_costRatio = 0;
 
 			// Creación de SM en base a los datos
-			int recountResourcesBeforeAsking = this->addNode(new CLARecountResources(_entity, _data, _resourceFrom));
+			int recountResourcesBeforeAsking = this->addNode(new CLARecountResources<CSMResourceTransformerData>(_entity, _data, _resourceFrom));
 			int gatherResources = this->addNode(new CLAAskAndWaitResources(_entity, _data, _resourceFrom, _period));
-			// TODO Pedir y pagar costes
-			int recountResourcesBeforeTransforming = this->addNode(new CLARecountResources(_entity, _data, _resourceFrom));
+			int recountResourcesBeforeTransforming = this->addNode(new CLARecountResources<CSMResourceTransformerData>(_entity, _data, _resourceFrom));
 			int transformResources = this->addNode(new CLATransformResources(_entity, _data, _resourceFrom, _resourceInto, _transformRatio, _costResource, _costRatio));
 
 			this->addEdge(recountResourcesBeforeAsking, gatherResources, new CConditionFinished());
@@ -75,7 +80,8 @@ namespace AI {
 		/** Recurso de salida */
 		ResourceType _resourceInto;
 
-		/** Ratio de conversión del recurso de entrada en el recurso de salida */
+		/** Ratio de conversión del recurso de entrada en el recurso de salida. 
+		* Ejemplo: Si el ratio es 0.8, cada recurso de entrada se transforma en 0.8 del de salida */
 		float _transformRatio;
 
 		/** Periodo (ms) con que se hace la transformación */
@@ -84,7 +90,8 @@ namespace AI {
 		/** Tipo de recurso para los costes */
 		ResourceType _costResource;
 
-		/** Ratio del recurso de costes sobre los recursos de entrada */
+		/** Ratio de coste del recurso de costes sobre los recursos de entrada. 
+		* Ejemplo: Si el ratio es 2, cada recurso de entrada que se quiera transformar cuesta 2 del de costes */
 		float _costRatio;
 	};
 }

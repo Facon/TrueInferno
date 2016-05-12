@@ -41,6 +41,10 @@ namespace Application {
 		// Crear la escena física.
 		Physics::CServer::getSingletonPtr()->createScene();
 
+		// Cargamos el archivo con los valores de configuración de los managers.
+		if (!Logic::CServer::getSingletonPtr()->loadManagersConfigurationValues("managers.txt"))
+			return false;
+
 		// Cargamos el archivo con las definiciones de las entidades del nivel.
 		if (!Logic::CEntityFactory::getSingletonPtr()->loadBluePrints("blueprints.txt"))
 			return false;
@@ -49,8 +53,8 @@ namespace Application {
 		if (!Logic::CServer::getSingletonPtr()->loadLevel("map.txt"))
 			return false;
 
-		// Cargar el script de eventos de LUA.
-		if (!Logic::CEventManager::getSingletonPtr()->loadEvents("Events.lua"))
+		// Cargar el script de LUA con los eventos definidos inicialmente.
+		if (!Logic::CEventManager::getSingletonPtr()->loadEventsScript("InitialEvents.lua"))
 			return false;
 
 		// Cargamos la ventana que muestra el tiempo de juego transcurrido.
@@ -174,10 +178,8 @@ namespace Application {
 		
 	bool CGameState::mousePressed(const GUI::CMouseState &mouseState)
 	{
-
-		
 		if (mouseState.button == GUI::Button::TButton::LEFT){
-			_uiManager.getSideBarUI()->placeBuildingInConstruction();
+			//_uiManager.getSideBarUI()->playerInteractionWithLeftClick();
 		}
 
 		return false;

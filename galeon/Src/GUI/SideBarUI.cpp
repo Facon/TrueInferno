@@ -5,11 +5,14 @@
 #include <CEGUI/Window.h>
 #include <CEGUI/CEGUI.h>
 
+#include "GUI/Server.h"
+#include "UIManager.h"
+
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
 
 #include "Logic/Events/EventManager.h"
-#include "Logic/Events/ConditionEvents.h"
+#include "Logic/Events/Event.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
@@ -30,6 +33,8 @@
 #include "Logic/Entity/Message.h"
 #include "AI/Server.h"
 
+#include "Logic\ResourcesManager.h"
+
 namespace GUI
 {
 	SideBarUI::SideBarUI()
@@ -45,35 +50,38 @@ namespace GUI
 	{
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIButtonBar.layout");
 
-		_uibuttonsWindow->getChildElement("CreateFurnace/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateFurnace")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createFurnaceReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateRoad/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateRoad")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createRoadReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateResource1Building/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateGasPlant")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createResource1BuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateResource2Building/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateMine")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createResource2BuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::createSoulReleased, this));
-
-		_uibuttonsWindow->getChildElement("MoveSoul/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::moveSoulReleased, this));
-
-		_uibuttonsWindow->getChildElement("CreateEvilworks/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateEvilworks")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createEvilworksReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateRefinery/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("CreateRefinery")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createRefineryReleased, this));
 
-		_uibuttonsWindow->getChildElement("RepairBuilding/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("RepairBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::repairBuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("ClearTerrain/Image/Button")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		_uibuttonsWindow->getChildElement("ClearTerrain")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::clearTerrainReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreateResearchLab")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createResearchLabReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreateWarehouse")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createWarehouseReleased, this));
+
+		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createPowerGeneratorReleased, this));
 	}
 
 	void SideBarUI::release()
@@ -81,14 +89,15 @@ namespace GUI
 		// Remove all events to avoid memory leaks
 		_uibuttonsWindow->getChildElement("CreateFurnace")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateRoad")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateResource1Building")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateResource2Building")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateSoul")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("MoveSoul")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateMine")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateGasPlant")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateEvilworks")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateRefinery")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateRefineryn")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("ClearTerrain")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateResearchLab")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateWarehouse")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->removeAllEvents();
 
 		_placeableEntity = nullptr;
 	}
@@ -108,7 +117,7 @@ namespace GUI
 		_uibuttonsWindow->setVisible(false);
 	}
 
-	Logic::CEntity* getTileEntityFromRaycast(){
+	Logic::CEntity* getEntityFromRaycastToGroup(int collisiongroup){
 
 		Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
 
@@ -119,28 +128,39 @@ namespace GUI
 		CEGUI::Vector2f mousePos =
 			context.getMouseCursor().getPosition();
 
+
 		Ogre::Ray mouseRay =
 			mCamera->getCameraToViewportRay(
 			mousePos.d_x / width,
 			mousePos.d_y / height);
 
-		Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000, 1);
+		Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000, collisiongroup);
 
 		return entity;
 	}
 
 	void SideBarUI::tick(unsigned int msecs)
 	{
+		//resize en CEGUI tiene algun fallo con los botones
+		//Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
+
+		//float width = (float)mCamera->getViewportWidth();
+		//float height = (float)mCamera->getViewportHeight();
+		//printf("width %f height %f\n", width, height);
+		//CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Sizef(width,height));
+
 		if (_placeableEntity){
 
-			Logic::CEntity* entity = getTileEntityFromRaycast();
+			Logic::CEntity* entity = getEntityFromRaycastToGroup(1);
 
 			if (entity)
 			{
-				Logic::Tile* to = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
-				if (_roadInConstruction == 2)
+				// Obtenemos la Tile sacando el componente directamente
+				Logic::Tile* to = entity->getComponent<Logic::Tile>();
+
+				if (_roadInConstruction == 2) // TODO Convendría usar un enum para mejorar legiblidad
 				{
-					std::vector<Logic::Tile*>* path= AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(_originRoadTile, to);
+					std::vector<Logic::Tile*>* path= AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(_originRoadTile, to, true);
 
 					if (path)
 					{
@@ -219,31 +239,6 @@ namespace GUI
 		return (_placeableEntity != nullptr);
 	}
 
-
-	bool SideBarUI::createSoulReleased(const CEGUI::EventArgs& e)
-	{
-		ClearBuildingConstruction();
-		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_WORK);
-		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
-		
-		m.Dispatch(*hellQuarters->getEntity());
-		
-		return true;
-	}
-
-
-	bool SideBarUI::moveSoulReleased(const CEGUI::EventArgs& e)
-	{
-		ClearBuildingConstruction();
-		Logic::HellQuartersMessage m(Logic::HellQuartersAction::SEND_SOUL_BURN);
-		Logic::CPlaceable* hellQuarters = Logic::CBuildingManager::getSingletonPtr()->findBuilding(Logic::BuildingType::HellQuarters);
-
-		m.Dispatch(*hellQuarters->getEntity());
-
-		return true;
-	}
-
-
 	bool SideBarUI::createEvilworksReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
@@ -259,21 +254,40 @@ namespace GUI
 		return (_placeableEntity != nullptr);
 	}
 
-
 	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding();
+		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding(); // TODO TEST borrar edificio
 		printf("Repair Building\n");
 		return true;
 	}
-
 
 	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
 		printf("Clear Terrain\n");
 		return true;
+	}
+
+	bool SideBarUI::createResearchLabReleased(const CEGUI::EventArgs& e)
+	{
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "ResearchLabs", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
+	}
+
+	bool SideBarUI::createWarehouseReleased(const CEGUI::EventArgs& e)
+	{
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Warehouse", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
+	}
+
+	bool SideBarUI::createPowerGeneratorReleased(const CEGUI::EventArgs& e)
+	{
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "PowerGenerator", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 	void SideBarUI::ClearBuildingConstruction(){
@@ -304,11 +318,11 @@ namespace GUI
 		return m.Dispatch(*placeableEntity);
 	}
 
-	void SideBarUI::placeBuildingInConstruction()
+	void SideBarUI::playerInteractionWithLeftClick()
 	{
 		if (_placeableEntity)
 		{
-			Logic::CEntity* entity = getTileEntityFromRaycast();
+			Logic::CEntity* entity = getEntityFromRaycastToGroup(1);
 			if (entity){
 				switch (_roadInConstruction)
 				{
@@ -353,7 +367,7 @@ namespace GUI
 
 						// @TODO Hacer esto bien...
 						if (_firstRoad) {
-							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::ConditionEventType::TUTORIAL);
+							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 							_firstRoad = false;
 						}
 
@@ -362,5 +376,19 @@ namespace GUI
 				}
 			}
 		}
+		else{
+			Logic::CEntity* entity = getEntityFromRaycastToGroup(2);
+			if (entity){
+				GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+				uiManager->getBuildingSelectionUI()->setEventWindowVisible(true, entity);
+				_uibuttonsWindow->setVisible(false);
+			}		
+		}
 	}
+
+	void SideBarUI::setEventWindowVisible(bool visible)
+	{
+		_uibuttonsWindow->setVisible(visible);
+	}
+
 }

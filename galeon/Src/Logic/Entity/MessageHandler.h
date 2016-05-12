@@ -25,15 +25,19 @@ namespace Logic
 	class SoulMessage;
 	class CheckValidPositionPlaceableMessage;
 	class MoveMessage;
-	class NumberMessage;
+	class SoulBurnMessage;
 	class ResourceMessage;
 	class GetCostPlaceableMessage;
 	class LogisticsMessage;
 	class ToggleMessage;
+	class PowerMessage;
+	class ConsumptionMessage;
 
 	class MessageHandler
 	{
 	public:
+		virtual bool HandleMessage(const Message& msg)
+		{ return false; }
 
 		virtual bool HandleMessage(const TransformMessage& msg)
 		{ return false; }
@@ -95,20 +99,27 @@ namespace Logic
         virtual bool HandleMessage(const MoveMessage& msg)
         { return false; }
 
-		virtual bool HandleMessage(const NumberMessage& msg)
+		virtual bool HandleMessage(const SoulBurnMessage& msg)
 		{ return false; }
 
 		virtual bool HandleMessage(const ResourceMessage& msg)
 		{ return false; }
 
 		virtual bool HandleMessage(const GetCostPlaceableMessage& msg)
-		{ return false;  }
+		{ return false; }
 
 		virtual bool HandleMessage(const LogisticsMessage& msg)
 		{ return false; }
 
 		virtual bool HandleMessage(const ToggleMessage& msg)
 		{ return false; }
+
+		virtual bool HandleMessage(const PowerMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const ConsumptionMessage& msg)
+		{ return false; }
+
 	};
 } // namespace Logic
 

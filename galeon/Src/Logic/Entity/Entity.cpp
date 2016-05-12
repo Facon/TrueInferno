@@ -65,6 +65,9 @@ namespace Logic
 		if (entityInfo->hasAttribute("dimensions"))
 			_dimensions = entityInfo->getVector3Attribute("dimensions");
 
+		if (entityInfo->hasAttribute("mesh_dimensions"))
+			_meshDimensions = entityInfo->getVector3Attribute("mesh_dimensions");
+
 		//if (entityInfo->getName() == "Camera")
 		//	_isPlayer = true;
 
@@ -186,6 +189,11 @@ namespace Logic
 
 	//---------------------------------------------------------
 
+	bool CEntity::HandleMessage(const Message& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
 	bool CEntity::HandleMessage(const TransformMessage& msg)
 	{
 		updateTransformValuesFromMatrix(msg._transform);
@@ -208,7 +216,7 @@ namespace Logic
 	}
 
 	//---------------------------------------------------------
-
+	
 	bool CEntity::HandleMessage(const ColorMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
@@ -253,7 +261,7 @@ namespace Logic
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
-
+	
 	bool CEntity::HandleMessage(const HellQuartersMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
@@ -279,7 +287,7 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
-	bool CEntity::HandleMessage(const NumberMessage& msg)
+	bool CEntity::HandleMessage(const SoulBurnMessage& msg)
 	{
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
@@ -304,6 +312,16 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
+	bool CEntity::HandleMessage(const PowerMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
+	bool CEntity::HandleMessage(const ConsumptionMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
 	//---------------------------------------------------------
 
 	void CEntity::updateTransformValuesFromMatrix(const Matrix4 &transform)
@@ -317,9 +335,8 @@ namespace Logic
 			orientation.getYaw().valueDegrees(),
 			orientation.getRoll().valueDegrees());
 
-		// @TODO _dimensions = Obtener dimensiones en función de la escala
-		// Valorar si deberíamos guardar también la escala junto con las dimensiones
-		_dimensions = scale * 100;
+		// Obtener dimensiones en función de la escala y las dimensiones de la malla
+		_dimensions = scale * _meshDimensions;
 	}
 
 	//---------------------------------------------------------
@@ -381,7 +398,7 @@ namespace Logic
 
 		// @TODO scale = Obtener escala en función de las dimensiones
 		// Valorar si deberíamos guardar también la escala junto con las dimensiones
-		scale = _dimensions / 100;
+		scale = _dimensions / _meshDimensions;
 
 		orientation = Math::getOrientationFromRadians(
 			Radian(_rotation.x), Radian(_rotation.y), Radian(_rotation.z));

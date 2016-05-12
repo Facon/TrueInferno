@@ -42,15 +42,24 @@ namespace Logic {
 	CBuildingManager::~CBuildingManager()
 	{
 		assert(_instance);
-		_instance = 0;
 
 		// Liberamos la  estructura de datos para los edificios
-		for (auto it = _buildings.begin(); it != _buildings.end(); ++it){
+		for (auto it = _buildings.begin(); it != _buildings.end(); ++it)
+		{
+			for (auto it2 = (*it).second->cbegin(); it2 != (*it).second->cend(); ++it2)
+			{
+				delete (*it2);
+			}
+
+			it->second->clear();
+
 			delete it->second;
 			it->second = nullptr;
 		}
+
 		_buildings.clear();
 
+		_instance = nullptr;
 	} // ~CBuildingManager
 
 	//--------------------------------------------------------
@@ -206,7 +215,7 @@ namespace Logic {
 
 			// Eliminamos la instancia si se llegó a crear
 			if (newEntity)
-				CEntityFactory::getSingletonPtr()->deferredDeleteEntity(newEntity);
+				CEntityFactory::getSingletonPtr()->deleteEntity(newEntity);
 
 			return nullptr;
 		}
@@ -216,7 +225,7 @@ namespace Logic {
 
 	void CBuildingManager::destroyPlaceable(CEntity *entity){
 		// Se elimina la entidad inmediatamente. OJO: NO usar deleteDeferred porque, por algún motivo, no elimina correctamente la entidad
-		CEntityFactory::getSingletonPtr()->deleteEntity(entity);
+		CEntityFactory::getSingletonPtr()->deferredDeleteEntity(entity);
 
 		// No hace falta desregistrar porque se hace automáticamente en el destructor de Placeable
 	}
@@ -338,7 +347,6 @@ namespace Logic {
 	std::map<BuildingType, std::set<CPlaceable*>*>& CBuildingManager::getBuildings(){
 		return _buildings;
 	}
-
 
 	bool CBuildingManager::HandleMessage(const LogisticsMessage& msg){
 		bool ret = false;

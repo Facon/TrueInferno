@@ -27,6 +27,24 @@ namespace AI {
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 
+			// Guardamos el máximo almacenable de cada tipo de recurso
+			// TODO Leer para cada recurso por separado
+			int maxResources;
+			if (entityInfo->hasAttribute("maxResources")){
+				maxResources = entityInfo->getIntAttribute("maxResources");
+			}
+			else{
+				std::cout << "No resource limit has been defined" << std::endl;
+				return false;
+			}
+
+			// Guardamos la cantidad inicial de recursos
+			// TODO Leer para cada recurso por separado
+			int initialResources = 0;
+			if (entityInfo->hasAttribute("initialResources")){
+				initialResources = entityInfo->getIntAttribute("initialResources");
+			}
+
 			// Guardamos el mapa de recursos almacenables
 			if (entityInfo->hasAttribute("storedResources")){
 				std::istringstream ss(entityInfo->getStringAttribute("storedResources"));
@@ -36,7 +54,7 @@ namespace AI {
 				while (std::getline(ss, item, ',')) {
 					if (item.size()>0)
 						// Inicializamos la cantidad de recursos almacenados de ese tipo
-						_data.registerStoredResourceType(ResourcesManager::parseResourceType(item));
+						_data.registerStoredResourceType(ResourcesManager::parseResourceType(item), initialResources, maxResources);
 				}
 			}
 			else{
@@ -55,13 +73,7 @@ namespace AI {
 				}
 			}
 
-			// Guardamos el máximo almacenable de cada tipo de recurso
-			if (entityInfo->hasAttribute("maxResources")){
-				_data.setMaxResources(entityInfo->getIntAttribute("maxResources"));
-			}
-			else{
-				std::cout << "No resource limit has been defined" << std::endl;
-			}
+			// Construcción de SM
 
 			// Bucle infinito procesando peticiones
 			int process = this->addNode(new CLAAttendResourceBuildingRequest(entity, _data));
@@ -74,8 +86,8 @@ namespace AI {
 		}
 
 		virtual void deactivate(){
-			// Al desactivarnos limpiamos los recursos que quedaran
-			_data.cleanResources();
+			// Al desactivarnos limpiamos el objeto de datos
+			_data.deactivate();
 		}
 
 		SM_HANDLE_MESSAGE(ResourceMessage);
