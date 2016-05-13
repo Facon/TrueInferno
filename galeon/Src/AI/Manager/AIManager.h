@@ -127,6 +127,7 @@ namespace AI
 		bool HandleMessage(const GetCostPlaceableMessage& msg);
 		bool HandleMessage(const LogisticsMessage& msg);
 		bool HandleMessage(const ToggleMessage& msg);
+		bool HandleMessage(const IconMessage& msg);
 
 	protected:
 		/**

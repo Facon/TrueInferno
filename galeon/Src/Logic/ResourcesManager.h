@@ -16,7 +16,7 @@ namespace Logic
 		GAS,
 		COKE,
 		CRUDE,
-		PURE,
+		PURE_EVIL,
 		REFINED,
 		AETHER,
 		HADES_FAVOR

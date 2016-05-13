@@ -29,8 +29,8 @@ material tile1
 	{
 		pass
 		{
-			ambient 0.2 0.6 0.2 1
-			diffuse 0.2 0.6 0.2	 1
+			ambient 0.2 0 0.8 1
+			diffuse 0.2 0 0.8 1
 		}
 	}
 }
@@ -41,8 +41,8 @@ material tile1_alt
 	{
 		pass
 		{
-			ambient 0.2 0.9 0 1
-			diffuse 0.2 0.9 0 1
+			ambient 0.2 0.1 1 1
+			diffuse 0.2 0.1 1 1
 		}
 	}
 }
@@ -53,8 +53,8 @@ material tile2
 	{
 		pass
 		{
-			ambient 0.2 0 0.8 1
-			diffuse 0.2 0 0.8 1
+			ambient 0.2 0.6 0.2	1
+			diffuse 0.2 0.6 0.2	1
 		}
 	}
 }
@@ -65,8 +65,8 @@ material tile2_alt
 	{
 		pass
 		{
-			ambient 0.2 0.1 1 1
-			diffuse 0.2 0.1 1 1
+			ambient 0.2 0.9 0 1
+			diffuse 0.2 0.9 0 1
 		}
 	}
 }

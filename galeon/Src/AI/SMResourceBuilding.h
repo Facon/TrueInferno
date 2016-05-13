@@ -1,6 +1,7 @@
 #ifndef SM_RESOURCE_BUILDING_H_
 #define SM_RESOURCE_BUILDING_H_
 
+#include "Logic/ResourcesManager.h"
 #include "StateMachine.h"
 #include "Logic\Entity\Message.h"
 #include "AI\Server.h"

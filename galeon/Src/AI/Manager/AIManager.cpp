@@ -431,6 +431,13 @@ namespace AI {
 		return false;
 	}
 
+	bool CAIManager::HandleMessage(const IconMessage& msg)
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
+
 	void CAIManager::assignGodTargetScores(int baseScore, int maxDifference){
 		for (auto it = _gods.begin(); it != _gods.end(); ++it){
 			int randomDifference = - maxDifference + std::rand() % (2 * maxDifference);

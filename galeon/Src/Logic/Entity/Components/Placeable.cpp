@@ -1,6 +1,7 @@
 #include "Placeable.h"
 
 #include "Map/MapEntity.h"
+#include "Logic/ResourcesManager.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Events/EventManager.h"

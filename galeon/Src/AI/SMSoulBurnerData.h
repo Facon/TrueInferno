@@ -20,14 +20,14 @@ namespace AI
 			return _soulsCategoryToBurn.size();
 		}
 
-		void addSoulToBurn(CSoulsTrialManager::SoulsCategory soulCategory)
+		void addSoulToBurn(SoulsTrialManager::SoulsCategory soulCategory)
 		{
 			_soulsCategoryToBurn.push(soulCategory);
 		}
 
-		CSoulsTrialManager::SoulsCategory getNextSoulToBurn()
+		SoulsTrialManager::SoulsCategory getNextSoulToBurn()
 		{
-			CSoulsTrialManager::SoulsCategory nextSoul = _soulsCategoryToBurn.front();
+			SoulsTrialManager::SoulsCategory nextSoul = _soulsCategoryToBurn.front();
 			_soulsCategoryToBurn.pop();
 
 			return nextSoul;
@@ -44,7 +44,7 @@ namespace AI
 	private:
 
 		/** Tipo cola de almas a quemar */
-		typedef std::queue<CSoulsTrialManager::SoulsCategory> TSoulsCategoryQueue;
+		typedef std::queue<SoulsTrialManager::SoulsCategory> TSoulsCategoryQueue;
 
 		/** (Categoría de las) Almas preparadas para ser quemadas */
 		TSoulsCategoryQueue _soulsCategoryToBurn;

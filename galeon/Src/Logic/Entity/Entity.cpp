@@ -322,6 +322,11 @@ namespace Logic
 		SEND_MESSAGE_TO_ALL_COMPONENTS;
 	}
 
+	bool CEntity::HandleMessage(const IconMessage& msg)
+	{
+		SEND_MESSAGE_TO_ALL_COMPONENTS;
+	}
+
 	//---------------------------------------------------------
 
 	void CEntity::updateTransformValuesFromMatrix(const Matrix4 &transform)
@@ -390,6 +395,18 @@ namespace Logic
 	} // setDimensions
 
 	//---------------------------------------------------------
+
+	Vector3 CEntity::getPosition() const
+	{ return _position; }
+
+	Vector3 CEntity::getRotation() const
+	{ return _rotation; }
+
+	Vector3 CEntity::getDimensions() const
+	{ return _dimensions; }
+
+	Vector3 CEntity::getMeshDimensions() const
+	{ return _meshDimensions; }
 
 	Matrix4 CEntity::getTransform() const
 	{

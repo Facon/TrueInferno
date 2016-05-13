@@ -1,4 +1,6 @@
 #include "LAStartSoulTask.h"
+
+#include "AI/SoulTask.h"
 #include "Logic\Maps\EntityFactory.h"
 #include "Logic\Server.h"
 #include "Logic\Maps\Map.h"

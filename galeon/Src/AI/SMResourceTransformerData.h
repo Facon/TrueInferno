@@ -1,6 +1,8 @@
 #ifndef SM_RESOURCE_TRANSFORMER_DATA_
 #define SM_RESOURCE_TRANSFORMER_DATA_
 
+#include "Logic/ResourcesManager.h"
+
 namespace AI {
 	class CSMResourceTransformerData {
 

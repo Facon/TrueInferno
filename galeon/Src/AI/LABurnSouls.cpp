@@ -21,14 +21,14 @@ namespace AI
 
 		while (_smData.getNumSoulsToBurn() > 0)
 		{
-			CSoulsTrialManager::SoulsCategory nextSoulCategory = _smData.getNextSoulToBurn();
+			SoulsTrialManager::SoulsCategory nextSoulCategory = _smData.getNextSoulToBurn();
 			CSoulsTrialManager::getSingletonPtr()->calculateSoulEvil(nextSoulCategory, soulCrude, soulCoke);
 
 			_totalCrudeToIncrease += soulCrude;
 			_totalCokeToIncrease += soulCoke;
 		}
 
-		// Notificamos el incremento de Coke si no está hecho ya
+		// Notificamos el incremento de Coke si no estï¿½ hecho ya
 		if (!_cokeIncreased)
 		{
 			ResourceMessage mCoke;
@@ -43,7 +43,7 @@ namespace AI
 				_cokeIncreased = true;
 		}
 
-		// Notificamos el incremento de Crude si no está hecho ya
+		// Notificamos el incremento de Crude si no estï¿½ hecho ya
 		if (!_crudeIncreased)
 		{
 			ResourceMessage mCrude;

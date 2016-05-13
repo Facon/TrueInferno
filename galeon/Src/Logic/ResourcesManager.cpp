@@ -6,6 +6,7 @@
 #include <algorithm>
 #include "BuildingManager.h"
 #include "Logic\Entity\Components\ResourceBuilding.h"
+#include "BaseSubsystems\ScriptManager.h"
 
 #include <stdexcept>
 #include <cassert>
@@ -18,6 +19,22 @@ namespace Logic
 	ResourcesManager::ResourcesManager()
 	{
 		_instance = this;
+
+		_currentResources[ResourceType::MINERAL] = 0;
+		_currentResources[ResourceType::GAS] = 0;
+		_currentResources[ResourceType::COKE] = 0;
+		_currentResources[ResourceType::CRUDE] = 0;
+		_currentResources[ResourceType::PURE_EVIL] = 0;
+		_currentResources[ResourceType::REFINED] = 0;
+		_currentResources[ResourceType::AETHER] = 0;
+
+		_maxResources[ResourceType::MINERAL] = 0;
+		_maxResources[ResourceType::GAS] = 0;
+		_maxResources[ResourceType::COKE] = 0;
+		_maxResources[ResourceType::CRUDE] = 0;
+		_maxResources[ResourceType::PURE_EVIL] = 0;
+		_maxResources[ResourceType::REFINED] = 0;
+		_maxResources[ResourceType::AETHER] = 0;
 
 	} // ResourcesManager
 
@@ -63,7 +80,7 @@ namespace Logic
 		_currentResources[ResourceType::GAS] = 0;
 		_currentResources[ResourceType::COKE] = 0;
 		_currentResources[ResourceType::CRUDE] = 0;
-		_currentResources[ResourceType::PURE] = 0;
+		_currentResources[ResourceType::PURE_EVIL] = 0;
 		_currentResources[ResourceType::REFINED] = 0;
 		_currentResources[ResourceType::AETHER] = 0;
 
@@ -71,7 +88,7 @@ namespace Logic
 		_maxResources[ResourceType::GAS] = 0;
 		_maxResources[ResourceType::COKE] = 0;
 		_maxResources[ResourceType::CRUDE] = 0;
-		_maxResources[ResourceType::PURE] = 0;
+		_maxResources[ResourceType::PURE_EVIL] = 0;
 		_maxResources[ResourceType::REFINED] = 0;
 		_maxResources[ResourceType::AETHER] = 0;
 
@@ -95,7 +112,7 @@ namespace Logic
 					luabind::value("RT_GAS", ResourceType::GAS),
 					luabind::value("RT_COKE", ResourceType::COKE),
 					luabind::value("RT_CRUDE", ResourceType::CRUDE),
-					luabind::value("RT_PURE", ResourceType::PURE),
+					luabind::value("RT_PURE", ResourceType::PURE_EVIL),
 					luabind::value("RT_REFINED", ResourceType::REFINED),
 					luabind::value("RT_AETHER", ResourceType::AETHER)
 				]
@@ -158,8 +175,8 @@ namespace Logic
 			return CRUDE;
 		}
 
-		else if (name == "PURE"){
-			return PURE;
+		else if (name == "PURE_EVIL"){
+			return PURE_EVIL;
 		}
 
 		else if (name == "REFINED"){

@@ -173,6 +173,9 @@ namespace Logic
 		bool HandleMessage(const GetCostPlaceableMessage& msg);
 		bool HandleMessage(const LogisticsMessage& msg);
 		bool HandleMessage(const ToggleMessage& msg);
+		bool HandleMessage(const IconMessage& msg);
+		bool HandleMessage(const PowerMessage& msg);
+		bool HandleMessage(const ConsumptionMessage& msg);
 
 	protected:
 
