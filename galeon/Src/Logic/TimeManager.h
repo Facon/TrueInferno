@@ -53,6 +53,13 @@ namespace Logic
 		/** Realiza las operaciones necesarias para comenzar la siguiente ronda */
 		void startNextRound();
 
+		/** 
+		Altera el tiempo restante de la ronda actual 
+		
+		@param roundTimeChange Tiempo (ms) que se añade (>0) o quita (<0) al tiempo restante de ronda actual
+		*/
+		void changeCurrentRoundTime(int roundTimeChange);
+
 	protected:
 		CTimeManager();
 
@@ -82,13 +89,17 @@ namespace Logic
 		void close();
 
 	private:
+		// TODO Leer desde configuración externa
+		/** Tiempo (ms) de ronda por defecto */
+		const long int MAX_ROUND_TIME = 3 * 60 * 1000; // 3 minutos por ronda
+
 		/**
 		Única instancia de la clase.
 		*/
 		static CTimeManager _instance;
 
-		/** Tiempo (ms) inicial */
-		static const long _maxRoundTime;
+		/** Tiempo (ms) de la ronda actual */
+		long _maxRoundTime;
 
 		/** Tiempo (ms) global transcurrido */
 		long _globalTime;

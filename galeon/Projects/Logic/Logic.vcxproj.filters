@@ -246,6 +246,7 @@
     <ClCompile Include="..\..\Src\Logic\Events\SoulSpeedAlterationEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\GodBoostEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\PlayerResourcesChangeEvent.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\RoundTimeChangeEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -471,6 +472,9 @@
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Events\PlayerResourcesChangeEvent.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\RoundTimeChangeEvent.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

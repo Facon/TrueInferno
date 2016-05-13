@@ -281,4 +281,4 @@ else
 end
 
 -- DEBUG Se fuerza el primer tick para poder ver la traza del error con breakpoint en CAIManager::open() de C++
---aiManager:tick(aiManager.timeUntilFirstEvent)
+-- aiManager:tick(aiManager.timeUntilFirstEvent)

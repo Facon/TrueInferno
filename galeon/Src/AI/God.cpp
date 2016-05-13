@@ -59,7 +59,7 @@ namespace AI {
 			long roundRemainingTime = Logic::CTimeManager::getSingletonPtr()->getRemainingRoundTime();
 
 			// Si no queda tiempo en la ronda no se hace nada
-			if (roundRemainingTime == 0)
+			if (roundRemainingTime <= 0)
 				return;
 
 			// Calculamos la velocidad necesaria (puntos/s) para llegar a la puntuación objetivo en el tiempo de ronda restante

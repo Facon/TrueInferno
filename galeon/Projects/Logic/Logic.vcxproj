@@ -125,6 +125,7 @@
     <ClCompile Include="..\..\Src\Logic\Events\EventManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\GodBoostEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\PlayerResourcesChangeEvent.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\RoundTimeChangeEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\SoulSpeedAlterationEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\TutorialEvent.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="..\..\Src\Logic\Events\EventManager.h" />
     <ClInclude Include="..\..\Src\Logic\Events\GodBoostEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\PlayerResourcesChangeEvent.h" />
+    <ClInclude Include="..\..\Src\Logic\Events\RoundTimeChangeEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\SoulSpeedAlterationEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h" />

@@ -265,6 +265,59 @@ MajorResourceGiftEvent.throw = function(god)
 		timeToLaunch, god.name, title, description, image, 0, 0.5, resourceType, true));
 end
 
+MinorTimeExtendedEvent = Event:new("MinorTimeExtendedEvent")
+MinorTimeExtendedEvent.good = 0.6
+MinorTimeExtendedEvent.evil = 0
+MinorTimeExtendedEvent.onlyBoss = true
+MinorTimeExtendedEvent.throw = function(god)
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Time Extended"
+	local description = god.name .. " has given you a little extra time for this round"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CRoundTimeChangeEvent.addCRoundTimeChangeEvent(
+		timeToLaunch, god.name, title, description, image, 5, true));
+end
+
+MajorTimeExtendedEvent = Event:new("MajorTimeExtendedEvent")
+MajorTimeExtendedEvent.good = 0.8
+MajorTimeExtendedEvent.evil = 0
+MajorTimeExtendedEvent.onlyBoss = true
+MajorTimeExtendedEvent.throw = function(god)
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Time Extended"
+	local description = god.name .. " has given you HUGE extra time for this round"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CRoundTimeChangeEvent.addCRoundTimeChangeEvent(
+		timeToLaunch, god.name, title, description, image, 15, true));
+end
+
+MinorTimeShortenedEvent = Event:new("MinorTimeShortenedEvent")
+MinorTimeShortenedEvent.good = 0
+MinorTimeShortenedEvent.evil = 0.8
+MinorTimeShortenedEvent.onlyBoss = true
+MinorTimeShortenedEvent.throw = function(god)
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Time Shortened"
+	local description = god.name .. " has reduced a little this round's time"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CRoundTimeChangeEvent.addCRoundTimeChangeEvent(
+		timeToLaunch, god.name, title, description, image, -5, true));
+end
+
+MajorTimeShortenedEvent = Event:new("MajorTimeShortenedEvent")
+MajorTimeShortenedEvent.good = 0
+MajorTimeShortenedEvent.evil = 1
+MajorTimeShortenedEvent.onlyBoss = true
+MajorTimeShortenedEvent.throw = function(god)
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Time Shortened"
+	local description = god.name .. " has reduced a LOT this round's time"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CRoundTimeChangeEvent.addCRoundTimeChangeEvent(
+		timeToLaunch, god.name, title, description, image, -15, true));
+end
+
+
 -- CResearchChallengeEvent
 -- CResourceDemandEvent
 -- CResourceStealEvent
@@ -286,6 +339,10 @@ events =
 	MinorResourceGiftEvent,
 	MajorResourceLossEvent,
 	MajorResourceGiftEvent,
+	MinorTimeExtendedEvent,
+	MajorTimeExtendedEvent,
+	MinorTimeShortenedEvent,
+	MajorTimeShortenedEvent,
 }
 
 -- DEBUG
