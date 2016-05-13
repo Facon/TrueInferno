@@ -56,7 +56,6 @@ namespace Logic {
 		// @TODO Hacer esto bien...
 		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
 
-		// TODO Reemplazar por imagen correcta
 		uiManager->getEventUI()->setEventImage(_image);
 		uiManager->getEventUI()->setEventTitle(_title);
 

@@ -22,6 +22,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "SoulsSpeedReductionEvent.h"
 #include "SoulSpeedAlterationEvent.h"
 #include "GodBoostEvent.h"
+#include "PlayerResourcesChangeEvent.h"
 #include "TutorialEvent.h"
 
 #include "Logic/TimeManager.h"
@@ -216,6 +217,7 @@ namespace Logic {
 		CSoulSpeedAlterationEvent::luaRegister();
 		CGodBoostEvent::luaRegister();
 		CTutorialEvent::luaRegister();
+		CPlayerResourcesChangeEvent::luaRegister();
 
 		// EventManager.
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())

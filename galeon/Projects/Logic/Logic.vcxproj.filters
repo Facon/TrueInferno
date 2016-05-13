@@ -245,6 +245,7 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Logic\Events\SoulSpeedAlterationEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\GodBoostEvent.cpp" />
+    <ClCompile Include="..\..\Src\Logic\Events\PlayerResourcesChangeEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -467,6 +468,9 @@
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\Events\GodBoostEvent.h">
+      <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\Events\PlayerResourcesChangeEvent.h">
       <Filter>Entity\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

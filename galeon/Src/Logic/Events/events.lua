@@ -161,13 +161,115 @@ MajorGodPenalizationEvent.throw = function(god)
 	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(timeToLaunch, god.name, title, description, image, -0.9, 20*1000, true));
 end
 
+MinorResourceLossEvent = Event:new("MinorResourceLossEvent")
+MinorResourceLossEvent.good = 0
+MinorResourceLossEvent.evil = 0.5
+MinorResourceLossEvent.godTraits.cheater = 1.0
+MinorResourceLossEvent.allowsBoss = true
+MinorResourceLossEvent.throw = function(god)
+	-- Elegir aleatoriamente gas o mineral
+	local resourceType = ResourcesManager.RT_NONE
+	local resourceText = ""
+	if(math.random() > 0.5)
+	then
+		resourceText = "mineral"
+		resourceType = ResourcesManager.RT_MINERAL
+	else
+		resourceText = "gas"
+		resourceType = ResourcesManager.RT_GAS
+	end
+	
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Resource Lost"
+	local description = god.name .. " has made you lose some of your " .. resourceText .. " reserves"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
+		timeToLaunch, god.name, title, description, image, -0.2, 0, resourceType, true));
+end
+
+MajorResourceLossEvent = Event:new("MajorResourceLossEvent")
+MajorResourceLossEvent.good = 0
+MajorResourceLossEvent.evil = 0.7
+MajorResourceLossEvent.godTraits.cheater = 1.0
+MajorResourceLossEvent.allowsBoss = true
+MajorResourceLossEvent.throw = function(god)
+	-- Elegir aleatoriamente gas o mineral
+	local resourceType = ResourcesManager.RT_NONE
+	local resourceText = ""
+	if(math.random() > 0.5)
+	then
+		resourceText = "mineral"
+		resourceType = ResourcesManager.RT_MINERAL
+	else
+		resourceText = "gas"
+		resourceType = ResourcesManager.RT_GAS
+	end
+	
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Resource Lost"
+	local description = god.name .. " has made you lose some of your " .. resourceText .. " reserves"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
+		timeToLaunch, god.name, title, description, image, -0.5, 0, resourceType, true));
+end
+
+MinorResourceGiftEvent = Event:new("MinorResourceGiftEvent")
+MinorResourceGiftEvent.good = 0.4
+MinorResourceGiftEvent.evil = 0
+MinorResourceGiftEvent.godTraits.generous = 1.0
+MinorResourceGiftEvent.allowsBoss = true
+MinorResourceGiftEvent.throw = function(god)
+	-- Elegir aleatoriamente gas o mineral
+	local resourceType = ResourcesManager.RT_NONE
+	local resourceText = ""
+	if(math.random() > 0.5)
+	then
+		resourceText = "mineral"
+		resourceType = ResourcesManager.RT_MINERAL
+	else
+		resourceText = "gas"
+		resourceType = ResourcesManager.RT_GAS
+	end
+	
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Resource Gift"
+	local description = god.name .. " has sent you a gift with some " .. resourceText
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
+		timeToLaunch, god.name, title, description, image, 0, 0.2, resourceType, true));
+end
+
+MajorResourceGiftEvent = Event:new("MajorResourceGiftEvent")
+MajorResourceGiftEvent.good = 0.6
+MajorResourceGiftEvent.evil = 0
+MajorResourceGiftEvent.godTraits.generous = 1.0
+MajorResourceGiftEvent.allowsBoss = true
+MajorResourceGiftEvent.throw = function(god)
+	-- Elegir aleatoriamente gas o mineral
+	local resourceType = ResourcesManager.RT_NONE
+	local resourceText = ""
+	if(math.random() > 0.5)
+	then
+		resourceText = "mineral"
+		resourceType = ResourcesManager.RT_MINERAL
+	else
+		resourceText = "gas"
+		resourceType = ResourcesManager.RT_GAS
+	end
+	
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Resource Gift"
+	local description = god.name .. " has sent you a gift with some " .. resourceText
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
+		timeToLaunch, god.name, title, description, image, 0, 0.5, resourceType, true));
+end
+
 -- CResearchChallengeEvent
 -- CResourceDemandEvent
--- CResourceGiftEvent
 -- CResourceStealEvent
 -- CSoulHellocaustEvent
 -- CSoulStealEvent
--- CGodMistakeEvent
 
 events =
 {
@@ -180,6 +282,10 @@ events =
 	MajorGodBoostEvent,
 	MinorGodPenalizationEvent,
 	MajorGodPenalizationEvent,
+	MinorResourceLossEvent,
+	MinorResourceGiftEvent,
+	MajorResourceLossEvent,
+	MajorResourceGiftEvent,
 }
 
 -- DEBUG

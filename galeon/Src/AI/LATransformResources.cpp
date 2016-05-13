@@ -20,7 +20,7 @@ namespace AI {
 		// Intentamos pagar el coste de transformación para todos los recursos a transformar: costeMáx = cantidadMáx * ratio
 		if ((_costRatio > ZERO_COST_RATIO) && (_costResource != ResourceType::NONE)){
 			int paidCost;
-			ResourcesManager::getSingleton().decrementResources(_costResource, (int) ceil(_transformed * _costRatio), false, true, paidCost);
+			ResourcesManager::getSingletonPtr()->decrementResources(_costResource, (int) ceil(_transformed * _costRatio), false, true, paidCost);
 
 			/* En base al coste válido que se ha podido pagar, paidCost, sabemos cuánto podemos transformar realmente:
 			* costeVáldo = cantidadVálida * ratio => cantidadVálida = costeVáldo / ratio */

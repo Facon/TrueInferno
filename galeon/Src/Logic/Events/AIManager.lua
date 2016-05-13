@@ -180,6 +180,8 @@ function AIManager:chooseGodEvent()
 	local bestScore = 0
 	local bestGodEvent = nil
 
+	local validEvents = {}
+	
 	-- Para cada evento-dios
 	for godEventIndex,godEvent in pairs(self.godEvents) 
 	do
@@ -197,7 +199,8 @@ function AIManager:chooseGodEvent()
 		end
 
 		--print("Event! " .. godEvent.event.name .. " - " .. godEvent.god.name .. " -> " .. score)
-		
+		table.insert(validEvents, {score=score, godEvent=godEvent})
+			
 		-- Actualización del mejor encontrado
 		if(score > bestScore)
 		then
@@ -205,6 +208,15 @@ function AIManager:chooseGodEvent()
 			bestGodEvent = godEvent
 		end
 	end
+	
+	-- Mostrar scores ordenados
+	--[[
+	table.sort(validEvents, function(a,b) return a.score > b.score end)
+	for eventIndex,validEvent in pairs(validEvents) 
+	do
+		print(validEvent.score .. ": " .. validEvent.godEvent.god.name .. " - " .. validEvent.godEvent.event.name)
+	end
+	]]--
 	
 	return bestGodEvent
 end

@@ -23,6 +23,7 @@ la gestión de la lógica del juego.
 #include "Logic/TimeManager.h"
 #include "Logic/Maps/Managers/WorkManager.h"
 #include "Logic/Maps/Managers/PowerManager.h"
+#include "Logic/ResourcesManager.h"
 #include "AI/Manager/AIManager.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/SoulManager.h"
@@ -142,6 +143,10 @@ namespace Logic {
 
 		// Inicializamos el manager de partida.
 		if (!Logic::CGameManager::Init())
+			return false;
+
+		// Inicializamos el manager de recursos.
+		if (!Logic::ResourcesManager::Init())
 			return false;
 
 		return true;

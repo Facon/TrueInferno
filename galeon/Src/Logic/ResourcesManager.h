@@ -27,11 +27,20 @@ namespace Logic
 	public:
 		static ResourceType parseResourceType(const std::string& name);
 
-		static ResourcesManager& getSingleton()
+		static ResourcesManager* getSingletonPtr()
 		{ return _instance; }
 
-		static ResourcesManager* getSingletonPtr()
-		{ return &_instance; }
+		/**
+		Inicializa la instancia y los recursos estáticos.
+		@return true si la inicialización se hizo correctamente.
+		*/
+		static bool Init();
+
+		/**
+		Libera la propia instancia y los recursos estáticos.
+		Debe llamarse al finalizar la aplicación.
+		*/
+		static void Release();
 
 		/**
 		* Devuelve la cantidad mostrada de recursos actuales de un tipo
@@ -107,27 +116,41 @@ namespace Logic
 		/*static const float MINERAL_GATHERING_SPEED;
 		static const float GAS_GATHERING_SPEED;*/
 
-		static ResourcesManager _instance;
+		/**
+		Constructor.
+		*/
+		ResourcesManager();
+
+		/**
+		Destructor.
+		*/
+		virtual ~ResourcesManager();
+
+		/**
+		Método encargado de registrar en el contexto de Lua todas aquellas
+		clases y funciones necesarias en Lua.
+		*/
+		void luaRegister();
+
+		/**
+		Segunda fase de la construcción del objeto. Sirve para hacer
+		inicializaciones de la propia instancia en vez de inicializaciones
+		estáticas.
+
+		@return true si la inicialización se hizo correctamente.
+		*/
+		bool open();
+
+		/**
+		Segunda fase de la destrucción del objeto. Sirve para hacer liberar
+		los recursos de la propia instancia, la liberación de los recursos
+		estáticos se hace en Release().
+		*/
+		void close();
+
+		static ResourcesManager *_instance;
 
 	private:
-		ResourcesManager() {
-			_currentResources[ResourceType::MINERAL] = 0;
-			_currentResources[ResourceType::GAS] = 0;
-			_currentResources[ResourceType::COKE] = 0;
-			_currentResources[ResourceType::CRUDE] = 0;
-			_currentResources[ResourceType::PURE] = 0;
-			_currentResources[ResourceType::REFINED] = 0;
-			_currentResources[ResourceType::AETHER] = 0;
-
-			_maxResources[ResourceType::MINERAL] = 0;
-			_maxResources[ResourceType::GAS] = 0;
-			_maxResources[ResourceType::COKE] = 0;
-			_maxResources[ResourceType::CRUDE] = 0;
-			_maxResources[ResourceType::PURE] = 0;
-			_maxResources[ResourceType::REFINED] = 0;
-			_maxResources[ResourceType::AETHER] = 0;
-		}
-
 		// Mapa genérico con la cantidad actual de recursos
 		std::map<ResourceType, float> _currentResources;
 

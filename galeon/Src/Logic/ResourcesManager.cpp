@@ -13,6 +13,96 @@
 
 namespace Logic
 {
+	ResourcesManager* ResourcesManager::_instance = 0;
+
+	ResourcesManager::ResourcesManager()
+	{
+		_instance = this;
+
+	} // ResourcesManager
+
+	ResourcesManager::~ResourcesManager()
+	{
+		assert(_instance);
+		_instance = 0;
+
+	} // ~ResourcesManager
+
+	bool ResourcesManager::Init()
+	{
+		assert(!_instance && "Segunda inicialización de Logic::ResourcesManager no permitida!");
+
+		new ResourcesManager();
+
+		if (!_instance->open())
+		{
+			Release();
+			return false;
+		}
+
+		return true;
+
+	} // Init
+
+	void ResourcesManager::Release()
+	{
+		assert(_instance && "Logic::ResourcesManager no está inicializado!");
+
+		if (_instance)
+		{
+			_instance->close();
+			delete _instance;
+		}
+
+	} // Release
+
+	bool ResourcesManager::open() {
+		luaRegister();
+
+		_currentResources[ResourceType::MINERAL] = 0;
+		_currentResources[ResourceType::GAS] = 0;
+		_currentResources[ResourceType::COKE] = 0;
+		_currentResources[ResourceType::CRUDE] = 0;
+		_currentResources[ResourceType::PURE] = 0;
+		_currentResources[ResourceType::REFINED] = 0;
+		_currentResources[ResourceType::AETHER] = 0;
+
+		_maxResources[ResourceType::MINERAL] = 0;
+		_maxResources[ResourceType::GAS] = 0;
+		_maxResources[ResourceType::COKE] = 0;
+		_maxResources[ResourceType::CRUDE] = 0;
+		_maxResources[ResourceType::PURE] = 0;
+		_maxResources[ResourceType::REFINED] = 0;
+		_maxResources[ResourceType::AETHER] = 0;
+
+		return true;
+
+	} // open
+
+	void ResourcesManager::close() {
+
+	} // close
+
+	void ResourcesManager::luaRegister() {
+		// ResourcesManager.
+		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
+			[
+				luabind::class_<ResourcesManager>("ResourcesManager")
+				.enum_("ResourceType")
+				[
+					luabind::value("RT_NONE", ResourceType::NONE),
+					luabind::value("RT_MINERAL", ResourceType::MINERAL),
+					luabind::value("RT_GAS", ResourceType::GAS),
+					luabind::value("RT_COKE", ResourceType::COKE),
+					luabind::value("RT_CRUDE", ResourceType::CRUDE),
+					luabind::value("RT_PURE", ResourceType::PURE),
+					luabind::value("RT_REFINED", ResourceType::REFINED),
+					luabind::value("RT_AETHER", ResourceType::AETHER)
+				]
+			];
+
+	} // luaRegister
+
 	/*const float ResourcesManager::MINERAL_GATHERING_SPEED = 20.f / 60.f;
 	const float ResourcesManager::GAS_GATHERING_SPEED = 12.f / 60.f;*/
 
@@ -26,8 +116,6 @@ namespace Logic
 		increaseResources(ResourceType::GAS, GAS_GATHERING_SPEED * workers * time);
 	}*/
 	
-	ResourcesManager ResourcesManager::_instance = ResourcesManager();
-
 	int ResourcesManager::getDisplayedResources(ResourceType type) const {
 		return (int) truncf(_currentResources.at(type));
 	}
