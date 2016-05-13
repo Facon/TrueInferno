@@ -57,10 +57,10 @@ namespace GUI
 			CEGUI::SubscriberSlot(&SideBarUI::createRoadReleased, this));
 
 		_uibuttonsWindow->getChildElement("CreateGasPlant")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::createResource1BuildingReleased, this));
+			CEGUI::SubscriberSlot(&SideBarUI::createGasPlantReleased, this));
 
 		_uibuttonsWindow->getChildElement("CreateMine")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::createResource2BuildingReleased, this));
+			CEGUI::SubscriberSlot(&SideBarUI::createMineReleased, this));
 
 		_uibuttonsWindow->getChildElement("CreateEvilworks")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createEvilworksReleased, this));
@@ -225,14 +225,14 @@ namespace GUI
 		return (_placeableEntity != nullptr);
 	}
 
-	bool SideBarUI::createResource1BuildingReleased(const CEGUI::EventArgs& e)
+	bool SideBarUI::createMineReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Mine", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
 
-	bool SideBarUI::createResource2BuildingReleased(const CEGUI::EventArgs& e)
+	bool SideBarUI::createGasPlantReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "GasPlant", Vector3(0, 0, 0), true, true);

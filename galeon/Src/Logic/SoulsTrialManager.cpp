@@ -170,13 +170,13 @@ namespace Logic {
 			unsigned int rndReveal = Math::random(0, 100);
 
 			if (rndReveal > _judgeLevel * REVEAL_SOUL_PROB) {
-				_souls[SoulsCategory::UNKNOWN]++; // Unknown soul
+				_souls[SoulsTrialManager::SoulsCategory::UNKNOWN]++; // Unknown soul
 			} else {
 				unsigned int rndCategory = Math::random(0, 100);
 
-				if (rndCategory < _heavySoulProb) _souls[SoulsCategory::HEAVY]++; // Heavy soul
-				else if (rndCategory < _wastedSoulProb) _souls[SoulsCategory::WASTED]++; // Wasted soul
-				else _souls[SoulsCategory::LIGHT]++; // Light soul
+				if (rndCategory < _heavySoulProb) _souls[SoulsTrialManager::HEAVY]++; // Heavy soul
+				else if (rndCategory < _wastedSoulProb) _souls[SoulsTrialManager::WASTED]++; // Wasted soul
+				else _souls[SoulsTrialManager::LIGHT]++; // Light soul
 			}
 		}
 

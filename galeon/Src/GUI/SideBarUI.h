@@ -29,8 +29,8 @@ namespace GUI
 
 		bool createFurnaceReleased(const CEGUI::EventArgs& e);
 		bool createRoadReleased(const CEGUI::EventArgs& e);
-		bool createResource1BuildingReleased(const CEGUI::EventArgs& e);
-		bool createResource2BuildingReleased(const CEGUI::EventArgs& e);
+		bool createMineReleased(const CEGUI::EventArgs& e);
+		bool createGasPlantReleased(const CEGUI::EventArgs& e);
 		bool createSoulReleased(const CEGUI::EventArgs& e);
 		bool moveSoulReleased(const CEGUI::EventArgs& e);
 		bool createEvilworksReleased(const CEGUI::EventArgs& e);

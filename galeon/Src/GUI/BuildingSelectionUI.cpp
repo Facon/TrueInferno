@@ -290,6 +290,45 @@ namespace GUI
 
 		if (wrongCategories.empty())
 				closeWindow();
+		else
+		{
+			_uipopupWindow->getChild("HeavySoulTotal")->setProperty("TextColours", "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000");
+			_uipopupWindow->getChild("HeavySoulText")->setProperty("TextColours", "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000");
+
+			_uipopupWindow->getChild("WastedSoulTotal")->setProperty("TextColours", "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000");
+			_uipopupWindow->getChild("WastedSoulText")->setProperty("TextColours", "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000");
+
+			_uipopupWindow->getChild("LightSoulTotal")->setProperty("TextColours", "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000");
+			_uipopupWindow->getChild("LightSoulText")->setProperty("TextColours", "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000");
+
+			_uipopupWindow->getChild("UnknownSoulTotal")->setProperty("TextColours", "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000");
+			_uipopupWindow->getChild("UnknownSoulText")->setProperty("TextColours", "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000");
+
+			for (auto it = wrongCategories.begin(); it != wrongCategories.end(); ++it)
+			{
+				if ((*it) == Logic::SoulsTrialManager::SoulsCategory::HEAVY)
+				{
+					_uipopupWindow->getChild("HeavySoulTotal")->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
+					_uipopupWindow->getChild("HeavySoulText")->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
+				}
+				if ((*it) == Logic::SoulsTrialManager::SoulsCategory::WASTED)
+				{
+					_uipopupWindow->getChild("WastedSoulTotal")->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
+					_uipopupWindow->getChild("WastedSoulText")->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
+				}
+				if ((*it) == Logic::SoulsTrialManager::SoulsCategory::LIGHT)
+				{
+					_uipopupWindow->getChild("LightSoulTotal")->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
+					_uipopupWindow->getChild("LightSoulText")->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
+				}
+				if ((*it) == Logic::SoulsTrialManager::SoulsCategory::UNKNOWN)
+				{
+					_uipopupWindow->getChild("UnknownSoulTotal")->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
+					_uipopupWindow->getChild("UnknownSoulText")->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
+				}
+			}
+
+		}
 
 		return true;
 	}
