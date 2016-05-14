@@ -24,6 +24,7 @@ namespace GUI
 		int _placeableRoadSize;
 		Logic::Tile* _originRoadTile=nullptr;
 		int _roadInConstruction = false;
+		bool _clearTerrain = false;
 
 		bool _firstRoad = true;
 

@@ -265,7 +265,8 @@ namespace GUI
 	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		printf("Clear Terrain\n");
+		// @TODO Cambiar puntero a pala
+		_clearTerrain = true;
 		return true;
 	}
 
@@ -377,11 +378,23 @@ namespace GUI
 			}
 		}
 		else{
-			Logic::CEntity* entity = getEntityFromRaycastToGroup(2);
-			if (entity){
-				GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-				uiManager->getBuildingSelectionUI()->setEventWindowVisible(true, entity);
-				_uibuttonsWindow->setVisible(false);
+			if (_clearTerrain){
+				Logic::CEntity* entity = getEntityFromRaycastToGroup(3);
+				if (entity)
+				{
+					Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(entity);
+					_clearTerrain=false;
+				}			
+			}
+			else
+			{
+				Logic::CEntity* entity = getEntityFromRaycastToGroup(2);
+				if (entity)
+				{
+					GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+					uiManager->getBuildingSelectionUI()->setEventWindowVisible(true, entity);
+					_uibuttonsWindow->setVisible(false);
+				}
 			}		
 		}
 	}
