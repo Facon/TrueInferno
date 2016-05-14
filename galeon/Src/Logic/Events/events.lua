@@ -413,13 +413,11 @@ end
 
 -- CResearchChallengeEvent
 -- CResourceDemandEvent
--- CResourceStealEvent
 -- CSoulHellocaustEvent
 -- CSoulStealEvent
 
 events =
 {
-	--[[
 	BuildingDestructionEvent,
 	MinorSoulsSpeedReductionEvent,
 	MajorSoulsSpeedReductionEvent,
@@ -439,7 +437,6 @@ events =
 	MajorTimeShortenedEvent,
 	MinorObstacleGrowthEvent,
 	MajorObstacleGrowthEvent,
-	]]--
 	MinorResourceStealEvent,
 	MajorResourceStealEvent,
 }
