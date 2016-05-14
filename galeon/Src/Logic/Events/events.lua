@@ -213,6 +213,74 @@ MajorResourceLossEvent.throw = function(god)
 		timeToLaunch, god.name, title, description, image, -0.5, 0, resourceType, true));
 end
 
+MinorResourceStealEvent = Event:new("MinorResourceStealEvent")
+MinorResourceStealEvent.good = 0
+MinorResourceStealEvent.evil = 0.6
+MinorResourceStealEvent.godTraits.cheater = 1.0
+MinorResourceStealEvent.godTraits.businessman = 1.0
+MinorResourceStealEvent.allowsBoss = false
+MinorResourceStealEvent.throw = function(god)
+	-- Elegir aleatoriamente gas o mineral
+	local resourceType = ResourcesManager.RT_NONE
+	local resourceText = ""
+	if(math.random() > 0.5)
+	then
+		resourceText = "mineral"
+		resourceType = ResourcesManager.RT_MINERAL
+	else
+		resourceText = "gas"
+		resourceType = ResourcesManager.RT_GAS
+	end
+	
+	-- Pérdida de recursos para el jugador
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Resource Steal"
+	local description = god.name .. " has made you lose some of your " .. resourceText .. " reserves"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
+		timeToLaunch, god.name, title, description, image, -0.2, 0, resourceType, true));
+	
+	-- Boost para el dios
+	title = "God Boost"
+	description = god.name .. " is taking benefit from your resources! Now " .. god.genre .. " will get Hades Favour faster for a while..."
+	image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(timeToLaunch+3000, god.name, title, description, image, 1, 20*1000, true));
+end
+
+MajorResourceStealEvent = Event:new("MajorResourceStealEvent")
+MajorResourceStealEvent.good = 0
+MajorResourceStealEvent.evil = 0.8
+MajorResourceStealEvent.godTraits.cheater = 1.0
+MajorResourceStealEvent.godTraits.businessman = 1.0
+MajorResourceStealEvent.allowsBoss = false
+MajorResourceStealEvent.throw = function(god)
+	-- Elegir aleatoriamente gas o mineral
+	local resourceType = ResourcesManager.RT_NONE
+	local resourceText = ""
+	if(math.random() > 0.5)
+	then
+		resourceText = "mineral"
+		resourceType = ResourcesManager.RT_MINERAL
+	else
+		resourceText = "gas"
+		resourceType = ResourcesManager.RT_GAS
+	end
+	
+	-- Pérdida de recursos para el jugador
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Resource Steal"
+	local description = god.name .. " has made you lose some of your " .. resourceText .. " reserves"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
+		timeToLaunch, god.name, title, description, image, -0.5, 0, resourceType, true));
+		
+	-- Boost para el dios
+	title = "God Boost"
+	description = god.name .. " is taking benefit from your resources! Now " .. god.genre .. " will get Hades Favour faster for a while..."
+	image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(timeToLaunch+3000, god.name, title, description, image, 2, 20*1000, true));
+end
+
 MinorResourceGiftEvent = Event:new("MinorResourceGiftEvent")
 MinorResourceGiftEvent.good = 0.4
 MinorResourceGiftEvent.evil = 0
@@ -351,6 +419,7 @@ end
 
 events =
 {
+	--[[
 	BuildingDestructionEvent,
 	MinorSoulsSpeedReductionEvent,
 	MajorSoulsSpeedReductionEvent,
@@ -370,6 +439,9 @@ events =
 	MajorTimeShortenedEvent,
 	MinorObstacleGrowthEvent,
 	MajorObstacleGrowthEvent,
+	]]--
+	MinorResourceStealEvent,
+	MajorResourceStealEvent,
 }
 
 -- DEBUG
