@@ -110,6 +110,9 @@ namespace Logic
 		/** Imprime información de debug */
 		void printDebugInfo();
 
+		/** Devuelve las dimensiones de la matriz de tiles */
+		void getDimensions(int& x, int& z) { x = SIZE_X; z = SIZE_Z; }
+
 	protected:
 
 		/**

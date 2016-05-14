@@ -19,10 +19,12 @@ Contiene la declaración del gestor de edificios.
 #include <vector>
 #include <string>
 #include <map>
+
 #include "BaseSubsystems/Math.h"
 #include "Logic/Entity/BuildingType.h"
 #include "Logic/Entity/Message.h"
 #include "Logic/Entity/Components/Placeable.h"
+#include "Logic/Maps/Managers/TileManager.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic
@@ -161,6 +163,16 @@ namespace Logic
 
 			return list;
 		}
+
+		/**
+		Hace crecer un número aproximado de obstáculos al azar.
+
+		@param number Número máximo de obstáculos que se crearán
+		*/
+		void growDestroyableObstaclesRandomly(CMap*, int number);
+
+		/** Hace crecer un obstáculo al azar en la posición dada */
+		bool growDestroyableObstacle(CMap* map, const Vector3& position);
 
 	protected:
 

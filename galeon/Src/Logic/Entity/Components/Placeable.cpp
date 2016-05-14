@@ -237,8 +237,13 @@ namespace Logic {
 			}
 		}
 
-		// Get the average position
-		centerPosition /= _tiles.size();
+		// Calculate the average if there were valid tiles
+		if (!_tiles.empty())
+			centerPosition /= _tiles.size();
+		
+		// Or place it in the origin position
+		else
+			centerPosition = _floorOriginPosition;
 
 		// Añadimos cierta altura a la posición del Placeable para que parezca que está colocada encima o sobrevolando la Tile
 		float buildingHeightIncrement;

@@ -24,6 +24,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "GodBoostEvent.h"
 #include "PlayerResourcesChangeEvent.h"
 #include "RoundTimeChangeEvent.h"
+#include "ObstacleGrowthEvent.h"
 #include "TutorialEvent.h"
 
 #include "Logic/TimeManager.h"
@@ -220,6 +221,7 @@ namespace Logic {
 		CTutorialEvent::luaRegister();
 		CPlayerResourcesChangeEvent::luaRegister();
 		CRoundTimeChangeEvent::luaRegister();
+		CObstacleGrowthEvent::luaRegister();
 
 		// EventManager.
 		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())

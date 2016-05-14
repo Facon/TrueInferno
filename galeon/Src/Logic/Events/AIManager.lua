@@ -152,6 +152,7 @@ end
 -- Función de actualización del nivel de dificultad
 function AIManager:updateDifficulty()
 	-- TODO Actualizar en función de los puntos del jugador y la curva deseada
+	--[[
 	if(CTimeManager.getSingletonPtr():getElapsedGlboalTime() <= 30000)
 	then
 		self.desiredDifficulty = 0.0
@@ -170,8 +171,11 @@ function AIManager:updateDifficulty()
 
 	else
 		self.desiredDifficulty = 1.0
-		
+	
 	end
+	]]--
+	
+	self.desiredDifficulty = math.random()
 end
 
 -- Función que determina el evento-dios a lanzar

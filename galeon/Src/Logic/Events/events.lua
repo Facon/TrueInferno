@@ -317,6 +317,31 @@ MajorTimeShortenedEvent.throw = function(god)
 		timeToLaunch, god.name, title, description, image, -15, true));
 end
 
+MinorObstacleGrowthEvent = Event:new("MinorObstacleGrowthEvent")
+MinorObstacleGrowthEvent.good = 0
+MinorObstacleGrowthEvent.evil = 0.3
+MinorObstacleGrowthEvent.onlyBoss = true
+MinorObstacleGrowthEvent.throw = function(god)
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Obstacle Growth"
+	local description = "Some obstacles have appeared"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CObstacleGrowthEvent.addCObstacleGrowthEvent(
+		timeToLaunch, god.name, title, description, image, 0.04, true));
+end
+
+MajorObstacleGrowthEvent = Event:new("MajorObstacleGrowthEvent")
+MajorObstacleGrowthEvent.good = 0
+MajorObstacleGrowthEvent.evil = 0.6
+MajorObstacleGrowthEvent.onlyBoss = true
+MajorObstacleGrowthEvent.throw = function(god)
+	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
+	local title = "Obstacle Growth"
+	local description = "A LOT of obstacles have appeared"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CObstacleGrowthEvent.addCObstacleGrowthEvent(
+		timeToLaunch, god.name, title, description, image, 0.1, true));
+end
 
 -- CResearchChallengeEvent
 -- CResourceDemandEvent
@@ -343,6 +368,8 @@ events =
 	MajorTimeExtendedEvent,
 	MinorTimeShortenedEvent,
 	MajorTimeShortenedEvent,
+	MinorObstacleGrowthEvent,
+	MajorObstacleGrowthEvent,
 }
 
 -- DEBUG

@@ -405,4 +405,23 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "WAREHOUSE",
 	},
+	
+	Tree = {
+		prefab = true,
+		type = "Tree",
+		dimensions = {1, 0.2, 1},
+		orientation = 0,
+		model = "cube.mesh",
+		static = false,
+		visible = true,
+		physic_entity = "rigid",
+		physic_type = "static",
+		physic_shape = "box",
+		physic_dimensions = {1, 0.2, 1},
+		physic_mass = 1,
+		physic_group = 3,
+		placeableType = "Obstacle",
+		validTerrainType = "Empty",
+		material = "Tree",
+	},
 }

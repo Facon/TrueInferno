@@ -1,0 +1,12 @@
+
+material Tree
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.494 0.298 0.066 1
+			diffuse 1 1 1 1
+		}
+	}
+}

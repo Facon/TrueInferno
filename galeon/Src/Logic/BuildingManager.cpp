@@ -21,6 +21,8 @@ Contiene la implementación del gestor de la matriz de tiles.
 #include "Logic/Entity/Components/Placeable.h"
 #include "AI/Server.h"
 #include "Logic/Entity/Message.h"
+#include "Logic\Maps\Managers\TileManager.h"
+#include "Logic\Entity\Components\Tile.h"
 
 #include <cassert>
 
@@ -126,8 +128,9 @@ namespace Logic {
 		if (!hellQuarters)
 			return false;
 
-		// Carretera inicial
-		/*if(!createPlaceable(map, "SoulPath", Vector3(13, 0, 4)))
+		// Carreteras iniciales
+		/*
+		if(!createPlaceable(map, "SoulPath", Vector3(13, 0, 4)))
 			return false;
 
 		if (!createPlaceable(map, "SoulPath", Vector3(13, 0, 5)))
@@ -139,7 +142,27 @@ namespace Logic {
 
 		for (int z = 7; z <= 11; ++z)
 			if (!createPlaceable(map, "SoulPath", Vector3(5, 0, z)))
-				return false;*/
+				return false;
+		*/
+
+		// Obstáculos iniciales
+		
+		CEntity* tree = createPlaceable(map, "Tree", Vector3(1, 1, 14), false, false);
+		if (!tree)
+			return false;
+
+		tree = createPlaceable(map, "Tree", Vector3(2, 1, 14), false, false);
+		if (!tree)
+			return false;
+
+		tree = createPlaceable(map, "Tree", Vector3(1, 1, 13), false, false);
+		if (!tree)
+			return false;
+
+		tree = createPlaceable(map, "Tree", Vector3(2, 1, 13), false, false);
+		if (!tree)
+			return false;
+		
 
 		return true;
 	}
@@ -211,7 +234,7 @@ namespace Logic {
 
 		// Si algo falló
 		if (!ret){
-			std::cout << "Can't create new placeable '"<< prefabName <<"' on '"<< logicPosition <<"'" << std::endl;
+			//std::cout << "Can't create new placeable '"<< prefabName <<"' on '"<< logicPosition <<"'" << std::endl;
 
 			// Eliminamos la instancia si se llegó a crear
 			if (newEntity)
@@ -224,7 +247,7 @@ namespace Logic {
 	}
 
 	void CBuildingManager::destroyPlaceable(CEntity *entity){
-		// Se elimina la entidad inmediatamente. OJO: NO usar deleteDeferred porque, por algún motivo, no elimina correctamente la entidad
+		// Se elimina la entidad inmediatamente. OJO: deleteDeferred no eliminaba correctamente la entidad
 		CEntityFactory::getSingletonPtr()->deferredDeleteEntity(entity);
 
 		// No hace falta desregistrar porque se hace automáticamente en el destructor de Placeable
@@ -379,4 +402,63 @@ namespace Logic {
 		return ret;
 	}
 
+	//--------------------------------------------------------
+
+	bool CBuildingManager::growDestroyableObstacle(CMap* map, const Vector3& position){
+		CTileManager* tileManager = CTileManager::getSingletonPtr();
+
+		Tile* tile = tileManager->getTile(position);
+
+		// Intentamos colocar obstáculo
+		return (createPlaceable(map, "Tree", position, false, false) != nullptr);
+	}
+
+	//--------------------------------------------------------
+
+/*
+	void CBuildingManager::growRandomDestroyableObstacles(int number){
+		// Obtenemos el número de tiles
+		int numTiles = CTileManager:: SIZE_X * SIZE_Z;
+
+		// Determinamos cuántas transformaremos en obstáculos
+		int numObstacles = numTiles * factor;
+
+		// Intentamos transformar tiles aleatorias
+		for (int i = 0; i < numObstacles; ++i){
+			Tile* tile = getRandomTile();
+
+			// Si la tile no tiene placeable y su terreno está vacío
+			if (tile->getPlaceableAbove() == nullptr){
+				CBuildingManager::
+			}
+		}
+*/
+
+	//--------------------------------------------------------
+
+	void CBuildingManager::growDestroyableObstaclesRandomly(CMap* map, int number){
+		CTileManager* tileManager = CTileManager::getSingletonPtr();
+
+		// Mientras queden obstáculos que poner
+		while (number > 0){
+			// Obtenemos la posición de una tile aleatoria
+			Tile* tile = tileManager->getRandomTile();
+			Vector3 pos = tile->getLogicPosition();
+
+			// Intentamos colocar obstáculo
+			if (!growDestroyableObstacle(map, pos)){
+				// Si no se pudo, decrementamos el contador para evitar tardar demasiado
+				--number;
+				continue;
+			}
+			
+			// Intentamos colocar más obstáculos en posiciones contiguas
+			do {
+				pos.x += (-1 + rand() % 3);
+				pos.z += (-1 + rand() % 3);
+				--number;
+			} while (growDestroyableObstacle(map, pos) && number > 0);
+		}
+	}
+	
 } // namespace Logic
