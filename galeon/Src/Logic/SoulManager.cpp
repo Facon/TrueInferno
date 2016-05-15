@@ -25,7 +25,6 @@ namespace Logic {
 	CSoulManager::CSoulManager()
 	{
 		_instance = this;
-		_workers = std::map<CPlaceable*, std::set<CSoul*>*>();
 
 	} // CSoulManager
 
@@ -34,22 +33,6 @@ namespace Logic {
 	CSoulManager::~CSoulManager()
 	{
 		assert(_instance);
-
-		// Liberamos el índice de almas
-		for (auto it = _workers.begin(); it != _workers.end(); ++it)
-		{
-			for (auto it2 = (*it).second->cbegin(); it2 != (*it).second->cend(); ++it2)
-			{
-				delete (*it2);
-			}
-
-			it->second->clear();
-
-			delete it->second;
-			it->second = nullptr;
-		}
-
-		_workers.clear();
 		_instance = nullptr;
 
 	} // ~CSoulManager
@@ -85,83 +68,6 @@ namespace Logic {
 		}
 
 	} // Release
-
-	//--------------------------------------------------------
-
-	void CSoulManager::registerWorker(CSoul *worker, CPlaceable *building)
-	{
-		// Comprobamos alma y edificio
-		if (worker == nullptr || building == nullptr || !building->isBuilding())
-			return;
-		
-		// Almacenamos en el mapa indexando por edificio:
-		// Creamos, si no existe, el conjunto de trabajadores para el edificio dado
-		std::set<CSoul*>* buildingWorkers = _workers[building];
-		if (buildingWorkers == nullptr)
-		{
-			buildingWorkers = new std::set<CSoul*>();
-			_workers[building] = buildingWorkers;
-		}
-
-		// Asignamos el trabajador al edificio
-		worker->setBuilding(building);
-
-		// Añadimos el trabajador
-		buildingWorkers->insert(worker);
-
-	} // registerWorker
-
-	//--------------------------------------------------------
-
-	void CSoulManager::unregisterWorker(CSoul *worker)
-	{
-		// Ignoramos almas no asignadas a un edificio
-		CPlaceable *building = worker->getBuilding();
-		if (building == nullptr || !building->isBuilding())
-			return;
-
-		// Eliminamos el puntero al trabajador del conjunto para su edificio
-		std::set<CSoul*>* buildingWorkers = _workers[building];
-		if (buildingWorkers != nullptr)
-		{
-			buildingWorkers->erase(worker);
-
-			// Si era el último de su edificio, eliminamos el set
-			if (buildingWorkers->empty())
-				_workers.erase(building);
-
-			delete buildingWorkers;
-			buildingWorkers = nullptr;
-		}
-
-		// Eliminamos la referencia al edificio del trabajador
-		worker->clearBuilding();
-
-	} // unregisterWorker
-
-	//--------------------------------------------------------
-
-	void CSoulManager::changeWorkerBuilding(CSoul *worker, CPlaceable *newBuilding)
-	{
-		// Comprobamos alma y nuevo edificio antes de desregistrarla del antiguo
-		if (worker == nullptr || newBuilding == nullptr || !newBuilding->isBuilding())
-			return;
-
-		unregisterWorker(worker);
-		registerWorker(worker, newBuilding);
-
-	} // changeWorkerBuilding
-
-	//--------------------------------------------------------
-
-	std::set<CSoul*>* CSoulManager::getBuildingWorkers(CPlaceable *building)
-	{
-		if (building == nullptr || !building->isBuilding())
-			return nullptr;
-
-		return _workers[building];
-
-	} // getBuildingWorkers
 
 	//--------------------------------------------------------
 

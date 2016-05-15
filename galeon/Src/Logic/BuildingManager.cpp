@@ -35,6 +35,14 @@ namespace Logic {
 		_instance = this;
 		_buildings = std::map<BuildingType, std::set<CPlaceable*>*>();
 
+		_buildingGroups = std::map<BuildingGroup, std::set<BuildingType>*>();
+		_buildingGroups[PowerSupply] = new std::set<BuildingType>{ PowerGenerator };
+		_buildingGroups[MapResources] = new std::set<BuildingType> { Mine, GasPlant };
+		_buildingGroups[Production] = new std::set<BuildingType> { Furnace };
+		_buildingGroups[EvilProcessing] = new std::set<BuildingType>{ EvilWorks, Refinery };
+		_buildingGroups[Logistics] = new std::set<BuildingType>{ Warehouse, Evilator };
+		_buildingGroups[IDi] = new std::set<BuildingType> { ResearchLabs };
+
 	} // CBuildingManager
 
 	//--------------------------------------------------------
@@ -42,6 +50,15 @@ namespace Logic {
 	CBuildingManager::~CBuildingManager()
 	{
 		assert(_instance);
+
+		// Liberamos la estructura de datos para los grupos de edificios por tipo
+		for (auto it = _buildingGroups.begin(); it != _buildingGroups.end(); ++it)
+		{
+			it->second->clear();
+
+			delete it->second;
+			it->second = nullptr;
+		}
 
 		// Liberamos la  estructura de datos para los edificios
 		for (auto it = _buildings.begin(); it != _buildings.end(); ++it)

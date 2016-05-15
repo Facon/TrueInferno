@@ -14,7 +14,6 @@ Contiene la implementación del gestor de trabajo.
 */
 
 #include "WorkManager.h"
-#include "Logic/BuildingManager.h"
 #include "Logic/Entity/Components/Placeable.h"
 #include "Logic/Entity/Components/WorkBuilding.h"
 #include "Logic/Entity/Components/SoulBurner.h"
@@ -31,6 +30,9 @@ namespace Logic {
 	CWorkManager::CWorkManager()
 	{
 		_instance = this;
+
+		for (unsigned int i = 0; i < NUM_BUILDING_GROUPS; ++i)
+			_groupsPriority[i] = static_cast<BuildingGroup>(i);
 
 	} // CWorkManager
 
@@ -89,6 +91,8 @@ namespace Logic {
 	{
 	} // close
 
+	//--------------------------------------------------------
+
 	TEntityID CWorkManager::findBuildingToWork(BuildingType buildingType)
 	{
 		// Buscaremos el edificio con menor proporción de trabajadores asignados sobre el máximo total
@@ -128,9 +132,13 @@ namespace Logic {
 		}
 
 		return target;
-	}
 
-	TEntityID CWorkManager::findFurnace(){
+	} // findBuildingToWork
+
+	//--------------------------------------------------------
+
+	TEntityID CWorkManager::findFurnace()
+	{
 		// Buscaremos el horno con mayor capacidad actual para quemar almas
 		TEntityID target = EntityID::UNASSIGNED;
 		int maxSoulsToBurn = INT_MIN;
@@ -184,6 +192,50 @@ namespace Logic {
 		}
 
 		return target;
-	}
+
+	} // findFurnace
+
+	//--------------------------------------------------------
+
+	unsigned int CWorkManager::setGroupsPriority(std::pair<BuildingGroup, unsigned int> newGroupsPriority[NUM_BUILDING_GROUPS])
+	{
+		BuildingGroup groupsOrder[NUM_BUILDING_GROUPS];
+		for (unsigned int i = 0; i < NUM_BUILDING_GROUPS; ++i)
+			groupsOrder[i] = BuildingGroup::Null;
+
+		// Recorremos y ordenamos la nuevas prioridades recibidas para cada grupo
+		for (unsigned int i = 0; i < NUM_BUILDING_GROUPS; ++i)
+		{
+			auto groupPriority = newGroupsPriority[i];
+			unsigned int priority = groupPriority.second;
+			
+			if (1 <= priority && priority <= NUM_BUILDING_GROUPS)
+				groupsOrder[priority - 1] = groupPriority.first;
+		}
+
+		// Comprobamos que cada grupo tiene una prioridad entre 1 y
+		// NUM_BUILDING_GROUPS, y que ésta es única
+		for (unsigned int i = 0; i < NUM_BUILDING_GROUPS; ++i)
+			if (groupsOrder[i] == BuildingGroup::Null)
+				return i + 1;
+
+		// Todo correcto, por lo que actualizamos la lista de prioridades
+		// y reordenamos a los trabajadores
+		for (unsigned int i = 0; i < NUM_BUILDING_GROUPS; ++i)
+			_groupsPriority[i] = groupsOrder[i];
+
+		reassignWorkers();
+
+		return 0;
+
+	} // setGroupsPriority
+
+	//--------------------------------------------------------
+
+	void CWorkManager::reassignWorkers()
+	{
+		return;
+
+	} // reassignWorkers
 
 } // namespace Logic

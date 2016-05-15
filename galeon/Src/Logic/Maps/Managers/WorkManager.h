@@ -16,13 +16,10 @@ Contiene la declaración del gestor de trabajo.
 #ifndef WORK_MANAGER_H_
 #define WORK_MANAGER_H_
 
-#include "Logic/Maps/EntityID.h"
-#include "Logic/Entity/BuildingType.h"
+#include <utility>
 
-// Predeclaración de clases para ahorrar tiempo de compilación
-namespace Logic
-{
-}
+#include "Logic/Maps/EntityID.h"
+#include "Logic/BuildingManager.h"
 
 /**
 Namespace que engloba la lógica del juego. Engloba desde el mapa lógico
@@ -78,6 +75,27 @@ namespace Logic
 		*/
 		TEntityID findFurnace();
 
+		/**
+		Devuelve la lista de grupos de edificios ordenados por prioridad.
+		*/
+		BuildingGroup* getGroupsPriority() { return _groupsPriority; }
+
+		/**
+		Define la nueva prioridad de cada grupo de edificios a partir del valor
+		asignado a cada uno por el jugador.
+
+		@return 0 si todo fue correcto. En caso contrario, un valor entre 1 y
+		NUM_BUILDING_GROUPS correspondiente al orden de prioridad no encontrado.
+		*/
+		unsigned int setGroupsPriority(std::pair<BuildingGroup, unsigned int> newGroupsPriority[NUM_BUILDING_GROUPS]);
+
+		/**
+		Método encargado de la comprobación y reordenación de los trabajadores
+		(en caso de que sea necesario) en base a la prioridad definida para
+		cada grupo de edificios.
+		*/
+		void reassignWorkers();
+
 	protected:
 
 		/**
@@ -111,6 +129,12 @@ namespace Logic
 		Única instancia de la clase.
 		*/
 		static CWorkManager *_instance;
+
+		/**
+		Lista que contiene todos los grupos de edificios ordenados por
+		prioridad (definida por el jugador a través del HellQuarters).
+		*/
+		BuildingGroup _groupsPriority[NUM_BUILDING_GROUPS];
 
 	}; // class WorkManager
 

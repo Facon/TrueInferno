@@ -5,6 +5,10 @@
 #include <cassert>
 
 namespace Logic {
+
+	/**
+	Tipos de edificio.
+	*/
 	enum BuildingType {
 		HellQuarters,
 		Furnace,
