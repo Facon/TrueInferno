@@ -16,6 +16,8 @@ Contiene la declaración del gestor de edificios.
 #ifndef BUILDING_MANAGER_H
 #define BUILDING_MANAGER_H
 
+#define NUM_BUILDING_GROUPS 6
+
 #include <vector>
 #include <string>
 #include <map>
@@ -49,6 +51,28 @@ sus componentes, mensajes, factorias de entidades y componentes, etc.
 */
 namespace Logic
 {
+	/**
+	Grupos de edificios por tipo.
+	Útil para asignación de trabajadores por prioridad.
+	CUIDAO!: En caso de modificación, cambiar también NUM_BUILDING_GROUPS
+	         y el WorkManager.
+	*/
+	enum BuildingGroup {
+		PowerSupply,    // PowerGenerator
+		MapResources,   // Mine, GasPlant
+		Production,     // Furnace
+		EvilProcessing, // Evilworks, Refinery
+		Logistics,      // Warehouse, Evilator
+		IDi,            // ResearchLab
+		//Bureaucracy   // HellQuarters
+		Null
+		/*
+		De momento no es necesario añadir el HellQuarters, ya que no
+		tendrá trabajadores como tal, sino que consideraremos que
+		funciona siempre (con personal del propio Infierno :)).
+		*/
+	};
+
 	/**
 	Manager singleton que gestiona las operaciones con los edificios del mapa.
 
@@ -209,7 +233,13 @@ namespace Logic
 		static CBuildingManager *_instance;
 
 		/**
-		Estructura map para almacenar los edificios. La clave es el tipo de edificio, el valor es un puntero al set de todos los edificios de dicho tipo.
+		Estructura map para almacenar los grupos de edificios por tipo.
+		*/
+		std::map<BuildingGroup, std::set<BuildingType>*> _buildingGroups;
+
+		/**
+		Estructura map para almacenar los edificios. La clave es el tipo de edificio,
+		el valor es un puntero al set de todos los edificios de dicho tipo.
 		Guardamos punteros de sus correspondientes componentes CPlaceable.
 		*/
 		std::map<BuildingType, std::set<CPlaceable*>*> _buildings;
@@ -218,9 +248,6 @@ namespace Logic
 		Índice de prefabs de edificios indexados por su nombre de tipo
 		*/
 		std::map<std::string, Map::CEntity*> _prefabs;
-
-		/** Carga los prefabs de edificios del mapa y los almacena indexados internamente */
-		//bool loadPrefabs();
 
 		void printBuildingList() const;
 
