@@ -145,8 +145,11 @@ namespace Logic
 		/** Comprueba si un placeable está en una posición válida */
 		bool checkValidPlaceablePosition(CEntity* placeableEntity, const Vector3& logicPosition);
 
-		// Devuelve el número de edificios de un tipo dado
+		/** Devuelve el número de edificios de un tipo dado */
 		int getBuildingTypeNumber(BuildingType buildingType);
+
+		/** Devuelve los edificios de un tipo dado */
+		std::set<CPlaceable*>* getBuildingsFromType(BuildingType buildingType);
 
 		// Localiza un edificio por el tipo dado
 		CPlaceable* findBuilding(BuildingType buildingType);
@@ -156,6 +159,9 @@ namespace Logic
 
 		//Destruye un edificio aleatorio
 		bool DestroyRandomBuilding();
+
+		/** Devuelve la estructura de datos con los grupos de edificios */
+		std::map<BuildingGroup, std::set<BuildingType>*>& getBuildingGroups();
 
 		/** Devuelve la estructura de datos con los edificios */
 		std::map<BuildingType, std::set<CPlaceable*>*>& getBuildings();
