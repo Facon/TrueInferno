@@ -15,7 +15,6 @@ Contiene la implementación del gestor de trabajo.
 
 #include "WorkManager.h"
 #include "Logic/Entity/Components/Placeable.h"
-#include "Logic/Entity/Components/WorkBuilding.h"
 #include "Logic/Entity/Components/SoulBurner.h"
 #include "Logic/Entity/Entity.h"
 #include <cassert>
@@ -234,8 +233,126 @@ namespace Logic {
 
 	void CWorkManager::reassignWorkers()
 	{
-		return;
+		// Grupos de edificios por tipo
+		std::map<BuildingGroup, std::set<BuildingType>*> buildingGroups = CBuildingManager::getSingletonPtr()->getBuildingGroups();
+
+		// Recorremos en orden la lista de prioridades comprobando en qué edificios
+		// se necesitan trabajadores para llegar al mínimo y, en ese caso, se los
+		// asignamos de los edificios con menor prioridad
+		int idxCurrentGroup = 0;
+		int idxLessPriorityGroup = NUM_BUILDING_GROUPS - 1;
+
+		while (idxCurrentGroup < idxLessPriorityGroup)
+		{
+			// Grupo i = idxCurrentGroup
+			BuildingGroup currentGroup = _groupsPriority[idxCurrentGroup];
+			assert(currentGroup != BuildingGroup::Null && "Null building group found while reassigning workers");
+
+			std::set<BuildingType>* currentTypes = buildingGroups[currentGroup];
+			std::set<BuildingType>::const_iterator it, end;
+			for (it = currentTypes->cbegin(), end = currentTypes->cend(); it != end; ++it)
+			{
+				// Grupo i = idxCurrentGroup. Tipo j = (*it)
+				std::set<CPlaceable*>* currentTypeBuildings = CBuildingManager::getSingletonPtr()->getBuildingsFromType(*it);
+				if (currentTypeBuildings == nullptr)
+					continue;
+
+				std::set<CPlaceable*>::const_iterator itBuildings, endBuildings;
+				for (itBuildings = currentTypeBuildings->cbegin(), endBuildings = currentTypeBuildings->cend();
+					itBuildings != endBuildings; ++itBuildings)
+				{
+					// Salimos del bucle si ya no hay trabajadores disponibles en los
+					// grupos con menor prioridad que el actual...
+					if (idxCurrentGroup >= idxLessPriorityGroup)
+						break;
+
+					// Grupo i = idxCurrentGroup. Tipo j = (*it). Edificio k = (*itBuildings)
+					CWorkBuilding *currentBuilding = (*itBuildings)->getEntity()->getComponent<CWorkBuilding>();
+					int assignedWorkers = currentBuilding->getAssignedWorkers();
+					int minWorkers = currentBuilding->getMinWorkers();
+
+					if (currentBuilding != nullptr && assignedWorkers < minWorkers)
+						// Asignar trabajadores de edificios con menor prioridad...
+						relocateWorkers(currentBuilding, idxCurrentGroup, idxLessPriorityGroup, minWorkers - assignedWorkers);
+				}
+			}
+
+			++idxCurrentGroup;
+		}
+
+		// qué pasa cuando currentGroup == lessPriorityGroup ??
+		// intentar llenar en orden
+		// función aparte
+
+		// @TODO Ir guardando referencias a los edificios cuyo número de trabajadores
+		// es superior al mínimo, para intentar llenar algún edificio más de los
+		// menos prioritarios
 
 	} // reassignWorkers
+
+	//--------------------------------------------------------
+
+	std::vector<CWorkBuilding*> CWorkManager::getBuildingsFromGroup(int groupPriority)
+	{
+		std::vector<CWorkBuilding*> buildingsFromGroup;
+
+		// Grupos de edificios por tipo
+		std::map<BuildingGroup, std::set<BuildingType>*> buildingGroups = CBuildingManager::getSingletonPtr()->getBuildingGroups();
+
+		// Grupo i = groupPriority
+		BuildingGroup buildingGroup = _groupsPriority[groupPriority];
+		assert(buildingGroup != BuildingGroup::Null && "Null building group found while reassigning workers");
+
+		std::set<BuildingType>* buildingTypes = buildingGroups[buildingGroup];
+		std::set<BuildingType>::const_iterator it, end;
+
+		for (it = buildingTypes->cbegin(), end = buildingTypes->cend(); it != end; ++it)
+		{
+			// Grupo i = groupPriority. Tipo j = (*it)
+			std::set<CPlaceable*>* buildings = CBuildingManager::getSingletonPtr()->getBuildingsFromType(*it);
+			if (buildings == nullptr)
+				continue;
+
+			std::set<CPlaceable*>::const_iterator itBuildings, endBuildings;
+
+			for (itBuildings = buildings->cbegin(), endBuildings = buildings->cend(); itBuildings != endBuildings; ++itBuildings)
+			{
+				// Grupo i = groupPriority. Tipo j = (*it). Edificio k = (*itBuildings)
+				CWorkBuilding *currentBuilding = (*itBuildings)->getEntity()->getComponent<CWorkBuilding>();
+				buildingsFromGroup.push_back(currentBuilding);
+			}
+		}
+
+		return buildingsFromGroup;
+
+	} // getBuildingsFromGroup
+
+	//--------------------------------------------------------
+
+	bool CWorkManager::relocateWorkers(CWorkBuilding* building, int groupPriority, int lessPriorityGroup, int numWorkers)
+	{
+		int workersFound = 0;
+
+		//pillar todos los del grupo lessPriority
+
+		//poner un iterador inverso con fin == end (para grupos de prioridad distintos)
+		// o fin == building para el mismo grupo de prioridad
+
+		//iterar con for y break si se llega al número solicitado
+
+		std::vector<CWorkBuilding*> buildingsFromLessPriorityGroup = getBuildingsFromGroup(lessPriorityGroup);
+
+
+
+		/*
+		while (workersFound < numWorkers && groupPriority < lessPriorityGroup)
+		{
+
+		}
+		*/
+
+		return (workersFound == numWorkers);
+
+	} // relocateWorkers
 
 } // namespace Logic
