@@ -231,70 +231,12 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	void CWorkManager::reassignWorkers()
-	{
-		// Grupos de edificios por tipo
-		std::map<BuildingGroup, std::set<BuildingType>*> buildingGroups = CBuildingManager::getSingletonPtr()->getBuildingGroups();
-
-		// Recorremos en orden la lista de prioridades comprobando en qué edificios
-		// se necesitan trabajadores para llegar al mínimo y, en ese caso, se los
-		// asignamos de los edificios con menor prioridad
-		int idxCurrentGroup = 0;
-		int idxLessPriorityGroup = NUM_BUILDING_GROUPS - 1;
-
-		while (idxCurrentGroup < idxLessPriorityGroup)
-		{
-			// Grupo i = idxCurrentGroup
-			BuildingGroup currentGroup = _groupsPriority[idxCurrentGroup];
-			assert(currentGroup != BuildingGroup::Null && "Null building group found while reassigning workers");
-
-			std::set<BuildingType>* currentTypes = buildingGroups[currentGroup];
-			std::set<BuildingType>::const_iterator it, end;
-			for (it = currentTypes->cbegin(), end = currentTypes->cend(); it != end; ++it)
-			{
-				// Grupo i = idxCurrentGroup. Tipo j = (*it)
-				std::set<CPlaceable*>* currentTypeBuildings = CBuildingManager::getSingletonPtr()->getBuildingsFromType(*it);
-				if (currentTypeBuildings == nullptr)
-					continue;
-
-				std::set<CPlaceable*>::const_iterator itBuildings, endBuildings;
-				for (itBuildings = currentTypeBuildings->cbegin(), endBuildings = currentTypeBuildings->cend();
-					itBuildings != endBuildings; ++itBuildings)
-				{
-					// Salimos del bucle si ya no hay trabajadores disponibles en los
-					// grupos con menor prioridad que el actual...
-					if (idxCurrentGroup >= idxLessPriorityGroup)
-						break;
-
-					// Grupo i = idxCurrentGroup. Tipo j = (*it). Edificio k = (*itBuildings)
-					CWorkBuilding *currentBuilding = (*itBuildings)->getEntity()->getComponent<CWorkBuilding>();
-					int assignedWorkers = currentBuilding->getAssignedWorkers();
-					int minWorkers = currentBuilding->getMinWorkers();
-
-					if (currentBuilding != nullptr && assignedWorkers < minWorkers)
-						// Asignar trabajadores de edificios con menor prioridad...
-						relocateWorkers(currentBuilding, idxCurrentGroup, idxLessPriorityGroup, minWorkers - assignedWorkers);
-				}
-			}
-
-			++idxCurrentGroup;
-		}
-
-		// qué pasa cuando currentGroup == lessPriorityGroup ??
-		// intentar llenar en orden
-		// función aparte
-
-		// @TODO Ir guardando referencias a los edificios cuyo número de trabajadores
-		// es superior al mínimo, para intentar llenar algún edificio más de los
-		// menos prioritarios
-
-	} // reassignWorkers
-
-	//--------------------------------------------------------
-
 	std::vector<CWorkBuilding*> CWorkManager::getBuildingsFromGroup(int groupPriority)
 	{
 		std::vector<CWorkBuilding*> buildingsFromGroup;
+
+		if (groupPriority >= NUM_BUILDING_GROUPS)
+			return buildingsFromGroup;
 
 		// Grupos de edificios por tipo
 		std::map<BuildingGroup, std::set<BuildingType>*> buildingGroups = CBuildingManager::getSingletonPtr()->getBuildingGroups();
@@ -304,6 +246,8 @@ namespace Logic {
 		assert(buildingGroup != BuildingGroup::Null && "Null building group found while reassigning workers");
 
 		std::set<BuildingType>* buildingTypes = buildingGroups[buildingGroup];
+		assert(buildingTypes != nullptr && "Empty building group found while reassigning workers");
+
 		std::set<BuildingType>::const_iterator it, end;
 
 		for (it = buildingTypes->cbegin(), end = buildingTypes->cend(); it != end; ++it)
@@ -318,8 +262,10 @@ namespace Logic {
 			for (itBuildings = buildings->cbegin(), endBuildings = buildings->cend(); itBuildings != endBuildings; ++itBuildings)
 			{
 				// Grupo i = groupPriority. Tipo j = (*it). Edificio k = (*itBuildings)
-				CWorkBuilding *currentBuilding = (*itBuildings)->getEntity()->getComponent<CWorkBuilding>();
-				buildingsFromGroup.push_back(currentBuilding);
+				CWorkBuilding *building = (*itBuildings)->getEntity()->getComponent<CWorkBuilding>();
+
+				if (building != nullptr)
+					buildingsFromGroup.push_back(building);
 			}
 		}
 
@@ -329,29 +275,95 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	bool CWorkManager::relocateWorkers(CWorkBuilding* building, int groupPriority, int lessPriorityGroup, int numWorkers)
+	void CWorkManager::reassignWorkers()
 	{
-		int workersFound = 0;
+		// Recorremos en orden la lista de prioridades comprobando en qué edificios
+		// se necesitan trabajadores para llegar al mínimo y, en ese caso, se los
+		// asignamos de los edificios de grupos con menor prioridad
+		int idxCurrentGroup = 0;
+		int idxLessPriorityGroup = NUM_BUILDING_GROUPS - 1;
 
-		//pillar todos los del grupo lessPriority
-
-		//poner un iterador inverso con fin == end (para grupos de prioridad distintos)
-		// o fin == building para el mismo grupo de prioridad
-
-		//iterar con for y break si se llega al número solicitado
-
-		std::vector<CWorkBuilding*> buildingsFromLessPriorityGroup = getBuildingsFromGroup(lessPriorityGroup);
-
-
-
-		/*
-		while (workersFound < numWorkers && groupPriority < lessPriorityGroup)
+		while (idxCurrentGroup <= idxLessPriorityGroup)
 		{
+			std::vector<CWorkBuilding*> currentGroupBuildings = getBuildingsFromGroup(idxCurrentGroup);
 
+			std::vector<CWorkBuilding*>::const_iterator it, end;
+
+			for (it = currentGroupBuildings.cbegin(), end = currentGroupBuildings.cend(); it != end; ++it)
+			{
+				CWorkBuilding *currentBuilding = (*it);
+
+				int assignedWorkers = currentBuilding->getAssignedWorkers();
+				int minWorkers = currentBuilding->getMinWorkers();
+
+				if (assignedWorkers < minWorkers)
+				{
+					// Edificio no funcional. Asignar trabajadores de edificios con
+					// menor prioridad...
+					bool enoughWorkers =
+						relocateWorkers(currentBuilding, idxCurrentGroup, idxLessPriorityGroup, minWorkers - assignedWorkers);
+
+					if (!enoughWorkers)
+						break;
+				}
+			}
+
+			++idxCurrentGroup;
 		}
-		*/
 
-		return (workersFound == numWorkers);
+		// @TODO Posible mejora: Ir guardando referencias a los edificios cuyo número
+		// de trabajadores asignados es superior al mínimo, para intentar llenar algún
+		// edificio más de los menos prioritarios
+
+	} // reassignWorkers
+
+	//--------------------------------------------------------
+
+	bool CWorkManager::relocateWorkers(CWorkBuilding* building, int groupPriority, int& lastPriorityGroup, int numWorkers)
+	{
+		// Comprobamos que no haya habido ningún tipo de error en la llamada al método
+		if (groupPriority > lastPriorityGroup || numWorkers <= 0)
+			return false;
+
+		int numWorkersFound = 0;
+
+		while (groupPriority <= lastPriorityGroup)
+		{
+			std::vector<CWorkBuilding*> buildingsFromLastGroup = getBuildingsFromGroup(lastPriorityGroup);
+
+			std::vector<CWorkBuilding*>::const_reverse_iterator rit = buildingsFromLastGroup.crbegin();
+			std::vector<CWorkBuilding*>::const_reverse_iterator rend = buildingsFromLastGroup.crend();
+
+			for (; rit != rend; ++rit)
+			{
+				CWorkBuilding *currentBuilding = (*rit);
+
+				// Si estamos recorriendo el mismo grupo de edificios que aquel para el que buscamos
+				// trabajadores, paramos al encontrarnos con el edificio dado
+				if (groupPriority == lastPriorityGroup && currentBuilding == building)
+					return false;
+
+				if (currentBuilding->getAssignedWorkers() > 0)
+				{
+					// Recoloca a tantos trabajadores como tenga el edificio (o como sigan
+					// necesitándose)
+
+					// TODO getminimo
+
+					// TODO funcion aparte con el trabajo sucio de mensajes (ver WorkBuilding)
+					// (hacerlo con función sincrona en vez de mensajes?)
+
+					// TODO incrementar numWorkersFound
+
+					if (numWorkersFound >= numWorkers)
+						return true;
+				}
+			}
+
+			--lastPriorityGroup;
+		}
+		
+		return false;
 
 	} // relocateWorkers
 

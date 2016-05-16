@@ -9,7 +9,7 @@ Contiene la declaración del gestor de trabajo.
 
 @see Logic::CWorkManager
 
-@author Álvaro Valera
+@author Álvaro Valera, Raúl Segura
 @date Marzo, 2016
 */
 
@@ -39,10 +39,9 @@ namespace Logic
 
 	@ingroup logicGroup
 
-	@author Álvaro Valera
+	@author Álvaro Valera, Raúl Segura
 	@date Marzo, 2016
 	*/
-
 	class CWorkManager
 	{
 	public:
@@ -130,8 +129,8 @@ namespace Logic
 		Devuelve todos los edificios presentes en el mapa cuyo tipo pertenezca
 		al grupo de prioridad dado.
 
-		@param groupPriority prioridad del grupo de edificios buscado.
-		@return vector de edificios pertenecientes al grupo.
+		@param groupPriority prioridad del grupo de edificios a devolver.
+		@return edificios pertenecientes a tipos pertenecientes al grupo.
 		*/
 		std::vector<CWorkBuilding*> getBuildingsFromGroup(int groupPriority);
 
@@ -142,13 +141,14 @@ namespace Logic
 
 		@param building edificio para el que buscar nuevos trabajadores.
 		@param groupPriority prioridad del grupo al que pertenece el edificio.
-		@param lessPriorityGroup grupo de menor prioridad por el que empezar.
+		@param lastPriorityGroup grupo de menor prioridad por el que empezar.
 		@param numWorkers número de trabajadores necesarios.
 		@return true si se encontró el número de trabajadores solicitado.
 		*/
-		bool relocateWorkers(CWorkBuilding* building, int groupPriority, int lessPriorityGroup, int numWorkers);
+		bool relocateWorkers(CWorkBuilding* building, int groupPriority, int& lastPriorityGroup, int numWorkers);
 
 	private:
+
 		/**
 		Única instancia de la clase.
 		*/
