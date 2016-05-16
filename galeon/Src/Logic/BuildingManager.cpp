@@ -303,10 +303,15 @@ namespace Logic {
 		return m.Dispatch(*placeableEntity);
 	}
 
-
-	int CBuildingManager::getBuildingTypeNumber(BuildingType buildingType){
+	int CBuildingManager::getBuildingTypeNumber(BuildingType buildingType)
+	{
 		std::set<CPlaceable*>* buildingsFromType = _buildings[buildingType];
 		return (buildingsFromType == nullptr) ? 0 : buildingsFromType->size();
+	}
+
+	std::set<CPlaceable*>* CBuildingManager::getBuildingsFromType(BuildingType buildingType)
+	{
+		return _buildings[buildingType];
 	}
 
 	CPlaceable* CBuildingManager::findBuilding(BuildingType buildingType){
@@ -384,7 +389,13 @@ namespace Logic {
 		return false;
 	}
 
-	std::map<BuildingType, std::set<CPlaceable*>*>& CBuildingManager::getBuildings(){
+	std::map<BuildingGroup, std::set<BuildingType>*>& CBuildingManager::getBuildingGroups()
+	{
+		return _buildingGroups;
+	}
+
+	std::map<BuildingType, std::set<CPlaceable*>*>& CBuildingManager::getBuildings()
+	{
 		return _buildings;
 	}
 
