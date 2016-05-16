@@ -17,9 +17,11 @@ Contiene la declaración del gestor de trabajo.
 #define WORK_MANAGER_H_
 
 #include <utility>
+#include <vector>
 
 #include "Logic/Maps/EntityID.h"
 #include "Logic/BuildingManager.h"
+#include "Logic/Entity/Components/WorkBuilding.h"
 
 /**
 Namespace que engloba la lógica del juego. Engloba desde el mapa lógico
@@ -123,6 +125,28 @@ namespace Logic
 		estáticos se hace en Release().
 		*/
 		void close();
+
+		/**
+		Devuelve todos los edificios presentes en el mapa cuyo tipo pertenezca
+		al grupo de prioridad dado.
+
+		@param groupPriority prioridad del grupo de edificios buscado.
+		@return vector de edificios pertenecientes al grupo.
+		*/
+		std::vector<CWorkBuilding*> getBuildingsFromGroup(int groupPriority);
+
+		/**
+		Dado un edificio concreto y la prioridad del grupo al que pertenece,
+		intenta asignarle un cierto número de nuevos trabajadores procedentes
+		de otros edificios de menor prioridad.
+
+		@param building edificio para el que buscar nuevos trabajadores.
+		@param groupPriority prioridad del grupo al que pertenece el edificio.
+		@param lessPriorityGroup grupo de menor prioridad por el que empezar.
+		@param numWorkers número de trabajadores necesarios.
+		@return true si se encontró el número de trabajadores solicitado.
+		*/
+		bool relocateWorkers(CWorkBuilding* building, int groupPriority, int lessPriorityGroup, int numWorkers);
 
 	private:
 		/**
