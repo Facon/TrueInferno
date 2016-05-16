@@ -63,6 +63,12 @@ namespace GUI
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::missionsReleased, this));
 			_uipopupWindow->getChildElement("Trial")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::trialReleased, this));
+			_uipopupWindow->getChildElement("WhiteMarket")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::whiteMarketReleased, this));
+			_uipopupWindow->getChildElement("Redemption")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::redemptionReleased, this));
+			_uipopupWindow->getChildElement("BuildingGroups")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::buildingGroupsReleased, this));
 		}
 
 		if (layout == "UIBuildingSelectionPopupTrial.layout"){
@@ -70,6 +76,30 @@ namespace GUI
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
 			_uipopupWindow->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::judgeSoulsReleased, this));
+
+		}
+
+		if (layout == "UIBuildingSelectionPopupBuildingGroups.layout"){
+			_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
+			_uipopupWindow->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::setBuildingGroupsReleased, this));
+
+		}
+
+		if (layout == "UIBuildingSelectionPopupWhiteMarket.layout"){
+			_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
+			_uipopupWindow->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::whiteTradeSoulsReleased, this));
+
+		}
+
+		if (layout == "UIBuildingSelectionPopupRedemption.layout"){
+			_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::returnToBuildingReleased, this));
+			_uipopupWindow->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::redemptSoulsReleased, this));
 
 		}
 
@@ -111,6 +141,12 @@ namespace GUI
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::missionsReleased, this));
 			_uipopupWindow->getChildElement("Trial")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::trialReleased, this));
+			_uipopupWindow->getChildElement("WhiteMarket")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::whiteMarketReleased, this));
+			_uipopupWindow->getChildElement("Redemption")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::redemptionReleased, this));
+			_uipopupWindow->getChildElement("BuildingGroups")->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&BuildingSelectionUI::buildingGroupsReleased, this));
 		}
 	}
 
@@ -131,13 +167,21 @@ namespace GUI
 			_uipopupWindow->getChild("WastedSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::WASTED]));
 			_uipopupWindow->getChild("LightSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::LIGHT]));
 			_uipopupWindow->getChild("UnknownSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::UNKNOWN]));
-
+			return;
 		}
-		else
-		{
-			_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoBuildings/" + image);
+		if (name == "White Market"){
+			
+			return;
 		}
+		if (name == "Building Groups Priorities"){
 
+			return;
+		}
+		if (name == "Soul Redemption"){
+
+			return;
+		}
+		_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoBuildings/" + image);
 	}
 
 	void BuildingSelectionUI::init()
@@ -216,6 +260,25 @@ namespace GUI
 		changePopupLayout("UIBuildingSelectionPopupTrial.layout", "Souls Trial", "Trial");
 		return true;
 	}
+
+	bool BuildingSelectionUI::buildingGroupsReleased(const CEGUI::EventArgs& e)
+	{
+		changePopupLayout("UIBuildingSelectionPopupBuildingGroups.layout", "Building Groups Priorities", "BuildingGroups");
+		return true;
+	}
+
+	bool BuildingSelectionUI::whiteMarketReleased(const CEGUI::EventArgs& e)
+	{
+		changePopupLayout("UIBuildingSelectionPopupWhiteMarket.layout", "White Market", "WhiteMarket");
+		return true;
+	}
+
+	bool BuildingSelectionUI::redemptionReleased(const CEGUI::EventArgs& e)
+	{
+		changePopupLayout("UIBuildingSelectionPopupRedemption.layout", "Soul Redemption", "Redemption");
+		return true;
+	}
+
 
 	bool BuildingSelectionUI::upgradeBuildingReleased(const CEGUI::EventArgs& e)
 	{
@@ -330,6 +393,24 @@ namespace GUI
 
 		}
 
+		return true;
+	}
+
+	bool BuildingSelectionUI::whiteTradeSoulsReleased(const CEGUI::EventArgs& e)
+	{
+		printf("white market traded\n");
+		return true;
+	}
+
+	bool BuildingSelectionUI::redemptSoulsReleased(const CEGUI::EventArgs& e)
+	{
+		printf("souls redemptioned\n");
+		return true;
+	}
+
+	bool BuildingSelectionUI::setBuildingGroupsReleased(const CEGUI::EventArgs& e)
+	{
+		printf("building group properties set\n");
 		return true;
 	}
 

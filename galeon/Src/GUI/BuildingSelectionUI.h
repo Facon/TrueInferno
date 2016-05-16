@@ -31,10 +31,16 @@ namespace GUI
 		bool godsReleased(const CEGUI::EventArgs& e);
 		bool missionsReleased(const CEGUI::EventArgs& e);
 		bool trialReleased(const CEGUI::EventArgs& e);
+		bool buildingGroupsReleased(const CEGUI::EventArgs& e);
+		bool whiteMarketReleased(const CEGUI::EventArgs& e);
+		bool redemptionReleased(const CEGUI::EventArgs& e);
 		bool returnToBuildingReleased(const CEGUI::EventArgs& e);
 		//bool createSoulReleased(const CEGUI::EventArgs& e);
 		//bool burnSoulReleased(const CEGUI::EventArgs& e);
 		bool judgeSoulsReleased(const CEGUI::EventArgs& e);
+		bool setBuildingGroupsReleased(const CEGUI::EventArgs& e);
+		bool redemptSoulsReleased(const CEGUI::EventArgs& e);
+		bool whiteTradeSoulsReleased(const CEGUI::EventArgs& e);
 		void bindPopupButtons(std::string layout);
 		void bindButtons();
 		void loadAssets();

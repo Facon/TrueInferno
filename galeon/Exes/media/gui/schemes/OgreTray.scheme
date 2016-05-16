@@ -5,12 +5,15 @@
 	<Imageset filename="TrueInfernoUITextures.imageset" />
     <Font filename="DejaVuSans-12.font" />
 	<Font filename="Jura-18.font" />
+	<Font filename="Jura-16.font" />
 	<Font filename="Jura-12.font" />
 	<Font filename="Jura-10.font" />
 	<Font filename="Jura-8.font" />
 	<Font filename="Jura-6.font" />
 	<Font filename="Jura-7.font" />
-	<Font filename="Jura-12-Italic.font" />
+	<Font filename="Jura-12-italic.font" />
+	<Font filename="Jura-12-italic-regular.font" />
+	<Font filename="Jura-10-italic-regular.font" />
     <LookNFeel filename="OgreTray.looknfeel" />
     <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
 	
