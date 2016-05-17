@@ -17,8 +17,12 @@ Contiene la implementación del gestor de trabajo.
 #include "Logic/Entity/Components/Placeable.h"
 #include "Logic/Entity/Components/SoulBurner.h"
 #include "Logic/Entity/Entity.h"
+
+#include "AI/WorkSoulTask.h"
+
 #include <cassert>
 #include <limits>
+#include <algorithm>
 
 namespace Logic {
 
@@ -343,17 +347,17 @@ namespace Logic {
 				if (groupPriority == lastPriorityGroup && currentBuilding == building)
 					return false;
 
-				if (currentBuilding->getAssignedWorkers() > 0)
+				int buildingWorkers = currentBuilding->getAssignedWorkers();
+
+				if (buildingWorkers > 0)
 				{
-					// Recoloca a tantos trabajadores como tenga el edificio (o como sigan
-					// necesitándose)
+					// Recoloca a tantos trabajadores como tenga el edificio (o como sigan siendo
+					// necesarios)
+					int numNewWorkers = std::min(buildingWorkers, numWorkers - numWorkersFound);
+					if (!moveWorkers(building, currentBuilding, numNewWorkers))
+						continue;
 
-					// TODO getminimo
-
-					// TODO funcion aparte con el trabajo sucio de mensajes (ver WorkBuilding)
-					// (hacerlo con función sincrona en vez de mensajes?)
-
-					// TODO incrementar numWorkersFound
+					numWorkersFound += numNewWorkers;
 
 					if (numWorkersFound >= numWorkers)
 						return true;
@@ -366,5 +370,19 @@ namespace Logic {
 		return false;
 
 	} // relocateWorkers
+
+	//--------------------------------------------------------
+
+	bool CWorkManager::moveWorkers(CWorkBuilding* targetBuilding, CWorkBuilding* sourceBuilding, int numWorkers)
+	{
+		CEntity *targetEntity = targetBuilding->getEntity();
+
+		AI::CWorkTask *workTask = new AI::CWorkTask(targetEntity->getMap(), targetEntity->getEntityID(),
+			CSoulsTrialManager::SoulsCategory::UNKNOWN);
+
+		SoulSenderMessage m(workTask, numWorkers);
+		return m.Dispatch(*sourceBuilding->getEntity());
+
+	} // moveWorkers
 
 } // namespace Logic

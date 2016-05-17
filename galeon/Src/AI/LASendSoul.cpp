@@ -1,14 +1,20 @@
 #include "LASendSoul.h"
-#include "Logic\Maps\EntityFactory.h"
-#include "Logic\Server.h"
-#include "Logic\Maps\Map.h"
-#include "Logic/Entity/Components/Graphics.h"
-#include "Graphics\Entity.h"
 
-namespace AI {
+#include "Logic\Maps\EntityFactory.h"
+#include "Logic\Maps\Map.h"
+#include "Logic\Server.h"
+
+#include "Logic/Entity/Components/Graphics.h"
+#include "Logic/Entity/Components/WorkBuilding.h"
+
+#include "Graphics/Entity.h"
+
+namespace AI
+{
 	RTTI_IMPL(CLASendSoul, CLatentAction);
 	
-	bool CLASendSoul::HandleMessage(const SoulSenderMessage& msg) {
+	bool CLASendSoul::HandleMessage(const SoulSenderMessage& msg)
+	{
 		// Rechazamos lo que no sean peticiones. No aceptamos más de una petición simultánea
 		if (msg._type != MessageType::SOUL_SENDER_REQUEST || _task != nullptr)
 			return false;
@@ -71,7 +77,8 @@ namespace AI {
 		return LAStatus::SUCCESS;
 	}
 
-	bool CLASendSoul::createSouls(){
+	bool CLASendSoul::createSouls()
+	{
 		bool ret = true;
 
 		// Creamos almas hasta completar las pedidas
@@ -103,23 +110,37 @@ namespace AI {
 		return ret;
 	}
 
-	bool CLASendSoul::sendSouls(){
+	bool CLASendSoul::sendSouls()
+	{
 		bool ret = true;
 
 		// Comenzamos el bucle por la última alma enviada
-		for (unsigned int i = _numSoulsSent; i < _newSouls.size(); ++i){
+		for (unsigned int i = _numSoulsSent; i < _newSouls.size(); ++i)
+		{
 			// Le asignamos la tarea
 			CSoulTask* clone = _task->clone();
 			
 			SoulMessage m2(clone);
-			if (!m2.Dispatch(*_newSouls[i])){
+			if (!m2.Dispatch(*_newSouls[i]))
+			{
 				//std::cout << "Can´t assign task to soul" << std::endl;
-				
 				ret = false;
 				break;
 			}
 
 			++_numSoulsSent;
+
+			// Si el alma ha sido enviada a trabajar a otro edificio, decrementar
+			// el número de trabajadores del actual
+			/*
+			dynamic_cast<CWorkTask*>(_task);
+
+			CWorkBuilding *workBuilding = _entity->getComponent<CWorkBuilding>();
+			if (workBuilding != nullptr)
+			{
+
+			}
+			*/
 		}
 
 		return ret;
