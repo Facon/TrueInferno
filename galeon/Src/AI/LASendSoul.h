@@ -4,6 +4,7 @@
 #include "LatentAction.h"
 #include "Server.h"
 #include "SoulTask.h"
+#include "WorkSoulTask.h"
 #include "Logic/Entity/Message.h"
 #include "Logic/Maps/EntityFactory.h"
 

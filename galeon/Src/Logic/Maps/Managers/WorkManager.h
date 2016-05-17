@@ -147,6 +147,16 @@ namespace Logic
 		*/
 		bool relocateWorkers(CWorkBuilding* building, int groupPriority, int& lastPriorityGroup, int numWorkers);
 
+		/**
+		Traslada un determinado número de trabajadores de un edificio a otro.
+
+		@param targetBuilding edificio de destino.
+		@param sourceBuilding edificio de origen.
+		@param numWorkers número de trabajadores a mover.
+		@return true si todo fue correctamente.
+		*/
+		bool moveWorkers(CWorkBuilding* targetBuilding, CWorkBuilding* sourceBuilding, int numWorkers);
+
 	private:
 
 		/**

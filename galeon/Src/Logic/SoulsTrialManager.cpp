@@ -81,12 +81,16 @@ namespace Logic {
 
 	void CSoulsTrialManager::spawn(const Map::CEntity *managerInfo)
 	{
+		// Souls generation time
 		if (managerInfo->hasAttribute("minSoulsGenerationTimeSeconds"))
 			_minSoulsGenerationTime = managerInfo->getIntAttribute("minSoulsGenerationTimeSeconds") * 1000;
 
 		if (managerInfo->hasAttribute("maxSoulsGenerationTimeSeconds"))
 			_maxSoulsGenerationTime = managerInfo->getIntAttribute("maxSoulsGenerationTimeSeconds") * 1000;
 
+		_timeForNextSoulsGeneration = (_minSoulsGenerationTime + _maxSoulsGenerationTime) / 2;
+
+		// Souls per group
 		if (managerInfo->hasAttribute("minSoulsPerGroup"))
 			_minSoulsPerGroup = managerInfo->getIntAttribute("minSoulsPerGroup");
 
