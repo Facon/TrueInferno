@@ -23,6 +23,9 @@ namespace Logic
 		float getHadesFavor() const { return _hadesFavor; }
 
 		void setHadesFavor(const float hadesFavor) { _hadesFavor = hadesFavor; }
+
+		/** Modifica el favor de Hades en la cantidad (positiva o negativa) dada */
+		void changeHadesFavor(const float hadesFavor) { _hadesFavor += hadesFavor; }
 	};
 }
 

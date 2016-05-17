@@ -43,6 +43,7 @@ Map = {
 		material = "SoulPath",
 		mineralCost = 10,
 		gasCost = 0,
+		hadesFavorReward = 0,
 	},
 	
 	HellQuarters = {
@@ -138,6 +139,7 @@ Map = {
 		image = "Furnace",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "FURNACE",
+		hadesFavorReward = 3,
 	},
 	
 	Soul = {
@@ -187,6 +189,7 @@ Map = {
 		image = "Mine",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "MINE",
+		hadesFavorReward = 1,
 	},
 	
 	GasPlant = {
@@ -224,6 +227,7 @@ Map = {
 		image = "GasPlant",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "GAS_PLANT",
+		hadesFavorReward = 1,
 	},
 	
 	EvilWorks = {
@@ -262,6 +266,7 @@ Map = {
 		image = "EvilWorks",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "EVILWORKS",
+		hadesFavorReward = 3,
 	},
 	
 	Refinery = {
@@ -303,6 +308,7 @@ Map = {
 		image = "Refinery",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "REFINERY",
+		hadesFavorReward = 3,
 	},
 		
 	ResearchLabs = {
@@ -324,8 +330,8 @@ Map = {
 		material = "ResearchLabs",
 		minWorkers = 1,
 		maxWorkers = 5,
-		mineralCost = 50,
-		gasCost = 50,
+		mineralCost = 200,
+		gasCost = 200,
 		storedResources="AETHER",
 		maxResources = 1000,
 		consumptionPeriod = 20,
@@ -336,6 +342,7 @@ Map = {
 		image = "ResearchLabs",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "RESEARCH_LABS",
+		hadesFavorReward = 4,
 	},
 		
 	PowerGenerator = {
@@ -369,6 +376,7 @@ Map = {
 		image = "PowerGenerator",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "POWER_GENERATOR",
+		hadesFavorReward = 1,
 	},
 
 	Warehouse = {
@@ -390,8 +398,8 @@ Map = {
 		material = "Warehouse",
 		minWorkers = 1,
 		maxWorkers = 5,
-		mineralCost = 50,
-		gasCost = 50,		
+		mineralCost = 250,
+		gasCost = 250,		
 		storedResources="MINERAL,GAS",
 		maxResources = 1000,
 		gatheredResources="MINERAL,GAS",
@@ -404,6 +412,7 @@ Map = {
 		image = "Warehouse",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "WAREHOUSE",
+		hadesFavorReward = 5,
 	},
 	
 	Tree = {

@@ -106,6 +106,9 @@ namespace Logic {
 		int _gasCost = 0;
 		int _mineralCost = 0;
 
+		/** Recompensa en favor de Hades por la construcción del edificio */
+		int _hadesFavorReward;
+
 		/** Floor's x size */
 		int _floorX;
 

@@ -1,5 +1,8 @@
 #include "Placeable.h"
 
+#include <iostream>
+#include <string>
+
 #include "Map/MapEntity.h"
 #include "Logic/ResourcesManager.h"
 #include "Logic/Entity/Entity.h"
@@ -8,20 +11,14 @@
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/Entity/PlaceableType.h"
-#include "AI/Server.h"
 #include "Logic/Entity/Message.h"
-
-#include <iostream>
-#include <string>
-
-#include "Application/GaleonApplication.h"
-#include "Application/GameState.h"
+#include "Logic/HFManager.h"
 
 namespace Logic {
 	RTTI_ROOT_IMPL(CPlaceable);
 	IMP_FACTORY(CPlaceable);
 
-	CPlaceable::CPlaceable() : IComponent() {
+	CPlaceable::CPlaceable() : IComponent(), _hadesFavorReward(0) {
 	}
 
 	CPlaceable::~CPlaceable() {
@@ -80,6 +77,9 @@ namespace Logic {
 
 		if (entityInfo->hasAttribute("gasCost"))
 			_gasCost = entityInfo->getIntAttribute("gasCost");
+
+		if (entityInfo->hasAttribute("hadesFavorReward"))
+			_hadesFavorReward = entityInfo->getIntAttribute("hadesFavorReward");
 
 		// Chequeamos que las dimensiones X,Z sean números enteros
 		Vector3 dimensions = entityInfo->getVector3Attribute("dimensions");
@@ -177,6 +177,10 @@ namespace Logic {
 		if (isBuilding()) {
 			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 		}
+
+		// Incrementamos el favor de Hades por construcción de edificio
+		HFManager* hadesFavorManager = HFManager::getSingletonPtr();
+		hadesFavorManager->changeHadesFavor(_hadesFavorReward);
 
 		return true;
 	}
