@@ -12,6 +12,10 @@ namespace AI {
 		if (msg._type != MessageType::RESOURCES_RESERVED || msg._resourceType != _consumedResource)
 			return false;
 
+		// 	Rechazamos también si es una cantidad SUPERIOR a la esperada porque eso significa que la reserva no era para nosotros!
+		if (msg._quantity > _resourcesAsked)
+			return false;
+
 		// No se aceptan peticiones simultáneas
 		if (_received)
 			return false;
@@ -19,7 +23,7 @@ namespace AI {
 		_received = true;
 
 		// Guardamos lo finalmente reservado
-		// NOTA: En esta LA no se libera lo reservado. En otras LAs se conumirá (i.e. se reclamará lo reservado) o se liberará
+		// NOTA: En esta LA no se libera lo reservado. En otras LAs se debe consumir (i.e. reclamar lo reservado) o liberar la reserva
 		_smData.setReservedForConsume(msg._quantity);
 
 		// Reactivamos la LA
@@ -32,6 +36,7 @@ namespace AI {
 		// Inicializamos
 		_received = false;
 		_smData.setReservedForConsume(0);
+		_resourcesAsked = 0;
 
 		// Si no hay consumo ni de una unidad no hay nada que hacer
 		if (ceil(_smData.getConsumption()) < 1)
@@ -39,7 +44,8 @@ namespace AI {
 
 		// Preparamos el mensaje de reserva de recursos que se enviará a nuestra propia entidad
 		ResourceMessage m;
-		m.assembleResourcesReserve(_consumedResource, (int) ceil(_smData.getConsumption()), _entity->getEntityID());
+		_resourcesAsked = (int)ceil(_smData.getConsumption());
+		m.assembleResourcesReserve(_consumedResource, _resourcesAsked, _entity->getEntityID());
 
 		// Reintentamos el mensaje hasta que se acepte
 		if (m.Dispatch(*_entity))
@@ -61,7 +67,7 @@ namespace AI {
 		}
 
 		// O más
-		else if (_smData.getReservedForConsume() > (int) ceil(_smData.getConsumption())){
+		else if (_smData.getReservedForConsume() > _resourcesAsked){
 			// No deberíamos haber podido reservar más
 			assert(false && "Reserved more resources than current consumption");
 			return LAStatus::SUCCESS;

@@ -50,7 +50,7 @@ namespace AI {
 		int newConsumption = _smData.getNewConsumptionUnits();
 		int currentCoke = _smData.getCurrentCoke();
 
-		// Si el nuevo consumo total es aceptable para nuestras reservas: éxito
+		// Si las reservas soportan un ciclo completo del nuevo consumo total: éxito
 		if (currentCoke >= (totalConsumption + newConsumption)){
 			_smData.setNewConsumerAccepted(true);
 			return LAStatus::SUCCESS;

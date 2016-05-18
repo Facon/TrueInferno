@@ -10,7 +10,7 @@ namespace AI {
 
 	public:
 		CLAReserveResourcesToConsume(CEntity* entity, CSMResourceConsumerData& smData, ResourceType consumedResource) : 
-			CLatentAction(entity), _smData(smData), _received(false), _consumedResource(consumedResource) {}
+			CLatentAction(entity), _smData(smData), _received(false), _consumedResource(consumedResource), _resourcesAsked(0) {}
 
 		virtual ~CLAReserveResourcesToConsume() {}
 
@@ -27,6 +27,8 @@ namespace AI {
 		bool _received;
 
 		ResourceType _consumedResource;
+
+		int _resourcesAsked;
 	};
 }
 
