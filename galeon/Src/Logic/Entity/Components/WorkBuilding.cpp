@@ -4,6 +4,7 @@
 #include "Logic/Entity/Message.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/LogicRequirement.h"
+
 #include <iostream>
 #include <cassert>
 
@@ -98,8 +99,17 @@ namespace Logic {
 		return true;
 	}
 
+	void CWorkBuilding::decrementAssignedWorkers(int numWorkers)
+	{
+		_assignedWorkers -= numWorkers;
+
+		if (_assignedWorkers < 0)
+			_assignedWorkers = 0;
+	}
+
 	// Ignoramos el requisito de los trabajadores
-	void CWorkBuilding::defineSkippedRequirements(){
+	void CWorkBuilding::defineSkippedRequirements()
+	{
 		_skippedRequirements.insert(LogicRequirement::Workers);
 	}
 

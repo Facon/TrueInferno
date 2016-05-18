@@ -37,6 +37,13 @@ namespace Logic {
 		/** Gestor de mensajes de trabajadores. Modifica la cantidad de trabajadores presentes en el edificio */
 		virtual bool HandleMessage(const WorkerMessage& msg);
 
+		/**
+		Decrementa el número de trabajadores asignados al edificio. Método utilizado únicamente en ciertas
+		partes del código en las que se necesita realizar el cambio de forma síncrona. Usar solo cuando sea
+		absolutamente imprescindible, para todo lo demás: WorkerMessage.
+		*/
+		void decrementAssignedWorkers(int numWorkers);
+
 		int getMinWorkers() const {
 			return _minWorkers;
 		}
