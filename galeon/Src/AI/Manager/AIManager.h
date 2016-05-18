@@ -29,6 +29,11 @@ Contiene la declaración del gestor de la IA de los enemigos en el juego.
 
 using namespace Logic;
 
+namespace Map
+{
+	class CEntity;
+}
+
 namespace AI
 {
 	/**
@@ -58,6 +63,16 @@ namespace AI
 		Debe llamarse al finalizar la aplicación.
 		*/
 		static void Release();
+
+		/**
+		Inicialización de los valores de configuración del manager,
+		utilizando la información extraída de una entidad de mapa
+		(Map::CEntity) leída previamente.
+
+		@param entity Entidad de mapa con los valores de configuración
+		leídos para el manager.
+		*/
+		void spawn(const Map::CEntity *managerInfo);
 
 		/**
 		Función llamada en cada frame para que se realicen las funciones
@@ -129,6 +144,9 @@ namespace AI
 		bool HandleMessage(const ToggleMessage& msg);
 		bool HandleMessage(const IconMessage& msg);
 
+		/** Devuelve la dificultad actual de la partida entre 0 (más fácil) y 1 (más difícil) */
+		float getCurrentDifficulty();
+
 	protected:
 		/**
 		Constructor.
@@ -163,6 +181,9 @@ namespace AI
 		*/
 		void close();
 
+		/** Escala linealmente un valor en el rango [oldMin, oldMax] a [newMin, newMax] */
+		float linearScale(const float oldMin, const float oldMax, const float newMin, const float newMax, const float value);
+
 	private:
 		/**
 		Única instancia de la clase.
@@ -191,13 +212,30 @@ namespace AI
 		*/
 		void assignGodTargetScores(int baseScore, int maxDifference);
 
-		// TODO Leer valores de fichero de configuración
 		/** Puntuación básica a batir en cada ronda */
-		const int _baseScorePerRound = 200;
+		int _baseScorePerRound;
 
-		// TODO Leer valores de fichero de configuración
 		/** Desviación (0,1) relativa máxima aleatoria para la puntuación básica a batir en cada ronda */
-		const float _scoreMaxRelativeDeviation = 0.25;
+		float _scoreMaxRelativeDeviation;
+		
+		/**
+		Dificultad actual de la partida. Debe estar entre 0 (más fácil) y 1 (más difícil)
+		*/
+		float _difficulty;
+
+		/** 
+		Valor actual de la dificultad base de la partida. A lo largo de la partida o, por ejemplo, en la cuenta final de cada ronda, debería ir aumentando
+		*/
+		float _baseDifficulty;
+
+		/** Máxima dificultad base de la partida */
+		float _maxBaseDifficulty;
+		
+		/** Mínima dificultad base de la partida */
+		float _minBaseDifficulty;
+
+		/** Incremento de la dificultad base por ronda */
+		float _baseDifficultyIncrement;
 
 	}; // class AIManager
 

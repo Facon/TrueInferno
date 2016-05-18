@@ -214,6 +214,12 @@ namespace Logic {
 
 			if (manager->getType() == "SoulsTrialManager")
 				CSoulsTrialManager::getSingletonPtr()->spawn(manager);
+
+			if (manager->getType() == "AIManager")
+				AI::CAIManager::getSingletonPtr()->spawn(manager);
+
+			if (manager->getType() == "TimeManager")
+				CTimeManager::getSingletonPtr()->spawn(manager);
 		}
 
 		return true;

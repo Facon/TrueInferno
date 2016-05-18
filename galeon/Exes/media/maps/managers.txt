@@ -7,5 +7,17 @@ Map = {
 		minSoulsPerGroup = 15,
 		maxSoulsPerGroup = 25,
 	},
+
+	AIManager = {
+		type = "AIManager",
+		baseScorePerRound = 100,
+		scoreMaxRelativeDeviation = 0.50,
+		minBaseDifficulty = 0.0,
+		maxBaseDifficulty = 1.0,
+	},
 	
+	TimeManager = {
+		type = "TimeManager",
+		defaultRoundTime = 180000,
+	},
 }

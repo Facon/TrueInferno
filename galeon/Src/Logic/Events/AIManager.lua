@@ -44,9 +44,7 @@ function AIManager:__init()
 	math.randomseed( os.time() )
 
 	-- Tiempo (ms) hasta el primer evento aleatorio
-	self.timeUntilFirstEvent = 10000
-	-- TODO TEST
-	--self.timeUntilFirstEvent = 30000
+	self.timeUntilFirstEvent = 20000
 
 	-- Tiempo (ms) mínimo entre eventos aleatorios
 	self.minTimeBetweenEvents = 15000
@@ -57,8 +55,8 @@ function AIManager:__init()
 	-- Tiempo (ms) que debe transcurrir hasta el próximo evento aleatorio. Se inicializa al valor de espera para el primer evento
 	self.timeUntilNextEvent = self.timeUntilFirstEvent
 
-	-- Dificultad deseada inicialmente. Debe actualizarse conforme avanza la partida. Ha de estar siempre entre 0 (más fácil) y 1 (más difícil)
-	self.desiredDifficulty = 0.2
+	-- Dificultad deseada. Debe actualizarse conforme avanza la partida. Ha de estar siempre entre 0 (más fácil) y 1 (más difícil)
+	self.desiredDifficulty = 0
 	
 	-- Combinaciones de evento-dios
 	self.godEvents = {}
@@ -151,31 +149,9 @@ end
 
 -- Función de actualización del nivel de dificultad
 function AIManager:updateDifficulty()
-	-- TODO Actualizar en función de los puntos del jugador y la curva deseada
-	--[[
-	if(CTimeManager.getSingletonPtr():getElapsedGlboalTime() <= 30000)
-	then
-		self.desiredDifficulty = 0.0
-
-	elseif(CTimeManager.getSingletonPtr():getElapsedGlboalTime() <= 60000)
-	then
-		self.desiredDifficulty = 0.25
-		
-	elseif(CTimeManager.getSingletonPtr():getElapsedGlboalTime() <= 120000)
-	then
-		self.desiredDifficulty = 0.5
-
-	elseif(CTimeManager.getSingletonPtr():getElapsedGlboalTime() <= 180000)
-	then
-		self.desiredDifficulty = 0.75
-
-	else
-		self.desiredDifficulty = 1.0
+	self.desiredDifficulty = CAIManager.getSingletonPtr():getCurrentDifficulty()
 	
-	end
-	]]--
-	
-	self.desiredDifficulty = math.random()
+	--print("Difficulty set to: " .. self.desiredDifficulty)
 end
 
 -- Función que determina el evento-dios a lanzar

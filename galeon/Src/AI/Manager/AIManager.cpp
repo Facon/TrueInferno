@@ -30,6 +30,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "BaseSubsystems/ScriptManager.h"
 #include "Logic/TimeManager.h"
 #include "Logic/Entity/Message.h"
+#include "Map/MapEntity.h"
 
 namespace AI {
 
@@ -37,7 +38,9 @@ namespace AI {
 
 	//--------------------------------------------------------
 
-	CAIManager::CAIManager()
+	CAIManager::CAIManager() : 
+		_baseScorePerRound(0), _scoreMaxRelativeDeviation(0), 
+		_difficulty(0), _baseDifficulty(0), _minBaseDifficulty(0), _maxBaseDifficulty(0)
 	{
 		_instance = this;
 
@@ -67,8 +70,10 @@ namespace AI {
 		_theBoss = nullptr;
 
 		// Liberamos el jugador
-		delete(_player);
-		_player = nullptr;
+		if (_player != nullptr) {
+			delete(_player);
+			_player = nullptr;
+		}
 
 	} // ~CAIManager
 
@@ -106,6 +111,30 @@ namespace AI {
 
 	//--------------------------------------------------------
 
+	void CAIManager::spawn(const Map::CEntity *managerInfo)
+	{
+		_baseScorePerRound = managerInfo->getIntAttribute("baseScorePerRound");
+		_scoreMaxRelativeDeviation = managerInfo->getFloatAttribute("scoreMaxRelativeDeviation");
+		_minBaseDifficulty = managerInfo->getFloatAttribute("minBaseDifficulty");
+		_maxBaseDifficulty = managerInfo->getFloatAttribute("maxBaseDifficulty");
+
+		loadAIScript("AIManager.lua");
+
+		// Asignación de scores objetivo iniciales
+		assignGodTargetScores(_baseScorePerRound, (int)(_baseScorePerRound * _scoreMaxRelativeDeviation));
+
+		// Metemos en el ranking al player
+		_ranking.push_back(_player);
+
+		// Inicialización de la dificultad base
+		_baseDifficulty = _minBaseDifficulty;
+
+		// Se ajusta el incremento por ronda para que la primera ronda empiece con _minBaseDifficulty y la última con _maxBaseDifficulty
+		_baseDifficultyIncrement = (_maxBaseDifficulty - _minBaseDifficulty) / (_gods.size() - 1);
+	}
+	
+	//--------------------------------------------------------
+
 	void CAIManager::tick(unsigned int msecs)
 	{
 		// Tick Lua AIManager
@@ -133,13 +162,6 @@ namespace AI {
 
 	bool CAIManager::open() {
 		luaRegister();
-		loadAIScript("AIManager.lua");
-
-		// Asignación de scores objetivo iniciales
-		assignGodTargetScores(_baseScorePerRound, (int)(_baseScorePerRound * _scoreMaxRelativeDeviation));
-
-		// Metemos en el ranking al player
-		_ranking.push_back(_player);
 
 		return true;
 
@@ -159,6 +181,7 @@ namespace AI {
 			[
 				luabind::class_<CAIManager>("CAIManager")
 				.def("addGod", &CAIManager::addGod)
+				.def("getCurrentDifficulty", &CAIManager::getCurrentDifficulty)
 				.scope
 				[
 					luabind::def("getSingletonPtr", &CAIManager::getSingletonPtr)
@@ -257,6 +280,11 @@ namespace AI {
 		// Tomamos como base la puntuación actual del mejor dios + el score base por ronda
 		int base = getGodRanking().front()->getScore() + _baseScorePerRound;
 		assignGodTargetScores(base, (int)(base * _scoreMaxRelativeDeviation));
+
+		// Aumentamos la dificultad base
+		_baseDifficulty += _baseDifficultyIncrement;
+
+		//std::cout << "Base difficulty set to: " << _baseDifficulty << std::endl;
 	}
 
 	CGod* CAIManager::getGod(const std::string& name){
@@ -436,6 +464,43 @@ namespace AI {
 		//std::cout << msg._type << "\n";
 
 		return false;
+	}
+
+	float CAIManager::getCurrentDifficulty(){
+		CGod* worstGod = getWorstActiveGod();
+
+		// Caso extremo. La partida debería haber acabado antes de quedarnos sin dioses activos
+		if (worstGod == nullptr)
+			return _baseDifficulty;
+
+		// Comparamos la puntuación actual del jugador y la del peor dios activo
+		int current = _player->getScore();
+		int target = worstGod->getScore();
+
+		// Caso base. Sólo debería pasar al arrancar. Devolvemos la dificultad base
+		if (target == 0)
+			return _baseDifficulty;
+
+		// Obtenemos la diferencia relativa con respecto al objetivo
+		float relativeDiff = (current - target) / (float) target;
+			
+		// Escalamos a [_baseDifficulty, 1] en función de la desviación relativa que aceptamos
+		// Truncamos los extremos
+		if (relativeDiff < -_scoreMaxRelativeDeviation)
+			return _baseDifficulty;
+		
+		if (relativeDiff > _scoreMaxRelativeDeviation)
+			return 1;
+
+		// Escalamos el resto
+		return linearScale(-_scoreMaxRelativeDeviation, _scoreMaxRelativeDeviation, _baseDifficulty, 1, relativeDiff);
+	}
+
+	float CAIManager::linearScale(const float oldMin, const float oldMax, const float newMin, const float newMax, const float value){
+		assert(oldMin < oldMax);
+		assert(newMin <= newMax);
+
+		return ((value - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin;
 	}
 
 	void CAIManager::assignGodTargetScores(int baseScore, int maxDifference){

@@ -1,6 +1,11 @@
 #ifndef TIME_MANAGER_H_
 #define TIME_MANAGER_H_
 
+namespace Map
+{
+	class CEntity;
+}
+
 namespace Logic
 {
 	class CTimeManager
@@ -24,6 +29,16 @@ namespace Logic
 		Debe llamarse al finalizar la aplicación.
 		*/
 		static void Release();
+
+		/**
+		Inicialización de los valores de configuración del manager,
+		utilizando la información extraída de una entidad de mapa
+		(Map::CEntity) leída previamente.
+
+		@param entity Entidad de mapa con los valores de configuración
+		leídos para el manager.
+		*/
+		void spawn(const Map::CEntity *managerInfo);
 
 		/**
 		Función llamada en cada frame para que se realicen las funciones
@@ -89,23 +104,22 @@ namespace Logic
 		void close();
 
 	private:
-		// TODO Leer desde configuración externa
-		/** Tiempo (ms) de ronda por defecto */
-		const long int MAX_ROUND_TIME = 3 * 60 * 1000; // 3 minutos por ronda
-
 		/**
 		Única instancia de la clase.
 		*/
 		static CTimeManager _instance;
 
 		/** Tiempo (ms) de la ronda actual */
-		long _maxRoundTime;
+		long _roundTime;
+
+		/** Tiempo (ms) por defecto para cada ronda */
+		long _defaultRoundTime;
 
 		/** Tiempo (ms) global transcurrido */
-		long _globalTime;
+		long _elapsedGlobalTime;
 
 		/** Tiempo (ms) de ronda transcurrido */
-		long _roundTime;
+		long _elapsedRoundTime;
 
 		/** Flag a true si el tiempo está pausado */
 		bool _pause;
