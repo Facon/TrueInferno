@@ -381,7 +381,14 @@ namespace Logic {
 			CSoulsTrialManager::SoulsCategory::UNKNOWN);
 
 		SoulSenderMessage m(workTask, numWorkers);
-		return m.Dispatch(*sourceBuilding->getEntity());
+		bool result = m.Dispatch(*sourceBuilding->getEntity());
+
+		// Si se ha podido enviar las almas a trabajar al edificio de destino, decrementamos
+		// el número de trabajadores del de origen
+		if (result)
+			sourceBuilding->decrementAssignedWorkers(numWorkers);
+
+		return result;
 
 	} // moveWorkers
 
