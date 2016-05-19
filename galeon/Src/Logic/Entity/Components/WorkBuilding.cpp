@@ -11,7 +11,7 @@ namespace Logic {
 	RTTI_ROOT_IMPL(CWorkBuilding);
 	IMP_FACTORY(CWorkBuilding);
 
-	CWorkBuilding::CWorkBuilding() : IComponent() {
+	CWorkBuilding::CWorkBuilding() : IComponent(), _askReceived(false) {
 	}
 
 	bool CWorkBuilding::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
@@ -29,6 +29,8 @@ namespace Logic {
 
 		_changeActive = 0;
 		_changeAssigned = 0;
+
+		_askReceived = false;
 
 		return true;
 	} // spawn
@@ -71,6 +73,16 @@ namespace Logic {
 			_changeAssigned = 0;
 		}
 
+		// Si había petición de información
+		if (_askReceived){
+			WorkerMessage info;
+			info.assembleWorkerInfo(_minWorkers, _maxWorkers, _activeWorkers, _assignedWorkers);
+
+			// Reenviamos hasta que lo acepten
+			if (info.Dispatch(*_entity))
+				_askReceived = false;
+		}
+
 	} // tick
 
 	bool CWorkBuilding::isActive(){
@@ -86,6 +98,15 @@ namespace Logic {
 
 		case MessageType::WORKER_ASSIGNED:{
 			_changeAssigned += msg._change;
+			break;
+		}
+
+		case MessageType::WORKER_ASK:{
+			_askReceived = true;
+			break;
+		}
+
+		case MessageType::WORKER_INFO:{
 			break;
 		}
 

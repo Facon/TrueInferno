@@ -75,6 +75,9 @@ namespace Logic {
 		// Cantidad (positiva o negativa) de trabajadores asignados pendiente de cambiar
 		int _changeAssigned;
 
+		// Flag a true cuando se ha recibido un mensaje WORKER_ASK y hay que responder
+		bool _askReceived;
+
 	}; // class CWorkBuilding
 
 	REG_FACTORY(CWorkBuilding);

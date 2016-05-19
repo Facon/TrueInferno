@@ -106,6 +106,8 @@ namespace Logic
 			LOGISTICS_PROVIDE_RESOURCES,
 			WORKER_ASSIGNED,
 			WORKER_ACTIVATED,
+			WORKER_ASK,
+			WORKER_INFO,
 			POWER_REQUEST_ATTACHMENT,
 			POWER_ATTACHMENT_INFO,
 			CONSUMPTION_START,
@@ -324,19 +326,48 @@ namespace Logic
 	/** Mensajes de trabajadores:
 	- WORKER_ASSIGNED: Cantidad a aumentar o disminuir de trabajadores asignados al edificio (i.e. un trabajador va a ir a trabajar al edificio)
 	- WORKER_ACTIVATED: Cantidad a aumentar o disminuir de trabajadores activados en el edificio (i.e. un trabajador ha llegado al edificio y empieza a trabajar)
+	- WORKER_ASK: Solicitud de información sobre los trabajadores de la entidad
+	- WORKER_INFO: Información de los trabajadores de la entidad
 	*/
 	class WorkerMessage : public Message
 	{
 	public:
+		// TODO deprecated! Mejor usar assembles
 		WorkerMessage(MessageType type, int change);
+
+		// Crea un mensaje vacío por defecto a la espera de que se invoque el assemble correspondiente
+		WorkerMessage();
+
+		// WORKER_ASSIGNED: Cantidad a aumentar o disminuir de trabajadores asignados al edificio (i.e. un trabajador va a ir a trabajar al edificio)
+		void assembleWorkerAssigned(int change);
+
+		// WORKER_ACTIVATED: Cantidad a aumentar o disminuir de trabajadores activados en el edificio (i.e. un trabajador ha llegado al edificio y empieza a trabajar)
+		void assembleWorkerActivated(int change);
+
+		// WORKER_ASK: Solicitud de información sobre los trabajadores de la entidad
+		void assembleWorkerAsk();
+
+		// WORKER_INFO: Información de los trabajadores de la entidad
+		void assembleWorkerInfo(int minWorkers, int maxWorkers, int activeWorkers, int assignedWorkers);
 
 		// Cambio solicitado
 		unsigned int _change;
 
+		// Número mínimo de trabajadores para que funcione el edificio
+		unsigned int _minWorkers;
+
+		// Número máximo de trabajadores permitido
+		unsigned int _maxWorkers;
+
+		// Número de trabajadores activos
+		unsigned int _activeWorkers;
+
+		// Número de trabajadores asignados (= activos + los que están de camino)
+		unsigned int _assignedWorkers;
+
 		virtual bool Dispatch(MessageHandler& handler) const;
 	};
 
-	// TODO Remember to discuss if we should separate this in 2 classes
 	// REQUEST_WALK_SOUL_PATH, RETURN_WALK_SOUL_PATH, PERFORM_WALK_SOUL_PATH, WALKING_SOUL_PATH_FINISHED
 	class WalkSoulPathMessage : public Message
 	{

@@ -493,14 +493,7 @@ namespace AI {
 			return 1;
 
 		// Escalamos el resto
-		return linearScale(-_scoreMaxRelativeDeviation, _scoreMaxRelativeDeviation, _baseDifficulty, 1, relativeDiff);
-	}
-
-	float CAIManager::linearScale(const float oldMin, const float oldMax, const float newMin, const float newMax, const float value){
-		assert(oldMin < oldMax);
-		assert(newMin <= newMax);
-
-		return ((value - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin;
+		return Math::linearScale(-_scoreMaxRelativeDeviation, _scoreMaxRelativeDeviation, _baseDifficulty, 1, relativeDiff);
 	}
 
 	void CAIManager::assignGodTargetScores(int baseScore, int maxDifference){

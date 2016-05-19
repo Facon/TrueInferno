@@ -117,6 +117,7 @@
     <ClCompile Include="..\..\Src\AI\LATransformResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAFollowPath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAUpdateExtractionSpeed.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitConsumerChange.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitGeneratorDetachment.cpp" />
     <ClCompile Include="..\..\Src\AI\LAWaitResourceDemand.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="..\..\Src\AI\LAFollowPath.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />
     <ClInclude Include="..\..\Src\AI\LAFindingPath.h" />
+    <ClInclude Include="..\..\Src\AI\LAUpdateExtractionSpeed.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitConsumerChange.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitGeneratorDetachment.h" />
     <ClInclude Include="..\..\Src\AI\LAWaitResourceDemand.h" />

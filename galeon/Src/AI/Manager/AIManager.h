@@ -181,9 +181,6 @@ namespace AI
 		*/
 		void close();
 
-		/** Escala linealmente un valor en el rango [oldMin, oldMax] a [newMin, newMax] */
-		float linearScale(const float oldMin, const float oldMax, const float newMin, const float newMax, const float value);
-
 	private:
 		/**
 		Única instancia de la clase.

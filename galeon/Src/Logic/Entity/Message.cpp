@@ -214,6 +214,35 @@ namespace Logic
 	WorkerMessage::WorkerMessage(MessageType type, int change) : Message(type), _change(change)
 	{}
 
+	WorkerMessage::WorkerMessage()
+	{}
+
+	void WorkerMessage::assembleWorkerAssigned(int change)
+	{
+		_type = MessageType::WORKER_ASSIGNED;
+		_change = change;
+	}
+
+	void WorkerMessage::assembleWorkerActivated(int change)
+	{
+		_type = MessageType::WORKER_ACTIVATED;
+		_change = change;
+	}
+
+	void WorkerMessage::assembleWorkerAsk()
+	{
+		_type = MessageType::WORKER_ASK;
+	}
+
+	void WorkerMessage::assembleWorkerInfo(int minWorkers, int maxWorkers, int activeWorkers, int assignedWorkers)
+	{
+		_type = MessageType::WORKER_INFO;
+		_minWorkers = minWorkers;
+		_maxWorkers = maxWorkers;
+		_activeWorkers = activeWorkers;
+		_assignedWorkers = assignedWorkers;
+	}
+
 	bool WorkerMessage::Dispatch(MessageHandler& handler) const
 	{
 		RESEND(*this);

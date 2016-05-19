@@ -6,6 +6,7 @@
 #include "AI\Server.h"
 #include "AI\SMResourceExtractorData.h"
 #include "AI\LAExtractResources.h"
+#include "AI\LAUpdateExtractionSpeed.h"
 #include "AI\LatentAction.h"
 #include "AI\Condition.h"
 #include "Map\MapEntity.h"
@@ -35,9 +36,11 @@ namespace AI {
 
 			// Creación de SM en base a los datos
 			int waitCycle = this->addNode(new CLAWait(_extractionPeriod));
+			int updateExtractionSpeed = this->addNode(new CLAUpdateExtractionSpeed(_entity, _data));
 			int extractResources = this->addNode(new CLAExtractResources(_entity, _data, _extractedResource, _maxExtractedQuantity));
 
-			this->addEdge(waitCycle, extractResources, new CConditionFinished());
+			this->addEdge(waitCycle, updateExtractionSpeed, new CConditionFinished());
+			this->addEdge(updateExtractionSpeed, extractResources, new CConditionFinished());
 			this->addEdge(extractResources, waitCycle, new CConditionFinished());
 
 			this->setInitialNode(waitCycle);

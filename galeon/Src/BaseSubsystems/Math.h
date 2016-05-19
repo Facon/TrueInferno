@@ -248,6 +248,14 @@ namespace Math
 
 	} // random
 
+	/** Escala linealmente un valor en el rango [oldMin, oldMax] a [newMin, newMax] */
+	static float linearScale(const float oldMin, const float oldMax, const float newMin, const float newMax, const float value){
+		assert(oldMin < oldMax);
+		assert(newMin <= newMax);
+
+		return ((value - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin;
+	}
+
 } // namespace Math
 
 #endif // __BaseSubsystems_Math_H
