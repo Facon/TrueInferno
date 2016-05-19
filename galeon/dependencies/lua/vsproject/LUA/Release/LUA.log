@@ -1,9 +1,42 @@
-﻿Build started 30/03/2016 16:53:07.
+﻿Build started 19/05/2016 21:25:38.
      1>Project "D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" on node 2 (Build target(s)).
      1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Release\lua51.dll" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Release\lua51.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Release\lua51.lib" /MACHINE:X86 /SAFESEH /DLL Release\lapi.obj
+         Release\lauxlib.obj
+         Release\lbaselib.obj
+         Release\lcode.obj
+         Release\ldblib.obj
+         Release\ldebug.obj
+         Release\ldo.obj
+         Release\ldump.obj
+         Release\lfunc.obj
+         Release\lgc.obj
+         Release\linit.obj
+         Release\liolib.obj
+         Release\llex.obj
+         Release\lmathlib.obj
+         Release\lmem.obj
+         Release\loadlib.obj
+         Release\lobject.obj
+         Release\lopcodes.obj
+         Release\loslib.obj
+         Release\lparser.obj
+         Release\lstate.obj
+         Release\lstring.obj
+         Release\lstrlib.obj
+         Release\ltable.obj
+         Release\ltablib.obj
+         Release\ltm.obj
+         Release\lundump.obj
+         Release\lvm.obj
+         Release\lzio.obj
+         Release\print.obj
+            Creating library D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Release\lua51.lib and object D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Release\lua51.exp
+         Generating code
+         Finished generating code
          LUA.vcxproj -> D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\../../lib/Release\lua51.dll
      1>Done Building Project "D:\Documentos\Proyectos\TrueInferno\galeon\dependencies\lua\vsproject\LUA\LUA.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.18
+Time Elapsed 00:00:01.45
