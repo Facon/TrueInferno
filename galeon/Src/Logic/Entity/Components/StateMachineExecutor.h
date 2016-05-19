@@ -152,6 +152,8 @@ namespace Logic
 
 		SM_EXECUTOR_HANDLE_MESSAGE(ConsumptionMessage);
 
+		SM_EXECUTOR_HANDLE_MESSAGE(WorkerMessage);
+
 	protected:
 		/**
 		Almacena la máquina de estados que se está ejecutando

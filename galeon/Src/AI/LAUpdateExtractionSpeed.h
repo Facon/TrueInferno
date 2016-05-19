@@ -13,6 +13,7 @@ namespace AI {
 
 		virtual ~CLAUpdateExtractionSpeed() {}
 
+		/** Gestor de mensajes de trabajadores. Modifica o informa acerca de los trabajadores del edificio */
 		virtual bool HandleMessage(const WorkerMessage& msg);
 
 	protected:

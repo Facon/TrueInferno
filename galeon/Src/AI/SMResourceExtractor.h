@@ -49,6 +49,8 @@ namespace AI {
 			return true;
 		}
 
+		SM_HANDLE_MESSAGE(WorkerMessage);
+
 	private:
 		/** Tipo del recurso que se extrae */
 		ResourceType _extractedResource;

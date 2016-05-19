@@ -34,7 +34,7 @@ namespace Logic {
 		/** Consulta si el edificio tiene suficientes trabajadores para considerarse activo */
 		bool isActive();
 
-		/** Gestor de mensajes de trabajadores. Modifica la cantidad de trabajadores presentes en el edificio */
+		/** Gestor de mensajes de trabajadores. Modifica o informa acerca de los trabajadores del edificio */
 		virtual bool HandleMessage(const WorkerMessage& msg);
 
 		int getMinWorkers() const {
