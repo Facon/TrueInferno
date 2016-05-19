@@ -23,7 +23,11 @@ namespace AI {
 	private:
 		CSMResourceExtractorData& _smData;
 
+		// Flag a true cuando se ha recibido el mensaje de información
 		bool _received;
+
+		// Mensaje con la información de los trabajadores
+		WorkerMessage _workerInfo;
 	};
 }
 

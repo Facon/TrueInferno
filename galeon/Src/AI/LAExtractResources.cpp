@@ -1,7 +1,8 @@
 #include "LAExtractResources.h"
-#include "Logic\ResourcesManager.h"
 
-#include "Logic\Entity\Components\WorkBuilding.h"
+#include <math.h>
+
+#include "Logic\ResourcesManager.h"
 
 namespace AI {
 	RTTI_IMPL(CLAExtractResources, CLatentAction);
@@ -11,10 +12,8 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLAExtractResources::OnRun(unsigned int msecs) {
-		// TODO Hay que hacerlo proporcional al número de trabajadores
-		unsigned int quantity = _maxExtractedQuantity;
-
-		CWorkBuilding* workBuilding = _entity->getComponent<CWorkBuilding>();
+		// La cantidad de recursos extraídos es la máxima ajustada por el factor de velocidad
+		int quantity = (int) std::truncf(_maxExtractedQuantity * _smData.getSpeedFactor());
 
 		// Notificamos el incremento de recursos
 		ResourceMessage m;

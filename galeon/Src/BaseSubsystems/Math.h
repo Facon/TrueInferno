@@ -253,6 +253,13 @@ namespace Math
 		assert(oldMin < oldMax);
 		assert(newMin <= newMax);
 
+		// Truncado de valores extremos
+		if (value <= oldMin)
+			return newMin;
+
+		if (value >= oldMax)
+			return newMax;
+
 		return ((value - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin;
 	}
 
