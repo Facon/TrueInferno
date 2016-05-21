@@ -118,13 +118,17 @@ namespace Logic
 			else // !absoluteTime
 				// El instante de lanzamiento es relativo al instante actual
 				_time = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime() + time;
+
+			_eventId = _nextEventId++;
 		}
 
 		/**
 		Construye un evento con trigger basado en condición.
 		*/
 		CEvent(EventType type, ConditionTriggerType conditionType) :
-			_type(type), _trigger(CONDITION), _conditionType(conditionType) {}
+			_type(type), _trigger(CONDITION), _conditionType(conditionType) {
+			_eventId = _nextEventId++;
+		}
 
 		/**
 		Destructor.
@@ -150,9 +154,16 @@ namespace Logic
 		Comprueba si debe lanzar el evento y lo hace en caso positivo.
 		En caso negativo, simplemente no hace nada.
 
+		@param[out] keepAlive true si el evento debe mantenerse vivo o 
+		puede ser borrado tras el lanzamiento.
+
 		@return true si el evento fue lanzado.
 		*/
-		bool launch();
+		bool launch(bool& keepAlive);
+
+		int getEventId() const {
+			return _eventId;
+		}
 
 	protected:
 
@@ -189,9 +200,51 @@ namespace Logic
 		jerarquía.
 		*/
 		virtual void execute() = 0;
+
+		/** Id interno del evento */
+		int _eventId;
+
+		/** Contador estático del id de evento */
+		static int _nextEventId;
 		
 	}; // class CEvent
+	/*
+	class EventID
+	{
+	public:
 
+		/**
+		Identificadores de evento que indican que el identificador no ha sido
+		inicializado (este identificador NO se utilizará para eventos válidos), o
+		cual es el primer identificador válido para asignar.
+		/
+		enum {
+			UNASSIGNED = 0xFFFFFFFF,
+			FIRST_ID = 0x00000000
+		};
+
+	private:
+		/**
+		Próximo identificador a asignar (aun no asignado).
+		/
+		static TEventID _nextId;
+
+		/**
+		Clase amiga que puede solicitar nuevos identificadores.
+		/
+		friend class CEvent;
+
+		/**
+		Devuelve el siguiente identificador de evento sin asignar. La funcion no
+		recicla identificadores ni comprueba que nos quedemos sin identificadores
+		para asignar.
+
+		@return Nuevo identificador.
+		/
+		static TEventID NextID();
+
+	}; // class EventID
+	*/
 } // namespace Logic
 
 #endif // __Logic_Event_H

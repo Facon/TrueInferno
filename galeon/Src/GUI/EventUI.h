@@ -2,6 +2,9 @@
 #define EVENTUI_H_
 
 #include <string>
+#include <map>
+
+#include "Logic\Events\Event.h"
 
 namespace CEGUI
 {
@@ -23,6 +26,7 @@ namespace GUI
 	public:
 		EventUI();
 		~EventUI();
+
 		void init();
 		void release();
 		void activate();
@@ -33,6 +37,15 @@ namespace GUI
 		void setEventTitle(std::string EventTitle);
 		void setEventTextResume(std::string EventTextResume);
 		void setEventWindowVisible(bool visible);
+
+		/** 
+		Registra un evento en el EventUI.
+		NOTA: Esta clase asume la responsabilidad de mantener y liberar la memoria del evento.
+		 */
+		void registerEvent(Logic::CEvent* event);
+
+	private:
+		std::map<int, Logic::CEvent*> _events;
 	};
 }
 

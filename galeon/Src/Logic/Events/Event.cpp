@@ -19,10 +19,15 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 
 #include "Logic/TimeManager.h"
 #include "BaseSubsystems/ScriptManager.h"
+#include "GUI/Server.h"
+#include "GUI/UIManager.h"
+#include "GUI/EventUI.h"
 
 #include <iostream>
 
 namespace Logic {
+
+	int CEvent::_nextEventId = 0;
 
 	void CEvent::luaRegister()
 	{
@@ -39,12 +44,21 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	bool CEvent::launch()
+	bool CEvent::launch(bool& keepAlive)
 	{
+		// Si hay que lanzar el evento
 		bool launched = mustBeLaunched();
-
-		if (launched)
+		if (launched){
+			// Ejecutamos
 			this->execute();
+
+			// Notificamos el evento al EventUI
+			GUI::EventUI *eventUI = GUI::CServer::getSingletonPtr()->getUIManager()->getEventUI();
+			eventUI->registerEvent(this);
+
+			// TODO Definir por evento/tipo de lanzamiento!
+			keepAlive = true;
+		}
 
 		return launched;
 
@@ -54,13 +68,24 @@ namespace Logic {
 
 	bool CEvent::mustBeLaunched()
 	{
-		// @TODO Usar aquí el CTimeManager para los tiempos exactos, ya que el AppTime siempre
-		// va por delante tantos segundos como se tarde en cargar la aplicación. Habrá que
-		// cambiar la implementación del CTimeManager porque ahora mismo solo contiene el
-		// tiempo decreciente.
+		// Se usa el CTimeManager para los tiempos exactos, ya que el AppTime siempre
+		// va por delante tantos segundos como se tarde en cargar la aplicación.
 		return (_trigger == TIME && _time <= Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime())
 			|| _trigger == CONDITION;
 
 	} // mustBeLaunched
-	
+	/*
+	TEventID EventID::_nextId = EventID::FIRST_ID;
+
+	//---------------------------------------------------------
+
+	TEntityID EntityID::NextID()
+	{
+		TEntityID ret = _nextId;
+		assert(ret != EntityID::UNASSIGNED && "Se han asignado todos los identificadores posibles.");
+		_nextId++;
+		return ret;
+
+	} // NextEntityId
+	*/
 } // namespace Logic

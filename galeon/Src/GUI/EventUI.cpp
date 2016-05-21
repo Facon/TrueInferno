@@ -30,6 +30,14 @@ namespace GUI
 	{
 		// Remove all events to avoid memory leaks
 		_uiEventWindow->getChildElement("AcceptEvent")->removeAllEvents();
+
+		// Liberamos los CEvent
+		for (auto it = _events.begin(); it != _events.end(); ++it){
+			delete (it->second);
+			it->second = NULL;
+			_events.erase(it);
+		}
+		_events.clear();
 	}
 
 	void EventUI::activate()
@@ -72,6 +80,10 @@ namespace GUI
 		return true;
 	}
 
+	void EventUI::registerEvent(Logic::CEvent* event){
+		_events[event->getEventId()] = event;
+	}
+	
 	void EventUI::setEventImage(std::string eventImage)
 	{
 		_uiEventWindow->getChild("EventImage")->setProperty("Image","TrueInfernoEvents/" + eventImage);

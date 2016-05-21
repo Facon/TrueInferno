@@ -93,17 +93,26 @@ namespace Logic {
 
 	void CEventManager::tick(unsigned int msecs)
 	{
-		CEvent *ev;
+		CEvent *ev = NULL;
 		bool launch = true;
 
 		while (!_timeEvents.empty() && launch)
 		{
-			ev = _timeEvents.front();
-			launch = ev->launch();
+			bool keepAlive = false;
 
+			ev = _timeEvents.front();
+			launch = ev->launch(keepAlive);
+
+			// Si se lanzó el evento
 			if (launch) {
+				// Se borra el puntero del array de eventos de tiempo
 				_timeEvents.erase(_timeEvents.begin());
-				delete ev;
+
+				// Y se borra la memoria salvo que el lanzamiento dictaminara que el evento debe mantenerse vivo
+				if (!keepAlive)
+					delete ev;
+
+				// El puntero se apunta a NULL en cualquier caso
 				ev = NULL;
 			}
 		}
@@ -175,14 +184,21 @@ namespace Logic {
 
 		if (!eventsList.empty())
 		{
+			bool keepAlive = false;
+
 			CEvent* conditionEvent = eventsList.front();
 			eventsList.pop_front();
 			_conditionEvents[conditionTriggerType] = eventsList;
 
-			bool launch = conditionEvent->launch();
+			bool launch = conditionEvent->launch(keepAlive);
 
+			// Si se lanzó el evento
 			if (launch) {
-				delete conditionEvent;
+				// Y se borra la memoria salvo que el lanzamiento dictaminara que el evento debe mantenerse vivo
+				if (!keepAlive)
+					delete conditionEvent;
+
+				// El puntero se apunta a NULL en cualquier caso
 				conditionEvent = NULL;
 			}
 
