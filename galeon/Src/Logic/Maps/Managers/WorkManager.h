@@ -35,7 +35,8 @@ sus componentes, mensajes, factorias de entidades y componentes, etc.
 namespace Logic
 {
 	/**
-	Manager singleton que gestiona la asignación de tareas a los trabajadores.
+	Manager singleton que gestiona la asignación de tareas y edificios
+	a los trabajadores.
 
 	@ingroup logicGroup
 
@@ -66,13 +67,15 @@ namespace Logic
 		static void Release();
 
 		/**
-		Obtiene la entidad del edificio donde sería más conveniente añadir trabajadores.
-		Si se indica un tipo de edificio sólo se buscará entre edificios de dicho tipo.
+		Obtiene la entidad del edificio donde debe ser enviado el siguiente
+		nuevo trabajador en función de las prioridades definidas para los
+		grupos de edificios.
 		*/
-		TEntityID findBuildingToWork(BuildingType buildingType = BuildingType::Unassigned);
+		TEntityID findBuildingToWork();
 
 		/**
-		Obtiene la entidad de horno activo con más capacidad actual para quemar almas.
+		Obtiene la entidad de horno activo con más capacidad actual para
+		quemar almas.
 		*/
 		TEntityID findFurnace();
 

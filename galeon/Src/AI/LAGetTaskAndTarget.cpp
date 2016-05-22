@@ -106,9 +106,11 @@ namespace AI {
 		if (target == EntityID::UNASSIGNED)
 			return false;
 
-		//std::unique_ptr<CWorkTask> _task(new CWorkTask(target));
 		_workTask = new CWorkTask(_entity->getMap(), target, _pendingSoulsToWork.front());
-		return true;
+
+		// Forzamos de forma síncrona la inicialización de la tarea para incrementar el número de
+		// trabajadores asignados del edificio
+		return _workTask->start();
 	}
 
 	bool CLAGetTaskAndTarget::createBurnTask()

@@ -68,7 +68,7 @@ namespace AI
 		unsigned int _timeSinceLastSoulSent = 0;
 
 		/* Tiempo a esperar entre cada alma enviada */
-		unsigned int _timeBetweenSouls = 200;
+		unsigned int _timeBetweenSouls = 500;
 
 		/* Crea las almas. Devuelve true cuando se acabó de crear todas las almas */
 		bool createSouls();

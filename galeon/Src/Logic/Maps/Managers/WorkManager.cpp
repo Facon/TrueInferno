@@ -96,45 +96,38 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
-	TEntityID CWorkManager::findBuildingToWork(BuildingType buildingType)
+	TEntityID CWorkManager::findBuildingToWork()
 	{
-		// Buscaremos el edificio con menor proporción de trabajadores asignados sobre el máximo total
-		TEntityID target = EntityID::UNASSIGNED;
-		float minRatio = FLT_MAX;
+		CWorkBuilding *nonFullBuilding = nullptr;
 
-		// Obtenemos los edificios
-		std::map<BuildingType, std::set<CPlaceable*>*> _buildings = CBuildingManager::getSingletonPtr()->getBuildings();
+		// Buscaremos, en el orden de prioridad definido para los diferentes
+		// grupos de edificios, el primero cuyo número de trabajadores
+		// asignados no llegue al mínimo necesario
+		for (unsigned int group = 0; group < NUM_BUILDING_GROUPS; ++group)
+		{
+			std::vector<CWorkBuilding*> currentGroupBuildings = getBuildingsFromGroup(group);
 
-		// Para cada tipo de edificio registrado
-		for (auto it = _buildings.cbegin(); it != _buildings.cend(); ++it){
-			// Si nos especificaron coger de un tipo concreto, ignoramos todos los demás tipos
-			if (buildingType != BuildingType::Unassigned && buildingType != it->first)
-				continue;
+			std::vector<CWorkBuilding*>::const_iterator it, end;
 
-			// Para cada uno de sus edificios
-			if (it->second != nullptr)
-				for (auto it2 = it->second->cbegin(); it2 != it->second->cend(); ++it2){
-					CWorkBuilding* building = (*it2)->getEntity()->getComponent<CWorkBuilding>();
-					// Ignoramos los edificios que no sean de trabajadores
-					if (building == nullptr)
-						continue;
+			for (it = currentGroupBuildings.cbegin(), end = currentGroupBuildings.cend(); it != end; ++it)
+			{
+				CWorkBuilding *currentBuilding = *it;
 
-					// Ignoramos los edificios ya llenos
-					if (building->getAssignedWorkers() >= building->getMaxWorkers())
-						continue;
+				if (currentBuilding->getVirtualAssignedWorkers() < currentBuilding->getMinWorkers())
+					return currentBuilding->getEntity()->getEntityID();
 
-					// Calculamos la proporción de ocupación
-					float occupationRatio = ((float)building->getAssignedWorkers()) / building->getMaxWorkers();
-
-					// Y actualizamos, si procede, el mejor ratio encontrado hasta el momento
-					if (occupationRatio < minRatio){
-						minRatio = occupationRatio;
-						target = building->getEntity()->getEntityID();
-					}
-				}
+				// Al mismo tiempo que iteramos sobre los edificios buscando uno que no llegue
+				// al mínimo número de trabajadores, nos guardamos el primero que no esté
+				// completo (con lo que nos ahorramos volver a iterar en caso de que todos
+				// lleguen al mínimo)
+				if (nonFullBuilding == nullptr &&
+					currentBuilding->getVirtualAssignedWorkers() < currentBuilding->getMaxWorkers())
+					nonFullBuilding = currentBuilding;
+			}
 		}
 
-		return target;
+		// Todos los edificios llegan al mínimo de trabajadores...
+		return (nonFullBuilding != nullptr) ? nonFullBuilding->getEntity()->getEntityID() : EntityID::UNASSIGNED;
 
 	} // findBuildingToWork
 
@@ -297,7 +290,7 @@ namespace Logic {
 			{
 				CWorkBuilding *currentBuilding = (*it);
 
-				int assignedWorkers = currentBuilding->getAssignedWorkers();
+				int assignedWorkers = currentBuilding->getVirtualAssignedWorkers();
 				int minWorkers = currentBuilding->getMinWorkers();
 
 				if (assignedWorkers < minWorkers)
@@ -347,7 +340,7 @@ namespace Logic {
 				if (groupPriority == lastPriorityGroup && currentBuilding == building)
 					return false;
 
-				int buildingWorkers = currentBuilding->getAssignedWorkers();
+				int buildingWorkers = currentBuilding->getVirtualAssignedWorkers();
 
 				if (buildingWorkers > 0)
 				{
@@ -380,13 +373,18 @@ namespace Logic {
 		AI::CWorkTask *workTask = new AI::CWorkTask(targetEntity->getMap(), targetEntity->getEntityID(),
 			CSoulsTrialManager::SoulsCategory::UNKNOWN);
 
+		workTask->setStarted(true);
+
 		SoulSenderMessage m(workTask, numWorkers);
 		bool result = m.Dispatch(*sourceBuilding->getEntity());
 
 		// Si se ha podido enviar las almas a trabajar al edificio de destino, decrementamos
-		// el número de trabajadores del de origen
+		// el número de trabajadores del de origen y forzamos el incremento en el primero
 		if (result)
-			sourceBuilding->decrementAssignedWorkers(numWorkers);
+		{
+			sourceBuilding->decreaseAssignedWorkers(numWorkers);
+			targetBuilding->increaseAssignedWorkers(numWorkers);
+		}
 
 		return result;
 
