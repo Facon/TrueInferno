@@ -127,7 +127,6 @@ namespace AI
 	{
 		// Envíamos solamente un alma cada vez para que salgan con el retraso
 		// definido entre ellas
-		// @TODO
 		if (!_newSouls.empty())
 		{
 			std::pair<CEntity*, AI::CSoulTask*> _newSoul = _newSouls.front();

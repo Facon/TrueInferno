@@ -12,79 +12,68 @@ namespace AI{
 	class CWorkTask : public CSoulTask {
 
 	public:
-		CWorkTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::SoulsTrialManager::SoulsCategory category) :
-			CSoulTask(map, target, category), _workerAssigned(false) {};
+		CWorkTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::CSoulsTrialManager::SoulsCategory category, bool started = false) :
+			CSoulTask(map, target, category), _started(started) {};
 
 		virtual ~CWorkTask() {};
 
-		virtual CSoulTask* clone(){
-			return new CWorkTask(_map, _target, _category);
+		virtual CSoulTask* clone()
+		{
+			return new CWorkTask(_map, _target, _category, _started);
 		}
 
-		bool start(){
-			CSoulTask::start();
+		bool start()
+		{
+			// Evitamos múltiples inicializaciones
+			if (_started)
+				return true;
 
-			if (!_workerAssigned){
-				// Chequeamos que el objetivo siga existiendo
-				Logic::CEntity* targetEntity = _map->getEntityByID(_target);
+			_started = true;
 
-				// Si lo está
-				if (targetEntity != nullptr){
-					// Asignamos el trabajador al objetivo
-					Logic::WorkerMessage m(MessageType::WORKER_ASSIGNED, 1);
+			// Chequeamos que el objetivo siga existiendo
+			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 
-					// Paramos si no nos aceptan el mensaje
-					if (!m.Dispatch(*targetEntity))
-						return false;
+			// Si existe
+			if (targetEntity != nullptr)
+			{
+				// Asignamos el trabajador al objetivo
+				Logic::WorkerMessage m(MessageType::WORKER_ASSIGNED, 1);
 
-					_workerAssigned = true;
-				}
-
-				// Si no, la solución más sencilla es descartar al trabajador
-				// TODO Quedaría mejor si le asignamos otra tarea
-				else{
-					std::cout << "Soul's target for WorkSoulTask has disappeared" << std::endl;
-					return true; // TODO Se debe notificar el error de alguna forma porque en este punto ya sabemos que, sin objetivo, la tarea no va a poder completarse
-				}
+				// Damos por ejecutada la tarea si nos aceptan el mensaje
+				return m.Dispatch(*targetEntity);
 			}
-
-			// Ponemos los iconos
-			// Obtenemos la entidad que va a ejecutar la tarea
-			CEntity* executor = _map->getEntityByID(_executorId);
-
-			// Si existe, establecemos sus iconos
-			if (executor != nullptr){
-				// Icono de alma que va a trabajar
-				IconMessage m(MessageType::ICON_ADD, IconType::IconType::SOUL);
-				bool result = m.Dispatch(*executor);
-				assert(result && "Can't set working soul icon");
-
-				// Icono por edificio de destino
-				result = addDestinationBuildingIcon();
-				assert(result && "Can't set building icon");
-			}
-
-			else{
-				assert(false && "There is no executor starting the task");
-				// Dejamos que siga sin icono
+			// Si no, la solución más sencilla es descartar al trabajador
+			// TODO Quedaría mejor si le asignamos otra tarea
+			else
+			{
+				std::cout << "Soul's target for WorkSoulTask has disappeared" << std::endl;
+				return true; // TODO Se debe notificar el error de alguna forma porque en este punto ya sabemos que, sin objetivo, la tarea no va a poder completarse
 			}
 
 			return true;
 		};
 
-		bool execute() {
-			CSoulTask::execute();
-
+		bool execute()
+		{
 			// Chequeamos que el objetivo siga existiendo
 			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 
 			// Si lo está
 			if (targetEntity != nullptr){
-				// Activamos el trabajador en el objetivo
+				// Activamos el trabajador en el objetivo...
 				Logic::WorkerMessage m(MessageType::WORKER_ACTIVATED, 1);
-				return m.Dispatch(*targetEntity);
-			}
 
+				// ...si se acepta el mensaje
+				bool workerActivated = m.Dispatch(*targetEntity);
+
+				if (!workerActivated)
+				{
+					CWorkBuilding* workBuilding = targetEntity->getComponent<CWorkBuilding>();
+					workBuilding->decreaseAssignedWorkers(1);
+				}
+
+				return workerActivated;
+			}
 			// Si no, la solución más sencilla es descartar al trabajador
 			// TODO Quedaría mejor si le asignamos otra tarea
 			else{
@@ -93,10 +82,16 @@ namespace AI{
 			}
 		};
 
-	private:
-		bool _workerAssigned;
+		void setStarted(bool started)
+		{
+			_started = started;
+		}
 
-	}; // class CWorkTask
+	protected:
+		// Indica si el método start() ha sido ya ejecutado previamente
+		bool _started = false;
+
+	};
 
 } // namespace AI
 
