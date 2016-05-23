@@ -49,21 +49,25 @@ namespace Logic
 	{
 
 	public:
-
-		/**  Constructor */
+		/**  Constructor basado en tiempo */
 		CRoundTimeChangeEvent(
-			unsigned long time, const std::string& godName, const std::string& title, const std::string& description, const std::string& image, 
+			unsigned long time, const std::string& godName, const std::string& title,
+			const std::string& description, const std::string& image,
 			int roundTimeChange, bool absoluteTime = true) :
-						
-			CEvent(INFO, time, absoluteTime), _godName(godName), _title(title), _description(description), _image(image),
+
+			CEvent(INFO, time, absoluteTime, false, godName), _title(title),
+			_description(description), _image(image),
 			_roundTimeChange(roundTimeChange) {};
 
+		/** Constructor estático. Permite invocar desde Lua pero mantener el ciclo de vida en C++ */
 		static CRoundTimeChangeEvent* addCRoundTimeChangeEvent(
-			unsigned long time, const std::string& godName, const std::string& title, const std::string& description, const std::string& image, 
+			unsigned long time, const std::string& godName, const std::string& title,
+			const std::string& description, const std::string& image,
 			int roundTimeChange, bool absoluteTime = true) {
 
 			return new CRoundTimeChangeEvent(
-				time, godName, title, description, image, 
+				time, godName, title,
+				description, image,
 				roundTimeChange, absoluteTime);
 		}
 
@@ -77,6 +81,18 @@ namespace Logic
 		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
 		*/
 		static void luaRegister();
+		
+		/** Devuelve la imagen para la GUI */
+		std::string getGUIImageName() const;
+
+		/** Devuelve el título para la GUI */
+		std::string getGUITitle() const;
+
+		/** Devuelve el campo de texto para la GUI */
+		std::string getGUIText() const;
+
+		/** Devuelve el campo adicional de texto para la GUI */
+		std::string getGUIResumeText() const;
 
 	protected:
 
@@ -89,9 +105,6 @@ namespace Logic
 		/** Tiempo (s) que se va a añadir (>0) o quitar (<0) del tiempo restante de la ronda actual */
 		int _roundTimeChange;
 
-		/** Nombre del dios que provoca el evento */
-		std::string _godName;
-		
 		/** Texto descriptivo del evento para mostrar en el panel */
 		std::string _description;
 

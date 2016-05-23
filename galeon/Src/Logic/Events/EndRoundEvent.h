@@ -17,6 +17,8 @@ el desenlace de la ronda (victoria o derrota).
 #ifndef END_ROUND_EVENT_H_
 #define END_ROUND_EVENT_H_
 
+#include <string>
+
 #include "Event.h"
 
 /**
@@ -48,7 +50,9 @@ namespace Logic
 		Constructor basado en trigger.
 		*/
 		CEndRoundEvent(bool victory) :
-			CEvent(INFO, CEvent::ConditionTriggerType::END_ROUND), _victory(victory) {};
+			CEvent(INFO, CEvent::ConditionTriggerType::END_ROUND, true, ""), _victory(victory) {
+			initGUIConstants();
+		};
 
 		/**
 		Constructor basado en tiempo.
@@ -57,12 +61,26 @@ namespace Logic
 		@param delay Retraso en ms para lanzar el evento desde el instante de tiempo actual
 		*/
 		CEndRoundEvent(bool victory, int delay) :
-			CEvent(INFO, delay, false), _victory(victory) {};
+			CEvent(INFO, delay, false, true, ""), _victory(victory) {
+			initGUIConstants();
+		};
 
 		/**
 		Destructor.
 		*/
 		~CEndRoundEvent() {};
+
+		/** Devuelve la imagen para la GUI */
+		std::string getGUIImageName() const;
+
+		/** Devuelve el título para la GUI */
+		std::string getGUITitle() const;
+
+		/** Devuelve el campo de texto para la GUI */
+		std::string getGUIText() const;
+
+		/** Devuelve el campo adicional de texto para la GUI */
+		std::string getGUIResumeText() const;
 
 	protected:
 
@@ -76,6 +94,14 @@ namespace Logic
 		asociada al evento.
 		*/
 		void execute();
+		
+	private:
+		std::string _eventImage;
+		std::string _eventTitle;
+		std::string _eventText;
+		std::string _eventTextResume;
+
+		void initGUIConstants();
 		
 	}; // class CEndRoundEvent
 

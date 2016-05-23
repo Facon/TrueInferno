@@ -9,7 +9,10 @@
 loadFromCpp = 1
 
 -- Flag para habilitar/deshabilitar fácilmente la IA
-aiEnabled = false
+aiEnabled = true
+
+-- Flag para test
+aiTest = false
 
 -- TODO usar require para no cargar módulos duplicados
 -- Carga de módulos desde la ruta base definida en C++
@@ -64,8 +67,23 @@ function AIManager:__init()
 	do
 		for eventIndex,event in pairs(events) 
 		do
-			-- Nos quedamos con los eventos de dioses normales o que permitan ser lanzados por el jefe
-			if((god.isBoss == false) or (event.allowsBoss == true))
+			-- Determinamos si evento puede ser lanzado por el dios. Por defecto no
+			local canThrowEvent = false
+			
+			-- Si es el jefe y el evento permite al jefe
+			if (god.isBoss == true and event.allowsBoss == true)
+			then
+				canThrowEvent = true
+
+			elseif (god.isBoss == false and event.allowsNonBoss == true)
+			then
+				canThrowEvent = true
+			
+			else
+				canThrowEvent = false
+			end
+			
+			if(canThrowEvent == true)
 			then
 				local godEvent = {god = god, event = event}
 				table.insert(self.godEvents, godEvent)
@@ -260,5 +278,7 @@ else
 	aiManager = AIManager
 end
 
--- DEBUG Se fuerza el primer tick para poder ver la traza del error con breakpoint en CAIManager::open() de C++
--- aiManager:tick(aiManager.timeUntilFirstEvent)
+if(aiTest == true)
+then
+	dofile("../Src/Logic/Events/aiTest.lua")
+end

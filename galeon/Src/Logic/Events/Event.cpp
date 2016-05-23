@@ -22,12 +22,56 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 #include "GUI/Server.h"
 #include "GUI/UIManager.h"
 #include "GUI/EventUI.h"
+#include "AI/Manager/AIManager.h"
 
 #include <iostream>
 
 namespace Logic {
-
+	/** Inicializador estático del ID de evento */
 	int CEvent::_nextEventId = 0;
+
+	/**
+	Construye un evento con trigger basado en tiempo.
+	@param type Tipo del evento.
+	@param time En función del parámetro absoluteTime, instante temporal absoluto en el que se lanzará el evento
+	o relativo al instante actual.
+	@absoluteTime Flag a true para lanzar el evento en un instante temporal absoluto o relativo al instante actual.
+	@showImmediately Flag a true si el evento debe mostrarse inmediatamente en vez de notificarse primero
+	*/
+	CEvent::CEvent(EventType type, unsigned long time, bool absoluteTime, bool showImmediately, const std::string& godName) :
+		_type(type), _trigger(TIME), _showImmediately(showImmediately) {
+
+		// Si el tiempo es absoluto
+		if (absoluteTime)
+			// El instante de lanzamiento es el proporcionado
+			_time = time;
+
+		// Si no
+		else // !absoluteTime
+			// El instante de lanzamiento es relativo al instante actual
+			_time = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime() + time;
+
+		if (!godName.empty())
+			_god = AI::CAIManager::getSingletonPtr()->getGod(godName);
+		else
+			_god = nullptr;
+
+		_eventId = _nextEventId++;
+	}
+
+	/**
+	Construye un evento con trigger basado en condición.
+	*/
+	CEvent::CEvent(EventType type, ConditionTriggerType conditionType, bool showImmediately, const std::string& godName) :
+		_type(type), _trigger(CONDITION), _conditionType(conditionType), _showImmediately(showImmediately) {
+
+		if (!godName.empty())
+			_god = AI::CAIManager::getSingletonPtr()->getGod(godName);
+		else
+			_god = nullptr;
+
+		_eventId = _nextEventId++;
+	}
 
 	void CEvent::luaRegister()
 	{
@@ -52,11 +96,13 @@ namespace Logic {
 			// Ejecutamos
 			this->execute();
 
-			// Notificamos el evento al EventUI
-			GUI::EventUI *eventUI = GUI::CServer::getSingletonPtr()->getUIManager()->getEventUI();
-			eventUI->registerEvent(this);
+			// Notificamos el evento al EventUI si es necesario
+			if (mustBeNotified()) {
+				GUI::EventUI *eventUI = GUI::CServer::getSingletonPtr()->getUIManager()->getEventUI();
+				eventUI->registerEvent(this);
+			}
 
-			// TODO Definir por evento/tipo de lanzamiento!
+			// TODO Definir por evento/tipo de lanzamiento
 			keepAlive = true;
 		}
 
@@ -74,18 +120,10 @@ namespace Logic {
 			|| _trigger == CONDITION;
 
 	} // mustBeLaunched
-	/*
-	TEventID EventID::_nextId = EventID::FIRST_ID;
 
-	//---------------------------------------------------------
+	bool CEvent::mustBeNotified() const {
+		// Simplemente se revisa si hay imagen definida. Se podría mejorar definiendo un campo adicional a rellenar por cada evento
+		return !getGUIImageName().empty();
+	}
 
-	TEntityID EntityID::NextID()
-	{
-		TEntityID ret = _nextId;
-		assert(ret != EntityID::UNASSIGNED && "Se han asignado todos los identificadores posibles.");
-		_nextId++;
-		return ret;
-
-	} // NextEntityId
-	*/
 } // namespace Logic

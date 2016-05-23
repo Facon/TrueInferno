@@ -39,6 +39,24 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	std::string CPlayerResourcesChangeEvent::getGUIImageName() const {
+		return _image;
+	}
+
+	std::string CPlayerResourcesChangeEvent::getGUITitle() const {
+		return _title;
+	}
+
+	std::string CPlayerResourcesChangeEvent::getGUIText() const {
+		return _description;
+	}
+
+	std::string CPlayerResourcesChangeEvent::getGUIResumeText() const {
+		return "";
+	}
+	
+	//--------------------------------------------------------
+
 	void CPlayerResourcesChangeEvent::execute()
 	{
 		// Preparamos la variable que contendrá el resultado del incremento/decremento
@@ -77,16 +95,6 @@ namespace Logic {
 				resourcesManager->decrementResources(_resourceType, quantity, false, true, result);
 		}
 
-		// Mostrar panel
-		// @TODO Hacer esto bien...
-		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-
-		uiManager->getEventUI()->setEventImage(_image);
-		uiManager->getEventUI()->setEventTitle(_title);
-
-		uiManager->getEventUI()->setEventText(_description);
-		uiManager->getEventUI()->setEventTextResume("");
-		uiManager->getEventUI()->setEventWindowVisible(true);
-	} // apply
+	} // execute
 	
 } // namespace Logic

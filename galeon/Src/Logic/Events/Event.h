@@ -18,12 +18,19 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 #ifndef __Logic_Event_H
 #define __Logic_Event_H
 
+#include <string>
+
 #include "Logic/TimeManager.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación.
 namespace Logic
 {
 	enum ConditionTriggerType;
+}
+
+namespace AI
+{
+	class CGod;
 }
 
 /**
@@ -102,33 +109,22 @@ namespace Logic
 
 		/**
 		Construye un evento con trigger basado en tiempo.
+
 		@param type Tipo del evento.
-		@param time En función del parámetro absoluteTime, instante temporal absoluto en el que se lanzará el evento 
+		@param time En función del parámetro absoluteTime, instante temporal absoluto en el que se lanzará el evento
 		o relativo al instante actual.
 		@absoluteTime Flag a true para lanzar el evento en un instante temporal absoluto o relativo al instante actual.
+		@showImmediately Flag a true si el evento debe mostrarse inmediatamente en vez de notificarse primero
+		TODO ...
 		*/
-		CEvent(EventType type, unsigned long time, bool absoluteTime = true) :
-			_type(type), _trigger(TIME) {
-			// Si el tiempo es absoluto
-			if (absoluteTime)
-				// El instante de lanzamiento es el proporcionado
-				_time = time;
-
-			// Si no
-			else // !absoluteTime
-				// El instante de lanzamiento es relativo al instante actual
-				_time = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime() + time;
-
-			_eventId = _nextEventId++;
-		}
+		CEvent(EventType type, unsigned long time, bool absoluteTime, bool showImmediately, const std::string& godName);
 
 		/**
 		Construye un evento con trigger basado en condición.
+
+		TODO ...
 		*/
-		CEvent(EventType type, ConditionTriggerType conditionType) :
-			_type(type), _trigger(CONDITION), _conditionType(conditionType) {
-			_eventId = _nextEventId++;
-		}
+		CEvent(EventType type, ConditionTriggerType conditionType, bool showImmediately, const std::string& godName);
 
 		/**
 		Destructor.
@@ -164,6 +160,23 @@ namespace Logic
 		int getEventId() const {
 			return _eventId;
 		}
+
+		/** Devuelve la imagen para la GUI */
+		virtual std::string getGUIImageName() const = 0;
+
+		/** Devuelve el título para la GUI */
+		virtual std::string getGUITitle() const = 0;
+
+		/** Devuelve el campo de texto para la GUI */
+		virtual std::string getGUIText() const = 0;
+
+		/** Devuelve el campo adicional de texto para la GUI */
+		virtual std::string getGUIResumeText() const = 0;
+
+		/** Devuelve si el evento debe ser notificado */
+		bool mustBeNotified() const;
+
+		bool getShowImmediately() const { return _showImmediately; }
 
 	protected:
 
@@ -206,45 +219,30 @@ namespace Logic
 
 		/** Contador estático del id de evento */
 		static int _nextEventId;
-		
+
+		/** Dios que provoca el evento (si es que hay alguno) */
+		AI::CGod* _god;
+
+		/** Título para la GUI */
+		std::string _guiTitle;
+
+		/** Imagen para la GUI */
+		std::string _guiImageName;
+
+		/** Campo de texto para la GUI */
+		std::string _guiText;
+
+		/** Campo adicional de texto para la GUI */
+		std::string _guiResumeText;
+
+		/** Dios que provoca el evento */
+		AI::CGod *god;
+
+		/** Flag a true si el evento debe mostrarse inmediatamente en vez de notificarse primero */
+		bool _showImmediately;
+
 	}; // class CEvent
-	/*
-	class EventID
-	{
-	public:
 
-		/**
-		Identificadores de evento que indican que el identificador no ha sido
-		inicializado (este identificador NO se utilizará para eventos válidos), o
-		cual es el primer identificador válido para asignar.
-		/
-		enum {
-			UNASSIGNED = 0xFFFFFFFF,
-			FIRST_ID = 0x00000000
-		};
-
-	private:
-		/**
-		Próximo identificador a asignar (aun no asignado).
-		/
-		static TEventID _nextId;
-
-		/**
-		Clase amiga que puede solicitar nuevos identificadores.
-		/
-		friend class CEvent;
-
-		/**
-		Devuelve el siguiente identificador de evento sin asignar. La funcion no
-		recicla identificadores ni comprueba que nos quedemos sin identificadores
-		para asignar.
-
-		@return Nuevo identificador.
-		/
-		static TEventID NextID();
-
-	}; // class EventID
-	*/
 } // namespace Logic
 
 #endif // __Logic_Event_H

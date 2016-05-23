@@ -32,11 +32,6 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
-		void setEventImage(std::string eventImage);
-		void setEventText(std::string eventText);
-		void setEventTitle(std::string EventTitle);
-		void setEventTextResume(std::string EventTextResume);
-		void setEventWindowVisible(bool visible);
 
 		/** 
 		Registra un evento en el EventUI.
@@ -46,6 +41,18 @@ namespace GUI
 
 	private:
 		std::map<int, Logic::CEvent*> _events;
+
+		void setEventImage(std::string eventImage);
+		void setEventText(std::string eventText);
+		void setEventTitle(std::string EventTitle);
+		void setEventTextResume(std::string EventTextResume);
+		void setEventWindowVisible(bool visible);
+
+		/**	Muestra el popup completo con la información del evento */
+		void EventUI::showFullEvent(Logic::CEvent* event);
+
+		/**	Muestra la notificación de un evento */
+		void EventUI::showEventNotification(Logic::CEvent* event);
 	};
 }
 

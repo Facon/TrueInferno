@@ -15,11 +15,8 @@ el panel de fin del juego (con victoria o derrota).
 */
 
 #include "EndGameEvent.h"
-#include "BaseSubsystems/ScriptManager.h"
 
-#include "GUI/Server.h"
-#include "GUI/UIManager.h"
-#include "GUI/EventUI.h"
+#include "BaseSubsystems/ScriptManager.h"
 
 namespace Logic {
 
@@ -34,35 +31,42 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	std::string CEndGameEvent::getGUIImageName() const {
+		return _eventImage;
+	}
+
+	std::string CEndGameEvent::getGUITitle() const {
+		return _eventTitle;
+	}
+
+	std::string CEndGameEvent::getGUIText() const {
+		return _eventText;
+	}
+
+	std::string CEndGameEvent::getGUIResumeText() const {
+		return "";
+	}
+	
+	//--------------------------------------------------------
+
 	void CEndGameEvent::execute()
 	{
-		// @TODO Hacer esto bien...
-		std::string eventImage, eventTitle, eventText, eventTextResume;
+	} // execute
 
-		switch (_victory)
-		{
-		case true:
-			eventImage = "EventVictory";
-			eventTitle = "VICTORY!";
-			eventText = "YOU DID IT! You ARE the WINNER!";
-			eventTextResume = "";
-			break;
-
-		case false:
-			eventImage = "EventDefeat";
-			eventTitle = "You have been ELIMINATED!";
-			eventText = "Sad news: you failed. You’re done. Out. FIRED. And I thought you had potential... I hate being wrong. I really do. Now get the Hell out of my Hell before I throw you in a furnace.";
-			eventTextResume = "";
-			break;
+	void CEndGameEvent::initGUIConstants(){
+		if (_victory) {
+			_eventImage = "EventVictory";
+			_eventTitle = "VICTORY!";
+			_eventText = "YOU DID IT! You ARE the WINNER!";
+			_eventTextResume = "";
 		}
 
-		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-		uiManager->getEventUI()->setEventImage(eventImage);
-		uiManager->getEventUI()->setEventTitle(eventTitle);
-		uiManager->getEventUI()->setEventText(eventText);
-		uiManager->getEventUI()->setEventTextResume(eventTextResume);
-		uiManager->getEventUI()->setEventWindowVisible(true);
-
-	} // execute
+		else{
+			_eventImage = "EventDefeat";
+			_eventTitle = "You have been ELIMINATED!";
+			_eventText = "Sad news: you failed. You’re done. Out. FIRED. And I thought you had potential... I hate being wrong. I really do. Now get the Hell out of my Hell before I throw you in a furnace.";
+			_eventTextResume = "";
+		}
+	}
 	
 } // namespace Logic

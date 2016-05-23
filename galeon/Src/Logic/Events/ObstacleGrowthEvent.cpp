@@ -19,9 +19,6 @@ Implementación de la clase CObstacleGrowthEvent.
 #include "BaseSubsystems/ScriptManager.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/Maps/Managers/TileManager.h"
-#include "GUI/Server.h"
-#include "GUI/UIManager.h"
-#include "GUI/EventUI.h"
 #include "Logic/Server.h"
 
 namespace Logic {
@@ -40,6 +37,24 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	std::string CObstacleGrowthEvent::getGUIImageName() const {
+		return _image;
+	}
+
+	std::string CObstacleGrowthEvent::getGUITitle() const {
+		return _title;
+	}
+
+	std::string CObstacleGrowthEvent::getGUIText() const {
+		return _description;
+	}
+
+	std::string CObstacleGrowthEvent::getGUIResumeText() const {
+		return "";
+	}
+	
+	//--------------------------------------------------------
+
 	void CObstacleGrowthEvent::execute()
 	{
 		// Sacamos del TileManager la cantidad total de tiles
@@ -51,17 +66,6 @@ namespace Logic {
 
 		// Solicitamos al BuildingManager que haga brotar obstáculos
 		CBuildingManager::getSingletonPtr()->growDestroyableObstaclesRandomly(CServer::getSingletonPtr()->getMap(), numObstacles);
-
-		// Mostrar panel
-		// @TODO Hacer esto bien...
-		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-
-		uiManager->getEventUI()->setEventImage(_image);
-		uiManager->getEventUI()->setEventTitle(_title);
-
-		uiManager->getEventUI()->setEventText(_description);
-		uiManager->getEventUI()->setEventTextResume("");
-		uiManager->getEventUI()->setEventWindowVisible(true);
 	} // apply
 	
 } // namespace Logic

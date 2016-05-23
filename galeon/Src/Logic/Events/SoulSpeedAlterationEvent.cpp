@@ -20,10 +20,7 @@ durante un cierto tiempo.
 #include "EventManager.h"
 #include "BaseSubsystems/ScriptManager.h"
 #include "Logic/SoulManager.h"
-
-#include "GUI/Server.h"
-#include "GUI/UIManager.h"
-#include "GUI/EventUI.h"
+#include "AI/God.h"
 
 namespace Logic {
 
@@ -39,6 +36,24 @@ namespace Logic {
 			];
 	}
 
+	//--------------------------------------------------------
+
+	std::string CSoulSpeedAlterationEvent::getGUIImageName() const {
+		return _image;
+	}
+
+	std::string CSoulSpeedAlterationEvent::getGUITitle() const {
+		return _title;
+	}
+
+	std::string CSoulSpeedAlterationEvent::getGUIText() const {
+		return _description;
+	}
+
+	std::string CSoulSpeedAlterationEvent::getGUIResumeText() const {
+		return "";
+	}
+	
 	//--------------------------------------------------------
 
 	void CSoulSpeedAlterationEvent::execute()
@@ -57,35 +72,9 @@ namespace Logic {
 		// Alterar la velocidad de recolección de recursos de las almas
 		// @TODO
 
-		// Mostrar panel dependiendo de si se aumenta o reduce la velocidad
-		std::string eventText = "";
-
-		// @TODO Hacer esto bien...
-		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-		if (_factor < 1.0) {
-			eventText += "The movement and gathering speed of your souls has been decreased, but ";
-			eventText += "don't worry, they will be fine again soon...hopefully...";
-
-			uiManager->getEventUI()->setEventImage("EventSoulsSpeedReduction");
-			uiManager->getEventUI()->setEventTitle("Useless souls");
-		}
-
-		else{
-			eventText += "The movement and gathering speed of your souls has been temporally increased! ";
-			eventText += "Go, souls, go!";
-
-			// TODO Reemplazar por imagen correcta
-			uiManager->getEventUI()->setEventImage("EventSoulsSpeedReduction");
-			uiManager->getEventUI()->setEventTitle("Useful souls");
-		}
-
-		uiManager->getEventUI()->setEventText(eventText);
-		uiManager->getEventUI()->setEventTextResume("");
-		uiManager->getEventUI()->setEventWindowVisible(true);
-
-		// Crear el evento opuesto para restablecer los valores alterados
+		// Creamos el evento opuesto para restablecer los valores alterados
 		CEventManager::getSingletonPtr()->addTimeEvent(
-			new CSoulSpeedAlterationEvent(_time + _duration, 1.0 / _factor, 0, true, true));
+			new CSoulSpeedAlterationEvent(_time + _duration, _god->getName(), "", "", "",  1.0 / _factor, 0, true, true));
 
 	} // apply
 

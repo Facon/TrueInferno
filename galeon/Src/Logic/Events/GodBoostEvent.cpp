@@ -17,11 +17,7 @@ Implementación de la clase CGodBoostEvent.
 
 #include "EventManager.h"
 #include "BaseSubsystems/ScriptManager.h"
-#include "Logic/SoulManager.h"
 #include "AI/Manager/AIManager.h"
-#include "GUI/Server.h"
-#include "GUI/UIManager.h"
-#include "GUI/EventUI.h"
 
 namespace Logic {
 
@@ -39,6 +35,24 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	std::string CGodBoostEvent::getGUIImageName() const {
+		return _image;
+	}
+
+	std::string CGodBoostEvent::getGUITitle() const {
+		return _title;
+	}
+
+	std::string CGodBoostEvent::getGUIText() const {
+		return _description;
+	}
+
+	std::string CGodBoostEvent::getGUIResumeText() const {
+		return "";
+	}
+	
+	//--------------------------------------------------------
+
 	void CGodBoostEvent::execute()
 	{
 		_restore ? restore() : apply();
@@ -49,23 +63,17 @@ namespace Logic {
 
 	void CGodBoostEvent::apply()
 	{
+		if (_god == nullptr){
+			assert(false && "There must be a related god");
+			return;
+		}
+
 		// Alterar el ritmo de modificación del score del dios
-		AI::CAIManager::getSingletonPtr()->getGod(_godName)->applyBoost(_factor);
-
-		// Mostrar panel
-		// @TODO Hacer esto bien...
-		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-
-		uiManager->getEventUI()->setEventImage(_image);
-		uiManager->getEventUI()->setEventTitle(_title);
-
-		uiManager->getEventUI()->setEventText(_description);
-		uiManager->getEventUI()->setEventTextResume("");
-		uiManager->getEventUI()->setEventWindowVisible(true);
+		_god->applyBoost(_factor);
 
 		// Crear el evento opuesto para restablecer los valores alterados
 		CEventManager::getSingletonPtr()->addTimeEvent(
-			new CGodBoostEvent(_time + _duration, _godName, 1.0 / _factor, true));
+			new CGodBoostEvent(_time + _duration, _god->getName(), 1.0 / _factor, true));
 
 	} // apply
 
@@ -73,8 +81,13 @@ namespace Logic {
 
 	void CGodBoostEvent::restore()
 	{
+		if (_god == nullptr){
+			assert(false && "There must be a related god");
+			return;
+		}
+
 		// Restaurar el efecto del boost. El evento debería haberse construido con con el factor inverso
-		AI::CAIManager::getSingletonPtr()->getGod(_godName)->removeBoost(_factor);
+		_god->removeBoost(_factor);
 
 	} // restore
 	

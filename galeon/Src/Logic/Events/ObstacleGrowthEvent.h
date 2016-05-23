@@ -50,20 +50,25 @@ namespace Logic
 
 	public:
 
-		/**  Constructor */
+		/**  Constructor basado en tiempo */
 		CObstacleGrowthEvent(
-			unsigned long time, const std::string& godName, const std::string& title, const std::string& description, const std::string& image, 
+			unsigned long time, const std::string& godName, const std::string& title, 
+			const std::string& description, const std::string& image, 
 			float tileFactor, bool absoluteTime = true) :
 						
-			CEvent(INFO, time, absoluteTime), _godName(godName), _title(title), _description(description), _image(image), 
+			CEvent(INFO, time, absoluteTime, false, godName), _title(title), 
+			_description(description), _image(image), 
 			_tileFactor(tileFactor) {};
 
+		/** Constructor estático. Permite invocar desde Lua pero mantener el ciclo de vida en C++ */
 		static CObstacleGrowthEvent* addCObstacleGrowthEvent(
-			unsigned long time, const std::string& godName, const std::string& title, const std::string& description, const std::string& image, 
+			unsigned long time, const std::string& godName, const std::string& title, 
+			const std::string& description, const std::string& image, 
 			float tileFactor, bool absoluteTime = true) {
 
 			return new CObstacleGrowthEvent(
-				time, godName, title, description, image, 
+				time, godName, title, 
+				description, image, 
 				tileFactor, absoluteTime);
 		}
 
@@ -77,7 +82,19 @@ namespace Logic
 		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
 		*/
 		static void luaRegister();
+		
+		/** Devuelve la imagen para la GUI */
+		std::string getGUIImageName() const;
 
+		/** Devuelve el título para la GUI */
+		std::string getGUITitle() const;
+
+		/** Devuelve el campo de texto para la GUI */
+		std::string getGUIText() const;
+
+		/** Devuelve el campo adicional de texto para la GUI */
+		std::string getGUIResumeText() const;
+		
 	protected:
 
 		/**
@@ -88,9 +105,6 @@ namespace Logic
 	private:
 		/** Factor (en escala unitaria) sobre la cantidad total de tiles que se van a convertir en obstáculos */
 		float _tileFactor;
-		
-		/** Nombre del dios que provoca el evento */
-		std::string _godName;
 		
 		/** Texto descriptivo del evento para mostrar en el panel */
 		std::string _description;

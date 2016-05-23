@@ -17,6 +17,8 @@ el panel de fin del juego (con victoria o derrota).
 #ifndef __Logic_EndGameEvent_H
 #define __Logic_EndGameEvent_H
 
+#include <string>
+
 #include "Event.h"
 
 /**
@@ -43,12 +45,13 @@ namespace Logic
 	{
 
 	public:
-
 		/**
 		Constructor basado en trigger.
 		*/
 		CEndGameEvent(bool victory) :
-			CEvent(INFO, CEvent::ConditionTriggerType::END_GAME), _victory(victory)	{};
+			CEvent(INFO, CEvent::ConditionTriggerType::END_GAME, true, ""), _victory(victory) {
+			initGUIConstants();
+		};
 
 		/**
 		Constructor basado en tiempo.
@@ -57,7 +60,9 @@ namespace Logic
 		@param delay Retraso en ms para lanzar el evento desde el instante de tiempo actual
 		*/
 		CEndGameEvent(bool victory, int delay) :
-			CEvent(INFO, delay, false), _victory(victory) {};
+			CEvent(INFO, delay, false, true, ""), _victory(victory) {
+			initGUIConstants();
+		};
 
 		/**
 		Destructor.
@@ -70,8 +75,19 @@ namespace Logic
 		*/
 		static void luaRegister();
 
-	protected:
+		/** Devuelve la imagen para la GUI */
+		std::string getGUIImageName() const;
 
+		/** Devuelve el título para la GUI */
+		std::string getGUITitle() const;
+
+		/** Devuelve el campo de texto para la GUI */
+		std::string getGUIText() const;
+
+		/** Devuelve el campo adicional de texto para la GUI */
+		std::string getGUIResumeText() const;
+
+	protected:
 		/**
 		Resultado de la partida (Victoria o Derrota).
 		*/
@@ -82,6 +98,14 @@ namespace Logic
 		asociada al evento.
 		*/
 		void execute();
+		
+	private:
+		std::string _eventImage;
+		std::string _eventTitle;
+		std::string _eventText;
+		std::string _eventTextResume;
+
+		void initGUIConstants();
 		
 	}; // class CEndGameEvent
 

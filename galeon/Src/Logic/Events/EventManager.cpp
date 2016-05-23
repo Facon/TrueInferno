@@ -19,7 +19,6 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "BuildingDestructionEvent.h"
 #include "EndGameEvent.h"
 #include "EndRoundEvent.h"
-#include "SoulsSpeedReductionEvent.h"
 #include "SoulSpeedAlterationEvent.h"
 #include "GodBoostEvent.h"
 #include "PlayerResourcesChangeEvent.h"

@@ -22,13 +22,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 
 #include "AIManager.h"
 
-#include "Logic/Events/BuildingDestructionEvent.h"
-#include "Logic/Events/EndGameEvent.h"
-#include "Logic/Events/SoulsSpeedReductionEvent.h"
-#include "Logic/Events/TutorialEvent.h"
-#include "Application/GaleonApplication.h"
 #include "BaseSubsystems/ScriptManager.h"
-#include "Logic/TimeManager.h"
 #include "Logic/Entity/Message.h"
 #include "Map/MapEntity.h"
 

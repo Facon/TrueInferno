@@ -36,8 +36,9 @@ function Event:new (name)
 		ending = 0.5,
 	}
 	
-	-- Por defecto, los eventos permiten ser lanzados por el jefe
+	-- Por defecto, los eventos permiten ser lanzados por cualquiera
 	self.allowsBoss = true
+	self.allowsNonBoss = true
 	
 	--[[
 	Inicializamos la afinidad del evento a cada uno de los rasgos de los dioses.
@@ -64,9 +65,14 @@ BuildingDestructionEvent.good = 0
 BuildingDestructionEvent.evil = 1.0
 BuildingDestructionEvent.godTraits.aggressive = 1.0
 BuildingDestructionEvent.allowsBoss = true
+BuildingDestructionEvent.allowsNonBoss = true
 BuildingDestructionEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
-	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent.addCBuildingDestructionEvent(timeToLaunch, true));
+	local title = "Building Destruction"
+	local description = "A building has been destroyed!"
+	local image = "EventBuildingDestruction"
+	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent.addCBuildingDestructionEvent(
+		timeToLaunch, god.name, title, description, image, true));
 end
 
 MinorSoulsSpeedReductionEvent = Event:new("MinorSoulsSpeedReductionEvent")
@@ -74,9 +80,14 @@ MinorSoulsSpeedReductionEvent.good = 0
 MinorSoulsSpeedReductionEvent.evil = 0.4
 MinorSoulsSpeedReductionEvent.godTraits.cheater = 1.0
 MinorSoulsSpeedReductionEvent.allowsBoss = true
+MinorSoulsSpeedReductionEvent.allowsNonBoss = true
 MinorSoulsSpeedReductionEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
-	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent.addCSoulSpeedAlterationEvent(timeToLaunch, 0.25, 20*1000, true, false));
+	local title = "Useless souls"
+	local description = "The movement and gathering speed of your souls has been decreased, but don't worry, they will be fine again soon...hopefully..."
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent.addCSoulSpeedAlterationEvent(
+		timeToLaunch, god.name, title, description, image, 0.25, 20*1000, true));
 end
 
 MajorSpeedReductionEvent = Event:new(MajorSpeedReductionEvent)
@@ -84,9 +95,14 @@ MajorSpeedReductionEvent.good = 0
 MajorSpeedReductionEvent.evil = 0.7
 MajorSpeedReductionEvent.godTraits.cheater = 1.0
 MajorSpeedReductionEvent.allowsBoss = true
+MajorSpeedReductionEvent.allowsNonBoss = true
 MajorSpeedReductionEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
-	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent.addCSoulSpeedAlterationEvent(timeToLaunch, 0.1, 20*1000, true, false));
+	local title = "Useless souls"
+	local description = "The movement and gathering speed of your souls has been decreased, but don't worry, they will be fine again soon...hopefully..."
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent.addCSoulSpeedAlterationEvent(
+		timeToLaunch, god.name, title, description, image, 0.1, 20*1000, true));
 end
 
 MinorSoulSpeedIncreaseEvent = Event:new("MinorSoulSpeedIncreaseEvent")
@@ -94,9 +110,14 @@ MinorSoulSpeedIncreaseEvent.good = 0.3
 MinorSoulSpeedIncreaseEvent.evil = 0
 MinorSoulSpeedIncreaseEvent.godTraits.generous = 1.0
 MinorSoulSpeedIncreaseEvent.allowsBoss = true
+MinorSoulSpeedIncreaseEvent.allowsNonBoss = false
 MinorSoulSpeedIncreaseEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
-	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent.addCSoulSpeedAlterationEvent(timeToLaunch, 2, 20*1000, true, false));
+	local title = "Useful souls"
+	local description = "The movement and gathering speed of your souls has been temporally increased! Go, souls, go!"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent.addCSoulSpeedAlterationEvent(
+		timeToLaunch, god.name, title, description, image, 2, 20*1000, true));
 end
 
 MajorSoulSpeedIncreaseEvent = Event:new("MajorSoulSpeedIncreaseEvent")
@@ -104,9 +125,14 @@ MajorSoulSpeedIncreaseEvent.good = 0.5
 MajorSoulSpeedIncreaseEvent.evil = 0
 MajorSoulSpeedIncreaseEvent.godTraits.generous = 1.0
 MajorSoulSpeedIncreaseEvent.allowsBoss = true
+MajorSoulSpeedIncreaseEvent.allowsNonBoss = false
 MajorSoulSpeedIncreaseEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
-	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent.addCSoulSpeedAlterationEvent(timeToLaunch, 4, 20*1000, true, false));
+	local title = "Useful souls"
+	local description = "The movement and gathering speed of your souls has been temporally increased! Go, souls, go!"
+	local image = "EventSoulsSpeedReduction"
+	CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent.addCSoulSpeedAlterationEvent(
+		timeToLaunch, god.name, title, description, image, 4, 20*1000, true));
 end
 
 MinorGodBoostEvent = Event:new("MinorGodBoostEvent")
@@ -114,12 +140,14 @@ MinorGodBoostEvent.good = 0
 MinorGodBoostEvent.evil = 0.1
 MinorGodBoostEvent.godTraits.cheater = 1.0
 MinorGodBoostEvent.allowsBoss = false
+MinorGodBoostEvent.allowsNonBoss = true
 MinorGodBoostEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	local title = "God Boost"
 	local description = god.name .. " is cheating! Now " .. god.genre .. " will get Hades Favour faster for a while..."
 	local image = "EventSoulsSpeedReduction"
-	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(timeToLaunch, god.name, title, description, image, 1, 20*1000, true));
+	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
+		timeToLaunch, god.name, title, description, image, 1, 20*1000, true));
 end
 
 MajorGodBoostEvent = Event:new("MajorGodBoostEvent")
@@ -127,12 +155,14 @@ MajorGodBoostEvent.good = 0
 MajorGodBoostEvent.evil = 0.3
 MajorGodBoostEvent.godTraits.cheater = 1.0
 MajorGodBoostEvent.allowsBoss = false
+MajorGodBoostEvent.allowsNonBoss = true
 MajorGodBoostEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	local title = "God Boost"
 	local description = god.name .. " is cheating! Now " .. god.genre .. " will get Hades Favour faster for a while..."
 	local image = "EventSoulsSpeedReduction"
-	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(timeToLaunch, god.name, title, description, image, 2, 20*1000, true));
+	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
+		timeToLaunch, god.name, title, description, image, 2, 20*1000, true));
 end
 
 MinorGodPenalizationEvent = Event:new("MinorGodPenalizationEvent")
@@ -140,12 +170,14 @@ MinorGodPenalizationEvent.good = 0.1
 MinorGodPenalizationEvent.evil = 0
 MinorGodPenalizationEvent.godTraits.clumsy = 1.0
 MinorGodPenalizationEvent.allowsBoss = false
+MinorGodPenalizationEvent.allowsNonBoss = true
 MinorGodPenalizationEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	local title = "God Penalization"
 	local description = god.name .. " has problems! Now " .. god.genre .. " will get Hades Favour slower for a while..."
 	local image = "EventSoulsSpeedReduction"
-	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(timeToLaunch, god.name, title, description, image, -0.5, 20*1000, true));
+	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
+		timeToLaunch, god.name, title, description, image, -0.5, 20*1000, true));
 end
 
 MajorGodPenalizationEvent = Event:new("MajorGodPenalizationEvent")
@@ -153,12 +185,14 @@ MajorGodPenalizationEvent.good = 0.3
 MajorGodPenalizationEvent.evil = 0
 MajorGodPenalizationEvent.godTraits.clumsy = 1.0
 MajorGodPenalizationEvent.allowsBoss = false
+MajorGodPenalizationEvent.allowsNonBoss = true
 MajorGodPenalizationEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	local title = "God Penalization"
 	local description = god.name .. " has problems! Now " .. god.genre .. " will get Hades Favour slower for a while..."
 	local image = "EventSoulsSpeedReduction"
-	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(timeToLaunch, god.name, title, description, image, -0.9, 20*1000, true));
+	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
+		timeToLaunch, god.name, title, description, image, -0.9, 20*1000, true));
 end
 
 MinorResourceLossEvent = Event:new("MinorResourceLossEvent")
@@ -166,6 +200,7 @@ MinorResourceLossEvent.good = 0
 MinorResourceLossEvent.evil = 0.5
 MinorResourceLossEvent.godTraits.cheater = 1.0
 MinorResourceLossEvent.allowsBoss = true
+MinorResourceLossEvent.allowsNonBoss = true
 MinorResourceLossEvent.throw = function(god)
 	-- Elegir aleatoriamente gas o mineral
 	local resourceType = ResourcesManager.RT_NONE
@@ -192,6 +227,7 @@ MajorResourceLossEvent.good = 0
 MajorResourceLossEvent.evil = 0.7
 MajorResourceLossEvent.godTraits.cheater = 1.0
 MajorResourceLossEvent.allowsBoss = true
+MajorResourceLossEvent.allowsNonBoss = true
 MajorResourceLossEvent.throw = function(god)
 	-- Elegir aleatoriamente gas o mineral
 	local resourceType = ResourcesManager.RT_NONE
@@ -219,6 +255,7 @@ MinorResourceStealEvent.evil = 0.6
 MinorResourceStealEvent.godTraits.cheater = 1.0
 MinorResourceStealEvent.godTraits.businessman = 1.0
 MinorResourceStealEvent.allowsBoss = false
+MinorResourceStealEvent.allowsNonBoss = true
 MinorResourceStealEvent.throw = function(god)
 	-- Elegir aleatoriamente gas o mineral
 	local resourceType = ResourcesManager.RT_NONE
@@ -244,7 +281,8 @@ MinorResourceStealEvent.throw = function(god)
 	title = "God Boost"
 	description = god.name .. " is taking benefit from your resources! Now " .. god.genre .. " will get Hades Favour faster for a while..."
 	image = "EventSoulsSpeedReduction"
-	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(timeToLaunch+3000, god.name, title, description, image, 1, 20*1000, true));
+	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
+		timeToLaunch+3000, god.name, title, description, image, 1, 20*1000, true));
 end
 
 MajorResourceStealEvent = Event:new("MajorResourceStealEvent")
@@ -253,6 +291,7 @@ MajorResourceStealEvent.evil = 0.8
 MajorResourceStealEvent.godTraits.cheater = 1.0
 MajorResourceStealEvent.godTraits.businessman = 1.0
 MajorResourceStealEvent.allowsBoss = false
+MajorResourceStealEvent.allowsNonBoss = true
 MajorResourceStealEvent.throw = function(god)
 	-- Elegir aleatoriamente gas o mineral
 	local resourceType = ResourcesManager.RT_NONE
@@ -278,7 +317,8 @@ MajorResourceStealEvent.throw = function(god)
 	title = "God Boost"
 	description = god.name .. " is taking benefit from your resources! Now " .. god.genre .. " will get Hades Favour faster for a while..."
 	image = "EventSoulsSpeedReduction"
-	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(timeToLaunch+3000, god.name, title, description, image, 2, 20*1000, true));
+	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
+		timeToLaunch+3000, god.name, title, description, image, 2, 20*1000, true));
 end
 
 MinorResourceGiftEvent = Event:new("MinorResourceGiftEvent")
@@ -286,6 +326,7 @@ MinorResourceGiftEvent.good = 0.4
 MinorResourceGiftEvent.evil = 0
 MinorResourceGiftEvent.godTraits.generous = 1.0
 MinorResourceGiftEvent.allowsBoss = true
+MinorResourceGiftEvent.allowsNonBoss = true
 MinorResourceGiftEvent.throw = function(god)
 	-- Elegir aleatoriamente gas o mineral
 	local resourceType = ResourcesManager.RT_NONE
@@ -312,6 +353,7 @@ MajorResourceGiftEvent.good = 0.6
 MajorResourceGiftEvent.evil = 0
 MajorResourceGiftEvent.godTraits.generous = 1.0
 MajorResourceGiftEvent.allowsBoss = true
+MajorResourceGiftEvent.allowsNonBoss = true
 MajorResourceGiftEvent.throw = function(god)
 	-- Elegir aleatoriamente gas o mineral
 	local resourceType = ResourcesManager.RT_NONE
@@ -336,7 +378,8 @@ end
 MinorTimeExtendedEvent = Event:new("MinorTimeExtendedEvent")
 MinorTimeExtendedEvent.good = 0.6
 MinorTimeExtendedEvent.evil = 0
-MinorTimeExtendedEvent.onlyBoss = true
+MinorTimeExtendedEvent.allowsBoss = true
+MinorTimeExtendedEvent.allowsNonBoss = false
 MinorTimeExtendedEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	local title = "Time Extended"
@@ -349,7 +392,8 @@ end
 MajorTimeExtendedEvent = Event:new("MajorTimeExtendedEvent")
 MajorTimeExtendedEvent.good = 0.8
 MajorTimeExtendedEvent.evil = 0
-MajorTimeExtendedEvent.onlyBoss = true
+MajorTimeExtendedEvent.allowsBoss = true
+MajorTimeExtendedEvent.allowsNonBoss = false
 MajorTimeExtendedEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	local title = "Time Extended"
@@ -362,7 +406,8 @@ end
 MinorTimeShortenedEvent = Event:new("MinorTimeShortenedEvent")
 MinorTimeShortenedEvent.good = 0
 MinorTimeShortenedEvent.evil = 0.8
-MinorTimeShortenedEvent.onlyBoss = true
+MinorTimeShortenedEvent.allowsBoss = true
+MinorTimeShortenedEvent.allowsNonBoss = false
 MinorTimeShortenedEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	local title = "Time Shortened"
@@ -375,7 +420,8 @@ end
 MajorTimeShortenedEvent = Event:new("MajorTimeShortenedEvent")
 MajorTimeShortenedEvent.good = 0
 MajorTimeShortenedEvent.evil = 1
-MajorTimeShortenedEvent.onlyBoss = true
+MajorTimeShortenedEvent.allowsBoss = true
+MajorTimeShortenedEvent.allowsNonBoss = false
 MajorTimeShortenedEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	local title = "Time Shortened"
@@ -388,7 +434,8 @@ end
 MinorObstacleGrowthEvent = Event:new("MinorObstacleGrowthEvent")
 MinorObstacleGrowthEvent.good = 0
 MinorObstacleGrowthEvent.evil = 0.3
-MinorObstacleGrowthEvent.onlyBoss = true
+MinorObstacleGrowthEvent.allowsBoss = true
+MinorObstacleGrowthEvent.allowsNonBoss = false
 MinorObstacleGrowthEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	local title = "Obstacle Growth"
@@ -401,7 +448,8 @@ end
 MajorObstacleGrowthEvent = Event:new("MajorObstacleGrowthEvent")
 MajorObstacleGrowthEvent.good = 0
 MajorObstacleGrowthEvent.evil = 0.6
-MajorObstacleGrowthEvent.onlyBoss = true
+MajorObstacleGrowthEvent.allowsBoss = true
+MajorObstacleGrowthEvent.allowsNonBoss = false
 MajorObstacleGrowthEvent.throw = function(god)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + 100
 	local title = "Obstacle Growth"

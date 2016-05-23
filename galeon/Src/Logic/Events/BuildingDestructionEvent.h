@@ -49,16 +49,29 @@ namespace Logic
 
 	public:
 
-		/**
-		Constructores.
-		*/
-		CBuildingDestructionEvent(unsigned long time, bool absoluteTime = true) : CEvent(INFO, time, absoluteTime) {};
-
+		/* TODO 
 		CBuildingDestructionEvent(ConditionTriggerType condEventType, bool dummy = true) : CEvent(INFO, condEventType) {};
+		*/
 
-		static CBuildingDestructionEvent* addCBuildingDestructionEvent(unsigned long time, bool absoluteTime = true) {
-			return new CBuildingDestructionEvent(time, absoluteTime);
-		};
+		/**  Constructor basado en tiempo */
+		CBuildingDestructionEvent(
+			unsigned long time, const std::string& godName, const std::string& title,
+			const std::string& description, const std::string& image,
+			bool absoluteTime = true) :
+
+			CEvent(INFO, time, absoluteTime, false, godName), 
+			_title(title), _description(description), _image(image) {};
+
+		/** Constructor estático. Permite invocar desde Lua pero mantener el ciclo de vida en C++ */
+		static CBuildingDestructionEvent* addCBuildingDestructionEvent(
+			unsigned long time, const std::string& godName, const std::string& title,
+			const std::string& description, const std::string& image,
+			bool absoluteTime = true) {
+
+			return new CBuildingDestructionEvent(
+				time, godName, title,
+				description, image, absoluteTime);
+		}
 
 		/**
 		Destructor.
@@ -70,7 +83,19 @@ namespace Logic
 		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
 		*/
 		static void luaRegister();
+		
+		/** Devuelve la imagen para la GUI */
+		std::string getGUIImageName() const;
 
+		/** Devuelve el título para la GUI */
+		std::string getGUITitle() const;
+
+		/** Devuelve el campo de texto para la GUI */
+		std::string getGUIText() const;
+
+		/** Devuelve el campo adicional de texto para la GUI */
+		std::string getGUIResumeText() const;
+		
 	protected:
 
 		/**
@@ -78,6 +103,16 @@ namespace Logic
 		asociada al evento.
 		*/
 		void execute();
+		
+	private:	
+		/** Texto descriptivo del evento para mostrar en el panel */
+		std::string _description;
+
+		/** Título para el panel */
+		std::string _title;
+
+		/** Identificador de imagen de fondo para el panel */
+		std::string _image;
 		
 	}; // class CBuildingDestructionEvent
 

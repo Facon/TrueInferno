@@ -81,9 +81,33 @@ namespace GUI
 	}
 
 	void EventUI::registerEvent(Logic::CEvent* event){
-		_events[event->getEventId()] = event;
+		// Mostramos inmediatamente el evento si es necesario
+		if (event->getShowImmediately()){
+			showFullEvent(event);
+		}
+
+		// En caso contrario
+		else {
+			// Guardamos el evento para mostrarlo más adelante
+			_events[event->getEventId()] = event;
+
+			// Se muestra únicamente la notificación
+			showEventNotification(event);
+		}
 	}
 	
+	void EventUI::showFullEvent(Logic::CEvent* event){
+		setEventImage(event->getGUIImageName());
+		setEventText(event->getGUIText());
+		setEventTitle(event->getGUITitle());
+		setEventTextResume(event->getGUIResumeText());
+		setEventWindowVisible(true);
+	}
+
+	void EventUI::showEventNotification(Logic::CEvent* event){
+		// TODO Ruymajo's CEGI powa aquí! :D
+	}
+
 	void EventUI::setEventImage(std::string eventImage)
 	{
 		_uiEventWindow->getChild("EventImage")->setProperty("Image","TrueInfernoEvents/" + eventImage);

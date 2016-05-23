@@ -57,6 +57,9 @@ namespace AI {
 			return false;
 		}
 
+		if (quantity == 0)
+			return true;
+
 		int aux = _storedResources[type] + quantity;
 
 		// Controlamos que el nuevo valor no sobrepase los límites
@@ -84,6 +87,9 @@ namespace AI {
 		if (!isResourceTypeStored(type)){
 			return false;
 		}
+
+		if (quantity == 0)
+			return true;
 
 		int aux = getMaxResources(type) + quantity;
 

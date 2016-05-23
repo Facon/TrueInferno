@@ -50,15 +50,26 @@ namespace Logic
 	{
 
 	public:
+		/**  Constructor basado en tiempo */
+		CSoulSpeedAlterationEvent(
+			unsigned long time, const std::string& godName, const std::string& title,
+			const std::string& description, const std::string& image,
+			float factor, int duration, bool absoluteTime = true, bool restore = false) :
 
-		/**
-		Constructor.
-		*/
-		CSoulSpeedAlterationEvent(unsigned long time, float factor, int duration, bool absoluteTime = true, bool restore = false) :
-			CEvent(INFO, time, absoluteTime), _factor(factor), _duration(duration), _restore(restore) {};
+			CEvent(INFO, time, absoluteTime, false, godName), _title(title),
+			_description(description), _image(image),
+			_factor(factor), _duration(duration), _restore(restore) {};
 
-		static CSoulSpeedAlterationEvent* addCSoulSpeedAlterationEvent(unsigned long time, float factor, int duration, bool absoluteTime = true, bool restore = false) {
-			return new CSoulSpeedAlterationEvent(time, factor, duration, absoluteTime, restore);
+		/** Constructor estático. Permite invocar desde Lua pero mantener el ciclo de vida en C++ */
+		static CSoulSpeedAlterationEvent* addCSoulSpeedAlterationEvent(
+			unsigned long time, const std::string& godName, const std::string& title,
+			const std::string& description, const std::string& image,
+			float factor, int duration, bool absoluteTime = true) {
+
+			return new CSoulSpeedAlterationEvent(
+				time, godName, title,
+				description, image,
+				factor, duration, absoluteTime);
 		}
 
 		/**
@@ -71,7 +82,19 @@ namespace Logic
 		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
 		*/
 		static void luaRegister();
+		
+		/** Devuelve la imagen para la GUI */
+		std::string getGUIImageName() const;
 
+		/** Devuelve el título para la GUI */
+		std::string getGUITitle() const;
+
+		/** Devuelve el campo de texto para la GUI */
+		std::string getGUIText() const;
+
+		/** Devuelve el campo adicional de texto para la GUI */
+		std::string getGUIResumeText() const;
+		
 	protected:
 
 		/**
@@ -108,6 +131,15 @@ namespace Logic
 
 		/** Duración (ms) de la alteración de velocidad */
 		int _duration;
+		
+		/** Texto descriptivo del evento para mostrar en el panel */
+		std::string _description;
+
+		/** Título para el panel */
+		std::string _title;
+
+		/** Identificador de imagen de fondo para el panel */
+		std::string _image;
 		
 	}; // class CSoulSpeedAlterationEvent
 

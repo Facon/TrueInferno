@@ -17,11 +17,6 @@ Implementación de la clase CRoundTimeChangeEvent.
 
 #include "EventManager.h"
 #include "BaseSubsystems/ScriptManager.h"
-#include "Logic/SoulManager.h"
-#include "AI/Manager/AIManager.h"
-#include "GUI/Server.h"
-#include "GUI/UIManager.h"
-#include "GUI/EventUI.h"
 
 namespace Logic {
 
@@ -39,20 +34,27 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	std::string CRoundTimeChangeEvent::getGUIImageName() const {
+		return _image;
+	}
+
+	std::string CRoundTimeChangeEvent::getGUITitle() const {
+		return _title;
+	}
+
+	std::string CRoundTimeChangeEvent::getGUIText() const {
+		return _description;
+	}
+
+	std::string CRoundTimeChangeEvent::getGUIResumeText() const {
+		return "";
+	}
+	
+	//--------------------------------------------------------
+
 	void CRoundTimeChangeEvent::execute()
 	{
 		CTimeManager::getSingletonPtr()->changeCurrentRoundTime(_roundTimeChange * 1000);
-
-		// Mostrar panel
-		// @TODO Hacer esto bien...
-		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-
-		uiManager->getEventUI()->setEventImage(_image);
-		uiManager->getEventUI()->setEventTitle(_title);
-
-		uiManager->getEventUI()->setEventText(_description);
-		uiManager->getEventUI()->setEventTextResume("");
-		uiManager->getEventUI()->setEventWindowVisible(true);
-	} // apply
+	} // execute
 	
 } // namespace Logic

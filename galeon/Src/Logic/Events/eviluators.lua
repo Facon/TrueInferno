@@ -141,7 +141,7 @@ weightedEviluators =
 	---[[
 	{
 		eviluator=PersonalityEviluator,
-		weight=1.0,
+		weight=0.6,
 	},
 	--]]
 	
@@ -169,7 +169,7 @@ weightedEviluators =
 	---[[	
 	{
 		eviluator=TimeSinceLastEventTypeEviluator, 
-		weight=0.1,
+		weight=0.4,
 	},
 	--]]
 

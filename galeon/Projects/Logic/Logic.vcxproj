@@ -128,7 +128,6 @@
     <ClCompile Include="..\..\Src\Logic\Events\PlayerResourcesChangeEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\RoundTimeChangeEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\SoulSpeedAlterationEvent.cpp" />
-    <ClCompile Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\TutorialEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\HFManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\Maps\ComponentFactory.cpp" />
@@ -203,7 +202,6 @@
     <ClInclude Include="..\..\Src\Logic\Events\PlayerResourcesChangeEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\RoundTimeChangeEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\SoulSpeedAlterationEvent.h" />
-    <ClInclude Include="..\..\Src\Logic\Events\SoulsSpeedReductionEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h" />
     <ClInclude Include="..\..\Src\Logic\HFManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h" />

@@ -81,7 +81,7 @@ namespace AI {
 		/** Modificamos la puntuación */
 		_score += change;
 
-		/** Actualizamos la GUI = Fresquísimo acoplamiento */
+		/** Actualizamos la GUI => Fresquísimo acoplamiento */
 		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
 		uiManager->getRankUI()->updateGodRank();
 	}

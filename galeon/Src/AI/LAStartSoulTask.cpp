@@ -17,6 +17,12 @@ namespace AI {
 			// Sacamos entidad gráfica
 			CMap* map = Logic::CServer::getSingletonPtr()->getMap();
 			CEntity* entity = map->getEntityByID(_smData.getTask()->getTarget());
+
+			// Chequeamos que exista el objetivo (puede que haya sido destruído). Si no, fallamos
+			if (entity == nullptr){
+				return LAStatus::FAIL;
+			}
+
 			Graphics::CEntity* graphics = entity->getComponent<CGraphics>()->getGraphicsEntity();
 
 			// Pasamos el nuevo color a la entidad gráfica del alma

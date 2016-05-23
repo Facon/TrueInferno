@@ -17,6 +17,8 @@ uno de los paneles del tutorial.
 #ifndef __Logic_TutorialEvent_H
 #define __Logic_TutorialEvent_H
 
+#include <cassert>
+
 #include "Event.h"
 
 /**
@@ -45,12 +47,13 @@ namespace Logic
 
 	public:
 
-		/**
-		Constructor.
-		*/
+		/**  Constructor basado en trigger */
 		CTutorialEvent(int tutorialpanelIndex) :
-			CEvent(INFO, CEvent::ConditionTriggerType::TUTORIAL), _tutorialPanelIndex(tutorialpanelIndex)	{};
+			CEvent(INFO, CEvent::ConditionTriggerType::TUTORIAL, true, std::string("")), _tutorialPanelIndex(tutorialpanelIndex) {
+			initGUIConstants();
+		};
 
+		/** Constructor estático. Permite invocar desde Lua pero mantener el ciclo de vida en C++ */
 		static CTutorialEvent* addCTutorialEvent(int tutorialpanelIndex) {
 			return new CTutorialEvent(tutorialpanelIndex);
 		};
@@ -65,6 +68,18 @@ namespace Logic
 		IMPORTANTE: Llamar a este método desde CEventManager::luaRegister.
 		*/
 		static void luaRegister();
+		
+		/** Devuelve la imagen para la GUI */
+		std::string getGUIImageName() const;
+
+		/** Devuelve el título para la GUI */
+		std::string getGUITitle() const;
+
+		/** Devuelve el campo de texto para la GUI */
+		std::string getGUIText() const;
+
+		/** Devuelve el campo adicional de texto para la GUI */
+		std::string getGUIResumeText() const;
 
 	protected:
 
@@ -79,6 +94,14 @@ namespace Logic
 		*/
 		void execute();
 		
+	private:
+		std::string _eventImage;
+		std::string _eventTitle;
+		std::string _eventText;
+		std::string _eventTextResume;
+
+		void initGUIConstants();
+
 	}; // class CTutorialEvent
 
 } // namespace Logic
