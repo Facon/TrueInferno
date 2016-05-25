@@ -1,6 +1,6 @@
 /**
 @file Message.cpp
-@author Raúl Segura
+@author Raúl Segura and Asier González
 */
 
 #include "Message.h"
@@ -488,7 +488,13 @@ namespace Logic
 		return handler.HandleMessage(*this);
 	}
 
-	IconMessage::IconMessage(IconType::IconType icon) : Message(MessageType::ICON), _icon(icon)
+	IconMessage::IconMessage(IconType::IconType icon) : Message(MessageType::ICON), _icon(icon), _iconReplacement(IconType::NONE)
+	{}
+
+	IconMessage::IconMessage(MessageType type, IconType::IconType icon) : Message(type), _icon(icon), _iconReplacement(IconType::NONE)
+	{}
+
+	IconMessage::IconMessage(MessageType type, IconType::IconType icon, IconType::IconType iconReplacement) : Message(type), _icon(icon), _iconReplacement(iconReplacement)
 	{}
 
 	bool IconMessage::Dispatch(MessageHandler& handler) const

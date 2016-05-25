@@ -1,3 +1,5 @@
+// @author Asier González
+
 #ifndef __Logic_Billboard_H
 #define __Logic_Billboard_H
 
@@ -35,11 +37,13 @@ namespace Logic
 		virtual void tick(unsigned int msecs);
 		bool HandleMessage(const IconMessage& msg);
 
+	private:
+		void adjustBillboards();
+
 	protected:
 		static const std::unordered_map<std::string, IconType::IconType> iconTableConversor;
 
 		Graphics::BillboardSet* _bbSet;
-		Ogre::Billboard* _billboard;
 	};
 
 	REG_FACTORY(Billboard);

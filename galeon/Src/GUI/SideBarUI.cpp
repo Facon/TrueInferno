@@ -92,7 +92,7 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CreateMine")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateGasPlant")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateEvilworks")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateRefineryn")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateRefinery")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("ClearTerrain")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateResearchLab")->removeAllEvents();
