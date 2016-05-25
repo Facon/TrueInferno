@@ -32,8 +32,16 @@ namespace GUI
 
 	bool UIManager::HandleRootMouseDown(const CEGUI::EventArgs& e)
 	{
-		if (e.handled==0)
+		const CEGUI::MouseEventArgs a = static_cast<const CEGUI::MouseEventArgs&>(e);
+
+		if (a.button == CEGUI::MouseButton::RightButton){
+			_sideBarUI.playerInteractionWithRightClick();
+			return true;
+		}
+
+		if (e.handled == 0)
 			_sideBarUI.playerInteractionWithLeftClick();
+
 		return true;
 	}
 

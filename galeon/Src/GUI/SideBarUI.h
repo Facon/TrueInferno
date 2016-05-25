@@ -43,6 +43,9 @@ namespace GUI
 		bool createWarehouseReleased(const CEGUI::EventArgs& e);
 		bool createPowerGeneratorReleased(const CEGUI::EventArgs& e);
 
+		bool continueRoadCreation();
+		bool continueClearTerrain();
+
 	public:
 		SideBarUI();
 		~SideBarUI();
@@ -52,6 +55,7 @@ namespace GUI
 		void deactivate();
 		void tick(unsigned int msecs);
 		void playerInteractionWithLeftClick();
+		void playerInteractionWithRightClick();
 		void setEventWindowVisible(bool visible);
 	};
 }

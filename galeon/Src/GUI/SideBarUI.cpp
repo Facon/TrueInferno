@@ -225,6 +225,19 @@ namespace GUI
 		return (_placeableEntity != nullptr);
 	}
 
+	bool SideBarUI::continueRoadCreation()
+	{
+		ClearBuildingConstruction();
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 0, 0), true, true);
+		if (_placeableEntity){
+			_placeableRoad = new Logic::CEntity*[1];
+			_placeableRoadSize = 1;
+			_placeableRoad[0] = _placeableEntity;
+			_roadInConstruction = 1;
+		}
+		return (_placeableEntity != nullptr);
+	}
+
 	bool SideBarUI::createMineReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
@@ -270,6 +283,14 @@ namespace GUI
 		return true;
 	}
 
+	bool SideBarUI::continueClearTerrain()
+	{
+		ClearBuildingConstruction();
+		// @TODO Cambiar puntero a pala
+		_clearTerrain = true;
+		return true;
+	}
+
 	bool SideBarUI::createResearchLabReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
@@ -292,6 +313,7 @@ namespace GUI
 	}
 
 	void SideBarUI::ClearBuildingConstruction(){
+		_clearTerrain = false;
 		_roadInConstruction = 0;
 		if (_placeableRoadSize > 0){
 			for (int i = 0; i < _placeableRoadSize; ++i){
@@ -317,6 +339,10 @@ namespace GUI
 		Logic::GetCostPlaceableMessage m(Logic::MessageType::PLACEABLE_CONSUME_COST, placeableEntity);
 
 		return m.Dispatch(*placeableEntity);
+	}
+
+	void SideBarUI::playerInteractionWithRightClick(){
+		ClearBuildingConstruction();
 	}
 
 	void SideBarUI::playerInteractionWithLeftClick()
@@ -371,7 +397,7 @@ namespace GUI
 							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 							_firstRoad = false;
 						}
-
+						continueRoadCreation();
 						break;
 					}
 				}
@@ -383,7 +409,7 @@ namespace GUI
 				if (entity)
 				{
 					Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(entity);
-					_clearTerrain=false;
+					continueClearTerrain();
 				}			
 			}
 			else
