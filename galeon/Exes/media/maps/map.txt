@@ -103,7 +103,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Evilator",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "EVILATOR",
+		defaultBillboard = "JUDGEMENT",
 	},
 	
 	Furnace = {

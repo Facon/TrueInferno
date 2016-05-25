@@ -1,3 +1,5 @@
+// @author Asier González
+
 #ifndef __Graphics_Billboard_H
 #define __Graphics_Billboard_H
 
@@ -31,7 +33,10 @@ namespace Graphics
 		virtual ~BillboardSet();
 
 		Ogre::Billboard* createBillboard(Vector3& vector);
+		Ogre::Billboard* getBillboard(unsigned int index);
+		void removeBillboard(unsigned int index);
 		Ogre::BillboardSet* getBillboardSet();
+		unsigned int getNumBillboards();
 
 	protected:
 		Ogre::BillboardSet* _bbSet;

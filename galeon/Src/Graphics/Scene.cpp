@@ -177,7 +177,7 @@ namespace Graphics
 		//Ogre::SceneNode* childNode = entity->_entityNode->getParentSceneNode()->createChildSceneNode(Vector3(0.0f, 2.0f, 0.0f));
 		Ogre::SceneNode* childNode = entity->_entityNode->createChildSceneNode();
 		childNode->setInheritScale(false);
-		childNode->setPosition(Vector3(0.0f, 200.0f, 0.0f));
+		childNode->setPosition(Vector3(0.0f, 100.0f, 0.0f));
 		childNode->attachObject(bbSet);
 
 		++index;

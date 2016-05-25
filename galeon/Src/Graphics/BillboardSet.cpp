@@ -1,3 +1,5 @@
+// @author Asier González
+
 #include "BillboardSet.h"
 
 #include <OgreSceneManager.h>
@@ -19,7 +21,7 @@ namespace Graphics
 			CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
 			Ogre::BillboardSet* bbSet = scene->createBillboardSet(entity, name);
 			bbSet->setMaterialName(materialName);
-			bbSet->setDefaultDimensions(1, 1);
+			bbSet->setDefaultDimensions(0.5, 0.5);
 
 			// Specific parts
 			if (materialName == "Billboard/TrueInfernoIcons")
@@ -48,5 +50,20 @@ namespace Graphics
 	Ogre::Billboard* BillboardSet::createBillboard(Vector3& vector)
 	{
 		return _bbSet->createBillboard(vector);
+	}
+
+	Ogre::Billboard* BillboardSet::getBillboard(unsigned int index)
+	{
+		return _bbSet->getBillboard(index);
+	}
+
+	void BillboardSet::removeBillboard(unsigned int index)
+	{
+		_bbSet->removeBillboard(index);
+	}
+
+	unsigned int BillboardSet::getNumBillboards()
+	{
+		return _bbSet->getNumBillboards();
 	}
 }
