@@ -5,7 +5,7 @@ Contiene el tipo de datos de un mensaje.
 
 @see Logic::Message
 
-@author David Llansó García
+@author Asier González
 */
 #ifndef __Logic_Message_H
 #define __Logic_Message_H
@@ -117,6 +117,9 @@ namespace Logic
 			TOGGLE_REQUEST,
 			TOGGLE_INFO,
 			ICON,
+			ICON_ADD,
+			ICON_CHANGE,
+			ICON_DELETE,
 		};
 
 		MessageType _type;
@@ -610,29 +613,30 @@ namespace Logic
 	{
 		enum IconType
 		{
-			OK = 0,
+			NONE = 0,
+			OK = 1,
 			BURNING, // WTF?
 			SHOVEL,
 			CLOSE,
-			ROCKS,
-			STAR, // WTF?
+			COKE,
+			CRUDE,
 			NOT_OK,
 			FLAMES,
 			SOUL_PATH,
-			COMPASS_ROSE,
+			EVILWORKS,
 			FURNACE,
 			GAS_PLANT,
-			HELLQUARTERS, // WTF?
-			MINE, // WTF?
+			HELLQUARTERS,
+			MINE,
 			CROSS_SWORD, // WTF?
 			SOUL, // WTF?
-			WIFI, // WTF?
-			TOXIC2, // WTF?
-			TOXIC3, // WTF?
+			POWER_GENERATOR,
+			PURE_EVIL,
+			REFINED,
 			REFINERY, 
 			REPAIR,
 			RESEARCH_LABS,
-			POWER_GENERATOR,
+			POWER_ON,
 			CLOCK,
 			JUDGEMENT,
 			COGS, // WTF?
@@ -644,8 +648,11 @@ namespace Logic
 	{
 	public:
 		IconType::IconType _icon;
+		IconType::IconType _iconReplacement;
 
 		IconMessage(IconType::IconType icon);
+		IconMessage(MessageType type, IconType::IconType icon);
+		IconMessage(MessageType type, IconType::IconType icon, IconType::IconType iconReplacement);
 
 		virtual bool Dispatch(MessageHandler& handler) const;
 	};
