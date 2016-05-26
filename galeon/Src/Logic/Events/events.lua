@@ -459,11 +459,6 @@ MajorObstacleGrowthEvent.throw = function(god)
 		timeToLaunch, god.name, title, description, image, 0.1, true));
 end
 
--- CResearchChallengeEvent
--- CResourceDemandEvent
--- CSoulHellocaustEvent
--- CSoulStealEvent
-
 events =
 {
 	BuildingDestructionEvent,

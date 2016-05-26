@@ -66,6 +66,11 @@ namespace Logic
 
 		void tick(unsigned int msecs);
 
+		/** Devuelve true si el jugador ganó la partida. False si perdió */
+		bool getVictory() const {
+			return _victory;
+		}
+
 	protected:
 
 		/**
@@ -99,6 +104,9 @@ namespace Logic
 		Única instancia de la clase.
 		*/
 		static CGameManager *_instance;
+
+		/** Flag a true si el jugador ha ganado o false si ha perdido */
+		bool _victory;
 
 	}; // class GameManager
 

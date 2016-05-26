@@ -21,6 +21,7 @@ Contiene la implementación del gestor del estado de la partida.
 #include "Logic/Events/EventManager.h"
 #include "Logic/Events/EndGameEvent.h"
 #include "Logic/Events/EndRoundEvent.h"
+#include "Application/BaseApplication.h"
 
 namespace Logic {
 
@@ -79,6 +80,7 @@ namespace Logic {
 
 	bool CGameManager::open()
 	{
+		_victory = false;
 		return true;
 
 	} // open
@@ -104,8 +106,13 @@ namespace Logic {
 
 		std::cout << "God eliminated: " << worstActiveGod->getName() << std::endl;
 
-		// Determinamos si el jugador ganó o perdió comparando su score con el del dios
-		bool victory = playerScore >= worstActiveGod->getScore();
+		// Determinamos si el jugador ganó o perdió la ronda comparando su score con el del peor dios activo
+		_victory = (playerScore > worstActiveGod->getScore());
+
+		// Si perdió el jugador la ronda acabamos la partida (con derrota)
+		if (!_victory) {
+			Application::CBaseApplication::getSingletonPtr()->setState("gameOver");
+		}
 
 		// Desactivamos al dios
 		AI::CAIManager::getSingletonPtr()->eliminateGod(worstActiveGod->getName());
@@ -114,25 +121,19 @@ namespace Logic {
 		// Si no hay más dioses -> final de partida
 		bool endGame = AI::CAIManager::getSingletonPtr()->getWorstActiveGod() == nullptr;
 
-		// Notificamos al jugador con un evento u otro según si es final de ronda o partida
-		bool eventThrown = false;
-		if (endGame)
-			eventThrown = Logic::CEventManager::getSingletonPtr()->addTimeEvent(new CEndGameEvent(victory, 100));
-		else
-			eventThrown = Logic::CEventManager::getSingletonPtr()->addTimeEvent(new CEndRoundEvent(victory, 100));
+		// Si es final de partida, cambiamos el estado y acabamos la partida (con victoria)
+		if (endGame) {
+			Application::CBaseApplication::getSingletonPtr()->setState("gameOver");
+			return;
+		}
 
+		// En otro caso es final de ronda, así que notificamos con un evento
+		bool eventThrown = Logic::CEventManager::getSingletonPtr()->addTimeEvent(new CEndRoundEvent(_victory, 100));
 		assert(eventThrown && "Event couldn't be thrown");
 
-		// En caso de fin de partida...
-		if (endGame){
-			// TODO
-		}
-
 		// En caso de fin de ronda, notificamos a los managers de tiempo e IA
-		else{
-			CTimeManager::getSingletonPtr()->startNextRound();
-			AI::CAIManager::getSingletonPtr()->startNextRound();
-		}
+		CTimeManager::getSingletonPtr()->startNextRound();
+		AI::CAIManager::getSingletonPtr()->startNextRound();
 	}
 
 	void CGameManager::tick(unsigned int msecs){

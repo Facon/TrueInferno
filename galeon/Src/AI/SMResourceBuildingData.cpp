@@ -64,12 +64,12 @@ namespace AI {
 
 		// Controlamos que el nuevo valor no sobrepase los límites
 		if (aux < 0){
-			std::cout << "Discarded changing " << quantity << " resources because there are only stored " << _storedResources[type] << std::endl;
+			//std::cout << "Discarded changing " << quantity << " resources because there are only stored " << _storedResources[type] << std::endl;
 			return false;
 		}
 
 		else if (aux > (int)_maxResources[type]){
-			std::cout << "Discarded changing " << quantity << " resources because there are already stored " << _storedResources[type] << " (limit = " << _maxResources[type] << ")" << std::endl;
+			//std::cout << "Discarded changing " << quantity << " resources because there are already stored " << _storedResources[type] << " (limit = " << _maxResources[type] << ")" << std::endl;
 			return false;
 		}
 

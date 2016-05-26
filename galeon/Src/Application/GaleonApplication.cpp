@@ -19,7 +19,7 @@ basadas en Ogre. Esta clase maneja la ejecución de todo el juego.
 #include "ExitState.h"
 #include "MenuState.h"
 #include "GameState.h"
-
+#include "GameOverState.h"
 
 namespace Application {
 
@@ -52,6 +52,9 @@ namespace Application {
 			return false;
 
 		if(!addState("exit", new CExitState(this)))
+			return false;
+
+		if (!addState("gameOver", new CGameOverState(this)))
 			return false;
 
 		if(!setState("game"))
