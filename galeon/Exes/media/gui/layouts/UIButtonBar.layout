@@ -2,53 +2,53 @@
 
 <GUILayout version="4" >
 	<Window type="OgreTray/StaticImage" name="SideBar" >
-		<Property name="Area" value="{{0.9,0},{0.05,0},{1,0},{1,0}}" />
+		<Property name="Area" value="{{0.88,0},{0.3,0},{1,0},{1,0}}" />
 		<Property name="Image" value="TrueInfernoUITextures/Sidebar" />
 		<Property name="HorzFormatting" value="LeftAligned" />
 		<Property name="VertFormatting" value="TopAligned" />
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateRoad" name="CreateRoad" >
-			<Property name="Area" value="{{0.05,0},{0.345,0},{0.475,0},{0.405,0}}" />		
+			<Property name="Area" value="{{0.05,0},{0.225,0},{0.475,0},{0.315,0}}" />		
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateFurnace" name="CreateFurnace" >
-			<Property name="Area" value="{{0.05,0},{0.41,0},{0.475,0},{0.47,0}}" />
+			<Property name="Area" value="{{0.05,0},{0.325,0},{0.475,0},{0.415,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCreatePowerGenerator" name="CreatePowerGenerator" >
-			<Property name="Area" value="{{0.525,0},{0.41,0},{0.95,0},{0.47,0}}" />
+			<Property name="Area" value="{{0.525,0},{0.325,0},{0.95,0},{0.415,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateMine" name="CreateMine" >
-			<Property name="Area" value="{{0.05,0},{0.475,0},{0.475,0},{0.535,0}}" />
+			<Property name="Area" value="{{0.05,0},{0.425,0},{0.475,0},{0.515,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateGasPlant" name="CreateGasPlant" >
-			<Property name="Area" value="{{0.525,0},{0.475,0},{0.95,0},{0.535,0}}" />
+			<Property name="Area" value="{{0.525,0},{0.425,0},{0.95,0},{0.515,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateEvilworks" name="CreateEvilworks" >
-			<Property name="Area" value="{{0.05,0},{0.54,0},{0.475,0},{0.60,0}}" />
+			<Property name="Area" value="{{0.05,0},{0.525,0},{0.475,0},{0.615,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateRefinery" name="CreateRefinery" >
-			<Property name="Area" value="{{0.525,0},{0.54,0},{0.95,0},{0.60,0}}" />
+			<Property name="Area" value="{{0.525,0},{0.525,0},{0.95,0},{0.615,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateResearchLab" name="CreateResearchLab" >
-			<Property name="Area" value="{{0.05,0},{0.605,0},{0.475,0},{0.665,0}}" />
+			<Property name="Area" value="{{0.05,0},{0.625,0},{0.475,0},{0.715,0}}" />
 		</Window>
 
 		<Window type="OgreTray/TrueInfernoButtonCreateWarehouse" name="CreateWarehouse" >
-			<Property name="Area" value="{{0.525,0},{0.605,0},{0.95,0},{0.665,0}}" />
+			<Property name="Area" value="{{0.525,0},{0.625,0},{0.95,0},{0.715,0}}" />
 		</Window>
 
 		<Window type="OgreTray/TrueInfernoButtonRepairBuilding" name="RepairBuilding" >
-			<Property name="Area" value="{{0.05,0},{0.67,0},{0.475,0},{0.73,0}}" />
+			<Property name="Area" value="{{0.05,0},{0.725,0},{0.475,0},{0.815,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonClearTerrain" name="ClearTerrain" >
-			<Property name="Area" value="{{0.525,0},{0.67,0},{0.95,0},{0.73,0}}" />
+			<Property name="Area" value="{{0.525,0},{0.725,0},{0.95,0},{0.815,0}}" />
 		</Window>
 
 	</Window>
