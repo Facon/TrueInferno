@@ -118,13 +118,15 @@ namespace AI {
 		// Buscamos horno. Si no hay, no aceptamos el mensaje
 		TEntityID target = CWorkManager::getSingletonPtr()->findFurnace();
 
-		// Si se devolvió el ID especial UNASSIGNED es que no había ningún edificio para trabajar
+		// Si se devolvió el ID especial UNASSIGNED es que no había ningún horno activo
 		if (target == EntityID::UNASSIGNED)
 			return false;
 
-		//std::unique_ptr<CBurnTask> _task(new CBurnTask(target));
 		_burnTask = new CBurnTask(_entity->getMap(), target, _pendingSoulsToBurn.front());
-		return true;
+
+		// Forzamos de forma síncrona la inicialización de la tarea para incrementar el número de
+		// almas a quemar asignadas al horno
+		return _burnTask->start();
 	}
 
 	bool CLAGetTaskAndTarget::sendSoul(bool workTask)

@@ -46,14 +46,22 @@ namespace AI {
 
 		SM_HANDLE_MESSAGE(SoulBurnMessage);
 
-		/** Devuelve el número actual de almas preparadas para ser quemadas */
-		int getCurrentSoulsToBurn(){
+		/** Devuelve el número actual de almas a ser quemadas en esta entidad */
+		int getCurrentSoulsToBurn()
+		{
 			return _data.getNumSoulsToBurn();
 		}
 
 		/** Devuelve el número máximo de almas que pueden quemarse en cada ciclo */
-		int getMaxSoulsToBurn(){
+		int getMaxSoulsToBurn()
+		{
 			return _maxSoulsPerCycle;
+		}
+
+		/** Incrementa el número de almas a quemar asignadas pero aún en camino. */
+		void increaseAssignedSoulsToBurn()
+		{
+			_data.increaseAssignedSoulsToBurn();
 		}
 
 	private:

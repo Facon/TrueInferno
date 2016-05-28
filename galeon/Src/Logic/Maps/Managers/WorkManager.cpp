@@ -140,18 +140,20 @@ namespace Logic {
 		int maxSoulsToBurn = INT_MIN;
 
 		// Obtenemos los hornos (si hay alguno)
-		std::set<CPlaceable*>* _furnaces = CBuildingManager::getSingletonPtr()->getBuildings()[BuildingType::Furnace];
+		std::set<CPlaceable*>* _furnaces = CBuildingManager::getSingletonPtr()->getBuildingsFromType(BuildingType::Furnace);
 		
-		if(_furnaces == nullptr)
+		if (_furnaces == nullptr)
 			return EntityID::UNASSIGNED;
 
-		for (auto it = _furnaces->cbegin(); it != _furnaces->cend(); ++it){
+		for (auto it = _furnaces->cbegin(); it != _furnaces->cend(); ++it)
+		{
 			CEntity* entity = (*it)->getEntity();
 
-			CWorkBuilding* furnace = entity->getComponent<CWorkBuilding>();
 			// Los hornos deben ser edificios de trabajadores
-			if (furnace == nullptr){
-				assert(false && "Furnace must have a WorkBuilding component");
+			CWorkBuilding* furnace = entity->getComponent<CWorkBuilding>();
+			if (furnace == nullptr)
+			{
+				assert(false && "Every furnace must have a WorkBuilding component");
 				continue;
 			}
 
@@ -161,30 +163,24 @@ namespace Logic {
 
 			// Los hornos deben ser quemadores de almas
 			CSoulBurner* soulBurner = entity->getComponent<CSoulBurner>();
-			if (soulBurner == nullptr){
-				assert(false && "Furnace must have a SoulBurner component");
+			if (soulBurner == nullptr)
+			{
+				assert(false && "Every furnace must have a SoulBurner component");
 				continue;
 			}
 
 			// Obtenemos la capacidad restante del horno
 			int remainingSoulsToBurn = soulBurner->getMaxSoulsToBurn() - soulBurner->getCurrentSoulsToBurn();
 
-			// Actualizaremos si...
-			bool update = false;
-
+			// Actualizaremos el horno seleccionado si...
 			// ...se mejora la mayor capacidad encontrada hasta el momento
 			if (remainingSoulsToBurn > maxSoulsToBurn)
-				update = true;
-
-			// TODO ...o si iguala y está más cerca
-			/*else if (remainingSoulsToBurn == maxSoulsToBurn){
-				//update = 
-			}*/
-
-			if (update){
+			{
 				maxSoulsToBurn = remainingSoulsToBurn;
 				target = entity->getEntityID();
 			}
+
+			// TODO ...o si se iguala y está más cerca
 		}
 
 		return target;
