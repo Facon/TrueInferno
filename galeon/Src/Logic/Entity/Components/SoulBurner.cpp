@@ -27,4 +27,10 @@ namespace Logic
 		//return _maxSoulsPerCycle;
 	}
 
+	void CSoulBurner::increaseAssignedSoulsToBurn()
+	{
+		((AI::CSMSoulBurner*)_currentStateMachine)->increaseAssignedSoulsToBurn();
+		//_data.increaseAssignedSoulsToBurn()
+	}
+
 }

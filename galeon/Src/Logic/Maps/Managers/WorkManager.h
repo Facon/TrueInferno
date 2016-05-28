@@ -97,6 +97,9 @@ namespace Logic
 		Método encargado de la comprobación y reordenación de los trabajadores
 		(en caso de que sea necesario) en base a la prioridad definida para
 		cada grupo de edificios.
+		<p>
+		Debe ser llamado siempre que se añada un nuevo edificio, y se pierdan
+		o ganen trabajadores.
 		*/
 		void reassignWorkers();
 

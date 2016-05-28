@@ -2,44 +2,48 @@
 #define BURN_SOUL_TASK_H_
 
 #include "SoulTask.h"
-#include "Logic\Entity\Message.h"
-#include "Logic\Entity\IconType.h"
+#include "Logic/Entity/Message.h"
+#include "Logic/Entity/Components/SoulBurner.h"
 
-namespace AI{
-
+namespace AI
+{
 	class CBurnTask : public CSoulTask {
 
 	public:
-		CBurnTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::SoulsTrialManager::SoulsCategory category) :
-			CSoulTask(map, target, category) {};
+		CBurnTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::CSoulsTrialManager::SoulsCategory category, bool started = false) :
+			CSoulTask(map, target, category), _started(started) {};
 
 		virtual ~CBurnTask() {};
 
 		virtual CSoulTask* clone(){
-			return new CBurnTask(_map, _target, _category);
+			return new CBurnTask(_map, _target, _category, _started);
 		}
 
-		bool start(){
-			CSoulTask::start();
+		bool start()
+		{
+			// Evitamos múltiples inicializaciones
+			if (_started)
+				return true;
 
-			// Obtenemos la entidad que va a ejecutar la tarea
-			CEntity* executor = _map->getEntityByID(_executorId);
+			_started = true;
 
-			// Si existe, establecemos sus iconos
-			if (executor != nullptr){
-				// Icono de alma quemándose
-				IconMessage m(MessageType::ICON_ADD, IconType::IconType::BURNING);
-				bool result = m.Dispatch(*executor);
-				assert(result && "Can't set burning soul icon");
+			// Chequeamos que el objetivo siga existiendo
+			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 
-				// Icono por edificio de destino
-				result = addDestinationBuildingIcon();
-				assert(result && "Can't set building icon");
+			// Si existe
+			if (targetEntity != nullptr)
+			{
+				// Incrementamos el número de almas a quemar asignadas al horno
+				CSoulBurner *soulBurner = targetEntity->getComponent<CSoulBurner>();
+
+				if (soulBurner != nullptr)
+					soulBurner->increaseAssignedSoulsToBurn();
 			}
-
-			else{
-				assert(false && "There is no executor starting the task");
-				// Dejamos que siga sin icono
+			// Si no, la solución más sencilla es descartar el alma
+			// TODO Quedaría mejor si le asignamos otro horno
+			else
+			{
+				std::cout << "Soul's target for BurnSoulTask has disappeared" << std::endl;
 			}
 
 			return true;
@@ -52,20 +56,29 @@ namespace AI{
 			// Chequeamos que el objetivo siga existiendo
 			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 
-			// Si lo está
+			// Si existe
 			if (targetEntity != nullptr)
 			{
 				// Notificamos al objetivo
 				SoulBurnMessage m(1, _category);
 				return m.Dispatch(*targetEntity);
 			}
-
 			// Si no
-			else{
+			else
+			{
 				std::cout << "Soul's target for BurnSoulTask has disappeared" << std::endl;
 				return true;
 			}
-		};
+		}
+
+		void setStarted(bool started)
+		{
+			_started = started;
+		}
+
+	protected:
+		// Indica si el método start() ha sido ya ejecutado previamente
+		bool _started = false;
 
 	}; // class CBurnTask
 

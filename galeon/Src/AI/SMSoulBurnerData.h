@@ -11,18 +11,28 @@ namespace AI
 
 	public:
 
-		CSMSoulBurnerData() { _soulsCategoryToBurn = TSoulsCategoryQueue(); }
+		CSMSoulBurnerData()
+		{
+			_soulsCategoryToBurn = TSoulsCategoryQueue();
+			_numAssignedSoulsToBurn = 0;
+		}
 
 		virtual ~CSMSoulBurnerData() {}
 
 		unsigned int getNumSoulsToBurn()
 		{
-			return _soulsCategoryToBurn.size();
+			return _soulsCategoryToBurn.size() + _numAssignedSoulsToBurn;
+		}
+
+		void increaseAssignedSoulsToBurn()
+		{
+			++_numAssignedSoulsToBurn;
 		}
 
 		void addSoulToBurn(SoulsTrialManager::SoulsCategory soulCategory)
 		{
 			_soulsCategoryToBurn.push(soulCategory);
+			--_numAssignedSoulsToBurn;
 		}
 
 		SoulsTrialManager::SoulsCategory getNextSoulToBurn()
@@ -39,6 +49,8 @@ namespace AI
 			{
 				_soulsCategoryToBurn.pop();
 			}
+
+			_numAssignedSoulsToBurn = 0;
 		}
 
 	private:
@@ -48,6 +60,12 @@ namespace AI
 
 		/** (Categoría de las) Almas preparadas para ser quemadas */
 		TSoulsCategoryQueue _soulsCategoryToBurn;
+
+		/**
+		Número de almas a quemar asignadas al horno que se encuentran
+		aún en camino.
+		*/
+		int _numAssignedSoulsToBurn;
 
 	};
 
