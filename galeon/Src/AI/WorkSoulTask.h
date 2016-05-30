@@ -4,6 +4,7 @@
 #include "SoulTask.h"
 #include "Logic\Entity\Message.h"
 #include "Logic\Maps\Managers\WorkManager.h"
+#include "Logic\Entity\IconType.h"
 
 namespace AI{
 
@@ -11,7 +12,7 @@ namespace AI{
 
 	public:
 		CWorkTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::SoulsTrialManager::SoulsCategory category) :
-			CSoulTask(map, target, category) {};
+			CSoulTask(map, target, category), _workerAssigned(false) {};
 
 		virtual ~CWorkTask() {};
 
@@ -20,24 +21,47 @@ namespace AI{
 		}
 
 		bool start(){
-			// Chequeamos que el objetivo siga existiendo
-			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
+			if (!_workerAssigned){
+				// Chequeamos que el objetivo siga existiendo
+				Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 
-			// Si lo está
-			if (targetEntity != nullptr){
-				// Asignamos el trabajador al objetivo
-				Logic::WorkerMessage m(MessageType::WORKER_ASSIGNED, 1);
+				// Si lo está
+				if (targetEntity != nullptr){
+					// Asignamos el trabajador al objetivo
+					Logic::WorkerMessage m(MessageType::WORKER_ASSIGNED, 1);
 
-				// Damos por ejecutada la tarea si nos aceptan el mensaje
-				return m.Dispatch(*targetEntity);
+					// Paramos si no nos aceptan el mensaje
+					if (!m.Dispatch(*targetEntity))
+						return false;
+
+					_workerAssigned = true;
+				}
+
+				// Si no, la solución más sencilla es descartar al trabajador
+				// TODO Quedaría mejor si le asignamos otra tarea
+				else{
+					std::cout << "Soul's target for WorkSoulTask has disappeared" << std::endl;
+					return true; // TODO Se debe notificar el error de alguna forma porque en este punto ya sabemos que, sin objetivo, la tarea no va a poder completarse
+				}
 			}
 
-			// Si no, la solución más sencilla es descartar al trabajador
-			// TODO Quedaría mejor si le asignamos otra tarea
+			// Ponemos los iconos
+			// Obtenemos la entidad que va a ejecutar la tarea
+			CEntity* executor = _map->getEntityByID(_executorId);
+
+			// Si existe, establecemos sus iconos
+			if (executor != nullptr){
+				// Icono de alma que va a trabajar
+				IconMessage m(MessageType::ICON, IconType::IconType::SOUL);
+				assert(m.Dispatch(*executor) && "Can't change icon");
+			}
+
 			else{
-				std::cout << "Soul's target for WorkSoulTask has disappeared" << std::endl;
-				return true; // TODO Se debe notificar el error de alguna forma porque en este punto ya sabemos que, sin objetivo, la tarea no va a poder completarse
+				assert(false && "There is no executor starting the task");
+				// Dejamos que siga sin icono
 			}
+
+			return true;
 		};
 
 		bool execute() {
@@ -59,8 +83,11 @@ namespace AI{
 			}
 		};
 
-	};
+	private:
+		bool _workerAssigned;
 
-}
+	}; // class CWorkTask
+
+} // namespace AI
 
 #endif

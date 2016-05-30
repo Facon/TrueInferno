@@ -6,6 +6,7 @@
 #include "Logic/Maps/Map.h"
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Components/Graphics.h"
+#include "Logic/Entity/IconType.h"
 
 #include <OgreBillboardSet.h>
 #include <OgreBillboard.h>
@@ -36,7 +37,6 @@ namespace Logic
 		{ "SOUL", IconType::SOUL },
 		{ "POWER_GENERATOR", IconType::POWER_GENERATOR }, // WTF?
 		{ "PURE_EVIL", IconType::PURE_EVIL },
-		{ "EVILATOR", IconType::JUDGEMENT }, // WTF?
 		{ "REFINERY", IconType::REFINERY },
 		{ "REPAIR", IconType::REPAIR },
 		{ "RESEARCH_LABS", IconType::RESEARCH_LABS },
@@ -45,6 +45,13 @@ namespace Logic
 		{ "JUDGEMENT", IconType::JUDGEMENT },
 		{ "COGS", IconType::COGS }, // WTF?
 		{ "WAREHOUSE", IconType::WAREHOUSE },
+		//{ "EVILATOR", IconType::EVILATOR },
+		//{ "MINERAL", IconType::MINERAL },
+		//{ "GAS", IconType::GAS },
+		// TODO Solución temporal hasta que estén los iconos que faltan
+		{ "EVILATOR", IconType::CLOCK },
+		{ "MINERAL", IconType::MINE },
+		{ "GAS", IconType::GAS_PLANT },
 	};
 	
 	Billboard::Billboard() : IComponent()

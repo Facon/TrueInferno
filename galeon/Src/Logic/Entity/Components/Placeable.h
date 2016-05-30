@@ -89,6 +89,16 @@ namespace Logic {
 
 		virtual bool HandleMessage(const GetCostPlaceableMessage& msg);
 
+		// Devuelve el PlaceableType de este placeable
+		PlaceableType CPlaceable::getPlaceableType() const {
+			return _placeableType;
+		}
+
+		// Devuelve el BuildingType de este placeable
+		BuildingType CPlaceable::getBuildingType() const {
+			return _buildingType;
+		}
+
 	private:
 		/** Altura añadida a la posición del Placeable para que parezca que está justo encima */
 		const float HEIGHT_ON_TILE = 1.0f;
@@ -164,16 +174,6 @@ namespace Logic {
 		/** Parsea un enum TerrainType a partir del nombre en texto
 		TODO Mover junto al código del enum */
 		static TerrainType parseTerrainType(const std::string& name);
-
-		// Devuelve el PlaceableType de este placeable
-		PlaceableType CPlaceable::getPlaceableType(){
-			return _placeableType;
-		}
-
-		// Devuelve el BuildingType de este placeable
-		BuildingType CPlaceable::getBuildingType(){
-			return _buildingType;
-		}
 
 	}; // class Placeable
 

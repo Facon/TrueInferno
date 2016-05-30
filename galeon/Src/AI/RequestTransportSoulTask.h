@@ -6,6 +6,8 @@
 #include "Logic\ResourcesManager.h"
 #include "Logic\Maps\Map.h"
 #include "Logic\Entity\Entity.h"
+#include "Logic\Entity\BuildingType.h"
+#include "Logic\Entity\IconType.h"
 
 using namespace Logic;
 
@@ -28,6 +30,30 @@ namespace AI{
 		}
 
 		bool start(){
+			// Obtenemos la entidad que va a ejecutar la tarea
+			CEntity* executor = _map->getEntityByID(_executorId);
+
+			// Si existe, establecemos sus iconos
+			if (executor != nullptr){
+				// TODO Icono de recurso que va a ir a recoger la entidad
+				//IconMessage m(MessageType::ICON, Logic::IconType::resourceType2IconType(_resourceType));
+				//ret &= m.Dispatch(*executor);
+
+				// Determinamos el tipo de edificio al que va
+				BuildingType buildingType = getTargetBuildingType();
+
+				if (buildingType != BuildingType::NonBuilding){
+					// Icono de edificio destino
+					IconMessage m(MessageType::ICON, Logic::IconType::buildingType2IconType(buildingType));
+					assert(m.Dispatch(*executor) && "Can't change icon");
+				}
+			}
+
+			else{
+				assert(false && "There is no executor starting the task");
+				// Dejamos que siga sin icono
+			}
+
 			return true;
 		}
 
@@ -62,8 +88,9 @@ namespace AI{
 
 		// Cantidad de recursos que portará el alma
 		unsigned int _resourceQuantity;
-	};
 
-}
+	}; // class CRequestTransportSoulTask
+
+} // namespace AI
 
 #endif // REQUEST_TRANSPORT_SOUL_TASK_H_

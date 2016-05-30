@@ -27,8 +27,12 @@ namespace AI {
 
 	CLatentAction::LAStatus CLAWaitSoulTask::OnRun(unsigned int msecs) {
 		// Fallamos si no hay tarea
-		if (_smData.getTask() == nullptr)
+		AI::CSoulTask *task = _smData.getTask();
+		if (task == nullptr)
 			return LAStatus::FAIL;
+
+		// Indicamos a la tarea el alma al que ha sido asignada
+		task->setExecutor(_entity->getEntityID());
 
 		return LAStatus::SUCCESS;
 	}

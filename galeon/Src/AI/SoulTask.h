@@ -4,6 +4,11 @@
 #include "Logic\Maps\Map.h"
 #include "Logic\SoulsTrialManager.h"
 
+namespace Logic
+{
+	enum BuildingType;
+}
+
 namespace AI
 {
 	class CSoulTask
@@ -11,7 +16,7 @@ namespace AI
 
 	public:
 		CSoulTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::SoulsTrialManager::SoulsCategory category) :
-			_map(map), _target(target), _category(category) {}
+			_map(map), _target(target), _category(category), _executorId(Logic::EntityID::UNASSIGNED) {}
 
 		virtual ~CSoulTask() {};
 
@@ -34,6 +39,11 @@ namespace AI
 		/** Método para clonar una instancia y poder transmitir con tranquilidad copias de la instancia como punteros a CSoulTask. Debe ser implementado en la clase hija */
 		virtual CSoulTask* clone() = 0;
 
+		/** Asigna la entidad que ejecutará la tarea */
+		void setExecutor(Logic::TEntityID executorId){
+			_executorId = executorId;
+		}
+
 	protected:
 		Logic::CMap *_map;
 
@@ -42,6 +52,11 @@ namespace AI
 
 		/** Categoría asignada al alma durante el Juicio de Almas inicial */
 		Logic::SoulsTrialManager::SoulsCategory _category;
+
+		/** Entidad (alma) que ejecutará la tarea */
+		Logic::TEntityID _executorId;
+
+		Logic::BuildingType getTargetBuildingType();
 	};
 
 }

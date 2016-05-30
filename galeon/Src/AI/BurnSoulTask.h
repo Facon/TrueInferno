@@ -3,6 +3,7 @@
 
 #include "SoulTask.h"
 #include "Logic\Entity\Message.h"
+#include "Logic\Entity\IconType.h"
 
 namespace AI{
 
@@ -18,8 +19,22 @@ namespace AI{
 			return new CBurnTask(_map, _target, _category);
 		}
 
-		bool start()
-		{
+		bool start(){
+			// Obtenemos la entidad que va a ejecutar la tarea
+			CEntity* executor = _map->getEntityByID(_executorId);
+
+			// Si existe, establecemos sus iconos
+			if (executor != nullptr){
+				// Icono de alma quemándose
+				IconMessage m(MessageType::ICON, IconType::IconType::BURNING);
+				assert(m.Dispatch(*executor) && "Can't change icon");
+			}
+
+			else{
+				assert(false && "There is no executor starting the task");
+				// Dejamos que siga sin icono
+			}
+
 			return true;
 		}
 
@@ -42,8 +57,9 @@ namespace AI{
 				return true;
 			}
 		};
-	};
 
-}
+	}; // class CBurnTask
+
+} // namespace AI
 
 #endif

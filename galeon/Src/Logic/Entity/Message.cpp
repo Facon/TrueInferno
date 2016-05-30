@@ -10,6 +10,8 @@
 #include "Logic/ResourcesManager.h"
 #include "Logic/Events/EventManager.h"
 #include "Logic/SoulsTrialManager.h"
+#include "Logic/Entity/BuildingType.h"
+#include "Logic/Entity/IconType.h"
 
 namespace Logic
 {
@@ -503,4 +505,5 @@ namespace Logic
 
 		return handler.HandleMessage(*this);
 	}
+
 } // namespace Logic

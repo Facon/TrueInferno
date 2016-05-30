@@ -25,12 +25,18 @@ namespace Logic
 	enum LogicRequirement;
 	
 	enum ResourceType;
+	enum BuildingType;
 
 	class CSoulsTrialManager;
 	
 	namespace SoulsTrialManager
 	{
 		enum SoulsCategory;
+	}
+
+	namespace IconType
+	{
+		enum IconType;
 	}
 };
 
@@ -608,41 +614,6 @@ namespace Logic
 
 		virtual bool Dispatch(MessageHandler& handler) const;
 	};
-
-	namespace IconType
-	{
-		enum IconType
-		{
-			NONE = 0,
-			OK = 1,
-			BURNING, // WTF?
-			SHOVEL,
-			CLOSE,
-			COKE,
-			CRUDE,
-			NOT_OK,
-			FLAMES,
-			SOUL_PATH,
-			EVILWORKS,
-			FURNACE,
-			GAS_PLANT,
-			HELLQUARTERS,
-			MINE,
-			CROSS_SWORD, // WTF?
-			SOUL, // WTF?
-			POWER_GENERATOR,
-			PURE_EVIL,
-			REFINED,
-			REFINERY, 
-			REPAIR,
-			RESEARCH_LABS,
-			POWER_ON,
-			CLOCK,
-			JUDGEMENT,
-			COGS, // WTF?
-			WAREHOUSE,
-		};
-	}
 
 	class IconMessage : public Message
 	{

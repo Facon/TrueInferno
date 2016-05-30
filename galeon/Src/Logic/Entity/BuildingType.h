@@ -20,6 +20,10 @@ namespace Logic {
 		Unassigned
 	};
 
+	static void test(){
+		int i = 0;
+	}
+
 } // namespace Logic
 
 #endif // BUILDING_TYPE_H_
