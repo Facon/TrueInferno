@@ -16,7 +16,7 @@ namespace Logic {
 		* Constructor por defecto.
 		*/
 		//CToggleable() : _enabled(false) {}
-		CToggleable() {}
+		CToggleable() : _requirementsStr("") {}
 
 		/**
 		* Destructor por defecto.
@@ -28,6 +28,11 @@ namespace Logic {
 		* el fichero de mapa.
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
+
+		/**
+		* Activación del componente invocado cuando se activa el mapa
+		*/
+		virtual bool activate();
 
 		/**
 		* Actualización por frame
@@ -52,10 +57,16 @@ namespace Logic {
 		/** Valor nuevo de habilitado lógico para el siguiente tick */
 		//bool _newEnabled;
 		
-		/** Criterios de deshabilitación: work, energy, etc. 
+		/** 
+		* Criterios de deshabilitación: work, energy, etc. 
 		* Si existe un elemento significa que la entidad lo necesita para que su lógica funcione adecuadamente.
 		*/
 		std::set<LogicRequirement> _requirements;
+
+		/**
+		* Criterios de deshabilitación almacenados inicialmente como cadena de caracteres
+		*/
+		std::string _requirementsStr;
 
 		/**
 		* Añade un requisito para el habilitado lógico

@@ -54,7 +54,7 @@ namespace Logic
 		{ "GAS", IconType::GAS_PLANT },
 	};
 	
-	Billboard::Billboard() : IComponent()
+	Billboard::Billboard() : IComponent(), _bbSet(nullptr)
 	{
 	}
 
@@ -110,8 +110,9 @@ namespace Logic
 		case MessageType::ICON_DELETE:
 			for (unsigned int i = 0; i < _bbSet->getNumBillboards(); ++i)
 			{
-				if (_bbSet->getBillboard(i)->getTexcoordIndex() == msg._icon)
-					_bbSet->removeBillboard(i);
+				// TODO Solución temporal hasta que funcione ICON_ADD
+				/*if (_bbSet->getBillboard(i)->getTexcoordIndex() == msg._icon)
+					_bbSet->removeBillboard(i);*/
 			}
 			break;
 		case MessageType::ICON:

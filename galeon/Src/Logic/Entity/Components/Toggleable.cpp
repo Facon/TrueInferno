@@ -1,8 +1,10 @@
 #include "Toggleable.h"
 
+#include <iostream>
+
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Entity.h"
-#include <iostream>
+#include "Logic/Entity/IconType.h"
 
 namespace Logic {
 	RTTI_ROOT_IMPL(CToggleable);
@@ -23,9 +25,23 @@ namespace Logic {
 		_newEnabled = _enabled;
 		*/
 
-		// Guardamos el set con los requisitos iniciales de la entidad (si hay alguno)
+		// Guardamos en cadena de caracteres los requisitos iniciales de la entidad (si hay alguno)
 		if (entityInfo->hasAttribute("requirements")){
-			std::istringstream ss(entityInfo->getStringAttribute("requirements"));
+			_requirementsStr = entityInfo->getStringAttribute("requirements");
+
+			// Todavía no los activamos porque necesitamos que estén spawneados el resto de componentes
+		}
+
+		return true;
+	} // spawn
+
+	bool CToggleable::activate() {
+		if (!IComponent::activate())
+			return false;
+
+		// Guardamos el set con los requisitos iniciales de la entidad (si hay alguno)
+		if (!_requirementsStr.empty()){
+			std::istringstream ss(_requirementsStr);
 			std::string item;
 
 			// Para cada elemento separado por coma
@@ -33,10 +49,12 @@ namespace Logic {
 				// Almacenamos el requisito
 				addRequirement(parseLogicRequirement(item));
 			}
+
+			_requirementsStr = "";
 		}
 
 		return true;
-	} // spawn
+	}
 
 	void CToggleable::tick(unsigned int msecs){
 		/*
@@ -128,6 +146,11 @@ namespace Logic {
 			assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage to disable entity");
 		}
 
+		// Activamos el icono correspondiente a la necesidad
+		//IconMessage m2(MessageType::ICON_ADD, Logic::IconType::logicRequirement2IconType(requirement));
+		IconMessage m2(MessageType::ICON, Logic::IconType::logicRequirement2IconType(requirement));
+		assert(m2.Dispatch(*_entity) && "Can't set icon for logicRequirement");
+
 		//std::cout << "Logic: Added '" << printLogicRequirement(requirement) << "' requirement" << std::endl;
 
 		return added;
@@ -143,6 +166,10 @@ namespace Logic {
 			ToggleMessage m(true);
 			assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage to enable entity");
 		}
+
+		// Eliminamos el icono correspondiente a la necesidad
+		IconMessage m2(MessageType::ICON_DELETE, Logic::IconType::logicRequirement2IconType(requirement));
+		assert(m2.Dispatch(*_entity) && "Can't delete icon for logicRequirement");
 
 		//std::cout << "Logic: Removed '" << printLogicRequirement(requirement) << "' requirement. " << _requirements.size() << " requirements left" << std::endl;
 

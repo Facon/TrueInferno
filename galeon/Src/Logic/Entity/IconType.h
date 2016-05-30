@@ -3,6 +3,7 @@
 
 #include "Logic/ResourcesManager.h"
 #include "BuildingType.h"
+#include "Components\Toggleable.h"
 
 namespace Logic 
 {
@@ -114,6 +115,22 @@ namespace Logic
 			}
 		}
 
+		// Conversor de LogicRequirement a IconType
+		static IconType logicRequirement2IconType(LogicRequirement logicRequirement){
+			switch (logicRequirement){
+			case LogicRequirement::Workers:
+				return IconType::SOUL;
+
+			case LogicRequirement::Energy:
+				return IconType::POWER_GENERATOR;
+
+			case LogicRequirement::Player:
+				return IconType::REPAIR;
+
+			default:
+				return IconType::NONE;
+			}
+		}
 	} // namespace IconType
 }
 
