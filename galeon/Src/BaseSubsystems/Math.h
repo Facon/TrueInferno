@@ -244,7 +244,12 @@ namespace Math
 	*/
 	static unsigned int random(const unsigned int min, const unsigned int max)
 	{
-		return min + (rand() % (max - min));
+		assert(max >= min);
+
+		if (min == max)
+			return min;
+
+		return min + (rand() % (max - min + 1));
 
 	} // random
 
