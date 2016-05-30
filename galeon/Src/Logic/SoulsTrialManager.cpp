@@ -93,6 +93,8 @@ namespace Logic {
 		if (managerInfo->hasAttribute("maxSoulsPerGroup"))
 			_maxSoulsPerGroup = managerInfo->getIntAttribute("maxSoulsPerGroup");
 
+		_timeForNextSoulsGeneration = (_minSoulsGenerationTime + _maxSoulsGenerationTime) / 2;
+
 	} // Spawn
 
 	//--------------------------------------------------------
@@ -341,7 +343,6 @@ namespace Logic {
 		for (unsigned int i = 0; i < 4; ++i)
 			_souls[i] = 0;
 
-		_timeForNextSoulsGeneration = (_minSoulsGenerationTime + _maxSoulsGenerationTime) / 2;
 		return true;
 
 	} // open
