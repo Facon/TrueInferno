@@ -36,15 +36,15 @@ namespace AI{
 			if (executor != nullptr){
 				// Icono de recurso transportado actualmente por la entidad
 				IconMessage m(MessageType::ICON, Logic::IconType::resourceType2IconType(_resourceType));
-				assert(m.Dispatch(*executor) && "Can't change icon");
+				assert(m.Dispatch(*executor) && "Can't set resource icon");
 
 				// Determinamos el tipo de edificio al que va
 				BuildingType buildingType = getTargetBuildingType();
 
 				if (buildingType != BuildingType::NonBuilding){
 					// Icono de edificio destino
-					IconMessage m(MessageType::ICON, Logic::IconType::buildingType2IconType(buildingType));
-					assert(m.Dispatch(*executor) && "Can't change icon");
+					IconMessage m2(MessageType::ICON_ADD, Logic::IconType::buildingType2IconType(buildingType));
+					assert(m2.Dispatch(*executor) && "Can't set building icon");
 				}
 			}
 

@@ -27,7 +27,7 @@ namespace AI{
 			if (executor != nullptr){
 				// Icono de alma quemándose
 				IconMessage m(MessageType::ICON, IconType::IconType::BURNING);
-				assert(m.Dispatch(*executor) && "Can't change icon");
+				assert(m.Dispatch(*executor) && "Can't set burning icon");
 			}
 
 			else{

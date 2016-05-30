@@ -35,7 +35,7 @@ namespace AI{
 
 			// Si existe, establecemos sus iconos
 			if (executor != nullptr){
-				// TODO Icono de recurso que va a ir a recoger la entidad
+				// TODO Icono de recurso que va a ir a recoger la entidad (distinto de recursos siendo transportados)
 				//IconMessage m(MessageType::ICON, Logic::IconType::resourceType2IconType(_resourceType));
 				//ret &= m.Dispatch(*executor);
 
@@ -45,7 +45,7 @@ namespace AI{
 				if (buildingType != BuildingType::NonBuilding){
 					// Icono de edificio destino
 					IconMessage m(MessageType::ICON, Logic::IconType::buildingType2IconType(buildingType));
-					assert(m.Dispatch(*executor) && "Can't change icon");
+					assert(m.Dispatch(*executor) && "Can't set building icon");
 				}
 			}
 
