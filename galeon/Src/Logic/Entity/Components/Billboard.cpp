@@ -136,7 +136,7 @@ namespace Logic
 		switch (msg._type)
 		{
 		case MessageType::ICON_ADD:
-			_bbSet->createBillboard(Vector3(0.0f, 0.0f, 0.0f));
+			_bbSet->createBillboard(Vector3(0.0f, 0.0f, 0.0f))->setTexcoordIndex(msg._icon);
 			adjustBillboards();
 			break;
 		case MessageType::ICON_CHANGE:
@@ -153,6 +153,7 @@ namespace Logic
 				if (_bbSet->getBillboard(i)->getTexcoordIndex() == msg._icon)
 					_bbSet->removeBillboard(i);
 			}
+			adjustBillboards();
 			break;
 		case MessageType::ICON:
 		default:
@@ -166,9 +167,13 @@ namespace Logic
 	{
 		unsigned int numBillboards = _bbSet->getNumBillboards();
 
-		if (numBillboards == 2)
+		if (numBillboards == 1)
 		{
-			const double HALF_SPACE_BETWEEN = 50.0;
+			_bbSet->getBillboard(0)->setPosition(Vector3(0.0f, 0.0f, 0.0f));
+		}
+		else if (numBillboards == 2)
+		{
+			const double HALF_SPACE_BETWEEN = 0.25;
 			_bbSet->getBillboard(0)->setPosition(-HALF_SPACE_BETWEEN, 0, 0);
 			_bbSet->getBillboard(1)->setPosition(HALF_SPACE_BETWEEN, 0, 0);
 		}
@@ -177,7 +182,7 @@ namespace Logic
 			unsigned int index = 0;
 			// Odd numbers should have one more element in upper row
 			const unsigned int BILLBOARDS_PER_ROW = (numBillboards / 2) + ((numBillboards % 2) ? 0 : 1);
-			const unsigned int ARBITRARY_SPACE = 100.0;
+			const unsigned int ARBITRARY_SPACE = 0.5;
 			const double HALF_SPACE_BETWEEN = ARBITRARY_SPACE / BILLBOARDS_PER_ROW;
 
 			for (; index < BILLBOARDS_PER_ROW; ++index)

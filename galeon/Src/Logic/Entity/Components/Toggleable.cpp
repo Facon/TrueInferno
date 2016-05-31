@@ -144,13 +144,15 @@ namespace Logic {
 		// Si se ha añadido algo y la lista de requisitos estaba vacía: Fue el primero en añadirse ==> La entidad acaba de ser desactivada lógicamente
 		if (added && wasEmpty){
 			ToggleMessage m(false);
-			assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage to disable entity");
+			const bool result = m.Dispatch(*_entity);
+			assert(result && "Unhandled ToggleMessage to disable entity");
 		}
 
-		// @todo Activamos el icono correspondiente a la necesidad
-		//IconMessage m2(MessageType::ICON_ADD, Logic::IconType::logicRequirement2IconType(requirement));
+		// Activamos el icono correspondiente a la necesidad
+		IconMessage m2(MessageType::ICON_ADD, Billboard::getLogicRequirementIcon(requirement));
 		//IconMessage m2(MessageType::ICON, Logic::IconType::logicRequirement2IconType(requirement));
-		//assert(m2.Dispatch(*_entity) && "Can't set icon for logicRequirement");
+		const bool result = m2.Dispatch(*_entity);
+		assert(result && "Can't set icon for logicRequirement");
 
 		//std::cout << "Logic: Added '" << printLogicRequirement(requirement) << "' requirement" << std::endl;
 
@@ -165,7 +167,8 @@ namespace Logic {
 		// Si se ha borrado algo y la lista de requisitos ahora está vacía: Fue el último por eliminar ==> La entidad acaba de ser activada lógicamente
 		if (removed && _requirements.empty()){
 			ToggleMessage m(true);
-			assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage to enable entity");
+			const bool result = m.Dispatch(*_entity);
+			assert(result && "Unhandled ToggleMessage to enable entity");
 		}
 
 		// Eliminamos el icono correspondiente a la necesidad

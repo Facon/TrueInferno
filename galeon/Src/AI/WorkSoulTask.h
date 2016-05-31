@@ -53,7 +53,8 @@ namespace AI{
 			if (executor != nullptr){
 				// Icono de alma que va a trabajar
 				IconMessage m(MessageType::ICON, IconType::IconType::SOUL);
-				assert(m.Dispatch(*executor) && "Can't set soul icon");
+				const bool result = m.Dispatch(*executor);
+				assert(result && "Can't set soul icon");
 			}
 
 			else{

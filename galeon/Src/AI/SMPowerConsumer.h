@@ -70,7 +70,8 @@ namespace AI {
 				if (generator != nullptr){
 					PowerMessage m;
 					m.assemblePowerAttachmentInfo(_entity->getEntityID(), false, _consumptionUnits, _consumptionPeriod);
-					assert(m.Dispatch(*generator) && "Can't detach from PowerGenerator on deactivation");
+					const bool result = m.Dispatch(*generator);
+					assert(result && "Can't detach from PowerGenerator on deactivation");
 				}
 			}
 		}
