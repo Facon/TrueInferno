@@ -1,7 +1,8 @@
 #include "LAExecuteResourceProvideTasks.h"
 
-#include "Logic\Entity\Message.h"
-#include "AI\SMResourceProviderData.h"
+#include "Logic/Entity/Message.h"
+#include "Logic/Entity/Components/Billboard.h"
+#include "AI/SMResourceProviderData.h"
 #include "PerformTransportSoulTask.h"
 
 namespace AI {
@@ -22,8 +23,9 @@ namespace AI {
 
 		// Solicitamos el envío de alma
 		if (msg.Dispatch(*_entity))
+		{
 			return LAStatus::SUCCESS;
-		
+		}
 		// Reintentamos en el siguiente tick si no hubo éxito
 		else
 			return LAStatus::RUNNING;

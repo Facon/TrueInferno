@@ -4,9 +4,13 @@
 
 #include "Logic/Entity/Entity.h"
 #include "Logic/Maps/Map.h"
+#include "Logic/ResourcesManager.h"
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Components/Graphics.h"
 #include "Logic/Entity/IconType.h"
+#include "Logic/Entity/BuildingType.h"
+#include "Logic/Entity/LogicRequirement.h"
+#include "Graphics/BillboardSet.h"
 
 #include <OgreBillboardSet.h>
 #include <OgreBillboard.h>
@@ -54,6 +58,41 @@ namespace Logic
 		{ "GAS", IconType::GAS_PLANT },
 	};
 	
+	const std::unordered_map<ResourceType, IconType::IconType> Billboard::resourceTableConversor =
+	{
+		{ NONE, IconType::NONE },
+		{ MINERAL, IconType::MINE },
+		{ GAS, IconType::GAS_PLANT },
+		{ COKE, IconType::COKE },
+		{ CRUDE, IconType::CRUDE },
+		{ PURE_EVIL, IconType::PURE_EVIL },
+		{ REFINED, IconType::REFINED },
+		{ AETHER, IconType::NONE },
+		{ HADES_FAVOR, IconType::HELLQUARTERS }
+	};
+
+	const std::unordered_map<BuildingType, IconType::IconType> Billboard::buildingTableConversor =
+	{
+		{ BuildingType::EvilWorks, IconType::EVILWORKS },
+		{ BuildingType::Furnace, IconType::FURNACE },
+		{ BuildingType::GasPlant, IconType::GAS_PLANT },
+		{ BuildingType::HellQuarters, IconType::HELLQUARTERS },
+		{ BuildingType::Mine, IconType::MINE },
+		{ BuildingType::PowerGenerator, IconType::POWER_GENERATOR }, // WTF?
+		{ BuildingType::Refinery, IconType::REFINERY },
+		{ BuildingType::PowerGenerator, IconType::RESEARCH_LABS },
+		{ BuildingType::Warehouse, IconType::WAREHOUSE },
+		{ BuildingType::Evilator, IconType::CLOCK },
+	};
+
+	const std::unordered_map<LogicRequirement, IconType::IconType> Billboard::requirementTableConversor =
+	{
+		{ LogicRequirement::Workers, IconType::SOUL },
+		{ LogicRequirement::Energy, IconType::POWER_GENERATOR },
+		{ LogicRequirement::Player, IconType::REPAIR },
+		{ LogicRequirement::Undefined, IconType::NONE },
+	};
+
 	Billboard::Billboard() : IComponent(), _bbSet(nullptr)
 	{
 	}
@@ -111,8 +150,8 @@ namespace Logic
 			for (unsigned int i = 0; i < _bbSet->getNumBillboards(); ++i)
 			{
 				// TODO Solución temporal hasta que funcione ICON_ADD
-				/*if (_bbSet->getBillboard(i)->getTexcoordIndex() == msg._icon)
-					_bbSet->removeBillboard(i);*/
+				if (_bbSet->getBillboard(i)->getTexcoordIndex() == msg._icon)
+					_bbSet->removeBillboard(i);
 			}
 			break;
 		case MessageType::ICON:
@@ -152,5 +191,25 @@ namespace Logic
 				_bbSet->getBillboard(index)->setPosition(((index - BILLBOARDS_PER_ROW) * HALF_SPACE_BETWEEN) - (BILLBOARDS_PER_ROW - index) * (HALF_SPACE_BETWEEN / 2), 0.0f, 0.0f);
 			}
 		}
+	}
+
+	IconType::IconType Billboard::getIcon(unsigned int i) const
+	{
+		return static_cast<IconType::IconType>(_bbSet->getBillboard(i)->getTexcoordIndex());
+	}
+
+	IconType::IconType Billboard::getResourceIcon(ResourceType type)
+	{
+		return resourceTableConversor.at(type);
+	}
+
+	IconType::IconType Billboard::getBuildingIcon(BuildingType type)
+	{
+		return buildingTableConversor.at(type);
+	}
+
+	IconType::IconType Billboard::getLogicRequirementIcon(LogicRequirement type)
+	{
+		return requirementTableConversor.at(type);
 	}
 }

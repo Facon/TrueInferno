@@ -5,6 +5,7 @@
 #include "Map/MapEntity.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/IconType.h"
+#include "Logic/Entity/Components/Billboard.h"
 
 namespace Logic {
 	RTTI_ROOT_IMPL(CToggleable);
@@ -146,10 +147,10 @@ namespace Logic {
 			assert(m.Dispatch(*_entity) && "Unhandled ToggleMessage to disable entity");
 		}
 
-		// Activamos el icono correspondiente a la necesidad
+		// @todo Activamos el icono correspondiente a la necesidad
 		//IconMessage m2(MessageType::ICON_ADD, Logic::IconType::logicRequirement2IconType(requirement));
-		IconMessage m2(MessageType::ICON, Logic::IconType::logicRequirement2IconType(requirement));
-		assert(m2.Dispatch(*_entity) && "Can't set icon for logicRequirement");
+		//IconMessage m2(MessageType::ICON, Logic::IconType::logicRequirement2IconType(requirement));
+		//assert(m2.Dispatch(*_entity) && "Can't set icon for logicRequirement");
 
 		//std::cout << "Logic: Added '" << printLogicRequirement(requirement) << "' requirement" << std::endl;
 
@@ -168,8 +169,9 @@ namespace Logic {
 		}
 
 		// Eliminamos el icono correspondiente a la necesidad
-		IconMessage m2(MessageType::ICON_DELETE, Logic::IconType::logicRequirement2IconType(requirement));
-		assert(m2.Dispatch(*_entity) && "Can't delete icon for logicRequirement");
+		IconMessage m2(MessageType::ICON_DELETE, Billboard::getLogicRequirementIcon(requirement));
+		const bool result = m2.Dispatch(*_entity);
+		assert(result && "Can't delete icon for logicRequirement");
 
 		//std::cout << "Logic: Removed '" << printLogicRequirement(requirement) << "' requirement. " << _requirements.size() << " requirements left" << std::endl;
 
