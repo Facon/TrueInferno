@@ -56,6 +56,7 @@ namespace Logic
 		{ "EVILATOR", IconType::CLOCK },
 		{ "MINERAL", IconType::MINE },
 		{ "GAS", IconType::GAS_PLANT },
+		{ "NONE", IconType::NONE},
 	};
 	
 	const std::unordered_map<ResourceType, IconType::IconType> Billboard::resourceTableConversor =
@@ -80,7 +81,7 @@ namespace Logic
 		{ BuildingType::Mine, IconType::MINE },
 		{ BuildingType::PowerGenerator, IconType::POWER_GENERATOR }, // WTF?
 		{ BuildingType::Refinery, IconType::REFINERY },
-		{ BuildingType::PowerGenerator, IconType::RESEARCH_LABS },
+		{ BuildingType::ResearchLabs, IconType::RESEARCH_LABS },
 		{ BuildingType::Warehouse, IconType::WAREHOUSE },
 		{ BuildingType::Evilator, IconType::CLOCK },
 	};
@@ -114,12 +115,24 @@ namespace Logic
 		if (entityInfo->hasAttribute("billboardMaterial"))
 		{
 			std::string materialName = entityInfo->getStringAttribute("billboardMaterial");
-			std::string defaultIcon = entityInfo->getStringAttribute("defaultBillboard");
-			_bbSet = new Graphics::BillboardSet(_entity->getComponent<Logic::CGraphics>()->getGraphicsEntity(), "bbSet", materialName);
-			_bbSet->createBillboard(Vector3(0.0f, 0.0f, 0.0f));
+			
+			// Por defecto los edificios no tienen icono
+			IconType::IconType defaultIcon = IconType::IconType::NONE;
+			if (entityInfo->hasAttribute("defaultBillboard")){
+				std::string defaultIconStr = entityInfo->getStringAttribute("defaultBillboard");
 
-			IconMessage m(iconTableConversor.at(defaultIcon));
-			m.Dispatch(*this);
+				if (!defaultIconStr.empty())
+					defaultIcon = iconTableConversor.at(defaultIconStr);
+			}
+						
+			_bbSet = new Graphics::BillboardSet(_entity->getComponent<Logic::CGraphics>()->getGraphicsEntity(), "bbSet", materialName);
+			
+			if (defaultIcon != IconType::NONE){
+				_bbSet->createBillboard(Vector3(0.0f, 0.0f, 0.0f));
+				IconMessage m(defaultIcon);
+				assert(m.Dispatch(*this) && "Can't set initial icon");
+			}
+
 			//_entity->getComponent<Graphics>()
 		}
 
@@ -167,7 +180,11 @@ namespace Logic
 	{
 		unsigned int numBillboards = _bbSet->getNumBillboards();
 
-		if (numBillboards == 1)
+		if (numBillboards == 0)
+		{
+			return;
+		}
+		else if (numBillboards == 1)
 		{
 			_bbSet->getBillboard(0)->setPosition(Vector3(0.0f, 0.0f, 0.0f));
 		}
@@ -198,10 +215,12 @@ namespace Logic
 		}
 	}
 
+	/*
 	IconType::IconType Billboard::getIcon(unsigned int i) const
 	{
 		return static_cast<IconType::IconType>(_bbSet->getBillboard(i)->getTexcoordIndex());
 	}
+	*/
 
 	IconType::IconType Billboard::getResourceIcon(ResourceType type)
 	{

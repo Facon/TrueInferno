@@ -70,7 +70,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopupHellquarters.layout",
 		image = "HellQuarters",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "HELLQUARTERS",
+		defaultBillboard = "NONE",
 	},
 	
 	Evilator = {
@@ -103,7 +103,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Evilator",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "EVILATOR",
+		defaultBillboard = "NONE",
 	},
 	
 	Furnace = {
@@ -138,7 +138,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Furnace",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "FURNACE",
+		defaultBillboard = "NONE",
 		hadesFavorReward = 3,
 	},
 	
@@ -151,7 +151,7 @@ Map = {
 		visible = "true",
 		material = "Soul",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "SOUL",
+		defaultBillboard = "NONE",
 	},
 	
 	Mine = {
@@ -188,7 +188,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Mine",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "MINE",
+		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
 	},
 	
@@ -226,7 +226,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "GasPlant",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "GAS_PLANT",
+		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
 	},
 	
@@ -265,7 +265,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "EvilWorks",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "EVILWORKS",
+		defaultBillboard = "NONE",
 		hadesFavorReward = 3,
 	},
 	
@@ -307,7 +307,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Refinery",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "REFINERY",
+		defaultBillboard = "NONE",
 		hadesFavorReward = 3,
 	},
 		
@@ -341,7 +341,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "ResearchLabs",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "RESEARCH_LABS",
+		defaultBillboard = "NONE",
 		hadesFavorReward = 4,
 	},
 		
@@ -375,7 +375,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "PowerGenerator",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "POWER_GENERATOR",
+		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
 	},
 
@@ -411,7 +411,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Warehouse",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "WAREHOUSE",
+		defaultBillboard = "NONE",
 		hadesFavorReward = 5,
 	},
 	

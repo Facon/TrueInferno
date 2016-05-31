@@ -20,14 +20,16 @@ namespace AI{
 		}
 
 		bool start(){
+			CSoulTask::start();
+
 			// Obtenemos la entidad que va a ejecutar la tarea
 			CEntity* executor = _map->getEntityByID(_executorId);
 
 			// Si existe, establecemos sus iconos
 			if (executor != nullptr){
 				// Icono de alma quemándose
-				IconMessage m(MessageType::ICON, IconType::IconType::BURNING);
-				assert(m.Dispatch(*executor) && "Can't set burning icon");
+				IconMessage m(MessageType::ICON_ADD, IconType::IconType::BURNING);
+				assert(m.Dispatch(*executor) && "Can't set burning soul icon");
 			}
 
 			else{
@@ -40,6 +42,8 @@ namespace AI{
 
 		bool execute()
 		{
+			CSoulTask::execute();
+
 			// Chequeamos que el objetivo siga existiendo
 			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 

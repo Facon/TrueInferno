@@ -8,6 +8,7 @@
 #include "Logic\Entity\Entity.h"
 #include "Logic\Entity\BuildingType.h"
 #include "Logic\Entity\IconType.h"
+#include "Logic/Entity/Components/Billboard.h"
 
 using namespace Logic;
 
@@ -29,20 +30,22 @@ namespace AI{
 		}
 
 		bool start(){
+			CSoulTask::start();
+
 			// Obtenemos la entidad que va a ejecutar la tarea
 			CEntity* executor = _map->getEntityByID(_executorId);
 
 			// Si existe, establecemos sus iconos
 			if (executor != nullptr){
 				// Icono de recurso transportado actualmente por la entidad
-				IconMessage m(MessageType::ICON, Billboard::getResourceIcon(_resourceType));
+				IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(_resourceType));
 				const bool result = m.Dispatch(*executor);
 				assert(result && "Can't set resource icon");
 
 				// Determinamos el tipo de edificio al que va
 				BuildingType buildingType = getTargetBuildingType();
 
-				if (buildingType != BuildingType::NonBuilding){
+				if (buildingType != BuildingType::NonBuilding && buildingType != BuildingType::Unassigned){
 					// Icono de edificio destino
 					IconMessage m2(MessageType::ICON_ADD, Billboard::getBuildingIcon(buildingType));
 					const bool result = m2.Dispatch(*executor);
@@ -59,6 +62,8 @@ namespace AI{
 		}
 
 		bool execute() {
+			CSoulTask::execute();
+
 			// Chequeamos que el objetivo al que acabamos de llegar siga existiendo
 			CEntity* targetEntity = _map->getEntityByID(_target);
 

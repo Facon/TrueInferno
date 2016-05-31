@@ -150,7 +150,6 @@ namespace Logic {
 
 		// Activamos el icono correspondiente a la necesidad
 		IconMessage m2(MessageType::ICON_ADD, Billboard::getLogicRequirementIcon(requirement));
-		//IconMessage m2(MessageType::ICON, Logic::IconType::logicRequirement2IconType(requirement));
 		const bool result = m2.Dispatch(*_entity);
 		assert(result && "Can't set icon for logicRequirement");
 
@@ -160,7 +159,7 @@ namespace Logic {
 	}
 
 	bool CToggleable::removeRequirement(LogicRequirement requirement){
-		// Chequeamos que un requisito exista antes de intentar eliminarlo
+		// Chequeamos que el requisito exista antes de intentar eliminarlo
 		bool removed = _requirements.erase(requirement) != 0;
 		assert(removed && "Removing requirement that doesn't exist");
 

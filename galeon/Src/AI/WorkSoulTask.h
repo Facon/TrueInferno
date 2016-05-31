@@ -5,6 +5,7 @@
 #include "Logic\Entity\Message.h"
 #include "Logic\Maps\Managers\WorkManager.h"
 #include "Logic\Entity\IconType.h"
+#include "Logic/Entity/Components/Billboard.h"
 
 namespace AI{
 
@@ -21,6 +22,8 @@ namespace AI{
 		}
 
 		bool start(){
+			CSoulTask::start();
+
 			if (!_workerAssigned){
 				// Chequeamos que el objetivo siga existiendo
 				Logic::CEntity* targetEntity = _map->getEntityByID(_target);
@@ -52,9 +55,19 @@ namespace AI{
 			// Si existe, establecemos sus iconos
 			if (executor != nullptr){
 				// Icono de alma que va a trabajar
-				IconMessage m(MessageType::ICON, IconType::IconType::SOUL);
+				IconMessage m(MessageType::ICON_ADD, IconType::IconType::SOUL);
 				const bool result = m.Dispatch(*executor);
-				assert(result && "Can't set soul icon");
+				assert(result && "Can't set working soul icon");
+
+				// Determinamos el tipo de edificio al que va
+				BuildingType buildingType = getTargetBuildingType();
+
+				if (buildingType != BuildingType::NonBuilding && buildingType != BuildingType::Unassigned){
+					// Icono de edificio destino
+					IconMessage m2(MessageType::ICON_ADD, Billboard::getBuildingIcon(buildingType));
+					const bool result = m2.Dispatch(*executor);
+					assert(result && "Can't set building icon");
+				}
 			}
 
 			else{
@@ -66,6 +79,8 @@ namespace AI{
 		};
 
 		bool execute() {
+			CSoulTask::execute();
+
 			// Chequeamos que el objetivo siga existiendo
 			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 

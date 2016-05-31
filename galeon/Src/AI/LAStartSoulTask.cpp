@@ -28,10 +28,6 @@ namespace AI {
 
 			// Pasamos el nuevo color a la entidad gráfica del alma
 			_entity->getComponent<CGraphics>()->getGraphicsEntity()->setColor(graphics->getColor());
-			
-			IconType::IconType iconType = entity->getComponent<Logic::Billboard>()->getIcon(0);
-			IconMessage im(iconType);
-			im.Dispatch(*_entity); // Icon of the building that soul goes to
 
 			return LAStatus::SUCCESS;
 		}

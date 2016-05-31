@@ -113,11 +113,6 @@ namespace AI {
 			// Le asignamos la tarea
 			CSoulTask* clone = _task->clone();
 			
-			// @todo
-			// We add the resource icon that souls transports
-			//IconMessage im(MessageType::ICON_ADD, _newSouls[i]->getComponent<Logic::Billboard>()->getResourceIcon(clone->));
-			//im.Dispatch(*_entity);
-
 			SoulMessage m2(clone);
 			if (!m2.Dispatch(*_newSouls[i])){
 				//std::cout << "Can´t assign task to soul" << std::endl;

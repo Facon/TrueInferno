@@ -20,11 +20,11 @@ namespace AI
 
 		virtual ~CSoulTask() {};
 
-		/** Método que se ejecutará al comenzar la tarea */
-		virtual bool start() = 0;
+		/** Método que se ejecutará al comenzar la tarea. Los hijos pueden sobrescribirlo pero deben invocar el del padre al principio */
+		virtual bool start() { return true; };
 
-		/** Método que se ejecutará en el objetivo al llegar el alma */
-		virtual bool execute() = 0;
+		/** Método que se ejecutará en el objetivo al llegar el alma. Los hijos pueden sobrescribirlo pero deben invocar el del padre al principio */
+		virtual bool execute() { return true; };
 
 		/** Devuelve el mapa al que pertenece el alma */
 		virtual Logic::CMap* getMap(){

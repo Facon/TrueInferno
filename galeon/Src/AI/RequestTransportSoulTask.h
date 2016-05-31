@@ -31,23 +31,28 @@ namespace AI{
 		}
 
 		bool start(){
+			CSoulTask::start();
+
 			// Obtenemos la entidad que va a ejecutar la tarea
 			CEntity* executor = _map->getEntityByID(_executorId);
 
 			// Si existe, establecemos sus iconos
 			if (executor != nullptr){
 				// TODO Icono de recurso que va a ir a recoger la entidad (distinto de recursos siendo transportados)
-				IconMessage m(MessageType::ICON, Billboard::getResourceIcon(_resourceType));
-				m.Dispatch(*executor);
+				//IconMessage m(MessageType::ICON, Billboard::getResourceIcon(_resourceType));
+				//m.Dispatch(*executor);
 
 				// Determinamos el tipo de edificio al que va
 				BuildingType buildingType = getTargetBuildingType();
 
-				if (buildingType != BuildingType::NonBuilding){
+				if (buildingType != BuildingType::NonBuilding && buildingType != BuildingType::Unassigned){
 					// Icono de edificio destino
-					IconMessage m(MessageType::ICON, Billboard::getBuildingIcon(buildingType));
-					const float result = m.Dispatch(*executor);
+					IconMessage m(MessageType::ICON_ADD, Billboard::getBuildingIcon(buildingType));
+					const bool result = m.Dispatch(*executor);
 					assert(result && "Can't set building icon");
+				}
+				else {
+					assert(false && "Can't set icon for a building without buildingType");
 				}
 			}
 
@@ -60,6 +65,8 @@ namespace AI{
 		}
 
 		bool execute() {
+			CSoulTask::execute();
+
 			// Chequeamos que el objetivo al que acabamos de llegar siga existiendo
 			CEntity* targetEntity = _map->getEntityByID(_target);
 
