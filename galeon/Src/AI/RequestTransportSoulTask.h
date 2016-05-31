@@ -38,22 +38,15 @@ namespace AI{
 
 			// Si existe, establecemos sus iconos
 			if (executor != nullptr){
-				// TODO Icono de recurso que va a ir a recoger la entidad (distinto de recursos siendo transportados)
+				// Icono del recurso que va a ir a recoger la entidad (distinto de recurso siendo transportado)
 				//IconMessage m(MessageType::ICON, Billboard::getResourceIcon(_resourceType));
-				//m.Dispatch(*executor);
+				// De momento ponemos la pala que es lo más parecido a un transporte que tenemos
+				IconMessage m(MessageType::ICON_ADD, IconType::IconType::SHOVEL);
+				const bool result = m.Dispatch(*executor);
+				assert(result && "Can't set transport soul icon");
 
-				// Determinamos el tipo de edificio al que va
-				BuildingType buildingType = getTargetBuildingType();
-
-				if (buildingType != BuildingType::NonBuilding && buildingType != BuildingType::Unassigned){
-					// Icono de edificio destino
-					IconMessage m(MessageType::ICON_ADD, Billboard::getBuildingIcon(buildingType));
-					const bool result = m.Dispatch(*executor);
-					assert(result && "Can't set building icon");
-				}
-				else {
-					assert(false && "Can't set icon for a building without buildingType");
-				}
+				// Icono por edificio de destino
+				assert(addDestinationBuildingIcon() && "Can't set building icon");
 			}
 
 			else{

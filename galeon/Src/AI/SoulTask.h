@@ -57,6 +57,12 @@ namespace AI
 		Logic::TEntityID _executorId;
 
 		Logic::BuildingType getTargetBuildingType();
+
+		/** 
+		* Añade un icono de edificio de destino a la entidad ejecutora 
+		* @return true si se pudo añadir correctamente el icono
+		*/
+		bool addDestinationBuildingIcon();
 	};
 
 }

@@ -2,6 +2,7 @@
 
 #include "Logic\Entity\Components\Placeable.h"
 #include "Logic\Entity\Entity.h"
+#include "Logic/Entity/Components/Billboard.h"
 
 using namespace Logic;
 
@@ -23,5 +24,24 @@ namespace AI
 		}
 
 		return buildingType;
+	}
+
+	bool CSoulTask::addDestinationBuildingIcon(){
+		// Obtenemos la entidad que va a ejecutar la tarea
+		CEntity* executor = _map->getEntityByID(_executorId);
+
+		// Determinamos el tipo de edificio al que va
+		BuildingType buildingType = getTargetBuildingType();
+
+		if (buildingType != BuildingType::NonBuilding && buildingType != BuildingType::Unassigned){
+			// Icono de edificio destino
+			IconMessage m2(MessageType::ICON_ADD, Billboard::getBuildingIcon(buildingType));
+			return m2.Dispatch(*executor);
+		}
+
+		else {
+			assert(false && "Can't set icon for a destination building without buildingType");
+		}
+
 	}
 }

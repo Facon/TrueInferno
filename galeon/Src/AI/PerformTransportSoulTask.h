@@ -41,16 +41,9 @@ namespace AI{
 				IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(_resourceType));
 				const bool result = m.Dispatch(*executor);
 				assert(result && "Can't set resource icon");
-
-				// Determinamos el tipo de edificio al que va
-				BuildingType buildingType = getTargetBuildingType();
-
-				if (buildingType != BuildingType::NonBuilding && buildingType != BuildingType::Unassigned){
-					// Icono de edificio destino
-					IconMessage m2(MessageType::ICON_ADD, Billboard::getBuildingIcon(buildingType));
-					const bool result = m2.Dispatch(*executor);
-					assert(result && "Can't set building icon");
-				}
+				
+				// Icono por edificio de destino
+				assert(addDestinationBuildingIcon() && "Can't set building icon");
 			}
 
 			else{
