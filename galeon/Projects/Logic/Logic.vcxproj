@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\BuildingManager.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\BuildingType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\Billboard.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\BuildingSelection.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\Components\CameraController.h" />

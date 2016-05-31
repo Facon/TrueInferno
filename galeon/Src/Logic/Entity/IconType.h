@@ -44,7 +44,7 @@ namespace Logic
 			//MINERAL,
 			//EVILATOR,
 		};
-
+		/*
 		// Conversor de ResourceType a IconType
 		static IconType resourceType2IconType(ResourceType resourceType){
 			switch (resourceType){
@@ -131,6 +131,7 @@ namespace Logic
 				return IconType::NONE;
 			}
 		}
+		*/
 	} // namespace IconType
 }
 

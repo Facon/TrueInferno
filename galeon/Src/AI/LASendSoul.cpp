@@ -3,6 +3,7 @@
 #include "Logic\Server.h"
 #include "Logic\Maps\Map.h"
 #include "Logic/Entity/Components/Graphics.h"
+#include "Logic/Entity/Components/Billboard.h"
 #include "Graphics\Entity.h"
 
 namespace AI {
@@ -90,6 +91,7 @@ namespace AI {
 			Vector3 newPosition = _entity->getPosition();
 			newPosition.y = SOUL_ON_TILE_HEIGHT;
 			PositionMessage m(newPosition);
+
 			if (!m.Dispatch(*newSoul)){
 				assert(false && "Can´t set soul on initial position");
 				ret = false;
@@ -111,6 +113,11 @@ namespace AI {
 			// Le asignamos la tarea
 			CSoulTask* clone = _task->clone();
 			
+			// @todo
+			// We add the resource icon that souls transports
+			//IconMessage im(MessageType::ICON_ADD, _newSouls[i]->getComponent<Logic::Billboard>()->getResourceIcon(clone->));
+			//im.Dispatch(*_entity);
+
 			SoulMessage m2(clone);
 			if (!m2.Dispatch(*_newSouls[i])){
 				//std::cout << "Can´t assign task to soul" << std::endl;

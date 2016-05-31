@@ -7,15 +7,23 @@
 
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
-#include "Graphics/BillboardSet.h"
 
 namespace Ogre
 {
 	class Billboard;
 }
 
+namespace Graphics
+{
+	class BillboardSet;
+}
+
 namespace Logic
 {
+	enum ResourceType;
+	enum BuildingType;
+	enum LogicRequirement;
+
 	namespace IconType
 	{
 		enum IconType;
@@ -36,12 +44,18 @@ namespace Logic
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 		virtual void tick(unsigned int msecs);
 		bool HandleMessage(const IconMessage& msg);
-
-	private:
-		void adjustBillboards();
+		IconType::IconType getIcon(unsigned int) const;
+		static IconType::IconType getResourceIcon(ResourceType type);
+		static IconType::IconType getBuildingIcon(BuildingType type);
+		static IconType::IconType getLogicRequirementIcon(LogicRequirement type);
 
 	protected:
 		static const std::unordered_map<std::string, IconType::IconType> iconTableConversor;
+		static const std::unordered_map<ResourceType, IconType::IconType> resourceTableConversor;
+		static const std::unordered_map<BuildingType, IconType::IconType> buildingTableConversor;
+		static const std::unordered_map<LogicRequirement, IconType::IconType> requirementTableConversor;
+
+		void adjustBillboards();
 
 		Graphics::BillboardSet* _bbSet;
 	};

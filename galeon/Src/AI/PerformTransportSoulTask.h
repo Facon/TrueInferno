@@ -35,16 +35,18 @@ namespace AI{
 			// Si existe, establecemos sus iconos
 			if (executor != nullptr){
 				// Icono de recurso transportado actualmente por la entidad
-				IconMessage m(MessageType::ICON, Logic::IconType::resourceType2IconType(_resourceType));
-				assert(m.Dispatch(*executor) && "Can't set resource icon");
+				IconMessage m(MessageType::ICON, Billboard::getResourceIcon(_resourceType));
+				const bool result = m.Dispatch(*executor);
+				assert(result && "Can't set resource icon");
 
 				// Determinamos el tipo de edificio al que va
 				BuildingType buildingType = getTargetBuildingType();
 
 				if (buildingType != BuildingType::NonBuilding){
 					// Icono de edificio destino
-					IconMessage m2(MessageType::ICON_ADD, Logic::IconType::buildingType2IconType(buildingType));
-					assert(m2.Dispatch(*executor) && "Can't set building icon");
+					IconMessage m2(MessageType::ICON_ADD, Billboard::getBuildingIcon(buildingType));
+					const bool result = m2.Dispatch(*executor);
+					assert(result && "Can't set building icon");
 				}
 			}
 

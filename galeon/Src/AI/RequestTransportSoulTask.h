@@ -6,6 +6,7 @@
 #include "Logic\ResourcesManager.h"
 #include "Logic\Maps\Map.h"
 #include "Logic\Entity\Entity.h"
+#include "Logic/Entity/Components/Billboard.h"
 #include "Logic\Entity\BuildingType.h"
 #include "Logic\Entity\IconType.h"
 
@@ -36,16 +37,17 @@ namespace AI{
 			// Si existe, establecemos sus iconos
 			if (executor != nullptr){
 				// TODO Icono de recurso que va a ir a recoger la entidad (distinto de recursos siendo transportados)
-				//IconMessage m(MessageType::ICON, Logic::IconType::resourceType2IconType(_resourceType));
-				//ret &= m.Dispatch(*executor);
+				IconMessage m(MessageType::ICON, Billboard::getResourceIcon(_resourceType));
+				m.Dispatch(*executor);
 
 				// Determinamos el tipo de edificio al que va
 				BuildingType buildingType = getTargetBuildingType();
 
 				if (buildingType != BuildingType::NonBuilding){
 					// Icono de edificio destino
-					IconMessage m(MessageType::ICON, Logic::IconType::buildingType2IconType(buildingType));
-					assert(m.Dispatch(*executor) && "Can't set building icon");
+					IconMessage m(MessageType::ICON, Billboard::getBuildingIcon(buildingType));
+					const float result = m.Dispatch(*executor);
+					assert(result && "Can't set building icon");
 				}
 			}
 
