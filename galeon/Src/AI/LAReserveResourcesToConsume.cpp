@@ -1,8 +1,9 @@
 #include "LAReserveResourcesToConsume.h"
 
+#include <math.h>
+
 #include "Logic\Entity\Message.h"
 #include "AI\SMResourceConsumerData.h"
-#include <math.h>
 
 namespace AI {
 	RTTI_IMPL(CLAReserveResourcesToConsume, CLatentAction);
@@ -62,18 +63,23 @@ namespace AI {
 		}
 		
 		// Chequeamos si hemos podido reservar el consumo actual
-		if (_smData.getReservedForConsume() == (int) ceil(_smData.getConsumption())){
-			return LAStatus::SUCCESS;
-		}
+		if (_smData.getReservedForConsume() >= _resourcesAsked){
+			
+			// Quitamos el icono de necesidad de recurso
+			/* Nota: Quitar aquí la necesidad de recurso fuerza a esperar un ciclo de consumo para que el icono desaparezca
+			IconMessage m(MessageType::ICON_DELETE, Billboard::getResourceIcon(_consumedResource));
+			bool result = m.Dispatch(*_entity);
+			assert(result && "Can't remove resource icon");
+			*/
 
-		// O más
-		else if (_smData.getReservedForConsume() > _resourcesAsked){
 			// No deberíamos haber podido reservar más
-			assert(false && "Reserved more resources than current consumption");
+			bool result = (_smData.getReservedForConsume() == _resourcesAsked);
+			assert(result && "Reserved more resources than current consumption");
+
 			return LAStatus::SUCCESS;
 		}
 
-		// O menos
+		// O no
 		else {
 			// Fallamos porque no se pudo reservar lo suficiente para el consumo
 			return LAStatus::FAIL;

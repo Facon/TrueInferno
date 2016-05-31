@@ -41,7 +41,7 @@ namespace AI
 
 		else {
 			assert(false && "Can't set icon for a destination building without buildingType");
+			return false;
 		}
-
 	}
 }

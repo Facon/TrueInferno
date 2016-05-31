@@ -230,6 +230,9 @@
     <ClCompile Include="..\..\Src\AI\SoulTask.cpp">
       <Filter>Souls\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\AI\LAStoppedResourceConsumer.cpp">
+      <Filter>Decision\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AI\DynTriMat.h">
@@ -509,6 +512,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\AI\LAUpdateExtractionSpeed.h">
+      <Filter>Decision\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AI\LAStoppedResourceConsumer.h">
       <Filter>Decision\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

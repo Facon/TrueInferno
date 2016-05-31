@@ -39,11 +39,12 @@ namespace AI{
 			if (executor != nullptr){
 				// Icono de recurso transportado actualmente por la entidad
 				IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(_resourceType));
-				const bool result = m.Dispatch(*executor);
+				bool result = m.Dispatch(*executor);
 				assert(result && "Can't set resource icon");
 				
 				// Icono por edificio de destino
-				assert(addDestinationBuildingIcon() && "Can't set building icon");
+				result = addDestinationBuildingIcon();
+				assert(result && "Can't set building icon");
 			}
 
 			else{

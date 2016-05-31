@@ -149,9 +149,26 @@ namespace Logic
 		switch (msg._type)
 		{
 		case MessageType::ICON_ADD:
-			_bbSet->createBillboard(Vector3(0.0f, 0.0f, 0.0f))->setTexcoordIndex(msg._icon);
-			adjustBillboards();
+		{
+			// Avoid adding the same icon twice
+			bool isNew = true;
+			for (unsigned int i = 0; i < _bbSet->getNumBillboards(); ++i)
+			{
+				if (_bbSet->getBillboard(i)->getTexcoordIndex() == msg._icon)
+				{
+					isNew = false;
+					break;
+				}
+			}
+
+			// Only add if it's new
+			if (isNew)
+			{
+				_bbSet->createBillboard(Vector3(0.0f, 0.0f, 0.0f))->setTexcoordIndex(msg._icon);
+				adjustBillboards();
+			}
 			break;
+		}
 		case MessageType::ICON_CHANGE:
 			for (unsigned int i = 0; i < _bbSet->getNumBillboards(); ++i)
 			{
@@ -162,7 +179,6 @@ namespace Logic
 		case MessageType::ICON_DELETE:
 			for (unsigned int i = 0; i < _bbSet->getNumBillboards(); ++i)
 			{
-				// TODO Solución temporal hasta que funcione ICON_ADD
 				if (_bbSet->getBillboard(i)->getTexcoordIndex() == msg._icon)
 					_bbSet->removeBillboard(i);
 			}

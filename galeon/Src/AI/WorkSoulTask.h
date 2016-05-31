@@ -56,11 +56,12 @@ namespace AI{
 			if (executor != nullptr){
 				// Icono de alma que va a trabajar
 				IconMessage m(MessageType::ICON_ADD, IconType::IconType::SOUL);
-				const bool result = m.Dispatch(*executor);
+				bool result = m.Dispatch(*executor);
 				assert(result && "Can't set working soul icon");
 
 				// Icono por edificio de destino
-				assert(addDestinationBuildingIcon() && "Can't set building icon");
+				result = addDestinationBuildingIcon();
+				assert(result && "Can't set building icon");
 			}
 
 			else{

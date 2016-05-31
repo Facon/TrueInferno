@@ -9,6 +9,7 @@
 #include "AI\LAConsumeResources.h"
 #include "AI\LAAcceptConsumptionChanges.h"
 #include "AI\LAStopConsumingResources.h"
+#include "AI\LAStoppedResourceConsumer.h"
 #include "AI\LatentAction.h"
 #include "AI\Condition.h"
 #include "Map\MapEntity.h"
@@ -35,7 +36,7 @@ namespace AI {
 			_normalizedConsumptionPeriod = 1000 * entityInfo->getIntAttribute("normalizedConsumptionPeriod");
 			
 			// Creación de SM en base a los datos
-			int stopped = this->addNode(new CLAWait());
+			int stopped = this->addNode(new CLAStoppedResourceConsumer(_entity, _consumedResource));
 			int waiting = this->addNode(new CLAWait(_normalizedConsumptionPeriod));
 			int reserving = this->addNode(new CLAReserveResourcesToConsume(_entity, _data, _consumedResource));
 			int consuming = this->addNode(new CLAConsumeResources(_entity, _data, _consumedResource));

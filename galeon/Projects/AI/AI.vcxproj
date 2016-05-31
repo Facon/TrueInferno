@@ -114,6 +114,7 @@
     <ClCompile Include="..\..\Src\AI\LAReserveResourcesToConsume.cpp" />
     <ClCompile Include="..\..\Src\AI\LAStartSoulTask.cpp" />
     <ClCompile Include="..\..\Src\AI\LAStopConsumingResources.cpp" />
+    <ClCompile Include="..\..\Src\AI\LAStoppedResourceConsumer.cpp" />
     <ClCompile Include="..\..\Src\AI\LATransformResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAFollowPath.cpp" />
     <ClCompile Include="..\..\Src\AI\LAExecuteSM.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="..\..\Src\AI\LAReserveResourcesToConsume.h" />
     <ClInclude Include="..\..\Src\AI\LAStartSoulTask.h" />
     <ClInclude Include="..\..\Src\AI\LAStopConsumingResources.h" />
+    <ClInclude Include="..\..\Src\AI\LAStoppedResourceConsumer.h" />
     <ClInclude Include="..\..\Src\AI\LATransformResources.h" />
     <ClInclude Include="..\..\Src\AI\LAFollowPath.h" />
     <ClInclude Include="..\..\Src\AI\LAExecuteSM.h" />

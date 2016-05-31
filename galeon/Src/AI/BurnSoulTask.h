@@ -29,10 +29,12 @@ namespace AI{
 			if (executor != nullptr){
 				// Icono de alma quemándose
 				IconMessage m(MessageType::ICON_ADD, IconType::IconType::BURNING);
-				assert(m.Dispatch(*executor) && "Can't set burning soul icon");
+				bool result = m.Dispatch(*executor);
+				assert(result && "Can't set burning soul icon");
 
 				// Icono por edificio de destino
-				assert(addDestinationBuildingIcon() && "Can't set building icon");
+				result = addDestinationBuildingIcon();
+				assert(result && "Can't set building icon");
 			}
 
 			else{

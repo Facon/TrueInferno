@@ -3,6 +3,7 @@
 #include "Logic\Entity\Message.h"
 #include "AI\SMPowerGeneratorData.h"
 #include "Logic\ResourcesManager.h"
+#include "Logic\Entity\Components\Billboard.h"
 
 namespace AI {
 	RTTI_IMPL(CLACheckNewConsumption, CLatentAction);
@@ -53,12 +54,24 @@ namespace AI {
 		// Si las reservas soportan un ciclo completo del nuevo consumo total: éxito
 		if (currentCoke >= (totalConsumption + newConsumption)){
 			_smData.setNewConsumerAccepted(true);
+
+			// Marcamos que ya no necesitamos coke
+			IconMessage m(MessageType::ICON_DELETE, Billboard::getResourceIcon(ResourceType::COKE));
+			bool result = m.Dispatch(*_entity);
+			assert(result && "Can't remove resource icon");
+
 			return LAStatus::SUCCESS;
 		}
 		
 		// Si no, fallo
 		else{
 			_smData.setNewConsumerAccepted(false);
+
+			// Marcamos que necesitamos coke
+			IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(ResourceType::COKE));
+			bool result = m.Dispatch(*_entity);
+			assert(result && "Can't add resource icon");
+
 			return LAStatus::FAIL;
 		}
 	}
