@@ -10,6 +10,8 @@ namespace Logic
 	namespace IconType
 	{
 		// TODO Faltan los iconos comentados
+		// Listado de iconos disponible
+		// Cualquier cambio que se haga debe estar sincronizado con el fichero de iconos 'media\gui\imagesets\TrueInfernoIcons.png'
 		enum IconType
 		{
 			NONE = 0,

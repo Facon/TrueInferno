@@ -77,7 +77,7 @@ end
 
 MinorSoulsSpeedReductionEvent = Event:new("MinorSoulsSpeedReductionEvent")
 MinorSoulsSpeedReductionEvent.good = 0
-MinorSoulsSpeedReductionEvent.evil = 0.4
+MinorSoulsSpeedReductionEvent.evil = 0.5
 MinorSoulsSpeedReductionEvent.godTraits.cheater = 1.0
 MinorSoulsSpeedReductionEvent.allowsBoss = true
 MinorSoulsSpeedReductionEvent.allowsNonBoss = true
@@ -106,7 +106,7 @@ MajorSpeedReductionEvent.throw = function(god)
 end
 
 MinorSoulSpeedIncreaseEvent = Event:new("MinorSoulSpeedIncreaseEvent")
-MinorSoulSpeedIncreaseEvent.good = 0.3
+MinorSoulSpeedIncreaseEvent.good = 0.5
 MinorSoulSpeedIncreaseEvent.evil = 0
 MinorSoulSpeedIncreaseEvent.godTraits.generous = 1.0
 MinorSoulSpeedIncreaseEvent.allowsBoss = true
@@ -121,7 +121,7 @@ MinorSoulSpeedIncreaseEvent.throw = function(god)
 end
 
 MajorSoulSpeedIncreaseEvent = Event:new("MajorSoulSpeedIncreaseEvent")
-MajorSoulSpeedIncreaseEvent.good = 0.5
+MajorSoulSpeedIncreaseEvent.good = 0.7
 MajorSoulSpeedIncreaseEvent.evil = 0
 MajorSoulSpeedIncreaseEvent.godTraits.generous = 1.0
 MajorSoulSpeedIncreaseEvent.allowsBoss = true

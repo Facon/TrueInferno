@@ -72,6 +72,19 @@ namespace Logic
 		{ HADES_FAVOR, IconType::HELLQUARTERS }
 	};
 
+	const std::unordered_map<ResourceType, IconType::IconType> Billboard::storageTableConversor =
+	{
+		{ NONE, IconType::NONE },
+		{ MINERAL, IconType::WAREHOUSE },
+		{ GAS, IconType::WAREHOUSE },
+		{ COKE, IconType::POWER_GENERATOR },
+		{ CRUDE, IconType::EVILWORKS },
+		{ PURE_EVIL, IconType::REFINERY },
+		{ REFINED, IconType::CLOCK },
+		{ AETHER, IconType::RESEARCH_LABS },
+		{ HADES_FAVOR, IconType::NONE }
+	};
+
 	const std::unordered_map<BuildingType, IconType::IconType> Billboard::buildingTableConversor =
 	{
 		{ BuildingType::EvilWorks, IconType::EVILWORKS },
@@ -255,5 +268,10 @@ namespace Logic
 	IconType::IconType Billboard::getLogicRequirementIcon(LogicRequirement type)
 	{
 		return requirementTableConversor.at(type);
+	}
+
+	IconType::IconType Billboard::getStorageIcon(ResourceType type)
+	{
+		return storageTableConversor.at(type);
 	}
 }

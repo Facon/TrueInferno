@@ -6,6 +6,7 @@
 #include "Logic\Entity\Message.h"
 #include "Logic\ResourcesManager.h"
 #include "Logic\Entity\Components\Billboard.h"
+#include "Logic\Entity\BuildingType.h"
 
 using namespace Logic;
 
@@ -79,19 +80,51 @@ namespace AI {
 
 		else if (newStored > (int)_maxResources[type]){
 			//std::cout << "Discarded changing " << quantity << " resources because there are already stored " << _storedResources[type] << " (limit = " << _maxResources[type] << ")" << std::endl;
+
+			// Mostramos icono del almacén necesario porque no pudimos satisfacer el cambio
+			IconMessage m(MessageType::ICON_ADD, Billboard::getStorageIcon(type));
+			bool result = m.Dispatch(*_owner);
+			assert(result && "Can't add storage icon");
+
 			return false;
 		}
 
-		// Si hemos pasado de la nada a tener algo
-		if ((_storedResources[type] == 0) && (newStored > 0)){
+		// Registramos el nuevo valor con el cambio aplicado
+		_storedResources[type] = newStored;
+
+		// Actualizamos iconos
+		// Si nos añadieron recursos
+		if (quantity > 0) {
 			// Quitamos icono de recurso necesario (si estaba puesto)
 			IconMessage m(MessageType::ICON_DELETE, Billboard::getResourceIcon(type));
 			bool result = m.Dispatch(*_owner);
 			assert(result && "Can't delete resource icon");
 		}
 
-		// Registramos el nuevo valor con el cambio aplicado
-		_storedResources[type] = newStored;
+		// Si nos quitaron
+		else if (quantity < 0) {
+			// Quitamos el icono del almacén necesario (si estaba puesto)
+			IconMessage m(MessageType::ICON_DELETE, Billboard::getStorageIcon(type));
+			bool result = m.Dispatch(*_owner);
+			assert(result && "Can't delete storage icon");
+		}
+
+		// Mostramos también avisos si estamos cerca de los límites
+		/*
+		if (newStored == 0){
+			// Mostramos icono de recurso necesario porque estamos a 0
+			IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(type));
+			bool result = m.Dispatch(*_owner);
+			assert(result && "Can't add resource icon");
+		}
+		*/
+
+		if (newStored == (int)_maxResources[type]){
+			// Mostramos icono del almacén necesario porque estamos al máximo
+			IconMessage m(MessageType::ICON_ADD, Billboard::getStorageIcon(type));
+			bool result = m.Dispatch(*_owner);
+			assert(result && "Can't add storage icon");
+		}
 
 		// Notificamos al ResourcesManager
 		Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
@@ -144,15 +177,15 @@ namespace AI {
 
 		// Si se sobrepasa la cantidad disponible para reservar
 		if (newReserved > getAvailableResources(type)){
+			// Mostramos icono de recurso necesario porque no pudimos satisfacer la reserva
+			IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(type));
+			bool result = m.Dispatch(*_owner);
+			assert(result && "Can't add resource icon");
+
 			// Fallamos si no se deseaba reserva parcial
 			if (!allowPartial){
 				std::cout << "Discarded reserving " << quantity << " resources because there are only available " << getAvailableResources(type) << std::endl;
 				finallyReserved = 0;
-
-				// Mostramos icono de recurso necesario porque no pudimos satisfacer la reserva
-				IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(type));
-				bool result = m.Dispatch(*_owner);
-				assert(result && "Can't add resource icon");
 
 				return false;
 			}
@@ -167,6 +200,16 @@ namespace AI {
 
 		_reservedResources[type] = newReserved;
 		finallyReserved = quantity;
+
+		// Mostramos también avisos si estamos cerca de los límites
+		/*
+		if (getAvailableResources(type) == 0){
+			// Mostramos icono de recurso necesario porque estamos a 0 disponible
+			IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(type));
+			bool result = m.Dispatch(*_owner);
+			assert(result && "Can't add resource icon");
+		}
+		*/
 
 		return true;
 	}
@@ -192,7 +235,7 @@ namespace AI {
 		}
 
 		// Quitamos icono de recurso necesario (si estaba puesto) porque nos han liberado algo
-		// Únicamente lo hacemos si no viene por un claim. En ese caso previamente se ha tomado de las reservas lo reclamado por lo que no hay liberación real
+		// Únicamente lo hacemos si no venimos a continuación de un claim. En ese caso nos acaban de reclamar lo reservado y aquí simplemente limpiamos el contador de reserva.
 		if (!afterClaim){
 			IconMessage m(MessageType::ICON_DELETE, Billboard::getResourceIcon(type));
 			bool result = m.Dispatch(*_owner);

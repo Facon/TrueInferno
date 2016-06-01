@@ -35,6 +35,8 @@
 
 #include "Logic\ResourcesManager.h"
 
+#include "Logic\Entity\IconType.h"
+
 namespace GUI
 {
 	SideBarUI::SideBarUI()
@@ -270,7 +272,13 @@ namespace GUI
 	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
-		Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding(); // TODO TEST borrar edificio
+
+		// Icono random
+		Logic::CEntity* ent = (*(Logic::CBuildingManager::getSingletonPtr()->getBuildings()[Logic::BuildingType::Evilator]->begin()))->getEntity(); // TODO TEST pruebas
+		Logic::IconMessage m(Logic::MessageType::ICON_ADD, (Logic::IconType::IconType) Math::random(1, 10));
+		bool result = m.Dispatch(*ent);
+		assert(result && "Can't add test icon");
+		
 		printf("Repair Building\n");
 		return true;
 	}

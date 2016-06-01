@@ -48,12 +48,14 @@ namespace Logic
 		static IconType::IconType getResourceIcon(ResourceType type);
 		static IconType::IconType getBuildingIcon(BuildingType type);
 		static IconType::IconType getLogicRequirementIcon(LogicRequirement type);
+		static IconType::IconType getStorageIcon(ResourceType type);
 
 	protected:
 		static const std::unordered_map<std::string, IconType::IconType> iconTableConversor;
 		static const std::unordered_map<ResourceType, IconType::IconType> resourceTableConversor;
 		static const std::unordered_map<BuildingType, IconType::IconType> buildingTableConversor;
 		static const std::unordered_map<LogicRequirement, IconType::IconType> requirementTableConversor;
+		static const std::unordered_map<ResourceType, IconType::IconType> storageTableConversor;
 
 		void adjustBillboards();
 

@@ -9,7 +9,7 @@ using namespace Logic;
 namespace AI
 {
 	Logic::BuildingType CSoulTask::getTargetBuildingType(){
-		BuildingType buildingType = BuildingType::NonBuilding;
+		BuildingType buildingType = BuildingType::Unassigned;
 
 		// Chequeamos que el objetivo siga existiendo
 		CEntity* targetEntity = _map->getEntityByID(_target);
@@ -40,7 +40,7 @@ namespace AI
 		}
 
 		else {
-			assert(false && "Can't set icon for a destination building without buildingType");
+			std::cout << "Can't set icon for a destination building without buildingType" << std::endl;
 			return false;
 		}
 	}
