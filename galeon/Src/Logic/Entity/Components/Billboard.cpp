@@ -143,7 +143,8 @@ namespace Logic
 			if (defaultIcon != IconType::NONE){
 				_bbSet->createBillboard(Vector3(0.0f, 0.0f, 0.0f));
 				IconMessage m(defaultIcon);
-				assert(m.Dispatch(*this) && "Can't set initial icon");
+				bool result = m.Dispatch(*this);
+				assert(result && "Can't set initial icon");
 			}
 
 			//_entity->getComponent<Graphics>()

@@ -48,14 +48,16 @@ namespace Logic {
 			if ((oldActive < (int)_minWorkers) && (_activeWorkers >= _minWorkers)){
 				// Eliminamos el requisito de trabajadores
 				ToggleMessage m(LogicRequirement::Workers, false);
-				assert(m.Dispatch(*_entity) && "Can't remove 'Workers' requirement");
+				bool result = m.Dispatch(*_entity);
+				assert(result && "Can't remove 'Workers' requirement");
 			}
 
 			// Si estábamos por encima del mínimo pero ya no lo superamos
 			else if ((oldActive >= (int)_minWorkers) && (_activeWorkers < _minWorkers)){
 				// Añadimos el requisito de trabajadores
 				ToggleMessage m(LogicRequirement::Workers, true);
-				assert(m.Dispatch(*_entity) && "Can't add 'Workers' requirement");
+				bool result = m.Dispatch(*_entity);
+				assert(result && "Can't add 'Workers' requirement");
 			}
 
 			//std::cout << "Current active workers=" << _activeWorkers << std::endl;

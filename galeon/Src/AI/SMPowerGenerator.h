@@ -89,7 +89,8 @@ namespace AI {
 
 				// Si no es nula, le intentamos enviar el mensaje
 				if (consumer != nullptr){
-					assert(powerMsg.Dispatch(*consumer) && "Can't detach existing consumer while deactivating PowerGenerator");
+					bool result = powerMsg.Dispatch(*consumer);
+					assert(result && "Can't detach existing consumer while deactivating PowerGenerator");
 				}
 
 				++it;
@@ -104,7 +105,8 @@ namespace AI {
 			if (_data.getNewConsumer() != EntityID::UNASSIGNED){
 				CEntity *consumer = _entity->getMap()->getEntityByID(_data.getNewConsumer());
 				if (consumer != nullptr){
-					assert(powerMsg.Dispatch(*consumer) && "Can't detach new consumer while deactivating PowerGenerator");
+					bool result = powerMsg.Dispatch(*consumer);
+					assert(result && "Can't detach new consumer while deactivating PowerGenerator");
 					_data.setNewConsumer(EntityID::UNASSIGNED);
 				}
 			}

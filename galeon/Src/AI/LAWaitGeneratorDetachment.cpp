@@ -51,7 +51,8 @@ namespace AI {
 
 			// Añadimos el requisito de energía dado que nos acabamos de desconectar de un generador
 			ToggleMessage m(LogicRequirement::Energy, true);
-			assert(m.Dispatch(*_entity) && "Can't add 'Energy' requirement");
+			bool result = m.Dispatch(*_entity);
+			assert(result && "Can't add 'Energy' requirement");
 
 			// La espera ha sido exitosa
 			return LAStatus::SUCCESS;

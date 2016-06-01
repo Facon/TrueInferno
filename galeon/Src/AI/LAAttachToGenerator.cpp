@@ -70,7 +70,8 @@ namespace AI {
 		if (_smData.getAttached() && _smData.getPowerGenerator() != EntityID::UNASSIGNED){
 			// Elinimamos el requisito de energía dado que nos acabamos de conectar a un generador
 			ToggleMessage m(LogicRequirement::Energy, false);
-			assert(m.Dispatch(*_entity) && "Can't remove 'Energy' requirement");
+			bool result = m.Dispatch(*_entity);
+			assert(result && "Can't remove 'Energy' requirement");
 
 			return LAStatus::SUCCESS;
 		}

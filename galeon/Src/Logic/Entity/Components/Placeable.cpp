@@ -349,8 +349,11 @@ namespace Logic {
 			return false;
 
 		// Computamos los costes
-		assert(resourcesManager->decrementResources(ResourceType::MINERAL, _mineralCost, false, false, finalCost) && "Can't pay mineral costs");
-		assert(resourcesManager->decrementResources(ResourceType::GAS, _gasCost, false, false, finalCost) && "Can't pay gas costs");
+		bool result = resourcesManager->decrementResources(ResourceType::MINERAL, _mineralCost, false, false, finalCost);
+		assert(result && "Can't pay mineral costs");
+		
+		result = resourcesManager->decrementResources(ResourceType::GAS, _gasCost, false, false, finalCost);
+		assert(result && "Can't pay gas costs");
 
 		return true;
 	}
