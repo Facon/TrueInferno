@@ -26,7 +26,9 @@ namespace AI {
 
 		virtual ~CSMResourceBuilding() {}
 
+		// TODO Pasar a open!
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+			_data.setOwner(_entity);
 
 			// Guardamos el máximo almacenable de cada tipo de recurso
 			// TODO Leer para cada recurso por separado

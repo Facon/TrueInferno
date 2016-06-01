@@ -15,7 +15,7 @@ namespace AI {
 	/**
 	Esta FSM controla la lógica fundamental de los extractores de recursos.
 
-	Los edificios extractores cíclicamente producen recursos.
+	Los edificios extractores cíclicamente producen recursos en función del número de trabajadores.
 	*/ 
 	class CSMResourceExtractor : public CStateMachine<CLatentAction, CSMResourceExtractorData> {
 	public:

@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "AI\StateMachine.h"
+
 namespace Logic {
 	enum ResourceType;
 }
@@ -14,7 +16,7 @@ namespace AI {
 	class CSMResourceBuildingData {
 
 	public:
-		CSMResourceBuildingData() {}
+		CSMResourceBuildingData() : _owner(nullptr) {}
 
 		virtual ~CSMResourceBuildingData() {
 			_storedResources.clear();
@@ -64,11 +66,14 @@ namespace AI {
 		bool reserveResources(ResourceType type, int quantity, bool allowPartial, int& finallyReserved);
 
 		/** Libera los recursos reservados del tipo dado según la cantidad positiva indicada.
-		Devuelve true o false según si la operación se realizó correctamente o no */
-		bool freeReservedResources(ResourceType type, int quantity);
+		* afterClaim indica si la liberación viene después de un claim o no
+		* Devuelve true o false según si la operación se realizó correctamente o no 
+		*/
+		bool freeReservedResources(ResourceType type, int quantity, bool afterClaim = false);
 
 		/** Reclama los recursos previamente reservados del tipo dado en la cantidad indicada
-		Devuelve true o false según si la operación se realizó correctamente o no */
+		* Devuelve true o false según si la operación se realizó correctamente o no 
+		*/
 		bool claimReservedResources(ResourceType type, int quantity);
 
 		/** Devuelve la lista de recursos que la entidad provee */
@@ -79,6 +84,16 @@ namespace AI {
 
 		/** Desactiva el objeto limpiando y notificando todo lo que sea necesario */
 		void deactivate();
+
+		/** Asigna la entidad propietaria */
+		void setOwner(CEntity* owner){
+			_owner = owner;
+		}
+
+		/** Devuelve la entidad propietaria */
+		CEntity* getOwner(){
+			return _owner;
+		}
 
 	private:
 		/** Cantidad de recursos almacenados indexados por tipo */
@@ -92,6 +107,9 @@ namespace AI {
 
 		/** Recursos que se proveen */
 		std::unordered_set<ResourceType> _providedResources;
+
+		/** Entidad propietaria */
+		CEntity* _owner;
 	};
 }
 

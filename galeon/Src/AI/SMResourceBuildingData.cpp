@@ -1,8 +1,11 @@
 #include "SMResourceBuildingData.h"
-#include "Logic/ResourcesManager.h"
 
 #include <iostream>
 #include <cassert>
+
+#include "Logic\Entity\Message.h"
+#include "Logic\ResourcesManager.h"
+#include "Logic\Entity\Components\Billboard.h"
 
 using namespace Logic;
 
@@ -60,21 +63,35 @@ namespace AI {
 		if (quantity == 0)
 			return true;
 
-		int aux = _storedResources[type] + quantity;
+		int newStored = _storedResources[type] + quantity;
 
 		// Controlamos que el nuevo valor no sobrepase los límites
-		if (aux < 0){
+		if (newStored < 0){
 			//std::cout << "Discarded changing " << quantity << " resources because there are only stored " << _storedResources[type] << std::endl;
+			
+			// Mostramos icono de recurso necesario porque no pudimos satisfacer el cambio
+			IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(type));
+			bool result = m.Dispatch(*_owner);
+			assert(result && "Can't add resource icon");
+
 			return false;
 		}
 
-		else if (aux > (int)_maxResources[type]){
+		else if (newStored > (int)_maxResources[type]){
 			//std::cout << "Discarded changing " << quantity << " resources because there are already stored " << _storedResources[type] << " (limit = " << _maxResources[type] << ")" << std::endl;
 			return false;
 		}
 
+		// Si hemos pasado de la nada a tener algo
+		if ((_storedResources[type] == 0) && (newStored > 0)){
+			// Quitamos icono de recurso necesario (si estaba puesto)
+			IconMessage m(MessageType::ICON_DELETE, Billboard::getResourceIcon(type));
+			bool result = m.Dispatch(*_owner);
+			assert(result && "Can't delete resource icon");
+		}
+
 		// Registramos el nuevo valor con el cambio aplicado
-		_storedResources[type] = aux;
+		_storedResources[type] = newStored;
 
 		// Notificamos al ResourcesManager
 		Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
@@ -91,16 +108,16 @@ namespace AI {
 		if (quantity == 0)
 			return true;
 
-		int aux = getMaxResources(type) + quantity;
+		int newMax = getMaxResources(type) + quantity;
 
 		// Controlamos que el nuevo valor no sobrepase los límites
-		if (aux < 0){
+		if (newMax < 0){
 			std::cout << "Discarded changing " << quantity << " max resources because current maximum is " << getMaxResources(type) << std::endl;
 			return false;
 		}
 
 		// Registramos el nuevo valor con el cambio aplicado
-		_maxResources[type] = aux;
+		_maxResources[type] = newMax;
 
 		// Notificamos al ResourcesManager
 		Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
@@ -123,14 +140,20 @@ namespace AI {
 			return false;
 		}
 
-		int aux = _reservedResources[type] + quantity;
+		int newReserved = _reservedResources[type] + quantity;
 
 		// Si se sobrepasa la cantidad disponible para reservar
-		if (aux > getAvailableResources(type)){
+		if (newReserved > getAvailableResources(type)){
 			// Fallamos si no se deseaba reserva parcial
 			if (!allowPartial){
 				std::cout << "Discarded reserving " << quantity << " resources because there are only available " << getAvailableResources(type) << std::endl;
 				finallyReserved = 0;
+
+				// Mostramos icono de recurso necesario porque no pudimos satisfacer la reserva
+				IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(type));
+				bool result = m.Dispatch(*_owner);
+				assert(result && "Can't add resource icon");
+
 				return false;
 			}
 
@@ -142,7 +165,7 @@ namespace AI {
 			}
 		}
 
-		_reservedResources[type] = aux;
+		_reservedResources[type] = newReserved;
 		finallyReserved = quantity;
 
 		return true;
@@ -150,7 +173,7 @@ namespace AI {
 
 	/** Libera los recursos reservados del tipo dado según la cantidad positiva indicada.
 	Devuelve true o false según si la operación se realizó correctamente o no */
-	bool CSMResourceBuildingData::freeReservedResources(ResourceType type, int quantity){
+	bool CSMResourceBuildingData::freeReservedResources(ResourceType type, int quantity, bool afterClaim){
 		if (!isResourceTypeStored(type)){
 			return false;
 		}
@@ -160,15 +183,23 @@ namespace AI {
 			return false;
 		}
 
-		int aux = _reservedResources[type] - quantity;
+		int newReserved = _reservedResources[type] - quantity;
 
 		// Controlamos que no se libere más de lo que estaba reservado
-		if (aux < 0){
+		if (newReserved < 0){
 			assert(false && "Can't free resources that weren't reserved");
 			return false;
 		}
 
-		_reservedResources[type] = aux;
+		// Quitamos icono de recurso necesario (si estaba puesto) porque nos han liberado algo
+		// Únicamente lo hacemos si no viene por un claim. En ese caso previamente se ha tomado de las reservas lo reclamado por lo que no hay liberación real
+		if (!afterClaim){
+			IconMessage m(MessageType::ICON_DELETE, Billboard::getResourceIcon(type));
+			bool result = m.Dispatch(*_owner);
+			assert(result && "Can't delete resource icon");
+		}
+
+		_reservedResources[type] = newReserved;
 		return true;
 	}
 
@@ -178,7 +209,7 @@ namespace AI {
 		if (!changeStoredResources(type, -quantity))
 			return false;
 			
-		return freeReservedResources(type, quantity);
+		return freeReservedResources(type, quantity, true);
 	}
 
 	std::unordered_set<ResourceType>& CSMResourceBuildingData::getProvidedResources() {

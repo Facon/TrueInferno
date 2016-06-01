@@ -15,6 +15,11 @@ namespace AI {
 		// La cantidad de recursos extraídos es la máxima ajustada por el factor de velocidad
 		int quantity = (int) std::truncf(_maxExtractedQuantity * _smData.getSpeedFactor());
 
+		if (quantity == 0)
+			return LAStatus::SUCCESS;
+
+		assert((quantity >= 0) && "Extracted quantity must be >= 0");
+
 		// Notificamos el incremento de recursos
 		ResourceMessage m;
 		m.assembleResourcesChange(_resourceType, quantity);

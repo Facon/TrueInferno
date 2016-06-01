@@ -1,5 +1,6 @@
 #include "LATransformResources.h"
 #include "Logic\ResourcesManager.h"
+#include "Logic\Entity\Components\Billboard.h"
 
 namespace AI {
 	RTTI_IMPL(CLATransformResources, CLatentAction);
@@ -14,6 +15,11 @@ namespace AI {
 
 		// Si no hay nada que transformar, hemos acabado
 		if (_transformed == 0){
+			// Notificamos la necesidad con icono
+			IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(_resourceFrom));
+			bool result = m.Dispatch(*_entity);
+			assert(result && "Can't add resource icon");
+
 			return LAStatus::SUCCESS;
 		}
 
@@ -29,6 +35,11 @@ namespace AI {
 
 		// Si no hay nada que transformar tras asjustar por costes, hemos acabado
 		if (_transformed == 0){
+			// Notificamos la necesidad con icono
+			IconMessage m(MessageType::ICON_ADD, Billboard::getResourceIcon(_costResource));
+			bool result = m.Dispatch(*_entity);
+			assert(result && "Can't add resource icon");
+
 			return LAStatus::SUCCESS;
 		}
 

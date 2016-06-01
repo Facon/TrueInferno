@@ -146,6 +146,10 @@ namespace Logic
 
 	bool Billboard::HandleMessage(const IconMessage& msg)
 	{
+		// TODO TEST solución temporal hasta que se quiten las llamadas al Billboard antes de su inicialización
+		if (_bbSet == nullptr)
+			return true;
+
 		switch (msg._type)
 		{
 		case MessageType::ICON_ADD:
