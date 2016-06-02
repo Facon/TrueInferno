@@ -20,6 +20,7 @@
 #include "Logic/Server.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Logic/Maps/Managers/WorkManager.h"
 
 #include "Graphics/Scene.h"
 #include "Graphics/Server.h"
@@ -332,7 +333,10 @@ namespace GUI
 						if (Logic::CBuildingManager::getSingletonPtr()->checkValidPlaceablePosition(_placeableEntity, _originRoadTile->getLogicPosition()))
 						{
 							if (checkPlaceableConsumeCost(_placeableEntity))
+							{
 								Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableEntity);
+								Logic::CWorkManager::getSingletonPtr()->reassignWorkers();
+							}
 							else
 								Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableEntity);
 
