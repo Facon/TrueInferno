@@ -19,9 +19,14 @@ namespace GUI
 	protected:
 		bool firstTick = true;
 		bool firstEventReleased = true;
+		bool showingEventList = false;
 
 		CEGUI::Window* _uiEventWindow;
+		CEGUI::Window* _uiEventNotification;
 		bool EventUI::AcceptEventReleased(const CEGUI::EventArgs& e);
+		bool EventUI::ShowEventListReleased(const CEGUI::EventArgs& e);
+		bool EventUI::showFullEventReleased(const CEGUI::EventArgs& e);
+		bool EventUI::ShowEventList();
 
 	public:
 		EventUI();
@@ -47,12 +52,13 @@ namespace GUI
 		void setEventTitle(std::string EventTitle);
 		void setEventTextResume(std::string EventTextResume);
 		void setEventWindowVisible(bool visible);
+		void setEventNotificationVisible(bool visible);
 
 		/**	Muestra el popup completo con la información del evento */
 		void EventUI::showFullEvent(Logic::CEvent* event);
-
+		bool EventUI::closeWindowReleased(const CEGUI::EventArgs& e);
 		/**	Muestra la notificación de un evento */
-		void EventUI::showEventNotification(Logic::CEvent* event);
+		void EventUI::showEventNotification();
 	};
 }
 

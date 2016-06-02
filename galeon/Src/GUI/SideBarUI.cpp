@@ -286,6 +286,8 @@ namespace GUI
 	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction();
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TaharezLook/MouseArrow");
 		// @TODO Cambiar puntero a pala
 		_clearTerrain = true;
 		return true;
@@ -294,6 +296,8 @@ namespace GUI
 	bool SideBarUI::continueClearTerrain()
 	{
 		ClearBuildingConstruction();
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TaharezLook/MouseArrow");
 		// @TODO Cambiar puntero a pala
 		_clearTerrain = true;
 		return true;
@@ -321,6 +325,8 @@ namespace GUI
 	}
 
 	void SideBarUI::ClearBuildingConstruction(){
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("OgreTrayImages/MouseArrow");
 		_clearTerrain = false;
 		_roadInConstruction = 0;
 		if (_placeableRoadSize > 0){

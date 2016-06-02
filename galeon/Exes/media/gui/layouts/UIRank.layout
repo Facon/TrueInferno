@@ -8,9 +8,6 @@
 		<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
 		<Property name="HorzFormatting" value="LeftAligned" />
 		<Property name="VertFormatting" value="TopAligned" />
-		
-
-
 	</Window>
     
 </GUILayout>
