@@ -24,6 +24,9 @@ namespace GUI
 		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventWindow.layout");
 		_uiEventWindow->getChildElement("AcceptEvent")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&EventUI::AcceptEventReleased, this));
+		_uiEventNotification = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventNotification.layout");
+		_uiEventNotification->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&EventUI::ShowEventListReleased, this));
 	}
 
 	void EventUI::release()
@@ -44,8 +47,11 @@ namespace GUI
 	{
 		// Activamos la interfaz de usuario
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventNotification);
 		setEventWindowVisible(false);
+		setEventNotificationVisible(false);
 		_uiEventWindow->activate();
+		_uiEventNotification->activate();
 		Audio::CServer::getSingletonPtr()->play();
 	}
 
@@ -54,6 +60,8 @@ namespace GUI
 		// Desactivamos la ventana de UiBars.
 		_uiEventWindow->deactivate();
 		_uiEventWindow->setVisible(false);
+		_uiEventNotification->deactivate();
+		_uiEventNotification->setVisible(false);
 	}
 
 	void EventUI::tick(unsigned int msecs)
@@ -61,11 +69,14 @@ namespace GUI
 		if (firstTick) {
 			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 			firstTick = false;
-		}		
+		}
+		if (_events.size()==0)
+			setEventNotificationVisible(false);
 	}
 
 	bool EventUI::AcceptEventReleased(const CEGUI::EventArgs& e)
 	{
+
 		// Al pulsar el botón OK simplemente se oculta la ventana.
 		_uiEventWindow->setVisible(false);
 
@@ -92,7 +103,7 @@ namespace GUI
 			_events[event->getEventId()] = event;
 
 			// Se muestra únicamente la notificación
-			showEventNotification(event);
+			showEventNotification();
 		}
 	}
 	
@@ -104,8 +115,115 @@ namespace GUI
 		setEventWindowVisible(true);
 	}
 
-	void EventUI::showEventNotification(Logic::CEvent* event){
+	bool EventUI::showFullEventReleased(const CEGUI::EventArgs& e){
+		const CEGUI::MouseEventArgs a = static_cast<const CEGUI::MouseEventArgs&>(e);
+		showingEventList = false;
+		int i = atoi(a.window->getParent()->getText().c_str());
+		Logic::CEvent* event = _events[i];
+		
+
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
+		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventWindow.layout");
+		_uiEventWindow->getChildElement("AcceptEvent")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&EventUI::AcceptEventReleased, this));
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
+
+		setEventImage(event->getGUIImageName());
+		setEventText(event->getGUIText());
+		setEventTitle(event->getGUITitle());
+		setEventTextResume(event->getGUIResumeText());
+		setEventWindowVisible(true);
+
+		std::map<int, Logic::CEvent*>::iterator it;
+		it = _events.find(i);
+		_events.erase(it);
+		if (_events.size() > 0)
+			showEventNotification();
+
+		return true;
+	}
+
+	void EventUI::showEventNotification(){
 		// TODO Ruymajo's CEGI powa aquí! :D
+		_uiEventNotification->getChild("Accept")->setText("! " + std::to_string(_events.size()));
+		setEventNotificationVisible(true);
+		if (showingEventList){
+			ShowEventList();
+		}
+	}
+
+
+	bool EventUI::closeWindowReleased(const CEGUI::EventArgs& e)
+	{
+		showingEventList = false;
+		setEventWindowVisible(false);
+		return true;
+	}
+
+	bool EventUI::ShowEventList()
+	{
+		showingEventList = true;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
+		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventList.layout");
+
+		_uiEventWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&EventUI::closeWindowReleased, this));
+
+		float verticalpos = 0.07;
+		int i = 1;
+		for (auto it = _events.begin(); it != _events.end(); ++it)
+		{
+			_uiEventWindow->createChild("OgreTray/StaticText", "id" + std::to_string(i));
+			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Text", std::to_string(it->second->getEventId()));
+			_uiEventWindow->getChild("id" + std::to_string(i))->createChild("OgreTray/TrueInfernoButtonText", "Event" + std::to_string(i));
+			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.05,0},{" + std::to_string(verticalpos) + ",0},{0.95,0},{" + std::to_string(verticalpos + 0.1) + ",0}}");
+
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Area", "{{0,0},{0,0},{1,0},{1,0}}");
+
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChildElement("Event" + std::to_string(i))->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&EventUI::showFullEventReleased, this));
+
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Text", it->second->getGUITitle());
+
+			verticalpos += 0.11;
+			++i;
+		}
+
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
+		return true;
+	}
+
+	bool EventUI::ShowEventListReleased(const CEGUI::EventArgs& e)
+	{
+		showingEventList = true;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
+		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventList.layout");
+
+		_uiEventWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&EventUI::closeWindowReleased, this));
+
+		float verticalpos = 0.07;
+		int i = 1;
+		for (auto it = _events.begin(); it != _events.end(); ++it)
+		{
+			_uiEventWindow->createChild("OgreTray/StaticText", "id" + std::to_string(i));
+			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Text", std::to_string(it->second->getEventId()));
+			_uiEventWindow->getChild("id" + std::to_string(i))->createChild("OgreTray/TrueInfernoButtonText", "Event" + std::to_string(i));
+			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.05,0},{" + std::to_string(verticalpos) + ",0},{0.95,0},{" + std::to_string(verticalpos + 0.1) + ",0}}");
+
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Area", "{{0,0},{0,0},{1,0},{1,0}}");
+
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChildElement("Event" + std::to_string(i))->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&EventUI::showFullEventReleased, this));
+
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Text", it->second->getGUITitle());
+
+			verticalpos += 0.11;
+			++i;
+		}
+
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
+		return true;
 	}
 
 	void EventUI::setEventImage(std::string eventImage)
@@ -131,6 +249,11 @@ namespace GUI
 	void EventUI::setEventWindowVisible(bool visible)
 	{
 		_uiEventWindow->setVisible(visible);
+	}
+
+	void EventUI::setEventNotificationVisible(bool visible)
+	{
+		_uiEventNotification->setVisible(visible);
 	}
 	
 }

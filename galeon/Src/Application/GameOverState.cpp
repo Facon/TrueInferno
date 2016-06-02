@@ -39,7 +39,7 @@ namespace Application {
 		CApplicationState::init();
 
         // TODO Posible error Aquí para cuando el personaje muera.
-        _gameOverWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("GameOver.layout");
+        _gameOverWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Defeat.layout");
 
         _gameOverWindow->getChildElement("Exit")->
                 subscribeEvent(CEGUI::PushButton::EventClicked,
@@ -72,7 +72,8 @@ namespace Application {
 		// TODO Mostrar en CEGUI!
 		bool victory = Logic::CGameManager::getSingletonPtr()->getVictory();
 
-		std::cout << (victory ? "VICTORY!" : "Defeat...") << std::endl;
+		//_gameOverWindow->getChild("ResultBackground/ResultText")->setText((victory ? "VICTORY!" : "Defeat..."));
+		
 
 	} // activate
 

@@ -3,17 +3,17 @@
 <GUILayout version="4" >
     <Window type="DefaultWindow" name="GameOver" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-        <Window type="OgreTray/StaticImage" name="GameOver/BackGround" >
+        <Window type="OgreTray/StaticImage" name="ResultBackground" >
             <Property name="Font" value="Jura-18" />
             <Property name="Text" value="TrueInferno" />
             <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-            <Window type="OgreTray/Title" name="GameOver/BackGround/" >
+            <Window type="OgreTray/Title" name="ResultText" >
                 <Property name="Font" value="Jura-18" />
-                <Property name="Text" value="GAME OVER" />
                 <Property name="AlwaysOnTop" value="True" />
                 <Property name="Area" value="{{0.2,0},{0.2,0},{0.8,0},{0.4,0}}" />
             </Window>
         </Window>
+		
         <Window type="OgreTray/Button" name="Exit" >
             <Property name="Font" value="Jura-18" />
             <Property name="Text" value="Exit" />

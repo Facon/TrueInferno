@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+	<Window type="OgreTray/StaticImage" name="EventWindow" >
+	<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
+	<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+		<Window type="OgreTray/StaticText" name="EventTitle" >
+			<Property name="Area" value="{{0.1,0},{0.05,0},{0.9,0},{0.09,0}}" />
+			<Property name="Font" value="Jura-18" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="CentreAligned" />
+			<Property name="Text" value="You have been ELIMINATED!" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/StaticImage" name="EventImage" >
+			<Property name="Image" value="TrueInfernoEvents/EventDefeat" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="CentreAligned" />
+			<Property name="Area" value="{{0.55,0},{0.1,0},{0.99,0},{0.8,0}}" />
+		</Window>
+		<Window type="OgreTray/StaticText" name="EventText" >
+			<Property name="Area" value="{{0.05,0},{0.1,0},{0.50,0},{0.55,0}}" />
+			<Property name="Font" value="Jura-12" />
+			<Property name="HorzFormatting" value="WordWrapJustified" />
+			<Property name="Text" value="Sad news: you failed. You’re done. Out. FIRED. And I thought you had potential... I hate being wrong. I really do. Now get the Hell out of my Hell before I throw you in a furnace." />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		<Window type="OgreTray/StaticText" name="EventTextResume" >
+			<Property name="Area" value="{{0.05,0},{0.6,0},{0.50,0},{0.8,0}}" />
+			<Property name="Font" value="Jura-12-i" />
+			<Property name="HorzFormatting" value="WordWrapJustified" />			
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="OgreTray/TrueInfernoButtonText" name="Exit" >
+			<Property name="Area" value="{{0.45,0},{0.85,0},{0.55,0},{0.95,0}}" />
+			<Property name="Text" value="Exit" />				
+		</Window>
+		
+
+	</Window>
+</GUILayout>
+

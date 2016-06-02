@@ -107,7 +107,7 @@ namespace GUI {
 		// Establecemos cual será el puntero del ratón.
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 #endif	
-		
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 		// Cargamos los archivos con las fuentes que usaremos.
 		CEGUI::FontManager::getSingleton().createFromFile("DejaVuSans-12.font");
 		CEGUI::Font& defaultFont = CEGUI::FontManager::getSingleton().createFromFile("Jura-18.font");
