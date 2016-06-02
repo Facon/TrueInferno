@@ -20,6 +20,7 @@ Contiene la implementaciï¿½n del gestor del Juicio de Almas.
 
 #include "BaseSubsystems/Math.h"
 #include "Logic/BuildingManager.h"
+#include "Logic/Maps/Managers/WorkManager.h"
 
 #include "Logic/Entity/Components/Soul.h"
 #include "BaseSubsystems/ScriptManager.h"
@@ -216,6 +217,9 @@ namespace Logic {
 			_souls[soulsCategory] -= numSoulsToWork[soulsCategory];
 			_souls[soulsCategory] -= numSoulsToBurn[soulsCategory];
 		}
+
+		// Reasignación de trabajadores si fuera necesario
+		CWorkManager::getSingletonPtr()->reassignWorkers();
 
 		return wrongCategories;
 	} // createSouls

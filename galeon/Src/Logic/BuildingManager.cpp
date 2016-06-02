@@ -281,8 +281,10 @@ namespace Logic {
 		return m.Dispatch(*movableEntity);
 	}
 
-	bool CBuildingManager::placePlaceable(CEntity* movableEntity){
-		if (!movableEntity){
+	bool CBuildingManager::placePlaceable(CEntity* movableEntity)
+	{
+		if (!movableEntity)
+		{
 			std::cout << "Can't place null placeable" << std::endl;
 			return false;
 		}
