@@ -46,8 +46,8 @@ namespace Logic {
 		*/
 		const Vector3 getLogicPosition();
 
-		/** Setter for terrainType */
-		void setTerrainType(const TerrainType &terrainType);
+		/** Modifca el terreno del Tile */
+		bool changeTerrain(const TerrainType &terrainType);
 
 		/** Setter for entityAbove */
 		void setPlaceableAbove(CPlaceable* placeableAbove);
