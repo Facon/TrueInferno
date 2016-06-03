@@ -19,9 +19,14 @@ namespace AI
 
 		virtual ~CSMSoulBurnerData() {}
 
-		unsigned int getNumSoulsToBurn()
+		unsigned int getVirtualNumSoulsToBurn()
 		{
 			return _soulsCategoryToBurn.size() + _numAssignedSoulsToBurn;
+		}
+
+		unsigned int getNumSoulsToBurn()
+		{
+			return _soulsCategoryToBurn.size();
 		}
 
 		void increaseAssignedSoulsToBurn()

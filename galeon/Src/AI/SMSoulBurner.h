@@ -46,6 +46,12 @@ namespace AI {
 
 		SM_HANDLE_MESSAGE(SoulBurnMessage);
 
+		/** Devuelve el número virtual de almas a ser quemadas en esta entidad */
+		int getVirtualSoulsToBurn()
+		{
+			return _data.getVirtualNumSoulsToBurn();
+		}
+
 		/** Devuelve el número actual de almas a ser quemadas en esta entidad */
 		int getCurrentSoulsToBurn()
 		{

@@ -17,6 +17,11 @@ namespace Logic
 		CStateMachineExecutor::tick(msecs);
 	} // tick
 
+	int CSoulBurner::getVirtualSoulsToBurn(){
+		return ((AI::CSMSoulBurner*)_currentStateMachine)->getVirtualSoulsToBurn();
+		//return _data.getVirtualNumSoulsToBurn();
+	}
+
 	int CSoulBurner::getCurrentSoulsToBurn(){
 		return ((AI::CSMSoulBurner*)_currentStateMachine)->getCurrentSoulsToBurn();
 		//return _data.getNumSoulsToBurn();

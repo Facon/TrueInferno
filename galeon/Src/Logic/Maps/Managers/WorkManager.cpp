@@ -170,7 +170,7 @@ namespace Logic {
 			}
 
 			// Obtenemos la capacidad restante del horno
-			int remainingSoulsToBurn = soulBurner->getMaxSoulsToBurn() - soulBurner->getCurrentSoulsToBurn();
+			int remainingSoulsToBurn = soulBurner->getMaxSoulsToBurn() - soulBurner->getVirtualSoulsToBurn();
 
 			// Actualizaremos el horno seleccionado si...
 			// ...se mejora la mayor capacidad encontrada hasta el momento
