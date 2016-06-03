@@ -9,7 +9,7 @@ Contiene la implementación del gestor de trabajo.
 
 @see Logic::CWorkManager
 
-@author Álvaro Valera
+@author Álvaro Valera, Raúl Segura
 @date Marzo, 2016
 */
 
