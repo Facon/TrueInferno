@@ -2,6 +2,7 @@
 // WorkManager.h
 //---------------------------------------------------------------------------
 
+
 /**
 @file WorkManager.h
 
@@ -13,6 +14,7 @@ Contiene la declaración del gestor de trabajo.
 @date Marzo, 2016
 */
 
+
 #ifndef WORK_MANAGER_H_
 #define WORK_MANAGER_H_
 
@@ -22,6 +24,7 @@ Contiene la declaración del gestor de trabajo.
 #include "Logic/Maps/EntityID.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/Entity/Components/WorkBuilding.h"
+
 
 /**
 Namespace que engloba la lógica del juego. Engloba desde el mapa lógico
