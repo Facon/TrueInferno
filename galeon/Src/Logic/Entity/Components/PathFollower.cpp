@@ -61,26 +61,31 @@ namespace Logic
 				_path.pop();
 				_targetPosition = Vector3(newPos.x, entityPosition.y, newPos.z);
 			} while (_path.size()>0 && _startPosition.squaredDistance(_targetPosition) <= ZERO_DISTANCE);
-								
-			// TODO Mirar como hacer la rotación sin usar LookAt
-			//this.transform.LookAt(targetPosition);
 			
-			_startTime = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime();
-			_journeyLength = _startPosition.distance(_targetPosition);
+			_dir = _targetPosition - _startPosition;
+			_dir.normalise();
 		}
 
 		if (_moving)
 		{
-			// Lerp
-			unsigned int appTime = Logic::CTimeManager::getSingletonPtr()->getElapsedGlboalTime();
-			float distCovered = ((appTime - _startTime) / 1000.0f) * CSoulManager::getSingletonPtr()->getMovementSpeed(); // Dividido entre 1000.0f para pasarlo a segundos
-			float fracJourney = distCovered / _journeyLength;
-			_entity->setPosition(Math::lerp<Vector3, float>(_startPosition, _targetPosition, fracJourney));
-			// Si llega al destino, meter moving a false
-			if (fracJourney >= 1.0f)
-			{
+			// Espacio recorrido = v * t en la dirección normalizada
+			Vector3 position = _entity->getPosition();
+			float baseSpeed = 1.0f / 1000; // 1 ud./s = 1 ud. / 1000 ms
+			float positionIncrement = baseSpeed * CSoulManager::getSingletonPtr()->getMovementSpeed() * msecs;
+
+			// Si nos pasamos (pico de FPS o por breakpoint en debug) ajustamos a la distancia que quedaba
+			// Chequeamos con los valores al cuadrado
+			float remainingSqDist = _entity->getPosition().squaredDistance(_targetPosition);
+			if (remainingSqDist <= positionIncrement*positionIncrement){
+				// Operamos con los valores normales
+				positionIncrement = sqrt(remainingSqDist);
 				_moving = false;
 			}
+
+			position += _dir * positionIncrement;
+
+			// Actualizamos posición
+			_entity->setPosition(position);
 		}
 	}
 

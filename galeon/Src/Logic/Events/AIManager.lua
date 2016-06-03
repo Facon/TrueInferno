@@ -61,6 +61,9 @@ function AIManager:__init()
 	-- Dificultad deseada. Debe actualizarse conforme avanza la partida. Ha de estar siempre entre 0 (más fácil) y 1 (más difícil)
 	self.desiredDifficulty = 0
 	
+	-- Retraso (ms) con que se lanzan los eventos para evitar problemas de eventos lanzados "en el pasado"
+	self.delay = 100
+	
 	-- Combinaciones de evento-dios
 	self.godEvents = {}
 	for godIndex,god in pairs(gods) 
@@ -129,7 +132,7 @@ function AIManager:tick(msecs)
 			-- Lanzamos el evento
 			if(aiEnabled)
 			then
-				chosenGodEvent.event.throw(chosenGodEvent.god)
+				chosenGodEvent.event.throw(chosenGodEvent.god, self.delay)
 			end
 
 			-- Se actualizan los contadores de tiempo en función del evento-dios lanzado

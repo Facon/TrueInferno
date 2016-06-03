@@ -19,3 +19,11 @@ if launchInitialEvents then
 	-- End game
 	-- CEventManager.getSingletonPtr():addConditionEvent(CEndGameEvent(true));	
 end
+
+-- TODO Hay que refactorizar los includes y las inicializaciones para poder aprovechar los eventos prehechos sin cargar doblemente los dioses
+--dofile("../Src/Logic/Events/events.lua")
+--dofile("../Src/Logic/Events/gods.lua")
+--MajorSoulSpeedReductionEvent.duration = 7*1000
+--MajorSoulSpeedReductionEvent.throw(Hades,15000)
+--MajorSoulSpeedIncreaseEvent.duration = 5*1000
+--MajorSoulSpeedIncreaseEvent.throw(Hades,20000)

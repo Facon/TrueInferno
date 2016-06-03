@@ -20,7 +20,7 @@ namespace Logic
 		DEC_FACTORY(PathFollower);
 
 	public:
-		PathFollower() : IComponent(), _startTime(0), _journeyLength(0.0f), 
+		PathFollower() : IComponent(), _dir(0.0f, 0.0f, 0.0f),
 			_moving(false), _targetReached(false), _targetReachedNotified(false),
 			_startPosition(0.0f, 0.0f, 0.0f), _targetPosition(0.0f, 0.0f, 0.0f)
 		{}
@@ -32,8 +32,6 @@ namespace Logic
 		void addToQueue(const std::vector<Vector3>& path);
 	
 	protected:
-		unsigned int _startTime;
-		float _journeyLength;
 		bool _moving;
 		
 		/** Flag a true si la entidad ha llegado al destino */
@@ -44,9 +42,14 @@ namespace Logic
 		
 		Vector3 _startPosition;
 		Vector3 _targetPosition;
-		//private Transform endMarker;
+
 		std::queue<Vector3> _path;
-		const float ZERO_DISTANCE = 0.1f;
+
+		const float ZERO_DISTANCE = 0.01f;
+
+	private:
+		/** Dirección actual */
+		Vector3 _dir;
 	};
 
 	REG_FACTORY(PathFollower);
