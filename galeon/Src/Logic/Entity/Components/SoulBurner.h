@@ -24,6 +24,9 @@ namespace Logic {
 
 		virtual void tick(unsigned int msecs);
 
+		/** Devuelve el número virtual de almas a ser quemadas en esta entidad */
+		int getVirtualSoulsToBurn();
+
 		/** Devuelve el número actual de almas a ser quemadas en esta entidad */
 		int getCurrentSoulsToBurn();
 
