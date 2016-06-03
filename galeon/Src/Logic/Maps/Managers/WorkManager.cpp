@@ -367,7 +367,7 @@ namespace Logic {
 		CEntity *targetEntity = targetBuilding->getEntity();
 
 		AI::CWorkTask *workTask = new AI::CWorkTask(targetEntity->getMap(), targetEntity->getEntityID(),
-			CSoulsTrialManager::SoulsCategory::UNKNOWN);
+			SoulsTrialManager::SoulsCategory::UNKNOWN);
 
 		// Esto evita que se incremente el número de trabajadores asignados al edificio de
 		// destino en el método start() de la tarea, ya que se hace aquí mismo de forma
