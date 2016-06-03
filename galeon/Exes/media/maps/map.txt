@@ -13,7 +13,6 @@ Map = {
 		dimensions = {1, 1, 1},
 		orientation = 0,
 		model = "cube.mesh",
-		material = "tile",
 		static = false,
 		visible = true,
 		physic_entity = "rigid",

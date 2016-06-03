@@ -42,8 +42,47 @@ namespace Logic {
 	void Tile::tick(unsigned int msecs) {
 	} // tick
 
-	void Tile::setTerrainType(const TerrainType &terrainType){
+	bool Tile::changeTerrain(const TerrainType &terrainType){
+		// Determinamos el nombre del material a usar en función del enumerado
+		std::string materialName;
+
+		switch (terrainType) {
+		case TerrainType::Empty:
+			materialName = "Terrain/Empty";
+			break;
+
+		case TerrainType::Mineral:
+			materialName = "Terrain/Mineral";
+			break;
+
+		case TerrainType::Gas:
+			materialName = "Terrain/Gas";
+			break;
+
+		default:
+			assert(false && "Unknown terrain type");
+			return false;
+		}
+
+		// Actualizamos el enumerado
 		_terrainType = terrainType;
+
+		// Alternative material for odd tiles
+		/*
+		std::string materialName(baseMaterialName);
+		materialName += terrainTypeChar;
+
+		if ((x + z) % 2 != 0)
+		materialName = materialName + "_alt";
+		*/
+
+		// Cambiamos el material
+		MaterialMessage message(materialName);
+
+		bool result = message.Dispatch(*_entity);
+		assert(result && "Can't change terrain material");
+
+		return result;
 	}
 
 	const Vector3 Tile::getLogicPosition() {

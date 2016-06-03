@@ -121,12 +121,6 @@ namespace Logic {
 		Vector3 tileBasePosition = tileMapEntity->getVector3Attribute("position");
 		Vector3 tileBaseDimensions = tileMapEntity->getVector3Attribute("dimensions");
 
-		// Material base para los tiles.
-		std::string baseMaterialName = tileMapEntity->getStringAttribute("material");
-		// Material alternativo para los tiles.
-		// Se usa para diferenciar visualmente tiles adyacentes entre sí.
-		std::string altMaterialName = baseMaterialName + "_alt";
-
 		// Reserva de memoria para la matriz de tiles.
 		_tiles = new Tile**[SIZE_X];
 		for (int x = 0; x < SIZE_X; ++x) {
@@ -248,9 +242,6 @@ namespace Logic {
 		// Open file
 		std::ifstream file(filename);
 
-		// Base material name for all tiles
-		std::string baseMaterialName = tileMapEntity->getStringAttribute("material");
-
 		// For each line
 		std::string line;
 		int z = 0;
@@ -268,29 +259,29 @@ namespace Logic {
 				
 				TerrainType terrainType;
 				char terrainTypeChar(item[0]);
+				std::string materialName;
 
 				switch (terrainTypeChar) {
 				case '0':
 					terrainType = TerrainType::Empty;
+					materialName = "Terrain/Empty";
 					break;
 				case '1':
 					terrainType = TerrainType::Mineral;
+					materialName = "Terrain/Mineral";
 					break;
 				case '2':
 					terrainType = TerrainType::Gas;
+					materialName = "Terrain/Gas";
 					break;
 				default:
 					assert("Unknown terrain type char: " + terrainType);
 				}
 
-				// Alternative material for odd tiles
-				std::string materialName(baseMaterialName);
-				materialName += terrainTypeChar;
+				// Actualizamos el terreno del Tile
+				bool result = _tiles[x][z]->changeTerrain(terrainType);
+				assert(result && "Can't change tile's terrain");
 
-				MaterialMessage message((((x + z) % 2 == 0) ? materialName : materialName + "_alt"));
-
-				message.Dispatch(*_tiles[x][z]->getEntity());
-				_tiles[x][z]->setTerrainType(terrainType);
 				++x;
 			} // while x
 
