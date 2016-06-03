@@ -3,7 +3,7 @@
 <GUILayout version="4" >
 	<Window type="OgreTray/StaticImage" name="BuildingSelectionPopup" >
 	<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
-		<Property name="Area" value="{{0.25,0},{0.37,0},{0.55,0},{0.72,0}}" />
+		<Property name="Area" value="{{0.22,0},{0.30,0},{0.65,0},{0.75,0}}" />
 	
 		<Window type="OgreTray/StaticText" name="BuildingName" >
 			<Property name="Area" value="{{0.05,0},{0.05,0},{0.95,0},{0.15,0}}" />
@@ -13,94 +13,110 @@
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
-		<Window type="OgreTray/StaticText" name="Group1Text" >
-			<Property name="Area" value="{{0.295,0},{0.21,0},{0.595,0},{0.31,0}}" />
+		<Window type="OgreTray/StaticText" name="PowerSupplyText" >
+			<Property name="Area" value="{{0.125,0},{0.18,0},{0.725,0},{0.28,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
-			<Property name="Text" value="Group 1" />
+			<Property name="Text" value="Power Supply: Power Generator" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
-		<Window type="TaharezLook/Editbox" name="Group1Priority" >
-			<Property name="Area" value="{{0.605,0},{0.21,0},{0.705,0},{0.31,0}}" />
+		<Window type="TaharezLook/Editbox" name="PowerSupplyPriority" >
+			<Property name="Area" value="{{0.755,0},{0.18,0},{0.855,0},{0.28,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="1" />
 		</Window>
 		
-		<Window type="OgreTray/StaticText" name="Group2Text" >
-			<Property name="Area" value="{{0.295,0},{0.32,0},{0.595,0},{0.42,0}}" />
+		<Window type="OgreTray/StaticText" name="MapResourcesText" >
+			<Property name="Area" value="{{0.125,0},{0.29,0},{0.725,0},{0.39,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
-			<Property name="Text" value="Group 2" />
+			<Property name="Text" value="Map Resources: Mine, Gas Plant" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
-		<Window type="TaharezLook/Editbox" name="Group2Priority" >
-			<Property name="Area" value="{{0.605,0},{0.32,0},{0.705,0},{0.42,0}}" />
+		<Window type="TaharezLook/Editbox" name="MapResourcesPriority" >
+			<Property name="Area" value="{{0.755,0},{0.29,0},{0.855,0},{0.39,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="2" />
 		</Window>
 		
-		<Window type="OgreTray/StaticText" name="Group3Text" >
-			<Property name="Area" value="{{0.295,0},{0.43,0},{0.595,0},{0.53,0}}" />
+		<Window type="OgreTray/StaticText" name="ProductionText" >
+			<Property name="Area" value="{{0.125,0},{0.40,0},{0.725,0},{0.50,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
-			<Property name="Text" value="Group 3" />
+			<Property name="Text" value="Production: Furnace" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
-		<Window type="TaharezLook/Editbox" name="Group3Priority" >
-			<Property name="Area" value="{{0.605,0},{0.43,0},{0.705,0},{0.53,0}}" />
+		<Window type="TaharezLook/Editbox" name="ProductionPriority" >
+			<Property name="Area" value="{{0.755,0},{0.40,0},{0.855,0},{0.50,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="3" />
 		</Window>
 		
-		<Window type="OgreTray/StaticText" name="Group4Text" >
-			<Property name="Area" value="{{0.295,0},{0.54,0},{0.595,0},{0.64,0}}" />
+		<Window type="OgreTray/StaticText" name="EvilProcessingText" >
+			<Property name="Area" value="{{0.125,0},{0.51,0},{0.725,0},{0.61,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
-			<Property name="Text" value="Group 4" />
+			<Property name="Text" value="Evil Processing: Evilworks, Refinery" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
-		<Window type="TaharezLook/Editbox" name="Group4Priority" >
-			<Property name="Area" value="{{0.605,0},{0.54,0},{0.705,0},{0.64,0}}" />
+		<Window type="TaharezLook/Editbox" name="EvilProcessingPriority" >
+			<Property name="Area" value="{{0.755,0},{0.51,0},{0.855,0},{0.61,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="4" />
 		</Window>
 		
-		<Window type="OgreTray/StaticText" name="Group5Text" >
-			<Property name="Area" value="{{0.295,0},{0.65,0},{0.595,0},{0.75,0}}" />
+		<Window type="OgreTray/StaticText" name="LogisticsText" >
+			<Property name="Area" value="{{0.125,0},{0.62,0},{0.725,0},{0.72,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
-			<Property name="Text" value="Group 5" />
+			<Property name="Text" value="Logistics: Warehouse, Evilator" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
-		<Window type="TaharezLook/Editbox" name="Group5Priority" >
-			<Property name="Area" value="{{0.605,0},{0.65,0},{0.705,0},{0.75,0}}" />
+		<Window type="TaharezLook/Editbox" name="LogisticsPriority" >
+			<Property name="Area" value="{{0.755,0},{0.62,0},{0.855,0},{0.72,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="5" />
 		</Window>
 		
+		<Window type="OgreTray/StaticText" name="IDiText" >
+			<Property name="Area" value="{{0.125,0},{0.73,0},{0.725,0},{0.83,0}}" />
+			<Property name="Font" value="Jura-12" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="LeftAligned" />
+			<Property name="Text" value="I+D+i: Research Lab" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="TaharezLook/Editbox" name="IDiPriority" >
+			<Property name="Area" value="{{0.755,0},{0.73,0},{0.855,0},{0.83,0}}" />
+			<Property name="Font" value="Jura-10" />
+			<Property name="TextFormatting" value="LeftAligned" />
+			<Property name="Text" value="6" />
+		</Window>
+		
 
 		
 		<Window type="OgreTray/TrueInfernoButtonCancel" name="CloseWindow" >
-			<Property name="Area" value="{{0.94,0},{0.01,0},{0.99,0},{0.06,0}}" />
+			<Property name="Area" value="{{0.96,0},{0.01,0},{0.99,0},{0.05,0}}" />
 		</Window>	
 		
 		<Window type="OgreTray/TrueInfernoButtonText" name="Accept" >
-			<Property name="Area" value="{{0.360,0},{0.81,0},{0.640,0},{0.95,0}}" />
+			<Property name="Area" value="{{0.360,0},{0.85,0},{0.640,0},{0.96,0}}" />
 			<Property name="Text" value="Apply" />				
 		</Window>
 		

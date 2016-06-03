@@ -21,6 +21,7 @@
 #include "Logic/Server.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Logic/Maps/Managers/WorkManager.h"
 
 namespace GUI
 {
@@ -156,11 +157,12 @@ namespace GUI
 
 	}
 
-	void BuildingSelectionUI::loadAssetsPopup(std::string name, std::string image){
+	void BuildingSelectionUI::loadAssetsPopup(std::string name, std::string image)
+	{
 		_uipopupWindow->getChild("BuildingName")->setText(name);
 		
-		
-		if (name == "Souls Trial"){
+		if (name == "Souls Trial")
+		{
 			//CEGUI::Editbox* editbox = (CEGUI::Editbox*)_uipopupWindow->getChild("HeavySoulsBurn");
 			unsigned int* getAvailableSouls = Logic::CSoulsTrialManager::getSingletonPtr()->getAvailableSouls();
 			_uipopupWindow->getChild("HeavySoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::HEAVY]));
@@ -169,18 +171,29 @@ namespace GUI
 			_uipopupWindow->getChild("UnknownSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::UNKNOWN]));
 			return;
 		}
-		if (name == "White Market"){
-			
-			return;
-		}
-		if (name == "Building Groups Priorities"){
 
+		if (name == "White Market")
+		{
 			return;
 		}
-		if (name == "Soul Redemption"){
 
+		if (name == "Building Groups Priorities")
+		{
+			Logic::BuildingGroup* groupsPriority = Logic::CWorkManager::getSingletonPtr()->getGroupsPriority();
+			_uipopupWindow->getChild("PowerSupplyPriority")->setText(std::to_string(groupsPriority[Logic::BuildingGroup::PowerSupply] + 1));
+			_uipopupWindow->getChild("MapResourcesPriority")->setText(std::to_string(groupsPriority[Logic::BuildingGroup::MapResources] + 1));
+			_uipopupWindow->getChild("ProductionPriority")->setText(std::to_string(groupsPriority[Logic::BuildingGroup::Production] + 1));
+			_uipopupWindow->getChild("EvilProcessingPriority")->setText(std::to_string(groupsPriority[Logic::BuildingGroup::EvilProcessing] + 1));
+			_uipopupWindow->getChild("LogisticsPriority")->setText(std::to_string(groupsPriority[Logic::BuildingGroup::Logistics] + 1));
+			_uipopupWindow->getChild("IDiPriority")->setText(std::to_string(groupsPriority[Logic::BuildingGroup::IDi] + 1));
 			return;
 		}
+
+		if (name == "Soul Redemption")
+		{
+			return;
+		}
+
 		_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoBuildings/" + image);
 	}
 
