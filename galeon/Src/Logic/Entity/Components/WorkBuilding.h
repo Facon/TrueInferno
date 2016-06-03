@@ -37,6 +37,17 @@ namespace Logic {
 		/** Gestor de mensajes de trabajadores. Modifica o informa acerca de los trabajadores del edificio */
 		virtual bool HandleMessage(const WorkerMessage& msg);
 
+		/**
+		Métodos para incrementar y decrementar el número de trabajadores asignados al edificio.
+		Necesarios en ciertas partes del código en las que se necesita realizar el cambio de
+		forma síncrona (como los algoritmos implicados en el Juicio de Almas y la reordenación
+		de trabajadores, que no pueden esperar al tick o la entrega de mensajes).
+		<p>
+		Usar solo cuando sea absolutamente imprescindible, para todo lo demás: WorkerMessage.
+		*/
+		void increaseAssignedWorkers(int numWorkers);
+		void decreaseAssignedWorkers(int numWorkers);
+
 		int getMinWorkers() const {
 			return _minWorkers;
 		}
@@ -53,6 +64,10 @@ namespace Logic {
 			return _assignedWorkers;
 		}
 
+		int getVirtualAssignedWorkers() const {
+			return _assignedWorkers + _changeAssigned;
+		}
+
 	protected:
 		virtual void CWorkBuilding::defineSkippedRequirements();
 
@@ -66,7 +81,8 @@ namespace Logic {
 		// Número de trabajadores activos
 		unsigned int _activeWorkers;
 
-		// Número de trabajadores asignados (= activos + los que están de camino)
+		// Número de trabajadores asignados (= activos + los que están de camino + los
+		// que están en espera de ser enviados al procesar su tarea)
 		unsigned int _assignedWorkers;
 
 		// Cantidad (positiva o negativa) de trabajadores activos pendiente de cambiar

@@ -9,20 +9,19 @@ Contiene la declaración del gestor de trabajo.
 
 @see Logic::CWorkManager
 
-@author Álvaro Valera
+@author Álvaro Valera, Raúl Segura
 @date Marzo, 2016
 */
 
 #ifndef WORK_MANAGER_H_
 #define WORK_MANAGER_H_
 
-#include "Logic/Maps/EntityID.h"
-#include "Logic/Entity/BuildingType.h"
+#include <utility>
+#include <vector>
 
-// Predeclaración de clases para ahorrar tiempo de compilación
-namespace Logic
-{
-}
+#include "Logic/Maps/EntityID.h"
+#include "Logic/BuildingManager.h"
+#include "Logic/Entity/Components/WorkBuilding.h"
 
 /**
 Namespace que engloba la lógica del juego. Engloba desde el mapa lógico
@@ -36,14 +35,14 @@ sus componentes, mensajes, factorias de entidades y componentes, etc.
 namespace Logic
 {
 	/**
-	Manager singleton que gestiona la asignación de tareas a los trabajadores.
+	Manager singleton que gestiona la asignación de tareas y edificios
+	a los trabajadores.
 
 	@ingroup logicGroup
 
-	@author Álvaro Valera
+	@author Álvaro Valera, Raúl Segura
 	@date Marzo, 2016
 	*/
-
 	class CWorkManager
 	{
 	public:
@@ -68,15 +67,41 @@ namespace Logic
 		static void Release();
 
 		/**
-		Obtiene la entidad del edificio donde sería más conveniente añadir trabajadores.
-		Si se indica un tipo de edificio sólo se buscará entre edificios de dicho tipo.
+		Obtiene la entidad del edificio donde debe ser enviado el siguiente
+		nuevo trabajador en función de las prioridades definidas para los
+		grupos de edificios.
 		*/
-		TEntityID findBuildingToWork(BuildingType buildingType = BuildingType::Unassigned);
+		TEntityID findBuildingToWork();
 
 		/**
-		Obtiene la entidad de horno activo con más capacidad actual para quemar almas.
+		Obtiene la entidad de horno activo con más capacidad actual para
+		quemar almas.
 		*/
 		TEntityID findFurnace();
+
+		/**
+		Devuelve la lista de grupos de edificios ordenados por prioridad.
+		*/
+		BuildingGroup* getGroupsPriority() { return _groupsPriority; }
+
+		/**
+		Define la nueva prioridad de cada grupo de edificios a partir del valor
+		asignado a cada uno por el jugador.
+
+		@return 0 si todo fue correcto. En caso contrario, un valor entre 1 y
+		NUM_BUILDING_GROUPS correspondiente al orden de prioridad no encontrado.
+		*/
+		unsigned int setGroupsPriority(std::pair<BuildingGroup, unsigned int> newGroupsPriority[NUM_BUILDING_GROUPS]);
+
+		/**
+		Método encargado de la comprobación y reordenación de los trabajadores
+		(en caso de que sea necesario) en base a la prioridad definida para
+		cada grupo de edificios.
+		<p>
+		Debe ser llamado siempre que se añada un nuevo edificio, y se pierdan
+		o ganen trabajadores.
+		*/
+		void reassignWorkers();
 
 	protected:
 
@@ -106,11 +131,50 @@ namespace Logic
 		*/
 		void close();
 
+		/**
+		Devuelve todos los edificios presentes en el mapa cuyo tipo pertenezca
+		al grupo de prioridad dado.
+
+		@param groupPriority prioridad del grupo de edificios a devolver.
+		@return edificios pertenecientes a tipos pertenecientes al grupo.
+		*/
+		std::vector<CWorkBuilding*> getBuildingsFromGroup(int groupPriority);
+
+		/**
+		Dado un edificio concreto y la prioridad del grupo al que pertenece,
+		intenta asignarle un cierto número de nuevos trabajadores procedentes
+		de otros edificios de menor prioridad.
+
+		@param building edificio para el que buscar nuevos trabajadores.
+		@param groupPriority prioridad del grupo al que pertenece el edificio.
+		@param lastPriorityGroup grupo de menor prioridad por el que empezar.
+		@param numWorkers número de trabajadores necesarios.
+		@return true si se encontró el número de trabajadores solicitado.
+		*/
+		bool relocateWorkers(CWorkBuilding* building, int groupPriority, int& lastPriorityGroup, int numWorkers);
+
+		/**
+		Traslada un determinado número de trabajadores de un edificio a otro.
+
+		@param targetBuilding edificio de destino.
+		@param sourceBuilding edificio de origen.
+		@param numWorkers número de trabajadores a mover.
+		@return true si todo fue correctamente.
+		*/
+		bool moveWorkers(CWorkBuilding* targetBuilding, CWorkBuilding* sourceBuilding, int numWorkers);
+
 	private:
+
 		/**
 		Única instancia de la clase.
 		*/
 		static CWorkManager *_instance;
+
+		/**
+		Lista que contiene todos los grupos de edificios ordenados por
+		prioridad (definida por el jugador a través del HellQuarters).
+		*/
+		BuildingGroup _groupsPriority[NUM_BUILDING_GROUPS];
 
 	}; // class WorkManager
 

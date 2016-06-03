@@ -14,10 +14,14 @@ ejecutar máquinas de estado de la clase CStateMachine.
 
 #include "Logic/Entity/Component.h"
 #include "AI/StateMachine.h"
+#include "AI/SMSoulSender.h"
 #include "Logic/Entity/Components/Toggleable.h"
 
-/** Macro para manejar mensajes en una componente ejecutor de SM (.e. hijos de StateMachineExecutor)
-Propaga el mensaje adecuadamente para que llegue a la propia SM y a la acción actual */
+/**
+Macros para manejar mensajes en una componente ejecutor de SM (.e. hijos de StateMachineExecutor)
+Propagan el mensaje adecuadamente para que llegue a la propia SM y a la acción actual
+*/
+
 #define SM_EXECUTOR_HANDLE_MESSAGE(Class) \
 bool HandleMessage(const Class& msg){ \
 	/* Chequeamos si estamos deshabilitados a nivel lógico */ \
@@ -28,6 +32,15 @@ bool HandleMessage(const Class& msg){ \
 		return false; \
 		} \
 \
+	if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg)) \
+		return true; \
+	if (_currentAction != NULL) \
+		return _currentAction->HandleMessage(msg); \
+	return false; \
+}
+
+#define SM_EXECUTOR_HANDLE_MESSAGE_NO_TOGGEABLE(Class) \
+bool HandleMessage(const Class& msg){ \
 	if (_currentStateMachine != NULL && _currentStateMachine->HandleMessage(msg)) \
 		return true; \
 	if (_currentAction != NULL) \
@@ -91,12 +104,17 @@ namespace Logic
 		*/
 		void tick(unsigned int msecs)
 		{
-			// Chequeamos si estamos deshabilitados a nivel lógico
-			CToggleable* toggleAble = _entity->getComponent<CToggleable>();
-			
-			// Si lo estamos, evitamos el tick
-			if (toggleAble != nullptr && !toggleAble->isLogicEnabled(_skippedRequirements)){
-				return;
+			// Algunos componentes (y sus correspondientes máquinas de estado)
+			// siempre deben tickearse y poder recibir mensajes
+			if (dynamic_cast<AI::CSMSoulSender*>(_currentStateMachine) == nullptr)
+			{
+				// Chequeamos si estamos deshabilitados a nivel lógico
+				CToggleable* toggleAble = _entity->getComponent<CToggleable>();
+
+				// Si lo estamos, evitamos el tick
+				if (toggleAble != nullptr && !toggleAble->isLogicEnabled(_skippedRequirements)){
+					return;
+				}
 			}
 
 			IComponent::tick(msecs);
@@ -133,12 +151,12 @@ namespace Logic
 			if (_currentAction != NULL)
 				_currentAction->deactivate();
 		}
+
+		SM_EXECUTOR_HANDLE_MESSAGE_NO_TOGGEABLE(SoulSenderMessage);
 		
 		SM_EXECUTOR_HANDLE_MESSAGE(WalkSoulPathMessage);
 
 		SM_EXECUTOR_HANDLE_MESSAGE(HellQuartersMessage);
-
-		SM_EXECUTOR_HANDLE_MESSAGE(SoulSenderMessage);
 
 		SM_EXECUTOR_HANDLE_MESSAGE(SoulMessage);
 

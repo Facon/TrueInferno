@@ -4,6 +4,7 @@
 #include "Logic/Entity/Message.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/LogicRequirement.h"
+
 #include <iostream>
 #include <cassert>
 
@@ -35,9 +36,11 @@ namespace Logic {
 		return true;
 	} // spawn
 
-	void CWorkBuilding::tick(unsigned int msecs){
+	void CWorkBuilding::tick(unsigned int msecs)
+	{
 		// Si había pendiente una orden de cambiar el número de trabajadores activos
-		if (_changeActive != 0){
+		if (_changeActive != 0)
+		{
 			// Guardamos la cantidad antigua de trabajadores activos
 			int oldActive = _activeWorkers;
 			
@@ -66,7 +69,20 @@ namespace Logic {
 		}
 
 		// Si había pendiente una orden de cambiar el número de trabajadores asignados
-		if (_changeAssigned != 0){
+		if (_changeAssigned != 0)
+		{
+			// Con incrementos todo va bien; pero si se decrementan los trabajadores
+			// asignados, es posible que haya que decrementar también los activos
+			if (_changeAssigned < 0)
+			{
+				int nonActiveWorkers = _assignedWorkers - _activeWorkers;
+				int nonActiveWorkersStaying = nonActiveWorkers + _changeAssigned;
+
+				if (nonActiveWorkersStaying < 0)
+					// También deben irse trabajadores activos
+					_changeActive += nonActiveWorkersStaying;
+			}
+
 			// Aplicamos el cambio
 			_assignedWorkers += _changeAssigned;
 
@@ -113,7 +129,7 @@ namespace Logic {
 		}
 
 		default:{
-			assert("Unmiplemented logic for message type" && false);
+			assert("Unimplemented logic for message type" && false);
 			return false;
 		}
 		}
@@ -121,8 +137,19 @@ namespace Logic {
 		return true;
 	}
 
+	void CWorkBuilding::increaseAssignedWorkers(int numWorkers)
+	{
+		_changeAssigned += numWorkers;
+	}
+
+	void CWorkBuilding::decreaseAssignedWorkers(int numWorkers)
+	{
+		_changeAssigned -= numWorkers;
+	}
+
 	// Ignoramos el requisito de los trabajadores
-	void CWorkBuilding::defineSkippedRequirements(){
+	void CWorkBuilding::defineSkippedRequirements()
+	{
 		_skippedRequirements.insert(LogicRequirement::Workers);
 	}
 

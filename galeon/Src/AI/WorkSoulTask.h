@@ -5,46 +5,51 @@
 #include "Logic\Entity\Message.h"
 #include "Logic\Maps\Managers\WorkManager.h"
 #include "Logic\Entity\IconType.h"
-#include "Logic/Entity/Components/Billboard.h"
+#include "Logic\Entity\Components\Billboard.h"
 
-namespace AI{
+namespace AI
+{
 
 	class CWorkTask : public CSoulTask {
 
 	public:
-		CWorkTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::SoulsTrialManager::SoulsCategory category) :
-			CSoulTask(map, target, category), _workerAssigned(false) {};
+		CWorkTask(Logic::CMap *map, const Logic::TEntityID& target, SoulsTrialManager::SoulsCategory category, bool workerAssigned = false) :
+			CSoulTask(map, target, category), _workerAssigned(workerAssigned) {};
 
 		virtual ~CWorkTask() {};
 
-		virtual CSoulTask* clone(){
-			return new CWorkTask(_map, _target, _category);
+		virtual CSoulTask* clone()
+		{
+			return new CWorkTask(_map, _target, _category, _workerAssigned);
 		}
 
-		bool start(){
+		bool start()
+		{
 			CSoulTask::start();
 
-			if (!_workerAssigned){
+			// Evitamos múltiples asignaciones a edificio
+			if (!_workerAssigned)
+			{
 				// Chequeamos que el objetivo siga existiendo
 				Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 
-				// Si lo está
-				if (targetEntity != nullptr){
-					// Asignamos el trabajador al objetivo
-					Logic::WorkerMessage m(MessageType::WORKER_ASSIGNED, 1);
+				// Si existe
+				if (targetEntity != nullptr)
+				{
+					// Incrementamos el número de trabajadores asignados al edificio de destino
+					CWorkBuilding *workBuilding = targetEntity->getComponent<CWorkBuilding>();
 
-					// Paramos si no nos aceptan el mensaje
-					if (!m.Dispatch(*targetEntity))
-						return false;
+					if (workBuilding != nullptr)
+						workBuilding->increaseAssignedWorkers(1);
 
 					_workerAssigned = true;
 				}
-
 				// Si no, la solución más sencilla es descartar al trabajador
 				// TODO Quedaría mejor si le asignamos otra tarea
-				else{
+				else
+				{
 					std::cout << "Soul's target for WorkSoulTask has disappeared" << std::endl;
-					return true; // TODO Se debe notificar el error de alguna forma porque en este punto ya sabemos que, sin objetivo, la tarea no va a poder completarse
+					return false; // TODO Se debe notificar el error de alguna forma porque en este punto ya sabemos que, sin objetivo, la tarea no va a poder completarse
 				}
 			}
 
@@ -53,7 +58,9 @@ namespace AI{
 			CEntity* executor = _map->getEntityByID(_executorId);
 
 			// Si existe, establecemos sus iconos
-			if (executor != nullptr){
+			// Si no, dejamos que siga sin icono
+			if (executor != nullptr)
+			{
 				// Icono de alma que va a trabajar
 				IconMessage m(MessageType::ICON_ADD, IconType::IconType::SOUL);
 				bool result = m.Dispatch(*executor);
@@ -64,37 +71,49 @@ namespace AI{
 				assert(result && "Can't set building icon");
 			}
 
-			else{
-				assert(false && "There is no executor starting the task");
-				// Dejamos que siga sin icono
-			}
-
 			return true;
 		};
 
-		bool execute() {
+		bool execute()
+		{
 			CSoulTask::execute();
 
 			// Chequeamos que el objetivo siga existiendo
 			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 
-			// Si lo está
-			if (targetEntity != nullptr){
-				// Activamos el trabajador en el objetivo
+			// Si existe
+			if (targetEntity != nullptr)
+			{
+				// Activamos el trabajador en el objetivo...
 				Logic::WorkerMessage m(MessageType::WORKER_ACTIVATED, 1);
-				return m.Dispatch(*targetEntity);
-			}
 
+				// ...si se acepta el mensaje
+				bool workerActivated = m.Dispatch(*targetEntity);
+
+				if (!workerActivated)
+				{
+					CWorkBuilding* workBuilding = targetEntity->getComponent<CWorkBuilding>();
+					workBuilding->decreaseAssignedWorkers(1);
+				}
+
+				return workerActivated;
+			}
 			// Si no, la solución más sencilla es descartar al trabajador
 			// TODO Quedaría mejor si le asignamos otra tarea
 			else{
 				std::cout << "Soul's target for WorkSoulTask has disappeared" << std::endl;
 				return true;
 			}
-		};
+		}
 
-	private:
-		bool _workerAssigned;
+		void setWorkerAssigned(bool workerAssigned)
+		{
+			_workerAssigned = workerAssigned;
+		}
+
+	protected:
+		// Indica si el trabajador ya ha sido asignado a un edificio
+		bool _workerAssigned = false;
 
 	}; // class CWorkTask
 

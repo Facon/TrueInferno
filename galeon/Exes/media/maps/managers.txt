@@ -2,8 +2,8 @@ Map = {
 	
 	SoulsTrialManager = {
 		type = "SoulsTrialManager",
-		minSoulsGenerationTimeSeconds = 5,
-		maxSoulsGenerationTimeSeconds = 15,
+		minSoulsGenerationTimeSeconds = 0,
+		maxSoulsGenerationTimeSeconds = 9,
 		minSoulsPerGroup = 15,
 		maxSoulsPerGroup = 25,
 	},

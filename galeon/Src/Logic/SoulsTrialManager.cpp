@@ -20,6 +20,7 @@ Contiene la implementaciï¿½n del gestor del Juicio de Almas.
 
 #include "BaseSubsystems/Math.h"
 #include "Logic/BuildingManager.h"
+#include "Logic/Maps/Managers/WorkManager.h"
 
 #include "Logic/Entity/Components/Soul.h"
 #include "BaseSubsystems/ScriptManager.h"
@@ -81,12 +82,16 @@ namespace Logic {
 
 	void CSoulsTrialManager::spawn(const Map::CEntity *managerInfo)
 	{
+		// Souls generation time
 		if (managerInfo->hasAttribute("minSoulsGenerationTimeSeconds"))
 			_minSoulsGenerationTime = managerInfo->getIntAttribute("minSoulsGenerationTimeSeconds") * 1000;
 
 		if (managerInfo->hasAttribute("maxSoulsGenerationTimeSeconds"))
 			_maxSoulsGenerationTime = managerInfo->getIntAttribute("maxSoulsGenerationTimeSeconds") * 1000;
 
+		_timeForNextSoulsGeneration = (_minSoulsGenerationTime + _maxSoulsGenerationTime) / 2;
+
+		// Souls per group
 		if (managerInfo->hasAttribute("minSoulsPerGroup"))
 			_minSoulsPerGroup = managerInfo->getIntAttribute("minSoulsPerGroup");
 
@@ -212,6 +217,9 @@ namespace Logic {
 			_souls[soulsCategory] -= numSoulsToWork[soulsCategory];
 			_souls[soulsCategory] -= numSoulsToBurn[soulsCategory];
 		}
+
+		// Reasignación de trabajadores si fuera necesario
+		CWorkManager::getSingletonPtr()->reassignWorkers();
 
 		return wrongCategories;
 	} // createSouls
