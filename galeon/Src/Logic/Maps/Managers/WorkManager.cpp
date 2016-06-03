@@ -369,7 +369,10 @@ namespace Logic {
 		AI::CWorkTask *workTask = new AI::CWorkTask(targetEntity->getMap(), targetEntity->getEntityID(),
 			CSoulsTrialManager::SoulsCategory::UNKNOWN);
 
-		workTask->setStarted(true);
+		// Esto evita que se incremente el número de trabajadores asignados al edificio de
+		// destino en el método start() de la tarea, ya que se hace aquí mismo de forma
+		// síncrona
+		workTask->setWorkerAssigned(true);
 
 		SoulSenderMessage m(workTask, numWorkers);
 		bool result = m.Dispatch(*sourceBuilding->getEntity());

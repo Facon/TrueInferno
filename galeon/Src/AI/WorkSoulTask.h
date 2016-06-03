@@ -5,49 +5,70 @@
 #include "Logic\Entity\Message.h"
 #include "Logic\Maps\Managers\WorkManager.h"
 #include "Logic\Entity\IconType.h"
-#include "Logic/Entity/Components/Billboard.h"
+#include "Logic\Entity\Components\Billboard.h"
 
-namespace AI{
+namespace AI
+{
 
 	class CWorkTask : public CSoulTask {
 
 	public:
-		CWorkTask(Logic::CMap *map, const Logic::TEntityID& target, Logic::CSoulsTrialManager::SoulsCategory category, bool started = false) :
-			CSoulTask(map, target, category), _started(started) {};
+		CWorkTask(Logic::CMap *map, const Logic::TEntityID& target, SoulsTrialManager::SoulsCategory category, bool workerAssigned = false) :
+			CSoulTask(map, target, category), _workerAssigned(workerAssigned) {};
 
 		virtual ~CWorkTask() {};
 
 		virtual CSoulTask* clone()
 		{
-			return new CWorkTask(_map, _target, _category, _started);
+			return new CWorkTask(_map, _target, _category, _workerAssigned);
 		}
 
 		bool start()
 		{
-			// Evitamos múltiples inicializaciones
-			if (_started)
-				return true;
+			CSoulTask::start();
 
-			_started = true;
-
-			// Chequeamos que el objetivo siga existiendo
-			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
-
-			// Si existe
-			if (targetEntity != nullptr)
+			// Evitamos múltiples asignaciones a edificio
+			if (!_workerAssigned)
 			{
-				// Asignamos el trabajador al objetivo
-				Logic::WorkerMessage m(MessageType::WORKER_ASSIGNED, 1);
+				// Chequeamos que el objetivo siga existiendo
+				Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 
-				// Damos por ejecutada la tarea si nos aceptan el mensaje
-				return m.Dispatch(*targetEntity);
+				// Si existe
+				if (targetEntity != nullptr)
+				{
+					// Incrementamos el número de trabajadores asignados al edificio de destino
+					CWorkBuilding *workBuilding = targetEntity->getComponent<CWorkBuilding>();
+
+					if (workBuilding != nullptr)
+						workBuilding->increaseAssignedWorkers(1);
+
+					_workerAssigned = true;
+				}
+				// Si no, la solución más sencilla es descartar al trabajador
+				// TODO Quedaría mejor si le asignamos otra tarea
+				else
+				{
+					std::cout << "Soul's target for WorkSoulTask has disappeared" << std::endl;
+					return false; // TODO Se debe notificar el error de alguna forma porque en este punto ya sabemos que, sin objetivo, la tarea no va a poder completarse
+				}
 			}
-			// Si no, la solución más sencilla es descartar al trabajador
-			// TODO Quedaría mejor si le asignamos otra tarea
-			else
+
+			// Ponemos los iconos
+			// Obtenemos la entidad que va a ejecutar la tarea
+			CEntity* executor = _map->getEntityByID(_executorId);
+
+			// Si existe, establecemos sus iconos
+			// Si no, dejamos que siga sin icono
+			if (executor != nullptr)
 			{
-				std::cout << "Soul's target for WorkSoulTask has disappeared" << std::endl;
-				return true; // TODO Se debe notificar el error de alguna forma porque en este punto ya sabemos que, sin objetivo, la tarea no va a poder completarse
+				// Icono de alma que va a trabajar
+				IconMessage m(MessageType::ICON_ADD, IconType::IconType::SOUL);
+				bool result = m.Dispatch(*executor);
+				assert(result && "Can't set working soul icon");
+
+				// Icono por edificio de destino
+				result = addDestinationBuildingIcon();
+				assert(result && "Can't set building icon");
 			}
 
 			return true;
@@ -55,11 +76,14 @@ namespace AI{
 
 		bool execute()
 		{
+			CSoulTask::execute();
+
 			// Chequeamos que el objetivo siga existiendo
 			Logic::CEntity* targetEntity = _map->getEntityByID(_target);
 
-			// Si lo está
-			if (targetEntity != nullptr){
+			// Si existe
+			if (targetEntity != nullptr)
+			{
 				// Activamos el trabajador en el objetivo...
 				Logic::WorkerMessage m(MessageType::WORKER_ACTIVATED, 1);
 
@@ -80,18 +104,18 @@ namespace AI{
 				std::cout << "Soul's target for WorkSoulTask has disappeared" << std::endl;
 				return true;
 			}
-		};
+		}
 
-		void setStarted(bool started)
+		void setWorkerAssigned(bool workerAssigned)
 		{
-			_started = started;
+			_workerAssigned = workerAssigned;
 		}
 
 	protected:
-		// Indica si el método start() ha sido ya ejecutado previamente
-		bool _started = false;
+		// Indica si el trabajador ya ha sido asignado a un edificio
+		bool _workerAssigned = false;
 
-	};
+	}; // class CWorkTask
 
 } // namespace AI
 
