@@ -1,11 +1,12 @@
 #ifndef LOGIC_SOUND_H_
 #define LOGIC_SOUND_H_
 
+#include <unordered_map>
+#include <FMOD/lowlevel/fmod.hpp>
+
 #include "BaseSubsystems/Math.h"
 #include "BaseSubsystems/RTTI.h"
 #include "Logic/Entity/Component.h"
-
-#include <FMOD/lowlevel/fmod.hpp>
 
 namespace Logic
 {
@@ -25,11 +26,15 @@ namespace Logic
 		bool HandleMessage(const TransformMessage& m);
 		//bool HandleMessage(const PositionMessage& m);
 		//bool HandleMessage(const PositionMessage& m);
+		bool HandleMessage(const SoundMessage& m);
 
 	protected:
+		static const std::unordered_map<std::string, FMOD_MODE> modeConversor;
+
 		void adjustTransform(const Matrix4& transform);
 
 		FMOD_3D_ATTRIBUTES _transform;
+		FMOD::Sound* _sound;
 	};
 
 	REG_FACTORY(Sound);

@@ -33,6 +33,7 @@ namespace Logic
 	class PowerMessage;
 	class ConsumptionMessage;
 	class IconMessage;
+	class SoundMessage;
 
 	class MessageHandler
 	{
@@ -122,6 +123,9 @@ namespace Logic
 		{ return false; }
 
 		virtual bool HandleMessage(const IconMessage& msg)
+		{ return false; }
+
+		virtual bool HandleMessage(const SoundMessage& msg)
 		{ return false; }
 
 	};

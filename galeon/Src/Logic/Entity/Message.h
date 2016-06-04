@@ -126,6 +126,9 @@ namespace Logic
 			ICON_ADD,
 			ICON_CHANGE,
 			ICON_DELETE,
+			SOUND,
+			SOUND_PLAY,
+			SOUND_STOP,
 		};
 
 		MessageType _type;
@@ -624,6 +627,14 @@ namespace Logic
 		IconMessage(IconType::IconType icon);
 		IconMessage(MessageType type, IconType::IconType icon);
 		IconMessage(MessageType type, IconType::IconType icon, IconType::IconType iconReplacement);
+
+		virtual bool Dispatch(MessageHandler& handler) const;
+	};
+
+	class SoundMessage : public Message
+	{
+	public:
+		SoundMessage(MessageType type);
 
 		virtual bool Dispatch(MessageHandler& handler) const;
 	};

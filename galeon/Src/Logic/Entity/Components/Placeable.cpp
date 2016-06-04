@@ -182,6 +182,10 @@ namespace Logic {
 		HFManager* hadesFavorManager = HFManager::getSingletonPtr();
 		hadesFavorManager->changeHadesFavor(_hadesFavorReward);
 
+		// Activamos sonido de construcción
+		SoundMessage soundMessage(Logic::MessageType::SOUND);
+		soundMessage.Dispatch(*_entity);
+
 		return true;
 	}
 
