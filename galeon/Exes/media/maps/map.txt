@@ -139,6 +139,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 3,
+		sound_file = "building_complete.mp3",
 	},
 	
 	Soul = {

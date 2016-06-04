@@ -506,4 +506,13 @@ namespace Logic
 		return handler.HandleMessage(*this);
 	}
 
+	SoundMessage::SoundMessage(MessageType type) : Message(type)
+	{}
+
+	bool SoundMessage::Dispatch(MessageHandler& handler) const
+	{
+		RESEND(*this);
+
+		return handler.HandleMessage(*this);
+	}
 } // namespace Logic
