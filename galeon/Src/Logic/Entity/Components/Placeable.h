@@ -158,6 +158,9 @@ namespace Logic {
 		//consume los recursos de un edificio a placear
 		bool CPlaceable::ConsumeResourcesForConstruction();
 
+		/** Nombre del material por defecto */
+		std::string _defaultMaterial;
+
 	protected:
 		/** Parsea un enum PlaceableType a partir del nombre en texto
 		TODO Mover junto al código del enum */

@@ -18,7 +18,7 @@ namespace Logic {
 	RTTI_ROOT_IMPL(CPlaceable);
 	IMP_FACTORY(CPlaceable);
 
-	CPlaceable::CPlaceable() : IComponent(), _hadesFavorReward(0) {
+	CPlaceable::CPlaceable() : IComponent(), _hadesFavorReward(0), _defaultMaterial("") {
 	}
 
 	CPlaceable::~CPlaceable() {
@@ -119,6 +119,12 @@ namespace Logic {
 		_validTerrainTypes.clear();
 		_validTerrainTypes.insert(parseTerrainType(entityInfo->getStringAttribute("validTerrainType")));
 
+		if (!entityInfo->hasAttribute("material")){
+			assert(false && "Placeable must have a material");
+			return false;
+		}
+		_defaultMaterial = entityInfo->getStringAttribute("material");
+
 		return true;
 	} // spawn
 
@@ -166,8 +172,8 @@ namespace Logic {
 			position.y = 0.6f;
 		}
 
-		PositionMessage m(position);
-		m.Dispatch(*_entity);
+		PositionMessage positionMessage(position);
+		positionMessage.Dispatch(*_entity);
 
 		// Cambiamos el estado
 		_floating = false;
@@ -185,6 +191,10 @@ namespace Logic {
 		// Activamos sonido de construcción
 		SoundMessage soundMessage(Logic::MessageType::SOUND);
 		soundMessage.Dispatch(*_entity);
+
+		MaterialMessage materialMessage(_defaultMaterial);
+		bool result = materialMessage.Dispatch(*_entity);
+		assert(result && "Can't set default material");
 
 		return true;
 	}
@@ -277,6 +287,18 @@ namespace Logic {
 
 		// Update adyacent tiles
 		updateAdyacentTiles();
+
+		// Ponemos un material u otro según si estamos en posición válida o no
+		std::string placementMaterial;
+		if (checkPlacementIsPossible(_floorOriginPosition)){
+			placementMaterial = "Building/RightPlaced";
+		}
+		else
+			placementMaterial = "Building/WrongPlaced";
+
+		MaterialMessage m(placementMaterial);
+		bool result = m.Dispatch(*_entity);
+		assert(result && "Can't set right/wrong placed material");
 	}
 	
 	bool CPlaceable::checkPlacementIsPossible(const Vector3 &checkPosition) const{
