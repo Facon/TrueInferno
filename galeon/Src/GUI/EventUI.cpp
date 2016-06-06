@@ -111,6 +111,7 @@ namespace GUI
 		setEventImage(event->getGUIImageName());
 		setEventText(event->getGUIText());
 		setEventTitle(event->getGUITitle());
+
 		setEventTextResume(event->getGUIResumeText());
 		setEventWindowVisible(true);
 	}
@@ -145,7 +146,7 @@ namespace GUI
 
 	void EventUI::showEventNotification(){
 		// TODO Ruymajo's CEGI powa aquí! :D
-		_uiEventNotification->getChild("Accept")->setText("! " + std::to_string(_events.size()));
+		_uiEventNotification->getChild("Accept")->setText("* " + std::to_string(_events.size()));
 		setEventNotificationVisible(true);
 		if (showingEventList){
 			ShowEventList();
@@ -175,17 +176,18 @@ namespace GUI
 		{
 			_uiEventWindow->createChild("OgreTray/StaticText", "id" + std::to_string(i));
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Text", std::to_string(it->second->getEventId()));
+			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Alpha", "000");
 			_uiEventWindow->getChild("id" + std::to_string(i))->createChild("OgreTray/TrueInfernoButtonText", "Event" + std::to_string(i));
-			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.05,0},{" + std::to_string(verticalpos) + ",0},{0.95,0},{" + std::to_string(verticalpos + 0.1) + ",0}}");
+			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.1,0},{" + std::to_string(verticalpos) + ",0},{0.9,0},{" + std::to_string(verticalpos + 0.06) + ",0}}");
 
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Area", "{{0,0},{0,0},{1,0},{1,0}}");
-
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setInheritsAlpha(false);
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChildElement("Event" + std::to_string(i))->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&EventUI::showFullEventReleased, this));
-
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Font", "Jura-10");
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Text", it->second->getGUITitle());
 
-			verticalpos += 0.11;
+			verticalpos += 0.07;
 			++i;
 		}
 
@@ -208,17 +210,20 @@ namespace GUI
 		{
 			_uiEventWindow->createChild("OgreTray/StaticText", "id" + std::to_string(i));
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Text", std::to_string(it->second->getEventId()));
+			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Alpha", "000");
 			_uiEventWindow->getChild("id" + std::to_string(i))->createChild("OgreTray/TrueInfernoButtonText", "Event" + std::to_string(i));
-			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.05,0},{" + std::to_string(verticalpos) + ",0},{0.95,0},{" + std::to_string(verticalpos + 0.1) + ",0}}");
+			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.1,0},{" + std::to_string(verticalpos) + ",0},{0.9,0},{" + std::to_string(verticalpos + 0.06) + ",0}}");
 
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Area", "{{0,0},{0,0},{1,0},{1,0}}");
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setInheritsAlpha(false);
 
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChildElement("Event" + std::to_string(i))->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&EventUI::showFullEventReleased, this));
 
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Font", "Jura-10");
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Text", it->second->getGUITitle());
 
-			verticalpos += 0.11;
+			verticalpos += 0.07;
 			++i;
 		}
 

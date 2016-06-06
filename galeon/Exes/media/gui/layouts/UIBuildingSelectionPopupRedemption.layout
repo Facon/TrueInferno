@@ -3,10 +3,10 @@
 <GUILayout version="4" >
 	<Window type="OgreTray/StaticImage" name="BuildingSelectionPopup" >
 	<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
-		<Property name="Area" value="{{0.25,0},{0.37,0},{0.55,0},{0.72,0}}" />
+		<Property name="Area" value="{{0.3575,0},{0.325,0},{0.5525,0},{0.725,0}}" />
 	
 		<Window type="OgreTray/StaticText" name="BuildingName" >
-			<Property name="Area" value="{{0.1,0},{0.05,0},{0.9,0},{0.15,0}}" />
+			<Property name="Area" value="{{0.1,0},{0.02,0},{0.9,0},{0.12,0}}" />
 			<Property name="Font" value="Jura-18" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
@@ -24,11 +24,11 @@
 		
 		<Window type="OgreTray/StaticImage" name="RedemptSoul" >
 			<Property name="Image" value="TrueInfernoIcons/BurnSoul" />
-			<Property name="Area" value="{{0.716,0},{0.45,0},{0.854,0},{0.59,0}}" />
+			<Property name="Area" value="{{0.736,0},{0.48,0},{0.874,0},{0.59,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="RedemptText" >
-			<Property name="Area" value="{{0.146,0},{0.60,0},{0.541,0},{0.70,0}}" />
+			<Property name="Area" value="{{0.126,0},{0.60,0},{0.600,0},{0.70,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
@@ -37,7 +37,7 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="SoulTotal" >
-			<Property name="Area" value="{{0.593,0},{0.60,0},{0.710,0},{0.70,0}}" />
+			<Property name="Area" value="{{0.613,0},{0.60,0},{0.730,0},{0.70,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="RightAligned" />
@@ -46,7 +46,7 @@
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="SoulsRedeemed" >
-			<Property name="Area" value="{{0.716,0},{0.60,0},{0.854,0},{0.70,0}}" />
+			<Property name="Area" value="{{0.736,0},{0.60,0},{0.874,0},{0.70,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
@@ -57,7 +57,7 @@
 		</Window>	
 		
 		<Window type="OgreTray/TrueInfernoButtonText" name="Accept" >
-			<Property name="Area" value="{{0.320,0},{0.81,0},{0.680,0},{0.95,0}}" />
+			<Property name="Area" value="{{0.290,0},{0.81,0},{0.710,0},{0.95,0}}" />
 			<Property name="Text" value="Redeem" />				
 		</Window>
 		
