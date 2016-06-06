@@ -41,6 +41,10 @@ namespace Logic {
 
 		virtual bool HandleMessage(const ToggleMessage& msg);
 
+		bool handleToggleRequest(const ToggleMessage& msg);
+
+		bool handleCheckStatus(const ToggleMessage& msg);
+
 		/** 
 		Devuelve verdadero o falso según si estamos habilitados o no para tickear/recibir mensajes.
 		El método recibe la lista de requisitos que se deben ignorar.

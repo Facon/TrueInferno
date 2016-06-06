@@ -122,6 +122,7 @@ namespace Logic
 			CONSUMPTION_CHANGE,
 			TOGGLE_REQUEST,
 			TOGGLE_INFO,
+			TOGGLE_CHECK,
 			ICON,
 			ICON_ADD,
 			ICON_CHANGE,
@@ -541,8 +542,11 @@ namespace Logic
 		// TOGGLE_REQUEST: Solicita añadir o eliminar un requisito para permitir el habilitado de la entidad
 		ToggleMessage(LogicRequirement requirement, bool add);
 
-		// TOGGLE_INFO: Informa de un cambio en el habilitado o deshabilitado de la entidads
+		// TOGGLE_INFO: Informa de un cambio en el habilitado o deshabilitado de la entidad
 		ToggleMessage(bool enabled);
+
+		// TOGGLE_CHECK: Chequea el estado de habilitado
+		ToggleMessage();
 
 		// Criterio por el que se quiere habilitar/deshabilitar
 		//std::string _criterion;

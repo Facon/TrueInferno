@@ -96,24 +96,32 @@ namespace Logic {
 
 
 	bool CToggleable::HandleMessage(const ToggleMessage& msg){
-		// Sólo se aceptan solicitudes de cambio
-		if (msg._type != MessageType::TOGGLE_REQUEST)
-			return false;
+		// Solicitudes de cambio
+		if (msg._type == MessageType::TOGGLE_REQUEST)
+			return handleToggleRequest(msg);
 
+		// Solicitudes de comprobación de estado
+		else if (msg._type == MessageType::TOGGLE_CHECK)
+			return handleCheckStatus(msg);
+
+		return false;
+	}
+
+	bool CToggleable::handleToggleRequest(const ToggleMessage& msg){
 		/*
 		// Si no había actualización en curso
 		if (!_update){
-			// El nuevo valor de habilitado viene dado por el mensaje
-			_newEnabled = msg._enable;
-			
-			// Marcamos que estamos actualizando
-			_update = true;
+		// El nuevo valor de habilitado viene dado por el mensaje
+		_newEnabled = msg._enable;
+
+		// Marcamos que estamos actualizando
+		_update = true;
 		}
 
 		// Si sí había actualización en curso
 		else{
-			// Habilitaremos si y sólo todos los cambios son para habilitar
-			_newEnabled &= msg._enable;
+		// Habilitaremos si y sólo todos los cambios son para habilitar
+		_newEnabled &= msg._enable;
 		}
 		*/
 
@@ -129,6 +137,15 @@ namespace Logic {
 
 		return true;
 	}
+
+	bool CToggleable::handleCheckStatus(const ToggleMessage& msg){
+		bool enabled = _requirements.empty();
+		ToggleMessage m(enabled);
+		m.Dispatch(*_entity);
+
+		return true;
+	}
+
 
 	bool CToggleable::addRequirement(LogicRequirement requirement){
 		// Chequeamos si es el primero en añadirse

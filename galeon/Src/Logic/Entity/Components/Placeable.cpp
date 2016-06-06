@@ -192,10 +192,15 @@ namespace Logic {
 		SoundMessage soundMessage(Logic::MessageType::SOUND);
 		soundMessage.Dispatch(*_entity);
 
+		// Ponemos el material básico
 		MaterialMessage materialMessage(_defaultMaterial);
 		bool result = materialMessage.Dispatch(*_entity);
 		assert(result && "Can't set default material");
 
+		// Forzamos rechequeo del estado de habilitado de la entidad para pintar de oscuro el material
+		ToggleMessage toggleMessage = ToggleMessage();
+		toggleMessage.Dispatch(*_entity);
+		
 		return true;
 	}
 
@@ -232,6 +237,8 @@ namespace Logic {
 		// Store new origin position
 		_floorOriginPosition = newOriginPosition;
 
+		// TODO Desmarcamos las tiles antiguas
+
 		// Clear tile vectors
 		_tiles.clear();
 		_adyacentTiles.clear();
@@ -254,6 +261,8 @@ namespace Logic {
 				}
 			}
 		}
+
+		// TODO Marcamos las tiles nuevas
 
 		// Calculate the average if there were valid tiles
 		if (!_tiles.empty())
@@ -288,13 +297,18 @@ namespace Logic {
 		// Update adyacent tiles
 		updateAdyacentTiles();
 
+		if (_buildingType == BuildingType::Evilator){
+			bool test = true;
+		}
+
 		// Ponemos un material u otro según si estamos en posición válida o no
 		std::string placementMaterial;
 		if (checkPlacementIsPossible(_floorOriginPosition)){
 			placementMaterial = "Building/RightPlaced";
 		}
-		else
+		else{
 			placementMaterial = "Building/WrongPlaced";
+		}
 
 		MaterialMessage m(placementMaterial);
 		bool result = m.Dispatch(*_entity);

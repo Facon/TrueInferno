@@ -417,6 +417,10 @@ namespace Logic
 		Message(MessageType::TOGGLE_INFO), _enabled(enabled)
 	{}
 
+	ToggleMessage::ToggleMessage() :
+		Message(MessageType::TOGGLE_CHECK)
+	{}
+
 	bool ToggleMessage::Dispatch(MessageHandler& handler) const
 	{
 		RESEND(*this);
