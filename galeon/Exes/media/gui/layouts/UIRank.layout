@@ -4,7 +4,7 @@
     
 
 	<Window type="OgreTray/StaticImage" name="RankFrame" >
-		<Property name="Area" value="{{0.88,0},{0.05,0},{1.0,0},{0.3,0}}" />
+		<Property name="Area" value="{{0.91,0},{0.05,0},{1.0,0},{0.3,0}}" />
 		<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
 		<Property name="HorzFormatting" value="LeftAligned" />
 		<Property name="VertFormatting" value="TopAligned" />
