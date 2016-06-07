@@ -54,8 +54,8 @@ namespace Logic
 	/**
 	Grupos de edificios por tipo.
 	Útil para asignación de trabajadores por prioridad.
-	CUIDAO!: En caso de modificación, cambiar también NUM_BUILDING_GROUPS
-	         y el WorkManager.
+	CUIDAO!: En caso de modificación, cambiar también NUM_BUILDING_GROUPS,
+	         WorkManager y el layout de la GUI.
 	*/
 	enum BuildingGroup {
 		PowerSupply,    // PowerGenerator

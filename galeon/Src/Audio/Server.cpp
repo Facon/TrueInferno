@@ -16,7 +16,7 @@ namespace Audio
 	FMOD::Channel* CServer::_channel = nullptr;
 	FMOD::Channel* CServer::_channel2 = nullptr;
 
-	CServer::CServer() : _mute(true)
+	CServer::CServer() : _mute(false)
 	{}
 
 	CServer::~CServer()

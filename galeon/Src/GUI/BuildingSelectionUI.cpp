@@ -21,6 +21,7 @@
 #include "Logic/Server.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Logic/Maps/Managers/WorkManager.h"
 
 namespace GUI
 {
@@ -156,11 +157,12 @@ namespace GUI
 
 	}
 
-	void BuildingSelectionUI::loadAssetsPopup(std::string name, std::string image){
+	void BuildingSelectionUI::loadAssetsPopup(std::string name, std::string image)
+	{
 		_uipopupWindow->getChild("BuildingName")->setText(name);
 		
-		
-		if (name == "Souls Trial"){
+		if (name == "Souls Trial")
+		{
 			//CEGUI::Editbox* editbox = (CEGUI::Editbox*)_uipopupWindow->getChild("HeavySoulsBurn");
 			unsigned int* getAvailableSouls = Logic::CSoulsTrialManager::getSingletonPtr()->getAvailableSouls();
 			_uipopupWindow->getChild("HeavySoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::HEAVY]));
@@ -169,18 +171,48 @@ namespace GUI
 			_uipopupWindow->getChild("UnknownSoulTotal")->setText(std::to_string(getAvailableSouls[Logic::SoulsTrialManager::UNKNOWN]));
 			return;
 		}
-		if (name == "White Market"){
+
+		if (name == "White Market")
+		{
+			return;
+		}
+
+		if (name == "Building Groups Priorities")
+		{
+			Logic::BuildingGroup* groupsPriority = Logic::CWorkManager::getSingletonPtr()->getGroupsPriority();
+
+			Logic::BuildingGroup* powerSupplyGroup =
+				std::find(groupsPriority, groupsPriority + NUM_BUILDING_GROUPS, Logic::BuildingGroup::PowerSupply);
+			_uipopupWindow->getChild("PowerSupplyPriority")->setText(std::to_string(powerSupplyGroup - groupsPriority + 1));
+
+			Logic::BuildingGroup* mapResourcesGroup =
+				std::find(groupsPriority, groupsPriority + NUM_BUILDING_GROUPS, Logic::BuildingGroup::MapResources);
+			_uipopupWindow->getChild("MapResourcesPriority")->setText(std::to_string(mapResourcesGroup - groupsPriority + 1));
+
+			Logic::BuildingGroup* productionGroup =
+				std::find(groupsPriority, groupsPriority + NUM_BUILDING_GROUPS, Logic::BuildingGroup::Production);
+			_uipopupWindow->getChild("ProductionPriority")->setText(std::to_string(productionGroup - groupsPriority + 1));
 			
-			return;
-		}
-		if (name == "Building Groups Priorities"){
+			Logic::BuildingGroup* evilProcessingGroup =
+				std::find(groupsPriority, groupsPriority + NUM_BUILDING_GROUPS, Logic::BuildingGroup::EvilProcessing);
+			_uipopupWindow->getChild("EvilProcessingPriority")->setText(std::to_string(evilProcessingGroup - groupsPriority + 1));
+
+			Logic::BuildingGroup* logisticsGroup =
+				std::find(groupsPriority, groupsPriority + NUM_BUILDING_GROUPS, Logic::BuildingGroup::Logistics);
+			_uipopupWindow->getChild("LogisticsPriority")->setText(std::to_string(logisticsGroup - groupsPriority + 1));
+
+			Logic::BuildingGroup* idiGroup =
+				std::find(groupsPriority, groupsPriority + NUM_BUILDING_GROUPS, Logic::BuildingGroup::IDi);
+			_uipopupWindow->getChild("IDiPriority")->setText(std::to_string(idiGroup - groupsPriority + 1));
 
 			return;
 		}
-		if (name == "Soul Redemption"){
 
+		if (name == "Soul Redemption")
+		{
 			return;
 		}
+
 		_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoBuildings/" + image);
 	}
 
@@ -410,11 +442,45 @@ namespace GUI
 
 	bool BuildingSelectionUI::setBuildingGroupsReleased(const CEGUI::EventArgs& e)
 	{
-		printf("building group properties set\n");
+		std::pair<Logic::BuildingGroup, unsigned int> newGroupsPriority[NUM_BUILDING_GROUPS];
+
+		unsigned int powerSupplyPriority = std::atoi(_uipopupWindow->getChild("PowerSupplyPriority")->getText().c_str());
+		newGroupsPriority[Logic::BuildingGroup::PowerSupply] =
+			std::pair<Logic::BuildingGroup, unsigned int>(Logic::BuildingGroup::PowerSupply, powerSupplyPriority);
+
+		unsigned int mapResourcesPriority = std::atoi(_uipopupWindow->getChild("MapResourcesPriority")->getText().c_str());
+		newGroupsPriority[Logic::BuildingGroup::MapResources] =
+			std::pair<Logic::BuildingGroup, unsigned int>(Logic::BuildingGroup::MapResources, mapResourcesPriority);
+
+		unsigned int productionPriority = std::atoi(_uipopupWindow->getChild("ProductionPriority")->getText().c_str());
+		newGroupsPriority[Logic::BuildingGroup::Production] =
+			std::pair<Logic::BuildingGroup, unsigned int>(Logic::BuildingGroup::Production, productionPriority);
+
+		unsigned int evilProcessingPriority = std::atoi(_uipopupWindow->getChild("EvilProcessingPriority")->getText().c_str());
+		newGroupsPriority[Logic::BuildingGroup::EvilProcessing] =
+			std::pair<Logic::BuildingGroup, unsigned int>(Logic::BuildingGroup::EvilProcessing, evilProcessingPriority);
+
+		unsigned int logisticsPriority = std::atoi(_uipopupWindow->getChild("LogisticsPriority")->getText().c_str());
+		newGroupsPriority[Logic::BuildingGroup::Logistics] =
+			std::pair<Logic::BuildingGroup, unsigned int>(Logic::BuildingGroup::Logistics, logisticsPriority);
+
+		unsigned int idiPriority = std::atoi(_uipopupWindow->getChild("IDiPriority")->getText().c_str());
+		newGroupsPriority[Logic::BuildingGroup::IDi] =
+			std::pair<Logic::BuildingGroup, unsigned int>(Logic::BuildingGroup::IDi, idiPriority);
+
+		unsigned int priorityNotFound = Logic::CWorkManager::getSingletonPtr()->setGroupsPriority(newGroupsPriority);
+
+		if (priorityNotFound == 0)
+			closeWindow();
+		else
+			_uipopupWindow->getChild("BuildingName")->setProperty("TextColours",
+				"tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
+
 		return true;
 	}
 
-	bool checkPlaceableUpgradeCost(Logic::CEntity* placeableEntity){
+	bool checkPlaceableUpgradeCost(Logic::CEntity* placeableEntity)
+	{
 		if (!placeableEntity){
 			std::cout << "Can't check consume costs on empty placeable" << std::endl;
 			return false;
@@ -428,15 +494,19 @@ namespace GUI
 	void BuildingSelectionUI::setEventWindowVisible(bool visible, Logic::CEntity* entity)
 	{	
 		_buildingEntity = entity;
+
 		changeLayout();
 		_uibuttonsWindow->setVisible(visible);
 		_uipopupWindow->setVisible(visible);
 	}
 
-	void BuildingSelectionUI::closeWindow(){
+	void BuildingSelectionUI::closeWindow()
+	{
 		_buildingEntity = nullptr;
+
 		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
 		uiManager->getSideBarUI()->setEventWindowVisible(true);
+
 		_uibuttonsWindow->setVisible(false);
 		_uipopupWindow->setVisible(false);
 	}
