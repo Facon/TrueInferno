@@ -180,6 +180,18 @@ namespace Graphics
 		*/
 		void setScene(const std::string& name);
 
+		/**
+		Devuelve el número de frames por segundo en base al último frame
+		renderizado.
+		*/
+		float getLastFPS() const;
+
+		/**
+		Devuelve el número medio de frames por segundo desde la primera
+		llamada.
+		*/
+		float getAverageFPS() const;
+
 	protected:
 
 		/**

@@ -189,7 +189,7 @@ namespace Graphics
 
 		_activeScene->activate();
 
-	} // createScene
+	} // setScene
 
 	//--------------------------------------------------------
 
@@ -206,7 +206,23 @@ namespace Graphics
 
 		_activeScene->activate();
 
-	} // createScene
+	} // setScene
+
+	//--------------------------------------------------------
+
+	float CServer::getLastFPS() const
+	{
+		return _renderWindow->getLastFPS();
+
+	} // getLastFPS
+
+	//--------------------------------------------------------
+
+	float CServer::getAverageFPS() const
+	{
+		return _renderWindow->getAverageFPS();
+
+	} // getAverageFPS
 
 	//--------------------------------------------------------
 
