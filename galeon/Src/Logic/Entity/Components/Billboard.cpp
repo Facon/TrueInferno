@@ -210,7 +210,48 @@ namespace Logic
 		return true;
 	}
 
-	void Billboard::adjustBillboards()
+	void Billboard::adjustBillboardsPosition(const std::vector<std::pair<float,float>>& grid) const
+	{
+		for (unsigned int i = 0; i < grid.size(); ++i)
+		{
+			_bbSet->getBillboard(i)->setPosition(grid[i].first, grid[i].second, 0.0f);
+		}
+	}
+	
+	void Billboard::fillGrid(const unsigned int numBillboards, std::vector<std::pair<float, float>>& grid) const
+	{
+		// Odd numbers should have one more element in upper row
+		const unsigned int BILLBOARDS_PER_ROW = ceil(numBillboards / 2.0f);
+		const float HALF_SPACE_BETWEEN = 0.5f;
+
+		const float HEIGHT = 1.f;
+
+		// Size of grid
+		const unsigned int Y = (numBillboards == 2) ? 1 : 2; // Use 1 row for 2 billboard, 2 rows for 3 or more
+
+		for (unsigned int y = 0; y < Y; ++y)
+		{
+			for (unsigned int x = 0; x < BILLBOARDS_PER_ROW; ++x)
+			{
+				grid.push_back(std::make_pair((x * HALF_SPACE_BETWEEN) - (HALF_SPACE_BETWEEN) + HALF_SPACE_BETWEEN / 2, y * HEIGHT));
+			}
+		}
+
+		// Remove element for odd size
+		if (numBillboards % 3 == 0)
+			grid.erase(--grid.end());
+	}
+
+	std::vector<std::pair<float, float>> Billboard::createGrid(const unsigned int numBillboards) const
+	{
+		std::vector<std::pair<float, float>> grid;
+
+		fillGrid(numBillboards, grid);
+
+		return grid;
+	}
+
+	void Billboard::adjustBillboards() const
 	{
 		unsigned int numBillboards = _bbSet->getNumBillboards();
 
@@ -222,30 +263,11 @@ namespace Logic
 		{
 			_bbSet->getBillboard(0)->setPosition(Vector3(0.0f, 0.0f, 0.0f));
 		}
-		else if (numBillboards == 2)
-		{
-			const double HALF_SPACE_BETWEEN = 0.25;
-			_bbSet->getBillboard(0)->setPosition(-HALF_SPACE_BETWEEN, 0, 0);
-			_bbSet->getBillboard(1)->setPosition(HALF_SPACE_BETWEEN, 0, 0);
-		}
 		else
 		{
-			unsigned int index = 0;
-			// Odd numbers should have one more element in upper row
-			const unsigned int BILLBOARDS_PER_ROW = (numBillboards / 2) + ((numBillboards % 2) ? 0 : 1);
-			const unsigned int ARBITRARY_SPACE = 0.5;
-			const double HALF_SPACE_BETWEEN = ARBITRARY_SPACE / BILLBOARDS_PER_ROW;
+			std::vector<std::pair<float, float>> positions = createGrid(numBillboards);
 
-			for (; index < BILLBOARDS_PER_ROW; ++index)
-			{
-				//_bbSet->getBillboard(index)->setPosition(BILLBOARDS_PER_ROW * index - HALF_SPACE_BETWEEN, 50.0f, 0.0f);
-				_bbSet->getBillboard(index)->setPosition((index * HALF_SPACE_BETWEEN) - BILLBOARDS_PER_ROW * (HALF_SPACE_BETWEEN / 2), 50.0f, 0.0f);
-			}
-
-			for (; index < numBillboards; ++index)
-			{
-				_bbSet->getBillboard(index)->setPosition(((index - BILLBOARDS_PER_ROW) * HALF_SPACE_BETWEEN) - (BILLBOARDS_PER_ROW - index) * (HALF_SPACE_BETWEEN / 2), 0.0f, 0.0f);
-			}
+			adjustBillboardsPosition(positions);
 		}
 	}
 
