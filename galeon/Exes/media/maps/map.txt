@@ -2,8 +2,8 @@ Map = {
 	
 	Camera = {
 		type = "Camera",
-		distance = 60,
-		height = 30,
+		distance = 90,
+		height = 35,
 		speed = 0.05,
 	},
 	
@@ -190,6 +190,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
+		sound_file = "building_complete.mp3",
 	},
 	
 	GasPlant = {
@@ -228,6 +229,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
+		sound_file = "building_complete.mp3",
 	},
 	
 	EvilWorks = {
@@ -267,6 +269,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 3,
+		sound_file = "building_complete.mp3",
 	},
 	
 	Refinery = {
@@ -309,6 +312,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 3,
+		sound_file = "building_complete.mp3",
 	},
 		
 	ResearchLabs = {
@@ -343,6 +347,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 4,
+		sound_file = "building_complete.mp3",
 	},
 		
 	PowerGenerator = {
@@ -377,6 +382,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
+		sound_file = "building_complete.mp3",
 	},
 
 	Warehouse = {
@@ -413,6 +419,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 5,
+		sound_file = "building_complete.mp3",
 	},
 	
 	Tree = {
