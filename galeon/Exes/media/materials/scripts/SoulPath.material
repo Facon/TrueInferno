@@ -1,12 +1,17 @@
-
 material SoulPath
 {
 	technique
 	{
 		pass
 		{
-			ambient 0.572 0.415 0.109 1
-			diffuse 1 1 1 1
+			// Textura visible por los 2 lados
+			cull_hardware none
+			cull_software none
+			
+			texture_unit
+			{
+				texture terrain/tile_carretera.jpg
+			}
 		}
 	}
 }
