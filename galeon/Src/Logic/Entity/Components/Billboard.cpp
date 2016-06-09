@@ -131,19 +131,29 @@ namespace Logic
 			
 			// Por defecto los edificios no tienen icono
 			IconType::IconType defaultIcon = IconType::IconType::NONE;
+			
 			if (entityInfo->hasAttribute("defaultBillboard")){
 				std::string defaultIconStr = entityInfo->getStringAttribute("defaultBillboard");
 
 				if (!defaultIconStr.empty())
 					defaultIcon = iconTableConversor.at(defaultIconStr);
 			}
+
+			Vector3 position(0.0f, 100.0f, 0.0f);
+
+			if (entityInfo->hasAttribute("billboardSetPosition"))
+			{
+				position = entityInfo->getVector3Attribute("billboardSetPosition");
+			}
 						
-			_bbSet = new Graphics::BillboardSet(_entity->getComponent<Logic::CGraphics>()->getGraphicsEntity(), "bbSet", materialName);
+			_bbSet = new Graphics::BillboardSet(_entity->getComponent<Logic::CGraphics>()->getGraphicsEntity(), "bbSet", materialName, position);
 			
 			if (defaultIcon != IconType::NONE){
 				_bbSet->createBillboard(Vector3(0.0f, 0.0f, 0.0f));
+
 				IconMessage m(defaultIcon);
-				bool result = m.Dispatch(*this);
+				const bool result = m.Dispatch(*this);
+
 				assert(result && "Can't set initial icon");
 			}
 
@@ -222,7 +232,7 @@ namespace Logic
 	{
 		// Odd numbers should have one more element in upper row
 		const unsigned int BILLBOARDS_PER_ROW = (numBillboards == 2) ? 2 : ceil(numBillboards / 2.0f);
-		const float HALF_SPACE_BETWEEN = 0.5f;
+		const float SPACE_BETWEEN = 0.5f;
 
 		const float HEIGHT = 1.f;
 
@@ -233,7 +243,7 @@ namespace Logic
 		{
 			for (unsigned int x = 0; x < BILLBOARDS_PER_ROW; ++x)
 			{
-				grid.push_back(std::make_pair((x * HALF_SPACE_BETWEEN) - HALF_SPACE_BETWEEN + HALF_SPACE_BETWEEN / 2, y * HEIGHT));
+				grid.push_back(std::make_pair((x * SPACE_BETWEEN) - SPACE_BETWEEN + SPACE_BETWEEN / 2, y * HEIGHT));
 			}
 		}
 

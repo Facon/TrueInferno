@@ -27,6 +27,7 @@ namespace GUI{
 // Predeclaraci�n de clases para ahorrar tiempo de compilaci�n
 namespace Ogre 
 {
+	class Vector3;
 	class Root;
 	class Viewport;
 	class SceneManager;
@@ -141,7 +142,8 @@ namespace Graphics
 		*/
 		void removeStaticEntity(CStaticEntity* entity);
 
-		Ogre::BillboardSet* createBillboardSet(CEntity* entity, const std::string& name);
+		Ogre::BillboardSet* createBillboardSet(CEntity* entity, const std::string& name, const Ogre::Vector3& position) const;
+		Ogre::BillboardSet* createBillboardSet(CEntity* entity, const std::string& name) const;
 
 	protected:
 

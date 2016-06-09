@@ -25,18 +25,15 @@ namespace Graphics
 	// without using more memory
 	class BillboardSet
 	{
-	protected:
-		static std::map<std::string, Ogre::BillboardSet*> bbSets;
-
 	public:
-		BillboardSet(Graphics::CEntity* entity, const std::string& name, const std::string& materialName);
+		BillboardSet(Graphics::CEntity* entity, const std::string& name, const std::string& materialName, const Vector3& position);
 		virtual ~BillboardSet();
 
-		Ogre::Billboard* createBillboard(Vector3& vector);
-		Ogre::Billboard* getBillboard(unsigned int index);
-		void removeBillboard(unsigned int index);
-		Ogre::BillboardSet* getBillboardSet();
-		unsigned int getNumBillboards();
+		Ogre::Billboard* createBillboard(Vector3& vector) const;
+		Ogre::Billboard* getBillboard(unsigned int index) const;
+		void removeBillboard(unsigned int index) const;
+		Ogre::BillboardSet* getBillboardSet() const;
+		unsigned int getNumBillboards() const;
 
 	protected:
 		Ogre::BillboardSet* _bbSet;
