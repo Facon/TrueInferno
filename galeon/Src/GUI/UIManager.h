@@ -41,6 +41,7 @@ namespace GUI
 		EventUI *getEventUI(){ return &_eventUI; };
 		SideBarUI *getSideBarUI(){ return &_sideBarUI; };
 		BuildingSelectionUI *getBuildingSelectionUI(){ return &_buildingSelectionUI; };
+		void disablePopupWindows();
 	};
 }
 
