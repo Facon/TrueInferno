@@ -203,6 +203,7 @@ namespace GUI
 
 	bool EventUI::ShowEventListReleased(const CEGUI::EventArgs& e)
 	{
+		GUI::CServer::getSingletonPtr()->getUIManager()->getSideBarUI()->playerInteractionWithRightClick();
 		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
 		showingEventList = true;
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
@@ -270,6 +271,7 @@ namespace GUI
 
 	void EventUI::DisablePopupVisibility(){
 		_uiEventWindow->setVisible(false);
+		showingEventList = false;
 	}
 	
 }
