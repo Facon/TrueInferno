@@ -35,6 +35,7 @@ namespace GUI
 	}
 
 	void BuildingSelectionUI::changeLayout(){
+		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uibuttonsWindow);
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getSidebarLayoutTemplate());
@@ -46,6 +47,7 @@ namespace GUI
 	}
 
 	void BuildingSelectionUI::changePopupLayout(std::string layout, std::string name, std::string image){
+		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
 		_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(layout);
 		bindPopupButtons(layout);
@@ -510,4 +512,13 @@ namespace GUI
 		_uibuttonsWindow->setVisible(false);
 		_uipopupWindow->setVisible(false);
 	}
+
+	void BuildingSelectionUI::DisablePopupVisibility(){
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->getSideBarUI()->setEventWindowVisible(true);
+
+		_uibuttonsWindow->setVisible(false);
+		_uipopupWindow->setVisible(false);
+	}
+
 }

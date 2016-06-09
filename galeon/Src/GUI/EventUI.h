@@ -37,6 +37,7 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
+		void DisablePopupVisibility();
 
 		/** 
 		Registra un evento en el EventUI.
@@ -55,10 +56,11 @@ namespace GUI
 		void setEventNotificationVisible(bool visible);
 
 		/**	Muestra el popup completo con la información del evento */
-		void EventUI::showFullEvent(Logic::CEvent* event);
-		bool EventUI::closeWindowReleased(const CEGUI::EventArgs& e);
+		void showFullEvent(Logic::CEvent* event);
+		bool closeWindowReleased(const CEGUI::EventArgs& e);
 		/**	Muestra la notificación de un evento */
-		void EventUI::showEventNotification();
+		void showEventNotification();
+		
 	};
 }
 

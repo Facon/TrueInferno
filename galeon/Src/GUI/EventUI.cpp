@@ -8,6 +8,9 @@
 #include <CEGUI/CEGUI.h>
 #include <Audio/Server.h>
 
+#include "UIManager.h"
+#include "GUI/Server.h"
+
 namespace GUI
 {
 	EventUI::EventUI()
@@ -108,6 +111,7 @@ namespace GUI
 	}
 	
 	void EventUI::showFullEvent(Logic::CEvent* event){
+		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
 		setEventImage(event->getGUIImageName());
 		setEventText(event->getGUIText());
 		setEventTitle(event->getGUITitle());
@@ -117,6 +121,7 @@ namespace GUI
 	}
 
 	bool EventUI::showFullEventReleased(const CEGUI::EventArgs& e){
+		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
 		const CEGUI::MouseEventArgs a = static_cast<const CEGUI::MouseEventArgs&>(e);
 		showingEventList = false;
 		int i = atoi(a.window->getParent()->getText().c_str());
@@ -163,6 +168,7 @@ namespace GUI
 
 	bool EventUI::ShowEventList()
 	{
+		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
 		showingEventList = true;
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
 		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventList.layout");
@@ -197,6 +203,7 @@ namespace GUI
 
 	bool EventUI::ShowEventListReleased(const CEGUI::EventArgs& e)
 	{
+		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
 		showingEventList = true;
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
 		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventList.layout");
@@ -259,6 +266,10 @@ namespace GUI
 	void EventUI::setEventNotificationVisible(bool visible)
 	{
 		_uiEventNotification->setVisible(visible);
+	}
+
+	void EventUI::DisablePopupVisibility(){
+		_uiEventWindow->setVisible(false);
 	}
 	
 }
