@@ -221,7 +221,7 @@ namespace Logic
 	void Billboard::fillGrid(const unsigned int numBillboards, std::vector<std::pair<float, float>>& grid) const
 	{
 		// Odd numbers should have one more element in upper row
-		const unsigned int BILLBOARDS_PER_ROW = ceil(numBillboards / 2.0f);
+		const unsigned int BILLBOARDS_PER_ROW = (numBillboards == 2) ? 2 : ceil(numBillboards / 2.0f);
 		const float HALF_SPACE_BETWEEN = 0.5f;
 
 		const float HEIGHT = 1.f;
@@ -233,12 +233,12 @@ namespace Logic
 		{
 			for (unsigned int x = 0; x < BILLBOARDS_PER_ROW; ++x)
 			{
-				grid.push_back(std::make_pair((x * HALF_SPACE_BETWEEN) - (HALF_SPACE_BETWEEN) + HALF_SPACE_BETWEEN / 2, y * HEIGHT));
+				grid.push_back(std::make_pair((x * HALF_SPACE_BETWEEN) - HALF_SPACE_BETWEEN + HALF_SPACE_BETWEEN / 2, y * HEIGHT));
 			}
 		}
 
 		// Remove element for odd size
-		if (numBillboards % 3 == 0)
+		if (numBillboards % 2 != 0)
 			grid.erase(--grid.end());
 	}
 
