@@ -27,8 +27,6 @@ Section
 	# Logs needed :( /x *.log
 	File /a /r /x *.pdb /x *.ilk Exes\*.*
 	
-	File Src\Logic\Events\*.lua
-	
 	# Make the directory "$INSTDIR\database" read write accessible by all users
 	AccessControl::GrantOnFile \
 	"$INSTDIR" "(BU)" "GenericRead + GenericWrite"
@@ -39,7 +37,7 @@ Section
 	WriteUninstaller $INSTDIR\uninstaller.exe
 	
 	createDirectory "$SMPROGRAMS\${APPNAME}"
-	createShortCut "$SMPROGRAMS\True Inferno\TrueInferno.lnk" "$INSTDIR\Galeon_d.exe"
+	createShortCut "$SMPROGRAMS\True Inferno\True Inferno.lnk" "$INSTDIR\Galeon_d.exe"
 	createShortCut "$SMPROGRAMS\True Inferno\uninstaller.lnk" "$INSTDIR\uninstaller.exe"
 	
 	# create a shortcut named "new shortcut" in the start menu programs directory
@@ -55,9 +53,7 @@ Section "Uninstall"
 	Delete $INSTDIR\uninstaller.exe
 	
 	RMDir /r $INSTDIR
-	 
-	# now delete installed file
-	Delete  "$SMPROGRAMS\True Inferno\TrueInferno.lnk"
-	Delete  "$SMPROGRAMS\True Inferno\uninstaller.lnk"
+	
+	RMDir /r "$SMPROGRAMS\${APPNAME}"
  
 SectionEnd
