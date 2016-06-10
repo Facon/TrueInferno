@@ -136,7 +136,7 @@ namespace Logic
 		Devuelve la cola de eventos lanzados por tiempo del juego.
 		@return vector de eventos por tiempo.
 		*/
-		const TEventVector getTimeEventsQueue() { return _timeEvents; }
+		const TEventVector getTimeEventsQueue() const { return _timeEvents; }
 
 		/**
 		Elimina todos los eventos lanzados por tiempo.
