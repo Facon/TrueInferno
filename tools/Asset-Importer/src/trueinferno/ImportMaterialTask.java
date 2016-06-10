@@ -114,6 +114,7 @@ public class ImportMaterialTask implements Task {
 		File originMaterialFile = null;
 		try{
 			originMaterialFile = findMaterialFile();
+
 			// Copiamos el material a su sitio correcto
 			Util.copyWithBackup(originMaterialFile, materialFile);
 		}

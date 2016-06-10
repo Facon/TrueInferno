@@ -1,6 +1,7 @@
 package trueinferno;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,9 @@ public class ImportMeshTask implements Task {
 
 	private MeshTaskOption meshTaskOption;
 
+	// Nombre correcto del fichero del modelo
+	private File meshFile;
+
 	public ImportMeshTask(String realName, String givenName, File inputModelDir, File outputModelDir, File mapFile, MeshTaskOption meshTaskOption) {
 		this.realName = realName;
 		this.givenName = givenName;
@@ -34,6 +38,8 @@ public class ImportMeshTask implements Task {
 		this.outputModelDir = outputModelDir;
 		this.mapFile = mapFile;
 		this.meshTaskOption = meshTaskOption;
+		
+		meshFile = FileUtils.getFile(outputModelDir, realName+".mesh");
 	}
 
 	@Override
@@ -70,12 +76,12 @@ public class ImportMeshTask implements Task {
 		}
 	}
 
-	private void importMesh() throws TrueInfernoException {
-		// Buscamos el fichero con la malla
-		File meshFile = findMeshFile();
+	private void importMesh() throws TrueInfernoException, IOException {
+		// Buscamos el fichero con el modelo
+		File originMeshFile = findMeshFile();
 		
-		// TODO
-		throw new TrueInfernoException("TODO");
+		// Copiamos el modelo a su sitio correcto
+		Util.copyWithBackup(originMeshFile, meshFile);
 	}
 
 	private File findMeshFile() throws TrueInfernoException {
