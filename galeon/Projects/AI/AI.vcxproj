@@ -94,6 +94,7 @@
     <ClCompile Include="..\..\Src\AI\LAAttendResourceBuildingRequest.cpp" />
     <ClCompile Include="..\..\Src\AI\LABurnSouls.cpp" />
     <ClCompile Include="..\..\Src\AI\LACheckNewConsumption.cpp" />
+    <ClCompile Include="..\..\Src\AI\LACheckTarget.cpp" />
     <ClCompile Include="..\..\Src\AI\LAConsumeResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LADestroyEntity.cpp" />
     <ClCompile Include="..\..\Src\AI\LADetachConsumers.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="..\..\Src\AI\LAAttendResourceBuildingRequest.h" />
     <ClInclude Include="..\..\Src\AI\LABurnSouls.h" />
     <ClInclude Include="..\..\Src\AI\LACheckNewConsumption.h" />
+    <ClInclude Include="..\..\Src\AI\LACheckTarget.h" />
     <ClInclude Include="..\..\Src\AI\LAConsumeResources.h" />
     <ClInclude Include="..\..\Src\AI\LADestroyEntity.h" />
     <ClInclude Include="..\..\Src\AI\LADetachConsumers.h" />
