@@ -104,6 +104,7 @@ namespace Logic
 		{ LogicRequirement::Workers, IconType::SOUL },
 		{ LogicRequirement::Energy, IconType::POWER_GENERATOR },
 		{ LogicRequirement::Player, IconType::REPAIR },
+		{ LogicRequirement::Road, IconType::SOUL_PATH },
 		{ LogicRequirement::Undefined, IconType::NONE },
 	};
 

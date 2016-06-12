@@ -1,6 +1,9 @@
 #include "LAGetWalkingSoulPath.h"
 
 #include "AI/SoulTask.h"
+#include "Logic\Entity\Components\Billboard.h"
+#include "Logic\Maps\Managers\TileManager.h"
+#include "Logic\Entity\Components\Tile.h"
 
 namespace AI {
 	RTTI_IMPL(CLAGetWalkingSoulPath, CLatentAction);
@@ -44,13 +47,54 @@ namespace AI {
 	}
 
 	CLatentAction::LAStatus CLAGetWalkingSoulPath::OnRun(unsigned int msecs) {
+		// Gestionamos los iconos a mostrar/ocultar de carretera en el edificio origen y destino
+		CEntity* fromBuilding = nullptr;
+		Logic::Tile* tile = Logic::CTileManager::getSingletonPtr()->getNearestTile(_entity->getPosition());
+		if (tile != nullptr && tile->getPlaceableAbove() != nullptr)
+			fromBuilding = tile->getPlaceableAbove()->getEntity();
+
+		TEntityID toBuildingID = _smData.getTask()->getTarget();
+		CEntity* toBuilding = _entity->getMap()->getEntityByID(toBuildingID);
+
 		// Si la ruta obtenida es nula fallamos
-		if (_smData.getPath() == nullptr)
+		if (_smData.getPath() == nullptr) {
+			// Si es posible, marcamos que necesitamos carretera en el origen
+			if (fromBuilding != nullptr){
+				IconMessage m(MessageType::ICON_ADD, Billboard::getLogicRequirementIcon(LogicRequirement::Road));
+				bool result = m.Dispatch(*fromBuilding);
+				assert(result && "Can't add road icon");
+			}
+
+			// Si es posible, marcamos que necesitamos carretera en el destino
+			if (toBuilding != nullptr){
+				// Marcamos que necesitamos carretera
+				IconMessage m(MessageType::ICON_ADD, Billboard::getLogicRequirementIcon(LogicRequirement::Road));
+				bool result = m.Dispatch(*toBuilding);
+				assert(result && "Can't add road icon");
+			}
+
 			return LAStatus::FAIL;
+		}
 
 		// Éxito en otro caso
-		else
+		else {
+			// Si es posible, eliminamos la necesidad de carretera en el origen
+			if (fromBuilding != nullptr){
+				IconMessage m(MessageType::ICON_DELETE, Billboard::getLogicRequirementIcon(LogicRequirement::Road));
+				bool result = m.Dispatch(*fromBuilding);
+				assert(result && "Can't delete road icon");
+			}
+
+			// Si es posible, eliminamos la necesidad de carretera en el destino
+			if (toBuilding != nullptr){
+				// Marcamos que necesitamos carretera
+				IconMessage m(MessageType::ICON_DELETE, Billboard::getLogicRequirementIcon(LogicRequirement::Road));
+				bool result = m.Dispatch(*toBuilding);
+				assert(result && "Can't delete road icon");
+			}
+
 			return LAStatus::SUCCESS;
+		}
 	}
 
 }
