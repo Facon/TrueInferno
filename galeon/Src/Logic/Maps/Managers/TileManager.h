@@ -151,8 +151,8 @@ namespace Logic
 		/**
 		Dimensiones de la matriz del mapa.
 		*/
-		const int SIZE_X = 15;
-		const int SIZE_Z = 15;
+		const int SIZE_X = 30;
+		const int SIZE_Z = 30;
 
 		/**
 		File with the terrain map definition.
