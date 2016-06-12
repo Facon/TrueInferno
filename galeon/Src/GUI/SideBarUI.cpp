@@ -275,7 +275,7 @@ namespace GUI
 		ClearBuildingConstruction(true);
 
 		// Icono random
-		Logic::CEntity* ent = (*(Logic::CBuildingManager::getSingletonPtr()->getBuildings()[Logic::BuildingType::Evilator]->begin()))->getEntity(); // TODO TEST pruebas
+		Logic::CEntity* ent = (*(Logic::CBuildingManager::getSingletonPtr()->getBuildings()[Logic::BuildingType::HellQuarters]->begin()))->getEntity(); // TODO TEST pruebas
 		Logic::IconMessage m(Logic::MessageType::ICON_ADD, (Logic::IconType::IconType) Math::random(1, 10));
 		bool result = m.Dispatch(*ent);
 		assert(result && "Can't add test icon");
