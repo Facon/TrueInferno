@@ -2,13 +2,16 @@ package trueinferno;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 
-public class ImportMeshTask implements Task {
+public class ImportMeshTask extends Task {
 	public enum MeshTaskOption {
 		IMPORT,
 		SKIP
@@ -38,8 +41,6 @@ public class ImportMeshTask implements Task {
 		this.outputModelDir = outputModelDir;
 		this.mapFile = mapFile;
 		this.meshTaskOption = meshTaskOption;
-		
-		meshFile = FileUtils.getFile(outputModelDir, realName+".mesh");
 	}
 
 	@Override
@@ -70,7 +71,9 @@ public class ImportMeshTask implements Task {
 			observations = "";
 		}
 		catch(Exception e){
-			Logger.getGlobal().log(Level.INFO, "Error in " + getTitle() + " - " + getDescription(), e);
+			//Logger.getGlobal().log(Level.INFO, "Error in " + getTitle() + " - " + getDescription(), e);
+			System.out.println("Error in " + getTitle() + " - " + getDescription());
+			e.printStackTrace();
 			result = false;
 			observations = e.getMessage();
 		}
@@ -78,10 +81,13 @@ public class ImportMeshTask implements Task {
 
 	private void importMesh() throws TrueInfernoException, IOException {
 		// Buscamos el fichero con el modelo
-		File originMeshFile = findMeshFile();
+		File meshFile = findMeshFile();
 		
-		// Copiamos el modelo a su sitio correcto
-		Util.copyWithBackup(originMeshFile, meshFile);
+		// Copiamos el material
+		Util.copyToDirWithBackup(meshFile, outputModelDir);
+		
+		// Actualizamos el mapa
+		updateAttributeInMap(mapFile, realName, "model", meshFile.getName());
 	}
 
 	private File findMeshFile() throws TrueInfernoException {

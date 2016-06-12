@@ -3,11 +3,14 @@ package trueinferno;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -15,7 +18,7 @@ import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
-public class ImportMaterialTask implements Task {
+public class ImportMaterialTask extends Task {
 
 	public enum MaterialTaskOption {
 		IMPORT_CREATE,
@@ -38,12 +41,6 @@ public class ImportMaterialTask implements Task {
 	private File outputTextureDir;
 	private File mapFile;
 
-	// Nombre correcto del fichero de material
-	private File materialFile;
-
-	// Nombre correcto del fichero de textura con el difuso/albedo
-	private File albedoTextureFile;
-
 	// Filtro de ficheros que acepta ficheros de textura de Albedo (difuso)
 	private IOFileFilter isAlbedoFileFilter;
 
@@ -54,13 +51,10 @@ public class ImportMaterialTask implements Task {
 		this.givenName = givenName;
 		this.inputModelDir = inputModelDir;
 		this.outputMaterialDir = outputMaterialDir;
-		this.outputTextureDir = outputTextureDir;
+		this.outputTextureDir = FileUtils.getFile(outputTextureDir, realName);
 		this.mapFile = mapFile;
 		this.materialTaskOption = materialTaskOption;
 		
-		materialFile = FileUtils.getFile(outputMaterialDir, realName+".material");
-		albedoTextureFile = FileUtils.getFile(outputTextureDir, realName + "_" + "Albedo.png");
-		 
 		isAlbedoFileFilter = 
 				FileFilterUtils.asFileFilter(
 						new FileFilter(){
@@ -103,7 +97,9 @@ public class ImportMaterialTask implements Task {
 			observations = "";
 		}
 		catch(Exception e){
-			Logger.getGlobal().log(Level.INFO, "Error in " + getTitle() + " - " + getDescription(), e);
+			//Logger.getGlobal().log(Level.INFO, "Error in " + getTitle() + " - " + getDescription(), e);
+			System.out.println("Error in " + getTitle() + " - " + getDescription());
+			e.printStackTrace();
 			result = false;
 			observations = e.getMessage();
 		}
@@ -111,30 +107,53 @@ public class ImportMaterialTask implements Task {
 
 	private void importMaterial() throws TrueInfernoException, IOException {
 		// Buscamos el fichero con el material
-		File originMaterialFile = null;
+		File materialFile = null;
 		try{
-			originMaterialFile = findMaterialFile();
-
-			// Copiamos el material a su sitio correcto
-			Util.copyWithBackup(originMaterialFile, materialFile);
+			materialFile = findMaterialFile();
 		}
 		
 		// Si no se encontró el asset del material lo creamos directamente
 		catch (AssetFileNotFoundException e) {
-			createMaterialFile(materialFile);
+			materialFile = createMaterialFile();
 		}
+		
+		// Copiamos el material
+		Util.copyToDirWithBackup(materialFile, outputMaterialDir);
+		
+		// Obtenemos el nombre del material (que NO es el nombre del fichero)
+		String materialName = getMaterialName(materialFile);
+		
+		// Actualizamos el mapa
+		updateAttributeInMap(mapFile, realName, "material", materialName);
 	}
 
-	private void createMaterialFile(File destinationMaterialFile) throws IOException, TrueInfernoException {
-		// Localizamos el fichero de origen con la textura de Albedo 
-		File originAlbedoFile = findAlbedoTextureFile();
+	private String getMaterialName(File materialFile) throws IOException, TrueInfernoException {
+		String content = FileUtils.readFileToString(materialFile, (Charset)null);
+		Pattern p = Pattern.compile("^.*material\\s+(\\S+)$", Pattern.MULTILINE);
+		Matcher m = p.matcher(content);
 		
-		// Lo copiamos a su sitio
-		Util.copyWithBackup(originAlbedoFile, albedoTextureFile);
+		if(!m.find())
+			throw new TrueInfernoException("No material name found in material script file '"+materialFile+"'");
+			
+		String name = m.group(1);
 		
-		// Creamos un nuevo fichero de material que haga uso de la textura de Albedo localizada
-		File newMaterialFile = File.createTempFile(realName, Util.getTimeStamp());
+		if(m.find())
+			throw new TrueInfernoException("Multiple names found in material script file '"+materialFile+"'");
+		
+		return name;
+	}
 
+	private File createMaterialFile() throws IOException, TrueInfernoException {
+		// Localizamos el fichero de origen con la textura de Albedo 
+		File diffuseTextureFile = findAlbedoTextureFile();
+		
+		// Lo ponemos en su carpeta
+		Util.copyToDirWithBackup(diffuseTextureFile, outputTextureDir);
+		
+		// Creamos un nuevo fichero de material que haga uso de la textura de difuso obtenida
+		
+		File newMaterialFile = new File("tmp" + File.separator + realName + ".material");
+		
 		ArrayList<String> lines = new ArrayList<String>();
 		lines.add("material "+realName);
 		lines.add("{");
@@ -145,17 +164,16 @@ public class ImportMaterialTask implements Task {
 		lines.add("	");
 		lines.add("			texture_unit");
 		lines.add("			{");
-		lines.add("				texture building/"+albedoTextureFile.getName());
+		lines.add("				texture building/"+realName+"/"+diffuseTextureFile.getName());
 		lines.add("			}");
 		lines.add("		");
 		lines.add("		}");
 		lines.add("	}");
 		lines.add("}");
 		
-		FileUtils.writeLines(newMaterialFile, lines);
-		
-		// Escribimos el fichero de material con backup si es necesario
-		Util.copyWithBackup(newMaterialFile, destinationMaterialFile);
+		FileUtils.writeLines(newMaterialFile, lines, false);
+
+		return newMaterialFile;
 	}
 
 	private File findMaterialFile() throws TrueInfernoException {

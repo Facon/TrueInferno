@@ -10,7 +10,7 @@ import org.apache.commons.io.FilenameUtils;
 
 public class Util {
 	public static String getTimeStamp(){
-		return new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+		return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 	}
 	
 	public static void backupFile(File file) throws IOException{
@@ -37,5 +37,10 @@ public class Util {
 		}
 		
 		FileUtils.copyFile(originFile, destinationFile);
+	}
+
+	public static void copyToDirWithBackup(File originFile, File destinationDir) throws IOException {
+		File destinationFile = FileUtils.getFile(destinationDir, originFile.getName());
+		copyWithBackup(originFile, destinationFile);
 	}
 }
