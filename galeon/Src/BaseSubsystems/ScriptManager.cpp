@@ -30,7 +30,7 @@ extern "C" {
 #include <iostream>
 
 // TODO: HACK. Debería leerse de algún fichero de configuración
-#define LUA_SCRIPTS_PATH "../Src/Logic/Events/"
+#define LUA_SCRIPTS_PATH "media/lua/"
 
 namespace ScriptManager {
 

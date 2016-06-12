@@ -273,7 +273,7 @@ namespace Logic {
 			centerPosition = _floorOriginPosition;
 
 		// Añadimos cierta altura a la posición del Placeable para que parezca que está colocada encima o sobrevolando la Tile
-		float buildingHeightIncrement;
+		float buildingHeightIncrement = 0.0f;
 
 		// @TODO Es necesario incluir aquí una distinción para todos los edificios que tengan un
 		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...

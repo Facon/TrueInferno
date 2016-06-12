@@ -3,6 +3,7 @@
 #include <CEGUI/System.h>
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/Window.h>
+#include "Graphics/Server.h"
 
 namespace GUI
 {
@@ -15,6 +16,10 @@ namespace GUI
 	{
 	}
 
+	void UIManager::disablePopupWindows(){
+		_eventUI.DisablePopupVisibility();
+		_buildingSelectionUI.DisablePopupVisibility();
+	}
 
 	void UIManager::init()
 	{
@@ -40,7 +45,10 @@ namespace GUI
 		}
 
 		if (e.handled == 0)
+		{
+			disablePopupWindows();
 			_sideBarUI.playerInteractionWithLeftClick();
+		}
 
 		return true;
 	}
@@ -49,7 +57,6 @@ namespace GUI
 	void UIManager::release()
 	{
 		// Releasing memory
-
 		_topBarUI.release();
 		_sideBarUI.release();
 		_eventUI.release();
@@ -90,6 +97,9 @@ namespace GUI
 
 	void UIManager::tick(unsigned int msecs)
 	{
+		_uiWindow->getChild("fps")->setProperty("Text", std::to_string((int) Graphics::CServer::getSingletonPtr()->getLastFPS()) + " fps");
+		
+		
 		_topBarUI.tick(msecs);
 		_sideBarUI.tick(msecs);
 		//_rankUI.tick(msecs);

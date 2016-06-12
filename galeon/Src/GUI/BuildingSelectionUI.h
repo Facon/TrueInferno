@@ -58,6 +58,7 @@ namespace GUI
 		void tick(unsigned int msecs);
 		void setEventWindowVisible(bool visible, Logic::CEntity* entity);
 		void closeWindow();
+		void DisablePopupVisibility();
 	};
 }
 
