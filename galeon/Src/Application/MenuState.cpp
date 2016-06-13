@@ -16,9 +16,12 @@ Contiene la implementación del estado de menú.
 
 #include "MenuState.h"
 
+#include "Logic/Server.h"
+#include "Logic/Maps/Map.h"
 #include "GUI/Server.h"
 
 #include <CEGUI/CEGUI.h>
+#include <iostream>
 
 namespace Application {
 
@@ -39,12 +42,18 @@ namespace Application {
 		_menuWindow->getChildElement("Start")->
 			subscribeEvent(CEGUI::PushButton::EventClicked, 
 				CEGUI::SubscriberSlot(&CMenuState::startReleased, this));
+
+		_menuWindow->getChildElement("Settings")->
+			subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&CMenuState::settingsReleased, this));
+
+		_menuWindow->getChildElement("Credits")->
+			subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::SubscriberSlot(&CMenuState::creditsReleased, this));
 		
 		_menuWindow->getChildElement("Exit")->
 			subscribeEvent(CEGUI::PushButton::EventClicked, 
 				CEGUI::SubscriberSlot(&CMenuState::exitReleased, this));
-
-		
 	
 		return true;
 
@@ -57,6 +66,8 @@ namespace Application {
 		CApplicationState::release();
 
 		_menuWindow->getChildElement("Start")->removeAllEvents();
+		_menuWindow->getChildElement("Settings")->removeAllEvents();
+		_menuWindow->getChildElement("Credits")->removeAllEvents();
 		_menuWindow->getChildElement("Exit")->removeAllEvents();
 	} // release
 
@@ -93,6 +104,7 @@ namespace Application {
 	{
 		CApplicationState::tick(msecs);
 
+		Logic::CServer::getSingletonPtr()->getMap()->tick(0);
 	} // tick
 
 	//--------------------------------------------------------
@@ -157,6 +169,20 @@ namespace Application {
 	} // startReleased
 			
 	//--------------------------------------------------------
+
+	bool CMenuState::settingsReleased(const CEGUI::EventArgs& e)
+	{
+		std::cout << "Settings\n";
+
+		return true;
+	}
+
+	bool CMenuState::creditsReleased(const CEGUI::EventArgs& e)
+	{
+		std::cout << "Credits\n";
+
+		return true;
+	}
 
 	bool CMenuState::exitReleased(const CEGUI::EventArgs& e)
 	{

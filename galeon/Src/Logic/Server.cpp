@@ -209,7 +209,7 @@ namespace Logic {
 		it = managersList.begin();
 		end = managersList.end();
 
-		for (; it != end; it++) {
+		for (; it != end; ++it) {
 			Map::CEntity *manager = *it;
 
 			if (manager->getType() == "SoulsTrialManager")
