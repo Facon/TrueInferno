@@ -56,7 +56,7 @@ namespace Logic
 		Constructor por defecto; inicializa los atributos a su valor por 
 		defecto.
 		*/
-		CGraphics() : IComponent(), _graphicsEntity(0) {}
+		CGraphics() : IComponent(), _graphicsEntity(nullptr), _scene(nullptr) {}
 
 		/**
 		Destructor (virtual); Quita de la escena y destruye la entidad gr�fica.
@@ -107,9 +107,9 @@ namespace Logic
 	protected:
 
 		/**
-		M�todo virtual que construye la entidad gr�fica de la entidad. Otros
+		Método virtual que construye la entidad gráfica de la entidad. Otros
 		componentes pueden sobreescribirlo para inicializar otro tipo de
-		entidades gr�ficas (animadas, etc.).
+		entidades gráficas (animadas, etc.).
 		
 		@param entityInfo Informaci�n de construcci�n del objeto le�do del
 			fichero de disco.

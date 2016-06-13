@@ -44,7 +44,7 @@ namespace Logic
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 		virtual void tick(unsigned int msecs);
 		bool HandleMessage(const IconMessage& msg);
-		IconType::IconType getIcon(unsigned int) const;
+		//IconType::IconType getIcon(unsigned int) const;
 		static IconType::IconType getResourceIcon(ResourceType type);
 		static IconType::IconType getBuildingIcon(BuildingType type);
 		static IconType::IconType getLogicRequirementIcon(LogicRequirement type);
@@ -57,8 +57,11 @@ namespace Logic
 		static const std::unordered_map<LogicRequirement, IconType::IconType> requirementTableConversor;
 		static const std::unordered_map<ResourceType, IconType::IconType> storageTableConversor;
 
-		void adjustBillboards();
-
+		void adjustBillboards() const;
+		void adjustBillboardsPosition(const std::vector<std::pair<float, float>>& grid) const;
+		void fillGrid(const unsigned numBillboards, std::vector<std::pair<float, float>>& grid) const;
+		std::vector<std::pair<float, float>> createGrid(const unsigned int numBillboards) const;
+		
 		Graphics::BillboardSet* _bbSet;
 	};
 

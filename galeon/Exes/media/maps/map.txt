@@ -4,7 +4,7 @@ Map = {
 		type = "Camera",
 		distance = 60,
 		height = 30,
-		speed = 0.05,
+		speed = 0.035,
 	},
 	
 	Tile = {
@@ -13,7 +13,7 @@ Map = {
 		dimensions = {1, 1, 1},
 		orientation = 0,
 		model = "cube.mesh",
-		static = false,
+		static = true,
 		visible = true,
 		physic_entity = "rigid",
 		physic_type = "static",
@@ -102,6 +102,7 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopup.layout",
 		image = "Evilator",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
+		billboardSetPosition = { 0, 100, 0 },
 		defaultBillboard = "NONE",
 	},
 	
@@ -138,6 +139,7 @@ Map = {
 		image = "Furnace",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
+		billboardSetPosition = { 0, 4, 0 },
 		hadesFavorReward = 3,
 		sound_file = "building_complete.mp3",
 	},
@@ -152,6 +154,7 @@ Map = {
 		material = "Soul",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
+		timeBeforeGetNewPath = 2,
 	},
 	
 	Mine = {
@@ -190,6 +193,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
+		sound_file = "building_complete.mp3",
 	},
 	
 	GasPlant = {
@@ -228,6 +232,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
+		sound_file = "building_complete.mp3",
 	},
 	
 	EvilWorks = {
@@ -267,6 +272,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 3,
+		sound_file = "building_complete.mp3",
 	},
 	
 	Refinery = {
@@ -309,6 +315,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 3,
+		sound_file = "building_complete.mp3",
 	},
 		
 	ResearchLabs = {
@@ -343,6 +350,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 4,
+		sound_file = "building_complete.mp3",
 	},
 		
 	PowerGenerator = {
@@ -377,6 +385,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
+		sound_file = "building_complete.mp3",
 	},
 
 	Warehouse = {
@@ -413,6 +422,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 5,
+		sound_file = "building_complete.mp3",
 	},
 	
 	Tree = {

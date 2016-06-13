@@ -10,10 +10,11 @@
 #include "AI\LAFollowPath.h"
 #include "AI\LAExecuteSoulTask.h"
 #include "AI\LADestroyEntity.h"
-#include "AI\LAGetSoulTaskTarget.h"
+#include "AI\LACheckTarget.h"
 #include "AI\SMSoulData.h"
 #include "AI\LatentAction.h"
 #include "AI\Condition.h"
+#include "Map\MapEntity.h"
 
 namespace AI {
 	/**
@@ -26,14 +27,23 @@ namespace AI {
 	*/ 
 	class CSMSoul : public CStateMachine<CLatentAction, CSMSoulData> {
 	public:
-		CSMSoul(CEntity* entity) : CStateMachine<CLatentAction, CSMSoulData>(entity) {
+		CSMSoul(CEntity* entity) : CStateMachine<CLatentAction, CSMSoulData>(entity), _timeBeforeGetNewPath(2000) {}
+
+		virtual ~CSMSoul() {}
+
+		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
+			if (entityInfo->hasAttribute("timeBeforeGetNewPath"))
+				_timeBeforeGetNewPath = 1000 * entityInfo->getIntAttribute("timeBeforeGetNewPath");
+
 			int waitTask = this->addNode(new CLAWaitSoulTask(entity, _data));
 			int getPath = this->addNode(new CLAGetWalkingSoulPath(entity, _data));
 			int startTask = this->addNode(new CLAStartSoulTask(entity, _data));
 			int followPath = this->addNode(new CLAFollowPath(entity, _data));
 			int executeTask = this->addNode(new CLAExecuteSoulTask(entity, _data));
 			int destroyEntity = this->addNode(new CLADestroyEntity(entity, _data));
-			int getNewTarget = this->addNode(new CLAGetSoulTaskTarget(entity, _data));
+			int checkTarget = this->addNode(new CLACheckTarget(entity, _data));
+			int waitRetryPath = this->addNode(new CLAWait(_timeBeforeGetNewPath));
+			//int getNewTarget = this->addNode(new CLAGetSoulTaskTarget(entity, _data));
 
 			// Inicialmente el alma se pone a la espera de que le asignen tarea
 			this->setInitialNode(waitTask);
@@ -41,32 +51,29 @@ namespace AI {
 			// En cuanto tiene tarea, obtiene ruta hasta el objetivo de la tarea
 			this->addEdge(waitTask, getPath, new CConditionFinished());
 
-			// Si obtiene ruta comienza la tarea del alma, si no, busca otro objetivo
+			// Si obtiene ruta comienza la tarea del alma, si no, chequea la validez del objetivo
 			this->addEdge(getPath, startTask, new CConditionSuccess());
-			this->addEdge(getPath, getNewTarget, new CConditionFail());
+			this->addEdge(getPath, checkTarget, new CConditionFail());
 
-			// Si empieza correctamente la tarea pasa a seguir la ruta, si no, busca otro objetivo
+			// Si empieza correctamente la tarea pasa a seguir la ruta
 			this->addEdge(startTask, followPath, new CConditionSuccess());
-			this->addEdge(startTask, getNewTarget, new CConditionFail());
+			this->addEdge(startTask, destroyEntity, new CConditionFail());
 
 			// Tras acabar la ruta ejecuta la tarea que tenía asignada
-			this->addEdge(followPath, executeTask, new CConditionMessage<CLatentAction,WalkSoulPathMessage>(MessageType::WALK_SOUL_PATH_FINISHED));
-			this->addEdge(followPath, getNewTarget, new CConditionFail());
+			this->addEdge(followPath, executeTask, new CConditionMessage<CLatentAction, WalkSoulPathMessage>(MessageType::WALK_SOUL_PATH_FINISHED));
+			this->addEdge(followPath, destroyEntity, new CConditionFail());
 
-			// Tras ejecutar la tarea se destruye el alma, si no, busca otro objetivo
-			this->addEdge(executeTask, destroyEntity, new CConditionSuccess());
-			this->addEdge(executeTask, getNewTarget, new CConditionFail());
+			// Tras ejecutar la tarea se destruye el alma
+			this->addEdge(executeTask, destroyEntity, new CConditionFinished());
 
-			// Cuando tiene que pedir nuevo objetivo, si lo consigue obtener pasa a buscar ruta, si no, se destruye
-			this->addEdge(getNewTarget, getPath, new CConditionSuccess());
-			this->addEdge(getNewTarget, destroyEntity, new CConditionFail());
+			// Tras chequear el objetivo, si es válido, espera para reintentar ruta. Si no, se autodestruye
+			this->addEdge(checkTarget, waitRetryPath, new CConditionSuccess());
+			this->addEdge(checkTarget, destroyEntity, new CConditionFail());
+
+			this->addEdge(waitRetryPath, getPath, new CConditionFinished());
 
 			this->resetExecution();
-		}
 
-		virtual ~CSMSoul() {}
-
-		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			return true;
 		}
 
@@ -76,6 +83,9 @@ namespace AI {
 
 	private:
 		CSMSoulData _data;
+
+		/** Tiempo (ms) que se deja transcurrir hasta calcular una nueva ruta */
+		unsigned int _timeBeforeGetNewPath;
 	};
 }
 

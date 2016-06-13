@@ -10,16 +10,10 @@
 
 namespace Graphics
 {
-	//std::map<std::string, Ogre::BillboardSet*> BillboardSet::bbSets;
-
-	BillboardSet::BillboardSet(Graphics::CEntity* entity, const std::string& name, const std::string& materialName)
+	BillboardSet::BillboardSet(Graphics::CEntity* entity, const std::string& name, const std::string& materialName, const Vector3& position)
 	{
-		//std::map<std::string, Ogre::BillboardSet*>::const_iterator bbSet = bbSets.find(name);
-
-		//if (bbSet == bbSets.cend())
-		//{
 			CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
-			Ogre::BillboardSet* bbSet = scene->createBillboardSet(entity, name);
+			Ogre::BillboardSet* bbSet = scene->createBillboardSet(entity, name, position);
 			bbSet->setMaterialName(materialName);
 			bbSet->setDefaultDimensions(0.5, 0.5);
 
@@ -30,39 +24,33 @@ namespace Graphics
 			}
 
 			_bbSet = bbSet;
-		//	bbSets.insert(std::pair<std::string, Ogre::BillboardSet*>(name, bbSet));
-		//}
-		//else
-		//{
-			//_bbSet = bbSet->second;
-		//}
 	}
 
 	BillboardSet::~BillboardSet()
 	{
 	}
 
-	Ogre::BillboardSet* BillboardSet::getBillboardSet()
+	Ogre::BillboardSet* BillboardSet::getBillboardSet() const
 	{
 		return _bbSet;
 	}
 
-	Ogre::Billboard* BillboardSet::createBillboard(Vector3& vector)
+	Ogre::Billboard* BillboardSet::createBillboard(Vector3& vector) const
 	{
 		return _bbSet->createBillboard(vector);
 	}
 
-	Ogre::Billboard* BillboardSet::getBillboard(unsigned int index)
+	Ogre::Billboard* BillboardSet::getBillboard(unsigned int index) const
 	{
 		return _bbSet->getBillboard(index);
 	}
 
-	void BillboardSet::removeBillboard(unsigned int index)
+	void BillboardSet::removeBillboard(unsigned int index) const
 	{
 		_bbSet->removeBillboard(index);
 	}
 
-	unsigned int BillboardSet::getNumBillboards()
+	unsigned int BillboardSet::getNumBillboards() const
 	{
 		return _bbSet->getNumBillboards();
 	}

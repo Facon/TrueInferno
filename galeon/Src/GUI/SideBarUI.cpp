@@ -210,14 +210,14 @@ namespace GUI
 
 	bool SideBarUI::createFurnaceReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Furnace", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
 
 	bool SideBarUI::createRoadReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 0, 0), true, true);
 		if (_placeableEntity){
 			_placeableRoad = new Logic::CEntity*[1];
@@ -230,7 +230,7 @@ namespace GUI
 
 	bool SideBarUI::continueRoadCreation()
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 0, 0), true, true);
 		if (_placeableEntity){
 			_placeableRoad = new Logic::CEntity*[1];
@@ -243,21 +243,21 @@ namespace GUI
 
 	bool SideBarUI::createMineReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Mine", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
 
 	bool SideBarUI::createGasPlantReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "GasPlant", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
 
 	bool SideBarUI::createEvilworksReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "EvilWorks", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
@@ -265,17 +265,17 @@ namespace GUI
 
 	bool SideBarUI::createRefineryReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Refinery", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
 
 	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 
 		// Icono random
-		Logic::CEntity* ent = (*(Logic::CBuildingManager::getSingletonPtr()->getBuildings()[Logic::BuildingType::Evilator]->begin()))->getEntity(); // TODO TEST pruebas
+		Logic::CEntity* ent = (*(Logic::CBuildingManager::getSingletonPtr()->getBuildings()[Logic::BuildingType::HellQuarters]->begin()))->getEntity(); // TODO TEST pruebas
 		Logic::IconMessage m(Logic::MessageType::ICON_ADD, (Logic::IconType::IconType) Math::random(1, 10));
 		bool result = m.Dispatch(*ent);
 		assert(result && "Can't add test icon");
@@ -286,7 +286,7 @@ namespace GUI
 
 	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TaharezLook/MouseArrow");
 		// @TODO Cambiar puntero a pala
@@ -296,7 +296,7 @@ namespace GUI
 
 	bool SideBarUI::continueClearTerrain()
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TaharezLook/MouseArrow");
 		// @TODO Cambiar puntero a pala
@@ -306,26 +306,29 @@ namespace GUI
 
 	bool SideBarUI::createResearchLabReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "ResearchLabs", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
 
 	bool SideBarUI::createWarehouseReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Warehouse", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
 
 	bool SideBarUI::createPowerGeneratorReleased(const CEGUI::EventArgs& e)
 	{
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "PowerGenerator", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
 
-	void SideBarUI::ClearBuildingConstruction(){
+	void SideBarUI::ClearBuildingConstruction(bool clearPopups){
+		if (clearPopups){}
+			GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
+
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("OgreTrayImages/MouseArrow");
 		_clearTerrain = false;
@@ -357,7 +360,7 @@ namespace GUI
 	}
 
 	void SideBarUI::playerInteractionWithRightClick(){
-		ClearBuildingConstruction();
+		ClearBuildingConstruction(false);
 	}
 
 	void SideBarUI::playerInteractionWithLeftClick()

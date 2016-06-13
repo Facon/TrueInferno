@@ -56,8 +56,8 @@ namespace Application
 		/** 
 		Constructor de la clase 
 		*/
-		CMenuState(CBaseApplication *app) : CApplicationState(app)
-				{}
+		CMenuState(CBaseApplication *app) : CApplicationState(app), _menuWindow(nullptr)
+		{}
 
 		/** 
 		Destructor 
@@ -173,6 +173,10 @@ namespace Application
 		Simplemente cambia al estado de juego.
 		*/
 		bool startReleased(const CEGUI::EventArgs& e);
+
+		bool settingsReleased(const CEGUI::EventArgs& e);
+
+		bool creditsReleased(const CEGUI::EventArgs& e);
 
 		/**
 		Función que se quiere realizar cuando se pulse el botón exit.

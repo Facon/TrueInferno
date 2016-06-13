@@ -3,7 +3,19 @@
 <GUILayout version="4" >
     <Window type="DefaultWindow" name="GameUIButtonFrame" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-        <Property name="MaxSize" value="{{1,0},{1,0}}" />
-    </Window>
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />	
+		
+		<Window type="OgreTray/StaticText" name="fps" >
+			<Property name="Area" value="{{0.85,0},{0.06,0},{0.90,0},{0.1,0}}" />
+			<Property name="Font" value="Jura-10" />
+			<Property name="TextColours" value="tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="CentreAligned" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+
+	</Window>
+	
+	
 </GUILayout>
 

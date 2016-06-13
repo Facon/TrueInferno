@@ -9,6 +9,7 @@ namespace Logic {
 		Workers,
 		Energy,
 		Player,
+		Road,
 		Undefined,	// Valor especial indefinido
 		All,		// Valor especial que simboliza todos los requisitos
 	};
@@ -22,6 +23,9 @@ namespace Logic {
 
 		else if (name == "Player")
 			return Player;
+
+		else if (name == "Road")
+			return Road;
 
 		else if (name == "All")
 			return All;
@@ -42,6 +46,9 @@ namespace Logic {
 
 		case Player:
 			return "Player";
+
+		case Road:
+			return "Road";
 
 		case All:
 			return "All";

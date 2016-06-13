@@ -175,7 +175,7 @@ namespace Graphics
 
 	} // buildStaticGeometry
 
-	Ogre::BillboardSet* CScene::createBillboardSet(CEntity* entity, const std::string& name)
+	Ogre::BillboardSet* CScene::createBillboardSet(CEntity* entity, const std::string& name, const Ogre::Vector3& position) const
 	{
 		static unsigned int index = 0;
 
@@ -184,12 +184,17 @@ namespace Graphics
 		//Ogre::SceneNode* childNode = entity->_entityNode->getParentSceneNode()->createChildSceneNode(Vector3(0.0f, 2.0f, 0.0f));
 		Ogre::SceneNode* childNode = entity->_entityNode->createChildSceneNode();
 		childNode->setInheritScale(false);
-		childNode->setPosition(Vector3(0.0f, 100.0f, 0.0f));
+		childNode->setPosition(position);
 		childNode->attachObject(bbSet);
 
 		++index;
 
 		return bbSet;
+	}
+
+	Ogre::BillboardSet* CScene::createBillboardSet(CEntity* entity, const std::string& name) const
+	{
+		return createBillboardSet(entity, name, Vector3(0.0f, 100.0f, 0.0f));
 	}
 
 } // namespace Graphics
