@@ -19,13 +19,13 @@ Contiene la implementación del gestor del estado de la partida.
 #include "AI/Manager/AIManager.h"
 #include "Logic/HFManager.h"
 #include "Logic/Events/EventManager.h"
-#include "Logic/Events/EndGameEvent.h"
 #include "Logic/Events/EndRoundEvent.h"
 #include "Application/BaseApplication.h"
+#include <Audio/Server.h>
 
 namespace Logic {
 
-	CGameManager* CGameManager::_instance = 0;
+	CGameManager* CGameManager::_instance = nullptr;
 
 	//--------------------------------------------------------
 
@@ -40,7 +40,7 @@ namespace Logic {
 	CGameManager::~CGameManager()
 	{
 		assert(_instance);
-		_instance = 0;
+		_instance = nullptr;
 
 	} // ~CGameManager
 
@@ -93,7 +93,7 @@ namespace Logic {
 
 	void CGameManager::roundFinished(){
 		// Cogemos la puntuación del jugador
-		int playerScore = (int)HFManager::getSingletonPtr()->getHadesFavor();
+		int playerScore = static_cast<int>(HFManager::getSingletonPtr()->getHadesFavor());
 
 		// Buscamos al dios activo con menos puntuación
 		AI::CGod* worstActiveGod = AI::CAIManager::getSingletonPtr()->getWorstActiveGod();
@@ -126,6 +126,9 @@ namespace Logic {
 			Application::CBaseApplication::getSingletonPtr()->setState("gameOver");
 			return;
 		}
+
+		// Sonido de fin de ronda
+		Audio::CServer::getSingletonPtr()->playSound("round_finished", 0.4f);
 
 		// En otro caso es final de ronda, así que notificamos con un evento
 		bool eventThrown = Logic::CEventManager::getSingletonPtr()->addTimeEvent(new CEndRoundEvent(_victory, 100));

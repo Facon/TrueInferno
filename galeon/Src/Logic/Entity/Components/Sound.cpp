@@ -10,12 +10,6 @@ namespace Logic
 	RTTI_ROOT_IMPL(Sound);
 	IMP_FACTORY(Sound);
 
-	const std::unordered_map<std::string, FMOD_MODE> Sound::modeConversor =
-	{
-		{ "DEFAULT", FMOD_DEFAULT },
-		{ "3D", FMOD_3D },
-	};
-
 	Sound::~Sound()
 	{}
 
@@ -24,24 +18,7 @@ namespace Logic
 		if (!IComponent::spawn(entity, map, entityInfo))
 			return false;
 
-		Audio::CServer* singleton = Audio::CServer::getSingletonPtr();
-
-		if (entityInfo->hasAttribute("sound_file"))
-		{
-			std::string soundFile = entityInfo->getStringAttribute("sound_file");
-			int soundMode;
-
-			if (entityInfo->hasAttribute("sound_mode"))
-			{
-				soundMode = modeConversor.at(entityInfo->getStringAttribute("sound_mode"));
-			}
-			else
-			{
-				soundMode = modeConversor.at("DEFAULT");
-			}
-
-			_sound = singleton->createSound(soundFile, soundMode);
-		}
+		//Audio::CServer* singleton = Audio::CServer::getSingletonPtr();
 
 		adjustTransform(_entity->getTransform());
 
@@ -77,7 +54,8 @@ namespace Logic
 	bool Sound::HandleMessage(const SoundMessage& m)
 	{
 		Audio::CServer* singleton = Audio::CServer::getSingletonPtr();
-		singleton->playSound(_sound);
+
+		singleton->playSound(m._soundName, 1.f);
 
 		return true;
 	}

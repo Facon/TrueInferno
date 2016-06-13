@@ -13,7 +13,6 @@
 
 #include "Logic/Events/EventManager.h"
 #include "Logic/Events/Event.h"
-#include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
 #include "Logic/BuildingManager.h"
@@ -26,15 +25,14 @@
 #include "Graphics/Server.h"
 #include "Graphics/Camera.h"
 
+#include "Audio/Server.h"
+
 #include <OgreCamera.h>
 #include <OgreViewport.h>
-#include <OgreSceneQuery.h>
 
 #include "Physics/Server.h"
 #include "Logic/Entity/Message.h"
 #include "AI/Server.h"
-
-#include "Logic\ResourcesManager.h"
 
 #include "Logic\Entity\IconType.h"
 
@@ -382,10 +380,16 @@ namespace GUI
 								Logic::CWorkManager::getSingletonPtr()->reassignWorkers();
 							}
 							else
+							{
 								Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableEntity);
+							}
 
 							_placeableEntity = nullptr;
 							break;
+						}
+						else
+						{
+							Audio::CServer::getSingletonPtr()->playSound("error", 0.4f);
 						}
 					}
 					case 1:

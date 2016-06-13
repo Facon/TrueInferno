@@ -10,13 +10,10 @@ namespace FMOD
 
 namespace Audio
 {
-	std::string CServer::_path("media/sounds/");
 	CServer CServer::_instance;
-	FMOD::System* CServer::_system = nullptr;
-	FMOD::Channel* CServer::_channel = nullptr;
-	FMOD::Channel* CServer::_channel2 = nullptr;
+	std::unordered_map<std::string, FMOD::Sound*> CServer::_sounds;
 
-	CServer::CServer() : _mute(false)
+	CServer::CServer() : _path("media/sounds/"), _system(nullptr), _channel(nullptr), _channel2(nullptr), _mute(false)
 	{}
 
 	CServer::~CServer()
@@ -39,12 +36,7 @@ namespace Audio
 
 		assert(!result);
 
-		//FMOD::Channel* channel = nullptr;
-
-		result = _system->playSound(sound, 0, true, &_channel);
-		//result = _system->playSound(sound, 0, true, nullptr);
-		
-		assert(!result);
+		appendSounds();
 
 		float volume = 0.3f;
 		// valor entre 0 y 1
@@ -59,34 +51,60 @@ namespace Audio
 		_system->close();
 	}
 
+	void CServer::appendSounds()
+	{
+		_sounds.insert(std::make_pair("audio_hito_3", createStream(std::string("audio_hito_3_suave.ogg"), FMOD_LOOP_NORMAL)));
+		_sounds.insert(std::make_pair("building_complete", createSound(std::string("building_complete.mp3"), FMOD_3D)));
+		_sounds.insert(std::make_pair("error", createSound(std::string("error.wav"), FMOD_DEFAULT)));
+		_sounds.insert(std::make_pair("event", createSound(std::string("event.wav"), FMOD_DEFAULT)));
+		_sounds.insert(std::make_pair("round_finished", createSound(std::string("round_finished.wav"), FMOD_DEFAULT)));
+		_sounds.insert(std::make_pair("victory", createSound(std::string("victory.mp3"), FMOD_DEFAULT)));
+	}
+
+
 	FMOD::Sound* CServer::createSound(std::string& name, FMOD_MODE mode)
 	{
+		FMOD_RESULT result;
 		FMOD::Sound* sound;
-		_system->createSound((_path + name).c_str(), mode, nullptr, &sound);
 		
+		result = _system->createSound((_path + name).c_str(), mode, nullptr, &sound);
+		
+		assert(!result);
+
+		return sound;
+	}
+
+	FMOD::Sound* CServer::createStream(std::string& name, FMOD_MODE mode)
+	{
+		FMOD_RESULT result;
+		FMOD::Sound* sound;
+
+		result = _system->createStream((_path + name).c_str(), mode, nullptr, &sound);
+
+		assert(!result);
+
 		return sound;
 	}
 
 	void CServer::play()
 	{
-		// TODO Disable sound
 		if (_mute)
 			return;
 
-		FMOD_RESULT result = FMOD_RESULT::FMOD_OK;
+		FMOD_RESULT result;
 
 		result = _channel->setPaused(false);
 
 		assert(!result);
 	}
 
-	void CServer::playSound(FMOD::Sound* sound)
+	void CServer::playSound(const std::string& sound, float volume = 0.4f)
 	{
 		if (_mute)
 			return;
 
-		_system->playSound(sound, 0, false, &_channel2);
-		_channel2->setVolume(0.4f);
+		_system->playSound(_sounds[sound], nullptr, false, &_channel2);
+		_channel2->setVolume(volume);
 	}
 
 	void CServer::tick(unsigned int secs)

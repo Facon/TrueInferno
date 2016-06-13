@@ -17,6 +17,7 @@ el panel de fin del juego (con victoria o derrota).
 #include "EndGameEvent.h"
 
 #include "BaseSubsystems/ScriptManager.h"
+#include <Audio/Server.h>
 
 namespace Logic {
 
@@ -51,6 +52,10 @@ namespace Logic {
 
 	void CEndGameEvent::execute()
 	{
+		if (_victory)
+			Audio::CServer::getSingletonPtr()->playSound("victory", 0.4f);
+		else
+			Audio::CServer::getSingletonPtr()->playSound("error", 0.4f);
 	} // execute
 
 	void CEndGameEvent::initGUIConstants(){

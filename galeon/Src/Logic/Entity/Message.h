@@ -5,7 +5,7 @@ Contiene el tipo de datos de un mensaje.
 
 @see Logic::Message
 
-@author Asier González
+@author Asier González, Alvaro and Raúl
 */
 #ifndef __Logic_Message_H
 #define __Logic_Message_H
@@ -638,7 +638,9 @@ namespace Logic
 	class SoundMessage : public Message
 	{
 	public:
-		SoundMessage(MessageType type);
+		std::string _soundName;
+
+		SoundMessage(MessageType type, std::string soundName);
 
 		virtual bool Dispatch(MessageHandler& handler) const;
 	};
