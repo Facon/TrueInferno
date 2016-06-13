@@ -25,6 +25,7 @@ de su trigger, como eventos lanzados por tiempo y por condición/acción.
 #include "AI/Manager/AIManager.h"
 
 #include <iostream>
+#include <Audio/Server.h>
 
 namespace Logic {
 	/** Inicializador estático del ID de evento */
@@ -101,6 +102,8 @@ namespace Logic {
 				GUI::EventUI *eventUI = GUI::CServer::getSingletonPtr()->getUIManager()->getEventUI();
 				eventUI->registerEvent(this);
 			}
+
+			Audio::CServer::getSingletonPtr()->playSound("event", 0.4f);
 
 			// TODO Definir por evento/tipo de lanzamiento
 			keepAlive = true;

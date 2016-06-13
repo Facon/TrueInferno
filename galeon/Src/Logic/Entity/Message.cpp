@@ -510,7 +510,7 @@ namespace Logic
 		return handler.HandleMessage(*this);
 	}
 
-	SoundMessage::SoundMessage(MessageType type) : Message(type)
+	SoundMessage::SoundMessage(MessageType type, std::string soundName) : Message(type), _soundName(soundName)
 	{}
 
 	bool SoundMessage::Dispatch(MessageHandler& handler) const

@@ -141,7 +141,6 @@ Map = {
 		defaultBillboard = "NONE",
 		billboardSetPosition = { 0, 4, 0 },
 		hadesFavorReward = 3,
-		sound_file = "building_complete.mp3",
 	},
 	
 	Soul = {
@@ -193,7 +192,6 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
-		sound_file = "building_complete.mp3",
 	},
 	
 	GasPlant = {
@@ -232,7 +230,6 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
-		sound_file = "building_complete.mp3",
 	},
 	
 	EvilWorks = {
@@ -272,7 +269,6 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 3,
-		sound_file = "building_complete.mp3",
 	},
 	
 	Refinery = {
@@ -315,7 +311,6 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 3,
-		sound_file = "building_complete.mp3",
 	},
 		
 	ResearchLabs = {
@@ -350,7 +345,6 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 4,
-		sound_file = "building_complete.mp3",
 	},
 		
 	PowerGenerator = {
@@ -385,7 +379,6 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 1,
-		sound_file = "building_complete.mp3",
 	},
 
 	Warehouse = {
@@ -422,7 +415,6 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		hadesFavorReward = 5,
-		sound_file = "building_complete.mp3",
 	},
 	
 	Tree = {

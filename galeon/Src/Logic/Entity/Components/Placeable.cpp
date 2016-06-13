@@ -189,7 +189,7 @@ namespace Logic {
 		hadesFavorManager->changeHadesFavor(_hadesFavorReward);
 
 		// Activamos sonido de construcción
-		SoundMessage soundMessage(Logic::MessageType::SOUND);
+		SoundMessage soundMessage(MessageType::SOUND_PLAY, "building_complete");
 		soundMessage.Dispatch(*_entity);
 
 		// Ponemos el material básico
@@ -311,7 +311,7 @@ namespace Logic {
 		}
 
 		MaterialMessage m(placementMaterial);
-		bool result = m.Dispatch(*_entity);
+		const bool result = m.Dispatch(*_entity);
 		assert(result && "Can't set right/wrong placed material");
 	}
 	

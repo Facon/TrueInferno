@@ -3,7 +3,6 @@
 #include <math.h>
 
 #include "BaseSubsystems/ScriptManager.h"
-#include "Logic/Events/EventManager.h"
 #include "Logic/Maps/Managers/GameManager.h"
 #include "Map/MapEntity.h"
 
