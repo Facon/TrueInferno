@@ -18,7 +18,7 @@ namespace Logic {
 	RTTI_ROOT_IMPL(CPlaceable);
 	IMP_FACTORY(CPlaceable);
 
-	CPlaceable::CPlaceable() : IComponent(), _hadesFavorReward(0), _defaultMaterial("") {
+	CPlaceable::CPlaceable() : IComponent(), _hadesFavorReward(0), _defaultMaterial(""), _doingGraphicPlace(false), _doingGraphicFloat(false), _placeSpeed(0.05), _floatSpeed(0.1) {
 	}
 
 	CPlaceable::~CPlaceable() {
@@ -129,7 +129,13 @@ namespace Logic {
 	} // spawn
 
 	void CPlaceable::tick(unsigned int msecs){
-		//processWalkingSoulPathRequest();
+		if (_doingGraphicFloat){
+			doGraphicFloat();
+		}
+
+		else if (_doingGraphicPlace){
+			doGraphicPlace();
+		}
 
 	} // tick
 
@@ -156,8 +162,8 @@ namespace Logic {
 			Logic::CBuildingManager::getSingletonPtr()->registerBuilding(this);
 		}
 
-		// Cambiamos la altura a justo encima de la tile
-		Vector3& position = _entity->getPosition();
+		// Partimos de la posición de justo encima del tile. Usamos la posición lógica donde tiene que acabar flotando la entidad
+		Vector3& position = _targetFloatPosition;
 
 		// @TODO Es necesario incluir aquí una distinción para todos los edificios que tengan un
 		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...
@@ -172,8 +178,9 @@ namespace Logic {
 			position.y = 0.6f;
 		}
 
-		PositionMessage positionMessage(position);
-		positionMessage.Dispatch(*_entity);
+		// Guardamos la posición a la que queremos que se haga el place
+		_targetPlacePosition = position;
+		_doingGraphicPlace = true;
 
 		// Cambiamos el estado
 		_floating = false;
@@ -291,8 +298,9 @@ namespace Logic {
 		float centerHeight = (showFloating) ? HEIGHT_ON_TILE + buildingHeightIncrement : 0.6f;
 		centerPosition += Vector3(0, centerHeight, 0);
 
-		// Move entity physically
-		_entity->setPosition(centerPosition);
+		// Guardamos la posición a la que queremos que se haga el float
+		_targetFloatPosition = centerPosition;
+		_doingGraphicFloat = true;
 
 		// Update adyacent tiles
 		updateAdyacentTiles();
@@ -545,6 +553,49 @@ namespace Logic {
 			Tile *tile = (*itTiles);
 			_adyacentTiles.erase(tile);
 		}
+	}
+
+	void CPlaceable::doGraphicFloat() {
+		doImmediateGraphicMovement(_targetFloatPosition, _doingGraphicFloat);
+	}
+
+	void CPlaceable::doGraphicPlace() {
+		doDelayedGraphicMovement(_targetPlacePosition, _placeSpeed, _doingGraphicPlace);
+	}
+
+	void CPlaceable::doDelayedGraphicMovement(const Vector3& targetPosition, float speed, bool& moving) {
+		if (!moving)
+			return;
+
+		Vector3 currentPosition = _entity->getPosition();
+		Vector3 dir = targetPosition - currentPosition;
+
+		if (dir.squaredLength() <= ZERO_DISTANCE){
+			moving = false;
+			return;
+		}
+
+		dir.normalise();
+		dir *= speed;
+
+		currentPosition += dir;
+
+		PositionMessage m(currentPosition);
+		bool result = m.Dispatch(*_entity);
+		assert(result && "Can't do animated graphic move");
+	}
+
+	void CPlaceable::doImmediateGraphicMovement(const Vector3& targetPosition, bool& moving) {
+		if (!moving)
+			return;
+
+		PositionMessage positionMessage(targetPosition);
+		bool result = positionMessage.Dispatch(*_entity);
+
+		assert(result && "Can't move immediate graphic move");
+
+		if (result)
+			moving = false;
 	}
 
 } // namespace Logic

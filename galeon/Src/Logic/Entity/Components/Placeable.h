@@ -161,6 +161,49 @@ namespace Logic {
 		/** Nombre del material por defecto */
 		std::string _defaultMaterial;
 
+		/** Posición en la que queremos que se haga el place del edificio */
+		Vector3 _targetPlacePosition;
+
+		/** Flag para saber si al edificio se le está haciendo place gráfico */
+		bool _doingGraphicPlace;
+
+		/** Realiza el place animado para la parte gráfica */
+		void doGraphicPlace();
+
+		/** Velocidad del place gráfico */
+		float _placeSpeed;
+
+		/** Posición en la que queremos que se haga el float del edificio */
+		Vector3 _targetFloatPosition;
+
+		/** Flag para saber si el edificio se le está haciendo float gráfico */
+		bool _doingGraphicFloat;
+
+		/** Realiza el float animado para la parte gráfica */
+		void doGraphicFloat();
+
+		/** Velocidad del float gráfico */
+		float _floatSpeed;
+
+		/**
+		* Realiza un movimiento gráfico animado con cierto retardo.
+		*
+		* @param (in) targetPosition Posición objetivo a la que queremos mover
+		* @param (in) speed Velocidad a la que queremos que mueva
+		* @param (out) Flag donde guardar si hace falta seguir moviendo o no
+		*/
+		void doDelayedGraphicMovement(const Vector3& targetPosition, float speed, bool& moving);
+
+		/**
+		* Realiza un movimiento gráfico inmediato.
+		*
+		* @param (in) targetPosition Posición objetivo a la que queremos mover
+		* @param (out) Flag donde guardar si hace falta seguir moviendo o no
+		*/
+		void doImmediateGraphicMovement(const Vector3& targetPosition, bool& moving);
+
+		const float ZERO_DISTANCE = 0.01f;
+
 	protected:
 		/** Parsea un enum PlaceableType a partir del nombre en texto
 		TODO Mover junto al código del enum */
