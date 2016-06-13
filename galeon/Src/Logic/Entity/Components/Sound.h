@@ -29,12 +29,9 @@ namespace Logic
 		bool HandleMessage(const SoundMessage& m);
 
 	protected:
-		static const std::unordered_map<std::string, FMOD_MODE> modeConversor;
-
 		void adjustTransform(const Matrix4& transform);
 
 		FMOD_3D_ATTRIBUTES _transform;
-		FMOD::Sound* _sound;
 	};
 
 	REG_FACTORY(Sound);

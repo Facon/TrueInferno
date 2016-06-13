@@ -348,7 +348,7 @@ namespace BaseSubsystems
 
 	bool CServer::initFMOD()
 	{
-		return Audio::CServer::Init();
+		return Audio::CServer::getSingletonPtr()->Init();
 	}
 
 	//--------------------------------------------------------
@@ -444,7 +444,7 @@ namespace BaseSubsystems
 	
 	void CServer::releaseFMOD()
 	{
-		Audio::CServer::Release();
+		Release();
 	}
 
 	Ogre::Timer* CServer::getAppTimer() 

@@ -2,6 +2,7 @@
 #define AUDIO_SERVER_H
 
 #include <string>
+#include <unordered_map>
 
 typedef unsigned int FMOD_MODE;
 
@@ -20,12 +21,13 @@ namespace Audio
 		static CServer* getSingletonPtr()
 		{ return &_instance; }
 		
-		static bool Init();
-		static void Release();
+		bool Init();
+		void Release();
 
 		FMOD::Sound* createSound(std::string& name, FMOD_MODE mode);
+		FMOD::Sound* createStream(std::string& name, FMOD_MODE mode);
 		void play();
-		void playSound(FMOD::Sound* sound);
+		void playSound(const std::string& sound, float volume);
 		void tick(unsigned int secs);
 
 	protected:
@@ -33,12 +35,15 @@ namespace Audio
 		~CServer();
 		bool open();
 		void close();
+		void appendSounds();
 
 		static CServer _instance;
-		static std::string _path;
-		static FMOD::System* _system;
-		static FMOD::Channel* _channel;
-		static FMOD::Channel* _channel2;
+		static std::unordered_map<std::string, FMOD::Sound*> _sounds;
+
+		std::string _path;
+		FMOD::System* _system;
+		FMOD::Channel* _channel;
+		FMOD::Channel* _channel2;
 
 		bool _mute;
 	};
