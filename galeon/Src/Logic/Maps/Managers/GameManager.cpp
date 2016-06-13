@@ -137,7 +137,6 @@ namespace Logic {
 	}
 
 	void CGameManager::tick(unsigned int msecs){
-
 	}
 
 } // namespace Logic
