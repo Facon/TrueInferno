@@ -158,25 +158,24 @@ namespace Graphics
 		const bool getVisible();
 
 		/**
-		 Devuelve el valor de la escala de la entidad.
-
-		 @return Valores de la escala en los diferentes ejes.
+		Devuelve el valor de la escala de la entidad.
+		@return Valores de la escala en los diferentes ejes.
 		*/
 		const Vector3 &getScale();
 
 		/**
-		 Cambia el color de la entidad.
-
-		 @param color Valores (r,g,b) del color interpolados entre 0 y 1.
+		Cambia el color de la entidad.
+		@param color Valores (r,g,b) del color interpolados entre 0 y 1.
 		*/
-		void setColor(const Vector3 &color);
+		void setDiffuseColor(const Vector3 &color);
+		void setEmissiveColor(const Vector3 &color);
 
 		/**
-		 Devuelve el color de la entidad.
-
-		 @return Valores (r,g,b) del color interpolados entre 0 y 1.
+		Devuelve el color de la entidad.
+		@return Valores (r,g,b) del color interpolados entre 0 y 1.
 		*/
-		Vector3 getColor();
+		Vector3 getDiffuseColor();
+		Vector3 getEmissiveColor();
 
 		/**
 		* Cambia el color para oscurecerlo aplicando el factor dado (0,1). Cuanto más cerca de 0, más oscuro.
@@ -189,22 +188,27 @@ namespace Graphics
 		void makeClearerColor(float factor = CHANGE_COLOR_FACTOR);
 
 		/**
-		 Cambia el material de la entidad.
-
-		 @param material Nombre del material.
+		Cambia el material de la entidad.
+		@param material Nombre del material.
 		*/
 		void setMaterialName(const std::string &materialName);
 
 		/**
-		 Devuelve el material de la entidad.
+		Añade un parámetro de entrada al material de la entidad.
 
-		 @return Nombre del material.
+		@param index Índice del parámetro.
+		@param param Parámetro de entrada.
+		*/
+		void setCustomParameter(int index, Vector4 param);
+
+		/**
+		Devuelve el material de la entidad.
+		@return Nombre del material.
 		*/
 		const std::string &getMaterialName();
 
 		/**
 		Devuelve la entidad de Ogre.
-
 		@return puntero a la entidad de Ogre.
 		*/
 		Ogre::Entity* getEntity() {return _entity;}

@@ -5,8 +5,10 @@ material Evilator
 	{
 		pass
 		{
-			ambient 0.81 0.32 0.7 1
-			diffuse 1 1 1 1
+			ambient  1 1 1 1
+			diffuse  0.6 0.2 0.9 1
+			specular 1 1 1 30
+			emissive 0.3 0.1 0.6 1
 		}
 	}
 }

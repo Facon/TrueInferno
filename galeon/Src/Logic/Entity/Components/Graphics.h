@@ -77,7 +77,24 @@ namespace Logic
 		*/
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo);
 
+		/**
+		Devuelve la entidad gráfica asociada al lcomponente.
+		*/
 		virtual Graphics::CEntity* getGraphicsEntity();
+
+		/**
+		Cambia el material de la entidad.
+		@param material Nombre del material.
+		*/
+		void setMaterialName(const std::string &materialName);
+
+		/**
+		Añade un parámetro de entrada al material de la entidad.
+
+		@param index Índice del parámetro.
+		@param param Parámetro de entrada.
+		*/
+		void setCustomParameter(int index, Vector4 param);
 
 		/**
 		Mensajes.

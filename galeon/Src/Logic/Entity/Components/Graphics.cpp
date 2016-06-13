@@ -95,20 +95,33 @@ namespace Logic
 			_graphicsEntity->setMaterialName(materialName);
 		}
 
-		if (entityInfo->hasAttribute("color"))
-		{
-			Vector3 color = entityInfo->getVector3Attribute("color");
-			_graphicsEntity->setColor(color);
-		}
-
 		return _graphicsEntity;
 
 	} // createGraphicsEntity
+
+	//---------------------------------------------------------
 	
 	Graphics::CEntity* CGraphics::getGraphicsEntity()
 	{
 		return _graphicsEntity;
-	}
+
+	} // getGraphicsEntity
+
+	//---------------------------------------------------------
+
+	void CGraphics::setMaterialName(const std::string &materialName)
+	{
+		_graphicsEntity->setMaterialName(materialName);
+
+	} // setMaterialName
+
+	//---------------------------------------------------------
+
+	void CGraphics::setCustomParameter(int index, Vector4 param)
+	{
+		_graphicsEntity->setCustomParameter(index, param);
+
+	} // setCustomParameter
 
 	//---------------------------------------------------------
 	
@@ -116,19 +129,28 @@ namespace Logic
 	{
 		_graphicsEntity->setTransform(m._transform);
 		return true;
+
 	} // SET_TRANSFORM
+
+	//---------------------------------------------------------
 	
 	bool CGraphics::HandleMessage(const ColorMessage& m)
 	{
-		_graphicsEntity->setColor(m._rgb);
+		_graphicsEntity->setDiffuseColor(m._rgb);
 		return true;
+
 	} // SET_COLOR
+
+	//---------------------------------------------------------
 
 	bool CGraphics::HandleMessage(const MaterialMessage& m)
 	{
 		_graphicsEntity->setMaterialName(m._name);
 		return true;
+
 	} // SET_MATERIAL_NAME
+
+	//---------------------------------------------------------
 
 	bool CGraphics::HandleMessage(const ToggleMessage& m)
 	{

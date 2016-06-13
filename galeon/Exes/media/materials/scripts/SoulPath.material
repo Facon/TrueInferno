@@ -4,6 +4,10 @@ material SoulPath
 	{
 		pass
 		{
+			ambient  1 1 1 1
+			diffuse  0.4 0.4 0.4 1
+			specular 1 1 1 30
+			
 			// Textura visible por los 2 lados
 			cull_hardware none
 			cull_software none
@@ -11,6 +15,7 @@ material SoulPath
 			texture_unit
 			{
 				texture terrain/tile_carretera.jpg
+				colour_op_ex modulate_x4 src_texture src_current
 			}
 		}
 	}

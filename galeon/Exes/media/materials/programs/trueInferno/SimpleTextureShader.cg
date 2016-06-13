@@ -1,0 +1,35 @@
+// --------------------------------------------------------------------
+// SimpleTextureShader: Vertex program
+// Author: Raul Segura
+// --------------------------------------------------------------------
+
+void simple_texture_vp
+(
+	in float4 position  : POSITION,
+	in float2 texCoord0 : TEXCOORD0,
+	out float4 oPosition : POSITION,
+	out float2 uv0       : TEXCOORD0,
+	uniform float4x4 worldViewProj
+)
+{
+	// Calculate output position
+	oPosition = mul(worldViewProj, position);
+
+	// Simply copy the input vertex UV to the output
+	uv0 = texCoord0;
+}
+
+// -----------------------------------------------------------------
+// SimpleTextureShader: Fragment program
+// Author: Raul Segura
+// -----------------------------------------------------------------
+
+void simple_texture_fp
+(
+	in float2 uv0 : TEXCOORD0,
+	out float4 color : COLOR,
+	uniform sampler2D texture
+)
+{
+	color = tex2D(texture, uv0);
+}

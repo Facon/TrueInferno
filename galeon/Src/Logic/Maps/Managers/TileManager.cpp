@@ -259,20 +259,16 @@ namespace Logic {
 				
 				TerrainType terrainType;
 				char terrainTypeChar(item[0]);
-				std::string materialName;
 
 				switch (terrainTypeChar) {
 				case '0':
 					terrainType = TerrainType::Empty;
-					materialName = "Terrain/Empty";
 					break;
 				case '1':
 					terrainType = TerrainType::Mineral;
-					materialName = "Terrain/Mineral";
 					break;
 				case '2':
 					terrainType = TerrainType::Gas;
-					materialName = "Terrain/Gas";
 					break;
 				default:
 					assert("Unknown terrain type char: " + terrainType);
