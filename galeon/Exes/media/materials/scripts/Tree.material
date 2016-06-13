@@ -5,8 +5,8 @@ material Tree
 	{
 		pass
 		{
-			ambient 0.494 0.298 0.066 1
-			diffuse 1 1 1 1
+			ambient 1 1 1 1
+			diffuse 0 1 0 1
 		}
 	}
 }

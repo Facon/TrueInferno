@@ -5,8 +5,10 @@ material Furnace
 	{
 		pass
 		{
-			ambient 0.721 0 0 1
-			diffuse 1 1 1 1
+			ambient  1 1 1 1
+			diffuse  0.8 0 0 1
+			specular 1 1 1 30
+			emissive 0.2 0 0 1
 		}
 	}
 }

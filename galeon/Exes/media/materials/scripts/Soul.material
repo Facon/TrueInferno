@@ -17,7 +17,7 @@ material Ogre/Eyes
 	{
 		pass
 		{
-			ambient 0.5 0.32 0.8z 1
+			ambient 0.5 0.32 0.8 1
 			diffuse 1 1 1 1
 		}
 	}

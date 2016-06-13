@@ -87,7 +87,7 @@ namespace Graphics
 	} // deattachFromScene
 	
 	//--------------------------------------------------------
-		
+	
 	bool CEntity::load()
 	{
 		try
@@ -98,8 +98,7 @@ namespace Graphics
 		{
 			return false;
 		}
-		_entityNode = _scene->getSceneMgr()->getRootSceneNode()->
-								createChildSceneNode(_name + "_node");
+		_entityNode = _scene->getSceneMgr()->getRootSceneNode()->createChildSceneNode(_name + "_node");
 		_entityNode->attachObject(_entity);
 		_loaded = true;
 
@@ -238,34 +237,97 @@ namespace Graphics
 
 	//--------------------------------------------------------
 	
-	void CEntity::setColor(const Vector3 &color)
+	void CEntity::setDiffuseColor(const Vector3 &color)
 	{
 		assert(_entityNode && "La entidad no ha sido cargada");
-		if (_entity) {
+		if (_entity)
+		{
 			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
 			{
 				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
-				Ogre::MaterialPtr entityMaterialClone = entityMaterial->clone(_entityNode->getName() + "_" + entityMaterial->getName());
-				entityMaterialClone->getTechnique(0)->getPass(0)->setAmbient(color.x, color.y, color.z);
-				_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+				std::string entityMaterialName = entityMaterial->getName();
+
+				std::size_t found = entityMaterialName.find("_cl_");
+				if (found != std::string::npos)
+				{
+					entityMaterial->getTechnique(0)->getPass(0)->
+						setDiffuse(Ogre::ColourValue(color.x, color.y, color.z, 1.0f));
+				}
+				else
+				{
+					Ogre::MaterialPtr entityMaterialClone = entityMaterial->
+						clone(_entityNode->getName() + "_cl_" + entityMaterial->getName());
+
+					entityMaterialClone->getTechnique(0)->getPass(0)->
+						setDiffuse(Ogre::ColourValue(color.x, color.y, color.z, 1.0f));
+
+					_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+				}
 			}
 		}
 
-	} // setColor
+	} // setDiffuseColor
+
+	//--------------------------------------------------------
+	
+	void CEntity::setEmissiveColor(const Vector3 &color)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entity)
+		{
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+			{
+				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
+				std::string entityMaterialName = entityMaterial->getName();
+
+				std::size_t found = entityMaterialName.find("_cl_");
+				if (found != std::string::npos)
+				{
+					entityMaterial->getTechnique(0)->getPass(0)->
+						setEmissive(Ogre::ColourValue(color.x, color.y, color.z, 1.0f));
+				}
+				else
+				{
+					Ogre::MaterialPtr entityMaterialClone = entityMaterial->
+						clone(_entityNode->getName() + "_cl_" + entityMaterial->getName());
+
+					entityMaterialClone->getTechnique(0)->getPass(0)->
+						setEmissive(Ogre::ColourValue(color.x, color.y, color.z, 1.0f));
+
+					_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+				}
+			}
+		}
+
+	} // setEmissiveColor
 	
 	//--------------------------------------------------------
 	
-	Vector3 CEntity::getColor()
+	Vector3 CEntity::getDiffuseColor()
 	{
 		if (_entityNode) {
 			Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(0)->getMaterial();
-			Ogre::ColourValue entityMatColor = entityMaterial->getTechnique(0)->getPass(0)->getAmbient();
+			Ogre::ColourValue entityMatColor = entityMaterial->getTechnique(0)->getPass(0)->getDiffuse();
 			return Vector3(entityMatColor.r, entityMatColor.g, entityMatColor.b);
 		}
 
 		throw new std::exception("La entidad no ha sido cargada");
 
-	} // getColor
+	} // getDiffuseColor
+	
+	//--------------------------------------------------------
+	
+	Vector3 CEntity::getEmissiveColor()
+	{
+		if (_entityNode) {
+			Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(0)->getMaterial();
+			Ogre::ColourValue entityMatColor = entityMaterial->getTechnique(0)->getPass(0)->getEmissive();
+			return Vector3(entityMatColor.r, entityMatColor.g, entityMatColor.b);
+		}
+
+		throw new std::exception("La entidad no ha sido cargada");
+
+	} // getEmissiveColor
 	
 	//--------------------------------------------------------
 	
@@ -274,23 +336,37 @@ namespace Graphics
 		assert(_entityNode && "La entidad no ha sido cargada");
 		assert((factor > 0) && (factor < 1) && "Factor must be in (0,1)");
 
-		if (_entity) {
+		if (_entity)
+		{
 			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
 			{
 				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
-				Ogre::MaterialPtr entityMaterialClone = entityMaterial->clone(_entityNode->getName() + "_" + entityMaterial->getName());
+				std::string entityMaterialName = entityMaterial->getName();
 
-				// Cogemos el color actual
-				Ogre::ColourValue color = entityMaterialClone->getTechnique(0)->getPass(0)->getAmbient();
+				std::size_t found = entityMaterialName.find("_cl_");
+				if (found != std::string::npos)
+				{
+					// Cogemos el color actual
+					Ogre::ColourValue color = entityMaterial->getTechnique(0)->getPass(0)->getDiffuse();
 
-				// Y se le aplica una multiplicación para hacerlo más oscuro
-				entityMaterialClone->getTechnique(0)->getPass(0)->setAmbient(color.r * factor, color.g * factor, color.b * factor);
+					entityMaterial->getTechnique(0)->getPass(0)->
+						setDiffuse(color.r * factor, color.g * factor, color.b * factor, color.a);
+				}
+				else
+				{
+					Ogre::MaterialPtr entityMaterialClone = entityMaterial->
+						clone(_entityNode->getName() + "_cl_" + entityMaterial->getName());
 
-				_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+					Ogre::ColourValue color = entityMaterial->getTechnique(0)->getPass(0)->getDiffuse();
+					entityMaterialClone->getTechnique(0)->getPass(0)->
+						setDiffuse(color.r * factor, color.g * factor, color.b * factor, color.a);
+
+					_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+				}
 			}
 		}
 
-	} // setLogicDisabledColor
+	} // makeDarkerColor
 
 	//--------------------------------------------------------
 
@@ -299,23 +375,38 @@ namespace Graphics
 		assert(_entityNode && "La entidad no ha sido cargada");
 		assert((factor > 0) && (factor < 1) && "Factor must be in (0,1)");
 
-		if (_entity) {
+		if (_entity)
+		{
 			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
 			{
 				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
-				Ogre::MaterialPtr entityMaterialClone = entityMaterial->clone(_entityNode->getName() + "_" + entityMaterial->getName());
+				std::string entityMaterialName = entityMaterial->getName();
 
-				// Cogemos el color actual
-				Ogre::ColourValue color = entityMaterialClone->getTechnique(0)->getPass(0)->getAmbient();
+				std::size_t found = entityMaterialName.find("_cl_");
+				if (found != std::string::npos)
+				{
+					// Cogemos el color actual
+					Ogre::ColourValue color = entityMaterial->getTechnique(0)->getPass(0)->getDiffuse();
 
-				// Y se le aplica la multiplicación inversa que hicimos al desactivar para devolverla al color inicial
-				entityMaterialClone->getTechnique(0)->getPass(0)->setAmbient(color.r / factor, color.g / factor, color.b / factor);
+					// Y se le aplica la multiplicación inversa que hicimos al desactivar para devolverla al color inicial
+					entityMaterial->getTechnique(0)->getPass(0)->
+						setDiffuse(color.r / factor, color.g / factor, color.b / factor, color.a);
+				}
+				else
+				{
+					Ogre::MaterialPtr entityMaterialClone = entityMaterial->
+						clone(_entityNode->getName() + "_cl_" + entityMaterial->getName());
 
-				_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+					Ogre::ColourValue color = entityMaterial->getTechnique(0)->getPass(0)->getDiffuse();
+					entityMaterialClone->getTechnique(0)->getPass(0)->
+						setDiffuse(color.r / factor, color.g / factor, color.b / factor, color.a);
+
+					_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+				}
 			}
 		}
 
-	} // setLogicEnabledColor
+	} // makeClearerColor
 
 	//--------------------------------------------------------
 
@@ -327,7 +418,19 @@ namespace Graphics
 				_entity->getSubEntity(i)->setMaterialName(materialName);
 		}
 
-	} // setMaterial
+	} // setMaterialName
+
+	//---------------------------------------------------------
+
+	void CEntity::setCustomParameter(int index, Vector4 param)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entity) {
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+				_entity->getSubEntity(i)->setCustomParameter(index, param);
+		}
+
+	} // setCustomParameter
 	
 	//--------------------------------------------------------
 	

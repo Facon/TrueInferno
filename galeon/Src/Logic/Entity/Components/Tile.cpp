@@ -1,9 +1,10 @@
 #include "Tile.h"
 
-#include "Logic/Entity/Entity.h"
 #include <iostream>
 #include "Map/MapEntity.h"
 
+#include "Logic/Entity/Entity.h"
+#include "Logic/Entity/Components/Graphics.h"
 #include "Logic/Maps/Managers/TileManager.h"
 
 #include <cassert>
@@ -76,13 +77,15 @@ namespace Logic {
 		materialName = materialName + "_alt";
 		*/
 
-		// Cambiamos el material
-		MaterialMessage message(materialName);
+		CGraphics *graphics = _entity->getComponent<Logic::CGraphics>();
+		if (graphics == nullptr)
+		{
+			assert(false && "Can't change terrain material");
+			return false;
+		}
 
-		bool result = message.Dispatch(*_entity);
-		assert(result && "Can't change terrain material");
-
-		return result;
+		graphics->setMaterialName(materialName);
+		return true;
 	}
 
 	const Vector3 Tile::getLogicPosition() {

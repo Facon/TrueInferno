@@ -100,22 +100,30 @@ namespace Graphics
 	void CScene::activate()
 	{
 		buildStaticGeometry();
-		// HACK en pruebas
+
+		// Viewport
 		_viewport = BaseSubsystems::CServer::getSingletonPtr()->getRenderWindow()
 						->addViewport(_camera->getCamera());
-		_viewport->setBackgroundColour(Ogre::ColourValue::Black);
 
-		_sceneMgr->setAmbientLight(Ogre::ColourValue(.9f,.9f,.9f));
+		// Background
+		Ogre::ColourValue backgroundColor = Ogre::ColourValue(0.2f, 0.0f, 0.0f, 0.5f);
+		_viewport->setBackgroundColour(backgroundColor);
 
-		// Además de la luz ambiente creamos una luz direccional que 
-		// hace que se vean mejor los volúmenes de las entidades.
-		_directionalLight = _sceneMgr->createLight("directional light");
-		_directionalLight->setDiffuseColour(.5f,.5f,.5f);
-		_directionalLight->setSpecularColour(.5f,.5f,.5f);
+		// Luz ambiente
+		_sceneMgr->setAmbientLight(Ogre::ColourValue(0.0f, 0.0f, 0.0f));
+
+		// Sombras
+		_sceneMgr->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_MODULATIVE);
+		_sceneMgr->setShadowColour(Ogre::ColourValue(0.3f, 0.3f, 0.3f, 0.5f));
+
+		// Luz direccional
+		_directionalLight = _sceneMgr->createLight("DirectionalLight");
+		_directionalLight->setDiffuseColour(1.0f, 0.7f, 0.7f);
+		_directionalLight->setSpecularColour(1.0f, 0.5f, 0.0f);
 		_directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
-		_directionalLight->setDirection(0, -150, 0);
-		_directionalLight->setType(Ogre::Light::LT_POINT);
-		_directionalLight->setPosition(0, 500, 0);
+		_directionalLight->setPosition(200, 200, 50);
+		_directionalLight->setDirection(-200, -200, -50);
+		_directionalLight->setCastShadows(true);
 
 	} // activate
 
@@ -139,7 +147,6 @@ namespace Graphics
 	
 	//--------------------------------------------------------
 
-	
 	void CScene::tick(float secs)
 	{	
 		TEntityList::const_iterator it = _dynamicEntities.begin();

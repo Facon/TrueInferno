@@ -5,8 +5,10 @@ material Mine
 	{
 		pass
 		{
-			ambient 0.325 0.235 0.129 1
-			diffuse 1 1 1 1
+			ambient  1 1 1 1
+			diffuse  0.8 0.1 0.1 1
+			specular 1 1 1 30
+			emissive 0.6 0.1 0.1 1
 		}
 	}
 }
