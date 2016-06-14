@@ -42,12 +42,13 @@ namespace AI{
 				//IconMessage m(MessageType::ICON, Billboard::getResourceIcon(_resourceType));
 				// De momento ponemos la pala que es lo más parecido a un transporte que tenemos
 				IconMessage m(MessageType::ICON_ADD, IconType::IconType::SHOVEL);
-				bool result = m.Dispatch(*executor);
+				
+				const bool result = m.Dispatch(*executor);
 				assert(result && "Can't set transport soul icon");
 
 				// Icono por edificio de destino
-				result = addDestinationBuildingIcon();
-				assert(result && "Can't set building icon");
+				const bool result2 = addDestinationBuildingIcon();
+				assert(result2 && "Can't set building icon");
 			}
 
 			else{

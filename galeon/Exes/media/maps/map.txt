@@ -69,7 +69,8 @@ Map = {
 		popuplayout = "UIBuildingSelectionPopupHellquarters.layout",
 		image = "HellQuarters",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
-		defaultBillboard = "NONE",
+		billboardSetPosition = { 0, 100, 0 },
+		defaultBillboard = "SOUL",
 	},
 	
 	Evilator = {

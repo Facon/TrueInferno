@@ -181,6 +181,7 @@ namespace Logic
 		{
 			// Avoid adding the same icon twice
 			bool isNew = true;
+
 			for (unsigned int i = 0; i < _bbSet->getNumBillboards(); ++i)
 			{
 				if (_bbSet->getBillboard(i)->getTexcoordIndex() == msg._icon)
@@ -266,13 +267,9 @@ namespace Logic
 	{
 		unsigned int numBillboards = _bbSet->getNumBillboards();
 
-		if (numBillboards == 0)
+		if (numBillboards == 0 || numBillboards == 1)
 		{
 			return;
-		}
-		else if (numBillboards == 1)
-		{
-			_bbSet->getBillboard(0)->setPosition(Vector3(0.0f, 0.0f, 0.0f));
 		}
 		else
 		{
