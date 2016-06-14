@@ -1,6 +1,7 @@
 #ifndef SIDEBARUI_H_
 #define SIDEBARUI_H_
 
+#include "Logic/Entity/Components/Tile.h"
 
 namespace Logic
 {
@@ -27,6 +28,13 @@ namespace GUI
 		bool _clearTerrain = false;
 
 		bool _firstRoad = true;
+
+		Logic::Tile* _previousOriginRoadTile = nullptr;
+		Logic::Tile* _previousToRoadTile = nullptr;
+		std::vector<Logic::Tile*>* path = nullptr;
+		
+		int _tickCountResetValue = 10;
+		int _tickCountLimit = _tickCountResetValue;
 
 		bool createFurnaceReleased(const CEGUI::EventArgs& e);
 		bool createRoadReleased(const CEGUI::EventArgs& e);

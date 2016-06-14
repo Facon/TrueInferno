@@ -161,8 +161,14 @@ namespace GUI
 
 				if (_roadInConstruction == 2) // TODO Convendría usar un enum para mejorar legiblidad
 				{
-					std::vector<Logic::Tile*>* path= AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(_originRoadTile, to, true);
-
+					--_tickCountLimit;
+					if (_previousOriginRoadTile != _originRoadTile || _previousToRoadTile != to && _tickCountLimit <= 0)
+					{
+						path = AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(_originRoadTile, to, true);
+						_previousOriginRoadTile = _originRoadTile;
+						_previousToRoadTile = to;
+						_tickCountLimit = _tickCountResetValue;
+					}
 					if (path)
 					{
 						Logic::CBuildingManager::getSingletonPtr()->floatPlaceableTo(_placeableEntity, to->getLogicPosition(), false);
@@ -331,6 +337,11 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("OgreTrayImages/MouseArrow");
 		_clearTerrain = false;
 		_roadInConstruction = 0;
+		path = nullptr;
+		_previousOriginRoadTile = nullptr;
+		_previousToRoadTile = nullptr;
+		_tickCountLimit = _tickCountResetValue;
+
 		if (_placeableRoadSize > 0){
 			for (int i = 0; i < _placeableRoadSize; ++i){
 				if (_placeableRoad[i])
@@ -416,6 +427,10 @@ namespace GUI
 						_roadInConstruction = 0;
 						_placeableRoadSize = 0;
 						_originRoadTile = nullptr;
+						path = nullptr;
+						_previousOriginRoadTile = nullptr;
+						_previousToRoadTile = nullptr;
+						_tickCountLimit = _tickCountResetValue;
 
 						// @TODO Hacer esto bien...
 						if (_firstRoad) {
