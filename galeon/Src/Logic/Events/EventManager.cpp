@@ -494,4 +494,11 @@ namespace Logic {
 		return false;
 	}
 
+	bool CEventManager::HandleMessage(const ParticleMessage& msg)
+	{
+		//std::cout << msg._type << "\n";
+
+		return false;
+	}
+
 } // namespace Logic
