@@ -26,6 +26,12 @@ Contiene la implementación de la clase que representa una entidad gráfica.
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 
+#include "Graphics/Server.h"
+#include "Graphics/Scene.h"
+#include "OgreParticleSystem.h"
+
+#include "Logic/Entity/ParticleType.h"
+
 namespace Graphics 
 {
 	CEntity::CEntity(const std::string &name, const std::string &mesh, const Vector3 &meshDimensions)
@@ -442,5 +448,56 @@ namespace Graphics
 		throw new std::exception("La entidad no ha sido cargada");
 
 	} // getMaterialName
+
+	//--------------------------------------------------------
+
+	void CEntity::addParticles(Logic::ParticleType particleType) {
+		Graphics::CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
+
+		// Creamos el sistema de partículas con un nombre único
+		std::string templateName = getParticleSystemTemplateName(particleType);
+		std::string id = getParticleSystemId(particleType);
+		Ogre::ParticleSystem* particleSystem = scene->getSceneMgr()->createParticleSystem(id, templateName);
+
+		//  Lo añadimos a la escena
+		this->_entityNode->attachObject(particleSystem);
+	}
+
+	//--------------------------------------------------------
+
+	void CEntity::removeParticles(Logic::ParticleType particleType) {
+		Graphics::CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
+
+		// TODO Quizás sea conveniente NO eliminar para ahorrar tiempo en el próximo uso
+		// Eliminamos el sistema de partículas
+		std::string id = getParticleSystemId(particleType);
+		//scene->getSceneMgr()->destroyParticleSystem(id);
+
+		// Lo quitamos de la escena
+		this->_entityNode->detachObject(id);
+	}
+
+	//--------------------------------------------------------
+
+	std::string CEntity::getParticleSystemTemplateName(Logic::ParticleType particleType) {
+		switch (particleType)
+		{
+		case Logic::ParticleType::CONSTRUCTION_SMOKE:
+			return "ConstructionSmoke";
+
+		case Logic::ParticleType::DESTRUCTION_SMOKE:
+			return "DestructionSmoke";
+
+		default:
+			assert(false && "No name for this particleType");
+			return "";
+		}
+	}
+
+	//--------------------------------------------------------
+
+	std::string CEntity::getParticleSystemId(Logic::ParticleType particleType) {
+		return "Particle_" + getParticleSystemTemplateName(particleType) + "_" + _entity->getName();
+	}
 
 } // namespace Graphics

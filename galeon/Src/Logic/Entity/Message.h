@@ -38,6 +38,8 @@ namespace Logic
 	{
 		enum IconType;
 	}
+
+	enum ParticleType;
 };
 
 namespace AI
@@ -130,6 +132,7 @@ namespace Logic
 			SOUND,
 			SOUND_PLAY,
 			SOUND_STOP,
+			PARTICLE_CHANGE,
 		};
 
 		MessageType _type;
@@ -641,6 +644,21 @@ namespace Logic
 		std::string _soundName;
 
 		SoundMessage(MessageType type, std::string soundName);
+
+		virtual bool Dispatch(MessageHandler& handler) const;
+	};
+
+	class ParticleMessage : public Message
+	{
+	public:
+		// Tipo de sistema de partículas a activar/desatctivar
+		ParticleType _particleType;
+
+		// True para activar, false para desactivar
+		bool _run;
+
+		// PARTICLE_CHANGE: Activa o desactiva el sistema de partículas indicado
+		ParticleMessage(ParticleType particleType, bool run);
 
 		virtual bool Dispatch(MessageHandler& handler) const;
 	};

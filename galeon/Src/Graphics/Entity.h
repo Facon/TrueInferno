@@ -30,6 +30,11 @@ namespace Graphics
 	class CScene;
 }
 
+namespace Logic
+{
+	enum ParticleType;
+}
+
 // Factor para oscurecer los colores. Cuanto más cerca de 0 más oscuro
 #define CHANGE_COLOR_FACTOR 0.4
 
@@ -213,6 +218,12 @@ namespace Graphics
 		*/
 		Ogre::Entity* getEntity() {return _entity;}
 
+		/** Añade un sistema de partículas del tipo dado (sólo puede haber uno de cada tipo) */
+		void addParticles(Logic::ParticleType particleType);
+
+		/** Elimina el sistema de partículas del tipo dado */
+		void removeParticles(Logic::ParticleType particleType);
+
 	protected:
 
 		// CScene es la única que puede añadir o eliminar entidades de una 
@@ -302,6 +313,13 @@ namespace Graphics
 		Indica si la entidad ha sido cargada en el motor gráfico.
 		*/
 		bool _loaded;
+	
+	private:
+		/** Obtiene el nombre de plantilla para el tipo de sistema partículas dado */
+		static std::string getParticleSystemTemplateName(Logic::ParticleType particleType);
+
+		/** Obtiene el identificador único del tipo de sistema partículas dado para esta entidad */
+		std::string CEntity::getParticleSystemId(Logic::ParticleType particleType);
 
 	}; // class CEntity
 

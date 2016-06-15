@@ -177,6 +177,7 @@ namespace Logic
 		bool HandleMessage(const PowerMessage& msg);
 		bool HandleMessage(const ConsumptionMessage& msg);
 		bool HandleMessage(const SoundMessage& msg);
+		bool HandleMessage(const ParticleMessage& msg);
 
 	protected:
 

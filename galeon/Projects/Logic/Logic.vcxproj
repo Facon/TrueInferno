@@ -192,6 +192,7 @@
     <ClInclude Include="..\..\Src\Logic\Entity\IconType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\LogicRequirement.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\MessageHandler.h" />
+    <ClInclude Include="..\..\Src\Logic\Entity\ParticleType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\PlaceableType.h" />
     <ClInclude Include="..\..\Src\Logic\Entity\TerrainType.h" />
     <ClInclude Include="..\..\Src\Logic\Events\BuildingDestructionEvent.h" />

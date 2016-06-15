@@ -13,12 +13,13 @@
 #include "Logic/Entity/PlaceableType.h"
 #include "Logic/Entity/Message.h"
 #include "Logic/HFManager.h"
+#include "Logic/Entity/ParticleType.h"
 
 namespace Logic {
 	RTTI_ROOT_IMPL(CPlaceable);
 	IMP_FACTORY(CPlaceable);
 
-	CPlaceable::CPlaceable() : IComponent(), _hadesFavorReward(0), _defaultMaterial(""), _doingGraphicPlace(false), _doingGraphicFloat(false), _placeSpeed(0.05), _floatSpeed(0.1) {
+	CPlaceable::CPlaceable() : IComponent(), _hadesFavorReward(0), _defaultMaterial(""), _doingGraphicPlace(false), _doingGraphicFloat(false), _placeSpeed(PLACE_SPEED), _floatSpeed(FLOAT_SPEED) {
 	}
 
 	CPlaceable::~CPlaceable() {
@@ -207,7 +208,12 @@ namespace Logic {
 		// Forzamos rechequeo del estado de habilitado de la entidad para pintar de oscuro el material
 		ToggleMessage toggleMessage = ToggleMessage();
 		toggleMessage.Dispatch(*_entity);
-		
+
+		// Activamos partículas de construcción
+		ParticleMessage particleMessage(ParticleType::CONSTRUCTION_SMOKE, true);
+		result = particleMessage.Dispatch(*_entity);
+		assert(result && "Can't start particles");
+
 		return true;
 	}
 
@@ -561,6 +567,14 @@ namespace Logic {
 
 	void CPlaceable::doGraphicPlace() {
 		doDelayedGraphicMovement(_targetPlacePosition, _placeSpeed, _doingGraphicPlace);
+
+		// Si acabó la colocación
+		if (!_doingGraphicPlace) {
+			// Detenemos las partículas de humo de construcción
+			ParticleMessage particleMessage(ParticleType::CONSTRUCTION_SMOKE, false);
+			bool result = particleMessage.Dispatch(*_entity);
+			assert(result && "Can't stop particles");
+		}
 	}
 
 	void CPlaceable::doDelayedGraphicMovement(const Vector3& targetPosition, float speed, bool& moving) {

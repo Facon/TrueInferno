@@ -106,6 +106,12 @@ namespace Logic {
 		/** Altura añadida a la posición del Placeable para que parezca que flota por encima */
 		const float HEIGHT_FLOATING_OVER_TILE = 1.5f;
 
+		/** Velocidad a la que se coloca gráficamente el edificio */
+		const float PLACE_SPEED = 0.025;
+		
+		/** Velocidad a la que se desplaza gráficamente el edificio */
+		const float FLOAT_SPEED = 0.1;
+
 		/** Floor's absolute logic origin position in the matrix */
 		Vector3 _floorOriginPosition;
 

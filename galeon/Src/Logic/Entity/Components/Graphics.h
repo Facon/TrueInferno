@@ -103,6 +103,7 @@ namespace Logic
 		bool HandleMessage(const ColorMessage& m);
 		bool HandleMessage(const MaterialMessage& m);
 		bool HandleMessage(const ToggleMessage& m);
+		bool HandleMessage(const ParticleMessage &m);
 
 	protected:
 

@@ -167,5 +167,17 @@ namespace Logic
 		return true;
 	}
 
+	bool CGraphics::HandleMessage(const ParticleMessage &m)
+	{
+		if (m._type != MessageType::PARTICLE_CHANGE)
+			return false;
+
+		// Activamos partículas
+		if (m._run)
+			_graphicsEntity->addParticles(m._particleType);
+		else
+			_graphicsEntity->removeParticles(m._particleType);
+	}
+
 } // namespace Logic
 

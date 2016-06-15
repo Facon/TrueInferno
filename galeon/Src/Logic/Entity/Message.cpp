@@ -519,4 +519,16 @@ namespace Logic
 
 		return handler.HandleMessage(*this);
 	}
+
+
+	ParticleMessage::ParticleMessage(ParticleType particleType, bool run) : Message(MessageType::PARTICLE_CHANGE), _particleType(particleType), _run(run)
+	{}
+
+	bool ParticleMessage::Dispatch(MessageHandler& handler) const
+	{
+		RESEND(*this);
+
+		return handler.HandleMessage(*this);
+	}
+
 } // namespace Logic

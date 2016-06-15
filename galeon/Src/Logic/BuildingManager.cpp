@@ -14,6 +14,7 @@ Contiene la implementación del gestor de la matriz de tiles.
 */
 
 #include "BuildingManager.h"
+
 #include "Map/MapParser.h"
 #include "Map/MapEntity.h"
 #include "Logic/Maps/EntityFactory.h"
@@ -23,6 +24,9 @@ Contiene la implementación del gestor de la matriz de tiles.
 #include "Logic/Entity/Message.h"
 #include "Logic\Maps\Managers\TileManager.h"
 #include "Logic\Entity\Components\Tile.h"
+
+#include "Logic\Entity\Components\Graphics.h"
+#include "Graphics\Entity.h"
 
 #include <cassert>
 
