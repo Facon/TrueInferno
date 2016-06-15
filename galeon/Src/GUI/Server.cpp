@@ -102,6 +102,7 @@ namespace GUI {
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoIcons.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoUITextures.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoBuildings.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoUIBars.scheme");
 
 #ifndef NON_EXCLUSIVE_MODE_IN_WINDOW_MODE 
 		// Establecemos cual será el puntero del ratón.
