@@ -161,7 +161,7 @@ namespace GUI
 
 				if (_roadInConstruction == 2) // TODO Convendría usar un enum para mejorar legiblidad
 				{
-					--_tickCountLimit;
+					_tickCountLimit-=msecs;
 					if (_previousOriginRoadTile != _originRoadTile || _previousToRoadTile != to && _tickCountLimit <= 0)
 					{
 						path = AI::CServer::getSingletonPtr()->getSoulPathAStarRoute(_originRoadTile, to, true);
@@ -331,7 +331,7 @@ namespace GUI
 	}
 
 	void SideBarUI::ClearBuildingConstruction(bool clearPopups){
-		if (clearPopups){}
+		if (clearPopups)
 			GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
 
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
@@ -469,6 +469,8 @@ namespace GUI
 	void SideBarUI::setEventWindowVisible(bool visible)
 	{
 		_uibuttonsWindow->setVisible(visible);
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		//uiManager->getRankUI()->reDrawUI();
 	}
 
 }

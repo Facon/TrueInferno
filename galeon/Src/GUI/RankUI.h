@@ -25,7 +25,7 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
-
+		void reDrawUI();
 		/** Solicita actualización del ranking de dioses */
 		void updateGodRank();
 	};

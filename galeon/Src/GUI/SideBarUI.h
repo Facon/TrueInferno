@@ -33,7 +33,7 @@ namespace GUI
 		Logic::Tile* _previousToRoadTile = nullptr;
 		std::vector<Logic::Tile*>* path = nullptr;
 		
-		int _tickCountResetValue = 10;
+		int _tickCountResetValue = 100;
 		int _tickCountLimit = _tickCountResetValue;
 
 		bool createFurnaceReleased(const CEGUI::EventArgs& e);
