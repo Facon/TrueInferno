@@ -177,6 +177,8 @@ namespace Logic
 			_graphicsEntity->addParticles(m._particleType);
 		else
 			_graphicsEntity->removeParticles(m._particleType);
+
+		return true;
 	}
 
 } // namespace Logic

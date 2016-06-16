@@ -107,7 +107,7 @@ namespace Logic {
 		const float HEIGHT_FLOATING_OVER_TILE = 1.5f;
 
 		/** Velocidad a la que se coloca gráficamente el edificio */
-		const float PLACE_SPEED = 0.025;
+		const float PLACE_SPEED = 0.01;
 		
 		/** Velocidad a la que se desplaza gráficamente el edificio */
 		const float FLOAT_SPEED = 0.1;

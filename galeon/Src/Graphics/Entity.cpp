@@ -460,7 +460,10 @@ namespace Graphics
 		Ogre::ParticleSystem* particleSystem = scene->getSceneMgr()->createParticleSystem(id, templateName);
 
 		//  Lo añadimos a la escena
-		this->_entityNode->attachObject(particleSystem);
+		if (particleSystem != nullptr)
+			this->_entityNode->attachObject(particleSystem);
+		else
+			assert(false && "Can't add particles");
 	}
 
 	//--------------------------------------------------------
@@ -468,13 +471,15 @@ namespace Graphics
 	void CEntity::removeParticles(Logic::ParticleType particleType) {
 		Graphics::CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
 
-		// TODO Quizás sea conveniente NO eliminar para ahorrar tiempo en el próximo uso
 		// Eliminamos el sistema de partículas
 		std::string id = getParticleSystemId(particleType);
-		//scene->getSceneMgr()->destroyParticleSystem(id);
 
 		// Lo quitamos de la escena
-		this->_entityNode->detachObject(id);
+		Ogre::MovableObject* o = this->_entityNode->getAttachedObject(id);
+		if (o != nullptr){
+			o->detachFromParent();
+			scene->getSceneMgr()->destroyParticleSystem(id);
+		}
 	}
 
 	//--------------------------------------------------------
@@ -487,6 +492,9 @@ namespace Graphics
 
 		case Logic::ParticleType::DESTRUCTION_SMOKE:
 			return "DestructionSmoke";
+
+		case Logic::ParticleType::FIRE_SMOKE:
+			return "FireSmoke";
 
 		default:
 			assert(false && "No name for this particleType");

@@ -562,13 +562,19 @@ namespace Logic {
 	}
 
 	void CPlaceable::doGraphicFloat() {
-		doImmediateGraphicMovement(_targetFloatPosition, _doingGraphicFloat);
+		// Flotamos si es necesario
+		if (_doingGraphicFloat)
+			doImmediateGraphicMovement(_targetFloatPosition, _doingGraphicFloat);
 	}
 
 	void CPlaceable::doGraphicPlace() {
-		doDelayedGraphicMovement(_targetPlacePosition, _placeSpeed, _doingGraphicPlace);
+		// Colocamos si es necesario
+		if (_doingGraphicPlace)
+			doDelayedGraphicMovement(_targetPlacePosition, _placeSpeed, _doingGraphicPlace);
+		else
+			return;
 
-		// Si acabó la colocación
+		// Si acabó ya la colocación
 		if (!_doingGraphicPlace) {
 			// Detenemos las partículas de humo de construcción
 			ParticleMessage particleMessage(ParticleType::CONSTRUCTION_SMOKE, false);

@@ -1,0 +1,86 @@
+// Example particle systems
+
+// smoke
+particle_system DestructionSmoke
+{
+	material        	Particle/Smoke
+	particle_width  	1
+	particle_height 	1
+	cull_each       	true
+	quota           	500
+	sorted				true
+	local_space			true
+	
+	billboard_type  	point
+	billboard_origin	bottom_center
+
+	// Fixed update a 30 fps
+	iteration_interval = 0.033
+	
+	// No actualizamos si pasan 2s desde que salió de la vista
+	nonvisible_update_timeout 2
+    
+	// Area emitter
+	emitter Point
+	{
+		position -10 0 -10
+		angle 35
+		emission_rate 15
+		time_to_live 2
+		direction 0 1 0
+		velocity_min 50
+		velocity_max 80    	
+	}
+
+	emitter Point
+	{
+		position 10 0 -10
+		angle 35
+		emission_rate 15
+		time_to_live 2
+		direction 0 1 0
+		velocity_min 50
+		velocity_max 80    	
+	}
+
+	emitter Point
+	{
+		position -10 0 10
+		angle 35
+		emission_rate 15
+		time_to_live 2
+		direction 0 1 0
+		velocity_min 50
+		velocity_max 80    	
+	}
+
+	emitter Point
+	{
+		position 10 0 10
+		angle 35
+		emission_rate 15
+		time_to_live 2
+		direction 0 1 0
+		velocity_min 50
+		velocity_max 80    	
+	}
+	
+	affector ColourImage
+	{
+		image other/smokecolors.png
+	}
+
+   	affector Rotator
+   	{
+		rotation_range_start 0
+		rotation_range_end 360
+		rotation_speed_range_start -60
+		rotation_speed_range_end 200
+   	}
+
+   	affector Scaler
+   	{
+       	rate 50
+   	}
+
+}

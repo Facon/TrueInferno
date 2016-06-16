@@ -6,6 +6,10 @@ material Particle/Smoke
 		{
 			lighting off
 			scene_blend alpha_blend
+			
+			// Efecto más "cartoon"
+			//scene_blend colour_blend
+			
 			depth_write off
 			diffuse vertexcolour
 

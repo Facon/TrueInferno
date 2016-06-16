@@ -6,7 +6,8 @@ namespace Logic
 	enum ParticleType
 	{
 		CONSTRUCTION_SMOKE,
-		DESTRUCTION_SMOKE
+		DESTRUCTION_SMOKE,
+		FIRE_SMOKE,
 	};
 }
 

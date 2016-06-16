@@ -268,6 +268,8 @@ namespace Logic {
 	}
 
 	void CBuildingManager::destroyPlaceable(CEntity *entity){
+		// TODO Diferenciar entre destrucción con animación o sin ella
+
 		// Se elimina la entidad inmediatamente. OJO: deleteDeferred no eliminaba correctamente la entidad
 		CEntityFactory::getSingletonPtr()->deferredDeleteEntity(entity);
 

@@ -1,0 +1,110 @@
+// Example particle systems
+
+// smoke
+particle_system ConstructionSmoke
+{
+	material        	Particle/Smoke
+	particle_width  	1
+	particle_height 	1
+	cull_each       	true
+	quota           	500
+	sorted				false
+	local_space			true
+	
+	billboard_type  	point
+	billboard_origin	bottom_center
+
+	// Fixed update a 30 fps
+	iteration_interval = 0.033
+	
+	// No actualizamos si pasan 2s desde que salió de la vista
+	nonvisible_update_timeout 2
+    
+	// Area emitter
+	emitter Point
+	{
+		//position 0 15 -15
+		position -50 0 -50
+		angle 35
+		emission_rate 15
+		time_to_live 4		
+		direction 0 -1 0
+		velocity_min 50
+		velocity_max 60    	
+	}
+
+	emitter Point
+	{
+		position 50 0 -50
+		angle 35
+		emission_rate 15
+		time_to_live 4		
+		direction 0 -1 0
+		velocity_min 50
+		velocity_max 60    	
+	}
+
+	emitter Point
+	{
+		position -50 0 50
+		angle 35
+		emission_rate 15
+		time_to_live 4		
+		direction 0 -1 0
+		velocity_min 50
+		velocity_max 60    	
+	}
+
+	emitter Point
+	{
+		position 50 0 50
+		angle 35
+		emission_rate 15
+		time_to_live 4		
+		direction 0 -1 0
+		velocity_min 50
+		velocity_max 60    	
+	}
+	
+	// TODO Puede quedar mejor si el humo se genera desde cualquier punto del perímetro con Ring
+	// emitter Ring
+	// {
+		// position 0 0 0
+		// angle 35
+		// emission_rate 15
+		// time_to_live 4		
+		// direction 0 -1 0
+		// velocity_min 50
+		// velocity_max 60   
+		// width 50
+		// height 1
+		// depth 50
+		// inner_width 0.9
+		// inner_height 0.9
+	// }
+	
+	//affector LinearForce
+	//{
+	//	force_vector 0 -10 0
+	//	force_application add
+	//}
+	
+	//affector ColourImage
+	//{
+	//	image other/smokecolors.png
+	//}
+
+   	affector Rotator
+   	{
+		rotation_range_start 0
+		rotation_range_end 360
+		rotation_speed_range_start -60
+		rotation_speed_range_end 200
+   	}
+
+   	affector Scaler
+   	{
+       	rate 35
+   	}
+
+}
