@@ -7,42 +7,133 @@
 		<Property name="HorzFormatting" value="LeftAligned" />
 		<Property name="VertFormatting" value="TopAligned" />
 		
-		<Window type="OgreTray/TrueInfernoButtonCreateRoad" name="CreateRoad" >
-			<Property name="Area" value="{{0.13,0},{0.325,0},{0.33,0},{0.415,0}}" />		
+		<Window type="OgreTray/StaticImage" name="ButtonsFrame" >
+		<Property name="Area" value="{{0.120,0},{0.33,0},{0.905,0},{0.645,0}}" />	
+			<Property name="Image" value="TrueInfernoUIBars/ButtonWindow" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCreateFurnace" name="CreateFurnace" >
-			<Property name="Area" value="{{0.35,0},{0.325,0},{0.55,0},{0.415,0}}" />
+		<Window type="OgreTray/StaticImage" name="CreateRoadFrame" >
+		<Property name="Area" value="{{0.19,0},{0.355,0},{0.405,0},{0.445,0}}" />	
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCreatePowerGenerator" name="CreatePowerGenerator" >
-			<Property name="Area" value="{{0.57,0},{0.325,0},{0.77,0},{0.415,0}}" />
+		<Window type="OgreTray/TrueInfernoButtonCreateRoad2" name="CreateRoad" >
+			<Property name="Area" value="{{0.21,0},{0.375,0},{0.385,0},{0.425,0}}" />	
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCreateMine" name="CreateMine" >
-			<Property name="Area" value="{{0.13,0},{0.425,0},{0.33,0},{0.515,0}}" />
+		<Window type="OgreTray/StaticImage" name="CreateFurnaceFrame" >
+			<Property name="Area" value="{{0.4075,0},{0.355,0},{0.6225,0},{0.445,0}}" />	
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCreateGasPlant" name="CreateGasPlant" >
-			<Property name="Area" value="{{0.35,0},{0.425,0},{0.55,0},{0.515,0}}" />
+		
+		<Window type="OgreTray/TrueInfernoButtonCreateFurnace2" name="CreateFurnace" >
+			<Property name="Area" value="{{0.4275,0},{0.375,0},{0.6025,0},{0.425,0}}" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCreateEvilworks" name="CreateEvilworks" >
-			<Property name="Area" value="{{0.57,0},{0.425,0},{0.77,0},{0.515,0}}" />
+		<Window type="OgreTray/StaticImage" name="CreatePowerGeneratorFrame" >
+			<Property name="Area" value="{{0.625,0},{0.355,0},{0.84,0},{0.445,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCreateRefinery" name="CreateRefinery" >
-			<Property name="Area" value="{{0.13,0},{0.525,0},{0.33,0},{0.615,0}}" />
+		
+		<Window type="OgreTray/TrueInfernoButtonCreatePowerGenerator2" name="CreatePowerGenerator" >
+			<Property name="Area" value="{{0.645,0},{0.375,0},{0.82,0},{0.425,0}}" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCreateWarehouse" name="CreateWarehouse" >
-			<Property name="Area" value="{{0.35,0},{0.525,0},{0.55,0},{0.615,0}}" />
+		<Window type="OgreTray/StaticImage" name="CreateMineFrame" >
+			<Property name="Area" value="{{0.19,0},{0.445,0},{0.405,0},{0.535,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		
+		<Window type="OgreTray/TrueInfernoButtonCreateMine2" name="CreateMine" >
+			<Property name="Area" value="{{0.21,0},{0.465,0},{0.385,0},{0.515,0}}" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="CreatGasPlantFrame" >
+			<Property name="Area" value="{{0.4075,0},{0.445,0},{0.6225,0},{0.535,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		
+		<Window type="OgreTray/TrueInfernoButtonCreateGasPlant2" name="CreateGasPlant" >
+			<Property name="Area" value="{{0.4275,0},{0.465,0},{0.6025,0},{0.515,0}}" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="CreateEvilworksFrame" >
+			<Property name="Area" value="{{0.625,0},{0.445,0},{0.84,0},{0.535,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		
+		<Window type="OgreTray/TrueInfernoButtonCreateEvilworks2" name="CreateEvilworks" >
+			<Property name="Area" value="{{0.645,0},{0.465,0},{0.82,0},{0.515,0}}" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="CreateRefineryFrame" >
+			<Property name="Area" value="{{0.19,0},{0.53,0},{0.405,0},{0.62,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		<Window type="OgreTray/TrueInfernoButtonCreateRefinery2" name="CreateRefinery" >
+			<Property name="Area" value="{{0.21,0},{0.55,0},{0.385,0},{0.60,0}}" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="CreateWarehouseFrame" >
+			<Property name="Area" value="{{0.4075,0},{0.53,0},{0.6225,0},{0.62,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		<Window type="OgreTray/TrueInfernoButtonCreateWarehouse2" name="CreateWarehouse" >
+			<Property name="Area" value="{{0.4275,0},{0.55,0},{0.6025,0},{0.60,0}}" />
 		</Window>
 
-		<Window type="OgreTray/TrueInfernoButtonClearTerrain" name="ClearTerrain" >
-			<Property name="Area" value="{{0.57,0},{0.525,0},{0.77,0},{0.615,0}}" />
+		<Window type="OgreTray/StaticImage" name="CreateClearTerrainFrame" >
+			<Property name="Area" value="{{0.625,0},{0.53,0},{0.84,0},{0.62,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		<Window type="OgreTray/TrueInfernoButtonClearTerrain2" name="ClearTerrain" >
+			<Property name="Area" value="{{0.645,0},{0.55,0},{0.82,0},{0.60,0}}" />
 		</Window>
 
+		
+		<Window type="OgreTray/StaticImage" name="TimeBorderLine">
+			<Property name="Area" value="{{0.30,0},{0.645,0},{0.72,0},{0.725,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />	
+		</Window>
+		
+		<Window type="OgreTray/StaticText" name="TimeLeft" >
+			<Property name="Area" value="{{0.30,0},{0.645,0},{0.72,0},{0.725,0}}" />
+			<Property name="Font" value="Jura-10" />
+			<Property name="Text" value="0" />
+			<Property name="AlwaysOnTop" value="True" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="CentreAligned" />
+		</Window>
 	</Window>
 </GUILayout>
 

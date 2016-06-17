@@ -12,6 +12,2543 @@
 -->
 <Falagard version="7">
 
+	<WidgetLook name="OgreTray/TrueInfernoButtonTrial2">
+		<ImagerySection name="backgroundnm">			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Trial" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Trial" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Trial" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonMissions2">
+		<ImagerySection name="backgroundnm">			
+	
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Missions" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Missions" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Missions" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonGods2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Gods" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Gods" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Gods" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonBurnSoul2">
+		<ImagerySection name="backgroundnm">
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/BurnSoul" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/BurnSoul" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/BorderLine" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonCreateSoul2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateSoul" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateSoul" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateSoul" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+	
+	<WidgetLook name="OgreTray/TrueInfernoButtonCloseWindow2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Cancel" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+	
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Cancel" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/Cancel" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonDisableBuilding2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/SwitchBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/SwitchBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/SwitchBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+	
+	<WidgetLook name="OgreTray/TrueInfernoButtonDestroyBuilding2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/DestroyBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/DestroyBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/DestroyBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+	
+	<WidgetLook name="OgreTray/TrueInfernoButtonUpgradeBuilding2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/UpgradeBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/UpgradeBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+	
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/UpgradeBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonClearTerrain2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/ClearTerrain" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/ClearTerrain" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/ClearTerrain" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonRepairBuilding2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/RepairBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/RepairBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/RepairBuilding" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonCreateWarehouse2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateWarehouse" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateWarehouse" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateWarehouse" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+	
+	<WidgetLook name="OgreTray/TrueInfernoButtonCreateResearchLab2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateResearchLabs" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateResearchLabs" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateResearchLabs" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonCreateRefinery2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateRefinery" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateRefinery" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateRefinery" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonCreateEvilworks2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateEvilworks" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateEvilworks" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateEvilworks" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonCreatePowerGenerator2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreatePowerGenerator" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreatePowerGenerator" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreatePowerGenerator" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+<WidgetLook name="OgreTray/TrueInfernoButtonCreateGasPlant2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateGasplant" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateGasplant" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateGasplant" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+    <WidgetLook name="OgreTray/TrueInfernoButtonCreateMine2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateMine" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateMine" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateMine" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+	 
+	 <WidgetLook name="OgreTray/TrueInfernoButtonCreateFurnace2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateFurnace" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateFurnace" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateFurnace" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+	 
+	 <WidgetLook name="OgreTray/TrueInfernoButtonCreateRoad2">
+		<ImagerySection name="backgroundnm">			
+
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateSoulpath" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+			
+	
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateSoulpath" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="0" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateSoulpath" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+
+
+
 	<WidgetLook name="OgreTray/TrueInfernoButtonCancel">
 		<ImagerySection name="backgroundnm">			
 

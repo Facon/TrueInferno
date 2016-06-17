@@ -55,19 +55,19 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CrudeIcon">
-			<Property name="Area" value="{{0.151,0},{0.35,0},{0.169,0},{0.60,0}}" />
+			<Property name="Area" value="{{0.399,0},{0.35,0},{0.417,0},{0.60,0}}" />
 			<Property name="Image" value="TrueInfernoIcons/Crude" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CrudeBorderLine">
-			<Property name="Area" value="{{0.17,0},{0.25,0},{0.27,0},{0.70,0}}" />
+			<Property name="Area" value="{{0.418,0},{0.25,0},{0.518,0},{0.70,0}}" />
 			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="VertFormatting" value="Stretched" />	
 		</Window>
 		<Window type="OgreTray/StaticText" name="Crude" >
-			<Property name="Area" value="{{0.17,0},{0.25,0},{0.27,0},{0.70,0}}" />
+			<Property name="Area" value="{{0.418,0},{0.25,0},{0.518,0},{0.70,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
@@ -76,19 +76,19 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="PureIcon">
-			<Property name="Area" value="{{0.151,0},{0.35,0},{0.169,0},{0.60,0}}" />
+			<Property name="Area" value="{{0.523,0},{0.35,0},{0.541,0},{0.60,0}}" />
 			<Property name="Image" value="TrueInfernoIcons/Pure" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="PureBorderLine">
-			<Property name="Area" value="{{0.17,0},{0.25,0},{0.27,0},{0.70,0}}" />
+			<Property name="Area" value="{{0.542,0},{0.25,0},{0.642,0},{0.70,0}}" />
 			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="VertFormatting" value="Stretched" />		
 		</Window>
 		<Window type="OgreTray/StaticText" name="Pure" >
-			<Property name="Area" value="{{0.17,0},{0.25,0},{0.27,0},{0.70,0}}" />
+			<Property name="Area" value="{{0.542,0},{0.25,0},{0.642,0},{0.70,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
@@ -97,19 +97,19 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="RefinedIcon">
-			<Property name="Area" value="{{0.151,0},{0.35,0},{0.169,0},{0.60,0}}" />
+			<Property name="Area" value="{{0.647,0},{0.35,0},{0.665,0},{0.60,0}}" />
 			<Property name="Image" value="TrueInfernoIcons/Refined" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="RefinedBorderLine">
-			<Property name="Area" value="{{0.17,0},{0.25,0},{0.27,0},{0.70,0}}" />
+			<Property name="Area" value="{{0.666,0},{0.25,0},{0.766,0},{0.70,0}}" />
 			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="VertFormatting" value="Stretched" />		
 		</Window>
 		<Window type="OgreTray/StaticText" name="Refined" >
-			<Property name="Area" value="{{0.17,0},{0.25,0},{0.27,0},{0.70,0}}" />
+			<Property name="Area" value="{{0.666,0},{0.25,0},{0.766,0},{0.70,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
@@ -118,20 +118,20 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="HadesFavorIcon">
-			<Property name="Area" value="{{0.896,0},{0.45,0},{0.930,0},{0.8,0}}" />
+			<Property name="Area" value="{{0.869,0},{0.35,0},{0.887,0},{0.60,0}}" />
 			<Property name="Image" value="TrueInfernoIcons/Gods" />				
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="HadesFavorBorderLine">
-			<Property name="Area" value="{{0.896,0},{0.45,0},{0.930,0},{0.8,0}}" />
+			<Property name="Area" value="{{0.888,0},{0.25,0},{0.948,0},{0.70,0}}" />
 			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="VertFormatting" value="Stretched" />	
 		</Window>
 		<Window type="OgreTray/StaticText" name="HadesFavor" >
-			<Property name="Area" value="{{0.896,0},{0.45,0},{0.930,0},{0.8,0}}" />
-			<Property name="Font" value="Jura-7" />
+			<Property name="Area" value="{{0.888,0},{0.25,0},{0.948,0},{0.70,0}}" />
+			<Property name="Font" value="Jura-10" />
 			<Property name="Text" value="0" />
 			<Property name="AlwaysOnTop" value="True" />
 			<Property name="VertFormatting" value="CentreAligned" />

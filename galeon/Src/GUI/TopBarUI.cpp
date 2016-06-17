@@ -54,7 +54,6 @@ namespace GUI
 		float total_seconds = tm.getRemainingRoundTime() / 1000.0f;
 		unsigned int minutes = static_cast<unsigned int>(trunc(total_seconds / 60.0f));
 		unsigned int seconds = static_cast<unsigned int>(((total_seconds / 60.0f) - minutes) * 60.0f);
-
 		// Changing Resources UI
 		
 		Logic::ResourcesManager* rm = Logic::ResourcesManager::getSingletonPtr();
