@@ -2,7 +2,7 @@
 
 <GUILayout version="4" >
 	<Window type="OgreTray/StaticImage" name="SideBar" >
-		<Property name="Area" value="{{0.772416,0},{0.1845,0},{1,0},{1,0}}" />
+		<Property name="Area" value="{{0.8014167,0},{0.15323,0},{1,0},{1,0}}" />
 		<Property name="Image" value="TrueInfernoUIBars/ButtonBar" />
 		<Property name="HorzFormatting" value="LeftAligned" />
 		<Property name="VertFormatting" value="TopAligned" />
@@ -35,20 +35,12 @@
 			<Property name="Area" value="{{0.13,0},{0.525,0},{0.33,0},{0.615,0}}" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCreateResearchLab" name="CreateResearchLab" >
+		<Window type="OgreTray/TrueInfernoButtonCreateWarehouse" name="CreateWarehouse" >
 			<Property name="Area" value="{{0.35,0},{0.525,0},{0.55,0},{0.615,0}}" />
 		</Window>
 
-		<Window type="OgreTray/TrueInfernoButtonCreateWarehouse" name="CreateWarehouse" >
-			<Property name="Area" value="{{0.57,0},{0.525,0},{0.77,0},{0.615,0}}" />
-		</Window>
-
-		<Window type="OgreTray/TrueInfernoButtonRepairBuilding" name="RepairBuilding" >
-			<Property name="Area" value="{{0.13,0},{0.625,0},{0.33,0},{0.715,0}}" />
-		</Window>
-		
 		<Window type="OgreTray/TrueInfernoButtonClearTerrain" name="ClearTerrain" >
-			<Property name="Area" value="{{0.35,0},{0.625,0},{0.55,0},{0.715,0}}" />
+			<Property name="Area" value="{{0.57,0},{0.525,0},{0.77,0},{0.615,0}}" />
 		</Window>
 
 	</Window>

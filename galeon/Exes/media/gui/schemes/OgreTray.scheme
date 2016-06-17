@@ -3,6 +3,7 @@
     <Imageset filename="OgreTray.imageset" />
 	<Imageset filename="TrueInfernoIcons.imageset" />
 	<Imageset filename="TrueInfernoUITextures.imageset" />
+	<Imageset filename="TrueInfernoUIBars.imageset" />
     <Font filename="DejaVuSans-12.font" />
 	<Font filename="Jura-18.font" />
 	<Font filename="Jura-16.font" />
@@ -29,6 +30,7 @@
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonDisableBuilding"   		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonDisableBuilding" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCloseWindow"   			targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCloseWindow" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonText" 			 		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonText" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonText2" 			 		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonText2" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateRoad"   			targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateRoad" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreatePowerGenerator"	targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreatePowerGenerator" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateFurnace"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateFurnace" />

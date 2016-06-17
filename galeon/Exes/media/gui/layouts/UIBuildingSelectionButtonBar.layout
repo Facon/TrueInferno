@@ -2,7 +2,7 @@
 
 <GUILayout version="4" >
 	<Window type="OgreTray/StaticImage" name="BuildingSelectionSideBar" >
-		<Property name="Area" value="{{0.772416,0},{0.1845,0},{1,0},{1,0}}" />
+		<Property name="Area" value="{{0.8014167,0},{0.15323,0},{1,0},{1,0}}" />
 		<Property name="Image" value="TrueInfernoUIBars/ButtonBar" />
 		<Property name="HorzFormatting" value="LeftAligned" />
 		<Property name="VertFormatting" value="TopAligned" />

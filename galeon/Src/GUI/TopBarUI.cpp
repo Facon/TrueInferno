@@ -72,11 +72,11 @@ namespace GUI
 			std::to_string(static_cast<int>(trunc(rm->getDisplayedMaxResources(ResourceType::GAS))))
 			);
 
-		_uiBarsWindow->getChild("Coke")->setText(
-			std::to_string(static_cast<int>(trunc(rm->getDisplayedResources(ResourceType::COKE)))) +
-			" / " +
-			std::to_string(static_cast<int>(trunc(rm->getDisplayedMaxResources(ResourceType::COKE))))
-			);
+		//_uiBarsWindow->getChild("Coke")->setText(
+		//	std::to_string(static_cast<int>(trunc(rm->getDisplayedResources(ResourceType::COKE)))) +
+		//	" / " +
+		//	std::to_string(static_cast<int>(trunc(rm->getDisplayedMaxResources(ResourceType::COKE))))
+		//	);
 
 		_uiBarsWindow->getChild("Crude")->setText(
 			std::to_string(static_cast<int>(trunc(rm->getDisplayedResources(ResourceType::CRUDE)))) +
@@ -96,7 +96,7 @@ namespace GUI
 			std::to_string(static_cast<int>(trunc(rm->getDisplayedMaxResources(ResourceType::REFINED))))
 			);
 
-		_uiBarsWindow->getChild("TimeLeft")->setText(std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
+		//_uiBarsWindow->getChild("TimeLeft")->setText(std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
 		_uiBarsWindow->getChild("HadesFavor")->setText(std::to_string(static_cast<int>(trunc(hf.getHadesFavor()))));
 	}
 
