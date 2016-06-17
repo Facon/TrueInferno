@@ -1,5 +1,5 @@
-#ifndef LA_DESTROY_ENTITY_
-#define LA_DESTROY_ENTITY_
+#ifndef LA_DESTROY_ENTITY_H_
+#define LA_DESTROY_ENTITY_H_
 
 #include "Logic\Entity\Message.h"
 #include "AI\SMSoulData.h"

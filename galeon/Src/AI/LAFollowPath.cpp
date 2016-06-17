@@ -1,12 +1,19 @@
 #include "LAFollowPath.h"
-#include "Logic\Maps\EntityFactory.h"
-#include "Logic\Server.h"
-#include "Logic\Maps\Map.h"
+
+#include "Logic\Entity\ParticleType.h"
 
 namespace AI {
 	RTTI_IMPL(CLAFollowPath, CLatentAction);
 
 	CLatentAction::LAStatus CLAFollowPath::OnStart() {
+		/* TODO Desactivadas partículas de momento
+		// Al iniciar intentamos poner las partículas para el movimiento del alma
+		ParticleMessage m(ParticleType::SOUL_MOVEMENT, true);
+		if (m.Dispatch(*_entity))
+			return LAStatus::RUNNING;
+		else
+			return LAStatus::READY;
+		*/
 		return LAStatus::RUNNING;
 	}
 

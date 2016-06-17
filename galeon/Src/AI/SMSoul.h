@@ -9,6 +9,7 @@
 #include "AI\LAStartSoulTask.h"
 #include "AI\LAFollowPath.h"
 #include "AI\LAExecuteSoulTask.h"
+#include "AI\LABurnEntity.h"
 #include "AI\LADestroyEntity.h"
 #include "AI\LACheckTarget.h"
 #include "AI\SMSoulData.h"
@@ -27,7 +28,7 @@ namespace AI {
 	*/ 
 	class CSMSoul : public CStateMachine<CLatentAction, CSMSoulData> {
 	public:
-		CSMSoul(CEntity* entity) : CStateMachine<CLatentAction, CSMSoulData>(entity), _timeBeforeGetNewPath(2000) {}
+		CSMSoul(CEntity* entity) : CStateMachine<CLatentAction, CSMSoulData>(entity), _timeBeforeGetNewPath(2000), _timeBeforeDestruction(2000) {}
 
 		virtual ~CSMSoul() {}
 
@@ -35,12 +36,18 @@ namespace AI {
 			if (entityInfo->hasAttribute("timeBeforeGetNewPath"))
 				_timeBeforeGetNewPath = 1000 * entityInfo->getIntAttribute("timeBeforeGetNewPath");
 
+			if (entityInfo->hasAttribute("timeBeforeDestruction"))
+				_timeBeforeDestruction = 1000 * entityInfo->getIntAttribute("timeBeforeDestruction");
+
 			int waitTask = this->addNode(new CLAWaitSoulTask(entity, _data));
 			int getPath = this->addNode(new CLAGetWalkingSoulPath(entity, _data));
 			int startTask = this->addNode(new CLAStartSoulTask(entity, _data));
 			int followPath = this->addNode(new CLAFollowPath(entity, _data));
 			int executeTask = this->addNode(new CLAExecuteSoulTask(entity, _data));
-			int destroyEntity = this->addNode(new CLADestroyEntity(entity, _data));
+			int checkTargetBeforeExecute = this->addNode(new CLACheckTarget(entity, _data));
+			int startBurning = this->addNode(new CLABurnEntity(entity, _data));
+			int burning = this->addNode(new CLAWait(_timeBeforeDestruction));
+			int destroy = this->addNode(new CLADestroyEntity(entity, _data));
 			int checkTarget = this->addNode(new CLACheckTarget(entity, _data));
 			int waitRetryPath = this->addNode(new CLAWait(_timeBeforeGetNewPath));
 			//int getNewTarget = this->addNode(new CLAGetSoulTaskTarget(entity, _data));
@@ -57,20 +64,28 @@ namespace AI {
 
 			// Si empieza correctamente la tarea pasa a seguir la ruta
 			this->addEdge(startTask, followPath, new CConditionSuccess());
-			this->addEdge(startTask, destroyEntity, new CConditionFail());
+			this->addEdge(startTask, startBurning, new CConditionFail());
 
 			// Tras acabar la ruta ejecuta la tarea que tenía asignada
-			this->addEdge(followPath, executeTask, new CConditionMessage<CLatentAction, WalkSoulPathMessage>(MessageType::WALK_SOUL_PATH_FINISHED));
-			this->addEdge(followPath, destroyEntity, new CConditionFail());
+			this->addEdge(followPath, checkTargetBeforeExecute, new CConditionMessage<CLatentAction, WalkSoulPathMessage>(MessageType::WALK_SOUL_PATH_FINISHED));
+			this->addEdge(followPath, startBurning, new CConditionFail());
 
-			// Tras ejecutar la tarea se destruye el alma
-			this->addEdge(executeTask, destroyEntity, new CConditionFinished());
+			// Chequeo previo a ejecutar (necesario porque executeTask actualmente no puede fallar)
+			this->addEdge(checkTargetBeforeExecute, executeTask, new CConditionSuccess());
+			this->addEdge(checkTargetBeforeExecute, startBurning, new CConditionFail());
+
+			// Tras ejecutar la tarea se destruye directamente el alma
+			this->addEdge(executeTask, destroy, new CConditionFinished());
 
 			// Tras chequear el objetivo, si es válido, espera para reintentar ruta. Si no, se autodestruye
 			this->addEdge(checkTarget, waitRetryPath, new CConditionSuccess());
-			this->addEdge(checkTarget, destroyEntity, new CConditionFail());
+			this->addEdge(checkTarget, startBurning, new CConditionFail());
 
 			this->addEdge(waitRetryPath, getPath, new CConditionFinished());
+
+			// Ante cualquier fallo: comenzamos a quemar -> quemamos -> destruímos
+			this->addEdge(startBurning, burning, new CConditionFinished());
+			this->addEdge(burning, destroy, new CConditionFinished());
 
 			this->resetExecution();
 
@@ -86,6 +101,9 @@ namespace AI {
 
 		/** Tiempo (ms) que se deja transcurrir hasta calcular una nueva ruta */
 		unsigned int _timeBeforeGetNewPath;
+
+		// Tiempo (ms) que se deja transcurrir hasta que se destruye el alma
+		unsigned int _timeBeforeDestruction;
 	};
 }
 

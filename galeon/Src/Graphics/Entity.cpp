@@ -493,8 +493,14 @@ namespace Graphics
 		case Logic::ParticleType::DESTRUCTION_SMOKE:
 			return "DestructionSmoke";
 
+		case Logic::ParticleType::SOUL_MOVEMENT:
+			return "SoulMovement";
+
 		case Logic::ParticleType::FIRE_SMOKE:
 			return "FireSmoke";
+
+		case Logic::ParticleType::SOUL_DESTRUCTION:
+			return "SoulDestruction";
 
 		default:
 			assert(false && "No name for this particleType");

@@ -92,6 +92,7 @@
     <ClCompile Include="..\..\Src\AI\LAAskResources.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAttachToGenerator.cpp" />
     <ClCompile Include="..\..\Src\AI\LAAttendResourceBuildingRequest.cpp" />
+    <ClCompile Include="..\..\Src\AI\LABurnEntity.cpp" />
     <ClCompile Include="..\..\Src\AI\LABurnSouls.cpp" />
     <ClCompile Include="..\..\Src\AI\LACheckNewConsumption.cpp" />
     <ClCompile Include="..\..\Src\AI\LACheckTarget.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="..\..\Src\AI\LAAskResources.h" />
     <ClInclude Include="..\..\Src\AI\LAAttachToGenerator.h" />
     <ClInclude Include="..\..\Src\AI\LAAttendResourceBuildingRequest.h" />
+    <ClInclude Include="..\..\Src\AI\LABurnEntity.h" />
     <ClInclude Include="..\..\Src\AI\LABurnSouls.h" />
     <ClInclude Include="..\..\Src\AI\LACheckNewConsumption.h" />
     <ClInclude Include="..\..\Src\AI\LACheckTarget.h" />

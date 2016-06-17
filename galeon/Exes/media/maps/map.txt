@@ -154,7 +154,8 @@ Map = {
 		material = "Soul",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
-		timeBeforeGetNewPath = 2,
+		timeBeforeGetNewPath = 1,
+		timeBeforeDestruction = 3,
 	},
 	
 	Mine = {

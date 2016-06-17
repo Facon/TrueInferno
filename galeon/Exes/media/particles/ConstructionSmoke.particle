@@ -23,7 +23,6 @@ particle_system ConstructionSmoke
 	// Area emitter
 	emitter Point
 	{
-		//position 0 15 -15
 		position -50 0 -50
 		angle 35
 		emission_rate 15

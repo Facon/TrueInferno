@@ -1,7 +1,7 @@
 // Example particle systems
 
 // smoke
-particle_system FireSmoke
+particle_system SoulMovement
 {
 	material        	Particle/Smoke
 	particle_width  	1
@@ -23,44 +23,11 @@ particle_system FireSmoke
 	// Area emitter
 	emitter Point
 	{
-		position -50 0 -50
+		position 0 0 0
 		angle 35
 		emission_rate 15
-		time_to_live 5
-		direction 0 -1 0
-		velocity_min 50
-		velocity_max 80    	
-	}
-
-	emitter Point
-	{
-		position 50 0 -50
-		angle 35
-		emission_rate 15
-		time_to_live 5
-		direction 0 -1 0
-		velocity_min 50
-		velocity_max 80    	
-	}
-
-	emitter Point
-	{
-		position -50 0 50
-		angle 35
-		emission_rate 15
-		time_to_live 5
-		direction 0 -1 0
-		velocity_min 50
-		velocity_max 80    	
-	}
-
-	emitter Point
-	{
-		position 50 0 50
-		angle 35
-		emission_rate 15
-		time_to_live 5
-		direction 0 -1 0
+		time_to_live 3
+		direction 0 1 0
 		velocity_min 50
 		velocity_max 80    	
 	}
