@@ -32,6 +32,7 @@ namespace GUI
 		_eventUI.init();
 		_rankUI.init();
 		_buildingSelectionUI.init();
+		_pauseMenu.init();
 
 	}
 
@@ -106,4 +107,13 @@ namespace GUI
 		_eventUI.tick(msecs);
 		_buildingSelectionUI.tick(msecs);
 	}
+
+	void UIManager::setPauseMenu(bool status)
+	{
+		if (status == true)
+			_pauseMenu.open();
+		else
+			_pauseMenu.close();
+	}
+
 }

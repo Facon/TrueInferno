@@ -6,6 +6,7 @@
 	<Imageset filename="TrueInfernoUITextures.imageset" />
 	<Imageset filename="TrueInfernoUIBars.imageset" />
     <Font filename="DejaVuSans-12.font" />
+	<Font filename="Jura-22-bold.font" />
 	<Font filename="Jura-18.font" />
 	<Font filename="Jura-16.font" />
 	<Font filename="Jura-14.font" />

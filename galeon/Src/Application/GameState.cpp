@@ -96,7 +96,7 @@ namespace Application {
 
 		// Queremos que el GUI maneje al jugador.
 		GUI::CServer::getSingletonPtr()->getPlayerController()->activate();
-
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().show();
 		// Activamos la ventana que nos muestra el tiempo transcurrido.
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_timeWindow);
 		_timeWindow->setVisible(true);
@@ -130,16 +130,29 @@ namespace Application {
 
 	void CGameState::tick(unsigned int msecs) 
 	{
-		CApplicationState::tick(msecs);
+		if (_paused == false){
+			CApplicationState::tick(msecs);
 
-		// Simulación física
-		Physics::CServer::getSingletonPtr()->tick(msecs);
+			// Simulación física
+			Physics::CServer::getSingletonPtr()->tick(msecs);
 
-		// Actualizamos la lógica de juego.
-		Logic::CServer::getSingletonPtr()->tick(msecs);
+			// Actualizamos la lógica de juego.
+			Logic::CServer::getSingletonPtr()->tick(msecs);
 
-		// Changing resources displays info
-		_uiManager.tick(msecs);
+			// Changing resources displays info
+			_uiManager.tick(msecs);
+		}
+		else
+		{
+			if (_uiManager.getPauseMenu()->_exit == true)
+			{
+				_paused = !_paused;
+				_uiManager.setPauseMenu(_paused);
+				_uiManager.getPauseMenu()->_exit = false;
+				_app->setState("menu");
+
+			}
+		}
 	} // tick
 
 	//--------------------------------------------------------
@@ -157,7 +170,8 @@ namespace Application {
 		switch(key.keyId)
 		{
 		case GUI::Key::ESCAPE:
-			_app->setState("menu");
+			_paused = !_paused;
+			_uiManager.setPauseMenu(_paused);
 			break;
 		default:
 			return false;
