@@ -2838,16 +2838,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
