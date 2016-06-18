@@ -6,14 +6,11 @@ namespace AI {
 	RTTI_IMPL(CLAFollowPath, CLatentAction);
 
 	CLatentAction::LAStatus CLAFollowPath::OnStart() {
-		/* TODO Desactivadas partículas de momento
 		// Al iniciar intentamos poner las partículas para el movimiento del alma
 		ParticleMessage m(ParticleType::SOUL_MOVEMENT, true);
-		if (m.Dispatch(*_entity))
-			return LAStatus::RUNNING;
-		else
-			return LAStatus::READY;
-		*/
+		bool result = m.Dispatch(*_entity);
+		assert(result && "Can't start soul movement particles");
+
 		return LAStatus::RUNNING;
 	}
 

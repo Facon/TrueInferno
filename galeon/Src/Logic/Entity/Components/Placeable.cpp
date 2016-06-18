@@ -212,7 +212,7 @@ namespace Logic {
 		// Activamos partículas de construcción
 		ParticleMessage particleMessage(ParticleType::CONSTRUCTION_SMOKE, true);
 		result = particleMessage.Dispatch(*_entity);
-		assert(result && "Can't start particles");
+		assert(result && "Can't start building construction particles");
 
 		return true;
 	}
@@ -579,7 +579,7 @@ namespace Logic {
 			// Detenemos las partículas de humo de construcción
 			ParticleMessage particleMessage(ParticleType::CONSTRUCTION_SMOKE, false);
 			bool result = particleMessage.Dispatch(*_entity);
-			assert(result && "Can't stop particles");
+			assert(result && "Can't stop building construction particles");
 		}
 	}
 

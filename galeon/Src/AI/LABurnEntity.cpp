@@ -8,11 +8,9 @@ namespace AI {
 	CLatentAction::LAStatus CLABurnEntity::OnStart() {
 		ParticleMessage m(Logic::ParticleType::SOUL_DESTRUCTION, true);
 		bool result = m.Dispatch(*_entity);
+		assert(result && "Can't start soul destruction particles");
 		
-		if (result)
-			return LAStatus::RUNNING;
-		else
-			return LAStatus::READY;
+		return LAStatus::RUNNING;
 	}
 
 }

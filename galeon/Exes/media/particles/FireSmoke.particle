@@ -1,6 +1,3 @@
-// Example particle systems
-
-// smoke
 particle_system FireSmoke
 {
 	material        	Particle/Smoke
