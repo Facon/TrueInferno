@@ -70,7 +70,7 @@ Map = {
 		image = "HellQuarters",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		billboardSetPosition = { 0, 100, 0 },
-		defaultBillboard = "SOUL",
+		defaultBillboard = "VOID",
 	},
 	
 	Evilator = {

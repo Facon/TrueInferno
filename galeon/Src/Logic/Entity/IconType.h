@@ -38,6 +38,7 @@ namespace Logic
 			JUDGEMENT,
 			COGS, // WTF?
 			WAREHOUSE,
+			VOID_ICON,
 			//GAS,
 			//MINERAL,
 			//EVILATOR,

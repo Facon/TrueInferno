@@ -11,7 +11,7 @@ material Billboard/TrueInfernoIcons
 			
 			texture_unit
 			{
-				texture TrueInfernoIcons.png
+				texture TrueInfernoIcons2.png
 				texture_address_mode clamp
 			}
 		}
