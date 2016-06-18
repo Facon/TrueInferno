@@ -49,6 +49,7 @@ namespace Logic
 		{ "JUDGEMENT", IconType::JUDGEMENT },
 		{ "COGS", IconType::COGS }, // WTF?
 		{ "WAREHOUSE", IconType::WAREHOUSE },
+		{ "VOID", IconType::VOID_ICON },
 		//{ "EVILATOR", IconType::EVILATOR },
 		//{ "MINERAL", IconType::MINERAL },
 		//{ "GAS", IconType::GAS },
@@ -181,6 +182,13 @@ namespace Logic
 		{
 			// Avoid adding the same icon twice
 			bool isNew = true;
+
+			if (_bbSet->getNumBillboards() == 1 && _bbSet->getBillboard(0)->getTexcoordIndex() == IconType::VOID_ICON)
+			{
+				_bbSet->getBillboard(0)->setTexcoordIndex(msg._icon);
+
+				return true;
+			}
 
 			for (unsigned int i = 0; i < _bbSet->getNumBillboards(); ++i)
 			{

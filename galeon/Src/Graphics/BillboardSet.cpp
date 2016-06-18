@@ -20,7 +20,7 @@ namespace Graphics
 			// Specific parts
 			if (materialName == "Billboard/TrueInfernoIcons")
 			{
-				bbSet->setTextureStacksAndSlices(1, 28);
+				bbSet->setTextureStacksAndSlices(1, 29);
 			}
 
 			_bbSet = bbSet;
