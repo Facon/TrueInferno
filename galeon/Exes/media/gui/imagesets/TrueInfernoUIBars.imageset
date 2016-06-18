@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
-<Imageset autoScaled="vertical" imagefile="TrueInfernoUIBars.png" name="TrueInfernoUIBars" nativeHorzRes="1920" nativeVertRes="1080" version="2">
-    <Image height="845" name="ButtonBar" width="437" xPos="0" yPos="0" />
-    <Image height="198" name="TopBar" width="1919" xPos="1" yPos="883" />
+<Imageset autoScaled="min" imagefile="TrueInfernoUIBars.png" name="TrueInfernoUIBars" nativeHorzRes="1920" nativeVertRes="1080" version="2">
+    <Image height="1080" name="StartMenu" width="1920" xPos="0" yPos="0" />
+	<Image height="846" name="ButtonBar" width="382" xPos="1" yPos="1080" />
+    <Image height="166" name="TopBar" width="1920" xPos="-2" yPos="2651" />
+    <Image height="397" name="EventFrame" width="460" xPos="616" yPos="1210" />
+    <Image height="229" name="ButtonFrame" width="364" xPos="278" yPos="2124" />
+	<Image height="277" name="ButtonWindow" width="358" xPos="668" yPos="1276" />
 </Imageset>

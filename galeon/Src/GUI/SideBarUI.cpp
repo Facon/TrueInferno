@@ -69,14 +69,14 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CreateRefinery")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createRefineryReleased, this));
 
-		_uibuttonsWindow->getChildElement("RepairBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::repairBuildingReleased, this));
+		//_uibuttonsWindow->getChildElement("RepairBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		//	CEGUI::SubscriberSlot(&SideBarUI::repairBuildingReleased, this));
 
 		_uibuttonsWindow->getChildElement("ClearTerrain")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::clearTerrainReleased, this));
 
-		_uibuttonsWindow->getChildElement("CreateResearchLab")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::createResearchLabReleased, this));
+		//_uibuttonsWindow->getChildElement("CreateResearchLab")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		//	CEGUI::SubscriberSlot(&SideBarUI::createResearchLabReleased, this));
 
 		_uibuttonsWindow->getChildElement("CreateWarehouse")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createWarehouseReleased, this));
@@ -94,9 +94,9 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CreateGasPlant")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateEvilworks")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateRefinery")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
+		//_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("ClearTerrain")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateResearchLab")->removeAllEvents();
+		//_uibuttonsWindow->getChildElement("CreateResearchLab")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateWarehouse")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->removeAllEvents();
 
@@ -149,6 +149,15 @@ namespace GUI
 		//float height = (float)mCamera->getViewportHeight();
 		//printf("width %f height %f\n", width, height);
 		//CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Sizef(width,height));
+		using namespace Logic;
+
+		Logic::CTimeManager& tm = Logic::CTimeManager::getSingleton();
+
+		float total_seconds = tm.getRemainingRoundTime() / 1000.0f;
+		unsigned int minutes = static_cast<unsigned int>(trunc(total_seconds / 60.0f));
+		unsigned int seconds = static_cast<unsigned int>(((total_seconds / 60.0f) - minutes) * 60.0f);
+		_uibuttonsWindow->getChild("TimeLeft")->setText(std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
+
 
 		if (_placeableEntity){
 

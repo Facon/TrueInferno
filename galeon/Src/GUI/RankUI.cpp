@@ -94,7 +94,7 @@ namespace GUI
 		{
 			start = false;
 			int i = 1;
-			float verticalpos = 0.15;
+			float verticalpos = 0.30;
 			for (auto it = ranking.begin(); it != ranking.end(); ++it)
 			{
 				_uiRankWindow->createChild("OgreTray/StaticText", "God" + std::to_string(i));
@@ -104,7 +104,7 @@ namespace GUI
 				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("AlwaysOnTop", "True");
 				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("VertFormatting", "CentreAligned");
 				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("HorzFormatting", "LeftAligned");
-				verticalpos += 0.16;
+				verticalpos += 0.1;
 				++i;
 			}
 		}	

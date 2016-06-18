@@ -173,18 +173,24 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
 		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventList.layout");
 
-		_uiEventWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&EventUI::closeWindowReleased, this));
+		//_uiEventWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		//	CEGUI::SubscriberSlot(&EventUI::closeWindowReleased, this));
 
-		float verticalpos = 0.07;
+		float verticalpos = 0.25;
 		int i = 1;
 		for (auto it = _events.begin(); it != _events.end(); ++it)
 		{
+			_uiEventWindow->createChild("OgreTray/StaticImage", "frameid" + std::to_string(i));
+			_uiEventWindow->getChild("frameid" + std::to_string(i))->setProperty("Area", "{{0.17,0},{" + std::to_string(verticalpos - 0.005) + ",0},{0.83,0},{" + std::to_string(verticalpos + 0.065) + ",0}}");
+			_uiEventWindow->getChild("frameid" + std::to_string(i))->setProperty("Image", "TrueInfernoUIBars/ButtonFrame");
+			_uiEventWindow->getChild("frameid" + std::to_string(i))->setProperty("HorzFormatting", "Stretched");
+			_uiEventWindow->getChild("frameid" + std::to_string(i))->setProperty("VertFormatting", "Stretched");
+
 			_uiEventWindow->createChild("OgreTray/StaticText", "id" + std::to_string(i));
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Text", std::to_string(it->second->getEventId()));
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Alpha", "000");
-			_uiEventWindow->getChild("id" + std::to_string(i))->createChild("OgreTray/TrueInfernoButtonText", "Event" + std::to_string(i));
-			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.1,0},{" + std::to_string(verticalpos) + ",0},{0.9,0},{" + std::to_string(verticalpos + 0.06) + ",0}}");
+			_uiEventWindow->getChild("id" + std::to_string(i))->createChild("OgreTray/TrueInfernoButtonText2", "Event" + std::to_string(i));
+			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.2,0},{" + std::to_string(verticalpos) + ",0},{0.8,0},{" + std::to_string(verticalpos + 0.06) + ",0}}");
 
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Area", "{{0,0},{0,0},{1,0},{1,0}}");
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setInheritsAlpha(false);
@@ -195,6 +201,8 @@ namespace GUI
 
 			verticalpos += 0.07;
 			++i;
+			if (i == 9)
+				break;
 		}
 
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
@@ -209,18 +217,24 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
 		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventList.layout");
 
-		_uiEventWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&EventUI::closeWindowReleased, this));
+		//_uiEventWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			//CEGUI::SubscriberSlot(&EventUI::closeWindowReleased, this));
 
-		float verticalpos = 0.07;
+		float verticalpos = 0.25;
 		int i = 1;
 		for (auto it = _events.begin(); it != _events.end(); ++it)
 		{
+			_uiEventWindow->createChild("OgreTray/StaticImage", "frameid" + std::to_string(i));
+			_uiEventWindow->getChild("frameid" + std::to_string(i))->setProperty("Area", "{{0.17,0},{" + std::to_string(verticalpos - 0.005) + ",0},{0.83,0},{" + std::to_string(verticalpos + 0.065) + ",0}}");
+			_uiEventWindow->getChild("frameid" + std::to_string(i))->setProperty("Image", "TrueInfernoUIBars/ButtonFrame");
+			_uiEventWindow->getChild("frameid" + std::to_string(i))->setProperty("HorzFormatting", "Stretched");
+			_uiEventWindow->getChild("frameid" + std::to_string(i))->setProperty("VertFormatting", "Stretched");
+
 			_uiEventWindow->createChild("OgreTray/StaticText", "id" + std::to_string(i));
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Text", std::to_string(it->second->getEventId()));
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Alpha", "000");
-			_uiEventWindow->getChild("id" + std::to_string(i))->createChild("OgreTray/TrueInfernoButtonText", "Event" + std::to_string(i));
-			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.1,0},{" + std::to_string(verticalpos) + ",0},{0.9,0},{" + std::to_string(verticalpos + 0.06) + ",0}}");
+			_uiEventWindow->getChild("id" + std::to_string(i))->createChild("OgreTray/TrueInfernoButtonText2", "Event" + std::to_string(i));
+			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.2,0},{" + std::to_string(verticalpos) + ",0},{0.8,0},{" + std::to_string(verticalpos + 0.06) + ",0}}");
 
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Area", "{{0,0},{0,0},{1,0},{1,0}}");
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setInheritsAlpha(false);
@@ -233,6 +247,8 @@ namespace GUI
 
 			verticalpos += 0.07;
 			++i;
+			if (i == 9)
+				break;
 		}
 
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);

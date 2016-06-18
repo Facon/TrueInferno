@@ -4,11 +4,11 @@
     
 
 	<Window type="OgreTray/StaticImage" name="RankFrame" >
-		<Property name="Area" value="{{0.796,0},{0.17,0},{0.952,0},{0.42,0}}" />
+		<Property name="Area" value="{{0.825,0},{0.11,0},{0.981,0},{0.43,0}}" />
 		<Property name="AlwaysOnTop" value="True" />
-		<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
-		<Property name="HorzFormatting" value="LeftAligned" />
-		<Property name="VertFormatting" value="TopAligned" />
+		<Property name="Image" value="TrueInfernoUIBars/EventFrame" />
+		<Property name="HorzFormatting" value="Stretched" />
+		<Property name="VertFormatting" value="Stretched" />
 	</Window>
     
 </GUILayout>

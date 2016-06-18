@@ -2,8 +2,8 @@
 
 <GUILayout version="4" >
 	<Window type="OgreTray/StaticImage" name="EventWindow" >
-	<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
-	<Property name="Area" value="{{0.2675,0},{0.325,0},{0.6425,0},{0.725,0}}" />
+	<Property name="Image" value="TrueInfernoUIBars/EventFrame" />
+		<Property name="Area" value="{{0.205,0},{0.193277,0},{0.705,0},{0.960427,0}}" />
 		<Window type="OgreTray/StaticText" name="EventTitle" >
 			<Property name="Area" value="{{0.2,0},{0.059375,0},{0.8,0},{0.159375,0}}" />
 			<Property name="Font" value="Jura-16" />

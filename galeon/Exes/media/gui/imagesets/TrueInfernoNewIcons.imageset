@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Imageset autoScaled="vertical" imagefile="TrueInfernoNewIcons.png" name="TrueInfernoNewIcons" nativeHorzRes="512" nativeVertRes="512" version="2">
+    <Image height="512" name="Missions" width="512" xPos="0" yPos="0" />
+    <Image height="512" name="CreateSoul" width="512" xPos="512" yPos="0" />
+    <Image height="512" name="BurnSoul" width="512" xPos="1024" yPos="0" />
+    <Image height="512" name="Crude" width="512" xPos="1536" yPos="0" />
+    <Image height="512" name="Pure" width="512" xPos="2048" yPos="0" />
+    <Image height="512" name="Refined" width="512" xPos="2560" yPos="0" />
+    <Image height="512" name="Gas" width="512" xPos="3072" yPos="0" />
+    <Image height="512" name="Gods" width="512" xPos="0" yPos="512" />
+    <Image height="512" name="CreateMine" width="512" xPos="512" yPos="512" />
+    <Image height="512" name="Crystal" width="512" xPos="512" yPos="512" />
+    <Image height="512" name="Time" width="512" xPos="1024" yPos="512" />
+    <Image height="512" name="CreateSoulpath" width="512" xPos="1536" yPos="512" />
+    <Image height="512" name="CreateEvilworks" width="512" xPos="2048" yPos="512" />
+    <Image height="512" name="Evilator" width="512" xPos="2560" yPos="512" />
+    <Image height="512" name="CreateFurnace" width="512" xPos="3072" yPos="512" />
+    <Image height="512" name="CreateGasplant" width="512" xPos="0" yPos="1024" />
+    <Image height="512" name="Hellquarters" width="512" xPos="512" yPos="1024" />
+    <Image height="512" name="CreateResearchLabs" width="512" xPos="1024" yPos="1024" />
+    <Image height="512" name="ClearTerrain" width="512" xPos="1536" yPos="1024" />
+    <Image height="512" name="CreatePowerGenerator" width="512" xPos="2048" yPos="1024" />
+    <Image height="512" name="CreateRefinery" width="512" xPos="2560" yPos="1024" />
+    <Image height="512" name="CreateWarehouse" width="512" xPos="3072" yPos="1024" />
+</Imageset>
