@@ -23,13 +23,11 @@ namespace Logic
 
 	const std::unordered_map<std::string, IconType::IconType> Billboard::iconTableConversor =
 	{
-		{ "OK", IconType::OK },
 		{ "BURNING", IconType::BURNING },
 		{ "SHOVEL", IconType::SHOVEL },
 		{ "CLOSE", IconType::CLOSE },
 		{ "COKE", IconType::COKE },
 		{ "CRUDE", IconType::CRUDE },
-		{ "NOT_OK", IconType::NOT_OK },
 		{ "FLAMES", IconType::FLAMES },
 		{ "SOUL_PATH", IconType::SOUL_PATH },
 		{ "EVILWORKS", IconType::EVILWORKS },
@@ -37,24 +35,20 @@ namespace Logic
 		{ "GAS_PLANT", IconType::GAS_PLANT },
 		{ "HELLQUARTERS", IconType::HELLQUARTERS },
 		{ "MINE", IconType::MINE },
-		{ "CROSS_SWORD", IconType::CROSS_SWORD }, // WTF?
 		{ "SOUL", IconType::SOUL },
-		{ "POWER_GENERATOR", IconType::POWER_GENERATOR }, // WTF?
+		{ "POWER_GENERATOR", IconType::POWER_GENERATOR },
 		{ "PURE_EVIL", IconType::PURE_EVIL },
 		{ "REFINERY", IconType::REFINERY },
-		{ "REPAIR", IconType::REPAIR },
 		{ "RESEARCH_LABS", IconType::RESEARCH_LABS },
 		{ "POWER_ON", IconType::POWER_GENERATOR },
-		{ "CLOCK", IconType::CLOCK },
-		{ "JUDGEMENT", IconType::JUDGEMENT },
-		{ "COGS", IconType::COGS }, // WTF?
+		{ "TIME", IconType::TIME },
 		{ "WAREHOUSE", IconType::WAREHOUSE },
 		{ "VOID", IconType::VOID_ICON },
 		//{ "EVILATOR", IconType::EVILATOR },
 		//{ "MINERAL", IconType::MINERAL },
 		//{ "GAS", IconType::GAS },
 		// TODO Solución temporal hasta que estén los iconos que faltan
-		{ "EVILATOR", IconType::CLOCK },
+		{ "EVILATOR", IconType::EVILATOR },
 		{ "MINERAL", IconType::MINE },
 		{ "GAS", IconType::GAS_PLANT },
 		{ "NONE", IconType::NONE},
