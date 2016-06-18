@@ -39,19 +39,19 @@ namespace Application {
 		_menuWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Menu.layout");
 		
 		// Asociamos los botones del menú con las funciones que se deben ejecutar.
-		_menuWindow->getChildElement("Start")->
+		_menuWindow->getChildElement("ButtonFrame/StartButton")->
 			subscribeEvent(CEGUI::PushButton::EventClicked, 
 				CEGUI::SubscriberSlot(&CMenuState::startReleased, this));
 
-		_menuWindow->getChildElement("Settings")->
-			subscribeEvent(CEGUI::PushButton::EventClicked,
-				CEGUI::SubscriberSlot(&CMenuState::settingsReleased, this));
+		//_menuWindow->getChildElement("Settings")->
+			//subscribeEvent(CEGUI::PushButton::EventClicked,
+				//CEGUI::SubscriberSlot(&CMenuState::settingsReleased, this));
 
-		_menuWindow->getChildElement("Credits")->
+		_menuWindow->getChildElement("ButtonFrame/CreditsButton")->
 			subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&CMenuState::creditsReleased, this));
 		
-		_menuWindow->getChildElement("Exit")->
+		_menuWindow->getChildElement("ButtonFrame/ExitButton")->
 			subscribeEvent(CEGUI::PushButton::EventClicked, 
 				CEGUI::SubscriberSlot(&CMenuState::exitReleased, this));
 	
@@ -65,10 +65,10 @@ namespace Application {
 	{
 		CApplicationState::release();
 
-		_menuWindow->getChildElement("Start")->removeAllEvents();
-		_menuWindow->getChildElement("Settings")->removeAllEvents();
-		_menuWindow->getChildElement("Credits")->removeAllEvents();
-		_menuWindow->getChildElement("Exit")->removeAllEvents();
+		_menuWindow->getChildElement("ButtonFrame/StartButton")->removeAllEvents();
+		//_menuWindow->getChildElement("Settings")->removeAllEvents();
+		_menuWindow->getChildElement("ButtonFrame/CreditsButton")->removeAllEvents();
+		_menuWindow->getChildElement("ButtonFrame/ExitButton")->removeAllEvents();
 	} // release
 
 	//--------------------------------------------------------
@@ -124,9 +124,7 @@ namespace Application {
 		case GUI::Key::ESCAPE:
 			_app->exitRequest();
 			break;
-		case GUI::Key::RETURN:
-			_app->setState("game");
-			break;
+
 		default:
 			return false;
 		}

@@ -177,6 +177,7 @@ namespace Application
 		GUI::UIManager* getUIManager() { return &_uiManager; }
 
 	protected:
+		bool _paused = false;
 
 		/**
 		Escena del estado.

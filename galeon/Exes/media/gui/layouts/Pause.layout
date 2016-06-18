@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="OgreTray/StaticImage" name="Menu" >
+        <Property name="Image" value="OgreTrayImages/Shade" />
+		<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+		<Property name="Alpha" value="50" />
+		<Property name="AlwaysOnTop" value="True" />
+		
+		<Window type="OgreTray/StaticImage" name="ButtonFrame" >
+			<Property name="Area" value="{{0.350,0},{0.30,0},{0.560,0},{0.80,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/EventFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />	
+
+			<Window type="OgreTray/StaticImage" name="Save" >
+				<Property name="Area" value="{{0.17,0},{0.245,0},{0.83,0},{0.445,0}}" />
+				<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+				<Property name="HorzFormatting" value="Stretched" />
+				<Property name="VertFormatting" value="Stretched" />		
+			</Window>
+			
+			<Window type="OgreTray/TrueInfernoButtonText2" name="SaveButton" >
+				<Property name="Area" value="{{0.22,0},{0.270,0},{0.78,0},{0.420,0}}" />
+				<Property name="Text" value="Save" />	
+			</Window>
+
+			<Window type="OgreTray/StaticImage" name="Load" >
+				<Property name="Area" value="{{0.17,0},{0.445,0},{0.83,0},{0.645,0}}" />
+				<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+				<Property name="HorzFormatting" value="Stretched" />
+				<Property name="VertFormatting" value="Stretched" />		
+			</Window>
+			
+			<Window type="OgreTray/TrueInfernoButtonText2" name="LoadButton" >
+				<Property name="Area" value="{{0.22,0},{0.470,0},{0.78,0},{0.620,0}}" />
+				<Property name="Text" value="Load" />	
+			</Window>	
+			
+			<Window type="OgreTray/StaticImage" name="Exit" >
+				<Property name="Area" value="{{0.17,0},{0.645,0},{0.83,0},{0.845,0}}" />
+				<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+				<Property name="HorzFormatting" value="Stretched" />
+				<Property name="VertFormatting" value="Stretched" />		
+			</Window>
+			
+			<Window type="OgreTray/TrueInfernoButtonText2" name="ExitButton" >
+				<Property name="Area" value="{{0.22,0},{0.670,0},{0.78,0},{0.820,0}}" />
+				<Property name="Text" value="Exit" />	
+			</Window>			
+			
+		</Window>
+		
+    </Window>
+</GUILayout>
