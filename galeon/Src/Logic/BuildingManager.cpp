@@ -20,13 +20,9 @@ Contiene la implementación del gestor de la matriz de tiles.
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
-#include "AI/Server.h"
 #include "Logic/Entity/Message.h"
 #include "Logic\Maps\Managers\TileManager.h"
 #include "Logic\Entity\Components\Tile.h"
-
-#include "Logic\Entity\Components\Graphics.h"
-#include "Graphics\Entity.h"
 
 #include <cassert>
 
@@ -141,11 +137,11 @@ namespace Logic {
 
 		// TODO Colocamos temporalmente hardcodeando posiciones en código
 		//CEntity* evilator = createPlaceable(map, "Evilator", Vector3(5, 0, 12));
-		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(8, 0, 4), false, false);
+		CEntity* evilator = createPlaceable(map, "Evilator", Vector3(18, 0, 20), false, false);
 		if (!evilator)
 			return false;
 
-		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(12, 0, 4), false, false);
+		CEntity* hellQuarters = createPlaceable(map, "HellQuarters", Vector3(24, 0, 23), false, false);
 		if (!hellQuarters)
 			return false;
 

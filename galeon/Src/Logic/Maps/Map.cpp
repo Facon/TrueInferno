@@ -18,7 +18,8 @@ Contiene la implementaciï¿½n de la clase CMap, Un mapa lï¿½gico.
 #include "Map/MapEntity.h"
 
 #include "Graphics/Server.h"
-#include "Graphics/Scene.h"
+
+#include <Algorithm>
 
 #include <cassert>
 
@@ -53,7 +54,7 @@ namespace Logic {
 		end = entityList.end();
 
 		// Creamos todas las entidades lógicas.
-		for (; it != end; it++) {
+		for (; it != end; ++it) {
 			// La propia factoría se encarga de añadir la entidad al mapa.
 			Map::CEntity *mapEntity = *it;
 
@@ -146,10 +147,8 @@ namespace Logic {
 
 	void CMap::tick(unsigned int msecs) 
 	{
-		TEntityMap::const_iterator it;
-
-		for( it = _entityMap.begin(); it != _entityMap.end(); ++it )
-			(*it).second->tick(msecs);
+		for (auto it = _entities.begin(); it != _entities.end(); ++it)
+			(*it)->tick(msecs);
 
 	} // tick
 
@@ -163,6 +162,7 @@ namespace Logic {
 		{
 			TEntityPair elem(entity->getEntityID(),entity);
 			_entityMap.insert(elem);
+			_entities.push_back(entity);
 		}
 
 	} // addEntity
@@ -175,8 +175,10 @@ namespace Logic {
 		{
 			if(entity->isActivated())
 				entity->deactivate();
-			entity->_map = 0;
+			entity->_map = nullptr;
 			_entityMap.erase(entity->getEntityID());
+			
+			std::remove(_entities.begin(), _entities.end(), entity);
 		}
 
 	} // removeEntity
@@ -201,6 +203,7 @@ namespace Logic {
 		}
 
 		_entityMap.clear();
+		_entities.clear();
 
 	} // removeEntity
 
@@ -209,7 +212,7 @@ namespace Logic {
 	CEntity* CMap::getEntityByID(TEntityID entityID)
 	{
 		if(_entityMap.count(entityID) == 0)
-			return 0;
+			return nullptr;
 		return (*_entityMap.find(entityID)).second;
 
 	} // getEntityByID

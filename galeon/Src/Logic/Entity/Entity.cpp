@@ -14,17 +14,11 @@ de juego. Es una colecci�n de componentes.
 #include <Logic/Entity/Components/AnimatedGraphics.h>
 #include "Entity.h"
 
-//#include "Component.h"
-
 #include "Logic/Entity/Message.h"
 
-#include "Logic/Server.h"
 #include "Logic/Maps/Map.h"
 
 #include "Map/MapEntity.h"
-
-#include "GUI/Server.h"
-#include "GUI/PlayerController.h"
 
 namespace Logic 
 {
@@ -121,7 +115,7 @@ namespace Logic
 	{
 		TComponentList::const_iterator it;
 
-		for( it = _components.begin(); it != _components.end(); ++it )
+		for( it = _components.cbegin(); it != _components.cend(); ++it )
 			(*it)->tick(msecs);
 
 	} // tick
@@ -436,5 +430,4 @@ namespace Logic
 		return transform;
 
 	} // getTransform
-
 } // namespace Logic

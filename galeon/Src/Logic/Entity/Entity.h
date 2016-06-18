@@ -20,7 +20,7 @@ de juego. Es una colección de componentes.
 
 #include "Logic/Maps/EntityID.h"
 
-#include <list>
+#include <vector>
 #include <string>
 
 #include "Component.h"
@@ -314,6 +314,38 @@ namespace Logic
 			return nullptr;
 		}
 
+		friend void swap(CEntity& first, CEntity& second) // nothrow
+		{
+			// enable ADL (not necessary in our case, but good practice)
+			using std::swap;
+
+			// by swapping the members of two classes,
+			// the two classes are effectively swapped
+			swap(first._name, second._name);
+			swap(first._activated, second._activated);
+			swap(first._components, second._components);
+			swap(first._dimensions, second._dimensions);
+			swap(first._entityID, second._entityID);
+			swap(first._isPlayer, second._isPlayer);
+			swap(first._map, second._map);
+			swap(first._meshDimensions, second._meshDimensions);
+			swap(first._position, second._position);
+			swap(first._rotation, second._rotation);
+			swap(first._type, second._type);
+		}
+
+		CEntity& operator=(CEntity other) // (1)
+		{
+			swap(*this, other); // (2)
+
+			return *this;
+		}
+
+		bool operator==(const CEntity& rhs) const
+		{
+			return _name == rhs._name;
+		}
+
 	protected:
 
 		/**
@@ -345,7 +377,7 @@ namespace Logic
 		/**
 		Tipo para la lista de componentes.
 		*/
-		typedef std::list<IComponent*> TComponentList;
+		typedef std::vector<IComponent*> TComponentList;
 
 		/**
 		Lista de los componentes de la entidad.
