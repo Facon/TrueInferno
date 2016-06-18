@@ -670,16 +670,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -714,16 +714,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -797,16 +797,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -841,16 +841,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -924,16 +924,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -968,16 +968,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -1051,16 +1051,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -1095,16 +1095,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -1168,7 +1168,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/ClearTerrain" />
+				<Image name="TrueInfernoNewIcons/ClearTerrain" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1178,16 +1178,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -1212,7 +1212,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/ClearTerrain" />
+				<Image name="TrueInfernoNewIcons/ClearTerrain" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1222,16 +1222,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -1254,7 +1254,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/ClearTerrain" />
+				<Image name="TrueInfernoNewIcons/ClearTerrain" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1422,7 +1422,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateWarehouse" />
+				<Image name="TrueInfernoNewIcons/CreateWarehouse" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1432,16 +1432,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -1466,7 +1466,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateWarehouse" />
+				<Image name="TrueInfernoNewIcons/CreateWarehouse" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1476,16 +1476,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -1508,7 +1508,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateWarehouse" />
+				<Image name="TrueInfernoNewIcons/CreateWarehouse" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1676,7 +1676,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateRefinery" />
+				<Image name="TrueInfernoNewIcons/CreateRefinery" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1686,16 +1686,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -1720,7 +1720,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateRefinery" />
+				<Image name="TrueInfernoNewIcons/CreateRefinery" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1730,16 +1730,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -1762,7 +1762,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateRefinery" />
+				<Image name="TrueInfernoNewIcons/CreateRefinery" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1803,7 +1803,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateEvilworks" />
+				<Image name="TrueInfernoNewIcons/CreateEvilworks" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1813,16 +1813,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -1847,7 +1847,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateEvilworks" />
+				<Image name="TrueInfernoNewIcons/CreateEvilworks" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1857,16 +1857,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -1889,7 +1889,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateEvilworks" />
+				<Image name="TrueInfernoNewIcons/CreateEvilworks" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1930,7 +1930,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreatePowerGenerator" />
+				<Image name="TrueInfernoNewIcons/CreatePowerGenerator" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1940,16 +1940,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -1974,7 +1974,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreatePowerGenerator" />
+				<Image name="TrueInfernoNewIcons/CreatePowerGenerator" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -1984,16 +1984,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -2016,7 +2016,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreatePowerGenerator" />
+				<Image name="TrueInfernoNewIcons/CreatePowerGenerator" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2057,7 +2057,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateGasplant" />
+				<Image name="TrueInfernoNewIcons/CreateGasplant" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2067,16 +2067,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -2101,7 +2101,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateGasplant" />
+				<Image name="TrueInfernoNewIcons/CreateGasplant" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2111,16 +2111,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -2143,7 +2143,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateGasplant" />
+				<Image name="TrueInfernoNewIcons/CreateGasplant" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2184,7 +2184,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateMine" />
+				<Image name="TrueInfernoNewIcons/CreateMine" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2194,16 +2194,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -2228,7 +2228,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateMine" />
+				<Image name="TrueInfernoNewIcons/CreateMine" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2238,16 +2238,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -2270,7 +2270,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateMine" />
+				<Image name="TrueInfernoNewIcons/CreateMine" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2311,7 +2311,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateFurnace" />
+				<Image name="TrueInfernoNewIcons/CreateFurnace" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2321,16 +2321,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -2355,7 +2355,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateFurnace" />
+				<Image name="TrueInfernoNewIcons/CreateFurnace" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2365,16 +2365,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -2397,7 +2397,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateFurnace" />
+				<Image name="TrueInfernoNewIcons/CreateFurnace" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2438,7 +2438,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateSoulpath" />
+				<Image name="TrueInfernoNewIcons/CreateSoulpath" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2448,16 +2448,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -2482,7 +2482,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateSoulpath" />
+				<Image name="TrueInfernoNewIcons/CreateSoulpath" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>
@@ -2492,16 +2492,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -2524,7 +2524,7 @@
 						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
 					</Dim>
 				</Area>
-				<Image name="TrueInfernoIcons/CreateSoulpath" />
+				<Image name="TrueInfernoNewIcons/CreateSoulpath" />
 				<VertFormat type="Stretched" />
 				<HorzFormat type="Stretched" />
 			</ImageryComponent>

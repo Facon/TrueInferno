@@ -22,7 +22,7 @@
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateRoad2" name="CreateRoad" >
-			<Property name="Area" value="{{0.21,0},{0.375,0},{0.385,0},{0.425,0}}" />	
+			<Property name="Area" value="{{0.20155,0},{0.360,0},{0.39345,0},{0.440,0}}" />	
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CreateFurnaceFrame" >
@@ -34,7 +34,7 @@
 		
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateFurnace2" name="CreateFurnace" >
-			<Property name="Area" value="{{0.4275,0},{0.375,0},{0.6025,0},{0.425,0}}" />
+			<Property name="Area" value="{{0.41905,0},{0.360,0},{0.61095,0},{0.440,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CreatePowerGeneratorFrame" >
@@ -46,7 +46,7 @@
 		
 		
 		<Window type="OgreTray/TrueInfernoButtonCreatePowerGenerator2" name="CreatePowerGenerator" >
-			<Property name="Area" value="{{0.645,0},{0.375,0},{0.82,0},{0.425,0}}" />
+			<Property name="Area" value="{{0.63755,0},{0.360,0},{0.82845,0},{0.440,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CreateMineFrame" >
@@ -58,7 +58,7 @@
 		
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateMine2" name="CreateMine" >
-			<Property name="Area" value="{{0.21,0},{0.465,0},{0.385,0},{0.515,0}}" />
+			<Property name="Area" value="{{0.20155,0},{0.450,0},{0.39345,0},{0.530,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CreatGasPlantFrame" >
@@ -70,7 +70,7 @@
 		
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateGasPlant2" name="CreateGasPlant" >
-			<Property name="Area" value="{{0.4275,0},{0.465,0},{0.6025,0},{0.515,0}}" />
+			<Property name="Area" value="{{0.41905,0},{0.450,0},{0.61095,0},{0.530,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CreateEvilworksFrame" >
@@ -82,7 +82,7 @@
 		
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateEvilworks2" name="CreateEvilworks" >
-			<Property name="Area" value="{{0.645,0},{0.465,0},{0.82,0},{0.515,0}}" />
+			<Property name="Area" value="{{0.63755,0},{0.450,0},{0.82845,0},{0.530,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CreateRefineryFrame" >
@@ -93,7 +93,7 @@
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateRefinery2" name="CreateRefinery" >
-			<Property name="Area" value="{{0.21,0},{0.55,0},{0.385,0},{0.60,0}}" />
+			<Property name="Area" value="{{0.20155,0},{0.535,0},{0.39345,0},{0.615,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CreateWarehouseFrame" >
@@ -104,7 +104,7 @@
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCreateWarehouse2" name="CreateWarehouse" >
-			<Property name="Area" value="{{0.4275,0},{0.55,0},{0.6025,0},{0.60,0}}" />
+			<Property name="Area" value="{{0.41905,0},{0.535,0},{0.61095,0},{0.615,0}}" />
 		</Window>
 
 		<Window type="OgreTray/StaticImage" name="CreateClearTerrainFrame" >
@@ -115,7 +115,7 @@
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonClearTerrain2" name="ClearTerrain" >
-			<Property name="Area" value="{{0.645,0},{0.55,0},{0.82,0},{0.60,0}}" />
+			<Property name="Area" value="{{0.63755,0},{0.535,0},{0.82845,0},{0.615,0}}" />
 		</Window>
 
 		

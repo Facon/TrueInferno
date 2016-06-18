@@ -23,7 +23,7 @@
 		
 		
 		<Window type="OgreTray/TrueInfernoButtonUpgradeBuilding2" name="UpgradeBuilding" >
-			<Property name="Area" value="{{0.21,0},{0.375,0},{0.385,0},{0.425,0}}" />	
+			<Property name="Area" value="{{0.20155,0},{0.360,0},{0.39345,0},{0.440,0}}" />	
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="DisableBuildingFrame" >
@@ -35,7 +35,7 @@
 		
 		
 		<Window type="OgreTray/TrueInfernoButtonDisableBuilding2" name="DisableBuilding" >
-			<Property name="Area" value="{{0.4275,0},{0.375,0},{0.6025,0},{0.425,0}}" />
+			<Property name="Area" value="{{0.41905,0},{0.360,0},{0.61095,0},{0.440,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="DestroyBuildingFrame" >
@@ -45,8 +45,8 @@
 			<Property name="VertFormatting" value="Stretched" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonDestroyBuilding" name="DestroyBuilding" >
-			<Property name="Area" value="{{0.645,0},{0.375,0},{0.82,0},{0.425,0}}" />
+		<Window type="OgreTray/TrueInfernoButtonDestroyBuilding2" name="DestroyBuilding" >
+			<Property name="Area" value="{{0.63755,0},{0.360,0},{0.82845,0},{0.440,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CloseWindowFrame" >
@@ -57,7 +57,23 @@
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCloseWindow2" name="CloseWindow" >
-			<Property name="Area" value="{{0.4275,0},{0.55,0},{0.6025,0},{0.60,0}}" />
+			<Property name="Area" value="{{0.41905,0},{0.535,0},{0.61095,0},{0.615,0}}" />
+		</Window>
+		
+				<Window type="OgreTray/StaticImage" name="TimeBorderLine">
+			<Property name="Area" value="{{0.30,0},{0.645,0},{0.72,0},{0.725,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />	
+		</Window>
+		
+		<Window type="OgreTray/StaticText" name="TimeLeft" >
+			<Property name="Area" value="{{0.30,0},{0.645,0},{0.72,0},{0.725,0}}" />
+			<Property name="Font" value="Jura-10" />
+			<Property name="Text" value="0" />
+			<Property name="AlwaysOnTop" value="True" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="CentreAligned" />
 		</Window>
 
 	</Window>
