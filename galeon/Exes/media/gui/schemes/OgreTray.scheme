@@ -45,11 +45,12 @@
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonRepairBuilding"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonRepairBuilding" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonClearTerrain"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonClearTerrain" />
 	
-	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCancel2" 		 			targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCancel2" />
-	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateSoul2" 		 		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateSoul2" />
-	<FalagardMapping windowType="OgreTray/TrueInfernoButtonBurnSoul2"   				targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonBurnSoul2" />
-	<FalagardMapping windowType="OgreTray/TrueInfernoButtonGods2"   					targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonGods2" />
-	<FalagardMapping windowType="OgreTray/TrueInfernoButtonMissions2"   				targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonMissions2" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonBuildingGroups2" 		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonBuildingGroups2" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCancel2" 				targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCancel2" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateSoul2" 	 		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateSoul2" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonBurnSoul2"   			targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonBurnSoul2" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonGods2"   				targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonGods2" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonMissions2"   			targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonMissions2" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonTrial2"   				targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonTrial2" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonDestroyBuilding2"   		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonDestroyBuilding2" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonUpgradeBuilding2"   		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonUpgradeBuilding2" />
@@ -60,10 +61,10 @@
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateFurnace2"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateFurnace2" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateMine2"    			targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateMine2" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateGasPlant2"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateGasPlant2" />
-	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateEvilworks2"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateEvilworks2" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateEvilworks2"   		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateEvilworks2" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateRefinery2"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateRefinery2" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateResearchLab2"    	targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateResearchLab2" />
-	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateWarehouse2"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateWarehouse2" />
+	<FalagardMapping windowType="OgreTray/TrueInfernoButtonCreateWarehouse2"   		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonCreateWarehouse2" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonRepairBuilding2"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonRepairBuilding2" />
 	<FalagardMapping windowType="OgreTray/TrueInfernoButtonClearTerrain2"    		targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/TrueInfernoButtonClearTerrain2" />
 	

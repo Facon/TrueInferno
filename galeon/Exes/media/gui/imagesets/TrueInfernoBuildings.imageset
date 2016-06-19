@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
-<Imageset autoScaled="horizontal" imagefile="TrueInfernoBuildings.png" name="TrueInfernoBuildings" nativeHorzRes="2850" nativeVertRes="1890" version="2">
-    <Image height="348" name="Trial" width="631" xPos="7" yPos="2" />
-    <Image height="394" name="Warehouse" width="597" xPos="4" yPos="354" />
-    <Image height="313" name="ResearchLabs" width="509" xPos="634" yPos="455" />
-    <Image height="350" name="Furnace" width="532" xPos="671" yPos="19" />
-    <Image height="358" name="Evilator" width="583" xPos="1254" yPos="11" />
-    <Image height="394" name="EvilWorks" width="622" xPos="1243" yPos="407" />
-    <Image height="350" name="Missions" width="609" xPos="1907" yPos="453" />
-    <Image height="383" name="Gods" width="697" xPos="2527" yPos="15" />
-    <Image height="370" name="Refinery" width="565" xPos="2656" yPos="432" />
-    <Image height="363" name="PowerGenerator" width="477" xPos="3311" yPos="13" />
-    <Image height="384" name="Mine" width="545" xPos="3363" yPos="461" />
-    <Image height="396" name="HellQuarters" width="515" xPos="3835" yPos="32" />
-	<Image height="387" name="GasPlant" width="542" xPos="1902" yPos="13" />
+<Imageset autoScaled="horizontal" imagefile="TrueInfernoBuildings.png" name="TrueInfernoBuildings" nativeHorzRes="460" nativeVertRes="345" version="2">
+    <Image height="345" name="Trial" width="460" xPos="34" yPos="0" />
+    <Image height="345" name="Warehouse" width="460" xPos="102" yPos="355" />
+    <Image height="345" name="ResearchLabs" width="460" xPos="684" yPos="422" />
+    <Image height="345" name="Furnace" width="460" xPos="718" yPos="26" />
+    <Image height="345" name="Evilator" width="460" xPos="1248" yPos="13" />
+    <Image height="345" name="EvilWorks" width="460" xPos="1297" yPos="401" />
+    <Image height="345" name="Missions" width="460" xPos="1982" yPos="454" />
+    <Image height="345" name="Gods" width="460" xPos="2719" yPos="35" />
+    <Image height="345" name="Refinery" width="460" xPos="2709" yPos="443" />
+    <Image height="345" name="PowerGenerator" width="460" xPos="3324" yPos="3" />
+    <Image height="345" name="Mine" width="460" xPos="3397" yPos="461" />
+    <Image height="345" name="HellQuarters" width="460" xPos="3866" yPos="35" />
+    <Image height="345" name="GasPlant" width="460" xPos="1947" yPos="16" />
 </Imageset>
