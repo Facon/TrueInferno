@@ -2,49 +2,58 @@
 
 <GUILayout version="4" >
 	<Window type="OgreTray/StaticImage" name="BuildingSelectionPopup" >
-	<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
-	<Property name="Area" value="{{0.32375,0},{0.325,0},{0.58675,0},{0.725,0}}" />
+	<Property name="Image" value="TrueInfernoUIBars/EventFrame" />
+		<Property name="Area" value="{{0.205,0},{0.193277,0},{0.705,0},{0.960427,0}}" />
+		
+				
+		<Window type="OgreTray/StaticImage" name="BuildingNameFrame">
+			<Property name="Area" value="{{0.3,0},{0.22,0},{0.7,0},{0.31,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />		
+		</Window>
 	
 		<Window type="OgreTray/StaticText" name="BuildingName" >
-			<Property name="Area" value="{{0.1,0},{0.02,0},{0.9,0},{0.09,0}}" />
+			<Property name="Area" value="{{0.3,0},{0.22,0},{0.7,0},{0.31,0}}" />
 			<Property name="Font" value="Jura-18" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
+		<Window type="OgreTray/StaticImage" name="ImageFrame" >
+			<Property name="Area" value="{{0.3320,0},{0.31,0},{0.6680,0},{0.625,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonWindow" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
 		<Window type="OgreTray/StaticImage" name="BuildingImage" >
-			<Property name="VertFormatting" value="CentreAligned" />
-			<Property name="HorzFormatting" value="CentreAligned" />
-			<Property name="Area" value="{{0.2,0},{0.10,0},{0.8,0},{0.70,0}}" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+			<Property name="Area" value="{{0.3525,0},{0.335,0},{0.6475,0},{0.60,0}}" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCancel" name="CloseWindow" >
-			<Property name="Area" value="{{0.94,0},{0.01,0},{0.99,0},{0.06,0}}" />
-		</Window>
-
-		<Window type="OgreTray/TrueInfernoButtonTrial" name="Trial" >
-			<Property name="Area" value="{{0.06,0},{0.81,0},{0.19,0},{0.95,0}}" />
-		</Window>
-
-		<Window type="OgreTray/TrueInfernoButtonCreateRefinery" name="BuildingGroups" >
-			<Property name="Area" value="{{0.21,0},{0.81,0},{0.34,0},{0.95,0}}" />
-		</Window>
-
-		<Window type="OgreTray/TrueInfernoButtonGods" name="Gods" >
-			<Property name="Area" value="{{0.36,0},{0.81,0},{0.49,0},{0.95,0}}" />
-		</Window>	
-		
-		<Window type="OgreTray/TrueInfernoButtonMissions" name="Missions" >
-			<Property name="Area" value="{{0.51,0},{0.81,0},{0.64,0},{0.95,0}}" />
-		</Window>
-
-		<Window type="OgreTray/TrueInfernoButtonCreateMine" name="WhiteMarket" >
-			<Property name="Area" value="{{0.66,0},{0.81,0},{0.79,0},{0.95,0}}" />
+		<Window type="OgreTray/StaticImage" name="TrialFrame" >
+			<Property name="Area" value="{{0.393,0},{0.665,0},{0.497,0},{0.795,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonBurnSoul" name="Redemption" >
-			<Property name="Area" value="{{0.81,0},{0.81,0},{0.94,0},{0.95,0}}" />
+		<Window type="OgreTray/TrueInfernoButtonTrial2" name="Trial" >
+			<Property name="Area" value="{{0.402,0},{0.6822,0},{0.488,0},{0.7828,0}}" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="BuildingGroupsFrame" >
+			<Property name="Area" value="{{0.503,0},{0.665,0},{0.607,0},{0.795,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+
+		<Window type="OgreTray/TrueInfernoButtonBuildingGroups2" name="BuildingGroups" >
+			<Property name="Area" value="{{0.512,0},{0.6822,0},{0.598,0},{0.7828,0}}" />
 		</Window>
 
 		

@@ -8,7 +8,7 @@
 		<Property name="VertFormatting" value="TopAligned" />
 		
 		<Window type="OgreTray/StaticImage" name="ButtonsFrame" >
-		<Property name="Area" value="{{0.120,0},{0.33,0},{0.905,0},{0.645,0}}" />	
+			<Property name="Area" value="{{0.120,0},{0.33,0},{0.905,0},{0.645,0}}" />	
 			<Property name="Image" value="TrueInfernoUIBars/ButtonWindow" />
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="VertFormatting" value="Stretched" />
