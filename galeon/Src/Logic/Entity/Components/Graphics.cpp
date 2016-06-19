@@ -16,8 +16,8 @@ gráfica de la entidad.
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Message.h"
 #include "Logic/Maps/Map.h"
+#include "Logic/Entity/ParticleType.h"
 #include "Map/MapEntity.h"
-
 #include "Graphics/Scene.h"
 #include "Graphics/Entity.h"
 #include "Graphics/StaticEntity.h"
@@ -38,6 +38,7 @@ namespace Logic
 			_graphicsEntity = 0;
 		}
 
+		_currentParticles.clear();
 	} // ~CGraphics
 	
 	//---------------------------------------------------------
@@ -169,16 +170,52 @@ namespace Logic
 
 	bool CGraphics::HandleMessage(const ParticleMessage &m)
 	{
-		if (m._type != MessageType::PARTICLE_CHANGE)
+		switch (m._type)
+		{
+		case MessageType::PARTICLE_START:
+			startParticles(m._particleType, m._duration);
+			return true;
+
+		case MessageType::PARTICLE_STOP:
+			stopParticles(m._particleType);
+			return true;
+
+		default:
+			assert(false && "Unimplemented type for ParticleMessage");
 			return false;
+		}
+	}
 
-		// Activamos partículas
-		if (m._run)
-			_graphicsEntity->addParticles(m._particleType);
-		else
-			_graphicsEntity->removeParticles(m._particleType);
+	void CGraphics::tick(unsigned int msecs)
+	{
+		// Paramos las partículas cuya duración haya finalizado
+		for (auto it = _currentParticles.begin(); it != _currentParticles.end(); ++it)
+		{
+			// Ignoramos los infinitos (duración=0) o los ya parados (duración<0)
+			int duration = it->second;
+			if (duration <= 0)
+				continue;
 
-		return true;
+			if ((_currentParticles[it->first] -= msecs) <= 0){
+				stopParticles(it->first);
+			}
+		}
+	}
+
+	void CGraphics::startParticles(ParticleType particleType, int duration)
+	{
+		// Creamos las partículas si no estaban creadas
+		if (_currentParticles.count(particleType) == 0)
+			_graphicsEntity->addParticles(particleType);
+
+		// Refrescamos la duración
+		_currentParticles[particleType] = duration;
+	}
+
+	void CGraphics::stopParticles(ParticleType particleType)
+	{
+		_graphicsEntity->removeParticles(particleType);
+		_currentParticles[particleType] = -1;
 	}
 
 } // namespace Logic

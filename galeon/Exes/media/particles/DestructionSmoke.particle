@@ -5,7 +5,7 @@ particle_system DestructionSmoke
 	particle_height 	1
 	cull_each       	true
 	quota           	500
-	sorted				true
+	sorted				false
 	local_space			true
 	
 	billboard_type  	point
@@ -16,55 +16,21 @@ particle_system DestructionSmoke
 	
 	// No actualizamos si pasan 2s desde que salió de la vista
 	nonvisible_update_timeout 2
-    
-	// Area emitter
-	emitter Point
-	{
-		position -10 0 -10
-		angle 35
-		emission_rate 15
-		time_to_live 2
-		direction 0 1 0
-		velocity_min 50
-		velocity_max 80    	
-	}
-
-	emitter Point
-	{
-		position 10 0 -10
-		angle 35
-		emission_rate 15
-		time_to_live 2
-		direction 0 1 0
-		velocity_min 50
-		velocity_max 80    	
-	}
-
-	emitter Point
-	{
-		position -10 0 10
-		angle 35
-		emission_rate 15
-		time_to_live 2
-		direction 0 1 0
-		velocity_min 50
-		velocity_max 80    	
-	}
-
-	emitter Point
-	{
-		position 10 0 10
-		angle 35
-		emission_rate 15
-		time_to_live 2
-		direction 0 1 0
-		velocity_min 50
-		velocity_max 80    	
-	}
 	
-	affector ColourImage
+	emitter Ring
 	{
-		image other/smokecolors.png
+		position 0 0 0
+		angle 35
+		emission_rate 15
+		time_to_live 4		
+		direction 0 -1 0
+		velocity_min 50
+		velocity_max 60   
+		width 50
+		height 2
+		depth 50
+		inner_width 0.8
+		inner_height 0.8
 	}
 
    	affector Rotator
@@ -77,7 +43,95 @@ particle_system DestructionSmoke
 
    	affector Scaler
    	{
-       	rate 50
+       	rate 35
    	}
 
+	affector DeflectorPlane
+	{
+		plane_point 0 0 0
+		plane_normal 0 1 0
+		bounce 1
+	}
 }
+// {
+	// material        	Particle/Smoke
+	// particle_width  	1
+	// particle_height 	1
+	// cull_each       	true
+	// quota           	500
+	// sorted				true
+	// local_space			true
+	
+	// billboard_type  	point
+	// billboard_origin	bottom_center
+
+	// // Fixed update a 30 fps
+	// iteration_interval = 0.033
+	
+	// // No actualizamos si pasan 2s desde que salió de la vista
+	// nonvisible_update_timeout 2
+    
+	// // Area emitter
+	// emitter Point
+	// {
+		// position -10 0 -10
+		// angle 35
+		// emission_rate 15
+		// time_to_live 2
+		// direction 0 1 0
+		// velocity_min 50
+		// velocity_max 80    	
+	// }
+
+	// emitter Point
+	// {
+		// position 10 0 -10
+		// angle 35
+		// emission_rate 15
+		// time_to_live 2
+		// direction 0 1 0
+		// velocity_min 50
+		// velocity_max 80    	
+	// }
+
+	// emitter Point
+	// {
+		// position -10 0 10
+		// angle 35
+		// emission_rate 15
+		// time_to_live 2
+		// direction 0 1 0
+		// velocity_min 50
+		// velocity_max 80    	
+	// }
+
+	// emitter Point
+	// {
+		// position 10 0 10
+		// angle 35
+		// emission_rate 15
+		// time_to_live 2
+		// direction 0 1 0
+		// velocity_min 50
+		// velocity_max 80    	
+	// }
+	
+	// affector ColourImage
+	// {
+		// image other/smokecolors.png
+	// }
+
+   	// affector Rotator
+   	// {
+		// rotation_range_start 0
+		// rotation_range_end 360
+		// rotation_speed_range_start -60
+		// rotation_speed_range_end 200
+   	// }
+
+   	// affector Scaler
+   	// {
+       	// rate 50
+   	// }
+
+// }

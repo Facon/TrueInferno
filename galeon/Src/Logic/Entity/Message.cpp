@@ -521,7 +521,10 @@ namespace Logic
 	}
 
 
-	ParticleMessage::ParticleMessage(ParticleType particleType, bool run) : Message(MessageType::PARTICLE_CHANGE), _particleType(particleType), _run(run)
+	ParticleMessage::ParticleMessage(ParticleType particleType, int duration) : Message(MessageType::PARTICLE_START), _particleType(particleType), _duration(duration)
+	{}
+
+	ParticleMessage::ParticleMessage(ParticleType particleType) : Message(MessageType::PARTICLE_STOP), _particleType(particleType)
 	{}
 
 	bool ParticleMessage::Dispatch(MessageHandler& handler) const

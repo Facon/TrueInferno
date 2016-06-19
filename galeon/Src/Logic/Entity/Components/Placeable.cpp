@@ -19,7 +19,10 @@ namespace Logic {
 	RTTI_ROOT_IMPL(CPlaceable);
 	IMP_FACTORY(CPlaceable);
 
-	CPlaceable::CPlaceable() : IComponent(), _hadesFavorReward(0), _defaultMaterial(""), _doingGraphicPlace(false), _doingGraphicFloat(false), _placeSpeed(PLACE_SPEED), _floatSpeed(FLOAT_SPEED) {
+	CPlaceable::CPlaceable() : IComponent(), _hadesFavorReward(0), _defaultMaterial(""), 
+		_doingGraphicPlace(false), _doingGraphicFloat(false), 
+		_placeSpeed(PLACE_SPEED), _floatSpeed(FLOAT_SPEED),
+		_smokeConstructionDuration(2000) {
 	}
 
 	CPlaceable::~CPlaceable() {
@@ -209,10 +212,12 @@ namespace Logic {
 		ToggleMessage toggleMessage = ToggleMessage();
 		toggleMessage.Dispatch(*_entity);
 
-		// Activamos partículas de construcción
-		ParticleMessage particleMessage(ParticleType::CONSTRUCTION_SMOKE, true);
-		result = particleMessage.Dispatch(*_entity);
-		assert(result && "Can't start building construction particles");
+		// Activamos partículas de construcción en los edificios
+		if (isBuilding()) {
+			ParticleMessage particleMessage(ParticleType::CONSTRUCTION_SMOKE, 0);
+			result = particleMessage.Dispatch(*_entity);
+			assert(result && "Can't start building construction particles");
+		}
 
 		return true;
 	}
@@ -576,10 +581,12 @@ namespace Logic {
 
 		// Si acabó ya la colocación
 		if (!_doingGraphicPlace) {
-			// Detenemos las partículas de humo de construcción
-			ParticleMessage particleMessage(ParticleType::CONSTRUCTION_SMOKE, false);
-			bool result = particleMessage.Dispatch(*_entity);
-			assert(result && "Can't stop building construction particles");
+			// Dejamos las partículas de humo de construcción un tiempo para los edificios
+			if (isBuilding()) {
+				ParticleMessage particleMessage(ParticleType::CONSTRUCTION_SMOKE, _smokeConstructionDuration);
+				bool result = particleMessage.Dispatch(*_entity);
+				assert(result && "Can't stop building construction particles");
+			}
 		}
 	}
 

@@ -125,6 +125,9 @@ namespace Logic {
 		/** Recompensa en favor de Hades por la construcción del edificio */
 		int _hadesFavorReward;
 
+		/** Duración (ms) del humo de construcción */
+		int _smokeConstructionDuration;
+
 		/** Floor's x size */
 		int _floorX;
 

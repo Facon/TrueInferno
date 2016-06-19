@@ -132,7 +132,8 @@ namespace Logic
 			SOUND,
 			SOUND_PLAY,
 			SOUND_STOP,
-			PARTICLE_CHANGE,
+			PARTICLE_START,
+			PARTICLE_STOP,
 		};
 
 		MessageType _type;
@@ -654,11 +655,14 @@ namespace Logic
 		// Tipo de sistema de partículas a activar/desatctivar
 		ParticleType _particleType;
 
-		// True para activar, false para desactivar
-		bool _run;
+		// Duración (ms) de las partículas. 0 para infinito
+		int _duration;
 
-		// PARTICLE_CHANGE: Activa o desactiva el sistema de partículas indicado
-		ParticleMessage(ParticleType particleType, bool run);
+		// PARTICLE_START: Activa el sistema de partículas indicado durante un tiempo (ms) dado
+		ParticleMessage(ParticleType particleType, int duration);
+
+		// PARTICLE_STOP: Desactiva el sistema de partículas indicado
+		ParticleMessage(ParticleType particleType);
 
 		virtual bool Dispatch(MessageHandler& handler) const;
 	};

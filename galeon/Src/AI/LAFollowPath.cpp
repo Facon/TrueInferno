@@ -7,7 +7,7 @@ namespace AI {
 
 	CLatentAction::LAStatus CLAFollowPath::OnStart() {
 		// Al iniciar intentamos poner las partículas para el movimiento del alma
-		ParticleMessage m(ParticleType::SOUL_MOVEMENT, true);
+		ParticleMessage m(ParticleType::SOUL_MOVEMENT, 0);
 		bool result = m.Dispatch(*_entity);
 		assert(result && "Can't start soul movement particles");
 

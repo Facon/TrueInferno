@@ -25,6 +25,11 @@ namespace Graphics
 	class CScene;
 }
 
+namespace Logic
+{
+	enum ParticleType;
+}
+
 //declaración de la clase
 namespace Logic 
 {
@@ -105,6 +110,8 @@ namespace Logic
 		bool HandleMessage(const ToggleMessage& m);
 		bool HandleMessage(const ParticleMessage &m);
 
+		void tick(unsigned int msecs);
+
 	protected:
 
 		/**
@@ -133,6 +140,15 @@ namespace Logic
 		las entidades. La guardamos para la destrucci�n de la entidad gr�fica.
 		*/
 		Graphics::CScene* _scene;
+
+	private:
+		std::unordered_map<ParticleType, int> _currentParticles;
+
+		/** Activa el sistema de partículas indicado durante un tiempo(ms) dado */
+		void startParticles(ParticleType particleType, int duration);
+
+		/** Desactiva el sistema de partículas indicado */
+		void stopParticles(ParticleType particleType);
 
 	}; // class CGraphics
 
