@@ -14,10 +14,8 @@ del juego.
 #define __Logic_EntityFactory_H
 
 #include <map>
-#include <string>
+#include <vector>
 #include <list>
-
-#include "EntityID.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Map
@@ -242,7 +240,7 @@ namespace Logic
 		/**
 		Tipo lista de CEntity donde guardaremos los pendientes de borrar.
 		*/
-		typedef std::list<Logic::CEntity*> TEntityList;
+		typedef std::vector<Logic::CEntity*> TEntityList;
 
 		/**
 		Lista de objetos pendientes de borrar.

@@ -26,7 +26,6 @@ Contiene la declaración del gestor de edificios.
 #include "Logic/Entity/BuildingType.h"
 #include "Logic/Entity/Message.h"
 #include "Logic/Entity/Components/Placeable.h"
-#include "Logic/Maps/Managers/TileManager.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic

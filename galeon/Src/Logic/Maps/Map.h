@@ -11,7 +11,8 @@ Contiene la declaración de la clase CMap, Un mapa lógico.
 #ifndef __Logic_Map_H
 #define __Logic_Map_H
 
-#include <map>
+#include <unordered_map>
+#include <list>
 #include "EntityID.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
@@ -170,12 +171,14 @@ namespace Logic
 		/**
 		Tipo tabla de entidades de mapa.
 		*/
-		typedef std::map<TEntityID,CEntity*> TEntityMap;
+		typedef std::unordered_map<TEntityID,CEntity*> TEntityMap;
 
 		/**
 		tabla con las entidades del mapa localizadas por su ID.
 		*/
 		TEntityMap _entityMap;
+
+		std::vector<CEntity*> _entities;
 
 		/**
 		Nombre del mapa.
