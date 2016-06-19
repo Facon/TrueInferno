@@ -141,7 +141,7 @@ weightedEviluators =
 	---[[
 	{
 		eviluator=PersonalityEviluator,
-		weight=0.6,
+		weight=0.5,
 	},
 	--]]
 	

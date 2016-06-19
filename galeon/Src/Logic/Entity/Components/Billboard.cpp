@@ -104,7 +104,9 @@ namespace Logic
 	{
 		{ LogicRequirement::Workers, IconType::SOUL },
 		{ LogicRequirement::Energy, IconType::POWER_GENERATOR },
-		{ LogicRequirement::Player, IconType::REPAIR },
+		// TODO Descomentar cuando se pueda volver a reparar edificios que van a ser destruidos
+		//{ LogicRequirement::Player, IconType::REPAIR },
+		{ LogicRequirement::Player, IconType::NONE },
 		{ LogicRequirement::Road, IconType::SOUL_PATH },
 		{ LogicRequirement::Undefined, IconType::NONE },
 	};

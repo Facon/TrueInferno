@@ -22,7 +22,8 @@ namespace Logic {
 	CPlaceable::CPlaceable() : IComponent(), _hadesFavorReward(0), _defaultMaterial(""), 
 		_doingGraphicPlace(false), _doingGraphicFloat(false), 
 		_placeSpeed(PLACE_SPEED), _floatSpeed(FLOAT_SPEED),
-		_smokeConstructionDuration(2000) {
+		_smokeConstructionDuration(2000), _destroying(false),
+		_destructionDuration(5000), _destructionSpeed(PLACE_SPEED) {
 	}
 
 	CPlaceable::~CPlaceable() {
@@ -133,12 +134,19 @@ namespace Logic {
 	} // spawn
 
 	void CPlaceable::tick(unsigned int msecs){
+		// Si se está destruyendo no se hace otra cosa
+		if (_destroying){
+			doGraphicDestroy(msecs);
+			return;
+		}
+		
+		// En otro caso vemos si está flotando o si está siendo colocado
 		if (_doingGraphicFloat){
-			doGraphicFloat();
+			doGraphicFloat(msecs);
 		}
 
 		else if (_doingGraphicPlace){
-			doGraphicPlace();
+			doGraphicPlace(msecs);
 		}
 
 	} // tick
@@ -396,6 +404,24 @@ namespace Logic {
 		}
 	}
 
+	void CPlaceable::destroyWithEffects(){
+		// Activamos las partículas de destrucción
+		ParticleMessage pm(ParticleType::DESTRUCTION_SMOKE, 0);
+		bool result = pm.Dispatch(*_entity);
+		assert(result && "Can't start destruction particles");
+
+		// Desactivamos el edificio para que ya no pueda interactuar con él nadie
+		ToggleMessage tm(LogicRequirement::Player, true);
+		result = tm.Dispatch(*_entity);
+		assert(result && "Can't toggle off building");
+
+		// Activamos el flag para destruirse
+		_destroying = true;
+
+		// Establecemos una posición de destino para la destrucción que esté muy abajo
+		_targetDestroyPosition = _entity->getPosition() + Vector3(0, -1000, 0); // OMG: NÚMERO MÁGICO DE ALBERTO!
+	}
+
 	bool CPlaceable::ConsumeResourcesForConstruction(){
 
 		Logic::ResourcesManager* resourcesManager = ResourcesManager::getSingletonPtr();
@@ -566,16 +592,16 @@ namespace Logic {
 		}
 	}
 
-	void CPlaceable::doGraphicFloat() {
+	void CPlaceable::doGraphicFloat(int msecs) {
 		// Flotamos si es necesario
 		if (_doingGraphicFloat)
 			doImmediateGraphicMovement(_targetFloatPosition, _doingGraphicFloat);
 	}
 
-	void CPlaceable::doGraphicPlace() {
+	void CPlaceable::doGraphicPlace(int msecs) {
 		// Colocamos si es necesario
 		if (_doingGraphicPlace)
-			doDelayedGraphicMovement(_targetPlacePosition, _placeSpeed, _doingGraphicPlace);
+			doDelayedGraphicMovement(msecs, _targetPlacePosition, _placeSpeed, _doingGraphicPlace);
 		else
 			return;
 
@@ -590,7 +616,27 @@ namespace Logic {
 		}
 	}
 
-	void CPlaceable::doDelayedGraphicMovement(const Vector3& targetPosition, float speed, bool& moving) {
+	void CPlaceable::doGraphicDestroy(int msecs) {
+		// Enterramos el edificio si no llegamos a la posición
+		if (!_destroying){
+			assert(false && "Calling doGraphicDestroy on a building that's not being destroyed");
+			return;
+		}
+			
+		// Reducimos el tiempo que queda para la destrucción
+		_destructionDuration -= msecs;
+
+		// Si se acabó: destrucción!
+		if (_destructionDuration <= 0)
+			// Delegamos en el manager pero ya SIN efectos
+			CBuildingManager::getSingletonPtr()->destroyPlaceable(_entity, false);
+
+		// Si no, seguimos moviendo al edificio
+		else
+			doDelayedGraphicMovement(msecs, _targetDestroyPosition, _placeSpeed, _destroying);
+	}
+
+	void CPlaceable::doDelayedGraphicMovement(int msecs, const Vector3& targetPosition, float speed, bool& moving) {
 		if (!moving)
 			return;
 
@@ -603,7 +649,7 @@ namespace Logic {
 		}
 
 		dir.normalise();
-		dir *= speed;
+		dir *= speed * msecs;
 
 		currentPosition += dir;
 

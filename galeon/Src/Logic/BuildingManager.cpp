@@ -263,13 +263,23 @@ namespace Logic {
 		return newEntity;
 	}
 
-	void CBuildingManager::destroyPlaceable(CEntity *entity){
-		// TODO Diferenciar entre destrucción con animación o sin ella
+	void CBuildingManager::destroyPlaceable(CEntity *entity, bool withEffects){
+		// Si usamos efectos, pedimos al placeable que se destruya
+		if (withEffects) {
+			CPlaceable* placeable = entity->getComponent<CPlaceable>();
+			if (placeable != nullptr){
+				placeable->destroyWithEffects();
+				return;
+			}
+
+			else
+				assert(false && "DestroyPlaceable used on non-Placeable entity");
+		}
 
 		// Se elimina la entidad inmediatamente. OJO: deleteDeferred no eliminaba correctamente la entidad
 		CEntityFactory::getSingletonPtr()->deferredDeleteEntity(entity);
 
-		// No hace falta desregistrar porque se hace automáticamente en el destructor de Placeable
+		// Nota: No hace falta desregistrar porque se hace automáticamente en el destructor de Placeable
 	}
 
 	bool CBuildingManager::floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition, bool showFloating){
@@ -387,7 +397,7 @@ namespace Logic {
 		CPlaceable* building = getRandomBuildingforDestruction();
 		if (building != nullptr){
 			// Invocamos la destrucción del placeable. Internamente se harán todas las operaciones necesarias para asegurar la consistencia de los datos
-			destroyPlaceable(building->getEntity());
+			destroyPlaceable(building->getEntity(), true);
 			return true;
 		}
 		return false;

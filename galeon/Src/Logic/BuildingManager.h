@@ -134,8 +134,14 @@ namespace Logic
 		@param floating Flag a true si se quiere dejar al Placeable inicialmente flotando sin ocupar realmente posiciones en la matriz ni registrarse */
 		CEntity* createPlaceable(CMap *map, const std::string& prefabName, const Vector3& logicPosition, bool floating, bool showFloating);
 
-		/** Elimina el Placeable dado incluyendo todas las operaciones de mantenimiento necesarias como, por ejemplo, desregistrar el edificio de las listas internas */
-		void CBuildingManager::destroyPlaceable(CEntity *entity);
+		/** 
+		* Elimina la entidad de Placeable dada incluyendo todas las operaciones de mantenimiento necesarias como, 
+		* por ejemplo, desregistrar el edificio de las listas internas.
+		* 
+		* @param entity Entidad de Placeable a destruir
+		* @param withEffects Flag a true cuando se desean efectos animados con retardo para la destrucción del edificio
+		*/
+		void CBuildingManager::destroyPlaceable(CEntity *entity, bool withEffects=false);
 
 		/** Hace flotar un placeable hasta la posición lógica deseada. Es necesario hacer llamar a place para que deje de flotar, se registre y conste para los chequeos de posicionamiento */
 		bool floatPlaceableTo(CEntity* movableEntity, const Vector3& logicPosition, bool showFloating);

@@ -90,14 +90,17 @@ namespace Logic {
 		virtual bool HandleMessage(const GetCostPlaceableMessage& msg);
 
 		// Devuelve el PlaceableType de este placeable
-		PlaceableType CPlaceable::getPlaceableType() const {
+		PlaceableType getPlaceableType() const {
 			return _placeableType;
 		}
 
 		// Devuelve el BuildingType de este placeable
-		BuildingType CPlaceable::getBuildingType() const {
+		BuildingType getBuildingType() const {
 			return _buildingType;
 		}
+
+		// Destruye el placeable con efectos
+		void destroyWithEffects();
 
 	private:
 		/** Altura añadida a la posición del Placeable para que parezca que está justo encima */
@@ -107,16 +110,13 @@ namespace Logic {
 		const float HEIGHT_FLOATING_OVER_TILE = 1.5f;
 
 		/** Velocidad a la que se coloca gráficamente el edificio */
-		const float PLACE_SPEED = 0.01;
+		const float PLACE_SPEED = 0.0005;
 		
 		/** Velocidad a la que se desplaza gráficamente el edificio */
-		const float FLOAT_SPEED = 0.1;
+		const float FLOAT_SPEED = 0.005;
 
 		/** Floor's absolute logic origin position in the matrix */
 		Vector3 _floorOriginPosition;
-
-		/** Flag set to true when logic position has changed */
-		//bool _logicPositionChanged;
 
 		//costes de fabricación del placeable
 		int _gasCost = 0;
@@ -177,7 +177,7 @@ namespace Logic {
 		bool _doingGraphicPlace;
 
 		/** Realiza el place animado para la parte gráfica */
-		void doGraphicPlace();
+		void doGraphicPlace(int msecs);
 
 		/** Velocidad del place gráfico */
 		float _placeSpeed;
@@ -189,7 +189,7 @@ namespace Logic {
 		bool _doingGraphicFloat;
 
 		/** Realiza el float animado para la parte gráfica */
-		void doGraphicFloat();
+		void doGraphicFloat(int msecs);
 
 		/** Velocidad del float gráfico */
 		float _floatSpeed;
@@ -197,11 +197,12 @@ namespace Logic {
 		/**
 		* Realiza un movimiento gráfico animado con cierto retardo.
 		*
+		* @param (in) msecs Tiempo (ms) transcurrido desde la última actualización
 		* @param (in) targetPosition Posición objetivo a la que queremos mover
 		* @param (in) speed Velocidad a la que queremos que mueva
 		* @param (out) Flag donde guardar si hace falta seguir moviendo o no
 		*/
-		void doDelayedGraphicMovement(const Vector3& targetPosition, float speed, bool& moving);
+		void doDelayedGraphicMovement(int msecs, const Vector3& targetPosition, float speed, bool& moving);
 
 		/**
 		* Realiza un movimiento gráfico inmediato.
@@ -212,6 +213,21 @@ namespace Logic {
 		void doImmediateGraphicMovement(const Vector3& targetPosition, bool& moving);
 
 		const float ZERO_DISTANCE = 0.01f;
+
+		/** Realiza la destrucción animada con efectos del edificio */
+		void CPlaceable::doGraphicDestroy(int msecs);
+
+		/** Flag a true si el edificio se estrá destruyendo */
+		bool _destroying;
+
+		/** Velocidad a la que se destruye (entierra) el edificio */
+		float _destructionSpeed;
+
+		/** Duración (ms) de los efectos de destrucción del edificio */
+		int _destructionDuration;
+
+		/** Posición hacia la que tenderá el edificio antes de destruirse */
+		Vector3 _targetDestroyPosition;
 
 	protected:
 		/** Parsea un enum PlaceableType a partir del nombre en texto

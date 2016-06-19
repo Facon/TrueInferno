@@ -336,7 +336,7 @@ namespace GUI
 
 	bool BuildingSelectionUI::destroyBuildingReleased(const CEGUI::EventArgs& e)
 	{
-		Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_buildingEntity);
+		Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_buildingEntity, true);
 		closeWindow();
 		return true;
 	}
