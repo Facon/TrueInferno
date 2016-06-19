@@ -1,3 +1,4 @@
+/*
 material Examples/SphereMappedRustySteel
 {
 	technique
@@ -2373,3 +2374,4 @@ material Examples/EnvMappedRustySteel
 		}
 	}
 }
+*/

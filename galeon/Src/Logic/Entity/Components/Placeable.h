@@ -83,8 +83,6 @@ namespace Logic {
 
 		virtual bool HandleMessage(const MovePlaceableMessage& msg);
 
-		//virtual bool HandleMessage(const WalkSoulPathMessage& msg);
-
 		virtual bool HandleMessage(const CheckValidPositionPlaceableMessage& msg);
 
 		virtual bool HandleMessage(const GetCostPlaceableMessage& msg);
@@ -102,6 +100,9 @@ namespace Logic {
 		// Destruye el placeable con efectos
 		void destroyWithEffects();
 
+		/** Elimina las entidades creadas para feedback visual durante la construcción */
+		void clearFloatingVisualEntities();
+		
 	private:
 		/** Altura añadida a la posición del Placeable para que parezca que está justo encima */
 		const float HEIGHT_ON_TILE = 1.0f;
@@ -139,6 +140,9 @@ namespace Logic {
 
 		/** Tiles adyacent to floor's occupied tiles */
 		std::unordered_set<Tile*> _adyacentTiles;
+
+		/** Entidades planas creadas a modo de feedback visual sobre las tiles sobre las que flota el edificio */
+		std::vector<CEntity*> _floatingVisualEntities;
 
 		/** Flag a true si el Placeable está flotando y, por tanto, todavía no debe estar registrado ni colisionar con otros objetos */
 		bool _floating;
