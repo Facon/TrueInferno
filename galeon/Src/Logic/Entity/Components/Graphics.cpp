@@ -95,6 +95,11 @@ namespace Logic
 			_graphicsEntity->setMaterialName(materialName);
 		}
 
+		if (entityInfo->hasAttribute("castShadows"))
+			_graphicsEntity->setCastShadows(entityInfo->getBoolAttribute("castShadows"));
+		else
+			_graphicsEntity->setCastShadows(false);
+
 		return _graphicsEntity;
 
 	} // createGraphicsEntity

@@ -178,15 +178,6 @@ namespace Logic {
 			entity->_map = nullptr;
 			_entityMap.erase(entity->getEntityID());
 			
-			/*
-			// Works but very slow
-			_entities.clear();
-			
-			for (auto it = _entityMap.begin(); it != _entityMap.end(); ++it) {
-				_entities.push_back(it->second);
-			}
-			*/
-			
 			_entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());
 		}
 
