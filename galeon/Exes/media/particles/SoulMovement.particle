@@ -44,7 +44,7 @@ particle_system SoulMovement
 	particle_width 1.0
 	particle_height 1.0
 	// quota 300
-	quota 20
+	quota 10
 	cull_each false
 	sorted false
 	local_space false
@@ -58,21 +58,21 @@ particle_system SoulMovement
 
 	emitter Box
 	{
-		position 0.0 0.0 0.0
+		position 0.0 10.0 0.0
 		direction 0.0 0.0 1.0
 		angle 180
 		// width 100
 		// height 100
 		// depth 100
-		width 10
-		height 10
-		depth 10
+		width 4
+		height 4
+		depth 4
 		// emission_rate 126.67
-		emission_rate 12.667
+		emission_rate 10
 		// velocity_min 6.95
 		// velocity_max 68.32
 		velocity_min 1
-		velocity_max 3
+		velocity_max 2
 		time_to_live_min 0.85
 		// time_to_live_max 5
 		time_to_live_max 3
@@ -84,14 +84,14 @@ particle_system SoulMovement
 		colour_range_end 1 1 1 1
 	}
 
-	affector DirectionRandomiser
-	{
-		// randomness 2000
-		randomness 2
-		// scope 100
-		scope 0.1
-		keep_velocity false
-	}
+	// affector DirectionRandomiser
+	// {
+		// // randomness 2000
+		// randomness 2
+		// // scope 100
+		// scope 0.1
+		// keep_velocity false
+	// }
 
 	affector ColourInterpolator
 	{
@@ -126,7 +126,7 @@ particle_system SoulMovement
 	affector LinearForce
 	{
 		// force_vector 0.0 -100.0 0.0
-		force_vector 0.0 -5.0 0.0
+		force_vector 0.0 -25.0 0.0
 		force_application add
 	}
 
