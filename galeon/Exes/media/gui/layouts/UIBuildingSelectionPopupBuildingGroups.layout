@@ -2,11 +2,19 @@
 
 <GUILayout version="4" >
 	<Window type="OgreTray/StaticImage" name="BuildingSelectionPopup" >
-	<Property name="Image" value="TrueInfernoUITextures/Resourcebar" />
-		<Property name="Area" value="{{0.32375,0},{0.325,0},{0.58675,0},{0.725,0}}" />
+		<Property name="Image" value="TrueInfernoUIBars/EventFrame" />
+		<Property name="Area" value="{{0.205,0},{0.193277,0},{0.705,0},{0.960427,0}}" />
+		
+				
+		<Window type="OgreTray/StaticImage" name="BuildingNameFrame">
+			<Property name="Area" value="{{0.3,0},{0.22,0},{0.7,0},{0.31,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />		
+		</Window>
 	
 		<Window type="OgreTray/StaticText" name="BuildingName" >
-			<Property name="Area" value="{{0.1,0},{0.02,0},{0.9,0},{0.09,0}}" />
+			<Property name="Area" value="{{0.3,0},{0.22,0},{0.7,0},{0.31,0}}" />
 			<Property name="Font" value="Jura-14" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
@@ -14,7 +22,7 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="PowerSupplyText" >
-			<Property name="Area" value="{{0.125,0},{0.18,0},{0.725,0},{0.28,0}}" />
+			<Property name="Area" value="{{0.250,0},{0.33,0},{0.446,0},{0.38,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
@@ -23,19 +31,19 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="PowerGen" >
-			<Property name="Image" value="TrueInfernoIcons/CreatePowerGenerator" />
-			<Property name="Area" value="{{0.654,0},{0.18,0},{0.760,0},{0.28,0}}" />
+			<Property name="Image" value="TrueInfernoNewIcons/CreatePowerGenerator" />
+			<Property name="Area" value="{{0.570,0},{0.325,0},{0.635,0},{0.395,0}}" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="PowerSupplyPriority" >
-			<Property name="Area" value="{{0.770,0},{0.18,0},{0.855,0},{0.28,0}}" />
+			<Property name="Area" value="{{0.665,0},{0.33,0},{0.720,0},{0.38,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="1" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="MapResourcesText" >
-			<Property name="Area" value="{{0.125,0},{0.29,0},{0.725,0},{0.39,0}}" />
+			<Property name="Area" value="{{0.250,0},{0.40,0},{0.446,0},{0.45,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
@@ -43,25 +51,25 @@
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
-		<Window type="OgreTray/StaticImage" name="Gas" >
-			<Property name="Image" value="TrueInfernoIcons/CreateGasplant" />
-			<Property name="Area" value="{{0.540,0},{0.29,0},{0.644,0},{0.39,0}}" />
+		<Window type="OgreTray/StaticImage" name="Mine" >
+			<Property name="Image" value="TrueInfernoNewIcons/CreateMine" />
+			<Property name="Area" value="{{0.485,0},{0.395,0},{0.550,0},{0.465,0}}" />
 		</Window>
 		
-		<Window type="OgreTray/StaticImage" name="Mine" >
-			<Property name="Image" value="TrueInfernoIcons/CreateMine" />
-			<Property name="Area" value="{{0.654,0},{0.29,0},{0.760,0},{0.39,0}}" />
+		<Window type="OgreTray/StaticImage" name="Gas" >
+			<Property name="Image" value="TrueInfernoNewIcons/CreateGasplant" />
+			<Property name="Area" value="{{0.570,0},{0.395,0},{0.635,0},{0.465,0}}" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="MapResourcesPriority" >
-			<Property name="Area" value="{{0.770,0},{0.29,0},{0.855,0},{0.39,0}}" />
+			<Property name="Area" value="{{0.665,0},{0.40,0},{0.720,0},{0.45,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="2" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="ProductionText" >
-			<Property name="Area" value="{{0.125,0},{0.40,0},{0.725,0},{0.50,0}}" />
+			<Property name="Area" value="{{0.250,0},{0.47,0},{0.446,0},{0.52,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
@@ -70,19 +78,19 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="Furnace" >
-			<Property name="Image" value="TrueInfernoIcons/CreateFurnace" />
-			<Property name="Area" value="{{0.654,0},{0.40,0},{0.760,0},{0.50,0}}" />
+			<Property name="Image" value="TrueInfernoNewIcons/CreateFurnace" />
+			<Property name="Area" value="{{0.570,0},{0.465,0},{0.635,0},{0.535,0}}" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="ProductionPriority" >
-			<Property name="Area" value="{{0.770,0},{0.40,0},{0.855,0},{0.50,0}}" />
+			<Property name="Area" value="{{0.665,0},{0.47,0},{0.720,0},{0.52,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="3" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="EvilProcessingText" >
-			<Property name="Area" value="{{0.125,0},{0.51,0},{0.725,0},{0.61,0}}" />
+			<Property name="Area" value="{{0.250,0},{0.54,0},{0.446,0},{0.59,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
@@ -91,24 +99,24 @@
 		</Window>
 				
 		<Window type="OgreTray/StaticImage" name="Refinery" >
-			<Property name="Image" value="TrueInfernoIcons/CreateRefinery" />
-			<Property name="Area" value="{{0.540,0},{0.51,0},{0.644,0},{0.61,0}}" />
+			<Property name="Image" value="TrueInfernoNewIcons/CreateRefinery" />
+			<Property name="Area" value="{{0.485,0},{0.535,0},{0.550,0},{0.605,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="Evilworks" >
-			<Property name="Image" value="TrueInfernoIcons/CreateEvilworks" />
-			<Property name="Area" value="{{0.654,0},{0.51,0},{0.760,0},{0.61,0}}" />
+			<Property name="Image" value="TrueInfernoNewIcons/CreateEvilworks" />
+			<Property name="Area" value="{{0.570,0},{0.535,0},{0.635,0},{0.605,0}}" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="EvilProcessingPriority" >
-			<Property name="Area" value="{{0.770,0},{0.51,0},{0.855,0},{0.61,0}}" />
+			<Property name="Area" value="{{0.665,0},{0.54,0},{0.720,0},{0.59,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="4" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="LogisticsText" >
-			<Property name="Area" value="{{0.125,0},{0.62,0},{0.725,0},{0.72,0}}" />
+			<Property name="Area" value="{{0.250,0},{0.61,0},{0.446,0},{0.66,0}}" />
 			<Property name="Font" value="Jura-12" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
@@ -117,50 +125,32 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="Evilator" >
-			<Property name="Image" value="TrueInfernoIcons/Refined" />
-			<Property name="Area" value="{{0.540,0},{0.62,0},{0.644,0},{0.72,0}}" />
+			<Property name="Image" value="TrueInfernoNewIcons/Refined" />
+			<Property name="Area" value="{{0.485,0},{0.605,0},{0.550,0},{0.675,0}}" />
 		</Window>
 		
-		<Window type="OgreTray/StaticImage" name="Wareouse" >
-			<Property name="Image" value="TrueInfernoIcons/CreateWarehouse" />
-			<Property name="Area" value="{{0.654,0},{0.62,0},{0.760,0},{0.72,0}}" />
+		<Window type="OgreTray/StaticImage" name="Warehouse" >
+			<Property name="Image" value="TrueInfernoNewIcons/CreateWarehouse" />
+			<Property name="Area" value="{{0.570,0},{0.605,0},{0.635,0},{0.675,0}}" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="LogisticsPriority" >
-			<Property name="Area" value="{{0.770,0},{0.62,0},{0.855,0},{0.72,0}}" />
+			<Property name="Area" value="{{0.665,0},{0.61,0},{0.720,0},{0.66,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="5" />
 		</Window>
 		
-		<Window type="OgreTray/StaticText" name="IDiText" >
-			<Property name="Area" value="{{0.125,0},{0.73,0},{0.725,0},{0.83,0}}" />
-			<Property name="Font" value="Jura-12" />
-			<Property name="VertFormatting" value="CentreAligned" />
-			<Property name="HorzFormatting" value="LeftAligned" />
-			<Property name="Text" value="I+D+i:" />
-			<Property name="AlwaysOnTop" value="True" />
+		<Window type="OgreTray/StaticImage" name="AcceptFrame" >
+			<Property name="Area" value="{{0.448,0},{0.68,0},{0.552,0},{0.81,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
 		</Window>
 		
-		<Window type="OgreTray/StaticImage" name="Lab" >
-			<Property name="Image" value="TrueInfernoIcons/CreateResearchLabs" />
-			<Property name="Area" value="{{0.654,0},{0.73,0},{0.760,0},{0.83,0}}" />
-		</Window>
-		
-		<Window type="TaharezLook/Editbox" name="IDiPriority" >
-			<Property name="Area" value="{{0.770,0},{0.73,0},{0.855,0},{0.83,0}}" />
-			<Property name="Font" value="Jura-10" />
-			<Property name="TextFormatting" value="LeftAligned" />
-			<Property name="Text" value="6" />
-		</Window>
-	
-		<Window type="OgreTray/TrueInfernoButtonCancel" name="CloseWindow" >
-			<Property name="Area" value="{{0.94,0},{0.01,0},{0.99,0},{0.06,0}}" />
-		</Window>	
-		
-		<Window type="OgreTray/TrueInfernoButtonText" name="Accept" >
-			<Property name="Area" value="{{0.360,0},{0.85,0},{0.640,0},{0.96,0}}" />
-			<Property name="Text" value="Apply" />				
+		<Window type="OgreTray/TrueInfernoButtonText2" name="Accept" >
+			<Property name="Area" value="{{0.457,0},{0.6972,0},{0.543,0},{0.7978,0}}" />
+			<Property name="Text" value="OK" />				
 		</Window>
 		
 	</Window>

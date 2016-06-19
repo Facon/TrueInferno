@@ -52,10 +52,6 @@
 			<Property name="Text" value="0" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCancel" name="CloseWindow" >
-			<Property name="Area" value="{{0.94,0},{0.01,0},{0.99,0},{0.06,0}}" />
-		</Window>	
-		
 		<Window type="OgreTray/TrueInfernoButtonText" name="Accept" >
 			<Property name="Area" value="{{0.290,0},{0.81,0},{0.710,0},{0.95,0}}" />
 			<Property name="Text" value="Redeem" />				

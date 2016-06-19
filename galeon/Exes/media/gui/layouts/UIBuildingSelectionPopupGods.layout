@@ -19,9 +19,6 @@
 			<Property name="Area" value="{{0.2,0},{0.10,0},{0.8,0},{0.70,0}}" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonCancel" name="CloseWindow" >
-			<Property name="Area" value="{{0.94,0},{0.01,0},{0.99,0},{0.06,0}}" />
-		</Window>			
 	</Window>
 </GUILayout>
 

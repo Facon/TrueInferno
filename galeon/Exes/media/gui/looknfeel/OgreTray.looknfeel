@@ -12,21 +12,145 @@
 -->
 <Falagard version="7">
 
-	<WidgetLook name="OgreTray/TrueInfernoButtonTrial2">
+	<WidgetLook name="OgreTray/TrueInfernoButtonBuildingGroups2">
 		<ImagerySection name="backgroundnm">			
+			<ImageryComponent>
+								<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="20" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="20" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateRefinery" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundhv">
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
 						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
 						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="OgreTrayImages/Shade" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="20" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="20" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateRefinery" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+		
+		<ImagerySection name="backgroundpd">
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="10" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="20" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoUITextures/Resourcebar" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+
+			<ImageryComponent>
+				<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="20" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="20" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
+					</Dim>
+				</Area>
+				<Image name="TrueInfernoIcons/CreateRefinery" />
+				<VertFormat type="Stretched" />
+				<HorzFormat type="Stretched" />
+			</ImageryComponent>
+		</ImagerySection>
+        <StateImagery name="Normal">
+			<Layer>
+                <Section section="backgroundnm" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Hover">
+			<Layer>
+                <Section section="backgroundhv" />
+            </Layer>
+         </StateImagery>
+		 <StateImagery name="Pushed">
+			<Layer>
+                <Section section="backgroundpd" />
+            </Layer>
+         </StateImagery>
+     </WidgetLook>
+
+	<WidgetLook name="OgreTray/TrueInfernoButtonTrial2">
+		<ImagerySection name="backgroundnm">			
+			<ImageryComponent>
+								<Area>
+					<Dim type="LeftEdge">
+						<AbsoluteDim value="20" />
+					</Dim>
+					<Dim type="TopEdge">
+						<AbsoluteDim value="20" />
+					</Dim>
+					<Dim type="RightEdge">
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
+					</Dim>
+					<Dim type="BottomEdge">
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/Trial" />
@@ -39,16 +163,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="OgreTrayImages/Shade" />
@@ -60,16 +184,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/Trial" />
@@ -82,16 +206,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="10" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="0" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="0" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="0" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoUITextures/Resourcebar" />
@@ -102,16 +226,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/Trial" />
@@ -648,16 +772,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/Cancel" />
@@ -692,16 +816,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/Cancel" />
@@ -734,16 +858,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/Cancel" />
@@ -775,16 +899,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/SwitchBuilding" />
@@ -819,16 +943,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/SwitchBuilding" />
@@ -861,16 +985,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/SwitchBuilding" />
@@ -902,16 +1026,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/DestroyBuilding" />
@@ -946,16 +1070,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/DestroyBuilding" />
@@ -988,16 +1112,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/DestroyBuilding" />
@@ -1029,16 +1153,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/UpgradeBuilding" />
@@ -1073,16 +1197,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/UpgradeBuilding" />
@@ -1115,16 +1239,16 @@
 			<ImageryComponent>
 				<Area>
 					<Dim type="LeftEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="TopEdge">
-						<AbsoluteDim value="10" />
+						<AbsoluteDim value="20" />
 					</Dim>
 					<Dim type="RightEdge">
-						<UnifiedDim scale="1" offset="-10" type="RightEdge" />
+						<UnifiedDim scale="1" offset="-20" type="RightEdge" />
 					</Dim>
 					<Dim type="BottomEdge">
-						<UnifiedDim scale="1" offset="-10" type="BottomEdge" />
+						<UnifiedDim scale="1" offset="-20" type="BottomEdge" />
 					</Dim>
 				</Area>
 				<Image name="TrueInfernoIcons/UpgradeBuilding" />

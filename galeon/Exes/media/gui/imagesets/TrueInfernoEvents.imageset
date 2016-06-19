@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <Imageset autoScaled="vertical" imagefile="TrueInfernoEvents.png" name="TrueInfernoEvents" nativeHorzRes="3688" nativeVertRes="1773" version="2">
     <Image height="596" name="EventTutorial1" width="601" xPos="0" yPos="0" />
     <Image height="768" name="EventDefeat" width="1023" xPos="1" yPos="701" />
@@ -8,5 +7,5 @@
     <Image height="542" name="EventBuildingDestruction" width="970" xPos="2625" yPos="1" />
     <Image height="715" name="EventTutorial3" width="1278" xPos="1025" yPos="703" />
     <Image height="1066" name="EventTutorial4" width="1376" xPos="2307" yPos="705" />
-    <Image height="620" name="EventSoulsSpeedReduction" width="510" xPos="1" yPos="1470" />
+    <Image height="345" name="EventSoulsSpeedReduction" width="460" xPos="18" yPos="1740" />
 </Imageset>
