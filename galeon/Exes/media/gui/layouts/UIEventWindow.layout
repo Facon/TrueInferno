@@ -4,23 +4,46 @@
 	<Window type="OgreTray/StaticImage" name="EventWindow" >
 	<Property name="Image" value="TrueInfernoUIBars/EventFrame" />
 		<Property name="Area" value="{{0.205,0},{0.193277,0},{0.705,0},{0.960427,0}}" />
+		
+		<Window type="OgreTray/StaticImage" name="BuildingNameFrame">
+			<Property name="Area" value="{{0.3,0},{0.22,0},{0.7,0},{0.31,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />		
+		</Window>
+	
 		<Window type="OgreTray/StaticText" name="EventTitle" >
-			<Property name="Area" value="{{0.2,0},{0.059375,0},{0.8,0},{0.159375,0}}" />
-			<Property name="Font" value="Jura-16" />
+			<Property name="Area" value="{{0.3,0},{0.22,0},{0.7,0},{0.31,0}}" />
+			<Property name="Font" value="Jura-18" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="ImageFrame" >
+			<Property name="Area" value="{{0.4720,0},{0.31,0},{0.8080,0},{0.625,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonWindow" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
 		<Window type="OgreTray/StaticImage" name="EventImage" >
-			<Property name="VertFormatting" value="CentreAligned" />
-			<Property name="HorzFormatting" value="CentreAligned" />
-			<Property name="Area" value="{{0.525,0},{0.21875,0},{0.975,0},{0.78125,0}}" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+			<Property name="Area" value="{{0.4925,0},{0.335,0},{0.7875,0},{0.60,0}}" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="PortraitFrame" >
+			<Property name="Area" value="{{0.20,0},{0.31,0},{0.417,0},{0.625,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonWindow" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="EventPortrait" >
-			<Property name="VertFormatting" value="CentreAligned" />
-			<Property name="HorzFormatting" value="CentreAligned" />
-			<Property name="Area" value="{{0.16,0},{0.21875,0},{0.34,0},{0.61875,0}}" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+			<Property name="Area" value="{{0.225,0},{0.335,0},{0.3965,0},{0.60,0}}" />
 			<Property name="Image" value="TrueInfernoEvents/EventDefeat" />
 		</Window>
 		
@@ -31,15 +54,29 @@
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
+		<Window type="OgreTray/StaticImage" name="TextFrame" >
+			<Property name="Area" value="{{0.19,0},{0.63,0},{0.8180,0},{0.81,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/EventFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
 		<Window type="OgreTray/StaticText" name="EventText" >
-			<Property name="Area" value="{{0.05,0},{0.65,0},{0.40,0},{0.98,0}}" />
+			<Property name="Area" value="{{0.30,0},{0.63,0},{0.7150,0},{0.81,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="HorzFormatting" value="WordWrapJustified" />			
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonText" name="AcceptEvent" >
-			<Property name="Area" value="{{0.45,0},{0.85,0},{0.55,0},{0.95,0}}" />
+		<Window type="OgreTray/StaticImage" name="AcceptFrame" >
+			<Property name="Area" value="{{0,0},{0,0},{0,0},{0,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		<Window type="OgreTray/TrueInfernoButtonText2" name="AcceptEvent" >
+			<Property name="Area" value="{{0,0},{0,0},{0,0},{0,0}}" />
 			<Property name="Text" value="OK" />				
 		</Window>
 		
