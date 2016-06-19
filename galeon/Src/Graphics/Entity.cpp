@@ -451,6 +451,16 @@ namespace Graphics
 
 	//--------------------------------------------------------
 
+	void CEntity::setCastShadows(bool castShadows)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entity)
+			_entity->setCastShadows(castShadows);
+
+	} // setCastShadows
+
+	//--------------------------------------------------------
+
 	void CEntity::addParticles(Logic::ParticleType particleType) {
 		Graphics::CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
 
@@ -464,7 +474,8 @@ namespace Graphics
 			this->_entityNode->attachObject(particleSystem);
 		else
 			assert(false && "Can't add particles");
-	}
+
+	} // addParticles
 
 	//--------------------------------------------------------
 
@@ -480,7 +491,8 @@ namespace Graphics
 			o->detachFromParent();
 			scene->getSceneMgr()->destroyParticleSystem(id);
 		}
-	}
+
+	} // removeParticles
 
 	//--------------------------------------------------------
 
@@ -506,12 +518,14 @@ namespace Graphics
 			assert(false && "No name for this particleType");
 			return "";
 		}
-	}
+
+	} // getParticleSystemTemplateName
 
 	//--------------------------------------------------------
 
 	std::string CEntity::getParticleSystemId(Logic::ParticleType particleType) {
 		return "Particle_" + getParticleSystemTemplateName(particleType) + "_" + _entity->getName();
-	}
+
+	} // getParticleSystemId
 
 } // namespace Graphics

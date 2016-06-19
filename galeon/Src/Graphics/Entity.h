@@ -213,6 +213,12 @@ namespace Graphics
 		const std::string &getMaterialName();
 
 		/**
+		Establece la propiedad castShadows de la entidad.
+		@param castShadows Nuevo valor de la propiedad castShadows.
+		*/
+		void setCastShadows(bool castShadows);
+
+		/**
 		Devuelve la entidad de Ogre.
 		@return puntero a la entidad de Ogre.
 		*/

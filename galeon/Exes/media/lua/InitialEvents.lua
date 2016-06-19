@@ -4,7 +4,12 @@ if launchInitialEvents then
 	print("[LUA] Loading InitialEvents.lua...");
 	
 	-- Time events
-	-- CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(40 * 1000));
+	-- CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent.addCBuildingDestructionEvent(
+	--	25 * 1000, "Osiris", "Title", "Description", "EventBuildingDestruction", true));
+	-- CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent.addCBuildingDestructionEvent(
+	--	35 * 1000, "Osiris", "Title", "Description", "EventBuildingDestruction", true));
+		
+	-- CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(25 * 1000, "", "", "", ""));
 	-- CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent(35 * 1000));
 	-- CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent.addCSoulSpeedAlterationEvent(5*1000, 0.25, 20*1000, true, false));
 	-- CEventManager.getSingletonPtr():addTimeEvent(CSoulSpeedAlterationEvent.addCSoulSpeedAlterationEvent(7*1000, 0.25, 20*1000, true, false));
