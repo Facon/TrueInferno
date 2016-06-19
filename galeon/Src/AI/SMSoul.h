@@ -74,8 +74,9 @@ namespace AI {
 			this->addEdge(checkTargetBeforeExecute, executeTask, new CConditionSuccess());
 			this->addEdge(checkTargetBeforeExecute, startBurning, new CConditionFail());
 
-			// Tras ejecutar la tarea se destruye directamente el alma
-			this->addEdge(executeTask, destroy, new CConditionFinished());
+			// Tras ejecutar la tarea se destruye directamente el alma, o se quema si falló
+			this->addEdge(executeTask, destroy, new CConditionSuccess());
+			this->addEdge(executeTask, startBurning, new CConditionFail());
 
 			// Tras chequear el objetivo, si es válido, espera para reintentar ruta. Si no, se autodestruye
 			this->addEdge(checkTarget, waitRetryPath, new CConditionSuccess());

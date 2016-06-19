@@ -17,6 +17,10 @@ namespace AI {
 		if (_smData.getTask() == nullptr)
 			return LAStatus::FAIL;
 
+		// Y que la tarea pueda ejecutarse
+		if(!_smData.getTask()->canExecute())
+			return LAStatus::FAIL;
+
 		return _smData.getTask()->execute() ? LAStatus::SUCCESS : LAStatus::RUNNING;
 	}
 

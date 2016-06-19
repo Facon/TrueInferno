@@ -44,4 +44,22 @@ namespace AI
 			return false;
 		}
 	}
+
+	bool CSoulTask::canStart() {
+		// Verificamos siga existiendo el objetivo
+		CEntity* targetEntity = _map->getEntityByID(_target);
+		if (targetEntity != nullptr)
+			return true;
+		else
+			return false;
+	}
+
+	bool CSoulTask::canExecute() {
+		// Verificamos siga existiendo el objetivo
+		CEntity* targetEntity = _map->getEntityByID(_target);
+		if (targetEntity != nullptr)
+			return true;
+		else
+			return false;
+	}
 }

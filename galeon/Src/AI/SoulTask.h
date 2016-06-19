@@ -44,6 +44,12 @@ namespace AI
 			_executorId = executorId;
 		}
 
+		/** Chequea que la tarea se pueda empezar */
+		bool canStart();
+
+		/** Chequea que la tarea se pueda ejecutar */
+		bool canExecute();
+
 	protected:
 		Logic::CMap *_map;
 
