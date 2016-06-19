@@ -4,11 +4,15 @@
 #include <string>
 
 #include "Map/MapEntity.h"
+
+#include "Logic/Server.h"
 #include "Logic/ResourcesManager.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
+#include "Logic/Entity/Components/Graphics.h"
 #include "Logic/Events/EventManager.h"
 #include "Logic/Maps/Managers/TileManager.h"
+#include "Logic/Maps/EntityFactory.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/Entity/PlaceableType.h"
 #include "Logic/Entity/Message.h"
@@ -37,6 +41,7 @@ namespace Logic {
 
 		_tiles.clear();
 		_adyacentTiles.clear();
+		clearFloatingVisualEntities();
 	}
 
 	bool CPlaceable::spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
@@ -150,6 +155,9 @@ namespace Logic {
 		if (!check)
 			return false;
 
+		// Eliminamos la entidad de feedback
+		clearFloatingVisualEntities();
+
 		// For each of our tiles
 		for (auto it = _tiles.cbegin(); it != _tiles.cend(); ++it){
 			assert("Can't place if there's a Placeable!" && (*it)->getPlaceableAbove()==nullptr);
@@ -250,11 +258,12 @@ namespace Logic {
 		// Store new origin position
 		_floorOriginPosition = newOriginPosition;
 
-		// TODO Desmarcamos las tiles antiguas
-
-		// Clear tile vectors
+		// Clear tiles and adyacent tiles vectors
 		_tiles.clear();
 		_adyacentTiles.clear();
+
+		// Clear visual feedback entities created for floating buildings
+		clearFloatingVisualEntities();
 
 		// Initialize vector to calculate the average position of all tiles
 		Vector3 centerPosition(0, 0, 0);
@@ -275,8 +284,6 @@ namespace Logic {
 			}
 		}
 
-		// TODO Marcamos las tiles nuevas
-
 		// Calculate the average if there were valid tiles
 		if (!_tiles.empty())
 			centerPosition /= _tiles.size();
@@ -288,7 +295,7 @@ namespace Logic {
 		// Añadimos cierta altura a la posición del Placeable para que parezca que está colocada encima o sobrevolando la Tile
 		float buildingHeightIncrement = 0.0f;
 
-		// @TODO Es necesario incluir aquí una distinción para todos los edificios que tengan un
+		// Es necesario incluir aquí una distinción para todos los edificios que tengan un
 		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...
 		if (_placeableType == Building)
 		{
@@ -315,18 +322,40 @@ namespace Logic {
 			bool test = true;
 		}
 
-		// Ponemos un material u otro según si estamos en posición válida o no
-		std::string placementMaterial;
-		if (checkPlacementIsPossible(_floorOriginPosition)){
-			placementMaterial = "Building/RightPlaced";
-		}
-		else{
-			placementMaterial = "Building/WrongPlaced";
-		}
+		// Ponemos un material u otro según estemos en una posición válida o no
+		std::string buildingPlacementMaterial;
 
-		MaterialMessage m(placementMaterial);
+		if (checkPlacementIsPossible(_floorOriginPosition))
+			buildingPlacementMaterial = "Building/RightPlaced";
+		else
+			buildingPlacementMaterial = "Building/WrongPlaced";
+
+		MaterialMessage m(buildingPlacementMaterial);
 		const bool result = m.Dispatch(*_entity);
 		assert(result && "Can't set right/wrong placed material");
+
+		// Feedback gráfico para las tiles sobre las que flota el Placeable
+		std::string tilePlacementMaterial;
+
+		if (buildingPlacementMaterial == "Building/RightPlaced")
+			tilePlacementMaterial = "Tile/RightPlaced";
+		else
+			tilePlacementMaterial = "Tile/WrongPlaced";
+
+		if (showFloating && _buildingType != BuildingType::NonBuilding)
+		{
+			for (int x = 0; x < _floorX; ++x) {
+				for (int z = 0; z < _floorZ; ++z) {
+					Tile* tile = _tileManager->getTile(_floorOriginPosition + Vector3(x, 0, z));
+
+					CEntity *visualPlaceable = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(),
+						"SoulPath", tile->getLogicPosition(), true, false);
+
+					visualPlaceable->getComponent<Logic::CGraphics>()->setMaterialName(tilePlacementMaterial);
+					_floatingVisualEntities.push_back(visualPlaceable);
+				}
+			}
+		}
 	}
 	
 	bool CPlaceable::checkPlacementIsPossible(const Vector3 &checkPosition) const{
@@ -343,6 +372,20 @@ namespace Logic {
 
 		// All checks are done!
 		return true;
+	}
+
+	void CPlaceable::clearFloatingVisualEntities()
+	{
+		while (!_floatingVisualEntities.empty())
+		{
+			CEntity *entity = _floatingVisualEntities.back();
+			_floatingVisualEntities.pop_back();
+
+			Logic::CEntityFactory::getSingletonPtr()->deleteEntity(entity);
+			entity = nullptr;
+		}
+
+		_floatingVisualEntities.clear();
 	}
 
 	const std::vector<Tile*> CPlaceable::getTiles() const{
