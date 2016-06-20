@@ -24,11 +24,8 @@ namespace Logic
 	const std::unordered_map<std::string, IconType::IconType> Billboard::iconTableConversor =
 	{
 		{ "BURNING", IconType::BURNING },
-		{ "SHOVEL", IconType::SHOVEL },
-		{ "CLOSE", IconType::CLOSE },
 		{ "COKE", IconType::COKE },
 		{ "CRUDE", IconType::CRUDE },
-		{ "FLAMES", IconType::FLAMES },
 		{ "SOUL_PATH", IconType::SOUL_PATH },
 		{ "EVILWORKS", IconType::EVILWORKS },
 		{ "FURNACE", IconType::FURNACE },
@@ -49,8 +46,8 @@ namespace Logic
 		//{ "GAS", IconType::GAS },
 		// TODO Solución temporal hasta que estén los iconos que faltan
 		{ "EVILATOR", IconType::EVILATOR },
-		{ "MINERAL", IconType::MINE },
-		{ "GAS", IconType::GAS_PLANT },
+		{ "MINERAL", IconType::MINERALS },
+		{ "GAS", IconType::GAS },
 		{ "NONE", IconType::NONE},
 	};
 	
@@ -75,7 +72,7 @@ namespace Logic
 		{ COKE, IconType::POWER_GENERATOR },
 		{ CRUDE, IconType::EVILWORKS },
 		{ PURE_EVIL, IconType::REFINERY },
-		{ REFINED, IconType::CLOCK },
+		{ REFINED, IconType::REFINED },
 		{ AETHER, IconType::RESEARCH_LABS },
 		{ HADES_FAVOR, IconType::NONE }
 	};
@@ -91,7 +88,7 @@ namespace Logic
 		{ BuildingType::Refinery, IconType::REFINERY },
 		{ BuildingType::ResearchLabs, IconType::RESEARCH_LABS },
 		{ BuildingType::Warehouse, IconType::WAREHOUSE },
-		{ BuildingType::Evilator, IconType::CLOCK },
+		{ BuildingType::Evilator, IconType::EVILATOR },
 	};
 
 	const std::unordered_map<LogicRequirement, IconType::IconType> Billboard::requirementTableConversor =
@@ -101,6 +98,7 @@ namespace Logic
 		// TODO Descomentar cuando se pueda volver a reparar edificios que van a ser destruidos
 		//{ LogicRequirement::Player, IconType::REPAIR },
 		{ LogicRequirement::Player, IconType::NONE },
+		{ LogicRequirement::Player, IconType::BATTLE },
 		{ LogicRequirement::Road, IconType::SOUL_PATH },
 		{ LogicRequirement::Undefined, IconType::NONE },
 	};
@@ -238,7 +236,7 @@ namespace Logic
 	{
 		// Odd numbers should have one more element in upper row
 		const unsigned int BILLBOARDS_PER_ROW = (numBillboards == 2) ? 2 : ceil(numBillboards / 2.0f);
-		const float SPACE_BETWEEN = 0.5f;
+		const float SPACE_BETWEEN = 1.f;
 
 		const float HEIGHT = 1.f;
 
@@ -271,9 +269,13 @@ namespace Logic
 	{
 		unsigned int numBillboards = _bbSet->getNumBillboards();
 
-		if (numBillboards == 0 || numBillboards == 1)
+		if (numBillboards == 0)
 		{
 			return;
+		}
+		else if (numBillboards == 1)
+		{
+			_bbSet->getBillboard(0)->setPosition(0.0f, 0.0f, 0.0f);
 		}
 		else
 		{

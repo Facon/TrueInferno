@@ -48,8 +48,8 @@ namespace Logic
 		enum IconType
 		{
 			BATTLE,
-			TRADE,
-			CRUDE_EVIL_BUILDING, // Not needed!
+			SOUL,
+			BURNING, // Not needed!
 			CRUDE,
 			PURE_EVIL,
 			REFINED,
@@ -66,12 +66,13 @@ namespace Logic
 			RESEARCH_LABS,
 			MINE,
 			POWER_GENERATOR,
+			COKE = 18,
 			REFINERY,
 			WAREHOUSE,
-			SOUL,
-			BURNING,
-			STUPID_SPACE,
+			STUPID_1,
+			STUPID_2,
 			VOID_ICON,
+			NONE,
 		};
 	} // namespace IconType
 }

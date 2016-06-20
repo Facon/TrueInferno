@@ -1,0 +1,19 @@
+material Billboard/TrueInfernoNewIcons
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend alpha_blend
+			//depth_write off
+			alpha_rejection greater_equal 128
+			
+			texture_unit
+			{
+				texture TrueInfernoNewIcons.png
+				texture_address_mode clamp
+			}
+		}
+	}
+}

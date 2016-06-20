@@ -41,7 +41,7 @@ namespace AI{
 				// Icono del recurso que va a ir a recoger la entidad (distinto de recurso siendo transportado)
 				//IconMessage m(MessageType::ICON, Billboard::getResourceIcon(_resourceType));
 				// De momento ponemos la pala que es lo más parecido a un transporte que tenemos
-				IconMessage m(MessageType::ICON_ADD, IconType::IconType::SHOVEL);
+				IconMessage m(MessageType::ICON_ADD, IconType::IconType::MINE);
 				
 				const bool result = m.Dispatch(*executor);
 				assert(result && "Can't set transport soul icon");
