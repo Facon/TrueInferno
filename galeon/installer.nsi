@@ -3,12 +3,12 @@
 !define DESCRIPTION "Hell is only the beginning!"
 # These three must be integers
 !define VERSIONMAJOR 1
-!define VERSIONMINOR 0
+!define VERSIONMINOR 1
 !define VERSIONBUILD 0
 
 # These will be display
 # name the installer
-OutFile "TrueInfernoInstaller1_0.exe"
+OutFile "TrueInfernoInstaller${VERSIONMAJOR}_${VERSIONMINOR}.exe"
  
 # set desktop as install directory
 InstallDir "$PROGRAMFILES\${APPNAME}"
