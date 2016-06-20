@@ -8,6 +8,7 @@ namespace Logic
 		// TODO Faltan los iconos comentados
 		// Listado de iconos disponible
 		// Cualquier cambio que se haga debe estar sincronizado con el fichero de iconos 'media\gui\imagesets\TrueInfernoIcons.png'
+		/*
 		enum IconType
 		{
 			NONE = 0,
@@ -42,6 +43,36 @@ namespace Logic
 			//GAS,
 			//MINERAL,
 			//EVILATOR,
+		};
+		*/
+		enum IconType
+		{
+			BATTLE,
+			SOUL,
+			BURNING, // Not needed!
+			CRUDE,
+			PURE_EVIL,
+			REFINED,
+			GAS,
+			HADES_FAVOR,
+			MINERALS,
+			TIME,
+			SOUL_PATH,
+			EVILWORKS,
+			EVILATOR,
+			FURNACE,
+			GAS_PLANT,
+			HELLQUARTERS,
+			RESEARCH_LABS,
+			MINE,
+			POWER_GENERATOR,
+			COKE = 18,
+			REFINERY,
+			WAREHOUSE,
+			STUPID_1,
+			STUPID_2,
+			VOID_ICON,
+			NONE,
 		};
 	} // namespace IconType
 }

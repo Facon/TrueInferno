@@ -23,40 +23,31 @@ namespace Logic
 
 	const std::unordered_map<std::string, IconType::IconType> Billboard::iconTableConversor =
 	{
-		{ "OK", IconType::OK },
 		{ "BURNING", IconType::BURNING },
-		{ "SHOVEL", IconType::SHOVEL },
-		{ "CLOSE", IconType::CLOSE },
 		{ "COKE", IconType::COKE },
 		{ "CRUDE", IconType::CRUDE },
-		{ "NOT_OK", IconType::NOT_OK },
-		{ "FLAMES", IconType::FLAMES },
 		{ "SOUL_PATH", IconType::SOUL_PATH },
 		{ "EVILWORKS", IconType::EVILWORKS },
 		{ "FURNACE", IconType::FURNACE },
 		{ "GAS_PLANT", IconType::GAS_PLANT },
 		{ "HELLQUARTERS", IconType::HELLQUARTERS },
 		{ "MINE", IconType::MINE },
-		{ "CROSS_SWORD", IconType::CROSS_SWORD }, // WTF?
 		{ "SOUL", IconType::SOUL },
-		{ "POWER_GENERATOR", IconType::POWER_GENERATOR }, // WTF?
+		{ "POWER_GENERATOR", IconType::POWER_GENERATOR },
 		{ "PURE_EVIL", IconType::PURE_EVIL },
 		{ "REFINERY", IconType::REFINERY },
-		{ "REPAIR", IconType::REPAIR },
 		{ "RESEARCH_LABS", IconType::RESEARCH_LABS },
 		{ "POWER_ON", IconType::POWER_GENERATOR },
-		{ "CLOCK", IconType::CLOCK },
-		{ "JUDGEMENT", IconType::JUDGEMENT },
-		{ "COGS", IconType::COGS }, // WTF?
+		{ "TIME", IconType::TIME },
 		{ "WAREHOUSE", IconType::WAREHOUSE },
 		{ "VOID", IconType::VOID_ICON },
 		//{ "EVILATOR", IconType::EVILATOR },
 		//{ "MINERAL", IconType::MINERAL },
 		//{ "GAS", IconType::GAS },
 		// TODO Solución temporal hasta que estén los iconos que faltan
-		{ "EVILATOR", IconType::CLOCK },
-		{ "MINERAL", IconType::MINE },
-		{ "GAS", IconType::GAS_PLANT },
+		{ "EVILATOR", IconType::EVILATOR },
+		{ "MINERAL", IconType::MINERALS },
+		{ "GAS", IconType::GAS },
 		{ "NONE", IconType::NONE},
 	};
 	
@@ -81,7 +72,7 @@ namespace Logic
 		{ COKE, IconType::POWER_GENERATOR },
 		{ CRUDE, IconType::EVILWORKS },
 		{ PURE_EVIL, IconType::REFINERY },
-		{ REFINED, IconType::CLOCK },
+		{ REFINED, IconType::REFINED },
 		{ AETHER, IconType::RESEARCH_LABS },
 		{ HADES_FAVOR, IconType::NONE }
 	};
@@ -97,7 +88,7 @@ namespace Logic
 		{ BuildingType::Refinery, IconType::REFINERY },
 		{ BuildingType::ResearchLabs, IconType::RESEARCH_LABS },
 		{ BuildingType::Warehouse, IconType::WAREHOUSE },
-		{ BuildingType::Evilator, IconType::CLOCK },
+		{ BuildingType::Evilator, IconType::EVILATOR },
 	};
 
 	const std::unordered_map<LogicRequirement, IconType::IconType> Billboard::requirementTableConversor =
@@ -107,6 +98,7 @@ namespace Logic
 		// TODO Descomentar cuando se pueda volver a reparar edificios que van a ser destruidos
 		//{ LogicRequirement::Player, IconType::REPAIR },
 		{ LogicRequirement::Player, IconType::NONE },
+		{ LogicRequirement::Player, IconType::BATTLE },
 		{ LogicRequirement::Road, IconType::SOUL_PATH },
 		{ LogicRequirement::Undefined, IconType::NONE },
 	};
@@ -244,7 +236,7 @@ namespace Logic
 	{
 		// Odd numbers should have one more element in upper row
 		const unsigned int BILLBOARDS_PER_ROW = (numBillboards == 2) ? 2 : ceil(numBillboards / 2.0f);
-		const float SPACE_BETWEEN = 0.5f;
+		const float SPACE_BETWEEN = 1.f;
 
 		const float HEIGHT = 1.f;
 
@@ -277,9 +269,13 @@ namespace Logic
 	{
 		unsigned int numBillboards = _bbSet->getNumBillboards();
 
-		if (numBillboards == 0 || numBillboards == 1)
+		if (numBillboards == 0)
 		{
 			return;
+		}
+		else if (numBillboards == 1)
+		{
+			_bbSet->getBillboard(0)->setPosition(0.0f, 0.0f, 0.0f);
 		}
 		else
 		{

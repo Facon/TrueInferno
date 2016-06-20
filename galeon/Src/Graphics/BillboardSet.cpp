@@ -15,12 +15,16 @@ namespace Graphics
 			CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
 			Ogre::BillboardSet* bbSet = scene->createBillboardSet(entity, name, position);
 			bbSet->setMaterialName(materialName);
-			bbSet->setDefaultDimensions(0.5, 0.5);
+			bbSet->setDefaultDimensions(1, 1);
 
 			// Specific parts
 			if (materialName == "Billboard/TrueInfernoIcons")
 			{
 				bbSet->setTextureStacksAndSlices(1, 29);
+			}
+			else if (materialName == "Billboard/TrueInfernoNewIcons")
+			{
+				bbSet->setTextureStacksAndSlices(4, 7);
 			}
 
 			_bbSet = bbSet;
