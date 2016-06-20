@@ -14,14 +14,15 @@ namespace AI {
 	public:
 		CLATransformResources(CEntity* entity, CSMResourceTransformerData& smData, 
 			ResourceType resourceFrom, ResourceType resourceInto, 
-			float transformRatio, ResourceType costResource, float costRatio) :
+			float transformRatio, ResourceType costResource, float costRatio, int transformParticlesDuration) :
 
 			CLatentAction(entity), _smData(smData), 
 			_resourceFrom(resourceFrom), _resourceInto(resourceInto),
 			_transformRatio(transformRatio), _costResource(costResource), _costRatio(costRatio),
-			_transformed(0), _decrementDone(false), _incrementDone(false) {}
+			_transformed(0), _decrementDone(false), _incrementDone(false),
+			_transformParticlesDuration(transformParticlesDuration) {}
 
-		virtual ~CLATransformResources() {}
+		virtual ~CLATransformResources() {};
 
 	protected:
 		LAStatus OnStart();
@@ -54,6 +55,9 @@ namespace AI {
 
 		/** Flag para señalar que el incremento de los recursos de salida ya está hecho */
 		bool _incrementDone;
+
+		/** Duración (ms) de las partículas de transformación de recursos */
+		int _transformParticlesDuration;
 	};
 }
 

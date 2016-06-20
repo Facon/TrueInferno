@@ -1,5 +1,7 @@
 #include "LABurnSouls.h"
+
 #include "Logic\ResourcesManager.h"
+#include "Logic\Entity\ParticleType.h"
 
 namespace AI
 {
@@ -59,6 +61,12 @@ namespace AI
 		}
 
 		// Si ya se han realizado ambos incrementos...
+
+		// Activamos partículas de acción de edificio
+		ParticleMessage pm(ParticleType::BUILDING_ACTION, _burnParticlesDuration);
+		bool result = pm.Dispatch(*_entity);
+		assert(true && "Can't set building action particles");
+
 		return LAStatus::SUCCESS;
 	}
 }

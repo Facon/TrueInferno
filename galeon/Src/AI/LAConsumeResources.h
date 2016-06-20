@@ -11,8 +11,8 @@ namespace AI {
 		RTTI_DECL;
 
 	public:
-		CLAConsumeResources(CEntity* entity, CSMResourceConsumerData& smData, ResourceType resourceType) :
-			CLatentAction(entity), _smData(smData), _resourceType(resourceType) {}
+		CLAConsumeResources(CEntity* entity, CSMResourceConsumerData& smData, ResourceType resourceType, int consumptionParticlesDuration) :
+			CLatentAction(entity), _smData(smData), _resourceType(resourceType), _consumptionParticlesDuration(consumptionParticlesDuration) {}
 
 		virtual ~CLAConsumeResources() {}
 
@@ -25,6 +25,9 @@ namespace AI {
 		CSMResourceConsumerData& _smData;
 
 		ResourceType _resourceType;
+
+		/** Duración (ms) de las partículas de consumo de recursos */
+		int _consumptionParticlesDuration;
 	};
 }
 

@@ -30,17 +30,40 @@ namespace AI {
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			// Lectura de datos
-			assert(entityInfo->hasAttribute("transformsFrom"));
-			_resourceFrom = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("transformsFrom"));
+			if (entityInfo->hasAttribute("transformsFrom"))
+				_resourceFrom = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("transformsFrom"));
+			else{
+				assert(false && "transformsFrom not defined");
+				return false;
+			}
 
-			assert(entityInfo->hasAttribute("transformsInto"));
-			_resourceInto = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("transformsInto"));
+			if(entityInfo->hasAttribute("transformsInto"))
+				_resourceInto = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("transformsInto"));
+			else{
+				assert(false && "transformsInto not defined");
+				return false;
+			}
 			
-			assert(entityInfo->hasAttribute("transformRatio"));
-			_transformRatio = entityInfo->getFloatAttribute("transformRatio");
+			if(entityInfo->hasAttribute("transformRatio"))
+				_transformRatio = entityInfo->getFloatAttribute("transformRatio");
+			else{
+				assert(false && "transformRatio not defined");
+				return false;
+			}
 
-			assert(entityInfo->hasAttribute("transformPeriod"));
-			_period = 1000 * entityInfo->getIntAttribute("transformPeriod");
+			if(entityInfo->hasAttribute("transformPeriodSecs"))
+				_period = 1000 * entityInfo->getIntAttribute("transformPeriodSecs");
+			else{
+				assert(false && "transformPeriodSecs not defined");
+				return false;
+			}
+
+			if(entityInfo->hasAttribute("transformParticlesDurationMsecs"))
+				_transformParticlesDuration = entityInfo->getIntAttribute("transformParticlesDurationMsecs");
+			else{
+				assert(false && "transformParticlesDurationMsecs not defined");
+				return false;
+			}
 
 			// El recurso de coste de la transformación es opcional
 			if (entityInfo->hasAttribute("transformCostResource"))
@@ -58,7 +81,7 @@ namespace AI {
 			int recountResourcesBeforeAsking = this->addNode(new CLARecountResources<CSMResourceTransformerData>(_entity, _data, _resourceFrom));
 			int gatherResources = this->addNode(new CLAAskAndWaitResources(_entity, _data, _resourceFrom, _period));
 			int recountResourcesBeforeTransforming = this->addNode(new CLARecountResources<CSMResourceTransformerData>(_entity, _data, _resourceFrom));
-			int transformResources = this->addNode(new CLATransformResources(_entity, _data, _resourceFrom, _resourceInto, _transformRatio, _costResource, _costRatio));
+			int transformResources = this->addNode(new CLATransformResources(_entity, _data, _resourceFrom, _resourceInto, _transformRatio, _costResource, _costRatio, _transformParticlesDuration));
 
 			this->addEdge(recountResourcesBeforeAsking, gatherResources, new CConditionFinished());
 			this->addEdge(gatherResources, recountResourcesBeforeTransforming, new CConditionFinished());
@@ -93,6 +116,9 @@ namespace AI {
 		/** Ratio de coste del recurso de costes sobre los recursos de entrada. 
 		* Ejemplo: Si el ratio es 2, cada recurso de entrada que se quiera transformar cuesta 2 del de costes */
 		float _costRatio;
+
+		/** Duración (ms) de las partículas de transformación de recursos */
+		int _transformParticlesDuration;
 	};
 }
 

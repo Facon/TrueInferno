@@ -461,36 +461,52 @@ namespace Graphics
 
 	//--------------------------------------------------------
 
-	void CEntity::addParticles(Logic::ParticleType particleType) {
-		Graphics::CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
-
-		// Creamos el sistema de partículas con un nombre único
+	void CEntity::startParticles(Logic::ParticleType particleType) {
+		// Creamos un sistema de partículas único para esta entidad y tipo de partícula
 		std::string templateName = getParticleSystemTemplateName(particleType);
 		std::string id = getParticleSystemId(particleType);
-		Ogre::ParticleSystem* particleSystem = scene->getSceneMgr()->createParticleSystem(id, templateName);
+		
+		// Sólo lo creamos si no existía previamente
+		if (!_scene->getSceneMgr()->hasParticleSystem(id)){
+			Ogre::ParticleSystem* particleSystem = _scene->getSceneMgr()->createParticleSystem(id, templateName);
+			
+			//  Lo añadimos a la escena
+			if (particleSystem != nullptr)
+				this->_entityNode->attachObject(particleSystem);
+			else
+				assert(false && "Can't create particle system");
+		}
 
-		//  Lo añadimos a la escena
-		if (particleSystem != nullptr)
-			this->_entityNode->attachObject(particleSystem);
-		else
-			assert(false && "Can't add particles");
+		// Si ya existía, reactivamos sus emisores
+		else{
+			_scene->getSceneMgr()->getParticleSystem(id)->setEmitting(true);
+		}
 
 	} // addParticles
 
 	//--------------------------------------------------------
 
-	void CEntity::removeParticles(Logic::ParticleType particleType) {
-		Graphics::CScene* scene = Graphics::CServer::getSingletonPtr()->getActiveScene();
+	void CEntity::stopParticles(Logic::ParticleType particleType) {
+		// Buscamos el sistema de partículas para esta entidad y tipo de partícula
+		std::string id = getParticleSystemId(particleType);
+		if (_scene->getSceneMgr()->hasParticleSystem(id)){
+			// Paramos sus emisores
+			_scene->getSceneMgr()->getParticleSystem(id)->setEmitting(false);
+		}
+
+		else{
+		//	assert(false && "Can't stop particleSystem which doesn't exist");
+		}
 
 		// Eliminamos el sistema de partículas
-		std::string id = getParticleSystemId(particleType);
+		/*std::string id = getParticleSystemId(particleType);
 
 		// Lo quitamos de la escena
 		Ogre::MovableObject* o = this->_entityNode->getAttachedObject(id);
 		if (o != nullptr){
 			o->detachFromParent();
-			scene->getSceneMgr()->destroyParticleSystem(id);
-		}
+			_scene->getSceneMgr()->destroyParticleSystem(id);
+		}*/
 
 	} // removeParticles
 
@@ -508,6 +524,7 @@ namespace Graphics
 		case Logic::ParticleType::SOUL_MOVEMENT:
 			return "SoulMovement";
 
+		case Logic::ParticleType::BUILDING_ACTION:
 		case Logic::ParticleType::FIRE_SMOKE:
 			return "FireSmoke";
 

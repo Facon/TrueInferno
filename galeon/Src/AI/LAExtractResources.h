@@ -11,8 +11,11 @@ namespace AI {
 		RTTI_DECL;
 
 	public:
-		CLAExtractResources(CEntity* entity, CSMResourceExtractorData& smData, ResourceType resourceType, unsigned int maxExtractedQuantity) :
-			CLatentAction(entity), _smData(smData), _resourceType(resourceType), _maxExtractedQuantity(maxExtractedQuantity) {}
+		CLAExtractResources(
+			CEntity* entity, CSMResourceExtractorData& smData, 
+			ResourceType resourceType, unsigned int maxExtractedQuantity, int extractParticlesDuration) :
+			CLatentAction(entity), _smData(smData), 
+			_resourceType(resourceType), _maxExtractedQuantity(maxExtractedQuantity), _extractParticlesDuration(extractParticlesDuration) {}
 
 		virtual ~CLAExtractResources() {}
 
@@ -27,6 +30,9 @@ namespace AI {
 		const int _maxExtractedQuantity;
 
 		ResourceType _resourceType;
+
+		/** Duración (ms) de las partículas de extracción de recursos */
+		int _extractParticlesDuration;
 	};
 }
 

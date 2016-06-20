@@ -25,15 +25,30 @@ namespace AI {
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			// Lectura de datos
-			assert(entityInfo->hasAttribute("burnPeriod"));
-			_burnPeriod = 1000 * entityInfo->getIntAttribute("burnPeriod");
+			if(entityInfo->hasAttribute("burnPeriodSecs"))
+				_burnPeriod = 1000 * entityInfo->getIntAttribute("burnPeriodSecs");
+			else{
+				assert(false && "burnPeriodSecs not defined");
+				return false;
+			}
 
-			assert(entityInfo->hasAttribute("maxSoulsPerCycle"));
-			_maxSoulsPerCycle = entityInfo->getIntAttribute("maxSoulsPerCycle");
+			if(entityInfo->hasAttribute("maxSoulsPerCycle"))
+				_maxSoulsPerCycle = entityInfo->getIntAttribute("maxSoulsPerCycle");
+			else{
+				assert(false && "maxSoulsPerCycle not defined");
+				return false;
+			}
+
+			if (entityInfo->hasAttribute("burnParticlesDurationMsecs"))
+				_burnParticlesDuration = entityInfo->getIntAttribute("burnParticlesDurationMsecs");
+			else{
+				assert(false && "burnParticlesDurationMsecs not defined");
+				return false;
+			}
 
 			// Creación de SM en base a los datos
 			int gatherSouls = this->addNode(new CLAGatherSouls(_entity, _data, _burnPeriod, _maxSoulsPerCycle));
-			int burnSouls = this->addNode(new CLABurnSouls(_entity, _data));
+			int burnSouls = this->addNode(new CLABurnSouls(_entity, _data, _burnParticlesDuration));
 
 			this->addEdge(gatherSouls, burnSouls, new CConditionFinished());
 			this->addEdge(burnSouls, gatherSouls, new CConditionFinished());
@@ -77,6 +92,9 @@ namespace AI {
 
 		/** Número máximo de almas que se queman en cada ciclo */
 		int _maxSoulsPerCycle;
+
+		/** Duración (ms) de las partículas de quemado de almas */
+		int _burnParticlesDuration;
 	};
 }
 

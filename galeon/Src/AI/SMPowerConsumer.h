@@ -33,8 +33,8 @@ namespace AI {
 			assert(entityInfo->hasAttribute("consumptionUnits"));
 			_consumptionUnits = entityInfo->getIntAttribute("consumptionUnits");
 
-			assert(entityInfo->hasAttribute("consumptionPeriod"));
-			_consumptionPeriod = 1000 * entityInfo->getIntAttribute("consumptionPeriod");
+			assert(entityInfo->hasAttribute("consumptionPeriodSecs"));
+			_consumptionPeriod = 1000 * entityInfo->getIntAttribute("consumptionPeriodSecs");
 
 			// Creación de SM en base a los datos
 			int findGenerator = this->addNode(new CLAFindGenerator(entity, _data));

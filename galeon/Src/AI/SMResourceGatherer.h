@@ -47,8 +47,8 @@ namespace AI {
 				assert(false && "No gathered resources have been defined");
 			}
 
-			assert(entityInfo->hasAttribute("gatheringPeriod"));
-			int _period = 1000 * entityInfo->getIntAttribute("gatheringPeriod");
+			assert(entityInfo->hasAttribute("gatheringPeriodSecs"));
+			int _period = 1000 * entityInfo->getIntAttribute("gatheringPeriodSecs");
 
 			// Creación de SM en base a los datos
 

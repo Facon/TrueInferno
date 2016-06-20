@@ -25,19 +25,38 @@ namespace AI {
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			// Lectura de datos
-			assert(entityInfo->hasAttribute("extractedResource"));
-			_extractedResource = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("extractedResource"));
+			if(entityInfo->hasAttribute("extractedResource"))
+				_extractedResource = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("extractedResource"));
+			else {
+				assert(false && "extractedResource not defined");
+				return false;
+			}
 
-			assert(entityInfo->hasAttribute("maxExtractedQuantity"));
-			_maxExtractedQuantity = entityInfo->getIntAttribute("maxExtractedQuantity");
+			if (entityInfo->hasAttribute("maxExtractedQuantity"))
+				_maxExtractedQuantity = entityInfo->getIntAttribute("maxExtractedQuantity");
+			else{
+				assert(false && "maxExtractedQuantity not defined");
+				return false;
+			}
 
-			assert(entityInfo->hasAttribute("extractionPeriod"));
-			_extractionPeriod = 1000 * entityInfo->getIntAttribute("extractionPeriod");
+			if(entityInfo->hasAttribute("extractPeriodSecs"))
+				_extractionPeriod = 1000 * entityInfo->getIntAttribute("extractPeriodSecs");
+			else{
+				assert(false && "extractPeriodSecs not defined");
+				return false;
+			}
+
+			if (entityInfo->hasAttribute("extractParticlesDurationMsecs"))
+				_extractParticlesDuration = entityInfo->getIntAttribute("extractParticlesDurationMsecs");
+			else{
+				assert(false && "extractParticlesDurationMsecs not defined");
+				return false;
+			}
 
 			// Creación de SM en base a los datos
 			int waitCycle = this->addNode(new CLAWait(_extractionPeriod));
 			int updateExtractionSpeed = this->addNode(new CLAUpdateExtractionSpeed(_entity, _data));
-			int extractResources = this->addNode(new CLAExtractResources(_entity, _data, _extractedResource, _maxExtractedQuantity));
+			int extractResources = this->addNode(new CLAExtractResources(_entity, _data, _extractedResource, _maxExtractedQuantity, _extractParticlesDuration));
 
 			this->addEdge(waitCycle, updateExtractionSpeed, new CConditionFinished());
 			this->addEdge(updateExtractionSpeed, extractResources, new CConditionFinished());
@@ -60,6 +79,9 @@ namespace AI {
 
 		/** Periodo (ms) con que se extraen recursos */
 		int _extractionPeriod;
+
+		/** Duración (ms) de las partículas de extracción de recursos */
+		int _extractParticlesDuration;
 	};
 }
 

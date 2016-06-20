@@ -1,8 +1,7 @@
 #include "LAExtractResources.h"
 
-#include <math.h>
-
 #include "Logic\ResourcesManager.h"
+#include "Logic\Entity\ParticleType.h"
 
 namespace AI {
 	RTTI_IMPL(CLAExtractResources, CLatentAction);
@@ -21,10 +20,15 @@ namespace AI {
 		assert((quantity >= 0) && "Extracted quantity must be >= 0");
 
 		// Notificamos el incremento de recursos
-		ResourceMessage m;
-		m.assembleResourcesChange(_resourceType, quantity);
-		if (!m.Dispatch(*_entity))
+		ResourceMessage rm;
+		rm.assembleResourcesChange(_resourceType, quantity);
+		if (!rm.Dispatch(*_entity))
 			return LAStatus::RUNNING;
+
+		// Activamos partículas de acción de edificio
+		ParticleMessage pm(ParticleType::BUILDING_ACTION, _extractParticlesDuration);
+		bool result = pm.Dispatch(*_entity);
+		assert(true && "Can't set building action particles");
 
 		return LAStatus::SUCCESS;
 	}

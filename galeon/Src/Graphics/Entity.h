@@ -224,11 +224,11 @@ namespace Graphics
 		*/
 		Ogre::Entity* getEntity() {return _entity;}
 
-		/** Añade un sistema de partículas del tipo dado (sólo puede haber uno de cada tipo) */
-		void addParticles(Logic::ParticleType particleType);
+		/** Crea o rearranca el sistema de partículas del tipo dado para esta entidad */
+		void startParticles(Logic::ParticleType particleType);
 
-		/** Elimina el sistema de partículas del tipo dado */
-		void removeParticles(Logic::ParticleType particleType);
+		/** Detiene el sistema de partículas del tipo dado para esta entidad */
+		void stopParticles(Logic::ParticleType particleType);
 
 	protected:
 

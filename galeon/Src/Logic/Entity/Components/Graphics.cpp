@@ -209,9 +209,8 @@ namespace Logic
 
 	void CGraphics::startParticles(ParticleType particleType, int duration)
 	{
-		// Creamos las partículas si no estaban creadas
-		if (_currentParticles.count(particleType) == 0)
-			_graphicsEntity->addParticles(particleType);
+		// Añadimos (o rearrancamos) las partículas
+		_graphicsEntity->startParticles(particleType);
 
 		// Refrescamos la duración
 		_currentParticles[particleType] = duration;
@@ -219,7 +218,10 @@ namespace Logic
 
 	void CGraphics::stopParticles(ParticleType particleType)
 	{
-		_graphicsEntity->removeParticles(particleType);
+		// Detenemos las partículas
+		_graphicsEntity->stopParticles(particleType);
+
+		// Anulamos su duración
 		_currentParticles[particleType] = -1;
 	}
 

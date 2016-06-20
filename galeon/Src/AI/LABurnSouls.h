@@ -10,8 +10,8 @@ namespace AI {
 		RTTI_DECL;
 
 	public:
-		CLABurnSouls(CEntity* entity, CSMSoulBurnerData& smData) : 
-			CLatentAction(entity), _smData(smData) {}
+		CLABurnSouls(CEntity* entity, CSMSoulBurnerData& smData, int burnParticlesDuration) :
+			CLatentAction(entity), _smData(smData), _burnParticlesDuration(burnParticlesDuration) {}
 
 		virtual ~CLABurnSouls() {}
 
@@ -30,6 +30,9 @@ namespace AI {
 		/** Suma de las cantidades de coke y crude de cada alma a quemar */
 		int _totalCokeToIncrease;
 		int _totalCrudeToIncrease;
+
+		/** Duración (ms) de las partículas de quemado de almas */
+		int _burnParticlesDuration;
 	};
 }
 

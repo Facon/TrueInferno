@@ -1,6 +1,8 @@
 #include "LATransformResources.h"
+
 #include "Logic\ResourcesManager.h"
 #include "Logic\Entity\Components\Billboard.h"
+#include "Logic\Entity\ParticleType.h"
 
 namespace AI {
 	RTTI_IMPL(CLATransformResources, CLatentAction);
@@ -72,6 +74,11 @@ namespace AI {
 			else
 				_incrementDone = true;
 		}
+
+		// Activamos partículas de acción de edificio
+		ParticleMessage m(ParticleType::BUILDING_ACTION, _transformParticlesDuration);
+		bool result = m.Dispatch(*_entity);
+		assert(true && "Can't set building action particles");
 
 		return LAStatus::SUCCESS;
 	}

@@ -29,17 +29,32 @@ namespace AI {
 
 		virtual bool spawn(CEntity* entity, CMap *map, const Map::CEntity *entityInfo){
 			// Lectura de datos
-			assert(entityInfo->hasAttribute("consumedResource"));
-			_consumedResource = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("consumedResource"));
+			if(entityInfo->hasAttribute("consumedResource"))
+				_consumedResource = Logic::ResourcesManager::parseResourceType(entityInfo->getStringAttribute("consumedResource"));
+			else{
+				assert(false && "consumedResource not defined");
+				return false;
+			}
 
-			assert(entityInfo->hasAttribute("normalizedConsumptionPeriod"));
-			_normalizedConsumptionPeriod = 1000 * entityInfo->getIntAttribute("normalizedConsumptionPeriod");
+			if (entityInfo->hasAttribute("normalizedConsumptionPeriodSecs"))
+				_normalizedConsumptionPeriod = 1000 * entityInfo->getIntAttribute("normalizedConsumptionPeriodSecs");
+			else{
+				assert(false && "normalizedConsumptionPeriodSecs not defined");
+				return false;
+			}
+
+			if (entityInfo->hasAttribute("consumptionParticlesDurationMsecs"))
+				_consumptionParticlesDuration = entityInfo->getIntAttribute("consumptionParticlesDurationMsecs");
+			else{
+				assert(false && "consumptionParticlesDurationMsecs not defined");
+				return false;
+			}
 			
 			// Creación de SM en base a los datos
 			int stopped = this->addNode(new CLAStoppedResourceConsumer(_entity, _consumedResource));
 			int waiting = this->addNode(new CLAWait(_normalizedConsumptionPeriod));
 			int reserving = this->addNode(new CLAReserveResourcesToConsume(_entity, _data, _consumedResource));
-			int consuming = this->addNode(new CLAConsumeResources(_entity, _data, _consumedResource));
+			int consuming = this->addNode(new CLAConsumeResources(_entity, _data, _consumedResource, _consumptionParticlesDuration));
 			int accept = this->addNode(new CLAAcceptConsumptionChanges(_entity, _data, _consumedResource, _normalizedConsumptionPeriod));
 			int stopping = this->addNode(new CLAStopConsumingResources(_entity, _data, _consumedResource));
 
@@ -89,6 +104,9 @@ namespace AI {
 
 		/** Periodo (ms) normalizado con que se consumen recursos */
 		int _normalizedConsumptionPeriod;
+
+		/** Duración (ms) de las partículas de consumo de recursos */
+		int _consumptionParticlesDuration;
 	};
 }
 
