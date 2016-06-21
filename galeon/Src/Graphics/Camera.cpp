@@ -56,7 +56,7 @@ namespace Graphics
 		// We need 30 degrees in Field Of View
 		_camera->setFOVy(Ogre::Radian(Ogre::Degree(30)));
 
-		_camera->move(Vector3(10.0f, 30.0f, -30.0f));
+		_camera->move(Vector3(20.0f, 30.0f, 0.0f));
 		_camera->rotate(Vector3(1.0f, 0.0f, 0.0f), Ogre::Degree(-45.0f));
 		
 		_cameraNode->setPosition(_camera->getRealPosition());

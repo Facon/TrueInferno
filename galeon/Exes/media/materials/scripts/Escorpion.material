@@ -1,3 +1,4 @@
+/*
 material Escorpion/TEXFACE/escorpion.jpg
 {
 	receive_shadows on
@@ -37,3 +38,4 @@ material Escorpion/TEXFACE/escorpion.jpg
 //		}
 //	}
 //}
+*/

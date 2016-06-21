@@ -110,7 +110,7 @@ namespace Graphics
 		_viewport->setBackgroundColour(backgroundColor);
 
 		// Luz ambiente
-		_sceneMgr->setAmbientLight(Ogre::ColourValue(0.0f, 0.0f, 0.0f));
+		_sceneMgr->setAmbientLight(Ogre::ColourValue(0.0f, 0.0f, 0.0f, 1.0f));
 
 		// Sombras
 		_sceneMgr->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_MODULATIVE);
@@ -118,8 +118,8 @@ namespace Graphics
 
 		// Luz direccional
 		_directionalLight = _sceneMgr->createLight("DirectionalLight");
-		_directionalLight->setDiffuseColour(1.0f, 0.7f, 0.7f);
-		_directionalLight->setSpecularColour(1.0f, 0.5f, 0.0f);
+		_directionalLight->setDiffuseColour(1.0f, 1.0f, 1.0f);
+		_directionalLight->setSpecularColour(1.0f, 1.0f, 1.0f);
 		_directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
 		_directionalLight->setPosition(200, 200, 50);
 		_directionalLight->setDirection(-200, -200, -50);

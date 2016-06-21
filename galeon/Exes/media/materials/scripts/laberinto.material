@@ -1,3 +1,4 @@
+/*
 material paredmetalica
 {
     set $diffuseCol "1 1 1 1"
@@ -1650,8 +1651,5 @@ material skybox
 		}
 
 	}
-
 }
-
-
-
+*/

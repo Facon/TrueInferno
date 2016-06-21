@@ -1,3 +1,4 @@
+/*
 material AttaObrera/lambert3
 {
 	technique
@@ -21,3 +22,4 @@ material AttaObrera/lambert3
 		}
 	}
 }
+*/
