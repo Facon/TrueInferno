@@ -52,7 +52,6 @@ namespace Logic
 
 	protected:
 		static const std::unordered_map<std::string, IconType::IconType> iconTableConversor;
-		static const std::unordered_map<std::string, IconType::IconType> newIconTableConversor;
 		static const std::unordered_map<ResourceType, IconType::IconType> resourceTableConversor;
 		static const std::unordered_map<BuildingType, IconType::IconType> buildingTableConversor;
 		static const std::unordered_map<LogicRequirement, IconType::IconType> requirementTableConversor;

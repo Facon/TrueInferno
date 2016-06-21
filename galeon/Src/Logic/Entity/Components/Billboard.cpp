@@ -72,9 +72,9 @@ namespace Logic
 		{ COKE, IconType::POWER_GENERATOR },
 		{ CRUDE, IconType::EVILWORKS },
 		{ PURE_EVIL, IconType::REFINERY },
-		{ REFINED, IconType::REFINED },
+		{ REFINED, IconType::EVILATOR },
 		{ AETHER, IconType::RESEARCH_LABS },
-		{ HADES_FAVOR, IconType::NONE }
+		{ HADES_FAVOR, IconType::EVILATOR }
 	};
 
 	const std::unordered_map<BuildingType, IconType::IconType> Billboard::buildingTableConversor =
@@ -97,7 +97,7 @@ namespace Logic
 		{ LogicRequirement::Energy, IconType::POWER_GENERATOR },
 		// TODO Descomentar cuando se pueda volver a reparar edificios que van a ser destruidos
 		//{ LogicRequirement::Player, IconType::REPAIR },
-		{ LogicRequirement::Player, IconType::NONE },
+		//{ LogicRequirement::Player, IconType::NONE },
 		{ LogicRequirement::Player, IconType::BATTLE },
 		{ LogicRequirement::Road, IconType::SOUL_PATH },
 		{ LogicRequirement::Undefined, IconType::NONE },
@@ -236,7 +236,7 @@ namespace Logic
 	{
 		// Odd numbers should have one more element in upper row
 		const unsigned int BILLBOARDS_PER_ROW = (numBillboards == 2) ? 2 : ceil(numBillboards / 2.0f);
-		const float SPACE_BETWEEN = 1.f;
+		const float SPACE_BETWEEN = 0.5f;
 
 		const float HEIGHT = 1.f;
 
