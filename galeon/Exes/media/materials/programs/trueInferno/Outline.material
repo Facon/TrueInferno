@@ -1,0 +1,25 @@
+//
+// Optional pass for experimental edge outlining.
+abstract pass OutlineExperiment
+{
+	//
+	// Diffuse tweaks outline color.
+	diffuse 0 0 0
+ 
+	//
+	// Multiplier for how far the black mesh protrusion is, for edge size.
+	set $edgeScale 1
+ 
+	//
+	// Multiplier for how far the black edge mesh should be pushed back to reduce Z fighting.
+	//
+	// Best value is greater for large meshes and smaller for small meshes. You may have to
+	// tweak this variable dramatically.
+	set $sinkScale 1
+ 
+	vertex_program_ref OutlineExperimentVP
+	{
+		param_named edgeScale float $edgeScale
+		param_named sinkScale float $sinkScale
+	}
+}

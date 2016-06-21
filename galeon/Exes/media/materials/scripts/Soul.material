@@ -1,12 +1,32 @@
+import * from "CelShading.material"
+import * from "Outline.material"
 
 material Soul
 {
-	technique
+	technique Shaders
 	{
-		pass
+		pass CelSh : CelShading
 		{
-			ambient 1 0.8 0 1
-			diffuse 1 1 1 1
+			ambient  1 1 1 1
+			diffuse  1 1 1 1
+			specular 1 0 0 20
+		}
+
+		pass Outlining : OutlineExperiment
+		{
+			set $edgeScale 0.025
+			set $sinkScale 2
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
+			}
 		}
 	}
 }
