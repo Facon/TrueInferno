@@ -203,16 +203,35 @@ namespace GUI
 
 		else if (!_placeableEntity && !_onUIScreen && !_onButtonFrame)
 		{
-			_tickCountCursorAnimationLimit -= msecs*3;
-			if (_tickCountCursorAnimationLimit <= 0){
-				_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+			Logic::CEntity* entity = getEntityFromRaycastToGroup(2);
+			if (entity)
+			{
+				_tickCountCursorAnimationLimit -= msecs * 18;
+				if (_tickCountCursorAnimationLimit <= 0){
+					_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
 
-				_cursorAnimationStatus++;
-				if (_cursorAnimationStatus > 8)
-					_cursorAnimationStatus = 1;
+					_cursorAnimationStatus++;
+					if (_cursorAnimationStatus > 41)
+						_cursorAnimationStatus = 1;
 
-				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle"+std::to_string(_cursorAnimationStatus));
-				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle" + std::to_string(_cursorAnimationStatus));	
+					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoSelectCursors/CursorSelect" + std::to_string(_cursorAnimationStatus));
+					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoSelectCursors/CursorSelect" + std::to_string(_cursorAnimationStatus));
+				}
+
+			}
+			else
+			{
+				_tickCountCursorAnimationLimit -= msecs * 3.5;
+				if (_tickCountCursorAnimationLimit <= 0){
+					_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+
+					_cursorAnimationStatus++;
+					if (_cursorAnimationStatus > 8)
+						_cursorAnimationStatus = 1;
+
+					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle" + std::to_string(_cursorAnimationStatus));
+					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle" + std::to_string(_cursorAnimationStatus));
+				}
 			}
 		}
 
