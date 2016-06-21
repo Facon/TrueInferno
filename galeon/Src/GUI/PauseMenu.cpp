@@ -57,6 +57,8 @@ namespace GUI
 
 	void PauseMenu::open()
 	{
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_menuWindow);
 		_menuWindow->setVisible(true);
 	}
@@ -64,6 +66,8 @@ namespace GUI
 	void PauseMenu::close()
 	{
 		_menuWindow->setVisible(false);
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle1");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle1");
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_menuWindow);
 	}
 

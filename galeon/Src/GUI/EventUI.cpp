@@ -27,9 +27,13 @@ namespace GUI
 		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventWindow.layout");
 		_uiEventWindow->getChildElement("AcceptEvent")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&EventUI::AcceptEventReleased, this));
+
 		_uiEventNotification = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventNotification.layout");
 		_uiEventNotification->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&EventUI::ShowEventListReleased, this));
+
+		_uiEventNotification->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&EventUI::buttonFrameEnter, this));
+		_uiEventNotification->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&EventUI::buttonFrameExit, this));
 	}
 
 	void EventUI::release()
@@ -112,6 +116,11 @@ namespace GUI
 	
 	void EventUI::showFullEvent(Logic::CEvent* event){
 		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->getSideBarUI()->_onUIScreen = true;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
+
 		setEventImage(event->getGUIImageName());
 		setEventText(event->getGUIText());
 		setEventTitle(event->getGUITitle());
@@ -122,6 +131,11 @@ namespace GUI
 
 	bool EventUI::showFullEventReleased(const CEGUI::EventArgs& e){
 		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->getSideBarUI()->_onUIScreen = true;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
+
 		const CEGUI::MouseEventArgs a = static_cast<const CEGUI::MouseEventArgs&>(e);
 		showingEventList = false;
 		int i = atoi(a.window->getParent()->getText().c_str());
@@ -149,6 +163,28 @@ namespace GUI
 		return true;
 	}
 
+	bool EventUI::buttonFrameEnter(const CEGUI::EventArgs& e)
+	{
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->getSideBarUI()->_onButtonFrame = true;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
+		return true;
+	}
+
+	bool EventUI::buttonFrameExit(const CEGUI::EventArgs& e)
+	{
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->getSideBarUI()->_onButtonFrame = false;
+		if (!uiManager->getSideBarUI()->_onUIScreen){
+			uiManager->getSideBarUI()->_cursorAnimationStatus = 1;
+			uiManager->getSideBarUI()->_tickCountCursorAnimationLimit = uiManager->getSideBarUI()->_tickCountCursorAnimationResetValue;
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle1");
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle1");
+		}
+		return true;
+	}
+
 	void EventUI::showEventNotification(){
 		// TODO Ruymajo's CEGI powa aquí! :D
 		_uiEventNotification->getChild("Accept")->setText("* " + std::to_string(_events.size()));
@@ -173,6 +209,10 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
 		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventList.layout");
 
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->getSideBarUI()->_onUIScreen = true;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
 		//_uiEventWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 		//	CEGUI::SubscriberSlot(&EventUI::closeWindowReleased, this));
 
@@ -216,7 +256,10 @@ namespace GUI
 		showingEventList = true;
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
 		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventList.layout");
-
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->getSideBarUI()->_onUIScreen = true;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
 		//_uiEventWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			//CEGUI::SubscriberSlot(&EventUI::closeWindowReleased, this));
 

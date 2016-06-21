@@ -104,12 +104,15 @@ namespace GUI {
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoBuildings.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoUIBars.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoNewIcons.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoOtherCursors.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoIdleCursors.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoSelectCursors.scheme");
 
 #ifndef NON_EXCLUSIVE_MODE_IN_WINDOW_MODE 
 		// Establecemos cual será el puntero del ratón.
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
 #endif	
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
 		// Cargamos los archivos con las fuentes que usaremos.
 		CEGUI::FontManager::getSingleton().createFromFile("DejaVuSans-12.font");
 		CEGUI::Font& defaultFont = CEGUI::FontManager::getSingleton().createFromFile("Jura-18.font");

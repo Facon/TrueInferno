@@ -36,6 +36,10 @@ namespace GUI
 		int _tickCountResetValue = 100;
 		int _tickCountLimit = _tickCountResetValue;
 
+		
+
+
+
 		bool createFurnaceReleased(const CEGUI::EventArgs& e);
 		bool createRoadReleased(const CEGUI::EventArgs& e);
 		bool createMineReleased(const CEGUI::EventArgs& e);
@@ -50,11 +54,19 @@ namespace GUI
 		bool createResearchLabReleased(const CEGUI::EventArgs& e);
 		bool createWarehouseReleased(const CEGUI::EventArgs& e);
 		bool createPowerGeneratorReleased(const CEGUI::EventArgs& e);
+		bool buttonFrameEnter(const CEGUI::EventArgs& e);
+		bool buttonFrameExit(const CEGUI::EventArgs& e);
 
 		bool continueRoadCreation();
 		bool continueClearTerrain();
 
 	public:
+		bool _onUIScreen = false;
+		bool _onButtonFrame = false;
+		float _tickCountCursorAnimationResetValue = 300;
+		float _tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+		int _cursorAnimationStatus = 1;
+
 		SideBarUI();
 		~SideBarUI();
 		void init();

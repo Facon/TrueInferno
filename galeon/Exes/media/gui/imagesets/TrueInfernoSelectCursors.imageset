@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<Imageset autoScaled="vertical" imagefile="TrueInfernoSelectCursors.png" name="TrueInfernoSelectCursors" nativeHorzRes="1920" nativeVertRes="1080" version="2">
+    <Image height="53" name="CursorSelect1" width="82" xPos="0" yPos="0" />
+    <Image height="53" name="CursorSelect2" width="82" xPos="0" yPos="53" />
+    <Image height="53" name="CursorSelect13" width="82" xPos="0" yPos="636" />
+    <Image height="53" name="CursorSelect24" width="82" xPos="0" yPos="1219" />
+    <Image height="53" name="CursorSelect35" width="82" xPos="0" yPos="1802" />
+    <Image height="53" name="CursorSelect38" width="82" xPos="0" yPos="1961" />
+    <Image height="53" name="CursorSelect39" width="82" xPos="0" yPos="2014" />
+    <Image height="53" name="CursorSelect40" width="82" xPos="0" yPos="2067" />
+    <Image height="53" name="CursorSelect41" width="82" xPos="0" yPos="2120" />
+    <Image height="53" name="CursorSelect3" width="82" xPos="0" yPos="106" />
+    <Image height="53" name="CursorSelect4" width="82" xPos="0" yPos="159" />
+    <Image height="53" name="CursorSelect5" width="82" xPos="0" yPos="212" />
+    <Image height="53" name="CursorSelect6" width="82" xPos="0" yPos="265" />
+    <Image height="53" name="CursorSelect7" width="82" xPos="0" yPos="318" />
+    <Image height="53" name="CursorSelect8" width="82" xPos="0" yPos="371" />
+    <Image height="53" name="CursorSelect9" width="82" xPos="0" yPos="424" />
+    <Image height="53" name="CursorSelect10" width="82" xPos="0" yPos="477" />
+    <Image height="53" name="CursorSelect11" width="82" xPos="0" yPos="530" />
+    <Image height="53" name="CursorSelect12" width="82" xPos="0" yPos="583" />
+    <Image height="53" name="CursorSelect14" width="82" xPos="0" yPos="689" />
+    <Image height="53" name="CursorSelect15" width="82" xPos="0" yPos="742" />
+    <Image height="53" name="CursorSelect16" width="82" xPos="0" yPos="795" />
+    <Image height="53" name="CursorSelect17" width="82" xPos="0" yPos="848" />
+    <Image height="53" name="CursorSelect18" width="82" xPos="0" yPos="901" />
+    <Image height="53" name="CursorSelect19" width="82" xPos="0" yPos="954" />
+    <Image height="53" name="CursorSelect20" width="82" xPos="0" yPos="1007" />
+    <Image height="53" name="CursorSelect21" width="82" xPos="0" yPos="1060" />
+    <Image height="53" name="CursorSelect22" width="82" xPos="0" yPos="1113" />
+    <Image height="53" name="CursorSelect23" width="82" xPos="0" yPos="1166" />
+    <Image height="53" name="CursorSelect25" width="82" xPos="0" yPos="1272" />
+    <Image height="53" name="CursorSelect26" width="82" xPos="0" yPos="1325" />
+    <Image height="53" name="CursorSelect27" width="82" xPos="0" yPos="1378" />
+    <Image height="53" name="CursorSelect28" width="82" xPos="0" yPos="1431" />
+    <Image height="53" name="CursorSelect29" width="82" xPos="0" yPos="1484" />
+    <Image height="53" name="CursorSelect30" width="82" xPos="0" yPos="1537" />
+    <Image height="53" name="CursorSelect31" width="82" xPos="0" yPos="1590" />
+    <Image height="53" name="CursorSelect32" width="82" xPos="0" yPos="1643" />
+    <Image height="53" name="CursorSelect33" width="82" xPos="0" yPos="1696" />
+    <Image height="53" name="CursorSelect34" width="82" xPos="0" yPos="1749" />
+    <Image height="53" name="CursorSelect36" width="82" xPos="0" yPos="1855" />
+    <Image height="53" name="CursorSelect37" width="82" xPos="0" yPos="1908" />
+</Imageset>

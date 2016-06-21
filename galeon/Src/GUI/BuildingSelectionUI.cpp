@@ -117,6 +117,20 @@ namespace GUI
 		}
 	}
 
+	bool BuildingSelectionUI::buttonFrameEnter(const CEGUI::EventArgs& e)
+	{
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->getSideBarUI()->_onButtonFrame = true;
+		return true;
+	}
+
+	bool BuildingSelectionUI::buttonFrameExit(const CEGUI::EventArgs& e)
+	{
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->getSideBarUI()->_onButtonFrame = false;
+		return true;
+	}
+
 	void BuildingSelectionUI::bindButtons(){
 
 		_uibuttonsWindow->getChildElement("UpgradeBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
@@ -128,6 +142,8 @@ namespace GUI
 
 		_uibuttonsWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
+		_uibuttonsWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&BuildingSelectionUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&BuildingSelectionUI::buttonFrameExit, this));
 
 		//_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			//CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
@@ -505,8 +521,11 @@ namespace GUI
 	void BuildingSelectionUI::setEventWindowVisible(bool visible, Logic::CEntity* entity)
 	{	
 		_buildingEntity = entity;
-
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
 		changeLayout();
+		uiManager->getSideBarUI()->_onUIScreen = true;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
 		_uibuttonsWindow->setVisible(visible);
 		_uipopupWindow->setVisible(visible);
 	}
