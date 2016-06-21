@@ -27,6 +27,8 @@ namespace GUI
 		bool EventUI::ShowEventListReleased(const CEGUI::EventArgs& e);
 		bool EventUI::showFullEventReleased(const CEGUI::EventArgs& e);
 		bool EventUI::ShowEventList();
+		bool buttonFrameEnter(const CEGUI::EventArgs& e);
+		bool buttonFrameExit(const CEGUI::EventArgs& e);
 
 	public:
 		EventUI();

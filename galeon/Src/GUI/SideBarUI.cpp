@@ -51,38 +51,57 @@ namespace GUI
 	{
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIButtonBar.layout");
 
+
 		_uibuttonsWindow->getChildElement("CreateFurnace")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createFurnaceReleased, this));
+		_uibuttonsWindow->getChildElement("CreateFurnace")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement("CreateFurnace")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
 		_uibuttonsWindow->getChildElement("CreateRoad")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createRoadReleased, this));
+		_uibuttonsWindow->getChildElement("CreateRoad")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement("CreateRoad")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
 		_uibuttonsWindow->getChildElement("CreateGasPlant")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createGasPlantReleased, this));
+		_uibuttonsWindow->getChildElement("CreateGasPlant")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement("CreateGasPlant")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
 		_uibuttonsWindow->getChildElement("CreateMine")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createMineReleased, this));
+		_uibuttonsWindow->getChildElement("CreateMine")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement("CreateMine")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
 		_uibuttonsWindow->getChildElement("CreateEvilworks")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createEvilworksReleased, this));
+		_uibuttonsWindow->getChildElement("CreateEvilworks")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement("CreateEvilworks")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
 		_uibuttonsWindow->getChildElement("CreateRefinery")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createRefineryReleased, this));
+		_uibuttonsWindow->getChildElement("CreateRefinery")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement("CreateRefinery")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
 		//_uibuttonsWindow->getChildElement("RepairBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 		//	CEGUI::SubscriberSlot(&SideBarUI::repairBuildingReleased, this));
 
 		_uibuttonsWindow->getChildElement("ClearTerrain")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::clearTerrainReleased, this));
+		_uibuttonsWindow->getChildElement("ClearTerrain")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement("ClearTerrain")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
 		//_uibuttonsWindow->getChildElement("CreateResearchLab")->subscribeEvent(CEGUI::PushButton::EventClicked,
 		//	CEGUI::SubscriberSlot(&SideBarUI::createResearchLabReleased, this));
 
 		_uibuttonsWindow->getChildElement("CreateWarehouse")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createWarehouseReleased, this));
+		_uibuttonsWindow->getChildElement("CreateWarehouse")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement("CreateWarehouse")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
 		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createPowerGeneratorReleased, this));
+		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 	}
 
 	void SideBarUI::release()
@@ -158,8 +177,51 @@ namespace GUI
 		unsigned int seconds = static_cast<unsigned int>(((total_seconds / 60.0f) - minutes) * 60.0f);
 		_uibuttonsWindow->getChild("TimeLeft")->setText(std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
 
+		if (_clearTerrain){
+			Logic::CEntity* entity = getEntityFromRaycastToGroup(3);
+			if (entity){
+				_tickCountCursorAnimationLimit -= msecs*1.5;
+				if (_tickCountCursorAnimationLimit <= 0){
+					_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+
+					_cursorAnimationStatus++;
+					if (_cursorAnimationStatus > 3)
+						_cursorAnimationStatus = 1;
+
+					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorClear" + std::to_string(_cursorAnimationStatus));
+					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorClear" + std::to_string(_cursorAnimationStatus));
+				}
+			}
+			else
+			{
+				_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+				_cursorAnimationStatus = 1;
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorClear1");
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorClear1");			
+			}
+		}
+
+		else if (!_placeableEntity && !_onUIScreen && !_onButtonFrame)
+		{
+			_tickCountCursorAnimationLimit -= msecs*3;
+			if (_tickCountCursorAnimationLimit <= 0){
+				_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+
+				_cursorAnimationStatus++;
+				if (_cursorAnimationStatus > 8)
+					_cursorAnimationStatus = 1;
+
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle"+std::to_string(_cursorAnimationStatus));
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle" + std::to_string(_cursorAnimationStatus));	
+			}
+		}
+
 
 		if (_placeableEntity){
+			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+			_cursorAnimationStatus = 1;
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorBuild");
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorBuild");
 
 			Logic::CEntity* entity = getEntityFromRaycastToGroup(1);
 
@@ -283,6 +345,26 @@ namespace GUI
 		return (_placeableEntity != nullptr);
 	}
 
+	bool SideBarUI::buttonFrameEnter(const CEGUI::EventArgs& e)
+	{
+		_onButtonFrame = true;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
+		return true;
+	}
+
+	bool SideBarUI::buttonFrameExit(const CEGUI::EventArgs& e)
+	{
+		_onButtonFrame = false;
+		if (!_onUIScreen){
+			_cursorAnimationStatus = 1;
+			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle1");
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle1");
+		}
+		return true;
+	}
+
 	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction(true);
@@ -301,8 +383,8 @@ namespace GUI
 	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction(true);
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TaharezLook/MouseArrow");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorClear1");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorClear1");
 		// @TODO Cambiar puntero a pala
 		_clearTerrain = true;
 		return true;
@@ -311,8 +393,8 @@ namespace GUI
 	bool SideBarUI::continueClearTerrain()
 	{
 		ClearBuildingConstruction(true);
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TaharezLook/MouseArrow");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorClear1");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorClear1");
 		// @TODO Cambiar puntero a pala
 		_clearTerrain = true;
 		return true;
@@ -342,9 +424,13 @@ namespace GUI
 	void SideBarUI::ClearBuildingConstruction(bool clearPopups){
 		if (clearPopups)
 			GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
-
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("OgreTrayImages/MouseArrow");
+		
+		if (!_onUIScreen && !_onButtonFrame){
+			_cursorAnimationStatus = 1;
+			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle1");
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle1");
+		}
 		_clearTerrain = false;
 		_roadInConstruction = 0;
 		path = nullptr;
@@ -477,9 +563,15 @@ namespace GUI
 
 	void SideBarUI::setEventWindowVisible(bool visible)
 	{
+		_onUIScreen = false;
+		if (!_onButtonFrame){
+			_cursorAnimationStatus = 1;
+			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle1");
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle1");
+		}
 		_uibuttonsWindow->setVisible(visible);
-		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-		//uiManager->getRankUI()->reDrawUI();
+
 	}
 
 }

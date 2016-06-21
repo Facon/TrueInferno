@@ -45,6 +45,8 @@ namespace GUI
 		void bindButtons();
 		void loadAssets();
 		void loadAssetsPopup(std::string name, std::string image);
+		bool buttonFrameEnter(const CEGUI::EventArgs& e);
+		bool buttonFrameExit(const CEGUI::EventArgs& e);
 
 	public:
 		BuildingSelectionUI();

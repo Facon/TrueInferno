@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Imageset autoScaled="vertical" imagefile="TrueInfernoOtherCursors.png" name="TrueInfernoOtherCursors" nativeHorzRes="1920" nativeVertRes="1080" version="2">
+    <Image height="70" name="CursorBuild" width="74" xPos="0" yPos="0" />
+    <Image height="86" name="CursorClear1" width="84" xPos="74" yPos="0" />
+    <Image height="65" name="CursorClear2" width="88" xPos="158" yPos="0" />
+    <Image height="65" name="CursorClear3" width="88" xPos="246" yPos="0" />
+    <Image height="39" name="CursorPoint" width="82" xPos="335" yPos="0" />
+</Imageset>

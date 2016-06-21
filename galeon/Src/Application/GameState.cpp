@@ -149,6 +149,8 @@ namespace Application {
 				_paused = !_paused;
 				_uiManager.setPauseMenu(_paused);
 				_uiManager.getPauseMenu()->_exit = false;
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
 				_app->setState("menu");
 
 			}
@@ -192,9 +194,9 @@ namespace Application {
 		
 	bool CGameState::mousePressed(const GUI::CMouseState &mouseState)
 	{
-		if (mouseState.button == GUI::Button::TButton::LEFT){
+		//if (mouseState.button == GUI::Button::TButton::LEFT){
 			//_uiManager.getSideBarUI()->playerInteractionWithLeftClick();
-		}
+		//}
 
 		return false;
 
