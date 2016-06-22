@@ -12,7 +12,6 @@ Contiene la declaración de la clase CMap, Un mapa lógico.
 #define __Logic_Map_H
 
 #include <unordered_map>
-#include <list>
 #include "EntityID.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
