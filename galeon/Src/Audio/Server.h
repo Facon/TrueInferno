@@ -1,7 +1,7 @@
 #ifndef AUDIO_SERVER_H
 #define AUDIO_SERVER_H
 
-#include <string>
+#include <boost/array.hpp>
 #include <unordered_map>
 
 typedef unsigned int FMOD_MODE;
@@ -15,6 +15,12 @@ namespace FMOD
 
 namespace Audio
 {
+	enum Channel
+	{
+		BACKGROUND,
+		SFX,
+	};
+
 	class CServer
 	{
 	public:
@@ -26,8 +32,9 @@ namespace Audio
 
 		FMOD::Sound* createSound(std::string& name, FMOD_MODE mode);
 		FMOD::Sound* createStream(std::string& name, FMOD_MODE mode);
-		void play();
-		void playSound(const std::string& sound, float volume);
+		void playSound(const std::string& sound, Channel channel, float volume);
+		void playBgSound(const std::string& sound);
+		void playSfxSound(const std::string& sound);
 		void tick(unsigned int secs);
 
 	protected:
@@ -42,8 +49,8 @@ namespace Audio
 
 		std::string _path;
 		FMOD::System* _system;
-		FMOD::Channel* _channel;
-		FMOD::Channel* _channel2;
+
+		boost::array<FMOD::Channel*, 2> _channels;
 
 		bool _mute;
 	};

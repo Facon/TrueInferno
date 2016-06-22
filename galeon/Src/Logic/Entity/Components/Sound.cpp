@@ -55,7 +55,7 @@ namespace Logic
 	{
 		Audio::CServer* singleton = Audio::CServer::getSingletonPtr();
 
-		singleton->playSound(m._soundName, 1.f);
+		singleton->playSfxSound(m._soundName);
 
 		return true;
 	}

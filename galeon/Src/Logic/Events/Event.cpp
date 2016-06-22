@@ -103,7 +103,7 @@ namespace Logic {
 				eventUI->registerEvent(this);
 			}
 
-			Audio::CServer::getSingletonPtr()->playSound("event", 0.4f);
+			Audio::CServer::getSingletonPtr()->playSfxSound("event");
 
 			// TODO Definir por evento/tipo de lanzamiento
 			keepAlive = true;

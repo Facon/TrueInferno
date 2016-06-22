@@ -13,7 +13,7 @@ namespace Audio
 	CServer CServer::_instance;
 	std::unordered_map<std::string, FMOD::Sound*> CServer::_sounds;
 
-	CServer::CServer() : _path("media/sounds/"), _system(nullptr), _channel(nullptr), _channel2(nullptr), _mute(false)
+	CServer::CServer() : _path("media/sounds/"), _system(nullptr), _mute(false)
 	{}
 
 	CServer::~CServer()
@@ -27,20 +27,11 @@ namespace Audio
 
 		assert(!result);
 		
-		result = _system->init(32, FMOD_INIT_NORMAL, 0);
-
-		assert(!result);
-
-		FMOD::Sound* sound;
-		result = _system->createStream((_path + std::string("audio_hito_3_suave.ogg")).c_str(), FMOD_LOOP_NORMAL, nullptr, &sound);
+		result = _system->init(32, FMOD_INIT_NORMAL, nullptr);
 
 		assert(!result);
 
 		appendSounds();
-
-		float volume = 0.3f;
-		// valor entre 0 y 1
-		_channel->setVolume(volume);
 
 		return true;
 	}
@@ -54,7 +45,7 @@ namespace Audio
 	void CServer::appendSounds()
 	{
 		_sounds.insert(std::make_pair("audio_hito_3", createStream(std::string("audio_hito_3_suave.ogg"), FMOD_LOOP_NORMAL)));
-		_sounds.insert(std::make_pair("building_complete", createSound(std::string("building_complete.mp3"), FMOD_3D)));
+		_sounds.insert(std::make_pair("building_complete", createSound(std::string("building_complete.ogg"), FMOD_3D)));
 		_sounds.insert(std::make_pair("error", createSound(std::string("error.wav"), FMOD_DEFAULT)));
 		_sounds.insert(std::make_pair("event", createSound(std::string("event.wav"), FMOD_DEFAULT)));
 		_sounds.insert(std::make_pair("round_finished", createSound(std::string("round_finished.wav"), FMOD_DEFAULT)));
@@ -86,25 +77,30 @@ namespace Audio
 		return sound;
 	}
 
-	void CServer::play()
+	void CServer::playSound(const std::string& sound, Channel channel, float volume)
 	{
 		if (_mute)
 			return;
 
-		FMOD_RESULT result;
+		assert((_sounds.find(sound) != _sounds.end()) && "Sonido no encontrado.");
 
-		result = _channel->setPaused(false);
-
-		assert(!result);
+		_system->playSound(_sounds[sound], nullptr, false, &_channels[channel]);
+		_channels[channel]->setVolume(volume);
 	}
 
-	void CServer::playSound(const std::string& sound, float volume = 0.4f)
-	{
-		if (_mute)
-			return;
 
-		_system->playSound(_sounds[sound], nullptr, false, &_channel2);
-		_channel2->setVolume(volume);
+	void CServer::playBgSound(const std::string& sound)
+	{
+		const float volume = 0.2f;
+
+		playSound(sound, Channel::BACKGROUND, volume);
+	}
+
+	void CServer::playSfxSound(const std::string& sound)
+	{
+		const float volume = 0.2f;
+
+		playSound(sound, Channel::SFX, volume);
 	}
 
 	void CServer::tick(unsigned int secs)

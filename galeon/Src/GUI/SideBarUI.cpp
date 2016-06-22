@@ -600,7 +600,7 @@ namespace GUI
 						}
 						else
 						{
-							Audio::CServer::getSingletonPtr()->playSound("error", 0.4f);
+							Audio::CServer::getSingletonPtr()->playSfxSound("error");
 						}
 					}
 					case 1:
