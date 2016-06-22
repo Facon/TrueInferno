@@ -35,7 +35,7 @@ namespace GUI
 		
 		int _tickCountResetValue = 100;
 		int _tickCountLimit = _tickCountResetValue;
-
+		bool _firstAnimation = true;
 		
 
 
