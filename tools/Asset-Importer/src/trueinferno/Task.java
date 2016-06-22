@@ -21,7 +21,7 @@ public abstract class Task {
 	
 	protected void updateAttributeInMap(File mapFile, String entityName, String attributeName, String newValue) throws IOException, TrueInfernoException {
 		String oldMapContent = FileUtils.readFileToString(mapFile, (Charset)null);
-		Pattern p = Pattern.compile("(" + entityName + " = \\{.*?)(" + attributeName + " = \".*?\")(.*?\\},)", Pattern.MULTILINE | Pattern.DOTALL);
+		Pattern p = Pattern.compile("(" + entityName + "\\s*=\\s*\\{.*?)(" + attributeName + "\\s*=\\s*\".*?\")(.*?\\},)", Pattern.MULTILINE | Pattern.DOTALL);
 		Matcher m = p.matcher(oldMapContent);
 		
 		if(!m.find())

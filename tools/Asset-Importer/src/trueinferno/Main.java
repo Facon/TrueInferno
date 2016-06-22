@@ -11,6 +11,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Logger logger = Logger.getGlobal();
+		logger.setLevel(Level.INFO);
 		
 		if(args.length != NUM_ARGS){
 			System.out.println("Argument error!");
