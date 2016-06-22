@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Imageset autoScaled="vertical" imagefile="TrueInfernoGoldCursors.png" name="TrueInfernoGoldCursors" nativeHorzRes="1920" nativeVertRes="1080" version="2">
+    <Image height="95" name="CursorGold1" width="87" xPos="0" yPos="0" />
+    <Image height="95" name="CursorGold12" width="87" xPos="0" yPos="1045" />
+    <Image height="95" name="CursorGold9" width="87" xPos="0" yPos="760" />
+    <Image height="95" name="CursorGold10" width="87" xPos="0" yPos="855" />
+    <Image height="95" name="CursorGold11" width="87" xPos="0" yPos="950" />
+    <Image height="95" name="CursorGold2" width="87" xPos="0" yPos="95" />
+    <Image height="95" name="CursorGold13" width="87" xPos="0" yPos="1140" />
+    <Image height="95" name="CursorGold14" width="87" xPos="0" yPos="1235" />
+    <Image height="95" name="CursorGold15" width="87" xPos="0" yPos="1330" />
+    <Image height="95" name="CursorGold16" width="87" xPos="0" yPos="1425" />
+    <Image height="95" name="CursorGold3" width="87" xPos="0" yPos="190" />
+    <Image height="95" name="CursorGold4" width="87" xPos="0" yPos="285" />
+    <Image height="95" name="CursorGold5" width="87" xPos="0" yPos="380" />
+    <Image height="95" name="CursorGold6" width="87" xPos="0" yPos="475" />
+    <Image height="95" name="CursorGold7" width="87" xPos="0" yPos="570" />
+    <Image height="95" name="CursorGold8" width="87" xPos="0" yPos="665" />
+</Imageset>

@@ -107,6 +107,9 @@ namespace GUI {
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoOtherCursors.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoIdleCursors.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoSelectCursors.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoGoldCursors.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoDropCursors.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoSlapCursors.scheme");
 
 #ifndef NON_EXCLUSIVE_MODE_IN_WINDOW_MODE 
 		// Establecemos cual será el puntero del ratón.

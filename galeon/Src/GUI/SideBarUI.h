@@ -63,6 +63,9 @@ namespace GUI
 	public:
 		bool _onUIScreen = false;
 		bool _onButtonFrame = false;
+		bool _onGoldFrame = false;
+		bool _dropBuilding = false;
+		bool _slap = false;
 		float _tickCountCursorAnimationResetValue = 300;
 		float _tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
 		int _cursorAnimationStatus = 1;

@@ -177,6 +177,56 @@ namespace GUI
 		unsigned int seconds = static_cast<unsigned int>(((total_seconds / 60.0f) - minutes) * 60.0f);
 		_uibuttonsWindow->getChild("TimeLeft")->setText(std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
 
+		if (_dropBuilding){
+			_tickCountCursorAnimationLimit -= msecs*10;
+			if (_tickCountCursorAnimationLimit <= 0){
+				_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+
+				if (_cursorAnimationStatus > 14){
+					_cursorAnimationStatus = 1;
+					_dropBuilding = false;
+					return;
+				}
+
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoDropCursors/CursorDrop" + std::to_string(_cursorAnimationStatus));
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoDropCursors/CursorDrop" + std::to_string(_cursorAnimationStatus));
+				_cursorAnimationStatus++;	
+			}
+			return;
+		}
+
+		if (_slap){
+			_tickCountCursorAnimationLimit -= msecs * 7;
+			if (_tickCountCursorAnimationLimit <= 0){
+				_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+
+				if (_cursorAnimationStatus > 15){
+					_cursorAnimationStatus = 1;
+					_slap = false;
+					return;
+				}
+
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoSlapCursors/CursorSlap" + std::to_string(_cursorAnimationStatus));
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoSlapCursors/CursorSlap" + std::to_string(_cursorAnimationStatus));
+				_cursorAnimationStatus++;
+			}
+			return;
+		}
+
+		if (_onGoldFrame){
+			_tickCountCursorAnimationLimit -= msecs*6.5;
+			if (_tickCountCursorAnimationLimit <= 0){
+				_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+
+				if (_cursorAnimationStatus > 16)
+					_cursorAnimationStatus = 1;
+
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoGoldCursors/CursorGold" + std::to_string(_cursorAnimationStatus));
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoGoldCursors/CursorGold" + std::to_string(_cursorAnimationStatus));
+				_cursorAnimationStatus++;
+			}
+		}
+
 		if (_clearTerrain){
 			Logic::CEntity* entity = getEntityFromRaycastToGroup(3);
 			if (entity){
@@ -184,12 +234,12 @@ namespace GUI
 				if (_tickCountCursorAnimationLimit <= 0){
 					_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
 
-					_cursorAnimationStatus++;
 					if (_cursorAnimationStatus > 3)
 						_cursorAnimationStatus = 1;
 
 					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorClear" + std::to_string(_cursorAnimationStatus));
 					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorClear" + std::to_string(_cursorAnimationStatus));
+					_cursorAnimationStatus++;
 				}
 			}
 			else
@@ -210,12 +260,12 @@ namespace GUI
 				if (_tickCountCursorAnimationLimit <= 0){
 					_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
 
-					_cursorAnimationStatus++;
 					if (_cursorAnimationStatus > 41)
 						_cursorAnimationStatus = 1;
 
 					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoSelectCursors/CursorSelect" + std::to_string(_cursorAnimationStatus));
 					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoSelectCursors/CursorSelect" + std::to_string(_cursorAnimationStatus));
+					_cursorAnimationStatus++;
 				}
 
 			}
@@ -225,12 +275,12 @@ namespace GUI
 				if (_tickCountCursorAnimationLimit <= 0){
 					_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
 
-					_cursorAnimationStatus++;
 					if (_cursorAnimationStatus > 8)
 						_cursorAnimationStatus = 1;
 
 					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle" + std::to_string(_cursorAnimationStatus));
 					CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle" + std::to_string(_cursorAnimationStatus));
+					_cursorAnimationStatus++;
 				}
 			}
 		}
@@ -366,16 +416,22 @@ namespace GUI
 
 	bool SideBarUI::buttonFrameEnter(const CEGUI::EventArgs& e)
 	{
-		_onButtonFrame = true;
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
+			_onButtonFrame = true;
+			_onGoldFrame = true;
+		if (!_clearTerrain){
+			_cursorAnimationStatus = 1;
+			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoGoldCursors/CursorGold1");
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoGoldCursors/CursorGold1");
+		}
 		return true;
 	}
 
 	bool SideBarUI::buttonFrameExit(const CEGUI::EventArgs& e)
 	{
 		_onButtonFrame = false;
-		if (!_onUIScreen){
+		_onGoldFrame = false;
+		if (!_onUIScreen && !_clearTerrain){
 			_cursorAnimationStatus = 1;
 			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
 			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle1");
@@ -504,6 +560,9 @@ namespace GUI
 							{
 								Logic::CBuildingManager::getSingletonPtr()->placePlaceable(_placeableEntity);
 								Logic::CWorkManager::getSingletonPtr()->reassignWorkers();
+								_dropBuilding = true;
+								_cursorAnimationStatus = 1;
+								_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
 							}
 							else
 							{
@@ -552,6 +611,9 @@ namespace GUI
 							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
 							_firstRoad = false;
 						}
+						_dropBuilding = true;
+						_cursorAnimationStatus = 1;
+						_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
 						continueRoadCreation();
 						break;
 					}
@@ -576,6 +638,18 @@ namespace GUI
 					uiManager->getBuildingSelectionUI()->setEventWindowVisible(true, entity);
 					_uibuttonsWindow->setVisible(false);
 				}
+				else
+				{
+					if (!_slap){
+						entity = getEntityFromRaycastToGroup(4);
+						if (entity)
+						{
+							_slap = true;
+							_cursorAnimationStatus = 1;
+							_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+						}
+					}
+				}
 			}		
 		}
 	}
@@ -583,7 +657,7 @@ namespace GUI
 	void SideBarUI::setEventWindowVisible(bool visible)
 	{
 		_onUIScreen = false;
-		if (!_onButtonFrame){
+		if (!_onButtonFrame && !_slap){
 			_cursorAnimationStatus = 1;
 			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
 			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle1");
