@@ -53,9 +53,9 @@ namespace Logic {
 	void CEndGameEvent::execute()
 	{
 		if (_victory)
-			Audio::CServer::getSingletonPtr()->playSound("victory", 0.4f);
+			Audio::CServer::getSingletonPtr()->playSfxSound("victory");
 		else
-			Audio::CServer::getSingletonPtr()->playSound("error", 0.4f);
+			Audio::CServer::getSingletonPtr()->playSfxSound("error");
 	} // execute
 
 	void CEndGameEvent::initGUIConstants(){
