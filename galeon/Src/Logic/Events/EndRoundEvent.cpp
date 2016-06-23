@@ -44,9 +44,10 @@ namespace Logic {
 	void CEndRoundEvent::initGUIConstants(){
 		if(_victory) {
 			_eventImage = "EventVictory";
-			_eventTitle = "You are in the NEXT ROUND!";
-			_eventText = "YES!! That’s how it’s done, kiddo. I KNEW you had potential. HAH!! Look at your rivals’ faces, you really pissed them off. This deserves some extra points. Here you go. Hades’ Favor increased! +66.666 Now on to the next round! Give’em Hell!";
-			_eventTextResume = "";
+			//_eventTitle = "You are in the NEXT ROUND!";
+			//_eventText = "YES!! That’s how it’s done, kiddo. I KNEW you had potential. HAH!! Look at your rivals’ faces, you really pissed them off. This deserves some extra points. Here you go. Hades’ Favor increased! +66.666 Now on to the next round! Give’em Hell!";
+			_eventTitle = "NEXT ROUND!";
+			_eventText = "YES!! I KNEW you had potential.HAH!!Look at your rivals’ faces. Hades’ Favor increased + 66.666! Now into the next round, Give em Hell!";
 		}
 
 		else {

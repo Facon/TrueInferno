@@ -22,7 +22,7 @@ namespace GUI
 		CEGUI::Window* _uibuttonsWindow;
 		Logic::CEntity* _placeableEntity=nullptr;
 		Logic::CEntity* *_placeableRoad = nullptr;
-		int _placeableRoadSize;
+		int _placeableRoadSize=0;
 		Logic::Tile* _originRoadTile=nullptr;
 		int _roadInConstruction = false;
 		bool _clearTerrain = false;
