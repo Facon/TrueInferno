@@ -1030,7 +1030,8 @@ public:
 
     /*!
     \brief
-        Return a pointer to the mouse cursor image to use when the mouse cursor
+        Return a pointer to the mouse 
+		image to use when the mouse cursor
         is within this window's area.
 
     \param useDefault
