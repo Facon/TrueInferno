@@ -18,7 +18,7 @@ public class Util {
 		String extension = FilenameUtils.getExtension(file.getName());
 		String baseName = FilenameUtils.getBaseName(file.getName());
 		
-		File backupFile = FileUtils.getFile(dir, baseName + "_" + Util.getTimeStamp() + "." + extension);
+		File backupFile = FileUtils.getFile(dir, baseName + "." + extension + "_" + Util.getTimeStamp());
 		FileUtils.moveFile(file, backupFile);
 	}
 

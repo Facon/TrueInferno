@@ -21,7 +21,8 @@ import org.apache.commons.io.filefilter.TrueFileFilter;
 public class ImportMaterialTask extends Task {
 
 	public enum MaterialTaskOption {
-		IMPORT_CREATE,
+		IMPORT_CREATE_DIFFUSE,
+		IMPORT_CREATE_NO_TEXTURE,
 		SKIP
 	}
 	
@@ -144,6 +145,19 @@ public class ImportMaterialTask extends Task {
 	}
 
 	private File createMaterialFile() throws IOException, TrueInfernoException {
+		switch(materialTaskOption){
+		case IMPORT_CREATE_DIFFUSE:
+			return createDiffuseMaterialFile();
+
+		case IMPORT_CREATE_NO_TEXTURE:
+			return createNoTextureMaterialFile();
+
+		default:
+			throw new TrueInfernoException("There is no createMaterialFile implementation for materialTaskOption="+materialTaskOption);
+		}
+	}
+	
+	private File createDiffuseMaterialFile() throws IOException, TrueInfernoException {
 		// Localizamos el fichero de origen con la textura de Albedo 
 		File diffuseTextureFile = findAlbedoTextureFile();
 		
@@ -176,6 +190,30 @@ public class ImportMaterialTask extends Task {
 		return newMaterialFile;
 	}
 
+	private File createNoTextureMaterialFile() throws IOException, TrueInfernoException {
+		// Creamos un nuevo fichero de material que haga uso de la textura de difuso obtenida
+		File newMaterialFile = new File("tmp" + File.separator + realName + ".material");
+		
+		ArrayList<String> lines = new ArrayList<String>();
+		lines.add("material "+realName);
+		lines.add("{");
+		lines.add("	technique");
+		lines.add("	{");
+		lines.add("		pass");
+		lines.add("		{");
+		lines.add("			ambient  1 1 1 1");
+		lines.add("			diffuse  0.4 0.4 0.4 1");
+		lines.add("			specular 1 1 1 30");
+		lines.add("			emissive 0 0 0 1");
+		lines.add("		}");
+		lines.add("	}");
+		lines.add("}");
+		
+		FileUtils.writeLines(newMaterialFile, lines, false);
+
+		return newMaterialFile;
+	}
+	
 	private File findMaterialFile() throws TrueInfernoException {
 		File dir = FileUtils.getFile(inputModelDir, givenName);
 		

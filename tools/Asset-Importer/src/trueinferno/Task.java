@@ -30,7 +30,7 @@ public abstract class Task {
 		if(m.find())
 			throw new TrueInfernoException("Multiple definitions found in map file '" + mapFile + "'  for type '" + entityName + "'");
 		
-		String newMapContent = m.replaceFirst("$1" + attributeName + "= \"" + newValue + "\"$3");
+		String newMapContent = m.replaceFirst("$1" + attributeName + " = \"" + newValue + "\"$3");
 		FileUtils.writeStringToFile(mapFile, newMapContent, (Charset)null);
 	}
 }
