@@ -19,6 +19,20 @@ material Soul
 		}
 	}
 	
+	technique Glow
+	{
+		scheme glow
+		pass Glow
+		{
+			diffuse 1 1 1 1
+
+			texture_unit
+			{
+				texture White.png
+			}
+		}
+	}
+	
 	technique Fallback
 	{
 		pass Fallback

@@ -17,6 +17,7 @@ Contiene la declaración de la clase que representa una entidad gráfica.
 #define __Graphics_Entity_H
 
 #include "BaseSubsystems/Math.h"
+#include <string>
 
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Ogre 
@@ -170,17 +171,29 @@ namespace Graphics
 
 		/**
 		Cambia el color de la entidad.
+
 		@param color Valores (r,g,b) del color interpolados entre 0 y 1.
+		@param technique Nombre de la técnica en la que cambiar el color.
+		@param pass Nombre de la pasada en la que cambiar el color.
 		*/
 		void setDiffuseColor(const Vector3 &color);
+		void setDiffuseColor(const Vector3 &color, std::string technique, std::string pass);
+
 		void setEmissiveColor(const Vector3 &color);
+		void setEmissiveColor(const Vector3 &color, std::string technique, std::string pass);
 
 		/**
 		Devuelve el color de la entidad.
+
+		@param technique Nombre de la técnica de la que obtener el color.
+		@param pass Nombre de la pasada de la que obtener el color.
 		@return Valores (r,g,b) del color interpolados entre 0 y 1.
 		*/
 		Vector3 getDiffuseColor();
+		Vector3 getDiffuseColor(std::string technique, std::string pass);
+
 		Vector3 getEmissiveColor();
+		Vector3 getEmissiveColor(std::string technique, std::string pass);
 
 		/**
 		* Cambia el color para oscurecerlo aplicando el factor dado (0,1). Cuanto más cerca de 0, más oscuro.

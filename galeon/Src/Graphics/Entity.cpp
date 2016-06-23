@@ -276,6 +276,39 @@ namespace Graphics
 
 	//--------------------------------------------------------
 	
+	void CEntity::setDiffuseColor(const Vector3 &color, std::string technique, std::string pass)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entity)
+		{
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+			{
+				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
+				std::string entityMaterialName = entityMaterial->getName();
+
+				std::size_t found = entityMaterialName.find("_cl_");
+				if (found != std::string::npos)
+				{
+					entityMaterial->getTechnique(technique)->getPass(pass)->
+						setDiffuse(Ogre::ColourValue(color.x, color.y, color.z, 1.0f));
+				}
+				else
+				{
+					Ogre::MaterialPtr entityMaterialClone = entityMaterial->
+						clone(_entityNode->getName() + "_cl_" + entityMaterial->getName());
+
+					entityMaterialClone->getTechnique(technique)->getPass(pass)->
+						setDiffuse(Ogre::ColourValue(color.x, color.y, color.z, 1.0f));
+
+					_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+				}
+			}
+		}
+
+	} // setDiffuseColor
+
+	//--------------------------------------------------------
+	
 	void CEntity::setEmissiveColor(const Vector3 &color)
 	{
 		assert(_entityNode && "La entidad no ha sido cargada");
@@ -306,6 +339,39 @@ namespace Graphics
 		}
 
 	} // setEmissiveColor
+
+	//--------------------------------------------------------
+	
+	void CEntity::setEmissiveColor(const Vector3 &color, std::string technique, std::string pass)
+	{
+		assert(_entityNode && "La entidad no ha sido cargada");
+		if (_entity)
+		{
+			for (unsigned int i = 0; i < _entity->getNumSubEntities(); ++i)
+			{
+				Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(i)->getMaterial();
+				std::string entityMaterialName = entityMaterial->getName();
+
+				std::size_t found = entityMaterialName.find("_cl_");
+				if (found != std::string::npos)
+				{
+					entityMaterial->getTechnique(technique)->getPass(pass)->
+						setEmissive(Ogre::ColourValue(color.x, color.y, color.z, 1.0f));
+				}
+				else
+				{
+					Ogre::MaterialPtr entityMaterialClone = entityMaterial->
+						clone(_entityNode->getName() + "_cl_" + entityMaterial->getName());
+
+					entityMaterialClone->getTechnique(technique)->getPass(pass)->
+						setEmissive(Ogre::ColourValue(color.x, color.y, color.z, 1.0f));
+
+					_entity->getSubEntity(i)->setMaterial(entityMaterialClone);
+				}
+			}
+		}
+
+	} // setEmissiveColor
 	
 	//--------------------------------------------------------
 	
@@ -323,11 +389,39 @@ namespace Graphics
 	
 	//--------------------------------------------------------
 	
+	Vector3 CEntity::getDiffuseColor(std::string technique, std::string pass)
+	{
+		if (_entityNode) {
+			Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(0)->getMaterial();
+			Ogre::ColourValue entityMatColor = entityMaterial->getTechnique(technique)->getPass(pass)->getDiffuse();
+			return Vector3(entityMatColor.r, entityMatColor.g, entityMatColor.b);
+		}
+
+		throw new std::exception("La entidad no ha sido cargada");
+
+	} // getDiffuseColor
+	
+	//--------------------------------------------------------
+	
 	Vector3 CEntity::getEmissiveColor()
 	{
 		if (_entityNode) {
 			Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(0)->getMaterial();
 			Ogre::ColourValue entityMatColor = entityMaterial->getTechnique(0)->getPass(0)->getEmissive();
+			return Vector3(entityMatColor.r, entityMatColor.g, entityMatColor.b);
+		}
+
+		throw new std::exception("La entidad no ha sido cargada");
+
+	} // getEmissiveColor
+	
+	//--------------------------------------------------------
+	
+	Vector3 CEntity::getEmissiveColor(std::string technique, std::string pass)
+	{
+		if (_entityNode) {
+			Ogre::MaterialPtr entityMaterial = _entity->getSubEntity(0)->getMaterial();
+			Ogre::ColourValue entityMatColor = entityMaterial->getTechnique(technique)->getPass(pass)->getEmissive();
 			return Vector3(entityMatColor.r, entityMatColor.g, entityMatColor.b);
 		}
 
