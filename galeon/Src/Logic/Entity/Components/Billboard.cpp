@@ -97,8 +97,8 @@ namespace Logic
 		{ LogicRequirement::Energy, IconType::POWER_GENERATOR },
 		// TODO Descomentar cuando se pueda volver a reparar edificios que van a ser destruidos
 		//{ LogicRequirement::Player, IconType::REPAIR },
-		//{ LogicRequirement::Player, IconType::NONE },
-		{ LogicRequirement::Player, IconType::BATTLE },
+		{ LogicRequirement::Player, IconType::NONE },
+		//{ LogicRequirement::Player, IconType::BATTLE },
 		{ LogicRequirement::Road, IconType::SOUL_PATH },
 		{ LogicRequirement::Undefined, IconType::NONE },
 	};

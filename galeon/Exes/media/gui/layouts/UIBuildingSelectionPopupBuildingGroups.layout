@@ -52,7 +52,7 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="Mine" >
-			<Property name="Image" value="TrueInfernoNewIcons/CreateMine" />
+			<Property name="Image" value="TrueInfernoNewIcons/ClearTerrain" />
 			<Property name="Area" value="{{0.485,0},{0.395,0},{0.550,0},{0.465,0}}" />
 		</Window>
 		
@@ -125,7 +125,7 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="Evilator" >
-			<Property name="Image" value="TrueInfernoNewIcons/Refined" />
+			<Property name="Image" value="TrueInfernoNewIcons/Evilator" />
 			<Property name="Area" value="{{0.485,0},{0.605,0},{0.550,0},{0.675,0}}" />
 		</Window>
 		

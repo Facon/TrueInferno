@@ -18,6 +18,7 @@ de una escena.
 #include "Camera.h"
 #include "Server.h"
 #include "StaticEntity.h"
+#include "GlowMaterialListener.h"
 #include "BaseSubsystems/Server.h"
 
 #include <assert.h>
@@ -103,10 +104,17 @@ namespace Graphics
 
 		// Viewport
 		_viewport = BaseSubsystems::CServer::getSingletonPtr()->getRenderWindow()
-						->addViewport(_camera->getCamera());
+			->addViewport(_camera->getCamera());
+
+		// Glow shader
+		Ogre::CompositorManager::getSingleton().addCompositor(_viewport, "Glow");
+		Ogre::CompositorManager::getSingleton().setCompositorEnabled(_viewport, "Glow", true);
+
+		GlowMaterialListener *gml = new GlowMaterialListener();
+		Ogre::MaterialManager::getSingleton().addListener(gml);
 
 		// Background
-		Ogre::ColourValue backgroundColor = Ogre::ColourValue(0.2f, 0.0f, 0.0f, 0.5f);
+		Ogre::ColourValue backgroundColor = Ogre::ColourValue(0.2f, 0.1f, 0.1f, 0.5f);
 		_viewport->setBackgroundColour(backgroundColor);
 
 		// Luz ambiente
@@ -118,11 +126,11 @@ namespace Graphics
 
 		// Luz direccional
 		_directionalLight = _sceneMgr->createLight("DirectionalLight");
-		_directionalLight->setDiffuseColour(1.0f, 1.0f, 1.0f);
-		_directionalLight->setSpecularColour(1.0f, 1.0f, 1.0f);
+		_directionalLight->setDiffuseColour(0.8f, 0.8f, 0.8f);
+		_directionalLight->setSpecularColour(0.8f, 0.8f, 0.8f);
 		_directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
-		_directionalLight->setPosition(200, 200, 50);
-		_directionalLight->setDirection(-200, -200, -50);
+		_directionalLight->setPosition(200, 200, -50);
+		_directionalLight->setDirection(-200, -200, 50);
 		_directionalLight->setCastShadows(true);
 
 	} // activate

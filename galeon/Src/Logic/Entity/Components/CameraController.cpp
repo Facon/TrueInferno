@@ -117,6 +117,10 @@ namespace Logic
 				direction = Math::getDirection(_entity->getRotation().y);
 				if (_movingBackward)
 					direction *= -1;
+
+				// #perspectiva Movimiento en perspectiva isométrica. Comentar para
+				// volver a movimiento ortogonal
+				direction.x = direction.z;
 			}
 
 			if (_strafingLeft || _strafingRight)
@@ -125,6 +129,10 @@ namespace Logic
 					Math::getDirection(_entity->getRotation().y + Math::PI / 2);
 				if (_strafingRight)
 					directionStrafe *= -1;
+
+				// #perspectiva Movimiento en perspectiva isométrica. Comentar para
+				// volver a movimiento ortogonal
+				directionStrafe.z = -directionStrafe.x;
 			}
 
 			direction += directionStrafe;

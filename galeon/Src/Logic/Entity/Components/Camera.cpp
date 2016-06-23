@@ -92,16 +92,17 @@ namespace Logic
 
 		// Updating camera position and direction...
 		Vector3 position = Vector3(_entity->getPosition());
-		Vector3 direction = Vector3(20, -10, 20);
+		position.x += 0.0f;
+		position.y = _height;
+		position.z += 0.0f;
 
-		// Isometric camera view for (0,0,0)...
-		//_graphicsCamera->setCameraPosition(Vector3(-10, 15, -10));
-		//_graphicsCamera->setTargetCameraPosition(Vector3(20, -10, 20));
-
+		// #perspectiva Para perspectiva isométrica: comentar el primero y activar el segundo
 		//_graphicsCamera->setCameraPosition(position + _distance * Vector3(0, 0, 1));
-		//_graphicsCamera->setTargetCameraPosition(direction);
-		_graphicsCamera->setCameraPosition(position + _distance * Vector3(0, 0, 1));
-		//_graphicsCamera->setTargetCameraPosition(direction);
+		_graphicsCamera->setCameraPosition(position + _distance * Vector3(1, 0, 1));
+
+		//Vector3 direction = Vector3(200, -5, 200);
+		//Vector3 direction = Vector3(0, -5, 0);
+		//_graphicsCamera->setTargetCameraPosition(position + direction);
 
 	} // tick
 

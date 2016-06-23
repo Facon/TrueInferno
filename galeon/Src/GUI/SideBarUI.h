@@ -22,7 +22,7 @@ namespace GUI
 		CEGUI::Window* _uibuttonsWindow;
 		Logic::CEntity* _placeableEntity=nullptr;
 		Logic::CEntity* *_placeableRoad = nullptr;
-		int _placeableRoadSize;
+		int _placeableRoadSize=0;
 		Logic::Tile* _originRoadTile=nullptr;
 		int _roadInConstruction = false;
 		bool _clearTerrain = false;
@@ -35,7 +35,9 @@ namespace GUI
 		
 		int _tickCountResetValue = 100;
 		int _tickCountLimit = _tickCountResetValue;
+		bool _firstAnimation = true;
 
+		bool _deactivateCursorAnimation = false;
 		
 
 
@@ -63,6 +65,9 @@ namespace GUI
 	public:
 		bool _onUIScreen = false;
 		bool _onButtonFrame = false;
+		bool _onGoldFrame = false;
+		bool _dropBuilding = false;
+		bool _slap = false;
 		float _tickCountCursorAnimationResetValue = 300;
 		float _tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
 		int _cursorAnimationStatus = 1;

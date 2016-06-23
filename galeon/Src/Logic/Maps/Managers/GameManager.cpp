@@ -128,7 +128,7 @@ namespace Logic {
 		}
 
 		// Sonido de fin de ronda
-		Audio::CServer::getSingletonPtr()->playSound("round_finished", 0.4f);
+		Audio::CServer::getSingletonPtr()->playSfxSound("round_finished");
 
 		// En otro caso es final de ronda, así que notificamos con un evento
 		bool eventThrown = Logic::CEventManager::getSingletonPtr()->addTimeEvent(new CEndRoundEvent(_victory, 100));

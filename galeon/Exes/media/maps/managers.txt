@@ -18,6 +18,6 @@ Map = {
 	
 	TimeManager = {
 		type = "TimeManager",
-		defaultRoundTime = 1800000,
+		defaultRoundTime = 180000,
 	},
 }

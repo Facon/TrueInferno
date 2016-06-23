@@ -22,13 +22,13 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="BurnSoul" >
-			<Property name="Image" value="TrueInfernoNewIcons/BurnSoul" />
-			<Property name="Area" value="{{0.504,0},{0.30,0},{0.608,0},{0.41,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/BurnSoul" />
+			<Property name="Area" value="{{0.530,0},{0.32,0},{0.585,0},{0.38,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CreateSoul" >
-			<Property name="Image" value="TrueInfernoNewIcons/CreateSoul" />
-			<Property name="Area" value="{{0.609,0},{0.30,0},{0.713,0},{0.41,0}}" />
+			<Property name="Image" value="TrueInfernoIcons/CreateSoul" />
+			<Property name="Area" value="{{0.635,0},{0.32,0},{0.690,0},{0.38,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="HeavySoulText" >

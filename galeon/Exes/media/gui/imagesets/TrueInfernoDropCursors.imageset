@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Imageset autoScaled="vertical" imagefile="TrueInfernoDropCursors.png" name="TrueInfernoDropCursors" nativeHorzRes="1920" nativeVertRes="1080" version="2">
+    <Image height="103" name="CursorDrop1" width="88" xPos="0" yPos="0" />
+    <Image height="103" name="CursorDrop2" width="88" xPos="0" yPos="103" />
+    <Image height="103" name="CursorDrop7" width="88" xPos="0" yPos="618" />
+    <Image height="103" name="CursorDrop8" width="88" xPos="0" yPos="721" />
+    <Image height="103" name="CursorDrop9" width="88" xPos="0" yPos="824" />
+    <Image height="103" name="CursorDrop10" width="88" xPos="0" yPos="927" />
+    <Image height="103" name="CursorDrop11" width="88" xPos="0" yPos="1030" />
+    <Image height="103" name="CursorDrop12" width="88" xPos="0" yPos="1133" />
+    <Image height="103" name="CursorDrop13" width="88" xPos="0" yPos="1236" />
+    <Image height="103" name="CursorDrop14" width="88" xPos="0" yPos="1339" />
+    <Image height="103" name="CursorDrop3" width="88" xPos="0" yPos="206" />
+    <Image height="103" name="CursorDrop4" width="88" xPos="0" yPos="309" />
+    <Image height="103" name="CursorDrop5" width="88" xPos="0" yPos="412" />
+    <Image height="103" name="CursorDrop6" width="88" xPos="0" yPos="515" />
+</Imageset>

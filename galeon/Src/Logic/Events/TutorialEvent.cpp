@@ -68,7 +68,7 @@ namespace Logic {
 		case 2:
 			_eventImage = "EventTutorial2";
 			_eventTitle = "Building facilities";
-			_eventText = "Oh, great… The rookie. I really don’t get why we must put up with these sissies. Look at this one… Hey you, where do you think you are? Heaven? Come on, move! Start building something!";
+			_eventText = "Oh, great… The rookie. I really don’t get why we must put up with these losers. Look at this one… Hey you, where do you think you are? Heaven? Come on, move! Start building something!";
 			_eventTextResume = "Press on a building’s button to select it, then click anywhere on the terrain to build it there.";
 			break;
 
@@ -96,7 +96,8 @@ namespace Logic {
 		case 9:
 			_eventImage = "EventVictory";
 			_eventTitle = "You are in the NEXT ROUND!";
-			_eventText = "YES!! That’s how it’s done, kiddo. I KNEW you had potential. HAH!! Look at your rivals’ faces, you really pissed them off. This deserves some extra points. Here you go. Hades’ Favor increased! +66.666 Now on to the next round! Give’em Hell!";
+			//_eventText = "YES!! That’s how it’s done, kiddo. I KNEW you had potential. HAH!! Look at your rivals’ faces, you really pissed them off. This deserves some extra points. Here you go. Hades’ Favor increased! +66.666 Now on to the next round! Give’em Hell!";
+			_eventText = "I KNEW you had potential.HAH!!Look at your rivals’ faces. Hades’ Favor increased + 66.666! Now into the next round, Give’em Hell!";
 			_eventTextResume = "";
 			break;
 

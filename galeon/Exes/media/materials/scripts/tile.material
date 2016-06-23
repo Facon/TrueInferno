@@ -22,35 +22,38 @@
 //	profiles ps_1_1
 //}
 
+// Material
+//material {
+//	technique {
+//		pass {
+//			vertex_program_ref Terrain/AveragePixelColorVP {}
+//			fragment_program_ref Terrain/AveragePixelColorFP {}
+//		}
+//	}
+//}
+
 material Terrain/Empty
 {
-	technique
+	technique Shaders
 	{
-		pass
+		pass CelSh : CelShadingDecal
 		{
-			// Vertex shader
-			//vertex_program_ref Terrain/AveragePixelColorVP
-			//{
-			//}
-			
-			// Pixel shader
-			//fragment_program_ref Terrain/AveragePixelColorFP
-			//{
-			//}
-
 			ambient  1 1 1 1
 			diffuse  1 1 1 1
-			emissive 0.2 0 0 1
-			
-			// Textura visible por los 2 lados
-			cull_hardware none
-			cull_software none
-			
-			// Textura
+ 
+			texture_unit decal {
+				texture terrain/tile_vacio_arena_bn.jpg
+			}
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
 			texture_unit
 			{
-				texture terrain/tile_vacio_arena.jpg
-				colour_op modulate
+				texture error.png
 			}
 		}
 	}
@@ -58,22 +61,43 @@ material Terrain/Empty
 
 material Terrain/Mineral
 {
-	technique
+	technique Shaders
 	{
-		pass
+		pass CelSh : CelShadingDecal
 		{
-			// Textura visible por los 2 lados
-			cull_hardware none
-			cull_software none
-			
-			ambient  0.8 0 0 1
-			diffuse  0.8 0 0 1
-			emissive 0.8 0 0 1
+			ambient  1 1 1 1
+			diffuse  0.5 0.5 0.5 1
+			emissive 0.6 0 0 1
+ 
+			texture_unit decal {
+				texture terrain/tile_mineral_bn.jpg
+				//colour_op_ex modulate_x2 src_texture src_current
+			}
+		}
+	}
+	
+	technique Glow
+	{
+		scheme glow
+		pass Glow
+		{
+			ambient 0 0 0 1
+			diffuse 0.2 0 0 1
 
 			texture_unit
 			{
-				texture terrain/tile_mineral.jpg
-				colour_op_ex modulate_x2 src_texture src_current
+				texture DarkGray.png
+			}
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
 			}
 		}
 	}
@@ -81,22 +105,42 @@ material Terrain/Mineral
 
 material Terrain/Gas
 {
-	technique
+	technique Shaders
 	{
-		pass
+		pass CelSh : CelShadingDecal
 		{
-			// Textura visible por los 2 lados
-			cull_hardware none
-			cull_software none
-			
-			ambient  0.2 0.2 0.2 1
-			diffuse  0.2 0.2 0.2 1
-			emissive 0.2 0.2 0.6 1
-			
+			ambient  1 1 1 1
+			diffuse  0.6 0.6 0.6 1
+			emissive 0.3 0.2 0 1
+ 
+			texture_unit decal {
+				texture terrain/tile_gas_bn.jpg
+				//colour_op_ex modulate_x2 src_texture src_current
+			}
+		}
+	}
+	
+	technique Glow
+	{
+		scheme glow
+		pass Glow
+		{
+			diffuse 0.2 0.15 0 1
+
 			texture_unit
 			{
-				texture terrain/tile_gas.jpg
-				colour_op_ex modulate_x2 src_texture src_current
+				texture DarkGray.png
+			}
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
 			}
 		}
 	}
