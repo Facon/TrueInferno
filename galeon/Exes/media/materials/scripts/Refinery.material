@@ -5,18 +5,18 @@ material Refinery
 {
 	technique Shaders
 	{
-		pass : CelShadingDecal
+		pass CelSh : CelShadingDecal
 		{
 			ambient  1 1 1 1
 			diffuse  1 1 1 1
-			specular 0.8 0 0 20
+			specular 0.6 0.3 0.3 20
  
 			texture_unit decal {
 				texture Refinery_Albedo.jpg
 			}
 		}
 
-		pass : OutlineExperiment
+		pass Outlining : OutlineExperiment
 		{
 			set $edgeScale 0.015
 			set $sinkScale 2

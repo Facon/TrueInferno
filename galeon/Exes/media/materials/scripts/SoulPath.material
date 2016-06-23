@@ -1,21 +1,35 @@
+import * from "CelShading.material"
+import * from "Outline.material"
+
 material SoulPath
 {
-	technique
+	technique Shaders
 	{
-		pass
+		pass CelSh : CelShadingDecal
 		{
 			ambient  1 1 1 1
-			diffuse  0.4 0.4 0.4 1
-			specular 1 1 1 30
-			
-			// Textura visible por los 2 lados
-			cull_hardware none
-			cull_software none
-			
+			diffuse  1 1 1 1
+			emissive 0.1 0 0 1
+ 
+			texture_unit decal {
+				texture terrain/tile_carretera_2.jpg
+			}
+		}
+
+		pass Outlining : OutlineExperiment
+		{
+			set $edgeScale 0.01
+			set $sinkScale 2
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
 			texture_unit
 			{
-				texture terrain/tile_carretera.jpg
-				colour_op_ex modulate_x4 src_texture src_current
+				texture error.png
 			}
 		}
 	}

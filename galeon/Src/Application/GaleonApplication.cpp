@@ -57,7 +57,7 @@ namespace Application {
 		if (!addState("gameOver", new CGameOverState(this)))
 			return false;
 
-		if(!setState("menu"))
+		if(!setState("game"))
 			return false;
 
 		return true;
