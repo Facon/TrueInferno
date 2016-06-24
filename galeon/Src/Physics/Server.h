@@ -301,7 +301,7 @@ namespace Physics {
 		void setControllerPosition(physx::PxCapsuleController *controller, const Vector3 &position);
 		
 		//----------------------------------
-		// Consultas 
+		// Consultas
 		//----------------------------------
 
 		/**
@@ -325,6 +325,17 @@ namespace Physics {
 		 @return Primera entidad l�gica alcanzada de ese grupo o NULL.
 		 */
 		Logic::CEntity* raycastClosest(const Ray& ray, float maxDist, int group) const;
+
+		/**
+		Lanza un rayo desde la cámara y devuelve la primera entidad lógica contra la que interseca
+		(perteneciente a cualquier grupo de colisión o al indicado). Si el rayo no choca contra
+		ninguna entidad devuelve NULL.
+
+		@param group Grupo de colisión de la entidad buscada.
+		@return Primera entidad lógica alcanzada o NULL.
+		*/
+		Logic::CEntity* getEntityFromRaycast();
+		Logic::CEntity* getEntityFromRaycastToGroup(int collisiongroup);
 
 	private:
 
