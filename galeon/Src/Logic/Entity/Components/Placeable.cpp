@@ -189,7 +189,9 @@ namespace Logic {
 		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...
 		if (_placeableType == Building)
 		{
-			if (getBuildingType() == Furnace) position.y = HEIGHT_ON_TILE - 0.3;
+			if (getBuildingType() == HellQuarters) position.y = HEIGHT_ON_TILE - 0.3f;
+			else if (getBuildingType() == Evilator) position.y = HEIGHT_ON_TILE - 0.2f;
+			else if (getBuildingType() == Furnace) position.y = HEIGHT_ON_TILE - 0.3f;
 			else if (getBuildingType() == Refinery) position.y = HEIGHT_ON_TILE + 0.15f;
 			else if (_placeableType == Building) position.y = HEIGHT_ON_TILE;
 		}
