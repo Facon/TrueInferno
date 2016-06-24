@@ -19,7 +19,12 @@ de una escena.
 #include "Server.h"
 #include "StaticEntity.h"
 #include "GlowMaterialListener.h"
+
 #include "BaseSubsystems/Server.h"
+
+#include "Logic/Entity/Entity.h"
+
+#include "Physics/Server.h"
 
 #include <assert.h>
 
@@ -33,11 +38,13 @@ de una escena.
 
 namespace Graphics 
 {
-	CScene::CScene(const std::string& name) : _viewport(0), 
-			_staticGeometry(0), _directionalLight(0)
+	CScene::CScene(const std::string& name) : _viewport(0), _staticGeometry(0),
+		_directionalLight(0), _spotlightLight(0),
+		_spotlightAcumTime(0), _spotlightThresholdTime(0.1f)
 	{
 		_root = BaseSubsystems::CServer::getSingletonPtr()->getOgreRoot();
 		_sceneMgr = _root->createSceneManager(Ogre::ST_INTERIOR, name);
+
 		_camera = new CCamera(name,this);
 		_name = name;
 
@@ -133,6 +140,15 @@ namespace Graphics
 		_directionalLight->setDirection(-200, -200, 50);
 		_directionalLight->setCastShadows(true);
 
+		_spotlightLight = _sceneMgr->createLight("SpotlightLight");
+		_spotlightLight->setDiffuseColour(1.0f, 0.2f, 0.2f);
+		_spotlightLight->setSpecularColour(1.0f, 0.2f, 0.2f);
+		_spotlightLight->setType(Ogre::Light::LT_SPOTLIGHT);
+		_spotlightLight->setPosition(0, 0, 0);  // Posición y dirección temporales. Se van actualizando
+		_spotlightLight->setDirection(0, 0, 0); // junto con la posición de la cámara
+		_spotlightLight->setSpotlightRange(Ogre::Degree(3), Ogre::Degree(5));
+		_spotlightLight->setAttenuation(1500.0f, 1.0f, 0.05f, 0.0f);
+
 	} // activate
 
 	//--------------------------------------------------------
@@ -143,6 +159,11 @@ namespace Graphics
 		{
 			_sceneMgr->destroyLight(_directionalLight);
 			_directionalLight = 0;
+		}
+		if (_spotlightLight)
+		{
+			_sceneMgr->destroyLight(_spotlightLight);
+			_spotlightLight = 0;
 		}
 		if(_viewport)
 		{
@@ -156,11 +177,28 @@ namespace Graphics
 	//--------------------------------------------------------
 
 	void CScene::tick(float secs)
-	{	
+	{
 		TEntityList::const_iterator it = _dynamicEntities.begin();
 		TEntityList::const_iterator end = _dynamicEntities.end();
 		for(; it != end; it++)
 			(*it)->tick(secs);
+
+		// Actualizamos posición y dirección de la luz focal que se mueve
+		// junto con el cursor
+		_spotlightAcumTime += secs;
+
+		if (_spotlightAcumTime >= _spotlightThresholdTime)
+		{
+			Vector3 cameraPosition = _camera->getCameraPosition();
+
+			Logic::CEntity *mouseEntity = Physics::CServer::getSingletonPtr()->getEntityFromRaycast();
+			Vector3 mouseWorldPosition = (mouseEntity != nullptr) ? mouseEntity->getPosition() : cameraPosition;
+
+			_spotlightLight->setPosition(cameraPosition);
+			_spotlightLight->setDirection(mouseWorldPosition - cameraPosition);
+
+			_spotlightAcumTime = 0.0f;
+		}
 
 	} // tick
 
@@ -183,6 +221,8 @@ namespace Graphics
 
 	} // buildStaticGeometry
 
+	//--------------------------------------------------------
+
 	Ogre::BillboardSet* CScene::createBillboardSet(CEntity* entity, const std::string& name, const Ogre::Vector3& position) const
 	{
 		static unsigned int index = 0;
@@ -198,11 +238,15 @@ namespace Graphics
 		++index;
 
 		return bbSet;
-	}
+
+	} // createBillboardSet
+
+	//--------------------------------------------------------
 
 	Ogre::BillboardSet* CScene::createBillboardSet(CEntity* entity, const std::string& name) const
 	{
 		return createBillboardSet(entity, name, Vector3(0.0f, 100.0f, 0.0f));
-	}
+
+	} // createBillboardSet
 
 } // namespace Graphics

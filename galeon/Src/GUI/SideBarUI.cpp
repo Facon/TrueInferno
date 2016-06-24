@@ -137,23 +137,35 @@ namespace GUI
 		_uibuttonsWindow->setVisible(false);
 	}
 
-	Logic::CEntity* getEntityFromRaycastToGroup(int collisiongroup){
-
+	// TODO Usar función idéntica de Physics::Server
+	Logic::CEntity* getEntityFromRaycast()
+	{
 		Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
 
 		float width = (float)mCamera->getViewportWidth();
 		float height = (float)mCamera->getViewportHeight();
 
 		CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-		CEGUI::Vector2f mousePos =
-			context.getMouseCursor().getPosition();
+		CEGUI::Vector2f mousePos = context.getMouseCursor().getPosition();
 
+		Ogre::Ray mouseRay = mCamera->getCameraToViewportRay(mousePos.d_x / width, mousePos.d_y / height);
+		Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000);
 
-		Ogre::Ray mouseRay =
-			mCamera->getCameraToViewportRay(
-			mousePos.d_x / width,
-			mousePos.d_y / height);
+		return entity;
+	}
 
+	// TODO Usar función idéntica de Physics::Server
+	Logic::CEntity* getEntityFromRaycastToGroup(int collisiongroup)
+	{
+		Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
+
+		float width = (float)mCamera->getViewportWidth();
+		float height = (float)mCamera->getViewportHeight();
+
+		CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+		CEGUI::Vector2f mousePos = context.getMouseCursor().getPosition();
+
+		Ogre::Ray mouseRay = mCamera->getCameraToViewportRay(mousePos.d_x / width, mousePos.d_y / height);
 		Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000, collisiongroup);
 
 		return entity;

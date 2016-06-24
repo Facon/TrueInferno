@@ -19,12 +19,7 @@ de una escena.
 
 #include <string>
 #include <list>
-//#include "GUI/SideBarUI.h"
 
-namespace GUI{
-	class SideBarUI;
-}
-// Predeclaraci�n de clases para ahorrar tiempo de compilaci�n
 namespace Ogre 
 {
 	class Vector3;
@@ -153,7 +148,6 @@ namespace Graphics
 		*/
 		friend class CServer;
 		
-
 		/**
 		Constructor de la clase.
 		*/
@@ -201,13 +195,13 @@ namespace Graphics
 		*/
 		friend class CEntity;
 		friend class CCamera;
+
 		/**
 		Devuelve el gestor de la escena de Ogre
 
 		@return Puntero al gestor de la escena de Ogre.
 		*/
 		Ogre::SceneManager *getSceneMgr() { return _sceneMgr; }
-
 
 		/**
 		Clase amiga. Solo las entidades pueden acceder al gestor de la
@@ -252,6 +246,14 @@ namespace Graphics
 		se ven mejor los vol�menes de las entidades.
 		*/
 		Ogre::Light *_directionalLight;
+
+		/**
+		Luz focal que apunta desde la cámara al cursor.
+		*/
+		Ogre::Light *_spotlightLight;
+
+		float _spotlightAcumTime;
+		float _spotlightThresholdTime;
 
 		/**
 		Camara desde la que se ver� la escena. Puede haber c�maras m�s

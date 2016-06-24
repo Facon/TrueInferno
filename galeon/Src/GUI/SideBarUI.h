@@ -39,9 +39,6 @@ namespace GUI
 
 		bool _deactivateCursorAnimation = false;
 		
-
-
-
 		bool createFurnaceReleased(const CEGUI::EventArgs& e);
 		bool createRoadReleased(const CEGUI::EventArgs& e);
 		bool createMineReleased(const CEGUI::EventArgs& e);

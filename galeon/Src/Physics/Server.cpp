@@ -13,10 +13,18 @@ Contiene la implementaci�n del servidor de f�sica.
 #include <extensions/PxExtensionsAPI.h>
 #include <extensions/PxVisualDebuggerExt.h>
 
+#include <CEGUI/System.h>
+#include <CEGUI/CEGUI.h>
+
 #include "Server.h"
 #include "Conversions.h"
 #include "ErrorManager.h"
 #include "CollisionManager.h"
+
+#include "Graphics/Camera.h"
+#include "Graphics/Server.h"
+#include "Graphics/Scene.h"
+
 #include "Logic/Entity/Components/Physics.h"
 
 #include <assert.h>
@@ -688,3 +696,39 @@ Logic::CEntity* CServer::raycastClosest(const Ray& ray, float maxDist, int group
 }
 
 //--------------------------------------------------------
+
+Logic::CEntity* CServer::getEntityFromRaycast()
+{
+	Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
+
+	float width = (float)mCamera->getViewportWidth();
+	float height = (float)mCamera->getViewportHeight();
+
+	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+	CEGUI::Vector2f mousePos = context.getMouseCursor().getPosition();
+
+	Ogre::Ray mouseRay = mCamera->getCameraToViewportRay(mousePos.d_x / width, mousePos.d_y / height);
+	Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000);
+
+	return entity;
+
+} // getEntityFromRaycast
+
+//--------------------------------------------------------
+
+Logic::CEntity* CServer::getEntityFromRaycastToGroup(int collisiongroup)
+{
+	Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
+
+	float width = (float)mCamera->getViewportWidth();
+	float height = (float)mCamera->getViewportHeight();
+
+	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+	CEGUI::Vector2f mousePos = context.getMouseCursor().getPosition();
+
+	Ogre::Ray mouseRay = mCamera->getCameraToViewportRay(mousePos.d_x / width, mousePos.d_y / height);
+	Logic::CEntity* entity = Physics::CServer::getSingletonPtr()->raycastClosest(mouseRay, 1000, collisiongroup);
+
+	return entity;
+
+} // getEntityFromRaycastToGroup
