@@ -9,7 +9,7 @@ material Refinery
 		{
 			ambient  1 1 1 1
 			diffuse  1 1 1 1
-			specular 0.6 0.3 0.3 20
+			specular 0.8 0.4 0.2 10
  
 			texture_unit decal {
 				texture Refinery_Albedo.jpg

@@ -136,8 +136,8 @@ namespace Graphics
 		_directionalLight->setDiffuseColour(0.8f, 0.8f, 0.8f);
 		_directionalLight->setSpecularColour(0.8f, 0.8f, 0.8f);
 		_directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
-		_directionalLight->setPosition(200, 200, -50);
-		_directionalLight->setDirection(-200, -200, 50);
+		_directionalLight->setPosition(200, 200, 50);
+		_directionalLight->setDirection(-200, -200, -50);
 		_directionalLight->setCastShadows(true);
 
 		_spotlightLight = _sceneMgr->createLight("SpotlightLight");
