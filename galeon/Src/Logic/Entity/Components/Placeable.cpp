@@ -189,7 +189,7 @@ namespace Logic {
 		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...
 		if (_placeableType == Building)
 		{
-			if (getBuildingType() == Furnace) position.y = HEIGHT_ON_TILE + 0.6f;
+			if (getBuildingType() == Furnace) position.y = HEIGHT_ON_TILE - 0.3;
 			else if (getBuildingType() == Refinery) position.y = HEIGHT_ON_TILE + 0.15f;
 			else if (_placeableType == Building) position.y = HEIGHT_ON_TILE;
 		}
@@ -312,7 +312,7 @@ namespace Logic {
 		// modelo propio con el pivote "cercano" al centro, pero no justo en el centro...
 		if (_placeableType == Building)
 		{
-			if (getBuildingType() == Furnace) buildingHeightIncrement = HEIGHT_ON_TILE + 0.3f;
+			if (getBuildingType() == Furnace) buildingHeightIncrement = HEIGHT_ON_TILE - 0.3;
 			else if (getBuildingType() == Refinery) buildingHeightIncrement = HEIGHT_ON_TILE;
 			else if (_placeableType == Building) buildingHeightIncrement = HEIGHT_ON_TILE;
 		}
