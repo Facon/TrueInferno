@@ -61,7 +61,7 @@
 			<Property name="Area" value="{{0.20155,0},{0.450,0},{0.39345,0},{0.530,0}}" />
 		</Window>
 		
-		<Window type="OgreTray/StaticImage" name="CreateRefineryFrame" >
+		<Window type="OgreTray/StaticImage" name="CreateEvilworksFrame" >
 			<Property name="Area" value="{{0.4075,0},{0.445,0},{0.6225,0},{0.535,0}}" />
 			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
 			<Property name="HorzFormatting" value="Stretched" />
@@ -69,11 +69,11 @@
 		</Window>
 		
 		
-		<Window type="OgreTray/TrueInfernoButtonCreateRefinery2" name="CreateRefinery" >
+		<Window type="OgreTray/TrueInfernoButtonCreateEvilworks2" name="CreateEvilworks" >
 			<Property name="Area" value="{{0.41905,0},{0.450,0},{0.61095,0},{0.530,0}}" />
 		</Window>
 		
-		<Window type="OgreTray/StaticImage" name="CreateEvilworksFrame" >
+		<Window type="OgreTray/StaticImage" name="CreateRefineryFrame" >
 			<Property name="Area" value="{{0.625,0},{0.445,0},{0.84,0},{0.535,0}}" />
 			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
 			<Property name="HorzFormatting" value="Stretched" />
@@ -81,7 +81,7 @@
 		</Window>
 		
 		
-		<Window type="OgreTray/TrueInfernoButtonCreateEvilworks2" name="CreateEvilworks" >
+		<Window type="OgreTray/TrueInfernoButtonCreateRefinery2" name="CreateRefinery" >
 			<Property name="Area" value="{{0.63755,0},{0.450,0},{0.82845,0},{0.530,0}}" />
 		</Window>
 		

@@ -360,12 +360,13 @@ namespace Logic {
 			for (int x = 0; x < _floorX; ++x) {
 				for (int z = 0; z < _floorZ; ++z) {
 					Tile* tile = _tileManager->getTile(_floorOriginPosition + Vector3(x, 0, z));
+					if (tile != nullptr){
+						CEntity *visualPlaceable = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(),
+							"SoulPath", tile->getLogicPosition(), true, false);
 
-					CEntity *visualPlaceable = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(),
-						"SoulPath", tile->getLogicPosition(), true, false);
-
-					visualPlaceable->getComponent<Logic::CGraphics>()->setMaterialName(tilePlacementMaterial);
-					_floatingVisualEntities.push_back(visualPlaceable);
+						visualPlaceable->getComponent<Logic::CGraphics>()->setMaterialName(tilePlacementMaterial);
+						_floatingVisualEntities.push_back(visualPlaceable);
+					}
 				}
 			}
 		}

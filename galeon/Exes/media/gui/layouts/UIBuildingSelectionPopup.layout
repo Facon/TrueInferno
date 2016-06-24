@@ -41,8 +41,43 @@
 			<Property name="VertFormatting" value="Stretched" />
 		</Window>
 		
-		<Window type="OgreTray/StaticText" name="ResourcesText" >
-			<Property name="Area" value="{{0.30,0},{0.63,0},{0.7150,0},{0.81,0}}" />
+		<Window type="OgreTray/StaticText" name="WorkerText" >
+			<Property name="Area" value="{{0.32,0},{0.67,0},{0.50,0},{0.705,0}}" />
+			<Property name="Font" value="Jura-10" />
+			<Property name="HorzFormatting" value="WordWrapJustified" />			
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="OgreTray/StaticText" name="ResourcesText1" >
+			<Property name="Area" value="{{0.5150,0},{0.67,0},{0.70,0},{0.705,0}}" />
+			<Property name="Font" value="Jura-10" />
+			<Property name="HorzFormatting" value="WordWrapJustified" />			
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="OgreTray/StaticText" name="ResourcesText2" >
+			<Property name="Area" value="{{0.32,0},{0.705,0},{0.50,0},{0.735,0}}" />
+			<Property name="Font" value="Jura-10" />
+			<Property name="HorzFormatting" value="WordWrapJustified" />			
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="OgreTray/StaticText" name="ResourcesText3" >
+			<Property name="Area" value="{{0.5150,0},{0.705,0},{0.70,0},{0.735,0}}" />
+			<Property name="Font" value="Jura-10" />
+			<Property name="HorzFormatting" value="WordWrapJustified" />			
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="OgreTray/StaticText" name="ResourcesText4" >
+			<Property name="Area" value="{{0.32,0},{0.735,0},{0.50,0},{0.77,0}}" />
+			<Property name="Font" value="Jura-10" />
+			<Property name="HorzFormatting" value="WordWrapJustified" />			
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="OgreTray/StaticText" name="ResourcesText5" >
+			<Property name="Area" value="{{0.5150,0},{0.735,0},{0.70,0},{0.77,0}}" />
 			<Property name="Font" value="Jura-10" />
 			<Property name="HorzFormatting" value="WordWrapJustified" />			
 			<Property name="AlwaysOnTop" value="True" />

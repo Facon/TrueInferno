@@ -22,6 +22,7 @@
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Logic/Maps/Managers/WorkManager.h"
+#include "Logic/Entity/Components/ResourceBuilding.h"
 
 namespace GUI
 {
@@ -172,6 +173,44 @@ namespace GUI
 	void BuildingSelectionUI::loadAssets(){
 		_uipopupWindow->getChild("BuildingName")->setText(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getBuildingName());
 		_uipopupWindow->getChild("BuildingImage")->setProperty("Image", "TrueInfernoBuildings/" + _buildingEntity->getComponent<Logic::CBuildingSelection>()->getBuildingImage());
+
+		if (_buildingEntity->getComponent<Logic::CBuildingSelection>()->getBuildingName() != "HellQuarters"){
+			int assignedWorkers = _buildingEntity->getComponent<Logic::CWorkBuilding>()->getAssignedWorkers();
+			int activeWorkers = _buildingEntity->getComponent<Logic::CWorkBuilding>()->getActiveWorkers();
+			int maxWorkers = _buildingEntity->getComponent<Logic::CWorkBuilding>()->getMaxWorkers();
+			int minWorkers = _buildingEntity->getComponent<Logic::CWorkBuilding>()->getMinWorkers();
+			_uipopupWindow->getChild("WorkerText")->setText("Workers: "+std::to_string(assignedWorkers)+"("+std::to_string(activeWorkers)+")/"+std::to_string(maxWorkers)+"("+std::to_string(minWorkers)+")");
+
+			Logic::CResourceBuilding *resources = _buildingEntity->getComponent<Logic::CResourceBuilding>();
+
+			if (resources){
+				int i = 1;
+				if (resources->getMaxResources(Logic::ResourceType::COKE)){
+					_uipopupWindow->getChild("ResourcesText" + std::to_string(i))->setText("Coke: " + std::to_string(resources->getStoredResources(Logic::ResourceType::COKE))+"/"+std::to_string(resources->getMaxResources(Logic::ResourceType::COKE)));
+					++i;
+				}
+				if (resources->getMaxResources(Logic::ResourceType::GAS)){
+					_uipopupWindow->getChild("ResourcesText" + std::to_string(i))->setText("Gas: " + std::to_string(resources->getStoredResources(Logic::ResourceType::GAS)) + "/" + std::to_string(resources->getMaxResources(Logic::ResourceType::GAS)));
+					++i;
+				}
+				if (resources->getMaxResources(Logic::ResourceType::MINERAL)){
+					_uipopupWindow->getChild("ResourcesText" + std::to_string(i))->setText("Mineral: " + std::to_string(resources->getStoredResources(Logic::ResourceType::MINERAL)) + "/" + std::to_string(resources->getMaxResources(Logic::ResourceType::MINERAL)));
+					++i;
+				}
+				if (resources->getMaxResources(Logic::ResourceType::CRUDE)){
+					_uipopupWindow->getChild("ResourcesText" + std::to_string(i))->setText("Crude: " + std::to_string(resources->getStoredResources(Logic::ResourceType::CRUDE)) + "/" + std::to_string(resources->getMaxResources(Logic::ResourceType::CRUDE)));
+					++i;
+				}
+				if (resources->getMaxResources(Logic::ResourceType::PURE_EVIL)){
+					_uipopupWindow->getChild("ResourcesText" + std::to_string(i))->setText("Pure: " + std::to_string(resources->getStoredResources(Logic::ResourceType::PURE_EVIL)) + "/" + std::to_string(resources->getMaxResources(Logic::ResourceType::PURE_EVIL)));
+					++i;
+				}
+				if (resources->getMaxResources(Logic::ResourceType::REFINED)){
+					_uipopupWindow->getChild("ResourcesText" + std::to_string(i))->setText("Refined: " + std::to_string(resources->getStoredResources(Logic::ResourceType::REFINED)) + "/" + std::to_string(resources->getMaxResources(Logic::ResourceType::REFINED)));
+					++i;
+				}
+			}
+		}
 
 	}
 
