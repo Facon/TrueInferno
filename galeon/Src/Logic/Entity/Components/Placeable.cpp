@@ -191,6 +191,7 @@ namespace Logic {
 		{
 			if (getBuildingType() == HellQuarters) position.y = HEIGHT_ON_TILE - 0.3f;
 			else if (getBuildingType() == Evilator) position.y = HEIGHT_ON_TILE - 0.2f;
+			else if (getBuildingType() == Mine) position.y = HEIGHT_ON_TILE - 0.2f;
 			else if (getBuildingType() == Furnace) position.y = HEIGHT_ON_TILE - 0.3f;
 			else if (getBuildingType() == Refinery) position.y = HEIGHT_ON_TILE + 0.15f;
 			else if (_placeableType == Building) position.y = HEIGHT_ON_TILE;
