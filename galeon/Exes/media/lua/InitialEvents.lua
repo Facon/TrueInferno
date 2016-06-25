@@ -1,15 +1,19 @@
-local launchInitialEvents = false;
+local launchInitialEvents = true;
 
 if launchInitialEvents then
 	print("[LUA] Loading InitialEvents.lua...");
 
-	BuildingDestructionEvent.throw(Osiris, 10000)
+	-- BuildingDestructionEvent.throw(Osiris, 10000)
 
-	MajorSoulSpeedReductionEvent.duration = 7 * 1000
-	MajorSoulSpeedReductionEvent.throw(Hades, 20000)
+	-- MajorSoulSpeedReductionEvent.duration = 7 * 1000
+	-- MajorSoulSpeedReductionEvent.throw(Hades, 20000)
 
-	MajorSoulSpeedIncreaseEvent.duration = 5 * 1000
-	MajorSoulSpeedIncreaseEvent.throw(Hades, 30000)
+	-- MajorSoulSpeedIncreaseEvent.duration = 5 * 1000
+	-- MajorSoulSpeedIncreaseEvent.throw(Hades, 30000)
+	
+	MajorObstacleGrowthEvent.throw(Hades, 5000)
+	
+	MajorObstacleGrowthEvent.throw(Hades, 10000)
 	
 -- pool de eventos de events.lua:
 	-- BuildingDestructionEvent,

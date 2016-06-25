@@ -62,7 +62,11 @@ namespace Logic {
 		CTileManager::getSingletonPtr()->getDimensions(x, z);
 
 		// Obtenemos el número de obstáculos deseado
-		int numObstacles = _tileFactor * x * z;
+		int numObstacles = 1;
+		if (_isFactor)
+			numObstacles = _quantity * x * z;
+		else
+			numObstacles = _quantity;
 
 		// Solicitamos al BuildingManager que haga brotar obstáculos
 		CBuildingManager::getSingletonPtr()->growDestroyableObstaclesRandomly(CServer::getSingletonPtr()->getMap(), numObstacles);

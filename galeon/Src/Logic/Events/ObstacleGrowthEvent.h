@@ -54,22 +54,22 @@ namespace Logic
 		CObstacleGrowthEvent(
 			unsigned long time, const std::string& godName, const std::string& title, 
 			const std::string& description, const std::string& image, 
-			float tileFactor, bool absoluteTime = true) :
+			float quantity, bool isFactor, bool absoluteTime = true) :
 						
 			CEvent(INFO, time, absoluteTime, false, godName), _title(title), 
 			_description(description), _image(image), 
-			_tileFactor(tileFactor) {};
+			_quantity(quantity), _isFactor(isFactor) {};
 
 		/** Constructor estático. Permite invocar desde Lua pero mantener el ciclo de vida en C++ */
 		static CObstacleGrowthEvent* addCObstacleGrowthEvent(
 			unsigned long time, const std::string& godName, const std::string& title, 
 			const std::string& description, const std::string& image, 
-			float tileFactor, bool absoluteTime = true) {
+			float quantity, bool isFactor, bool absoluteTime = true) {
 
 			return new CObstacleGrowthEvent(
 				time, godName, title, 
 				description, image, 
-				tileFactor, absoluteTime);
+				quantity, isFactor, absoluteTime);
 		}
 
 		/**
@@ -103,9 +103,12 @@ namespace Logic
 		void execute();
 
 	private:
-		/** Factor (en escala unitaria) sobre la cantidad total de tiles que se van a convertir en obstáculos */
-		float _tileFactor;
+		/** Cantidad absoluta o factor (en escala unitaria) sobre la cantidad total de tiles que se van a convertir en obstáculos */
+		float _quantity;
 		
+		/** Flag a true si tileFactor*/
+		bool _isFactor;
+
 		/** Texto descriptivo del evento para mostrar en el panel */
 		std::string _description;
 

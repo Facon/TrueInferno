@@ -450,7 +450,7 @@ MinorObstacleGrowthEvent.throw = function(god,delay)
 	local description = "Some obstacles have appeared"
 	local image = "EventSoulsSpeedReduction"
 	CEventManager.getSingletonPtr():addTimeEvent(CObstacleGrowthEvent.addCObstacleGrowthEvent(
-		timeToLaunch, god.name, title, description, image, 0.04, true));
+		timeToLaunch, god.name, title, description, image, 2, false, true));
 end
 
 MajorObstacleGrowthEvent = Event:new("MajorObstacleGrowthEvent")
@@ -464,7 +464,7 @@ MajorObstacleGrowthEvent.throw = function(god,delay)
 	local description = "A LOT of obstacles have appeared"
 	local image = "EventSoulsSpeedReduction"
 	CEventManager.getSingletonPtr():addTimeEvent(CObstacleGrowthEvent.addCObstacleGrowthEvent(
-		timeToLaunch, god.name, title, description, image, 0.1, true));
+		timeToLaunch, god.name, title, description, image, 10, false, true));
 end
 
 events =

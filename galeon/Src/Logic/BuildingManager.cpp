@@ -446,7 +446,8 @@ namespace Logic {
 		Tile* tile = tileManager->getTile(position);
 
 		// Intentamos colocar obstáculo
-		return (createPlaceable(map, "Tree", position, false, false) != nullptr);
+		//return (createPlaceable(map, "Tree", position, false, false) != nullptr);
+		return (createPlaceable(map, "Ruinas", position, false, false) != nullptr);
 	}
 
 	//--------------------------------------------------------
@@ -489,11 +490,14 @@ namespace Logic {
 			}
 			
 			// Intentamos colocar más obstáculos en posiciones contiguas
+			/*
 			do {
 				pos.x += (-1 + rand() % 3);
 				pos.z += (-1 + rand() % 3);
 				--number;
 			} while (growDestroyableObstacle(map, pos) && number > 0);
+			*/
+			--number;
 		}
 	}
 	
