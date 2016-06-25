@@ -1,0 +1,8 @@
+<Imageset autoScaled="vertical" imagefile="TrueInfernoNewEvents.png" name="TrueInfernoNewEvents" nativeHorzRes="3688" nativeVertRes="1773" version="2">
+    <Image height="750" name="EventSpeedUp" width="1000" xPos="1000" yPos="948" />
+    <Image height="750" name="EventSpeedDown" width="1000" xPos="0" yPos="948" />
+    <Image height="511" name="EventObstacles" width="681" xPos="60" yPos="403" />
+    <Image height="268" name="EventDefeat" width="357" xPos="88" yPos="0" />
+    <Image height="545" name="EventBuildingDestruction" width="727" xPos="1154" yPos="403" />
+    <Image height="377" name="EventVictory" width="503" xPos="495" yPos="13" />
+</Imageset>
