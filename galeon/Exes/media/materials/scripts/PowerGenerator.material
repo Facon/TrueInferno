@@ -1,13 +1,37 @@
+import * from "CelShading.material"
+import * from "Outline.material"
+
 material PowerGenerator
 {
-	technique
+	technique Shaders
 	{
-		pass
+		pass CelSh : CelShadingDecal
 		{
 			ambient  1 1 1 1
-			diffuse  0.4 0.4 0.4 1
-			specular 1 1 1 30
-			emissive 0 0 0 1
+			diffuse  0.3 0.3 0.3 1
+			specular 0.4 0.2 0.0 10
+ 
+			texture_unit decal {
+				texture Metal_Albedo.jpg
+			}
+		}
+
+		pass Outlining : OutlineExperiment
+		{
+			set $edgeScale 0.05
+			set $sinkScale 2
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
+			}
 		}
 	}
 }
+

@@ -165,10 +165,10 @@ namespace Logic
 			return false;
 
 		// Oscurecemos o aclaramos el color dependiendo de si deshabilitan o habilitan
-		if (m._enabled)
-			_graphicsEntity->makeClearerColor();
-		else
-			_graphicsEntity->makeDarkerColor();
+		//if (m._enabled)
+		//	_graphicsEntity->makeClearerColor();
+		//else
+		//	_graphicsEntity->makeDarkerColor();
 		
 		return true;
 	}

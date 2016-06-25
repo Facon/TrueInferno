@@ -15,7 +15,8 @@
 	
 		<Window type="OgreTray/StaticText" name="BuildingName" >
 			<Property name="Area" value="{{0.3,0},{0.22,0},{0.7,0},{0.31,0}}" />
-			<Property name="Font" value="Jura-18" />
+			<Property name="Font" value="DeadSecretary-18" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 			<Property name="AlwaysOnTop" value="True" />
@@ -33,7 +34,8 @@
 		
 		<Window type="OgreTray/StaticText" name="HeavySoulText" >
 			<Property name="Area" value="{{0.310,0},{0.40,0},{0.446,0},{0.45,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
 			<Property name="Text" value="Heavy" />
@@ -41,8 +43,9 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="HeavySoulTotal" >
-			<Property name="Area" value="{{0.392,0},{0.40,0},{0.492,0},{0.45,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Area" value="{{0.410,0},{0.40,0},{0.510,0},{0.45,0}}" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="RightAligned" />
 			<Property name="Text" value="0" />
@@ -51,21 +54,22 @@
 		
 		<Window type="TaharezLook/Editbox" name="HeavySoulsBurn" >
 			<Property name="Area" value="{{0.530,0},{0.40,0},{0.585,0},{0.45,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="HeavySoulsWork" >
 			<Property name="Area" value="{{0.635,0},{0.40,0},{0.690,0},{0.45,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="WastedSoulText" >
 			<Property name="Area" value="{{0.310,0},{0.47,0},{0.446,0},{0.52,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
 			<Property name="Text" value="Wasted" />
@@ -73,8 +77,9 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="WastedSoulTotal" >
-			<Property name="Area" value="{{0.392,0},{0.47,0},{0.492,0},{0.52,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Area" value="{{0.410,0},{0.47,0},{0.510,0},{0.52,0}}" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="RightAligned" />
 			<Property name="Text" value="0" />
@@ -83,21 +88,22 @@
 		
 		<Window type="TaharezLook/Editbox" name="WastedSoulsBurn" >
 			<Property name="Area" value="{{0.530,0},{0.47,0},{0.585,0},{0.52,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="WastedSoulsWork" >
 			<Property name="Area" value="{{0.635,0},{0.47,0},{0.690,0},{0.52,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="LightSoulText" >
 			<Property name="Area" value="{{0.310,0},{0.54,0},{0.446,0},{0.59,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
 			<Property name="Text" value="Light" />
@@ -105,8 +111,9 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="LightSoulTotal" >
-			<Property name="Area" value="{{0.392,0},{0.54,0},{0.492,0},{0.59,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Area" value="{{0.410,0},{0.54,0},{0.510,0},{0.59,0}}" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="RightAligned" />
 			<Property name="Text" value="0" />
@@ -115,21 +122,22 @@
 		
 		<Window type="TaharezLook/Editbox" name="LightSoulsBurn" >
 			<Property name="Area" value="{{0.530,0},{0.54,0},{0.585,0},{0.59,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="LightSoulsWork" >
 			<Property name="Area" value="{{0.635,0},{0.54,0},{0.690,0},{0.59,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="UnknownSoulText" >
 			<Property name="Area" value="{{0.310,0},{0.61,0},{0.446,0},{0.66,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
 			<Property name="Text" value="Unknown" />
@@ -137,8 +145,9 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="UnknownSoulTotal" >
-			<Property name="Area" value="{{0.392,0},{0.61,0},{0.492,0},{0.66,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Area" value="{{0.410,0},{0.61,0},{0.510,0},{0.66,0}}" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="RightAligned" />
 			<Property name="Text" value="0" />
@@ -147,14 +156,14 @@
 		
 		<Window type="TaharezLook/Editbox" name="UnknownSoulsBurn" >
 			<Property name="Area" value="{{0.530,0},{0.61,0},{0.585,0},{0.66,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>
 		
 		<Window type="TaharezLook/Editbox" name="UnknownSoulsWork" >
 			<Property name="Area" value="{{0.635,0},{0.61,0},{0.690,0},{0.66,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="0" />
 		</Window>	

@@ -4,7 +4,7 @@
 //
 // If you change this, then you must enter 'CelShading.cg' and change the 'NUM_LIGHTS'
 // definition to match this variable.
-set $numLights 3
+set $numLights 1
 
 vertex_program CelShadingVP cg
 {
