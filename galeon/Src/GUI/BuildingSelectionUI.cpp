@@ -47,6 +47,18 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uipopupWindow);
 	}
 
+	void BuildingSelectionUI::changeButtonLayout(){
+		//GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uibuttonsWindow);
+		//CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
+		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getSidebarLayoutTemplate());
+		//_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getPopupLayoutTemplate());
+		//bindButtons();
+		//loadAssets();
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uibuttonsWindow);
+		//CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uipopupWindow);
+	}
+
 	void BuildingSelectionUI::changePopupLayout(std::string layout, std::string name, std::string image){
 		//GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
@@ -572,12 +584,12 @@ namespace GUI
 	void BuildingSelectionUI::setEventWindowVisibleCurrentEntity(bool visible)
 	{
 		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-		changeLayout();
+		changeButtonLayout();
 		uiManager->getSideBarUI()->_onUIScreen = true;
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
 		_uibuttonsWindow->setVisible(visible);
-		_uipopupWindow->setVisible(visible);
+		//_uipopupWindow->setVisible(visible);
 	}
 
 	void BuildingSelectionUI::closeWindow()
