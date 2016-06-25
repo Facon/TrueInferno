@@ -450,6 +450,26 @@ Map = {
 		hadesFavorReward = 5,
 	},
 	
+	Ruinas = {
+		prefab = true,
+		type = "Ruinas",
+		dimensions = {2, 2, 2},
+		mesh_dimensions = { 0.33, 0.16, 0.30 },
+		orientation = 0,
+		model = "Ruinas.mesh",
+		static = false,
+		visible = true,
+		physic_entity = "rigid",
+		physic_type = "static",
+		physic_shape = "box",
+		physic_dimensions = {1, 1, 1},
+		physic_mass = 1,
+		physic_group = 3,
+		placeableType = "Obstacle",
+		validTerrainType = "Empty",
+		material = "Ruinas",
+	},
+	
 	Tree = {
 		prefab = true,
 		type = "Tree",

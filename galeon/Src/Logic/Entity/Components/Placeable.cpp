@@ -203,6 +203,10 @@ namespace Logic {
 		{
 			position.y = 0.6f;
 		}
+		else if (_placeableType == Obstacle)
+		{
+			position.y = HEIGHT_ON_TILE - 0.4;
+		}
 
 		// Guardamos la posición a la que queremos que se haga el place
 		_targetPlacePosition = position;
@@ -328,6 +332,10 @@ namespace Logic {
 		else if (_placeableType == SoulPath)
 		{
 			buildingHeightIncrement = 0.3f;
+		}
+		else if (_placeableType == Obstacle)
+		{
+			buildingHeightIncrement = HEIGHT_ON_TILE - 0.4;
 		}
 
 		float centerHeight = (showFloating) ? HEIGHT_ON_TILE + buildingHeightIncrement : 0.6f;
