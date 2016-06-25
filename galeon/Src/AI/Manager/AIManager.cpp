@@ -34,7 +34,7 @@ namespace AI {
 
 	CAIManager::CAIManager() : 
 		_baseScorePerRound(0), _scoreMaxRelativeDeviation(0), 
-		_difficulty(0), _baseDifficulty(0), _minBaseDifficulty(0), _maxBaseDifficulty(0), _numRound(0)
+		_difficulty(0), _baseDifficulty(0), _minBaseDifficulty(0), _maxBaseDifficulty(0), _numRound(1)
 	{
 		_instance = this;
 
@@ -274,7 +274,7 @@ namespace AI {
 		// Asignamos nueva puntuación objetivo a los dioses
 
 		// Tomamos como base la puntuación actual del mejor dios + un incremento creciente por ronda
-		int base = getGodRanking().front()->getScore() + (2 * _baseScorePerRound);
+		int base = getGodRanking().front()->getScore() + (_numRound * _numRound * _baseScorePerRound);
 		assignGodTargetScores(base, (int)(base * _scoreMaxRelativeDeviation));
 
 		// Aumentamos la dificultad base
