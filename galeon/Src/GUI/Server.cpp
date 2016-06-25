@@ -99,6 +99,7 @@ namespace GUI {
 		CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("OgreTray.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoEvents.scheme");
+		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoNewEvents.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoIcons.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoUITextures.scheme");
 		CEGUI::SchemeManager::getSingleton().createFromFile("TrueInfernoBuildings.scheme");
