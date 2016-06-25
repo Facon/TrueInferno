@@ -9,7 +9,7 @@ material Mine
 		{
 			ambient  1 1 1 1
 			diffuse  1 1 1 1
-			specular 0.6 0.2 0.2 15
+			specular 1.0 0.1 0.1 5
  
 			texture_unit decal {
 				texture Mine_Albedo_BN.jpg
@@ -19,7 +19,7 @@ material Mine
 		pass Outlining : OutlineExperiment
 		{
 			set $edgeScale 0.02
-			set $sinkScale 10
+			set $sinkScale 5
 		}
 	}
 	

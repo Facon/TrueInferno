@@ -141,8 +141,8 @@ namespace Graphics
 		_directionalLight->setCastShadows(true);
 
 		_spotlightLight = _sceneMgr->createLight("SpotlightLight");
-		_spotlightLight->setDiffuseColour(1.0f, 0.2f, 0.2f);
-		_spotlightLight->setSpecularColour(1.0f, 0.2f, 0.2f);
+		_spotlightLight->setDiffuseColour(Ogre::ColourValue(1.0f, 0.1f, 0.1f, 0.0f));
+		_spotlightLight->setSpecularColour(Ogre::ColourValue(1.0f, 0.1f, 0.1f, 0.0f));
 		_spotlightLight->setType(Ogre::Light::LT_SPOTLIGHT);
 		_spotlightLight->setPosition(0, 0, 0);  // Posición y dirección temporales. Se van actualizando
 		_spotlightLight->setDirection(0, 0, 0); // junto con la posición de la cámara
