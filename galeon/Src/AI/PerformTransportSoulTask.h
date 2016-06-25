@@ -45,6 +45,48 @@ namespace AI{
 				// Icono por edificio de destino
 				result = addDestinationBuildingIcon();
 				assert(result && "Can't set building icon");
+
+				// Cambio de material
+				std::string materialName = "";
+				switch (_resourceType) {
+				case MINERAL: 
+					materialName = "SoulMineral"; 
+					break;
+
+				case GAS: 
+					materialName = "SoulGas"; 
+					break;
+
+				case CRUDE: 
+					materialName = "SoulCrude"; 
+					break;
+
+				case PURE_EVIL: 
+					materialName = "SoulPure"; 
+					break;
+
+				case REFINED: 
+					materialName = "SoulRefined"; 
+					break;
+
+				case COKE: 
+					materialName = "SoulCoke"; 
+					break;
+
+				default:
+					materialName = "";
+				}
+
+				if (!materialName.empty()) {
+					MaterialMessage m(materialName);
+					bool result = m.Dispatch(*executor);
+					if (!result){
+						assert(false && "Can't change material");
+					}
+				}
+				else {
+					assert(false && "No material defined for this resource type");
+				}
 			}
 
 			else{
