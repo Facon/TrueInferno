@@ -107,6 +107,7 @@ namespace Application {
 		CApplicationState::tick(msecs);
 
 		Logic::CServer::getSingletonPtr()->getMap()->tick(0);
+
 	} // tick
 
 	//--------------------------------------------------------

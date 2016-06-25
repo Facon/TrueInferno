@@ -16,6 +16,7 @@ basadas en Ogre. Esta clase maneja la ejecución de todo el juego.
 */
 #include "GaleonApplication.h"
 
+#include "LoadingState.h"
 #include "ExitState.h"
 #include "MenuState.h"
 #include "GameState.h"
@@ -43,11 +44,17 @@ namespace Application {
 		if (!C3DApplication::init())
 			return false;
 
-		// Creamos los estados. La aplicación se hace responsable de
-		// destruirlos.
+		// Creamos los estados. La aplicación se hace responsable
+		// de destruirlos.
+		if (!addState("loading", new CLoadingState(this)))
+			return false;
+
+		//if (!setState("loading"))
+		//	return false;
+
 		if(!addState("menu", new CMenuState(this)))
 			return false;
-		
+
 		if(!addState("game", new CGameState(this)))
 			return false;
 
