@@ -22,6 +22,8 @@ if launchInitialEvents then
 	-- Ronda 2
 	BuildingDestructionEvent.throw(Hades, (2 * 60 + 50) * 1000)
 	
+	BuildingDestructionEvent.throw(Hades, (3 * 60 + 5) * 1000)
+	
 	BuildingDestructionEvent.throw(Hades, (3 * 60 + 45) * 1000)
 	
 	MajorSoulsSpeedReductionEvent.duration = 15 * 1000
