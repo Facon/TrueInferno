@@ -193,7 +193,7 @@ namespace Logic {
 			else if (getBuildingType() == Evilator) position.y = HEIGHT_ON_TILE - 0.2f;
 			else if (getBuildingType() == Furnace) position.y = HEIGHT_ON_TILE - 0.3f;
 			else if (getBuildingType() == Refinery) position.y = HEIGHT_ON_TILE + 0.15f;
-			else if (getBuildingType() == EvilWorks) position.y = HEIGHT_ON_TILE - 0.5f;
+			else if (getBuildingType() == EvilWorks) position.y = HEIGHT_ON_TILE - 0.8f;
 			else if (getBuildingType() == Warehouse) position.y = HEIGHT_ON_TILE - 0.5f;
 			else if (_placeableType == Building) position.y = HEIGHT_ON_TILE;
 		}
@@ -318,7 +318,7 @@ namespace Logic {
 		{
 			if (getBuildingType() == Furnace) buildingHeightIncrement = HEIGHT_ON_TILE - 0.3;
 			else if (getBuildingType() == Refinery) buildingHeightIncrement = HEIGHT_ON_TILE;
-			else if (getBuildingType() == EvilWorks) buildingHeightIncrement = HEIGHT_ON_TILE - 0.5f;
+			else if (getBuildingType() == EvilWorks) buildingHeightIncrement = HEIGHT_ON_TILE - 0.8f;
 			else if (getBuildingType() == Warehouse) buildingHeightIncrement = HEIGHT_ON_TILE - 0.5f;
 			else if (_placeableType == Building) buildingHeightIncrement = HEIGHT_ON_TILE;
 		}
