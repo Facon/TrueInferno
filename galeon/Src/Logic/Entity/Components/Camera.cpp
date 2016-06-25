@@ -77,9 +77,9 @@ namespace Logic
 	{
 		// Updating camera position and direction...
 		Vector3 position = Vector3(_entity->getPosition());
-		position.x += 0.0f;
+		position.x += -8.0f;
 		position.y = _height;
-		position.z += 0.0f;
+		position.z += -8.0f;
 
 		// #perspectiva Para perspectiva isométrica: comentar el primero y activar el segundo
 		//_graphicsCamera->setCameraPosition(position + _distance * Vector3(0, 0, 1));

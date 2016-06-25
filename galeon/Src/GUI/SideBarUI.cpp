@@ -605,6 +605,7 @@ namespace GUI
 							else
 							{
 								Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(_placeableEntity);
+								Audio::CServer::getSingletonPtr()->playSfxSound("error");
 							}
 
 							_placeableEntity = nullptr;
