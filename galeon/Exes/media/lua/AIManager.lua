@@ -8,8 +8,8 @@
 -- Comentar para testear directamente en Lua
 loadFromCpp = 1
 
--- Flag para habilitar/deshabilitar fácilmente la IA
-aiEnabled = true
+-- Flag para habilitar/deshabilitar fácilmente los eventos de IA
+godEventsEnabled = false
 
 -- Flag para test
 aiTest = false
@@ -21,12 +21,14 @@ then
 	dofile("media/lua/gods.lua")
 	dofile("media/lua/events.lua")
 	dofile("media/lua/eviluators.lua")
+	dofile("media/lua/InitialEvents.lua")
 
 -- O carga desde la ubicación actual si se ejecuta directamente en Lua
 else
 	dofile("gods.lua")
 	dofile("events.lua")
 	dofile("eviluators.lua")
+	dofile("InitialEvents.lua")
 end
 
 -- Inicialización dependiente de si es C++ o Lua directo
@@ -130,7 +132,7 @@ function AIManager:tick(msecs)
 			print("Chosen event! " .. chosenGodEvent.event.name .. " - " .. chosenGodEvent.god.name)
 
 			-- Lanzamos el evento
-			if(aiEnabled)
+			if(godEventsEnabled)
 			then
 				chosenGodEvent.event.throw(chosenGodEvent.god, self.delay)
 			end
