@@ -167,7 +167,7 @@ namespace Logic {
 		if (!ruinas)
 			return false;
 
-		ruinas = createPlaceable(map, "Ruinas", Vector3(15, 0, 18), false, false);
+		ruinas = createPlaceable(map, "Ruinas", Vector3(13, 0, 29), false, false);
 		if (!ruinas)
 			return false;
 
