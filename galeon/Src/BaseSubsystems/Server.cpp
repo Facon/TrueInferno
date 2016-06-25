@@ -186,6 +186,7 @@ namespace BaseSubsystems
 		releaseScriptManager();
 		
 		releaseFMOD();
+
 	} // close
 
 	//--------------------------------------------------------
@@ -444,8 +445,11 @@ namespace BaseSubsystems
 	
 	void CServer::releaseFMOD()
 	{
-		Release();
-	}
+		Audio::CServer::getSingletonPtr()->Release();
+
+	} // releaseFMOD
+
+	//--------------------------------------------------------
 
 	Ogre::Timer* CServer::getAppTimer() 
 	{

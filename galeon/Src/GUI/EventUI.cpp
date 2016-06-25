@@ -45,8 +45,8 @@ namespace GUI
 		for (auto it = _events.begin(); it != _events.end(); ++it){
 			delete (it->second);
 			it->second = NULL;
-			_events.erase(it);
 		}
+
 		_events.clear();
 	}
 
