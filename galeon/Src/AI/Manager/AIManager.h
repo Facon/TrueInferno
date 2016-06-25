@@ -234,6 +234,9 @@ namespace AI
 		/** Incremento de la dificultad base por ronda */
 		float _baseDifficultyIncrement;
 
+		/** Ronda actual (empezando por 1) */
+		int _numRound;
+
 	}; // class AIManager
 
 } // namespace Logic
