@@ -9,7 +9,7 @@ material GasPlant
 		{
 			ambient  1 1 1 1
 			diffuse  1 1 1 1
-			specular 0.8 0.8 0 10
+			specular 0.8 0.8 0 5
  
 			texture_unit decal {
 				texture GasPlant_Albedo_BN.jpg
