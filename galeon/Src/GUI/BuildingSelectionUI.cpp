@@ -569,6 +569,17 @@ namespace GUI
 		_uipopupWindow->setVisible(visible);
 	}
 
+	void BuildingSelectionUI::setEventWindowVisibleCurrentEntity(bool visible)
+	{
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		changeLayout();
+		uiManager->getSideBarUI()->_onUIScreen = true;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
+		_uibuttonsWindow->setVisible(visible);
+		_uipopupWindow->setVisible(visible);
+	}
+
 	void BuildingSelectionUI::closeWindow()
 	{
 		_buildingEntity = nullptr;

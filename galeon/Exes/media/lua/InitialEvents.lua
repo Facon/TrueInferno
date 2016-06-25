@@ -15,7 +15,7 @@ if launchInitialEvents then
 	MajorSoulSpeedIncreaseEvent.duration = 10 * 1000
 	MajorSoulSpeedIncreaseEvent.throw(Hades, 45000)
 	
-	MinorObstacleGrowthEvent.throw(Hades, 65000)
+	MajorObstacleGrowthEvent.throw(Hades, 65000)
 	
 	BuildingDestructionEvent.throw(Hades, 90000)
 	

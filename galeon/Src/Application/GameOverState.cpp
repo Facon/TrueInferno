@@ -149,7 +149,7 @@ namespace Application {
 
 	bool CGameOverState::exitReleased(const CEGUI::EventArgs& e)
 	{
-		_app->exitRequest();
+		_app->setState("menu");
 		return true;
 
 	} // exitReleased
