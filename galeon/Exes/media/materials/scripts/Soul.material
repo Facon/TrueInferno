@@ -1,7 +1,7 @@
 import * from "CelShading.material"
 import * from "Outline.material"
 
-material Soul
+material SoulToWork
 {
 	technique Shaders
 	{
@@ -9,7 +9,7 @@ material Soul
 		{
 			ambient  1 1 1 1
 			diffuse  1 1 1 1
-			specular 1 0 0 20
+			specular 1 1 1 10
 		}
 
 		pass Outlining : OutlineExperiment
@@ -25,6 +25,314 @@ material Soul
 		pass Glow
 		{
 			diffuse 1 1 1 1
+
+			texture_unit
+			{
+				texture White.png
+			}
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
+			}
+		}
+	}
+}
+
+material SoulToBurn
+{
+	technique Shaders
+	{
+		pass CelSh : CelShading
+		{
+			ambient  1 1 1 1
+			diffuse  1 0.5 0 1
+			specular 1 0.5 0 10
+		}
+
+		pass Outlining : OutlineExperiment
+		{
+			set $edgeScale 0.025
+			set $sinkScale 2
+		}
+	}
+	
+	technique Glow
+	{
+		scheme glow
+		pass Glow
+		{
+			diffuse 1 0.5 0 1
+
+			texture_unit
+			{
+				texture White.png
+			}
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
+			}
+		}
+	}
+}
+
+material SoulMineral
+{
+	technique Shaders
+	{
+		pass CelSh : CelShading
+		{
+			ambient  1 1 1 1
+			diffuse  1 0 0 1
+			specular 1 0 0 10
+		}
+
+		pass Outlining : OutlineExperiment
+		{
+			set $edgeScale 0.025
+			set $sinkScale 2
+		}
+	}
+	
+	technique Glow
+	{
+		scheme glow
+		pass Glow
+		{
+			diffuse 1 0 0 1
+
+			texture_unit
+			{
+				texture White.png
+			}
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
+			}
+		}
+	}
+}
+
+material SoulGas
+{
+	technique Shaders
+	{
+		pass CelSh : CelShading
+		{
+			ambient  1 1 1 1
+			diffuse  1 1 0 1
+			specular 1 1 0 10
+		}
+
+		pass Outlining : OutlineExperiment
+		{
+			set $edgeScale 0.025
+			set $sinkScale 2
+		}
+	}
+	
+	technique Glow
+	{
+		scheme glow
+		pass Glow
+		{
+			diffuse 1 1 0 1
+
+			texture_unit
+			{
+				texture White.png
+			}
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
+			}
+		}
+	}
+}
+
+material SoulCrude
+{
+	technique Shaders
+	{
+		pass CelSh : CelShading
+		{
+			ambient  1 1 1 1
+			diffuse  0.8 0.8 0.8 1
+			specular 0.8 0.8 0.8 10
+		}
+
+		pass Outlining : OutlineExperiment
+		{
+			set $edgeScale 0.025
+			set $sinkScale 2
+		}
+	}
+	
+	technique Glow
+	{
+		scheme glow
+		pass Glow
+		{
+			diffuse 0.8 0.8 0.8 1
+
+			texture_unit
+			{
+				texture White.png
+			}
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
+			}
+		}
+	}
+}
+
+material SoulPure
+{
+	technique Shaders
+	{
+		pass CelSh : CelShading
+		{
+			ambient  1 1 1 1
+			diffuse  0.5 0.5 0.5 1
+			specular 0.5 0.5 0.5 10
+		}
+
+		pass Outlining : OutlineExperiment
+		{
+			set $edgeScale 0.025
+			set $sinkScale 2
+		}
+	}
+	
+	technique Glow
+	{
+		scheme glow
+		pass Glow
+		{
+			diffuse 0.5 0.5 0.5 1
+
+			texture_unit
+			{
+				texture White.png
+			}
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
+			}
+		}
+	}
+}
+
+material SoulRefined
+{
+	technique Shaders
+	{
+		pass CelSh : CelShading
+		{
+			ambient  1 1 1 1
+			diffuse  0.2 0.2 0.2 1
+			specular 0.2 0.2 0.2 10
+		}
+
+		pass Outlining : OutlineExperiment
+		{
+			set $edgeScale 0.025
+			set $sinkScale 2
+		}
+	}
+	
+	technique Glow
+	{
+		scheme glow
+		pass Glow
+		{
+			diffuse 0.2 0.2 0.2 1
+
+			texture_unit
+			{
+				texture White.png
+			}
+		}
+	}
+	
+	technique Fallback
+	{
+		pass Fallback
+		{
+			texture_unit
+			{
+				texture error.png
+			}
+		}
+	}
+}
+
+material SoulCoke
+{
+	technique Shaders
+	{
+		pass CelSh : CelShading
+		{
+			ambient  1 1 1 1
+			diffuse  0.4 0.1 0 1
+			specular 0.4 0.1 0 10
+		}
+
+		pass Outlining : OutlineExperiment
+		{
+			set $edgeScale 0.025
+			set $sinkScale 2
+		}
+	}
+	
+	technique Glow
+	{
+		scheme glow
+		pass Glow
+		{
+			diffuse 0.4 0.1 0 1
 
 			texture_unit
 			{

@@ -37,8 +37,8 @@ namespace AI {
 			Graphics::CEntity* graphics = entity->getComponent<CGraphics>()->getGraphicsEntity();
 
 			// Pasamos el nuevo color a la entidad gráfica del alma
-			_entity->getComponent<CGraphics>()->getGraphicsEntity()->setDiffuseColor(graphics->getDiffuseColor(), "Shaders", "CelSh");
-			_entity->getComponent<CGraphics>()->getGraphicsEntity()->setDiffuseColor(graphics->getDiffuseColor(), "Glow", "Glow");
+			//_entity->getComponent<CGraphics>()->getGraphicsEntity()->setDiffuseColor(graphics->getDiffuseColor(), "Shaders", "CelSh");
+			//_entity->getComponent<CGraphics>()->getGraphicsEntity()->setDiffuseColor(graphics->getDiffuseColor(), "Glow", "Glow");
 
 			return LAStatus::SUCCESS;
 		}

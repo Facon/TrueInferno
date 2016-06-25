@@ -5,6 +5,7 @@
 #include "Logic/Entity/Message.h"
 #include "Logic/Entity/IconType.h"
 #include "Logic/Entity/Components/SoulBurner.h"
+#include "Logic/Entity/Components/Graphics.h"
 
 namespace AI
 {
@@ -66,6 +67,9 @@ namespace AI
 				// Icono por edificio de destino
 				result = addDestinationBuildingIcon();
 				assert(result && "Can't set building icon");
+
+				// Material
+				executor->getComponent<Logic::CGraphics>()->setMaterialName("SoulToBurn");
 			}
 
 			return true;
