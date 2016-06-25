@@ -15,15 +15,17 @@
 	
 		<Window type="OgreTray/StaticText" name="BuildingName" >
 			<Property name="Area" value="{{0.3,0},{0.22,0},{0.7,0},{0.31,0}}" />
-			<Property name="Font" value="Jura-14" />
+			<Property name="Font" value="DeadSecretary-14" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="PowerSupplyText" >
-			<Property name="Area" value="{{0.250,0},{0.33,0},{0.446,0},{0.38,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Area" value="{{0.250,0},{0.33,0},{0.500,0},{0.38,0}}" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
 			<Property name="Text" value="Power Supply:" />
@@ -37,14 +39,15 @@
 		
 		<Window type="TaharezLook/Editbox" name="PowerSupplyPriority" >
 			<Property name="Area" value="{{0.665,0},{0.33,0},{0.720,0},{0.38,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="1" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="MapResourcesText" >
-			<Property name="Area" value="{{0.250,0},{0.40,0},{0.446,0},{0.45,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Area" value="{{0.250,0},{0.40,0},{0.500,0},{0.45,0}}" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
 			<Property name="Text" value="Map Resources:" />
@@ -63,14 +66,15 @@
 		
 		<Window type="TaharezLook/Editbox" name="MapResourcesPriority" >
 			<Property name="Area" value="{{0.665,0},{0.40,0},{0.720,0},{0.45,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="2" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="ProductionText" >
-			<Property name="Area" value="{{0.250,0},{0.47,0},{0.446,0},{0.52,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Area" value="{{0.250,0},{0.47,0},{0.500,0},{0.52,0}}" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
 			<Property name="Text" value="Production:" />
@@ -84,14 +88,15 @@
 		
 		<Window type="TaharezLook/Editbox" name="ProductionPriority" >
 			<Property name="Area" value="{{0.665,0},{0.47,0},{0.720,0},{0.52,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="3" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="EvilProcessingText" >
-			<Property name="Area" value="{{0.250,0},{0.54,0},{0.446,0},{0.59,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Area" value="{{0.250,0},{0.54,0},{0.500,0},{0.59,0}}" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
 			<Property name="Text" value="Evil Processing:" />
@@ -110,14 +115,15 @@
 		
 		<Window type="TaharezLook/Editbox" name="EvilProcessingPriority" >
 			<Property name="Area" value="{{0.665,0},{0.54,0},{0.720,0},{0.59,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="4" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="LogisticsText" >
-			<Property name="Area" value="{{0.250,0},{0.61,0},{0.446,0},{0.66,0}}" />
-			<Property name="Font" value="Jura-12" />
+			<Property name="Area" value="{{0.250,0},{0.61,0},{0.500,0},{0.66,0}}" />
+			<Property name="Font" value="videophreak-12" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="LeftAligned" />
 			<Property name="Text" value="Logistics:" />
@@ -136,7 +142,7 @@
 		
 		<Window type="TaharezLook/Editbox" name="LogisticsPriority" >
 			<Property name="Area" value="{{0.665,0},{0.61,0},{0.720,0},{0.66,0}}" />
-			<Property name="Font" value="Jura-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextFormatting" value="LeftAligned" />
 			<Property name="Text" value="5" />
 		</Window>

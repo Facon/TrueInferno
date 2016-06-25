@@ -10,11 +10,12 @@
 			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
 			
 			<Window type="OgreTray/StaticText" >
-				<Property name="Font" value="Jura-22-bold" />
+				<Property name="Font" value="DeadSecretary-22" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 				<Property name="VertFormatting" value="CentreAligned" />
 				<Property name="HorzFormatting" value="CentreAligned" />
 				<Property name="Area" value="{{0.2,0},{0.3,0},{0.8,0},{0.7,0}}" />
-				<Property name="Text" value="TrueInferno" />
+				<Property name="Text" value="True Inferno" />
 			</Window>
 			
 		</Window>

@@ -99,8 +99,8 @@ namespace GUI
 			{
 				_uiRankWindow->createChild("OgreTray/StaticText", "God" + std::to_string(i));
 				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("Area", "{{0.30,0},{" + std::to_string(verticalpos) + ",0},{1,0},{" + std::to_string(verticalpos + 0.05) + ",0}}");
-				//_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
-				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("Font", "Jura-10");
+				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("TextColours", "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF");
+				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("Font", "videophreak-10");
 				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("AlwaysOnTop", "True");
 				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("VertFormatting", "CentreAligned");
 				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("HorzFormatting", "LeftAligned");
@@ -112,7 +112,7 @@ namespace GUI
 		int i = 1;
 		for (auto it = ranking.begin(); it != ranking.end(); ++it)
 		{
-			_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("Text", std::to_string(i) + ". " + (*it)->getName() + " " + std::to_string((*it)->getScore()));
+			_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("Text", (*it)->getName() + " " + std::to_string((*it)->getScore()));
 			++i;
 		}
 	}

@@ -236,7 +236,7 @@ namespace GUI
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setInheritsAlpha(false);
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChildElement("Event" + std::to_string(i))->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&EventUI::showFullEventReleased, this));
-			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Font", "Jura-10");
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Font", "DeadSecretary-12");
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Text", it->second->getGUITitle());
 
 			verticalpos += 0.07;
@@ -285,7 +285,7 @@ namespace GUI
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChildElement("Event" + std::to_string(i))->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&EventUI::showFullEventReleased, this));
 
-			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Font", "Jura-10");
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Font", "DeadSecretary-12");
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Text", it->second->getGUITitle());
 
 			verticalpos += 0.07;
