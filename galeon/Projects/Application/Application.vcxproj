@@ -112,6 +112,7 @@
     <ClCompile Include="..\..\Src\Application\GaleonApplication.cpp" />
     <ClCompile Include="..\..\Src\Application\GameOverState.cpp" />
     <ClCompile Include="..\..\Src\Application\GameState.cpp" />
+    <ClCompile Include="..\..\Src\Application\LoadingState.cpp" />
     <ClCompile Include="..\..\Src\Application\MenuState.cpp" />
     <ClCompile Include="..\..\Src\Application\OgreClock.cpp" />
     <ClCompile Include="..\..\Src\Docs\docCompilando.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="..\..\Src\Application\GaleonApplication.h" />
     <ClInclude Include="..\..\Src\Application\GameOverState.h" />
     <ClInclude Include="..\..\Src\Application\GameState.h" />
+    <ClInclude Include="..\..\Src\Application\LoadingState.h" />
     <ClInclude Include="..\..\Src\Application\MenuState.h" />
     <ClInclude Include="..\..\Src\Application\OgreClock.h" />
   </ItemGroup>

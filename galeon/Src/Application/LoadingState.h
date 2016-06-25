@@ -1,21 +1,21 @@
 //---------------------------------------------------------------------------
-// MenuState.h
+// LoadingState.h
 //---------------------------------------------------------------------------
 
 /**
-@file MenuState.h
+@file LoadingState.h
 
-Contiene la declaración del estado de menú.
+Contiene la declaración del estado de carga.
 
 @see Application::CApplicationState
-@see Application::CMenuState
+@see Application::CLoadingState
 
-@author David Llansó
-@date Agosto, 2010
+@author Raúl Segura
+@date Junio, 2016
 */
 
-#ifndef __Application_MenuState_H
-#define __Application_MenuState_H
+#ifndef __Application_LoadingState_H
+#define __Application_LoadingState_H
 
 #include "ApplicationState.h"
 
@@ -34,35 +34,30 @@ namespace CEGUI
 namespace Application 
 {
 	/**
-	Como su nombre indica, esta clase es la clase del menú
-	principal del juego. Es muy sencilla y lo único que hace es cargar
-	un layout de CEGUI al inicio y activarlo y desactivarlo cuando
-	se activa o desactiva el estado (haciéndo visible/invisible también
-	el puntero del ratón). También asocia los eventos de los botones 
-	del menú a las funciones C++ que se deben invocar cuando los botones
-	son pulsados.
+	Estado de carga inicial del juego. Simplemente mostrará la imagen de carga
+	mientras se inicializa el juego.
 	<p>
 	Este estado es CEGUI dependiente, lo cual no es deseable, la aplicación
 	debería ser independiente de las tecnologías usadas.
 
 	@ingroup applicationGroup
 
-	@author David Llansó
-	@date Agosto, 2010
+	@author Raúl Segura
+	@date Junio, 2016
 	*/
-	class CMenuState : public CApplicationState 
+	class CLoadingState : public CApplicationState 
 	{
 	public:
 		/** 
 		Constructor de la clase 
 		*/
-		CMenuState(CBaseApplication *app) : CApplicationState(app), _menuWindow(nullptr)
+		CLoadingState(CBaseApplication *app) : CApplicationState(app), _loadingWindow(nullptr)
 		{}
 
 		/** 
 		Destructor 
 		*/
-		virtual ~CMenuState();
+		virtual ~CLoadingState();
 
 		/**
 		Función llamada cuando se crea el estado (se "engancha" en la
@@ -164,32 +159,12 @@ namespace Application
 	private:
 
 		/**
-		Ventana CEGUI que muestra el menú.
+		Ventana CEGUI que muestra la imagen de carga.
 		*/
-		CEGUI::Window* _menuWindow;
-		CEGUI::Window* _menuMainWindow;
-		CEGUI::Window* _menuCreditsWindow;
+		CEGUI::Window* _loadingWindow;
 
-		bool _onMenu = true;
-		
-		/**
-		Función que se quiere realizar cuando se pulse el botón start.
-		Simplemente cambia al estado de juego.
-		*/
-		bool startReleased(const CEGUI::EventArgs& e);
-
-		bool settingsReleased(const CEGUI::EventArgs& e);
-
-		bool creditsReleased(const CEGUI::EventArgs& e);
-
-		/**
-		Función que se quiere realizar cuando se pulse el botón exit.
-		Simplemente termina la aplicación.
-		*/
-		bool exitReleased(const CEGUI::EventArgs& e);
-
-	}; // CMenuState
+	}; // CLoadingState
 
 } // namespace Application
 
-#endif //  __Application_MenuState_H
+#endif //  __Application_LoadingState_H

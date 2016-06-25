@@ -665,7 +665,9 @@ namespace GUI
 				{
 					Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(entity);
 					continueClearTerrain();
-				}			
+				}
+				else
+					_firstAnimation = true;
 			}
 			else
 			{

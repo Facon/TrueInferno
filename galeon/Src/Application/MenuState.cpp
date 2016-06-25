@@ -36,10 +36,11 @@ namespace Application {
 		CApplicationState::init();
 
 		// Cargamos la ventana que muestra el menú
-		_menuWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Menu.layout");
-		
+		_menuWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UI.layout");
+		_menuMainWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Menu.layout");
+		_menuCreditsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Credits.layout");
 		// Asociamos los botones del menú con las funciones que se deben ejecutar.
-		_menuWindow->getChildElement("ButtonFrame/StartButton")->
+		_menuMainWindow->getChildElement("ButtonFrame/StartButton")->
 			subscribeEvent(CEGUI::PushButton::EventClicked, 
 				CEGUI::SubscriberSlot(&CMenuState::startReleased, this));
 
@@ -47,11 +48,11 @@ namespace Application {
 			//subscribeEvent(CEGUI::PushButton::EventClicked,
 				//CEGUI::SubscriberSlot(&CMenuState::settingsReleased, this));
 
-		_menuWindow->getChildElement("ButtonFrame/CreditsButton")->
+		_menuMainWindow->getChildElement("ButtonFrame/CreditsButton")->
 			subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&CMenuState::creditsReleased, this));
 		
-		_menuWindow->getChildElement("ButtonFrame/ExitButton")->
+		_menuMainWindow->getChildElement("ButtonFrame/ExitButton")->
 			subscribeEvent(CEGUI::PushButton::EventClicked, 
 				CEGUI::SubscriberSlot(&CMenuState::exitReleased, this));
 	
@@ -79,6 +80,7 @@ namespace Application {
 
 		// Activamos la ventana que nos muestra el menú y activamos el ratón.
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_menuWindow);
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_menuMainWindow);
 		_menuWindow->setVisible(true);
 		_menuWindow->activate();
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().show();
@@ -105,6 +107,7 @@ namespace Application {
 		CApplicationState::tick(msecs);
 
 		Logic::CServer::getSingletonPtr()->getMap()->tick(0);
+
 	} // tick
 
 	//--------------------------------------------------------
@@ -122,7 +125,12 @@ namespace Application {
 		switch(key.keyId)
 		{
 		case GUI::Key::ESCAPE:
+			if (_onMenu)
 			_app->exitRequest();
+			else{
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_menuCreditsWindow);
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_menuMainWindow);
+			}
 			break;
 
 		default:
@@ -177,8 +185,9 @@ namespace Application {
 
 	bool CMenuState::creditsReleased(const CEGUI::EventArgs& e)
 	{
-		std::cout << "Credits\n";
-
+		_onMenu = false;
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_menuMainWindow);
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_menuCreditsWindow);
 		return true;
 	}
 

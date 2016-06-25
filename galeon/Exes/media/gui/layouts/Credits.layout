@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="OgreTray/StaticImage" name="Credits" >
+        <Property name="Image" value="TrueInfernoUIBars/StartMenu" />
+		<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+
+		<Window type="OgreTray/StaticImage" >
+			<Property name="Area" value="{{0.35,0},{0.05,0},{0.65,0},{0.25,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			
+			<Window type="OgreTray/StaticText" >
+				<Property name="Font" value="DeadSecretary-22" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />
+				<Property name="Area" value="{{0.2,0},{0.3,0},{0.8,0},{0.7,0}}" />
+				<Property name="Text" value="True Inferno" />
+			</Window>
+			
+		</Window>
+		
+		<Window type="DefaultWindow" name="CreditsFrame" >
+			<Property name="Area" value="{{0.195,0},{0.30,0},{0.805,0},{0.9,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/EventFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />	
+
+			<Window type="OgreTray/StaticImage" name="DevelopersFrame" >
+				<Property name="Area" value="{{0.37,0},{0.0,0},{0.63,0},{0.150,0}}" />
+				<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+				<Property name="HorzFormatting" value="Stretched" />
+				<Property name="VertFormatting" value="Stretched" />		
+			</Window>
+			
+			<Window type="OgreTray/StaticText" name="Developers" >
+				<Property name="Area" value="{{0.37,0},{0.025,0},{0.63,0},{0.125,0}}" />
+				<Property name="Text" value="Developers" />	
+				<Property name="Font" value="DeadSecretary-18" />
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			</Window>
+			
+			<Window type="OgreTray/StaticText" name="Assier" >
+				<Property name="Area" value="{{0.2,0},{0.175,0},{0.8,0},{0.225,0}}" />
+				<Property name="Text" value="Asier González Blanco" />	
+				<Property name="Font" value="DeadSecretary-14" />
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			</Window>
+			
+			<Window type="OgreTray/StaticText" name="Ruyman" >
+				<Property name="Area" value="{{0.2,0},{0.235,0},{0.8,0},{0.285,0}}" />
+				<Property name="Text" value="Ruyman Molina Perez" />	
+				<Property name="Font" value="DeadSecretary-14" />
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			</Window>
+			
+			<Window type="OgreTray/StaticText" name="Raul" >
+				<Property name="Area" value="{{0.2,0},{0.295,0},{0.8,0},{0.345,0}}" />
+				<Property name="Text" value="Raul Segura Galeote" />	
+				<Property name="Font" value="DeadSecretary-14" />
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			</Window>
+			
+			<Window type="OgreTray/StaticText" name="Bardo" >
+				<Property name="Area" value="{{0.2,0},{0.355,0},{0.8,0},{0.405,0}}" />
+				<Property name="Text" value="Alvaro Valera Vazquez" />	
+				<Property name="Font" value="DeadSecretary-14" />
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			</Window>
+			
+			<Window type="OgreTray/StaticImage" name="DesignersFrame" >
+				<Property name="Area" value="{{0.37,0},{0.455,0},{0.63,0},{0.605,0}}" />
+				<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+				<Property name="HorzFormatting" value="Stretched" />
+				<Property name="VertFormatting" value="Stretched" />		
+			</Window>
+			
+			<Window type="OgreTray/StaticText" name="Designers" >
+				<Property name="Area" value="{{0.22,0},{0.480,0},{0.78,0},{0.580,0}}" />
+				<Property name="Text" value="Designers" />	
+				<Property name="Font" value="DeadSecretary-18" />
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			</Window>
+			
+			<Window type="OgreTray/StaticText" name="Bea" >
+				<Property name="Area" value="{{0.2,0},{0.630,0},{0.8,0},{0.680,0}}" />
+				<Property name="Text" value="Beatriz Diaz Martin" />	
+				<Property name="Font" value="DeadSecretary-14" />
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			</Window>
+			
+			<Window type="OgreTray/StaticText" name="Clemente" >
+				<Property name="Area" value="{{0.2,0},{0.690,0},{0.8,0},{0.740,0}}" />
+				<Property name="Text" value="Clemente Lopez Pizarro" />	
+				<Property name="Font" value="DeadSecretary-14" />
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			</Window>
+			
+			<Window type="OgreTray/StaticText" name="Jose" >
+				<Property name="Area" value="{{0.2,0},{0.750,0},{0.8,0},{0.800,0}}" />
+				<Property name="Text" value="Jose Antonio Villaroya Garcia" />	
+				<Property name="Font" value="DeadSecretary-14" />
+				<Property name="VertFormatting" value="CentreAligned" />
+				<Property name="HorzFormatting" value="CentreAligned" />
+				<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			</Window>
+
+		</Window>
+    </Window>
+</GUILayout>
