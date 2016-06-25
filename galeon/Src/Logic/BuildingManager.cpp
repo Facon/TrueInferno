@@ -163,23 +163,17 @@ namespace Logic {
 		*/
 
 		// Obstáculos iniciales
-		
-		CEntity* tree = createPlaceable(map, "Tree", Vector3(1, 1, 14), false, false);
-		if (!tree)
+		CEntity* ruinas = createPlaceable(map, "Ruinas", Vector3(3, 0, 8), false, false);
+		if (!ruinas)
 			return false;
 
-		tree = createPlaceable(map, "Tree", Vector3(2, 1, 14), false, false);
-		if (!tree)
+		ruinas = createPlaceable(map, "Ruinas", Vector3(15, 0, 18), false, false);
+		if (!ruinas)
 			return false;
 
-		tree = createPlaceable(map, "Tree", Vector3(1, 1, 13), false, false);
-		if (!tree)
+		ruinas = createPlaceable(map, "Ruinas", Vector3(35, 0, 40), false, false);
+		if (!ruinas)
 			return false;
-
-		tree = createPlaceable(map, "Tree", Vector3(2, 1, 13), false, false);
-		if (!tree)
-			return false;
-		
 
 		return true;
 	}
