@@ -5,4 +5,5 @@
     <Image height="268" name="EventDefeat" width="357" xPos="88" yPos="0" />
     <Image height="545" name="EventBuildingDestruction" width="727" xPos="1154" yPos="403" />
     <Image height="377" name="EventVictory" width="503" xPos="495" yPos="13" />
+	<Image height="124" name="EventPortrait" width="93" xPos="589" yPos="13" />
 </Imageset>

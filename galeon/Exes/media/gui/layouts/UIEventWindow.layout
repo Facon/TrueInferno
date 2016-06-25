@@ -45,7 +45,7 @@
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="VertFormatting" value="Stretched" />
 			<Property name="Area" value="{{0.225,0},{0.335,0},{0.3965,0},{0.60,0}}" />
-			<Property name="Image" value="TrueInfernoEvents/EventDefeat" />
+			<Property name="Image" value="TrueInfernoNewEvents/EventPortrait" />
 		</Window>
 		
 		<Window type="OgreTray/StaticText" name="EventTextResume" >

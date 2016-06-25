@@ -300,7 +300,7 @@ namespace GUI
 
 	void EventUI::setEventImage(std::string eventImage)
 	{
-		_uiEventWindow->getChild("EventImage")->setProperty("Image","TrueInfernoEvents/" + eventImage);
+		_uiEventWindow->getChild("EventImage")->setProperty("Image","TrueInfernoNewEvents/" + eventImage);
 	}
 	
 	void EventUI::setEventText(std::string eventText)

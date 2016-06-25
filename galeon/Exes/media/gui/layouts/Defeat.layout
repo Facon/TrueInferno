@@ -27,7 +27,7 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="EventImage" >
-			<Property name="Image" value="TrueInfernoEvents/EventDefeat" />
+			<Property name="Image" value="TrueInfernoNewEvents/EventDefeat" />
 			<Property name="VertFormatting" value="Stretched" />
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="Area" value="{{0.55,0},{0.27,0},{0.88,0},{0.72,0}}" />
