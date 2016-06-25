@@ -189,6 +189,24 @@ namespace GUI
 		unsigned int seconds = static_cast<unsigned int>(((total_seconds / 60.0f) - minutes) * 60.0f);
 		_uibuttonsWindow->getChild("TimeLeft")->setText(std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
 
+		_redrawUICountLimit -= msecs;
+		if (_redrawUICountLimit <= 0){
+			_redrawUICountLimit = _redrawUICountResetValue;
+
+			if (_sidebarVisible){
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uibuttonsWindow);
+				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uibuttonsWindow);
+			}
+
+			else{
+				GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+				uiManager->getBuildingSelectionUI()->setEventWindowVisibleCurrentEntity(true);
+				_uibuttonsWindow->setVisible(false);
+				_sidebarVisible = false;
+				_redrawUICountLimit = _redrawUICountResetValue;
+			}
+		}
+
 		if (!_deactivateCursorAnimation){
 
 			if (_dropBuilding){
@@ -678,6 +696,8 @@ namespace GUI
 					GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
 					uiManager->getBuildingSelectionUI()->setEventWindowVisible(true, entity);
 					_uibuttonsWindow->setVisible(false);
+					_sidebarVisible = false;
+					_redrawUICountLimit = _redrawUICountResetValue;
 				}
 				else
 				{
@@ -705,7 +725,7 @@ namespace GUI
 			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle1");
 		}
 		_uibuttonsWindow->setVisible(visible);
-
+		_sidebarVisible = true;
 	}
 
 }
