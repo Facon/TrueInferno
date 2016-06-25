@@ -118,16 +118,20 @@
 			<Property name="Area" value="{{0.63755,0},{0.535,0},{0.82845,0},{0.615,0}}" />
 		</Window>
 
-		
 		<Window type="OgreTray/StaticImage" name="TimeBorderLine">
-			<Property name="Area" value="{{0.30,0},{0.645,0},{0.72,0},{0.725,0}}" />
+			<Property name="Area" value="{{0.25,0},{0.645,0},{0.77,0},{0.725,0}}" />
 			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="VertFormatting" value="Stretched" />	
 		</Window>
 		
+		<Window type="OgreTray/StaticImage" name="TimeIcon">
+			<Property name="Area" value="{{0.345,0},{0.665,0},{0.465,0},{0.705,0}}" />
+			<Property name="Image" value="TrueInfernoNewIcons/Time" />
+		</Window>
+		
 		<Window type="OgreTray/StaticText" name="TimeLeft" >
-			<Property name="Area" value="{{0.30,0},{0.645,0},{0.72,0},{0.725,0}}" />
+			<Property name="Area" value="{{0.35,0},{0.645,0},{0.77,0},{0.725,0}}" />
 			<Property name="Font" value="videophreak-10" />
 			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="Text" value="0" />
@@ -135,6 +139,7 @@
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 		</Window>
+		
 	</Window>
 </GUILayout>
 

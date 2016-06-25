@@ -6,7 +6,7 @@
 		<Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
 
 		<Window type="OgreTray/StaticImage" >
-			<Property name="Area" value="{{0.35,0},{0.005,0},{0.65,0},{0.205,0}}" />
+			<Property name="Area" value="{{0.35,0},{0.1,0},{0.65,0},{0.3,0}}" />
 			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
 			
 			<Window type="OgreTray/StaticText" >
@@ -21,7 +21,7 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="ButtonFrame" >
-			<Property name="Area" value="{{0.395,0},{0.30,0},{0.605,0},{0.80,0}}" />
+			<Property name="Area" value="{{0.395,0},{0.4,0},{0.605,0},{0.9,0}}" />
 			<Property name="Image" value="TrueInfernoUIBars/EventFrame" />
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="VertFormatting" value="Stretched" />	

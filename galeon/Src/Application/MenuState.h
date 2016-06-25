@@ -167,6 +167,10 @@ namespace Application
 		Ventana CEGUI que muestra el menú.
 		*/
 		CEGUI::Window* _menuWindow;
+		CEGUI::Window* _menuMainWindow;
+		CEGUI::Window* _menuCreditsWindow;
+
+		bool _onMenu = true;
 		
 		/**
 		Función que se quiere realizar cuando se pulse el botón start.
