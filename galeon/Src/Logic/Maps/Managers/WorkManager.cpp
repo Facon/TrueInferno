@@ -2,6 +2,7 @@
 // WorkManager.cpp
 //---------------------------------------------------------------------------
 
+
 /**
 @file WorkManager.cpp
 
@@ -13,6 +14,7 @@ Contiene la implementación del gestor de trabajo.
 @date Marzo, 2016
 */
 
+
 #include "WorkManager.h"
 #include "Logic/Entity/Components/Placeable.h"
 #include "Logic/Entity/Components/SoulBurner.h"
@@ -23,6 +25,7 @@ Contiene la implementación del gestor de trabajo.
 #include <cassert>
 #include <limits>
 #include <algorithm>
+
 
 namespace Logic {
 
