@@ -40,29 +40,28 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uibuttonsWindow);
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getSidebarLayoutTemplate());
+		_uibuttonsWindow->setRiseOnClickEnabled(false);
 		_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getPopupLayoutTemplate());
+		_uipopupWindow->setRiseOnClickEnabled(false);
 		bindButtons();
 		loadAssets();
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uibuttonsWindow);
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uipopupWindow);
 	}
 
-	void BuildingSelectionUI::changeButtonLayout(){
-		//GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
+	void BuildingSelectionUI::changeButtonLayout()
+	{
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uibuttonsWindow);
-		//CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getSidebarLayoutTemplate());
-		//_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(_buildingEntity->getComponent<Logic::CBuildingSelection>()->getPopupLayoutTemplate());
-		//bindButtons();
-		//loadAssets();
+		_uibuttonsWindow->setRiseOnClickEnabled(false);
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uibuttonsWindow);
-		//CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uipopupWindow);
 	}
 
-	void BuildingSelectionUI::changePopupLayout(std::string layout, std::string name, std::string image){
-		//GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
+	void BuildingSelectionUI::changePopupLayout(std::string layout, std::string name, std::string image)
+	{
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
 		_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(layout);
+		_uibuttonsWindow->setRiseOnClickEnabled(false);
 		bindPopupButtons(layout);
 		loadAssetsPopup(name, image);
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uipopupWindow);
@@ -289,7 +288,9 @@ namespace GUI
 	{
 		
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIBuildingSelectionButtonBar.layout");
+		_uibuttonsWindow->setRiseOnClickEnabled(false);
 		_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIBuildingSelectionPopup.layout");
+		_uipopupWindow->setRiseOnClickEnabled(false);
 
 		_uibuttonsWindow->getChildElement("UpgradeBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::upgradeBuildingReleased, this));
@@ -301,22 +302,18 @@ namespace GUI
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::disableBuildingReleased, this));
 
 		_uibuttonsWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
-
-		//_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			//CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
-
-		
+			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));		
 	}
 
 	void BuildingSelectionUI::release()
 	{
 		// Remove all events to avoid memory leaks
 		_uibuttonsWindow->getChildElement("UpgradeBuilding")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("DestroyBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("DisableBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CloseWindow")->removeAllEvents();
-		//_uipopupWindow->getChildElement("CloseWindow")->removeAllEvents();
+
+		//Falla al liberar
+		//_uibuttonsWindow->getChildElement("DestroyBuilding")->removeAllEvents();
 	}
 
 	void BuildingSelectionUI::activate()
@@ -579,17 +576,6 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
 		_uibuttonsWindow->setVisible(visible);
 		_uipopupWindow->setVisible(visible);
-	}
-
-	void BuildingSelectionUI::setEventWindowVisibleCurrentEntity(bool visible)
-	{
-		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-		changeButtonLayout();
-		uiManager->getSideBarUI()->_onUIScreen = true;
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
-		_uibuttonsWindow->setVisible(visible);
-		//_uipopupWindow->setVisible(visible);
 	}
 
 	void BuildingSelectionUI::closeWindow()

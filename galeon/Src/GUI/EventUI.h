@@ -21,6 +21,9 @@ namespace GUI
 		bool firstEventReleased = true;
 		bool showingEventList = false;
 
+		int _redrawUICountResetValue = 1500;
+		int _redrawUICountLimit = _redrawUICountResetValue;
+
 		CEGUI::Window* _uiEventWindow;
 		CEGUI::Window* _uiEventNotification;
 		bool EventUI::AcceptEventReleased(const CEGUI::EventArgs& e);

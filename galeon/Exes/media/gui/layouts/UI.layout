@@ -8,7 +8,7 @@
 		<Window type="OgreTray/StaticText" name="fps" >
 			<Property name="Area" value="{{0.95,0},{0.96,0},{1,0},{1,0}}" />
 			<Property name="Font" value="Jura-10" />
-			<Property name="TextColours" value="tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="VertFormatting" value="CentreAligned" />
 			<Property name="HorzFormatting" value="CentreAligned" />
 			<Property name="AlwaysOnTop" value="True" />

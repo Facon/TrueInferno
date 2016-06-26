@@ -155,7 +155,7 @@
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonText2" name="Accept" >
-			<Property name="Area" value="{{0.457,0},{0.6972,0},{0.543,0},{0.7978,0}}" />
+			<Property name="Area" value="{{0.448,0},{0.68,0},{0.552,0},{0.81,0}}" />
 			<Property name="Text" value="OK" />				
 		</Window>
 		

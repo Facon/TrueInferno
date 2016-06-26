@@ -38,8 +38,8 @@ namespace GUI
 
 	void EventUI::release()
 	{
-		// Remove all events to avoid memory leaks
-		_uiEventWindow->getChildElement("AcceptEvent")->removeAllEvents();
+		// Falla al liberar
+		// _uiEventWindow->getChildElement("AcceptEvent")->removeAllEvents();
 
 		// Liberamos los CEvent
 		for (auto it = _events.begin(); it != _events.end(); ++it){
@@ -64,7 +64,7 @@ namespace GUI
 
 	void EventUI::deactivate()
 	{
-		// Desactivamos la ventana de UiBars.
+		// Desactivamos la ventana de UiBars
 		_uiEventWindow->deactivate();
 		_uiEventWindow->setVisible(false);
 		_uiEventNotification->deactivate();
@@ -79,6 +79,18 @@ namespace GUI
 		}
 		if (_events.size()==0)
 			setEventNotificationVisible(false);
+
+		_redrawUICountLimit -= msecs;
+		if (_redrawUICountLimit <= 0)
+		{
+			_redrawUICountLimit = _redrawUICountResetValue;
+
+			//for (unsigned int i = 0; i < _uiEventWindow->getChildCount(); ++i)
+			//	_uiEventWindow->getChildAtIdx(i)->moveToFront();
+
+			//for (unsigned int i = 0; i < _uiEventNotification->getChildCount(); ++i)
+			//	_uiEventNotification->getChildAtIdx(i)->moveToFront();
+		}
 	}
 
 	bool EventUI::AcceptEventReleased(const CEGUI::EventArgs& e)
