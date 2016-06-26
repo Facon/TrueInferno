@@ -8,9 +8,6 @@
 -- Comentar para testear directamente en Lua
 loadFromCpp = 1
 
--- Flag para habilitar/deshabilitar fácilmente los eventos de IA
-godEventsEnabled = true
-
 -- Flag para test
 aiTest = false
 
@@ -27,7 +24,7 @@ then
 	
 	if (gameRuntimeContext == CAIManager.RUNTIME_DEV)
 	then
-		initialEvents = dofile("media/lua/InitialEvents_dev.lua")
+		dofile("media/lua/InitialEvents_dev.lua")
 	elseif (gameRuntimeContext == CAIManager.RUNTIME_SCRIPTED_DEMO)
 	then
 		dofile("media/lua/InitialEvents_script.lua")

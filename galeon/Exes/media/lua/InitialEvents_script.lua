@@ -1,4 +1,8 @@
-local launchInitialEvents = true;
+-- Flag para habilitar/deshabilitar los eventos scriptados
+launchInitialEvents = true
+
+-- Flag para habilitar/deshabilitar fácilmente los eventos de IA
+godEventsEnabled = false
 
 if launchInitialEvents then
 	print("[LUA] Loading InitialEvents_script.lua...");
