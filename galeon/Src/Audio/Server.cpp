@@ -44,7 +44,8 @@ namespace Audio
 
 	void CServer::appendSounds()
 	{
-		_sounds.insert(std::make_pair("audio_hito_3", createStream(std::string("audio_hito_3_suave.ogg"), FMOD_LOOP_NORMAL)));
+		_sounds.insert(std::make_pair("audio_game_1", createStream(std::string("audio_game_1.ogg"), FMOD_LOOP_NORMAL)));
+		_sounds.insert(std::make_pair("audio_menu", createStream(std::string("audio_menu.wav"), FMOD_LOOP_NORMAL)));
 		_sounds.insert(std::make_pair("building_complete", createSound(std::string("building_complete.ogg"), FMOD_3D)));
 		_sounds.insert(std::make_pair("error", createSound(std::string("error.wav"), FMOD_DEFAULT)));
 		_sounds.insert(std::make_pair("event", createSound(std::string("event.wav"), FMOD_DEFAULT)));
@@ -88,17 +89,17 @@ namespace Audio
 		_channels[channel]->setVolume(volume);
 	}
 
-
 	void CServer::playBgSound(const std::string& sound)
 	{
-		const float volume = 0.2f;
+		const float volume = 0.4f;
 
+		_channels[Channel::BACKGROUND]->stop();
 		playSound(sound, Channel::BACKGROUND, volume);
 	}
 
 	void CServer::playSfxSound(const std::string& sound)
 	{
-		const float volume = 0.2f;
+		const float volume = 0.5f;
 
 		playSound(sound, Channel::SFX, volume);
 	}

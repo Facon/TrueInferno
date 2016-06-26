@@ -63,18 +63,19 @@ namespace Logic {
 		}
 
 		// Liberamos la  estructura de datos para los edificios
+		// TODO Falla al liberar
+		/*
 		for (auto it = _buildings.begin(); it != _buildings.end(); ++it)
 		{
-			for (auto it2 = (*it).second->cbegin(); it2 != (*it).second->cend(); ++it2)
-			{
+			for (auto it2 = (*it).second->begin(); it2 != (*it).second->end(); ++it2)
 				delete (*it2);
-			}
 
 			it->second->clear();
 
 			delete it->second;
 			it->second = nullptr;
 		}
+		*/
 
 		_buildings.clear();
 

@@ -16,6 +16,8 @@ Contiene la implementación del estado de menú.
 
 #include "MenuState.h"
 
+#include "Audio/Server.h"
+
 #include "Logic/Server.h"
 #include "Logic/Maps/Map.h"
 #include "GUI/Server.h"
@@ -85,6 +87,9 @@ namespace Application {
 		_menuWindow->setVisible(true);
 		_menuWindow->activate();
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().show();
+
+		// Reproducimos la música del menú
+		Audio::CServer::getSingletonPtr()->playBgSound("audio_menu");
 
 	} // activate
 
@@ -159,22 +164,24 @@ namespace Application {
 
 	//--------------------------------------------------------
 
-
 	bool CMenuState::mouseReleased(const GUI::CMouseState &mouseState)
 	{
 		return false;
 
 	} // mouseReleased
-			
+	
 	//--------------------------------------------------------
-		
+	
 	bool CMenuState::startReleased(const CEGUI::EventArgs& e)
 	{
+		// Reproducimos la música inicial del juego
+		Audio::CServer::getSingletonPtr()->playBgSound("audio_game_1");
+
 		_app->setState("game");
 		return true;
 
 	} // startReleased
-			
+	
 	//--------------------------------------------------------
 
 	bool CMenuState::settingsReleased(const CEGUI::EventArgs& e)
