@@ -38,6 +38,8 @@ la gestión de la lógica del juego.
 // HACK. Debería leerse de algún fichero de configuración
 #define MANAGERS_FILE_PATH "./media/maps/"
 
+#define MAX_LINE 500
+
 namespace Logic {
 
 	CServer* CServer::_instance = 0;
@@ -97,6 +99,9 @@ namespace Logic {
 		// Aleatorizamos la semilla de los números pseudoaleatorios
 		std::srand((int)std::time(0));
 
+		// Determinamos el entorno de ejecución del juego
+		initGameRuntimeContext();
+
 		// Inicializamos el parser de mapas.
 		if (!Map::CMapParser::Init())
 			return false;
@@ -152,6 +157,42 @@ namespace Logic {
 		return true;
 
 	} // open
+
+	void CServer::initGameRuntimeContext() {
+		// Por defecto contexto de juego
+		_gameRuntimeContext = GameRuntimeContext::GAME;
+
+		std::ifstream in("GameRuntimeContext.cfg");
+		if (in.good()) {
+			char line[MAX_LINE];
+
+			do {
+				in.getline(line, MAX_LINE);
+			} while (line[0] == '/');
+
+			if (strcmp(line, "DEV") == 0)
+				_gameRuntimeContext = GameRuntimeContext::DEV;
+			else if (strcmp(line, "SCRIPTED_DEMO") == 0)
+				_gameRuntimeContext = GameRuntimeContext::SCRIPTED_DEMO;
+		}
+
+		switch (_gameRuntimeContext) {
+		case DEV:
+			std::cout << "Running in DEV mode" << std::endl;
+			break;
+
+		case SCRIPTED_DEMO:
+			std::cout << "Running in SCRIPTED_DEMO mode" << std::endl;
+			break;
+
+		case GAME:
+			std::cout << "Running in GAME mode" << std::endl;
+			break;
+
+		default:
+			assert(false && "Unkonw game runtime");
+		}
+	}
 
 	//--------------------------------------------------------
 
@@ -311,5 +352,9 @@ namespace Logic {
 		Logic::CGameManager::getSingletonPtr()->tick(msecs);
 
 	} // tick
+
+	GameRuntimeContext CServer::getGameRuntimeContext() const {
+		return _gameRuntimeContext;
+	}
 
 } // namespace Logic

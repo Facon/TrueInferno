@@ -29,7 +29,12 @@ Contiene la declaración del gestor de la IA de los enemigos en el juego.
 
 using namespace Logic;
 
-namespace Map
+namespace Logic
+{
+	enum GameRuntimeContext;
+}
+
+namespace Map	
 {
 	class CEntity;
 }
@@ -146,6 +151,9 @@ namespace AI
 
 		/** Devuelve la dificultad actual de la partida entre 0 (más fácil) y 1 (más difícil) */
 		float getCurrentDifficulty();
+
+		/** Obtiene el contexto de ejecución del juego */
+		GameRuntimeContext getGameRuntimeContext();
 
 	protected:
 		/**

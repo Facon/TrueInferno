@@ -206,6 +206,7 @@
     <ClInclude Include="..\..\Src\Logic\Events\RoundTimeChangeEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\SoulSpeedAlterationEvent.h" />
     <ClInclude Include="..\..\Src\Logic\Events\TutorialEvent.h" />
+    <ClInclude Include="..\..\Src\Logic\GameRuntimeContext.h" />
     <ClInclude Include="..\..\Src\Logic\HFManager.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h" />
     <ClInclude Include="..\..\Src\Logic\Maps\Documentation.h" />

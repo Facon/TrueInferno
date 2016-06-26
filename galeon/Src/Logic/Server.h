@@ -14,6 +14,8 @@ la gestión de la lógica del juego.
 
 #include <string>
 
+#include "Logic\GameRuntimeContext.h"
+
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Logic 
 {
@@ -135,6 +137,9 @@ namespace Logic
 		*/
 		void unLoadLevel();
 
+		/** Devuelve el entorno de ejecución del juego */
+		GameRuntimeContext getGameRuntimeContext() const;
+
 	protected:
 		/**
 		Constructor.
@@ -177,6 +182,12 @@ namespace Logic
 		Única instancia de la clase.
 		*/
 		static CServer* _instance;
+
+		/** Contexto de ejecución del juego */
+		GameRuntimeContext _gameRuntimeContext;
+
+		/** Inicializa el valor del entorno de juego */
+		void initGameRuntimeContext();
 
 	}; // class CServer
 

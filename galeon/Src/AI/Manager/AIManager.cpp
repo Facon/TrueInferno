@@ -25,6 +25,8 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include "BaseSubsystems/ScriptManager.h"
 #include "Logic/Entity/Message.h"
 #include "Map/MapEntity.h"
+#include "Logic/Server.h"
+#include "Logic\GameRuntimeContext.h"
 
 namespace AI {
 
@@ -176,6 +178,13 @@ namespace AI {
 				luabind::class_<CAIManager>("CAIManager")
 				.def("addGod", &CAIManager::addGod)
 				.def("getCurrentDifficulty", &CAIManager::getCurrentDifficulty)
+				.def("getGameRuntimeContext", &CAIManager::getGameRuntimeContext)
+				.enum_("GameRuntimeContext")
+				[
+					luabind::value("RUNTIME_DEV", GameRuntimeContext::DEV),
+					luabind::value("RUNTIME_GAME", GameRuntimeContext::GAME),
+					luabind::value("RUNTIME_SCRIPTED_DEMO", GameRuntimeContext::SCRIPTED_DEMO)
+				]
 				.scope
 				[
 					luabind::def("getSingletonPtr", &CAIManager::getSingletonPtr)
@@ -271,10 +280,26 @@ namespace AI {
 
 		// No hace falta eliminar dios porque ya se ha hecho desde el GameManager
 
-		// Asignamos nueva puntuación objetivo a los dioses
+		// Asignamos nueva puntuación objetivo a los dioses para las rondas a partir de la 2ª
+		int base;
 
 		// Tomamos como base la puntuación actual del mejor dios + un incremento creciente por ronda
-		int base = getGodRanking().front()->getScore() + (_numRound * _numRound * _baseScorePerRound);
+		switch (Logic::CServer::getSingletonPtr()->getGameRuntimeContext()){
+		case GameRuntimeContext::SCRIPTED_DEMO:
+			// 1ª ronda: BASE_SCORE_PER_ROUND
+			// 2ª ronda: MEJOR_DIOS + 4 * BASE_SCORE_PER_ROUND
+			// 3ª ronda: MEJOR_DIOS + 9 * BASE_SCORE_PER_ROUND
+			base = getGodRanking().front()->getScore() + (_numRound * _numRound * _baseScorePerRound);
+			break;
+		default:
+			// 1ª ronda: BASE_SCORE_PER_ROUND
+			// 2ª ronda: MEJOR_DIOS + BASE_SCORE_PER_ROUND
+			// 3ª ronda: MEJOR_DIOS + 2 * BASE_SCORE_PER_ROUND
+			base = getGodRanking().front()->getScore() + ((_numRound-1) * _baseScorePerRound);
+			break;
+		}
+
+		// Asignamos la puntuación objetivo con cierta variedad relativa
 		assignGodTargetScores(base, (int)(base * _scoreMaxRelativeDeviation));
 
 		// Aumentamos la dificultad base
@@ -490,6 +515,10 @@ namespace AI {
 
 		// Escalamos el resto
 		return Math::linearScale(-_scoreMaxRelativeDeviation, _scoreMaxRelativeDeviation, _baseDifficulty, 1, relativeDiff);
+	}
+
+	GameRuntimeContext CAIManager::getGameRuntimeContext(){
+		return Logic::CServer::getSingletonPtr()->getGameRuntimeContext();
 	}
 
 	void CAIManager::assignGodTargetScores(int baseScore, int maxDifference){

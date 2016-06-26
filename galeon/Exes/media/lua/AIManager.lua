@@ -9,10 +9,13 @@
 loadFromCpp = 1
 
 -- Flag para habilitar/deshabilitar fácilmente los eventos de IA
-godEventsEnabled = false
+godEventsEnabled = true
 
 -- Flag para test
 aiTest = false
+
+-- Contexto de ejecución del juego
+gameRuntimeContext = CAIManager.getSingletonPtr():getGameRuntimeContext();
 
 -- TODO usar require para no cargar módulos duplicados
 -- Carga de módulos desde la ruta base definida en C++
@@ -21,7 +24,16 @@ then
 	dofile("media/lua/gods.lua")
 	dofile("media/lua/events.lua")
 	dofile("media/lua/eviluators.lua")
-	dofile("media/lua/InitialEvents.lua")
+	
+	if (gameRuntimeContext == CAIManager.RUNTIME_DEV)
+	then
+		initialEvents = dofile("media/lua/InitialEvents_dev.lua")
+	elseif (gameRuntimeContext == CAIManager.RUNTIME_SCRIPTED_DEMO)
+	then
+		dofile("media/lua/InitialEvents_script.lua")
+	else
+		dofile("media/lua/InitialEvents.lua")
+	end
 
 -- O carga desde la ubicación actual si se ejecuta directamente en Lua
 else

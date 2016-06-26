@@ -92,7 +92,7 @@ MinorSoulSpeedReductionEvent.throw = function(god,delay)
 		timeToLaunch, god.name, title, description, image, 0.25, MinorSoulSpeedReductionEvent.duration, true));
 end
 
-MajorSoulSpeedReductionEvent = Event:new(MajorSoulSpeedReductionEvent)
+MajorSoulSpeedReductionEvent = Event:new("MajorSoulSpeedReductionEvent")
 MajorSoulSpeedReductionEvent.good = 0
 MajorSoulSpeedReductionEvent.evil = 0.7
 MajorSoulSpeedReductionEvent.godTraits.cheater = 1.0
@@ -472,7 +472,7 @@ events =
 {
 	BuildingDestructionEvent,
 	MinorSoulSpeedReductionEvent,
-	MajorSoulsSpeedReductionEvent,
+	MajorSoulSpeedReductionEvent,
 	MinorSoulSpeedIncreaseEvent,
 	MajorSoulSpeedIncreaseEvent,
 	MinorGodBoostEvent,

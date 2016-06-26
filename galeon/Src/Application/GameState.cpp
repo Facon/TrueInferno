@@ -20,6 +20,7 @@ Contiene la implementación del estado de juego.
 #include "Logic/Events/EventManager.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Maps/Map.h"
+#include "Logic\GameRuntimeContext.h"
 
 #include "GUI/Server.h"
 #include "GUI/PlayerController.h"
@@ -41,8 +42,28 @@ namespace Application {
 		// Crear la escena física.
 		Physics::CServer::getSingletonPtr()->createScene();
 
+		// Config de parámetos según el entorno
+		std::string managersFile = "managers.txt";
+		std::string mapFile = "map.txt";
+
+		Logic::GameRuntimeContext context = Logic::CServer::getSingletonPtr()->getGameRuntimeContext();
+		switch (context) {
+		case Logic::GameRuntimeContext::DEV:
+			managersFile = "managers_dev.txt";
+			mapFile = "map_dev.txt";
+			break;
+		case Logic::GameRuntimeContext::SCRIPTED_DEMO:
+			managersFile = "managers_script.txt";
+			mapFile = "map_script.txt";
+			break;
+		default:
+			managersFile = "managers.txt";
+			mapFile = "map.txt";
+			break;
+		}
+
 		// Cargamos el archivo con los valores de configuración de los managers.
-		if (!Logic::CServer::getSingletonPtr()->loadManagersConfigurationValues("managers.txt"))
+		if (!Logic::CServer::getSingletonPtr()->loadManagersConfigurationValues(managersFile))
 			return false;
 
 		// Cargamos el archivo con las definiciones de las entidades del nivel.
@@ -50,7 +71,7 @@ namespace Application {
 			return false;
 
 		// Cargamos el nivel a partir del nombre del mapa.
-		if (!Logic::CServer::getSingletonPtr()->loadLevel("map.txt"))
+		if (!Logic::CServer::getSingletonPtr()->loadLevel(mapFile))
 			return false;
 
 		// Cargamos la ventana que muestra el tiempo de juego transcurrido.
