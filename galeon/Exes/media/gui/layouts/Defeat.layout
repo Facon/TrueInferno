@@ -65,7 +65,7 @@
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonText2" name="Exit" >
-			<Property name="Area" value="{{0.48,0},{0.83,0},{0.52,0},{0.88,0}}" />
+			<Property name="Area" value="{{0.43,0},{0.75,0},{0.57,0},{0.95,0}}" />
 			<Property name="Text" value="Exit" />				
 		</Window>
 		
