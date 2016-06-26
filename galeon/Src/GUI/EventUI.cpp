@@ -59,7 +59,6 @@ namespace GUI
 		setEventNotificationVisible(false);
 		_uiEventWindow->activate();
 		_uiEventNotification->activate();
-		Audio::CServer::getSingletonPtr()->playBgSound("audio_hito_3");
 	}
 
 	void EventUI::deactivate()

@@ -5,13 +5,11 @@
 #include <CEGUI/Window.h>
 #include <CEGUI/CEGUI.h>
 
-
 namespace GUI
 {
 	PauseMenu::PauseMenu()
 	{
 	}
-
 
 	PauseMenu::~PauseMenu()
 	{
@@ -29,6 +27,7 @@ namespace GUI
 	{
 		_menuWindow->getChildElement("ButtonFrame/ExitButton")->removeAllEvents();
 	}
+
 	bool PauseMenu::exitReleased(const CEGUI::EventArgs& e)
 	{
 		_exit = true;
