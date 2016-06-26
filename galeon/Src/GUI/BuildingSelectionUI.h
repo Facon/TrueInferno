@@ -20,6 +20,9 @@ namespace GUI
 	class BuildingSelectionUI
 	{
 	protected:
+		int _redrawUICountResetValue = 1500;
+		int _redrawUICountLimit = _redrawUICountResetValue;
+
 		CEGUI::Window* _uibuttonsWindow;
 		CEGUI::Window* _uipopupWindow;
 		Logic::CEntity* _buildingEntity = nullptr;
@@ -59,7 +62,6 @@ namespace GUI
 		void activate();
 		void deactivate();
 		void tick(unsigned int msecs);
-		void setEventWindowVisibleCurrentEntity(bool visible);
 		void setEventWindowVisible(bool visible, Logic::CEntity* entity);
 		void closeWindow();
 		void DisablePopupVisibility();

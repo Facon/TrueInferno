@@ -34,7 +34,7 @@
 			</Window>
 			
 			<Window type="OgreTray/StaticText" name="Developers" >
-				<Property name="Area" value="{{0.37,0},{0.025,0},{0.63,0},{0.125,0}}" />
+				<Property name="Area" value="{{0.37,0},{0.0,0},{0.63,0},{0.150,0}}" />
 				<Property name="Text" value="Developers" />	
 				<Property name="Font" value="DeadSecretary-18" />
 				<Property name="VertFormatting" value="CentreAligned" />
@@ -86,7 +86,7 @@
 			</Window>
 			
 			<Window type="OgreTray/StaticText" name="Designers" >
-				<Property name="Area" value="{{0.22,0},{0.480,0},{0.78,0},{0.580,0}}" />
+				<Property name="Area" value="{{0.37,0},{0.455,0},{0.63,0},{0.605,0}}" />
 				<Property name="Text" value="Designers" />	
 				<Property name="Font" value="DeadSecretary-18" />
 				<Property name="VertFormatting" value="CentreAligned" />

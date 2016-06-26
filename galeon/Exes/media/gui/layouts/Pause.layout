@@ -21,7 +21,7 @@
 			</Window>
 			
 			<Window type="OgreTray/TrueInfernoButtonText2" name="SaveButton" >
-				<Property name="Area" value="{{0.22,0},{0.270,0},{0.78,0},{0.420,0}}" />
+				<Property name="Area" value="{{0.17,0},{0.245,0},{0.83,0},{0.445,0}}" />
 				<Property name="Text" value="Save" />	
 			</Window>
 
@@ -33,7 +33,7 @@
 			</Window>
 			
 			<Window type="OgreTray/TrueInfernoButtonText2" name="LoadButton" >
-				<Property name="Area" value="{{0.22,0},{0.470,0},{0.78,0},{0.620,0}}" />
+				<Property name="Area" value="{{0.17,0},{0.445,0},{0.83,0},{0.645,0}}" />
 				<Property name="Text" value="Load" />	
 			</Window>	
 			
@@ -45,7 +45,7 @@
 			</Window>
 			
 			<Window type="OgreTray/TrueInfernoButtonText2" name="ExitButton" >
-				<Property name="Area" value="{{0.22,0},{0.670,0},{0.78,0},{0.820,0}}" />
+				<Property name="Area" value="{{0.17,0},{0.645,0},{0.83,0},{0.845,0}}" />
 				<Property name="Text" value="Exit" />	
 			</Window>			
 			

@@ -19,6 +19,10 @@ namespace GUI
 	class SideBarUI
 	{
 	protected:
+		bool _sidebarVisible = true;
+		int _redrawUICountResetValue = 1500;
+		int _redrawUICountLimit = _redrawUICountResetValue;
+
 		CEGUI::Window* _uibuttonsWindow;
 		Logic::CEntity* _placeableEntity=nullptr;
 		Logic::CEntity* *_placeableRoad = nullptr;
@@ -60,10 +64,6 @@ namespace GUI
 		bool continueClearTerrain();
 
 	public:
-		bool _sidebarVisible = true;
-		int _redrawUICountResetValue = 3000;
-		int _redrawUICountLimit = _redrawUICountResetValue;
-
 		bool _onUIScreen = false;
 		bool _onButtonFrame = false;
 		bool _onGoldFrame = false;

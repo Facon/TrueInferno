@@ -23,7 +23,7 @@
 		
 		
 		<Window type="OgreTray/TrueInfernoButtonUpgradeBuilding2" name="UpgradeBuilding" >
-			<Property name="Area" value="{{0.20155,0},{0.360,0},{0.39345,0},{0.440,0}}" />	
+			<Property name="Area" value="{{0.19,0},{0.355,0},{0.405,0},{0.445,0}}" />	
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="DisableBuildingFrame" >
@@ -35,7 +35,7 @@
 		
 		
 		<Window type="OgreTray/TrueInfernoButtonDisableBuilding2" name="DisableBuilding" >
-			<Property name="Area" value="{{0.41905,0},{0.360,0},{0.61095,0},{0.440,0}}" />
+			<Property name="Area" value="{{0.4075,0},{0.355,0},{0.6225,0},{0.445,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="DestroyBuildingFrame" >
@@ -46,7 +46,7 @@
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonDestroyBuilding2" name="DestroyBuilding" >
-			<Property name="Area" value="{{0.63755,0},{0.360,0},{0.82845,0},{0.440,0}}" />
+			<Property name="Area" value="{{0.625,0},{0.355,0},{0.84,0},{0.445,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="CloseWindowFrame" >
@@ -57,7 +57,7 @@
 		</Window>
 		
 		<Window type="OgreTray/TrueInfernoButtonCloseWindow2" name="CloseWindow" >
-			<Property name="Area" value="{{0.41905,0},{0.535,0},{0.61095,0},{0.615,0}}" />
+			<Property name="Area" value="{{0.4075,0},{0.53,0},{0.6225,0},{0.62,0}}" />
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="TimeBorderLine">

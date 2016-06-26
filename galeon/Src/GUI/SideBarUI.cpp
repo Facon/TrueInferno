@@ -50,7 +50,7 @@ namespace GUI
 	void SideBarUI::init()
 	{
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIButtonBar.layout");
-
+		_uibuttonsWindow->setRiseOnClickEnabled(false);
 
 		_uibuttonsWindow->getChildElement("CreateFurnace")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createFurnaceReleased, this));
@@ -190,21 +190,12 @@ namespace GUI
 		_uibuttonsWindow->getChild("TimeLeft")->setText(std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
 
 		_redrawUICountLimit -= msecs;
-		if (_redrawUICountLimit <= 0){
+		if (_redrawUICountLimit <= 0)
+		{
 			_redrawUICountLimit = _redrawUICountResetValue;
 
-			if (_sidebarVisible){
-				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uibuttonsWindow);
-				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uibuttonsWindow);
-			}
-
-			else{
-				GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-				uiManager->getBuildingSelectionUI()->setEventWindowVisibleCurrentEntity(true);
-				_uibuttonsWindow->setVisible(false);
-				_sidebarVisible = false;
-				_redrawUICountLimit = _redrawUICountResetValue;
-			}
+			for (unsigned int i = 0; i < _uibuttonsWindow->getChildCount(); ++i)
+				_uibuttonsWindow->getChildAtIdx(i)->moveToFront();
 		}
 
 		if (!_deactivateCursorAnimation){
