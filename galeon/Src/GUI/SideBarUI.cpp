@@ -194,8 +194,16 @@ namespace GUI
 		{
 			_redrawUICountLimit = _redrawUICountResetValue;
 
-			for (unsigned int i = 0; i < _uibuttonsWindow->getChildCount(); ++i)
-				_uibuttonsWindow->getChildAtIdx(i)->moveToFront();
+			if (_sidebarVisible)
+			{
+				for (unsigned int i = 0; i < _uibuttonsWindow->getChildCount(); ++i)
+					_uibuttonsWindow->getChildAtIdx(i)->moveToFront();
+			}
+			else
+			{
+				UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+				uiManager->getBuildingSelectionUI()->changeButtonLayout();
+			}
 		}
 
 		if (!_deactivateCursorAnimation){

@@ -20,9 +20,6 @@ namespace GUI
 	class BuildingSelectionUI
 	{
 	protected:
-		int _redrawUICountResetValue = 1500;
-		int _redrawUICountLimit = _redrawUICountResetValue;
-
 		CEGUI::Window* _uibuttonsWindow;
 		CEGUI::Window* _uipopupWindow;
 		Logic::CEntity* _buildingEntity = nullptr;
@@ -50,12 +47,12 @@ namespace GUI
 		void loadAssetsPopup(std::string name, std::string image);
 		bool buttonFrameEnter(const CEGUI::EventArgs& e);
 		bool buttonFrameExit(const CEGUI::EventArgs& e);
-		void changeButtonLayout();
 
 	public:
 		BuildingSelectionUI();
 		~BuildingSelectionUI();
 		void changeLayout();
+		void changeButtonLayout();
 		void changePopupLayout(std::string layout, std::string name, std::string image);
 		void init();
 		void release();

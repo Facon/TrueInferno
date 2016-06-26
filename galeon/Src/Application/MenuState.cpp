@@ -66,9 +66,11 @@ namespace Application {
 	{
 		CApplicationState::release();
 
-		_menuWindow->getChildElement("ButtonFrame/StartButton")->removeAllEvents();
-		_menuWindow->getChildElement("ButtonFrame/CreditsButton")->removeAllEvents();
-		_menuWindow->getChildElement("ButtonFrame/ExitButton")->removeAllEvents();
+		// Fallan al liberar
+		//_menuWindow->getChildElement("ButtonFrame/StartButton")->removeAllEvents();
+		//_menuWindow->getChildElement("ButtonFrame/CreditsButton")->removeAllEvents();
+		//_menuWindow->getChildElement("ButtonFrame/ExitButton")->removeAllEvents();
+
 	} // release
 
 	//--------------------------------------------------------

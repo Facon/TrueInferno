@@ -57,8 +57,8 @@ namespace GUI
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uibuttonsWindow);
 	}
 
-	void BuildingSelectionUI::changePopupLayout(std::string layout, std::string name, std::string image){
-		//GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
+	void BuildingSelectionUI::changePopupLayout(std::string layout, std::string name, std::string image)
+	{
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
 		_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(layout);
 		_uibuttonsWindow->setRiseOnClickEnabled(false);
@@ -302,22 +302,18 @@ namespace GUI
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::disableBuildingReleased, this));
 
 		_uibuttonsWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
-
-		//_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			//CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
-
-		
+			CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));		
 	}
 
 	void BuildingSelectionUI::release()
 	{
 		// Remove all events to avoid memory leaks
 		_uibuttonsWindow->getChildElement("UpgradeBuilding")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("DestroyBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("DisableBuilding")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CloseWindow")->removeAllEvents();
-		//_uipopupWindow->getChildElement("CloseWindow")->removeAllEvents();
+
+		//Falla al liberar
+		//_uibuttonsWindow->getChildElement("DestroyBuilding")->removeAllEvents();
 	}
 
 	void BuildingSelectionUI::activate()
@@ -344,18 +340,6 @@ namespace GUI
 	void BuildingSelectionUI::tick(unsigned int msecs)
 	{
 		using namespace Logic;
-
-		_redrawUICountLimit -= msecs;
-		if (_redrawUICountLimit <= 0)
-		{
-			_redrawUICountLimit = _redrawUICountResetValue;
-
-			for (unsigned int i = 0; i < _uibuttonsWindow->getChildCount(); ++i)
-				_uibuttonsWindow->getChildAtIdx(i)->moveToFront();
-
-			for (unsigned int i = 0; i < _uipopupWindow->getChildCount(); ++i)
-				_uipopupWindow->getChildAtIdx(i)->moveToFront();
-		}
 
 		Logic::CTimeManager& tm = Logic::CTimeManager::getSingleton();
 
