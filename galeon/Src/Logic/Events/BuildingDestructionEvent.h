@@ -19,6 +19,8 @@ un edificio de forma aleatoria.
 
 #include "Event.h"
 
+#include "Logic/Entity/BuildingType.h"
+
 // Predeclaración de clases para ahorrar tiempo de compilación.
 namespace Logic
 {
@@ -57,20 +59,22 @@ namespace Logic
 		CBuildingDestructionEvent(
 			unsigned long time, const std::string& godName, const std::string& title,
 			const std::string& description, const std::string& image,
+			BuildingType buildingType,
 			bool absoluteTime = true) :
 
 			CEvent(INFO, time, absoluteTime, false, godName), 
-			_title(title), _description(description), _image(image) {};
+			_title(title), _description(description), _image(image), _buildingType(buildingType) {};
 
 		/** Constructor estático. Permite invocar desde Lua pero mantener el ciclo de vida en C++ */
 		static CBuildingDestructionEvent* addCBuildingDestructionEvent(
 			unsigned long time, const std::string& godName, const std::string& title,
 			const std::string& description, const std::string& image,
+			BuildingType buildingType,
 			bool absoluteTime = true) {
 
 			return new CBuildingDestructionEvent(
 				time, godName, title,
-				description, image, absoluteTime);
+				description, image, buildingType, absoluteTime);
 		}
 
 		/**
@@ -114,6 +118,9 @@ namespace Logic
 		/** Identificador de imagen de fondo para el panel */
 		std::string _image;
 		
+		/** Tipo del edificio a destruir */
+		BuildingType _buildingType;
+
 	}; // class CBuildingDestructionEvent
 
 } // namespace Logic

@@ -165,6 +165,7 @@ namespace Logic
 		CPlaceable* getRandomBuilding();
 
 		//Destruye un edificio aleatorio
+		bool DestroyRandomBuilding(BuildingType buildingType);
 		bool DestroyRandomBuilding();
 
 		/** Devuelve la estructura de datos con los grupos de edificios */
@@ -208,6 +209,12 @@ namespace Logic
 
 		/** Hace crecer un obstáculo al azar en la posición dada */
 		bool growDestroyableObstacle(CMap* map, const Vector3& position);
+
+		/**
+		Método encargado de registrar en el contexto de Lua todas aquellas
+		clases y funciones necesarias en Lua.
+		*/
+		void luaRegister();
 
 	protected:
 
