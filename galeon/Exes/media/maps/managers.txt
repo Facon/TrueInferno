@@ -10,7 +10,7 @@ Map = {
 
 	AIManager = {
 		type = "AIManager",
-		baseScorePerRound = 50,
+		baseScorePerRound = 40,
 		scoreMaxRelativeDeviation = 0.75,
 		minBaseDifficulty = 0.0,
 		maxBaseDifficulty = 1.0,

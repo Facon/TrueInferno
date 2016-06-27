@@ -109,7 +109,7 @@ namespace GUI
 					++i;
 				}
 			}
-			else{
+			else{	
 				int defeatedgod = ranking.size() - round + 1;
 				_uiRankWindow->getChild("God" + std::to_string(defeatedgod))->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
 			}
