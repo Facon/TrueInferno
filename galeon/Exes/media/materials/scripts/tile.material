@@ -82,11 +82,11 @@ material Terrain/Mineral
 		pass Glow
 		{
 			ambient 0 0 0 1
-			diffuse 0.2 0 0 1
+			diffuse 0.7 0 0 1
 
 			texture_unit
 			{
-				texture DarkGray.png
+				texture Gray.png
 			}
 		}
 	}
@@ -125,11 +125,11 @@ material Terrain/Gas
 		scheme glow
 		pass Glow
 		{
-			diffuse 0.2 0.15 0 1
+			diffuse 0.6 0.4 0 1
 
 			texture_unit
 			{
-				texture DarkGray.png
+				texture Gray.png
 			}
 		}
 	}
