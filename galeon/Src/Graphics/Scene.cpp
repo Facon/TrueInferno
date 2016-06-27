@@ -30,6 +30,7 @@ de una escena.
 
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
+//#include <OgreOctreeSceneManager.h>
 #include <OgreRenderWindow.h>
 #include <OgreViewport.h>
 #include <OgreStaticGeometry.h>
@@ -43,7 +44,7 @@ namespace Graphics
 		_spotlightAcumTime(0), _spotlightThresholdTime(0.1f)
 	{
 		_root = BaseSubsystems::CServer::getSingletonPtr()->getOgreRoot();
-		_sceneMgr = _root->createSceneManager(Ogre::ST_INTERIOR, name);
+		_sceneMgr = _root->createSceneManager(Ogre::ST_EXTERIOR_REAL_FAR, name);
 
 		_camera = new CCamera(name,this);
 		_name = name;

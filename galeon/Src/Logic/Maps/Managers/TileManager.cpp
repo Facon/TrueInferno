@@ -19,7 +19,6 @@ Contiene la implementación del gestor de la matriz de tiles.
 #include "Map/MapEntity.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Entity/Entity.h"
-#include "Logic/Entity/Message.h"
 #include "Logic/Entity/Components/Tile.h"
 
 #include <cassert>
@@ -27,7 +26,10 @@ Contiene la implementación del gestor de la matriz de tiles.
 
 namespace Logic {
 
-	CTileManager* CTileManager::_instance = 0;
+	CTileManager* CTileManager::_instance = nullptr;
+	const int CTileManager::SIZE_X = 45;
+	const int CTileManager::SIZE_Z = 45;
+	const std::string CTileManager::TERRAIN_MAP_FILE = "media/maps/terrain_map.txt";
 
 	//--------------------------------------------------------
 

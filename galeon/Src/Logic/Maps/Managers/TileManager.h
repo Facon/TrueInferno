@@ -18,7 +18,6 @@ al mapa.
 #ifndef __Logic_TileManager_H
 #define __Logic_TileManager_H
 
-#include <string>
 #include "BaseSubsystems/Math.h"
 
 // Predeclaración de clases para ahorrar tiempo de compilación
@@ -151,13 +150,13 @@ namespace Logic
 		/**
 		Dimensiones de la matriz del mapa.
 		*/
-		const int SIZE_X = 45;
-		const int SIZE_Z = 45;
+		static const int SIZE_X;
+		static const int SIZE_Z;
 
 		/**
 		File with the terrain map definition.
 		*/
-		const std::string TERRAIN_MAP_FILE = "media/maps/terrain_map.txt";
+		static const std::string TERRAIN_MAP_FILE;
 
 		/**
 		2D tile matrix[x][z].
