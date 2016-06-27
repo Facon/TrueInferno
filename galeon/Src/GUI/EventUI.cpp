@@ -242,6 +242,7 @@ namespace GUI
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Alpha", "000");
 			_uiEventWindow->getChild("id" + std::to_string(i))->createChild("OgreTray/TrueInfernoButtonText2", "Event" + std::to_string(i));
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.2,0},{" + std::to_string(verticalpos) + ",0},{0.8,0},{" + std::to_string(verticalpos + 0.06) + ",0}}");
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("AlwaysOnTop", "True");
 
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Area", "{{0,0},{0,0},{1,0},{1,0}}");
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setInheritsAlpha(false);
@@ -288,6 +289,7 @@ namespace GUI
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Text", std::to_string(it->second->getEventId()));
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Alpha", "000");
 			_uiEventWindow->getChild("id" + std::to_string(i))->createChild("OgreTray/TrueInfernoButtonText2", "Event" + std::to_string(i));
+			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("AlwaysOnTop", "True");
 			_uiEventWindow->getChild("id" + std::to_string(i))->setProperty("Area", "{{0.2,0},{" + std::to_string(verticalpos) + ",0},{0.8,0},{" + std::to_string(verticalpos + 0.06) + ",0}}");
 
 			_uiEventWindow->getChild("id" + std::to_string(i))->getChild("Event" + std::to_string(i))->setProperty("Area", "{{0,0},{0,0},{1,0},{1,0}}");
