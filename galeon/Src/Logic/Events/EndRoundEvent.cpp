@@ -18,6 +18,10 @@ el desenlace de la ronda (victoria o derrota).
 
 #include "BaseSubsystems/ScriptManager.h"
 
+#include "GUI/Server.h"
+#include "GUI/UIManager.h"
+#include "GUI/RankUI.h"
+
 namespace Logic {
 	std::string CEndRoundEvent::getGUIImageName() const {
 		return _eventImage;
@@ -48,6 +52,8 @@ namespace Logic {
 			//_eventText = "YES!! That’s how it’s done, kiddo. I KNEW you had potential. HAH!! Look at your rivals’ faces, you really pissed them off. This deserves some extra points. Here you go. Hades’ Favor increased! +66.666 Now on to the next round! Give’em Hell!";
 			_eventTitle = "NEXT ROUND!";
 			_eventText = "YES!! I KNEW you had potential.HAH!!Look at your rivals’ faces. Hades’ Favor increased + 66.666! Now into the next round, Give em Hell!";
+			GUI::CServer::getSingletonPtr()->getUIManager()->getRankUI()->round++;
+			GUI::CServer::getSingletonPtr()->getUIManager()->getRankUI()->start = true;
 		}
 
 		else {

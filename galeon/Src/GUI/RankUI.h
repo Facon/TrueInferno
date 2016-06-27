@@ -15,9 +15,10 @@ namespace GUI
 	protected:
 		// Window for displaying resources
 		CEGUI::Window* _uiRankWindow;
-		bool start = true;
 
 	public:
+		int round = 0;
+		bool start = true;
 		RankUI();
 		~RankUI();
 		void init();

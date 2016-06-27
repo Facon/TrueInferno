@@ -93,19 +93,25 @@ namespace GUI
 		if (start)
 		{
 			start = false;
-			int i = 1;
-			float verticalpos = 0.30;
-			for (auto it = ranking.begin(); it != ranking.end(); ++it)
-			{
-				_uiRankWindow->createChild("OgreTray/StaticText", "God" + std::to_string(i));
-				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("Area", "{{0.30,0},{" + std::to_string(verticalpos) + ",0},{1,0},{" + std::to_string(verticalpos + 0.05) + ",0}}");
-				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("TextColours", "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF");
-				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("Font", "videophreak-10");
-				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("AlwaysOnTop", "True");
-				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("VertFormatting", "CentreAligned");
-				_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("HorzFormatting", "LeftAligned");
-				verticalpos += 0.1;
-				++i;
+			if (round == 0){
+				int i = 1;
+				float verticalpos = 0.30;
+				for (auto it = ranking.begin(); it != ranking.end(); ++it)
+				{
+					_uiRankWindow->createChild("OgreTray/StaticText", "God" + std::to_string(i));
+					_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("Area", "{{0.30,0},{" + std::to_string(verticalpos) + ",0},{1,0},{" + std::to_string(verticalpos + 0.05) + ",0}}");
+					_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("Font", "videophreak-10");
+					_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("AlwaysOnTop", "True");
+					_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("VertFormatting", "CentreAligned");
+					_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("HorzFormatting", "LeftAligned");
+					_uiRankWindow->getChild("God" + std::to_string(i))->setProperty("TextColours", "tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF");
+					verticalpos += 0.1;
+					++i;
+				}
+			}
+			else{
+				int defeatedgod = ranking.size() - round + 1;
+				_uiRankWindow->getChild("God" + std::to_string(defeatedgod))->setProperty("TextColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000");
 			}
 		}	
 
