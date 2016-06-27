@@ -126,8 +126,8 @@ Parametros:
       <arg value="-DOGRE_BUILD_TOOLS=FALSE"/>
       <arg value="-DOGRE_BUILD_COMPONENT_PAGING=FALSE"/>
       <arg value="-DOGRE_BUILD_COMPONENT_TERRAIN=FALSE"/>
-      <arg value="-DOGRE_BUILD_PLUGIN_PCZ=FALSE"/>
-      <arg value="-DOGRE_BUILD_PLUGIN_OCTREE=FALSE"/>
+      <arg value="-DOGRE_BUILD_PLUGIN_PCZ=TRUE"/>
+      <arg value="-DOGRE_BUILD_PLUGIN_OCTREE=TRUE"/>
       <arg value="-DOGRE_BUILD_PLUGIN_BSP=FALSE"/>
       <arg value="-DOGRE_INSTALL_TOOLS=FALSE"/>
       <arg line='-G "Visual Studio 12"'/>

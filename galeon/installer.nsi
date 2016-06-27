@@ -3,7 +3,7 @@
 !define DESCRIPTION "Hell is only the beginning!"
 # These three must be integers
 !define VERSIONMAJOR 1
-!define VERSIONMINOR 2
+!define VERSIONMINOR 4
 !define VERSIONBUILD 0
 
 # These will be display
