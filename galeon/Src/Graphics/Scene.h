@@ -17,7 +17,6 @@ de una escena.
 #ifndef __Graphics_Scene_H
 #define __Graphics_Scene_H
 
-#include <string>
 #include <list>
 
 namespace Ogre 
@@ -36,6 +35,7 @@ namespace Graphics
 	class CCamera;
 	class CEntity;
 	class CStaticEntity;
+	class GlowMaterialListener;
 }
 
 namespace Graphics 
@@ -286,6 +286,8 @@ namespace Graphics
 		Geometr�a est�tica de la escena.
 		*/
 		Ogre::StaticGeometry *_staticGeometry;
+
+		GlowMaterialListener* _gml;
 
 	}; // class CScene
 

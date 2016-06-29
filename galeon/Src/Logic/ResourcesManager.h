@@ -1,8 +1,7 @@
 #ifndef RESOURCEMANAGER_H_
 #define RESOURCEMANAGER_H_
 
-#include <string>
-#include <map>
+#include <unordered_map>
 #include <vector>
 
 namespace Logic
@@ -22,13 +21,15 @@ namespace Logic
 		HADES_FAVOR
 	};
 
+	typedef std::unordered_map<ResourceType, float> CurrentResourcesMap;
+	typedef std::unordered_map<ResourceType, unsigned int> MaxResourcesMap;
+
 	class ResourcesManager
 	{
 	public:
 		static ResourceType parseResourceType(const std::string& name);
 
-		static ResourcesManager* getSingletonPtr()
-		{ return _instance; }
+		static ResourcesManager* getSingletonPtr();
 
 		/**
 		Inicializa la instancia y los recursos estáticos.
@@ -72,7 +73,7 @@ namespace Logic
 		* @param[out] totalAvailable cantidad total disponible encontrada
 		* @return Mapa con la cifra de recursos disponibles de cada componente
 		*/
-		std::map<CResourceBuilding*, int> ResourcesManager::findResources(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalAvailable);
+		std::unordered_map<CResourceBuilding*, int> ResourcesManager::findResources(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalAvailable);
 
 		/**
 		* Busca recursos almacenables de un tipo determinado entre los componentes de recursos dados.
@@ -82,7 +83,7 @@ namespace Logic
 		* @param[out] totalStorage cantidad total almacenable encontrada
 		* @return Mapa con la cifra de recursos almacenables de cada componente
 		*/
-		std::map<CResourceBuilding*, int> ResourcesManager::findStorage(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalStorage);
+		std::unordered_map<CResourceBuilding*, int> ResourcesManager::findStorage(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalStorage);
 
 		/**
 		* Chequea si es posible decrementar y, opcionalmente, decrementa, una cantidad dada de recursos de un tipo en los edificios de recursos.
@@ -148,14 +149,16 @@ namespace Logic
 		*/
 		void close();
 
-		static ResourcesManager *_instance;
+		static ResourcesManager _instance;
 
-	private:
+		static CurrentResourcesMap ResourcesManager::createCurrentResourcesMap();
+		static MaxResourcesMap ResourcesManager::createMaxResourcesMap();
+
 		// Mapa genérico con la cantidad actual de recursos
-		std::map<ResourceType, float> _currentResources;
+		CurrentResourcesMap _currentResources;
 
 		// Mapa genérico con la cantidad máxima de recursos
-		std::map<ResourceType, int> _maxResources;
+		MaxResourcesMap _maxResources;
 	};
 
 }

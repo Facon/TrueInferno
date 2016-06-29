@@ -38,16 +38,15 @@ namespace GUI
 
 	void EventUI::release()
 	{
-		// Falla al liberar
-		// _uiEventWindow->getChildElement("AcceptEvent")->removeAllEvents();
-
-		// Liberamos los CEvent
 		for (auto it = _events.begin(); it != _events.end(); ++it){
 			delete (it->second);
-			it->second = NULL;
+			it->second = nullptr;
 		}
 
 		_events.clear();
+
+		_uiEventNotification->getChildElement("Accept")->removeAllEvents();
+		_uiEventWindow->getChildElement("AcceptEvent")->removeAllEvents();
 	}
 
 	void EventUI::activate()

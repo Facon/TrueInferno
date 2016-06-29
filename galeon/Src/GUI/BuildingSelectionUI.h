@@ -2,7 +2,6 @@
 #define BUILDINGSELECTIONUI_H_
 
 #include <string>
-#include <vector>
 
 namespace Logic
 {
@@ -11,6 +10,7 @@ namespace Logic
 
 namespace CEGUI
 {
+	class NamedElement;
 	class Window;
 	class EventArgs;
 }
@@ -47,6 +47,7 @@ namespace GUI
 		void loadAssetsPopup(std::string name, std::string image);
 		bool buttonFrameEnter(const CEGUI::EventArgs& e);
 		bool buttonFrameExit(const CEGUI::EventArgs& e);
+		void removeChildrenEvents(CEGUI::NamedElement* element);
 
 	public:
 		BuildingSelectionUI();

@@ -78,6 +78,8 @@ namespace Application
 		*/
 		virtual void release();
 
+		void releaseEvents();
+
 		/**
 		Función llamada por la aplicación cuando se activa
 		el estado.

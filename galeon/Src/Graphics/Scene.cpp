@@ -16,9 +16,7 @@ de una escena.
 
 #include "Scene.h"
 #include "Camera.h"
-#include "Server.h"
 #include "StaticEntity.h"
-#include "GlowMaterialListener.h"
 
 #include "BaseSubsystems/Server.h"
 
@@ -36,12 +34,13 @@ de una escena.
 #include <OgreStaticGeometry.h>
 #include <OgreColourValue.h>
 #include <OgreBillboardSet.h>
+#include "GlowMaterialListener.h"
 
 namespace Graphics 
 {
-	CScene::CScene(const std::string& name) : _viewport(0), _staticGeometry(0),
-		_directionalLight(0), _spotlightLight(0),
-		_spotlightAcumTime(0), _spotlightThresholdTime(0.1f)
+	CScene::CScene(const std::string& name) : _viewport(nullptr), _staticGeometry(nullptr),
+		_directionalLight(nullptr), _spotlightLight(nullptr),
+		_spotlightAcumTime(0), _spotlightThresholdTime(0.1f), _gml(nullptr)
 	{
 		_root = BaseSubsystems::CServer::getSingletonPtr()->getOgreRoot();
 		_sceneMgr = _root->createSceneManager(Ogre::ST_EXTERIOR_REAL_FAR, name);
@@ -117,9 +116,9 @@ namespace Graphics
 		// Glow shader
 		Ogre::CompositorManager::getSingleton().addCompositor(_viewport, "Glow");
 		Ogre::CompositorManager::getSingleton().setCompositorEnabled(_viewport, "Glow", true);
-
-		GlowMaterialListener *gml = new GlowMaterialListener();
-		Ogre::MaterialManager::getSingleton().addListener(gml);
+		
+		_gml = new GlowMaterialListener();
+		Ogre::MaterialManager::getSingleton().addListener(_gml);
 
 		// Background
 		Ogre::ColourValue backgroundColor = Ogre::ColourValue(0.2f, 0.1f, 0.1f, 0.5f);
@@ -173,6 +172,12 @@ namespace Graphics
 			_viewport = 0;
 		}
 
+		if (_gml)
+			delete _gml;
+
+		Ogre::MaterialManager::getSingleton().removeListener(_gml); // _gml is deleted
+
+		_gml = nullptr;
 	} // deactivate
 	
 	//--------------------------------------------------------

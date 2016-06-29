@@ -54,7 +54,8 @@ namespace Application {
 	void CGameOverState::release() 
 	{
 		CApplicationState::release();
-
+		
+		_gameOverWindow->getChildElement("Exit")->removeAllEvents();
 	} // release
 
 	//--------------------------------------------------------

@@ -58,6 +58,7 @@ namespace GUI
 	void UIManager::release()
 	{
 		// Releasing memory
+		_pauseMenu.release();
 		_topBarUI.release();
 		_sideBarUI.release();
 		_eventUI.release();

@@ -1,76 +1,76 @@
 #include "ResourcesManager.h"
 
-#include "Application/GaleonApplication.h"
 #include "Application/GameState.h"
 #include "HFManager.h"
-#include <algorithm>
 #include "BuildingManager.h"
 #include "Logic\Entity\Components\ResourceBuilding.h"
 #include "BaseSubsystems\ScriptManager.h"
 
-#include <stdexcept>
 #include <cassert>
-#include <map>
 
 namespace Logic
 {
-	ResourcesManager* ResourcesManager::_instance = 0;
+	ResourcesManager ResourcesManager::_instance;
 
-	ResourcesManager::ResourcesManager()
+	ResourcesManager* ResourcesManager::getSingletonPtr()
 	{
-		_instance = this;
+		return &_instance;
+	}
 
-		_currentResources[ResourceType::MINERAL] = 0;
-		_currentResources[ResourceType::GAS] = 0;
-		_currentResources[ResourceType::COKE] = 0;
-		_currentResources[ResourceType::CRUDE] = 0;
-		_currentResources[ResourceType::PURE_EVIL] = 0;
-		_currentResources[ResourceType::REFINED] = 0;
-		_currentResources[ResourceType::AETHER] = 0;
+	CurrentResourcesMap ResourcesManager::createCurrentResourcesMap()
+	{
+		CurrentResourcesMap map =
+		{
+			{ ResourceType::MINERAL, 0 },
+			{ ResourceType::GAS, 0 },
+			{ ResourceType::COKE, 0 },
+			{ ResourceType::CRUDE, 0 },
+			{ ResourceType::PURE_EVIL, 0 },
+			{ ResourceType::REFINED, 0 },
+			{ ResourceType::AETHER, 0 },
+		};
 
-		_maxResources[ResourceType::MINERAL] = 0;
-		_maxResources[ResourceType::GAS] = 0;
-		_maxResources[ResourceType::COKE] = 0;
-		_maxResources[ResourceType::CRUDE] = 0;
-		_maxResources[ResourceType::PURE_EVIL] = 0;
-		_maxResources[ResourceType::REFINED] = 0;
-		_maxResources[ResourceType::AETHER] = 0;
+		return map;
+	}
 
-	} // ResourcesManager
+	MaxResourcesMap ResourcesManager::createMaxResourcesMap()
+	{
+		MaxResourcesMap map =
+		{
+			{ ResourceType::MINERAL, 0 },
+			{ ResourceType::GAS, 0 },
+			{ ResourceType::COKE, 0 },
+			{ ResourceType::CRUDE, 0 },
+			{ ResourceType::PURE_EVIL, 0 },
+			{ ResourceType::REFINED, 0 },
+			{ ResourceType::AETHER, 0 },
+		};
+
+		return map;
+	}
+
+	ResourcesManager::ResourcesManager() : _currentResources(createCurrentResourcesMap()), _maxResources(createMaxResourcesMap())
+	{
+	}
 
 	ResourcesManager::~ResourcesManager()
 	{
-		assert(_instance);
-		_instance = 0;
-
 	} // ~ResourcesManager
 
 	bool ResourcesManager::Init()
 	{
-		assert(!_instance && "Segunda inicialización de Logic::ResourcesManager no permitida!");
-
-		new ResourcesManager();
-
-		if (!_instance->open())
+		if (!_instance.open())
 		{
 			Release();
 			return false;
 		}
 
 		return true;
-
 	} // Init
 
 	void ResourcesManager::Release()
 	{
-		assert(_instance && "Logic::ResourcesManager no está inicializado!");
-
-		if (_instance)
-		{
-			_instance->close();
-			delete _instance;
-		}
-
+		_instance.close();
 	} // Release
 
 	bool ResourcesManager::open() {
@@ -119,22 +119,9 @@ namespace Logic
 			];
 
 	} // luaRegister
-
-	/*const float ResourcesManager::MINERAL_GATHERING_SPEED = 20.f / 60.f;
-	const float ResourcesManager::GAS_GATHERING_SPEED = 12.f / 60.f;*/
-
-	/*void ResourcesManager::incMineral(int workers, float time)
-	{
-		increaseResources(ResourceType::MINERAL, MINERAL_GATHERING_SPEED * workers * time);
-	}*/
-	
-	/*void ResourcesManager::incGas(int workers, float time)
-	{
-		increaseResources(ResourceType::GAS, GAS_GATHERING_SPEED * workers * time);
-	}*/
 	
 	int ResourcesManager::getDisplayedResources(ResourceType type) const {
-		return (int) truncf(_currentResources.at(type));
+		return static_cast<int>(truncf(_currentResources.at(type)));
 	}
 
 	void ResourcesManager::changeDisplayedResources(ResourceType type, float num) {
@@ -159,51 +146,40 @@ namespace Logic
 	}
 
 	void ResourcesManager::changeDisplayedMaxResources(ResourceType type, int num) {
-		_maxResources[type] += num;
+		// Hades' Favor tiene un máximo ilimitado
+		// TODO ERROR Mirar porque el favor de hades aparece aquí
+		if (type != ResourceType::HADES_FAVOR) {
+			_maxResources[type] += num;
+		}
 	}
 
 	ResourceType ResourcesManager::parseResourceType(const std::string& name){
-		if (name == "MINERAL"){
+		if (name == "MINERAL")
 			return MINERAL;
-		}
-
-		else if (name == "GAS"){
+		else if (name == "GAS")
 			return GAS;
-		}
-
-		else if (name == "COKE"){
+		else if (name == "COKE")
 			return COKE;
-		}
-
-		else if (name == "CRUDE"){
+		else if (name == "CRUDE")
 			return CRUDE;
-		}
-
-		else if (name == "PURE_EVIL"){
+		else if (name == "PURE_EVIL")
 			return PURE_EVIL;
-		}
-
-		else if (name == "REFINED"){
+		else if (name == "REFINED")
 			return REFINED;
-		}
-
-		else if (name == "AETHER"){
+		else if (name == "AETHER")
 			return AETHER;
-		}
-
-		else if (name == "HADES_FAVOR"){
+		else if (name == "HADES_FAVOR")
 			return HADES_FAVOR;
-		}
-
-		else{
+		else
+		{
 			assert(false && "ResourceType name unknown");
 			return NONE;
 		}
 	}
 
-	std::map<CResourceBuilding*, int> ResourcesManager::findResources(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalAvailable){
+	std::unordered_map<CResourceBuilding*, int> ResourcesManager::findResources(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalAvailable){
 		// Obtenemos todos los recursos disponibles indexados por componente
-		std::map<CResourceBuilding*, int> availabilityMap;
+		std::unordered_map<CResourceBuilding*, int> availabilityMap;
 
 		// Y el total
 		totalAvailable = 0;
@@ -224,9 +200,9 @@ namespace Logic
 		return availabilityMap;
 	}
 
-	std::map<CResourceBuilding*, int> ResourcesManager::findStorage(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalStorage){
+	std::unordered_map<CResourceBuilding*, int> ResourcesManager::findStorage(ResourceType type, const std::vector<CResourceBuilding*>& resourceBuildings, int& totalStorage){
 		// Obtenemos todos los recursos almacenables indexados por componente
-		std::map<CResourceBuilding*, int> storageMap;
+		std::unordered_map<CResourceBuilding*, int> storageMap;
 
 		// Y el total
 		totalStorage = 0;
@@ -262,7 +238,7 @@ namespace Logic
 
 		// Obtenemos la información de disponibilidad de recursos
 		int totalAvailable;
-		std::map<CResourceBuilding*, int> availabilityMap = findResources(type, resourceBuildings, totalAvailable);
+		std::unordered_map<CResourceBuilding*, int> availabilityMap = findResources(type, resourceBuildings, totalAvailable);
 
 		// Vemos si el total disponible cubre el decremento solicitado completo
 		// Si cubre
@@ -333,7 +309,7 @@ namespace Logic
 
 		// Obtenemos la información de disponibilidad de recursos
 		int totalAvailable;
-		std::map<CResourceBuilding*, int> storageMap = findStorage(type, resourceBuildings, totalAvailable);
+		std::unordered_map<CResourceBuilding*, int> storageMap = findStorage(type, resourceBuildings, totalAvailable);
 
 		// Vemos si el total disponible cubre el incremento solicitado completo
 		// Si cubre
