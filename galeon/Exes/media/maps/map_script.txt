@@ -66,7 +66,7 @@ Map = {
 		material = "HellQuarters",
 		storedResources="GAS,MINERAL",
 		maxResources = 2000,
-		initialResources = 1000,
+		initialResources = 1500,
 		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopupHellquarters.layout",
 		image = "HellQuarters",
@@ -296,7 +296,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		billboardSetPosition = { 0, 300, 0 },
-		hadesFavorReward = 3,
+		hadesFavorReward = 5,
 	},
 	
 	Refinery = {
@@ -340,7 +340,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		billboardSetPosition = { 0, 300, 0 },
-		hadesFavorReward = 3,
+		hadesFavorReward = 5,
 	},
 		
 	ResearchLabs = {
@@ -374,7 +374,7 @@ Map = {
 		image = "ResearchLabs",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
-		hadesFavorReward = 4,
+		hadesFavorReward = 5,
 	},
 		
 	PowerGenerator = {
@@ -410,7 +410,7 @@ Map = {
 		image = "PowerGenerator",
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
-		hadesFavorReward = 15,
+		hadesFavorReward = 10,
 	},
 
 	Warehouse = {

@@ -229,7 +229,8 @@ namespace AI
 		float _difficulty;
 
 		/** 
-		Valor actual de la dificultad base de la partida. A lo largo de la partida o, por ejemplo, en la cuenta final de cada ronda, debería ir aumentando
+		Valor actual de la dificultad base de la partida. A lo largo de la partida o, por ejemplo,
+		en la cuenta final de cada ronda, debería ir aumentando
 		*/
 		float _baseDifficulty;
 
