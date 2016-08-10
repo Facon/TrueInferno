@@ -30,7 +30,6 @@ de una escena.
 
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
-//#include <OgreOctreeSceneManager.h>
 #include <OgreRenderWindow.h>
 #include <OgreViewport.h>
 #include <OgreStaticGeometry.h>
