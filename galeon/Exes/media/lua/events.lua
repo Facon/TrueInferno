@@ -66,13 +66,26 @@ BuildingDestructionEvent.evil = 1.0
 BuildingDestructionEvent.godTraits.aggressive = 1.0
 BuildingDestructionEvent.allowsBoss = true
 BuildingDestructionEvent.allowsNonBoss = true
+BuildingDestructionEvent.buildingType = BuildingManager.BT_UNASSIGNED
+-- "BT_EVILATOR"
+-- "BT_EVIL_WORKS"
+-- "BT_FURNACE"
+-- "BT_GAS_PLANT"
+-- "BT_HQ"
+-- "BT_MINE"
+-- "BT_NON_BUILDING"
+-- "BT_POWER_GENERATOR"
+-- "BT_REFINERY"
+-- "BT_RESEARCH_LABS"
+-- "BT_UNASSIGNED"
+-- "BT_WAREHOUSE"
 BuildingDestructionEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "Building Destruction"
 	local description = "A building has been destroyed!"
 	local image = "EventBuildingDestruction"
 	CEventManager.getSingletonPtr():addTimeEvent(CBuildingDestructionEvent.addCBuildingDestructionEvent(
-		timeToLaunch, god.name, title, description, image, true));
+		timeToLaunch, god.name, title, description, image, BuildingDestructionEvent.buildingType, true));
 end
 
 MinorSoulSpeedReductionEvent = Event:new("MinorSoulSpeedReductionEvent")

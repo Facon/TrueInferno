@@ -23,6 +23,7 @@ Contiene la implementación del gestor de la matriz de tiles.
 #include "Logic/Entity/Message.h"
 #include "Logic\Maps\Managers\TileManager.h"
 #include "Logic\Entity\Components\Tile.h"
+#include "BaseSubsystems\ScriptManager.h"
 
 #include <cassert>
 
@@ -118,6 +119,8 @@ namespace Logic {
 
 	bool CBuildingManager::open()
 	{
+		luaRegister();
+
 		return true;
 
 	} // open
@@ -387,9 +390,19 @@ namespace Logic {
 		}
 		return false;
 	}
-
+	
 	bool CBuildingManager::DestroyRandomBuilding(){
 		CPlaceable* building = getRandomBuildingforDestruction();
+		if (building != nullptr){
+			// Invocamos la destrucción del placeable. Internamente se harán todas las operaciones necesarias para asegurar la consistencia de los datos
+			destroyPlaceable(building->getEntity(), true);
+			return true;
+		}
+		return false;
+	}
+
+	bool CBuildingManager::DestroyRandomBuilding(BuildingType buildingType){
+		CPlaceable* building = findBuilding(buildingType);
 		if (building != nullptr){
 			// Invocamos la destrucción del placeable. Internamente se harán todas las operaciones necesarias para asegurar la consistencia de los datos
 			destroyPlaceable(building->getEntity(), true);
@@ -501,5 +514,29 @@ namespace Logic {
 			--number;
 		}
 	}
+
+	void CBuildingManager::luaRegister() {
+		// CBuildingManager.
+		luabind::module(ScriptManager::CScriptManager::GetPtrSingleton()->getNativeInterpreter())
+			[
+				luabind::class_<CBuildingManager>("BuildingManager")
+				.enum_("BuildingType")
+				[
+					luabind::value("BT_EVILATOR", BuildingType::Evilator),
+					luabind::value("BT_EVIL_WORKS", BuildingType::EvilWorks),
+					luabind::value("BT_FURNACE", BuildingType::Furnace),
+					luabind::value("BT_GAS_PLANT", BuildingType::GasPlant),
+					luabind::value("BT_HQ", BuildingType::HellQuarters),
+					luabind::value("BT_MINE", BuildingType::Mine),
+					luabind::value("BT_NON_BUILDING", BuildingType::NonBuilding),
+					luabind::value("BT_POWER_GENERATOR", BuildingType::PowerGenerator),
+					luabind::value("BT_REFINERY", BuildingType::Refinery),
+					luabind::value("BT_RESEARCH_LABS", BuildingType::ResearchLabs),
+					luabind::value("BT_UNASSIGNED", BuildingType::Unassigned),
+					luabind::value("BT_WAREHOUSE", BuildingType::Warehouse)
+				]
+			];
+
+	} // luaRegister
 	
 } // namespace Logic

@@ -19,6 +19,7 @@ y encolados hasta que llegue el momento de su lanzamiento.
 #include <iostream>
 #include <algorithm>
 #include <climits>
+#include <cmath>
 
 #include "AIManager.h"
 
@@ -275,7 +276,8 @@ namespace AI {
 		return worstGod;
 	}
 
-	void CAIManager::startNextRound(){
+	void CAIManager::startNextRound()
+	{
 		++_numRound;
 
 		// No hace falta eliminar dios porque ya se ha hecho desde el GameManager
@@ -287,15 +289,15 @@ namespace AI {
 		switch (Logic::CServer::getSingletonPtr()->getGameRuntimeContext()){
 		case GameRuntimeContext::SCRIPTED_DEMO:
 			// 1ª ronda: BASE_SCORE_PER_ROUND
-			// 2ª ronda: MEJOR_DIOS + 4 * BASE_SCORE_PER_ROUND
-			// 3ª ronda: MEJOR_DIOS + 9 * BASE_SCORE_PER_ROUND
-			base = getGodRanking().front()->getScore() + (_numRound * _numRound * _baseScorePerRound);
+			// 2ª ronda: MEJOR_DIOS + 2^1 * BASE_SCORE_PER_ROUND
+			// 3ª ronda: MEJOR_DIOS + 2^2 * BASE_SCORE_PER_ROUND
+			base = getGodRanking().front()->getScore() + pow(2, _numRound - 1) * _baseScorePerRound;
 			break;
 		default:
 			// 1ª ronda: BASE_SCORE_PER_ROUND
-			// 2ª ronda: MEJOR_DIOS + BASE_SCORE_PER_ROUND
-			// 3ª ronda: MEJOR_DIOS + 2 * BASE_SCORE_PER_ROUND
-			base = getGodRanking().front()->getScore() + ((_numRound-1) * _baseScorePerRound);
+			// 2ª ronda: MEJOR_DIOS + 2 * BASE_SCORE_PER_ROUND
+			// 3ª ronda: MEJOR_DIOS + 3 * BASE_SCORE_PER_ROUND
+			base = getGodRanking().front()->getScore() + _numRound * _baseScorePerRound;
 			break;
 		}
 

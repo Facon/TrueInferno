@@ -10,7 +10,7 @@ Map = {
 
 	AIManager = {
 		type = "AIManager",
-		baseScorePerRound = 30,
+		baseScorePerRound = 50,
 		scoreMaxRelativeDeviation = 0.50,
 		minBaseDifficulty = 0.0,
 		maxBaseDifficulty = 1.0,
@@ -18,6 +18,6 @@ Map = {
 	
 	TimeManager = {
 		type = "TimeManager",
-		defaultRoundTime = 150000,
+		defaultRoundTime = 240000,
 	},
 }

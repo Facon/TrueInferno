@@ -68,10 +68,10 @@ namespace Application {
 	{
 		CApplicationState::release();
 
-		// Fallan al liberar
-		//_menuWindow->getChildElement("ButtonFrame/StartButton")->removeAllEvents();
-		//_menuWindow->getChildElement("ButtonFrame/CreditsButton")->removeAllEvents();
-		//_menuWindow->getChildElement("ButtonFrame/ExitButton")->removeAllEvents();
+		// Fallan al liberar (saliendo del juego a través del menú con Exit->Exit): No descomentar
+		_menuWindow->getChildElement("ButtonFrame/StartButton")->removeAllEvents();
+		_menuWindow->getChildElement("ButtonFrame/CreditsButton")->removeAllEvents();
+		_menuWindow->getChildElement("ButtonFrame/ExitButton")->removeAllEvents();
 
 	} // release
 

@@ -1,14 +1,20 @@
+# Application (Name and description)
 !define APPNAME "True Inferno"
-!define COMPANYNAME "True Inferno team"
+!define COMPANYNAME "True Inferno"
 !define DESCRIPTION "Hell is only the beginning!"
-# These three must be integers
-!define VERSIONMAJOR 1
-!define VERSIONMINOR 4
+
+# Version (These three must be integers)
+!define VERSIONMAJOR 0
+!define VERSIONMINOR 1
 !define VERSIONBUILD 0
+
+# Icons
+!include "MUI2.nsh"
+!define MUI_ICON "TrueInferno.ico"
 
 # These will be display
 # name the installer
-OutFile "TrueInfernoInstaller${VERSIONMAJOR}_${VERSIONMINOR}.exe"
+OutFile "TrueInferno_v${VERSIONMAJOR}_${VERSIONMINOR}.exe"
  
 # set desktop as install directory
 InstallDir "$PROGRAMFILES\${APPNAME}"
@@ -32,13 +38,13 @@ Section
 	"$INSTDIR" "(BU)" "GenericRead + GenericWrite"
 	Pop $0
 	
-	#File /oname=TrueInferno.exe Galeon_d.exe
+	#File /oname=TrueInferno.exe
 	# define uninstaller name
-	WriteUninstaller $INSTDIR\uninstaller.exe
+	WriteUninstaller $INSTDIR\Uninstaller.exe
 	
 	createDirectory "$SMPROGRAMS\${APPNAME}"
-	createShortCut "$SMPROGRAMS\True Inferno\True Inferno.lnk" "$INSTDIR\Galeon_d.exe"
-	createShortCut "$SMPROGRAMS\True Inferno\uninstaller.lnk" "$INSTDIR\uninstaller.exe"
+	createShortCut "$SMPROGRAMS\True Inferno\True Inferno.lnk" "$INSTDIR\TrueInferno.exe"
+	createShortCut "$SMPROGRAMS\True Inferno\Uninstaller.lnk" "$INSTDIR\Uninstaller.exe"
 	
 	# create a shortcut named "new shortcut" in the start menu programs directory
 	# presently, the new shortcut doesn't call anything (the second field is blank)

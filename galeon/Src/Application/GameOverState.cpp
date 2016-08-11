@@ -38,7 +38,7 @@ namespace Application {
 	{
 		CApplicationState::init();
 
-        // TODO Posible error Aquí para cuando el personaje muera.
+        // TODO Posible error aquí para cuando el personaje muera.
         _gameOverWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Defeat.layout");
 
         _gameOverWindow->getChildElement("Exit")->
@@ -54,6 +54,7 @@ namespace Application {
 	void CGameOverState::release() 
 	{
 		CApplicationState::release();
+		_gameOverWindow->getChildElement("Exit")->removeAllEvents();
 
 	} // release
 

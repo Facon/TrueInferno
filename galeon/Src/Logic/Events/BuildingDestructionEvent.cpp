@@ -55,7 +55,10 @@ namespace Logic {
 
 	void CBuildingDestructionEvent::execute()
 	{
-		bool buildingDestroyed = Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding();
+		if (_buildingType == BuildingType::Unassigned)
+			Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding();
+		else
+			Logic::CBuildingManager::getSingletonPtr()->DestroyRandomBuilding(_buildingType);
 
 		// TODO ¿Notificar distinto dependiendo de buildingDestroyed?
 	} // execute
