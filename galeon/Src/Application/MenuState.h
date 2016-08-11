@@ -77,6 +77,7 @@ namespace Application
 		estado de la aplicación.
 		*/
 		virtual void release();
+		void releaseEvents();
 
 		/**
 		Función llamada por la aplicación cuando se activa

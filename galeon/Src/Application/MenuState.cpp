@@ -41,6 +41,7 @@ namespace Application {
 		_menuWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UI.layout");
 		_menuMainWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Menu.layout");
 		_menuCreditsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Credits.layout");
+
 		// Asociamos los botones del menú con las funciones que se deben ejecutar.
 		_menuMainWindow->getChildElement("ButtonFrame/StartButton")->
 			subscribeEvent(CEGUI::PushButton::EventClicked, 
@@ -67,13 +68,18 @@ namespace Application {
 	void CMenuState::release() 
 	{
 		CApplicationState::release();
-
-		// Fallan al liberar (saliendo del juego a través del menú con Exit->Exit): No descomentar
-		_menuWindow->getChildElement("ButtonFrame/StartButton")->removeAllEvents();
-		_menuWindow->getChildElement("ButtonFrame/CreditsButton")->removeAllEvents();
-		_menuWindow->getChildElement("ButtonFrame/ExitButton")->removeAllEvents();
+		releaseEvents();
 
 	} // release
+
+	void CMenuState::releaseEvents()
+	{
+		// Fallan al liberar (al salir del juego a través del menú con Exit->Exit): NO descomentar!
+		//_menuWindow->getChildElement("ButtonFrame/StartButton")->removeAllEvents();
+		//_menuWindow->getChildElement("ButtonFrame/CreditsButton")->removeAllEvents();
+		//_menuWindow->getChildElement("ButtonFrame/ExitButton")->removeAllEvents();
+
+	} // releaseEvents
 
 	//--------------------------------------------------------
 
