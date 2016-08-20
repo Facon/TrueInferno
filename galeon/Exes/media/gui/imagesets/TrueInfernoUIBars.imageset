@@ -5,5 +5,6 @@
     <Image height="166" name="TopBar" width="1920" xPos="-2" yPos="2651" />
     <Image height="397" name="EventFrame" width="460" xPos="616" yPos="1210" />
     <Image height="229" name="ButtonFrame" width="364" xPos="278" yPos="2124" />
+    <Image height="233" name="ButtonFrameWhite" width="372" xPos="653" yPos="2120" />
 	<Image height="277" name="ButtonWindow" width="358" xPos="668" yPos="1276" />
 </Imageset>

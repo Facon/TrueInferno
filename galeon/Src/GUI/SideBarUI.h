@@ -3,11 +3,55 @@
 
 #include "Logic/Entity/Components/Tile.h"
 
+#include <boost/unordered_map.hpp>
+#include <boost/assign/list_of.hpp>
+
+/**
+@author Raúl Segura
+*/
+namespace SideBar
+{
+	/**
+	Botones de construcción de edificios (y limpieza del terreno) presentes en el menú
+	de la barra lateral derecha de la interfaz.
+	*/
+	enum BuildingButton
+	{
+		ROAD,
+		MINE,
+		GAS_PLANT,
+		FURNACE,
+		EVILWORKS,
+		REFINERY,
+		POWER_GENERATOR,
+		WAREHOUSE,
+		CLEAR_TERRAIN
+	};
+
+	/**
+	Índice entre cada uno de los botones del enum anterior y el nombre (string) que
+	hay que pasarle a CEGUI para referenciarlo.
+	*/
+	typedef boost::unordered_map<SideBar::BuildingButton, std::string> bumap_names;
+
+	const bumap_names buildingButtonsNamesMap = boost::assign::map_list_of
+		(BuildingButton::ROAD, "CreateRoad")
+		(BuildingButton::MINE, "CreateMine")
+		(BuildingButton::GAS_PLANT, "CreateGasPlant")
+		(BuildingButton::FURNACE, "CreateFurnace")
+		(BuildingButton::EVILWORKS, "CreateEvilworks")
+		(BuildingButton::REFINERY, "CreateRefinery")
+		(BuildingButton::POWER_GENERATOR, "CreatePowerGenerator")
+		(BuildingButton::WAREHOUSE, "CreateWarehouse")
+		(BuildingButton::CLEAR_TERRAIN, "ClearTerrain");
+}
+
 namespace Logic
 {
 	class CEntity;
 	class Tile;
 }
+
 namespace CEGUI
 {
 	class Window;
@@ -16,6 +60,7 @@ namespace CEGUI
 
 namespace GUI
 {
+
 	class SideBarUI
 	{
 	protected:
@@ -42,26 +87,57 @@ namespace GUI
 		bool _firstAnimation = true;
 
 		bool _deactivateCursorAnimation = false;
-		
-		bool createFurnaceReleased(const CEGUI::EventArgs& e);
+
+		// Blinking button
+		bool _blinkingButton = false;
+		CEGUI::Window* _blinkingButtonFrameWindow = nullptr;
+
+		int _blinkingButtonTickLimit = 500;
+		int _blinkingButtonTickCount = _blinkingButtonTickLimit;
+
+		std::string buttonFrame = "TrueInfernoUIBars/ButtonFrame";
+		std::string buttonFrameWhite = "TrueInfernoUIBars/ButtonFrameWhite";
+
+		// Botones de construcción de edificios
 		bool createRoadReleased(const CEGUI::EventArgs& e);
 		bool createMineReleased(const CEGUI::EventArgs& e);
 		bool createGasPlantReleased(const CEGUI::EventArgs& e);
-		bool createSoulReleased(const CEGUI::EventArgs& e);
-		bool moveSoulReleased(const CEGUI::EventArgs& e);
+		bool createFurnaceReleased(const CEGUI::EventArgs& e);
 		bool createEvilworksReleased(const CEGUI::EventArgs& e);
 		bool createRefineryReleased(const CEGUI::EventArgs& e);
-		bool repairBuildingReleased(const CEGUI::EventArgs& e);
-		bool clearTerrainReleased(const CEGUI::EventArgs& e);
-		void ClearBuildingConstruction(bool clearPopups);
-		bool createResearchLabReleased(const CEGUI::EventArgs& e);
-		bool createWarehouseReleased(const CEGUI::EventArgs& e);
 		bool createPowerGeneratorReleased(const CEGUI::EventArgs& e);
+		bool createWarehouseReleased(const CEGUI::EventArgs& e);
+		bool clearTerrainReleased(const CEGUI::EventArgs& e);
+		
+		// Botones de construcción no incluidos finalmente
+		bool createResearchLabReleased(const CEGUI::EventArgs& e);
+		bool repairBuildingReleased(const CEGUI::EventArgs& e);
+
+		// Botones de almas usados durante el desarrollo
+		bool createSoulReleased(const CEGUI::EventArgs& e);
+		bool moveSoulReleased(const CEGUI::EventArgs& e);
+
+		// Animación del cursor durante el hover
 		bool buttonFrameEnter(const CEGUI::EventArgs& e);
 		bool buttonFrameExit(const CEGUI::EventArgs& e);
 
+		// Acciones múltiples
 		bool continueRoadCreation();
 		bool continueClearTerrain();
+
+		// Reset completo de lo que se estuviera haciendo
+		void ClearBuildingConstruction(bool clearPopups);
+
+		// Cambios en botones de construcción bajo demanda
+		void buildingButtonShow(SideBar::BuildingButton button);
+		void buildingButtonHide(SideBar::BuildingButton button);
+		void buildingButtonFadeIn(SideBar::BuildingButton button);
+		void buildingButtonFadeOut(SideBar::BuildingButton button);
+		void buildingButtonBlinkStart(SideBar::BuildingButton button);
+		void buildingButtonBlinkStop(SideBar::BuildingButton button);
+
+		// Función auxiliar para los métodos anteriores
+		CEGUI::Window* getButtonWindowFromName(std::string buttonName);
 
 	public:
 		bool _onUIScreen = false;
