@@ -36,12 +36,13 @@
 
 #include "Logic\Entity\IconType.h"
 
+using namespace SideBar;
+
 namespace GUI
 {
 	SideBarUI::SideBarUI()
 	{
 	}
-
 
 	SideBarUI::~SideBarUI()
 	{
@@ -52,72 +53,81 @@ namespace GUI
 		_uibuttonsWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIButtonBar.layout");
 		_uibuttonsWindow->setRiseOnClickEnabled(false);
 
-		_uibuttonsWindow->getChildElement("CreateFurnace")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::createFurnaceReleased, this));
-		_uibuttonsWindow->getChildElement("CreateFurnace")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
-		_uibuttonsWindow->getChildElement("CreateFurnace")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
-
-		_uibuttonsWindow->getChildElement("CreateRoad")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		std::string roadButton = buildingButtonsNamesMap.at(BuildingButton::ROAD);
+		_uibuttonsWindow->getChildElement(roadButton)->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createRoadReleased, this));
-		_uibuttonsWindow->getChildElement("CreateRoad")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
-		_uibuttonsWindow->getChildElement("CreateRoad")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
+		_uibuttonsWindow->getChildElement(roadButton)->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement(roadButton)->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
-		_uibuttonsWindow->getChildElement("CreateGasPlant")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::createGasPlantReleased, this));
-		_uibuttonsWindow->getChildElement("CreateGasPlant")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
-		_uibuttonsWindow->getChildElement("CreateGasPlant")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
-
-		_uibuttonsWindow->getChildElement("CreateMine")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		std::string mineButton = buildingButtonsNamesMap.at(BuildingButton::MINE);
+		_uibuttonsWindow->getChildElement(mineButton)->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createMineReleased, this));
-		_uibuttonsWindow->getChildElement("CreateMine")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
-		_uibuttonsWindow->getChildElement("CreateMine")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
+		_uibuttonsWindow->getChildElement(mineButton)->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement(mineButton)->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
-		_uibuttonsWindow->getChildElement("CreateEvilworks")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		std::string gasPlantButton = buildingButtonsNamesMap.at(BuildingButton::GAS_PLANT);
+		_uibuttonsWindow->getChildElement(gasPlantButton)->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createGasPlantReleased, this));
+		_uibuttonsWindow->getChildElement(gasPlantButton)->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement(gasPlantButton)->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
+
+		std::string furnaceButton = buildingButtonsNamesMap.at(BuildingButton::FURNACE);
+		_uibuttonsWindow->getChildElement(furnaceButton)->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createFurnaceReleased, this));
+		_uibuttonsWindow->getChildElement(furnaceButton)->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement(furnaceButton)->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
+
+		std::string evilworksButton = buildingButtonsNamesMap.at(BuildingButton::EVILWORKS);
+		_uibuttonsWindow->getChildElement(evilworksButton)->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createEvilworksReleased, this));
-		_uibuttonsWindow->getChildElement("CreateEvilworks")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
-		_uibuttonsWindow->getChildElement("CreateEvilworks")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
+		_uibuttonsWindow->getChildElement(evilworksButton)->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement(evilworksButton)->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
-		_uibuttonsWindow->getChildElement("CreateRefinery")->subscribeEvent(CEGUI::PushButton::EventClicked,
+		std::string refineryButton = buildingButtonsNamesMap.at(BuildingButton::REFINERY);
+		_uibuttonsWindow->getChildElement(refineryButton)->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&SideBarUI::createRefineryReleased, this));
-		_uibuttonsWindow->getChildElement("CreateRefinery")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
-		_uibuttonsWindow->getChildElement("CreateRefinery")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
+		_uibuttonsWindow->getChildElement(refineryButton)->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement(refineryButton)->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
+
+		std::string powerGeneratorButton = buildingButtonsNamesMap.at(BuildingButton::POWER_GENERATOR);
+		_uibuttonsWindow->getChildElement(powerGeneratorButton)->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createPowerGeneratorReleased, this));
+		_uibuttonsWindow->getChildElement(powerGeneratorButton)->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement(powerGeneratorButton)->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
+
+		std::string warehouseButton = buildingButtonsNamesMap.at(BuildingButton::WAREHOUSE);
+		_uibuttonsWindow->getChildElement(warehouseButton)->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::createWarehouseReleased, this));
+		_uibuttonsWindow->getChildElement(warehouseButton)->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement(warehouseButton)->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
+
+		std::string clearTerrainButton = buildingButtonsNamesMap.at(BuildingButton::CLEAR_TERRAIN);
+		_uibuttonsWindow->getChildElement(clearTerrainButton)->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&SideBarUI::clearTerrainReleased, this));
+		_uibuttonsWindow->getChildElement(clearTerrainButton)->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
+		_uibuttonsWindow->getChildElement(clearTerrainButton)->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 
 		//_uibuttonsWindow->getChildElement("RepairBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 		//	CEGUI::SubscriberSlot(&SideBarUI::repairBuildingReleased, this));
 
-		_uibuttonsWindow->getChildElement("ClearTerrain")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::clearTerrainReleased, this));
-		_uibuttonsWindow->getChildElement("ClearTerrain")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
-		_uibuttonsWindow->getChildElement("ClearTerrain")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
-
 		//_uibuttonsWindow->getChildElement("CreateResearchLab")->subscribeEvent(CEGUI::PushButton::EventClicked,
 		//	CEGUI::SubscriberSlot(&SideBarUI::createResearchLabReleased, this));
-
-		_uibuttonsWindow->getChildElement("CreateWarehouse")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::createWarehouseReleased, this));
-		_uibuttonsWindow->getChildElement("CreateWarehouse")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
-		_uibuttonsWindow->getChildElement("CreateWarehouse")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
-
-		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::SubscriberSlot(&SideBarUI::createPowerGeneratorReleased, this));
-		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameEnter, this));
-		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&SideBarUI::buttonFrameExit, this));
 	}
 
 	void SideBarUI::release()
 	{
 		// Remove all events to avoid memory leaks
-		_uibuttonsWindow->getChildElement("CreateFurnace")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateRoad")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateMine")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateGasPlant")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateFurnace")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateEvilworks")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateRefinery")->removeAllEvents();
-		//_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("ClearTerrain")->removeAllEvents();
-		//_uibuttonsWindow->getChildElement("CreateResearchLab")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("CreateWarehouse")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateWarehouse")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("ClearTerrain")->removeAllEvents();
+		//_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
+		//_uibuttonsWindow->getChildElement("CreateResearchLab")->removeAllEvents();
 
 		_placeableEntity = nullptr;
 	}
@@ -173,13 +183,13 @@ namespace GUI
 
 	void SideBarUI::tick(unsigned int msecs)
 	{
-		//resize en CEGUI tiene algun fallo con los botones
+		//TODO El resize en CEGUI tiene algun fallo con los botones...
 		//Graphics::CCamera* mCamera = Graphics::CServer::getSingletonPtr()->getActiveScene()->getCamera();
-
 		//float width = (float)mCamera->getViewportWidth();
 		//float height = (float)mCamera->getViewportHeight();
 		//printf("width %f height %f\n", width, height);
 		//CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Sizef(width,height));
+
 		using namespace Logic;
 
 		Logic::CTimeManager& tm = Logic::CTimeManager::getSingleton();
@@ -187,9 +197,10 @@ namespace GUI
 		float total_seconds = tm.getRemainingRoundTime() / 1000.0f;
 		unsigned int minutes = static_cast<unsigned int>(trunc(total_seconds / 60.0f));
 		unsigned int seconds = static_cast<unsigned int>(((total_seconds / 60.0f) - minutes) * 60.0f);
-		_uibuttonsWindow->getChild("TimeLeft")->setText(std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
 
+		_uibuttonsWindow->getChild("TimeLeft")->setText(std::to_string(minutes) + ":" + ((seconds > 9) ? std::to_string(seconds) : "0" + std::to_string(seconds)));
 		_redrawUICountLimit -= msecs;
+
 		if (_redrawUICountLimit <= 0)
 		{
 			_redrawUICountLimit = _redrawUICountResetValue;
@@ -203,6 +214,20 @@ namespace GUI
 			{
 				UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
 				uiManager->getBuildingSelectionUI()->changeButtonLayout();
+			}
+		}
+
+		// Blinking button
+		if (_blinkingButton)
+		{
+			_blinkingButtonTickCount += msecs;
+
+			if (_blinkingButtonTickCount >= _blinkingButtonTickLimit && _blinkingButtonFrameWindow != nullptr)
+			{
+				_blinkingButtonTickCount = 0;
+
+				bool blinkingNormalFrame = _blinkingButtonFrameWindow->getProperty("Image") == buttonFrame;
+				_blinkingButtonFrameWindow->setProperty("Image", blinkingNormalFrame ? buttonFrameWhite : buttonFrame);
 			}
 		}
 
@@ -285,8 +310,6 @@ namespace GUI
 					}
 				}
 			}
-
-
 			else if (!_placeableEntity && !_onUIScreen && !_onButtonFrame)
 			{
 				Logic::CEntity* entity = getEntityFromRaycastToGroup(2);
@@ -405,13 +428,6 @@ namespace GUI
 		}
 	}
 
-	bool SideBarUI::createFurnaceReleased(const CEGUI::EventArgs& e)
-	{
-		ClearBuildingConstruction(true);
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Furnace", Vector3(0, 0, 0), true, true);
-		return (_placeableEntity != nullptr);
-	}
-
 	bool SideBarUI::createRoadReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction(true);
@@ -452,13 +468,19 @@ namespace GUI
 		return (_placeableEntity != nullptr);
 	}
 
+	bool SideBarUI::createFurnaceReleased(const CEGUI::EventArgs& e)
+	{
+		ClearBuildingConstruction(true);
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Furnace", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
+	}
+
 	bool SideBarUI::createEvilworksReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "EvilWorks", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
-
 
 	bool SideBarUI::createRefineryReleased(const CEGUI::EventArgs& e)
 	{
@@ -467,46 +489,18 @@ namespace GUI
 		return (_placeableEntity != nullptr);
 	}
 
-	bool SideBarUI::buttonFrameEnter(const CEGUI::EventArgs& e)
-	{
-			_onButtonFrame = true;
-			_onGoldFrame = true;
-		if (!_clearTerrain && !_placeableEntity){
-			_cursorAnimationStatus = 1;
-			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
-			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoGoldCursors/CursorGold1");
-			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoGoldCursors/CursorGold1");
-		}
-		return true;
-	}
-
-	bool SideBarUI::buttonFrameExit(const CEGUI::EventArgs& e)
-	{
-		_onButtonFrame = false;
-		_onGoldFrame = false;
-		_firstAnimation = true;
-		if (!_onUIScreen && !_clearTerrain && !_placeableEntity){
-			_cursorAnimationStatus = 1;
-			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
-			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle1");
-			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle1");
-		}
-		return true;
-	}
-
-	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
+	bool SideBarUI::createPowerGeneratorReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction(true);
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "PowerGenerator", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
+	}
 
-		// Icono random
-		Logic::CEntity* ent = (*(Logic::CBuildingManager::getSingletonPtr()->getBuildings()[Logic::BuildingType::HellQuarters]->begin()))->getEntity(); // TODO TEST pruebas
-		Logic::IconMessage m(Logic::MessageType::ICON_ADD, static_cast<Logic::IconType::IconType>(Math::random(1, 10)));
-		
-		const bool result = m.Dispatch(*ent);
-		assert(result && "Can't add test icon");
-		
-		printf("Repair Building\n");
-		return true;
+	bool SideBarUI::createWarehouseReleased(const CEGUI::EventArgs& e)
+	{
+		ClearBuildingConstruction(true);
+		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Warehouse", Vector3(0, 0, 0), true, true);
+		return (_placeableEntity != nullptr);
 	}
 
 	bool SideBarUI::clearTerrainReleased(const CEGUI::EventArgs& e)
@@ -529,24 +523,25 @@ namespace GUI
 		return true;
 	}
 
+	bool SideBarUI::repairBuildingReleased(const CEGUI::EventArgs& e)
+	{
+		ClearBuildingConstruction(true);
+
+		// Icono random
+		Logic::CEntity* ent = (*(Logic::CBuildingManager::getSingletonPtr()->getBuildings()[Logic::BuildingType::HellQuarters]->begin()))->getEntity(); // TODO TEST pruebas
+		Logic::IconMessage m(Logic::MessageType::ICON_ADD, static_cast<Logic::IconType::IconType>(Math::random(1, 10)));
+
+		const bool result = m.Dispatch(*ent);
+		assert(result && "Can't add test icon");
+
+		printf("Repair Building\n");
+		return true;
+	}
+
 	bool SideBarUI::createResearchLabReleased(const CEGUI::EventArgs& e)
 	{
 		ClearBuildingConstruction(true);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "ResearchLabs", Vector3(0, 0, 0), true, true);
-		return (_placeableEntity != nullptr);
-	}
-
-	bool SideBarUI::createWarehouseReleased(const CEGUI::EventArgs& e)
-	{
-		ClearBuildingConstruction(true);
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "Warehouse", Vector3(0, 0, 0), true, true);
-		return (_placeableEntity != nullptr);
-	}
-
-	bool SideBarUI::createPowerGeneratorReleased(const CEGUI::EventArgs& e)
-	{
-		ClearBuildingConstruction(true);
-		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "PowerGenerator", Vector3(0, 0, 0), true, true);
 		return (_placeableEntity != nullptr);
 	}
 
@@ -583,7 +578,165 @@ namespace GUI
 		}
 	}
 
-	bool checkPlaceableConsumeCost(Logic::CEntity* placeableEntity){
+	bool SideBarUI::buttonFrameEnter(const CEGUI::EventArgs& e)
+	{
+		_onButtonFrame = true;
+		_onGoldFrame = true;
+		if (!_clearTerrain && !_placeableEntity){
+			_cursorAnimationStatus = 1;
+			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoGoldCursors/CursorGold1");
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoGoldCursors/CursorGold1");
+		}
+		return true;
+	}
+
+	bool SideBarUI::buttonFrameExit(const CEGUI::EventArgs& e)
+	{
+		_onButtonFrame = false;
+		_onGoldFrame = false;
+		_firstAnimation = true;
+		if (!_onUIScreen && !_clearTerrain && !_placeableEntity){
+			_cursorAnimationStatus = 1;
+			_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoIdleCursors/CursorIdle1");
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoIdleCursors/CursorIdle1");
+		}
+		return true;
+	}
+
+	//--------------------------------------------------------
+
+	CEGUI::Window* SideBarUI::getButtonWindowFromName(std::string buttonName)
+	{
+		for (unsigned int i = 0; i < _uibuttonsWindow->getChildCount(); ++i)
+			if (_uibuttonsWindow->getChildAtIdx(i)->getName() == buttonName)
+				return _uibuttonsWindow->getChildAtIdx(i);
+
+		return nullptr;
+	}
+
+	//--------------------------------------------------------
+
+	void SideBarUI::buildingButtonShow(SideBar::BuildingButton button)
+	{
+		// Nombre del botón pulsado
+		std::string buttonName = buildingButtonsNamesMap.at(button);
+
+		// Botón pulsado
+		CEGUI::Window *buttonWindow = getButtonWindowFromName(buttonName);
+
+		if (buttonWindow == nullptr)
+			return;
+
+		// Opción 1: Botón invisible y no interactuable
+		buttonWindow->setVisible(true);
+
+		// Opción 2: Botón inactivo y eventos muteados
+		// @TODO En caso de usar esta opción, habría que hacer algún cambio adicional para mostrar que el
+		// botón no está activo (se podría hacer un fade out y cambiar el color del icono a gris)
+		//buttonWindow->setMutedState(false);
+		//buttonWindow->setDisabled(false);
+		//buttonWindow->setAlwaysOnTop(false);
+	}
+
+	void SideBarUI::buildingButtonHide(SideBar::BuildingButton button)
+	{
+		// Nombre del botón pulsado
+		std::string buttonName = buildingButtonsNamesMap.at(button);
+
+		// Botón pulsado
+		CEGUI::Window *buttonWindow = getButtonWindowFromName(buttonName);
+
+		if (buttonWindow == nullptr)
+			return;
+
+		// Opción 1: Botón invisible y no interactuable
+		buttonWindow->setVisible(false);
+
+		// Opción 2: Botón inactivo y eventos muteados
+		// @TODO En caso de usar esta opción, habría que hacer algún cambio adicional para mostrar que el
+		// botón no está activo (se podría hacer un fade out y cambiar el color del icono a gris)
+		//buttonWindow->setMutedState(true);
+		//buttonWindow->setDisabled(true);
+		//buttonWindow->setAlwaysOnTop(true);
+	}
+
+	//--------------------------------------------------------
+
+	void SideBarUI::buildingButtonFadeIn(SideBar::BuildingButton button)
+	{
+		// Nombre del botón pulsado
+		std::string buttonName = buildingButtonsNamesMap.at(button);
+
+		// Botón pulsado
+		CEGUI::Window *buttonWindow = getButtonWindowFromName(buttonName);
+
+		if (buttonWindow != nullptr)
+			buttonWindow->setAlpha(1.0f);
+
+		// Marco del botón pulsado
+		CEGUI::Window *buttonFrameWindow = getButtonWindowFromName(buttonName + "Frame");
+
+		if (buttonFrameWindow != nullptr)
+			buttonFrameWindow->setAlpha(1.0f);
+	}
+
+	void SideBarUI::buildingButtonFadeOut(SideBar::BuildingButton button)
+	{
+		// Nombre del botón pulsado
+		std::string buttonName = buildingButtonsNamesMap.at(button);
+
+		// Botón pulsado
+		CEGUI::Window *buttonWindow = getButtonWindowFromName(buttonName);
+
+		if (buttonWindow != nullptr)
+			buttonWindow->setAlpha(0.5f);
+
+		// Marco del botón pulsado
+		CEGUI::Window *buttonFrameWindow = getButtonWindowFromName(buttonName + "Frame");
+
+		if (buttonFrameWindow != nullptr)
+			buttonFrameWindow->setAlpha(0.5f);
+	}
+
+	//--------------------------------------------------------
+
+	void SideBarUI::buildingButtonBlinkStart(SideBar::BuildingButton button)
+	{
+		// Nombre del botón pulsado
+		std::string buttonName = buildingButtonsNamesMap.at(button);
+
+		// Marco del botón pulsado
+		CEGUI::Window *buttonFrameWindow = getButtonWindowFromName(buttonName + "Frame");
+
+		// Activar parpadeo y guardar referencia al [marco del] botón. El cambio de imagen
+		// periódico se lleva a cabo en el tick
+		_blinkingButton = true;
+		_blinkingButtonFrameWindow = buttonFrameWindow;
+		_blinkingButtonTickCount = _blinkingButtonTickLimit;
+	}
+
+	void SideBarUI::buildingButtonBlinkStop(SideBar::BuildingButton button)
+	{
+		// Nombre del botón pulsado
+		std::string buttonName = buildingButtonsNamesMap.at(button);
+
+		// Marco del botón pulsado
+		CEGUI::Window *buttonFrameWindow = getButtonWindowFromName(buttonName + "Frame");
+
+		// Reestablecer la imagen original del marco
+		_blinkingButtonFrameWindow->setProperty("Image", buttonFrame);
+
+		// Desactivar parpadeo y limpiar referencia al [marco del] botón
+		_blinkingButton = false;
+		_blinkingButtonFrameWindow = nullptr;
+	}
+
+	//--------------------------------------------------------
+
+	bool checkPlaceableConsumeCost(Logic::CEntity* placeableEntity)
+	{
 		if (!placeableEntity){
 			std::cout << "Can't check consume costs on empty placeable" << std::endl;
 			return false;
@@ -594,7 +747,8 @@ namespace GUI
 		return m.Dispatch(*placeableEntity);
 	}
 
-	void SideBarUI::playerInteractionWithRightClick(){
+	void SideBarUI::playerInteractionWithRightClick()
+	{
 		ClearBuildingConstruction(false);
 	}
 
