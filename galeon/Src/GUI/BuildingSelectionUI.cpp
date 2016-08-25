@@ -61,8 +61,6 @@ namespace GUI
 
 	void BuildingSelectionUI::changePopupLayout(std::string layout, std::string name, std::string image)
 	{
-		removeChildrenEvents(_uipopupWindow);
-
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uipopupWindow);
 		_uipopupWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile(layout);
 		_uibuttonsWindow->setRiseOnClickEnabled(false);
@@ -73,8 +71,6 @@ namespace GUI
 
 	void BuildingSelectionUI::bindPopupButtons(std::string layout)
 	{
-		removeChildrenEvents(_uipopupWindow);
-
 		if (layout == "UIBuildingSelectionPopupHellquarters.layout"){
 			//_uipopupWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				//CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
@@ -151,8 +147,6 @@ namespace GUI
 
 	void BuildingSelectionUI::bindButtons()
 	{
-		removeChildrenEvents(_uibuttonsWindow);
-
 		_uibuttonsWindow->getChildElement("UpgradeBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::upgradeBuildingReleased, this));
 
@@ -169,7 +163,6 @@ namespace GUI
 			//CEGUI::SubscriberSlot(&BuildingSelectionUI::closeWindowReleased, this));
 
 		if (_buildingEntity->getComponent<Logic::CBuildingSelection>()->getSidebarLayoutTemplate() == "UIBuildingSelectionButtonBar.layout"){
-			_uibuttonsWindow->getChildElement("DestroyBuilding")->removeAllEvents();
 			_uibuttonsWindow->getChildElement("DestroyBuilding")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&BuildingSelectionUI::destroyBuildingReleased, this));
 		}
@@ -179,14 +172,12 @@ namespace GUI
 				//CEGUI::SubscriberSlot(&BuildingSelectionUI::godsReleased, this));
 			//_uipopupWindow->getChildElement("Missions")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				//CEGUI::SubscriberSlot(&BuildingSelectionUI::missionsReleased, this));
-			_uipopupWindow->getChildElement("Trial")->removeAllEvents();
 			_uipopupWindow->getChildElement("Trial")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::trialReleased, this));
 			//_uipopupWindow->getChildElement("WhiteMarket")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				//CEGUI::SubscriberSlot(&BuildingSelectionUI::whiteMarketReleased, this));
 			//_uipopupWindow->getChildElement("Redemption")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				//CEGUI::SubscriberSlot(&BuildingSelectionUI::redemptionReleased, this));
-			_uipopupWindow->getChildElement("BuildingGroups")->removeAllEvents();
 			_uipopupWindow->getChildElement("BuildingGroups")->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::SubscriberSlot(&BuildingSelectionUI::buildingGroupsReleased, this));
 		}
