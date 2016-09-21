@@ -16,7 +16,8 @@ namespace GUI
 	{
 	}
 
-	void UIManager::disablePopupWindows(){
+	void UIManager::disablePopupWindows()
+	{
 		_eventUI.DisablePopupVisibility();
 		_buildingSelectionUI.DisablePopupVisibility();
 	}

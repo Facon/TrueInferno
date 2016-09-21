@@ -69,7 +69,7 @@ namespace Application
 		/** 
 		Constructor de la clase 
 		*/
-		CGameState(CBaseApplication *app) : CApplicationState(app), _scene(0), _uiManager()
+		CGameState(CBaseApplication *app) : CApplicationState(app), _scene(0), _uiManager(0)
 		{}
 
 		/** 
@@ -174,7 +174,7 @@ namespace Application
 		*/
 		virtual bool mouseReleased(const GUI::CMouseState &mouseState);
 
-		GUI::UIManager* getUIManager() { return &_uiManager; }
+		GUI::UIManager* getUIManager() { return _uiManager; }
 
 	protected:
 		bool _paused = false;
@@ -189,8 +189,13 @@ namespace Application
 		*/
 		CEGUI::Window* _timeWindow;
 
-		// Resources Displays
-		GUI::UIManager _uiManager;
+		/**
+		Esto no debería ir aquí en ningún caso, y mejor no mirar como está
+		hecho por dentro...Habría que rehacer todo el módulo de la GUI para
+		manejarlo a través del GUI::Server como el resto de proyectos...
+		*/
+		GUI::UIManager* _uiManager;
+
 	}; // CGameState
 
 } // namespace Application

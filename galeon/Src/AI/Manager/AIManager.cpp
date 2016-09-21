@@ -288,6 +288,7 @@ namespace AI {
 		// Tomamos como base la puntuación actual del mejor dios + un incremento creciente por ronda
 		switch (Logic::CServer::getSingletonPtr()->getGameRuntimeContext()){
 		case GameRuntimeContext::SCRIPTED_DEMO:
+		case GameRuntimeContext::GAME:
 			// 1ª ronda: BASE_SCORE_PER_ROUND
 			// 2ª ronda: MEJOR_DIOS + 2^1 * BASE_SCORE_PER_ROUND
 			// 3ª ronda: MEJOR_DIOS + 2^2 * BASE_SCORE_PER_ROUND

@@ -66,7 +66,7 @@ Map = {
 		material = "HellQuarters",
 		storedResources="GAS,MINERAL",
 		maxResources = 2000,
-		initialResources = 1000,
+		initialResources = 1500,
 		sidebarlayout = "UIAlternativeBuildingSelectionButtonBar.layout",
 		popuplayout = "UIBuildingSelectionPopupHellquarters.layout",
 		image = "HellQuarters",
@@ -134,8 +134,8 @@ Map = {
 		burnPeriodSecs = 10,
 		burnParticlesDurationMsecs = 2000,
 		maxSoulsPerCycle = 5,
-		mineralCost = 150,
-		gasCost = 100,
+		mineralCost = 100,
+		gasCost = 50,
 		storedResources="COKE,CRUDE",
 		maxResources = 1000,
 		providedResources="COKE,CRUDE",
@@ -146,7 +146,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		billboardSetPosition = { 0, 150, 0 },
-		hadesFavorReward = 5,
+		hadesFavorReward = 10,
 	},
 	
 	Soul = {
@@ -210,7 +210,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		billboardSetPosition = { 0, 400, 0 },
-		hadesFavorReward = 2,
+		hadesFavorReward = 3,
 	},
 	
 	GasPlant = {
@@ -240,7 +240,7 @@ Map = {
 		extractPeriodSecs = 5,
 		extractParticlesDurationMsecs = 2000,
 		maxExtractedQuantity = 40,
-		mineralCost = 100,
+		mineralCost = 50,
 		gasCost = 0,
 		storedResources="GAS",
 		maxResources = 250,
@@ -254,7 +254,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		billboardSetPosition = { 0, 500, 0 },
-		hadesFavorReward = 2,
+		hadesFavorReward = 3,
 	},
 	
 	EvilWorks = {
@@ -277,8 +277,8 @@ Map = {
 		material = "EvilWorks",
 		minWorkers = 3,
 		maxWorkers = 5,	
-		mineralCost = 150,
-		gasCost = 75,
+		mineralCost = 75,
+		gasCost = 50,
 		storedResources="CRUDE,PURE_EVIL",
 		maxResources = 500,
 		providedResources="PURE_EVIL",
@@ -296,7 +296,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		billboardSetPosition = { 0, 300, 0 },
-		hadesFavorReward = 3,
+		hadesFavorReward = 5,
 	},
 	
 	Refinery = {
@@ -319,8 +319,8 @@ Map = {
 		material = "Refinery",
 		minWorkers = 3,
 		maxWorkers = 5,
-		mineralCost = 150,
-		gasCost = 75,
+		mineralCost = 75,
+		gasCost = 50,
 		storedResources="PURE_EVIL,REFINED",
 		maxResources = 250,
 		providedResources="REFINED",
@@ -340,7 +340,7 @@ Map = {
 		billboardMaterial = "Billboard/TrueInfernoIcons",
 		defaultBillboard = "NONE",
 		billboardSetPosition = { 0, 300, 0 },
-		hadesFavorReward = 3,
+		hadesFavorReward = 5,
 	},
 		
 	ResearchLabs = {
@@ -433,8 +433,8 @@ Map = {
 		material = "Warehouse",
 		minWorkers = 2,
 		maxWorkers = 5,
-		mineralCost = 250,
-		gasCost = 250,		
+		mineralCost = 150,
+		gasCost = 150,		
 		storedResources="MINERAL,GAS",
 		maxResources = 1000,
 		gatheredResources="MINERAL,GAS",

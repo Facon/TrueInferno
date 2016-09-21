@@ -59,7 +59,6 @@ if launchInitialEvents then
 	BuildingDestructionEvent.buildingType = BuildingManager.BT_UNASSIGNED
 	BuildingDestructionEvent.throw(Hades, (3 * 60 + 45) * 1000)
 	
-	
 	MajorSoulSpeedReductionEvent.duration = 15 * 1000
 	MajorSoulSpeedReductionEvent.throw(Hades, (4 * 60 + 30) * 1000)
 

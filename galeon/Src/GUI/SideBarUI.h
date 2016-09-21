@@ -76,8 +76,6 @@ namespace GUI
 		int _roadInConstruction = false;
 		bool _clearTerrain = false;
 
-		bool _firstRoad = true;
-
 		Logic::Tile* _previousOriginRoadTile = nullptr;
 		Logic::Tile* _previousToRoadTile = nullptr;
 		std::vector<Logic::Tile*>* path = nullptr;
@@ -128,14 +126,6 @@ namespace GUI
 		// Reset completo de lo que se estuviera haciendo
 		void ClearBuildingConstruction(bool clearPopups);
 
-		// Cambios en botones de construcción bajo demanda
-		void buildingButtonShow(SideBar::BuildingButton button);
-		void buildingButtonHide(SideBar::BuildingButton button);
-		void buildingButtonFadeIn(SideBar::BuildingButton button);
-		void buildingButtonFadeOut(SideBar::BuildingButton button);
-		void buildingButtonBlinkStart(SideBar::BuildingButton button);
-		void buildingButtonBlinkStop(SideBar::BuildingButton button);
-
 		// Función auxiliar para los métodos anteriores
 		CEGUI::Window* getButtonWindowFromName(std::string buttonName);
 
@@ -159,6 +149,14 @@ namespace GUI
 		void playerInteractionWithLeftClick();
 		void playerInteractionWithRightClick();
 		void setEventWindowVisible(bool visible);
+
+		// Cambios en botones de construcción bajo demanda
+		void buildingButtonShow(SideBar::BuildingButton button);
+		void buildingButtonHide(SideBar::BuildingButton button);
+		void buildingButtonFadeIn(SideBar::BuildingButton button);
+		void buildingButtonFadeOut(SideBar::BuildingButton button);
+		void buildingButtonBlinkStart(SideBar::BuildingButton button);
+		void buildingButtonBlinkStop(SideBar::BuildingButton button);
 	};
 }
 

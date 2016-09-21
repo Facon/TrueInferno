@@ -58,18 +58,19 @@ namespace Logic {
 			Audio::CServer::getSingletonPtr()->playSfxSound("error");
 	} // execute
 
-	void CEndGameEvent::initGUIConstants(){
+	void CEndGameEvent::initGUIConstants()
+	{
 		if (_victory) {
 			_eventImage = "EventVictory";
 			_eventTitle = "VICTORY!";
-			_eventText = "YOU DID IT! You ARE the WINNER!";
+			_eventText = "Yes! YOU DID IT! You ARE the WINNER! Hell is yours now, totally deserved it I should say. But do not relax yet and keep making them all suffer!";
 			_eventTextResume = "";
 		}
 
 		else{
 			_eventImage = "EventDefeat";
-			_eventTitle = "You have been ELIMINATED!";
-			_eventText = "Sad news: you failed. You’re done. Out. FIRED. And I thought you had potential... I hate being wrong. I really do. Now get the Hell out of my Hell before I throw you in a furnace.";
+			_eventTitle = "ELIMINATED!";
+			_eventText = "Sad news: you failed. You’re done. Out. FIRED. And I thought you had potential... I hate being wrong. I really do. Now get the Hell out of my Hell before I throw you into a furnace.";
 			_eventTextResume = "";
 		}
 	}

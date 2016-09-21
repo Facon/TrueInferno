@@ -815,12 +815,6 @@ namespace GUI
 						_previousOriginRoadTile = nullptr;
 						_previousToRoadTile = nullptr;
 						_tickCountLimit = _tickCountResetValue;
-
-						// @TODO Hacer esto bien...
-						if (_firstRoad) {
-							Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
-							_firstRoad = false;
-						}
 						_dropBuilding = true;
 						_cursorAnimationStatus = 1;
 						_tickCountCursorAnimationLimit = _tickCountCursorAnimationResetValue;

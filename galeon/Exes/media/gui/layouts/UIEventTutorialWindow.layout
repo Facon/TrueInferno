@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+	<Window type="OgreTray/StaticImage" name="EventTutorialWindow" >
+	<Property name="Image" value="TrueInfernoUIBars/EventFrame" />
+		<Property name="Area" value="{{0.205,0},{0.193277,0},{0.705,0},{0.960427,0}}" />
+		
+		<Window type="OgreTray/StaticImage" name="EventTitleFrame">
+			<Property name="Area" value="{{0.3,0},{0.22,0},{0.7,0},{0.325,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />		
+		</Window>
+	
+		<Window type="OgreTray/StaticText" name="EventTitle" >
+			<Property name="Area" value="{{0.3,0},{0.22,0},{0.7,0},{0.325,0}}" />
+			<Property name="Font" value="DeadSecretary-18" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="CentreAligned" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="EventImageFrame" >
+			<Property name="Area" value="{{0.18,0},{0.33,0},{0.37,0},{0.6,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonWindow" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="EventImage" >
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+			<Property name="Area" value="{{0.195,0},{0.345,0},{0.355,0},{0.585,0}}" />
+			<Property name="Image" value="TrueInfernoNewEvents/EventPortrait" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="EventTextFrame" >
+			<Property name="Area" value="{{0.38,0},{0.33,0},{0.83,0},{0.815,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonWindow" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		<Window type="OgreTray/StaticText" name="EventText" >
+			<Property name="Area" value="{{0.415,0},{0.365,0},{0.795,0},{0.78,0}}" />
+			<Property name="Font" value="videophreak-10" />
+			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
+			<Property name="HorzFormatting" value="WordWrapJustified" />
+			<Property name="VertFormatting" value="TopAligned" />			
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="AcceptFrame" >
+			<Property name="Area" value="{{0.18,0},{0.603,0},{0.37,0},{0.709,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		<Window type="OgreTray/TrueInfernoButtonText2" name="AcceptEvent" >
+			<Property name="Area" value="{{0.18,0},{0.603,0},{0.37,0},{0.709,0}}" />
+			<Property name="Font" value="DeadSecretary-18" />
+			<Property name="Text" value="OK" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="CentreAligned" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+		
+		<Window type="OgreTray/StaticImage" name="SkipFrame" >
+			<Property name="Area" value="{{0.18,0},{0.709,0},{0.37,0},{0.815,0}}" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
+			<Property name="HorzFormatting" value="Stretched" />
+			<Property name="VertFormatting" value="Stretched" />
+		</Window>
+		
+		<Window type="OgreTray/TrueInfernoButtonText2" name="SkipEvent" >
+			<Property name="Area" value="{{0.18,0},{0.709,0},{0.37,0},{0.815,0}}" />
+			<Property name="Font" value="DeadSecretary-18" />
+			<Property name="Text" value="SKIP" />
+			<Property name="VertFormatting" value="CentreAligned" />
+			<Property name="HorzFormatting" value="CentreAligned" />
+			<Property name="AlwaysOnTop" value="True" />
+		</Window>
+
+	</Window>
+</GUILayout>
+

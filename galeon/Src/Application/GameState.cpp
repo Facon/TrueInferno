@@ -20,10 +20,11 @@ Contiene la implementación del estado de juego.
 #include "Logic/Events/EventManager.h"
 #include "Logic/Maps/EntityFactory.h"
 #include "Logic/Maps/Map.h"
-#include "Logic\GameRuntimeContext.h"
+#include "Logic/GameRuntimeContext.h"
 
 #include "GUI/Server.h"
 #include "GUI/PlayerController.h"
+#include "GUI/UIManager.h"
 
 #include "Physics/Server.h"
 
@@ -77,7 +78,8 @@ namespace Application {
 		// Cargamos la ventana que muestra el tiempo de juego transcurrido.
 		_timeWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Time.layout");
 
-		_uiManager.init();
+		_uiManager = new GUI::UIManager();
+		_uiManager->init();
 
 		return true;
 
@@ -96,7 +98,7 @@ namespace Application {
 		// Liberamos la escena física.
 		Physics::CServer::getSingletonPtr()->destroyScene();
 
-		_uiManager.release();
+		_uiManager->release();
 
 		CApplicationState::release();
 
@@ -104,7 +106,7 @@ namespace Application {
 
 	//--------------------------------------------------------
 
-	void CGameState::activate() 
+	void CGameState::activate()
 	{
 		CApplicationState::activate();
 		
@@ -119,7 +121,8 @@ namespace Application {
 		_timeWindow->setVisible(true);
 		_timeWindow->activate();
 
-		_uiManager.activate();
+		_uiManager->activate();
+
 	} // activate
 
 	//--------------------------------------------------------
@@ -130,7 +133,7 @@ namespace Application {
 		_timeWindow->deactivate();
 		_timeWindow->setVisible(false);
 
-		_uiManager.deactivate();
+		_uiManager->deactivate();
 
 		// Desactivamos la clase que procesa eventos de entrada para 
 		// controlar al jugador.
@@ -147,7 +150,8 @@ namespace Application {
 
 	void CGameState::tick(unsigned int msecs) 
 	{
-		if (_paused == false){
+		if (_paused == false)
+		{
 			CApplicationState::tick(msecs);
 
 			// Simulación física
@@ -157,21 +161,22 @@ namespace Application {
 			Logic::CServer::getSingletonPtr()->tick(msecs);
 
 			// Changing resources displays info
-			_uiManager.tick(msecs);
+			_uiManager->tick(msecs);
 		}
 		else
 		{
-			if (_uiManager.getPauseMenu()->_exit == true)
+			if (_uiManager->getPauseMenu()->_exit == true)
 			{
 				_paused = !_paused;
-				_uiManager.setPauseMenu(_paused);
-				_uiManager.getPauseMenu()->_exit = false;
+				_uiManager->setPauseMenu(_paused);
+				_uiManager->getPauseMenu()->_exit = false;
 				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
 				CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
 				_app->setState("menu");
 
 			}
 		}
+
 	} // tick
 
 	//--------------------------------------------------------
@@ -190,7 +195,7 @@ namespace Application {
 		{
 		case GUI::Key::ESCAPE:
 			_paused = !_paused;
-			_uiManager.setPauseMenu(_paused);
+			_uiManager->setPauseMenu(_paused);
 			break;
 		default:
 			return false;
@@ -212,7 +217,7 @@ namespace Application {
 	bool CGameState::mousePressed(const GUI::CMouseState &mouseState)
 	{
 		//if (mouseState.button == GUI::Button::TButton::LEFT){
-			//_uiManager.getSideBarUI()->playerInteractionWithLeftClick();
+			//_uiManager->getSideBarUI()->playerInteractionWithLeftClick();
 		//}
 
 		return false;

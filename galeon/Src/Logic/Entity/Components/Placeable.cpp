@@ -215,12 +215,6 @@ namespace Logic {
 		// Cambiamos el estado
 		_floating = false;
 
-		// Eventos del tutorial
-		// @TODO Hacer bien...
-		if (isBuilding()) {
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
-		}
-
 		// Incrementamos el favor de Hades por construcción de edificio
 		HFManager* hadesFavorManager = HFManager::getSingletonPtr();
 		hadesFavorManager->changeHadesFavor(_hadesFavorReward);

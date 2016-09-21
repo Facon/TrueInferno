@@ -1,6 +1,7 @@
 #include "EventUI.h"
 
 #include "Logic/Events/EventManager.h"
+#include "Logic/TutorialManager.h"
 
 #include <CEGUI/System.h>
 #include <CEGUI/WindowManager.h>
@@ -24,16 +25,27 @@ namespace GUI
 
 	void EventUI::init()
 	{
+		// Eventos
 		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventWindow.layout");
 		_uiEventWindow->getChildElement("AcceptEvent")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&EventUI::AcceptEventReleased, this));
 
+		// Eventos del tutorial
+		_uiEventTutorialWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventTutorialWindow.layout");
+		_uiEventTutorialWindow->getChildElement("AcceptEvent")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&EventUI::AcceptEventTutorialReleased, this));
+		_uiEventTutorialWindow->getChildElement("SkipEvent")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&EventUI::SkipEventTutorialReleased, this));
+
+		// Notificación de eventos
 		_uiEventNotification = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventNotification.layout");
 		_uiEventNotification->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&EventUI::ShowEventListReleased, this));
 
-		_uiEventNotification->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea, CEGUI::SubscriberSlot(&EventUI::buttonFrameEnter, this));
-		_uiEventNotification->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea, CEGUI::SubscriberSlot(&EventUI::buttonFrameExit, this));
+		_uiEventNotification->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventMouseEntersArea,
+			CEGUI::SubscriberSlot(&EventUI::buttonFrameEnter, this));
+		_uiEventNotification->getChildElement("Accept")->subscribeEvent(CEGUI::PushButton::EventMouseLeavesArea,
+			CEGUI::SubscriberSlot(&EventUI::buttonFrameExit, this));
 	}
 
 	void EventUI::release()
@@ -46,6 +58,7 @@ namespace GUI
 		_events.clear();
 
 		_uiEventNotification->getChildElement("Accept")->removeAllEvents();
+		_uiEventTutorialWindow->getChildElement("AcceptEvent")->removeAllEvents();
 		_uiEventWindow->getChildElement("AcceptEvent")->removeAllEvents();
 	}
 
@@ -53,10 +66,15 @@ namespace GUI
 	{
 		// Activamos la interfaz de usuario
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventTutorialWindow);
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventNotification);
+
 		setEventWindowVisible(false);
+		setEventTutorialWindowVisible(false);
 		setEventNotificationVisible(false);
+
 		_uiEventWindow->activate();
+		_uiEventTutorialWindow->activate();
 		_uiEventNotification->activate();
 	}
 
@@ -65,16 +83,16 @@ namespace GUI
 		// Desactivamos la ventana de UiBars
 		_uiEventWindow->deactivate();
 		_uiEventWindow->setVisible(false);
+
+		_uiEventTutorialWindow->deactivate();
+		_uiEventTutorialWindow->setVisible(false);
+
 		_uiEventNotification->deactivate();
 		_uiEventNotification->setVisible(false);
 	}
 
 	void EventUI::tick(unsigned int msecs)
 	{
-		if (firstTick) {
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
-			firstTick = false;
-		}
 		if (_events.size()==0)
 			setEventNotificationVisible(false);
 
@@ -93,26 +111,34 @@ namespace GUI
 
 	bool EventUI::AcceptEventReleased(const CEGUI::EventArgs& e)
 	{
-
 		// Al pulsar el botón OK simplemente se oculta la ventana.
 		_uiEventWindow->setVisible(false);
 
-		// @TODO Hacer esto bien...
-		if (firstEventReleased)	{
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
-			firstEventReleased = false;
-		} else if (_uiEventWindow->getChild("EventImage")->getProperty("Image") == "TrueInfernoEvents/EventTutorial4") {
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
-		}
+		return true;
+	}
 
+	bool EventUI::AcceptEventTutorialReleased(const CEGUI::EventArgs& e)
+	{
+		// Al pulsar el botón OK se oculta la ventana y se notifica al TutorialManager
+		_uiEventTutorialWindow->setVisible(false);
+
+		Logic::CTutorialManager::getSingletonPtr()->buttonOK();
+		return true;
+	}
+
+	bool EventUI::SkipEventTutorialReleased(const CEGUI::EventArgs& e)
+	{
+		// Al pulsar el botón SKIP se oculta la ventana y se notifica al TutorialManager
+		_uiEventTutorialWindow->setVisible(false);
+
+		Logic::CTutorialManager::getSingletonPtr()->buttonSKIP();
 		return true;
 	}
 
 	void EventUI::registerEvent(Logic::CEvent* event){
 		// Mostramos inmediatamente el evento si es necesario
-		if (event->getShowImmediately()){
+		if (event->getShowImmediately())
 			showFullEvent(event);
-		}
 
 		// En caso contrario
 		else {
@@ -124,22 +150,33 @@ namespace GUI
 		}
 	}
 	
-	void EventUI::showFullEvent(Logic::CEvent* event){
-		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
+	void EventUI::showFullEvent(Logic::CEvent* event)
+	{
 		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+		uiManager->disablePopupWindows();
 		uiManager->getSideBarUI()->_onUIScreen = true;
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
 
-		setEventImage(event->getGUIImageName());
-		setEventText(event->getGUIText());
-		setEventTitle(event->getGUITitle());
-
-		setEventTextResume(event->getGUIResumeText());
-		setEventWindowVisible(true);
+		if (event->getConditionTriggerType() == Logic::CEvent::ConditionTriggerType::TUTORIAL)
+		{
+			setEventTutorialTitle(event->getGUITitle());
+			setEventTutorialImage(event->getGUIImageName());
+			setEventTutorialText(event->getGUIText());
+			setEventTutorialWindowVisible(true);
+		}
+		else
+		{
+			setEventImage(event->getGUIImageName());
+			setEventText(event->getGUIText());
+			setEventTitle(event->getGUITitle());
+			setEventTextResume(event->getGUIResumeText());
+			setEventWindowVisible(true);
+		}
 	}
 
-	bool EventUI::showFullEventReleased(const CEGUI::EventArgs& e){
+	bool EventUI::showFullEventReleased(const CEGUI::EventArgs& e)
+	{
 		GUI::CServer::getSingletonPtr()->getUIManager()->disablePopupWindows();
 		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
 		uiManager->getSideBarUI()->_onUIScreen = true;
@@ -151,11 +188,12 @@ namespace GUI
 		int i = atoi(a.window->getParent()->getText().c_str());
 		Logic::CEvent* event = _events[i];
 		
-
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->removeChild(_uiEventWindow);
+
 		_uiEventWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("UIEventWindow.layout");
 		_uiEventWindow->getChildElement("AcceptEvent")->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::SubscriberSlot(&EventUI::AcceptEventReleased, this));
+
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(_uiEventWindow);
 
 		setEventImage(event->getGUIImageName());
@@ -195,15 +233,15 @@ namespace GUI
 		return true;
 	}
 
-	void EventUI::showEventNotification(){
-		// TODO Ruymajo's CEGI powa aquí! :D
+	void EventUI::showEventNotification()
+	{
+		// TODO Ruymajo's CEGUI powa aquí! :D
 		_uiEventNotification->getChild("Accept")->setText("* " + std::to_string(_events.size()));
 		setEventNotificationVisible(true);
-		if (showingEventList){
-			ShowEventList();
-		}
-	}
 
+		if (showingEventList)
+			ShowEventList();
+	}
 
 	bool EventUI::closeWindowReleased(const CEGUI::EventArgs& e)
 	{
@@ -223,6 +261,7 @@ namespace GUI
 		uiManager->getSideBarUI()->_onUIScreen = true;
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
+		
 		//_uiEventWindow->getChildElement("CloseWindow")->subscribeEvent(CEGUI::PushButton::EventClicked,
 		//	CEGUI::SubscriberSlot(&EventUI::closeWindowReleased, this));
 
@@ -310,6 +349,13 @@ namespace GUI
 		return true;
 	}
 
+	//---------------------------------------------
+
+	void EventUI::setEventTitle(std::string eventTitle)
+	{
+		_uiEventWindow->getChild("EventTitle")->setText(eventTitle);
+	}
+
 	void EventUI::setEventImage(std::string eventImage)
 	{
 		_uiEventWindow->getChild("EventImage")->setProperty("Image","TrueInfernoNewEvents/" + eventImage);
@@ -320,19 +366,38 @@ namespace GUI
 		_uiEventWindow->getChild("EventText")->setText(eventText);
 	}
 
-	void EventUI::setEventTitle(std::string eventTitle)
-	{
-		_uiEventWindow->getChild("EventTitle")->setText(eventTitle);
-	}
-
 	void EventUI::setEventTextResume(std::string EventTextResume)
 	{
 		_uiEventWindow->getChild("EventTextResume")->setText(EventTextResume);
 	}
 
+	//---------------------------------------------
+
+	void EventUI::setEventTutorialTitle(std::string eventTitle)
+	{
+		_uiEventTutorialWindow->getChild("EventTitle")->setText(eventTitle);
+	}
+
+	void EventUI::setEventTutorialImage(std::string eventImage)
+	{
+		_uiEventTutorialWindow->getChild("EventImage")->setProperty("Image", eventImage);
+	}
+
+	void EventUI::setEventTutorialText(std::string eventText)
+	{
+		_uiEventTutorialWindow->getChild("EventText")->setText(eventText);
+	}
+
+	//---------------------------------------------
+
 	void EventUI::setEventWindowVisible(bool visible)
 	{
 		_uiEventWindow->setVisible(visible);
+	}
+
+	void EventUI::setEventTutorialWindowVisible(bool visible)
+	{
+		_uiEventTutorialWindow->setVisible(visible);
 	}
 
 	void EventUI::setEventNotificationVisible(bool visible)
@@ -340,8 +405,12 @@ namespace GUI
 		_uiEventNotification->setVisible(visible);
 	}
 
-	void EventUI::DisablePopupVisibility(){
+	//---------------------------------------------
+
+	void EventUI::DisablePopupVisibility()
+	{
 		_uiEventWindow->setVisible(false);
+		_uiEventTutorialWindow->setVisible(false);
 		showingEventList = false;
 	}
 	
