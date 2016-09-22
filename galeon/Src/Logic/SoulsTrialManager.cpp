@@ -338,7 +338,7 @@ namespace Logic {
 	bool CSoulsTrialManager::open()
 	{
 		for (unsigned int i = 0; i < 4; ++i)
-			_souls[i] = 0;
+			_souls[i] = 5;
 
 		return true;
 

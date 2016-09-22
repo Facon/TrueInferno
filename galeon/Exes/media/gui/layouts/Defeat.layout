@@ -42,7 +42,7 @@
 		
 		<Window type="OgreTray/StaticText" name="EventText" >
 			<Property name="Area" value="{{0.16,0},{0.35,0},{0.39,0},{0.60,0}}" />
-			<Property name="Font" value="astronboy-14" />
+			<Property name="Font" value="videophreak-12" />
 			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="HorzFormatting" value="WordWrapJustified" />
 			<Property name="HorzFormatting" value="WordWrapJustified" />

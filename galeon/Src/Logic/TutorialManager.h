@@ -19,6 +19,11 @@ Contiene la declaración del gestor del tutorial.
 #include "Logic/Events/Event.h"
 #include "Logic/Entity/MessageHandler.h"
 
+namespace Logic
+{
+	enum BuildingType;
+}
+
 namespace GUI
 {
 	class SideBarUI;
@@ -126,6 +131,15 @@ namespace Logic
 		*/
 		void buttonOK();
 		void buttonSKIP();
+
+		/**
+		Notificaciones varias relevantes para el avance del tutorial.
+		*/
+		void buildingSelected(std::string buildingName); // Edificio seleccionado
+		void soulsTrialSelected(); // Juicio de Almas seleccionado
+		void soulsTrialCompleted(); // Juicio de Almas completado satisfactoriamente
+		void roadPlaced(); // Carretera construida
+		void buildingPlaced(BuildingType buildingType); // Edificio construido
 
 		/**
 		Manejo de mensajes, tiene que manejar todos los tipos de mensajes sin excepción.

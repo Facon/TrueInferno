@@ -15,6 +15,7 @@ Contiene la implementación del gestor del tutorial.
 
 #include "Logic/TutorialManager.h"
 #include "Logic/Events/EventManager.h"
+#include "Logic/TimeManager.h"
 
 #include <cassert>
 
@@ -98,8 +99,19 @@ namespace Logic {
 
 	void CTutorialManager::buttonOK()
 	{
-		// @TODO Solo habrá que avanzar de esta forma para ciertas etapas/paneles intermedi@s
-		// CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
+		// Para determinadas etapas intermedias (con su respectivo panel de evento), se avanza
+		// directamente a la siguiente cuando el jugador pulsa el botón OK
+		switch (_currentStage)
+		{
+		case Logic::REFINED_EVIL_AS_OBJ_1:
+		case Logic::REFINED_EVIL_AS_OBJ_2:
+			nextStage(_currentStage);
+			break;
+		default:
+			// El tutorial se encuentra en cualquier otra etapa que no salta directamente,
+			// luego no hacemos nada
+			break;
+		}
 
 	} // buttonOK
 
@@ -108,9 +120,77 @@ namespace Logic {
 	void CTutorialManager::buttonSKIP()
 	{
 		_currentStage = TutorialStage::SKIPPED;
+
+		// Fin del tutorial
 		endTutorial();
 
 	} // buttonSKIP
+
+	//--------------------------------------------------------
+
+	void CTutorialManager::buildingSelected(std::string buildingName)
+	{
+		if (buildingName == "HellQuarters")
+			nextStage(TutorialStage::HELLQUARTERS_CLICK);
+
+	} // buildingSelected
+
+	//--------------------------------------------------------
+
+	void CTutorialManager::soulsTrialSelected()
+	{
+		nextStage(TutorialStage::HELLQUARTERS_CLICK_SOULS_TRIAL);
+
+	} // soulsTrialSelected
+
+	//--------------------------------------------------------
+
+	void CTutorialManager::soulsTrialCompleted()
+	{
+		nextStage(TutorialStage::SOULS_TRIAL);
+
+	} // soulsTrialCompleted
+
+	//--------------------------------------------------------
+
+	void CTutorialManager::roadPlaced()
+	{
+		nextStage(TutorialStage::ROAD);
+
+	} // roadPlaced
+
+	//--------------------------------------------------------
+
+	void CTutorialManager::buildingPlaced(BuildingType buildingType)
+	{
+		switch (buildingType)
+		{
+		case Furnace:
+			nextStage(TutorialStage::FURNACE);
+			break;
+		case EvilWorks:
+			nextStage(TutorialStage::EVILWORKS);
+			break;
+		case Refinery:
+			nextStage(TutorialStage::REFINERY);
+			break;
+		case Mine:
+			nextStage(TutorialStage::MINE);
+			break;
+		case GasPlant:
+			nextStage(TutorialStage::GAS_PLANT);
+			break;
+		case PowerGenerator:
+			nextStage(TutorialStage::POWER_GENERATOR);
+			break;
+		case Warehouse:
+			nextStage(TutorialStage::WAREHOUSE);
+			break;
+		default:
+			break;
+		}
+
+	} // buildingPlaced
 
 	//--------------------------------------------------------
 
@@ -156,7 +236,6 @@ namespace Logic {
 
 		switch (_currentStage)
 		{
-		// @TODO Programar etapas...
 		case HELLQUARTERS_CLICK:
 			startStageHellQuartersClick();
 			break;
@@ -181,6 +260,7 @@ namespace Logic {
 		case GAS_PLANT:
 			startStageGasPlant();
 			break;
+		// @TODO Programar etapas...
 		case FURNACE:
 			startStageFurnace();
 			break;
@@ -224,12 +304,17 @@ namespace Logic {
 		_sideBarUI->buildingButtonHide(SideBar::BuildingButton::WAREHOUSE);
 		_sideBarUI->buildingButtonHide(SideBar::BuildingButton::CLEAR_TERRAIN);
 
+		// @TODO Iluminar HellQuarters
+
 	} // startStageHellQuartersClick
 
 	//--------------------------------------------------------
 
 	void CTutorialManager::startStageHellQuartersClickSoulsTrial()
 	{
+		// Al llegar aquí se está mostrando el panel del HellQuarters
+		// @TODO Blink para el botón del Juicio de Almas
+
 	} // startStageHellQuartersClickSoulsTrial
 
 	//--------------------------------------------------------
@@ -242,60 +327,105 @@ namespace Logic {
 
 	void CTutorialManager::startStageRefinedEvil1()
 	{
+		// @TODO Blink para el marco de todo el panel derecho de construcción de edificios
+
 	} // startStageRefinedEvil1
 
 	//--------------------------------------------------------
 
 	void CTutorialManager::startStageRefinedEvil2()
 	{
+		// @TODO Blink para los paneles superiores de recursos
+
 	} // startStageRefinedEvil2
 
 	//--------------------------------------------------------
 
 	void CTutorialManager::startStageRoad()
 	{
+		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::ROAD);
+
 	} // startStageRoad
 
 	//--------------------------------------------------------
 
 	void CTutorialManager::startStageMine()
 	{
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::ROAD);
+		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::MINE);
+
+		// Simulamos click derecho del jugador para que salga del modo de construcción
+		// de carreteras
+		// _sideBarUI->playerInteractionWithRightClick();
+
+		// TODO Estaría bien, pero hay que hacerlo de otra forma porque al llegar a
+		// este punto aún no ha hecho el CPlaceable::place() de los tiles de la
+		// carretera recién construida
+
 	} // startStageMine
 
 	//--------------------------------------------------------
 
 	void CTutorialManager::startStageGasPlant()
 	{
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::MINE);
+		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::GAS_PLANT);
+
 	} // startStageGasPlant
 
 	//--------------------------------------------------------
 
 	void CTutorialManager::startStageFurnace()
 	{
+		// Mostrar la segunda fila de botones de construcción de edificios
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::FURNACE);
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::EVILWORKS);
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::REFINERY);
+
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::GAS_PLANT);
+		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::FURNACE);
+
 	} // startStageFurnace
 
 	//--------------------------------------------------------
 
 	void CTutorialManager::startStageEvilworks()
 	{
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::FURNACE);
+		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::EVILWORKS);
+
 	} // startStageEvilworks
 
 	//--------------------------------------------------------
 
 	void CTutorialManager::startStageRefinery()
 	{
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::EVILWORKS);
+		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::REFINERY);
+
 	} // startStageRefinery
 
 	//--------------------------------------------------------
 
 	void CTutorialManager::startStagePowerGenerator()
 	{
+		// Mostrar la tercera fila de botones de construcción de edificios
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::POWER_GENERATOR);
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::WAREHOUSE);
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::CLEAR_TERRAIN);
+
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::REFINERY);
+		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::POWER_GENERATOR);
+
 	} // startStagePowerGenerator
 
 	//--------------------------------------------------------
 
 	void CTutorialManager::startStageWarehouse()
 	{
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::POWER_GENERATOR);
+		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::WAREHOUSE);
+
 	} // startStageWarehouse
 
 	//--------------------------------------------------------
@@ -303,6 +433,35 @@ namespace Logic {
 	void CTutorialManager::endTutorial()
 	{
 		_active = false;
+
+		// Acabe como y cuando acabe, nos aseguramos de que se cierren todos los posibles paneles
+		// activos y de que se muestran los botones de construcción de edificios...
+		GUI::CServer::getSingletonPtr()->getUIManager()->getBuildingSelectionUI()->DisablePopupVisibility();
+
+		// ...y de que realmente se muestran todos...
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::FURNACE);
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::EVILWORKS);
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::REFINERY);
+
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::POWER_GENERATOR);
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::WAREHOUSE);
+		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::CLEAR_TERRAIN);
+
+		// ...y de que ninguno parpadea
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::ROAD);
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::MINE);
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::GAS_PLANT);
+
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::FURNACE);
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::EVILWORKS);
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::REFINERY);
+
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::POWER_GENERATOR);
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::WAREHOUSE);
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::CLEAR_TERRAIN);
+
+		// Activamos el tiempo, con lo que comienza la primera ronda
+		CTimeManager::getSingletonPtr()->setPause(false);
 
 	} // endTutorial
 

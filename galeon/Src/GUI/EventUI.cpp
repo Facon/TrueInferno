@@ -57,9 +57,14 @@ namespace GUI
 
 		_events.clear();
 
-		_uiEventNotification->getChildElement("Accept")->removeAllEvents();
-		_uiEventTutorialWindow->getChildElement("AcceptEvent")->removeAllEvents();
-		_uiEventWindow->getChildElement("AcceptEvent")->removeAllEvents();
+		if (_uiEventNotification != nullptr)
+			_uiEventNotification->getChildElement("Accept")->removeAllEvents();
+
+		if (_uiEventTutorialWindow != nullptr)
+			_uiEventTutorialWindow->getChildElement("AcceptEvent")->removeAllEvents();
+
+		if (_uiEventWindow != nullptr)
+			_uiEventWindow->getChildElement("AcceptEvent")->removeAllEvents();
 	}
 
 	void EventUI::activate()
@@ -101,12 +106,20 @@ namespace GUI
 		{
 			_redrawUICountLimit = _redrawUICountResetValue;
 
+			// No recuerdo por qué había que comentar esto en concreto, pero funciona. Seguramente
+			// esté hecho en algún otro manager de la UI.
+
 			//for (unsigned int i = 0; i < _uiEventWindow->getChildCount(); ++i)
 			//	_uiEventWindow->getChildAtIdx(i)->moveToFront();
 
 			//for (unsigned int i = 0; i < _uiEventNotification->getChildCount(); ++i)
 			//	_uiEventNotification->getChildAtIdx(i)->moveToFront();
 		}
+
+		// Los eventos del tutorial siempre deben quedar encima de los demás, ya que explican
+		// por adelantado aquello que se esté haciendo.
+		if (_uiEventTutorialWindow->isVisible())
+			_uiEventTutorialWindow->moveToFront();
 	}
 
 	bool EventUI::AcceptEventReleased(const CEGUI::EventArgs& e)
@@ -152,14 +165,15 @@ namespace GUI
 	
 	void EventUI::showFullEvent(Logic::CEvent* event)
 	{
-		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
-		uiManager->disablePopupWindows();
-		uiManager->getSideBarUI()->_onUIScreen = true;
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorPoint");
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorPoint");
 
+		GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+
 		if (event->getConditionTriggerType() == Logic::CEvent::ConditionTriggerType::TUTORIAL)
 		{
+			uiManager->getSideBarUI()->_onUIScreen = true;
+
 			setEventTutorialTitle(event->getGUITitle());
 			setEventTutorialImage(event->getGUIImageName());
 			setEventTutorialText(event->getGUIText());
@@ -167,6 +181,10 @@ namespace GUI
 		}
 		else
 		{
+			// Solo se quitan los posibles paneles activos para eventos que no sean del tutorial
+			uiManager->disablePopupWindows();
+			uiManager->getSideBarUI()->_onUIScreen = true;
+
 			setEventImage(event->getGUIImageName());
 			setEventText(event->getGUIText());
 			setEventTitle(event->getGUITitle());

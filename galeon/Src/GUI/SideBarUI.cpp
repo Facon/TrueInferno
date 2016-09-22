@@ -15,8 +15,10 @@
 #include "Logic/Events/Event.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Placeable.h"
+#include "Logic/Entity/Components/BuildingSelection.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/Server.h"
+#include "Logic/TutorialManager.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "Logic/Maps/Managers/TileManager.h"
 #include "Logic/Maps/Managers/WorkManager.h"
@@ -443,7 +445,7 @@ namespace GUI
 
 	bool SideBarUI::continueRoadCreation()
 	{
-		ClearBuildingConstruction(true);
+		ClearBuildingConstruction(false);
 		_placeableEntity = Logic::CBuildingManager::getSingletonPtr()->createPlaceable(Logic::CServer::getSingletonPtr()->getMap(), "SoulPath", Vector3(0, 0, 0), true, true);
 		if (_placeableEntity){
 			_placeableRoad = new Logic::CEntity*[1];
@@ -515,7 +517,7 @@ namespace GUI
 
 	bool SideBarUI::continueClearTerrain()
 	{
-		ClearBuildingConstruction(true);
+		ClearBuildingConstruction(false);
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TrueInfernoOtherCursors/CursorClear1");
 		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setImage("TrueInfernoOtherCursors/CursorClear1");
 		// @TODO Cambiar puntero a pala
@@ -719,6 +721,10 @@ namespace GUI
 
 	void SideBarUI::buildingButtonBlinkStop(SideBar::BuildingButton button)
 	{
+		// Comprobamos que haya algún botón parpadeando
+		if (!_blinkingButton)
+			return;
+
 		// Nombre del botón pulsado
 		std::string buttonName = buildingButtonsNamesMap.at(button);
 
@@ -757,9 +763,14 @@ namespace GUI
 		if (_placeableEntity)
 		{
 			Logic::CEntity* entity = getEntityFromRaycastToGroup(1);
-			if (entity){
+			// Yo diría que entity != nullptr quiere decir que se está construyendo algo, ya sea
+			// edificio o carretera...
+			if (entity)
+			{
 				switch (_roadInConstruction)
 				{
+					// Se supone que este caso (_roadInConstruction == 0) corresponde a
+					// la construcción de un edificio?
 					case 0:
 					{
 						_originRoadTile = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
@@ -787,6 +798,7 @@ namespace GUI
 							Audio::CServer::getSingletonPtr()->playSfxSound("error");
 						}
 					}
+					// Y estos dos últimos son para construcción de carreteras?
 					case 1:
 					{
 						_originRoadTile = Logic::CTileManager::getSingletonPtr()->getNearestTile(entity->getPosition());
@@ -824,6 +836,8 @@ namespace GUI
 				}
 			}
 		}
+		// ...luego, por descarte, entrará aquí en caso de que se haya hecho click con el
+		// botón izquierdo y no se estuviera construyendo nada
 		else{
 			if (_clearTerrain){
 				Logic::CEntity* entity = getEntityFromRaycastToGroup(3);
@@ -840,11 +854,17 @@ namespace GUI
 				Logic::CEntity* entity = getEntityFromRaycastToGroup(2);
 				if (entity)
 				{
+					// Conclusión final: entra aquí cuando, efectivamente, se hace click en
+					// algún edificio construido
 					GUI::UIManager *uiManager = GUI::CServer::getSingletonPtr()->getUIManager();
+					// Cambia el panel lateral y demás cosas relacionadas con la GUI
 					uiManager->getBuildingSelectionUI()->setEventWindowVisible(true, entity);
 					_uibuttonsWindow->setVisible(false);
 					_sidebarVisible = false;
 					_redrawUICountLimit = _redrawUICountResetValue;
+					// Avisa al TutorialManager de que se ha seleccionado un edificio
+					std::string buildingName = entity->getComponent<Logic::CBuildingSelection>()->getBuildingName();
+					Logic::CTutorialManager::getSingletonPtr()->buildingSelected(buildingName);
 				}
 				else
 				{

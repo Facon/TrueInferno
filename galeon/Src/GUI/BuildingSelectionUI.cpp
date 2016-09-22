@@ -16,6 +16,7 @@
 #include "Logic/Entity/Components/BuildingSelection.h"
 #include "Logic/BuildingManager.h"
 #include "Logic/SoulsTrialManager.h"
+#include "Logic/TutorialManager.h"
 #include "Logic/Maps/Managers/WorkManager.h"
 #include "Logic/Entity/Components/ResourceBuilding.h"
 
@@ -361,6 +362,10 @@ namespace GUI
 	bool BuildingSelectionUI::trialReleased(const CEGUI::EventArgs& e)
 	{
 		changePopupLayout("UIBuildingSelectionPopupTrial.layout", "Souls Trial", "Trial");
+
+		// Avisa al TutorialManager de que se ha seleccionado el Juicio de Almas
+		Logic::CTutorialManager::getSingletonPtr()->soulsTrialSelected();
+
 		return true;
 	}
 
@@ -455,7 +460,13 @@ namespace GUI
 			Logic::CSoulsTrialManager::getSingletonPtr()->createSouls(soulstowork, soulstoburn);
 
 		if (wrongCategories.empty())
-				closeWindow();
+		{
+			closeWindow();
+
+			// Juicio de Almas correcto: panel cerrado y almas creadas
+			// Avisar al TutorialManager
+			Logic::CTutorialManager::getSingletonPtr()->soulsTrialCompleted();
+		}
 		else
 		{
 			_uipopupWindow->getChild("HeavySoulTotal")->setProperty("TextColours", "tl:FF000000 tr:FF000000 bl:FF000000 br:FF000000");

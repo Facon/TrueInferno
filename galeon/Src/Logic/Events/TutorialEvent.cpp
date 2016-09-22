@@ -89,7 +89,7 @@ namespace Logic {
 		case TutorialStage::REFINED_EVIL_AS_OBJ_2:
 			_eventImage = "TrueInfernoBuildings/Trial";
 			_eventTitle = "Refine Evil to win";
-			_eventText = "Remember that building facilities will require resources, and their extraction will require some working souls that you must send from the HellQuarters. You remember how, don't you? You can check how much resources of each type you have in the top side of the screen. From left to right: [Mineral] [Gas] [Power] [Crude Evil | Pure Evil | Refined Evil] [Hades'Favor]. I guess you are ready now to start building things.";
+			_eventText = "Remember that building facilities will require resources, and their extraction will require some working souls that you must send from the HellQuarters. You remember how, don't you? You can check how much resources of each type you have in the top side of the screen. From left to right: [Mineral] [Gas] [Power] [Crude Evil | Pure Evil | Refined Evil] [Hades'Favor]. I guess you are ready now to start building.";
 			break;
 
 		case TutorialStage::ROAD:
