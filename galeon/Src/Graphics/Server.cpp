@@ -238,4 +238,22 @@ namespace Graphics
 		}
 	} // tick
 
+	//--------------------------------------------------------
+
+	void CServer::turnOnBuildingLight(Ogre::Vector3 buildingPosition)
+	{
+		if (_activeScene != nullptr && _activeScene != _dummyScene)
+			_activeScene->turnOnBuildingLight(buildingPosition);
+
+	} // turnOnBuildingLight
+
+	//--------------------------------------------------------
+
+	void CServer::turnOffBuildingLight()
+	{
+		if (_activeScene != nullptr && _activeScene != _dummyScene)
+			_activeScene->turnOffBuildingLight();
+
+	} // turnOffBuildingLight
+
 } // namespace Graphics

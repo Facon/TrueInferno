@@ -17,11 +17,13 @@ Contiene la implementación del gestor del tutorial.
 #include "Logic/Events/EventManager.h"
 #include "Logic/TimeManager.h"
 
-#include <cassert>
+#include "Graphics/Server.h"
 
 #include "GUI/Server.h"
 #include "GUI/UIManager.h"
 #include "GUI/SideBarUI.h"
+
+#include <cassert>
 
 namespace Logic {
 
@@ -260,7 +262,6 @@ namespace Logic {
 		case GAS_PLANT:
 			startStageGasPlant();
 			break;
-		// @TODO Programar etapas...
 		case FURNACE:
 			startStageFurnace();
 			break;
@@ -304,7 +305,8 @@ namespace Logic {
 		_sideBarUI->buildingButtonHide(SideBar::BuildingButton::WAREHOUSE);
 		_sideBarUI->buildingButtonHide(SideBar::BuildingButton::CLEAR_TERRAIN);
 
-		// @TODO Iluminar HellQuarters
+		// Iluminar HellQuarters
+		Graphics::CServer::getSingletonPtr()->turnOnBuildingLight(hellquartersPosition);
 
 	} // startStageHellQuartersClick
 
@@ -327,6 +329,9 @@ namespace Logic {
 
 	void CTutorialManager::startStageRefinedEvil1()
 	{
+		// Dejar de iluminar HellQuarters
+		Graphics::CServer::getSingletonPtr()->turnOffBuildingLight();
+
 		// @TODO Blink para el marco de todo el panel derecho de construcción de edificios
 
 	} // startStageRefinedEvil1

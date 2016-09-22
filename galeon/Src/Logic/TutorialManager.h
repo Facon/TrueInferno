@@ -19,6 +19,8 @@ Contiene la declaración del gestor del tutorial.
 #include "Logic/Events/Event.h"
 #include "Logic/Entity/MessageHandler.h"
 
+#include <OgreRoot.h>
+
 namespace Logic
 {
 	enum BuildingType;
@@ -257,6 +259,12 @@ namespace Logic
 		Referencia a la instancia única de la clase.
 		*/
 		GUI::SideBarUI *_sideBarUI = nullptr;
+
+		/**
+		TODO Debería cogerlas del BuildingManager
+		*/
+		Ogre::Vector3 hellquartersPosition = Ogre::Vector3(24, 0, 23);
+		Ogre::Vector3 evilatorPosition = Ogre::Vector3(18, 0, 20);
 
 	}; // class CTutorialManager
 
