@@ -376,7 +376,8 @@ namespace GUI
 
 	void EventUI::setEventImage(std::string eventImage)
 	{
-		_uiEventWindow->getChild("EventImage")->setProperty("Image","TrueInfernoNewEvents/" + eventImage);
+		_uiEventWindow->getChild("EventImage")->setProperty("Image", "TrueInfernoNewEvents/" + eventImage);
+		_uiEventWindow->getChild("EventImage")->setAlwaysOnTop(true);
 	}
 	
 	void EventUI::setEventText(std::string eventText)
@@ -399,6 +400,7 @@ namespace GUI
 	void EventUI::setEventTutorialImage(std::string eventImage)
 	{
 		_uiEventTutorialWindow->getChild("EventImage")->setProperty("Image", eventImage);
+		_uiEventTutorialWindow->getChild("EventImage")->setAlwaysOnTop(true);
 	}
 
 	void EventUI::setEventTutorialText(std::string eventText)

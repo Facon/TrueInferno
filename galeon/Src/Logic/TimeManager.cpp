@@ -57,22 +57,23 @@ namespace Logic
 
 	void CTimeManager::tick(unsigned int msecs)
 	{
+		// Si está en pausa, no incrementamos ni el tiempo global ni el de ronda
+		if (_pause)
+			return;
+
 		_elapsedGlobalTime += msecs;
 
-		if (!_pause)
+		_elapsedRoundTime += msecs;
+		if (_elapsedRoundTime > _roundTime)
 		{
-			_elapsedRoundTime += msecs;
-			if (_elapsedRoundTime > _roundTime)
-			{
-				// Fijamos el tiempo de ronda en el tiempo máximo
-				_elapsedRoundTime = _roundTime;
+			// Fijamos el tiempo de ronda en el tiempo máximo
+			_elapsedRoundTime = _roundTime;
 
-				// Paramos el tiempo
-				_pause = true;
+			// Paramos el tiempo
+			_pause = true;
 
-				// Notificamos el final de ronda al GameManager
-				Logic::CGameManager::getSingletonPtr()->roundFinished();
-			}
+			// Notificamos el final de ronda al GameManager
+			Logic::CGameManager::getSingletonPtr()->roundFinished();
 		}
 	}
 

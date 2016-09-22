@@ -164,8 +164,9 @@ namespace Application
 	private:
 
 		/**
-		Ventana CEGUI que muestra el men�.
+		Ventanas CEGUI para victoria y derrota .
 		*/
+		CEGUI::Window* _victoryWindow;
 		CEGUI::Window* _gameOverWindow;
 
 		/**

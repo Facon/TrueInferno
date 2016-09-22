@@ -38,7 +38,12 @@ namespace Application {
 	{
 		CApplicationState::init();
 
-        // TODO Posible error aquí para cuando el personaje muera.
+		_victoryWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Victory.layout");
+
+		_victoryWindow->getChildElement("Exit")->
+			subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::SubscriberSlot(&CGameOverState::exitReleased, this));
+
         _gameOverWindow = CEGUI::WindowManager::getSingletonPtr()->loadLayoutFromFile("Defeat.layout");
 
         _gameOverWindow->getChildElement("Exit")->
@@ -54,6 +59,7 @@ namespace Application {
 	void CGameOverState::release() 
 	{
 		CApplicationState::release();
+		_victoryWindow->getChildElement("Exit")->removeAllEvents();
 		_gameOverWindow->getChildElement("Exit")->removeAllEvents();
 
 	} // release
@@ -64,17 +70,26 @@ namespace Application {
 	{
 		CApplicationState::activate();
 
-		// Activamos la ventana que nos muestra el men� y activamos el rat�n.
-        CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_gameOverWindow);
-        _gameOverWindow->setVisible(true);
-        _gameOverWindow->activate();
-        CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().show();
-
-		// TODO Mostrar en CEGUI!
+		// Victoria? Panel de derrota por defecto
 		bool victory = Logic::CGameManager::getSingletonPtr()->getVictory();
 
-		//_gameOverWindow->getChild("ResultBackground/ResultText")->setText((victory ? "VICTORY!" : "Defeat..."));
-		
+		if (victory)
+		{
+			// Activamos la ventana de victoria
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_victoryWindow);
+			_victoryWindow->setVisible(true);
+			_victoryWindow->activate();
+		}
+		else
+		{
+			// Activamos la ventana de derrota
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().setRootWindow(_gameOverWindow);
+			_gameOverWindow->setVisible(true);
+			_gameOverWindow->activate();
+		}
+
+		// Activamos el ratón
+        CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().show();
 
 	} // activate
 
@@ -83,10 +98,15 @@ namespace Application {
 	void CGameOverState::deactivate() 
 	{
         CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().hide();
+
+		_victoryWindow->deactivate();
+		_victoryWindow->setVisible(false);
+
         _gameOverWindow->deactivate();
         _gameOverWindow->setVisible(false);
 
         CApplicationState::deactivate();
+
 	} // deactivate
 
 	//--------------------------------------------------------

@@ -14,9 +14,8 @@
 				<Property name="VertFormatting" value="CentreAligned" />
 				<Property name="HorzFormatting" value="CentreAligned" />
 				<Property name="Area" value="{{0.2,0},{0.3,0},{0.8,0},{0.7,0}}" />
-				<Property name="Text" value="ELIMINATED!" />
+				<Property name="Text" value="Victory!" />
 			</Window>
-			
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="ImageFrame" >
@@ -27,7 +26,7 @@
 		</Window>
 		
 		<Window type="OgreTray/StaticImage" name="EventImage" >
-			<Property name="Image" value="TrueInfernoNewEvents/EventDefeat" />
+			<Property name="Image" value="TrueInfernoNewEvents/EventVictory" />
 			<Property name="VertFormatting" value="Stretched" />
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="Area" value="{{0.55,0},{0.27,0},{0.88,0},{0.72,0}}" />
@@ -46,7 +45,7 @@
 			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="HorzFormatting" value="WordWrapJustified" />
 			<Property name="HorzFormatting" value="WordWrapJustified" />
-			<Property name="Text" value="Sad news: you failed. You’re done. Out. FIRED. And I thought you had potential... I hate being wrong. I really do. Now get the Hell out of my Hell before I throw you into a furnace." />
+			<Property name="Text" value="Yes! YOU DID IT! You ARE the WINNER! Hell is yours now, totally deserved it I should say. But do not relax yet and keep making them all suffer!" />
 			<Property name="AlwaysOnTop" value="True" />
 		</Window>
 		
