@@ -43,7 +43,7 @@ namespace SideBar
 		(BuildingButton::REFINERY, "CreateRefinery")
 		(BuildingButton::POWER_GENERATOR, "CreatePowerGenerator")
 		(BuildingButton::WAREHOUSE, "CreateWarehouse")
-		(BuildingButton::CLEAR_TERRAIN, "ClearTerrain");
+		(BuildingButton::CLEAR_TERRAIN, "CreateClearTerrain");
 }
 
 namespace Logic

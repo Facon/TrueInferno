@@ -140,6 +140,24 @@ namespace Logic {
 			_eventText = "Got too much Mineral? No problem, you can store it in the Warehouse. Got too much Gas? Try eating less beans. HAHA, I am hilarious... You can store excess of Gas here too. But pay attention, you cannot store Coke, Power or Evil (any kind of it) in the Warehouse.";
 			break;
 
+		case TutorialStage::CLEAR_TERRAIN:
+			_eventImage = "TrueInfernoUIBars/StartMenu";
+			_eventTitle = "Clear Terrain";
+			_eventText = "Ruins, obstacles... This is Hell kid. Did you expect it to be a nice place? Use this tool to remove unwanted stuff from the map. Though it is not free either.";
+			break;
+
+		case TutorialStage::EVILATOR:
+			_eventImage = "TrueInfernoBuildings/Evilator";
+			_eventTitle = "Evilator";
+			_eventText = "All right then, here is the last building you must know: the Evilator. As I told you before, this structure has been designed to send all your Refined Evil directly to my office. You better take care of it, I definitely would not like to see rubbish coming up... Now click on the Evilator, I just want to make sure that you know what building it is. You can also click on any other building to see its details.";
+			break;
+
+		case TutorialStage::RANKING:
+			_eventImage = "TrueInfernoBuildings/Missions";
+			_eventTitle = "Gods Ranking";
+			_eventText = "Well done! So after all these devilish lessons, you are good to go! Finally, take a look at the Gods ranking. There you will see how well you are doing in the competition. Try reaching enough Hades Favor (your score) to avoid the last position, because every round the last one of you will get eliminated. Be the only survivor of this contest and you will become my successor! Good luck, and do not disappoint me...";
+			break;
+
 		default:
 			assert(false && "No values defined for GUI");
 			_eventImage = "";

@@ -127,7 +127,7 @@ namespace GUI
 		_uibuttonsWindow->getChildElement("CreateRefinery")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreatePowerGenerator")->removeAllEvents();
 		_uibuttonsWindow->getChildElement("CreateWarehouse")->removeAllEvents();
-		_uibuttonsWindow->getChildElement("ClearTerrain")->removeAllEvents();
+		_uibuttonsWindow->getChildElement("CreateClearTerrain")->removeAllEvents();
 		//_uibuttonsWindow->getChildElement("RepairBuilding")->removeAllEvents();
 		//_uibuttonsWindow->getChildElement("CreateResearchLab")->removeAllEvents();
 
@@ -712,6 +712,10 @@ namespace GUI
 		// Marco del botón pulsado
 		CEGUI::Window *buttonFrameWindow = getButtonWindowFromName(buttonName + "Frame");
 
+		// Si no se encuentra...
+		if (buttonFrameWindow == nullptr)
+			return;
+
 		// Activar parpadeo y guardar referencia al [marco del] botón. El cambio de imagen
 		// periódico se lleva a cabo en el tick
 		_blinkingButton = true;
@@ -730,6 +734,10 @@ namespace GUI
 
 		// Marco del botón pulsado
 		CEGUI::Window *buttonFrameWindow = getButtonWindowFromName(buttonName + "Frame");
+
+		// Si el pulsado no es el que está parpadeando
+		if (buttonFrameWindow == nullptr || buttonFrameWindow != _blinkingButtonFrameWindow)
+			return;
 
 		// Reestablecer la imagen original del marco
 		_blinkingButtonFrameWindow->setProperty("Image", buttonFrame);
@@ -839,12 +847,16 @@ namespace GUI
 		// ...luego, por descarte, entrará aquí en caso de que se haya hecho click con el
 		// botón izquierdo y no se estuviera construyendo nada
 		else{
-			if (_clearTerrain){
+			if (_clearTerrain)
+			{
+				// Modo de limpieza del terreno
 				Logic::CEntity* entity = getEntityFromRaycastToGroup(3);
 				if (entity)
 				{
+					// Limpieza de obstáculo
 					Logic::CBuildingManager::getSingletonPtr()->destroyPlaceable(entity);
 					continueClearTerrain();
+					Logic::CTutorialManager::getSingletonPtr()->obstacleRemoved();
 				}
 				else
 					_firstAnimation = true;

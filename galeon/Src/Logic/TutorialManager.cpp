@@ -105,8 +105,9 @@ namespace Logic {
 		// directamente a la siguiente cuando el jugador pulsa el botón OK
 		switch (_currentStage)
 		{
-		case Logic::REFINED_EVIL_AS_OBJ_1:
-		case Logic::REFINED_EVIL_AS_OBJ_2:
+		case TutorialStage::REFINED_EVIL_AS_OBJ_1:
+		case TutorialStage::REFINED_EVIL_AS_OBJ_2:
+		case TutorialStage::RANKING:
 			nextStage(_currentStage);
 			break;
 		default:
@@ -134,6 +135,8 @@ namespace Logic {
 	{
 		if (buildingName == "HellQuarters")
 			nextStage(TutorialStage::HELLQUARTERS_CLICK);
+		else if (buildingName == "Evilator")
+			nextStage(TutorialStage::EVILATOR);
 
 	} // buildingSelected
 
@@ -196,6 +199,14 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	void CTutorialManager::obstacleRemoved()
+	{
+		nextStage(TutorialStage::CLEAR_TERRAIN);
+
+	} // obstacleRemoved
+
+	//--------------------------------------------------------
+
 	bool CTutorialManager::open()
 	{
 		// Eventos del tutorial
@@ -212,6 +223,9 @@ namespace Logic {
 		CEventManager::getSingletonPtr()->addConditionEvent(new CTutorialEvent(TutorialStage::REFINERY));
 		CEventManager::getSingletonPtr()->addConditionEvent(new CTutorialEvent(TutorialStage::POWER_GENERATOR));
 		CEventManager::getSingletonPtr()->addConditionEvent(new CTutorialEvent(TutorialStage::WAREHOUSE));
+		CEventManager::getSingletonPtr()->addConditionEvent(new CTutorialEvent(TutorialStage::CLEAR_TERRAIN));
+		CEventManager::getSingletonPtr()->addConditionEvent(new CTutorialEvent(TutorialStage::EVILATOR));
+		CEventManager::getSingletonPtr()->addConditionEvent(new CTutorialEvent(TutorialStage::RANKING));
 
 		return true;
 
@@ -276,6 +290,15 @@ namespace Logic {
 			break;
 		case WAREHOUSE:
 			startStageWarehouse();
+			break;
+		case CLEAR_TERRAIN:
+			startStageClearTerrain();
+			break;
+		case EVILATOR:
+			startStageEvilator();
+			break;
+		case RANKING:
+			startStageRanking();
 			break;
 		case FINISHED:
 			endTutorial();
@@ -435,6 +458,38 @@ namespace Logic {
 
 	//--------------------------------------------------------
 
+	void CTutorialManager::startStageClearTerrain()
+	{
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::WAREHOUSE);
+		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::CLEAR_TERRAIN);
+
+	} // startStageClearTerrain
+
+	//--------------------------------------------------------
+
+	void CTutorialManager::startStageEvilator()
+	{
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::CLEAR_TERRAIN);
+
+		// Simulamos click derecho del jugador para que salga del modo de limpieza
+		// del terreno
+		_sideBarUI->playerInteractionWithRightClick();
+
+		// Iluminar Evilator
+		Graphics::CServer::getSingletonPtr()->turnOnBuildingLight(evilatorPosition);
+
+	} // startStageEvilator
+
+	//--------------------------------------------------------
+
+	void CTutorialManager::startStageRanking()
+	{
+		// @TODO Blink para el marco del ranking de dioses
+
+	} // startStageRanking
+
+	//--------------------------------------------------------
+
 	void CTutorialManager::endTutorial()
 	{
 		_active = false;
@@ -443,7 +498,7 @@ namespace Logic {
 		// activos y de que se muestran los botones de construcción de edificios...
 		GUI::CServer::getSingletonPtr()->getUIManager()->getBuildingSelectionUI()->DisablePopupVisibility();
 
-		// ...y de que realmente se muestran todos...
+		// ...y de que realmente están todos visibles...
 		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::FURNACE);
 		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::EVILWORKS);
 		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::REFINERY);
@@ -452,7 +507,7 @@ namespace Logic {
 		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::WAREHOUSE);
 		_sideBarUI->buildingButtonShow(SideBar::BuildingButton::CLEAR_TERRAIN);
 
-		// ...y de que ninguno parpadea
+		// ...y de que ninguno parpadea...
 		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::ROAD);
 		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::MINE);
 		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::GAS_PLANT);
@@ -465,7 +520,10 @@ namespace Logic {
 		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::WAREHOUSE);
 		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::CLEAR_TERRAIN);
 
-		// Activamos el tiempo, con lo que comienza la primera ronda
+		// ...y de que no hay ningún edificio iluminado.
+		Graphics::CServer::getSingletonPtr()->turnOffBuildingLight();
+
+		// Activamos el tiempo, con lo que comienza la primera ronda.
 		CTimeManager::getSingletonPtr()->setPause(false);
 
 	} // endTutorial

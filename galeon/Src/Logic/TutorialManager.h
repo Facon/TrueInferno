@@ -68,6 +68,9 @@ namespace Logic
 		REFINERY,                       // Refinery: Refined Evil, Evilator y Hades Favor.
 		POWER_GENERATOR,                // Power Generator: Power.
 		WAREHOUSE,                      // Warehouse: almacenamiento de recursos.
+		CLEAR_TERRAIN,                  // Limpieza de obstáculos del mapa.
+		EVILATOR,                       // Evilator: envío de Refined Evil.
+		RANKING,                        // Ranking de dioses y puntuación.
 		// Tutorial finalizado
 		FINISHED,
 		// Tutorial desactivado
@@ -142,6 +145,7 @@ namespace Logic
 		void soulsTrialCompleted(); // Juicio de Almas completado satisfactoriamente
 		void roadPlaced(); // Carretera construida
 		void buildingPlaced(BuildingType buildingType); // Edificio construido
+		void obstacleRemoved(); // Obstáculo eliminado del mapa
 
 		/**
 		Manejo de mensajes, tiene que manejar todos los tipos de mensajes sin excepción.
@@ -232,6 +236,9 @@ namespace Logic
 		void startStageRefinery();
 		void startStagePowerGenerator();
 		void startStageWarehouse();
+		void startStageClearTerrain();
+		void startStageEvilator();
+		void startStageRanking();
 
 		/**
 		Fin del tutorial.
