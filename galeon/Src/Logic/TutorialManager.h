@@ -29,6 +29,7 @@ namespace Logic
 namespace GUI
 {
 	class SideBarUI;
+	class RankUI;
 }
 
 namespace Map
@@ -263,9 +264,10 @@ namespace Logic
 		TutorialStage _currentStage = TutorialStage::NOT_STARTED;
 
 		/**
-		Referencia a la instancia única de la clase.
+		Referencia a la instancia única de las clases de la GUI.
 		*/
 		GUI::SideBarUI *_sideBarUI = nullptr;
+		GUI::RankUI *_rankUI = nullptr;
 
 		/**
 		TODO Debería cogerlas del BuildingManager

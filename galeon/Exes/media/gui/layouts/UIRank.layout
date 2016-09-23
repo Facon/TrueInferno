@@ -2,7 +2,6 @@
 
 <GUILayout version="4" >
     
-
 	<Window type="OgreTray/StaticImage" name="RankFrame" >
 		<Property name="Area" value="{{0.825,0},{0.11,0},{0.981,0},{0.43,0}}" />
 		<Property name="AlwaysOnTop" value="True" />

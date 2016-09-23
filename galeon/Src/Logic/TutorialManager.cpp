@@ -92,6 +92,10 @@ namespace Logic {
 		if (_sideBarUI == nullptr)
 			_sideBarUI = GUI::CServer::getSingletonPtr()->getUIManager()->getSideBarUI();
 
+		// Guarda una referencia a la instancia de RankUI a través del UIManager
+		if (_rankUI == nullptr)
+			_rankUI = GUI::CServer::getSingletonPtr()->getUIManager()->getRankUI();
+
 		if (_currentStage == TutorialStage::NOT_STARTED)
 			nextStage(_currentStage);
 
@@ -331,6 +335,12 @@ namespace Logic {
 		// Iluminar HellQuarters
 		Graphics::CServer::getSingletonPtr()->turnOnBuildingLight(hellquartersPosition);
 
+		// ==================
+		// Eliminar cuando esté probado y quede bien
+		// Activar parpadeo para el panel derecho del ranking de dioses
+		_rankUI->godsRankingBlinkStart();
+		// ==================
+
 	} // startStageHellQuartersClick
 
 	//--------------------------------------------------------
@@ -355,7 +365,8 @@ namespace Logic {
 		// Dejar de iluminar HellQuarters
 		Graphics::CServer::getSingletonPtr()->turnOffBuildingLight();
 
-		// @TODO Blink para el marco de todo el panel derecho de construcción de edificios
+		// Activar parpadeo para el panel derecho de construcción de edificios
+		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::BUILDING_BUTTONS);
 
 	} // startStageRefinedEvil1
 
@@ -371,6 +382,10 @@ namespace Logic {
 
 	void CTutorialManager::startStageRoad()
 	{
+		// Desactivar parpadeo del panel derecho de construcción de edificios
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::BUILDING_BUTTONS);
+
+		// Activar parpadeo para los botones de construcción de edificios (1 a 1)...
 		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::ROAD);
 
 	} // startStageRoad
@@ -484,7 +499,8 @@ namespace Logic {
 
 	void CTutorialManager::startStageRanking()
 	{
-		// @TODO Blink para el marco del ranking de dioses
+		// Activar parpadeo para el panel derecho correspondiente al ranking de dioses
+		_rankUI->godsRankingBlinkStart();
 
 	} // startStageRanking
 
@@ -519,6 +535,10 @@ namespace Logic {
 		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::POWER_GENERATOR);
 		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::WAREHOUSE);
 		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::CLEAR_TERRAIN);
+
+		// ...y de que el resto de paneles tampoco parpadean...
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::BUILDING_BUTTONS);
+		_rankUI->godsRankingBlinkStop();
 
 		// ...y de que no hay ningún edificio iluminado.
 		Graphics::CServer::getSingletonPtr()->turnOffBuildingLight();

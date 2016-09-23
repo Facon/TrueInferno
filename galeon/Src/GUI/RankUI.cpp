@@ -125,7 +125,60 @@ namespace GUI
 
 	void RankUI::tick(unsigned int msecs)
 	{
-		//updateGodRank();
+		// updateGodRank();
+
+		// Blinking ranking
+		if (_blinking)
+		{
+			_blinkingTickCount += msecs;
+
+			if (_blinkingTickCount >= _blinkingTickLimit && _blinkingRankFrameWindow != nullptr)
+			{
+				_blinkingTickCount = 0;
+
+				bool blinkingNormalFrame = _blinkingRankFrameWindow->getProperty("Image") == rankFrame;
+				_blinkingRankFrameWindow->setProperty("Image", blinkingNormalFrame ? rankFrameWhite : rankFrame);
+			}
+		}
+	}
+
+	//--------------------------------------------------------
+
+	void RankUI::godsRankingBlinkStart()
+	{
+		// Marco del ranking
+		CEGUI::Window *rankFrameWindow = _uiRankWindow;
+
+		// Si no se encuentra...
+		if (rankFrameWindow == nullptr)
+			return;
+
+		// Activar parpadeo y guardar referencia al [marco del] ranking. El cambio de imagen
+		// periódico se lleva a cabo en el tick
+		_blinking = true;
+		_blinkingRankFrameWindow = rankFrameWindow;
+		_blinkingTickCount = _blinkingTickLimit;
+	}
+
+	void RankUI::godsRankingBlinkStop()
+	{
+		// Comprobamos que el ranking esté parpadeando
+		if (!_blinking)
+			return;
+
+		// Marco del ranking
+		CEGUI::Window *rankFrameWindow = _uiRankWindow;
+
+		// Si no coincide, que nunca debería pasar...
+		if (rankFrameWindow == nullptr || rankFrameWindow != _blinkingRankFrameWindow)
+			return;
+
+		// Reestablecer la imagen original del marco
+		_blinkingRankFrameWindow->setProperty("Image", rankFrame);
+
+		// Desactivar parpadeo y limpiar referencia al [marco del] ranking
+		_blinking = false;
+		_blinkingRankFrameWindow = nullptr;
 	}
 
 }

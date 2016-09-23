@@ -13,10 +13,11 @@ namespace SideBar
 {
 	/**
 	Botones de construcción de edificios (y limpieza del terreno) presentes en el menú
-	de la barra lateral derecha de la interfaz.
+	de la barra lateral derecha de la interfaz + Panel que engloba a todos ellos
 	*/
 	enum BuildingButton
 	{
+		// Botones de construcción de edificios
 		ROAD,
 		MINE,
 		GAS_PLANT,
@@ -25,11 +26,13 @@ namespace SideBar
 		REFINERY,
 		POWER_GENERATOR,
 		WAREHOUSE,
-		CLEAR_TERRAIN
+		CLEAR_TERRAIN,
+		// Panel común
+		BUILDING_BUTTONS
 	};
 
 	/**
-	Índice entre cada uno de los botones del enum anterior y el nombre (string) que
+	Índice entre cada uno de los valores del enum anterior y el nombre (string) que
 	hay que pasarle a CEGUI para referenciarlo.
 	*/
 	typedef boost::unordered_map<SideBar::BuildingButton, std::string> bumap_names;
@@ -43,7 +46,8 @@ namespace SideBar
 		(BuildingButton::REFINERY, "CreateRefinery")
 		(BuildingButton::POWER_GENERATOR, "CreatePowerGenerator")
 		(BuildingButton::WAREHOUSE, "CreateWarehouse")
-		(BuildingButton::CLEAR_TERRAIN, "CreateClearTerrain");
+		(BuildingButton::CLEAR_TERRAIN, "CreateClearTerrain")
+		(BuildingButton::BUILDING_BUTTONS, "Buttons");
 }
 
 namespace Logic

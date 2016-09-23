@@ -101,10 +101,9 @@ namespace GUI
 	{
 		_uiWindow->getChild("fps")->setProperty("Text", std::to_string((int) Graphics::CServer::getSingletonPtr()->getLastFPS()) + " fps");
 		
-		
 		_topBarUI.tick(msecs);
 		_sideBarUI.tick(msecs);
-		//_rankUI.tick(msecs);
+		_rankUI.tick(msecs);
 		_eventUI.tick(msecs);
 		_buildingSelectionUI.tick(msecs);
 	}
