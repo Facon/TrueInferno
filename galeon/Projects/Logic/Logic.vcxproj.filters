@@ -245,6 +245,9 @@
     <ClCompile Include="..\..\Src\Logic\Events\PlayerResourcesChangeEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\RoundTimeChangeEvent.cpp" />
     <ClCompile Include="..\..\Src\Logic\Events\ObstacleGrowthEvent.cpp" />
+    <ClCompile Include="..\..\Src\Logic\TutorialManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\Maps\ComponentFactory.h">
@@ -486,6 +489,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Logic\GameRuntimeContext.h">
       <Filter>Entity\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Logic\TutorialManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

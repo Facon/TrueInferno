@@ -8,6 +8,7 @@
 #include "BaseSubsystems/ScriptManager.h"
 #include "AI/SoulTask.h"
 #include "Logic/ResourcesManager.h"
+#include "Logic/TutorialManager.h"
 #include "Logic/Events/EventManager.h"
 #include "Logic/SoulsTrialManager.h"
 #include "Logic/Entity/BuildingType.h"
@@ -16,7 +17,8 @@
 namespace Logic
 {
 	#define RESEND(message) \
-		CEventManager::getSingletonPtr()->HandleMessage(message);
+		CEventManager::getSingletonPtr()->HandleMessage(message); \
+		CTutorialManager::getSingletonPtr()->HandleMessage(message);
 
 	Message::Message() : _type(MessageType::UNASSIGNED)
 	{}

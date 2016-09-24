@@ -47,9 +47,10 @@ namespace Logic
 
 	public:
 
-		/**  Constructor basado en trigger */
+		/** Constructor basado en trigger */
 		CTutorialEvent(int tutorialpanelIndex) :
-			CEvent(INFO, CEvent::ConditionTriggerType::TUTORIAL, true, std::string("")), _tutorialPanelIndex(tutorialpanelIndex) {
+			CEvent(INFO, CEvent::ConditionTriggerType::TUTORIAL, true, std::string("")),
+			_tutorialPanelIndex(tutorialpanelIndex) {
 			initGUIConstants();
 		};
 
@@ -98,7 +99,6 @@ namespace Logic
 		std::string _eventImage;
 		std::string _eventTitle;
 		std::string _eventText;
-		std::string _eventTextResume;
 
 		void initGUIConstants();
 

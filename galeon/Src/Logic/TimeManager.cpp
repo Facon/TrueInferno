@@ -10,7 +10,8 @@ namespace Logic
 {
 	CTimeManager CTimeManager::_instance = CTimeManager();
 
-	CTimeManager::CTimeManager() : _elapsedRoundTime(0), _roundTime(0), _defaultRoundTime(0), _elapsedGlobalTime(0), _pause(false)
+	CTimeManager::CTimeManager() : _elapsedRoundTime(0), _roundTime(0), _defaultRoundTime(0), _elapsedGlobalTime(0),
+		_pause(true) // Empieza en pausa por el tutorial, luego se activará al terminar éste (TutorialManager)
 	{
 	}
 
@@ -37,8 +38,8 @@ namespace Logic
 
 	bool CTimeManager::open() {
 		luaRegister();
-
 		return true;
+
 	} // open
 
 	void CTimeManager::close() {
@@ -50,30 +51,29 @@ namespace Logic
 
 		_elapsedRoundTime = 0;
 		_elapsedGlobalTime = 0;
-		_pause = false;
+		_pause = true;
 		_roundTime = _defaultRoundTime;
 	}
 
 	void CTimeManager::tick(unsigned int msecs)
 	{
+		// Si está en pausa, no incrementamos ni el tiempo global ni el de ronda
+		if (_pause)
+			return;
+
 		_elapsedGlobalTime += msecs;
 
-		if (!_pause)
+		_elapsedRoundTime += msecs;
+		if (_elapsedRoundTime > _roundTime)
 		{
-			_elapsedRoundTime += msecs;
-			if (_elapsedRoundTime > _roundTime){
-				// Fijamos el tiempo de ronda en el tiempo máximo
-				_elapsedRoundTime = _roundTime;
+			// Fijamos el tiempo de ronda en el tiempo máximo
+			_elapsedRoundTime = _roundTime;
 
-				// Paramos el tiempo
-				_pause = true;
+			// Paramos el tiempo
+			_pause = true;
 
-				// @TODO Hacer esto bien...
-				//Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::END_GAME);
-
-				// Notificamos el final de ronda al GameManager
-				Logic::CGameManager::getSingletonPtr()->roundFinished();
-			}
+			// Notificamos el final de ronda al GameManager
+			Logic::CGameManager::getSingletonPtr()->roundFinished();
 		}
 	}
 

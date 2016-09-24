@@ -22,6 +22,7 @@ la ventana, etc.
 // Predeclaración de clases para ahorrar tiempo de compilación
 namespace Ogre 
 {
+	class Vector3;
 	class Root;
 	class RenderWindow;
 	class Timer;
@@ -191,6 +192,12 @@ namespace Graphics
 		llamada.
 		*/
 		float getAverageFPS() const;
+
+		/**
+		Activar y desactivar la luz focal para edificios de la escena.
+		*/
+		void turnOnBuildingLight(Ogre::Vector3 buildingPosition);
+		void turnOffBuildingLight();
 
 	protected:
 

@@ -5,11 +5,11 @@
 /**
 @file SoulsTrialManager.cpp
 
-Contiene la implementaciï¿½n del gestor del Juicio de Almas.
+Contiene la implementación del gestor del Juicio de Almas.
 
 @see Logic::CSoulsTrialManager
 
-@author Raï¿½l Segura
+@author Raúl Segura
 @date Abril, 2016
 */
 
@@ -128,19 +128,8 @@ namespace Logic {
 
 		if (_timeSinceLastSoulsGeneration >= _timeForNextSoulsGeneration)
 		{
-			// TODO Borrar cuando funcione el Juicio de Almas
-			//std::cout << "pre souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
-
 			processNewGroupOfSouls();
-			// TODO ï¿½Reproducimos algï¿½n sonido o notificaciï¿½n de almas nuevas?
-
-			// TODO Borrar cuando funcione el Juicio de Almas
-			//std::cout << "mid souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
-			//unsigned int toWork[] = { 2, 1, 2, 1 }; //
-			//unsigned int toBurn[] = { 2, 2, 2, 1 }; //
-			//SoulsCategory category = createSouls(toWork, toBurn); //
-			//std::cout << "create si o no = " << (category == SoulsCategory::NONE) << std::endl; //
-			//std::cout << "pst souls = [" << _souls[0] << "," << _souls[1] << "," << _souls[2] << "," << _souls[3] << "]" << std::endl; //
+			// TODO ¿Reproducimos algún sonido o notificación de almas nuevas?
 
 			_timeForNextSoulsGeneration = Math::random(_minSoulsGenerationTime, _maxSoulsGenerationTime);
 			_timeSinceLastSoulsGeneration = 0;
@@ -349,7 +338,7 @@ namespace Logic {
 	bool CSoulsTrialManager::open()
 	{
 		for (unsigned int i = 0; i < 4; ++i)
-			_souls[i] = 0;
+			_souls[i] = 5;
 
 		return true;
 

@@ -13,10 +13,11 @@ namespace SideBar
 {
 	/**
 	Botones de construcción de edificios (y limpieza del terreno) presentes en el menú
-	de la barra lateral derecha de la interfaz.
+	de la barra lateral derecha de la interfaz + Panel que engloba a todos ellos
 	*/
 	enum BuildingButton
 	{
+		// Botones de construcción de edificios
 		ROAD,
 		MINE,
 		GAS_PLANT,
@@ -25,11 +26,13 @@ namespace SideBar
 		REFINERY,
 		POWER_GENERATOR,
 		WAREHOUSE,
-		CLEAR_TERRAIN
+		CLEAR_TERRAIN,
+		// Panel común
+		BUILDING_BUTTONS
 	};
 
 	/**
-	Índice entre cada uno de los botones del enum anterior y el nombre (string) que
+	Índice entre cada uno de los valores del enum anterior y el nombre (string) que
 	hay que pasarle a CEGUI para referenciarlo.
 	*/
 	typedef boost::unordered_map<SideBar::BuildingButton, std::string> bumap_names;
@@ -43,7 +46,8 @@ namespace SideBar
 		(BuildingButton::REFINERY, "CreateRefinery")
 		(BuildingButton::POWER_GENERATOR, "CreatePowerGenerator")
 		(BuildingButton::WAREHOUSE, "CreateWarehouse")
-		(BuildingButton::CLEAR_TERRAIN, "ClearTerrain");
+		(BuildingButton::CLEAR_TERRAIN, "CreateClearTerrain")
+		(BuildingButton::BUILDING_BUTTONS, "Buttons");
 }
 
 namespace Logic
@@ -75,8 +79,6 @@ namespace GUI
 		Logic::Tile* _originRoadTile=nullptr;
 		int _roadInConstruction = false;
 		bool _clearTerrain = false;
-
-		bool _firstRoad = true;
 
 		Logic::Tile* _previousOriginRoadTile = nullptr;
 		Logic::Tile* _previousToRoadTile = nullptr;
@@ -128,14 +130,6 @@ namespace GUI
 		// Reset completo de lo que se estuviera haciendo
 		void ClearBuildingConstruction(bool clearPopups);
 
-		// Cambios en botones de construcción bajo demanda
-		void buildingButtonShow(SideBar::BuildingButton button);
-		void buildingButtonHide(SideBar::BuildingButton button);
-		void buildingButtonFadeIn(SideBar::BuildingButton button);
-		void buildingButtonFadeOut(SideBar::BuildingButton button);
-		void buildingButtonBlinkStart(SideBar::BuildingButton button);
-		void buildingButtonBlinkStop(SideBar::BuildingButton button);
-
 		// Función auxiliar para los métodos anteriores
 		CEGUI::Window* getButtonWindowFromName(std::string buttonName);
 
@@ -159,6 +153,14 @@ namespace GUI
 		void playerInteractionWithLeftClick();
 		void playerInteractionWithRightClick();
 		void setEventWindowVisible(bool visible);
+
+		// Cambios en botones de construcción bajo demanda
+		void buildingButtonShow(SideBar::BuildingButton button);
+		void buildingButtonHide(SideBar::BuildingButton button);
+		void buildingButtonFadeIn(SideBar::BuildingButton button);
+		void buildingButtonFadeOut(SideBar::BuildingButton button);
+		void buildingButtonBlinkStart(SideBar::BuildingButton button);
+		void buildingButtonBlinkStop(SideBar::BuildingButton button);
 	};
 }
 

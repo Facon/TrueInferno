@@ -9,7 +9,7 @@
 		
 		<Window type="OgreTray/StaticImage" name="ButtonsFrame" >
 			<Property name="Area" value="{{0.120,0},{0.33,0},{0.905,0},{0.655,0}}" />	
-			<Property name="Image" value="TrueInfernoUIBars/ButtonWindow" />
+			<Property name="Image" value="TrueInfernoUIBars/ButtonFrame" />
 			<Property name="HorzFormatting" value="Stretched" />
 			<Property name="VertFormatting" value="Stretched" />
 		</Window>
@@ -114,7 +114,7 @@
 			<Property name="VertFormatting" value="Stretched" />
 		</Window>
 		
-		<Window type="OgreTray/TrueInfernoButtonClearTerrain2" name="ClearTerrain" >
+		<Window type="OgreTray/TrueInfernoButtonClearTerrain2" name="CreateClearTerrain" >
 			<Property name="Area" value="{{0.625,0},{0.545,0},{0.84,0},{0.635,0}}" />
 		</Window>
 

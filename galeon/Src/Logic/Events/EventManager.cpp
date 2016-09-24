@@ -301,203 +301,146 @@ namespace Logic {
 	bool CEventManager::HandleMessage(const Message& msg)
 	{
 		assert(!"Estás enviando un Message sin tipo.");
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const TransformMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const PositionMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const RotationMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const DimensionsMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const ColorMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const MaterialMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const AnimationMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const ControlMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const PhysicMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const TouchMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const DamageMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const WorkerMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const WalkSoulPathMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const HellQuartersMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const MovePlaceableMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const SoulSenderMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const SoulMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const CheckValidPositionPlaceableMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const SoulBurnMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const ResourceMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const GetCostPlaceableMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const LogisticsMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const ToggleMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const IconMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const PowerMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const ConsumptionMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 	
 	bool CEventManager::HandleMessage(const SoundMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 
 	bool CEventManager::HandleMessage(const ParticleMessage& msg)
 	{
-		//std::cout << msg._type << "\n";
-
 		return false;
 	}
 

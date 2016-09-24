@@ -189,6 +189,9 @@ namespace Logic
 		/** Inicializa el valor del entorno de juego */
 		void initGameRuntimeContext();
 
+		/** HACK Ver explicación donde se usa */
+		bool _firstTick = true;
+
 	}; // class CServer
 
 } // namespace Logic

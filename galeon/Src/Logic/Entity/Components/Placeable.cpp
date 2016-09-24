@@ -6,6 +6,7 @@
 #include "Map/MapEntity.h"
 
 #include "Logic/Server.h"
+#include "Logic/TutorialManager.h"
 #include "Logic/ResourcesManager.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
@@ -156,7 +157,8 @@ namespace Logic {
 
 	} // tick
 
-	bool CPlaceable::place() {
+	bool CPlaceable::place()
+	{
 		// Si no estábamos flotando no hacemos nada porque ya estábamos (teóricamente bien) colocados
 		if (!_floating)
 			return true;
@@ -215,12 +217,6 @@ namespace Logic {
 		// Cambiamos el estado
 		_floating = false;
 
-		// Eventos del tutorial
-		// @TODO Hacer bien...
-		if (isBuilding()) {
-			Logic::CEventManager::getSingletonPtr()->launchConditionEvent(Logic::CEvent::ConditionTriggerType::TUTORIAL);
-		}
-
 		// Incrementamos el favor de Hades por construcción de edificio
 		HFManager* hadesFavorManager = HFManager::getSingletonPtr();
 		hadesFavorManager->changeHadesFavor(_hadesFavorReward);
@@ -244,6 +240,12 @@ namespace Logic {
 			result = particleMessage.Dispatch(*_entity);
 			assert(result && "Can't start building construction particles");
 		}
+
+		// Avisamos al TutorialManager de la construcción
+		if (_placeableType == Building)
+			CTutorialManager::getSingletonPtr()->buildingPlaced(getBuildingType());
+		else if (_placeableType == SoulPath)
+			CTutorialManager::getSingletonPtr()->roadPlaced();
 
 		return true;
 	}

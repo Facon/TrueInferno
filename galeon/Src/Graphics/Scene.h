@@ -137,8 +137,17 @@ namespace Graphics
 		*/
 		void removeStaticEntity(CStaticEntity* entity);
 
+		/**
+		Crear billboards.
+		*/
 		Ogre::BillboardSet* createBillboardSet(CEntity* entity, const std::string& name, const Ogre::Vector3& position) const;
 		Ogre::BillboardSet* createBillboardSet(CEntity* entity, const std::string& name) const;
+
+		/**
+		Activar y desactivar la luz focal para edificios.
+		*/
+		void turnOnBuildingLight(Ogre::Vector3 buildingPosition);
+		void turnOffBuildingLight();
 
 	protected:
 
@@ -251,6 +260,11 @@ namespace Graphics
 		Luz focal que apunta desde la cámara al cursor.
 		*/
 		Ogre::Light *_spotlightLight;
+
+		/**
+		Luz focal que ilumina un edificio concreto durante el tutorial.
+		*/
+		Ogre::Light *_buildingHighlight;
 
 		float _spotlightAcumTime;
 		float _spotlightThresholdTime;

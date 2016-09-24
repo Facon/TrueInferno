@@ -39,7 +39,7 @@ de una escena.
 namespace Graphics 
 {
 	CScene::CScene(const std::string& name) : _viewport(0), _staticGeometry(0),
-		_directionalLight(0), _spotlightLight(0),
+		_directionalLight(0), _buildingHighlight(0), _spotlightLight(0),
 		_spotlightAcumTime(0), _spotlightThresholdTime(0.1f)
 	{
 		_root = BaseSubsystems::CServer::getSingletonPtr()->getOgreRoot();
@@ -140,6 +140,7 @@ namespace Graphics
 		_directionalLight->setDirection(-200, -200, -50);
 		_directionalLight->setCastShadows(true);
 
+		// Luz focal desde la cámara al cursor
 		_spotlightLight = _sceneMgr->createLight("SpotlightLight");
 		_spotlightLight->setDiffuseColour(Ogre::ColourValue(1.0f, 0.1f, 0.1f, 0.0f));
 		_spotlightLight->setSpecularColour(Ogre::ColourValue(1.0f, 0.1f, 0.1f, 0.0f));
@@ -148,6 +149,17 @@ namespace Graphics
 		_spotlightLight->setDirection(0, 0, 0); // junto con la posición de la cámara
 		_spotlightLight->setSpotlightRange(Ogre::Degree(3), Ogre::Degree(5));
 		_spotlightLight->setAttenuation(1500.0f, 1.0f, 0.05f, 0.0f);
+
+		// Luz focal para iluminar un edificio concreto durante el tutorial
+		_buildingHighlight = _sceneMgr->createLight("BuildingHighlight");
+		_buildingHighlight->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f, 0.5f));
+		_buildingHighlight->setSpecularColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f, 0.5f));
+		_buildingHighlight->setType(Ogre::Light::LT_SPOTLIGHT);
+		_buildingHighlight->setPosition(0.f, 0.f, 0.f); // Posición temporal. Cambia según el edificio
+		_buildingHighlight->setDirection(0.f, -1.f, 0.f);
+		_buildingHighlight->setSpotlightRange(Ogre::Degree(10), Ogre::Degree(20));
+		_buildingHighlight->setAttenuation(1500.0f, 1.0f, 0.05f, 0.0f);
+		_buildingHighlight->setVisible(false);
 
 	} // activate
 
@@ -164,6 +176,11 @@ namespace Graphics
 		{
 			_sceneMgr->destroyLight(_spotlightLight);
 			_spotlightLight = 0;
+		}
+		if (_buildingHighlight)
+		{
+			_sceneMgr->destroyLight(_buildingHighlight);
+			_buildingHighlight = 0;
 		}
 		if(_viewport)
 		{
@@ -248,5 +265,22 @@ namespace Graphics
 		return createBillboardSet(entity, name, Vector3(0.0f, 100.0f, 0.0f));
 
 	} // createBillboardSet
+
+	//--------------------------------------------------------
+
+	void CScene::turnOnBuildingLight(Vector3 buildingPosition)
+	{
+		_buildingHighlight->setPosition(buildingPosition + Vector3(0.f, 25.f, 0.f));
+		_buildingHighlight->setVisible(true);
+
+	} // turnOnBuildingLight
+
+	//--------------------------------------------------------
+
+	void CScene::turnOffBuildingLight()
+	{
+		_buildingHighlight->setVisible(false);
+
+	} // turnOffBuildingLight
 
 } // namespace Graphics

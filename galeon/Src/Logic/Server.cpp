@@ -29,6 +29,7 @@ la gestión de la lógica del juego.
 #include "Logic/SoulManager.h"
 #include "Logic/Maps/Managers/GameManager.h"
 #include "Logic/SoulsTrialManager.h"
+#include "Logic/TutorialManager.h"
 #include "Logic/Entity/Entity.h"
 #include "Logic/Entity/Components/Tile.h"
 #include "AI/Server.h"
@@ -154,6 +155,10 @@ namespace Logic {
 		if (!Logic::ResourcesManager::Init())
 			return false;
 
+		// Inicializamos el gestor del tutorial.
+		if (!Logic::CTutorialManager::Init())
+			return false;
+
 		return true;
 
 	} // open
@@ -199,6 +204,10 @@ namespace Logic {
 	void CServer::close() 
 	{
 		unLoadLevel();
+
+		Logic::CTutorialManager::Release();
+
+		Logic::ResourcesManager::Release();
 
 		Logic::CGameManager::Release();
 
@@ -351,7 +360,20 @@ namespace Logic {
 	
 		Logic::CGameManager::getSingletonPtr()->tick(msecs);
 
+		// HACK Soy consciente de que esto es horrible; pero la GUI está hecha
+		// de tal forma (desde su estructura hasta la caótica forma en que se
+		// van inicilizando sus managers con referencias cruzadas y lógica de
+		// inicialización en el tick()...) que el inicio del tutorial debe
+		// lanzarse desde dentro de algún método tick() y no antes.
+		if (_firstTick)
+		{
+			Logic::CTutorialManager::getSingletonPtr()->start();
+			_firstTick = false;
+		}
+
 	} // tick
+
+	//---------------------------------------------------------
 
 	GameRuntimeContext CServer::getGameRuntimeContext() const {
 		return _gameRuntimeContext;

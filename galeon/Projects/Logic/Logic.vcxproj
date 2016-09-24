@@ -150,6 +150,7 @@
     <ClCompile Include="..\..\Src\Logic\SoulManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\SoulsTrialManager.cpp" />
     <ClCompile Include="..\..\Src\Logic\TimeManager.cpp" />
+    <ClCompile Include="..\..\Src\Logic\TutorialManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Logic\BuildingManager.h" />
@@ -232,6 +233,7 @@
     <ClInclude Include="..\..\Src\Logic\SoulManager.h" />
     <ClInclude Include="..\..\Src\Logic\SoulsTrialManager.h" />
     <ClInclude Include="..\..\Src\Logic\TimeManager.h" />
+    <ClInclude Include="..\..\Src\Logic\TutorialManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AI\AI.vcxproj">

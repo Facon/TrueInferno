@@ -65,7 +65,7 @@
 		
 		<Window type="OgreTray/StaticText" name="EventText" >
 			<Property name="Area" value="{{0.30,0},{0.63,0},{0.7150,0},{0.81,0}}" />
-			<Property name="Font" value="astronboy-10" />
+			<Property name="Font" value="videophreak-10" />
 			<Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
 			<Property name="HorzFormatting" value="WordWrapJustified" />			
 			<Property name="AlwaysOnTop" value="True" />
