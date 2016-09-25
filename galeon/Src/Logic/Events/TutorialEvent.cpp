@@ -89,7 +89,7 @@ namespace Logic {
 		case TutorialStage::REFINED_EVIL_AS_OBJ_2:
 			_eventImage = "TrueInfernoBuildings/Trial";
 			_eventTitle = "Refine Evil to win";
-			_eventText = "Remember: building facilities will require RESOURCES, and their extraction will require some working souls that you must send from the HQ. You remember how, don't you? Check how much resources of each type you have in the top side of the screen. From left to right: MINERAL, GAS and POWER; CRUDE EVIL, PURE EVIL and REFINED EVIL; HADES FAVOR. Ready now to start building?";
+			_eventText = "Remember: building facilities will require RESOURCES, and their extraction will require some working souls that you must send from the HQ. You remember how, don't you? Check how much resources of each type you have in the top side of the screen. From left to right: MINERAL, GAS and COKE; CRUDE EVIL, PURE EVIL and REFINED EVIL; HADES FAVOR. Ready now to start building?";
 			break;
 
 		case TutorialStage::ROAD:
@@ -143,7 +143,7 @@ namespace Logic {
 		case TutorialStage::CLEAR_TERRAIN:
 			_eventImage = "TrueInfernoUIBars/StartMenu";
 			_eventTitle = "Clear Terrain";
-			_eventText = "RUINS, obstacles... This is Hell kid. Did you expect it to be a nice place? Use this tool to REMOVE unwanted stuff from the map. Though it is not free either.";
+			_eventText = "RUINS, obstacles... This is Hell kid. Did you expect it to be a nice place? Use this tool to REMOVE unwanted stuff from the map.";
 			break;
 
 		case TutorialStage::EVILATOR:

@@ -30,6 +30,7 @@ namespace GUI
 {
 	class SideBarUI;
 	class RankUI;
+	class TopBarUI;
 }
 
 namespace Map
@@ -268,6 +269,7 @@ namespace Logic
 		*/
 		GUI::SideBarUI *_sideBarUI = nullptr;
 		GUI::RankUI *_rankUI = nullptr;
+		GUI::TopBarUI *_topBarUI = nullptr;
 
 		/**
 		TODO Debería cogerlas del BuildingManager

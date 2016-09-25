@@ -99,7 +99,7 @@ namespace GUI
 
 	void UIManager::tick(unsigned int msecs)
 	{
-		_uiWindow->getChild("fps")->setProperty("Text", std::to_string((int) Graphics::CServer::getSingletonPtr()->getLastFPS()) + " fps");
+		//_uiWindow->getChild("fps")->setProperty("Text", std::to_string((int) Graphics::CServer::getSingletonPtr()->getLastFPS()) + " fps");
 		
 		_topBarUI.tick(msecs);
 		_sideBarUI.tick(msecs);

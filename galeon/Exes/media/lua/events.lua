@@ -164,7 +164,7 @@ MinorGodBoostEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "God Boost"
 	local description = god.name .. " is cheating! Now " .. god.genre .. " will get Hades Favour faster for a while..."
-	local image = "EventSpeedDown"
+	local image = "EventBuildingDestruction"
 	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
 		timeToLaunch, god.name, title, description, image, 1, MinorGodBoostEvent.duration, true));
 end
@@ -180,7 +180,7 @@ MajorGodBoostEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "God Boost"
 	local description = god.name .. " is cheating! Now " .. god.genre .. " will get Hades Favour faster for a while..."
-	local image = "EventSpeedDown"
+	local image = "EventBuildingDestruction"
 	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
 		timeToLaunch, god.name, title, description, image, 2, MajorGodBoostEvent.duration, true));
 end
@@ -196,7 +196,7 @@ MinorGodPenalizationEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "God Penalization"
 	local description = god.name .. " has problems! Now " .. god.genre .. " will get Hades Favour slower for a while..."
-	local image = "EventSpeedDown"
+	local image = "EventObstacles"
 	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
 		timeToLaunch, god.name, title, description, image, -0.5, MinorGodPenalizationEvent.duration, true));
 end
@@ -212,7 +212,7 @@ MajorGodPenalizationEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "God Penalization"
 	local description = god.name .. " has problems! Now " .. god.genre .. " will get Hades Favour slower for a while..."
-	local image = "EventSpeedDown"
+	local image = "EventObstacles"
 	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
 		timeToLaunch, god.name, title, description, image, -0.9, MajorGodPenalizationEvent.duration, true));
 end
@@ -239,7 +239,7 @@ MinorResourceLossEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "Resource Lost"
 	local description = god.name .. " has made you lose some of your " .. resourceText .. " reserves"
-	local image = "EventSpeedDown"
+	local image = "EventBuildingDestruction"
 	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
 		timeToLaunch, god.name, title, description, image, -0.2, 0, resourceType, true));
 end
@@ -266,7 +266,7 @@ MajorResourceLossEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "Resource Lost"
 	local description = god.name .. " has made you lose some of your " .. resourceText .. " reserves"
-	local image = "EventSpeedDown"
+	local image = "EventBuildingDestruction"
 	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
 		timeToLaunch, god.name, title, description, image, -0.5, 0, resourceType, true));
 end
@@ -295,14 +295,14 @@ MinorResourceStealEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "Resource Steal"
 	local description = god.name .. " has made you lose some of your " .. resourceText .. " reserves"
-	local image = "EventSpeedDown"
+	local image = "EventBuildingDestruction"
 	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
 		timeToLaunch, god.name, title, description, image, -0.2, 0, resourceType, true));
 	
 	-- Boost para el dios
 	title = "God Boost"
 	description = god.name .. " is taking benefit from your resources! Now " .. god.genre .. " will get Hades Favour faster for a while..."
-	image = "EventSoulsSpeedReduction"
+	image = "EventBuildingDestruction"
 	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
 		timeToLaunch+3000, god.name, title, description, image, 1, 20*1000, true));
 end
@@ -331,14 +331,14 @@ MajorResourceStealEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "Resource Steal"
 	local description = god.name .. " has made you lose some of your " .. resourceText .. " reserves"
-	local image = "EventSpeedDown"
+	local image = "EventBuildingDestruction"
 	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
 		timeToLaunch, god.name, title, description, image, -0.5, 0, resourceType, true));
 		
 	-- Boost para el dios
 	title = "God Boost"
 	description = god.name .. " is taking benefit from your resources! Now " .. god.genre .. " will get Hades Favour faster for a while..."
-	image = "EventSoulsSpeedReduction"
+	image = "EventBuildingDestruction"
 	CEventManager.getSingletonPtr():addTimeEvent(CGodBoostEvent.addCGodBoostEvent(
 		timeToLaunch+3000, god.name, title, description, image, 2, 20*1000, true));
 end
@@ -365,7 +365,7 @@ MinorResourceGiftEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "Resource Gift"
 	local description = god.name .. " has sent you a gift with some " .. resourceText
-	local image = "EventSpeedDown"
+	local image = "EventObstacles"
 	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
 		timeToLaunch, god.name, title, description, image, 0, 0.2, resourceType, true));
 end
@@ -392,7 +392,7 @@ MajorResourceGiftEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "Resource Gift"
 	local description = god.name .. " has sent you a gift with some " .. resourceText
-	local image = "EventSpeedDown"
+	local image = "EventObstacles"
 	CEventManager.getSingletonPtr():addTimeEvent(CPlayerResourcesChangeEvent.addCPlayerResourcesChangeEvent(
 		timeToLaunch, god.name, title, description, image, 0, 0.5, resourceType, true));
 end
@@ -406,7 +406,7 @@ MinorTimeExtendedEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "Time Extended"
 	local description = god.name .. " has given you a little extra time for this round"
-	local image = "EventSpeedDown"
+	local image = "EventSpeedUp"
 	CEventManager.getSingletonPtr():addTimeEvent(CRoundTimeChangeEvent.addCRoundTimeChangeEvent(
 		timeToLaunch, god.name, title, description, image, 5, true));
 end
@@ -420,7 +420,7 @@ MajorTimeExtendedEvent.throw = function(god,delay)
 	local timeToLaunch = CTimeManager.getSingletonPtr():getElapsedGlboalTime() + delay
 	local title = "Time Extended"
 	local description = god.name .. " has given you HUGE extra time for this round"
-	local image = "EventSpeedDown"
+	local image = "EventSpeedUp"
 	CEventManager.getSingletonPtr():addTimeEvent(CRoundTimeChangeEvent.addCRoundTimeChangeEvent(
 		timeToLaunch, god.name, title, description, image, 15, true));
 end

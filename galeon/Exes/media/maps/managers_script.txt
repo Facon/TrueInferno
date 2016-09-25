@@ -4,13 +4,13 @@ Map = {
 		type = "SoulsTrialManager",
 		minSoulsGenerationTimeSeconds = 15,
 		maxSoulsGenerationTimeSeconds = 30,
-		minSoulsPerGroup = 5,
-		maxSoulsPerGroup = 10,
+		minSoulsPerGroup = 10,
+		maxSoulsPerGroup = 15,
 	},
 
 	AIManager = {
 		type = "AIManager",
-		baseScorePerRound = 50,
+		baseScorePerRound = 30,
 		scoreMaxRelativeDeviation = 0.50,
 		minBaseDifficulty = 0.0,
 		maxBaseDifficulty = 1.0,

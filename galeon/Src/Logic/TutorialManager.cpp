@@ -96,6 +96,10 @@ namespace Logic {
 		if (_rankUI == nullptr)
 			_rankUI = GUI::CServer::getSingletonPtr()->getUIManager()->getRankUI();
 
+		// Guarda una referencia a la instancia de TopBarUI a través del UIManager
+		if (_topBarUI == nullptr)
+			_topBarUI = GUI::CServer::getSingletonPtr()->getUIManager()->getTopBarUI();
+
 		if (_currentStage == TutorialStage::NOT_STARTED)
 			nextStage(_currentStage);
 
@@ -239,6 +243,10 @@ namespace Logic {
 
 	void CTutorialManager::close()
 	{
+		_sideBarUI = nullptr;
+		_topBarUI = nullptr;
+		_rankUI = nullptr;
+
 	} // close
 
 	//--------------------------------------------------------
@@ -368,7 +376,11 @@ namespace Logic {
 
 	void CTutorialManager::startStageRefinedEvil2()
 	{
-		// @TODO Blink para los paneles superiores de recursos
+		// Desactivar parpadeo del panel derecho de construcción de edificios
+		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::BUILDING_BUTTONS);
+
+		// Activar parpadeo para los paneles superiores de recursos
+		_topBarUI->resourcesBlinkStart();
 
 	} // startStageRefinedEvil2
 
@@ -376,8 +388,9 @@ namespace Logic {
 
 	void CTutorialManager::startStageRoad()
 	{
-		// Desactivar parpadeo del panel derecho de construcción de edificios
-		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::BUILDING_BUTTONS);
+
+		// Desactivar parpadeo de los paneles superiores de recursos
+		_topBarUI->resourcesBlinkStop();
 
 		// Activar parpadeo para los botones de construcción de edificios (1 a 1)...
 		_sideBarUI->buildingButtonBlinkStart(SideBar::BuildingButton::ROAD);
@@ -533,6 +546,7 @@ namespace Logic {
 		// ...y de que el resto de paneles tampoco parpadean...
 		_sideBarUI->buildingButtonBlinkStop(SideBar::BuildingButton::BUILDING_BUTTONS);
 		_rankUI->godsRankingBlinkStop();
+		_topBarUI->resourcesBlinkStop();
 
 		// ...y de que no hay ningún edificio iluminado.
 		Graphics::CServer::getSingletonPtr()->turnOffBuildingLight();
