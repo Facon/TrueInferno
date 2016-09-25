@@ -25,7 +25,7 @@ namespace GUI
 
 		std::string rankFrameName = "RankFrame";
 		std::string rankFrame = "TrueInfernoUIBars/EventFrame";
-		std::string rankFrameWhite = "TrueInfernoUIBars/ButtonFrameWhite";
+		std::string rankFrameWhite = "TrueInfernoUIBars/EventFrameWhite";
 
 	public:
 		int round = 0;

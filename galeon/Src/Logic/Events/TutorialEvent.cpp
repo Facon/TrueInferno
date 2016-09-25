@@ -71,7 +71,7 @@ namespace Logic {
 		case TutorialStage::HELLQUARTERS_CLICK_SOULS_TRIAL:
 			_eventImage = "TrueInfernoBuildings/HellQuarters";
 			_eventTitle = "HellQuarters";
-			_eventText  = "Good, very good! That was an impressive demonstration of skill. Was it hard? Anyway, look at this beautiful building. In the HELLQUARTERS you can decide the fate of the poor SOULS that fall to hell. You can enslave them to work for you... or you can burn them, ha, ha! Why would you do that? Because It is the way to keep me happy! Click on the left icon.";
+			_eventText  = "Good, very good! That was an impressive demonstration of skill. Was it hard? Anyway, look at this beautiful building. In the HELLQUARTERS you can decide the fate of the poor SOULS that fall to hell. You can enslave them to work for you... or you can burn them, ha, ha! Why would you do that? Because It is the way to keep me happy! Click OK and then click on the left button.";
 			break;
 
 		case TutorialStage::SOULS_TRIAL:

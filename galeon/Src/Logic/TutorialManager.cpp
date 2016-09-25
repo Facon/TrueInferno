@@ -335,12 +335,6 @@ namespace Logic {
 		// Iluminar HellQuarters
 		Graphics::CServer::getSingletonPtr()->turnOnBuildingLight(hellquartersPosition);
 
-		// ==================
-		// Eliminar cuando esté probado y quede bien
-		// Activar parpadeo para el panel derecho del ranking de dioses
-		_rankUI->godsRankingBlinkStart();
-		// ==================
-
 	} // startStageHellQuartersClick
 
 	//--------------------------------------------------------
