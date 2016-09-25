@@ -64,6 +64,11 @@ namespace AI {
 		if (quantity == 0)
 			return true;
 
+		// TODO Como los recursos no se leen por separado (hay otro TODO en SMResourceBuilding.h),
+		// la cantidad inicial de gas es demasiado alta
+		if (type == ResourceType::GAS)
+			quantity /= 2;
+
 		int newStored = _storedResources[type] + quantity;
 
 		// Controlamos que el nuevo valor no sobrepase los límites

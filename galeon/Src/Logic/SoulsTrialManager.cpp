@@ -20,6 +20,7 @@ Contiene la implementación del gestor del Juicio de Almas.
 
 #include "BaseSubsystems/Math.h"
 #include "Logic/BuildingManager.h"
+#include "Logic/TimeManager.h"
 #include "Logic/Maps/Managers/WorkManager.h"
 
 #include "Logic/Entity/Components/Soul.h"
@@ -124,6 +125,12 @@ namespace Logic {
 
 	void CSoulsTrialManager::tick(unsigned long msecs)
 	{
+		bool pause = CTimeManager::getSingletonPtr()->getPause();
+
+		// Si la partida está en pausa, evitamos la llegada de nuevas almas al HQ
+		if (pause)
+			return;
+
 		_timeSinceLastSoulsGeneration += msecs;
 
 		if (_timeSinceLastSoulsGeneration >= _timeForNextSoulsGeneration)
