@@ -25,6 +25,8 @@ Contiene la implementación del gestor del tutorial.
 
 #include <cassert>
 
+
+
 namespace Logic {
 
 	CTutorialManager* CTutorialManager::_instance = 0;
